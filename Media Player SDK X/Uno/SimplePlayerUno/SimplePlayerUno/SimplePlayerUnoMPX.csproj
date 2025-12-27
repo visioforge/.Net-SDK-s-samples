@@ -26,7 +26,7 @@
     <_RequireCodeSigning>false</_RequireCodeSigning>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.12.10" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2025.12.12" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2025.12.8" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">

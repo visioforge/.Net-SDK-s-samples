@@ -49,7 +49,7 @@ await _player.PlayAsync();
 ## Requirements
 
 - Windows 10 or later
-- .NET 4.7.2, .NET 5.0+, or later
+- .NET 10.0 or later
 - Custom DirectShow source filter registered on the system
 
 ## Related Documentation

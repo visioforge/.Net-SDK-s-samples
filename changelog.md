@@ -9,6 +9,12 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2025.12.12
+
+* [Media Blocks SDK .Net] Added PitchBlock for audio pitch shifting with semitone control (-12 to +12 range)
+* [Media Player SDK X .Net] CDGSource: Added pitch shifting support with EnablePitchShifting option and real-time PitchSemitones control
+* [Media Player SDK X .Net / Media Blocks SDK .Net] CDGSourceSettings: Added ZIP archive support for karaoke files (MP3+CDG pairs inside ZIP)
+
 ## 2025.11.8
 
 * [Media Blocks SDK .Net] OverlayManagerVideo and OverlayManagerDecklinkVideo: Changed AudioOutput property type from MediaBlock to AudioOutputDeviceInfo for direct audio device selection. Audio is now handled internally via AudioRenderer with automatic channel conversion support.

@@ -257,6 +257,168 @@
                                                Foreground="Gray"
                                                Margin="0,0,0,5"/>
                                 </StackPanel>
+
+                                <!-- Video Transform Effects -->
+                                <Label Content="Video Transform:" FontWeight="SemiBold" Margin="0,10,0,5"/>
+                                <StackPanel Margin="0,0,0,10">
+                                    <!-- Zoom Controls -->
+                                    <GroupBox Header="Zoom" Margin="0,0,0,5" Padding="5">
+                                        <StackPanel>
+                                            <Grid Margin="0,0,0,3">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="55"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="40"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="Zoom X:" VerticalAlignment="Center"/>
+                                                <Slider Grid.Column="1" x:Name="slZoomX" Minimum="0.5" Maximum="4.0" Value="1.0" 
+                                                        TickFrequency="0.1" IsSnapToTickEnabled="True"
+                                                        ValueChanged="slZoom_ValueChanged"/>
+                                                <TextBlock Grid.Column="2" x:Name="lbZoomX" Text="1.0" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                            </Grid>
+                                            <Grid Margin="0,0,0,3">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="55"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="40"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="Zoom Y:" VerticalAlignment="Center"/>
+                                                <Slider Grid.Column="1" x:Name="slZoomY" Minimum="0.5" Maximum="4.0" Value="1.0" 
+                                                        TickFrequency="0.1" IsSnapToTickEnabled="True"
+                                                        ValueChanged="slZoom_ValueChanged"/>
+                                                <TextBlock Grid.Column="2" x:Name="lbZoomY" Text="1.0" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                            </Grid>
+                                            <Grid Margin="0,0,0,3">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="55"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="40"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="Shift X:" VerticalAlignment="Center"/>
+                                                <Slider Grid.Column="1" x:Name="slShiftX" Minimum="-500" Maximum="500" Value="0" 
+                                                        TickFrequency="10" IsSnapToTickEnabled="True"
+                                                        ValueChanged="slZoom_ValueChanged"/>
+                                                <TextBlock Grid.Column="2" x:Name="lbShiftX" Text="0" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                            </Grid>
+                                            <Grid Margin="0,0,0,3">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="55"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="40"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="Shift Y:" VerticalAlignment="Center"/>
+                                                <Slider Grid.Column="1" x:Name="slShiftY" Minimum="-500" Maximum="500" Value="0" 
+                                                        TickFrequency="10" IsSnapToTickEnabled="True"
+                                                        ValueChanged="slZoom_ValueChanged"/>
+                                                <TextBlock Grid.Column="2" x:Name="lbShiftY" Text="0" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                            </Grid>
+                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                                <CheckBox x:Name="cbZoomEnabled" Content="Enable" 
+                                                          Checked="cbZoomEnabled_CheckedChanged" 
+                                                          Unchecked="cbZoomEnabled_CheckedChanged"
+                                                          Margin="0,0,10,0"/>
+                                                <Button x:Name="btZoomReset" Content="Reset" Width="60" Height="22" Click="btZoomReset_Click"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </GroupBox>
+                                    
+                                    <!-- Pan/Ken Burns Controls -->
+                                    <GroupBox Header="Pan (Ken Burns Effect)" Padding="5">
+                                        <StackPanel>
+                                            <TextBlock Text="Start Rectangle:" FontWeight="SemiBold" Margin="0,0,0,3"/>
+                                            <Grid Margin="0,0,0,3">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="25"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="25"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="25"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="25"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="X:" VerticalAlignment="Center"/>
+                                                <TextBox Grid.Column="1" x:Name="edPanStartX" Text="0" VerticalAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="Y:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                <TextBox Grid.Column="3" x:Name="edPanStartY" Text="0" VerticalAlignment="Center"/>
+                                                <TextBlock Grid.Column="4" Text="W:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                <TextBox Grid.Column="5" x:Name="edPanStartW" Text="0" VerticalAlignment="Center" ToolTip="0 = full width"/>
+                                                <TextBlock Grid.Column="6" Text="H:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                <TextBox Grid.Column="7" x:Name="edPanStartH" Text="0" VerticalAlignment="Center" ToolTip="0 = full height"/>
+                                            </Grid>
+                                            <TextBlock Text="Stop Rectangle:" FontWeight="SemiBold" Margin="0,5,0,3"/>
+                                            <Grid Margin="0,0,0,3">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="25"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="25"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="25"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="25"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="X:" VerticalAlignment="Center"/>
+                                                <TextBox Grid.Column="1" x:Name="edPanStopX" Text="100" VerticalAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="Y:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                <TextBox Grid.Column="3" x:Name="edPanStopY" Text="100" VerticalAlignment="Center"/>
+                                                <TextBlock Grid.Column="4" Text="W:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                <TextBox Grid.Column="5" x:Name="edPanStopW" Text="640" VerticalAlignment="Center"/>
+                                                <TextBlock Grid.Column="6" Text="H:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                                <TextBox Grid.Column="7" x:Name="edPanStopH" Text="480" VerticalAlignment="Center"/>
+                                            </Grid>
+                                            <Grid Margin="0,5,0,3">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="60"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="60"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="Duration:" VerticalAlignment="Center"/>
+                                                <TextBox Grid.Column="1" x:Name="edPanDuration" Text="5" VerticalAlignment="Center" ToolTip="Duration in seconds"/>
+                                                <TextBlock Grid.Column="2" Text="Easing:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                                <ComboBox Grid.Column="3" x:Name="cbPanEasing" VerticalAlignment="Center">
+                                                    <ComboBoxItem Content="Linear" IsSelected="True"/>
+                                                    <ComboBoxItem Content="EaseIn"/>
+                                                    <ComboBoxItem Content="EaseOut"/>
+                                                    <ComboBoxItem Content="EaseInOut"/>
+                                                </ComboBox>
+                                            </Grid>
+                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                                <Button x:Name="btPanAdd" Content="Add Pan" Width="70" Height="22" Click="btPanAdd_Click" Margin="0,0,5,0"/>
+                                                <Button x:Name="btPanPreset1" Content="Zoom In" Width="60" Height="22" Click="btPanPreset1_Click" Margin="0,0,5,0" ToolTip="Full frame to center crop"/>
+                                                <Button x:Name="btPanPreset2" Content="Zoom Out" Width="60" Height="22" Click="btPanPreset2_Click" ToolTip="Center crop to full frame"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </GroupBox>
+                                    
+                                    <!-- Fade In/Out Controls -->
+                                    <GroupBox Header="Fade Effects" Padding="5" Margin="0,5,0,0">
+                                        <StackPanel>
+                                            <Grid Margin="0,0,0,5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="60"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="Duration:" VerticalAlignment="Center"/>
+                                                <TextBox Grid.Column="1" x:Name="edFadeDuration" Text="2" VerticalAlignment="Center" ToolTip="Fade duration in seconds"/>
+                                                <TextBlock Grid.Column="2" Text="Easing:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                                <ComboBox Grid.Column="3" x:Name="cbFadeEasing" VerticalAlignment="Center">
+                                                    <ComboBoxItem Content="Linear" IsSelected="True"/>
+                                                    <ComboBoxItem Content="EaseIn"/>
+                                                    <ComboBoxItem Content="EaseOut"/>
+                                                    <ComboBoxItem Content="EaseInOut"/>
+                                                </ComboBox>
+                                            </Grid>
+                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                                <Button x:Name="btFadeIn" Content="Add Fade In" Width="85" Height="22" Click="btFadeIn_Click" Margin="0,0,5,0" ToolTip="Fade from black to video (starts now)"/>
+                                                <Button x:Name="btFadeOut" Content="Add Fade Out" Width="85" Height="22" Click="btFadeOut_Click" ToolTip="Fade from video to black (starts now)"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </GroupBox>
+                                </StackPanel>
                             </StackPanel>
                         </GroupBox>
 

@@ -51,9 +51,12 @@
             VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             cbAudioOutputDevice = new System.Windows.Forms.ComboBox();
             label5 = new System.Windows.Forms.Label();
+            tbPitch = new System.Windows.Forms.TrackBar();
+            lbPitch = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)tbVolume1).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)tbTimeline).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbPitch).BeginInit();
             SuspendLayout();
             // 
             // linkLabel1
@@ -259,11 +262,36 @@
             label5.TabIndex = 33;
             label5.Text = "Audio output";
             // 
+            // tbPitch
+            // 
+            tbPitch.BackColor = System.Drawing.SystemColors.Window;
+            tbPitch.Location = new System.Drawing.Point(180, 399);
+            tbPitch.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbPitch.Maximum = 200;
+            tbPitch.Minimum = 50;
+            tbPitch.Name = "tbPitch";
+            tbPitch.Size = new System.Drawing.Size(142, 69);
+            tbPitch.TabIndex = 35;
+            tbPitch.Value = 100;
+            tbPitch.Scroll += tbPitch_Scroll;
+            // 
+            // lbPitch
+            // 
+            lbPitch.AutoSize = true;
+            lbPitch.Location = new System.Drawing.Point(180, 368);
+            lbPitch.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lbPitch.Name = "lbPitch";
+            lbPitch.Size = new System.Drawing.Size(89, 25);
+            lbPitch.TabIndex = 36;
+            lbPitch.Text = "Rate: 1.00";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1398, 678);
+            Controls.Add(lbPitch);
+            Controls.Add(tbPitch);
             Controls.Add(cbAudioOutputDevice);
             Controls.Add(label5);
             Controls.Add(VideoView1);
@@ -279,13 +307,14 @@
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             Name = "Form1";
-            Text = "Media Player SDK .Net - Karaoke Demo";
+            Text = "Media Blocks SDK .Net - Karaoke Demo";
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)tbVolume1).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)tbTimeline).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbPitch).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -311,6 +340,8 @@
         private VisioForge.Core.UI.WinForms.VideoView VideoView1;
         private System.Windows.Forms.ComboBox cbAudioOutputDevice;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TrackBar tbPitch;
+        private System.Windows.Forms.Label lbPitch;
     }
 }
 

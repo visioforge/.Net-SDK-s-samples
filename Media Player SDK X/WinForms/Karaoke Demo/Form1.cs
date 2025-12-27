@@ -18,6 +18,8 @@
     {
         private MediaPlayerCoreX MediaPlayer1;
 
+        private CDGSourceSettings _currentSettings;
+
         public Form1()
         {
             InitializeComponent();
@@ -49,10 +51,17 @@
             {
                 cbAudioOutputDevice.SelectedIndex = 0;
             }
+
+            // Initialize pitch trackbar (range: -12 to +12 semitones)
+            tbPitch.Minimum = -12;
+            tbPitch.Maximum = 12;
+            tbPitch.Value = 0;
+            lbPitch.Text = "Pitch: 0";
         }
 
         private void btSelectFile_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Filter = "Karaoke files|*.mp3;*.zip|MP3 files|*.mp3|ZIP archives|*.zip|All files|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 edFilename.Text = openFileDialog1.FileName;
@@ -77,10 +86,27 @@
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
 
-            var mp3File = edFilename.Text;
-            var cdgFile = Path.Combine(Path.GetDirectoryName(mp3File), Path.GetFileNameWithoutExtension(mp3File) + ".cdg");
-            await MediaPlayer1.OpenAsync(new CDGSourceSettings(cdgFile, mp3File));
+            var filename = edFilename.Text;
 
+            // Check if it's a ZIP file
+            if (filename.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
+            {
+                // ZIP archive containing CDG and MP3 files
+                _currentSettings = new CDGSourceSettings(filename);
+            }
+            else
+            {
+                // Traditional MP3 file with accompanying CDG file
+                var mp3File = filename;
+                var cdgFile = Path.Combine(Path.GetDirectoryName(mp3File), Path.GetFileNameWithoutExtension(mp3File) + ".cdg");
+                _currentSettings = new CDGSourceSettings(cdgFile, mp3File);
+            }
+
+            // Set pitch from trackbar (semitones) and enable runtime pitch control
+            _currentSettings.EnablePitchShifting = true;
+            _currentSettings.PitchSemitones = tbPitch.Value;
+
+            await MediaPlayer1.OpenAsync(_currentSettings);
             await MediaPlayer1.PlayAsync();
 
             MediaPlayer1.Audio_OutputDevice_Volume = tbVolume1.Value;
@@ -101,6 +127,9 @@
         private async void btStop_Click(object sender, EventArgs e)
         {
             await MediaPlayer1.StopAsync();
+
+            _currentSettings = null;
+
             timer1.Enabled = false;
             tbTimeline.Value = 0;
         }
@@ -108,6 +137,18 @@
         private void tbVolume1_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_OutputDevice_Volume = tbVolume1.Value;
+        }
+
+        private void tbPitch_Scroll(object sender, EventArgs e)
+        {
+            var semitones = tbPitch.Value;
+            lbPitch.Text = $"Pitch: {semitones:+#;-#;0}";
+
+            // Change pitch during playback - just set the property on settings
+            if (_currentSettings != null)
+            {
+                _currentSettings.PitchSemitones = semitones;
+            }
         }
 
         private async void timer1_Tick(object sender, EventArgs e)

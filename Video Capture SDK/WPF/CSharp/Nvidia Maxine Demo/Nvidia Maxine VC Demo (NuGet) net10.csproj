@@ -50,7 +50,7 @@
     <NoWarn>1701;1702;MC3074;MSB4181</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.12.10" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2025.12.12" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />

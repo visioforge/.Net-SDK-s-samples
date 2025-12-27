@@ -11,6 +11,10 @@ A simple media player demo application built with Uno Platform and VisioForge Me
 - Playback speed control (0.5x, 1x, 2x)
 - Position and duration display
 
+## Product Page
+
+[VisioForge Media Player SDK .NET](https://www.visioforge.com/media-player-sdk-net)
+
 ## Supported Platforms
 
 - Windows (WinUI)

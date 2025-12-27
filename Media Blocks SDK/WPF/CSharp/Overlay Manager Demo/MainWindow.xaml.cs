@@ -54,6 +54,11 @@ namespace Overlay_Manager_Demo
 
         // Dictionary to track external VideoView windows for video overlays
         private Dictionary<OverlayManagerVideo, VideoOverlayViewWindow> _videoOverlayWindows = new Dictionary<OverlayManagerVideo, VideoOverlayViewWindow>();
+
+        // Zoom/Pan overlay references
+        private OverlayManagerZoom _currentZoom = null;
+        private List<OverlayManagerPan> _panOverlays = new List<OverlayManagerPan>();
+        private List<OverlayManagerFade> _fadeOverlays = new List<OverlayManagerFade>();
         
         public MainWindow()
         {
@@ -252,6 +257,11 @@ namespace Overlay_Manager_Demo
             }
             _overlayGroups.Clear();
 
+            // Clear zoom/pan/fade overlays
+            _currentZoom = null;
+            _panOverlays.Clear();
+            _fadeOverlays.Clear();
+
             if (_pipeline != null)
             {
                 _pipeline.OnStop -= Pipeline_OnStop;
@@ -437,6 +447,36 @@ namespace Overlay_Manager_Demo
                     }
 
                     _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
+                }
+                else if (selectedItem != null && selectedItem.StartsWith("[Zoom]"))
+                {
+                    // Remove zoom overlay
+                    if (_currentZoom != null)
+                    {
+                        _overlayManager.Video_Overlay_Remove(_currentZoom);
+                        _currentZoom = null;
+                        cbZoomEnabled.IsChecked = false;
+                    }
+                }
+                else if (selectedItem != null && selectedItem.StartsWith("[Pan]"))
+                {
+                    // Find and remove the pan overlay
+                    var panOverlay = _panOverlays.Find(p => selectedItem.Contains(p.Name));
+                    if (panOverlay != null)
+                    {
+                        _overlayManager.Video_Overlay_Remove(panOverlay);
+                        _panOverlays.Remove(panOverlay);
+                    }
+                }
+                else if (selectedItem != null && (selectedItem.StartsWith("[FadeIn]") || selectedItem.StartsWith("[FadeOut]")))
+                {
+                    // Find and remove the fade overlay
+                    var fadeOverlay = _fadeOverlays.Find(f => selectedItem.Contains(f.Name));
+                    if (fadeOverlay != null)
+                    {
+                        _overlayManager.Video_Overlay_Remove(fadeOverlay);
+                        _fadeOverlays.Remove(fadeOverlay);
+                    }
                 }
                 else
                 {
@@ -1085,5 +1125,221 @@ namespace Overlay_Manager_Demo
                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        #region Zoom/Pan Controls
+
+        private void slZoom_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            // Update labels
+            if (lbZoomX != null) lbZoomX.Text = slZoomX.Value.ToString("F1");
+            if (lbZoomY != null) lbZoomY.Text = slZoomY.Value.ToString("F1");
+            if (lbShiftX != null) lbShiftX.Text = ((int)slShiftX.Value).ToString();
+            if (lbShiftY != null) lbShiftY.Text = ((int)slShiftY.Value).ToString();
+
+            // Update zoom if enabled
+            if (cbZoomEnabled != null && cbZoomEnabled.IsChecked == true && _currentZoom != null)
+            {
+                _currentZoom.ZoomX = slZoomX.Value;
+                _currentZoom.ZoomY = slZoomY.Value;
+                _currentZoom.ShiftX = (int)slShiftX.Value;
+                _currentZoom.ShiftY = (int)slShiftY.Value;
+            }
+        }
+
+        private void cbZoomEnabled_CheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if (cbZoomEnabled.IsChecked == true)
+            {
+                // Add zoom effect
+                if (_currentZoom == null)
+                {
+                    _currentZoom = new OverlayManagerZoom(
+                        slZoomX.Value, 
+                        slZoomY.Value, 
+                        (int)slShiftX.Value, 
+                        (int)slShiftY.Value, 
+                        true, 
+                        "Zoom");
+                    _overlayManager.Video_Overlay_Add(_currentZoom);
+                    lbOverlays.Items.Add("[Zoom] Video Transform");
+                }
+                else
+                {
+                    _currentZoom.Enabled = true;
+                }
+            }
+            else
+            {
+                // Disable zoom effect
+                if (_currentZoom != null)
+                {
+                    _currentZoom.Enabled = false;
+                }
+            }
+        }
+
+        private void btZoomReset_Click(object sender, RoutedEventArgs e)
+        {
+            slZoomX.Value = 1.0;
+            slZoomY.Value = 1.0;
+            slShiftX.Value = 0;
+            slShiftY.Value = 0;
+
+            if (_currentZoom != null)
+            {
+                _currentZoom.ZoomX = 1.0;
+                _currentZoom.ZoomY = 1.0;
+                _currentZoom.ShiftX = 0;
+                _currentZoom.ShiftY = 0;
+            }
+        }
+
+        private void btPanAdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int startX = int.Parse(edPanStartX.Text);
+                int startY = int.Parse(edPanStartY.Text);
+                int startW = int.Parse(edPanStartW.Text);
+                int startH = int.Parse(edPanStartH.Text);
+                int stopX = int.Parse(edPanStopX.Text);
+                int stopY = int.Parse(edPanStopY.Text);
+                int stopW = int.Parse(edPanStopW.Text);
+                int stopH = int.Parse(edPanStopH.Text);
+                double duration = double.Parse(edPanDuration.Text);
+
+                // Get easing type
+                OverlayManagerPanEasing easing = OverlayManagerPanEasing.Linear;
+                switch (cbPanEasing.SelectedIndex)
+                {
+                    case 1: easing = OverlayManagerPanEasing.EaseIn; break;
+                    case 2: easing = OverlayManagerPanEasing.EaseOut; break;
+                    case 3: easing = OverlayManagerPanEasing.EaseInOut; break;
+                }
+
+                // Create pan effect
+                var pan = new OverlayManagerPan(
+                    startX, startY, startW, startH,
+                    stopX, stopY, stopW, stopH,
+                    TimeSpan.Zero, TimeSpan.FromSeconds(duration),
+                    true, $"Pan_{_panOverlays.Count + 1}")
+                {
+                    Easing = easing
+                };
+
+                _panOverlays.Add(pan);
+                _overlayManager.Video_Overlay_Add(pan);
+                lbOverlays.Items.Add($"[Pan] {pan.Name} ({duration}s)");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error creating pan effect: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btPanPreset1_Click(object sender, RoutedEventArgs e)
+        {
+            // Preset: Zoom In (Full frame to center crop)
+            edPanStartX.Text = "0";
+            edPanStartY.Text = "0";
+            edPanStartW.Text = "0";  // Full width
+            edPanStartH.Text = "0";  // Full height
+            edPanStopX.Text = "160";
+            edPanStopY.Text = "90";
+            edPanStopW.Text = "320";
+            edPanStopH.Text = "180";
+            edPanDuration.Text = "5";
+        }
+
+        private void btPanPreset2_Click(object sender, RoutedEventArgs e)
+        {
+            // Preset: Zoom Out (Center crop to full frame)
+            edPanStartX.Text = "160";
+            edPanStartY.Text = "90";
+            edPanStartW.Text = "320";
+            edPanStartH.Text = "180";
+            edPanStopX.Text = "0";
+            edPanStopY.Text = "0";
+            edPanStopW.Text = "0";  // Full width
+            edPanStopH.Text = "0";  // Full height
+            edPanDuration.Text = "5";
+        }
+
+        #endregion
+
+        #region Fade Effects
+
+        private OverlayManagerPanEasing GetFadeEasing()
+        {
+            return cbFadeEasing.SelectedIndex switch
+            {
+                1 => OverlayManagerPanEasing.EaseIn,
+                2 => OverlayManagerPanEasing.EaseOut,
+                3 => OverlayManagerPanEasing.EaseInOut,
+                _ => OverlayManagerPanEasing.Linear
+            };
+        }
+
+        private async void btFadeIn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                double duration = double.Parse(edFadeDuration.Text);
+                var easing = GetFadeEasing();
+
+                // Get current position as the base time
+                var currentPosition = await _pipeline.Position_GetAsync();
+
+                var fade = new OverlayManagerFade(
+                    OverlayManagerFadeType.FadeIn,
+                    currentPosition,
+                    currentPosition + TimeSpan.FromSeconds(duration),
+                    true,
+                    $"FadeIn_{_fadeOverlays.Count + 1}")
+                {
+                    Easing = easing
+                };
+
+                _fadeOverlays.Add(fade);
+                _overlayManager.Video_Overlay_Add(fade);
+                lbOverlays.Items.Add($"[FadeIn] {fade.Name} ({duration}s)");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error creating fade in effect: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async void btFadeOut_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                double duration = double.Parse(edFadeDuration.Text);
+                var easing = GetFadeEasing();
+
+                // Get current position as the base time
+                var currentPosition = await _pipeline.Position_GetAsync();
+
+                var fade = new OverlayManagerFade(
+                    OverlayManagerFadeType.FadeOut,
+                    currentPosition,
+                    currentPosition + TimeSpan.FromSeconds(duration),
+                    true,
+                    $"FadeOut_{_fadeOverlays.Count + 1}")
+                {
+                    Easing = easing
+                };
+
+                _fadeOverlays.Add(fade);
+                _overlayManager.Video_Overlay_Add(fade);
+                lbOverlays.Items.Add($"[FadeOut] {fade.Name} ({duration}s)");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error creating fade out effect: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        #endregion
     }
 }

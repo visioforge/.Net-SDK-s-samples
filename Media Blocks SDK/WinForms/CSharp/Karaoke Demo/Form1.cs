@@ -7,6 +7,7 @@
     using System.Windows.Forms;
     using VisioForge.Core;
     using VisioForge.Core.MediaBlocks;
+    using VisioForge.Core.MediaBlocks.AudioProcessing;
     using VisioForge.Core.MediaBlocks.AudioRendering;
     using VisioForge.Core.MediaBlocks.Sources;
     using VisioForge.Core.MediaBlocks.VideoRendering;
@@ -23,9 +24,11 @@
 
         private VideoRendererBlock _videoRenderer;
 
-        private TimeSpan _duration;
+        private AudioRendererBlock _audioRenderer;
 
-        // private AudioRendererBlock _audioRenderer;
+        private PitchBlock _pitch;
+
+        private TimeSpan _duration;
 
         public Form1()
         {
@@ -41,13 +44,7 @@
             this.Enabled = true;
             Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += Pipeline_OnError;
-            _pipeline.OnStop += Pipeline_OnStop;
-            _pipeline.OnStart += Pipeline_OnStart;
-
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             // audio output
             foreach (var item in await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))
@@ -59,6 +56,12 @@
             {
                 cbAudioOutputDevice.SelectedIndex = 0;
             }
+
+            // Initialize pitch trackbar (range: -12 to +12 semitones)
+            tbPitch.Minimum = -12;
+            tbPitch.Maximum = 12;
+            tbPitch.Value = 0;
+            lbPitch.Text = "Pitch: 0";
         }
 
         private async void Pipeline_OnStart(object sender, EventArgs e)
@@ -68,6 +71,7 @@
 
         private void btSelectFile_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Filter = "Karaoke files|*.mp3;*.cdg;*.zip|CDG files|*.cdg|MP3 files|*.mp3|ZIP archives|*.zip|All files|*.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 edFilename.Text = openFileDialog1.FileName;
@@ -87,22 +91,63 @@
             mmError.Clear();
             _duration = TimeSpan.Zero;
 
-            //_audioRenderer = new AudioRendererBlock(
-            //    (await DeviceEnumerator.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutputDevice.Text));
+            // Create fresh pipeline for each run
+            _pipeline = new MediaBlocksPipeline();
+            _pipeline.OnError += Pipeline_OnError;
+            _pipeline.OnStop += Pipeline_OnStop;
+            _pipeline.OnStart += Pipeline_OnStart;
+            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+            var audioDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))
+                .FirstOrDefault(x => x.DisplayName == cbAudioOutputDevice.Text);
+            _audioRenderer = new AudioRendererBlock(audioDevice);
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+
+            // Create pitch block for pitch shifting (-12 to +12 semitones)
+            _pitch = new PitchBlock(tbPitch.Value);
 
             _pipeline.Debug_Mode = cbDebugMode.Checked;
 
-            var mp3File = edFilename.Text;
-            var cdgFile = Path.Combine(Path.GetDirectoryName(mp3File), Path.GetFileNameWithoutExtension(mp3File) + ".cdg");
-            _cdgSource = new CDGSourceBlock(new CDGSourceSettings(cdgFile, null));
+            var filename = edFilename.Text;
+            CDGSourceSettings settings;
+
+            // Check if it's a ZIP file
+            if (filename.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
+            {
+                // ZIP archive containing CDG and MP3 files
+                settings = new CDGSourceSettings(filename);
+            }
+            else if (filename.EndsWith(".cdg", StringComparison.OrdinalIgnoreCase))
+            {
+                // CDG file selected - look for matching audio file
+                var cdgFile = filename;
+                var mp3File = Path.Combine(Path.GetDirectoryName(cdgFile), Path.GetFileNameWithoutExtension(cdgFile) + ".mp3");
+                settings = new CDGSourceSettings(cdgFile, File.Exists(mp3File) ? mp3File : null);
+            }
+            else
+            {
+                // Traditional MP3 file with accompanying CDG file
+                var mp3File = filename;
+                var cdgFile = Path.Combine(Path.GetDirectoryName(mp3File), Path.GetFileNameWithoutExtension(mp3File) + ".cdg");
+                settings = new CDGSourceSettings(cdgFile, mp3File);
+            }
+
+            _cdgSource = new CDGSourceBlock(settings);
 
             _pipeline.Connect(_cdgSource.VideoOutput, _videoRenderer.Input);
-            //_pipeline.Connect(_cdgSource.AudioOutput, _audioRenderer.Input);
+
+            if (_cdgSource.AudioOutput != null)
+            {
+                _pipeline.Connect(_cdgSource.AudioOutput, _pitch.Input);
+                _pipeline.Connect(_pitch.Output, _audioRenderer.Input);
+            }
 
             await _pipeline.StartAsync();
 
-            //_audioRenderer.Volume = tbVolume1.Value;
+            if (_audioRenderer != null)
+            {
+                _audioRenderer.Volume = tbVolume1.Value;
+            }
 
             timer1.Enabled = true;
         }
@@ -114,23 +159,56 @@
 
         private async void btPause_Click(object sender, EventArgs e)
         {
-            await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(25));
-            //await _pipeline.PauseAsync();
+            await _pipeline.PauseAsync();
         }
 
         private async void btStop_Click(object sender, EventArgs e)
         {
-            await _pipeline.StopAsync();
             timer1.Enabled = false;
+
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync(true);
+
+                // Dispose all blocks to clean up resources
+                _pitch?.Dispose();
+                _pitch = null;
+
+                _audioRenderer?.Dispose();
+                _audioRenderer = null;
+
+                _videoRenderer?.Dispose();
+                _videoRenderer = null;
+
+                // Important: Dispose CDGSourceBlock to clean up temp ZIP files
+                _cdgSource?.Dispose();
+                _cdgSource = null;
+
+                // Dispose and recreate pipeline for clean state
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+
             tbTimeline.Value = 0;
         }
 
         private void tbVolume1_Scroll(object sender, EventArgs e)
         {
-            //if (_audioRenderer != null)
-            //{
-            //    _audioRenderer.Volume = tbVolume1.Value;
-            //}
+            if (_audioRenderer != null)
+            {
+                _audioRenderer.Volume = tbVolume1.Value;
+            }
+        }
+
+        private void tbPitch_Scroll(object sender, EventArgs e)
+        {
+            var semitones = tbPitch.Value;
+            lbPitch.Text = $"Pitch: {semitones:+#;-#;0}";
+
+            if (_pitch != null)
+            {
+                _pitch.Semitones = semitones;
+            }
         }
 
         private async void timer1_Tick(object sender, EventArgs e)
