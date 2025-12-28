@@ -53,6 +53,13 @@
             label5 = new System.Windows.Forms.Label();
             tbPitch = new System.Windows.Forms.TrackBar();
             lbPitch = new System.Windows.Forms.Label();
+            rbZipMode = new System.Windows.Forms.RadioButton();
+            rbSeparateFilesMode = new System.Windows.Forms.RadioButton();
+            edAudioFilename = new System.Windows.Forms.TextBox();
+            btSelectAudioFile = new System.Windows.Forms.Button();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)tbVolume1).BeginInit();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)tbTimeline).BeginInit();
@@ -62,7 +69,7 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new System.Drawing.Point(1185, 635);
+            linkLabel1.Location = new System.Drawing.Point(1185, 725);
             linkLabel1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new System.Drawing.Size(184, 25);
@@ -73,7 +80,7 @@
             // 
             // mmError
             // 
-            mmError.Location = new System.Drawing.Point(18, 512);
+            mmError.Location = new System.Drawing.Point(18, 602);
             mmError.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             mmError.Multiline = true;
             mmError.Name = "mmError";
@@ -84,7 +91,7 @@
             // cbDebugMode
             // 
             cbDebugMode.AutoSize = true;
-            cbDebugMode.Location = new System.Drawing.Point(489, 470);
+            cbDebugMode.Location = new System.Drawing.Point(489, 560);
             cbDebugMode.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             cbDebugMode.Name = "cbDebugMode";
             cbDebugMode.Size = new System.Drawing.Size(144, 29);
@@ -95,7 +102,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(12, 368);
+            label6.Location = new System.Drawing.Point(12, 458);
             label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(72, 25);
@@ -105,7 +112,7 @@
             // tbVolume1
             // 
             tbVolume1.BackColor = System.Drawing.SystemColors.Window;
-            tbVolume1.Location = new System.Drawing.Point(18, 399);
+            tbVolume1.Location = new System.Drawing.Point(18, 489);
             tbVolume1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             tbVolume1.Maximum = 100;
             tbVolume1.Minimum = 20;
@@ -123,7 +130,7 @@
             groupBox2.Controls.Add(btStart);
             groupBox2.Controls.Add(lbTime);
             groupBox2.Controls.Add(tbTimeline);
-            groupBox2.Location = new System.Drawing.Point(22, 104);
+            groupBox2.Location = new System.Drawing.Point(22, 194);
             groupBox2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
@@ -200,7 +207,7 @@
             // 
             // btSelectFile
             // 
-            btSelectFile.Location = new System.Drawing.Point(600, 48);
+            btSelectFile.Location = new System.Drawing.Point(600, 90);
             btSelectFile.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             btSelectFile.Name = "btSelectFile";
             btSelectFile.Size = new System.Drawing.Size(38, 44);
@@ -211,12 +218,12 @@
             // 
             // edFilename
             // 
-            edFilename.Location = new System.Drawing.Point(22, 52);
+            edFilename.Location = new System.Drawing.Point(122, 96);
             edFilename.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             edFilename.Name = "edFilename";
-            edFilename.Size = new System.Drawing.Size(566, 31);
+            edFilename.Size = new System.Drawing.Size(466, 31);
             edFilename.TabIndex = 21;
-            edFilename.Text = "c:\\1.mp3";
+            edFilename.Text = "c:\\1.zip";
             // 
             // label14
             // 
@@ -224,9 +231,9 @@
             label14.Location = new System.Drawing.Point(18, 21);
             label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             label14.Name = "label14";
-            label14.Size = new System.Drawing.Size(567, 25);
+            label14.Size = new System.Drawing.Size(115, 25);
             label14.TabIndex = 20;
-            label14.Text = "Audio file name (CDG file should have same name and .cdg extension)";
+            label14.Text = "Input Mode:";
             // 
             // timer1
             // 
@@ -246,7 +253,7 @@
             // 
             cbAudioOutputDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbAudioOutputDevice.FormattingEnabled = true;
-            cbAudioOutputDevice.Location = new System.Drawing.Point(18, 314);
+            cbAudioOutputDevice.Location = new System.Drawing.Point(18, 404);
             cbAudioOutputDevice.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             cbAudioOutputDevice.Name = "cbAudioOutputDevice";
             cbAudioOutputDevice.Size = new System.Drawing.Size(616, 33);
@@ -255,7 +262,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(14, 286);
+            label5.Location = new System.Drawing.Point(14, 376);
             label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(119, 25);
@@ -265,7 +272,7 @@
             // tbPitch
             // 
             tbPitch.BackColor = System.Drawing.SystemColors.Window;
-            tbPitch.Location = new System.Drawing.Point(180, 399);
+            tbPitch.Location = new System.Drawing.Point(180, 489);
             tbPitch.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             tbPitch.Maximum = 200;
             tbPitch.Minimum = 50;
@@ -278,18 +285,93 @@
             // lbPitch
             // 
             lbPitch.AutoSize = true;
-            lbPitch.Location = new System.Drawing.Point(180, 368);
+            lbPitch.Location = new System.Drawing.Point(180, 458);
             lbPitch.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             lbPitch.Name = "lbPitch";
             lbPitch.Size = new System.Drawing.Size(89, 25);
             lbPitch.TabIndex = 36;
             lbPitch.Text = "Pitch: 1.00";
             // 
+            // rbZipMode
+            // 
+            rbZipMode.AutoSize = true;
+            rbZipMode.Checked = true;
+            rbZipMode.Location = new System.Drawing.Point(148, 21);
+            rbZipMode.Name = "rbZipMode";
+            rbZipMode.Size = new System.Drawing.Size(230, 29);
+            rbZipMode.TabIndex = 37;
+            rbZipMode.TabStop = true;
+            rbZipMode.Text = "ZIP (CDG + Audio inside)";
+            rbZipMode.UseVisualStyleBackColor = true;
+            rbZipMode.CheckedChanged += rbInputMode_CheckedChanged;
+            // 
+            // rbSeparateFilesMode
+            // 
+            rbSeparateFilesMode.AutoSize = true;
+            rbSeparateFilesMode.Location = new System.Drawing.Point(400, 21);
+            rbSeparateFilesMode.Name = "rbSeparateFilesMode";
+            rbSeparateFilesMode.Size = new System.Drawing.Size(209, 29);
+            rbSeparateFilesMode.TabIndex = 38;
+            rbSeparateFilesMode.Text = "Separate CDG + Audio";
+            rbSeparateFilesMode.UseVisualStyleBackColor = true;
+            rbSeparateFilesMode.CheckedChanged += rbInputMode_CheckedChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(22, 64);
+            label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(77, 25);
+            label1.TabIndex = 39;
+            label1.Text = "ZIP File:";
+            // 
+            // edAudioFilename
+            // 
+            edAudioFilename.Enabled = false;
+            edAudioFilename.Location = new System.Drawing.Point(122, 146);
+            edAudioFilename.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            edAudioFilename.Name = "edAudioFilename";
+            edAudioFilename.Size = new System.Drawing.Size(466, 31);
+            edAudioFilename.TabIndex = 40;
+            // 
+            // btSelectAudioFile
+            // 
+            btSelectAudioFile.Enabled = false;
+            btSelectAudioFile.Location = new System.Drawing.Point(600, 140);
+            btSelectAudioFile.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btSelectAudioFile.Name = "btSelectAudioFile";
+            btSelectAudioFile.Size = new System.Drawing.Size(38, 44);
+            btSelectAudioFile.TabIndex = 41;
+            btSelectAudioFile.Text = "...";
+            btSelectAudioFile.UseVisualStyleBackColor = true;
+            btSelectAudioFile.Click += btSelectAudioFile_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(22, 152);
+            label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(95, 25);
+            label2.TabIndex = 42;
+            label2.Text = "Audio File:";
+            // 
+            // openFileDialog2
+            // 
+            openFileDialog2.FileName = "openFileDialog2";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1398, 678);
+            ClientSize = new System.Drawing.Size(1398, 768);
+            Controls.Add(label2);
+            Controls.Add(btSelectAudioFile);
+            Controls.Add(edAudioFilename);
+            Controls.Add(label1);
+            Controls.Add(rbSeparateFilesMode);
+            Controls.Add(rbZipMode);
             Controls.Add(lbPitch);
             Controls.Add(tbPitch);
             Controls.Add(cbAudioOutputDevice);
@@ -342,6 +424,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TrackBar tbPitch;
         private System.Windows.Forms.Label lbPitch;
+        private System.Windows.Forms.RadioButton rbZipMode;
+        private System.Windows.Forms.RadioButton rbSeparateFilesMode;
+        private System.Windows.Forms.TextBox edAudioFilename;
+        private System.Windows.Forms.Button btSelectAudioFile;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }
 

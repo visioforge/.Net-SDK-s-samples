@@ -7,6 +7,7 @@
     using System.Windows.Forms;
 
     using VisioForge.Core;
+    using VisioForge.Core.MediaBlocks.VideoRendering;
     using VisioForge.Core.MediaPlayerX;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.X.AudioRenderers;
@@ -19,6 +20,9 @@
         private MediaPlayerCoreX MediaPlayer1;
 
         private CDGSourceSettings _currentSettings;
+
+        private SecondaryVideoWindow _secondaryWindow;
+        private VideoRendererBlock _secondaryRenderer;
 
         public Form1()
         {
@@ -41,6 +45,12 @@
             Text += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
+            // Initialize and show secondary window
+            _secondaryWindow = new SecondaryVideoWindow();
+#pragma warning disable S6966 // Awaitable method should be used
+            _secondaryWindow.Show();
+#pragma warning restore S6966
+
             // audio output
             foreach (var item in await MediaPlayer1.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound))
             {
@@ -61,7 +71,15 @@
 
         private void btSelectFile_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "Karaoke files|*.mp3;*.zip|MP3 files|*.mp3|ZIP archives|*.zip|All files|*.*";
+            if (rbZipMode.Checked)
+            {
+                openFileDialog1.Filter = "ZIP archives|*.zip|All files|*.*";
+            }
+            else
+            {
+                openFileDialog1.Filter = "CDG files|*.cdg|All files|*.*";
+            }
+            
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 edFilename.Text = openFileDialog1.FileName;
@@ -86,20 +104,27 @@
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
 
-            var filename = edFilename.Text;
-
-            // Check if it's a ZIP file
-            if (filename.EndsWith(".zip", StringComparison.OrdinalIgnoreCase))
+            // Add secondary video output if window should be visible
+            if (_secondaryWindow != null)
             {
-                // ZIP archive containing CDG and MP3 files
-                _currentSettings = new CDGSourceSettings(filename);
+                // Create a secondary video renderer for the second window
+                _secondaryRenderer = new VideoRendererBlock(null, _secondaryWindow.VideoView);
+                MediaPlayer1.Custom_Video_Outputs.Clear();
+                MediaPlayer1.Custom_Video_Outputs.Add(_secondaryRenderer);
+            }
+
+            if (rbZipMode.Checked)
+            {
+                // ZIP archive containing CDG and audio files
+                var zipFile = edFilename.Text;
+                _currentSettings = new CDGSourceSettings(zipFile);
             }
             else
             {
-                // Traditional MP3 file with accompanying CDG file
-                var mp3File = filename;
-                var cdgFile = Path.Combine(Path.GetDirectoryName(mp3File), Path.GetFileNameWithoutExtension(mp3File) + ".cdg");
-                _currentSettings = new CDGSourceSettings(cdgFile, mp3File);
+                // Separate CDG and audio files
+                var cdgFile = edFilename.Text;
+                var audioFile = edAudioFilename.Text;
+                _currentSettings = new CDGSourceSettings(cdgFile, audioFile);
             }
 
             // Set pitch from trackbar (semitones) and enable runtime pitch control
@@ -130,6 +155,13 @@
 
             _currentSettings = null;
 
+            // Clean up secondary renderer
+            if (_secondaryRenderer != null)
+            {
+                MediaPlayer1.Custom_Video_Outputs.Clear();
+                _secondaryRenderer = null;
+            }
+
             timer1.Enabled = false;
             tbTimeline.Value = 0;
         }
@@ -148,6 +180,38 @@
             if (_currentSettings != null)
             {
                 _currentSettings.PitchSemitones = semitones;
+            }
+        }
+
+        private void rbInputMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbZipMode.Checked)
+            {
+                // ZIP mode - disable audio file input
+                label1.Text = "ZIP File:";
+                edAudioFilename.Enabled = false;
+                btSelectAudioFile.Enabled = false;
+                label2.Enabled = false;
+                edFilename.Text = "c:\\1.zip";
+            }
+            else
+            {
+                // Separate files mode - enable audio file input
+                label1.Text = "CDG File:";
+                edAudioFilename.Enabled = true;
+                btSelectAudioFile.Enabled = true;
+                label2.Enabled = true;
+                edFilename.Text = "c:\\1.cdg";
+                edAudioFilename.Text = "c:\\1.mp3";
+            }
+        }
+
+        private void btSelectAudioFile_Click(object sender, EventArgs e)
+        {
+            openFileDialog2.Filter = "Audio files|*.mp3;*.wav;*.ogg;*.flac;*.m4a;*.aac|MP3 files|*.mp3|WAV files|*.wav|All files|*.*";
+            if (openFileDialog2.ShowDialog() == DialogResult.OK)
+            {
+                edAudioFilename.Text = openFileDialog2.FileName;
             }
         }
 
@@ -199,6 +263,9 @@
             await MediaPlayer1.StopAsync();
 
             await MediaPlayer1.DisposeAsync();
+
+            _secondaryWindow?.Close();
+            _secondaryWindow?.Dispose();
 
             VisioForgeX.DestroySDK();
         }
