@@ -17,6 +17,7 @@ jobs:
       Solution_Name_VC1: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net10.sln"
       Solution_Name_VC2: "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net10.sln"
       Solution_Name_VC3: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net10.sln"
+      Solution_Name_VC3_VB: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.VB net10.sln"
       Solution_Name_VC_VB: "Video Capture SDK/VisioForge.VideoCapture.Demos.VB (NuGet) net10.sln"
 
       Solution_Name_VE1: "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net10.sln"
@@ -90,6 +91,12 @@ jobs:
 
     - name: Build app for release $env:Solution_Name_VC3
       run: msbuild $env:Solution_Name_VC3 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    - name: Restore dependencies $env:Solution_Name_VC3_VB
+      run: dotnet restore $env:Solution_Name_VC3_VB
+
+    - name: Build app for release $env:Solution_Name_VC3_VB
+      run: msbuild $env:Solution_Name_VC3_VB -t:rebuild -verbosity:diag -property:Configuration=Release
 
     - name: Restore dependencies $env:Solution_Name_VC_VB
       run: dotnet restore $env:Solution_Name_VC_VB
