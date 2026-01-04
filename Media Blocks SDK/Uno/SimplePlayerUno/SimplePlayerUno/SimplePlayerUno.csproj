@@ -6,6 +6,7 @@
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
     <UseCurrentXcodeSDKVersion>true</UseCurrentXcodeSDKVersion>
+    <RunAOTCompilation>false</RunAOTCompilation>
     <ApplicationTitle>SimplePlayerUno</ApplicationTitle>
     <ApplicationId>com.companyname.simpleplayeruno</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -46,7 +47,7 @@
     <Message Text="AppBundleDir: $(AppBundleDir)" Importance="High" />
     <Message Text="MonoBundleDir: $(MonoBundleDir)" Importance="High" />
     <MakeDir Directories="$(MonoBundleDir)" Condition="!Exists('$(MonoBundleDir)')" />
-    <Copy SourceFiles="@(None-&gt;'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
+    <Copy SourceFiles="@(None->'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
       <Output TaskParameter="CopiedFiles" ItemName="CopiedNativeFiles" />
     </Copy>
     <Message Text="Copied native files:" Importance="High" Condition="@(CopiedNativeFiles) != ''" />

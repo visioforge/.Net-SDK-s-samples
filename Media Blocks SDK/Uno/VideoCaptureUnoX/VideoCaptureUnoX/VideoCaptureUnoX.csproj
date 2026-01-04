@@ -6,6 +6,7 @@
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
     <UseCurrentXcodeSDKVersion>true</UseCurrentXcodeSDKVersion>
+    <RunAOTCompilation>false</RunAOTCompilation>
     <ApplicationTitle>VideoCaptureUnoX</ApplicationTitle>
     <ApplicationId>com.companyname.videocaptureunox</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -44,7 +45,7 @@
       <MonoBundleDir>$(AppBundleDir)/Contents/MonoBundle</MonoBundleDir>
     </PropertyGroup>
     <MakeDir Directories="$(MonoBundleDir)" Condition="!Exists('$(MonoBundleDir)')" />
-    <Copy SourceFiles="@(None-&gt;'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
+    <Copy SourceFiles="@(None->'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
       <Output TaskParameter="CopiedFiles" ItemName="CopiedNativeFiles" />
     </Copy>
   </Target>

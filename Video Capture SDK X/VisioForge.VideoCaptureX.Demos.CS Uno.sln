@@ -1,11 +1,12 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32210.308
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151 d18.0
 MinimumVisualStudioVersion = 15.0.26124.0
-
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCaptureUno", "Uno\SimpleCaptureUno\SimpleCaptureUno\SimpleCaptureUno.csproj", "{A7890123-4567-89AB-F012-345678901234}"
 EndProject
-
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X10", "..\AndroidDependency\VisioForge.Core.Android.X10.csproj", "{621AD692-5F1C-9918-4F67-140B24AED986}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +19,7 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A7890123-4567-89AB-F012-345678901234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A7890123-4567-89AB-F012-345678901234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7890123-4567-89AB-F012-345678901234}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{A7890123-4567-89AB-F012-345678901234}.Debug|ARM64.ActiveCfg = Debug|Any CPU
 		{A7890123-4567-89AB-F012-345678901234}.Debug|ARM64.Build.0 = Debug|Any CPU
 		{A7890123-4567-89AB-F012-345678901234}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -28,6 +30,18 @@ Global
 		{A7890123-4567-89AB-F012-345678901234}.Release|ARM64.Build.0 = Release|Any CPU
 		{A7890123-4567-89AB-F012-345678901234}.Release|x64.ActiveCfg = Release|Any CPU
 		{A7890123-4567-89AB-F012-345678901234}.Release|x64.Build.0 = Release|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Debug|x64.Build.0 = Debug|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Release|Any CPU.Build.0 = Release|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Release|ARM64.Build.0 = Release|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Release|x64.ActiveCfg = Release|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

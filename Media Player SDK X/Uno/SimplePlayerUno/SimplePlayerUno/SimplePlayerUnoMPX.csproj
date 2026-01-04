@@ -6,6 +6,7 @@
     <OutputType>Exe</OutputType>
     <UnoSingleProject>true</UnoSingleProject>
     <UseCurrentXcodeSDKVersion>true</UseCurrentXcodeSDKVersion>
+    <RunAOTCompilation>false</RunAOTCompilation>
     <AssemblyName>SimplePlayerUnoMPX</AssemblyName>
     <ApplicationTitle>SimplePlayerUnoMPX</ApplicationTitle>
     <ApplicationId>com.visioforge.simpleplayerunompx</ApplicationId>
@@ -36,7 +37,7 @@
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.33" />
-    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
+    <ProjectReference Include="..\..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
