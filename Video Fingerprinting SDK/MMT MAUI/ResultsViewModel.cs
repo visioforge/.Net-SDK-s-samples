@@ -2,10 +2,10 @@ namespace MMT_MAUI
 {
     public class ResultsViewModel
     {
-        public string Sample { get; set; }
+        public required string Sample { get; set; }
 
-        public string Position { get; set; }
+        public required string Position { get; set; }
 
-        public string DumpFile { get; set; }
+        public required string DumpFile { get; set; }
     }
 }

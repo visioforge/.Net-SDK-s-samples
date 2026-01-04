@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimplePlayer", "MAUI\Simple
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SkinnedPlayer", "MAUI\SkinnedPlayer\SkinnedPlayer.csproj", "{91282EB3-BB4A-4352-8C9A-405C42E82456}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X9", "..\AndroidDependency\VisioForge.Core.Android.X9.csproj", "{6CEB9299-675D-8FAB-0423-1A0209F60B14}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X10", "..\AndroidDependency\VisioForge.Core.Android.X10.csproj", "{6CEB9299-675D-8FAB-0423-1A0209F60B14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

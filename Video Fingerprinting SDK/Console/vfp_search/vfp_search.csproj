@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net9.0-windows;net9.0-macos</TargetFrameworks>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget Condition="$(TargetFramework.Contains('-windows'))">x64</PlatformTarget>
     <AssemblyTitle>vfp_search</AssemblyTitle>
     <Company>VisioForge</Company>
     <Product>vfp_search</Product>

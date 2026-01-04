@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Globalization;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Sources;
@@ -39,12 +39,12 @@ namespace HLS_Player_MB_MAUI
             pickerSampleStreams.SelectedIndex = 0;
         }
 
-        private void MainPage_Loaded(object sender, EventArgs e)
+        private void MainPage_Loaded(object? sender, EventArgs e)
         {
             Window.Destroying += Window_Destroying;
         }
 
-        private async void Window_Destroying(object sender, EventArgs e)
+        private async void Window_Destroying(object? sender, EventArgs e)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace HLS_Player_MB_MAUI
             _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
         }
 
-        private void _pipeline_OnError(object sender, ErrorsEventArgs e)
+        private void _pipeline_OnError(object? sender, ErrorsEventArgs e)
         {
             Debug.WriteLine($"Pipeline Error: {e.Message}");
             
@@ -116,7 +116,7 @@ namespace HLS_Player_MB_MAUI
             });
         }
 
-        private void _pipeline_OnStart(object sender, EventArgs e)
+        private void _pipeline_OnStart(object? sender, EventArgs e)
         {
             MainThread.BeginInvokeOnMainThread(async () =>
             {
@@ -165,7 +165,7 @@ namespace HLS_Player_MB_MAUI
             });
         }
 
-        private void _pipeline_OnStop(object sender, StopEventArgs e)
+        private void _pipeline_OnStop(object? sender, StopEventArgs e)
         {
             _tmPosition.Stop();
             
@@ -225,7 +225,7 @@ namespace HLS_Player_MB_MAUI
             });
         }
 
-        private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private async void tmPosition_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             if (_pipeline == null || _pipeline.State != PlaybackState.Play)
                 return;
@@ -267,7 +267,7 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
-        private void pickerSampleStreams_SelectedIndexChanged(object sender, EventArgs e)
+        private void pickerSampleStreams_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (pickerSampleStreams.SelectedIndex >= 0)
             {
@@ -279,20 +279,20 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
-        private async void btPlay_Clicked(object sender, EventArgs e)
+        private async void btPlay_Clicked(object? sender, EventArgs e)
         {
             try
             {
                 var hlsUrl = txtHLSUrl.Text?.Trim();
                 if (string.IsNullOrEmpty(hlsUrl))
                 {
-                    await DisplayAlert("Error", "Please enter an HLS stream URL", "OK");
+                    await DisplayAlertAsync("Error", "Please enter an HLS stream URL", "OK");
                     return;
                 }
 
                 if (!hlsUrl.StartsWith("http://") && !hlsUrl.StartsWith("https://"))
                 {
-                    await DisplayAlert("Error", "Please enter a valid HTTP/HTTPS URL", "OK");
+                    await DisplayAlertAsync("Error", "Please enter a valid HTTP/HTTPS URL", "OK");
                     return;
                 }
 
@@ -311,7 +311,7 @@ namespace HLS_Player_MB_MAUI
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error playing stream: {ex.Message}");
-                await DisplayAlert("Connection Error", $"Failed to connect: {ex.Message}", "OK");
+                await DisplayAlertAsync("Connection Error", $"Failed to connect: {ex.Message}", "OK");
                 lblStreamInfo.Text = $"Connection failed: {ex.Message}";
                 lblStreamInfo.TextColor = Colors.Red;
                 UpdateConnectionStatus(false);
@@ -321,7 +321,7 @@ namespace HLS_Player_MB_MAUI
         }
 
 
-        private async void btStop_Clicked(object sender, EventArgs e)
+        private async void btStop_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -345,7 +345,7 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
-        private async void slSeeking_ValueChanged(object sender, ValueChangedEventArgs e)
+        private async void slSeeking_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             try
             {
@@ -360,7 +360,7 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
-        private void slVolume_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void slVolume_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             if (_audioRenderer != null)
             {

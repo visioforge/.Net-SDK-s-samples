@@ -1,4 +1,4 @@
-﻿#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
+#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
 #define MOBILE
 #endif
 
@@ -69,7 +69,7 @@ namespace SimpleCaptureMB
             VisioForgeX.InitSDK();
         }
 
-        private void MainPage_Unloaded(object sender, EventArgs e)
+        private void MainPage_Unloaded(object? sender, EventArgs e)
         {
             _pipeline?.Dispose();
             _pipeline = null;
@@ -88,7 +88,7 @@ namespace SimpleCaptureMB
             _pipeline.OnError += Core_OnError;
         }
 
-        private async void MainPage_Loaded(object sender, EventArgs e)
+        private async void MainPage_Loaded(object? sender, EventArgs e)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace SimpleCaptureMB
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error loading page: {ex.Message}");
-                await DisplayAlert("Error", $"Failed to initialize devices: {ex.Message}", "OK");
+                await DisplayAlertAsync("Error", $"Failed to initialize devices: {ex.Message}", "OK");
             }
         }
 
@@ -143,7 +143,7 @@ namespace SimpleCaptureMB
             {
                 if (Permissions.ShouldShowRationale<Permissions.Camera>())
                 {
-                    if (await DisplayAlert(null, "You need to allow access to the Camera", "OK", "Cancel"))
+                    if (await DisplayAlertAsync(null, "You need to allow access to the Camera", "OK", "Cancel"))
                         await RequestCameraPermissionAsync();
                 }
             }
@@ -161,7 +161,7 @@ namespace SimpleCaptureMB
             {
                 if (Permissions.ShouldShowRationale<Permissions.Microphone>())
                 {
-                    if (await DisplayAlert(null, "You need to allow access to the Microphone", "OK", "Cancel"))
+                    if (await DisplayAlertAsync(null, "You need to allow access to the Microphone", "OK", "Cancel"))
                         await RequestMicPermissionAsync();
                 }
             }
@@ -180,7 +180,7 @@ namespace SimpleCaptureMB
         }
 #endif
 
-        private async void Window_Destroying(object sender, EventArgs e)
+        private async void Window_Destroying(object? sender, EventArgs e)
         {
             try
             {
@@ -201,7 +201,7 @@ namespace SimpleCaptureMB
             }
         }
 
-        private void Core_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
+        private void Core_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
@@ -279,7 +279,7 @@ namespace SimpleCaptureMB
         }
 #endif
 
-        private async void btStop_Clicked(object sender, EventArgs e)
+        private async void btStop_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -308,11 +308,11 @@ namespace SimpleCaptureMB
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error stopping capture: {ex.Message}");
-                await DisplayAlert("Error", $"Failed to stop capture: {ex.Message}", "OK");
+                await DisplayAlertAsync("Error", $"Failed to stop capture: {ex.Message}", "OK");
             }
         }
 
-        private void btCamera_Clicked(object sender, System.EventArgs e)
+        private void btCamera_Clicked(object? sender, System.EventArgs e)
         {
             if (_cameras == null || _cameras.Length == 0)
             {
@@ -329,7 +329,7 @@ namespace SimpleCaptureMB
             btCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
         }
 
-        private void btMic_Clicked(object sender, System.EventArgs e)
+        private void btMic_Clicked(object? sender, System.EventArgs e)
         {
             if (_mics == null || _mics.Length == 0)
             {
@@ -346,7 +346,7 @@ namespace SimpleCaptureMB
             btMic.Text = _mics[_micSelectedIndex].DisplayName;
         }
 
-        private void btSpeakers_Clicked(object sender, System.EventArgs e)
+        private void btSpeakers_Clicked(object? sender, System.EventArgs e)
         {
             if (_speakers == null || _speakers.Length == 0)
             {
@@ -394,7 +394,7 @@ namespace SimpleCaptureMB
 
             if (videoSourceSettings == null)
             {
-                await DisplayAlert("Error", "Unable to configure camera settings", "OK");
+                await DisplayAlertAsync("Error", "Unable to configure camera settings", "OK");
                 return;
             }
 
@@ -516,7 +516,7 @@ namespace SimpleCaptureMB
             _pipeline.Connect(_audioEncoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Audio));
         }
 
-        private async void btStartPreview_Clicked(object sender, EventArgs e)
+        private async void btStartPreview_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -565,12 +565,12 @@ namespace SimpleCaptureMB
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error starting preview: {ex.Message}");
-                await DisplayAlert("Error", $"Failed to start preview: {ex.Message}", "OK");
+                await DisplayAlertAsync("Error", $"Failed to start preview: {ex.Message}", "OK");
                 btStartPreview.Text = "PREVIEW";
             }
         }
 
-        private async void btStartCapture_Clicked(object sender, EventArgs e)
+        private async void btStartCapture_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -621,7 +621,7 @@ namespace SimpleCaptureMB
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error starting capture: {ex.Message}");
-                await DisplayAlert("Error", $"Failed to start capture: {ex.Message}", "OK");
+                await DisplayAlertAsync("Error", $"Failed to start capture: {ex.Message}", "OK");
                 btStartCapture.Text = "CAPTURE";
             }
         }

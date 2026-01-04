@@ -1,5 +1,6 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using VisioForge.Core.UI.MAUI;
+
 
 namespace PhotoCapture
 {
@@ -16,7 +17,7 @@ namespace PhotoCapture
             Loaded += MainPage_Loaded;
         }
 
-        private async void MainPage_Loaded(object sender, EventArgs e)
+        private async void MainPage_Loaded(object? sender, EventArgs e)
         {
             try
             {
@@ -44,11 +45,11 @@ namespace PhotoCapture
 #endif
         }
 
-        private async void ContentPage_Loaded(object sender, EventArgs e)
+        private async void ContentPage_Loaded(object? sender, EventArgs e)
         {
             try
             {
-                this.LayoutChanged += MainPage_LayoutChanged;
+                this.SizeChanged += MainPage_LayoutChanged;
 
 #if __ANDROID__ || __IOS__ || WINDOWS
                 await RequestCameraPermissionAsync();
@@ -83,19 +84,19 @@ namespace PhotoCapture
             {
                 if (Permissions.ShouldShowRationale<Permissions.Camera>())
                 {
-                    if (await DisplayAlert(null, "You need to allow access to the Camera", "OK", "Cancel"))
+                    if (await DisplayAlertAsync(null, "You need to allow access to the Camera", "OK", "Cancel"))
                         await RequestCameraPermissionAsync();
                 }
             }
         }
 
-        private void ContentPage_Unloaded(object sender, EventArgs e)
+        private void ContentPage_Unloaded(object? sender, EventArgs e)
         {
             _photoCaptureCore?.Dispose();
             _photoCaptureCore = null;
         }
 
-        private async void btCamera_Clicked(object sender, EventArgs e)
+        private async void btCamera_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -127,7 +128,7 @@ namespace PhotoCapture
             }
         }
 
-        private async void btPhoto_Clicked(object sender, EventArgs e)
+        private async void btPhoto_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -144,14 +145,14 @@ namespace PhotoCapture
                 else
                 {
                     // Access denied
-                    await DisplayAlert("Permission Required", "Photo permission is required to save photos.", "OK");
+                    await DisplayAlertAsync("Permission Required", "Photo permission is required to save photos.", "OK");
                 }
 #endif
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error taking photo: {ex.Message}");
-                await DisplayAlert("Error", $"Failed to take photo: {ex.Message}", "OK");
+                await DisplayAlertAsync("Error", $"Failed to take photo: {ex.Message}", "OK");
             }
         }
     }

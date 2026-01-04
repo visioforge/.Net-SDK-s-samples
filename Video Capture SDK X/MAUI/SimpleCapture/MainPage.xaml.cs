@@ -1,4 +1,4 @@
-﻿#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
+#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
 #define MOBILE
 #endif
 
@@ -49,7 +49,7 @@ namespace SimpleCapture
             this.BindingContext = this;
         }
 
-        private void MainPage_Unloaded(object sender, EventArgs e)
+        private void MainPage_Unloaded(object? sender, EventArgs e)
         {
             // Dispose core object
             _core?.Dispose();
@@ -84,7 +84,7 @@ namespace SimpleCapture
             {
                 if (Permissions.ShouldShowRationale<Permissions.Camera>())
                 {
-                    if (await DisplayAlert(null, "You need to allow access to the Camera", "OK", "Cancel"))
+                    if (await DisplayAlertAsync(null, "You need to allow access to the Camera", "OK", "Cancel"))
                         await RequestCameraPermissionAsync();
                 }
             }
@@ -102,7 +102,7 @@ namespace SimpleCapture
             {
                 if (Permissions.ShouldShowRationale<Permissions.Microphone>())
                 {
-                    if (await DisplayAlert(null, "You need to allow access to the Microphone", "OK", "Cancel"))
+                    if (await DisplayAlertAsync(null, "You need to allow access to the Microphone", "OK", "Cancel"))
                         await RequestMicPermissionAsync();
                 }
             }
@@ -121,7 +121,7 @@ namespace SimpleCapture
                 {
                     if (Permissions.ShouldShowRationale<Permissions.Media>())
                     {
-                        if (await DisplayAlert(null, "You need to allow access to save videos", "OK", "Cancel"))
+                        if (await DisplayAlertAsync(null, "You need to allow access to save videos", "OK", "Cancel"))
                             await RequestStoragePermissionAsync();
                     }
                 }
@@ -141,7 +141,7 @@ namespace SimpleCapture
                 {
                     if (Permissions.ShouldShowRationale<Permissions.StorageWrite>())
                     {
-                        if (await DisplayAlert(null, "You need to allow storage access to save videos", "OK", "Cancel"))
+                        if (await DisplayAlertAsync(null, "You need to allow storage access to save videos", "OK", "Cancel"))
                             await RequestStoragePermissionAsync();
                     }
                 }
@@ -149,7 +149,7 @@ namespace SimpleCapture
         }
 #endif
 
-        private async void MainPage_Loaded(object sender, EventArgs e)
+        private async void MainPage_Loaded(object? sender, EventArgs e)
         {
             // Ask for permissions
 #if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
@@ -213,7 +213,7 @@ namespace SimpleCapture
 #endif
         }
 
-        private async void Window_Destroying(object sender, EventArgs e)
+        private async void Window_Destroying(object? sender, EventArgs e)
         {
             if (_core != null)
             {
@@ -227,7 +227,7 @@ namespace SimpleCapture
             VisioForgeX.DestroySDK();
         }
 
-        private void Core_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
+        private void Core_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
@@ -245,7 +245,7 @@ namespace SimpleCapture
             }
         }
 
-        private void slVolume_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void slVolume_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             if (_core != null)
             {
@@ -298,7 +298,7 @@ namespace SimpleCapture
 #endif
         }
 
-        private async void btCamera_Clicked(object sender, System.EventArgs e)
+        private async void btCamera_Clicked(object? sender, System.EventArgs e)
         {
             if (_cameras == null || _cameras.Length < 2)
             {
@@ -320,7 +320,7 @@ namespace SimpleCapture
 #endif
         }
 
-        private void btMic_Clicked(object sender, System.EventArgs e)
+        private void btMic_Clicked(object? sender, System.EventArgs e)
         {
             if (_mics == null || _mics.Length < 2)
             {
@@ -337,7 +337,7 @@ namespace SimpleCapture
             btMic.Text = _mics[_micSelectedIndex].DisplayName;
         }
 
-        private void btSpeakers_Clicked(object sender, System.EventArgs e)
+        private void btSpeakers_Clicked(object? sender, System.EventArgs e)
         {
             if (_speakers == null || _speakers.Length < 2)
             {
@@ -401,7 +401,7 @@ namespace SimpleCapture
 
             if (videoSourceSettings == null)
             {
-                await DisplayAlert("Error", "Unable to configure camera settings", "OK");
+                await DisplayAlertAsync("Error", "Unable to configure camera settings", "OK");
             }
 
             // audio source
@@ -481,7 +481,7 @@ namespace SimpleCapture
             return filename;
         }
 
-        private async void btStartPreview_Clicked(object sender, EventArgs e)
+        private async void btStartPreview_Clicked(object? sender, EventArgs e)
         {
             if (_core == null)
             {
@@ -516,7 +516,7 @@ namespace SimpleCapture
             }
         }
 
-        private async void btStartCapture_Clicked(object sender, EventArgs e)
+        private async void btStartCapture_Clicked(object? sender, EventArgs e)
         {
             if (_core == null || _core.State != PlaybackState.Play)
             {

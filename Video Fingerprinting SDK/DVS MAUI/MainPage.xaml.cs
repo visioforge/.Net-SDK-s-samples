@@ -1,4 +1,4 @@
-﻿namespace DVS_MAUI
+namespace DVS_MAUI
 {
     using System.Collections.ObjectModel;
     using System.Globalization;
@@ -73,14 +73,14 @@
                     }
                     else
                     {
-                        await DisplayAlert("Error", "The specified folder does not exist.", "OK");
+                        await DisplayAlertAsync("Error", "The specified folder does not exist.", "OK");
                     }
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error adding folder: {ex.Message}");
-                await DisplayAlert("Error", $"Failed to add folder: {ex.Message}", "OK");
+                await DisplayAlertAsync("Error", $"Failed to add folder: {ex.Message}", "OK");
             }
         }
 
@@ -122,7 +122,7 @@
 
                 if (extensions.Count == 0)
                 {
-                    await DisplayAlert("Warning", "Please select at least one format to analyze.", "OK");
+                    await DisplayAlertAsync("Warning", "Please select at least one format to analyze.", "OK");
                     return;
                 }
 
@@ -136,7 +136,7 @@
 
                 if (filenames.Count == 0)
                 {
-                    await DisplayAlert("Information", "No video files found in the specified folders.", "OK");
+                    await DisplayAlertAsync("Information", "No video files found in the specified folders.", "OK");
                     return;
                 }
 
@@ -260,7 +260,7 @@
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Search error: {ex.Message}");
-                await DisplayAlert("Error", $"Search failed: {ex.Message}", "OK");
+                await DisplayAlertAsync("Error", $"Search failed: {ex.Message}", "OK");
                 await MainThread.InvokeOnMainThreadAsync(() =>
                 {
                     edErrors.Text += $"Search error: {ex.Message}{Environment.NewLine}";
@@ -280,11 +280,11 @@
             
             if (itemsToDelete.Count == 0)
             {
-                await DisplayAlert("Information", "No files selected for deletion.", "OK");
+                await DisplayAlertAsync("Information", "No files selected for deletion.", "OK");
                 return;
             }
 
-            bool confirm = await DisplayAlert("Confirm", 
+            bool confirm = await DisplayAlertAsync("Confirm", 
                 $"Are you sure you want to delete {itemsToDelete.Count} file(s)?", 
                 "Yes", "No");
             
@@ -320,7 +320,7 @@
 
             if (deletedCount > 0)
             {
-                await DisplayAlert("Success", $"{deletedCount} file(s) have been deleted.", "OK");
+                await DisplayAlertAsync("Success", $"{deletedCount} file(s) have been deleted.", "OK");
             }
         }
 

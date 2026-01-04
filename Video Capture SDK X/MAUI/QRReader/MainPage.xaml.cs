@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using VisioForge.Core;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
@@ -24,7 +24,7 @@ namespace QRReader
             Unloaded += MainPage_Unloaded;
         }
 
-        private void MainPage_Unloaded(object sender, EventArgs e)
+        private void MainPage_Unloaded(object? sender, EventArgs e)
         {
             _core?.Dispose();
             _core = null;
@@ -32,7 +32,7 @@ namespace QRReader
             VisioForgeX.DestroySDK();
         }
 
-        private async void MainPage_Loaded(object sender, EventArgs e)
+        private async void MainPage_Loaded(object? sender, EventArgs e)
         {
 #if __ANDROID__ || __MACOS__ || __MACCATALYST__
             await RequestCameraPermissionAsync();
@@ -56,7 +56,7 @@ namespace QRReader
             Window.Destroying += Window_Destroying;
         }
 
-        private void Core_OnBarcodeDetected(object sender, BarcodeDetectorEventArgs e)
+        private void Core_OnBarcodeDetected(object? sender, BarcodeDetectorEventArgs e)
         {
             Debug.WriteLine($"Detected barcode: {e.Value}");
 
@@ -78,13 +78,13 @@ namespace QRReader
             {
                 if (Permissions.ShouldShowRationale<Permissions.Camera>())
                 {
-                    if (await DisplayAlert(null, "You need to allow access to the Camera", "OK", "Cancel"))
+                    if (await DisplayAlertAsync(null, "You need to allow access to the Camera", "OK", "Cancel"))
                         await RequestCameraPermissionAsync();
                 }
             }
         }
 
-        private async void btPlayStop_Clicked(object sender, EventArgs e)
+        private async void btPlayStop_Clicked(object? sender, EventArgs e)
         {
             if (_core == null)
             {
@@ -135,7 +135,7 @@ namespace QRReader
 
                         if (videoSourceSettings == null)
                         {
-                            await DisplayAlert("Error", "Unable to configure camera settings", "OK");
+                            await DisplayAlertAsync("Error", "Unable to configure camera settings", "OK");
                         }
 
                         await _core.StartAsync();
@@ -149,7 +149,7 @@ namespace QRReader
             }
         }
 
-        private async void Window_Destroying(object sender, EventArgs e)
+        private async void Window_Destroying(object? sender, EventArgs e)
         {
             if (_core != null)
             {
@@ -163,12 +163,12 @@ namespace QRReader
             VisioForgeX.DestroySDK();
         }
 
-        private void Core_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
+        private void Core_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
-        private void btCamera_Clicked(object sender, EventArgs e)
+        private void btCamera_Clicked(object? sender, EventArgs e)
         {
             if (_cameras == null || _cameras.Length == 0)
             {

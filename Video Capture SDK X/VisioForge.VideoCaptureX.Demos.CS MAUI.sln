@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCapture", "MAUI\Simpl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoCapture", "MAUI\PhotoCapture\PhotoCapture.csproj", "{E20EBFFC-6D11-4C58-9C9A-52D2582990A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X9", "..\AndroidDependency\VisioForge.Core.Android.X9.csproj", "{6CEB9299-675D-8FAB-0423-1A0209F60B14}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X10", "..\AndroidDependency\VisioForge.Core.Android.X10.csproj", "{6CEB9299-675D-8FAB-0423-1A0209F60B14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -13,13 +13,13 @@ namespace MMT_MAUI;
 public partial class MainPage : ContentPage
 {
     private readonly List<Rect> _ignoredAreas = new List<Rect>();
-    private VFPFingerPrintDB _db;
+    private VFPFingerPrintDB? _db;
     private readonly ObservableCollection<ResultsViewModel> results = new ObservableCollection<ResultsViewModel>();
     private readonly ObservableCollection<string> broadcastFolders = new ObservableCollection<string>();
     private readonly ObservableCollection<string> adFolders = new ObservableCollection<string>();
     private readonly ObservableCollection<string> ignoredAreasList = new ObservableCollection<string>();
     private readonly ObservableCollection<string> dbItems = new ObservableCollection<string>();
-    private readonly IFileSaver _fileSaver;
+    private readonly IFileSaver? _fileSaver;
 
     public ObservableCollection<ResultsViewModel> Results { get { return this.results; } }
 
@@ -55,7 +55,7 @@ public partial class MainPage : ContentPage
         VisioForgeX.DestroySDK();
     }
 
-    private async void btAddBroadcastFile_Click(object sender, EventArgs e)
+    private async void btAddBroadcastFile_Click(object? sender, EventArgs e)
     {
         try
         {
@@ -129,17 +129,17 @@ public partial class MainPage : ContentPage
                 };
                 lbBroadcastFolders.Children.Add(label);
                 
-                Settings.LastPath = Path.GetDirectoryName(result.FullPath);
+                Settings.LastPath = Path.GetDirectoryName(result.FullPath) ?? "";
             }
 #endif
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", $"Failed to select files: {ex.Message}", "OK");
+            await DisplayAlertAsync("Error", $"Failed to select files: {ex.Message}", "OK");
         }
     }
 
-    private async void btAddAdFile_Click(object sender, EventArgs e)
+    private async void btAddAdFile_Click(object? sender, EventArgs e)
     {
         try
         {
@@ -213,23 +213,23 @@ public partial class MainPage : ContentPage
                 };
                 lbAdFolders.Children.Add(label);
                 
-                Settings.LastPath = Path.GetDirectoryName(result.FullPath);
+                Settings.LastPath = Path.GetDirectoryName(result.FullPath) ?? "";
             }
 #endif
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", $"Failed to select files: {ex.Message}", "OK");
+            await DisplayAlertAsync("Error", $"Failed to select files: {ex.Message}", "OK");
         }
     }
 
-    private void btClearAds_Click(object sender, EventArgs e)
+    private void btClearAds_Click(object? sender, EventArgs e)
     {
         adFolders.Clear();
         lbAdFolders.Children.Clear();
     }
 
-    private void btClearBroadcast_Click(object sender, EventArgs e)
+    private void btClearBroadcast_Click(object? sender, EventArgs e)
     {
         broadcastFolders.Clear();
         lbBroadcastFolders.Children.Clear();
@@ -237,10 +237,10 @@ public partial class MainPage : ContentPage
 
     private async void errorDelegate(string error)
     {
-        await DisplayAlert("Error", error, "OK");
+        await DisplayAlertAsync("Error", error, "OK");
     }
 
-    private async void btStart_Click(object sender, EventArgs e)
+    private async void btStart_Click(object? sender, EventArgs e)
     {
         try
         {
@@ -298,7 +298,7 @@ public partial class MainPage : ContentPage
                     source.IgnoredAreas.Add(area);
                 }
 
-                VFPFingerPrint fp = _db.GetFingerprint(source);
+                VFPFingerPrint? fp = _db?.GetFingerprint(source);
 
                 if (fp == null)
                 {
@@ -306,16 +306,22 @@ public partial class MainPage : ContentPage
 
                     if (fp == null)
                     {
-                        await DisplayAlert("Error", "Unable to get fingerprint for the video file: " + filename, "OK");
+                        await DisplayAlertAsync("Error", "Unable to get fingerprint for the video file: " + filename, "OK");
                     }
                     else
                     {
-                        _db.Items.Add(fp);
-                        AddDBItem(fp);
+                        if (_db != null)
+                        {
+                            _db.Items.Add(fp);
+                            AddDBItem(fp);
+                        }
                     }
                 }
 
-                adVFPList.Add(fp);
+                if (fp != null)
+                {
+                    adVFPList.Add(fp);
+                }
 
                 progress += 100 / adList.Count;
             }
@@ -334,19 +340,22 @@ public partial class MainPage : ContentPage
                     source.IgnoredAreas.Add(area);
                 }
 
-                VFPFingerPrint fp = _db.GetFingerprint(source);
+                VFPFingerPrint? fp = _db?.GetFingerprint(source);
                 if (fp == null)
                 {
                     fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, errorDelegate);
                     if (fp == null)
                     {
-                        await DisplayAlert("Error", "Unable to get fingerprint for the video file: " + filename, "OK");
+                        await DisplayAlertAsync("Error", "Unable to get fingerprint for the video file: " + filename, "OK");
                         return;
                     }
                     else
                     {
-                        _db.Items.Add(fp);
-                        AddDBItem(fp);
+                        if (_db != null)
+                        {
+                            _db.Items.Add(fp);
+                            AddDBItem(fp);
+                        }
                     }
                 }
 
@@ -397,7 +406,7 @@ public partial class MainPage : ContentPage
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"Error in analysis: {ex.Message}");
-            await DisplayAlert("Error", $"Analysis failed: {ex.Message}", "OK");
+            await DisplayAlertAsync("Error", $"Analysis failed: {ex.Message}", "OK");
             lbStatus.Text = "Error occurred during analysis.";
         }
         finally
@@ -406,7 +415,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private async void btPlay_Click(object sender, EventArgs e)
+    private async void btPlay_Click(object? sender, EventArgs e)
     {
         if (lvResults.SelectedItem == null)
         {
@@ -416,19 +425,19 @@ public partial class MainPage : ContentPage
         // VideoView playback requires MediaBlocks pipeline setup
         // For simplicity, just show the file path for now
         var selected = (ResultsViewModel)lvResults.SelectedItem;
-        await DisplayAlert("Play Video", $"Selected file: {selected.DumpFile}", "OK");
+        await DisplayAlertAsync("Play Video", $"Selected file: {selected.DumpFile}", "OK");
         
         // TODO: Implement MediaBlocks pipeline for video playback
         // Requires: UniversalSourceBlock, VideoRendererBlock, AudioRendererBlock
     }
 
-    private async void btSaveResults_Click(object sender, EventArgs e)
+    private async void btSaveResults_Click(object? sender, EventArgs e)
     {
         try
         {
             if (results.Count == 0)
             {
-                await DisplayAlert("Info", "No results to save", "OK");
+                await DisplayAlertAsync("Info", "No results to save", "OK");
                 return;
             }
 
@@ -437,7 +446,7 @@ public partial class MainPage : ContentPage
             try
             {
                 // First prepare the data in memory
-                var saveOptions = await DisplayActionSheet("Save as", "Cancel", null, "CSV", "XML");
+                var saveOptions = await DisplayActionSheetAsync("Save as", "Cancel", null, "CSV", "XML");
                 if (saveOptions == "Cancel" || string.IsNullOrEmpty(saveOptions))
                     return;
 
@@ -478,14 +487,14 @@ public partial class MainPage : ContentPage
                     }
                 }
                 
-                await DisplayAlert("Success", "Results exported successfully", "OK");
+                await DisplayAlertAsync("Success", "Results exported successfully", "OK");
             }
             catch (Exception macEx)
             {
-                await DisplayAlert("Error", $"Failed to save results: {macEx.Message}", "OK");
+                await DisplayAlertAsync("Error", $"Failed to save results: {macEx.Message}", "OK");
             }
 #else
-            string filename = null;
+            string? filename = null;
 
             // Use the native file saver service for Windows
             if (_fileSaver != null)
@@ -513,20 +522,20 @@ public partial class MainPage : ContentPage
                 {
                     // Save as XML
                     SaveResultsAsXml(filename);
-                    await DisplayAlert("Success", $"Results saved to {Path.GetFileName(filename)}", "OK");
+                    await DisplayAlertAsync("Success", $"Results saved to {Path.GetFileName(filename)}", "OK");
                 }
                 else
                 {
                     // Save as CSV (default)
                     results.ToList().SerializeToCsv(filename, ',');
-                    await DisplayAlert("Success", $"Results saved to {Path.GetFileName(filename)}", "OK");
+                    await DisplayAlertAsync("Success", $"Results saved to {Path.GetFileName(filename)}", "OK");
                 }
             }
 #endif
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", $"Failed to save results: {ex.Message}", "OK");
+            await DisplayAlertAsync("Error", $"Failed to save results: {ex.Message}", "OK");
         }
     }
 
@@ -552,7 +561,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void slDifference_ValueChanged(object sender, ValueChangedEventArgs e)
+    private void slDifference_ValueChanged(object? sender, ValueChangedEventArgs e)
     {
         if (lbDifference != null)
         {
@@ -560,7 +569,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void btIgnoredAreaAdd_Click(object sender, EventArgs e)
+    private void btIgnoredAreaAdd_Click(object? sender, EventArgs e)
     {
         var rect = new Rect()
         {
@@ -585,7 +594,7 @@ public partial class MainPage : ContentPage
         lbIgnoredAreas.Children.Add(label);
     }
 
-    private void btIgnoredAreasRemoveItem_Click(object sender, EventArgs e)
+    private void btIgnoredAreasRemoveItem_Click(object? sender, EventArgs e)
     {
         // Since we don't have selection anymore, remove the last item
         if (ignoredAreasList.Count > 0)
@@ -599,16 +608,19 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void btIgnoredAreasRemoveAll_Click(object sender, EventArgs e)
+    private void btIgnoredAreasRemoveAll_Click(object? sender, EventArgs e)
     {
         ignoredAreasList.Clear();
         _ignoredAreas.Clear();
         lbIgnoredAreas.Children.Clear();
     }
 
-    private void btDBClear_Click(object sender, EventArgs e)
+    private void btDBClear_Click(object? sender, EventArgs e)
     {
-        _db.Items.Clear();
+        if (_db != null)
+        {
+            _db.Items.Clear();
+        }
         dbItems.Clear();
         lbDB.Children.Clear();
     }
@@ -656,8 +668,11 @@ public partial class MainPage : ContentPage
 
     private void SaveDB()
     {
-        var dbFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "mmt.db");
-        _db.Save(dbFile);
+        if (_db != null)
+        {
+            var dbFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "mmt.db");
+            _db.Save(dbFile);
+        }
     }
 
     protected override void OnDisappearing()

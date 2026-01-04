@@ -3,7 +3,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>vfpgen</RootNamespace>
     <TargetFrameworks>net9.0-windows;net9.0-macos</TargetFrameworks>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget Condition="$(TargetFramework.Contains('-windows'))">x64</PlatformTarget>
     <AssemblyTitle>vfpgen</AssemblyTitle>
     <Company>VisioForge</Company>
     <Product>vfpgen</Product>

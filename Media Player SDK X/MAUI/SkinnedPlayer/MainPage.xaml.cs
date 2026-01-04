@@ -1,4 +1,4 @@
-﻿//using VisioForge.Core.UI.MAUI;
+//using VisioForge.Core.UI.MAUI;
 using System.Diagnostics;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
@@ -74,7 +74,7 @@ namespace SkinnedPlayer_MAUI
             //playerControls.SkinName = "Default";
         }
 
-        private void Window_Destroying(object sender, EventArgs e)
+        private void Window_Destroying(object? sender, EventArgs e)
         {
             if (_player != null)
             {
@@ -88,7 +88,7 @@ namespace SkinnedPlayer_MAUI
             VisioForgeX.DestroySDK();
         }
 
-        private async void MainPage_Loaded(object sender, EventArgs e)
+        private async void MainPage_Loaded(object? sender, EventArgs e)
         {
             IVideoView vv = videoView.GetVideoView();
 
@@ -111,7 +111,7 @@ namespace SkinnedPlayer_MAUI
             Window.Destroying += Window_Destroying;
         }
 
-        private void OnStop(object sender, EventArgs e)
+        private void OnStop(object? sender, EventArgs e)
         {
             if (_player != null)
             {
@@ -120,7 +120,7 @@ namespace SkinnedPlayer_MAUI
             }
         }
 
-        private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
+        private void _player_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }

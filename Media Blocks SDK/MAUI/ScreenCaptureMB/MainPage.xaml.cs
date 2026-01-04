@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Globalization;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
@@ -164,7 +164,7 @@ namespace ScreenCaptureMB
         }
 #endif
 
-        private void MainPage_Loaded(object sender, EventArgs e)
+        private void MainPage_Loaded(object? sender, EventArgs e)
         {
             Window.Destroying += Window_Destroying;
 
@@ -177,7 +177,7 @@ namespace ScreenCaptureMB
 #endif
         }
 
-        private async void Window_Destroying(object sender, EventArgs e)
+        private async void Window_Destroying(object? sender, EventArgs e)
         {
             if (_pipeline != null)
             {
@@ -191,7 +191,7 @@ namespace ScreenCaptureMB
             VisioForgeX.DestroySDK();
         }
 
-        private async void OnStop(object sender, EventArgs e)
+        private async void OnStop(object? sender, EventArgs e)
         {
             if (_pipeline != null)
             {
@@ -200,7 +200,7 @@ namespace ScreenCaptureMB
             }
         }
 
-        private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
+        private void _player_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
@@ -225,7 +225,7 @@ namespace ScreenCaptureMB
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
-        private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private async void tmPosition_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             if (_pipeline == null)
             {
@@ -250,7 +250,7 @@ namespace ScreenCaptureMB
             }
         }
 
-        private async void btStart_Clicked(object sender, EventArgs e)
+        private async void btStart_Clicked(object? sender, EventArgs e)
         {
             await CreateEngineAsync();
 
@@ -259,7 +259,7 @@ namespace ScreenCaptureMB
             _tmPosition.Start();
         }
 
-        private async void btStop_Clicked(object sender, EventArgs e)
+        private async void btStop_Clicked(object? sender, EventArgs e)
         {
 #if __IOS__ && !__MACCATALYST__
             var filename = _mp4Sink.GetFilenameOrURL();            

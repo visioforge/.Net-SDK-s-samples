@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0-android</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net9.0-maccatalyst;net9.0-ios</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+    <TargetFrameworks>net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">$(TargetFrameworks);net10.0-maccatalyst;net10.0-ios</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
     <RootNamespace>SkinnedPlayer_MAUI</RootNamespace>
     <UseMaui>true</UseMaui>
@@ -23,6 +23,11 @@
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     <PublishReadyToRun>false</PublishReadyToRun>
+  </PropertyGroup>
+  <!-- Force x64 on Windows (ARM64 Windows will use x64 emulation since native libs are x64 only) -->
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('windows')) AND $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <!-- App Icon -->
@@ -52,12 +57,8 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.1.1" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.1.1" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.1.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.1.1" />
-    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.20" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.20" />
   </ItemGroup>
   <!-- VisioForge SDK Deployment -->
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
@@ -66,7 +67,7 @@
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.33" />
-    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X9.csproj" />
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Globalization;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Sources;
@@ -13,15 +13,15 @@ namespace Simple_Player_MB_MAUI
 {
     public partial class MainPage : ContentPage
     {
-        private MediaBlocksPipeline _pipeline;
+        private MediaBlocksPipeline? _pipeline;
 
-        private UniversalSourceBlock _source;
+        private UniversalSourceBlock? _source;
 
-        private MediaBlock _videoRenderer;
+        private MediaBlock? _videoRenderer;
 
-        private AudioRendererBlock _audioRenderer;
+        private AudioRendererBlock? _audioRenderer;
 
-        private string _filename;
+        private string? _filename;
 
         /// <summary>
         /// The seeking flag.
@@ -58,7 +58,7 @@ namespace Simple_Player_MB_MAUI
 
             _audioRenderer = new AudioRendererBlock();
             
-            _source = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(_filename)));
+            _source = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(_filename!)));
             
             var vv = videoView.GetVideoView();
             _videoRenderer = new VideoRendererBlock(_pipeline, vv);
@@ -68,7 +68,7 @@ namespace Simple_Player_MB_MAUI
             _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
         }
 
-        private async void _player_OnStop(object sender, StopEventArgs e)
+        private async void _player_OnStop(object? sender, StopEventArgs e)
         {
             try
             {
@@ -90,12 +90,12 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
-        private void MainPage_Loaded(object sender, EventArgs e)
+        private void MainPage_Loaded(object? sender, EventArgs e)
         {
             Window.Destroying += Window_Destroying;
         }
 
-        private async void _player_OnStart(object sender, EventArgs e)
+        private async void _player_OnStart(object? sender, EventArgs e)
         {
             try
             {
@@ -115,7 +115,7 @@ namespace Simple_Player_MB_MAUI
             }                      
         }
 
-        private async void Window_Destroying(object sender, EventArgs e)
+        private async void Window_Destroying(object? sender, EventArgs e)
         {
             try
             {
@@ -125,7 +125,7 @@ namespace Simple_Player_MB_MAUI
                     await _pipeline.StopAsync();
 
                     _pipeline.Dispose();
-                    _pipeline = null;
+                    _pipeline = null!;
                 }
 
                 VisioForgeX.DestroySDK();
@@ -136,7 +136,7 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
-        private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
+        private void _player_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
@@ -161,7 +161,7 @@ namespace Simple_Player_MB_MAUI
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
-        private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private async void tmPosition_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             if (_pipeline == null)
             {
@@ -206,7 +206,7 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
-        private async void slSeeking_ValueChanged(object sender, ValueChangedEventArgs e)
+        private async void slSeeking_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             try
             {
@@ -221,15 +221,15 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
-        private void slVolume_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void slVolume_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
-            if (_pipeline != null)
+            if (_pipeline != null && _audioRenderer != null)
             {
                 _audioRenderer.Volume = e.NewValue / 100.0;
             }
         }
 
-        private async void btOpen_Clicked(object sender, EventArgs e)
+        private async void btOpen_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -252,7 +252,7 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
-        private async void btPlayPause_Clicked(object sender, EventArgs e)
+        private async void btPlayPause_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Simple_Player_MB_MAUI
                 {
                     await CreateEngineAsync();
 
-                    await _pipeline.StartAsync();
+                    await _pipeline!.StartAsync();
 
                     _tmPosition.Start();
 
@@ -290,12 +290,12 @@ namespace Simple_Player_MB_MAUI
                 System.Diagnostics.Debug.WriteLine($"Error in play/pause: {ex.Message}");
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    await DisplayAlert("Error", $"Playback error: {ex.Message}", "OK");
+                    await DisplayAlertAsync("Error", $"Playback error: {ex.Message}", "OK");
                 });
             }
         }
 
-        private async void btSpeed_Clicked(object sender, EventArgs e)
+        private async void btSpeed_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -303,19 +303,19 @@ namespace Simple_Player_MB_MAUI
                 {
                     // set 2x
                     btSpeed.Text = "SPEED: 2X";
-                    await _pipeline.Rate_SetAsync(2.0);
+                    await _pipeline!.Rate_SetAsync(2.0);
                 }
                 else if (btSpeed.Text == "SPEED: 2X")
                 {
                     // set 0.5x
                     btSpeed.Text = "SPEED: 0.5X";
-                    await _pipeline.Rate_SetAsync(0.5);
+                    await _pipeline!.Rate_SetAsync(0.5);
                 }
                 else if (btSpeed.Text == "SPEED: 0.5X")
                 {
                     // set 1x
                     btSpeed.Text = "SPEED: 1X";
-                    await _pipeline.Rate_SetAsync(1.0);
+                    await _pipeline!.Rate_SetAsync(1.0);
                 }
             }
             catch (Exception ex)
@@ -324,7 +324,7 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
-        private async void btStop_Clicked(object sender, EventArgs e)
+        private async void btStop_Clicked(object? sender, EventArgs e)
         {
             try
             {

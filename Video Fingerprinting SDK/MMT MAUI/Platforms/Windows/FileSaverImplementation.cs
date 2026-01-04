@@ -7,14 +7,19 @@ namespace MMT_MAUI.Platforms.Windows
 {
     public class FileSaverImplementation : IFileSaver
     {
-        public async Task<string> SaveFileAsync(string suggestedFileName, Dictionary<string, List<string>> fileTypes)
+        public async Task<string?> SaveFileAsync(string suggestedFileName, Dictionary<string, List<string>> fileTypes)
         {
             try
             {
                 var savePicker = new FileSavePicker();
                 
                 // Get the current window handle
-                var windowHandle = ((MauiWinUIWindow)App.Current.Windows[0].Handler.PlatformView).WindowHandle;
+                var window = App.Current?.Windows[0]?.Handler?.PlatformView as MauiWinUIWindow;
+                if (window == null)
+                {
+                    return null;
+                }
+                var windowHandle = window.WindowHandle;
                 InitializeWithWindow.Initialize(savePicker, windowHandle);
 
                 savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;

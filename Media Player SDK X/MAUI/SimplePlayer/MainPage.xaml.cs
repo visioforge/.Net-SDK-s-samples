@@ -1,4 +1,4 @@
-﻿using VisioForge.Core.UI.MAUI;
+using VisioForge.Core.UI.MAUI;
 using System.Diagnostics;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
@@ -46,7 +46,7 @@ namespace Simple_Player_MAUI
             _tmPosition.Elapsed += tmPosition_Elapsed;
         }
 
-        private async void MainPage_Loaded(object sender, EventArgs e)
+        private async void MainPage_Loaded(object? sender, EventArgs e)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace Simple_Player_MAUI
             }
         }
         
-        private async void _player_OnStop(object sender, StopEventArgs e)
+        private async void _player_OnStop(object? sender, StopEventArgs e)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace Simple_Player_MAUI
             }
         }
 
-        private async void _player_OnStart(object sender, EventArgs e)
+        private async void _player_OnStart(object? sender, EventArgs e)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace Simple_Player_MAUI
             }                      
         }
 
-        private void Window_Destroying(object sender, EventArgs e)
+        private void Window_Destroying(object? sender, EventArgs e)
         {
             if (_player != null)
             {
@@ -130,7 +130,7 @@ namespace Simple_Player_MAUI
             VisioForgeX.DestroySDK();
         }
 
-        private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
+        private void _player_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
@@ -155,7 +155,7 @@ namespace Simple_Player_MAUI
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
-        private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private async void tmPosition_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             if (_player == null)
             {
@@ -198,7 +198,7 @@ namespace Simple_Player_MAUI
             }
         }
 
-        private async void slSeeking_ValueChanged(object sender, ValueChangedEventArgs e)
+        private async void slSeeking_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             try
             {
@@ -213,7 +213,7 @@ namespace Simple_Player_MAUI
             }
         }
 
-        private void slVolume_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void slVolume_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             if (_player != null)
             {
@@ -221,7 +221,7 @@ namespace Simple_Player_MAUI
             }
         }
 
-        private async void btOpen_Clicked(object sender, EventArgs e)
+        private async void btOpen_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -244,7 +244,7 @@ namespace Simple_Player_MAUI
             }
         }
 
-        private async void btPlayPause_Clicked(object sender, EventArgs e)
+        private async void btPlayPause_Clicked(object? sender, EventArgs e)
         {
             if (_player == null || string.IsNullOrEmpty(_filename))
             {
@@ -292,7 +292,7 @@ namespace Simple_Player_MAUI
             }
         }
 
-        private async void btSpeed_Clicked(object sender, EventArgs e)
+        private async void btSpeed_Clicked(object? sender, EventArgs e)
         {         
             if (btSpeed.Text == "SPEED: 1X")
             {
@@ -314,7 +314,7 @@ namespace Simple_Player_MAUI
             }
         }
 
-        private async void btStop_Clicked(object sender, EventArgs e)
+        private async void btStop_Clicked(object? sender, EventArgs e)
         {
             await StopAllAsync();
 
