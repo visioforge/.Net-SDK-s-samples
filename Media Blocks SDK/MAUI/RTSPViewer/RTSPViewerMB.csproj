@@ -50,8 +50,8 @@
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.1.0" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.1.0" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.1.1" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.1.1" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->

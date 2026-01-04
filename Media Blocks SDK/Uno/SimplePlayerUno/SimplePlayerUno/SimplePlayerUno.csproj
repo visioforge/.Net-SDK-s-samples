@@ -20,8 +20,11 @@
     <CodesignKey>Apple Development</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.1.0" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.1.1" />
     <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2025.12.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="$(NuGetPackageRoot)visioforge.dotnet.core.ui.uno\2025.12.8\lib\net10.0-windows10.0.19041\VisioForge.Core.UI.Uno\nuget.png" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
@@ -47,7 +50,7 @@
     <Message Text="AppBundleDir: $(AppBundleDir)" Importance="High" />
     <Message Text="MonoBundleDir: $(MonoBundleDir)" Importance="High" />
     <MakeDir Directories="$(MonoBundleDir)" Condition="!Exists('$(MonoBundleDir)')" />
-    <Copy SourceFiles="@(None->'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
+    <Copy SourceFiles="@(None-&gt;'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
       <Output TaskParameter="CopiedFiles" ItemName="CopiedNativeFiles" />
     </Copy>
     <Message Text="Copied native files:" Importance="High" Condition="@(CopiedNativeFiles) != ''" />
