@@ -41,6 +41,15 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         public Task<bool> StartAsync(RTSPRAWSourceSettings rtspSettings)
         {
+            // Validate codec compatibility with target container
+            string targetContainer = MP4 ? "mp4" : "mpegts";
+            
+            var mediaInfo = rtspSettings.GetInfo();
+            if (!CodecValidationHelper.IsCodecCompatibleWithContainer(mediaInfo, targetContainer, out string errorMessage))
+            {
+                throw new CodecNotCompatibleException(errorMessage);
+            }
+
             Pipeline = new MediaBlocksPipeline();
             Pipeline.OnError += OnError;
             // Pipeline.Debug_Mode = true;

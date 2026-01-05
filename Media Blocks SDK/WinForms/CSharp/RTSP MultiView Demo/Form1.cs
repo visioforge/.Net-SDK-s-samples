@@ -313,7 +313,24 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             _recordEngines[id].ReencodeAudio = cbReencodeAudio.Checked;
             _recordEngines[id].MP4 = rbMP4Output.Checked;
 
-            await _recordEngines[id].StartAsync(rtspSettings);
+            try
+            {
+                await _recordEngines[id].StartAsync(rtspSettings);
+            }
+            catch (CodecNotCompatibleException ex)
+            {
+                MessageBox.Show(ex.Message, "Codec Not Compatible", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                _recordEngines[id].OnError -= Engine_OnError;
+                await _recordEngines[id].DisposeAsync();
+                _recordEngines[id] = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to start recording: {ex.Message}", "Recording Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _recordEngines[id].OnError -= Engine_OnError;
+                await _recordEngines[id].DisposeAsync();
+                _recordEngines[id] = null;
+            }
         }
 
         private async void btStopRecord_Click(object sender, EventArgs e)

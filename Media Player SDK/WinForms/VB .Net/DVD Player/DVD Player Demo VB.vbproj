@@ -33,7 +33,7 @@
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.1.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="2026.1.1" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.1.2" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MediaPlayer.x64" Version="2026.1.2" />
   </ItemGroup>
 </Project>

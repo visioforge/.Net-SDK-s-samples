@@ -206,10 +206,25 @@ namespace RTSP_RAW_Capture_Demo
                     return;
                 }
 
+                // Validate codec compatibility with target container
+                bool isMP4 = rbMP4Output.IsChecked == true;
+                string targetContainer = isMP4 ? "mp4" : "mpegts";
+                
+                var mediaInfo = rtspSettings.GetInfo();
+                if (!CodecValidationHelper.IsCodecCompatibleWithContainer(mediaInfo, targetContainer, out string errorMessage))
+                {
+                    LogMessage($"Codec compatibility error: {errorMessage}");
+                    MessageBox.Show(errorMessage, "Codec Not Compatible", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    await CleanupRecordingAsync();
+                    return;
+                }
+
+                string codec = CodecValidationHelper.GetVideoCodec(mediaInfo);
+                LogMessage($"Video codec detected: {codec ?? "Unknown"}");
+
                 _recordSource = new RTSPRAWSourceBlock(rtspSettings);
 
                 // Create muxer based on output format
-                bool isMP4 = rbMP4Output.IsChecked == true;
                 if (isMP4)
                 {
                     _muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
