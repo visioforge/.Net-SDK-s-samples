@@ -62,6 +62,10 @@ namespace Decklink_MB_Demo
 
         private DecklinkVideoSinkBlock _decklinkVideoSink;
 
+        private VideoResizeBlock _decklinkOutputResize;
+
+        private VideoRateBlock _decklinkOutputFrameRate;
+
         private UniversalSourceBlock _fileSource;
 
         private System.Timers.Timer _timer;
@@ -187,9 +191,11 @@ namespace Decklink_MB_Demo
             foreach (var item in decklinkModes)
             {
                 cbVideoMode.Items.Add(item.ToString());
+                cbDecklinkOutputMode.Items.Add(item.ToString());
             }
 
             cbVideoMode.SelectedIndex = 0;
+            cbDecklinkOutputMode.SelectedIndex = 0;
 
             edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 
@@ -500,6 +506,18 @@ namespace Decklink_MB_Demo
                 {
                     DecklinkVideoSinkSettings videoSinkSettings = null;
 
+                    // Determine the output mode - use custom mode if enabled, otherwise use input mode
+                    DecklinkMode outputMode;
+                    bool useCustomFormat = cbDecklinkOutputCustomFormat.IsChecked == true;
+                    if (useCustomFormat)
+                    {
+                        outputMode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbDecklinkOutputMode.Text);
+                    }
+                    else
+                    {
+                        outputMode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
+                    }
+
                     var deviceName = cbDecklinkVideoOutput.Text;
                     if (!string.IsNullOrEmpty(deviceName))
                     {
@@ -507,7 +525,7 @@ namespace Decklink_MB_Demo
                         if (device != null)
                         {
                             videoSinkSettings = new DecklinkVideoSinkSettings(device);
-                            videoSinkSettings.Mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
+                            videoSinkSettings.Mode = outputMode;
                         }
                     }
 
@@ -527,7 +545,25 @@ namespace Decklink_MB_Demo
 
                     _decklinkAudioSink = new DecklinkAudioSinkBlock(audioSinkSettings);
 
-                    _pipeline.Connect(_videoTee.Outputs[decklinkOutputID], _decklinkVideoSink.Input);
+                    // Get output format info for custom format conversion
+                    if (useCustomFormat && outputMode != DecklinkMode.Unknown)
+                    {
+                        DecklinkHelper.GetVideoInfoFromMode(outputMode, out var outputWidth, out var outputHeight, out var outputFrameRate);
+
+                        // Create resize and frame rate blocks for format conversion
+                        _decklinkOutputResize = new VideoResizeBlock(new ResizeVideoEffect(outputWidth, outputHeight));
+                        _decklinkOutputFrameRate = new VideoRateBlock(outputFrameRate);
+
+                        // Connect: tee -> resize -> framerate -> decklink sink
+                        _pipeline.Connect(_videoTee.Outputs[decklinkOutputID], _decklinkOutputResize.Input);
+                        _pipeline.Connect(_decklinkOutputResize.Output, _decklinkOutputFrameRate.Input);
+                        _pipeline.Connect(_decklinkOutputFrameRate.Output, _decklinkVideoSink.Input);
+                    }
+                    else
+                    {
+                        _pipeline.Connect(_videoTee.Outputs[decklinkOutputID], _decklinkVideoSink.Input);
+                    }
+
                     _pipeline.Connect(_audioTee.Outputs[decklinkOutputID], _decklinkAudioSink.Input);
                 }
             }

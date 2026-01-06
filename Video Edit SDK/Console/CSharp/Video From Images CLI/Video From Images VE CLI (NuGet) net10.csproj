@@ -27,7 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.1.2" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.1.3" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
