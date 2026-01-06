@@ -90,7 +90,7 @@ Most demo applications contain unmanaged NuGet redist packages specific to the S
 ## Supported Frameworks
 
 - .NET Framework 4.7.2, 4.8
-- .NET 5, 6, 7, 8, 9, 10
+- .NET 5, 6, 7, 8, 9, and 10
 - .NET Core 3.1
 
 ## Supported Platforms
