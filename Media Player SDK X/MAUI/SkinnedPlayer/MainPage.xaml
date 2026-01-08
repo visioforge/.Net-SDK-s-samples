@@ -7,15 +7,22 @@
 
     <ScrollView>
         <!--WidthRequest="1280" HeightRequest="720"-->
-        <Grid RowSpacing="10" RowDefinitions="*,Auto" Padding="{OnPlatform iOS='30,60,30,30', Default='10'}" >
+        <Grid RowSpacing="10" RowDefinitions="Auto,*,Auto" Padding="{OnPlatform iOS='30,60,30,30', Default='10'}" >
 
-            <my:VideoView Grid.Row="0"               
+            <HorizontalStackLayout Grid.Row="0" HorizontalOptions="End" Spacing="10">
+                <Label Text="Skin:" VerticalOptions="Center" FontSize="14" TextColor="White" />
+                <Button x:Name="btSkinSelect" Text="Default" Clicked="OnSkinSelectClicked" 
+                        BackgroundColor="#512BD4" TextColor="White" 
+                        CornerRadius="8" Padding="15,8" FontSize="12" />
+            </HorizontalStackLayout>
+
+            <my:VideoView Grid.Row="1"               
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 x:Name="videoView"
                 Background="Gray"/>
 
-            <skins:SkinPlayerControls x:Name="pbPanel" Grid.Row="1" SkinName="Default" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="0" />
+            <skins:SkinPlayerControls x:Name="pbPanel" Grid.Row="2" SkinName="Default" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="0" />
         </Grid>
     </ScrollView>
     

@@ -29,7 +29,9 @@ namespace SkinnedPlayer_MAUI
 {
     public partial class MainPage : ContentPage
     {
-        private string SKIN_NAME = "Default.vfskin";
+        private readonly string[] SKIN_FILES = { "Default.vfskin", "Violet.vfskin" };
+        private readonly string[] SKIN_NAMES = { "Default", "Violet" };
+        private int _currentSkinIndex = 0;
 
         private MediaPlayerCoreX _player;
 
@@ -40,31 +42,60 @@ namespace SkinnedPlayer_MAUI
 #endif
 
         /// <summary>
-        /// Loads this instance.
+        /// Loads all available skins from embedded resources.
         /// </summary>
-        private void LoadSkin()
+        private void LoadAllSkins()
         {
             var assembly = GetType().Assembly;
             var resources = assembly.GetManifestResourceNames();
 
-            foreach (string resourceKey in resources)
+            foreach (var skinFile in SKIN_FILES)
             {
-                if (resourceKey.Contains(SKIN_NAME))
+                foreach (string resourceKey in resources)
                 {
-                    using (var stream = assembly.GetManifestResourceStream(resourceKey))
+                    if (resourceKey.Contains(skinFile))
                     {
-                        var data = new byte[stream.Length];
-                        stream.Read(data, 0, data.Length);
+                        using (var stream = assembly.GetManifestResourceStream(resourceKey))
+                        {
+                            var data = new byte[stream.Length];
+                            stream.Read(data, 0, data.Length);
 
-                        SkinManager.LoadFromData("Default", data);
+                            // Extract skin name from file name (remove .vfskin)
+                            var skinName = skinFile.Replace(".vfskin", "");
+                            SkinManager.LoadFromData(skinName, data);
+                        }
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Handles the skin selection button click to toggle between available skins.
+        /// </summary>
+        private void OnSkinSelectClicked(object sender, EventArgs e)
+        {
+            // Cycle to next skin
+            _currentSkinIndex = (_currentSkinIndex + 1) % SKIN_NAMES.Length;
+            var skinName = SKIN_NAMES[_currentSkinIndex];
+
+            // Update UI
+            pbPanel.SkinName = skinName;
+            btSkinSelect.Text = skinName;
+
+            // Update button color based on skin
+            if (skinName == "Violet")
+            {
+                btSkinSelect.BackgroundColor = Color.FromArgb("#9B59B6");
+            }
+            else
+            {
+                btSkinSelect.BackgroundColor = Color.FromArgb("#512BD4");
             }
         }
         
         public MainPage()
         {
-            LoadSkin();
+            LoadAllSkins();
             
             InitializeComponent();
 
@@ -96,7 +127,7 @@ namespace SkinnedPlayer_MAUI
 
             _player.OnError += _player_OnError;
 
-#if !__IOS__ || __MACCATALYST__
+#if !__IOS__ && !__MACCATALYST__
             var audioOutputs = await _player.Audio_OutputDevicesAsync();
             if (audioOutputs.Length > 0)
             {
