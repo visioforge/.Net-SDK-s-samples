@@ -14,6 +14,6 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.1.6" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.1.7" />
   </ItemGroup>
 </Project>
