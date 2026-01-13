@@ -26,7 +26,7 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.1.5" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.1.6" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

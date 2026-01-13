@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.1.6
+
+* [Video Capture SDK .Net] VideoCaptureCoreX: Fixed video capture resolution issue when ResizeVideoEffect is applied
+
 ## 2025.12.12
 
 * [Media Blocks SDK .Net] Added PitchBlock for audio pitch shifting with semitone control (-12 to +12 range)

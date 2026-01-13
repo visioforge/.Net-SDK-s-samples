@@ -6,6 +6,6 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.1.5" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.1.6" />
   </ItemGroup>
 </Project>
