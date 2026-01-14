@@ -59,7 +59,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.1.8" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.1.8" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.1.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.1.9" />
   </ItemGroup>
 </Project>
