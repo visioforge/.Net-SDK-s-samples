@@ -126,7 +126,7 @@
     <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.1.7" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.1.8" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
