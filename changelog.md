@@ -9,6 +9,11 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.1.10
+
+* [Video Capture SDK .Net] DSFFMPEGEXEPipeOutput: Fixed preview lag during video capture with optimized pipe handling and queue processing
+* [Video Capture SDK .Net] FFMPEG EXE output: Added real-time encoding optimizations for VP8/VP9, fixed MJPEG quality mode, improved default H264MFSettings defaults
+
 ## 2026.1.6
 
 * [Video Capture SDK .Net] VideoCaptureCoreX: Fixed video capture resolution issue when ResizeVideoEffect is applied

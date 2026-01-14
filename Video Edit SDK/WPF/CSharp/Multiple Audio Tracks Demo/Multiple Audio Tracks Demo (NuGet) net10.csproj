@@ -10,7 +10,7 @@
     <None Remove="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.1.9" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.1.10" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
