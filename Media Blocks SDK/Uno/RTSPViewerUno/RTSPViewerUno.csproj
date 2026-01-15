@@ -28,8 +28,8 @@
     <CodesignKey>Apple Development</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.1.10" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2026.1.10" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.1.11" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2026.1.11" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="$(NuGetPackageRoot)visioforge.dotnet.core.ui.uno\2026.1.1\lib\net10.0-windows10.0.19041\VisioForge.Core.UI.Uno\nuget.png" />

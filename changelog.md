@@ -9,6 +9,13 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.1.11
+
+* [Media Blocks SDK .Net] RTSPSourceBlock: Fixed video freeze when audio capture is disabled for cameras with multiple audio streams
+* [Media Blocks SDK .Net] RTSPRAWSourceBlock: Added fakesink handling for disabled audio streams to prevent pipeline stalls
+* [Core] MediaInfoReaderCore: Added logging for discovered audio, video, and RTP streams
+* [Core] MediaInfoReaderCore: Fixed excessive blocksize (5MB) being set for RTSP sources, improving discovery speed
+
 ## 2026.1.10
 
 * [Video Capture SDK .Net] DSFFMPEGEXEPipeOutput: Fixed preview lag during video capture with optimized pipe handling and queue processing
