@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.1.12
+
+* [Core] WPF VideoView: Fixed crash (System.ExecutionEngineException) when minimizing window during video overlay playback
+
 ## 2026.1.11
 
 * [Media Blocks SDK .Net] RTSPSourceBlock: Fixed video freeze when audio capture is disabled for cameras with multiple audio streams
