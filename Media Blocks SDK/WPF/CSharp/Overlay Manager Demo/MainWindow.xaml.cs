@@ -59,7 +59,7 @@ namespace Overlay_Manager_Demo
         private OverlayManagerZoom _currentZoom = null;
         private List<OverlayManagerPan> _panOverlays = new List<OverlayManagerPan>();
         private List<OverlayManagerFade> _fadeOverlays = new List<OverlayManagerFade>();
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -216,6 +216,12 @@ namespace Overlay_Manager_Demo
                 decklinkOverlay.Play();
             }
 
+            // Start any overlay groups that were added before the main pipeline started
+            foreach (var overlayGroup in _overlayGroups)
+            {
+                overlayGroup.Play();
+            }
+
             _timer.Start();
         }
 
@@ -236,6 +242,12 @@ namespace Overlay_Manager_Demo
             foreach (var decklinkOverlay in _decklinkOverlays)
             {
                 decklinkOverlay.Pause();
+            }
+
+            // Pause all overlay groups when stopping main pipeline
+            foreach (var overlayGroup in _overlayGroups)
+            {
+                overlayGroup.Pause();
             }
 
             if (_pipeline != null)
@@ -261,7 +273,7 @@ namespace Overlay_Manager_Demo
                 videoOverlay?.Dispose();
             }
             _videoOverlays.Clear();
-            
+
             // Close all external VideoView windows
             foreach (var window in _videoOverlayWindows.Values)
             {
@@ -388,10 +400,10 @@ namespace Overlay_Manager_Demo
                 }
 
                 _overlayManager.Video_Overlay_Add(scrollingText);
-                
+
                 // Truncate text for display if too long
-                var displayText = optionsWindow.ScrollText.Length > 30 
-                    ? optionsWindow.ScrollText.Substring(0, 30) + "..." 
+                var displayText = optionsWindow.ScrollText.Length > 30
+                    ? optionsWindow.ScrollText.Substring(0, 30) + "..."
                     : optionsWindow.ScrollText;
                 lbOverlays.Items.Add($"[Scrolling] {displayText}");
             }
@@ -441,7 +453,7 @@ namespace Overlay_Manager_Demo
                 var selectedItem = lbOverlays.Items[lbOverlays.SelectedIndex] as string;
                 if (selectedItem != null && (selectedItem.StartsWith("[Video]") || selectedItem.StartsWith("[Video+View]")))
                 {
-                    // Find and dispose the video overlay
+                    // Find the video overlay
                     var videoOverlay = _videoOverlays.Find(v => selectedItem.Contains(v.Name));
                     if (videoOverlay != null)
                     {
@@ -455,51 +467,60 @@ namespace Overlay_Manager_Demo
                         }
 
                         _videoOverlays.Remove(videoOverlay);
-                        videoOverlay.Dispose();
+                        // Don't dispose here - let overlay manager handle disposal
                     }
 
+                    // Remove from overlay manager - this will also dispose the overlay
                     _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 }
                 else if (selectedItem != null && selectedItem.StartsWith("[Decklink]"))
                 {
-                    // Find and dispose the Decklink overlay
+                    // Find the Decklink overlay
                     var decklinkOverlay = _decklinkOverlays.Find(v => selectedItem.Contains(v.Name));
                     if (decklinkOverlay != null)
                     {
                         decklinkOverlay.Stop();
-
                         _decklinkOverlays.Remove(decklinkOverlay);
-                        decklinkOverlay.Dispose();
+                        // Don't dispose here - let overlay manager handle disposal
                     }
 
+                    // Remove from overlay manager - this will also dispose the overlay
                     _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 }
                 else if (selectedItem != null && selectedItem.StartsWith("[NDI]"))
                 {
-                    // Find and dispose the NDI overlay
+                    // Find the NDI overlay
                     var ndiOverlay = _ndiOverlays.Find(v => selectedItem.Contains(v.Name));
                     if (ndiOverlay != null)
                     {
                         ndiOverlay.Stop();
-
                         _ndiOverlays.Remove(ndiOverlay);
-                        ndiOverlay.Dispose();
+                        // Don't dispose here - let overlay manager handle disposal
                     }
 
+                    // Remove from overlay manager - this will also dispose the overlay
                     _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 }
                 else if (selectedItem != null && selectedItem.StartsWith("[GROUP]"))
                 {
-                    // Find and dispose the overlay group
+                    // Find the overlay group
                     var overlayGroup = _overlayGroups.Find(g => selectedItem.Contains(g.Name));
                     if (overlayGroup != null)
                     {
                         overlayGroup.Stop();
-
                         _overlayGroups.Remove(overlayGroup);
-                        overlayGroup.Dispose();
+
+                        // Also remove any Decklink overlays that were in this group from tracking
+                        foreach (var overlay in overlayGroup.Overlays)
+                        {
+                            if (overlay is OverlayManagerDecklinkVideo decklink)
+                            {
+                                _decklinkOverlays.Remove(decklink);
+                            }
+                        }
                     }
 
+                    // Remove from overlay manager - this will also dispose the group and its overlays
                     _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 }
                 else if (selectedItem != null && selectedItem.StartsWith("[Zoom]"))
@@ -670,14 +691,14 @@ namespace Overlay_Manager_Demo
                 if (optionsWindow.ShowDialog() == true)
                 {
                     VideoOverlayViewWindow externalWindow = null;
-                    
+
                     // Create external VideoView window if requested
                     if (optionsWindow.UseExternalVideoView)
                     {
                         externalWindow = new VideoOverlayViewWindow($"Video Overlay - {System.IO.Path.GetFileName(dlg.FileName)}");
                         externalWindow.Show();
                     }
-                    
+
                     // Create video overlay with specified options
                     var videoOverlay = new OverlayManagerVideo(
                         source: dlg.FileName,
@@ -689,8 +710,8 @@ namespace Overlay_Manager_Demo
                     {
                         Loop = optionsWindow.Loop,
                         Opacity = optionsWindow.OpacityLevel,
-                        StretchMode = optionsWindow.VideoWidth > 0 && optionsWindow.VideoHeight > 0 
-                            ? optionsWindow.StretchMode 
+                        StretchMode = optionsWindow.VideoWidth > 0 && optionsWindow.VideoHeight > 0
+                            ? optionsWindow.StretchMode
                             : OverlayManagerImageStretchMode.None,  // Use None only if no dimensions specified
                         ZIndex = 5,
                         Name = $"VideoOverlay_{System.IO.Path.GetFileName(dlg.FileName)}",
@@ -717,7 +738,7 @@ namespace Overlay_Manager_Demo
                         try
                         {
                             var audioOutputs = await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound);
-                            if (audioOutputs != null && audioOutputs.Length > optionsWindow.SelectedAudioDeviceIndex 
+                            if (audioOutputs != null && audioOutputs.Length > optionsWindow.SelectedAudioDeviceIndex
                                 && optionsWindow.SelectedAudioDeviceIndex >= 0)
                             {
                                 videoOverlay.AudioOutput = audioOutputs[optionsWindow.SelectedAudioDeviceIndex];
@@ -732,16 +753,16 @@ namespace Overlay_Manager_Demo
 
                     // Check if main pipeline is already running
                     bool mainPipelineRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
-                    
+
                     // Initialize the video overlay
                     // Initialize with autoStart based on main pipeline state
                     bool initialized = videoOverlay.Initialize(autoStart: mainPipelineRunning);
-                    
+
                     if (initialized)
                     {
                         // Keep track of video overlays for proper disposal
                         _videoOverlays.Add(videoOverlay);
-                        
+
                         // Track external window if created
                         if (externalWindow != null)
                         {
@@ -750,9 +771,9 @@ namespace Overlay_Manager_Demo
 
                         // Add to overlay manager
                         _overlayManager.Video_Overlay_Add(videoOverlay);
-                        
-                        string displayName = externalWindow != null 
-                            ? $"[Video+View] {videoOverlay.Name}" 
+
+                        string displayName = externalWindow != null
+                            ? $"[Video+View] {videoOverlay.Name}"
                             : $"[Video] {videoOverlay.Name}";
                         if (videoOverlay.AudioOutput != null)
                         {
@@ -762,10 +783,10 @@ namespace Overlay_Manager_Demo
                     }
                     else
                     {
-                        MessageBox.Show("Failed to initialize video overlay. Please check if the file is valid and GStreamer has the required codecs.", 
+                        MessageBox.Show("Failed to initialize video overlay. Please check if the file is valid and GStreamer has the required codecs.",
                             "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         videoOverlay.Dispose();
-                        
+
                         // Close external window if it was created
                         if (externalWindow != null)
                         {
@@ -803,7 +824,7 @@ namespace Overlay_Manager_Demo
                     StretchMode = OverlayManagerImageStretchMode.Letterbox,
                     ZIndex = 100,  // On top of everything
                     Name = $"PiP_{System.IO.Path.GetFileName(dlg.FileName)}",
-                    
+
                     // Add border effect with shadow
                     Shadow = new OverlayManagerShadowSettings
                     {
@@ -818,10 +839,10 @@ namespace Overlay_Manager_Demo
 
                 // Check if main pipeline is already running
                 bool mainPipelineRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
-                
+
                 // Initialize the PiP video overlay
                 bool initialized = pipVideo.Initialize(autoStart: mainPipelineRunning);
-                
+
                 if (initialized)
                 {
                     // Keep track of video overlays
@@ -849,7 +870,7 @@ namespace Overlay_Manager_Demo
             if (inputWindow.ShowDialog() == true)
             {
                 string streamUrl = inputWindow.StreamUrl;
-                
+
                 // Create stream overlay
                 var streamOverlay = new OverlayManagerVideo(
                     source: streamUrl,
@@ -868,10 +889,10 @@ namespace Overlay_Manager_Demo
 
                 // Check if main pipeline is already running
                 bool mainPipelineRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
-                
+
                 // Initialize the stream overlay
                 bool initialized = streamOverlay.Initialize(autoStart: mainPipelineRunning);
-                
+
                 if (initialized)
                 {
                     // Keep track of video overlays
@@ -883,7 +904,7 @@ namespace Overlay_Manager_Demo
                 }
                 else
                 {
-                    MessageBox.Show($"Failed to initialize stream overlay. Please check if the URL is accessible: {streamUrl}", 
+                    MessageBox.Show($"Failed to initialize stream overlay. Please check if the URL is accessible: {streamUrl}",
                         "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     streamOverlay.Dispose();
                 }
@@ -943,7 +964,7 @@ namespace Overlay_Manager_Demo
                     try
                     {
                         var audioOutputs = await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound);
-                        if (audioOutputs != null && audioOutputs.Length > optionsWindow.SelectedAudioDeviceIndex 
+                        if (audioOutputs != null && audioOutputs.Length > optionsWindow.SelectedAudioDeviceIndex
                             && optionsWindow.SelectedAudioDeviceIndex >= 0)
                         {
                             decklinkOverlay.AudioOutput = audioOutputs[optionsWindow.SelectedAudioDeviceIndex];
@@ -958,10 +979,10 @@ namespace Overlay_Manager_Demo
 
                 // Check if main pipeline is already running
                 bool mainPipelineRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
-                
+
                 // Initialize the Decklink overlay
                 bool initialized = decklinkOverlay.Initialize(autoStart: mainPipelineRunning);
-                
+
                 if (initialized)
                 {
                     // Keep track of Decklink overlays for proper disposal
@@ -969,7 +990,7 @@ namespace Overlay_Manager_Demo
 
                     // Add to overlay manager
                     _overlayManager.Video_Overlay_Add(decklinkOverlay);
-                    
+
                     string displayName = $"[Decklink] {decklinkOverlay.Name}";
                     if (decklinkOverlay.AudioOutput != null)
                     {
@@ -979,7 +1000,7 @@ namespace Overlay_Manager_Demo
                 }
                 else
                 {
-                    MessageBox.Show("Failed to initialize Decklink overlay. Please check if the device is connected and has an active input signal.", 
+                    MessageBox.Show("Failed to initialize Decklink overlay. Please check if the device is connected and has an active input signal.",
                         "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     decklinkOverlay.Dispose();
                 }
@@ -1065,137 +1086,204 @@ namespace Overlay_Manager_Demo
         /// <summary>
         /// Handles the bt add sync group click event.
         /// </summary>
-        private void btAddSyncGroup_Click(object sender, RoutedEventArgs e)
+        private async void btAddSyncGroup_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                // Create a synchronized overlay group
-                var overlayGroup = new OverlayManagerGroup("SyncGroup_" + (_overlayGroups.Count + 1));
-
-                // Prompt user for video files to add to the group
+                // 1. Show info dialog
                 var result = MessageBox.Show(
-                    "This demo will create a synchronized group with:\n" +
-                    "• Two video overlays (you'll select the files)\n" +
-                    "• One text overlay\n" +
-                    "• One image overlay (optional)\n\n" +
-                    "All overlays in the group will start playing at the same time.\n\n" +
+                    "This will create a synchronized group with:\n" +
+                    "- One video file overlay\n" +
+                    "- One Decklink capture overlay\n\n" +
+                    "Both sources will start playing at the same time.\n\n" +
                     "Continue?",
-                    "Create Synchronized Overlay Group",
+                    "Create Synchronized Group",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question);
 
                 if (result != MessageBoxResult.Yes)
                     return;
 
-                // Select first video
-                var dlg1 = new OpenFileDialog()
+                // 2. Select video file and configure via dialog
+                var fileDlg = new OpenFileDialog()
                 {
                     Filter = "Video files (*.mp4, *.avi, *.mov, *.mkv, *.wmv)|*.mp4;*.avi;*.mov;*.mkv;*.wmv|All files (*.*)|*.*",
-                    Title = "Select First Video for Group"
+                    Title = "Select Video File for Synchronized Group"
                 };
 
-                if (dlg1.ShowDialog() != true)
+                if (fileDlg.ShowDialog() != true)
                     return;
 
-                // Select second video
-                var dlg2 = new OpenFileDialog()
-                {
-                    Filter = "Video files (*.mp4, *.avi, *.mov, *.mkv, *.wmv)|*.mp4;*.avi;*.mov;*.mkv;*.wmv|All files (*.*)|*.*",
-                    Title = "Select Second Video for Group"
-                };
-
-                if (dlg2.ShowDialog() != true)
+                var videoOptionsWindow = new VideoOverlayOptionsWindow();
+                if (videoOptionsWindow.ShowDialog() != true)
                     return;
 
-                // Create first video overlay (top-left, quarter size)
-                var video1 = new OverlayManagerVideo(
-                    source: dlg1.FileName,
-                    x: 10,
-                    y: 10,
-                    width: 320,
-                    height: 240
+                // 3. Configure Decklink source via dialog
+                var decklinkOptionsWindow = new DecklinkOverlayOptionsWindow();
+                if (decklinkOptionsWindow.ShowDialog() != true)
+                    return;
+
+                // 4. Create the synchronized group
+                var overlayGroup = new OverlayManagerGroup("SyncGroup_" + (_overlayGroups.Count + 1));
+
+                // 5. Create video file overlay with dialog settings
+                // Note: If dimensions are set but StretchMode is None, use Stretch mode instead
+                // because StretchMode.None ignores width/height and renders at original size
+                var effectiveStretchMode = videoOptionsWindow.StretchMode;
+                if (effectiveStretchMode == OverlayManagerImageStretchMode.None
+                    && videoOptionsWindow.VideoWidth > 0 && videoOptionsWindow.VideoHeight > 0)
+                {
+                    effectiveStretchMode = OverlayManagerImageStretchMode.Stretch;
+                }
+
+                var videoOverlay = new OverlayManagerVideo(
+                    source: fileDlg.FileName,
+                    x: videoOptionsWindow.X,
+                    y: videoOptionsWindow.Y,
+                    width: videoOptionsWindow.VideoWidth,
+                    height: videoOptionsWindow.VideoHeight
                 )
                 {
-                    Loop = true,
+                    Loop = videoOptionsWindow.Loop,
+                    Opacity = videoOptionsWindow.OpacityLevel,
+                    StretchMode = effectiveStretchMode,
                     ZIndex = 10,
-                    Name = $"GroupVideo1_{System.IO.Path.GetFileName(dlg1.FileName)}"
+                    Name = $"GroupVideo_{System.IO.Path.GetFileName(fileDlg.FileName)}"
                 };
 
-                // Create second video overlay (top-right, quarter size)
-                var video2 = new OverlayManagerVideo(
-                    source: dlg2.FileName,
-                    x: 340,
-                    y: 10,
-                    width: 320,
-                    height: 240
-                )
+                // Add shadow if enabled
+                if (videoOptionsWindow.EnableShadow)
                 {
-                    Loop = true,
-                    ZIndex = 10,
-                    Name = $"GroupVideo2_{System.IO.Path.GetFileName(dlg2.FileName)}"
-                };
-
-                // Create text overlay
-                var text = new OverlayManagerText("SYNCHRONIZED GROUP", 10, 260)
-                {
-                    Color = SKColors.Yellow,
-                    Font = new FontSettings
+                    videoOverlay.Shadow = new OverlayManagerShadowSettings
                     {
-                        Name = "Arial",
-                        Size = 24,
-                    },
-                    ZIndex = 11
-                };
-
-                // Add all overlays to the group
-                overlayGroup.Add(video1);
-                overlayGroup.Add(video2);
-                overlayGroup.Add(text);
-
-                // Optionally add an image overlay
-                var imageResult = MessageBox.Show(
-                    "Do you want to add an image overlay to the group?",
-                    "Add Image",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Question);
-
-                if (imageResult == MessageBoxResult.Yes)
-                {
-                    var imageDlg = new OpenFileDialog()
-                    {
-                        Filter = "Image files (*.jpg, *.jpeg, *.png, *.bmp)|*.jpg;*.jpeg;*.png;*.bmp"
+                        Enabled = true,
+                        Color = SKColors.Black,
+                        Opacity = 0.5,
+                        BlurRadius = 5,
+                        Depth = 5,
+                        Direction = 45
                     };
+                }
 
-                    if (imageDlg.ShowDialog() == true)
+                // Set audio output device if enabled
+                if (videoOptionsWindow.EnableAudio)
+                {
+                    try
                     {
-                        var imageOverlay = new OverlayManagerImage(imageDlg.FileName, 670, 10)
+                        var audioOutputs = await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound);
+                        if (audioOutputs != null && audioOutputs.Length > videoOptionsWindow.SelectedAudioDeviceIndex
+                            && videoOptionsWindow.SelectedAudioDeviceIndex >= 0)
                         {
-                            ZIndex = 11
-                        };
-                        overlayGroup.Add(imageOverlay);
+                            videoOverlay.AudioOutput = audioOutputs[videoOptionsWindow.SelectedAudioDeviceIndex];
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        edLog.Text += $"Warning: Failed to set audio output device for video overlay: {ex.Message}{Environment.NewLine}";
                     }
                 }
 
-                // Add the group to the overlay manager
-                // This automatically initializes all video overlays to PAUSED state
+                // 6. Create Decklink overlay with dialog settings
+                // Note: Apply same StretchMode fix as video overlay
+                var decklinkEffectiveStretchMode = decklinkOptionsWindow.StretchMode;
+                if (decklinkEffectiveStretchMode == OverlayManagerImageStretchMode.None
+                    && decklinkOptionsWindow.VideoWidth > 0 && decklinkOptionsWindow.VideoHeight > 0)
+                {
+                    decklinkEffectiveStretchMode = OverlayManagerImageStretchMode.Stretch;
+                }
+
+                var decklinkSettings = new DecklinkVideoSourceSettings(decklinkOptionsWindow.SelectedDevice.DeviceNumber)
+                {
+                    Mode = decklinkOptionsWindow.SelectedMode,
+                    Connection = decklinkOptionsWindow.SelectedConnection,
+                    EnableAutoDeinterlacing = decklinkOptionsWindow.AutoDeinterlace,
+                    BufferSize = decklinkOptionsWindow.BufferSize
+                };
+
+                var decklinkOverlay = new OverlayManagerDecklinkVideo(
+                    settings: decklinkSettings,
+                    x: decklinkOptionsWindow.X,
+                    y: decklinkOptionsWindow.Y,
+                    width: decklinkOptionsWindow.VideoWidth,
+                    height: decklinkOptionsWindow.VideoHeight
+                )
+                {
+                    Opacity = decklinkOptionsWindow.OpacityLevel,
+                    StretchMode = decklinkEffectiveStretchMode,
+                    ZIndex = 11,
+                    Name = $"GroupDecklink_{decklinkOptionsWindow.SelectedDevice.ModelName}"
+                };
+
+                // Add shadow if enabled
+                if (decklinkOptionsWindow.EnableShadow)
+                {
+                    decklinkOverlay.Shadow = new OverlayManagerShadowSettings
+                    {
+                        Enabled = true,
+                        Color = SKColors.Black,
+                        Opacity = 0.5,
+                        BlurRadius = 5,
+                        Depth = 5,
+                        Direction = 45
+                    };
+                }
+
+                // Set Decklink audio output if enabled
+                if (decklinkOptionsWindow.EnableAudio)
+                {
+                    try
+                    {
+                        var audioOutputs = await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound);
+                        if (audioOutputs != null && audioOutputs.Length > decklinkOptionsWindow.SelectedAudioDeviceIndex
+                            && decklinkOptionsWindow.SelectedAudioDeviceIndex >= 0)
+                        {
+                            decklinkOverlay.AudioOutput = audioOutputs[decklinkOptionsWindow.SelectedAudioDeviceIndex];
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        edLog.Text += $"Warning: Failed to set audio output device for Decklink overlay: {ex.Message}{Environment.NewLine}";
+                    }
+                }
+
+                // 7. Initialize Decklink overlay manually (OverlayManagerGroup doesn't handle Decklink overlays)
+                bool decklinkInitialized = decklinkOverlay.Initialize(autoStart: false);
+                if (!decklinkInitialized)
+                {
+                    MessageBox.Show("Failed to initialize Decklink overlay. Please check if the device is connected and has an active input signal.",
+                        "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+
+                // 8. Add overlays to the group
+                overlayGroup.Add(videoOverlay);
+                overlayGroup.Add(decklinkOverlay);
+
+                // Track Decklink overlay for proper lifecycle management
+                _decklinkOverlays.Add(decklinkOverlay);
+
+                // 9. Add group to overlay manager
                 _overlayManager.Video_Overlay_Add(overlayGroup);
                 _overlayGroups.Add(overlayGroup);
 
-                // Add to the list
-                lbOverlays.Items.Add($"[GROUP] {overlayGroup.Name} ({overlayGroup.Overlays.Count} overlays)");
+                // 10. Add to list
+                lbOverlays.Items.Add($"[GROUP] {overlayGroup.Name} (Video + Decklink)");
 
-                // Show info message
+                // 11. Show success message
                 MessageBox.Show(
-                    $"Synchronized overlay group created with {overlayGroup.Overlays.Count} overlays.\n\n" +
-                    "The videos are now preloaded and paused.\n" +
-                    "They will start playing when you start the pipeline.\n\n" +
-                    "All overlays in the group will begin at exactly the same time!",
+                    $"Synchronized overlay group created with:\n" +
+                    $"- Video: {System.IO.Path.GetFileName(fileDlg.FileName)}\n" +
+                    $"- Decklink: {decklinkOptionsWindow.SelectedDevice.ModelName}\n\n" +
+                    "Both sources will start playing synchronously when you start the pipeline.",
                     "Group Created",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
 
-                // Start the group (this makes videos start playing synchronously)
-                overlayGroup.Play();
+                // 12. Start group and Decklink overlay if pipeline is running
+                if (_pipeline != null && _pipeline.State == PlaybackState.Play)
+                {
+                    overlayGroup.Play();
+                    decklinkOverlay.Play();  // Must start Decklink manually since group doesn't handle it
+                }
             }
             catch (Exception ex)
             {
@@ -1238,11 +1326,11 @@ namespace Overlay_Manager_Demo
                 if (_currentZoom == null)
                 {
                     _currentZoom = new OverlayManagerZoom(
-                        slZoomX.Value, 
-                        slZoomY.Value, 
-                        (int)slShiftX.Value, 
-                        (int)slShiftY.Value, 
-                        true, 
+                        slZoomX.Value,
+                        slZoomY.Value,
+                        (int)slShiftX.Value,
+                        (int)slShiftY.Value,
+                        true,
                         "Zoom");
                     _overlayManager.Video_Overlay_Add(_currentZoom);
                     lbOverlays.Items.Add("[Zoom] Video Transform");

@@ -641,8 +641,7 @@ namespace Decklink_MB_Demo
                         var device = (await DecklinkVideoSinkBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
                         if (device != null)
                         {
-                            videoSinkSettings = new DecklinkVideoSinkSettings(device);
-                            videoSinkSettings.Mode = outputMode;
+                            videoSinkSettings = new DecklinkVideoSinkSettings(device, outputMode);
                         }
                     }
 
