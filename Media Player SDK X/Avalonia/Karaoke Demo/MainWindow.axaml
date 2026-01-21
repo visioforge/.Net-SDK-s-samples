@@ -1,0 +1,98 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avalonia="clr-namespace:VisioForge.Core.UI.Avalonia;assembly=VisioForge.Core.UI.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="1400" d:DesignHeight="800"
+        x:Class="KaraokeDemoAMB.MainWindow"
+        Icon="/Assets/visioforge_main_icon.ico"
+        Title="Media Player SDK .Net - Karaoke Demo (Avalonia)"
+        Width="1400" Height="800">
+
+    <Grid ColumnDefinitions="650,*">
+        <!-- Left Panel: Controls -->
+        <StackPanel Grid.Column="0" Margin="10">
+
+            <!-- Input Mode Selection -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Input Mode:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <RadioButton x:Name="rbZipMode" Content="ZIP (CDG + Audio inside)"
+                             GroupName="InputMode" IsChecked="True"/>
+                <RadioButton x:Name="rbSeparateFilesMode" Content="Separate CDG + Audio"
+                             GroupName="InputMode" Margin="20,0,0,0"/>
+            </StackPanel>
+
+            <!-- CDG/ZIP File Input -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <TextBlock x:Name="lbFileLabel" Text="ZIP File:" Width="80" VerticalAlignment="Center"/>
+                <TextBox x:Name="edFilename" Width="460" Text="c:\1.zip"/>
+                <Button x:Name="btSelectFile" Content="..." Width="40" Margin="5,0,0,0"/>
+            </StackPanel>
+
+            <!-- Audio File Input (for separate mode) -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock x:Name="lbAudioLabel" Text="Audio File:" Width="80" VerticalAlignment="Center"/>
+                <TextBox x:Name="edAudioFilename" Width="460" IsEnabled="False"/>
+                <Button x:Name="btSelectAudioFile" Content="..." Width="40" Margin="5,0,0,0" IsEnabled="False"/>
+            </StackPanel>
+
+            <!-- Playback Controls Group -->
+            <Border BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="0,0,0,10" CornerRadius="4">
+                <StackPanel>
+                    <TextBlock Text="Controls" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                    <!-- Timeline Slider -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <TextBlock Text="Timeline:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <Slider x:Name="tbTimeline" Width="350" Minimum="0" Maximum="100"/>
+                        <TextBlock x:Name="lbTime" Text="00:00:00 | 00:00:00"
+                                   Margin="20,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Playback Buttons -->
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btStart" Content="Start" Width="80" FontWeight="Bold"/>
+                        <Button x:Name="btResume" Content="Resume" Width="80" Margin="10,0,0,0"/>
+                        <Button x:Name="btPause" Content="Pause" Width="80" Margin="10,0,0,0"/>
+                        <Button x:Name="btStop" Content="Stop" Width="80" Margin="10,0,0,0" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Audio Output Device -->
+            <TextBlock Text="Audio Output" Margin="0,0,0,5"/>
+            <ComboBox x:Name="cbAudioOutputDevice" Width="620" HorizontalAlignment="Left"/>
+
+            <!-- Volume and Pitch Controls -->
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <!-- Volume Control -->
+                <StackPanel Width="200">
+                    <TextBlock Text="Volume"/>
+                    <Slider x:Name="tbVolume" Minimum="20" Maximum="100" Value="80"/>
+                </StackPanel>
+
+                <!-- Pitch Control -->
+                <StackPanel Width="200" Margin="40,0,0,0">
+                    <TextBlock x:Name="lbPitch" Text="Pitch: 0"/>
+                    <Slider x:Name="tbPitch" Minimum="-12" Maximum="12" Value="0"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Debug Mode -->
+            <CheckBox x:Name="cbDebugMode" Content="Debug mode" Margin="0,20,0,10"/>
+
+            <!-- Error Log -->
+            <TextBlock Text="Log:" Margin="0,0,0,5"/>
+            <TextBox x:Name="mmError" Height="180" AcceptsReturn="True"
+                     IsReadOnly="True" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <!-- Right Panel: Video View -->
+        <Panel Grid.Column="1" Margin="10" Background="#0C0C0C">
+            <avalonia:VideoView x:Name="VideoView1"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               Background="#0C0C0C"/>
+        </Panel>
+    </Grid>
+</Window>
