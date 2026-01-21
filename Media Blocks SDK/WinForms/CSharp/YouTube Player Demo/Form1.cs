@@ -17,22 +17,49 @@
     using YoutubeExplode;
     using YoutubeExplode.Videos.Streams;
 
+    /// <summary>
+    /// The main form of the application.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The video info list.
+        /// </summary>
         private readonly List<IVideoStreamInfo> _videoInfoList = new List<IVideoStreamInfo>();
 
+        /// <summary>
+        /// The audio info list.
+        /// </summary>
         private readonly List<IAudioStreamInfo> _audioInfoList = new List<IAudioStreamInfo>();
 
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The video source.
+        /// </summary>
         private UniversalSourceBlock _videoSource;
 
+        /// <summary>
+        /// The audio source.
+        /// </summary>
         private UniversalSourceBlock _audioSource;
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -51,6 +78,9 @@
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void BtStart_Click(object sender, EventArgs e)
         {
             mmLog.Text = string.Empty;
@@ -100,6 +130,9 @@
             timer1.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void BtStop_Click(object sender, EventArgs e)
         {
             timer1.Stop();
@@ -109,6 +142,9 @@
             await DestroyEngineAsync();
         }
 
+        /// <summary>
+        /// Media player 1 on error.
+        /// </summary>
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -117,6 +153,9 @@
                                    }));
         }
 
+        /// <summary>
+        /// Handles the bt read formats click event.
+        /// </summary>
         private async void BtReadFormats_Click(object sender, EventArgs e)
         {
             _videoInfoList.Clear();
@@ -154,6 +193,9 @@
             cbAudioStream.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
@@ -172,6 +214,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the timer 1 tick event.
+        /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
             var duration = await _pipeline.DurationAsync();
@@ -181,6 +226,9 @@
         }
 
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             await DestroyEngineAsync();

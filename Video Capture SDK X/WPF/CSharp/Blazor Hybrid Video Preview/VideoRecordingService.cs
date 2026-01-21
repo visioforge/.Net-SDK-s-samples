@@ -23,6 +23,10 @@ using VisioForge.Core.Types.X.Output;
 
 namespace Video_Preview_Blazor_Hybrid
 {
+    /// <summary>
+    /// Service responsible for managing video capture and recording operations using the Video Capture SDK X.
+    /// Provides methods to initialize the camera, capture frames, and record video to a file.
+    /// </summary>
     public class VideoRecordingService : IDisposable
     {
         private VideoCaptureCoreX _videoCapture;
@@ -40,6 +44,12 @@ namespace Video_Preview_Blazor_Hybrid
             _cts = new CancellationTokenSource();
         }
 
+        /// <summary>
+        /// Initializes the camera and starts the preview stream.
+        /// Configures the video source, enables frame capture callbacks, and prepares the recording output.
+        /// </summary>
+        /// <param name="deviceIndex">The index of the video device to use (default is 0).</param>
+        /// <returns>True if the camera was successfully initialized; otherwise, false.</returns>
         public bool InitializeCamera(int deviceIndex = 0)
         {
             try
@@ -101,6 +111,11 @@ namespace Video_Preview_Blazor_Hybrid
             }
         }
 
+        /// <summary>
+        /// Starts recording video to a specified file.
+        /// </summary>
+        /// <param name="fileName">The name of the output video file. If null, a timestamp-based filename is generated.</param>
+        /// <returns>The full path to the recording file, or null if recording could not start.</returns>
         public string StartRecording(string fileName = null)
         {
             if (!_isCameraRunning || _isRecording)
@@ -130,6 +145,10 @@ namespace Video_Preview_Blazor_Hybrid
             }
         }
 
+        /// <summary>
+        /// Stops the current video recording.
+        /// </summary>
+        /// <returns>The full path to the recorded video file, or null if no recording was active.</returns>
         public string StopRecording()
         {
             if (!_isRecording)
@@ -145,6 +164,10 @@ namespace Video_Preview_Blazor_Hybrid
             return videoPath;
         }
 
+        /// <summary>
+        /// Stops the camera preview and releases camera resources.
+        /// Stops any active recording.
+        /// </summary>
         public void StopCamera()
         {
             _isCameraRunning = false;
@@ -158,6 +181,10 @@ namespace Video_Preview_Blazor_Hybrid
             _videoCapture = null;
         }
 
+        /// <summary>
+        /// Disposes of the resources used by the <see cref="VideoRecordingService"/>.
+        /// Stops the camera and disposes of the cancellation token source.
+        /// </summary>
         public void Dispose()
         {
             StopCamera();

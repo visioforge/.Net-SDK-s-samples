@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace VisioForge_SDK_4_Audio_Capture_CSharp
 {
+    /// <summary>
+    /// Program class.
+    /// </summary>
     static class Program
     {
         /// <summary>

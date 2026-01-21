@@ -14,6 +14,9 @@ namespace VideoCaptureUnoX.Droid;
 )]
 public class MainActivity : Microsoft.UI.Xaml.ApplicationActivity
 {
+        /// <summary>
+        /// On create.
+        /// </summary>
     protected override void OnCreate(Bundle? savedInstanceState)
     {
         global::AndroidX.Core.SplashScreen.SplashScreen.InstallSplashScreen(this);
@@ -21,6 +24,9 @@ public class MainActivity : Microsoft.UI.Xaml.ApplicationActivity
         base.OnCreate(savedInstanceState);
     }
 
+        /// <summary>
+        /// On request permissions result.
+        /// </summary>
     public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
     {
         base.OnRequestPermissionsResult(requestCode, permissions, grantResults);

@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable InconsistentNaming
+
+
 
 namespace speaker_capture
 {
@@ -32,6 +32,9 @@ namespace speaker_capture
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await _pipeline.StopAsync();
@@ -39,6 +42,9 @@ namespace speaker_capture
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await VisioForgeX.InitSDKAsync();
@@ -58,11 +64,17 @@ namespace speaker_capture
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             _pipeline = new MediaBlocksPipeline();

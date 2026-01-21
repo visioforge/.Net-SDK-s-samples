@@ -60,6 +60,10 @@ public sealed partial class MainPage : Page
 
     private SolidColorBrush? _defaultButtonBackground;
 
+    /// <summary>
+    /// Interaction logic for the Uno Platform Simple Capture demo's MainPage.
+    /// Demonstrates how to handle video capture across different platforms (Windows, Android, iOS, macOS) using a unified codebase.
+    /// </summary>
     public MainPage()
     {
         this.InitializeComponent();
@@ -68,6 +72,12 @@ public sealed partial class MainPage : Page
         Unloaded += MainPage_Unloaded;
     }
 
+    /// <summary>
+    /// Handles the Unloaded event of the MainPage.
+    /// Safely disposes of the video capture core and destroys the SDK to release resources.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void MainPage_Unloaded(object sender, RoutedEventArgs e)
     {
         try
@@ -91,6 +101,10 @@ public sealed partial class MainPage : Page
     }
 
 #if __IOS__ || __MACCATALYST__
+    /// <summary>
+    /// Asynchronously requests video and audio permissions on iOS and MacCatalyst.
+    /// </summary>
+    /// <returns>True if permissions are granted; otherwise, false.</returns>
     private async Task<bool> EnsureApplePermissionsAsync()
     {
         var cameraStatus = AVCaptureDevice.GetAuthorizationStatus(AVAuthorizationMediaType.Video);
@@ -118,6 +132,10 @@ public sealed partial class MainPage : Page
 #endif
 
 #if __ANDROID__
+    /// <summary>
+    /// Asynchronously requests camera and microphone permissions on Android.
+    /// </summary>
+    /// <returns>True if permissions are granted; otherwise, false.</returns>
     private async Task<bool> EnsureAndroidPermissionsAsync()
     {
         var activity = ContextHelper.Current as Android.App.Activity;
@@ -153,6 +171,10 @@ public sealed partial class MainPage : Page
 #endif
 
 #if NET_WINDOWS
+    /// <summary>
+    /// Asynchronously ensures camera and microphone permissions on Windows.
+    /// </summary>
+    /// <returns>True if permissions are initialized successfully; otherwise, false.</returns>
     private async Task<bool> EnsureWindowsPermissionsAsync()
     {
         try
@@ -174,6 +196,11 @@ public sealed partial class MainPage : Page
     }
 #endif
 
+    /// <summary>
+    /// Updates the status label on the UI thread with a specified message and color.
+    /// </summary>
+    /// <param name="message">The status message to display.</param>
+    /// <param name="color">The hex color string for the text color (default is green).</param>
     private void ShowStatus(string message, string color = "#00FF00")
     {
         SysDebug.WriteLine($"ShowStatus: {message}");
@@ -195,6 +222,9 @@ public sealed partial class MainPage : Page
         return Windows.UI.Color.FromArgb(a, r, g, b);
     }
 
+    /// <summary>
+    /// Clears the status label message on the UI thread.
+    /// </summary>
     private void HideStatus()
     {
         DispatcherQueue.TryEnqueue(() =>
@@ -203,6 +233,12 @@ public sealed partial class MainPage : Page
         });
     }
 
+    /// <summary>
+    /// Handles the Loaded event of the MainPage.
+    /// Initializes SDK, checks permissions, constructs the video capture core, and populates device lists.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void MainPage_Loaded(object sender, RoutedEventArgs e)
     {
         try
@@ -275,11 +311,21 @@ public sealed partial class MainPage : Page
         }
     }
 
+    /// <summary>
+    /// Handles the OnError event of the video capture core.
+    /// Logs error messages to the debug output.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="VisioForge.Core.Types.Events.ErrorsEventArgs"/> instance containing the error information.</param>
     private void Core_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
     {
         SysDebug.WriteLine(e.Message);
     }
 
+    /// <summary>
+    /// Asynchronously stops the current video capture session.
+    /// </summary>
+    /// <returns>A task representing the asynchronous operation.</returns>
     private async Task StopAllAsync()
     {
         if (_core == null)
@@ -291,6 +337,10 @@ public sealed partial class MainPage : Page
     }
 
 #if __IOS__ && !__MACCATALYST__
+    /// <summary>
+    /// Adds the recorded video file to the iOS Photos library.
+    /// </summary>
+    /// <param name="filePath">The path to the video file.</param>
     private void AddVideoToPhotosLibrary(string filePath)
     {
         var fileUrl = NSUrl.FromFilename(filePath);
@@ -318,6 +368,10 @@ public sealed partial class MainPage : Page
     }
 #endif
 
+    /// <summary>
+    /// Asynchronously stops the active recording and updates the UI status.
+    /// </summary>
+    /// <returns>A task representing the asynchronous operation.</returns>
     private async Task StopCaptureAsync()
     {
         if (_core == null) return;
@@ -342,6 +396,12 @@ public sealed partial class MainPage : Page
         ShowStatus($"Saved: {filename}");
     }
 
+    /// <summary>
+    /// Handles the Click event of the Camera button.
+    /// Cycles through available camera devices and restarts the preview.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btCamera_Clicked(object sender, RoutedEventArgs e)
     {
         if (_cameras == null || _cameras.Length < 2)
@@ -364,6 +424,12 @@ public sealed partial class MainPage : Page
 #endif
     }
 
+    /// <summary>
+    /// Handles the Click event of the Microphone button.
+    /// Cycles through available audio input devices.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private void btMic_Clicked(object sender, RoutedEventArgs e)
     {
         if (_mics == null || _mics.Length < 2)
@@ -381,6 +447,12 @@ public sealed partial class MainPage : Page
         btMic.Content = _mics[_micSelectedIndex].DisplayName;
     }
 
+    /// <summary>
+    /// Handles the Click event of the Speakers button.
+    /// Cycles through available audio output devices.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private void btSpeakers_Clicked(object sender, RoutedEventArgs e)
     {
         if (_speakers == null || _speakers.Length < 2)
@@ -398,6 +470,10 @@ public sealed partial class MainPage : Page
         btSpeakers.Content = _speakers[_speakerSelectedIndex].DisplayName;
     }
 
+    /// <summary>
+    /// Configures and starts the camera preview with the selected devices.
+    /// </summary>
+    /// <returns>A task representing the asynchronous operation.</returns>
     private async Task StartPreview()
     {
         if (_core == null) return;
@@ -489,6 +565,10 @@ public sealed partial class MainPage : Page
         ShowStatus("Preview");
     }
 
+    /// <summary>
+    /// Generates a unique filename for the recording based on the platform and current time.
+    /// </summary>
+    /// <returns>The full path to the generated filename.</returns>
     private string GenerateFilename()
     {
         DateTime now = DateTime.Now;
@@ -544,6 +624,12 @@ public sealed partial class MainPage : Page
         return filename;
     }
 
+    /// <summary>
+    /// Handles the Click event of the Start/Stop Preview button.
+    /// Toggles the camera preview state.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btStartPreview_Clicked(object sender, RoutedEventArgs e)
     {
         if (_core == null)
@@ -580,6 +666,12 @@ public sealed partial class MainPage : Page
         }
     }
 
+    /// <summary>
+    /// Handles the Click event of the Start/Stop Capture button.
+    /// Starts recording to a file or stops the current recording.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btStartCapture_Clicked(object sender, RoutedEventArgs e)
     {
         if (_core == null || _core.State != PlaybackState.Play)

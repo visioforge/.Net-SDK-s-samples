@@ -16,6 +16,9 @@ public class FileSaverImplementation : IFileSaver
     /// <param name="suggestedFileName">Suggested file name for the save dialog.</param>
     /// <param name="fileTypes">Dictionary of file type descriptions and their extensions.</param>
     /// <returns>The selected file path, or null if cancelled.</returns>
+        /// <summary>
+        /// Save file async.
+        /// </summary>
     public async Task<string> SaveFileAsync(string suggestedFileName, Dictionary<string, List<string>> fileTypes)
     {
         var tcs = new TaskCompletionSource<string>();
@@ -109,6 +112,9 @@ public class FileSaverImplementation : IFileSaver
             _tempPath = tempPath;
         }
 
+        /// <summary>
+        /// Did pick document.
+        /// </summary>
         public override void DidPickDocument(UIDocumentPickerViewController controller, NSUrl[] urls)
         {
             try
@@ -154,6 +160,9 @@ public class FileSaverImplementation : IFileSaver
             }
         }
 
+        /// <summary>
+        /// Was cancelled.
+        /// </summary>
         public override void WasCancelled(UIDocumentPickerViewController controller)
         {
             _tcs.SetResult(null);
@@ -161,6 +170,9 @@ public class FileSaverImplementation : IFileSaver
             controller.DismissViewController(true, null);
         }
 
+        /// <summary>
+        /// Cleanup temp file.
+        /// </summary>
         private void CleanupTempFile()
         {
             try

@@ -1,7 +1,7 @@
-// ReSharper disable InconsistentNaming
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable StyleCop.SA1601
-// ReSharper disable RedundantNameQualifier
+
+
+
+
 
 namespace Screen_Capture
 {
@@ -32,22 +32,49 @@ namespace Screen_Capture
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     public partial class Window1
     {
+        /// <summary>
+        /// Settings dialog for MP4 hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MPEG-TS hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mpegTSSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MOV hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog movSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MP4 output format.
+        /// </summary>
         private MP4SettingsDialog mp4SettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for AVI output format.
+        /// </summary>
         private AVISettingsDialog aviSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for WMV output format.
+        /// </summary>
         private WMVSettingsDialog wmvSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for GIF output format.
+        /// </summary>
         private GIFSettingsDialog gifSettingsDialog;
 
+        /// <summary>
+        /// Form for window capture source selection.
+        /// </summary>
         private WindowCaptureForm windowCaptureForm;
 
+        /// <summary>
+        /// Save file dialog for screenshot capture functionality.
+        /// </summary>
         private readonly SaveFileDialog screenshotSaveDialog = new SaveFileDialog()
         {
             FileName = "image.jpg",
@@ -55,13 +82,24 @@ namespace Screen_Capture
             InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
+        /// <summary>
+        /// Timer for updating recording time display.
+        /// </summary>
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
-        // Dialogs
+        /// <summary>
+        /// Save file dialog for output file selection.
+        /// </summary>
         private readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
+        /// <summary>
+        /// The main video capture core engine instance.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Window1"/> class.
+        /// </summary>
         public Window1()
         {
             InitializeComponent();
@@ -69,6 +107,9 @@ namespace Screen_Capture
             
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -76,6 +117,9 @@ namespace Screen_Capture
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -90,6 +134,11 @@ namespace Screen_Capture
             tmRecording = null;
         }
 
+        /// <summary>
+        /// Handles the bt screen capture update click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btScreenCaptureUpdate_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.Screen_Capture_UpdateParametersAsync(
@@ -99,6 +148,11 @@ namespace Screen_Capture
                 cbScreenCapture_HighlightMouseCursor.IsChecked == true);
         }
 
+        /// <summary>
+        /// Cb audio input device selected index changed.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -150,16 +204,31 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt audio input device settings click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btAudioInputDeviceSettings_Click(object sender, RoutedEventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
         }
 
+        /// <summary>
+        /// Handles the cb use best audio input format checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, RoutedEventArgs e)
         {
             cbAudioInputFormat.IsEnabled = cbUseBestAudioInputFormat.IsChecked == false;
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -168,6 +237,10 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Set mp 4 output.
+        /// </summary>
+        /// <param name="mp4Output">The mp4 output.</param>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -178,6 +251,10 @@ namespace Screen_Capture
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set wmv output.
+        /// </summary>
+        /// <param name="wmvOutput">The WMV output.</param>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -189,6 +266,10 @@ namespace Screen_Capture
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Set mp 4 hw output.
+        /// </summary>
+        /// <param name="mp4Output">The mp4 output.</param>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -199,6 +280,10 @@ namespace Screen_Capture
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set mpegts output.
+        /// </summary>
+        /// <param name="mpegTSOutput">The mpeg ts output.</param>
         private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
@@ -209,6 +294,10 @@ namespace Screen_Capture
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
+        /// <summary>
+        /// Set mov output.
+        /// </summary>
+        /// <param name="mkvOutput">The mkv output.</param>
         private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
@@ -219,6 +308,10 @@ namespace Screen_Capture
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
+        /// <summary>
+        /// Set gif output.
+        /// </summary>
+        /// <param name="gifOutput">The gif output.</param>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
@@ -229,6 +322,10 @@ namespace Screen_Capture
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Set avi output.
+        /// </summary>
+        /// <param name="aviOutput">The avi output.</param>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -245,6 +342,12 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Create screen capture source.
+        /// </summary>
+        /// <param name="screenID">The screen ID.</param>
+        /// <param name="forcedFullScreen">if set to <c>true</c> [forced full screen].</param>
+        /// <returns>ScreenCaptureSourceSettings.</returns>
         private ScreenCaptureSourceSettings CreateScreenCaptureSource(int screenID, bool forcedFullScreen)
         {
             var source = new ScreenCaptureSourceSettings();
@@ -265,7 +368,7 @@ namespace Screen_Capture
 
                     source.WindowHandle = windowCaptureForm.CapturedWindowHandle;
                 }
-                // ReSharper disable once EmptyGeneralCatchClause
+                
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.ToString());
@@ -296,6 +399,11 @@ namespace Screen_Capture
             return source;
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -437,6 +545,9 @@ namespace Screen_Capture
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Configure video effects.
+        /// </summary>
         private void ConfigureVideoEffects()
         {
             if (tbLightness.Value > 0)
@@ -480,16 +591,29 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void BtResume_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void BtPause_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = VideoCapture1.Duration_Time();
@@ -505,6 +629,11 @@ namespace Screen_Capture
            }));
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -512,6 +641,11 @@ namespace Screen_Capture
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Form 1 load.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             await CreateEngineAsync();
@@ -544,22 +678,41 @@ namespace Screen_Capture
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void llVideoTutorials_LinkClicked(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
+        /// <param name="txt">The text.</param>
         private void Log(string txt)
         {
             Dispatcher.Invoke((Action)(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; }));
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt save screenshot click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog() == true)
@@ -587,6 +740,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt output configure click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btOutputConfigure_Click(object sender, RoutedEventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -672,6 +830,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Cb output format selection changed.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -714,6 +877,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the cb greyscale checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbGreyscale_CheckedChanged(object sender, RoutedEventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -733,6 +901,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the tb contrast scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbContrast_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectContrast contrast;
@@ -752,6 +925,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the tb darkness scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbDarkness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectDarkness darkness;
@@ -771,6 +949,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the tb lightness scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbLightness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectLightness lightness;
@@ -790,6 +973,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the tb saturation scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbSaturation_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoCapture1 != null)
@@ -812,6 +1000,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the cb invert checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbInvert_CheckedChanged(object sender, RoutedEventArgs e)
         {
             IVideoEffectInvert invert;
@@ -831,6 +1024,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void CbFlipX_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipDown flip;
@@ -850,6 +1048,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void CbFlipY_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipRight flip;
@@ -869,6 +1072,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt image logo add click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtImageLogoAdd_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new ImageLogoSettingsDialog();
@@ -884,6 +1092,11 @@ namespace Screen_Capture
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt text logo add click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtTextLogoAdd_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -899,6 +1112,11 @@ namespace Screen_Capture
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt logo edit click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtLogoEdit_Click(object sender, RoutedEventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -930,6 +1148,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt logo remove click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtLogoRemove_Click(object sender, RoutedEventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -939,6 +1162,11 @@ namespace Screen_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt screen source window select click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btScreenSourceWindowSelect_Click(object sender, RoutedEventArgs e)
         {
             if (windowCaptureForm == null)
@@ -950,6 +1178,11 @@ namespace Screen_Capture
             windowCaptureForm.StartCapture();
         }
 
+        /// <summary>
+        /// Window capture form on capture hotkey.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="WindowCaptureEventArgs"/> instance containing the event data.</param>
         private void WindowCaptureForm_OnCaptureHotkey(object sender, WindowCaptureEventArgs e)
         {
             windowCaptureForm.StopCapture();
@@ -958,6 +1191,11 @@ namespace Screen_Capture
             lbScreenSourceWindowText.Content = e.Caption;
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEngine();
@@ -965,4 +1203,3 @@ namespace Screen_Capture
     }
 }
 
-// ReSharper restore InconsistentNaming

@@ -31,34 +31,79 @@ namespace VisioForge_MMT_Live
     /// </summary>
     public partial class MainWindow : IDisposable
     {
+        /// <summary>
+        /// The search live data.
+        /// </summary>
         private FingerprintLiveData _searchLiveData;
 
+        /// <summary>
+        /// The search live overlap data.
+        /// </summary>
         private FingerprintLiveData _searchLiveOverlapData;
 
+        /// <summary>
+        /// The fingerprint queue.
+        /// </summary>
         private ConcurrentQueue<FingerprintLiveData> _fingerprintQueue;
 
+        /// <summary>
+        /// The temporary buffer.
+        /// </summary>
         private IntPtr _tempBuffer;
 
+        /// <summary>
+        /// The ad VFP list.
+        /// </summary>
         private List<VFPFingerPrint> _adVFPList;
 
+        /// <summary>
+        /// The results.
+        /// </summary>
         private List<DetectedAd> _results;
 
+        /// <summary>
+        /// The ignored areas.
+        /// </summary>
         private List<Rect> _ignoredAreas;
 
+        /// <summary>
+        /// The fragment duration.
+        /// </summary>
         private long _fragmentDuration;
 
+        /// <summary>
+        /// The fragment count.
+        /// </summary>
         private int _fragmentCount;
 
+        /// <summary>
+        /// The overlap fragment count.
+        /// </summary>
         private int _overlapFragmentCount;
 
+        /// <summary>
+        /// The processing lock.
+        /// </summary>
         private object _processingLock;
 
+        /// <summary>
+        /// The video capture.
+        /// </summary>
         private readonly VideoCaptureCoreX _videoCapture;
 
+        /// <summary>
+        /// The video player.
+        /// </summary>
         private readonly FrameSource _videoPlayer;
 
+        /// <summary>
+        /// The stop flag.
+        /// </summary>
         private bool _stopFlag;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -72,6 +117,9 @@ namespace VisioForge_MMT_Live
             _videoCapture.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Handles the bt add ad folder click event.
+        /// </summary>
         private void btAddAdFolder_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new System.Windows.Forms.FolderBrowserDialog
@@ -93,11 +141,17 @@ namespace VisioForge_MMT_Live
             }
         }
 
+        /// <summary>
+        /// Handles the bt clear ads click event.
+        /// </summary>
         private void btClearAds_Click(object sender, RoutedEventArgs e)
         {
             lbAdFiles.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if ((string)btStart.Content == "Stop")
@@ -278,6 +332,9 @@ namespace VisioForge_MMT_Live
 
         #endregion
 
+        /// <summary>
+        /// Handles the bt save results click event.
+        /// </summary>
         private void btSaveResults_Click(object sender, RoutedEventArgs e)
         {
             string xml = XmlUtility.Obj2XmlStr(resultsView);
@@ -309,6 +366,9 @@ namespace VisioForge_MMT_Live
             }
         }
 
+        /// <summary>
+        /// Save settings.
+        /// </summary>
         private void SaveSettings()
         {
             string filename = Settings.SettingsFolder + "settings.xml";
@@ -326,6 +386,9 @@ namespace VisioForge_MMT_Live
             Settings.Save(typeof(Settings), filename);
         }
 
+        /// <summary>
+        /// Load settings.
+        /// </summary>
         private void LoadSettings()
         {
             string filename = Settings.SettingsFolder + "settings.xml";
@@ -336,6 +399,9 @@ namespace VisioForge_MMT_Live
             }
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadSettings();
@@ -358,6 +424,9 @@ namespace VisioForge_MMT_Live
             _ignoredAreas = new List<Rect>();
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             edLog.Text += e.Message + Environment.NewLine;
@@ -368,6 +437,9 @@ namespace VisioForge_MMT_Live
 
         private delegate void ProcessVideoDelegate();
 
+        /// <summary>
+        /// Process video delegate method.
+        /// </summary>
         private void ProcessVideoDelegateMethod()
         {
             lock (_processingLock)
@@ -456,6 +528,9 @@ namespace VisioForge_MMT_Live
 
         private delegate void NewFrameDelegate(VideoFrameXBufferEventArgs e);
 
+        /// <summary>
+        /// New frame delegate method.
+        /// </summary>
         private void NewFrameDelegateMethod(VideoFrameXBufferEventArgs e)
         {
             if (_stopFlag)
@@ -503,6 +578,9 @@ namespace VisioForge_MMT_Live
         }
 
 
+        /// <summary>
+        /// Video capture 1 on video frame buffer.
+        /// </summary>
         private void VideoCapture1_OnVideoFrameBuffer(object sender, VideoFrameXBufferEventArgs e)
         {
             try
@@ -591,11 +669,17 @@ namespace VisioForge_MMT_Live
             }
         }
 
+        /// <summary>
+        /// Window unloaded.
+        /// </summary>
         private void Window_Unloaded(object sender, RoutedEventArgs e)
         {
             SaveSettings();
         }
 
+        /// <summary>
+        /// Cb video source selection changed.
+        /// </summary>
         private async void cbVideoSource_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (e == null)
@@ -625,6 +709,9 @@ namespace VisioForge_MMT_Live
             }
         }
 
+        /// <summary>
+        /// Cb video format selection changed.
+        /// </summary>
         private async void cbVideoFormat_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (e == null)
@@ -664,6 +751,9 @@ namespace VisioForge_MMT_Live
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SaveSettings();
@@ -699,6 +789,9 @@ namespace VisioForge_MMT_Live
         /// <param name="disposing">
         /// Disposing parameter.
         /// </param>
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposed)
@@ -731,6 +824,9 @@ namespace VisioForge_MMT_Live
 
         #endregion
 
+        /// <summary>
+        /// Handles the bt ignored area add click event.
+        /// </summary>
         private void btIgnoredAreaAdd_Click(object sender, RoutedEventArgs e)
         {
             var rect = new Rect()
@@ -745,6 +841,9 @@ namespace VisioForge_MMT_Live
             lbIgnoredAreas.Items.Add($"Left: {rect.Left}, Top: {rect.Top}, Right: {rect.Right}, Bottom: {rect.Bottom}");
         }
 
+        /// <summary>
+        /// Handles the bt ignored areas remove item click event.
+        /// </summary>
         private void btIgnoredAreasRemoveItem_Click(object sender, RoutedEventArgs e)
         {
             int index = lbIgnoredAreas.SelectedIndex;
@@ -755,18 +854,27 @@ namespace VisioForge_MMT_Live
             }
         }
 
+        /// <summary>
+        /// Handles the bt ignored areas remove all click event.
+        /// </summary>
         private void btIgnoredAreasRemoveAll_Click(object sender, RoutedEventArgs e)
         {
             lbIgnoredAreas.Items.Clear();
             _ignoredAreas.Clear();
         }
 
+        /// <summary>
+        /// Handles the bt sort results click event.
+        /// </summary>
         private void btSortResults_Click(object sender, RoutedEventArgs e)
         {
             resultsView = new ObservableCollection<ResultsViewModel>(resultsView.OrderBy(i => i.TimeStampMS.TotalMilliseconds));
             lvResults.ItemsSource = resultsView;
         }
 
+        /// <summary>
+        /// Handles the bt add ad file click event.
+        /// </summary>
         private void BtAddAdFile_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new System.Windows.Forms.OpenFileDialog
@@ -788,6 +896,9 @@ namespace VisioForge_MMT_Live
             }
         }
 
+        /// <summary>
+        /// Error callback.
+        /// </summary>
         private void ErrorCallback(string error)
         {
             Dispatcher.Invoke(() =>

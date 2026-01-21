@@ -16,7 +16,8 @@ using VisioForge.Core.VideoCaptureX;
 namespace USB3V_GigE_Spinnaker
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for the USB3V-GigE Spinnaker WPF demo's MainWindow.
+    /// Demonstrates how to discover and capture from FLIR/Teledyne Spinnaker cameras using the X-engine.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -29,11 +30,20 @@ namespace USB3V_GigE_Spinnaker
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the OnError event of the video capture engine.
+        /// Outputs error messages to the debug console.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Creates a new instance of the video capture engine and configures event handlers.
+        /// </summary>
         private void CreateEngine()
         {
             _core = new VideoCaptureCoreX(VideoView1);
@@ -41,6 +51,10 @@ namespace USB3V_GigE_Spinnaker
             _core.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
+        /// <summary>
+        /// Asynchronously stops and disposes of the video capture engine.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (_core != null)
@@ -53,6 +67,9 @@ namespace USB3V_GigE_Spinnaker
             }
         }
 
+        /// <summary>
+        /// Asynchronously updates the recording duration displayed in the UI.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = _core.Duration();
@@ -68,6 +85,12 @@ namespace USB3V_GigE_Spinnaker
             }));
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the engine for the selected Spinnaker camera with custom resolution and frame rate, then starts the stream.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             CreateEngine();
@@ -84,6 +107,12 @@ namespace USB3V_GigE_Spinnaker
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the stream and cleans up engine resources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -91,6 +120,12 @@ namespace USB3V_GigE_Spinnaker
             await DestroyEngineAsync();
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the window.
+        /// Initializes the SDK and enumerates available Spinnaker cameras.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -119,6 +154,12 @@ namespace USB3V_GigE_Spinnaker
             }
         }
 
+        /// <summary>
+        /// Handles the Closing event of the window.
+        /// Ensures SDK resources are released.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();

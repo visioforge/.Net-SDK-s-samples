@@ -5,6 +5,9 @@ namespace SimplePlayerUno.Template;
 public class Program
 {
     [STAThread]
+        /// <summary>
+        /// Main.
+        /// </summary>
     public static void Main(string[] args)
     {
         App.InitializeLogging();

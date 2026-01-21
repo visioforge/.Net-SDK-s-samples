@@ -35,6 +35,9 @@ public sealed partial class MainPage : Page
         Unloaded += MainPage_Unloaded;
     }
 
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
     private void MainPage_Loaded(object sender, RoutedEventArgs e)
     {
         if (_sdkInitialized)
@@ -53,6 +56,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Main page unloaded.
+        /// </summary>
     private async void MainPage_Unloaded(object sender, RoutedEventArgs e)
     {
         await StopAsync();
@@ -64,6 +70,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Open async.
+        /// </summary>
     private async Task<bool> OpenAsync()
     {
         // Clean up any existing pipeline first
@@ -152,6 +161,9 @@ public sealed partial class MainPage : Page
         return true;
     }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
     private async Task StopAsync()
     {
         if (_pipeline != null)
@@ -182,6 +194,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Handles the btn play stop click event.
+        /// </summary>
     private async void BtnPlayStop_Click(object sender, RoutedEventArgs e)
     {
         try
@@ -223,11 +238,17 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
     private void Pipeline_OnError(object? sender, ErrorsEventArgs e)
     {
         ShowToast($"Error: {e.Message}");
     }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
     private void Pipeline_OnStop(object? sender, VisioForge.Core.Types.Events.StopEventArgs e)
     {
         _dispatcherQueue.TryEnqueue(() =>
@@ -238,6 +259,9 @@ public sealed partial class MainPage : Page
         });
     }
 
+        /// <summary>
+        /// Show toast.
+        /// </summary>
     private void ShowToast(string message)
     {
         System.Diagnostics.Debug.WriteLine(message);

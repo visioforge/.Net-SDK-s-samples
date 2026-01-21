@@ -1,7 +1,7 @@
-﻿// ReSharper disable InconsistentNaming
+﻿
 
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable StyleCop.SA1601
+
+
 
 namespace IP_Capture
 {
@@ -37,20 +37,44 @@ namespace IP_Capture
 
     public partial class Window1 : IDisposable
     {
+        /// <summary>
+        /// MP4 HW settings dialog.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
+        /// <summary>
+        /// MPEG TS settings dialog.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mpegTSSettingsDialog;
 
+        /// <summary>
+        /// MOV settings dialog.
+        /// </summary>
         private HWEncodersOutputSettingsDialog movSettingsDialog;
 
+        /// <summary>
+        /// MP4 settings dialog.
+        /// </summary>
         private MP4SettingsDialog mp4SettingsDialog;
 
+        /// <summary>
+        /// AVI settings dialog.
+        /// </summary>
         private AVISettingsDialog aviSettingsDialog;
 
+        /// <summary>
+        /// WMV settings dialog.
+        /// </summary>
         private WMVSettingsDialog wmvSettingsDialog;
 
+        /// <summary>
+        /// GIF settings dialog.
+        /// </summary>
         private GIFSettingsDialog gifSettingsDialog;
 
+        /// <summary>
+        /// Screenshot save dialog.
+        /// </summary>
         private SaveFileDialog screenshotSaveDialog = new SaveFileDialog
         {
             FileName = "image.jpg",
@@ -58,17 +82,35 @@ namespace IP_Capture
             InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
+        /// <summary>
+        /// Recording timer.
+        /// </summary>
         private Timer tmRecording = new Timer(1000);
 
+        /// <summary>
+        /// Save file dialog 1.
+        /// </summary>
         private readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
+        /// <summary>
+        /// The ONVIF client.
+        /// </summary>
         private ONVIFClientX onvifClient;
 
         // PTZ ranges will be handled differently in the new API
 
+        /// <summary>
+        /// The video capture.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
+        /// <summary>
+        /// The disposed value.
+        /// </summary>
         private bool disposedValue;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Window1"/> class.
+        /// </summary>
         public Window1()
         {
             InitializeComponent();
@@ -76,6 +118,9 @@ namespace IP_Capture
             Application.EnableVisualStyles();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -84,6 +129,9 @@ namespace IP_Capture
             VideoCapture1.OnNetworkSourceDisconnect += VideoCapture1_OnNetworkSourceDisconnect;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -96,6 +144,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Form 1 load.
+        /// </summary>
+        /// <summary>
+        /// Form 1 load.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             await CreateEngineAsync();
@@ -113,6 +169,14 @@ namespace IP_Capture
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Handles the bt save screenshot click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt save screenshot click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog() == true)
@@ -140,6 +204,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -148,6 +220,9 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Set mp 4 output.
+        /// </summary>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -158,6 +233,9 @@ namespace IP_Capture
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set wmv output.
+        /// </summary>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -169,6 +247,9 @@ namespace IP_Capture
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Set mp 4 hw output.
+        /// </summary>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -179,6 +260,9 @@ namespace IP_Capture
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set mpegts output.
+        /// </summary>
         private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
@@ -189,6 +273,9 @@ namespace IP_Capture
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
+        /// <summary>
+        /// Set mov output.
+        /// </summary>
         private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
@@ -199,6 +286,9 @@ namespace IP_Capture
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
+        /// <summary>
+        /// Set gif output.
+        /// </summary>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
@@ -209,6 +299,9 @@ namespace IP_Capture
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Set avi output.
+        /// </summary>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -225,6 +318,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (onvifClient != null)
@@ -412,6 +513,9 @@ namespace IP_Capture
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Configure video effects.
+        /// </summary>
         private void ConfigureVideoEffects()
         {
             if (tbLightness.Value > 0)
@@ -455,6 +559,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -462,22 +574,53 @@ namespace IP_Capture
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void llVideoTutorials_LinkClicked(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
+        /// <summary>
+        /// Log.
+        /// </summary>
+        /// <param name="txt">Text.</param>
         private void Log(string txt)
         {
             Dispatcher.Invoke(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt onvif connect click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt onvif connect click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btONVIFConnect_Click(object sender, RoutedEventArgs e)
         {
             if (btONVIFConnect.Content.ToString() == "Connect")
@@ -563,6 +706,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt onvif right click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt onvif right click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btONVIFRight_Click(object sender, RoutedEventArgs e)
         {
             if (onvifClient == null)
@@ -581,6 +732,14 @@ namespace IP_Capture
             await onvifClient.StopMoveAsync(profiles[0].token, true, true);
         }
 
+        /// <summary>
+        /// Handles the bt onvifptz set default click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt onvifptz set default click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btONVIFPTZSetDefault_Click(object sender, RoutedEventArgs e)
         {
             if (onvifClient != null)
@@ -593,6 +752,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt onvif left click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt onvif left click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btONVIFLeft_Click(object sender, RoutedEventArgs e)
         {
             if (onvifClient == null)
@@ -611,6 +778,14 @@ namespace IP_Capture
             await onvifClient.StopMoveAsync(profiles[0].token, true, true);
         }
 
+        /// <summary>
+        /// Handles the bt onvif up click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt onvif up click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btONVIFUp_Click(object sender, RoutedEventArgs e)
         {
             if (onvifClient == null)
@@ -629,6 +804,14 @@ namespace IP_Capture
             await onvifClient.StopMoveAsync(profiles[0].token, true, true);
         }
 
+        /// <summary>
+        /// Handles the bt onvif down click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt onvif down click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btONVIFDown_Click(object sender, RoutedEventArgs e)
         {
             if (onvifClient == null)
@@ -647,6 +830,14 @@ namespace IP_Capture
             await onvifClient.StopMoveAsync(profiles[0].token, true, true);
         }
 
+        /// <summary>
+        /// Handles the bt onvif zoom in click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt onvif zoom in click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btONVIFZoomIn_Click(object sender, RoutedEventArgs e)
         {
             if (onvifClient == null)
@@ -665,6 +856,14 @@ namespace IP_Capture
             await onvifClient.StopMoveAsync(profiles[0].token, true, true);
         }
 
+        /// <summary>
+        /// Handles the bt onvif zoom out click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt onvif zoom out click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btONVIFZoomOut_Click(object sender, RoutedEventArgs e)
         {
             if (onvifClient == null)
@@ -683,6 +882,9 @@ namespace IP_Capture
             await onvifClient.StopMoveAsync(profiles[0].token, true, true);
         }
 
+        /// <summary>
+        /// Stop ptz movement async.
+        /// </summary>
         private async Task StopPtzMovementAsync()
         {
             if (onvifClient == null)
@@ -697,6 +899,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Cb output format selection changed.
+        /// </summary>
+        /// <summary>
+        /// Cb output format selection changed.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -739,16 +949,40 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void BtResume_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void BtPause_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt output configure click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt output configure click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void BtOutputConfigure_Click(object sender, RoutedEventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -834,6 +1068,9 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = VideoCapture1.Duration_Time();
@@ -849,6 +1086,14 @@ namespace IP_Capture
             }));
         }
 
+        /// <summary>
+        /// Handles the cb greyscale checked changed event.
+        /// </summary>
+        /// <summary>
+        /// Handles the cb greyscale checked changed event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void cbGreyscale_CheckedChanged(object sender, RoutedEventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -868,6 +1113,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the tb contrast scroll event.
+        /// </summary>
+        /// <summary>
+        /// Handles the tb contrast scroll event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void tbContrast_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectContrast contrast;
@@ -887,6 +1140,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the tb darkness scroll event.
+        /// </summary>
+        /// <summary>
+        /// Handles the tb darkness scroll event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void tbDarkness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectDarkness darkness;
@@ -906,6 +1167,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the tb lightness scroll event.
+        /// </summary>
+        /// <summary>
+        /// Handles the tb lightness scroll event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void tbLightness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectLightness lightness;
@@ -925,6 +1194,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the tb saturation scroll event.
+        /// </summary>
+        /// <summary>
+        /// Handles the tb saturation scroll event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void tbSaturation_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoCapture1 != null)
@@ -947,6 +1224,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the cb invert checked changed event.
+        /// </summary>
+        /// <summary>
+        /// Handles the cb invert checked changed event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void cbInvert_CheckedChanged(object sender, RoutedEventArgs e)
         {
             IVideoEffectInvert invert;
@@ -966,6 +1251,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void CbFlipX_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipDown flip;
@@ -985,6 +1278,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void CbFlipY_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipRight flip;
@@ -1004,6 +1305,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt image logo add click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt image logo add click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void BtImageLogoAdd_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new ImageLogoSettingsDialog();
@@ -1019,6 +1328,14 @@ namespace IP_Capture
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt text logo add click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt text logo add click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void BtTextLogoAdd_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -1034,6 +1351,14 @@ namespace IP_Capture
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt logo edit click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt logo edit click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void BtLogoEdit_Click(object sender, RoutedEventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -1065,6 +1390,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt logo remove click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt logo remove click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void BtLogoRemove_Click(object sender, RoutedEventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -1074,12 +1407,28 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Lb ndi vendor mouse left button down.
+        /// </summary>
+        /// <summary>
+        /// Lb ndi vendor mouse left button down.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void lbNDIVendor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the bt list ndi sources click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt list ndi sources click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btListNDISources_Click(object sender, RoutedEventArgs e)
         {
             cbIPURL.Items.Clear();
@@ -1096,6 +1445,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the bt list onvif sources click event.
+        /// </summary>
+        /// <summary>
+        /// Handles the bt list onvif sources click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btListONVIFSources_Click(object sender, RoutedEventArgs e)
         {
             cbIPURL.Items.Clear();
@@ -1112,6 +1469,14 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the video capture 1 on network source disconnect event.
+        /// </summary>
+        /// <summary>
+        /// Handles the video capture 1 on network source disconnect event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void VideoCapture1_OnNetworkSourceDisconnect(object sender, EventArgs e)
         {
             Dispatcher.Invoke((Action)(
@@ -1123,11 +1488,26 @@ namespace IP_Capture
                                    }));
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
+        /// <summary>
+        /// Window closing.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -1182,6 +1562,9 @@ namespace IP_Capture
         //     Dispose(disposing: false);
         // }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -1191,4 +1574,3 @@ namespace IP_Capture
     }
 }
 
-// ReSharper restore InconsistentNaming

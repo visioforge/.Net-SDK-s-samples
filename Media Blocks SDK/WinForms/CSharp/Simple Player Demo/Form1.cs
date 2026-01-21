@@ -1,4 +1,4 @@
-// ReSharper disable InconsistentNaming
+
 
 namespace MediaBlocks_Player_Demo
 {
@@ -28,16 +28,34 @@ namespace MediaBlocks_Player_Demo
     using System.Threading.Tasks;
     using VisioForge.Core;
 
+    /// <summary>
+    /// Represents the main form of the application.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The file source.
+        /// </summary>
         private UniversalSourceBlock _fileSource;
 
+        /// <summary>
+        /// Creates the media engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -46,6 +64,10 @@ namespace MediaBlocks_Player_Demo
             _pipeline.OnStop += Pipeline_OnStop;
         }
 
+        /// <summary>
+        /// Asynchronously destroys the media engine.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -57,11 +79,19 @@ namespace MediaBlocks_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectFile control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btSelectFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -70,12 +100,22 @@ namespace MediaBlocks_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the LinkClicked event of the linkLabel1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="LinkLabelLinkClickedEventArgs"/> instance containing the event data.</param>
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the Scroll event of the tbTimeline control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (Convert.ToInt32(_tmPosition.Tag) == 0)
@@ -84,11 +124,21 @@ namespace MediaBlocks_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Scroll event of the tbSpeed control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void tbSpeed_Scroll(object sender, EventArgs e)
         {
             await _pipeline.Rate_SetAsync(tbSpeed.Value / 10.0);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmError.Clear();
@@ -134,11 +184,21 @@ namespace MediaBlocks_Player_Demo
             _tmPosition.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btNextFrame control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btNextFrame_Click(object sender, EventArgs e)
         {
             _pipeline.NextFrame();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, EventArgs e)
         {
             _tmPosition.Stop();
@@ -155,21 +215,41 @@ namespace MediaBlocks_Player_Demo
             await DestroyEngineAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btPause control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await _pipeline.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btResume control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the Scroll event of the tbVolume1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbVolume1_Scroll(object sender, EventArgs e)
         {
             _audioRenderer.Volume = tbVolume1.Value / 100.0;
         }
 
+        /// <summary>
+        /// Handles the Load event of the Form1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -182,6 +262,11 @@ namespace MediaBlocks_Player_Demo
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
+        /// <summary>
+        /// Handles the Tick event of the tmPosition timer.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void tmPosition_Tick(object sender, EventArgs e)
         {
             _tmPosition.Tag = 1;
@@ -201,6 +286,11 @@ namespace MediaBlocks_Player_Demo
             _tmPosition.Tag = 0;
         }
 
+        /// <summary>
+        /// Handles the OnError event of the Pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -209,6 +299,11 @@ namespace MediaBlocks_Player_Demo
                                    }));
         }
 
+        /// <summary>
+        /// Handles the OnStop event of the Pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
@@ -218,6 +313,11 @@ namespace MediaBlocks_Player_Demo
                                    }));
         }
 
+        /// <summary>
+        /// Handles the FormClosing event of the Form1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             _tmPosition.Stop();
@@ -236,4 +336,4 @@ namespace MediaBlocks_Player_Demo
     }
 }
 
-// ReSharper restore InconsistentNaming
+

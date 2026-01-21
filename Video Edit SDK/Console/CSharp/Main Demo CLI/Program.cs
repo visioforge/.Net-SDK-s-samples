@@ -13,8 +13,16 @@ namespace VE_Main_Demo_CLI
     using CommandLine;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Represents the main program for the Video Edit CLI demo.
+    /// </summary>
     static class Program
     {
+        /// <summary>
+        /// Adds a video source to the video editing engine based on the specified option.
+        /// </summary>
+        /// <param name="option">The option array containing file path and segment information.</param>
+        /// <param name="core">The VideoEditCore instance.</param>
         private static void AddVideoSourceFromOption(string[] option, VideoEditCore core)
         {
             VideoSource src;
@@ -41,6 +49,11 @@ namespace VE_Main_Demo_CLI
             }
         }
 
+        /// <summary>
+        /// Adds an audio source to the video editing engine based on the specified option.
+        /// </summary>
+        /// <param name="option">The option array containing file path and segment information.</param>
+        /// <param name="core">The VideoEditCore instance.</param>
         private static void AddAudioSourceFromOption(string[] option, VideoEditCore core)
         {
             AudioSource src;
@@ -67,6 +80,12 @@ namespace VE_Main_Demo_CLI
             }
         }
 
+        /// <summary>
+        /// Adds sources to the video editing engine based on the provided option.
+        /// </summary>
+        /// <param name="option">The option array containing file path, type, and segment information.</param>
+        /// <param name="core">The VideoEditCore instance.</param>
+        /// <returns>True if sources were added successfully, false otherwise.</returns>
         private static bool AddSources(string[] option, VideoEditCore core)
         {
             if (option[1] == "x")
@@ -91,6 +110,10 @@ namespace VE_Main_Demo_CLI
             return true;
         }
 
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        /// <param name="args">The command-line arguments.</param>
         static void Main(string[] args)
         {
             //var str = "-i c:\\samples\\pics\\ -o output_file.mp4 -r 1920:1080 -d 2000 -f mp4";
@@ -100,12 +123,20 @@ namespace VE_Main_Demo_CLI
                 .WithNotParsed(HandleParseError);
         }
 
+        /// <summary>
+        /// Handles errors that occur during command-line argument parsing.
+        /// </summary>
+        /// <param name="errs">The collection of errors.</param>
         static void HandleParseError(IEnumerable<Error> errs)
         {
             Console.WriteLine("Wrong arguments. Press any key to exit...");
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Runs the video editing process with the specified options.
+        /// </summary>
+        /// <param name="options">The command-line options.</param>
         static void Run(CommandLineOptions options)
         {
             var core = new VideoEditCore();

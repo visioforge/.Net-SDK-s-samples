@@ -21,6 +21,9 @@ namespace NDI_Source
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -28,6 +31,9 @@ namespace NDI_Source
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -39,11 +45,21 @@ namespace NDI_Source
             }
         }
 
+        /// <summary>
+        /// Handles the tab page 1 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngineAsync();
@@ -58,6 +74,9 @@ namespace NDI_Source
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             if (IsHandleCreated)
@@ -77,6 +96,11 @@ namespace NDI_Source
             }
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -85,6 +109,11 @@ namespace NDI_Source
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -132,6 +161,11 @@ namespace NDI_Source
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -139,6 +173,10 @@ namespace NDI_Source
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
+        /// <param name="txt">The text.</param>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -147,11 +185,21 @@ namespace NDI_Source
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt list ndi sources click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btListNDISources_Click(object sender, EventArgs e)
         {
             cbIPURL.Items.Clear();
@@ -168,6 +216,11 @@ namespace NDI_Source
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();

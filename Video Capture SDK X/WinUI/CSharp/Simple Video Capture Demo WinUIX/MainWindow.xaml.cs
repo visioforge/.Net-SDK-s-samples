@@ -33,7 +33,9 @@ using VisioForge.Core.Types.X.AudioRenderers;
 
 namespace Simple_Video_Capture;
 /// <summary>
-/// An empty window that can be used on its own or navigated to within a Frame.
+/// Interaction logic for the WinUI Simple Video Capture demo's MainWindow.
+/// Demonstrates the core capabilities of the Video Capture SDK in a WinUI 3 Desktop application,
+/// including device enumeration, recording, and camera controls.
 /// </summary>
 public sealed partial class MainWindow : Window
 {
@@ -50,6 +52,12 @@ public sealed partial class MainWindow : Window
         this.InitializeComponent();
     }
 
+    /// <summary>
+    /// Handles the ValueChanged event of the audio volume slider.
+    /// Adjusts the output volume of the video capture engine.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RangeBaseValueChangedEventArgs"/> instance containing the event data.</param>
     private void tbAudioVolume_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         if (VideoCapture1 != null)
@@ -58,6 +66,12 @@ public sealed partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Handles the Click event of the Select Output button.
+    /// Opens a file save dialog to let the user choose where to save the recording.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btSelectOutput_Click(object sender, RoutedEventArgs e)
     {
         string filename = await SaveFileDialog();
@@ -67,6 +81,12 @@ public sealed partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Handles the Click event of the Stop button.
+    /// Stops the video capture and the recording timer.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btStop_Click(object sender, RoutedEventArgs e)
     {
         tmRecording.Stop();
@@ -74,16 +94,31 @@ public sealed partial class MainWindow : Window
         await VideoCapture1.StopAsync();
     }
 
+    /// <summary>
+    /// Handles the Click event of the Resume button.
+    /// Resumes the video capture if it was paused.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btResume_Click(object sender, RoutedEventArgs e)
     {
         await VideoCapture1.ResumeAsync();
     }
 
+    /// <summary>
+    /// Handles the Click event of the Pause button.
+    /// Pauses the video capture.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btPause_Click(object sender, RoutedEventArgs e)
     {
         await VideoCapture1.PauseAsync();
     }
 
+    /// <summary>
+    /// Initializes the video capture engine and subscribes to error events.
+    /// </summary>
     private void CreateEngine()
     {
         VideoCapture1 = new VideoCaptureCoreX(_videoView);
@@ -91,6 +126,9 @@ public sealed partial class MainWindow : Window
         VideoCapture1.OnError += VideoCapture1_OnError;
     }
 
+    /// <summary>
+    /// Diposes of the video capture engine and destroys the SDK instance.
+    /// </summary>
     private void DestroyEngine()
     {
         if (VideoCapture1 != null)
@@ -104,6 +142,10 @@ public sealed partial class MainWindow : Window
         VisioForgeX.DestroySDK();
     }
 
+    /// <summary>
+    /// Opens a file save picker dialog to allow the user to select a destination for the recording.
+    /// </summary>
+    /// <returns>The full path of the selected file, or an empty string if cancelled.</returns>
     private async Task<string> SaveFileDialog()
     {
         var picker = new FileSavePicker
@@ -126,16 +168,32 @@ public sealed partial class MainWindow : Window
         return string.Empty;
     }
 
+    /// <summary>
+    /// Appends a message to the on-screen log via the dispatcher.
+    /// </summary>
+    /// <param name="txt">The message text to log.</param>
     private void Log(string txt)
     {
         DispatcherQueue.TryEnqueue(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
     }
 
+    /// <summary>
+    /// Handles the OnError event of the video capture engine.
+    /// Logs any errors that occur during operation.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
     private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
     {
         Log(e.Message);
     }
 
+    /// <summary>
+    /// Handles the SelectionChanged event of the video input device combo box.
+    /// Updates the available video formats based on the selected device.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
     private async void cbVideoInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (cbVideoInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -162,6 +220,12 @@ public sealed partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Handles the SelectionChanged event of the audio input device combo box.
+    /// Updates the available audio formats based on the selected device.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
     private async void cbAudioInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -186,6 +250,12 @@ public sealed partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Handles the Click event of the Start button.
+    /// Configures the video capture engine with selected video/audio sources and settings, then starts the capture.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btStart_Click(object sender, RoutedEventArgs e)
     {
         mmLog.Text = string.Empty;
@@ -272,6 +342,12 @@ public sealed partial class MainWindow : Window
         tmRecording.Start();
     }
 
+    /// <summary>
+    /// Handles the SelectionChanged event of the video input format combo box.
+    /// Updates available frame rates for the selected video format.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
     private async void cbVideoInputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (string.IsNullOrEmpty(cbVideoInputFormat.SelectedValue?.ToString()) || string.IsNullOrEmpty(cbVideoInputDevice.SelectedValue.ToString()))
@@ -312,6 +388,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Updates the recording duration display on the UI thread.
+    /// </summary>
     private void UpdateRecordingTime()
     {
         var ts = VideoCapture1.Duration();
@@ -327,6 +406,10 @@ public sealed partial class MainWindow : Window
         });
     }
 
+    /// <summary>
+    /// Disposes of managed resources and cleans up the video capture engine.
+    /// </summary>
+    /// <param name="disposing">True if called from <see cref="Dispose()"/>; false if called from finalizer.</param>
     private void Dispose(bool disposing)
     {
         if (!disposedValue)
@@ -353,6 +436,9 @@ public sealed partial class MainWindow : Window
     //     Dispose(disposing: false);
     // }
 
+    /// <summary>
+    /// Releases all resources used by the <see cref="MainWindow"/>.
+    /// </summary>
     public void Dispose()
     {
         // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -360,6 +446,9 @@ public sealed partial class MainWindow : Window
         GC.SuppressFinalize(this);
     }
 
+    /// <summary>
+    /// Sets the application window icon.
+    /// </summary>
     private void SetIcon()
     {
         try
@@ -378,6 +467,12 @@ public sealed partial class MainWindow : Window
 
     private bool _isInitiated = false;
 
+    /// <summary>
+    /// Handles the Activated event of the Window.
+    /// Performs one-time initialization, such as initializing the SDK, creating the engine, setting the icon, and enumerating devices.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="args">The <see cref="WindowActivatedEventArgs"/> instance containing the event data.</param>
     private async void Window_Activated(object sender, WindowActivatedEventArgs args)
     {
         if (_isInitiated)
@@ -438,6 +533,12 @@ public sealed partial class MainWindow : Window
         edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
     }
 
+    /// <summary>
+    /// Handles the Closed event of the Window.
+    /// Ensures that the engine is destroyed and resources are cleaned up.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="args">The <see cref="WindowEventArgs"/> instance containing the event data.</param>
     private void Window_Closed(object sender, WindowEventArgs args)
     {
         DestroyEngine();

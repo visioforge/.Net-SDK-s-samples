@@ -2,11 +2,14 @@
 
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
+    /// <summary>
+    /// Initializes a new instance of the <see cref="App"/> class.
+    /// </summary>
+    public App()
+    {
+        InitializeComponent();
 
-		MainPage = new AppShell();
-	}
+        MainPage = new AppShell();
+    }
 }
 

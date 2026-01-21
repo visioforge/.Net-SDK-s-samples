@@ -20,32 +20,54 @@ namespace AlliedVision_Source_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The source.
+        /// </summary>
         private MediaBlock _source;
 
+        /// <summary>
+        /// The recording timer.
+        /// </summary>
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-
-            
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -57,6 +79,9 @@ namespace AlliedVision_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = _pipeline.Position_Get();
@@ -72,6 +97,9 @@ namespace AlliedVision_Source_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             var devices = await DeviceEnumerator.Shared.AlliedVisionSourcesAsync();
@@ -94,6 +122,9 @@ namespace AlliedVision_Source_Demo
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -101,6 +132,9 @@ namespace AlliedVision_Source_Demo
             await DestroyEngineAsync();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -128,6 +162,9 @@ namespace AlliedVision_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();

@@ -33,6 +33,9 @@ public class Application : Microsoft.UI.Xaml.NativeApplication
         ConfigureUniversalImageLoader();
     }
 
+        /// <summary>
+        /// Configure universal image loader.
+        /// </summary>
     private static void ConfigureUniversalImageLoader()
     {
         // Create global configuration and initialize ImageLoader with this config

@@ -19,6 +19,10 @@ using VisioForge.Core.VideoCaptureX;
 
 namespace SimpleCapture
 {
+    /// <summary>
+    /// Interaction logic for the MAUI Simple Capture demo's MainPage.
+    /// Demonstrates how to configure video and audio sources, manage permissions, and perform video capture/recording using the X-engine.
+    /// </summary>
     public partial class MainPage : ContentPage, INotifyPropertyChanged
     {
         private VideoCaptureCoreX _core;
@@ -39,6 +43,9 @@ namespace SimpleCapture
 
         private Color _defaultButtonColor;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainPage"/> class.
+        /// </summary>
         public MainPage()
         {
             InitializeComponent();
@@ -49,6 +56,12 @@ namespace SimpleCapture
             this.BindingContext = this;
         }
 
+        /// <summary>
+        /// Handles the Unloaded event of the MainPage.
+        /// Disposes of the video capture engine and destroys the SDK.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void MainPage_Unloaded(object? sender, EventArgs e)
         {
             // Dispose core object
@@ -60,6 +73,9 @@ namespace SimpleCapture
         }
 
 #if __IOS__ && !__MACCATALYST__
+        /// <summary>
+        /// Request photo permission.
+        /// </summary>
         private void RequestPhotoPermission()
         {
             Photos.PHPhotoLibrary.RequestAuthorization(status =>
@@ -72,6 +88,11 @@ namespace SimpleCapture
         }
 #endif
 
+        /// <summary>
+        /// Asynchronously requests camera access permissions from the user.
+        /// Displays an alert if permission is required but not yet granted.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task RequestCameraPermissionAsync()
         {
             var result = await Permissions.RequestAsync<Permissions.Camera>();
@@ -90,6 +111,11 @@ namespace SimpleCapture
             }
         }
 
+        /// <summary>
+        /// Asynchronously requests microphone access permissions from the user.
+        /// Displays an alert if permission is required but not yet granted.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task RequestMicPermissionAsync()
         {
             var result = await Permissions.RequestAsync<Permissions.Microphone>();
@@ -109,6 +135,9 @@ namespace SimpleCapture
         }
 
 #if __ANDROID__
+        /// <summary>
+        /// Request storage permission async.
+        /// </summary>
         private async Task RequestStoragePermissionAsync()
         {
             // For Android 13+ (API 33+), we need to request media permissions
@@ -149,6 +178,12 @@ namespace SimpleCapture
         }
 #endif
 
+        /// <summary>
+        /// Handles the Loaded event of the MainPage.
+        /// Requests necessary permissions and initializes the video capture engine, devices, and UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void MainPage_Loaded(object? sender, EventArgs e)
         {
             // Ask for permissions
@@ -213,6 +248,12 @@ namespace SimpleCapture
 #endif
         }
 
+        /// <summary>
+        /// Handles the Destroying event of the Window.
+        /// Properly stops and disposes of the video capture core.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Window_Destroying(object? sender, EventArgs e)
         {
             if (_core != null)
@@ -227,11 +268,21 @@ namespace SimpleCapture
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the OnError event of the video capture core.
+        /// Logs error messages to the debug output.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VisioForge.Core.Types.Events.ErrorsEventArgs"/> instance containing the error information.</param>
         private void Core_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Asynchronously stops the current capture or preview session.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task StopAllAsync()
         {
             if (_core == null)
@@ -245,6 +296,12 @@ namespace SimpleCapture
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the volume slider.
+        /// Updates the audio output volume.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ValueChangedEventArgs"/> instance containing the event data.</param>
         private void slVolume_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             if (_core != null)
@@ -254,6 +311,10 @@ namespace SimpleCapture
         }
 
 #if __IOS__ && !__MACCATALYST__
+        /// <summary>
+        /// Adds a recorded video file to the iOS Photos library.
+        /// </summary>
+        /// <param name="filePath">The path to the video file to add.</param>
         private void AddVideoToPhotosLibrary(string filePath)
         {
             var fileUrl = Foundation.NSUrl.FromFilename(filePath);
@@ -282,6 +343,11 @@ namespace SimpleCapture
         }
 #endif
 
+        /// <summary>
+        /// Asynchronously stops the video capture recording.
+        /// Saves the recorded video to the device's photo gallery on supported platforms.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task StopCaptureAsync()
         {
             System.Diagnostics.Debug.WriteLine("Stop capture");
@@ -298,6 +364,12 @@ namespace SimpleCapture
 #endif
         }
 
+        /// <summary>
+        /// Handles the Click event of the camera selection button.
+        /// Cycles through available camera devices and restarts the preview.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btCamera_Clicked(object? sender, System.EventArgs e)
         {
             if (_cameras == null || _cameras.Length < 2)
@@ -320,6 +392,12 @@ namespace SimpleCapture
 #endif
         }
 
+        /// <summary>
+        /// Handles the Click event of the microphone selection button.
+        /// Cycles through available audio input devices.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btMic_Clicked(object? sender, System.EventArgs e)
         {
             if (_mics == null || _mics.Length < 2)
@@ -337,6 +415,12 @@ namespace SimpleCapture
             btMic.Text = _mics[_micSelectedIndex].DisplayName;
         }
 
+        /// <summary>
+        /// Handles the Click event of the speakers selection button.
+        /// Cycles through available audio output devices.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btSpeakers_Clicked(object? sender, System.EventArgs e)
         {
             if (_speakers == null || _speakers.Length < 2)
@@ -354,6 +438,10 @@ namespace SimpleCapture
             btSpeakers.Text = _speakers[_speakerSelectedIndex].DisplayName;
         }
 
+        /// <summary>
+        /// Configures and starts the camera preview with the selected video and audio settings.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task StartPreview()
         {
             if (_core.State == PlaybackState.Play || _core.State == PlaybackState.Pause)
@@ -432,6 +520,10 @@ namespace SimpleCapture
             btStartPreview.Text = "STOP";
         }
 
+        /// <summary>
+        /// Generates a unique filename for the new video recording based on the current timestamp and platform-specific storage paths.
+        /// </summary>
+        /// <returns>The full path to the new video file.</returns>
         private string GenerateFilename()
         {
             DateTime now = DateTime.Now;
@@ -481,6 +573,12 @@ namespace SimpleCapture
             return filename;
         }
 
+        /// <summary>
+        /// Handles the Click event of the Start/Stop Preview button.
+        /// Toggles the camera preview state.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStartPreview_Clicked(object? sender, EventArgs e)
         {
             if (_core == null)
@@ -516,6 +614,12 @@ namespace SimpleCapture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the Start/Stop Capture button.
+        /// Starts recording using the configured settings or stops the active recording.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStartCapture_Clicked(object? sender, EventArgs e)
         {
             if (_core == null || _core.State != PlaybackState.Play)

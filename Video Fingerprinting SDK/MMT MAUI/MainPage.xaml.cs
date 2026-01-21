@@ -12,17 +12,54 @@ namespace MMT_MAUI;
 
 public partial class MainPage : ContentPage
 {
+    /// <summary>
+    /// The ignored areas.
+    /// </summary>
     private readonly List<Rect> _ignoredAreas = new List<Rect>();
+
+    /// <summary>
+    /// The database.
+    /// </summary>
     private VFPFingerPrintDB? _db;
+
+    /// <summary>
+    /// The results.
+    /// </summary>
     private readonly ObservableCollection<ResultsViewModel> results = new ObservableCollection<ResultsViewModel>();
+
+    /// <summary>
+    /// The broadcast folders.
+    /// </summary>
     private readonly ObservableCollection<string> broadcastFolders = new ObservableCollection<string>();
+
+    /// <summary>
+    /// The ad folders.
+    /// </summary>
     private readonly ObservableCollection<string> adFolders = new ObservableCollection<string>();
+
+    /// <summary>
+    /// The ignored areas list.
+    /// </summary>
     private readonly ObservableCollection<string> ignoredAreasList = new ObservableCollection<string>();
+
+    /// <summary>
+    /// The database items.
+    /// </summary>
     private readonly ObservableCollection<string> dbItems = new ObservableCollection<string>();
+
+    /// <summary>
+    /// The file saver.
+    /// </summary>
     private readonly IFileSaver? _fileSaver;
 
+    /// <summary>
+    /// Gets the results.
+    /// </summary>
     public ObservableCollection<ResultsViewModel> Results { get { return this.results; } }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MainPage"/> class.
+    /// </summary>
     public MainPage()
     {
         InitializeComponent();
@@ -49,12 +86,18 @@ public partial class MainPage : ContentPage
     }
 
 
+        /// <summary>
+        /// Main page unloaded.
+        /// </summary>
     private void MainPage_Unloaded(object? sender, EventArgs e)
     {
         // Destroy SDK
         VisioForgeX.DestroySDK();
     }
 
+        /// <summary>
+        /// Handles the bt add broadcast file click event.
+        /// </summary>
     private async void btAddBroadcastFile_Click(object? sender, EventArgs e)
     {
         try
@@ -139,6 +182,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+        /// <summary>
+        /// Handles the bt add ad file click event.
+        /// </summary>
     private async void btAddAdFile_Click(object? sender, EventArgs e)
     {
         try
@@ -223,23 +269,35 @@ public partial class MainPage : ContentPage
         }
     }
 
+        /// <summary>
+        /// Handles the bt clear ads click event.
+        /// </summary>
     private void btClearAds_Click(object? sender, EventArgs e)
     {
         adFolders.Clear();
         lbAdFolders.Children.Clear();
     }
 
+        /// <summary>
+        /// Handles the bt clear broadcast click event.
+        /// </summary>
     private void btClearBroadcast_Click(object? sender, EventArgs e)
     {
         broadcastFolders.Clear();
         lbBroadcastFolders.Children.Clear();
     }
 
+        /// <summary>
+        /// Error delegate.
+        /// </summary>
     private async void errorDelegate(string error)
     {
         await DisplayAlertAsync("Error", error, "OK");
     }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
     private async void btStart_Click(object? sender, EventArgs e)
     {
         try
@@ -415,6 +473,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+        /// <summary>
+        /// Handles the bt play click event.
+        /// </summary>
     private async void btPlay_Click(object? sender, EventArgs e)
     {
         if (lvResults.SelectedItem == null)
@@ -431,6 +492,9 @@ public partial class MainPage : ContentPage
         // Requires: UniversalSourceBlock, VideoRendererBlock, AudioRendererBlock
     }
 
+        /// <summary>
+        /// Handles the bt save results click event.
+        /// </summary>
     private async void btSaveResults_Click(object? sender, EventArgs e)
     {
         try
@@ -539,6 +603,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+        /// <summary>
+        /// Save results as xml.
+        /// </summary>
     private void SaveResultsAsXml(string filename)
     {
         using (var writer = new System.Xml.XmlTextWriter(filename, System.Text.Encoding.UTF8))
@@ -561,6 +628,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+        /// <summary>
+        /// Sl difference value changed.
+        /// </summary>
     private void slDifference_ValueChanged(object? sender, ValueChangedEventArgs e)
     {
         if (lbDifference != null)
@@ -569,6 +639,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+        /// <summary>
+        /// Handles the bt ignored area add click event.
+        /// </summary>
     private void btIgnoredAreaAdd_Click(object? sender, EventArgs e)
     {
         var rect = new Rect()
@@ -594,6 +667,9 @@ public partial class MainPage : ContentPage
         lbIgnoredAreas.Children.Add(label);
     }
 
+        /// <summary>
+        /// Handles the bt ignored areas remove item click event.
+        /// </summary>
     private void btIgnoredAreasRemoveItem_Click(object? sender, EventArgs e)
     {
         // Since we don't have selection anymore, remove the last item
@@ -608,6 +684,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+        /// <summary>
+        /// Handles the bt ignored areas remove all click event.
+        /// </summary>
     private void btIgnoredAreasRemoveAll_Click(object? sender, EventArgs e)
     {
         ignoredAreasList.Clear();
@@ -615,6 +694,9 @@ public partial class MainPage : ContentPage
         lbIgnoredAreas.Children.Clear();
     }
 
+        /// <summary>
+        /// Handles the bt db clear click event.
+        /// </summary>
     private void btDBClear_Click(object? sender, EventArgs e)
     {
         if (_db != null)
@@ -625,6 +707,9 @@ public partial class MainPage : ContentPage
         lbDB.Children.Clear();
     }
 
+        /// <summary>
+        /// Add db item.
+        /// </summary>
     private void AddDBItem(VFPFingerPrint fp)
     {
         var txt = $"{fp.OriginalFilename} [{fp.Width}x{fp.Height}, {fp.OriginalDuration.ToString("g")}]";
@@ -646,6 +731,9 @@ public partial class MainPage : ContentPage
         lbDB.Children.Add(label);
     }
 
+        /// <summary>
+        /// Load db.
+        /// </summary>
     private void LoadDB()
     {
         var dbFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "mmt.db");
@@ -666,6 +754,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+        /// <summary>
+        /// Save db.
+        /// </summary>
     private void SaveDB()
     {
         if (_db != null)
@@ -675,6 +766,9 @@ public partial class MainPage : ContentPage
         }
     }
 
+        /// <summary>
+        /// On disappearing.
+        /// </summary>
     protected override void OnDisappearing()
     {
         base.OnDisappearing();

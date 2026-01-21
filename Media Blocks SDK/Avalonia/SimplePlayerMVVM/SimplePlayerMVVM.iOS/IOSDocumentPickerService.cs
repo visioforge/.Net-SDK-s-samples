@@ -12,6 +12,9 @@ public class IOSDocumentPickerService : IDocumentPickerService
 {
     TaskCompletionSource<object?>? _tcs;
 
+        /// <summary>
+        /// Pick video async.
+        /// </summary>
     public Task<object?> PickVideoAsync()
     {
         _tcs = new TaskCompletionSource<object?>();
@@ -35,6 +38,9 @@ public class IOSDocumentPickerService : IDocumentPickerService
         return _tcs.Task;
     }
 
+        /// <summary>
+        /// On document picked.
+        /// </summary>
     private void OnDocumentPicked(object sender, UIDocumentPickedAtUrlsEventArgs e)
     {
         try
@@ -58,6 +64,9 @@ public class IOSDocumentPickerService : IDocumentPickerService
         }
     }
 
+        /// <summary>
+        /// Handles the on cancelled event.
+        /// </summary>
     private void OnCancelled(object sender, EventArgs e)
     {
         _tcs?.TrySetResult(null);

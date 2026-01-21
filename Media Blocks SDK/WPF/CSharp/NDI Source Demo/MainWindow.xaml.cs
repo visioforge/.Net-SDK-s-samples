@@ -21,18 +21,39 @@ namespace NDI_Source_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The NDI source.
+        /// </summary>
         private NDISourceBlock _ndiSource;
 
+        /// <summary>
+        /// The available NDI sources.
+        /// </summary>
         private NDISourceInfo[] _ndiSources;
 
+        /// <summary>
+        /// The available audio output devices.
+        /// </summary>
         private AudioOutputDeviceInfo[] _audioOutputDevices;
 
+        /// <summary>
+        /// The recording timer.
+        /// </summary>
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         public MainWindow()
@@ -40,17 +61,26 @@ namespace NDI_Source_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -62,6 +92,9 @@ namespace NDI_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private async void UpdateRecordingTime()
         {
             var ts = await _pipeline.Position_GetAsync();
@@ -77,6 +110,9 @@ namespace NDI_Source_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (cbNDISources.SelectedIndex == -1)
@@ -115,6 +151,9 @@ namespace NDI_Source_Demo
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -124,6 +163,9 @@ namespace NDI_Source_Demo
             await DestroyEngineAsync();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -143,6 +185,9 @@ namespace NDI_Source_Demo
             await LoadAudioOutputDevicesAsync();
         }
 
+        /// <summary>
+        /// Load audio output devices async.
+        /// </summary>
         private async Task LoadAudioOutputDevicesAsync()
         {
             try
@@ -167,6 +212,9 @@ namespace NDI_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt list ndi sources click event.
+        /// </summary>
         private async void btListNDISources_Click(object sender, RoutedEventArgs e)
         {
             _ndiSources = await DeviceEnumerator.Shared.NDISourcesAsync();
@@ -184,6 +232,9 @@ namespace NDI_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             tmRecording?.Stop();

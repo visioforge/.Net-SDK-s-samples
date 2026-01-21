@@ -16,31 +16,67 @@ using VisioForge.Core.Types.X.VideoEffects;
 
 namespace MediaBlocks_Video_Mixer_Demo
 {
+    /// <summary>
+    /// The D3D11 mixer engine.
+    /// </summary>
     internal class D3D11MixerEngine : IMixerEngine
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The first source.
+        /// </summary>
         private UniversalSourceBlock _source1;
 
+        /// <summary>
+        /// The second source.
+        /// </summary>
         private UniversalSourceBlock _source2;
 
+        /// <summary>
+        /// The video mixer.
+        /// </summary>
         private VideoMixerBlock _videoMixer;
 
+        /// <summary>
+        /// The first null renderer.
+        /// </summary>
         private NullRendererBlock _nullRenderer1;
 
+        /// <summary>
+        /// The second null renderer.
+        /// </summary>
         private NullRendererBlock _nullRenderer2;
 
+        /// <summary>
+        /// The D3D11 video compositor settings.
+        /// </summary>
         private D3D11VideoCompositorSettings _settings = new D3D11VideoCompositorSettings(0, 0, VideoFrameRate.Empty);
 
+        /// <summary>
+        /// Occurs when an error happens.
+        /// </summary>
         public event EventHandler<ErrorsEventArgs> OnError;
 
+        /// <summary>
+        /// Add stream.
+        /// </summary>
         public void AddStream(Rect rect, uint zorder)
         {
             _settings.Streams.Add(new D3D11VideoCompositorStream(rect, zorder));
         }
 
+        /// <summary>
+        /// Start async.
+        /// </summary>
         public async Task StartAsync(string filename1, string filename2, IVideoView videoView)
         {
             _pipeline = new MediaBlocksPipeline();
@@ -74,11 +110,17 @@ namespace MediaBlocks_Video_Mixer_Demo
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void _pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             OnError?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
         public async Task StopAsync()
         {
             if (_pipeline != null)

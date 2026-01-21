@@ -65,6 +65,9 @@ namespace Overlay_Manager_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -82,6 +85,9 @@ namespace Overlay_Manager_Demo
             _overlayManager = new OverlayManagerBlock();
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -90,6 +96,9 @@ namespace Overlay_Manager_Demo
             }));
         }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
         private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -98,6 +107,9 @@ namespace Overlay_Manager_Demo
             }));
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -117,6 +129,9 @@ namespace Overlay_Manager_Demo
             _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timerFlag = true;
@@ -139,6 +154,9 @@ namespace Overlay_Manager_Demo
             _timerFlag = false;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -150,6 +168,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
@@ -159,6 +180,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Tb timeline value changed.
+        /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!_timerFlag)
@@ -167,6 +191,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             edLog.Clear();
@@ -192,6 +219,9 @@ namespace Overlay_Manager_Demo
             _timer.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -216,6 +246,9 @@ namespace Overlay_Manager_Demo
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
@@ -274,6 +307,9 @@ namespace Overlay_Manager_Demo
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt add image click event.
+        /// </summary>
         private void btAddImage_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog()
@@ -295,6 +331,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add text click event.
+        /// </summary>
         private void btAddText_Click(object sender, RoutedEventArgs e)
         {
             var text = new OverlayManagerText("Hello world!", 100, 100);
@@ -304,6 +343,9 @@ namespace Overlay_Manager_Demo
             lbOverlays.Items.Add($"[Text] {text.Text}");
         }
 
+        /// <summary>
+        /// Handles the bt add scrolling text click event.
+        /// </summary>
         private void btAddScrollingText_Click(object sender, RoutedEventArgs e)
         {
             var optionsWindow = new ScrollingTextOptionsWindow();
@@ -355,6 +397,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add line click event.
+        /// </summary>
         private void btAddLine_Click(object sender, RoutedEventArgs e)
         {
             var line = new OverlayManagerLine(new SkiaSharp.SKPoint(100, 100), new SkiaSharp.SKPoint(200, 200));
@@ -363,6 +408,9 @@ namespace Overlay_Manager_Demo
             lbOverlays.Items.Add($"[Line] {line.Start.X}x{line.Start.Y} - {line.End.X}x{line.End.Y}");
         }
 
+        /// <summary>
+        /// Handles the bt add rectangle click event.
+        /// </summary>
         private void btAddRectangle_Click(object sender, RoutedEventArgs e)
         {
             var rect = new OverlayManagerRectangle(new SkiaSharp.SKRect(100, 100, 200, 200));
@@ -371,6 +419,9 @@ namespace Overlay_Manager_Demo
             lbOverlays.Items.Add($"[Rectangle] {rect.Rectangle.Left}x{rect.Rectangle.Top} - {rect.Rectangle.Right}x{rect.Rectangle.Bottom}");
         }
 
+        /// <summary>
+        /// Handles the bt add circle click event.
+        /// </summary>
         private void btAddCircle_Click(object sender, RoutedEventArgs e)
         {
             var circle = new OverlayManagerCircle(new SkiaSharp.SKPoint(150, 150), 50);
@@ -379,6 +430,9 @@ namespace Overlay_Manager_Demo
             lbOverlays.Items.Add($"[Circle] {circle.Center.X}x{circle.Center.Y} - {circle.Radius}");
         }
 
+        /// <summary>
+        /// Handles the bt remove click event.
+        /// </summary>
         private void btRemove_Click(object sender, RoutedEventArgs e)
         {
             if (lbOverlays.SelectedIndex != -1)
@@ -487,6 +541,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add frame counter click event.
+        /// </summary>
         private void btAddFrameCounter_Click(object sender, RoutedEventArgs e)
         {
             // Reset frame counter
@@ -537,6 +594,9 @@ namespace Overlay_Manager_Demo
             lbOverlays.Items.Add("[Callback] Frame Counter");
         }
 
+        /// <summary>
+        /// Handles the bt add time overlay click event.
+        /// </summary>
         private void btAddTimeOverlay_Click(object sender, RoutedEventArgs e)
         {
             // Create callback overlay for time display
@@ -592,6 +652,9 @@ namespace Overlay_Manager_Demo
             lbOverlays.Items.Add("[Callback] Time Display");
         }
 
+        /// <summary>
+        /// Handles the bt add video click event.
+        /// </summary>
         private async void btAddVideo_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog()
@@ -713,6 +776,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add picture in picture click event.
+        /// </summary>
         private void btAddPictureInPicture_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog()
@@ -773,6 +839,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add stream overlay click event.
+        /// </summary>
         private void btAddStreamOverlay_Click(object sender, RoutedEventArgs e)
         {
             // Create a simple input dialog for stream URL
@@ -821,6 +890,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add decklink click event.
+        /// </summary>
         private async void btAddDecklink_Click(object sender, RoutedEventArgs e)
         {
             // Show custom Decklink options dialog
@@ -914,6 +986,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add click event.
+        /// </summary>
         private async void btAddNDI_Click(object sender, RoutedEventArgs e)
         {
             // Show custom NDI options dialog
@@ -987,6 +1062,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add sync group click event.
+        /// </summary>
         private void btAddSyncGroup_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1128,6 +1206,9 @@ namespace Overlay_Manager_Demo
 
         #region Zoom/Pan Controls
 
+        /// <summary>
+        /// Sl zoom value changed.
+        /// </summary>
         private void slZoom_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             // Update labels
@@ -1146,6 +1227,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb zoom enabled checked changed event.
+        /// </summary>
         private void cbZoomEnabled_CheckedChanged(object sender, RoutedEventArgs e)
         {
             if (cbZoomEnabled.IsChecked == true)
@@ -1178,6 +1262,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt zoom reset click event.
+        /// </summary>
         private void btZoomReset_Click(object sender, RoutedEventArgs e)
         {
             slZoomX.Value = 1.0;
@@ -1194,6 +1281,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt pan add click event.
+        /// </summary>
         private void btPanAdd_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1237,6 +1327,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt pan preset 1 click event.
+        /// </summary>
         private void btPanPreset1_Click(object sender, RoutedEventArgs e)
         {
             // Preset: Zoom In (Full frame to center crop)
@@ -1251,6 +1344,9 @@ namespace Overlay_Manager_Demo
             edPanDuration.Text = "5";
         }
 
+        /// <summary>
+        /// Handles the bt pan preset 2 click event.
+        /// </summary>
         private void btPanPreset2_Click(object sender, RoutedEventArgs e)
         {
             // Preset: Zoom Out (Center crop to full frame)
@@ -1269,6 +1365,9 @@ namespace Overlay_Manager_Demo
 
         #region Fade Effects
 
+        /// <summary>
+        /// Get fade easing.
+        /// </summary>
         private OverlayManagerPanEasing GetFadeEasing()
         {
             return cbFadeEasing.SelectedIndex switch
@@ -1280,6 +1379,9 @@ namespace Overlay_Manager_Demo
             };
         }
 
+        /// <summary>
+        /// Handles the bt fade in click event.
+        /// </summary>
         private async void btFadeIn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -1310,6 +1412,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt fade out click event.
+        /// </summary>
         private async void btFadeOut_Click(object sender, RoutedEventArgs e)
         {
             try

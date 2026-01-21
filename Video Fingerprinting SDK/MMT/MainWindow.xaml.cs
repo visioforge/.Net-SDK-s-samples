@@ -19,15 +19,27 @@ namespace VisioForge_MMT
     /// </summary>
     public partial class MainWindow
     {
+        /// <summary>
+        /// The ignored areas.
+        /// </summary>
         private readonly List<Rect> _ignoredAreas = new List<Rect>();
 
+        /// <summary>
+        /// The database.
+        /// </summary>
         private VFPFingerPrintDB _db;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt add broadcast folder click event.
+        /// </summary>
         private void btAddBroadcastFolder_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new System.Windows.Forms.FolderBrowserDialog
@@ -44,6 +56,9 @@ namespace VisioForge_MMT
             }
         }
 
+        /// <summary>
+        /// Handles the bt add ad folder click event.
+        /// </summary>
         private void btAddAdFolder_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new System.Windows.Forms.FolderBrowserDialog
@@ -60,21 +75,33 @@ namespace VisioForge_MMT
             }
         }
 
+        /// <summary>
+        /// Handles the bt clear ads click event.
+        /// </summary>
         private void btClearAds_Click(object sender, RoutedEventArgs e)
         {
             lbAdFolders.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the bt clear broadcast click event.
+        /// </summary>
         private void btClearBroadcast_Click(object sender, RoutedEventArgs e)
         {
             lbBroadcastFolders.Items.Clear();
         }
 
+        /// <summary>
+        /// Error delegate.
+        /// </summary>
         private void errorDelegate(string error)
         {
             MessageBox.Show(error);
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (cbDebug.IsChecked == true)
@@ -237,12 +264,21 @@ namespace VisioForge_MMT
 
         #region List view
 
+        /// <summary>
+        /// The results.
+        /// </summary>
         private readonly ObservableCollection<ResultsViewModel> results = new ObservableCollection<ResultsViewModel>();
 
+        /// <summary>
+        /// Gets the results.
+        /// </summary>
         public ObservableCollection<ResultsViewModel> Results { get { return this.results; } }
 
         #endregion
 
+        /// <summary>
+        /// Handles the bt play click event.
+        /// </summary>
         private void btPlay_Click(object sender, RoutedEventArgs e)
         {
             if (lvResults.SelectedItem == null)
@@ -266,6 +302,9 @@ namespace VisioForge_MMT
             }
         }
 
+        /// <summary>
+        /// Handles the bt save results click event.
+        /// </summary>
         private void btSaveResults_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new System.Windows.Forms.SaveFileDialog
@@ -308,6 +347,9 @@ namespace VisioForge_MMT
             }
         }
 
+        /// <summary>
+        /// Save settings.
+        /// </summary>
         private void SaveSettings()
         {
             string filename = Settings.SettingsFolder + "settings.xml";
@@ -325,6 +367,9 @@ namespace VisioForge_MMT
             Settings.Save(typeof(Settings), filename);
         }
 
+        /// <summary>
+        /// Load settings.
+        /// </summary>
         private void LoadSettings()
         {
             string filename = Settings.SettingsFolder + "settings.xml";
@@ -335,6 +380,9 @@ namespace VisioForge_MMT
             }
         }
 
+        /// <summary>
+        /// Add db item.
+        /// </summary>
         private void AddDBItem(VFPFingerPrint fp)
         {
             var txt = $"{fp.OriginalFilename} [{fp.Width}x{fp.Height}, {fp.OriginalDuration.ToString("g")}]";
@@ -346,6 +394,9 @@ namespace VisioForge_MMT
             lbDB.Items.Add(txt);
         }
 
+        /// <summary>
+        /// Load db.
+        /// </summary>
         private void LoadDB()
         {
             var dbFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "mmt.db");
@@ -365,12 +416,18 @@ namespace VisioForge_MMT
             }
         }
 
+        /// <summary>
+        /// Save db.
+        /// </summary>
         private void SaveDB()
         {
             var dbFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "mmt.db");
             _db.Save(dbFile);
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadSettings();
@@ -378,11 +435,17 @@ namespace VisioForge_MMT
             LoadDB();
         }
 
+        /// <summary>
+        /// Window unloaded.
+        /// </summary>
         private void Window_Unloaded(object sender, RoutedEventArgs e)
         {
             SaveSettings();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SaveSettings();
@@ -390,6 +453,9 @@ namespace VisioForge_MMT
             SaveDB();
         }
 
+        /// <summary>
+        /// Sl difference value changed.
+        /// </summary>
         private void slDifference_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbDifference != null)
@@ -398,6 +464,9 @@ namespace VisioForge_MMT
             }
         }
 
+        /// <summary>
+        /// Handles the bt add broadcast file click event.
+        /// </summary>
         private void btAddBroadcastFile_Click(Object sender, RoutedEventArgs e)
         {
             var dlg = new System.Windows.Forms.OpenFileDialog
@@ -419,6 +488,9 @@ namespace VisioForge_MMT
             }
         }
 
+        /// <summary>
+        /// Handles the bt add ad file click event.
+        /// </summary>
         private void btAddAdFile_Click(Object sender, RoutedEventArgs e)
         {
             var dlg = new System.Windows.Forms.OpenFileDialog
@@ -440,6 +512,9 @@ namespace VisioForge_MMT
             }
         }
 
+        /// <summary>
+        /// Handles the bt ignored area add click event.
+        /// </summary>
         private void btIgnoredAreaAdd_Click(object sender, RoutedEventArgs e)
         {
             var rect = new Rect()
@@ -454,6 +529,9 @@ namespace VisioForge_MMT
             lbIgnoredAreas.Items.Add($"Left: {rect.Left}, Top: {rect.Top}, Right: {rect.Right}, Bottom: {rect.Bottom}");
         }
 
+        /// <summary>
+        /// Handles the bt ignored areas remove item click event.
+        /// </summary>
         private void btIgnoredAreasRemoveItem_Click(object sender, RoutedEventArgs e)
         {
             int index = lbIgnoredAreas.SelectedIndex;
@@ -464,12 +542,18 @@ namespace VisioForge_MMT
             }
         }
 
+        /// <summary>
+        /// Handles the bt ignored areas remove all click event.
+        /// </summary>
         private void btIgnoredAreasRemoveAll_Click(object sender, RoutedEventArgs e)
         {
             lbIgnoredAreas.Items.Clear();
             _ignoredAreas.Clear();
         }
 
+        /// <summary>
+        /// Handles the bt db clear click event.
+        /// </summary>
         private void btDBClear_Click(object sender, RoutedEventArgs e)
         {
             _db.Items.Clear();

@@ -12,6 +12,9 @@
     public static class Settings
     {
         #region Serialize
+        /// <summary>
+        /// Save.
+        /// </summary>
         public static bool Save(Type staticClass, string filename)
         {
             try
@@ -46,6 +49,9 @@
             }
         }
 
+        /// <summary>
+        /// Load.
+        /// </summary>
         public static bool Load(Type staticClass, string filename)
         {
             try
@@ -84,6 +90,9 @@
             }
         }
 
+        /// <summary>
+        /// Convert json element to type.
+        /// </summary>
         private static object ConvertJsonElementToType(JsonElement element, Type targetType)
         {
             if (targetType == typeof(string))

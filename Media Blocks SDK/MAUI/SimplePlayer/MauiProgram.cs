@@ -3,8 +3,14 @@ using VisioForge.Core.UI.MAUI;
 
 namespace Simple_Player_MB_MAUI
 {
+    /// <summary>
+    /// The Maui program class.
+    /// </summary>
     public static class MauiProgram
     {
+        /// <summary>
+        /// Create maui app.
+        /// </summary>
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();

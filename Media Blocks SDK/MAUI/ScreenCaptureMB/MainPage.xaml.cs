@@ -40,6 +40,9 @@ namespace ScreenCaptureMB
             _tmPosition.Elapsed += tmPosition_Elapsed;
         }
 
+        /// <summary>
+        /// Generate filename.
+        /// </summary>
         private string GenerateFilename()
         {
             DateTime now = DateTime.Now;
@@ -89,6 +92,9 @@ namespace ScreenCaptureMB
             return filename;
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             if (_pipeline != null)
@@ -123,6 +129,9 @@ namespace ScreenCaptureMB
         }
 
 #if __IOS__ && !__MACCATALYST__
+        /// <summary>
+        /// Request photo permission.
+        /// </summary>
         private void RequestPhotoPermission()
         {
             Photos.PHPhotoLibrary.RequestAuthorization(status =>
@@ -136,6 +145,9 @@ namespace ScreenCaptureMB
 #endif
 
 #if __IOS__ && !__MACCATALYST__
+        /// <summary>
+        /// Add video to photos library.
+        /// </summary>
         private void AddVideoToPhotosLibrary(string filePath)
         {
             var fileUrl = Foundation.NSUrl.FromFilename(filePath);
@@ -164,6 +176,9 @@ namespace ScreenCaptureMB
         }
 #endif
 
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
         private void MainPage_Loaded(object? sender, EventArgs e)
         {
             Window.Destroying += Window_Destroying;
@@ -177,6 +192,9 @@ namespace ScreenCaptureMB
 #endif
         }
 
+        /// <summary>
+        /// Window destroying.
+        /// </summary>
         private async void Window_Destroying(object? sender, EventArgs e)
         {
             if (_pipeline != null)
@@ -191,6 +209,9 @@ namespace ScreenCaptureMB
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// On stop.
+        /// </summary>
         private async void OnStop(object? sender, EventArgs e)
         {
             if (_pipeline != null)
@@ -200,11 +221,17 @@ namespace ScreenCaptureMB
             }
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void _player_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Stop all async.
+        /// </summary>
         private async Task StopAllAsync()
         {
             if (_pipeline == null)
@@ -225,6 +252,9 @@ namespace ScreenCaptureMB
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Tm position elapsed.
+        /// </summary>
         private async void tmPosition_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             if (_pipeline == null)
@@ -250,6 +280,9 @@ namespace ScreenCaptureMB
             }
         }
 
+        /// <summary>
+        /// Handles the bt start clicked event.
+        /// </summary>
         private async void btStart_Clicked(object? sender, EventArgs e)
         {
             await CreateEngineAsync();
@@ -259,6 +292,9 @@ namespace ScreenCaptureMB
             _tmPosition.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop clicked event.
+        /// </summary>
         private async void btStop_Clicked(object? sender, EventArgs e)
         {
 #if __IOS__ && !__MACCATALYST__

@@ -13,15 +13,30 @@ namespace File_Encryptor
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The video editing engine instance.
+        /// </summary>
         VideoEditCore _videoEdit = new VideoEditCore();
 
+        /// <summary>
+        /// Indicates whether fast encryption mode is used (stream copy instead of re-encoding).
+        /// </summary>
         bool _fastEncrypt = false;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the Load event of the Form1 control.
+        /// Initializes the SDK version display and sets default file paths.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void Form1_Load(object sender, System.EventArgs e)
         {
             Text += $" (SDK v{VideoEditCore.GetVersion()})";
@@ -33,6 +48,12 @@ namespace File_Encryptor
             _videoEdit.OnStop += _videoEdit_OnStop;
         }
 
+        /// <summary>
+        /// Handles the OnStop event of the VideoEdit engine.
+        /// Displays a completion message.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VisioForge.Core.Types.Events.StopEventArgs"/> instance containing the event data.</param>
         private void _videoEdit_OnStop(object sender, VisioForge.Core.Types.Events.StopEventArgs e)
         {
             Invoke((Action)(() =>
@@ -41,6 +62,12 @@ namespace File_Encryptor
             }));
         }
 
+        /// <summary>
+        /// Handles the OnError event of the VideoEdit engine.
+        /// Logs the error message.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VisioForge.Core.Types.Events.ErrorsEventArgs"/> instance containing the event data.</param>
         private void _videoEdit_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -49,6 +76,12 @@ namespace File_Encryptor
             }));
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Checks media info to decide between fast encryption or re-encoding, and starts the process.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btStart_Click(object sender, EventArgs e)
         {
             if (!File.Exists(edInputFile.Text))
@@ -121,6 +154,12 @@ namespace File_Encryptor
             tmProgress.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the encryption process.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmProgress.Stop();
@@ -135,6 +174,12 @@ namespace File_Encryptor
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btInputFile control.
+        /// Opens a file dialog to select the input media file.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btInputFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -143,6 +188,12 @@ namespace File_Encryptor
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btOutputFile control.
+        /// Opens a file dialog to select the output encrypted file path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btOutputFile_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -151,6 +202,12 @@ namespace File_Encryptor
             }
         }
 
+        /// <summary>
+        /// Handles the Tick event of the tmProgress timer.
+        /// Updates the progress bar.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tmProgress_Tick(object sender, EventArgs e)
         {
             if (_fastEncrypt)
@@ -163,6 +220,12 @@ namespace File_Encryptor
             }
         }
 
+        /// <summary>
+        /// Handles the LinkClicked event of the linkLabelDecoders control.
+        /// Opens the download link for LAV decoders.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="LinkLabelLinkClickedEventArgs"/> instance containing the event data.</param>
         private void linkLabelDecoders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64);

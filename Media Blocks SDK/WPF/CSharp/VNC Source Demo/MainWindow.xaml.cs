@@ -36,17 +36,26 @@ namespace VNC_Source_Demo
             
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -58,6 +67,9 @@ namespace VNC_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {            
             //var ts = _pipeline.Duration();
@@ -73,6 +85,9 @@ namespace VNC_Source_Demo
             //}));
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             CreateEngine();
@@ -108,6 +123,9 @@ namespace VNC_Source_Demo
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();            
@@ -115,6 +133,9 @@ namespace VNC_Source_Demo
             await DestroyEngineAsync();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -131,6 +152,9 @@ namespace VNC_Source_Demo
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();

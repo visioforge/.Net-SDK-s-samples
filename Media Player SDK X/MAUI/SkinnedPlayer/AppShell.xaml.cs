@@ -2,9 +2,12 @@
 
 public partial class AppShell : Shell
 {
-	public AppShell()
-	{
-		InitializeComponent();
-	}
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AppShell"/> class.
+    /// </summary>
+    public AppShell()
+    {
+        InitializeComponent();
+    }
 }
 

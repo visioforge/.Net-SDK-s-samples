@@ -17,12 +17,20 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace MediaBlocks_Barcode_Detection_Demo_WPF
 {
+    /// <summary>
+    /// Represents the barcode information.
+    /// </summary>
     public class BarcodeInfo : INotifyPropertyChanged
     {
         private string _type;
+
         private string _value;
+
         private string _timestamp;
 
+        /// <summary>
+        /// Gets or sets the barcode type.
+        /// </summary>
         public string Type
         {
             get => _type;
@@ -33,6 +41,9 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Gets or sets the barcode value.
+        /// </summary>
         public string Value
         {
             get => _value;
@@ -43,6 +54,9 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Gets or sets the timestamp.
+        /// </summary>
         public string Timestamp
         {
             get => _timestamp;
@@ -53,8 +67,14 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// On property changed.
+        /// </summary>
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -66,20 +86,53 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
+
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
+
+        /// <summary>
+        /// The video source.
+        /// </summary>
         private SystemVideoSourceBlock _videoSource;
+
+        /// <summary>
+        /// The barcode detector.
+        /// </summary>
         private BarcodeDetectorBlock _barcodeDetector;
+
+        /// <summary>
+        /// The timer.
+        /// </summary>
         private System.Timers.Timer _timer;
+
+        /// <summary>
+        /// The barcodes collection.
+        /// </summary>
         private ObservableCollection<BarcodeInfo> _barcodes = new ObservableCollection<BarcodeInfo>();
+
+        /// <summary>
+        /// The detection count.
+        /// </summary>
         private int _detectionCount = 0;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             lbBarcodes.ItemsSource = _barcodes;
         }
 
+        /// <summary>
+        /// Device enumerator on video source added.
+        /// </summary>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -93,6 +146,9 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -101,6 +157,9 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             }));
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -123,6 +182,9 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
@@ -177,6 +239,9 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             _timer.Start();
         }
 
+        /// <summary>
+        /// Barcode detector on barcode detected.
+        /// </summary>
         private void BarcodeDetector_OnBarcodeDetected(object sender, BarcodeDetectorEventArgs e)
         {
             Dispatcher.Invoke(() =>
@@ -203,6 +268,9 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -219,16 +287,25 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             VideoView1.CallRefresh();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             var position = await _pipeline.Position_GetAsync();
@@ -239,6 +316,9 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
@@ -261,6 +341,9 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Cb video input selection changed.
+        /// </summary>
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -288,6 +371,9 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Cb video format selection changed.
+        /// </summary>
         private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFrameRate.Items.Clear();
@@ -321,6 +407,9 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the bt clear barcodes click event.
+        /// </summary>
         private void btClearBarcodes_Click(object sender, RoutedEventArgs e)
         {
             _barcodes.Clear();

@@ -15,20 +15,42 @@
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.UI;
 
+    /// <summary>
+    /// Karaoke demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCoreX MediaPlayer1;
 
+        /// <summary>
+        /// The current CDG source settings.
+        /// </summary>
         private CDGSourceSettings _currentSettings;
 
+        /// <summary>
+        /// The secondary video window.
+        /// </summary>
         private SecondaryVideoWindow _secondaryWindow;
+
+        /// <summary>
+        /// The secondary video renderer.
+        /// </summary>
         private VideoRendererBlock _secondaryRenderer;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -69,6 +91,9 @@
             lbPitch.Text = "Pitch: 0";
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, EventArgs e)
         {
             if (rbZipMode.Checked)
@@ -86,6 +111,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the tb timeline scroll event.
+        /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (Convert.ToInt32(timer1.Tag) == 0)
@@ -94,6 +122,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmError.Clear();
@@ -139,16 +170,25 @@
             timer1.Enabled = true;
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await MediaPlayer1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await MediaPlayer1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await MediaPlayer1.StopAsync();
@@ -166,11 +206,17 @@
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the tb volume 1 scroll event.
+        /// </summary>
         private void tbVolume1_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_OutputDevice_Volume = tbVolume1.Value;
         }
 
+        /// <summary>
+        /// Handles the tb pitch scroll event.
+        /// </summary>
         private void tbPitch_Scroll(object sender, EventArgs e)
         {
             var semitones = tbPitch.Value;
@@ -183,6 +229,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the rb input mode checked changed event.
+        /// </summary>
         private void rbInputMode_CheckedChanged(object sender, EventArgs e)
         {
             if (rbZipMode.Checked)
@@ -206,6 +255,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt select audio file click event.
+        /// </summary>
         private void btSelectAudioFile_Click(object sender, EventArgs e)
         {
             openFileDialog2.Filter = "Audio files|*.mp3;*.wav;*.ogg;*.flac;*.m4a;*.aac|MP3 files|*.mp3|WAV files|*.wav|All files|*.*";
@@ -215,6 +267,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the timer 1 tick event.
+        /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Tag = 1;
@@ -234,12 +289,18 @@
             timer1.Tag = 0;
         }
 
+        /// <summary>
+        /// Link label 1 link clicked.
+        /// </summary>
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Media player 1 on error.
+        /// </summary>
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -248,6 +309,9 @@
                                    }));
         }
 
+        /// <summary>
+        /// Media player 1 on stop.
+        /// </summary>
         private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
@@ -256,6 +320,9 @@
                                    }));
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             timer1.Enabled = false;

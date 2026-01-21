@@ -19,6 +19,9 @@ namespace Overlay_Manager_Demo
             Title = title;
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Prevent closing - just hide the window

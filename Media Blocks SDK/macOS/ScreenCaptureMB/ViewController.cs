@@ -55,6 +55,9 @@ public partial class ViewController : NSViewController
         // Update the view, if already loaded.
     }
 
+        /// <summary>
+        /// View did load.
+        /// </summary>
     public override void ViewDidLoad()
     {
         base.ViewDidLoad();
@@ -72,12 +75,18 @@ public partial class ViewController : NSViewController
         VisioForgeX.InitSDK();
     }
 
+        /// <summary>
+        /// Generate filename.
+        /// </summary>
     private string GenerateFilename()
     {
         return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
             $"capture_{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.mp4");
     }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
     private async Task CreateEngineAsync()
     {
         if (_pipeline != null)
@@ -117,6 +126,9 @@ public partial class ViewController : NSViewController
         _pipeline.Connect(_h264Encoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video));
     }
 
+        /// <summary>
+        /// Handles the on stop event.
+        /// </summary>
     private async void OnStop(object sender, EventArgs e)
     {
         if (_pipeline != null)
@@ -126,11 +138,17 @@ public partial class ViewController : NSViewController
         }
     }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
     private void _pipeline_OnError(object sender, ErrorsEventArgs e)
     {
         Debug.WriteLine(e.Message);
     }
 
+        /// <summary>
+        /// Stop all async.
+        /// </summary>
     private async Task StopAllAsync()
     {
         if (_pipeline == null) return;
@@ -145,6 +163,9 @@ public partial class ViewController : NSViewController
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs" /> instance containing the event data.</param>
+        /// <summary>
+        /// Tm position elapsed.
+        /// </summary>
     private async void tmPosition_Elapsed(object sender, ElapsedEventArgs e)
     {
         if (_pipeline == null) return;
@@ -186,6 +207,9 @@ public partial class ViewController : NSViewController
 // Custom Window delegate to close the SDK
 public class CustomWindowDelegate : NSWindowDelegate
 {
+        /// <summary>
+        /// Window should close.
+        /// </summary>
     public override bool WindowShouldClose(NSObject sender)
     {
         VisioForgeX.DestroySDK();

@@ -39,6 +39,9 @@ namespace RTSP_Restreamer
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.IsEnabled = false;
@@ -55,11 +58,17 @@ namespace RTSP_Restreamer
             this.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             // Create pipeline
@@ -130,6 +139,9 @@ namespace RTSP_Restreamer
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.StopAsync();

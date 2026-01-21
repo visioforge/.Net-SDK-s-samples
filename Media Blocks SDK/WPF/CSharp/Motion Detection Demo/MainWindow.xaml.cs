@@ -37,6 +37,9 @@ namespace MediaBlocks_Motion_Detection_Demo_WPF
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Device enumerator on video source added.
+        /// </summary>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -50,6 +53,9 @@ namespace MediaBlocks_Motion_Detection_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -58,6 +64,9 @@ namespace MediaBlocks_Motion_Detection_Demo_WPF
             }));
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -86,6 +95,9 @@ namespace MediaBlocks_Motion_Detection_Demo_WPF
             sliderThreshold.ValueChanged += (s, args) => lblThreshold.Content = sliderThreshold.Value.ToString("F2");
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
@@ -155,6 +167,9 @@ namespace MediaBlocks_Motion_Detection_Demo_WPF
             _timer.Start();
         }
 
+        /// <summary>
+        /// Motion detector on motion detected.
+        /// </summary>
         private void MotionDetector_OnMotionDetected(object sender, CVMotionCellsEventArgs e)
         {
             _motionEventCount++;
@@ -170,6 +185,9 @@ namespace MediaBlocks_Motion_Detection_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -186,6 +204,9 @@ namespace MediaBlocks_Motion_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             Dispatcher.Invoke(async () =>
@@ -195,6 +216,9 @@ namespace MediaBlocks_Motion_Detection_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
@@ -212,6 +236,9 @@ namespace MediaBlocks_Motion_Detection_Demo_WPF
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Cb video input selection changed.
+        /// </summary>
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -239,6 +266,9 @@ namespace MediaBlocks_Motion_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Cb video format selection changed.
+        /// </summary>
         private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFrameRate.Items.Clear();

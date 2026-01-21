@@ -23,6 +23,9 @@ namespace DecklinkFillKeyDemo
             InitializeClock();
         }
 
+        /// <summary>
+        /// Initialize animations.
+        /// </summary>
         private void InitializeAnimations()
         {
             _slideInStoryboard = (Storyboard)Resources["SlideIn"];
@@ -33,6 +36,9 @@ namespace DecklinkFillKeyDemo
             LowerThirdContainer.RenderTransform = new System.Windows.Media.TranslateTransform();
         }
 
+        /// <summary>
+        /// Initialize clock.
+        /// </summary>
         private void InitializeClock()
         {
             _clockTimer = new DispatcherTimer();
@@ -41,6 +47,9 @@ namespace DecklinkFillKeyDemo
             _clockTimer.Start();
         }
 
+        /// <summary>
+        /// Update clock.
+        /// </summary>
         private void UpdateClock()
         {
             ClockText.Text = DateTime.Now.ToString("HH:mm:ss");

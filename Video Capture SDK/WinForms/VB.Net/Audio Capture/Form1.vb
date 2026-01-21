@@ -107,6 +107,9 @@ Public Class Form1
         edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp3")
     End Sub
 
+        ''' <summary>
+        ''' Cb audio input device selected index changed.
+        ''' </summary>
     Private Sub cbAudioInputDevice_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudioInputDevice.SelectedIndexChanged
         If cbAudioInputDevice.SelectedIndex <> -1 Then
             cbAudioInputFormat.Items.Clear()
@@ -150,84 +153,144 @@ Public Class Form1
             btAudioInputDeviceSettings.Enabled = deviceItem.DialogDefault
         End If
     End Sub
+        ''' <summary>
+        ''' Bt audio input device settings click.
+        ''' </summary>
     Private Sub btAudioInputDeviceSettings_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btAudioInputDeviceSettings.Click
         VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text)
     End Sub
 
+        ''' <summary>
+        ''' Cb use best audio input format checked changed.
+        ''' </summary>
     Private Sub cbUseBestAudioInputFormat_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbUseBestAudioInputFormat.CheckedChanged
         cbAudioInputFormat.Enabled = Not cbUseBestAudioInputFormat.Checked
     End Sub
 
+        ''' <summary>
+        ''' Cb audio output device selected index changed.
+        ''' </summary>
     Private Sub cbAudioOutputDevice_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudioOutputDevice.SelectedIndexChanged
         VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text
     End Sub
 
+        ''' <summary>
+        ''' Tb audio volume scroll.
+        ''' </summary>
     Private Sub tbAudioVolume_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudioVolume.Scroll
         VideoCapture1.Audio_OutputDevice_Volume_Set(tbAudioVolume.Value)
     End Sub
 
+        ''' <summary>
+        ''' Tb audio balance scroll.
+        ''' </summary>
     Private Sub tbAudioBalance_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudioBalance.Scroll
         VideoCapture1.Audio_OutputDevice_Balance_Set(tbAudioBalance.Value)
         VideoCapture1.Audio_OutputDevice_Balance_Get()
     End Sub
 
+        ''' <summary>
+        ''' Cb aud amplify enabled checked changed.
+        ''' </summary>
     Private Sub cbAudAmplifyEnabled_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudAmplifyEnabled.CheckedChanged
         VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud amplify amp scroll.
+        ''' </summary>
     Private Sub tbAudAmplifyAmp_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudAmplifyAmp.Scroll
         VideoCapture1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, False)
     End Sub
 
+        ''' <summary>
+        ''' Cb aud equalizer enabled checked changed.
+        ''' </summary>
     Private Sub cbAudEqualizerEnabled_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudEqualizerEnabled.CheckedChanged
         VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 0 scroll.
+        ''' </summary>
     Private Sub tbAudEq0_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudEq0.Scroll
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 0, tbAudEq0.Value)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 1 scroll.
+        ''' </summary>
     Private Sub tbAudEq1_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudEq1.Scroll
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 1, tbAudEq1.Value)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 2 scroll.
+        ''' </summary>
     Private Sub tbAudEq2_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudEq2.Scroll
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 2, tbAudEq2.Value)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 3 scroll.
+        ''' </summary>
     Private Sub tbAudEq3_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudEq3.Scroll
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 3, tbAudEq3.Value)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 4 scroll.
+        ''' </summary>
     Private Sub tbAudEq4_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudEq4.Scroll
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 4, tbAudEq4.Value)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 5 scroll.
+        ''' </summary>
     Private Sub tbAudEq5_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudEq5.Scroll
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 5, tbAudEq5.Value)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 6 scroll.
+        ''' </summary>
     Private Sub tbAudEq6_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudEq6.Scroll
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 6, tbAudEq6.Value)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 7 scroll.
+        ''' </summary>
     Private Sub tbAudEq7_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudEq7.Scroll
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 7, tbAudEq7.Value)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 8 scroll.
+        ''' </summary>
     Private Sub tbAudEq8_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudEq8.Scroll
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 8, tbAudEq8.Value)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 9 scroll.
+        ''' </summary>
     Private Sub tbAudEq9_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudEq9.Scroll
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 9, tbAudEq9.Value)
     End Sub
 
+        ''' <summary>
+        ''' Cb aud equalizer preset selected index changed.
+        ''' </summary>
     Private Sub cbAudEqualizerPreset_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudEqualizerPreset.SelectedIndexChanged
         VideoCapture1.Audio_Effects_Equalizer_Preset_Set(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerPreset.SelectedIndex)
         btAudEqRefresh_Click(sender, e)
     End Sub
 
+        ''' <summary>
+        ''' Bt aud eq refresh click.
+        ''' </summary>
     Private Sub btAudEqRefresh_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btAudEqRefresh.Click
         tbAudEq0.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0)
         tbAudEq1.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 1)
@@ -241,23 +304,38 @@ Public Class Form1
         tbAudEq9.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 9)
     End Sub
 
+        ''' <summary>
+        ''' Cb aud true bass enabled checked changed.
+        ''' </summary>
     Private Sub cbAudTrueBassEnabled_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudTrueBassEnabled.CheckedChanged
         VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked)
     End Sub
 
+        ''' <summary>
+        ''' Tb aud true bass scroll.
+        ''' </summary>
     Private Sub tbAudTrueBass_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAudTrueBass.Scroll
         VideoCapture1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, False, tbAudTrueBass.Value)
     End Sub
+        ''' <summary>
+        ''' Cb aud sound 3 d enabled checked changed.
+        ''' </summary>
     Private Sub cbAudSound3DEnabled_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudSound3DEnabled.CheckedChanged
 
         VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked)
 
     End Sub
+        ''' <summary>
+        ''' Tb aud 3 d sound scroll.
+        ''' </summary>
     Private Sub tbAud3DSound_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbAud3DSound.Scroll
 
         VideoCapture1.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, tbAud3DSound.Value)
 
     End Sub
+        ''' <summary>
+        ''' Bt select output click.
+        ''' </summary>
     Private Sub btSelectOutput_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btSelectOutput.Click
 
         If saveFileDialog1.ShowDialog() = DialogResult.OK Then
@@ -266,6 +344,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Set m 4 a output.
+        ''' </summary>
     Private Sub SetM4AOutput(ByRef m4aOutput As M4AOutput)
         If (m4aSettingsDialog Is Nothing) Then
             m4aSettingsDialog = New M4ASettingsDialog()
@@ -274,6 +355,9 @@ Public Class Form1
         m4aSettingsDialog.SaveSettings(m4aOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set wma output.
+        ''' </summary>
     Private Sub SetWMAOutput(ByRef wmaOutput As WMAOutput)
         If (wmvSettingsDialog Is Nothing) Then
             wmvSettingsDialog = New WMVSettingsDialog(VideoCapture1)
@@ -283,6 +367,9 @@ Public Class Form1
         wmvSettingsDialog.SaveSettings(wmaOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set ogg output.
+        ''' </summary>
     Private Sub SetOGGOutput(ByRef oggVorbisOutput As OGGVorbisOutput)
         If (oggVorbisSettingsDialog Is Nothing) Then
             oggVorbisSettingsDialog = New OggVorbisSettingsDialog()
@@ -291,6 +378,9 @@ Public Class Form1
         oggVorbisSettingsDialog.SaveSettings(oggVorbisOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set speex output.
+        ''' </summary>
     Private Sub SetSpeexOutput(ByRef speexOutput As SpeexOutput)
         If (speexSettingsDialog Is Nothing) Then
             speexSettingsDialog = New SpeexSettingsDialog()
@@ -299,6 +389,9 @@ Public Class Form1
         speexSettingsDialog.SaveSettings(speexOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set flac output.
+        ''' </summary>
     Private Sub SetFLACOutput(ByRef flacOutput As FLACOutput)
         If (flacSettingsDialog Is Nothing) Then
             flacSettingsDialog = New FLACSettingsDialog()
@@ -307,6 +400,9 @@ Public Class Form1
         flacSettingsDialog.SaveSettings(flacOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set mp 3 output.
+        ''' </summary>
     Private Sub SetMP3Output(ByRef mp3Output As MP3Output)
         If (mp3SettingsDialog Is Nothing) Then
             mp3SettingsDialog = New MP3SettingsDialog()
@@ -315,6 +411,9 @@ Public Class Form1
         mp3SettingsDialog.SaveSettings(mp3Output)
     End Sub
 
+        ''' <summary>
+        ''' Set acm output.
+        ''' </summary>
     Private Sub SetACMOutput(ByRef acmOutput As ACMOutput)
         If (pcmSettingsDialog Is Nothing) Then
             pcmSettingsDialog = New PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray())
@@ -398,6 +497,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Ll video tutorials link clicked.
+        ''' </summary>
     Private Sub llVideoTutorials_LinkClicked(ByVal sender As System.Object, ByVal e As LinkLabelLinkClickedEventArgs) Handles llVideoTutorials.LinkClicked
 
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials)
@@ -405,6 +507,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Log.
+        ''' </summary>
     Private Sub Log(msg As String)
         If (IsHandleCreated) Then
             Invoke(Sub()
@@ -413,10 +518,16 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on error.
+        ''' </summary>
     Private Sub VideoCapture1_OnError(ByVal sender As System.Object, ByVal e As ErrorsEventArgs) Handles VideoCapture1.OnError
         Log(e.Message)
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on audio frame buffer.
+        ''' </summary>
     Private Sub VideoCapture1_OnAudioFrameBuffer(sender As Object, e As AudioFrameBufferEventArgs)
 
         If (e.Frame.Timestamp.TotalMilliseconds < 0) Then
@@ -428,6 +539,9 @@ Public Class Form1
                     End Sub)
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on stop.
+        ''' </summary>
     Private Sub VideoCapture1_OnStop(sender As Object, e As EventArgs)
 
         If Me.IsHandleCreated Then
@@ -437,6 +551,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt output configure click.
+        ''' </summary>
     Private Sub btOutputConfigure_Click(sender As Object, e As EventArgs) Handles btOutputConfigure.Click
         Select Case (cbOutputFormat.SelectedIndex)
             Case 0
@@ -485,6 +602,9 @@ Public Class Form1
         End Select
     End Sub
 
+        ''' <summary>
+        ''' Cb output format selected index changed.
+        ''' </summary>
     Private Sub cbOutputFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOutputFormat.SelectedIndexChanged
         Select Case (cbOutputFormat.SelectedIndex)
             Case 0

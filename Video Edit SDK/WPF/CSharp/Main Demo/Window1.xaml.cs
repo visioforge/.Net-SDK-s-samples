@@ -1,6 +1,6 @@
-// ReSharper disable InconsistentNaming
 
-// ReSharper disable StyleCop.SA1600
+
+
 
 namespace Main_Demo
 {
@@ -39,84 +39,203 @@ namespace Main_Demo
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     public partial class Window1
     {
+        /// <summary>
+        /// Audio effect ID for amplify.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_AMPLIFY = "amplify";
 
+        /// <summary>
+        /// Audio effect ID for equalizer.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_EQ = "eq";
 
+        /// <summary>
+        /// Audio effect ID for dynamic amplify.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_DYN_AMPLIFY = "dyn_amplify";
 
+        /// <summary>
+        /// Audio effect ID for sound 3D.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_SOUND_3D = "sound3d";
 
+        /// <summary>
+        /// Audio effect ID for true bass.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_TRUE_BASS = "true_bass";
 
+        /// <summary>
+        /// Audio effect ID for fade in.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_FADE_IN = "fade_in";
 
+        /// <summary>
+        /// Audio effect ID for fade out.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_FADE_OUT = "fade_out";
 
+        /// <summary>
+        /// The video edit core.
+        /// </summary>
         private VideoEditCore VideoEdit1;
 
+        /// <summary>
+        /// MP4 HW settings dialog.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
+        /// <summary>
+        /// MP4 settings dialog.
+        /// </summary>
         private MP4SettingsDialog mp4SettingsDialog;
 
+        /// <summary>
+        /// AVI settings dialog.
+        /// </summary>
         private AVISettingsDialog aviSettingsDialog;
 
+        /// <summary>
+        /// WMV settings dialog.
+        /// </summary>
         private WMVSettingsDialog wmvSettingsDialog;
 
+        /// <summary>
+        /// DV settings dialog.
+        /// </summary>
         private DVSettingsDialog dvSettingsDialog;
 
+        /// <summary>
+        /// PCM settings dialog.
+        /// </summary>
         private PCMSettingsDialog pcmSettingsDialog;
 
+        /// <summary>
+        /// MP3 settings dialog.
+        /// </summary>
         private MP3SettingsDialog mp3SettingsDialog;
 
+        /// <summary>
+        /// WebM settings dialog.
+        /// </summary>
         private WebMSettingsDialog webmSettingsDialog;
 
+        /// <summary>
+        /// FFMPEG settings dialog.
+        /// </summary>
         private FFMPEGSettingsDialog ffmpegSettingsDialog;
 
+        /// <summary>
+        /// FFMPEG EXE settings dialog.
+        /// </summary>
         private FFMPEGEXESettingsDialog ffmpegEXESettingsDialog;
 
+        /// <summary>
+        /// FLAC settings dialog.
+        /// </summary>
         private FLACSettingsDialog flacSettingsDialog;
 
+        /// <summary>
+        /// Custom format settings dialog.
+        /// </summary>
         private CustomFormatSettingsDialog customFormatSettingsDialog;
 
+        /// <summary>
+        /// Ogg Vorbis settings dialog.
+        /// </summary>
         private OggVorbisSettingsDialog oggVorbisSettingsDialog;
 
+        /// <summary>
+        /// Speex settings dialog.
+        /// </summary>
         private SpeexSettingsDialog speexSettingsDialog;
 
+        /// <summary>
+        /// M4A settings dialog.
+        /// </summary>
         private M4ASettingsDialog m4aSettingsDialog;
 
+        /// <summary>
+        /// GIF settings dialog.
+        /// </summary>
         private GIFSettingsDialog gifSettingsDialog;
 
+        /// <summary>
+        /// List of audio channel mapper items.
+        /// </summary>
         private readonly List<AudioChannelMapperItem> audioChannelMapperItems = new List<AudioChannelMapperItem>();
 
         // Zoom
+        /// <summary>
+        /// The zoom level.
+        /// </summary>
         private double zoom = 1.0;
+
+        /// <summary>
+        /// The zoom shift X.
+        /// </summary>
         private int zoomShiftX;
+
+        /// <summary>
+        /// The zoom shift Y.
+        /// </summary>
         private int zoomShiftY;
 
         // Dialogs
+        /// <summary>
+        /// The font dialog.
+        /// </summary>
         private readonly FontDialog fontDialog;
+
+        /// <summary>
+        /// The save file dialog.
+        /// </summary>
         private readonly Microsoft.Win32.SaveFileDialog saveFileDialog1;
+
+        /// <summary>
+        /// The open file dialog 1.
+        /// </summary>
         private readonly Microsoft.Win32.OpenFileDialog openFileDialog1;
+
+        /// <summary>
+        /// The open file dialog 2.
+        /// </summary>
         private readonly Microsoft.Win32.OpenFileDialog openFileDialog2;
+
+        /// <summary>
+        /// The color dialog.
+        /// </summary>
         private readonly ColorDialog colorDialog1;
 
+        /// <summary>
+        /// Converts WPF Color to System.Drawing.Color.
+        /// </summary>
         private static System.Drawing.Color ColorConv(Color color)
         {
             return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
         }
 
+        /// <summary>
+        /// Color conv.
+        /// </summary>
         private static Color ColorConv(System.Drawing.Color color)
         {
             return Color.FromArgb(color.A, color.R, color.G, color.B);
         }
 
+        /// <summary>
+        /// Gets the file extension from the specified filename.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <returns>The file extension including the dot.</returns>
         private static string GetFileExt(string filename)
         {
             int k = filename.LastIndexOf('.');
             return filename.Substring(k, filename.Length - k);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Window1"/> class.
+        /// </summary>
         public Window1()
         {
             InitializeComponent();
@@ -130,6 +249,9 @@ namespace Main_Demo
             colorDialog1 = new ColorDialog();
         }
 
+        /// <summary>
+        /// Creates the video editing engine and subscribes to events.
+        /// </summary>
         private void CreateEngine()
         {
             VideoEdit1 = new VideoEditCore(VideoView1 as IVideoView);
@@ -143,6 +265,9 @@ namespace Main_Demo
             VideoEdit1.OnProgress += VideoEdit1_OnProgress;
         }
 
+        /// <summary>
+        /// Destroys the video editing engine and unsubscribes from events.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoEdit1 != null)
@@ -160,6 +285,12 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the Window.
+        /// Initializes the engine, sets the SDK version in the title, and configures default UI values.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Form1_Load(object sender, RoutedEventArgs e)
         {
             CreateEngine();
@@ -210,7 +341,7 @@ namespace Main_Demo
 
             cbTagGenre.SelectedIndex = 0;
 
-            // ReSharper disable once CoVariantArrayConversion
+            
             foreach (var item in VideoEdit1.Audio_Effects_Equalizer_Presets())
             {
                 cbAudEqualizerPreset.Items.Add(item);
@@ -219,6 +350,11 @@ namespace Main_Demo
             cbAudEqualizerPreset.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -227,6 +363,10 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Configures the MP3 output settings.
+        /// </summary>
+        /// <param name="mp3Output">The MP3 output settings.</param>
         private void SetMP3Output(ref MP3Output mp3Output)
         {
             if (mp3SettingsDialog == null)
@@ -237,6 +377,10 @@ namespace Main_Demo
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
+        /// <summary>
+        /// Configures the MP4 output settings.
+        /// </summary>
+        /// <param name="mp4Output">The MP4 output settings.</param>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -247,6 +391,10 @@ namespace Main_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Configures the FFMPEG EXE output settings.
+        /// </summary>
+        /// <param name="ffmpegOutput">The FFMPEG EXE output settings.</param>
         private void SetFFMPEGEXEOutput(ref FFMPEGEXEOutput ffmpegOutput)
         {
             if (ffmpegEXESettingsDialog == null)
@@ -257,6 +405,10 @@ namespace Main_Demo
             ffmpegEXESettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
+        /// <summary>
+        /// Configures the WMV output settings.
+        /// </summary>
+        /// <param name="wmvOutput">The WMV output settings.</param>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -268,6 +420,10 @@ namespace Main_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Configures the WMA output settings.
+        /// </summary>
+        /// <param name="wmaOutput">The WMA output settings.</param>
         private void SetWMAOutput(ref WMAOutput wmaOutput)
         {
             if (wmvSettingsDialog == null)
@@ -279,6 +435,10 @@ namespace Main_Demo
             wmvSettingsDialog.SaveSettings(ref wmaOutput);
         }
 
+        /// <summary>
+        /// Configures the ACM (PCM) output settings.
+        /// </summary>
+        /// <param name="acmOutput">The ACM output settings.</param>
         private void SetACMOutput(ref ACMOutput acmOutput)
         {
             if (pcmSettingsDialog == null)
@@ -289,6 +449,10 @@ namespace Main_Demo
             pcmSettingsDialog.SaveSettings(ref acmOutput);
         }
 
+        /// <summary>
+        /// Configures the WebM output settings.
+        /// </summary>
+        /// <param name="webmOutput">The WebM output settings.</param>
         private void SetWebMOutput(ref WebMOutput webmOutput)
         {
             if (webmSettingsDialog == null)
@@ -299,6 +463,10 @@ namespace Main_Demo
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
+        /// <summary>
+        /// Configures the FFMPEG output settings.
+        /// </summary>
+        /// <param name="ffmpegOutput">The FFMPEG output settings.</param>
         private void SetFFMPEGOutput(ref FFMPEGOutput ffmpegOutput)
         {
             if (ffmpegSettingsDialog == null)
@@ -309,6 +477,10 @@ namespace Main_Demo
             ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
+        /// <summary>
+        /// Configures the FLAC output settings.
+        /// </summary>
+        /// <param name="flacOutput">The FLAC output settings.</param>
         private void SetFLACOutput(ref FLACOutput flacOutput)
         {
             if (flacSettingsDialog == null)
@@ -319,6 +491,10 @@ namespace Main_Demo
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
 
+        /// <summary>
+        /// Configures the MP4 hardware encoders output settings.
+        /// </summary>
+        /// <param name="mp4Output">The MP4 HW output settings.</param>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -329,6 +505,10 @@ namespace Main_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Configures the Speex output settings.
+        /// </summary>
+        /// <param name="speexOutput">The Speex output settings.</param>
         private void SetSpeexOutput(ref SpeexOutput speexOutput)
         {
             if (speexSettingsDialog == null)
@@ -339,6 +519,10 @@ namespace Main_Demo
             speexSettingsDialog.SaveSettings(ref speexOutput);
         }
 
+        /// <summary>
+        /// Configures the M4A output settings.
+        /// </summary>
+        /// <param name="m4aOutput">The M4A output settings.</param>
         public void SetM4AOutput(ref M4AOutput m4aOutput)
         {
             if (m4aSettingsDialog == null)
@@ -349,6 +533,10 @@ namespace Main_Demo
             m4aSettingsDialog.SaveSettings(ref m4aOutput);
         }
 
+        /// <summary>
+        /// Configures the Animated GIF output settings.
+        /// </summary>
+        /// <param name="gifOutput">The GIF output settings.</param>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
@@ -359,6 +547,10 @@ namespace Main_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Configures the custom output settings.
+        /// </summary>
+        /// <param name="customOutput">The custom output settings.</param>
         private void SetCustomOutput(ref CustomOutput customOutput)
         {
             if (customFormatSettingsDialog == null)
@@ -369,6 +561,10 @@ namespace Main_Demo
             customFormatSettingsDialog.SaveSettings(ref customOutput);
         }
 
+        /// <summary>
+        /// Configures the DV output settings.
+        /// </summary>
+        /// <param name="dvOutput">The DV output settings.</param>
         private void SetDVOutput(ref DVOutput dvOutput)
         {
             if (dvSettingsDialog == null)
@@ -379,6 +575,10 @@ namespace Main_Demo
             dvSettingsDialog.SaveSettings(ref dvOutput);
         }
 
+        /// <summary>
+        /// Configures the AVI output settings.
+        /// </summary>
+        /// <param name="aviOutput">The AVI output settings.</param>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -396,6 +596,10 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Configures the MKV output settings.
+        /// </summary>
+        /// <param name="mkvOutput">The MKV output settings.</param>
         private void SetMKVOutput(ref MKVv1Output mkvOutput)
         {
             if (aviSettingsDialog == null)
@@ -413,6 +617,10 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Configures the Ogg Vorbis output settings.
+        /// </summary>
+        /// <param name="oggVorbisOutput">The Ogg Vorbis output settings.</param>
         private void SetOGGOutput(ref OGGVorbisOutput oggVorbisOutput)
         {
             if (oggVorbisSettingsDialog == null)
@@ -423,6 +631,9 @@ namespace Main_Demo
             oggVorbisSettingsDialog.SaveSettings(ref oggVorbisOutput);
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Debug_Mode = cbDebugMode.IsChecked == true;
@@ -1031,6 +1242,9 @@ namespace Main_Demo
             edNetworkURL.Text = VideoEdit1.Network_Streaming_URL;
         }
 
+        /// <summary>
+        /// Configures and adds video effects to the engine.
+        /// </summary>
         private void AddVideoEffects()
         {
             VideoEdit1.Video_Effects_Enabled = cbEffects.IsChecked == true;
@@ -1211,6 +1425,12 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the video editing engine and resets UI state.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await VideoEdit1.StopAsync();
@@ -1226,6 +1446,11 @@ namespace Main_Demo
             lbTextLogos.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the cbGreyscale control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbGreyscale_CheckedChanged(object sender, RoutedEventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -1245,6 +1470,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the cbInvert control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbInvert_CheckedChanged(object sender, RoutedEventArgs e)
         {
             IVideoEffectInvert invert;
@@ -1264,6 +1494,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the cbFilters control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbFilters_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbFilters.SelectedIndex != -1)
@@ -1274,6 +1509,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btFilterAdd control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btFilterAdd_Click(object sender, RoutedEventArgs e)
         {
             if (cbFilters.SelectedIndex != -1)
@@ -1283,6 +1523,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btFilterSettings control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btFilterSettings_Click(object sender, RoutedEventArgs e)
         {
             string name = cbFilters.Text;
@@ -1297,6 +1542,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btFilterSettings2 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btFilterSettings2_Click(object sender, RoutedEventArgs e)
         {
             if (lbFilters.SelectedIndex != -1)
@@ -1314,12 +1564,22 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btFilterDeleteAll control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btFilterDeleteAll_Click(object sender, RoutedEventArgs e)
         {
             lbFilters.Items.Clear();
             VideoEdit1.Video_Filters_Clear();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAudEqRefresh control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btAudEqRefresh_Click(object sender, RoutedEventArgs e)
         {
             tbAudEq0.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0);
@@ -1334,109 +1594,214 @@ namespace Main_Demo
             tbAudEq9.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 9);
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the cbAudAmplifyEnabled control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.IsChecked == true);
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the cbAudDynamicAmplifyEnabled control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbAudDynamicAmplifyEnabled_CheckedChanged(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.IsChecked == true);
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the cbAudEqualizerEnabled control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbAudEqualizerEnabled_CheckedChanged(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.IsChecked == true);
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the cbAudEqualizerPreset control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbAudEqualizerPreset_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Preset_Set(-1, AUDIO_EFFECT_ID_EQ, (EqualizerPreset)cbAudEqualizerPreset.SelectedIndex);
             btAudEqRefresh_Click(sender, e);
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the cbAudSound3DEnabled control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbAudSound3DEnabled_CheckedChanged(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.IsChecked == true);
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the cbAudTrueBassEnabled control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbAudTrueBassEnabled_CheckedChanged(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.IsChecked == true);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAud3DSound control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAud3DSound_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1?.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, (ushort)tbAud3DSound.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudDynAmp control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudDynAmp_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e) //-V3013
         {
             VideoEdit1?.Audio_Effects_DynamicAmplify(
                 -1, AUDIO_EFFECT_ID_DYN_AMPLIFY, (int)tbAudAttack.Value, (int)tbAudDynAmp.Value, (int)tbAudRelease.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudAttack control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudAttack_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1?.Audio_Effects_DynamicAmplify(
                 -1, AUDIO_EFFECT_ID_DYN_AMPLIFY, (int)tbAudAttack.Value, (int)tbAudDynAmp.Value, (int)tbAudRelease.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudEq0 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudEq0_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 0, (sbyte)tbAudEq0.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudEq1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudEq1_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 1, (sbyte)tbAudEq1.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudEq2 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudEq2_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 2, (sbyte)tbAudEq2.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudEq3 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudEq3_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 3, (sbyte)tbAudEq3.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudEq4 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudEq4_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 4, (sbyte)tbAudEq4.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudEq5 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudEq5_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 5, (sbyte)tbAudEq5.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudEq6 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudEq6_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 6, (sbyte)tbAudEq6.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudEq7 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudEq7_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 7, (sbyte)tbAudEq7.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudEq8 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudEq8_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 8, (sbyte)tbAudEq8.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudEq9 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudEq9_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 9, (sbyte)tbAudEq9.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudTrueBass control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudTrueBass_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, false, (ushort)tbAudTrueBass.Value);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbContrast control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbContrast_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectContrast contrast;
@@ -1456,6 +1821,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbDarkness control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbDarkness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectDarkness darkness;
@@ -1475,6 +1845,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbLightness control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbLightness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectLightness lightness;
@@ -1494,6 +1869,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbSaturation control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbSaturation_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoEdit1 != null)
@@ -1516,6 +1896,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Configures the Chroma Key settings.
+        /// </summary>
         private void ConfigureChromaKey()
         {
             if (VideoEdit1.ChromaKey != null)
@@ -1545,6 +1928,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Configures the Decklink output settings.
+        /// </summary>
         private void ConfigureDecklinkOutput()
         {
             if (cbDecklinkOutput.IsChecked == true)
@@ -1569,6 +1955,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Configures the object detection settings.
+        /// </summary>
         private void ConfigureObjectDetection()
         {
             if (cbAFMotionDetection.IsChecked == true)
@@ -1589,26 +1978,47 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudAmplifyAmp control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudAmplifyAmp_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1?.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, (int)tbAudAmplifyAmp.Value * 10, false);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudRelease control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudRelease_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1?.Audio_Effects_DynamicAmplify(
                 -1, AUDIO_EFFECT_ID_DYN_AMPLIFY, (ushort)tbAudAttack.Value, (ushort)tbAudDynAmp.Value, (int)tbAudRelease.Value);
         }
 
+        /// <summary>
+        /// Handles the MouseLeftButtonDown event of the linkLabel1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void linkLabel1_LinkClicked(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the Closed event of the Window.
+        /// Stops the engine and destroys resources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Window_Closed(object sender, EventArgs e)
         {
-            if (VideoEdit1.State() == PlaybackState.Play)
+            if (VideoEdit1 != null && VideoEdit1.State() == PlaybackState.Play)
             {
                 await VideoEdit1.StopAsync();
             }
@@ -1616,11 +2026,21 @@ namespace Main_Demo
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Handles the OnError event of the VideoEdit1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher?.Invoke(() => { mmLog.Text = mmLog.Text + e.Message + Environment.NewLine; });
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the lbFilters control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void lbFilters_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lbFilters.SelectedIndex != -1)
@@ -1631,6 +2051,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Checked event of the cbStretch control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void cbStretch_Checked(object sender, RoutedEventArgs e)
         {
             if (cbStretch.IsChecked == true)
@@ -1645,6 +2070,12 @@ namespace Main_Demo
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the OnProgress event of the VideoEdit1 control.
+        /// Updates the progress bar.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ProgressEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
         {
             Dispatcher?.Invoke(() => { pbProgress.Value = e.Progress; });
@@ -1652,8 +2083,17 @@ namespace Main_Demo
             // Application.DoEvents();
         }
 
+        /// <summary>
+        /// Delegate for the Stop event to be called on the UI thread.
+        /// </summary>
+        /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         public delegate void StopDelegate(StopEventArgs e);
 
+        /// <summary>
+        /// Handles the Stop event on the UI thread.
+        /// Resets the progress bar and shows a message box.
+        /// </summary>
+        /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         public void StopDelegateMethod(StopEventArgs e)
         {
             pbProgress.Value = 0;
@@ -1678,16 +2118,33 @@ namespace Main_Demo
             lbTextLogos.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the OnStop event of the VideoEdit1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher?.BeginInvoke(new StopDelegate(StopDelegateMethod), e);
         }
 
+        /// <summary>
+        /// Handles the OnStart event of the VideoEdit1 control.
+        /// Sets the maximum value for the seeking slider.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnStart(object sender, EventArgs e)
         {
             Dispatcher?.Invoke(() => { tbSeeking.Maximum = (int)VideoEdit1.Duration().TotalMilliseconds; });
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAddInputFile control.
+        /// Opens a file dialog and adds the selected file(s) to the input list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btAddInputFile_Click(object sender, RoutedEventArgs e)
         {
             if (openFileDialog1.ShowDialog() == true)
@@ -1814,12 +2271,23 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btClearList control.
+        /// Clears the input list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btClearList_Click(object sender, RoutedEventArgs e)
         {
             lbFiles.Items.Clear();
             VideoEdit1.Input_Clear_List();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbSpeed control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbSpeed != null)
@@ -1828,11 +2296,22 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbSeeking control.
+        /// Updates the playback position.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbSeeking_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoEdit1?.Position_Set(TimeSpan.FromMilliseconds(tbSeeking.Value));
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbChromaKeyContrastLow control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbChromaKeyContrastLow_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) //-V3013
         {
             if (VideoEdit1 != null)
@@ -1841,6 +2320,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbChromaKeyContrastHigh control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbChromaKeyContrastHigh_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoEdit1 != null)
@@ -1849,6 +2333,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btChromaKeySelectBGImage control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btChromaKeySelectBGImage_Click(object sender, RoutedEventArgs e)
         {
             if (openFileDialog1.ShowDialog() == true)
@@ -1857,28 +2346,55 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Checked event of the cbAFMotionHighlight control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbAFMotionHighlight_Checked(object sender, RoutedEventArgs e)
         {
             ConfigureObjectDetection();
         }
 
+        /// <summary>
+        /// Handles the Checked event of the cbAFMotionDetection control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbAFMotionDetection_Checked(object sender, RoutedEventArgs e)
         {
             ConfigureObjectDetection();
         }
 
+        /// <summary>
+        /// Handles the OnObjectDetection event of the VideoEdit1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MotionDetectionExEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnObjectDetection(object sender, MotionDetectionExEventArgs e)
         {
             Dispatcher?.BeginInvoke(new AFMotionDelegate(AFMotionDelegateMethod), e.Level);
         }
 
+        /// <summary>
+        /// Delegate for the AF motion event to be called on the UI thread.
+        /// </summary>
+        /// <param name="level">The motion level.</param>
         public delegate void AFMotionDelegate(float level);
 
+        /// <summary>
+        /// Handles the AF motion event on the UI thread.
+        /// Updates the motion level progress bar.
+        /// </summary>
+        /// <param name="level">The motion level.</param>
         public void AFMotionDelegateMethod(float level)
         {
             pbAFMotionLevel.Value = (int)(level * 100);
         }
 
+        /// <summary>
+        /// Configures the motion detection settings.
+        /// </summary>
         private void ConfigureMotionDetection()
         {
             if (cbMotDetEnabled.IsChecked == true)
@@ -1907,13 +2423,27 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btMotDetUpdateSettings control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btMotDetUpdateSettings_Click(object sender, RoutedEventArgs e)
         {
             ConfigureMotionDetection();
         }
 
+        /// <summary>
+        /// Delegate for the motion detection event to be called on the UI thread.
+        /// </summary>
+        /// <param name="e">The <see cref="MotionDetectionEventArgs"/> instance containing the event data.</param>
         public delegate void MotionDelegate(MotionDetectionEventArgs e);
 
+        /// <summary>
+        /// Handles the motion detection event on the UI thread.
+        /// Updates the motion matrix text and motion level progress bar.
+        /// </summary>
+        /// <param name="e">The <see cref="MotionDetectionEventArgs"/> instance containing the event data.</param>
         public void MotionDelegateMethod(MotionDetectionEventArgs e)
         {
             string s = string.Empty;
@@ -1937,11 +2467,21 @@ namespace Main_Demo
             pbMotionLevel.Value = e.Level;
         }
 
+        /// <summary>
+        /// Handles the OnMotion event of the VideoEdit1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MotionDetectionEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnMotion(object sender, MotionDetectionEventArgs e)
         {
             Dispatcher?.BeginInvoke(new MotionDelegate(MotionDelegateMethod), e);
         }
 
+        /// <summary>
+        /// Handles the Checked event of the cbZoomEnabled control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbZoomEnabled_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectZoom zoomEffect;
@@ -1969,6 +2509,11 @@ namespace Main_Demo
             zoomEffect.Enabled = cbZoomEnabled.IsChecked == true;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btEffZoomIn control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btEffZoomIn_Click(object sender, RoutedEventArgs e)
         {
             zoom += 0.1;
@@ -1977,6 +2522,11 @@ namespace Main_Demo
             cbZoomEnabled_Checked(null, null);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btEffZoomOut control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btEffZoomOut_Click(object sender, RoutedEventArgs e)
         {
             zoom -= 0.1;
@@ -1985,6 +2535,11 @@ namespace Main_Demo
             cbZoomEnabled_Checked(null, null);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btEffZoomShiftUp control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btEffZoomShiftUp_Click(object sender, RoutedEventArgs e)
         {
             zoomShiftY += 20;
@@ -1992,6 +2547,11 @@ namespace Main_Demo
             cbZoomEnabled_Checked(null, null);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btEffZoomShiftDown control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btEffZoomShiftDown_Click(object sender, RoutedEventArgs e)
         {
             zoomShiftY -= 20;
@@ -1999,6 +2559,11 @@ namespace Main_Demo
             cbZoomEnabled_Checked(null, null);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btEffZoomShiftRight control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btEffZoomShiftRight_Click(object sender, RoutedEventArgs e)
         {
             zoomShiftX += 20;
@@ -2006,6 +2571,11 @@ namespace Main_Demo
             cbZoomEnabled_Checked(null, null);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btEffZoomShiftLeft control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btEffZoomShiftLeft_Click(object sender, RoutedEventArgs e)
         {
             zoomShiftX -= 20;
@@ -2013,6 +2583,11 @@ namespace Main_Demo
             cbZoomEnabled_Checked(null, null);
         }
 
+        /// <summary>
+        /// Handles the Checked event of the cbPan control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbPan_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectPan pan;
@@ -2048,8 +2623,17 @@ namespace Main_Demo
 
         #region Barcode detector
 
+        /// <summary>
+        /// Delegate for the barcode detected event to be called on the UI thread.
+        /// </summary>
+        /// <param name="value">The <see cref="BarcodeEventArgs"/> instance containing the event data.</param>
         public delegate void BarcodeDelegate(BarcodeEventArgs value);
 
+        /// <summary>
+        /// Handles the barcode detected event on the UI thread.
+        /// Updates the barcode text and metadata.
+        /// </summary>
+        /// <param name="value">The <see cref="BarcodeEventArgs"/> instance containing the event data.</param>
         public void BarcodeDelegateMethod(BarcodeEventArgs value)
         {
             edBarcode.Text = value.Value;
@@ -2060,6 +2644,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the OnBarcodeDetected event of the VideoEdit1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="BarcodeEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnBarcodeDetected(object sender, BarcodeEventArgs e)
         {
             e.DetectorEnabled = false;
@@ -2069,6 +2658,11 @@ namespace Main_Demo
 
         #endregion
 
+        /// <summary>
+        /// Handles the Click event of the btBarcodeReset control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btBarcodeReset_Click(object sender, RoutedEventArgs e)
         {
             edBarcode.Text = string.Empty;
@@ -2076,6 +2670,11 @@ namespace Main_Demo
             VideoEdit1.Barcode_Reader_Enabled = true;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectWMVProfileNetwork control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectWMVProfileNetwork_Click(object sender, RoutedEventArgs e)
         {
             if (openFileDialog1.ShowDialog() == true)
@@ -2084,7 +2683,13 @@ namespace Main_Demo
             }
         }
 
-        [SuppressMessage("ReSharper", "InlineOutVariableDeclaration")]
+        
+        /// <summary>
+        /// Handles the Click event of the btRefreshClients control.
+        /// Refreshes the list of network streaming clients.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btRefreshClients_Click(object sender, RoutedEventArgs e)
         {
             lbNetworkClients.Items.Clear();
@@ -2101,6 +2706,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Checked event of the cbFadeInOut control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbFadeInOut_Checked(object sender, RoutedEventArgs e)
         {
             if (rbFadeIn.IsChecked == true)
@@ -2153,12 +2763,22 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the MouseLeftButtonDown event of the label1291 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void label1291_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.StreamingToAdobeFlashServer);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the MouseLeftButtonDown event of the Label control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void Label_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.StreamingMSExpressionEncoder);
@@ -2167,22 +2787,52 @@ namespace Main_Demo
 
         #region Full screen
 
+        /// <summary>
+        /// Full screen flag.
+        /// </summary>
         private bool fullScreen;
 
+        /// <summary>
+        /// Previous window left.
+        /// </summary>
         private double windowLeft;
 
+        /// <summary>
+        /// Previous window top.
+        /// </summary>
         private double windowTop;
 
+        /// <summary>
+        /// Previous window width.
+        /// </summary>
         private double windowWidth;
 
+        /// <summary>
+        /// Previous window height.
+        /// </summary>
         private double windowHeight;
 
+        /// <summary>
+        /// Previous control margin.
+        /// </summary>
         private Thickness controlMargin;
 
+        /// <summary>
+        /// Previous control width.
+        /// </summary>
         private double controlWidth;
 
+        /// <summary>
+        /// Previous control height.
+        /// </summary>
         private double controlHeight;
 
+        /// <summary>
+        /// Handles the Click event of the btFullScreen control.
+        /// Toggles full screen mode for the video renderer.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btFullScreen_Click(object sender, RoutedEventArgs e)
         {
             if (!fullScreen)
@@ -2247,6 +2897,12 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the VideoView1 control.
+        /// Exits full screen mode if active.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void VideoView1_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (fullScreen)
@@ -2257,12 +2913,22 @@ namespace Main_Demo
 
         #endregion
 
+        /// <summary>
+        /// Handles the MouseLeftButtonDown event of the label1291_Copy control to open IIS Smooth Streaming documentation.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void label1291_Copy_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.IISSmoothStreaming);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAddInputFile2 control to select the source file for cutting.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btAddInputFile2_Click(object sender, RoutedEventArgs e)
         {
             if (openFileDialog1.ShowDialog() == true)
@@ -2280,6 +2946,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAddInputFile3 control to add files to the join list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btAddInputFile3_Click(object sender, RoutedEventArgs e)
         {
             if (openFileDialog1.ShowDialog() == true)
@@ -2298,23 +2969,43 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btClearList3 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btClearList3_Click(object sender, RoutedEventArgs e)
         {
             lbFiles2.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the Checked event of the cbScreenFlipVertical control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void cbScreenFlipVertical_Checked(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Video_Renderer.Flip_Vertical = cbScreenFlipVertical.IsChecked == true;
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the Checked event of the cbScreenFlipHorizontal control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void cbScreenFlipHorizontal_Checked(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Video_Renderer.Flip_Horizontal = cbScreenFlipHorizontal.IsChecked == true;
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbDirect2DRotate control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbDirect2DRotate_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string name = ((ComboBoxItem)e.AddedItems[0]).Content.ToString();
@@ -2325,42 +3016,77 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btZoomShiftUp control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btZoomShiftUp_Click(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Video_Renderer.Zoom_ShiftY = VideoEdit1.Video_Renderer.Zoom_ShiftY + 10;
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btZoomShiftRight control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btZoomShiftRight_Click(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Video_Renderer.Zoom_ShiftX = VideoEdit1.Video_Renderer.Zoom_ShiftX + 10;
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btZoomShiftLeft control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btZoomShiftLeft_Click(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Video_Renderer.Zoom_ShiftX = VideoEdit1.Video_Renderer.Zoom_ShiftX - 10;
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btZoomShiftDown control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btZoomShiftDown_Click(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Video_Renderer.Zoom_ShiftY = VideoEdit1.Video_Renderer.Zoom_ShiftY - 10;
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btZoomOut control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btZoomOut_Click(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Video_Renderer.Zoom_Ratio = VideoEdit1.Video_Renderer.Zoom_Ratio - 10;
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btZoomIn control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btZoomIn_Click(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Video_Renderer.Zoom_Ratio = VideoEdit1.Video_Renderer.Zoom_Ratio + 10;
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the pnVideoRendererBGColor control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private async void pnVideoRendererBGColor_MouseDown(object sender, MouseButtonEventArgs e)
         {
             colorDialog1.Color = ColorConv(((SolidColorBrush)pnVideoRendererBGColor.Fill).Color);
@@ -2374,6 +3100,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Checked event of the rbVR control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void rbVR_Checked(object sender, RoutedEventArgs e)
         {
             if (rbDirect2D != null)
@@ -2386,6 +3117,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAddTransition control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btAddTransition_Click(object sender, RoutedEventArgs e)
         {
             // get id
@@ -2399,16 +3135,30 @@ namespace Main_Demo
             "(Start: " + edTransStartTime.Text + ", stop: " + edTransStopTime.Text + ")");
         }
 
+        /// <summary>
+        /// Handles the Checked event of the cbAudioNormalize control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void cbAudioNormalize_Checked(object sender, RoutedEventArgs e)
         {
             await VideoEdit1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.IsChecked == true);
         }
 
+        /// <summary>
+        /// Handles the Checked event of the cbAudioAutoGain control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void cbAudioAutoGain_Checked(object sender, RoutedEventArgs e)
         {
             await VideoEdit1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.IsChecked == true);
         }
 
+        /// <summary>
+        /// Applies the audio input gains.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task ApplyAudioInputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
@@ -2424,6 +3174,11 @@ namespace Main_Demo
             await VideoEdit1.Audio_Enhancer_InputGainsAsync(-1, gains);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioInputGainL control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioInputGainL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainL.Content = (tbAudioInputGainL.Value / 10.0f).ToString("F1");
@@ -2431,6 +3186,11 @@ namespace Main_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioInputGainC control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioInputGainC_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainC.Content = (tbAudioInputGainC.Value / 10.0f).ToString("F1");
@@ -2438,6 +3198,11 @@ namespace Main_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioInputGainR control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioInputGainR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainR.Content = (tbAudioInputGainR.Value / 10.0f).ToString("F1");
@@ -2445,6 +3210,11 @@ namespace Main_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioInputGainSL control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioInputGainSL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainSL.Content = (tbAudioInputGainSL.Value / 10.0f).ToString("F1");
@@ -2452,6 +3222,11 @@ namespace Main_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioInputGainSR control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioInputGainSR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainSR.Content = (tbAudioInputGainSR.Value / 10.0f).ToString("F1");
@@ -2459,6 +3234,11 @@ namespace Main_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioInputGainLFE control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioInputGainLFE_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioInputGainLFE.Content = (tbAudioInputGainLFE.Value / 10.0f).ToString("F1");
@@ -2466,6 +3246,10 @@ namespace Main_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Applies the audio output gains.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task ApplyAudioOutputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
@@ -2481,6 +3265,11 @@ namespace Main_Demo
             await VideoEdit1.Audio_Enhancer_OutputGainsAsync(-1, gains);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioOutputGainL control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioOutputGainL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainL.Content = (tbAudioOutputGainL.Value / 10.0f).ToString("F1");
@@ -2488,6 +3277,11 @@ namespace Main_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioOutputGainC control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioOutputGainC_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainC.Content = (tbAudioOutputGainC.Value / 10.0f).ToString("F1");
@@ -2495,6 +3289,11 @@ namespace Main_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioOutputGainR control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioOutputGainR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainR.Content = (tbAudioOutputGainR.Value / 10.0f).ToString("F1");
@@ -2502,6 +3301,11 @@ namespace Main_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioOutputGainSL control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioOutputGainSL_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainSL.Content = (tbAudioOutputGainSL.Value / 10.0f).ToString("F1");
@@ -2509,6 +3313,11 @@ namespace Main_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioOutputGainSR control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioOutputGainSR_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainSR.Content = (tbAudioOutputGainSR.Value / 10.0f).ToString("F1");
@@ -2516,6 +3325,11 @@ namespace Main_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioOutputGainLFE control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioOutputGainLFE_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioOutputGainLFE.Content = (tbAudioOutputGainLFE.Value / 10.0f).ToString("F1");
@@ -2523,6 +3337,11 @@ namespace Main_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioTimeshift control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbAudioTimeshift_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             lbAudioTimeshift.Content = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms";
@@ -2530,8 +3349,16 @@ namespace Main_Demo
             await VideoEdit1.Audio_Enhancer_TimeshiftAsync(-1, (int)tbAudioTimeshift.Value);
         }
 
+        /// <summary>
+        /// Delegate for the FFMPEG info event to be called on the UI thread.
+        /// </summary>
+        /// <param name="message">The info message.</param>
         public delegate void FFMPEGInfoDelegate(string message);
 
+        /// <summary>
+        /// Handles the FFMPEG info event on the UI thread.
+        /// </summary>
+        /// <param name="message">The info message.</param>
         public void FFMPEGInfoDelegateMethod(string message)
         {
             // if (VideoEdit1.Debug_Mode)
@@ -2542,11 +3369,21 @@ namespace Main_Demo
             // }
         }
 
+        /// <summary>
+        /// Handles the OnFFMPEGInfo event of the VideoEdit1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FFMPEGInfoEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnFFMPEGInfo(object sender, FFMPEGInfoEventArgs e)
         {
             Dispatcher?.Invoke(new FFMPEGInfoDelegate(FFMPEGInfoDelegateMethod), e.Message);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btEncryptionOpenFile control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btEncryptionOpenFile_Click(object sender, RoutedEventArgs e)
         {
             if (openFileDialog1.ShowDialog() == true)
@@ -2555,6 +3392,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutputCut control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectOutputCut_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -2563,6 +3405,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStartCut control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStartCut_Click(object sender, RoutedEventArgs e)
         {
             await VideoEdit1.FastEdit_CutFileAsync(
@@ -2572,16 +3419,31 @@ namespace Main_Demo
                 edOutputFileCut.Text);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStopCut control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStopCut_Click(object sender, RoutedEventArgs e)
         {
             await VideoEdit1.FastEdit_StopAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStopJoin control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStopJoin_Click(object sender, RoutedEventArgs e)
         {
             await VideoEdit1.FastEdit_StopAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStartJoin control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btStartJoin_Click(object sender, RoutedEventArgs e)
         {
             List<string> files = new List<string>();
@@ -2595,6 +3457,11 @@ namespace Main_Demo
                 edOutputFileCut.Text);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutputJoin control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectOutputJoin_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -2603,6 +3470,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the Grid control to set a cover image for tags.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (openFileDialog2.ShowDialog() == true)
@@ -2612,6 +3484,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btMuxStreamsSelectFile control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btMuxStreamsSelectFile_Click(object sender, RoutedEventArgs e)
         {
             if (openFileDialog1.ShowDialog() == true)
@@ -2620,6 +3497,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btMuxStreamsAdd control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btMuxStreamsAdd_Click(object sender, RoutedEventArgs e)
         {
             string prefix;
@@ -2639,11 +3521,21 @@ namespace Main_Demo
             lbMuxStreamsList.Items.Add(prefix + ": " + edMuxStreamsSourceFile.Text);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btMuxStreamsClear control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btMuxStreamsClear_Click(object sender, RoutedEventArgs e)
         {
             lbMuxStreamsList.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btMuxStreamsSelectOutput control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btMuxStreamsSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -2652,11 +3544,21 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStopMux control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStopMux_Click(object sender, RoutedEventArgs e)
         {
             await VideoEdit1.FastEdit_StopAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStartMux control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStartMux_Click(object sender, RoutedEventArgs e)
         {
             var streams = new List<FFMPEGStream>();
@@ -2676,23 +3578,43 @@ namespace Main_Demo
             await VideoEdit1.FastEdit_MuxStreamsAsync(streams, cbMuxStreamsShortest.IsChecked == true, edMuxStreamsOutputFile.Text);
         }
 
+        /// <summary>
+        /// Handles the Click event of the cbDebugMode control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbDebugMode_Click(object sender, RoutedEventArgs e)
         {
             VideoEdit1.Debug_Mode = cbDebugMode.IsChecked == true;
         }
 
+        /// <summary>
+        /// Handles the MouseLeftButtonDown event of the lbDownloadFFMPEG_Copy3 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void lbDownloadFFMPEG_Copy3_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NetworkStreamingToYouTube);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAudioChannelMapperClear control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btAudioChannelMapperClear_Click(object sender, RoutedEventArgs e)
         {
             audioChannelMapperItems.Clear();
             lbAudioChannelMapperRoutes.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAudioChannelMapperAddNewRoute control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btAudioChannelMapperAddNewRoute_Click(object sender, RoutedEventArgs e)
         {
             var item = new AudioChannelMapperItem
@@ -2710,6 +3632,11 @@ namespace Main_Demo
                 + (tbAudioChannelMapperVolume.Value / 1000.0f).ToString("F2"));
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSubtitlesSelectFile control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSubtitlesSelectFile_Click(object sender, RoutedEventArgs e)
         {
             if (openFileDialog1.ShowDialog() == true)
@@ -2718,6 +3645,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbGPULightness control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbGPULightness_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoEdit1 == null)
@@ -2743,6 +3675,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbGPUSaturation control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbGPUSaturation_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoEdit1 == null)
@@ -2768,6 +3705,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbGPUContrast control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbGPUContrast_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoEdit1 == null)
@@ -2793,6 +3735,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbGPUDarkness control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbGPUDarkness_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoEdit1 == null)
@@ -2818,6 +3765,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the cbGPUGreyscale control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbGPUGreyscale_Click(object sender, RoutedEventArgs e)
         {
             IGPUVideoEffectGrayscale intf;
@@ -2838,6 +3790,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the cbGPUInvert control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbGPUInvert_Click(object sender, RoutedEventArgs e)
         {
             IGPUVideoEffectInvert intf;
@@ -2858,6 +3815,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the cbGPUNightVision control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbGPUNightVision_Click(object sender, RoutedEventArgs e)
         {
             IGPUVideoEffectNightVision intf;
@@ -2878,6 +3840,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the cbGPUPixelate control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbGPUPixelate_Click(object sender, RoutedEventArgs e)
         {
             IGPUVideoEffectPixelate intf;
@@ -2898,6 +3865,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the cbGPUDenoise control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbGPUDenoise_Click(object sender, RoutedEventArgs e)
         {
             IGPUVideoEffectDenoise intf;
@@ -2918,6 +3890,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the cbGPUDeinterlace control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbGPUDeinterlace_Click(object sender, RoutedEventArgs e)
         {
             IGPUVideoEffectDeinterlaceBlend intf;
@@ -2938,6 +3915,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the cbGPUOldMovie control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbGPUOldMovie_Click(object sender, RoutedEventArgs e)
         {
             IGPUVideoEffectOldMovie intf;
@@ -2958,6 +3940,12 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbOutputVideoFormat control.
+        /// Updates the output file extension based on the selected format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void CbOutputVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (cbOutputVideoFormat.SelectedIndex)
@@ -3061,6 +4049,12 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btOutputConfigure control.
+        /// Opens the configuration dialog for the selected output video format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtOutputConfigure_Click(object sender, RoutedEventArgs e)
         {
             switch (cbOutputVideoFormat.SelectedIndex)
@@ -3261,6 +4255,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btTextLogoAdd control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtTextLogoAdd_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -3276,6 +4275,11 @@ namespace Main_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btTextLogoEdit control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtTextLogoEdit_Click(object sender, RoutedEventArgs e)
         {
             if (lbTextLogos.SelectedItem != null)
@@ -3289,6 +4293,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btTextLogoRemove control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtTextLogoRemove_Click(object sender, RoutedEventArgs e)
         {
             if (lbTextLogos.SelectedItem != null)
@@ -3298,6 +4307,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btImageLogoAdd control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtImageLogoAdd_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new ImageLogoSettingsDialog();
@@ -3313,6 +4327,11 @@ namespace Main_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btImageLogoEdit control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtImageLogoEdit_Click(object sender, RoutedEventArgs e)
         {
             if (lbImageLogos.SelectedItem != null)
@@ -3326,6 +4345,11 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btImageLogoRemove control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void BtImageLogoRemove_Click(object sender, RoutedEventArgs e)
         {
             if (lbImageLogos.SelectedItem != null)
@@ -3335,6 +4359,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
         private void CbFlipX_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipDown flip;
@@ -3354,6 +4381,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
         private void CbFlipY_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipRight flip;
@@ -3373,6 +4403,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbGPUBlur control to update the GPU blur effect.
+        /// </summary>
         private void tbGPUBlur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IGPUVideoEffectBlur intf;
@@ -3394,6 +4427,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the pnChromaKeyColor control to select the chroma key color.
+        /// </summary>
         private void pnChromaKeyColor_MouseDown(object sender, MouseButtonEventArgs e)
         {
             colorDialog1.Color = ColorConv(((SolidColorBrush)pnChromaKeyColor.Fill).Color);
@@ -3404,24 +4440,36 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the MouseLeftButtonUp event of the lbNDI control to open NDI documentation.
+        /// </summary>
         private void lbNDI_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the llXiphX86 control to open Xiph x86 codecs documentation.
+        /// </summary>
         private void llXiphX86_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx86);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the llXiphX64 control to open Xiph x64 codecs documentation.
+        /// </summary>
         private void llXiphX64_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectHLSOutputFolder control to select the HLS output directory.
+        /// </summary>
         private void btSelectHLSOutputFolder_Click(object sender, RoutedEventArgs e)
         {
             var folderDialog = new FolderBrowserDialog();
@@ -3431,12 +4479,18 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the lbHLSConfigure control to open HLS streaming documentation.
+        /// </summary>
         private void lbHLSConfigure_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.HLSStreaming);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the llDecoders control to open LAV decoders documentation.
+        /// </summary>
         private void llDecoders_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64);
@@ -3445,4 +4499,3 @@ namespace Main_Demo
     }
 }
 
-// ReSharper restore InconsistentNaming

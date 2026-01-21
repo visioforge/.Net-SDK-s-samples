@@ -65,6 +65,9 @@ namespace YouTube_Streamer_with_Bridge
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Device enumerator on audio source added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -73,6 +76,9 @@ namespace YouTube_Streamer_with_Bridge
             });
         }
 
+        /// <summary>
+        /// Device enumerator on video source added.
+        /// </summary>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -86,6 +92,9 @@ namespace YouTube_Streamer_with_Bridge
             });
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -94,6 +103,9 @@ namespace YouTube_Streamer_with_Bridge
             }));
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
@@ -117,6 +129,9 @@ namespace YouTube_Streamer_with_Bridge
             await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (_pipelinePreview != null)
@@ -130,6 +145,9 @@ namespace YouTube_Streamer_with_Bridge
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -234,6 +252,9 @@ namespace YouTube_Streamer_with_Bridge
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -257,6 +278,9 @@ namespace YouTube_Streamer_with_Bridge
             VideoView1.CallRefresh();
         }
 
+        /// <summary>
+        /// Handles the bt start streaming click event.
+        /// </summary>
         private async void btStartStreaming_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(edYouTubeKey.Text) || edYouTubeKey.Text == "Your-YouTube-Streaming-Key")
@@ -272,6 +296,9 @@ namespace YouTube_Streamer_with_Bridge
             UpdateUI();
         }
 
+        /// <summary>
+        /// Create streaming pipeline.
+        /// </summary>
         private void CreateStreamingPipeline()
         {
             _pipelineStreaming = new MediaBlocksPipeline(name: "STREAMING");
@@ -309,6 +336,9 @@ namespace YouTube_Streamer_with_Bridge
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop streaming click event.
+        /// </summary>
         private async void btStopStreaming_Click(object sender, RoutedEventArgs e)
         {
             await StopStreamingAsync();
@@ -328,6 +358,9 @@ namespace YouTube_Streamer_with_Bridge
             UpdateUI();
         }
 
+        /// <summary>
+        /// Update ui.
+        /// </summary>
         private void UpdateUI()
         {
             btStart.IsEnabled = !_isPreviewRunning;
@@ -355,6 +388,9 @@ namespace YouTube_Streamer_with_Bridge
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer?.Stop();
@@ -378,6 +414,9 @@ namespace YouTube_Streamer_with_Bridge
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Cb video input selection changed.
+        /// </summary>
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -405,6 +444,9 @@ namespace YouTube_Streamer_with_Bridge
             }
         }
 
+        /// <summary>
+        /// Cb video format selection changed.
+        /// </summary>
         private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFrameRate.Items.Clear();
@@ -437,6 +479,9 @@ namespace YouTube_Streamer_with_Bridge
             }
         }
 
+        /// <summary>
+        /// Cb audio input selection changed.
+        /// </summary>
         private async void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbAudioFormat.Items.Clear();

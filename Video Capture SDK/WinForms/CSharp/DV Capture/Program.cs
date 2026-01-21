@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
 {
+    /// <summary>
+    /// Program class.
+    /// </summary>
     static class Program
     {
         /// <summary>

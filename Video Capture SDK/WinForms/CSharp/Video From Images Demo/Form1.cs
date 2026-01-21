@@ -13,6 +13,9 @@
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.VideoCapture;
 
+    /// <summary>
+    /// Video from images demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private List<Bitmap> _images = new List<Bitmap>();
@@ -29,11 +32,17 @@
 
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -42,6 +51,9 @@
             VideoCapture1.OnVideoFrameBitmap += VideoCapture1_OnVideoFrameBitmap;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -54,6 +66,9 @@
             }
         }
 
+        /// <summary>
+        /// Load images.
+        /// </summary>
         private bool LoadImages()
         {
             if (!Directory.Exists(edInputFolder.Text))
@@ -96,6 +111,9 @@
             return true;
         }
 
+        /// <summary>
+        /// Handles the bt select folder click event.
+        /// </summary>
         private void btSelectFolder_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
@@ -104,6 +122,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt select output file click event.
+        /// </summary>
         private void btSelectOutputFile_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)
@@ -112,6 +133,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             edLog.Text = string.Empty;
@@ -144,6 +168,9 @@
             await VideoCapture1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngineAsync();
@@ -153,6 +180,9 @@
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
+        /// <summary>
+        /// Video capture 1 on video frame bitmap.
+        /// </summary>
         private void VideoCapture1_OnVideoFrameBitmap(object sender, VideoFrameBitmapEventArgs e)
         {
             using (var grf = Graphics.FromImage(e.Frame))
@@ -165,11 +195,17 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -178,6 +214,9 @@
                                    }));
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();

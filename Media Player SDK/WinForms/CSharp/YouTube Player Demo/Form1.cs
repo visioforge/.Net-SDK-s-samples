@@ -12,22 +12,43 @@
     using YoutubeExplode;
     using YoutubeExplode.Videos.Streams;
 
+    /// <summary>
+    /// YouTube player demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The video info list.
+        /// </summary>
         private readonly List<IVideoStreamInfo> _videoInfoList = new List<IVideoStreamInfo>();
 
+        /// <summary>
+        /// The audio info list.
+        /// </summary>
         private readonly List<IAudioStreamInfo> _audioInfoList = new List<IAudioStreamInfo>();
 
+        /// <summary>
+        /// The time tag.
+        /// </summary>
         private volatile int _timeTag;
 
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCore MediaPlayer1;
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
             MediaPlayer1.OnError += MediaPlayer1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (MediaPlayer1 != null)
@@ -39,11 +60,17 @@
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void BtStart_Click(object sender, EventArgs e)
         {
             mmLog.Text = string.Empty;
@@ -85,6 +112,9 @@
             timer1.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void BtStop_Click(object sender, EventArgs e)
         {
             timer1.Stop();
@@ -92,6 +122,9 @@
             await MediaPlayer1.StopAsync();
         }
 
+        /// <summary>
+        /// Media player 1 on error.
+        /// </summary>
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -100,6 +133,9 @@
                                    }));
         }
 
+        /// <summary>
+        /// Handles the bt read formats click event.
+        /// </summary>
         private async void BtReadFormats_Click(object sender, EventArgs e)
         {
             _videoInfoList.Clear();
@@ -137,6 +173,9 @@
             cbAudioStream.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
@@ -158,6 +197,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the timer 1 tick event.
+        /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
             _timeTag = 1;
@@ -174,6 +216,9 @@
             _timeTag = 0;
         }
 
+        /// <summary>
+        /// Handles the tb timeline scroll event.
+        /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (_timeTag == 0)
@@ -182,6 +227,9 @@
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();

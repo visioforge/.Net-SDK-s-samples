@@ -21,7 +21,8 @@ using VisioForge.Core.MediaBlocks.VideoEncoders;
 namespace GenICam_Source_Demo
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for the GenICam Capture WPF demo's MainWindow.
+    /// Demonstrates how to discover, configure, and capture video from GenICam-compatible cameras using the X-engine.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -55,17 +56,30 @@ namespace GenICam_Source_Demo
             UpdateGenTLPathDisplay();
         }
 
+        /// <summary>
+        /// Handles the OnError event of the video capture engine.
+        /// Outputs error messages to the debug console.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Creates a new instance of the video capture engine and configures event handlers.
+        /// </summary>
         private void CreateEngine()
         {
             _core = new VideoCaptureCoreX(videoView: VideoView1);
             _core.OnError += Pipeline_OnError;
         }
 
+        /// <summary>
+        /// Asynchronously stops and disposes of the video capture engine and cleans up output resources.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (_core != null)
@@ -80,6 +94,9 @@ namespace GenICam_Source_Demo
             _mp4Output = null;
         }
 
+        /// <summary>
+        /// Updates the recording or preview duration displayed in the UI.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             if (_core == null)
@@ -105,6 +122,12 @@ namespace GenICam_Source_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the engine for GenICam capture, sets up the output (if recording is enabled), and starts the stream.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -195,6 +218,12 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the capture engine and closes the GenICam camera.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -221,12 +250,24 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btRefresh control.
+        /// Refresh the list of available GenICam cameras and updates the GenTL path display.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btRefresh_Click(object sender, RoutedEventArgs e)
         {
             await LoadCameraList();
             UpdateGenTLPathDisplay();
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbCamera control.
+        /// Loads information and settings for the newly selected GenICam camera.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbCamera_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbCamera.SelectedItem != null)
@@ -235,6 +276,12 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btUpdateSettings control.
+        /// Refreshes the settings display for the currently selected camera.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btUpdateSettings_Click(object sender, RoutedEventArgs e)
         {
             if (_currentCamera != null)
@@ -243,6 +290,12 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btBrowse control.
+        /// Opens a save file dialog to select the MP4 recording output path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btBrowse_Click(object sender, RoutedEventArgs e)
         {
             var saveFileDialog = new SaveFileDialog
@@ -259,6 +312,12 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the window.
+        /// Initializes the SDK and loads the initial list of GenICam cameras.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -287,6 +346,12 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Closing event of the window.
+        /// Ensures the GenICam camera is closed and SDK resources are released.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
@@ -306,6 +371,9 @@ namespace GenICam_Source_Demo
 
         #region Camera Information Methods
 
+        /// <summary>
+        /// Updates the UI display of the GENICAM_GENTL64_PATH environment variable.
+        /// </summary>
         private void UpdateGenTLPathDisplay()
         {
             try
@@ -329,6 +397,10 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Asynchronously refreshes the list of available GenICam cameras in the UI.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task LoadCameraList()
         {
             try
@@ -371,6 +443,10 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Connects to a specific GenICam camera and retrieves its configuration and capabilities.
+        /// </summary>
+        /// <param name="cameraName">The name or device ID of the camera to load.</param>
         private void LoadCameraInformation(string cameraName)
         {
             try
@@ -451,6 +527,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Displays detailed technical information for the currently connected GenICam camera in the UI.
+        /// </summary>
         private void DisplayCameraInformation()
         {
             if (_currentCamera == null) return;
@@ -493,6 +572,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Displays basic identification information for a camera that is available but not necessarily opened.
+        /// </summary>
         private void DisplayBasicCameraInformation()
         {
             if (string.IsNullOrEmpty(_currentCameraDeviceId)) return;
@@ -511,6 +593,9 @@ namespace GenICam_Source_Demo
             DisplayTechnicalSpecifications();
         }
 
+        /// <summary>
+        /// Populates the technical specifications and feature availability tabs in the UI.
+        /// </summary>
         private void DisplayTechnicalSpecifications()
         {
             // Pixel Formats
@@ -684,6 +769,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Reads and displays the current runtime settings (exposure, gain, etc.) from the active GenICam camera.
+        /// </summary>
         private void UpdateCurrentCameraSettings()
         {
             if (_currentCamera == null)
@@ -794,6 +882,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Updates the connection and acquisition status indicators in the UI.
+        /// </summary>
         private void UpdateConnectionStatus()
         {
             if (_currentCamera != null)
@@ -808,6 +899,9 @@ namespace GenICam_Source_Demo
             tbAcquisitionStatus.Text = _core != null && _core.State == VisioForge.Core.Types.PlaybackState.Play ? "Running" : "Stopped";
         }
 
+        /// <summary>
+        /// Resets all camera-related UI fields to their default empty state.
+        /// </summary>
         private void ClearCameraInformation()
         {
             // Basic Information
@@ -835,6 +929,9 @@ namespace GenICam_Source_Demo
             ClearCurrentSettings();
         }
 
+        /// <summary>
+        /// Resets the "Current Settings" UI fields to their default empty state.
+        /// </summary>
         private void ClearCurrentSettings()
         {
             tbCurrentRegion.Text = "-";
@@ -852,7 +949,7 @@ namespace GenICam_Source_Demo
         #region Advanced Camera Information Methods
 
         /// <summary>
-        /// Gets additional camera features and displays them
+        /// Retrieves and logs advanced GenICam features and capabilities to the debug output.
         /// </summary>
         private void ShowAdvancedCameraFeatures()
         {
@@ -981,7 +1078,7 @@ namespace GenICam_Source_Demo
         }
 
         /// <summary>
-        /// Tests camera feature access
+        /// Performs diagnostic tests on various GenICam feature types (integer, float, boolean, string) and logs results.
         /// </summary>
         private void TestCameraFeatures()
         {

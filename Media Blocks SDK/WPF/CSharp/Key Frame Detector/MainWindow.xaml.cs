@@ -32,6 +32,9 @@ namespace key_frame_detector_mb
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await VisioForgeX.InitSDKAsync();
@@ -61,11 +64,17 @@ namespace key_frame_detector_mb
             };
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             btStart.IsEnabled = true;
@@ -80,6 +89,9 @@ namespace key_frame_detector_mb
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             var sourceFile = edSourceFile.Text;
@@ -141,6 +153,9 @@ namespace key_frame_detector_mb
             _timer.Start();
         }
     
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             // select file

@@ -18,6 +18,9 @@ namespace screen_capture_avi
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create screen capture source.
+        /// </summary>
         private IScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
             var source = new ScreenCaptureDX9SourceSettings();
@@ -31,11 +34,17 @@ namespace screen_capture_avi
             return source;
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await VisioForgeX.InitSDKAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             videoCapture1 = new VideoCaptureCoreX(VideoView1);
@@ -53,6 +62,9 @@ namespace screen_capture_avi
             await videoCapture1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await videoCapture1.StopAsync();
@@ -60,6 +72,9 @@ namespace screen_capture_avi
             await videoCapture1.DisposeAsync();
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             VisioForgeX.DestroySDK();

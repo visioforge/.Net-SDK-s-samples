@@ -39,6 +39,9 @@ namespace GaussianBlurDemo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initialize component.
+        /// </summary>
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
@@ -259,6 +262,9 @@ namespace GaussianBlurDemo
         private TrackBar tbTimeline;
         private TextBox mmError;
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             Text += " [INITIALIZING SDK...]";
@@ -269,6 +275,9 @@ namespace GaussianBlurDemo
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
+        /// <summary>
+        /// Handles the btn select file click event.
+        /// </summary>
         private void btnSelectFile_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog dialog = new OpenFileDialog())
@@ -281,6 +290,9 @@ namespace GaussianBlurDemo
             }
         }
 
+        /// <summary>
+        /// Handles the btn start click event.
+        /// </summary>
         private async void btnStart_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(edFilename.Text))
@@ -366,6 +378,9 @@ namespace GaussianBlurDemo
             }
         }
 
+        /// <summary>
+        /// Setup single pass blur.
+        /// </summary>
         private void SetupSinglePassBlur()
         {
             var glUpload = new GLUploadBlock();
@@ -388,6 +403,9 @@ namespace GaussianBlurDemo
             _pipeline.Connect(glDownload.Output, _videoRenderer.Input);
         }
 
+        /// <summary>
+        /// Setup two pass blur.
+        /// </summary>
         private void SetupTwoPassBlur(bool highQuality = false)
         {
             var glUpload = new GLUploadBlock();
@@ -424,6 +442,9 @@ namespace GaussianBlurDemo
             _pipeline.Connect(glDownload.Output, _videoRenderer.Input);
         }
 
+        /// <summary>
+        /// Handles the tb blur radius scroll event.
+        /// </summary>
         private void tbBlurRadius_Scroll(object sender, EventArgs e)
         {
             _blurRadius = tbBlurRadius.Value / 10.0f;
@@ -431,6 +452,9 @@ namespace GaussianBlurDemo
             UpdateBlurSettings();
         }
 
+        /// <summary>
+        /// Update blur settings.
+        /// </summary>
         private void UpdateBlurSettings()
         {
             if (_blurShaderH == null)
@@ -456,6 +480,9 @@ namespace GaussianBlurDemo
             }
         }
 
+        /// <summary>
+        /// Handles the cb blur mode selected index changed event.
+        /// </summary>
         private async void cbBlurMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             bool wasRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
@@ -473,6 +500,9 @@ namespace GaussianBlurDemo
             }
         }
 
+        /// <summary>
+        /// Handles the btn stop click event.
+        /// </summary>
         private async void btnStop_Click(object sender, EventArgs e)
         {
             _positionTimer.Stop();
@@ -487,6 +517,9 @@ namespace GaussianBlurDemo
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the btn pause click event.
+        /// </summary>
         private async void btnPause_Click(object sender, EventArgs e)
         {
             if (_pipeline != null)
@@ -495,6 +528,9 @@ namespace GaussianBlurDemo
             }
         }
 
+        /// <summary>
+        /// Handles the btn resume click event.
+        /// </summary>
         private async void btnResume_Click(object sender, EventArgs e)
         {
             if (_pipeline != null)
@@ -503,6 +539,9 @@ namespace GaussianBlurDemo
             }
         }
 
+        /// <summary>
+        /// Handles the tb timeline scroll event.
+        /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (_pipeline != null && _pipeline.State == PlaybackState.Play)
@@ -516,6 +555,9 @@ namespace GaussianBlurDemo
             }
         }
 
+        /// <summary>
+        /// Handles the tm position tick event.
+        /// </summary>
         private async void tmPosition_Tick(object sender, EventArgs e)
         {
             if (_pipeline != null && _pipeline.State == PlaybackState.Play)
@@ -532,6 +574,9 @@ namespace GaussianBlurDemo
             }
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -539,6 +584,9 @@ namespace GaussianBlurDemo
             _pipeline.OnStop += Pipeline_OnStop;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -554,6 +602,9 @@ namespace GaussianBlurDemo
             }
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             BeginInvoke(new Action(() =>
@@ -563,6 +614,9 @@ namespace GaussianBlurDemo
             }));
         }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
         private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             BeginInvoke(new Action(() =>
@@ -573,6 +627,9 @@ namespace GaussianBlurDemo
             }));
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             _positionTimer?.Stop();

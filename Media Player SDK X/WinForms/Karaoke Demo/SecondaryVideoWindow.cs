@@ -21,6 +21,9 @@ namespace Karaoke_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initialize component.
+        /// </summary>
         private void InitializeComponent()
         {
             VideoView = new VideoView();
@@ -47,6 +50,9 @@ namespace Karaoke_Demo
             ResumeLayout(false);
         }
 
+        /// <summary>
+        /// Secondary video window form closing.
+        /// </summary>
         private void SecondaryVideoWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Prevent closing, just hide the window

@@ -25,6 +25,9 @@ namespace IPCaptureService
     /// </summary>
     public partial class Service1 : ServiceBase
     {
+        /// <summary>
+        /// Video capture instance.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
         /// <summary>
@@ -76,6 +79,9 @@ namespace IPCaptureService
         /// <param name="args">
         /// Service args.
         /// </param>
+        /// <summary>
+        /// On start.
+        /// </summary>
         protected override void OnStart(string[] args)
         {
             AddLog("start - 1");
@@ -94,6 +100,9 @@ namespace IPCaptureService
         /// <param name="e">
         /// Event args.
         /// </param>
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         protected void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             this.AddLog("cam1: " + e.Message);
@@ -125,6 +134,9 @@ namespace IPCaptureService
         /// <param name="log">
         /// Event text.
         /// </param>
+        /// <summary>
+        /// Add log.
+        /// </summary>
         public void AddLog(string log)
         {
             try

@@ -64,6 +64,9 @@ Public Class Form1
         Return VideoCapture1
     End Function
 
+        ''' <summary>
+        ''' Destroy engine.
+        ''' </summary>
     Private Sub DestroyEngine()
         VideoCapture1.Dispose()
         VideoCapture1 = Nothing
@@ -87,12 +90,18 @@ Public Class Form1
         edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
     End Sub
 
+        ''' <summary>
+        ''' Bt select output click.
+        ''' </summary>
     Private Sub btSelectOutput_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btSelectOutput.Click
         If saveFileDialog1.ShowDialog() = DialogResult.OK Then
             edOutput.Text = saveFileDialog1.FileName
         End If
     End Sub
 
+        ''' <summary>
+        ''' Set mp 4 hw output.
+        ''' </summary>
     Private Sub SetMP4HWOutput(ByRef mp4Output As MP4HWOutput)
         If (mp4HWSettingsDialog Is Nothing) Then
             mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
@@ -101,6 +110,9 @@ Public Class Form1
         mp4HWSettingsDialog.SaveSettings(mp4Output)
     End Sub
 
+        ''' <summary>
+        ''' Set mpegts output.
+        ''' </summary>
     Private Sub SetMPEGTSOutput(ByRef mpegTSOutput As MPEGTSOutput)
 
         If (mpegTSSettingsDialog Is Nothing) Then
@@ -110,6 +122,9 @@ Public Class Form1
         mpegTSSettingsDialog.SaveSettings(mpegTSOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set mov output.
+        ''' </summary>
     Private Sub SetMOVOutput(ByRef mkvOutput As MOVOutput)
 
         If (movSettingsDialog Is Nothing) Then
@@ -119,6 +134,9 @@ Public Class Form1
         movSettingsDialog.SaveSettings(mkvOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set mp 4 output.
+        ''' </summary>
     Private Sub SetMP4Output(ByRef mp4Output As MP4Output)
         If (_mp4SettingsDialog Is Nothing) Then
             _mp4SettingsDialog = New MP4SettingsDialog()
@@ -127,6 +145,9 @@ Public Class Form1
         _mp4SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
+        ''' <summary>
+        ''' Set gif output.
+        ''' </summary>
     Private Sub SetGIFOutput(ByRef gifOutput As AnimatedGIFOutput)
         If (gifSettingsDialog Is Nothing) Then
             gifSettingsDialog = New GIFSettingsDialog()
@@ -135,6 +156,9 @@ Public Class Form1
         gifSettingsDialog.SaveSettings(gifOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set wmv output.
+        ''' </summary>
     Private Sub SetWMVOutput(ByRef wmvOutput As WMVOutput)
         If (wmvSettingsDialog Is Nothing) Then
             wmvSettingsDialog = New WMVSettingsDialog(VideoCapture1)
@@ -144,6 +168,9 @@ Public Class Form1
         wmvSettingsDialog.SaveSettings(wmvOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set avi output.
+        ''' </summary>
     Private Sub SetAVIOutput(ByRef aviOutput As AVIOutput)
         If (aviSettingsDialog Is Nothing) Then
             aviSettingsDialog = New AVISettingsDialog(
@@ -303,6 +330,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Ll video tutorials link clicked.
+        ''' </summary>
     Private Sub llVideoTutorials_LinkClicked(ByVal sender As System.Object, ByVal e As LinkLabelLinkClickedEventArgs) Handles llVideoTutorials.LinkClicked
 
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials)
@@ -310,6 +340,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Log.
+        ''' </summary>
     Private Sub Log(msg As String)
         If (IsHandleCreated) Then
             Invoke(Sub()
@@ -318,6 +351,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on error.
+        ''' </summary>
     Private Sub VideoCapture1_OnError(ByVal sender As System.Object, ByVal e As ErrorsEventArgs) Handles VideoCapture1.OnError
         Log(e.Message)
     End Sub
@@ -409,6 +445,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif right click.
+        ''' </summary>
     Private Sub btONVIFRight_Click(sender As Object, e As EventArgs) Handles btONVIFRight.Click
 
         If (onvifClient Is Nothing) Then
@@ -428,6 +467,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvifptz set default click.
+        ''' </summary>
     Private Sub btONVIFPTZSetDefault_Click(sender As Object, e As EventArgs) Handles btONVIFPTZSetDefault.Click
 
         If cbONVIFProfile.SelectedItem IsNot Nothing Then
@@ -436,6 +478,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif left click.
+        ''' </summary>
     Private Sub btONVIFLeft_Click(sender As Object, e As EventArgs) Handles btONVIFLeft.Click
 
         If (onvifClient Is Nothing) Then
@@ -455,6 +500,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif up click.
+        ''' </summary>
     Private Sub btONVIFUp_Click(sender As Object, e As EventArgs) Handles btONVIFUp.Click
 
         If (onvifClient Is Nothing) Then
@@ -474,6 +522,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif down click.
+        ''' </summary>
     Private Sub btONVIFDown_Click(sender As Object, e As EventArgs) Handles btONVIFDown.Click
 
         If (onvifClient Is Nothing) Then
@@ -493,6 +544,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif zoom in click.
+        ''' </summary>
     Private Sub btONVIFZoomIn_Click(sender As Object, e As EventArgs) Handles btONVIFZoomIn.Click
 
         If (onvifClient Is Nothing) Then
@@ -512,6 +566,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif zoom out click.
+        ''' </summary>
     Private Sub btONVIFZoomOut_Click(sender As Object, e As EventArgs) Handles btONVIFZoomOut.Click
 
         If (onvifClient Is Nothing) Then
@@ -531,6 +588,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb output format selected index changed.
+        ''' </summary>
     Private Sub cbOutputFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOutputFormat.SelectedIndexChanged
         Select Case (cbOutputFormat.SelectedIndex)
             Case 0
@@ -558,6 +618,9 @@ Public Class Form1
         Await VideoCapture1.PauseAsync()
     End Sub
 
+        ''' <summary>
+        ''' Update recording time.
+        ''' </summary>
     Private Sub UpdateRecordingTime()
         If Me.IsHandleCreated Then
             Dim ts = VideoCapture1.Duration_Time()
@@ -572,6 +635,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt output configure click.
+        ''' </summary>
     Private Sub btOutputConfigure_Click(sender As Object, e As EventArgs) Handles btOutputConfigure.Click
         Select Case (cbOutputFormat.SelectedIndex)
             Case 0
@@ -639,6 +705,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Configure video effects.
+        ''' </summary>
     Private Sub ConfigureVideoEffects()
 
         'Other effects
@@ -675,6 +744,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Tb lightness scroll.
+        ''' </summary>
     Private Sub tbLightness_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbLightness.Scroll
 
         Dim intf As IVideoEffectLightness
@@ -691,6 +763,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb saturation scroll.
+        ''' </summary>
     Private Sub tbSaturation_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSaturation.Scroll
 
         Dim intf As IVideoEffectSaturation
@@ -708,6 +783,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb contrast scroll.
+        ''' </summary>
     Private Sub tbContrast_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbContrast.Scroll
 
         Dim intf As IVideoEffectContrast
@@ -724,6 +802,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb darkness scroll.
+        ''' </summary>
     Private Sub tbDarkness_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbDarkness.Scroll
 
         Dim intf As IVideoEffectDarkness
@@ -740,6 +821,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb greyscale checked changed.
+        ''' </summary>
     Private Sub cbGreyscale_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbGreyscale.CheckedChanged
 
         Dim intf As IVideoEffectGrayscale
@@ -756,6 +840,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb invert checked changed.
+        ''' </summary>
     Private Sub cbInvert_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbInvert.CheckedChanged
 
         Dim intf As IVideoEffectInvert
@@ -772,6 +859,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb flip checked changed.
+        ''' </summary>
     Private Sub cbFlipX_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipX.CheckedChanged
         Dim flip As IVideoEffectFlipDown
         Dim effect = VideoCapture1.Video_Effects_Get("FlipDown")
@@ -786,6 +876,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Cb flip checked changed.
+        ''' </summary>
     Private Sub cbFlipY_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipY.CheckedChanged
         Dim flip As IVideoEffectFlipRight
         Dim effect = VideoCapture1.Video_Effects_Get("FlipRight")
@@ -800,6 +893,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt image logo add click.
+        ''' </summary>
     Private Sub btImageLogoAdd_Click(sender As Object, e As EventArgs) Handles btImageLogoAdd.Click
         Dim dlg = New ImageLogoSettingsDialog()
 
@@ -814,6 +910,9 @@ Public Class Form1
         dlg.Dispose()
     End Sub
 
+        ''' <summary>
+        ''' Bt text logo add click.
+        ''' </summary>
     Private Sub btTextLogoAdd_Click(sender As Object, e As EventArgs) Handles btTextLogoAdd.Click
         Dim dlg = New TextLogoSettingsDialog()
 
@@ -828,6 +927,9 @@ Public Class Form1
         dlg.Dispose()
     End Sub
 
+        ''' <summary>
+        ''' Bt logo edit click.
+        ''' </summary>
     Private Sub btLogoEdit_Click(sender As Object, e As EventArgs) Handles btLogoEdit.Click
         If (lbLogos.SelectedItem IsNot Nothing) Then
             Dim effect = VideoCapture1.Video_Effects_Get(lbLogos.SelectedItem)
@@ -849,6 +951,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt logo remove click.
+        ''' </summary>
     Private Sub btLogoRemove_Click(sender As Object, e As EventArgs) Handles btLogoRemove.Click
         If (lbLogos.SelectedItem IsNot Nothing) Then
             VideoCapture1.Video_Effects_Remove(lbLogos.SelectedItem)
@@ -856,6 +961,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Lb link clicked.
+        ''' </summary>
     Private Sub lbNDI_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lbNDI.LinkClicked
         Dim startInfo As ProcessStartInfo = New ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor)
         Process.Start(startInfo)
@@ -887,6 +995,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on network source disconnect.
+        ''' </summary>
     Private Sub VideoCapture1_OnNetworkSourceDisconnect(sender As Object, e As EventArgs) Handles VideoCapture1.OnNetworkSourceDisconnect
         Invoke(Async Sub()
                    Await VideoCapture1.StopAsync()
@@ -894,6 +1005,9 @@ Public Class Form1
                End Sub)
     End Sub
 
+        ''' <summary>
+        ''' Form 1 form closing.
+        ''' </summary>
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         DestroyEngine()
     End Sub

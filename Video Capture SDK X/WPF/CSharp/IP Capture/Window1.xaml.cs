@@ -1,7 +1,7 @@
-﻿// ReSharper disable InconsistentNaming
+﻿
 
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable StyleCop.SA1601
+
+
 
 namespace IP_Capture
 {
@@ -33,6 +33,10 @@ namespace IP_Capture
     using VisioForge.Core.VideoCaptureX;
     using Application = System.Windows.Forms.Application;
 
+    /// <summary>
+    /// Interaction logic for the IP Capture WPF demo's Window1.
+    /// Demonstrates capturing from various IP sources (RTSP, MJPEG, NDI, SRT, ONVIF) using the X-engine.
+    /// </summary>
     public partial class Window1 : IDisposable
     {
         private UniversalOutputDialog mpegTSSettingsDialog;
@@ -62,6 +66,9 @@ namespace IP_Capture
 
         private bool disposedValue;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Window1"/> class.
+        /// </summary>
         public Window1()
         {
             InitializeComponent();
@@ -69,6 +76,9 @@ namespace IP_Capture
             Application.EnableVisualStyles();
         }
 
+        /// <summary>
+        /// Creates the video capture engine and subscribes to essential events.
+        /// </summary>
         private void CreateEngine()
         {
             VideoCapture1 = new VideoCaptureCoreX(VideoView1 as IVideoView);
@@ -77,6 +87,10 @@ namespace IP_Capture
             //VideoCapture1.OnNetworkSourceDisconnect += VideoCapture1_OnNetworkSourceDisconnect;
         }
 
+        /// <summary>
+        /// Disposes of the video capture engine and unsubscribes from events.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (VideoCapture1 != null)
@@ -89,6 +103,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Load event of the Window control.
+        /// Initializes the SDK, sets up the engine, and populates audio output devices.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -137,6 +157,12 @@ namespace IP_Capture
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSaveScreenshot control.
+        /// Captures a snapshot of the current video frame and saves it to a file.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog() == true)
@@ -161,6 +187,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// Opens a file dialog to select the output video file path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -169,6 +201,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the engine for the selected IP camera type and starts capture or preview.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (onvifDevice != null)
@@ -360,6 +398,12 @@ namespace IP_Capture
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the video capture engine and resets the recording timer.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -372,22 +416,43 @@ namespace IP_Capture
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the llVideoTutorials label.
+        /// Opens the video tutorials link in the default browser.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void llVideoTutorials_LinkClicked(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             Dispatcher.Invoke(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
         }
 
+        /// <summary>
+        /// Handles the OnError event of the VideoCapture1 control.
+        /// Logs error messages to the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btONVIFConnect control.
+        /// Connects to or disconnects from the specified ONVIF device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btONVIFConnect_Click(object sender, RoutedEventArgs e)
         {
             if (btONVIFConnect.Content.ToString() == "Connect")
@@ -473,6 +538,9 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Get current profile token async.
+        /// </summary>
         private async Task<string> GetCurrentProfileTokenAsync()
         {
             if (onvifDevice == null || cbONVIFProfile.SelectedIndex < 0)
@@ -489,6 +557,12 @@ namespace IP_Capture
             return null;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btONVIFRight control.
+        /// Initiates a continuous move to the right on the ONVIF device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btONVIFRight_Click(object sender, RoutedEventArgs e)
         {
             if (onvifDevice == null)
@@ -503,6 +577,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btONVIFPTZSetDefault control.
+        /// Navigates the ONVIF device PTZ to its default position.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btONVIFPTZSetDefault_Click(object sender, RoutedEventArgs e)
         {
             if (onvifDevice == null)
@@ -529,6 +609,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btONVIFLeft control.
+        /// Initiates a continuous move to the left on the ONVIF device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btONVIFLeft_Click(object sender, RoutedEventArgs e)
         {
             if (onvifDevice == null)
@@ -543,6 +629,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btONVIFUp control.
+        /// Initiates a continuous move upward on the ONVIF device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btONVIFUp_Click(object sender, RoutedEventArgs e)
         {
             if (onvifDevice == null)
@@ -557,6 +649,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btONVIFDown control.
+        /// Initiates a continuous move downward on the ONVIF device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btONVIFDown_Click(object sender, RoutedEventArgs e)
         {
             if (onvifDevice == null)
@@ -571,6 +669,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btONVIFZoomIn control.
+        /// Initiates a continuous zoom in on the ONVIF device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btONVIFZoomIn_Click(object sender, RoutedEventArgs e)
         {
             if (onvifDevice == null)
@@ -585,6 +689,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btONVIFZoomOut control.
+        /// Initiates a continuous zoom out on the ONVIF device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btONVIFZoomOut_Click(object sender, RoutedEventArgs e)
         {
             if (onvifDevice == null)
@@ -599,6 +709,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbOutputFormat control.
+        /// Updates the output file extension based on the selected format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (edOutput == null)
@@ -636,16 +752,34 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btResume control.
+        /// Resumes the video capture engine.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btPause control.
+        /// Pauses the video capture engine.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btOutputConfigure control.
+        /// Opens a configuration dialog for the selected output format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btOutputConfigure_Click(object sender, RoutedEventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -738,6 +872,10 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Asynchronously updates the recording duration displayed in the UI.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task UpdateRecordingTime()
         {
             var ts = await VideoCapture1.DurationAsync();
@@ -753,12 +891,24 @@ namespace IP_Capture
             }));
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the lbNDIVendor label.
+        /// Opens the NDI vendor link in the default browser.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void lbNDIVendor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btListNDISources control.
+        /// Populates the URL combo box with available NDI sources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btListNDISources_Click(object sender, RoutedEventArgs e)
         {
             cbIPURL.Items.Clear();
@@ -775,6 +925,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btListONVIFSources control.
+        /// Populates the URL combo box with available ONVIF sources discovered on the network.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btListONVIFSources_Click(object sender, RoutedEventArgs e)
         {
             cbIPURL.Items.Clear();
@@ -791,6 +947,12 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the OnNetworkSourceDisconnect event of the VideoCapture1 control.
+        /// Stops the engine and alerts the user when a network disconnect occurs.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnNetworkSourceDisconnect(object sender, EventArgs e)
         {
             Dispatcher.Invoke((Action)(
@@ -802,6 +964,12 @@ namespace IP_Capture
                                    }));
         }
 
+        /// <summary>
+        /// Handles the Closing event of the Window control.
+        /// Stops the engine and releases SDK resources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
@@ -809,6 +977,13 @@ namespace IP_Capture
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -829,12 +1004,18 @@ namespace IP_Capture
             }
         }
 
+        /// <summary>
+        /// Finalizes an instance of the <see cref="Window1"/> class.
+        /// </summary>
         ~Window1()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: false);
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -844,4 +1025,3 @@ namespace IP_Capture
     }
 }
 
-// ReSharper restore InconsistentNaming

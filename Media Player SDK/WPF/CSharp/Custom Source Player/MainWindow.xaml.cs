@@ -17,19 +17,37 @@ namespace Custom_Source_Player
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The timer.
+        /// </summary>
         private System.Timers.Timer _timer;
 
+        /// <summary>
+        /// Flag to indicate if the timer is running.
+        /// </summary>
         private volatile bool _timerFlag;
 
+        /// <summary>
+        /// The media player.
+        /// </summary>
         private MediaPlayerCore _player;
 
+        /// <summary>
+        /// Flag to indicate if the window is closing.
+        /// </summary>
         private volatile bool _isClosing;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _timer = new System.Timers.Timer(500);
@@ -51,6 +69,9 @@ namespace Custom_Source_Player
             }
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void Player_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke(() =>
@@ -59,6 +80,9 @@ namespace Custom_Source_Player
             });
         }
 
+        /// <summary>
+        /// Player on stop.
+        /// </summary>
         private void Player_OnStop(object sender, StopEventArgs e)
         {
             if (_isClosing)
@@ -73,6 +97,9 @@ namespace Custom_Source_Player
             });
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _player = new MediaPlayerCore(VideoView1);
@@ -83,6 +110,9 @@ namespace Custom_Source_Player
             _player.Debug_Mode = cbDebugMode.IsChecked == true;
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timerFlag = true;
@@ -110,6 +140,9 @@ namespace Custom_Source_Player
             _timerFlag = false;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_player != null)
@@ -122,6 +155,9 @@ namespace Custom_Source_Player
             }
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog
@@ -135,6 +171,9 @@ namespace Custom_Source_Player
             }
         }
 
+        /// <summary>
+        /// Tb timeline value changed.
+        /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!_timerFlag && _player != null)
@@ -143,6 +182,9 @@ namespace Custom_Source_Player
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             // Validate CLSID
@@ -184,6 +226,9 @@ namespace Custom_Source_Player
             _timer.Start();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             if (_player != null)
@@ -192,6 +237,9 @@ namespace Custom_Source_Player
             }
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             if (_player != null)
@@ -200,6 +248,9 @@ namespace Custom_Source_Player
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -215,6 +266,9 @@ namespace Custom_Source_Player
             lbTime.Text = "00:00:00 / 00:00:00";
         }
 
+        /// <summary>
+        /// Tb volume value changed.
+        /// </summary>
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_player != null)
@@ -223,6 +277,9 @@ namespace Custom_Source_Player
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();

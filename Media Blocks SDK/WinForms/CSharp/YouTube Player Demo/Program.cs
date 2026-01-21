@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace youtube_player
 {
+    /// <summary>
+    /// The program class.
+    /// </summary>
     static class Program
     {
         /// <summary>

@@ -14,6 +14,9 @@ namespace vfpgen
 
     class Program
     {
+        /// <summary>
+        /// Main.
+        /// </summary>
         static async Task Main(string[] args)
         {
             Console.WriteLine(new CommandLineOptions().GetUsage());
@@ -81,6 +84,9 @@ namespace vfpgen
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Error callback.
+        /// </summary>
         private static void ErrorCallback(string error)
         {
             Console.WriteLine(error);

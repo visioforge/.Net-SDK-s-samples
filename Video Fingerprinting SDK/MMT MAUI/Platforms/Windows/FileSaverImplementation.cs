@@ -7,6 +7,9 @@ namespace MMT_MAUI.Platforms.Windows
 {
     public class FileSaverImplementation : IFileSaver
     {
+        /// <summary>
+        /// Save file async.
+        /// </summary>
         public async Task<string?> SaveFileAsync(string suggestedFileName, Dictionary<string, List<string>> fileTypes)
         {
             try

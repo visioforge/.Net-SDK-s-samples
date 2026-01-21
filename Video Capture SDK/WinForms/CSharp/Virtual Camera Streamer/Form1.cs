@@ -31,6 +31,9 @@ namespace Virtual_Camera_Streamer_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -38,6 +41,9 @@ namespace Virtual_Camera_Streamer_Demo
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -49,6 +55,9 @@ namespace Virtual_Camera_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb audio input device selected index changed event.
+        /// </summary>
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1)
@@ -99,16 +108,25 @@ namespace Virtual_Camera_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt audio input device settings click event.
+        /// </summary>
         private void btAudioInputDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
         }
 
+        /// <summary>
+        /// Handles the cb use best audio input format checked changed event.
+        /// </summary>
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbAudioInputFormat.Enabled = !cbUseBestAudioInputFormat.Checked;
         }
 
+        /// <summary>
+        /// Handles the cb video input device selected index changed event.
+        /// </summary>
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1)
@@ -135,6 +153,9 @@ namespace Virtual_Camera_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb video input format selected index changed event.
+        /// </summary>
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
@@ -169,26 +190,41 @@ namespace Virtual_Camera_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb use best video input format checked changed event.
+        /// </summary>
         private void cbUseBestVideoInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbVideoInputFormat.Enabled = !cbUseBestVideoInputFormat.Checked;
         }
 
+        /// <summary>
+        /// Handles the bt video capture device settings click event.
+        /// </summary>
         private void btVideoCaptureDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.Text);
         }
 
+        /// <summary>
+        /// Handles the tb audio volume scroll event.
+        /// </summary>
         private void tbAudioVolume_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Volume_Set(tbAudioVolume.Value);
         }
 
+        /// <summary>
+        /// Handles the tb audio balance scroll event.
+        /// </summary>
         private void tbAudioBalance_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set(tbAudioBalance.Value);
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -241,11 +277,17 @@ namespace Virtual_Camera_Streamer_Demo
             tcMain.SelectedIndex = 1;
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngineAsync();
@@ -321,12 +363,18 @@ namespace Virtual_Camera_Streamer_Demo
             VideoCapture1.Video_Renderer_SetAuto();
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
         private void llVideoTutorials_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -335,11 +383,17 @@ namespace Virtual_Camera_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt save screenshot click event.
+        /// </summary>
         private async void btSaveScreenshot_Click(object sender, EventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog(this) == DialogResult.OK)
@@ -367,16 +421,25 @@ namespace Virtual_Camera_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();

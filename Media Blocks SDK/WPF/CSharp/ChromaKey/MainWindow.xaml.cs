@@ -28,28 +28,81 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
+
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
+
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
+
+        /// <summary>
+        /// The video source.
+        /// </summary>
         private SystemVideoSourceBlock _videoSource;
+
+        /// <summary>
+        /// The video file source.
+        /// </summary>
         private UniversalSourceBlock _videoFileSource;
+
+        /// <summary>
+        /// The audio source.
+        /// </summary>
         private SystemAudioSourceBlock _audioSource;
+
+        /// <summary>
+        /// The background source.
+        /// </summary>
         private ImageVideoSourceBlock _backgroundSource;
+
+        /// <summary>
+        /// The chroma key block.
+        /// </summary>
         private ChromaKeyBlock _chromaKeyBlock;
+
+        /// <summary>
+        /// The timer.
+        /// </summary>
         private System.Timers.Timer _timer;
 
+        /// <summary>
+        /// The video resolution.
+        /// </summary>
         private VisioForge.Core.Types.Size _videoResolution;
 
+        /// <summary>
+        /// The color dialog.
+        /// </summary>
         private System.Windows.Forms.ColorDialog _colorDialog;
+        /// <summary>
+        /// The custom chroma color.
+        /// </summary>
         private SKColor _customChromaColor = SKColors.Lime;
+        /// <summary>
+        /// The background color.
+        /// </summary>
         private System.Drawing.Color _backgroundColor = System.Drawing.Color.Blue;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             _colorDialog = new System.Windows.Forms.ColorDialog();
         }
 
+        /// <summary>
+        /// Device enumerator on audio sink added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -60,6 +113,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Device enumerator on audio source added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -73,6 +129,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Device enumerator on video source added.
+        /// </summary>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -86,6 +145,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke(() =>
@@ -95,6 +157,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -127,6 +192,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -211,6 +279,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Get video source settings.
+        /// </summary>
         private async Task<VideoCaptureDeviceSourceSettings> GetVideoSourceSettings()
         {
             var deviceName = cbVideoInput.Text;
@@ -240,6 +311,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             return settings;
         }
 
+        /// <summary>
+        /// Create background source.
+        /// </summary>
         private void CreateBackgroundSource()
         {
             // Use image file background
@@ -257,12 +331,18 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             _backgroundSource = new ImageVideoSourceBlock(imageSettings);
         }
 
+        /// <summary>
+        /// Create chroma key block.
+        /// </summary>
         private void CreateChromaKeyBlock()
         {
             var chromaKeySettings = GetChromaKeySettings();
             _chromaKeyBlock = new ChromaKeyBlock(chromaKeySettings);
         }
 
+        /// <summary>
+        /// Get chroma key settings.
+        /// </summary>
         private VisioForge.Core.Types.X.VideoEffects.ChromaKeySettingsX GetChromaKeySettings()
         {
             var settings = new ChromaKeySettingsX(_videoResolution)
@@ -289,6 +369,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             return settings;
         }
 
+        /// <summary>
+        /// Create video file source async.
+        /// </summary>
         private async Task<bool> CreateVideoFileSourceAsync()
         {
             if (string.IsNullOrEmpty(edVideoFile.Text) || !File.Exists(edVideoFile.Text))
@@ -319,6 +402,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Create audio blocks.
+        /// </summary>
         private async Task CreateAudioBlocks()
         {
             // Create audio source if available
@@ -351,6 +437,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Build pipeline.
+        /// </summary>
         private void BuildPipeline()
         {
             // Determine which video source to use
@@ -390,11 +479,17 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             LogMessage("Pipeline built successfully.");
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await StopPipeline();
         }
 
+        /// <summary>
+        /// Stop pipeline.
+        /// </summary>
         private async Task StopPipeline()
         {
             try
@@ -442,6 +537,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             // Update status if needed
@@ -449,6 +547,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
 
         #region UI Event Handlers
 
+        /// <summary>
+        /// Cb video input selection changed.
+        /// </summary>
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFormat.Items.Clear();
@@ -473,6 +574,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Cb video format selection changed.
+        /// </summary>
         private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFrameRate.Items.Clear();
@@ -509,6 +613,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Cb audio input selection changed.
+        /// </summary>
         private async void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbAudioFormat.Items.Clear();
@@ -532,6 +639,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the bt select background click event.
+        /// </summary>
         private void btSelectBackground_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog
@@ -546,6 +656,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the bt select video file click event.
+        /// </summary>
         private void btSelectVideoFile_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog
@@ -560,6 +673,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Cb video source type selection changed.
+        /// </summary>
         private void cbVideoSourceType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (pnCameraSource == null || pnVideoFileSource == null)
@@ -581,6 +697,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the bt background color click event.
+        /// </summary>
         private void btBackgroundColor_Click(object sender, RoutedEventArgs e)
         {
             _colorDialog.Color = _backgroundColor;
@@ -596,6 +715,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the bt custom color click event.
+        /// </summary>
         private void btCustomColor_Click(object sender, RoutedEventArgs e)
         {
             // Convert SKColor to System.Drawing.Color for the dialog
@@ -618,6 +740,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Cb chroma color selection changed.
+        /// </summary>
         private void cbChromaColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (pnCustomColor == null)
@@ -629,6 +754,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             UpdateChromaKeySettings();
         }
 
+        /// <summary>
+        /// Sl alpha value changed.
+        /// </summary>
         private void slAlpha_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbAlpha != null)
@@ -636,6 +764,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             UpdateChromaKeySettings();
         }
 
+        /// <summary>
+        /// Sl sensitivity value changed.
+        /// </summary>
         private void slSensitivity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbSensitivity != null)
@@ -643,6 +774,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             UpdateChromaKeySettings();
         }
 
+        /// <summary>
+        /// Sl noise level value changed.
+        /// </summary>
         private void slNoiseLevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbNoiseLevel != null)
@@ -650,6 +784,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             UpdateChromaKeySettings();
         }
 
+        /// <summary>
+        /// Sl black sensitivity value changed.
+        /// </summary>
         private void slBlackSensitivity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbBlackSensitivity != null)
@@ -657,6 +794,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             UpdateChromaKeySettings();
         }
 
+        /// <summary>
+        /// Sl white sensitivity value changed.
+        /// </summary>
         private void slWhiteSensitivity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbWhiteSensitivity != null)
@@ -664,11 +804,17 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             UpdateChromaKeySettings();
         }
 
+        /// <summary>
+        /// Cb prefer passthrough changed.
+        /// </summary>
         private void cbPreferPassthrough_Changed(object sender, RoutedEventArgs e)
         {
             UpdateChromaKeySettings();
         }
 
+        /// <summary>
+        /// Sl volume value changed.
+        /// </summary>
         private void slVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_audioRenderer != null && _pipeline != null && _pipeline.State == PlaybackState.Play)
@@ -677,12 +823,18 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Cb use color background checked.
+        /// </summary>
         private void cbUseColorBackground_Checked(object sender, RoutedEventArgs e)
         {
             edBackgroundImage.IsEnabled = false;
             btSelectBackground.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Cb use color background unchecked.
+        /// </summary>
         private void cbUseColorBackground_Unchecked(object sender, RoutedEventArgs e)
         {
             edBackgroundImage.IsEnabled = true;
@@ -693,6 +845,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
 
         #region Helper Methods
 
+        /// <summary>
+        /// Update chroma key settings.
+        /// </summary>
         private void UpdateChromaKeySettings()
         {
             if (_chromaKeyBlock != null && _pipeline != null && _pipeline.State == PlaybackState.Play)
@@ -702,6 +857,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Log message.
+        /// </summary>
         private void LogMessage(string message)
         {
             Dispatcher.Invoke(() =>
@@ -713,6 +871,9 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
 
         #endregion
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try

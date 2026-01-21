@@ -1,7 +1,7 @@
-﻿// ReSharper disable InconsistentNaming
+﻿
 
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable StyleCop.SA1601
+
+
 
 namespace RTSP_Preview
 {
@@ -29,26 +29,59 @@ namespace RTSP_Preview
     using Uri = System.Uri;
     using System.Linq;
 
+    /// <summary>
+    /// Interaction logic for Window1.xaml.
+    /// </summary>
     public partial class Window1 : IDisposable
     {
+        /// <summary>
+        /// The recording timer.
+        /// </summary>
         private Timer tmRecording = new Timer(1000);
 
+        /// <summary>
+        /// The ONVIF client.
+        /// </summary>
         private ONVIFClientX onvifClient;
 
+        /// <summary>
+        /// The ONVIF discovery instance.
+        /// </summary>
         private Discovery _onvifDiscovery = new Discovery();
-        
+
+        /// <summary>
+        /// The cancellation token source.
+        /// </summary>
         private System.Threading.CancellationTokenSource _cts;
 
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The RTSP source.
+        /// </summary>
         private RTSPSourceBlock _rtspSource;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// Value indicating whether the object is disposed.
+        /// </summary>
         private bool disposedValue;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Window1"/> class.
+        /// </summary>
         public Window1()
         {
             InitializeComponent();
@@ -56,6 +89,9 @@ namespace RTSP_Preview
             Application.EnableVisualStyles();
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -63,6 +99,9 @@ namespace RTSP_Preview
             _pipeline.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -76,6 +115,9 @@ namespace RTSP_Preview
             }
         }
 
+        /// <summary>
+        /// Form 1 load.
+        /// </summary>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -93,6 +135,9 @@ namespace RTSP_Preview
             };
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             CreateEngine();
@@ -153,6 +198,9 @@ namespace RTSP_Preview
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -161,22 +209,34 @@ namespace RTSP_Preview
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
         private void llVideoTutorials_LinkClicked(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             Dispatcher.Invoke(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt onvif connect click event.
+        /// </summary>
         private async void btONVIFConnect_Click(object sender, RoutedEventArgs e)
         {
             if (btONVIFConnect.Content.ToString() == "Connect")
@@ -254,16 +314,25 @@ namespace RTSP_Preview
             }
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.PauseAsync();
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private async Task UpdateRecordingTime()
         {
             var ts = await _pipeline.Position_GetAsync();
@@ -279,6 +348,9 @@ namespace RTSP_Preview
             }));
         }
 
+        /// <summary>
+        /// Handles the bt list onvif sources click event.
+        /// </summary>
         private void btListONVIFSources_Click(object sender, RoutedEventArgs e)
         {
             cbIPURL.Items.Clear();
@@ -317,6 +389,9 @@ namespace RTSP_Preview
             });
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
@@ -324,6 +399,9 @@ namespace RTSP_Preview
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -350,6 +428,9 @@ namespace RTSP_Preview
             Dispose(disposing: false);
         }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -359,4 +440,3 @@ namespace RTSP_Preview
     }
 }
 
-// ReSharper restore InconsistentNaming

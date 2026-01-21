@@ -9,6 +9,9 @@ namespace VisioForge_MMT_Live
 
     public class XmlUtility
     {
+        /// <summary>
+        /// Obj 2 xml str.
+        /// </summary>
         public static string Obj2XmlStr(object obj, string nameSpace)
         {
             if (obj == null) return string.Empty;
@@ -29,6 +32,9 @@ namespace VisioForge_MMT_Live
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Obj 2 xml str.
+        /// </summary>
         public static string Obj2XmlStr(object obj)
         {
             if (obj == null) return string.Empty;
@@ -45,6 +51,9 @@ namespace VisioForge_MMT_Live
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Xml str 2 obj.
+        /// </summary>
         public static T XmlStr2Obj<T>(string xml) 
         {
             if (xml == null) return default(T);
@@ -55,6 +64,9 @@ namespace VisioForge_MMT_Live
             return (T)sr.Deserialize(reader);
         }
 		
+        /// <summary>
+        /// Xml str 2 xml dom.
+        /// </summary>
         public static  XmlElement XmlStr2XmlDom(string xml)
         {
             XmlDocument doc = new XmlDocument();
@@ -62,15 +74,28 @@ namespace VisioForge_MMT_Live
             return doc.DocumentElement;
         }
 
+        /// <summary>
+        /// Obj 2 xml dom.
+        /// </summary>
         public static  XmlElement Obj2XmlDom(object obj, string nameSpace)
         {
             return XmlStr2XmlDom(Obj2XmlStr(obj, nameSpace));
         }
     }
 
+    /// <summary>
+    /// Serializer cache.
+    /// </summary>
     internal class SerializerCache
     {
+        /// <summary>
+        /// The hash.
+        /// </summary>
         private static readonly Hashtable Hash = new Hashtable();
+
+        /// <summary>
+        /// Get serializer.
+        /// </summary>
         public static XmlSerializer GetSerializer(Type type)
         {
             XmlSerializer res;

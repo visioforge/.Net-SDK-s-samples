@@ -51,6 +51,9 @@ namespace video_from_images
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -63,6 +66,9 @@ namespace video_from_images
             edSourceFolder.Text = "c:\\Samples\\pics\\src\\";
         }
 
+        /// <summary>
+        /// Load images.
+        /// </summary>
         private bool LoadImages(out int width, out int height)
         {
             // get images
@@ -93,6 +99,9 @@ namespace video_from_images
             return true;
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             // Create VideoCaptureCoreX object
@@ -153,6 +162,9 @@ namespace video_from_images
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
         private void _pipeline_OnStop(object sender, StopEventArgs e)
         {
             _pipeline.OnStop -= _pipeline_OnStop;
@@ -166,6 +178,9 @@ namespace video_from_images
             });
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             if (_pipeline == null)
@@ -178,11 +193,17 @@ namespace video_from_images
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt select folder click event.
+        /// </summary>
         private void btSelectFolder_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new System.Windows.Forms.FolderBrowserDialog();

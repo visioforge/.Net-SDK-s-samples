@@ -16,6 +16,9 @@ namespace PhotoCapture
 
         private bool _isPreview = false;
 
+        /// <summary>
+        /// On create.
+        /// </summary>
         protected override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -42,6 +45,9 @@ namespace PhotoCapture
             CheckPermissionsAndStartPreview();
         }
 
+        /// <summary>
+        /// On destroy.
+        /// </summary>
         protected override void OnDestroy()
         {
             _photoCapture.Dispose();
@@ -49,6 +55,9 @@ namespace PhotoCapture
             base.OnDestroy();
         }
 
+        /// <summary>
+        /// Check permissions and start preview.
+        /// </summary>
         private void CheckPermissionsAndStartPreview()
         {
             if (CheckSelfPermission(Manifest.Permission.Camera) != Android.Content.PM.Permission.Granted)
@@ -82,16 +91,25 @@ namespace PhotoCapture
         }
 
 
+        /// <summary>
+        /// Start preview async.
+        /// </summary>
         private async Task StartPreviewAsync()
         {
             await _photoCapture.StartCameraAsync();
         }
 
+        /// <summary>
+        /// Handles the bt capture frame click event.
+        /// </summary>
         private async void btCaptureFrame_Click(object? sender, EventArgs e)
         {
             await _photoCapture.SavePhotoAsync($"{Guid.NewGuid()}.jpg");
         }
                 
+        /// <summary>
+        /// Handles the bt select camera click event.
+        /// </summary>
         private async void btSelectCamera_Click(object? sender, EventArgs e)
         {
             if (_photoCapture.Cameras.Count < 2)
@@ -115,6 +133,9 @@ namespace PhotoCapture
             await _photoCapture.StartCameraAsync();
         }
 
+        /// <summary>
+        /// On request permissions result.
+        /// </summary>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

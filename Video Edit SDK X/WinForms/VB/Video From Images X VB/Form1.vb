@@ -11,6 +11,9 @@ Imports VisioForge.Core.VideoEditX
 Public Class Form1
     Private WithEvents VideoEdit1 As VideoEditCoreX
 
+        ''' <summary>
+        ''' Bt select output click.
+        ''' </summary>
     Private Sub btSelectOutput_Click(sender As Object, e As EventArgs) Handles btSelectOutput.Click
         Dim sfd As New SaveFileDialog With {
             .Filter = "MP4 files|*.mp4",
@@ -23,10 +26,16 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Create engine.
+        ''' </summary>
     Private Sub CreateEngine()
         VideoEdit1 = New VideoEditCoreX(VideoView1)
     End Sub
 
+        ''' <summary>
+        ''' Destroy engine.
+        ''' </summary>
     Private Sub DestroyEngine()
         If (VideoEdit1 IsNot Nothing) Then
             VideoEdit1.Dispose()
@@ -53,10 +62,16 @@ Public Class Form1
         cbFrameRate.SelectedIndex = 7
     End Sub
 
+        ''' <summary>
+        ''' Video edit 1 on error.
+        ''' </summary>
     Private Sub VideoEdit1_OnError(sender As Object, e As ErrorsEventArgs) Handles VideoEdit1.OnError
         Debug.WriteLine("Error: " + e.Message)
     End Sub
 
+        ''' <summary>
+        ''' Video edit 1 on stop.
+        ''' </summary>
     Private Sub VideoEdit1_OnStop(sender As Object, e As StopEventArgs) Handles VideoEdit1.OnStop
         Invoke(Sub()
                    ProgressBar1.Value = 0
@@ -69,12 +84,18 @@ Public Class Form1
                End Sub)
     End Sub
 
+        ''' <summary>
+        ''' Video edit 1 on progress.
+        ''' </summary>
     Private Sub VideoEdit1_OnProgress(sender As Object, e As ProgressEventArgs) Handles VideoEdit1.OnProgress
         Invoke(Sub()
                    ProgressBar1.Value = e.Progress
                End Sub)
     End Sub
 
+        ''' <summary>
+        ''' Bt add input file click.
+        ''' </summary>
     Private Sub btAddInputFile_Click(sender As Object, e As EventArgs) Handles btAddInputFile.Click
         ' Set output video size
         VideoEdit1.Output_VideoSize = New VisioForge.Core.Types.Size(Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text))
@@ -100,11 +121,17 @@ Public Class Form1
             Next
         End If
     End Sub
+        ''' <summary>
+        ''' Bt clear list click.
+        ''' </summary>
     Private Sub btClearList_Click(sender As Object, e As EventArgs) Handles btClearList.Click
         lbFiles.Items.Clear()
         VideoEdit1.Input_Clear_List()
     End Sub
 
+        ''' <summary>
+        ''' Bt start click.
+        ''' </summary>
     Private Sub btStart_Click(sender As Object, e As EventArgs) Handles btStart.Click
         ' Apply capture parameters
         If (rbPreview.Checked) Then
@@ -118,6 +145,9 @@ Public Class Form1
         VideoEdit1.Start()
     End Sub
 
+        ''' <summary>
+        ''' Bt stop click.
+        ''' </summary>
     Private Sub btStop_Click(sender As Object, e As EventArgs) Handles btStop.Click
         VideoEdit1.Stop()
         ProgressBar1.Value = 0
@@ -126,6 +156,9 @@ Public Class Form1
         lbFiles.Items.Clear()
     End Sub
 
+        ''' <summary>
+        ''' Form 1 closing.
+        ''' </summary>
     Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         DestroyEngine()
 

@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace MediaBlocks_Simple_Video_Capture_Demo
 {
+    /// <summary>
+    /// The program class.
+    /// </summary>
     internal static class Program
     {
         /// <summary>

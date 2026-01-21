@@ -10,11 +10,17 @@ namespace Simple_Player_MVVM
 {
     public partial class App : Application
     {
+        /// <summary>
+        /// Initialize.
+        /// </summary>
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
         }
 
+        /// <summary>
+        /// On framework initialization completed.
+        /// </summary>
         public override void OnFrameworkInitializationCompleted()
         {
             IVideoView videoView = null;

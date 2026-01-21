@@ -54,6 +54,9 @@ namespace Decklink_MultiOutput
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create pipeline.
+        /// </summary>
         private void CreatePipeline()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -62,6 +65,9 @@ namespace Decklink_MultiOutput
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -70,6 +76,9 @@ namespace Decklink_MultiOutput
             }));
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (_pipeline != null)
@@ -83,6 +92,9 @@ namespace Decklink_MultiOutput
             }
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -111,6 +123,9 @@ namespace Decklink_MultiOutput
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -124,6 +139,9 @@ namespace Decklink_MultiOutput
             VideoView1.CallRefresh();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             CreatePipeline();
@@ -171,7 +189,7 @@ namespace Decklink_MultiOutput
                 {
                     screenSource.Rectangle = new Rect(0, 0, (int)Width, (int)Height);
                 }
-                
+
                 _videoSource = new ScreenSourceBlock(screenSource);
 
                 _videoResize = new VideoResizeBlock(new ResizeVideoEffect(1920, 1080));
@@ -179,7 +197,7 @@ namespace Decklink_MultiOutput
                 _pipeline.Connect(_videoSource.Output, _videoResize.Input);
                 _pipeline.Connect(_videoResize.Output, _videoTee.Input);
             }
-           
+
             _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
 
             // create Decklink outputs
@@ -191,8 +209,7 @@ namespace Decklink_MultiOutput
                 var device1 = (await DecklinkVideoSinkBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName1);
                 if (device1 != null)
                 {
-                    videoSinkSettings1 = new DecklinkVideoSinkSettings(device1);
-                    videoSinkSettings1.Mode = DecklinkMode.HD1080p30;
+                    videoSinkSettings1 = new DecklinkVideoSinkSettings(device1, DecklinkMode.HD1080p30);
                 }
             }
 
@@ -208,8 +225,7 @@ namespace Decklink_MultiOutput
                 var device2 = (await DecklinkVideoSinkBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName2);
                 if (device2 != null)
                 {
-                    videoSinkSettings2 = new DecklinkVideoSinkSettings(device2);
-                    videoSinkSettings2.Mode = DecklinkMode.HD1080p30;
+                    videoSinkSettings2 = new DecklinkVideoSinkSettings(device2, DecklinkMode.HD1080p30);
                 }
             }
 
@@ -223,6 +239,9 @@ namespace Decklink_MultiOutput
             _timer.Start();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();

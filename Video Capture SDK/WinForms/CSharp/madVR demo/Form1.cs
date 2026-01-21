@@ -1,8 +1,8 @@
-// ReSharper disable InconsistentNaming
 
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable UseObjectOrCollectionInitializer
-// ReSharper disable StyleCop.SA1601
+
+
+
+
 
 using System.Globalization;
 
@@ -20,17 +20,26 @@ namespace madVR_Demo
     using VisioForge.Core.UI;
     using VisioForge.Core.VideoCapture;
 
+    /// <summary>
+    /// madVR demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
@@ -38,6 +47,9 @@ namespace madVR_Demo
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -49,6 +61,9 @@ namespace madVR_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb audio input device selected index changed event.
+        /// </summary>
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1)
@@ -99,16 +114,25 @@ namespace madVR_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt audio input device settings click event.
+        /// </summary>
         private void btAudioInputDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
         }
 
+        /// <summary>
+        /// Handles the cb use best audio input format checked changed event.
+        /// </summary>
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbAudioInputFormat.Enabled = !cbUseBestAudioInputFormat.Checked;
         }
 
+        /// <summary>
+        /// Handles the cb video input device selected index changed event.
+        /// </summary>
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1)
@@ -135,6 +159,9 @@ namespace madVR_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb video input format selected index changed event.
+        /// </summary>
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
@@ -169,21 +196,33 @@ namespace madVR_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb use best video input format checked changed event.
+        /// </summary>
         private void cbUseBestVideoInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbVideoInputFormat.Enabled = !cbUseBestVideoInputFormat.Checked;
         }
 
+        /// <summary>
+        /// Handles the bt video capture device settings click event.
+        /// </summary>
         private void btVideoCaptureDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.Text);
         }
 
+        /// <summary>
+        /// Handles the tb audio volume scroll event.
+        /// </summary>
         private void tbAudioVolume_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Volume_Set(tbAudioVolume.Value);
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -232,6 +271,9 @@ namespace madVR_Demo
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -239,6 +281,9 @@ namespace madVR_Demo
             VideoCapture1.Stop();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
@@ -319,12 +364,18 @@ namespace madVR_Demo
             VideoCapture1.Video_Renderer_SetAuto();
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
         private void llVideoTutorials_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -333,11 +384,17 @@ namespace madVR_Demo
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             if (IsHandleCreated)
@@ -357,11 +414,17 @@ namespace madVR_Demo
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Handles the button 1 click event.
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             VideoView1.Width += 25;
@@ -369,4 +432,3 @@ namespace madVR_Demo
     }
 }
 
-// ReSharper restore InconsistentNaming

@@ -9,6 +9,12 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.1.15
+
+* [Media Blocks SDK .Net] DecklinkVideoSinkSettings: Made Mode parameter required in constructor to prevent frame rate mismatch issues (was defaulting to Unknown mode causing unexpected 23.98fps output)
+* [Media Blocks SDK .Net] DecklinkVideoSinkSettings: Made DeviceNumber and Mode properties read-only for immutability
+* [Core] DecklinkVideoOutputDialog (WPF): Added Video Mode selector for configuring output frame rate
+
 ## 2026.1.12
 
 * [Core] WPF VideoView: Fixed crash (System.ExecutionEngineException) when minimizing window during video overlay playback

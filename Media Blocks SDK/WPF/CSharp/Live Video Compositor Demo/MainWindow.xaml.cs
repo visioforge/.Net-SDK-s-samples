@@ -57,6 +57,9 @@ namespace Live_Video_Compositor_Demo
             InitializeComponent();            
         }
                 
+        /// <summary>
+        /// Compositor on error.
+        /// </summary>
         private void Compositor_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -65,6 +68,9 @@ namespace Live_Video_Compositor_Demo
             }));
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             var settings =
@@ -76,6 +82,9 @@ namespace Live_Video_Compositor_Demo
             _compositor.OnError += Compositor_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (_compositor != null)
@@ -87,6 +96,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add camera source async.
+        /// </summary>
         private async Task AddCameraSourceAsync()
         {
             var dlg = new VideoCaptureSourceDialog();
@@ -138,6 +150,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add file source async.
+        /// </summary>
         private async Task AddFileSourceAsync()
         {
             var dlg = new OpenFileDialog();
@@ -163,6 +178,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add screen source async.
+        /// </summary>
         private async Task AddScreenSourceAsync()
         {
             var dlg = new ScreenSourceDialog();
@@ -192,6 +210,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var resDialog = new ResolutionDialog();
@@ -224,6 +245,9 @@ namespace Live_Video_Compositor_Demo
             VideoView1.SetNativeRendering(true);
         }
 
+        /// <summary>
+        /// Shared on audio sink added.
+        /// </summary>
         private void Shared_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
         {
             Dispatcher.BeginInvoke((Action)(() =>
@@ -237,6 +261,9 @@ namespace Live_Video_Compositor_Demo
             }));
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private async void UpdateRecordingTime()
         {
             var ts = await _compositor.DurationAsync();
@@ -252,6 +279,9 @@ namespace Live_Video_Compositor_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             _compositor.Settings.VideoView = VideoView1;
@@ -264,6 +294,9 @@ namespace Live_Video_Compositor_Demo
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -277,6 +310,9 @@ namespace Live_Video_Compositor_Demo
             lbSources.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the bt update source click event.
+        /// </summary>
         private void btUpdateSource_Click(object sender, RoutedEventArgs e)
         {
             int index = lbSources.SelectedIndex;
@@ -318,6 +354,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add mp 4 output async.
+        /// </summary>
         private async Task AddMP4OutputAsync()
         {
             var now = System.DateTime.Now;
@@ -338,6 +377,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add decklink video output async.
+        /// </summary>
         private async Task AddDecklinkVideoOutputAsync()
         {
             // Decklink video output
@@ -373,6 +415,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add web m output async.
+        /// </summary>
         private async Task AddWebMOutputAsync()
         {
             var now = System.DateTime.Now;
@@ -392,6 +437,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add mp 3 output async.
+        /// </summary>
         private async Task AddMP3OutputAsync()
         {
             var now = System.DateTime.Now;
@@ -411,6 +459,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add audio source async.
+        /// </summary>
         private async Task AddAudioSourceAsync()
         {
             var dlg = new AudioCaptureSourceDialog();
@@ -456,6 +507,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add audio virtual async.
+        /// </summary>
         private async Task AddAudioVirtualAsync()
         {
             var name = "Audio source [Virtual]";
@@ -473,6 +527,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add video virtual async.
+        /// </summary>
         private async Task AddVideoVirtualAsync()
         {
             var rect = new Rect(
@@ -498,6 +555,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add video static image async.
+        /// </summary>
         private async Task AddVideoStaticImageAsync()
         {
             var dlg = new OpenFileDialog();
@@ -528,6 +588,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add decklink video source async.
+        /// </summary>
         private async Task AddDecklinkVideoSourceAsync()
         {
             // Decklink video source
@@ -568,6 +631,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Add ndi source async.
+        /// </summary>
         private async Task AddNDISourceAsync()
         {
             var dlg = new NDISourceDialog();
@@ -659,6 +725,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add source click event.
+        /// </summary>
         private void btAddSource_Click(object sender, RoutedEventArgs e)
         {
             var ctx = new ContextMenu();
@@ -732,6 +801,9 @@ namespace Live_Video_Compositor_Demo
             ctx.IsOpen = true;
         }
 
+        /// <summary>
+        /// Handles the bt remove source click event.
+        /// </summary>
         private async void btRemoveSource_Click(object sender, RoutedEventArgs e)
         {
             if (lbSources.SelectedIndex != -1)
@@ -746,6 +818,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Update source selection async.
+        /// </summary>
         private async Task UpdateSourceSelectionAsync()
         {
             if (lbSources.SelectedIndex != -1)
@@ -785,16 +860,25 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Lb sources selection changed.
+        /// </summary>
         private async void lbSources_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             await UpdateSourceSelectionAsync();
         }
 
+        /// <summary>
+        /// Lb sources preview mouse left button down.
+        /// </summary>
         private async void lbSources_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             await UpdateSourceSelectionAsync();
         }
 
+        /// <summary>
+        /// Handles the bt add output click event.
+        /// </summary>
         private void btAddOutput_Click(object sender, RoutedEventArgs e)
         {
             var ctx = new ContextMenu();
@@ -832,6 +916,9 @@ namespace Live_Video_Compositor_Demo
             ctx.IsOpen = true;
         }
 
+        /// <summary>
+        /// Handles the bt remove output click event.
+        /// </summary>
         private async void btRemoveOutput_Click(object sender, RoutedEventArgs e)
         {
             if (lbOutputs.SelectedIndex != -1)
@@ -847,6 +934,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (_compositor != null)
@@ -857,6 +947,9 @@ namespace Live_Video_Compositor_Demo
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt start output click event.
+        /// </summary>
         private async void btStartOutput_Click(object sender, RoutedEventArgs e)
         {
             if (lbOutputs.SelectedIndex != -1)
@@ -866,6 +959,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop output click event.
+        /// </summary>
         private async void btStopOutput_Click(object sender, RoutedEventArgs e)
         {
             if (lbOutputs.SelectedIndex != -1)
@@ -877,6 +973,9 @@ namespace Live_Video_Compositor_Demo
 
         private bool _timelineSeeking = true;
 
+        /// <summary>
+        /// Tb seeking value changed.
+        /// </summary>
         private async void tbSeeking_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!_timelineSeeking)

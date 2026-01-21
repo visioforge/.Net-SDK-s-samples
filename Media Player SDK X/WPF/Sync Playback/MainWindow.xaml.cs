@@ -16,21 +16,42 @@ namespace SyncPlayback
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The timer for UI updates.
+        /// </summary>
         private System.Timers.Timer _timer;
 
+        /// <summary>
+        /// Flag to prevent re-entrant timer calls.
+        /// </summary>
         private volatile bool _timerFlag;
 
+        /// <summary>
+        /// The media player instance 1.
+        /// </summary>
         private MediaPlayerCoreX _player1;
 
+        /// <summary>
+        /// The media player instance 2.
+        /// </summary>
         private MediaPlayerCoreX _player2;
 
+        /// <summary>
+        /// Flag to indicate if the window is closing.
+        /// </summary>
         private volatile bool _isClosing;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _timer = new System.Timers.Timer(500);
@@ -52,6 +73,9 @@ namespace SyncPlayback
             }
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void Player_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -60,6 +84,9 @@ namespace SyncPlayback
             }));
         }
 
+        /// <summary>
+        /// Player 1 on stop.
+        /// </summary>
         private void Player1_OnStop(object sender, StopEventArgs e)
         {
             if (_isClosing)
@@ -73,6 +100,9 @@ namespace SyncPlayback
             }));
         }
 
+        /// <summary>
+        /// Create engines.
+        /// </summary>
         private void CreateEngines()
         {
             _player1 = new MediaPlayerCoreX(VideoView1);
@@ -91,6 +121,9 @@ namespace SyncPlayback
 
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timerFlag = true;
@@ -118,6 +151,9 @@ namespace SyncPlayback
             _timerFlag = false;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_player1 != null)
@@ -139,6 +175,9 @@ namespace SyncPlayback
             }
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
@@ -148,6 +187,9 @@ namespace SyncPlayback
             }
         }
 
+        /// <summary>
+        /// Handles the bt select file 2 click event.
+        /// </summary>
         private void btSelectFile2_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
@@ -157,6 +199,9 @@ namespace SyncPlayback
             }
         }
 
+        /// <summary>
+        /// Tb timeline value changed.
+        /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!_timerFlag && _player1 != null)
@@ -170,6 +215,9 @@ namespace SyncPlayback
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             edLog.Clear();
@@ -206,6 +254,9 @@ namespace SyncPlayback
             _timer.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -227,18 +278,27 @@ namespace SyncPlayback
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _player1.PauseAsync();
             await _player2.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _player1.ResumeAsync();
             await _player2.ResumeAsync();
         }
 
+        /// <summary>
+        /// Tb volume value changed.
+        /// </summary>
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_player1 != null)
@@ -252,6 +312,9 @@ namespace SyncPlayback
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();

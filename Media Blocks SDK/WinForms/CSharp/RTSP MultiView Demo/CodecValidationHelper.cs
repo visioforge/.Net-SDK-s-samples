@@ -17,6 +17,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// <param name="targetContainer">The target container format ("mp4" or "mpegts").</param>
         /// <param name="errorMessage">Error message if codec is incompatible.</param>
         /// <returns><c>true</c> if codec is compatible; otherwise, <c>false</c>.</returns>
+        /// <summary>
+        /// Is codec compatible with container.
+        /// </summary>
         public static bool IsCodecCompatibleWithContainer(MediaFileInfo mediaInfo, string targetContainer, out string errorMessage)
         {
             errorMessage = null;
@@ -85,6 +88,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// </summary>
         /// <param name="mediaInfo">The media information.</param>
         /// <returns>The codec name, or null if not available.</returns>
+        /// <summary>
+        /// Get video codec.
+        /// </summary>
         public static string GetVideoCodec(MediaFileInfo mediaInfo)
         {
             if (mediaInfo == null)

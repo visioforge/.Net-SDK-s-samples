@@ -17,18 +17,32 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
 {
+    /// <summary>
+    /// Represents the DataMatrix information.
+    /// </summary>
     public class DataMatrixInfo : INotifyPropertyChanged
     {
         private string _value;
+
         private string _timestamp;
+
         private long _frameNumber;
+
         private int _rows;
+
         private int _cols;
+
         private string _topLeft;
+
         private string _topRight;
+
         private string _bottomLeft;
+
         private string _bottomRight;
 
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
         public string Value
         {
             get => _value;
@@ -39,6 +53,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Gets or sets the timestamp.
+        /// </summary>
         public string Timestamp
         {
             get => _timestamp;
@@ -49,6 +66,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Gets or sets the frame number.
+        /// </summary>
         public long FrameNumber
         {
             get => _frameNumber;
@@ -59,6 +79,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Gets or sets the rows.
+        /// </summary>
         public int Rows
         {
             get => _rows;
@@ -69,6 +92,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Gets or sets the columns.
+        /// </summary>
         public int Cols
         {
             get => _cols;
@@ -79,6 +105,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Gets or sets the top left corner.
+        /// </summary>
         public string TopLeft
         {
             get => _topLeft;
@@ -89,6 +118,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Gets or sets the top right corner.
+        /// </summary>
         public string TopRight
         {
             get => _topRight;
@@ -99,6 +131,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Gets or sets the bottom left corner.
+        /// </summary>
         public string BottomLeft
         {
             get => _bottomLeft;
@@ -109,6 +144,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Gets or sets the bottom right corner.
+        /// </summary>
         public string BottomRight
         {
             get => _bottomRight;
@@ -119,8 +157,14 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// On property changed.
+        /// </summary>
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -132,20 +176,53 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
+
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
+
+        /// <summary>
+        /// The video source.
+        /// </summary>
         private SystemVideoSourceBlock _videoSource;
+
+        /// <summary>
+        /// The DataMatrix decoder.
+        /// </summary>
         private DataMatrixDecoderBlock _dataMatrixDecoder;
+
+        /// <summary>
+        /// The timer.
+        /// </summary>
         private System.Timers.Timer _timer;
+
+        /// <summary>
+        /// The DataMatrix codes collection.
+        /// </summary>
         private ObservableCollection<DataMatrixInfo> _dataMatrixCodes = new ObservableCollection<DataMatrixInfo>();
+
+        /// <summary>
+        /// The detection count.
+        /// </summary>
         private int _detectionCount = 0;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             lbDataMatrixCodes.ItemsSource = _dataMatrixCodes;
         }
 
+        /// <summary>
+        /// Device enumerator on video source added.
+        /// </summary>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -159,6 +236,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -167,6 +247,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }));
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Check if DataMatrix detection is available
@@ -197,6 +280,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
@@ -260,6 +346,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             _timer.Start();
         }
 
+        /// <summary>
+        /// Data matrix decoder on data matrix detected.
+        /// </summary>
         private void DataMatrixDecoder_OnDataMatrixDetected(object sender, DataMatrixDecoderEventArgs e)
         {
             Dispatcher.Invoke(() =>
@@ -312,6 +401,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -328,16 +420,25 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             VideoView1.CallRefresh();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             var position = await _pipeline.Position_GetAsync();
@@ -348,6 +449,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer?.Stop();
@@ -370,6 +474,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Cb video input selection changed.
+        /// </summary>
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -397,6 +504,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Cb video format selection changed.
+        /// </summary>
         private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFrameRate.Items.Clear();
@@ -430,6 +540,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the bt clear data matrix click event.
+        /// </summary>
         private void btClearDataMatrix_Click(object sender, RoutedEventArgs e)
         {
             _dataMatrixCodes.Clear();
@@ -438,6 +551,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             lbLastDetection.Text = "";
         }
 
+        /// <summary>
+        /// Sl frame skip value changed.
+        /// </summary>
         private void slFrameSkip_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbFrameSkipValue != null)
@@ -451,6 +567,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Sl timeout value changed.
+        /// </summary>
         private void slTimeout_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbTimeoutValue != null)
@@ -464,6 +583,9 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Sl max codes value changed.
+        /// </summary>
         private void slMaxCodes_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbMaxCodesValue != null)

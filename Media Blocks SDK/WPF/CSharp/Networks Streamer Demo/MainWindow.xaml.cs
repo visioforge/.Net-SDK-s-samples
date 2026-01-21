@@ -73,6 +73,9 @@ namespace Networks_Streamer_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Device enumerator on audio source added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -81,6 +84,9 @@ namespace Networks_Streamer_Demo
             });
         }
 
+        /// <summary>
+        /// Device enumerator on video source added.
+        /// </summary>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -94,6 +100,9 @@ namespace Networks_Streamer_Demo
             });
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -102,6 +111,9 @@ namespace Networks_Streamer_Demo
             }));
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -129,6 +141,9 @@ namespace Networks_Streamer_Demo
             await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             var position = await _pipeline.Position_GetAsync();
@@ -139,6 +154,9 @@ namespace Networks_Streamer_Demo
             });
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -390,6 +408,9 @@ namespace Networks_Streamer_Demo
             _timer.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -401,6 +422,9 @@ namespace Networks_Streamer_Demo
             VideoView1.CallRefresh();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
@@ -418,6 +442,9 @@ namespace Networks_Streamer_Demo
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Cb video input selection changed.
+        /// </summary>
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -445,6 +472,9 @@ namespace Networks_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Cb video format selection changed.
+        /// </summary>
         private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFrameRate.Items.Clear();
@@ -478,6 +508,9 @@ namespace Networks_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Cb audio input selection changed.
+        /// </summary>
         private async void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbAudioFormat.Items.Clear();
@@ -504,6 +537,9 @@ namespace Networks_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Cb platform selection changed.
+        /// </summary>
         private void cbPlatform_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (edStreamingKey == null)

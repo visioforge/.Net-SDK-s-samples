@@ -24,6 +24,9 @@ namespace ip_camera_capture_mp4
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             // create MediaBlocks pipeline
@@ -64,6 +67,9 @@ namespace ip_camera_capture_mp4
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await _pipeline.StopAsync();
@@ -71,11 +77,17 @@ namespace ip_camera_capture_mp4
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await VisioForgeX.InitSDKAsync();
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             VisioForgeX.DestroySDK();

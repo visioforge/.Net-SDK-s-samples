@@ -13,14 +13,29 @@
     using VisioForge.Core.Types.MediaPlayer;
     using VisioForge.Core.UI;
 
+    /// <summary>
+    /// Video mixing demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The list of PIP info.
+        /// </summary>
         private readonly List<PIPInfo> _pipInfos;
 
+        /// <summary>
+        /// The last Z order.
+        /// </summary>
         private int _lastZOrder = 8;
 
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCore MediaPlayer1;
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
@@ -28,6 +43,9 @@
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (MediaPlayer1 != null)
@@ -40,6 +58,9 @@
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -47,6 +68,9 @@
             _pipInfos = new List<PIPInfo>();
         }
 
+        /// <summary>
+        /// Add file.
+        /// </summary>
         private void AddFile(string filename)
         {
             var info = new PIPInfo();
@@ -81,12 +105,18 @@
             //lbSourceFiles.SelectedIndex = _pipInfos.Count - 1;
         }
 
+        /// <summary>
+        /// Handles the bt add file to playlist click event.
+        /// </summary>
         private void btAddFileToPlaylist_Click(object sender, EventArgs e)
         {
             var filename = edFilenameOrURL.Text;
             AddFile(filename);
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -95,12 +125,18 @@
             }
         }
 
+        /// <summary>
+        /// Link label 1 link clicked.
+        /// </summary>
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
@@ -124,6 +160,9 @@
             timer1.Start();
         }
 
+        /// <summary>
+        /// Media player 1 on error.
+        /// </summary>
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -132,6 +171,9 @@
                                    }));
         }
 
+        /// <summary>
+        /// Handles the bt test click event.
+        /// </summary>
         private void btTest_Click(object sender, EventArgs e)
         {
             string filename1 = @"e:\_movies\The Mighty Boosh.Saliour Tour 2009.mkv";
@@ -144,6 +186,9 @@
             AddFile(filename2);
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             timer1.Stop();
@@ -155,16 +200,25 @@
             lbSourceFiles.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await MediaPlayer1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await MediaPlayer1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 shown event.
+        /// </summary>
         private void Form1_Shown(object sender, EventArgs e)
         {
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
@@ -173,6 +227,9 @@
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
+        /// <summary>
+        /// Handles the lb source files selected index changed event.
+        /// </summary>
         private void lbSourceFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbSourceFiles.SelectedIndex >= 0)
@@ -188,6 +245,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt update rect click event.
+        /// </summary>
         private async void btUpdateRect_Click(object sender, EventArgs e)
         {
             int index = lbSourceFiles.SelectedIndex;
@@ -220,6 +280,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
@@ -227,11 +290,17 @@
             Text += $" (SDK v{MediaPlayer1.SDK_Version()})";
         }
 
+        /// <summary>
+        /// Handles the tb stream transparency scroll event.
+        /// </summary>
         private void tbStreamTransparency_Scroll(object sender, EventArgs e)
         {
             lbStreamTransparency.Text = tbStreamTransparency.Value.ToString();
         }
 
+        /// <summary>
+        /// Media player 1 on stop.
+        /// </summary>
         private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             BeginInvoke(new StopDelegate(StopDelegateMethod), null);
@@ -239,11 +308,17 @@
 
         private delegate void StopDelegate();
 
+        /// <summary>
+        /// Stop delegate method.
+        /// </summary>
         private void StopDelegateMethod()
         {
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the timer 1 tick event.
+        /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Tag = 1;
@@ -260,11 +335,17 @@
             timer1.Tag = 0;
         }
 
+        /// <summary>
+        /// Handles the tb speed scroll event.
+        /// </summary>
         private async void tbSpeed_Scroll(object sender, EventArgs e)
         {
             await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0);
         }
 
+        /// <summary>
+        /// Handles the tb timeline scroll event.
+        /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (Convert.ToInt32(timer1.Tag) == 0)
@@ -273,6 +354,9 @@
             }
         }
 
+        /// <summary>
+        /// Form 1 form closed.
+        /// </summary>
         private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (MediaPlayer1.State() != PlaybackState.Free)

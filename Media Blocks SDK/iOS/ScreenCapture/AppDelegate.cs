@@ -46,6 +46,9 @@ namespace ScreenCapture
 
         public override UIWindow? Window { get; set; }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync(bool capture)
         {
             //capture = false;
@@ -97,11 +100,17 @@ namespace ScreenCapture
             }
         }
 
+        /// <summary>
+        /// Request photo library permissions.
+        /// </summary>
         private void RequestPhotoLibraryPermissions(Action<PHAuthorizationStatus> completionHandler)
         {
             PHPhotoLibrary.RequestAuthorization((status) => { completionHandler(status); });
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -113,11 +122,17 @@ namespace ScreenCapture
             }
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void _pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Add buttons.
+        /// </summary>
         private void AddButtons(UIView parent)
         {
             // start capture
@@ -146,6 +161,9 @@ namespace ScreenCapture
             parent!.AddSubview(btStartCapture);
         }
 
+        /// <summary>
+        /// Save video to photo library.
+        /// </summary>
         private void SaveVideoToPhotoLibrary(string filePath)
         {
             PHPhotoLibrary.SharedPhotoLibrary.PerformChanges(() =>
@@ -171,6 +189,9 @@ namespace ScreenCapture
             });
         }
 
+        /// <summary>
+        /// Stop camera.
+        /// </summary>
         private async Task StopCamera()
         {
             if (_pipeline == null)
@@ -199,6 +220,9 @@ namespace ScreenCapture
             (_videoView as UIView).Hidden = true;
         }
 
+        /// <summary>
+        /// Start capture.
+        /// </summary>
         private async Task StartCapture()
         {
             await StopCamera();
@@ -210,6 +234,9 @@ namespace ScreenCapture
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Add video view.
+        /// </summary>
         private void AddVideoView(UIView view)
         {
             var rect = new CGRect(Window!.Frame.Width / 3, Window!.Frame.Height / 3, Window!.Frame.Width / 3, Window!.Frame.Height / 3);
@@ -219,6 +246,9 @@ namespace ScreenCapture
             view!.AddSubview(_videoView as UIView);
         }
 
+        /// <summary>
+        /// Add rainbow.
+        /// </summary>
         private void AddRainbow(UIView view)
         {
             // Create a new UIView
@@ -252,6 +282,9 @@ namespace ScreenCapture
             view.AddSubview(gradientView);
         }
 
+        /// <summary>
+        /// Add time label.
+        /// </summary>
         private void AddTimeLabel(UIView view)
         {
             // Create and configure the time label
@@ -265,6 +298,9 @@ namespace ScreenCapture
             view.AddSubview(timeLabel);
         }
 
+        /// <summary>
+        /// Finished launching.
+        /// </summary>
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             // create a new window instance based on the screen size
@@ -313,6 +349,9 @@ namespace ScreenCapture
             return true;
         }
 
+        /// <summary>
+        /// Update time.
+        /// </summary>
         private void UpdateTime()
         {
             // Get the current time and update the label

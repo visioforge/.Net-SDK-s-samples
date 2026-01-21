@@ -11,15 +11,24 @@ using System.Linq;
 
 namespace video_capture_webcam_wmv
 {
+    /// <summary>
+    /// Video capture webcam WMV X demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private VideoCaptureCoreX videoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             videoCapture1 = new VideoCaptureCoreX(VideoView1);
@@ -45,6 +54,9 @@ namespace video_capture_webcam_wmv
             await videoCapture1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await videoCapture1.StopAsync();
@@ -52,6 +64,9 @@ namespace video_capture_webcam_wmv
             await videoCapture1.DisposeAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -62,6 +77,9 @@ namespace video_capture_webcam_wmv
             Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             VisioForgeX.DestroySDK();

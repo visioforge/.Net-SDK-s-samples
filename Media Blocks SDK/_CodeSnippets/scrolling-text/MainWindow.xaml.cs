@@ -31,6 +31,9 @@ namespace scrolling_text
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Initialize the SDK on start
@@ -41,6 +44,9 @@ namespace scrolling_text
             Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(edFilename.Text))
@@ -116,6 +122,9 @@ namespace scrolling_text
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             if (_pipeline == null)
@@ -128,12 +137,18 @@ namespace scrolling_text
             _pipeline = null;
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             btStop_Click(null, null);
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog

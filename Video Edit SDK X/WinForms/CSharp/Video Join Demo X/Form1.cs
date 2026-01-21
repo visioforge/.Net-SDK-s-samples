@@ -12,15 +12,25 @@
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.VideoEditX;
 
+    /// <summary>
+    /// The main form for the Video Join Demo X.
+    /// Provides a simplified interface for joining multiple video/audio/image files into a single output using the X-engine.
+    /// </summary>
     public partial class Form1 : Form
     {
         private VideoEditCoreX VideoEdit1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Creates the video editing engine and subscribes to events.
+        /// </summary>
         private void CreateEngine()
         {
             VideoEdit1 = new VideoEditCoreX(VideoView1 as IVideoView);
@@ -30,6 +40,9 @@
             VideoEdit1.OnProgress += VideoEdit1_OnProgress;
         }
 
+        /// <summary>
+        /// Destroys the video editing engine and unsubscribes from events to release resources.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoEdit1 != null)
@@ -43,6 +56,12 @@
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAddInputFile control.
+        /// Opens a file dialog to select and add multimedia files to the join list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btAddInputFile_Click(object sender, EventArgs e)
         {
             if (OpenDialog1.ShowDialog() == DialogResult.OK)
@@ -77,6 +96,12 @@
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// Opens a save file dialog to specify the joined output file path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (SaveDialog1.ShowDialog() == DialogResult.OK)
@@ -85,12 +110,24 @@
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btClearList control.
+        /// Clears the input files list and resets the engine's input list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btClearList_Click(object sender, EventArgs e)
         {
             lbFiles.Items.Clear();
             VideoEdit1.Input_Clear_List();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the output format and starts the joining process.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btStart_Click(object sender, EventArgs e)
         {
             VideoEdit1.Debug_Mode = cbDebugMode.Checked;
@@ -190,6 +227,12 @@
             VideoEdit1.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the joining process and resets the project state.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btStop_Click(object sender, EventArgs e)
         {
             VideoEdit1.Stop();
@@ -199,6 +242,9 @@
             ProgressBar1.Value = 0;
         }
 
+        /// <summary>
+        /// Video edit 1 on error.
+        /// </summary>
         private void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -207,11 +253,17 @@
                                    }));
         }
 
+        /// <summary>
+        /// Video edit 1 on progress.
+        /// </summary>
         private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
         {
             Invoke((Action)(() => { ProgressBar1.Value = e.Progress; }));
         }
 
+        /// <summary>
+        /// Video edit 1 on stop.
+        /// </summary>
         private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
@@ -230,6 +282,12 @@
                                    }));          
         }
 
+        /// <summary>
+        /// Handles the Load event of the Form1 control.
+        /// Initializes the SDK, creates the engine, and sets default UI values.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -251,6 +309,9 @@
             cbOutputVideoFormat.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();

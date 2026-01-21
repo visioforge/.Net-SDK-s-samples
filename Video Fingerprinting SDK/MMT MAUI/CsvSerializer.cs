@@ -5,6 +5,13 @@ namespace MMT_MAUI
 {
     public static class CsvSerializer
     {
+        /// <summary>
+        /// Serializes to CSV.
+        /// </summary>
+        /// <typeparam name="T">The type.</typeparam>
+        /// <param name="genericList">The generic list.</param>
+        /// <param name="fileName">The file name.</param>
+        /// <param name="separator">The separator.</param>
         public static void SerializeToCsv<T>(this List<T> genericList, string fileName, char separator)
         {
             var sb = new StringBuilder();

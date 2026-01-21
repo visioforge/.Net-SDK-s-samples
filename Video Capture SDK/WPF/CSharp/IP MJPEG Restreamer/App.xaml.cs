@@ -7,6 +7,9 @@ using System.Windows;
 
 namespace IP_MJPEG_Restreamer
 {
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
     public partial class App : Application
     {
     }

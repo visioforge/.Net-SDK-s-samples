@@ -15,16 +15,32 @@ using VisioForge.Core.ONVIFDiscovery.Models;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
+    /// <summary>
+    /// The ONVIF discovery form.
+    /// </summary>
     public partial class ONVIFDiscovery : Form
     {
+        /// <summary>
+        /// The ONVIF discovery instance.
+        /// </summary>
         private Discovery _onvifDiscovery = new Discovery();
+
+        /// <summary>
+        /// The cancellation token source.
+        /// </summary>
         private CancellationTokenSource _cts;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ONVIFDiscovery"/> class.
+        /// </summary>
         public ONVIFDiscovery()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt search click event.
+        /// </summary>
         private async void btSearch_Click(object sender, EventArgs e)
         {
             cbSources.Items.Clear();
@@ -60,6 +76,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt read profiles click event.
+        /// </summary>
         private async void btReadProfiles_Click(object sender, EventArgs e)
         {
             var onvifClient = new ONVIFClientX();

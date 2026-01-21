@@ -12,11 +12,19 @@ namespace SimpleService
     [RunInstaller(true)]
     public partial class ProjectInstaller : System.Configuration.Install.Installer
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProjectInstaller"/> class.
+        /// </summary>
         public ProjectInstaller()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Service installer 1 committed.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void serviceInstaller1_Committed(object sender, InstallEventArgs e)
         {
             // System.Diagnostics.Debugger.Launch();

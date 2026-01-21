@@ -15,7 +15,8 @@ using VisioForge.Core;
 namespace Video_Preview_Blazor_Hybrid;
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+/// Interaction logic for the Blazor Hybrid Video Preview WPF demo's MainWindow.
+/// Initializes the internal service collection and the Video Capture SDK X.
 /// </summary>
 public partial class MainWindow : Window
 {
@@ -31,11 +32,22 @@ public partial class MainWindow : Window
         VisioForgeX.InitSDK();
     }
 
+    /// <summary>
+    /// Handles the Loaded event of the window.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
        
     }
 
+    /// <summary>
+    /// Handles the Unloaded event of the window.
+    /// Ensures that the Video Capture SDK is properly destroyed.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private void Window_Unloaded(object sender, RoutedEventArgs e)
     {
         VisioForgeX.DestroySDK();

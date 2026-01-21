@@ -6,6 +6,9 @@ namespace DVS_MAUI
 
     public static class FileScanner
     {
+        /// <summary>
+        /// Search video in folder.
+        /// </summary>
         public static IEnumerable<string> SearchVideoInFolder(string folder, List<string> extensions)
         {   
             var files = new List<string>();

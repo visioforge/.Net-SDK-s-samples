@@ -84,6 +84,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Tb audio volume scroll.
+        ''' </summary>
     Private Sub tbAudioVolume_Scroll(sender As Object, e As EventArgs) Handles tbAudioVolume.Scroll
         If VideoCapture1 Is Nothing Then
             Return
@@ -92,6 +95,9 @@ Public Class Form1
         VideoCapture1.Audio_OutputDevice_Volume = tbAudioVolume.Value / 100.0
     End Sub
 
+        ''' <summary>
+        ''' Bt select output click.
+        ''' </summary>
     Private Sub btSelectOutput_Click(sender As Object, e As EventArgs) Handles btSelectOutput.Click
         If saveFileDialog1.ShowDialog() = DialogResult.OK Then
             edOutput.Text = saveFileDialog1.FileName
@@ -192,10 +198,16 @@ Public Class Form1
         End Try
     End Sub
 
+        ''' <summary>
+        ''' Tm recording elapsed.
+        ''' </summary>
     Private Sub tmRecording_Elapsed(sender As Object, e As ElapsedEventArgs) Handles tmRecording.Elapsed
         UpdateRecordingTime()
     End Sub
 
+        ''' <summary>
+        ''' Update recording time.
+        ''' </summary>
     Private Sub UpdateRecordingTime()
         Dim ts = VideoCapture1.Duration()
 
@@ -212,6 +224,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Ll video tutorials link clicked.
+        ''' </summary>
     Private Sub llVideoTutorials_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llVideoTutorials.LinkClicked
         Dim startInfo = New ProcessStartInfo(HelpLinks.VideoTutorials) With {
             .UseShellExecute = True
@@ -219,6 +234,9 @@ Public Class Form1
         Process.Start(startInfo)
     End Sub
 
+        ''' <summary>
+        ''' Log.
+        ''' </summary>
     Private Sub Log(txt As String)
         If Me.InvokeRequired Then
             Me.Invoke(Sub() mmLog.Text = mmLog.Text & txt & Environment.NewLine)
@@ -227,10 +245,16 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on error.
+        ''' </summary>
     Private Sub VideoCapture1_OnError(sender As Object, e As ErrorsEventArgs)
         Log(e.Message)
     End Sub
 
+        ''' <summary>
+        ''' Cb output format selected index changed.
+        ''' </summary>
     Private Sub cbOutputFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOutputFormat.SelectedIndexChanged
         If edOutput Is Nothing Then
             Return
@@ -254,6 +278,9 @@ Public Class Form1
         End Select
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on stop.
+        ''' </summary>
     Private Sub VideoCapture1_OnStop(sender As Object, e As EventArgs)
         If Me.InvokeRequired Then
             Me.Invoke(Sub() lbTimestamp.Text = "Recording time: 00:00:00")

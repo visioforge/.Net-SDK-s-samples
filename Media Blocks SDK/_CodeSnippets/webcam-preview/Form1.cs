@@ -27,6 +27,9 @@ namespace webcam_preview
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -34,6 +37,9 @@ namespace webcam_preview
             _pipeline.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (_pipeline != null)
@@ -45,6 +51,9 @@ namespace webcam_preview
             }
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -65,6 +74,9 @@ namespace webcam_preview
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
+        /// <summary>
+        /// Device enumerator on audio sink added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
         {
             Invoke((Action)(() =>
@@ -78,6 +90,9 @@ namespace webcam_preview
             }));
         }
 
+        /// <summary>
+        /// Device enumerator on audio source added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
             Invoke((Action)(() =>
@@ -91,6 +106,9 @@ namespace webcam_preview
             }));
         }
 
+        /// <summary>
+        /// Device enumerator on video source added.
+        /// </summary>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Invoke((Action)(() =>
@@ -104,6 +122,9 @@ namespace webcam_preview
             }));
         }
 
+        /// <summary>
+        /// Handles the cb video input device selected index changed event.
+        /// </summary>
         private async void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbVideoInputFormat.Items.Clear();
@@ -127,6 +148,9 @@ namespace webcam_preview
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             CreateEngine();
@@ -197,6 +221,9 @@ namespace webcam_preview
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the cb audio input device selected index changed event.
+        /// </summary>
         private async void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbAudioInputFormat.Items.Clear();
@@ -233,6 +260,9 @@ namespace webcam_preview
             }
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -241,11 +271,17 @@ namespace webcam_preview
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             if (_pipeline == null)
@@ -256,6 +292,9 @@ namespace webcam_preview
             await _pipeline.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             if (_pipeline == null)
@@ -266,6 +305,9 @@ namespace webcam_preview
             await _pipeline.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             if (_pipeline == null)
@@ -276,6 +318,9 @@ namespace webcam_preview
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the cb video input format selected index changed event.
+        /// </summary>
         private async void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
@@ -319,6 +364,9 @@ namespace webcam_preview
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();

@@ -10,20 +10,44 @@ using VisioForge.Core.UI.Apple;
 
 namespace SimpleMediaPlayerMBMac;
 
+/// <summary>
+/// The view controller.
+/// </summary>
 public partial class ViewController : NSViewController
 {
+    /// <summary>
+    /// The audio renderer.
+    /// </summary>
     private AudioRendererBlock _audioRenderer;
     
+    /// <summary>
+    /// The pipeline.
+    /// </summary>
     private MediaBlocksPipeline _pipeline;
 
+    /// <summary>
+    /// The universal source.
+    /// </summary>
     private UniversalSourceBlock _source;
 
+    /// <summary>
+    /// The position timer.
+    /// </summary>
     private Timer _timer;
 
+    /// <summary>
+    /// Indicates whether the timer is currently processing an update.
+    /// </summary>
     private bool _timerFlag;
 
+    /// <summary>
+    /// The video renderer.
+    /// </summary>
     private VideoRendererBlock _videoRenderer;
 
+    /// <summary>
+    /// The video view.
+    /// </summary>
     private VideoView _videoView;
 
     protected ViewController(NativeHandle handle) : base(handle)
@@ -39,6 +63,9 @@ public partial class ViewController : NSViewController
         // Update the view, if already loaded.
     }
 
+        /// <summary>
+        /// View did load.
+        /// </summary>
     public override void ViewDidLoad()
     {
         base.ViewDidLoad();
@@ -53,6 +80,9 @@ public partial class ViewController : NSViewController
         _timer = new Timer(OnTimer);
     }
 
+        /// <summary>
+        /// On timer.
+        /// </summary>
     public async void OnTimer(object stateInfo)
     {
         if (_pipeline == null) return;
@@ -74,6 +104,9 @@ public partial class ViewController : NSViewController
         _timerFlag = false;
     }
 
+        /// <summary>
+        /// Show message.
+        /// </summary>
     private void ShowMessage(string text)
     {
         InvokeOnMainThread(async () =>
@@ -88,6 +121,9 @@ public partial class ViewController : NSViewController
         });
     }
 
+        /// <summary>
+        /// Start async.
+        /// </summary>
     private async Task StartAsync()
     {
         if (View.Window.Delegate == null)
@@ -129,6 +165,9 @@ public partial class ViewController : NSViewController
         _timer.Change(0, 1000);
     }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
     private async Task StopAsync()
     {
         _timer.Change(0, Timeout.Infinite);
@@ -141,16 +180,25 @@ public partial class ViewController : NSViewController
         _pipeline = null;
     }
 
+    /// <summary>
+    /// Handles the Click event of the btStart button.
+    /// </summary>
     partial void btStart_Click(NSObject sender)
     {
         InvokeOnMainThread(async () => { await StartAsync(); });
     }
 
+    /// <summary>
+    /// Handles the Click event of the btStop button.
+    /// </summary>
     partial void btStop_Click(NSObject sender)
     {
         InvokeOnMainThread(async () => { await StopAsync(); });
     }
 
+    /// <summary>
+    /// Handles the Click event of the btOpen button.
+    /// </summary>
     partial void btOpen_Click(NSObject sender)
     {
         var dlg = NSOpenPanel.OpenPanel;
@@ -167,6 +215,9 @@ public partial class ViewController : NSViewController
         }
     }
 
+    /// <summary>
+    /// Handles the change event of the slPosition slider.
+    /// </summary>
     partial void slPositionChanged(NSObject sender)
     {
         var value = (sender as NSSlider).FloatValue;
@@ -178,9 +229,14 @@ public partial class ViewController : NSViewController
     }
 }
 
-// Custom Window delegate to close the SDK
+/// <summary>
+/// Custom Window delegate to close the SDK
+/// </summary>
 public class CustomWindowDelegate : NSWindowDelegate
 {
+        /// <summary>
+        /// Window should close.
+        /// </summary>
     public override bool WindowShouldClose(NSObject sender)
     {
         VisioForgeX.DestroySDK();

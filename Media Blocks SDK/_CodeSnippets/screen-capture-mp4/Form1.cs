@@ -25,6 +25,9 @@ namespace screen_capture_mp4
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create screen capture source.
+        /// </summary>
         private IScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
             var source = new ScreenCaptureDX9SourceSettings();
@@ -38,11 +41,17 @@ namespace screen_capture_mp4
             return source;
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await VisioForgeX.InitSDKAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start without audio click event.
+        /// </summary>
         private async void btStartWithoutAudio_Click(object sender, EventArgs e)
         {
             // create MediaBlocks pipeline
@@ -71,6 +80,9 @@ namespace screen_capture_mp4
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start with audio click event.
+        /// </summary>
         private async void btStartWithAudio_Click(object sender, EventArgs e)
         {
             // create MediaBlocks pipeline
@@ -104,6 +116,9 @@ namespace screen_capture_mp4
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await _pipeline.StopAsync();
@@ -111,6 +126,9 @@ namespace screen_capture_mp4
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             VisioForgeX.DestroySDK();

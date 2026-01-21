@@ -14,19 +14,37 @@ using VisioForge.Core;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
+    /// <summary>
+    /// The main form of the application.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The play engines array.
+        /// </summary>
         private IPlayEngine[] _playEngines = new IPlayEngine[9];
 
+        /// <summary>
+        /// The record engines array.
+        /// </summary>
         private RTSPRecordEngine[] _recordEngines = new RTSPRecordEngine[9];
 
+        /// <summary>
+        /// The custom decoders list.
+        /// </summary>
         private List<Tuple<string, string>> _customDecoders;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -68,6 +86,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
         }
 
+        /// <summary>
+        /// Get video view by index.
+        /// </summary>
         private IVideoView GetVideoViewByIndex(int index)
         {
             switch (index)
@@ -95,6 +116,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             edLog.Text = string.Empty;
@@ -151,6 +175,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         bool _rawAudioFrameReceived;
 
+        /// <summary>
+        /// Engine on video raw frame.
+        /// </summary>
         private void Engine_OnVideoRAWFrame(object sender, VisioForge.Core.Types.Events.DataFrameEventArgs e)
         {
             if (_rawVideoFrameReceived)
@@ -165,6 +192,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }));
         }
 
+        /// <summary>
+        /// Engine on audio raw frame.
+        /// </summary>
         private void Engine_OnAudioRAWFrame(object sender, VisioForge.Core.Types.Events.DataFrameEventArgs e)
         {
             if (_rawAudioFrameReceived)
@@ -179,6 +209,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }));
         }
 
+        /// <summary>
+        /// Engine on error.
+        /// </summary>
         private void Engine_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -187,6 +220,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             int id = cbCameraIndex.SelectedIndex;
@@ -202,6 +238,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             GetVideoViewByIndex(id).CallRefresh();
         }
 
+        /// <summary>
+        /// Handles the cb camera index selected index changed event.
+        /// </summary>
         private void cbCameraIndex_SelectedIndexChanged(object sender, EventArgs e)
         {
             int id = cbCameraIndex.SelectedIndex;
@@ -229,6 +268,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             for (int i = 0; i < _playEngines.Length; i++)
@@ -243,6 +285,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt read info click event.
+        /// </summary>
         private async void btReadInfo_Click(object sender, EventArgs e)
         {
             var infoReader = new MediaInfoReaderX();
@@ -279,6 +324,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start record click event.
+        /// </summary>
         private async void btStartRecord_Click(object sender, EventArgs e)
         {
             edLog.Text = string.Empty;
@@ -333,6 +381,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop record click event.
+        /// </summary>
         private async void btStopRecord_Click(object sender, EventArgs e)
         {
             int id = cbCameraIndex.SelectedIndex;
@@ -347,6 +398,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt click event.
+        /// </summary>
         private void btONVIF_Click(object sender, EventArgs e)
         {
             var disc = new ONVIFDiscovery();

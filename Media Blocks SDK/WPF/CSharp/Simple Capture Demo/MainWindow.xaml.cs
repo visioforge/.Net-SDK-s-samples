@@ -39,26 +39,59 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The video source.
+        /// </summary>
         private SystemVideoSourceBlock _videoSource;
 
+        /// <summary>
+        /// The audio source.
+        /// </summary>
         private SystemAudioSourceBlock _audioSource;
 
+        /// <summary>
+        /// The muxer.
+        /// </summary>
         private MediaBlock _muxer;
 
+        /// <summary>
+        /// The video encoder.
+        /// </summary>
         private MediaBlock _videoEncoder;
 
+        /// <summary>
+        /// The video tee.
+        /// </summary>
         private TeeBlock _videoTee;
 
+        /// <summary>
+        /// The audio tee.
+        /// </summary>
         private TeeBlock _audioTee;
 
+        /// <summary>
+        /// The audio encoder.
+        /// </summary>
         private MediaBlock _audioEncoder;
 
+        /// <summary>
+        /// The timer.
+        /// </summary>
         private System.Timers.Timer _timer;
 
         public MainWindow()
@@ -66,6 +99,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Device enumerator on audio sink added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -79,6 +115,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Device enumerator on audio source added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -92,6 +131,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Device enumerator on video source added.
+        /// </summary>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -105,6 +147,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             });
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -113,6 +158,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             }));
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -141,6 +189,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
@@ -260,6 +311,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             _timer.Start();
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new SaveFileDialog();
@@ -270,6 +324,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -281,16 +338,25 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             VideoView1.CallRefresh();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             var position = await _pipeline.Position_GetAsync();
@@ -301,6 +367,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             });           
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
@@ -318,6 +387,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Cb video input selection changed.
+        /// </summary>
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -345,6 +417,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Cb video format selection changed.
+        /// </summary>
         private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFrameRate.Items.Clear();
@@ -378,6 +453,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Cb audio input selection changed.
+        /// </summary>
         private async void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -404,6 +482,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Tb volume value changed.
+        /// </summary>
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_audioRenderer != null)

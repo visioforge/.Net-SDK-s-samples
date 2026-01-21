@@ -15,43 +15,67 @@ namespace Skinned_Player
     /// </summary>
     public partial class MainWindow : Window, IDisposable
     {
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCore MediaPlayer1;
 
+        /// <summary>
+        /// The disposed value.
+        /// </summary>
         private bool disposedValue;
 
         #region Title bar
 
         // Can execute
+        /// <summary>
+        /// Command binding can execute.
+        /// </summary>
         private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
 
         // Minimize
+        /// <summary>
+        /// Command binding executed minimize.
+        /// </summary>
         private void CommandBinding_Executed_Minimize(object sender, ExecutedRoutedEventArgs e)
         {
             SystemCommands.MinimizeWindow(this);
         }
 
         // Maximize
+        /// <summary>
+        /// Command binding executed maximize.
+        /// </summary>
         private void CommandBinding_Executed_Maximize(object sender, ExecutedRoutedEventArgs e)
         {
             SystemCommands.MaximizeWindow(this);
         }
 
         // Restore
+        /// <summary>
+        /// Command binding executed restore.
+        /// </summary>
         private void CommandBinding_Executed_Restore(object sender, ExecutedRoutedEventArgs e)
         {
             SystemCommands.RestoreWindow(this);
         }
 
         // Close
+        /// <summary>
+        /// Command binding executed close.
+        /// </summary>
         private void CommandBinding_Executed_Close(object sender, ExecutedRoutedEventArgs e)
         {
             SystemCommands.CloseWindow(this);
         }
 
         // State change
+        /// <summary>
+        /// Handles the main window state change raised event.
+        /// </summary>
         private void MainWindowStateChangeRaised(object sender, EventArgs e)
         {
             if (WindowState == WindowState.Maximized)
@@ -70,6 +94,9 @@ namespace Skinned_Player
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             var skinFile = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Skins", "Default.vfskin");
@@ -86,6 +113,9 @@ namespace Skinned_Player
             playerControls.SkinName = "Default";
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             CreateEngine();
@@ -100,6 +130,9 @@ namespace Skinned_Player
             playlist.AttachPlayerControls(playerControls);
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
@@ -114,6 +147,9 @@ namespace Skinned_Player
             playerControls.OnAction += PlayerControls_OnAction;
         }
 
+        /// <summary>
+        /// Player controls on action.
+        /// </summary>
         private async void PlayerControls_OnAction(object sender, SkinActionEventArgs e)
         {
             if (e.Type == SkinElementType.FullScreen)
@@ -122,6 +158,9 @@ namespace Skinned_Player
             }
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (MediaPlayer1 != null)
@@ -134,11 +173,17 @@ namespace Skinned_Player
             }
         }
 
+        /// <summary>
+        /// Media player 1 on error.
+        /// </summary>
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Window size changed.
+        /// </summary>
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             //VideoView1.Height = e.NewSize.Height - playerControls.ActualHeight - 45;
@@ -146,22 +191,49 @@ namespace Skinned_Player
 
         #region Full screen
 
+        /// <summary>
+        /// The full screen flag.
+        /// </summary>
         private bool fullScreen;
 
+        /// <summary>
+        /// The window left value.
+        /// </summary>
         private double windowLeft;
 
+        /// <summary>
+        /// The window top value.
+        /// </summary>
         private double windowTop;
 
+        /// <summary>
+        /// The window width value.
+        /// </summary>
         private double windowWidth;
 
+        /// <summary>
+        /// The window height value.
+        /// </summary>
         private double windowHeight;
 
+        /// <summary>
+        /// The control margin.
+        /// </summary>
         private Thickness controlMargin;
 
+        /// <summary>
+        /// The control width.
+        /// </summary>
         private double controlWidth;
 
+        /// <summary>
+        /// The control height.
+        /// </summary>
         private double controlHeight;
 
+        /// <summary>
+        /// Toggle full screen async.
+        /// </summary>
         private async Task ToggleFullScreenAsync()
         {
             if (!fullScreen)
@@ -229,6 +301,9 @@ namespace Skinned_Player
             }
         }
 
+        /// <summary>
+        /// Media player 1 mouse down.
+        /// </summary>
         private async void MediaPlayer1_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (fullScreen)
@@ -239,6 +314,9 @@ namespace Skinned_Player
 
         #endregion
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -263,6 +341,9 @@ namespace Skinned_Player
         //     Dispose(disposing: false);
         // }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

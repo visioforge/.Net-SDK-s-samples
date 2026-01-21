@@ -9,8 +9,17 @@ using VisioForge.Core.Types.VideoEdit;
 
 namespace Video_From_Images_CLI
 {
+    /// <summary>
+    /// Represents the main program for the Video From Images CLI demo.
+    /// </summary>
     static class Program
     {
+        /// <summary>
+        /// Adds files from the specified folder with the given extension to the file list.
+        /// </summary>
+        /// <param name="inputFolder">The input folder path.</param>
+        /// <param name="ext">The file extension filter (e.g., "*.jpg").</param>
+        /// <param name="files">The list of files to add to.</param>
         static void AddFiles(string inputFolder, string ext, ref List<string> files)
         {
             var files2 = Directory.GetFiles(inputFolder, ext);
@@ -20,6 +29,10 @@ namespace Video_From_Images_CLI
             }
         }
         
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        /// <param name="args">The command-line arguments.</param>
         static void Main(string[] args)
         {
             if (args.Length < 2)
@@ -38,6 +51,10 @@ namespace Video_From_Images_CLI
                 .WithNotParsed(HandleParseError);
         }
         
+        /// <summary>
+        /// Runs the video creation process from images with the specified options.
+        /// </summary>
+        /// <param name="options">The command-line options.</param>
         static void Run(CommandLineOptions options)
         {
             if (!Directory.Exists(options.InputFolder))
@@ -135,17 +152,31 @@ namespace Video_From_Images_CLI
             videoEdit.Dispose();
         }
         
+        /// <summary>
+        /// Handles errors that occur during command-line argument parsing.
+        /// </summary>
+        /// <param name="errs">The collection of errors.</param>
         static void HandleParseError(IEnumerable<Error> errs)
         {
             Console.WriteLine("Wrong arguments. Press any key to exit...");
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Handles the progress event of the video editing process.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="progressEventArgs">The ProgressEventArgs containing progress information.</param>
         private static void VeOnOnProgress(object sender, ProgressEventArgs progressEventArgs)
         {
             Console.WriteLine(progressEventArgs.Progress);
         }
 
+        /// <summary>
+        /// Handles the error event of the video editing process.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The ErrorsEventArgs containing error information.</param>
         private static void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
         {
             Console.WriteLine(e.Message);

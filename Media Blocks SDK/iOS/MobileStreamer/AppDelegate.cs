@@ -55,6 +55,9 @@ public class AppDelegate : UIApplicationDelegate
 
     public override UIWindow? Window { get; set; }
 
+        /// <summary>
+        /// Get local ip address.
+        /// </summary>
     public string GetLocalIpAddress()
     {
         foreach (var networkInterface in NetworkInterface.GetAllNetworkInterfaces())
@@ -74,6 +77,9 @@ public class AppDelegate : UIApplicationDelegate
         return string.Empty;
     }
 
+        /// <summary>
+        /// Add srt sink.
+        /// </summary>
     private void AddSRTSink()
     {
         // video encoder
@@ -93,6 +99,9 @@ public class AppDelegate : UIApplicationDelegate
             (_sink as SRTMPEGTSSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
     }
 
+        /// <summary>
+        /// Add facebook sink.
+        /// </summary>
     private void AddFacebookSink()
     {
         // video encoder
@@ -110,6 +119,9 @@ public class AppDelegate : UIApplicationDelegate
         _pipeline.Connect(_audioEncoder.Output, (_sink as FacebookLiveSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
     }
     
+        /// <summary>
+        /// Add you tube sink.
+        /// </summary>
     private void AddYouTubeSink()
     {
         // video encoder
@@ -127,6 +139,9 @@ public class AppDelegate : UIApplicationDelegate
         _pipeline.Connect(_audioEncoder.Output, (_sink as YouTubeSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
     }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
     private async Task CreateEngineAsync()
     {
         _pipeline = new MediaBlocksPipeline();
@@ -190,6 +205,9 @@ public class AppDelegate : UIApplicationDelegate
         _audioSource = new SystemAudioSourceBlock(new IOSAudioSourceSettings());
     }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
     private async Task DestroyEngineAsync()
     {
         if (_pipeline != null)
@@ -201,11 +219,17 @@ public class AppDelegate : UIApplicationDelegate
         }
     }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
     private void _pipeline_OnError(object sender, ErrorsEventArgs e)
     {
         Debug.WriteLine(e.Message);
     }
 
+        /// <summary>
+        /// Add buttons.
+        /// </summary>
     private void AddButtons(UIView parent)
     {
         // select camera
@@ -344,6 +368,9 @@ public class AppDelegate : UIApplicationDelegate
         parent!.AddSubview(btStartSRT);
     }
 
+        /// <summary>
+        /// Stop camera.
+        /// </summary>
     private async Task StopCamera()
     {
         if (_pipeline == null)
@@ -356,6 +383,9 @@ public class AppDelegate : UIApplicationDelegate
         await DestroyEngineAsync();
     }
 
+        /// <summary>
+        /// Add video view.
+        /// </summary>
     private void AddVideoView(UIView view)
     {
         var rect = new CGRect(0, 0, Window!.Frame.Width, Window!.Frame.Height);
@@ -364,6 +394,9 @@ public class AppDelegate : UIApplicationDelegate
         view!.AddSubview(_videoView);
     }
 
+        /// <summary>
+        /// Finished launching.
+        /// </summary>
     public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
     {
         // create a new window instance based on the screen size

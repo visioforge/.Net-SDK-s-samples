@@ -28,6 +28,9 @@
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt add folder click event.
+        /// </summary>
         private void btAddFolder_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new System.Windows.Forms.FolderBrowserDialog
@@ -44,6 +47,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt remove folder click event.
+        /// </summary>
         private void btRemoveFolder_Click(object sender, RoutedEventArgs e)
         {
             if (lbSourceFolders.SelectedIndex != -1)
@@ -52,6 +58,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt search click event.
+        /// </summary>
         private async void btSearch_Click(object sender, RoutedEventArgs e)
         {
             btSearch.IsEnabled = false;
@@ -254,6 +263,9 @@
             btSearch.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Handles the bt delete click event.
+        /// </summary>
         private void btDelete_Click(object sender, RoutedEventArgs e)
         {
             bool removed = false;
@@ -283,6 +295,9 @@
             }
         }
 
+        /// <summary>
+        /// Sl sensitivity value changed.
+        /// </summary>
         private void slSensitivity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbSensitivity != null)
@@ -291,6 +306,9 @@
             }
         }
 
+        /// <summary>
+        /// Sl max shift value changed.
+        /// </summary>
         private void slMaxShift_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lbMaxShift != null)
@@ -299,6 +317,9 @@
             }
         }
 
+        /// <summary>
+        /// Save settings.
+        /// </summary>
         private void SaveSettings()
         {
             string filename = Settings.SettingsFolder + "settings.xml";
@@ -316,6 +337,9 @@
             Settings.Save(typeof(Settings), filename);
         }
 
+        /// <summary>
+        /// Load settings.
+        /// </summary>
         private void LoadSettings()
         {
             string filename = Settings.SettingsFolder + "settings.xml";
@@ -326,21 +350,33 @@
             }
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadSettings();
         }
 
+        /// <summary>
+        /// Window unloaded.
+        /// </summary>
         private void Window_Unloaded(object sender, RoutedEventArgs e)
         {
             SaveSettings();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SaveSettings();
         }
 
+        /// <summary>
+        /// Error callback.
+        /// </summary>
         private void ErrorCallback(string error)
         {
             Dispatcher.Invoke(() =>

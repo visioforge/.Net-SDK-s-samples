@@ -9,6 +9,9 @@ Imports VisioForge.Core.VideoCapture
 Public Class Form1
     Private WithEvents VideoCapture1 As VideoCaptureCore
 
+        ''' <summary>
+        ''' New.
+        ''' </summary>
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -19,11 +22,17 @@ Public Class Form1
         Return VideoCapture1
     End Function
 
+        ''' <summary>
+        ''' Destroy engine.
+        ''' </summary>
     Private Sub DestroyEngine()
         VideoCapture1.Dispose()
         VideoCapture1 = Nothing
     End Sub
 
+        ''' <summary>
+        ''' Cb video input device selected index changed.
+        ''' </summary>
     Private Sub cbVideoInputDevice_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) _
         Handles cbVideoInputDevice.SelectedIndexChanged
         If cbVideoInputDevice.SelectedIndex <> -1 Then
@@ -61,6 +70,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Cb video input format selected index changed.
+        ''' </summary>
     Private Sub cbVideoInputFormat_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbVideoInputFormat.SelectedIndexChanged
         If (String.IsNullOrEmpty(cbVideoInputFormat.Text)) Then
             Return
@@ -138,6 +150,9 @@ Public Class Form1
         Await VideoCapture1.StopAsync()
     End Sub
 
+        ''' <summary>
+        ''' Bt snapshot click.
+        ''' </summary>
     Private Sub btSnapshot_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btSnapshot.Click
         ' Capture current frame and display in PictureBox
         Using capturedImage As Drawing.Bitmap = CType(VideoCapture1.Frame_GetCurrent(), Drawing.Bitmap)
@@ -168,6 +183,9 @@ Public Class Form1
         cbVideoInputDevice_SelectedIndexChanged(Nothing, Nothing)
     End Sub
 
+        ''' <summary>
+        ''' Form 1 form closing.
+        ''' </summary>
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         ' Dispose snapshot image
         If pbSnapshot.Image IsNot Nothing Then

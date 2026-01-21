@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace RTSP_Preview_WinForms
 {
+    /// <summary>
+    /// The program class.
+    /// </summary>
     internal static class Program
     {
         /// <summary>

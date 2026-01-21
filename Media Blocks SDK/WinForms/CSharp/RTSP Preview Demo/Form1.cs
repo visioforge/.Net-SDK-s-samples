@@ -1,4 +1,4 @@
-// ReSharper disable InconsistentNaming
+
 
 namespace RTSP_Preview_WinForms
 {
@@ -22,24 +22,54 @@ namespace RTSP_Preview_WinForms
     using VisioForge.Core.UI;
     using VisioForge.Core.VideoCaptureX;
 
+    /// <summary>
+    /// The main form of the application.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The recording timer.
+        /// </summary>
         private System.Windows.Forms.Timer tmRecording = new System.Windows.Forms.Timer();
 
+        /// <summary>
+        /// The ONVIF client.
+        /// </summary>
         private ONVIFClientX onvifClient;
 
+        /// <summary>
+        /// The ONVIF discovery.
+        /// </summary>
         private Discovery _onvifDiscovery = new Discovery();
         
+        /// <summary>
+        /// The cancellation token source.
+        /// </summary>
         private CancellationTokenSource _cts;
 
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The RTSP source.
+        /// </summary>
         private RTSPSourceBlock _rtspSource;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The closing flag.
+        /// </summary>
         private bool _isClosing = false;
 
         public Form1()
@@ -53,6 +83,9 @@ namespace RTSP_Preview_WinForms
             };
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -60,6 +93,9 @@ namespace RTSP_Preview_WinForms
             _pipeline.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -73,6 +109,9 @@ namespace RTSP_Preview_WinForms
             }
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -85,6 +124,9 @@ namespace RTSP_Preview_WinForms
             Text += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             CreateEngine();
@@ -145,6 +187,9 @@ namespace RTSP_Preview_WinForms
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -154,12 +199,18 @@ namespace RTSP_Preview_WinForms
             _pipeline = null;
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
         private void llVideoTutorials_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (InvokeRequired)
@@ -172,11 +223,17 @@ namespace RTSP_Preview_WinForms
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt onvif connect click event.
+        /// </summary>
         private async void btONVIFConnect_Click(object sender, EventArgs e)
         {
             if (btONVIFConnect.Text == "Connect")
@@ -255,6 +312,9 @@ namespace RTSP_Preview_WinForms
             }
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             if (_pipeline == null)
@@ -265,6 +325,9 @@ namespace RTSP_Preview_WinForms
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             if (_pipeline == null)
@@ -275,6 +338,9 @@ namespace RTSP_Preview_WinForms
             await _pipeline.PauseAsync();
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private async Task UpdateRecordingTime()
         {
             if (_pipeline == null)
@@ -302,6 +368,9 @@ namespace RTSP_Preview_WinForms
             }
         }
 
+        /// <summary>
+        /// Handles the bt list onvif sources click event.
+        /// </summary>
         private void btListONVIFSources_Click(object sender, EventArgs e)
         {
             cbIPURL.Items.Clear();
@@ -343,6 +412,9 @@ namespace RTSP_Preview_WinForms
             });
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             // If already processed closing, allow the form to close
@@ -371,6 +443,9 @@ namespace RTSP_Preview_WinForms
             Application.Exit();
         }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -395,4 +470,4 @@ namespace RTSP_Preview_WinForms
     }
 }
 
-// ReSharper restore InconsistentNaming
+

@@ -58,6 +58,10 @@ namespace Mobile_Streamer
 
         private bool _isPreview;
 
+        /// <summary>
+        /// Called when the activity is starting.
+        /// </summary>
+        /// <param name="savedInstanceState">If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in <see cref="M:Android.App.Activity.OnSaveInstanceState(Android.OS.Bundle)"/>.  <format type="text/html"><a href="https://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)" target="_blank">[C# document]</a></format></param>
         protected override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -86,6 +90,9 @@ namespace Mobile_Streamer
             CheckPermissionsAndStartPreview();
         }
 
+        /// <summary>
+        /// Called when the activity is being destroyed.
+        /// </summary>
         protected override void OnDestroy()
         {
             VisioForgeX.DestroySDK();
@@ -93,6 +100,9 @@ namespace Mobile_Streamer
             base.OnDestroy();
         }
 
+        /// <summary>
+        /// Checks the permissions and starts the preview if granted.
+        /// </summary>
         private void CheckPermissionsAndStartPreview()
         {
             if (CheckSelfPermission(Manifest.Permission.Camera) != Android.Content.PM.Permission.Granted)
@@ -128,6 +138,10 @@ namespace Mobile_Streamer
             });
         }
 
+        /// <summary>
+        /// Asynchronously creates the media blocks engine pipeline and initializes blocks.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task CreateEngineAsync()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -200,6 +214,10 @@ namespace Mobile_Streamer
             _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
         }
 
+        /// <summary>
+        /// Asynchronously destroys the media blocks engine pipeline and releases resources.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -211,11 +229,27 @@ namespace Mobile_Streamer
             }
         }
 
+        /// <summary>
+        /// Handles the OnError event of the pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void _pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Log.Error("MainActivity", e.Message);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSwitchCam control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Handles the bt switch cam click event.
+        /// </summary>
         private async void btSwitchCam_Click(object sender, EventArgs e)
         {
             await StopAsync();
@@ -232,6 +266,10 @@ namespace Mobile_Streamer
             await StartPreviewAsync();
         }
 
+        /// <summary>
+        /// Asynchronously stops the pipeline and destroys the engine.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task StopAsync()
         {
             if (_pipeline == null)
@@ -248,6 +286,14 @@ namespace Mobile_Streamer
             videoView.Invalidate();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStopRecord control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Handles the bt stop record click event.
+        /// </summary>
         private async void btStopRecord_Click(object sender, EventArgs e)
         {
             await StopAsync();
@@ -255,6 +301,10 @@ namespace Mobile_Streamer
             await StartPreviewAsync();
         }
 
+        /// <summary>
+        /// Asynchronously starts the preview.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task StartPreviewAsync()
         {
             await StopAsync();
@@ -266,6 +316,10 @@ namespace Mobile_Streamer
             tmPosition.Start();
         }
 
+        /// <summary>
+        /// Asynchronously starts the streaming record.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task StartRecordAsync()
         {
             if (string.IsNullOrEmpty(STREAMING_KEY))
@@ -313,11 +367,28 @@ namespace Mobile_Streamer
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStartRecord control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Handles the bt start record click event.
+        /// </summary>
         private async void btStartRecord_Click(object sender, EventArgs e)
         {
             await StartRecordAsync();
         }
 
+        /// <summary>
+        /// Called when the activity has detected the user's query for the result from a permission request.
+        /// </summary>
+        /// <param name="requestCode">The request code passed in <see cref="M:Android.App.Activity.RequestPermissions(System.String[],System.Int32)" />.</param>
+        /// <param name="permissions">The requested permissions. Never null.</param>
+        /// <param name="grantResults">The grant results for the corresponding permissions which is either <see cref="F:Android.Content.PM.Permission.Granted" /> or <see cref="F:Android.Content.PM.Permission.Denied" />. Never null.</param>
+        /// <summary>
+        /// On request permissions result.
+        /// </summary>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

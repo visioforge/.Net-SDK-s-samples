@@ -39,11 +39,17 @@ namespace Overlay_Manager_Demo
             Loaded += VideoOverlayOptionsWindow_Loaded;
         }
 
+        /// <summary>
+        /// Video overlay options window loaded.
+        /// </summary>
         private async void VideoOverlayOptionsWindow_Loaded(object sender, RoutedEventArgs e)
         {
             await LoadAudioDevicesAsync();
         }
 
+        /// <summary>
+        /// Load audio devices async.
+        /// </summary>
         private async Task LoadAudioDevicesAsync()
         {
             try
@@ -78,6 +84,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Cb enable audio changed.
+        /// </summary>
         private void cbEnableAudio_Changed(object sender, RoutedEventArgs e)
         {
             if (cbAudioDevice == null)
@@ -86,6 +95,9 @@ namespace Overlay_Manager_Demo
             cbAudioDevice.IsEnabled = cbEnableAudio.IsChecked == true;
         }
 
+        /// <summary>
+        /// Cb original size checked.
+        /// </summary>
         private void cbOriginalSize_Checked(object sender, RoutedEventArgs e)
         {
             tbWidth.IsEnabled = false;
@@ -94,6 +106,9 @@ namespace Overlay_Manager_Demo
             tbHeight.Text = "0";
         }
 
+        /// <summary>
+        /// Cb original size unchecked.
+        /// </summary>
         private void cbOriginalSize_Unchecked(object sender, RoutedEventArgs e)
         {
             tbWidth.IsEnabled = true;
@@ -102,6 +117,9 @@ namespace Overlay_Manager_Demo
             tbHeight.Text = "240";
         }
 
+        /// <summary>
+        /// Handles the bt click event.
+        /// </summary>
         private void btOK_Click(object sender, RoutedEventArgs e)
         {
             // Validate input

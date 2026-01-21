@@ -44,6 +44,9 @@ namespace RTSP_RAW_Capture_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Initialize SDK
@@ -72,12 +75,18 @@ namespace RTSP_RAW_Capture_Demo
             LogMessage("SDK initialized successfully.");
         }
 
+        /// <summary>
+        /// Log message.
+        /// </summary>
         private void LogMessage(string message)
         {
             mmLog.Text += $"[{DateTime.Now:HH:mm:ss}] {message}\n";
             mmLog.ScrollToEnd();
         }
 
+        /// <summary>
+        /// Handles the bt start preview click event.
+        /// </summary>
         private async void btStartPreview_Click(object sender, RoutedEventArgs e)
         {
             if (_isPreviewStarted)
@@ -136,6 +145,9 @@ namespace RTSP_RAW_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop preview click event.
+        /// </summary>
         private async void btStopPreview_Click(object sender, RoutedEventArgs e)
         {
             if (!_isPreviewStarted)
@@ -150,6 +162,9 @@ namespace RTSP_RAW_Capture_Demo
             LogMessage("Preview stopped.");
         }
 
+        /// <summary>
+        /// Cleanup preview async.
+        /// </summary>
         private async Task CleanupPreviewAsync()
         {
             if (_previewPipeline != null)
@@ -172,6 +187,9 @@ namespace RTSP_RAW_Capture_Demo
             _isPreviewStarted = false;
         }
 
+        /// <summary>
+        /// Handles the bt start record click event.
+        /// </summary>
         private async void btStartRecord_Click(object sender, RoutedEventArgs e)
         {
             if (_isRecordingStarted)
@@ -291,6 +309,9 @@ namespace RTSP_RAW_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop record click event.
+        /// </summary>
         private async void btStopRecord_Click(object sender, RoutedEventArgs e)
         {
             if (!_isRecordingStarted)
@@ -305,6 +326,9 @@ namespace RTSP_RAW_Capture_Demo
             LogMessage("Recording stopped.");
         }
 
+        /// <summary>
+        /// Cleanup recording async.
+        /// </summary>
         private async Task CleanupRecordingAsync()
         {
             if (_recordPipeline != null)
@@ -330,6 +354,9 @@ namespace RTSP_RAW_Capture_Demo
             _isRecordingStarted = false;
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke(() =>
@@ -338,6 +365,9 @@ namespace RTSP_RAW_Capture_Demo
             });
         }
 
+        /// <summary>
+        /// Handles the bt browse click event.
+        /// </summary>
         private void btBrowse_Click(object sender, RoutedEventArgs e)
         {
             var saveFileDialog = new SaveFileDialog();
@@ -361,6 +391,9 @@ namespace RTSP_RAW_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Lb video tutorial mouse left button up.
+        /// </summary>
         private void lbVideoTutorial_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             try
@@ -377,6 +410,9 @@ namespace RTSP_RAW_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Stop and cleanup preview

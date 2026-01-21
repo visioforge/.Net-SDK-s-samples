@@ -17,6 +17,9 @@ namespace lut_sample
 
         private static Thread _thread;
 
+        /// <summary>
+        /// Main.
+        /// </summary>
         static void Main(string[] args)
         {
             Console.WriteLine("Initializing SDK...");

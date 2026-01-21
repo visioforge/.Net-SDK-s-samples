@@ -4,6 +4,9 @@ namespace VideoCaptureUnoX;
 
 public class Program
 {
+        /// <summary>
+        /// Main.
+        /// </summary>
     public static async Task Main(string[] args)
     {
         App.InitializeLogging();

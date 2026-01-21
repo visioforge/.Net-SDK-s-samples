@@ -10,18 +10,33 @@ namespace vfp_compare
 
     public class CommandLineOptions
     {
+        /// <summary>
+        /// Gets or sets the first fingerprint file.
+        /// </summary>
         [Option('f', "f1", Required = true, HelpText = "First fingerprint file.")]
         public string Input1 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the second fingerprint file.
+        /// </summary>
         [Option('s', "f2", Required = true, HelpText = "Second fingerprint file.")]
         public string Input2 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the maximal difference between fingerprints.
+        /// </summary>
         [Option('d', "md", Required = false, HelpText = "Maximal difference between fingerprints.", Default = 500)]
         public int MaxDifference { get; set; }
 
+        /// <summary>
+        /// Gets or sets the license key.
+        /// </summary>
         [Option('l', "license", Required = false, HelpText = "License key.", Default = "TRIAL")]
         public string LicenseKey { get; set; }
 
+        /// <summary>
+        /// Get usage.
+        /// </summary>
         public string GetUsage()
         {
             var help = new HelpText

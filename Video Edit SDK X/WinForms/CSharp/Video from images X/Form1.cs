@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+﻿
 
 using System;
 using System.Drawing;
@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using VisioForge.Core.UI;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
 using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
-// ReSharper disable RedundantArgumentDefaultValue
+
 
 namespace Video_From_Images
 {
@@ -23,15 +23,25 @@ namespace Video_From_Images
     using VisioForge.Core.Helpers;
     using System.Globalization;
 
+    /// <summary>
+    /// The main form for the Video From Images X demo.
+    /// Provides an interface for creating videos from a sequence of image files using the X-engine.
+    /// </summary>
     public partial class Form1 : Form
     {
         private VideoEditCoreX VideoEdit1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Creates the video editing engine and subscribes to essential events.
+        /// </summary>
         private void CreateEngine()
         {
             VideoEdit1 = new VideoEditCoreX(VideoView1 as IVideoView);
@@ -41,6 +51,9 @@ namespace Video_From_Images
             VideoEdit1.OnProgress += VideoEdit1_OnProgress;
         }
 
+        /// <summary>
+        /// Destroys the video editing engine and unsubscribes from events to release resources.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoEdit1 != null)
@@ -54,6 +67,12 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAddInputFile control.
+        /// Opens a file dialog to select multiple image files to add to the video project.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btAddInputFile_Click(object sender, EventArgs e)
         {
             if (OpenDialog1.ShowDialog() == DialogResult.OK)
@@ -81,12 +100,24 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btClearList control.
+        /// Clears the input files list and resets the engine's input state.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btClearList_Click(object sender, EventArgs e)
         {
             lbFiles.Items.Clear();
             VideoEdit1.Input_Clear_List();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// Opens a save file dialog to specify the output video file path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (SaveDialog1.ShowDialog() == DialogResult.OK)
@@ -95,12 +126,21 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Link label 1 link clicked.
+        /// </summary>
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the Load event of the Form1 control.
+        /// Initializes the SDK engine, configures default paths, and sets initial UI values.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -123,6 +163,12 @@ namespace Video_From_Images
             cbOutputFormat.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the output format and starts the video generation process.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -179,6 +225,12 @@ namespace Video_From_Images
             VideoEdit1.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the video generation process and resets project state.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btStop_Click(object sender, EventArgs e)
         {
             VideoEdit1.Stop();
@@ -188,11 +240,17 @@ namespace Video_From_Images
             lbFiles.Items.Clear();
         }
 
+        /// <summary>
+        /// Video edit 1 on progress.
+        /// </summary>
         private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
         {
             Invoke((Action)(() => { ProgressBar1.Value = e.Progress; }));
         }
 
+        /// <summary>
+        /// Video edit 1 on stop.
+        /// </summary>
         private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
@@ -211,6 +269,9 @@ namespace Video_From_Images
             }));          
         }
 
+        /// <summary>
+        /// Video edit 1 on error.
+        /// </summary>
         private void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -219,6 +280,9 @@ namespace Video_From_Images
                                    }));
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
@@ -228,4 +292,3 @@ namespace Video_From_Images
     }
 }
 
-// ReSharper restore InconsistentNaming

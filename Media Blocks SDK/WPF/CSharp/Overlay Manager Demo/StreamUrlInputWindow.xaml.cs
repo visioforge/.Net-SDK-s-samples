@@ -15,6 +15,9 @@ namespace Overlay_Manager_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt click event.
+        /// </summary>
         private void btOK_Click(object sender, RoutedEventArgs e)
         {
             string url = tbStreamUrl.Text.Trim();

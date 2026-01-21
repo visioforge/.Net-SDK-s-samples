@@ -11,6 +11,9 @@ Public Class Form1
 
     Dim WithEvents MediaPlayer1 As MediaPlayerCore
 
+        ''' <summary>
+        ''' Bt select file click.
+        ''' </summary>
     Private Sub btSelectFile_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btSelectFile.Click
 
         If (openFileDialog1.ShowDialog() = DialogResult.OK) Then
@@ -73,18 +76,27 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb volume 1 scroll.
+        ''' </summary>
     Private Sub tbVolume1_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbVolume1.Scroll
 
         MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb balance 1 scroll.
+        ''' </summary>
     Private Sub tbBalance1_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbBalance1.Scroll
 
         MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Form 1 load.
+        ''' </summary>
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
         MediaPlayer1 = New MediaPlayerCore()
@@ -110,6 +122,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Media player 1 on stop.
+        ''' </summary>
     Private Sub MediaPlayer1_OnStop(ByVal sender As System.Object, ByVal e As EventArgs) Handles MediaPlayer1.OnStop
 
         Invoke(Sub()
@@ -118,6 +133,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Link label 1 link clicked.
+        ''' </summary>
     Private Sub linkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel1.LinkClicked
 
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials)
@@ -125,6 +143,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Media player 1 on error.
+        ''' </summary>
     Private Sub MediaPlayer1_OnError(sender As Object, e As ErrorsEventArgs) Handles MediaPlayer1.OnError
 
         Invoke(Sub()
@@ -133,10 +154,16 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Media player 1 on stop.
+        ''' </summary>
     Private Sub MediaPlayer1_OnStop(sender As Object, e As StopEventArgs) Handles MediaPlayer1.OnStop
 
     End Sub
 
+        ''' <summary>
+        ''' Form 1 form closing.
+        ''' </summary>
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         btStop_Click(Nothing, Nothing)
     End Sub

@@ -29,6 +29,9 @@ public partial class ViewController : NSViewController
         // Update the view, if already loaded.
     }
 
+        /// <summary>
+        /// View did load.
+        /// </summary>
     public override void ViewDidLoad()
     {
         base.ViewDidLoad();
@@ -48,6 +51,9 @@ public partial class ViewController : NSViewController
         });
     }
 
+        /// <summary>
+        /// Load devices async.
+        /// </summary>
     private async Task LoadDevicesAsync()
     {
         // video sources
@@ -84,6 +90,9 @@ public partial class ViewController : NSViewController
         if (audioOutputs.Length > 0) cbAudioOutput.Select(new NSString(audioOutputs[0].DisplayName));
     }
 
+        /// <summary>
+        /// Handles the cb video format selection changed event.
+        /// </summary>
     private async void cbVideoFormat_SelectionChanged(object sender, EventArgs e)
     {
         cbVideoFrameRate.RemoveAll();
@@ -113,6 +122,9 @@ public partial class ViewController : NSViewController
         }
     }
 
+        /// <summary>
+        /// Handles the cb audio source selection changed event.
+        /// </summary>
     private async void cbAudioSource_SelectionChanged(object sender, EventArgs e)
     {
         if (cbAudioSource.SelectedIndex != -1 && e != null)
@@ -135,6 +147,9 @@ public partial class ViewController : NSViewController
         }
     }
 
+        /// <summary>
+        /// Handles the cb video source selection changed event.
+        /// </summary>
     private async void cbVideoSource_SelectionChanged(object sender, EventArgs e)
     {
         if (cbVideoSource.SelectedIndex != -1)
@@ -158,6 +173,9 @@ public partial class ViewController : NSViewController
         }
     }
 
+        /// <summary>
+        /// Start async.
+        /// </summary>
     private async Task StartAsync()
     {
         _videoView = new VideoViewGL(new CGRect(0, 0, videoViewHost.Bounds.Width, videoViewHost.Bounds.Height));
@@ -217,6 +235,9 @@ public partial class ViewController : NSViewController
         await _core.StartAsync();
     }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
     private async Task StopAsync()
     {
         if (_core == null)
@@ -244,6 +265,9 @@ public partial class ViewController : NSViewController
 // Custom Window delegate to close the SDK
 public class CustomWindowDelegate : NSWindowDelegate
 {
+        /// <summary>
+        /// Window should close.
+        /// </summary>
     public override bool WindowShouldClose(NSObject sender)
     {
         VisioForgeX.DestroySDK();

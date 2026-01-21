@@ -15,17 +15,32 @@ namespace Video_Mixer_Player
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The live video compositor instance.
+        /// </summary>
         private LiveVideoCompositor _compositor;
 
+        /// <summary>
+        /// The video view output.
+        /// </summary>
         private LVCVideoViewOutput _videoRendererOutput;
 
+        /// <summary>
+        /// The list of inputs.
+        /// </summary>
         private List<LVCInput> _inputs = new List<LVCInput>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Form 1 load.
+        /// </summary>
         private async void Form1_Load(object sender, System.EventArgs e)
         {
             // We have to initialize the engine on start
@@ -38,6 +53,9 @@ namespace Video_Mixer_Player
             Text += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
         }
 
+        /// <summary>
+        /// Handles the bt add file click event.
+        /// </summary>
         private void btAddFile_Click(object sender, System.EventArgs e)
         {
             var openFileDialog1 = new OpenFileDialog();
@@ -47,6 +65,9 @@ namespace Video_Mixer_Player
             }
         }
 
+        /// <summary>
+        /// Add file source async.
+        /// </summary>
         private async Task AddFileSourceAsync(string filename, Rect rect)
         {
             var name = $"File [{filename}]";
@@ -80,6 +101,9 @@ namespace Video_Mixer_Player
             }
         }
 
+        /// <summary>
+        /// Get source position async.
+        /// </summary>
         private async Task<TimeSpan> GetSourcePositionAsync()
         {
             TimeSpan pos = TimeSpan.Zero;
@@ -96,6 +120,9 @@ namespace Video_Mixer_Player
             return pos;
         }
 
+        /// <summary>
+        /// Get source duration async.
+        /// </summary>
         private async Task<TimeSpan> GetSourceDurationAsync()
         {
             TimeSpan duration = TimeSpan.Zero;
@@ -112,6 +139,9 @@ namespace Video_Mixer_Player
             return duration;
         }
 
+        /// <summary>
+        /// Set source position async.
+        /// </summary>
         private async Task SetSourcePositionAsync(TimeSpan position)
         {
             foreach (var input in _inputs)
@@ -120,6 +150,9 @@ namespace Video_Mixer_Player
             }
         }
 
+        /// <summary>
+        /// Handles the tm position tick event.
+        /// </summary>
         private async void tmPosition_Tick(object sender, EventArgs e)
         {
             var position = await GetSourcePositionAsync();
@@ -135,6 +168,9 @@ namespace Video_Mixer_Player
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, System.EventArgs e)
         {
             if (lbSourceFiles.Items.Count < 2)
@@ -163,11 +199,17 @@ namespace Video_Mixer_Player
             tmPosition.Start();
         }
 
+        /// <summary>
+        /// Handles the tb timeline scroll event.
+        /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             await SetSourcePositionAsync(TimeSpan.FromSeconds(tbTimeline.Value));
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             VisioForgeX.DestroySDK();

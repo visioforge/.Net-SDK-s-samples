@@ -15,6 +15,9 @@ public partial class App : Application
 
     protected Window? MainWindow { get; private set; }
 
+        /// <summary>
+        /// On launched.
+        /// </summary>
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
         MainWindow = new Window();
@@ -43,6 +46,9 @@ public partial class App : Application
         throw new InvalidOperationException($"Failed to load {e.SourcePageType.FullName}: {e.Exception}");
     }
 
+        /// <summary>
+        /// Initialize logging.
+        /// </summary>
     public static void InitializeLogging()
     {
 #if DEBUG

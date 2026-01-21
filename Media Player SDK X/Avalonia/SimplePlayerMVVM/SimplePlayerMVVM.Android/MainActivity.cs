@@ -23,6 +23,9 @@ namespace Simple_Player_MVVM.Android
     {
         public static MainActivity Instance { get; private set; }
 
+        /// <summary>
+        /// Customize app builder.
+        /// </summary>
         protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
         {
             return base.CustomizeAppBuilder(builder)
@@ -30,11 +33,17 @@ namespace Simple_Player_MVVM.Android
                 .UseReactiveUI();
         }
 
+        /// <summary>
+        /// On request permissions result.
+        /// </summary>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, global::Android.Content.PM.Permission[] grantResults)
         {
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+        /// <summary>
+        /// On create.
+        /// </summary>
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -47,6 +56,9 @@ namespace Simple_Player_MVVM.Android
             RequestPermissionsAsync();
         }
 
+        /// <summary>
+        /// Request permissions async.
+        /// </summary>
         private async void RequestPermissionsAsync()
         {
             RequestPermissions(
@@ -56,6 +68,9 @@ namespace Simple_Player_MVVM.Android
                         Manifest.Permission.ReadMediaVideo}, 1004);
         }
 
+        /// <summary>
+        /// Get context.
+        /// </summary>
         public Context GetContext()
         {
             return this;

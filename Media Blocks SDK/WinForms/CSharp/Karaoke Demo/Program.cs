@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace Karaoke_Demo
 {
+    /// <summary>
+    /// The program class.
+    /// </summary>
     static class Program
     {
         /// <summary>

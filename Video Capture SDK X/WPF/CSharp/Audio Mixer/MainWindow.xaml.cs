@@ -26,6 +26,10 @@ namespace Audio_Mixer_MB
     using VisioForge.Core.VideoCaptureX;
     using VisioForge.Core.Types.X.AudioRenderers;
 
+    /// <summary>
+    /// Interaction logic for the Audio Mixer WPF demo's MainWindow.
+    /// Demonstrates how to mix multiple audio sources (mic, loopback) and optionally record the result to MP3 using the X-engine.
+    /// </summary>
     public partial class MainWindow : Window
     {
         private readonly Microsoft.Win32.SaveFileDialog saveFileDialog1 = new Microsoft.Win32.SaveFileDialog();
@@ -43,6 +47,9 @@ namespace Audio_Mixer_MB
             
         }
 
+        /// <summary>
+        /// Creates a new instance of the video capture engine and configures event handlers.
+        /// </summary>
         private void CreatePipeline()
         {
             _core = new VideoCaptureCoreX();
@@ -50,6 +57,10 @@ namespace Audio_Mixer_MB
             _core.OnStop += Pipeline_OnStop;
         }
 
+        /// <summary>
+        /// Asynchronously disposes of the video capture engine and unsubscribes from events.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task DestroyPipelineAsync()
         {
             if ( _core == null )
@@ -61,6 +72,12 @@ namespace Audio_Mixer_MB
             _core = null;
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the window.
+        /// Initializes the SDK, prepares the UI, and enumerates available audio sources and outputs.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -125,6 +142,12 @@ namespace Audio_Mixer_MB
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp3");
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbAudioInputDevice1 control.
+        /// Populates available formats for the first selected audio device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbAudioInputDevice1_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice1.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -149,6 +172,12 @@ namespace Audio_Mixer_MB
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbAudioInputDevice2 control.
+        /// Populates available formats for the second selected audio device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbAudioInputDevice2_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice2.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -173,6 +202,12 @@ namespace Audio_Mixer_MB
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioVolume control.
+        /// Updates the output device volume.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudioVolume_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_core == null)
@@ -183,6 +218,12 @@ namespace Audio_Mixer_MB
             _core.Audio_OutputDevice_Volume = tbAudioVolume.Value / 100.0;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// Opens a save file dialog to select the MP3 recording output path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -191,6 +232,12 @@ namespace Audio_Mixer_MB
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the audio mixer with selected inputs, sets up the output device (and optional MP3 recording), and starts the engine.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -283,6 +330,12 @@ namespace Audio_Mixer_MB
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the engine and cleans up resources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             if (_core == null)
@@ -297,6 +350,9 @@ namespace Audio_Mixer_MB
             await DestroyPipelineAsync();
         }
 
+        /// <summary>
+        /// Asynchronously updates the recording duration displayed in the UI.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = _core.Duration();
@@ -312,22 +368,43 @@ namespace Audio_Mixer_MB
             }));
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the llVideoTutorials control.
+        /// Opens the video tutorials URL in the default browser.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void llVideoTutorials_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Logs a message to the UI log window.
+        /// </summary>
+        /// <param name="txt">The message to log.</param>
         private void Log(string txt)
         {
             Dispatcher.Invoke((Action)(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; }));
         }
 
+        /// <summary>
+        /// Handles the OnError event of the video capture engine.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the OnStop event of the video capture engine.
+        /// Resets the recording timer display.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Pipeline_OnStop(object sender, EventArgs e)
         {
             Dispatcher.BeginInvoke((Action)(() =>
@@ -336,6 +413,12 @@ namespace Audio_Mixer_MB
             }));
         }
 
+        /// <summary>
+        /// Handles the Closing event of the window.
+        /// Ensures the engine is stopped and SDK resources are released.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyPipelineAsync();
@@ -345,4 +428,3 @@ namespace Audio_Mixer_MB
     }
 }
 
-// ReSharper restore InconsistentNaming

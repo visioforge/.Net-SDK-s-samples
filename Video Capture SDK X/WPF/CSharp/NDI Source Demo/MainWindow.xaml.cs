@@ -14,7 +14,8 @@ using VisioForge.Core.Types.X.AudioRenderers;
 namespace NDI_Source_Demo
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for the NDI Source Demo WPF demo's MainWindow.
+    /// Demonstrates how to discover and receive NDI streams using the X-engine.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -31,17 +32,30 @@ namespace NDI_Source_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the OnError event of the _videoCapture control.
+        /// Outputs error messages to the debug console.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Creates a new instance of the video capture engine and subscribes to error events.
+        /// </summary>
         private void CreateEngine()
         {
             _videoCapture = new VideoCaptureCoreX(VideoView1);
             _videoCapture.OnError += VideoCapture_OnError;
         }
 
+        /// <summary>
+        /// Asynchronously disposes of the video capture engine and unsubscribes from events.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (_videoCapture != null)
@@ -53,6 +67,9 @@ namespace NDI_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Asynchronously updates the recording duration displayed in the UI.
+        /// </summary>
         private async void UpdateRecordingTime()
         {
             var ts = await _videoCapture.DurationAsync();
@@ -68,6 +85,12 @@ namespace NDI_Source_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the engine for the selected NDI source and starts the stream.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (cbNDISources.SelectedIndex == -1)
@@ -104,6 +127,12 @@ namespace NDI_Source_Demo
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the stream and disposes of the engine instance.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -113,6 +142,12 @@ namespace NDI_Source_Demo
             await DestroyEngineAsync();
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the Window control.
+        /// Initializes the SDK and prepares the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -132,6 +167,10 @@ namespace NDI_Source_Demo
             await LoadAudioOutputDevicesAsync();
         }
 
+        /// <summary>
+        /// Asynchronously enumerates and populates the audio output devices list.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task LoadAudioOutputDevicesAsync()
         {
             try
@@ -156,6 +195,12 @@ namespace NDI_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btListNDISources control.
+        /// Asynchronously discovers available NDI sources on the network and populates the list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btListNDISources_Click(object sender, RoutedEventArgs e)
         {
             _ndiSources = await DeviceEnumerator.Shared.NDISourcesAsync();
@@ -173,6 +218,12 @@ namespace NDI_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Closing event of the Window control.
+        /// Ensures resources are released and the SDK is destroyed.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();

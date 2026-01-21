@@ -46,6 +46,9 @@ namespace vr360_media_player
             _timer.Tick += Timer_Tick;
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(edFilename.Text))
@@ -98,6 +101,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             if (_pipeline == null) return;
@@ -123,6 +129,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -147,6 +156,9 @@ namespace vr360_media_player
             btPause.Content = "Pause";
         }
 
+        /// <summary>
+        /// Handles the bt open file click event.
+        /// </summary>
         private void btOpenFile_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog
@@ -161,6 +173,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Handles the bt 360 left click event.
+        /// </summary>
         private void bt360Left_Click(object sender, RoutedEventArgs e)
         {
             if (_processor != null)
@@ -175,6 +190,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Handles the bt 360 right click event.
+        /// </summary>
         private void bt360Right_Click(object sender, RoutedEventArgs e)
         {
             if (_processor != null)
@@ -189,6 +207,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Handles the bt 360 up click event.
+        /// </summary>
         private void bt360Up_Click(object sender, RoutedEventArgs e)
         {
             if (_processor != null)
@@ -203,6 +224,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Handles the bt 360 down click event.
+        /// </summary>
         private void bt360Down_Click(object sender, RoutedEventArgs e)
         {
             if (_processor != null)
@@ -217,6 +241,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Handles the bt zoom in click event.
+        /// </summary>
         private void btZoomIn_Click(object sender, RoutedEventArgs e)
         {
             if (_processor != null)
@@ -231,6 +258,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Handles the bt zoom out click event.
+        /// </summary>
         private void btZoomOut_Click(object sender, RoutedEventArgs e)
         {
             if (_processor != null)
@@ -245,6 +275,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Handles the timer tick event.
+        /// </summary>
         private async void Timer_Tick(object sender, EventArgs e)
         {
             if (_pipeline == null) return;
@@ -273,6 +306,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Tb timeline value changed.
+        /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_pipeline != null && !_timer.IsEnabled)
@@ -288,6 +324,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Video view 1 mouse down.
+        /// </summary>
         private void VideoView1_MouseDown(object sender, MouseButtonEventArgs e)
         {           
             if (e.LeftButton == MouseButtonState.Pressed && _processor != null)
@@ -298,6 +337,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Video view 1 mouse move.
+        /// </summary>
         private void VideoView1_MouseMove(object sender, MouseEventArgs e)
         {
             if (_processor == null || !_isMouseDragging) return;
@@ -318,6 +360,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Video view 1 mouse up.
+        /// </summary>
         private void VideoView1_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Released && _isMouseDragging)
@@ -330,6 +375,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Video view 1 mouse leave.
+        /// </summary>
         private void VideoView1_MouseLeave(object sender, MouseEventArgs e)
         {
             // Release capture if mouse leaves the control while dragging
@@ -340,6 +388,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// On closing.
+        /// </summary>
         protected override async void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
@@ -363,6 +414,9 @@ namespace vr360_media_player
             base.OnClosing(e);
         }
 
+        /// <summary>
+        /// Update paused frame.
+        /// </summary>
         private void UpdatePausedFrame()
         {
             if (_pauseDrawing)
@@ -413,6 +467,9 @@ namespace vr360_media_player
             }
         }
 
+        /// <summary>
+        /// Video frame to writeable bitmap.
+        /// </summary>
         private WriteableBitmap VideoFrameToWriteableBitmap(VideoFrameX frame)
         {
             if (frame == null || frame.Width <= 0 || frame.Height <= 0 || frame.Data == IntPtr.Zero)

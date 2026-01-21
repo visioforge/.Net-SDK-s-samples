@@ -14,6 +14,9 @@
     using VisioForge.Core.VideoCapture;
     using ScreenCaptureMode = VisioForge.Core.Types.VideoCapture.ScreenCaptureMode;
 
+    /// <summary>
+    /// Window capture demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
@@ -34,11 +37,17 @@
 
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -46,6 +55,9 @@
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -57,6 +69,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngineAsync();
@@ -70,6 +85,9 @@
             VideoCapture1.Video_Renderer_SetAuto();
         }
 
+        /// <summary>
+        /// Set mp 4 output.
+        /// </summary>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -80,6 +98,9 @@
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set wmv output.
+        /// </summary>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -91,6 +112,9 @@
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Set mp 4 hw output.
+        /// </summary>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -101,6 +125,9 @@
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set mpegts output.
+        /// </summary>
         private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
@@ -111,6 +138,9 @@
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
+        /// <summary>
+        /// Set mov output.
+        /// </summary>
         private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
@@ -121,6 +151,9 @@
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
+        /// <summary>
+        /// Set gif output.
+        /// </summary>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
@@ -131,6 +164,9 @@
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Set avi output.
+        /// </summary>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -147,6 +183,9 @@
             }
         }
 
+        /// <summary>
+        /// Create screen capture source.
+        /// </summary>
         private ScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
             var source = new ScreenCaptureSourceSettings
@@ -181,6 +220,9 @@
             return source;
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -273,11 +315,17 @@
             tcMain.SelectedIndex = 2;
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -286,11 +334,17 @@
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt output configure click event.
+        /// </summary>
         private void btOutputConfigure_Click(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -376,6 +430,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the cb output format selected index changed event.
+        /// </summary>
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -418,6 +475,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -426,6 +486,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt screen source window select click event.
+        /// </summary>
         private void btScreenSourceWindowSelect_Click(object sender, EventArgs e)
         {
             if (windowCaptureForm == null)
@@ -437,6 +500,9 @@
             windowCaptureForm.StartCapture();
         }
 
+        /// <summary>
+        /// Window capture form on capture hotkey.
+        /// </summary>
         private void WindowCaptureForm_OnCaptureHotkey(object sender, WindowCaptureEventArgs e)
         {
             windowCaptureForm.StopCapture();
@@ -445,6 +511,9 @@
             lbScreenSourceWindowText.Text = e.Caption;
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();

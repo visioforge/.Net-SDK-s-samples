@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace Camera_Light_Demo
 {
+    /// <summary>
+    /// Program class.
+    /// </summary>
     internal static class Program
     {
         /// <summary>

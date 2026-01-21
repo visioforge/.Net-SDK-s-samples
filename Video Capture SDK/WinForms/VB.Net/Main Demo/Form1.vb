@@ -117,11 +117,17 @@ Public Class Form1
         Return VideoCapture1
     End Function
 
+        ''' <summary>
+        ''' Destroy engine.
+        ''' </summary>
     Private Sub DestroyEngine()
         VideoCapture1.Dispose()
         VideoCapture1 = Nothing
     End Sub
 
+        ''' <summary>
+        ''' Add audio effects.
+        ''' </summary>
     Private Sub AddAudioEffects()
 
         VideoCapture1.Audio_Effects_Clear(-1)
@@ -551,6 +557,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb video input selected index changed.
+        ''' </summary>
     Private Sub cbVideoInputSelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbVideoInputFormat.SelectedIndexChanged
 
         If (String.IsNullOrEmpty(cbVideoInputFormat.Text)) Then
@@ -581,6 +590,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb audio input device selected index changed.
+        ''' </summary>
     Private Sub cbAudioInputDevice_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudioInputDevice.SelectedIndexChanged
 
         cbAudioInputFormat.Items.Clear()
@@ -627,6 +639,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt select output click.
+        ''' </summary>
     Private Sub btSelectOutput_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btSelectOutput.Click
 
         If saveFileDialog1.ShowDialog() = DialogResult.OK Then
@@ -1053,6 +1068,9 @@ Public Class Form1
         tmRecording.Start()
     End Sub
 
+        ''' <summary>
+        ''' Configure motion detection ex.
+        ''' </summary>
     Private Sub ConfigureMotionDetectionEx()
         If (cbMotionDetectionEx.Checked) Then
             VideoCapture1.Motion_DetectionEx = New MotionDetectionExSettings()
@@ -1063,6 +1081,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Configure output tags.
+        ''' </summary>
     Private Sub ConfigureOutputTags()
 
         If cbTagEnabled.Checked Then
@@ -1088,6 +1109,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Configure separate capture.
+        ''' </summary>
     Private Sub ConfigureSeparateCapture()
 
         VideoCapture1.SeparateCapture_Enabled = cbSeparateCaptureEnabled.Checked
@@ -1107,6 +1131,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Configure vu meter.
+        ''' </summary>
     Private Sub ConfigureVUMeter()
 
         VideoCapture1.Audio_VUMeter_Enabled = cbVUMeter.Checked
@@ -1125,6 +1152,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Configure mpegdv decoding.
+        ''' </summary>
     Private Sub ConfigureMPEGDVDecoding()
 
         'MPEG decoding (only for tuners with internal HW encoder)
@@ -1152,6 +1182,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Configure resize crop rotate.
+        ''' </summary>
     Private Sub ConfigureResizeCropRotate()
 
         VideoCapture1.Video_ResizeOrCrop_Enabled = False
@@ -1201,6 +1234,9 @@ Public Class Form1
         End Select
     End Sub
 
+        ''' <summary>
+        ''' Configure video renderer.
+        ''' </summary>
     Private Sub ConfigureVideoRenderer()
 
         If rbVMR9.Checked Then
@@ -1226,6 +1262,9 @@ Public Class Form1
         VideoCapture1.Video_Renderer.Flip_Vertical = cbScreenFlipVertical.Checked
     End Sub
 
+        ''' <summary>
+        ''' Configure decklink.
+        ''' </summary>
     Private Sub ConfigureDecklink()
 
         If cbDecklinkOutput.Checked Then
@@ -1253,6 +1292,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Configure chroma key.
+        ''' </summary>
     Private Sub ConfigureChromaKey()
         If (Not IsNothing(VideoCapture1.ChromaKey)) Then
             VideoCapture1.ChromaKey.Dispose()
@@ -1275,6 +1317,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Configure face tracking.
+        ''' </summary>
     Private Sub ConfigureFaceTracking()
 
         If (cbFaceTrackingEnabled.Checked) Then
@@ -1296,6 +1341,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Configure video effects.
+        ''' </summary>
     Private Sub ConfigureVideoEffects()
 
         VideoCapture1.Video_Effects_Enabled = cbEffects.Checked
@@ -1447,6 +1495,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Select crossbar.
+        ''' </summary>
     Private Sub SelectCrossbar()
 
         If cbCrossBarAvailable.Enabled Then
@@ -1462,6 +1513,9 @@ Public Class Form1
             End If
         End If
     End Sub
+        ''' <summary>
+        ''' Set mp 4 hw output.
+        ''' </summary>
     Private Sub SetMP4HWOutput(ByRef mp4Output As MP4HWOutput)
         If (mp4HWSettingsDialog Is Nothing) Then
             mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
@@ -1470,6 +1524,9 @@ Public Class Form1
         mp4HWSettingsDialog.SaveSettings(mp4Output)
     End Sub
 
+        ''' <summary>
+        ''' Set mpegts output.
+        ''' </summary>
     Private Sub SetMPEGTSOutput(ByRef mpegTSOutput As MPEGTSOutput)
 
         If (mpegTSSettingsDialog Is Nothing) Then
@@ -1479,6 +1536,9 @@ Public Class Form1
         mpegTSSettingsDialog.SaveSettings(mpegTSOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set mov output.
+        ''' </summary>
     Private Sub SetMOVOutput(ByRef mkvOutput As MOVOutput)
 
         If (movSettingsDialog Is Nothing) Then
@@ -1488,6 +1548,9 @@ Public Class Form1
         movSettingsDialog.SaveSettings(mkvOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set mp 4 output.
+        ''' </summary>
     Private Sub SetMP4Output(ByRef mp4Output As MP4Output)
         If (mp4SettingsDialog Is Nothing) Then
             mp4SettingsDialog = New MP4SettingsDialog()
@@ -1496,6 +1559,9 @@ Public Class Form1
         mp4SettingsDialog.SaveSettings(mp4Output)
     End Sub
 
+        ''' <summary>
+        ''' Set ffmpeg output.
+        ''' </summary>
     Private Sub SetFFMPEGOutput(ByRef ffmpegOutput As FFMPEGOutput)
         If (ffmpegSettingsDialog Is Nothing) Then
             ffmpegSettingsDialog = New FFMPEGSettingsDialog()
@@ -1504,6 +1570,9 @@ Public Class Form1
         ffmpegSettingsDialog.SaveSettings(ffmpegOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set ffmpegexe output.
+        ''' </summary>
     Private Sub SetFFMPEGEXEOutput(ByRef ffmpegOutput As FFMPEGEXEOutput)
         If (ffmpegEXESettingsDialog Is Nothing) Then
             ffmpegEXESettingsDialog = New FFMPEGEXESettingsDialog()
@@ -1512,6 +1581,9 @@ Public Class Form1
         ffmpegEXESettingsDialog.SaveSettings(ffmpegOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set gif output.
+        ''' </summary>
     Private Sub SetGIFOutput(ByRef gifOutput As AnimatedGIFOutput)
         If (gifSettingsDialog Is Nothing) Then
             gifSettingsDialog = New GIFSettingsDialog()
@@ -1520,6 +1592,9 @@ Public Class Form1
         gifSettingsDialog.SaveSettings(gifOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set direct capture custom output.
+        ''' </summary>
     Private Sub SetDirectCaptureCustomOutput(ByRef directCaptureOutput As DirectCaptureCustomOutput)
         If (customFormatSettingsDialog Is Nothing) Then
             customFormatSettingsDialog = New CustomFormatSettingsDialog(
@@ -1531,6 +1606,9 @@ Public Class Form1
         customFormatSettingsDialog.SaveSettings(directCaptureOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set direct capture custom output.
+        ''' </summary>
     Private Sub SetDirectCaptureCustomOutput(ByRef directCaptureOutput As DirectCaptureMP4Output)
         If (customFormatSettingsDialog Is Nothing) Then
 
@@ -1543,6 +1621,9 @@ Public Class Form1
         customFormatSettingsDialog.SaveSettings(directCaptureOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set web m output.
+        ''' </summary>
     Private Sub SetWebMOutput(ByRef webmOutput As WebMOutput)
         If (webmSettingsDialog Is Nothing) Then
             webmSettingsDialog = New WebMSettingsDialog()
@@ -1551,6 +1632,9 @@ Public Class Form1
         webmSettingsDialog.SaveSettings(webmOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set m 4 a output.
+        ''' </summary>
     Private Sub SetM4AOutput(ByRef m4aOutput As M4AOutput)
         If (m4aSettingsDialog Is Nothing) Then
             m4aSettingsDialog = New M4ASettingsDialog()
@@ -1559,6 +1643,9 @@ Public Class Form1
         m4aSettingsDialog.SaveSettings(m4aOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set wmv output.
+        ''' </summary>
     Private Sub SetWMVOutput(ByRef wmvOutput As WMVOutput)
         If (wmvSettingsDialog Is Nothing) Then
             wmvSettingsDialog = New WMVSettingsDialog(VideoCapture1)
@@ -1568,6 +1655,9 @@ Public Class Form1
         wmvSettingsDialog.SaveSettings(wmvOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set wma output.
+        ''' </summary>
     Private Sub SetWMAOutput(ByRef wmaOutput As WMAOutput)
         If (wmvSettingsDialog Is Nothing) Then
             wmvSettingsDialog = New WMVSettingsDialog(VideoCapture1)
@@ -1577,6 +1667,9 @@ Public Class Form1
         wmvSettingsDialog.SaveSettings(wmaOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set ogg output.
+        ''' </summary>
     Private Sub SetOGGOutput(ByRef oggVorbisOutput As OGGVorbisOutput)
         If (oggVorbisSettingsDialog Is Nothing) Then
             oggVorbisSettingsDialog = New OggVorbisSettingsDialog()
@@ -1585,6 +1678,9 @@ Public Class Form1
         oggVorbisSettingsDialog.SaveSettings(oggVorbisOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set speex output.
+        ''' </summary>
     Private Sub SetSpeexOutput(ByRef speexOutput As SpeexOutput)
         If (speexSettingsDialog Is Nothing) Then
             speexSettingsDialog = New SpeexSettingsDialog()
@@ -1593,6 +1689,9 @@ Public Class Form1
         speexSettingsDialog.SaveSettings(speexOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set flac output.
+        ''' </summary>
     Private Sub SetFLACOutput(ByRef flacOutput As FLACOutput)
         If (flacSettingsDialog Is Nothing) Then
             flacSettingsDialog = New FLACSettingsDialog()
@@ -1601,6 +1700,9 @@ Public Class Form1
         flacSettingsDialog.SaveSettings(flacOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set mp 3 output.
+        ''' </summary>
     Private Sub SetMP3Output(ByRef mp3Output As MP3Output)
         If (mp3SettingsDialog Is Nothing) Then
             mp3SettingsDialog = New MP3SettingsDialog()
@@ -1609,6 +1711,9 @@ Public Class Form1
         mp3SettingsDialog.SaveSettings(mp3Output)
     End Sub
 
+        ''' <summary>
+        ''' Set acm output.
+        ''' </summary>
     Private Sub SetACMOutput(ByRef acmOutput As ACMOutput)
         If (pcmSettingsDialog Is Nothing) Then
             pcmSettingsDialog = New PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray())
@@ -1617,6 +1722,9 @@ Public Class Form1
         pcmSettingsDialog.SaveSettings(acmOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set custom output.
+        ''' </summary>
     Private Sub SetCustomOutput(ByRef customOutput As CustomOutput)
         If (customFormatSettingsDialog Is Nothing) Then
             customFormatSettingsDialog = New CustomFormatSettingsDialog(
@@ -1628,6 +1736,9 @@ Public Class Form1
         customFormatSettingsDialog.SaveSettings(customOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set dv output.
+        ''' </summary>
     Private Sub SetDVOutput(ByRef dvOutput As DVOutput)
         If (dvSettingsDialog Is Nothing) Then
             dvSettingsDialog = New DVSettingsDialog()
@@ -1636,6 +1747,9 @@ Public Class Form1
         dvSettingsDialog.SaveSettings(dvOutput)
     End Sub
 
+        ''' <summary>
+        ''' Set avi output.
+        ''' </summary>
     Private Sub SetAVIOutput(ByRef aviOutput As AVIOutput)
         If (aviSettingsDialog Is Nothing) Then
             aviSettingsDialog = New AVISettingsDialog(
@@ -1653,6 +1767,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Set mkv output.
+        ''' </summary>
     Private Sub SetMKVOutput(ByRef mkvOutput As MKVv1Output)
         If (aviSettingsDialog Is Nothing) Then
             aviSettingsDialog = New AVISettingsDialog(
@@ -1669,6 +1786,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Show on screen.
+        ''' </summary>
     Private Sub ShowOnScreen(window As Form, screenNumber As Int32)
         If (screenNumber >= 0 And screenNumber < Screen.AllScreens.Length) Then
             window.Location = Screen.AllScreens(screenNumber).WorkingArea.Location
@@ -1685,6 +1805,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Configure multiscreen.
+        ''' </summary>
     Private Sub ConfigureMultiscreen()
         VideoCapture1.MultiScreen_Clear()
         VideoCapture1.MultiScreen_Enabled = cbMultiscreenDrawOnPanels.Checked Or cbMultiscreenDrawOnExternalDisplays.Checked
@@ -1713,6 +1836,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Configure network streaming.
+        ''' </summary>
     Private Sub ConfigureNetworkStreaming()
 
         VideoCapture1.Network_Streaming_Enabled = True
@@ -1828,6 +1954,9 @@ Public Class Form1
         VideoCapture1.Network_Streaming_Audio_Enabled = cbNetworkStreamingAudioEnabled.Checked
     End Sub
 
+        ''' <summary>
+        ''' Select video capture source.
+        ''' </summary>
     Private Sub SelectVideoCaptureSource()
 
         'from video capture device
@@ -1845,6 +1974,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Select custom source.
+        ''' </summary>
     Private Sub SelectCustomSource()
 
         VideoCapture1.Custom_Source = New CustomSourceSettings()
@@ -1877,6 +2009,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Select bda source.
+        ''' </summary>
     Private Sub SelectBDASource()
 
         VideoCapture1.BDA_Source = New BDASourceSettings()
@@ -1898,6 +2033,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Select ip camera source.
+        ''' </summary>
     Private Function SelectIPCameraSource() As IPCameraSourceSettings
 
         Dim settings As IPCameraSourceSettings = New IPCameraSourceSettings()
@@ -1961,6 +2099,9 @@ Public Class Form1
 
     End Function
 
+        ''' <summary>
+        ''' Select screen source.
+        ''' </summary>
     Private Function SelectScreenSource() As ScreenCaptureSourceSettings
         Dim settings As ScreenCaptureSourceSettings = New ScreenCaptureSourceSettings()
 
@@ -2038,10 +2179,16 @@ Public Class Form1
     End Sub
 
     ' ReSharper disable once UnusedParameter.Local
+        ''' <summary>
+        ''' Cb audio output device selected index changed.
+        ''' </summary>
     Private Sub cbAudioOutputDevice_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbAudioOutputDevice.SelectedIndexChanged
         VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text
     End Sub
 
+        ''' <summary>
+        ''' Cb crossbar input selected index changed.
+        ''' </summary>
     Private Sub cbCrossbarInput_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbCrossbarInput.SelectedIndexChanged
         Dim RelatedInput As String = "", RelatedOutput As String = ""
 
@@ -2050,6 +2197,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Cb crossbar output selected index changed.
+        ''' </summary>
     Private Sub cbCrossbarOutput_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbCrossbarOutput.SelectedIndexChanged
         cbCrossbarInput.Items.Clear()
 
@@ -2123,6 +2273,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb greyscale checked changed.
+        ''' </summary>
     Private Sub cbGreyscale_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbGreyscale.CheckedChanged
 
         Dim intf As IVideoEffectGrayscale
@@ -2158,6 +2311,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Cb invert checked changed.
+        ''' </summary>
     Private Sub cbInvert_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbInvert.CheckedChanged
 
         Dim intf As IVideoEffectInvert
@@ -2194,6 +2350,9 @@ Public Class Form1
         lbAdjSaturationCurrent.Text = "Current: " + Convert.ToString(tbAdjSaturation.Value)
     End Sub
 
+        ''' <summary>
+        ''' Rb checked changed.
+        ''' </summary>
     Private Sub rbVR_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles rbVMR9.CheckedChanged, rbNone.CheckedChanged, rbEVR.CheckedChanged, rbDirect2D.CheckedChanged
 
         cbScreenFlipVertical.Enabled = rbVMR9.Checked Or rbDirect2D.Checked
@@ -2214,18 +2373,27 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt video capture device settings click.
+        ''' </summary>
     Private Sub btVideoCaptureDeviceSettings_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btVideoCaptureDeviceSettings.Click
 
         VideoCapture1.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.Text)
 
     End Sub
 
+        ''' <summary>
+        ''' Bt audio input device settings click.
+        ''' </summary>
     Private Sub btAudioInputDeviceSettings_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btAudioInputDeviceSettings.Click
 
         VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.Text)
 
     End Sub
 
+        ''' <summary>
+        ''' Bt connect click.
+        ''' </summary>
     Private Sub btConnect_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btConnect.Click
         Dim input1 As String
 
@@ -2268,6 +2436,9 @@ Public Class Form1
         Await VideoCapture1.DV_SendCommandAsync(DVCommand.Stop)
     End Sub
 
+        ''' <summary>
+        ''' Bt refresh clients click.
+        ''' </summary>
     Private Sub btRefreshClients_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btRefreshClients.Click
 
         Dim dns1 As String = "", address As String = ""
@@ -2305,6 +2476,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt stop tune click.
+        ''' </summary>
     Private Sub btStopTune_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btStopTune.Click
 
         VideoCapture1.TVTuner_TuneChannels_Stop()
@@ -2411,24 +2585,36 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb use best audio input checked changed.
+        ''' </summary>
     Private Sub cbUseBestAudioInputCheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbUseBestAudioInputFormat.CheckedChanged
 
         cbAudioInputFormat.Enabled = Not cbUseBestAudioInputFormat.Checked
 
     End Sub
 
+        ''' <summary>
+        ''' Cb use best video input checked changed.
+        ''' </summary>
     Private Sub cbUseBestVideoInputCheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbUseBestVideoInputFormat.CheckedChanged
 
         cbVideoInputFormat.Enabled = Not cbUseBestVideoInputFormat.Checked
 
     End Sub
 
+        ''' <summary>
+        ''' Tb audio volume scroll.
+        ''' </summary>
     Private Sub tbAudioVolume_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudioVolume.Scroll
 
         VideoCapture1.Audio_OutputDevice_Volume_Set(tbAudioVolume.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb audio balance scroll.
+        ''' </summary>
     Private Sub tbAudioBalance_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudioBalance.Scroll
 
         VideoCapture1.Audio_OutputDevice_Balance_Set(tbAudioBalance.Value)
@@ -2436,6 +2622,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt select wmv profile network click.
+        ''' </summary>
     Private Sub btSelectWMVProfileNetwork_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btSelectWMVProfileNetwork.Click
 
         If openFileDialog1.ShowDialog() = DialogResult.OK Then
@@ -2456,6 +2645,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt mpeg encoder show dialog click.
+        ''' </summary>
     Private Sub btMPEGEncoderShowDialog_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btMPEGEncoderShowDialog.Click
 
         If cbMPEGEncoder.SelectedIndex <> -1 Then
@@ -2464,6 +2656,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb filters selected index changed.
+        ''' </summary>
     Private Sub cbFilters_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbFilters.SelectedIndexChanged
 
         If cbFilters.SelectedIndex <> -1 Then
@@ -2475,6 +2670,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt filter settings click.
+        ''' </summary>
     Private Sub btFilterSettings_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btFilterSettings.Click
 
         Dim sName As String = cbFilters.Text
@@ -2488,6 +2686,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Lb filters selected index changed.
+        ''' </summary>
     Private Sub lbFilters_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles lbFilters.SelectedIndexChanged
 
         If lbFilters.SelectedIndex <> -1 Then
@@ -2499,6 +2700,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt filter settings 2 click.
+        ''' </summary>
     Private Sub btFilterSettings2_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btFilterSettings2.Click
 
         If lbFilters.SelectedIndex <> -1 Then
@@ -2516,6 +2720,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt filter delete all click.
+        ''' </summary>
     Private Sub btFilterDeleteAll_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btFilterDeleteAll.Click
 
         lbFilters.Items.Clear()
@@ -2523,6 +2730,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt osd clear layers click.
+        ''' </summary>
     Private Sub btOSDClearLayers_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btOSDClearLayers.Click
 
         VideoCapture1.OSD_Layers_Clear()
@@ -2530,6 +2740,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt osd layer add click.
+        ''' </summary>
     Private Sub btOSDLayerAdd_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btOSDLayerAdd.Click
 
         VideoCapture1.OSD_Layers_Create(
@@ -2542,6 +2755,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt osd select image click.
+        ''' </summary>
     Private Sub btOSDSelectImage_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btOSDSelectImage.Click
 
         If openFileDialog2.ShowDialog() = DialogResult.OK Then
@@ -2550,6 +2766,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt osd image draw click.
+        ''' </summary>
     Private Sub btOSDImageDraw_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btOSDImageDraw.Click
 
         If (Not System.IO.File.Exists(edOSDImageFilename.Text)) Then
@@ -2569,6 +2788,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt osd select font click.
+        ''' </summary>
     Private Sub btOSDSelectFont_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btOSDSelectFont.Click
 
         If fontDialog1.ShowDialog() = DialogResult.OK Then
@@ -2578,6 +2800,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt osd text draw click.
+        ''' </summary>
     Private Sub btOSDTextDraw_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btOSDTextDraw.Click
 
         If lbOSDLayers.SelectedIndex <> -1 Then
@@ -2594,6 +2819,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt osd set transp click.
+        ''' </summary>
     Private Sub btOSDSetTransp_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btOSDSetTransp.Click
 
         If lbOSDLayers.SelectedIndex <> -1 Then
@@ -2605,6 +2833,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb mpeg video decoder selected index changed.
+        ''' </summary>
     Private Sub cbMPEGVideoDecoder_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbMPEGVideoDecoder.SelectedIndexChanged
 
         Dim sName As String
@@ -2618,6 +2849,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb mpeg audio decoder selected index changed.
+        ''' </summary>
     Private Sub cbMPEGAudioDecoder_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbMPEGAudioDecoder.SelectedIndexChanged
 
         Dim sName As String
@@ -2631,6 +2865,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt mpeg vid dec setting click.
+        ''' </summary>
     Private Sub btMPEGVidDecSetting_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btMPEGVidDecSetting.Click
 
         Dim sName As String
@@ -2647,6 +2884,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt mpeg aud dec settings click.
+        ''' </summary>
     Private Sub btMPEGAudDecSettings_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btMPEGAudDecSettings.Click
 
         Dim sName As String
@@ -2667,6 +2907,9 @@ Public Class Form1
         Await VideoCapture1.Screen_Capture_UpdateParametersAsync(Convert.ToInt32(edScreenLeft.Text), Convert.ToInt32(edScreenTop.Text), cbScreenCapture_GrabMouseCursor.Checked)
     End Sub
 
+        ''' <summary>
+        ''' Cb pip device selected index changed.
+        ''' </summary>
     Private Sub cbPIPDevice_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbPIPDevice.SelectedIndexChanged
 
         If cbPIPDevice.SelectedIndex <> -1 Then
@@ -2698,12 +2941,18 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb pip format use best checked changed.
+        ''' </summary>
     Private Sub cbPIPFormatUseBest_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbPIPFormatUseBest.CheckedChanged
 
         cbPIPFormat.Enabled = Not cbPIPFormatUseBest.Checked
 
     End Sub
 
+        ''' <summary>
+        ''' Bt pip add device click.
+        ''' </summary>
     Private Sub btPIPAddDevice_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btPIPAddDevice.Click
 
         Dim format As String
@@ -2760,6 +3009,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Configure motion detection.
+        ''' </summary>
     Private Sub ConfigureMotionDetection()
         If (cbMotDetEnabled.Checked) Then
             VideoCapture1.Motion_Detection = New MotionDetectionSettings()
@@ -2782,6 +3034,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt mot det update settings click.
+        ''' </summary>
     Private Sub btMotDetUpdateSettings_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btMotDetUpdateSettings.Click
         ConfigureMotionDetection()
     End Sub
@@ -2850,6 +3105,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb lightness scroll.
+        ''' </summary>
     Private Sub tbLightness_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbLightness.Scroll
 
         Dim intf As IVideoEffectLightness
@@ -2866,6 +3124,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb saturation scroll.
+        ''' </summary>
     Private Sub tbSaturation_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSaturation.Scroll
 
         Dim intf As IVideoEffectSaturation
@@ -2883,6 +3144,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb contrast scroll.
+        ''' </summary>
     Private Sub tbContrast_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbContrast.Scroll
 
         Dim intf As IVideoEffectContrast
@@ -2899,6 +3163,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb darkness scroll.
+        ''' </summary>
     Private Sub tbDarkness_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbDarkness.Scroll
 
         Dim intf As IVideoEffectDarkness
@@ -2915,12 +3182,18 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb audio effects enabled checked changed.
+        ''' </summary>
     Private Sub cbAudioEffectsEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudioEffectsEnabled.CheckedChanged
 
         VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked)
 
     End Sub
 
+        ''' <summary>
+        ''' Pn osd color key click.
+        ''' </summary>
     Private Sub pnOSDColorKey_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles pnOSDColorKey.Click
 
         If colorDialog1.ShowDialog() = DialogResult.OK Then
@@ -2929,6 +3202,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt aud eq refresh click.
+        ''' </summary>
     Private Sub btAudEqRefresh_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btAudEqRefresh.Click
 
         tbAudEq0.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0)
@@ -2982,108 +3258,162 @@ Public Class Form1
         Await VideoCapture1.Video_Renderer_UpdateAsync()
     End Sub
 
+        ''' <summary>
+        ''' Cb aud amplify enabled checked changed.
+        ''' </summary>
     Private Sub cbAudAmplifyEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudAmplifyEnabled.CheckedChanged
 
         VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked)
 
     End Sub
 
+        ''' <summary>
+        ''' Cb aud dynamic amplify enabled checked changed.
+        ''' </summary>
     Private Sub cbAudDynamicAmplifyEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudDynamicAmplifyEnabled.CheckedChanged
 
         VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud 3 d sound scroll.
+        ''' </summary>
     Private Sub tbAud3DSound_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAud3DSound.Scroll
 
         VideoCapture1.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, tbAud3DSound.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud amplify amp scroll.
+        ''' </summary>
     Private Sub tbAudAmplifyAmp_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudAmplifyAmp.Scroll
 
         VideoCapture1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, False)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud attack scroll.
+        ''' </summary>
     Private Sub tbAudAttack_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudAttack.Scroll
 
         VideoCapture1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 0 scroll.
+        ''' </summary>
     Private Sub tbAudEq0_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq0.Scroll
 
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 0, tbAudEq0.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 1 scroll.
+        ''' </summary>
     Private Sub tbAudEq1_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq1.Scroll
 
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 1, tbAudEq1.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 2 scroll.
+        ''' </summary>
     Private Sub tbAudEq2_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq2.Scroll
 
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 2, tbAudEq2.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 3 scroll.
+        ''' </summary>
     Private Sub tbAudEq3_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq3.Scroll
 
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 3, tbAudEq3.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 4 scroll.
+        ''' </summary>
     Private Sub tbAudEq4_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq4.Scroll
 
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 4, tbAudEq4.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 5 scroll.
+        ''' </summary>
     Private Sub tbAudEq5_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq5.Scroll
 
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 5, tbAudEq5.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 6 scroll.
+        ''' </summary>
     Private Sub tbAudEq6_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq6.Scroll
 
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 6, tbAudEq6.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 7 scroll.
+        ''' </summary>
     Private Sub tbAudEq7_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq7.Scroll
 
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 7, tbAudEq7.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 8 scroll.
+        ''' </summary>
     Private Sub tbAudEq8_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq8.Scroll
 
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 8, tbAudEq8.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud eq 9 scroll.
+        ''' </summary>
     Private Sub tbAudEq9_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudEq9.Scroll
 
         VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 9, tbAudEq9.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud true bass scroll.
+        ''' </summary>
     Private Sub tbAudTrueBass_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudTrueBass.Scroll
 
         VideoCapture1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, False, tbAudTrueBass.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud release scroll.
+        ''' </summary>
     Private Sub tbAudRelease_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudRelease.Scroll
 
         VideoCapture1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Cb aud equalizer preset selected index changed.
+        ''' </summary>
     Private Sub cbAudEqualizerPreset_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudEqualizerPreset.SelectedIndexChanged
 
         VideoCapture1.Audio_Effects_Equalizer_Preset_Set(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerPreset.SelectedIndex)
@@ -3091,24 +3421,36 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb aud sound 3 d enabled checked changed.
+        ''' </summary>
     Private Sub cbAudSound3DEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudSound3DEnabled.CheckedChanged
 
         VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked)
 
     End Sub
 
+        ''' <summary>
+        ''' Cb aud true bass enabled checked changed.
+        ''' </summary>
     Private Sub cbAudTrueBassEnabled_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbAudTrueBassEnabled.CheckedChanged
 
         VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb aud dyn amp scroll.
+        ''' </summary>
     Private Sub tbAudDynAmp_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbAudDynAmp.Scroll
 
         VideoCapture1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, False)
 
     End Sub
 
+        ''' <summary>
+        ''' Ll video tutorials link clicked.
+        ''' </summary>
     Private Sub llVideoTutorials_LinkClicked(ByVal sender As System.Object, ByVal e As LinkLabelLinkClickedEventArgs) Handles linkLabel1.LinkClicked
 
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials)
@@ -3116,6 +3458,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on tv tuner tune channels.
+        ''' </summary>
     Private Sub VideoCapture1_OnTVTunerTuneChannels(ByVal sender As System.Object, ByVal e As TVTunerTuneChannelsEventArgs) Handles VideoCapture1.OnTVTunerTuneChannels
 
         BeginInvoke(Sub()
@@ -3141,6 +3486,9 @@ Public Class Form1
 
     Private Delegate Sub MotionDelegate(ByVal e As MotionDetectionEventArgs)
 
+        ''' <summary>
+        ''' Motion delegate method.
+        ''' </summary>
     Private Sub MotionDelegateMethod(ByVal e As MotionDetectionEventArgs)
 
         Dim s As String = String.Empty
@@ -3162,6 +3510,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on motion.
+        ''' </summary>
     Private Sub VideoCapture1_OnMotion(ByVal sender As System.Object, ByVal e As MotionDetectionEventArgs) Handles VideoCapture1.OnMotion
 
         Dim motdel As MotionDelegate = New MotionDelegate(AddressOf MotionDelegateMethod)
@@ -3171,6 +3522,9 @@ Public Class Form1
 
     Private Delegate Sub VUDelegate(ByVal e As VUMeterEventArgs)
 
+        ''' <summary>
+        ''' Vu delegate method.
+        ''' </summary>
     Private Sub VUDelegateMethod(ByVal e As VUMeterEventArgs)
 
         If (VideoCapture1.State = PlaybackState.Free) Then
@@ -3181,6 +3535,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on audio vu meter.
+        ''' </summary>
     Private Sub VideoCapture1_OnAudioVUMeter(ByVal sender As System.Object, ByVal e As VUMeterEventArgs) Handles VideoCapture1.OnAudioVUMeter
 
         BeginInvoke(New VUDelegate(AddressOf VUDelegateMethod), e)
@@ -3188,6 +3545,9 @@ Public Class Form1
     End Sub
 
     ' ReSharper disable once MemberCanBePrivate.Global
+        ''' <summary>
+        ''' New.
+        ''' </summary>
     Public Sub New()
 
         ' This call is required by the designer.
@@ -3197,6 +3557,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on object detection.
+        ''' </summary>
     Private Sub VideoCapture1_OnObjectDetection(ByVal sender As System.Object, ByVal e As MotionDetectionExEventArgs) Handles VideoCapture1.OnMotionDetectionEx
 
         Dim motdel As AFMotionDelegate = New AFMotionDelegate(AddressOf AFMotionDelegateMethod)
@@ -3206,12 +3569,18 @@ Public Class Form1
 
     Private Delegate Sub AFMotionDelegate(ByVal level As System.Single)
 
+        ''' <summary>
+        ''' Af motion delegate method.
+        ''' </summary>
     Private Sub AFMotionDelegateMethod(ByVal level As System.Single)
 
         pbAFMotionLevel.Value = level * 100
 
     End Sub
 
+        ''' <summary>
+        ''' Cb af motion detection checked changed.
+        ''' </summary>
     Private Sub cbAFMotionDetection_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbMotionDetectionEx.CheckedChanged
 
         ConfigureMotionDetectionEx()
@@ -3237,6 +3606,9 @@ Public Class Form1
     End Sub
 
 
+        ''' <summary>
+        ''' Bt pip add ip camera click.
+        ''' </summary>
     Private Sub btPIPAddIPCamera_Click(sender As System.Object, e As EventArgs) Handles btPIPAddIPCamera.Click
 
         Dim ipCameraSource As IPCameraSourceSettings = SelectIPCameraSource()
@@ -3252,6 +3624,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt pip add screen capture click.
+        ''' </summary>
     Private Sub btPIPAddScreenCapture_Click(sender As System.Object, e As EventArgs) Handles btPIPAddScreenCapture.Click
 
         Dim screenSource As ScreenCaptureSourceSettings = SelectScreenSource()
@@ -3267,6 +3642,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt pip devices clear click.
+        ''' </summary>
     Private Sub btPIPDevicesClear_Click(sender As System.Object, e As EventArgs) Handles btPIPDevicesClear.Click
 
         VideoCapture1.PIP_Sources_Clear()
@@ -3289,6 +3667,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt pip set output size click.
+        ''' </summary>
     Private Sub btPIPSetOutputSize_Click(sender As System.Object, e As EventArgs) Handles btPIPSetOutputSize.Click
 
         VideoCapture1.PIP_CustomOutputSize_Set(Convert.ToInt32(edPIPOutputWidth.Text), Convert.ToInt32(edPIPOutputHeight.Text))
@@ -3317,6 +3698,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt dvbt tune click.
+        ''' </summary>
     Private Sub btDVBTTune_Click(sender As System.Object, e As EventArgs) Handles btDVBTTune.Click
 
         If (Not IsNothing(VideoCapture1.BDA_Source) And VideoCapture1.BDA_Source.SourceType = BDAType.DVBT) Then
@@ -3334,6 +3718,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb zoom checked changed.
+        ''' </summary>
     Private Sub cbZoom_CheckedChanged(sender As Object, e As EventArgs) Handles cbZoom.CheckedChanged
 
         Dim zoomEffect As IVideoEffectZoom
@@ -3359,6 +3746,9 @@ Public Class Form1
     End Sub
 
 
+        ''' <summary>
+        ''' Bt eff zoom in click.
+        ''' </summary>
     Private Sub btEffZoomIn_Click(sender As Object, e As EventArgs) Handles btEffZoomIn.Click
 
         zoom += 0.1
@@ -3368,6 +3758,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt eff zoom out click.
+        ''' </summary>
     Private Sub btEffZoomOut_Click(sender As Object, e As EventArgs) Handles btEffZoomOut.Click
 
         zoom -= 0.1
@@ -3377,6 +3770,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt eff zoom up click.
+        ''' </summary>
     Private Sub btEffZoomUp_Click(sender As Object, e As EventArgs) Handles btEffZoomUp.Click
 
         zoomShiftY += 20
@@ -3385,6 +3781,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt eff zoom down click.
+        ''' </summary>
     Private Sub btEffZoomDown_Click(sender As Object, e As EventArgs) Handles btEffZoomDown.Click
 
         zoomShiftY -= 20
@@ -3393,6 +3792,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt eff zoom right click.
+        ''' </summary>
     Private Sub btEffZoomRight_Click(sender As Object, e As EventArgs) Handles btEffZoomRight.Click
 
         zoomShiftX += 20
@@ -3401,6 +3803,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt eff zoom left click.
+        ''' </summary>
     Private Sub btEffZoomLeft_Click(sender As Object, e As EventArgs) Handles btEffZoomLeft.Click
 
         zoomShiftX -= 20
@@ -3409,6 +3814,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb pan checked changed.
+        ''' </summary>
     Private Sub cbPan_CheckedChanged(sender As Object, e As EventArgs) Handles cbPan.CheckedChanged
 
         Dim pan As IVideoEffectPan
@@ -3439,6 +3847,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt barcode reset click.
+        ''' </summary>
     Private Sub btBarcodeReset_Click(sender As Object, e As EventArgs) Handles btBarcodeReset.Click
 
         edBarcode.Text = String.Empty
@@ -3447,6 +3858,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on barcode detected.
+        ''' </summary>
     Private Sub VideoCapture1_OnBarcodeDetected(sender As Object, e As BarcodeEventArgs) Handles VideoCapture1.OnBarcodeDetected
 
         e.DetectorEnabled = False
@@ -3457,6 +3871,9 @@ Public Class Form1
 
     Private Delegate Sub BarcodeDelegate(ByVal value As BarcodeEventArgs)
 
+        ''' <summary>
+        ''' Barcode delegate method.
+        ''' </summary>
     Private Sub BarcodeDelegateMethod(ByVal value As BarcodeEventArgs)
 
         edBarcode.Text = value.Value
@@ -3470,6 +3887,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt add additional audio source click.
+        ''' </summary>
     Private Sub btAddAdditionalAudioSource_Click(sender As Object, e As EventArgs) Handles btAddAdditionalAudioSource.Click
 
         VideoCapture1.Additional_Audio_CaptureDevice_Add(cbAdditionalAudioSource.Text)
@@ -3477,6 +3897,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Button 1 click.
+        ''' </summary>
     Private Sub button1_Click(sender As Object, e As EventArgs) Handles button1.Click
 
         If (openFileDialog1.ShowDialog() = DialogResult.OK) Then
@@ -3487,6 +3910,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt pip file source add click.
+        ''' </summary>
     Private Sub btPIPFileSourceAdd_Click(sender As Object, e As EventArgs) Handles btPIPFileSourceAdd.Click
 
         VideoCapture1.PIP_Sources_Add_VideoFile(
@@ -3499,6 +3925,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb fade in out checked changed.
+        ''' </summary>
     Private Sub cbFadeInOut_CheckedChanged(sender As Object, e As EventArgs) Handles cbFadeInOut.CheckedChanged
 
         If (rbFadeIn.Checked) Then
@@ -3541,6 +3970,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Link label 2 link clicked.
+        ''' </summary>
     Private Sub linkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel2.LinkClicked
 
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.StreamingToAdobeFlashServer)
@@ -3548,6 +3980,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt bda channel scanning start click.
+        ''' </summary>
     Private Sub btBDAChannelScanningStart_Click(sender As Object, e As EventArgs) Handles btBDAChannelScanningStart.Click
 
         lvBDAChannels.Items.Clear()
@@ -3555,6 +3990,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on bda channel found.
+        ''' </summary>
     Private Sub VideoCapture1_OnBDAChannelFound(sender As Object, e As BDAChannelEventArgs) Handles VideoCapture1.OnBDAChannelFound
 
         BeginInvoke(Sub()
@@ -3576,6 +4014,9 @@ Public Class Form1
                     End Sub)
     End Sub
 
+        ''' <summary>
+        ''' Link label 4 link clicked.
+        ''' </summary>
     Private Sub linkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel4.LinkClicked
 
         Dim startInfo As ProcessStartInfo = New ProcessStartInfo("explorer.exe", HelpLinks.StreamingMSExpressionEncoder)
@@ -3583,6 +4024,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on face detected.
+        ''' </summary>
     Private Sub VideoCapture1_OnFaceDetected(sender As Object, e As AFFaceDetectionEventArgs) Handles VideoCapture1.OnFaceDetected
 
         BeginInvoke(New FaceDelegate(AddressOf FaceDelegateMethod), e)
@@ -3591,6 +4035,9 @@ Public Class Form1
 
     Private Delegate Sub FaceDelegate(ByVal value As AFFaceDetectionEventArgs)
 
+        ''' <summary>
+        ''' Face delegate method.
+        ''' </summary>
     Private Sub FaceDelegateMethod(ByVal value As AFFaceDetectionEventArgs)
 
         edFaceTrackingFaces.Text = String.Empty
@@ -3682,6 +4129,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Video view 1 mouse down.
+        ''' </summary>
     Private Sub VideoView1_MouseDown(sender As Object, e As MouseEventArgs) Handles VideoView1.MouseDown
         If (fullScreen) Then
             btFullScreen_Click(sender, e)
@@ -3691,15 +4141,24 @@ Public Class Form1
 #End Region
 
 
+        ''' <summary>
+        ''' Link label 5 link clicked.
+        ''' </summary>
     Private Sub linkLabel5_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel5.LinkClicked
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.IISSmoothStreaming)
         Process.Start(startInfo)
     End Sub
 
+        ''' <summary>
+        ''' Tb vu meter amplification scroll.
+        ''' </summary>
     Private Sub tbVUMeterAmplification_Scroll(sender As Object, e As EventArgs) Handles tbVUMeterAmplification.Scroll
         VideoCapture1.Audio_VUMeter_Pro_Volume = tbVUMeterAmplification.Value
     End Sub
 
+        ''' <summary>
+        ''' Tb vu meter boost scroll.
+        ''' </summary>
     Private Sub tbVUMeterBoost_Scroll(sender As Object, e As EventArgs) Handles tbVUMeterBoost.Scroll
         volumeMeter1.Boost = tbVUMeterBoost.Value / 10.0F
         volumeMeter2.Boost = tbVUMeterBoost.Value / 10.0F
@@ -3708,6 +4167,9 @@ Public Class Form1
         waveformPainter2.Boost = tbVUMeterBoost.Value / 10.0F
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on audio vu meter pro volume.
+        ''' </summary>
     Private Sub VideoCapture1_OnAudioVUMeterProVolume(sender As Object, e As AudioLevelEventArgs) Handles VideoCapture1.OnAudioVUMeterProVolume
         BeginInvoke(Sub()
                         volumeMeter1.Amplitude = e.ChannelLevelsDb(0)
@@ -3722,6 +4184,9 @@ Public Class Form1
                     End Sub)
     End Sub
 
+        ''' <summary>
+        ''' Cb live rotation checked changed.
+        ''' </summary>
     Private Sub cbLiveRotation_CheckedChanged(sender As Object, e As EventArgs) Handles cbLiveRotation.CheckedChanged
 
         Dim rotate As IVideoEffectRotate
@@ -3747,10 +4212,16 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb live rotation angle scroll.
+        ''' </summary>
     Private Sub tbLiveRotationAngle_Scroll(sender As Object, e As EventArgs) Handles tbLiveRotationAngle.Scroll
         cbLiveRotation_CheckedChanged(sender, e)
     End Sub
 
+        ''' <summary>
+        ''' Cb live rotation stretch checked changed.
+        ''' </summary>
     Private Sub cbLiveRotationStretch_CheckedChanged(sender As Object, e As EventArgs) Handles cbLiveRotationStretch.CheckedChanged
         cbLiveRotation_CheckedChanged(sender, e)
     End Sub
@@ -3775,6 +4246,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb custom video source category selected index changed.
+        ''' </summary>
     Private Sub cbCustomVideoSourceCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomVideoSourceCategory.SelectedIndexChanged
 
         cbCustomVideoSourceFilter.Items.Clear()
@@ -3805,6 +4279,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb custom audio source category selected index changed.
+        ''' </summary>
     Private Sub cbCustomAudioSourceCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomAudioSourceCategory.SelectedIndexChanged
 
         cbCustomAudioSourceFilter.Items.Clear()
@@ -3836,6 +4313,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Cb custom video source filter selected index changed.
+        ''' </summary>
     Private Sub cbCustomVideoSourceFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomVideoSourceFilter.SelectedIndexChanged
 
         If (Not String.IsNullOrEmpty(cbCustomVideoSourceFilter.Text)) Then
@@ -3865,6 +4345,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb custom audio source filter selected index changed.
+        ''' </summary>
     Private Sub cbCustomAudioSourceFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomAudioSourceFilter.SelectedIndexChanged
 
         If (Not String.IsNullOrEmpty(cbCustomAudioSourceFilter.Text)) Then
@@ -4033,6 +4516,9 @@ Public Class Form1
         Await VideoCapture1.Audio_Enhancer_TimeshiftAsync(tbAudioTimeshift.Value)
     End Sub
 
+        ''' <summary>
+        ''' Log.
+        ''' </summary>
     Private Sub Log(msg As String)
         If (IsHandleCreated) Then
             Invoke(Sub()
@@ -4041,18 +4527,27 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on error.
+        ''' </summary>
     Private Sub VideoCapture1_OnError(ByVal sender As System.Object, ByVal e As ErrorsEventArgs) Handles VideoCapture1.OnError
         Log(e.Message)
     End Sub
 
     Private Delegate Sub FFMPEGInfoDelegate(ByVal message As String)
 
+        ''' <summary>
+        ''' Ffmpeg info delegate method.
+        ''' </summary>
     Private Sub FFMPEGInfoDelegateMethod(ByVal message As String)
 
         mmLog.Text += "(NOT ERROR) FFMPEG " + message + Environment.NewLine
 
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on ffmpeg info.
+        ''' </summary>
     Private Sub VideoCapture1_OnFFMPEGInfo(sender As Object, e As FFMPEGInfoEventArgs) Handles VideoCapture1.OnFFMPEGInfo
 
         Dim del As FFMPEGInfoDelegate = New FFMPEGInfoDelegate(AddressOf FFMPEGInfoDelegateMethod)
@@ -4060,6 +4555,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt encryption open file click.
+        ''' </summary>
     Private Sub btEncryptionOpenFile_Click(sender As Object, e As EventArgs) Handles btEncryptionOpenFile.Click
 
         If (openFileDialog1.ShowDialog() = DialogResult.OK) Then
@@ -4070,6 +4568,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Img tag cover click.
+        ''' </summary>
     Private Sub imgTagCover_Click(sender As Object, e As EventArgs) Handles imgTagCover.Click
 
         If (openFileDialog2.ShowDialog() = DialogResult.OK) Then
@@ -4107,6 +4608,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt audio channel mapper clear click.
+        ''' </summary>
     Private Sub btAudioChannelMapperClear_Click(sender As Object, e As EventArgs) Handles btAudioChannelMapperClear.Click
 
         audioChannelMapperItems.Clear()
@@ -4114,6 +4618,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt audio channel mapper add new route click.
+        ''' </summary>
     Private Sub btAudioChannelMapperAddNewRoute_Click(sender As Object, e As EventArgs) Handles btAudioChannelMapperAddNewRoute.Click
 
         Dim item As AudioChannelMapperItem = New AudioChannelMapperItem()
@@ -4128,6 +4635,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Link label 11 link clicked.
+        ''' </summary>
     Private Sub linkLabel11_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel11.LinkClicked
 
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.NetworkStreamingToYouTube)
@@ -4145,6 +4655,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on network source disconnect.
+        ''' </summary>
     Private Sub VideoCapture1_OnNetworkSourceDisconnect(sender As Object, e As EventArgs) Handles VideoCapture1.OnNetworkSourceDisconnect
 
         Dim del As NetworkStopDelegate = New NetworkStopDelegate(AddressOf NetworkStopDelegateMethod)
@@ -4152,6 +4665,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb gpu lightness scroll.
+        ''' </summary>
     Private Sub tbGPULightness_Scroll(sender As Object, e As EventArgs) Handles tbGPULightness.Scroll
 
         Dim intf As IGPUVideoEffectBrightness
@@ -4169,6 +4685,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb gpu saturation scroll.
+        ''' </summary>
     Private Sub tbGPUSaturation_Scroll(sender As Object, e As EventArgs) Handles tbGPUSaturation.Scroll
 
         Dim intf As IGPUVideoEffectSaturation
@@ -4186,6 +4705,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb gpu contrast scroll.
+        ''' </summary>
     Private Sub tbGPUContrast_Scroll(sender As Object, e As EventArgs) Handles tbGPUContrast.Scroll
 
         Dim intf As IGPUVideoEffectContrast
@@ -4203,6 +4725,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb gpu darkness scroll.
+        ''' </summary>
     Private Sub tbGPUDarkness_Scroll(sender As Object, e As EventArgs) Handles tbGPUDarkness.Scroll
 
         Dim intf As IGPUVideoEffectDarkness
@@ -4220,6 +4745,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb gpu greyscale checked changed.
+        ''' </summary>
     Private Sub cbGPUGreyscale_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUGreyscale.CheckedChanged
 
         Dim intf As IGPUVideoEffectGrayscale
@@ -4237,6 +4765,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb gpu invert checked changed.
+        ''' </summary>
     Private Sub cbGPUInvert_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUInvert.CheckedChanged
 
         Dim intf As IGPUVideoEffectInvert
@@ -4254,6 +4785,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb gpu night vision checked changed.
+        ''' </summary>
     Private Sub cbGPUNightVision_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUNightVision.CheckedChanged
 
         Dim intf As IGPUVideoEffectNightVision
@@ -4271,6 +4805,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb gpu pixelate checked changed.
+        ''' </summary>
     Private Sub cbGPUPixelate_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUPixelate.CheckedChanged
 
         Dim intf As IGPUVideoEffectPixelate
@@ -4288,6 +4825,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb gpu denoise checked changed.
+        ''' </summary>
     Private Sub cbGPUDenoise_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUDenoise.CheckedChanged
 
         Dim intf As IGPUVideoEffectDenoise
@@ -4305,6 +4845,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb gpu deinterlace checked changed.
+        ''' </summary>
     Private Sub cbGPUDeinterlace_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUDeinterlace.CheckedChanged
 
         Dim intf As IGPUVideoEffectDeinterlaceBlend
@@ -4322,6 +4865,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Cb gpu old movie checked changed.
+        ''' </summary>
     Private Sub cbGPUOldMovie_CheckedChanged(sender As Object, e As EventArgs) Handles cbGPUOldMovie.CheckedChanged
 
         Dim intf As IGPUVideoEffectOldMovie
@@ -4431,6 +4977,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif right click.
+        ''' </summary>
     Private Sub btONVIFRight_Click(sender As Object, e As EventArgs) Handles btONVIFRight.Click
 
         If (onvifClient Is Nothing) Then
@@ -4448,12 +4997,18 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvifptz set default click.
+        ''' </summary>
     Private Sub btONVIFPTZSetDefault_Click(sender As Object, e As EventArgs) Handles btONVIFPTZSetDefault.Click
 
         onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, 0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 0.5F)
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif left click.
+        ''' </summary>
     Private Sub btONVIFLeft_Click(sender As Object, e As EventArgs) Handles btONVIFLeft.Click
 
         If (onvifClient Is Nothing) Then
@@ -4471,6 +5026,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif up click.
+        ''' </summary>
     Private Sub btONVIFUp_Click(sender As Object, e As EventArgs) Handles btONVIFUp.Click
 
         If (onvifClient Is Nothing) Then
@@ -4488,6 +5046,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif down click.
+        ''' </summary>
     Private Sub btONVIFDown_Click(sender As Object, e As EventArgs) Handles btONVIFDown.Click
 
         If (onvifClient Is Nothing) Then
@@ -4505,6 +5066,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif zoom in click.
+        ''' </summary>
     Private Sub btONVIFZoomIn_Click(sender As Object, e As EventArgs) Handles btONVIFZoomIn.Click
 
         If (onvifClient Is Nothing) Then
@@ -4522,6 +5086,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt onvif zoom out click.
+        ''' </summary>
     Private Sub btONVIFZoomOut_Click(sender As Object, e As EventArgs) Handles btONVIFZoomOut.Click
 
         If (onvifClient Is Nothing) Then
@@ -4539,6 +5106,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Pn pip chroma key color click.
+        ''' </summary>
     Private Sub pnPIPChromaKeyColor_Click(sender As Object, e As EventArgs) Handles pnPIPChromaKeyColor.Click
 
         colorDialog1.Color = pnPIPChromaKeyColor.BackColor
@@ -4549,12 +5119,18 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb pip chroma key tolerance 1 scroll.
+        ''' </summary>
     Private Sub tbPIPChromaKeyTolerance1_Scroll(sender As Object, e As EventArgs) Handles tbPIPChromaKeyTolerance1.Scroll
 
         lbPIPChromaKeyTolerance1.Text = tbPIPChromaKeyTolerance1.Value.ToString()
 
     End Sub
 
+        ''' <summary>
+        ''' Tb pip chroma key tolerance 2 scroll.
+        ''' </summary>
     Private Sub tbPIPChromaKeyTolerance2_Scroll(sender As Object, e As EventArgs) Handles tbPIPChromaKeyTolerance2.Scroll
 
         lbPIPChromaKeyTolerance2.Text = tbPIPChromaKeyTolerance2.Value.ToString()
@@ -4562,21 +5138,33 @@ Public Class Form1
     End Sub
 
 
+        ''' <summary>
+        ''' Cb audio input format selected index changed.
+        ''' </summary>
     Private Sub cbAudioInputFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbAudioInputFormat.SelectedIndexChanged
 
     End Sub
 
+        ''' <summary>
+        ''' Bt select hls output folder click.
+        ''' </summary>
     Private Sub btSelectHLSOutputFolder_Click(sender As Object, e As EventArgs) Handles btSelectHLSOutputFolder.Click
         If (folderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
             edHLSOutputFolder.Text = folderBrowserDialog1.SelectedPath
         End If
     End Sub
 
+        ''' <summary>
+        ''' Lb hls configure link clicked.
+        ''' </summary>
     Private Sub lbHLSConfigure_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lbHLSConfigure.LinkClicked
         Dim startInfo As ProcessStartInfo = New ProcessStartInfo("explorer.exe", HelpLinks.HLSStreaming)
         Process.Start(startInfo)
     End Sub
 
+        ''' <summary>
+        ''' Cb output format selected index changed.
+        ''' </summary>
     Private Sub cbOutputFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOutputFormat.SelectedIndexChanged
 
         Select Case (cbOutputFormat.SelectedIndex)
@@ -4639,6 +5227,9 @@ Public Class Form1
         End Select
     End Sub
 
+        ''' <summary>
+        ''' Bt output configure click.
+        ''' </summary>
     Private Sub btOutputConfigure_Click(sender As Object, e As EventArgs) Handles btOutputConfigure.Click
         Select Case (cbOutputFormat.SelectedIndex)
             Case 0
@@ -4785,6 +5376,9 @@ Public Class Form1
         End Select
     End Sub
 
+        ''' <summary>
+        ''' Update recording time.
+        ''' </summary>
     Private Sub UpdateRecordingTime()
         If Me.IsHandleCreated Then
             Dim ts = VideoCapture1.Duration_Time()
@@ -4799,6 +5393,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Cb flip checked changed.
+        ''' </summary>
     Private Sub cbFlipX_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipX.CheckedChanged
         Dim flip As IVideoEffectFlipDown
         Dim effect = VideoCapture1.Video_Effects_Get("FlipDown")
@@ -4813,6 +5410,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Cb flip checked changed.
+        ''' </summary>
     Private Sub cbFlipY_CheckedChanged(sender As Object, e As EventArgs) Handles cbFlipY.CheckedChanged
         Dim flip As IVideoEffectFlipRight
         Dim effect = VideoCapture1.Video_Effects_Get("FlipRight")
@@ -4827,6 +5427,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt image logo remove click.
+        ''' </summary>
     Private Sub btImageLogoRemove_Click(sender As Object, e As EventArgs) Handles btImageLogoRemove.Click
         If (lbImageLogos.SelectedItem IsNot Nothing) Then
             VideoCapture1.Video_Effects_Remove(lbImageLogos.SelectedItem)
@@ -4834,6 +5437,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt image logo edit click.
+        ''' </summary>
     Private Sub btImageLogoEdit_Click(sender As Object, e As EventArgs) Handles btImageLogoEdit.Click
         If (lbImageLogos.SelectedItem IsNot Nothing) Then
             Dim dlg = New ImageLogoSettingsDialog()
@@ -4845,6 +5451,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt image logo add click.
+        ''' </summary>
     Private Sub btImageLogoAdd_Click(sender As Object, e As EventArgs) Handles btImageLogoAdd.Click
         Dim dlg = New ImageLogoSettingsDialog()
 
@@ -4859,6 +5468,9 @@ Public Class Form1
         dlg.Dispose()
     End Sub
 
+        ''' <summary>
+        ''' Bt text logo edit click.
+        ''' </summary>
     Private Sub btTextLogoEdit_Click(sender As Object, e As EventArgs) Handles btTextLogoEdit.Click
         If (lbTextLogos.SelectedItem IsNot Nothing) Then
             Dim dlg = New TextLogoSettingsDialog()
@@ -4870,6 +5482,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt text logo remove click.
+        ''' </summary>
     Private Sub btTextLogoRemove_Click(sender As Object, e As EventArgs) Handles btTextLogoRemove.Click
         If (lbTextLogos.SelectedItem IsNot Nothing) Then
             VideoCapture1.Video_Effects_Remove(lbTextLogos.SelectedItem)
@@ -4877,6 +5492,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt text logo add click.
+        ''' </summary>
     Private Sub btTextLogoAdd_Click(sender As Object, e As EventArgs) Handles btTextLogoAdd.Click
         Dim dlg = New TextLogoSettingsDialog()
 
@@ -5025,6 +5643,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt osd clear layer click.
+        ''' </summary>
     Private Sub btOSDClearLayer_Click(sender As Object, e As EventArgs) Handles btOSDClearLayer.Click
         If (lbOSDLayers.SelectedIndex <> -1) Then
             VideoCapture1.OSD_Layers_Clear(lbOSDLayers.SelectedIndex)
@@ -5033,14 +5654,23 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt osd render layers click.
+        ''' </summary>
     Private Sub btOSDRenderLayers_Click(sender As Object, e As EventArgs) Handles btOSDRenderLayers.Click
         VideoCapture1.OSD_Layers_Render()
     End Sub
 
+        ''' <summary>
+        ''' Lb osd layers item check.
+        ''' </summary>
     Private Sub lbOSDLayers_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles lbOSDLayers.ItemCheck
         VideoCapture1.OSD_Layers_Enable(e.Index, e.NewValue = CheckState.Checked)
     End Sub
 
+        ''' <summary>
+        ''' Bt screen source window select click.
+        ''' </summary>
     Private Sub btScreenSourceWindowSelect_Click(sender As Object, e As EventArgs) Handles btScreenSourceWindowSelect.Click
         If (windowCaptureForm Is Nothing) Then
             windowCaptureForm = New WindowCaptureForm()
@@ -5049,6 +5679,9 @@ Public Class Form1
         windowCaptureForm.StartCapture()
     End Sub
 
+        ''' <summary>
+        ''' Window capture form on capture hotkey.
+        ''' </summary>
     Private Sub WindowCaptureForm_OnCaptureHotkey(sender As Object, e As WindowCaptureEventArgs) Handles windowCaptureForm.OnCaptureHotkey
         windowCaptureForm.StopCapture()
         windowCaptureForm.Hide()
@@ -5056,6 +5689,9 @@ Public Class Form1
         lbScreenSourceWindowText.Text = e.Caption
     End Sub
 
+        ''' <summary>
+        ''' Tb gpu blur scroll.
+        ''' </summary>
     Private Sub tbGPUBlur_Scroll(sender As Object, e As EventArgs) Handles tbGPUBlur.Scroll
         Dim intf As IGPUVideoEffectBlur
         Dim effect = VideoCapture1.Video_Effects_GPU_Get("Blur")
@@ -5072,14 +5708,23 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Tb chroma key threshold sensitivity scroll.
+        ''' </summary>
     Private Sub tbChromaKeyThresholdSensitivity_Scroll(sender As Object, e As EventArgs) Handles tbChromaKeyThresholdSensitivity.Scroll
         ConfigureChromaKey()
     End Sub
 
+        ''' <summary>
+        ''' Tb chroma key smoothing scroll.
+        ''' </summary>
     Private Sub tbChromaKeySmoothing_Scroll(sender As Object, e As EventArgs) Handles tbChromaKeySmoothing.Scroll
         ConfigureChromaKey()
     End Sub
 
+        ''' <summary>
+        ''' Pn chroma key color mouse down.
+        ''' </summary>
     Private Sub pnChromaKeyColor_MouseDown(sender As Object, e As MouseEventArgs) Handles pnChromaKeyColor.MouseDown
         If (colorDialog1.ShowDialog() = DialogResult.OK) Then
             pnChromaKeyColor.BackColor = colorDialog1.Color
@@ -5087,6 +5732,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt chroma key select bg image click.
+        ''' </summary>
     Private Sub btChromaKeySelectBGImage_Click(sender As Object, e As EventArgs) Handles btChromaKeySelectBGImage.Click
         If (openFileDialog1.ShowDialog() = DialogResult.OK) Then
             edChromaKeyImage.Text = openFileDialog1.FileName
@@ -5094,6 +5742,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Lb link clicked.
+        ''' </summary>
     Private Sub lbNDI_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lbNDI.LinkClicked, linkLabel6.LinkClicked
         Dim startInfo As ProcessStartInfo = New ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor)
         Process.Start(startInfo)
@@ -5125,20 +5776,32 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Bt virtual camera register click.
+        ''' </summary>
     Private Sub btVirtualCameraRegister_Click(sender As Object, e As EventArgs) Handles btVirtualCameraRegister.Click
         btVirtualCameraRegister.Enabled = Not VideoCapture1.CustomRedist_VirtualCameraRegister()
     End Sub
 
+        ''' <summary>
+        ''' Ll xiph x 86 link clicked.
+        ''' </summary>
     Private Sub llXiphX86_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llXiphX86.LinkClicked
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx86)
         Process.Start(startInfo)
     End Sub
 
+        ''' <summary>
+        ''' Ll xiph x 64 link clicked.
+        ''' </summary>
     Private Sub llXiphX64_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles llXiphX64.LinkClicked
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64)
         Process.Start(startInfo)
     End Sub
 
+        ''' <summary>
+        ''' Cb pip format selected index changed.
+        ''' </summary>
     Private Sub cbPIPFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPIPFormat.SelectedIndexChanged
         If (String.IsNullOrEmpty(cbPIPFormat.Text)) Then
             Return
@@ -5166,6 +5829,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Form 1 form closing.
+        ''' </summary>
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         DestroyEngine()
     End Sub

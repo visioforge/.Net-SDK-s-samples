@@ -21,6 +21,10 @@ namespace Audio_Capture_Demo_X_WPF
     using VisioForge.Core.Types.X.VideoCapture;
     using VisioForge.Core.Types.X.AudioRenderers;
 
+    /// <summary>
+    /// Interaction logic for the Audio Capture Demo X WPF's MainWindow.
+    /// Demonstrates capturing audio from various sources, including system loopback, using the X-engine.
+    /// </summary>
     public partial class MainWindow : Window
     {
         private readonly Microsoft.Win32.SaveFileDialog saveFileDialog1 = new Microsoft.Win32.SaveFileDialog();
@@ -52,6 +56,12 @@ namespace Audio_Capture_Demo_X_WPF
             
         }
            
+        /// <summary>
+        /// Handles the Load event of the Window control.
+        /// Initializes the SDK, sets up the video capture core, and enumerates audio devices.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -108,6 +118,12 @@ namespace Audio_Capture_Demo_X_WPF
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp3");
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the cbAudioInputDevice control.
+        /// Populates the available audio input formats for the selected device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbAudioInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -132,6 +148,12 @@ namespace Audio_Capture_Demo_X_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbAudioVolume control.
+        /// Updates the output device volume level.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudioVolume_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoCapture1 == null)
@@ -142,6 +164,12 @@ namespace Audio_Capture_Demo_X_WPF
             VideoCapture1.Audio_OutputDevice_Volume = tbAudioVolume.Value / 100.0;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// Opens a file dialog to select the output audio file path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -150,6 +178,12 @@ namespace Audio_Capture_Demo_X_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the engine and starts the audio capture or monitoring.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -306,6 +340,12 @@ namespace Audio_Capture_Demo_X_WPF
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the audio capture engine and resets the recording timer.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -313,6 +353,9 @@ namespace Audio_Capture_Demo_X_WPF
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Updates the recorded time display in the UI.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = VideoCapture1.Duration();
@@ -328,22 +371,43 @@ namespace Audio_Capture_Demo_X_WPF
             }));
         }
 
+        /// <summary>
+        /// Handles the MouseDown event of the llVideoTutorials label.
+        /// Opens the video tutorials link in the default browser.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void llVideoTutorials_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             Dispatcher.Invoke((Action)(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; }));
         }
 
+        /// <summary>
+        /// Handles the OnError event of the VideoCapture1 control.
+        /// Logs error messages to the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btOutputConfigure control.
+        /// Opens the configuration dialog for the selected audio output format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btOutputConfigure_Click(object sender, RoutedEventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -470,6 +534,12 @@ namespace Audio_Capture_Demo_X_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbOutputFormat control.
+        /// Updates the output file extension based on the selected format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (edOutput == null)
@@ -517,6 +587,12 @@ namespace Audio_Capture_Demo_X_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the OnStop event of the VideoCapture1 control.
+        /// Resets the timestamp display.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnStop(object sender, EventArgs e)
         {
             Dispatcher.BeginInvoke((Action)(() =>
@@ -525,6 +601,12 @@ namespace Audio_Capture_Demo_X_WPF
             }));
         }
 
+        /// <summary>
+        /// Handles the Closing event of the Window control.
+        /// Stops the engine and releases SDK resources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (VideoCapture1 != null)
@@ -538,4 +620,3 @@ namespace Audio_Capture_Demo_X_WPF
     }
 }
 
-// ReSharper restore InconsistentNaming

@@ -11,6 +11,9 @@ namespace SimpleCaptureMB
         {
         }
 
+        /// <summary>
+        /// Create maui app.
+        /// </summary>
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
 }

@@ -17,6 +17,9 @@ public partial class App : Application
 
     protected Window? MainWindow { get; private set; }
 
+        /// <summary>
+        /// On launched.
+        /// </summary>
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
         MainWindow = new Window();

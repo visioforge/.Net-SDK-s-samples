@@ -17,7 +17,10 @@ using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.VideoEditX;
 
 namespace VideoJoin;
-
+/// <summary>
+/// The main window for the Avalonia VideoJoin demo.
+/// Demonstrates joining multiple files into a single output using the VideoEditCoreX engine in an Avalonia environment.
+/// </summary>
 public partial class MainWindow : Window
 {
     private bool _initialized;
@@ -46,6 +49,12 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Handles the Closing event of the MainWindow.
+    /// Stops the engine and releases SDK resources.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
     private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
         VideoEdit1.Stop();
@@ -55,6 +64,12 @@ public partial class MainWindow : Window
         VisioForgeX.DestroySDK();
     }
 
+    /// <summary>
+    /// Handles the Activated event of the MainWindow.
+    /// Initializes controls and the engine upon first activation.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
     private void MainWindow_Activated(object sender, EventArgs e)
     {
         if (_initialized)
@@ -75,6 +90,9 @@ public partial class MainWindow : Window
         VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
     }
 
+    /// <summary>
+    /// Initializes and configures the UI controls and their initial values.
+    /// </summary>
     private void InitControls()
     {
         //VideoView1 = this.FindControl<VideoView>("VideoView1");
@@ -138,6 +156,12 @@ public partial class MainWindow : Window
         mmLog.ItemsSource = Log;
     }
 
+    /// <summary>
+    /// Handles the Click event of the btAddFile control.
+    /// Opens a file dialog and adds the selected file to the engine's input list.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btAddFile_Click(object sender, RoutedEventArgs e)
     {
         var ofd = new OpenFileDialog();
@@ -175,6 +199,9 @@ public partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Creates the VideoEditCoreX engine and subscribes to its events.
+    /// </summary>
     private void CreateEngine()
     {
         VideoEdit1 = new VideoEditCoreX();
@@ -184,6 +211,9 @@ public partial class MainWindow : Window
         VideoEdit1.OnProgress += VideoEdit1_OnProgress;
     }
 
+    /// <summary>
+    /// Destroys the VideoEditCoreX engine and unsubscribes from events.
+    /// </summary>
     private void DestroyEngine()
     {
         if (VideoEdit1 != null)
@@ -197,12 +227,23 @@ public partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Gets the file extension from the specified filename.
+    /// </summary>
+    /// <param name="filename">The filename.</param>
+    /// <returns>The file extension including the dot.</returns>
     private static string GetFileExt(string filename)
     {
         int k = filename.LastIndexOf('.');
         return filename.Substring(k, filename.Length - k);
     }
 
+    /// <summary>
+    /// Handles the Click event of the btSelectFile control.
+    /// Opens a dialog to select the output file path.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btSelectFile_Click(object sender, RoutedEventArgs e)
     {
         var ofd = new SaveFileDialog();
@@ -213,6 +254,12 @@ public partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// Handles the Click event of the btStop control.
+    /// Stops the joining process and clears the project state.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private void btStop_Click(object sender, RoutedEventArgs e)
     {
         VideoEdit1.Stop();
@@ -222,12 +269,24 @@ public partial class MainWindow : Window
         pbProgress.Value = 0;
     }
 
+    /// <summary>
+    /// Handles the Click event of the btClearFiles control.
+    /// Clears the input files list.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private void btClearFiles_Click(object sender, RoutedEventArgs e)
     {
         InputFiles.Clear();
         VideoEdit1.Input_Clear_List();
     }
 
+    /// <summary>
+    /// Handles the Click event of the btStart control.
+    /// Configures the engine and starts the join operation.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private void btStart_Click(object sender, RoutedEventArgs e)
     {
         VideoEdit1.Debug_Mode = cbDebugMode.IsChecked == true;
@@ -320,11 +379,17 @@ public partial class MainWindow : Window
         VideoEdit1.Start();
     }
 
+        /// <summary>
+        /// Video edit 1 on error.
+        /// </summary>
     private void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
     {
         Log.Add(e.Message);
     }
 
+        /// <summary>
+        /// Video edit 1 on progress.
+        /// </summary>
     private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
     {
         Dispatcher.UIThread.InvokeAsync(() =>
@@ -333,6 +398,9 @@ public partial class MainWindow : Window
         });
     }
 
+        /// <summary>
+        /// Video edit 1 on stop.
+        /// </summary>
     private void VideoEdit1_OnStop(object sender, StopEventArgs e)
     {
         Dispatcher.UIThread.InvokeAsync(async () =>
@@ -351,6 +419,11 @@ public partial class MainWindow : Window
         });
     }
 
+    /// <summary>
+    /// Displays a message box with the specified text.
+    /// </summary>
+    /// <param name="message">The message to display.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
     private async Task ShowMessageAsync(string message)
     {
         var messageBoxStandardWindow = MsBox.Avalonia.MessageBoxManager.GetMessageBoxStandard("Message", message);

@@ -23,8 +23,14 @@ namespace Simple_Player_MAUI
 {
     public partial class MainPage : ContentPage
     {
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCoreX _player;
 
+        /// <summary>
+        /// The filename of the media to play.
+        /// </summary>
         private string _filename;
 
         /// <summary>
@@ -37,6 +43,9 @@ namespace Simple_Player_MAUI
         /// </summary>
         private System.Timers.Timer _tmPosition = new System.Timers.Timer(500);        
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainPage"/> class.
+        /// </summary>
         public MainPage()
         {
             InitializeComponent();
@@ -46,6 +55,9 @@ namespace Simple_Player_MAUI
             _tmPosition.Elapsed += tmPosition_Elapsed;
         }
 
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
         private async void MainPage_Loaded(object? sender, EventArgs e)
         {
             try
@@ -74,6 +86,9 @@ namespace Simple_Player_MAUI
             }
         }
         
+        /// <summary>
+        /// Player on stop.
+        /// </summary>
         private async void _player_OnStop(object? sender, StopEventArgs e)
         {
             try
@@ -96,6 +111,9 @@ namespace Simple_Player_MAUI
             }
         }
 
+        /// <summary>
+        /// Player on start.
+        /// </summary>
         private async void _player_OnStart(object? sender, EventArgs e)
         {
             try
@@ -116,6 +134,9 @@ namespace Simple_Player_MAUI
             }                      
         }
 
+        /// <summary>
+        /// Window destroying.
+        /// </summary>
         private void Window_Destroying(object? sender, EventArgs e)
         {
             if (_player != null)
@@ -130,11 +151,17 @@ namespace Simple_Player_MAUI
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void _player_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Stop all async.
+        /// </summary>
         private async Task StopAllAsync()
         {
             if (_player == null)
@@ -198,6 +225,9 @@ namespace Simple_Player_MAUI
             }
         }
 
+        /// <summary>
+        /// Sl seeking value changed.
+        /// </summary>
         private async void slSeeking_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             try
@@ -213,6 +243,9 @@ namespace Simple_Player_MAUI
             }
         }
 
+        /// <summary>
+        /// Sl volume value changed.
+        /// </summary>
         private void slVolume_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             if (_player != null)
@@ -221,6 +254,9 @@ namespace Simple_Player_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt open clicked event.
+        /// </summary>
         private async void btOpen_Clicked(object? sender, EventArgs e)
         {
             try
@@ -244,6 +280,9 @@ namespace Simple_Player_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt play pause clicked event.
+        /// </summary>
         private async void btPlayPause_Clicked(object? sender, EventArgs e)
         {
             if (_player == null || string.IsNullOrEmpty(_filename))
@@ -292,6 +331,9 @@ namespace Simple_Player_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt speed clicked event.
+        /// </summary>
         private async void btSpeed_Clicked(object? sender, EventArgs e)
         {         
             if (btSpeed.Text == "SPEED: 1X")
@@ -314,6 +356,9 @@ namespace Simple_Player_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop clicked event.
+        /// </summary>
         private async void btStop_Clicked(object? sender, EventArgs e)
         {
             await StopAllAsync();

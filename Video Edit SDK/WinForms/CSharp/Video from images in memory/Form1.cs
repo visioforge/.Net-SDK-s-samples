@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+﻿
 
 namespace Video_From_Images
 {
@@ -20,43 +20,97 @@ namespace Video_From_Images
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.VideoEdit;
 
+    /// <summary>
+    /// Video from images in memory demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The MP4 HW settings dialog.
+        /// </summary>
         private HWEncodersOutputSettingsDialog _mp4HWSettingsDialog;
 
+        /// <summary>
+        /// The MP4 settings dialog.
+        /// </summary>
         private MP4SettingsDialog _mp4SettingsDialog;
 
+        /// <summary>
+        /// The AVI settings dialog.
+        /// </summary>
         private AVISettingsDialog _aviSettingsDialog;
 
+        /// <summary>
+        /// The MP3 settings dialog.
+        /// </summary>
         private MP3SettingsDialog _mp3SettingsDialog;
 
+        /// <summary>
+        /// The WMV settings dialog.
+        /// </summary>
         private WMVSettingsDialog _wmvSettingsDialog;
 
+        /// <summary>
+        /// The DV settings dialog.
+        /// </summary>
         private DVSettingsDialog _dvSettingsDialog;
 
+        /// <summary>
+        /// The WebM settings dialog.
+        /// </summary>
         private WebMSettingsDialog _webmSettingsDialog;
 
+        /// <summary>
+        /// The FFMPEG settings dialog.
+        /// </summary>
         private FFMPEGSettingsDialog _ffmpegSettingsDialog;
 
+        /// <summary>
+        /// The FFMPEG EXE settings dialog.
+        /// </summary>
         private FFMPEGEXESettingsDialog _ffmpegEXESettingsDialog;
 
+        /// <summary>
+        /// The GIF settings dialog.
+        /// </summary>
         private GIFSettingsDialog _gifSettingsDialog;
 
+        /// <summary>
+        /// Indicates whether predefined images are used.
+        /// </summary>
         private bool _predefinedImagesUsed;
 
+        /// <summary>
+        /// The loaded image bitmap.
+        /// </summary>
         private Bitmap _loadedImage;
 
+        /// <summary>
+        /// The loaded image filename.
+        /// </summary>
         private string _loadedImageFilename;
 
+        /// <summary>
+        /// The list of loaded image files.
+        /// </summary>
         private string[] _loadedFiles;
 
+        /// <summary>
+        /// The video editing engine instance.
+        /// </summary>
         private VideoEditCore VideoEdit1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Creates the video editing engine and subscribes to events.
+        /// </summary>
         private void CreateEngine()
         {
             VideoEdit1 = new VideoEditCore(VideoView1 as IVideoView);
@@ -67,6 +121,9 @@ namespace Video_From_Images
             VideoEdit1.OnVideoFrameBitmap += VideoEdit1_OnVideoFrameBitmap;
         }
 
+        /// <summary>
+        /// Destroys the video editing engine and unsubscribes from events.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoEdit1 != null)
@@ -81,6 +138,12 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// Opens a file dialog to select the output file path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -89,12 +152,24 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the LinkClicked event of the linkLabel1 control.
+        /// Opens the video tutorials help link.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="LinkLabelLinkClickedEventArgs"/> instance containing the event data.</param>
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the Load event of the Form1 control.
+        /// Initializes the engine and sets default values.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
@@ -108,6 +183,10 @@ namespace Video_From_Images
             cbOutputFormat.SelectedIndex = 7;
         }
 
+        /// <summary>
+        /// Configures the MP4 output settings.
+        /// </summary>
+        /// <param name="mp4Output">The MP4 output settings.</param>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this._mp4SettingsDialog == null)
@@ -118,6 +197,10 @@ namespace Video_From_Images
             this._mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Configures the FFMPEG EXE output settings.
+        /// </summary>
+        /// <param name="ffmpegOutput">The FFMPEG EXE output settings.</param>
         private void SetFFMPEGEXEOutput(ref FFMPEGEXEOutput ffmpegOutput)
         {
             if (_ffmpegEXESettingsDialog == null)
@@ -128,6 +211,10 @@ namespace Video_From_Images
             _ffmpegEXESettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
+        /// <summary>
+        /// Configures the WMV output settings.
+        /// </summary>
+        /// <param name="wmvOutput">The WMV output settings.</param>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (_wmvSettingsDialog == null)
@@ -139,6 +226,10 @@ namespace Video_From_Images
             _wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Configures the WebM output settings.
+        /// </summary>
+        /// <param name="webmOutput">The WebM output settings.</param>
         private void SetWebMOutput(ref WebMOutput webmOutput)
         {
             if (_webmSettingsDialog == null)
@@ -149,6 +240,10 @@ namespace Video_From_Images
             _webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
+        /// <summary>
+        /// Configures the FFMPEG output settings.
+        /// </summary>
+        /// <param name="ffmpegOutput">The FFMPEG output settings.</param>
         private void SetFFMPEGOutput(ref FFMPEGOutput ffmpegOutput)
         {
             if (_ffmpegSettingsDialog == null)
@@ -159,6 +254,10 @@ namespace Video_From_Images
             _ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
+        /// <summary>
+        /// Configures the MP4 hardware encoders output settings.
+        /// </summary>
+        /// <param name="mp4Output">The MP4 HW output settings.</param>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (_mp4HWSettingsDialog == null)
@@ -169,6 +268,10 @@ namespace Video_From_Images
             _mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Configures the Animated GIF output settings.
+        /// </summary>
+        /// <param name="gifOutput">The GIF output settings.</param>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (_gifSettingsDialog == null)
@@ -179,6 +282,10 @@ namespace Video_From_Images
             _gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Configures the DV output settings.
+        /// </summary>
+        /// <param name="dvOutput">The DV output settings.</param>
         private void SetDVOutput(ref DVOutput dvOutput)
         {
             if (_dvSettingsDialog == null)
@@ -189,6 +296,10 @@ namespace Video_From_Images
             _dvSettingsDialog.SaveSettings(ref dvOutput);
         }
 
+        /// <summary>
+        /// Configures the AVI output settings.
+        /// </summary>
+        /// <param name="aviOutput">The AVI output settings.</param>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (_aviSettingsDialog == null)
@@ -206,6 +317,10 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Configures the MP3 output settings.
+        /// </summary>
+        /// <param name="mp3Output">The MP3 output settings.</param>
         private void SetMP3Output(ref MP3Output mp3Output)
         {
             if (_mp3SettingsDialog == null)
@@ -216,6 +331,10 @@ namespace Video_From_Images
             _mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
+        /// <summary>
+        /// Configures the MKV output settings.
+        /// </summary>
+        /// <param name="mkvOutput">The MKV output settings.</param>
         private void SetMKVOutput(ref MKVv1Output mkvOutput)
         {
             if (_aviSettingsDialog == null)
@@ -233,6 +352,12 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the output and starts the video creation process using a blank input that will be filled manually.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -409,6 +534,11 @@ namespace Video_From_Images
             await VideoEdit1.StartAsync();
         }
 
+        /// <summary>
+        /// Enumerates image files in the specified path.
+        /// </summary>
+        /// <param name="path">The folder path.</param>
+        /// <returns>An array of image file paths.</returns>
         private static string[] EnumerateImageFiles(string path)
         {
             var res = new List<string>();
@@ -423,12 +553,24 @@ namespace Video_From_Images
             return res.ToArray();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the video creation process.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await VideoEdit1.StopAsync();
             ProgressBar1.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the OnVideoFrameBitmap event of the VideoEdit engine.
+        /// Manually draws the image onto the video frame for "in memory" processing.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VideoFrameBitmapEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnVideoFrameBitmap(object sender, VideoFrameBitmapEventArgs e)
         {
             Bitmap frame;
@@ -485,11 +627,23 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the OnProgress event of the VideoEdit engine.
+        /// Updates the progress bar.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ProgressEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
         {
             Invoke((Action)(() => { ProgressBar1.Value = e.Progress; }));
         }
 
+        /// <summary>
+        /// Handles the OnStop event of the VideoEdit engine.
+        /// Resets the UI and displays a completion message.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
@@ -507,6 +661,12 @@ namespace Video_From_Images
             }));      
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the cbOutputFormat control.
+        /// Updates the output file extension based on the selected format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -569,6 +729,12 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btConfigure control.
+        /// Opens the settings dialog for the selected output format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btConfigure_Click(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -678,6 +844,12 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btTextLogoAdd control.
+        /// Adds a new text logo effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btTextLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -693,6 +865,12 @@ namespace Video_From_Images
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btImageLogoAdd control.
+        /// Adds a new image logo effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btImageLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new ImageLogoSettingsDialog();
@@ -708,6 +886,12 @@ namespace Video_From_Images
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btLogoRemove control.
+        /// Removes the selected logo effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btLogoRemove_Click(object sender, EventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -717,6 +901,12 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btLogoEdit control.
+        /// Opens the settings dialog for the selected logo effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btLogoEdit_Click(object sender, EventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -748,6 +938,11 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the tb lightness scroll event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbLightness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectLightness lightness;
@@ -767,6 +962,11 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the tb saturation scroll event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbSaturation_Scroll(object sender, EventArgs e)
         {
             IVideoEffectSaturation saturation;
@@ -786,6 +986,11 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the tb contrast scroll event.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbContrast_Scroll(object sender, EventArgs e)
         {
             IVideoEffectContrast contrast;
@@ -805,6 +1010,9 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
         private void cbFlipX_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipDown flip;
@@ -824,6 +1032,9 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
         private void cbFlipY_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipRight flip;
@@ -843,6 +1054,9 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the cb greyscale checked changed event.
+        /// </summary>
         private void cbGreyscale_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -862,6 +1076,9 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Configure video effects.
+        /// </summary>
         private void ConfigureVideoEffects()
         {
             if (tbLightness.Value > 0)
@@ -905,6 +1122,9 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the cb invert checked changed event.
+        /// </summary>
         private void cbInvert_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectInvert invert;
@@ -924,6 +1144,9 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Handles the tb darkness scroll event.
+        /// </summary>
         private void tbDarkness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectDarkness darkness;
@@ -943,6 +1166,9 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Video edit 1 on error.
+        /// </summary>
         private void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -951,6 +1177,9 @@ namespace Video_From_Images
                                    }));
         }
 
+        /// <summary>
+        /// Handles the bt select images folder click event.
+        /// </summary>
         private void btSelectImagesFolder_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
@@ -959,11 +1188,17 @@ namespace Video_From_Images
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Link label decoders link clicked.
+        /// </summary>
         private void linkLabelDecoders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64);
@@ -972,4 +1207,3 @@ namespace Video_From_Images
     }
 }
 
-// ReSharper restore InconsistentNaming

@@ -6,6 +6,9 @@ namespace QRReader
 {
     public static class MauiProgram
     {
+        /// <summary>
+        /// Create maui app.
+        /// </summary>
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();

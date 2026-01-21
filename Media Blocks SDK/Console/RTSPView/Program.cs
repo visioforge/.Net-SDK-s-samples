@@ -9,8 +9,15 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace RTSPView
 {
+    /// <summary>
+    /// Represents the program.
+    /// </summary>
     internal class Program
     {      
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {        
             if (args.Length != 3)
@@ -59,6 +66,11 @@ namespace RTSPView
             _pipeline.Dispose();
         }
 
+        /// <summary>
+        /// Handles the OnError event of the pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VisioForge.Core.Types.Events.ErrorsEventArgs"/> instance containing the event data.</param>
         private static void _pipeline_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Console.WriteLine(e.Message);

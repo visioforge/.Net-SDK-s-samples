@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace MediaBlocks_Memory_Player_Demo
 {
+    /// <summary>
+    /// The program class.
+    /// </summary>
     internal static class Program
     {
         /// <summary>

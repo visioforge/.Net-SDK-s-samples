@@ -20,7 +20,8 @@ using VisioForge.Core.UI.WPF;
 namespace Multiple_Encoders
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for the Multiple Encoders WPF demo's MainWindow.
+    /// Demonstrates how to run multiple independent capture/encode pipelines simultaneously.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -80,6 +81,10 @@ namespace Multiple_Encoders
             return encoders.ToArray();
         }
 
+        /// <summary>
+        /// Asynchronously retrieves the display names of all available video capture devices.
+        /// </summary>
+        /// <returns>An array of video source display names.</returns>
         private async Task<string[]> GetVideoSourcesAsync()
         {
             var sources = new List<string>();
@@ -93,6 +98,10 @@ namespace Multiple_Encoders
             return sources.ToArray();
         }
 
+        /// <summary>
+        /// Asynchronously retrieves the display names of all available audio capture devices.
+        /// </summary>
+        /// <returns>An array of audio source display names.</returns>
         private async Task<string[]> GetAudioSourcesAsync()
         {
             var sources = new List<string>();
@@ -106,6 +115,12 @@ namespace Multiple_Encoders
             return sources.ToArray();
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the Window control.
+        /// Initializes the SDK, populates device and encoder lists, and sets default values.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // init SDK
@@ -160,12 +175,27 @@ namespace Multiple_Encoders
             edOutputFolder.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
         }
 
+        /// <summary>
+        /// Handles the Closing event of the Window control.
+        /// Destroys the SDK resources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // destroy SDK
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Asynchronously starts a capture pipeline for a specific engine instance.
+        /// </summary>
+        /// <param name="index">The index of the engine instance (0-3).</param>
+        /// <param name="videoView">The video view to render the stream on.</param>
+        /// <param name="videoCaptureSource">The display name of the selected video source.</param>
+        /// <param name="audioCaptureSource">The display name of the selected audio source.</param>
+        /// <param name="videoEncoder">The name of the selected video encoder.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task StartCaptureAsync(int index, VideoView videoView, string videoCaptureSource, string audioCaptureSource, string videoEncoder)
         {
             if (_encodeEngines[index] != null)
@@ -183,6 +213,11 @@ namespace Multiple_Encoders
                 System.IO.Path.Combine(edOutputFolder.Text, $"output {index}.mp4"));
         }
 
+        /// <summary>
+        /// Asynchronously stops the capture pipeline for a specific engine instance.
+        /// </summary>
+        /// <param name="index">The index of the engine instance to stop.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task StopCaptureAsync(int index)
         {
             if (_encodeEngines[index] != null)
@@ -192,41 +227,89 @@ namespace Multiple_Encoders
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart1 control.
+        /// Starts capture for the first engine instance.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart1_Click(object sender, RoutedEventArgs e)
         {
             await StartCaptureAsync(0, videoView1, cbVideoSource1.Text, cbAudioSource1.Text, cbVideoEncoder1.Text);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop1 control.
+        /// Stops capture for the first engine instance.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop1_Click(object sender, RoutedEventArgs e)
         {
             await StopCaptureAsync(0);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart2 control.
+        /// Starts capture for the second engine instance.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart2_Click(object sender, RoutedEventArgs e)
         {
             await StartCaptureAsync(1, videoView2, cbVideoSource2.Text, cbAudioSource2.Text, cbVideoEncoder2.Text);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop2 control.
+        /// Stops capture for the second engine instance.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop2_Click(object sender, RoutedEventArgs e)
         {
             await StopCaptureAsync(1);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart3 control.
+        /// Starts capture for the third engine instance.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart3_Click(object sender, RoutedEventArgs e)
         {
             await StartCaptureAsync(2, videoView3, cbVideoSource3.Text, cbAudioSource3.Text, cbVideoEncoder3.Text);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop3 control.
+        /// Stops capture for the third engine instance.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop3_Click(object sender, RoutedEventArgs e)
         {
             await StopCaptureAsync(2);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart4 control.
+        /// Starts capture for the fourth engine instance.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart4_Click(object sender, RoutedEventArgs e)
         {
             await StartCaptureAsync(3, videoView4, cbVideoSource4.Text, cbAudioSource4.Text, cbVideoEncoder4.Text);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop4 control.
+        /// Stops capture for the fourth engine instance.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop4_Click(object sender, RoutedEventArgs e)
         {
             await StopCaptureAsync(3);

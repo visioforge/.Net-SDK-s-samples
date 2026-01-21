@@ -35,6 +35,9 @@ namespace Simple_Player_MVVM.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+        /// </summary>
         public MainViewModel()
         {
             OpenFileCommand = ReactiveCommand.Create(OpenFileAsync);
@@ -61,20 +64,41 @@ namespace Simple_Player_MVVM.ViewModels
             VisioForgeX.InitSDK();
         }
 
+        /// <summary>
+        /// Command to handle volume value changes.
+        /// </summary>
         public ReactiveCommand<Unit, Unit> VolumeValueChangedCommand { get; }
 
+        /// <summary>
+        /// Command to handle seeking value changes.
+        /// </summary>
         public ReactiveCommand<Unit, Unit> SeekingValueChangedCommand { get; }
 
+        /// <summary>
+        /// The video view interface.
+        /// </summary>
         public IVideoView VideoViewIntf { get; set; }
 
 #if __ANDROID__
+        /// <summary>
+        /// The Android helper.
+        /// </summary>
         public static IAndroidHelper AndroidHelper { get; set; }
 #endif 
 
+        /// <summary>
+        /// The top level window.
+        /// </summary>
         public TopLevel TopLevel { get; set; }
 
+        /// <summary>
+        /// Backing field for Position property.
+        /// </summary>
         private string? _Position = "00:00:00";
 
+        /// <summary>
+        /// Gets or sets the current position string.
+        /// </summary>
         public string? Position
         {
             get => _Position;
@@ -83,8 +107,14 @@ namespace Simple_Player_MVVM.ViewModels
 
 #if __IOS__ && !__MACCATALYST__
 
+        /// <summary>
+        /// Backing field for Filename property.
+        /// </summary>
         private Foundation.NSUrl? _Filename;
         
+        /// <summary>
+        /// Gets or sets the filename.
+        /// </summary>
         public Foundation.NSUrl? Filename
         {
             get => _Filename;
@@ -93,8 +123,14 @@ namespace Simple_Player_MVVM.ViewModels
         
 #else
         
+        /// <summary>
+        /// Backing field for Filename property.
+        /// </summary>
         private string? _Filename = "File name";
 
+        /// <summary>
+        /// Gets or sets the filename.
+        /// </summary>
         public string? Filename
         {
             get => _Filename;
@@ -103,80 +139,146 @@ namespace Simple_Player_MVVM.ViewModels
         
 #endif
 
+        /// <summary>
+        /// Backing field for SampleText property.
+        /// </summary>
         private string? _SampleText = "SAMPLE";
 
+        /// <summary>
+        /// Gets or sets the sample text.
+        /// </summary>
         public string? SampleText
         {
             get => _SampleText;
             set => this.RaiseAndSetIfChanged(ref _SampleText, value);
         }
 
+        /// <summary>
+        /// Backing field for Duration property.
+        /// </summary>
         private string? _Duration = "00:00:00";
 
+        /// <summary>
+        /// Gets or sets the duration string.
+        /// </summary>
         public string? Duration
         {
             get => _Duration;
             set => this.RaiseAndSetIfChanged(ref _Duration, value);
         }
 
+        /// <summary>
+        /// Backing field for Volume property.
+        /// </summary>
         private string? _Volume;
 
+        /// <summary>
+        /// Gets or sets the volume string.
+        /// </summary>
         public string? Volume
         {
             get => _Volume;
             set => this.RaiseAndSetIfChanged(ref _Volume, value);
         }
 
+        /// <summary>
+        /// Backing field for VolumeValue property.
+        /// </summary>
         private double? _VolumeValue = 0;
 
+        /// <summary>
+        /// Gets or sets the volume value.
+        /// </summary>
         public double? VolumeValue
         {
             get => _VolumeValue;
             set => this.RaiseAndSetIfChanged(ref _VolumeValue, value);
         }
 
+        /// <summary>
+        /// Command to open a file.
+        /// </summary>
         public ICommand OpenFileCommand { get; }
 
+        /// <summary>
+        /// Command to toggle play/pause.
+        /// </summary>
         public ICommand PlayPauseCommand { get; }
 
+        /// <summary>
+        /// Backing field for PlayPauseText property.
+        /// </summary>
         private string? _PlayPauseText = "PLAY";
 
+        /// <summary>
+        /// Gets or sets the play/pause button text.
+        /// </summary>
         public string? PlayPauseText
         {
             get => _PlayPauseText;
             set => this.RaiseAndSetIfChanged(ref _PlayPauseText, value);
         }
 
+        /// <summary>
+        /// Backing field for SpeedText property.
+        /// </summary>
         private string? _SpeedText = "SPEED: 1X";
 
+        /// <summary>
+        /// Gets or sets the speed button text.
+        /// </summary>
         public string? SpeedText
         {
             get => _SpeedText;
             set => this.RaiseAndSetIfChanged(ref _SpeedText, value);
         }
 
+        /// <summary>
+        /// Command to stop playback.
+        /// </summary>
         public ICommand StopCommand { get; }
 
+        /// <summary>
+        /// Command to change playback speed.
+        /// </summary>
         public ICommand SpeedCommand { get; }
 
+        /// <summary>
+        /// Backing field for SeekingValue property.
+        /// </summary>
         public double? _SeekingValue = 0;
 
+        /// <summary>
+        /// Gets or sets the seeking value.
+        /// </summary>
         public double? SeekingValue
         {
             get => _SeekingValue;
             set => this.RaiseAndSetIfChanged(ref _SeekingValue, value);
         }
 
+        /// <summary>
+        /// Backing field for SeekingMaximum property.
+        /// </summary>
         public double? _SeekingMaximum = null;
 
+        /// <summary>
+        /// Gets or sets the maximum seeking value.
+        /// </summary>
         public double? SeekingMaximum
         {
             get => _SeekingMaximum;
             set => this.RaiseAndSetIfChanged(ref _SeekingMaximum, value);
         }
 
+        /// <summary>
+        /// Command to handle window closing.
+        /// </summary>
         public ReactiveCommand<Unit, Unit> WindowClosingCommand { get; }
 
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCoreX _player;
         
         /// <summary>
@@ -189,6 +291,9 @@ namespace Simple_Player_MVVM.ViewModels
         /// </summary>
         private System.Timers.Timer _tmPosition = new System.Timers.Timer(500);
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             if (_player != null)
@@ -207,6 +312,9 @@ namespace Simple_Player_MVVM.ViewModels
             await _player.OpenAsync(sourceSettings);
         }
 
+        /// <summary>
+        /// On window closing.
+        /// </summary>
         private void OnWindowClosing()
         {
             if (_player != null)
@@ -221,6 +329,9 @@ namespace Simple_Player_MVVM.ViewModels
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Open file async.
+        /// </summary>
     private async Task OpenFileAsync()
         {
             await StopAllAsync();
@@ -278,6 +389,9 @@ namespace Simple_Player_MVVM.ViewModels
 #endif
         }
 
+        /// <summary>
+        /// Play pause async.
+        /// </summary>
         private async Task PlayPauseAsync()
         {
 #if !__IOS__ && !__MACCATALYST__
@@ -312,6 +426,9 @@ namespace Simple_Player_MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
         private async Task StopAsync()
         {
             await StopAllAsync();
@@ -320,6 +437,9 @@ namespace Simple_Player_MVVM.ViewModels
             PlayPauseText = "PLAY";
         }
 
+        /// <summary>
+        /// Speed async.
+        /// </summary>
         private async Task SpeedAsync()
         {
             if (SpeedText == "SPEED: 1X")
@@ -342,11 +462,17 @@ namespace Simple_Player_MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Stop all async.
+        /// </summary>
         private async Task StopAllAsync()
         {
             if (_player == null)
@@ -420,6 +546,9 @@ namespace Simple_Player_MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// On seeking value changed.
+        /// </summary>
         private async Task OnSeekingValueChanged()
         {
             if (!_isTimerUpdate && _player != null && SeekingValue.HasValue)
@@ -428,6 +557,9 @@ namespace Simple_Player_MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// On volume value changed.
+        /// </summary>
         private void OnVolumeValueChanged()
         {
             if (_player != null && VolumeValue.HasValue)

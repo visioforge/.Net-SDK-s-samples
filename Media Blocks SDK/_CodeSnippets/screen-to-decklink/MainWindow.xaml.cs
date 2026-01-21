@@ -34,6 +34,9 @@ namespace screen_to_decklink_mb
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create screen capture source.
+        /// </summary>
         private IScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
             var source = new ScreenCaptureD3D11SourceSettings();
@@ -46,6 +49,9 @@ namespace screen_to_decklink_mb
             return source;
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -67,6 +73,9 @@ namespace screen_to_decklink_mb
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             // Create VideoCaptureCoreX object
@@ -80,9 +89,10 @@ namespace screen_to_decklink_mb
 
             // Add Decklink output
             var videoSinks = await DeviceEnumerator.Shared.DecklinkVideoSinksAsync();
-            var videoSink = new DecklinkVideoSinkSettings(videoSinks[cbDecklinkOutput.SelectedIndex]);
-            videoSink.Mode = DecklinkMode.HD1080p60;
-            videoSink.CustomVideoSize = new ResizeVideoEffect(1920, 1080);
+            var videoSink = new DecklinkVideoSinkSettings(videoSinks[cbDecklinkOutput.SelectedIndex], DecklinkMode.HD1080p60)
+            {
+                CustomVideoSize = new ResizeVideoEffect(1920, 1080)
+            };
             var decklinkVideoOutput = new DecklinkVideoSinkBlock(videoSink);
 
             // Video tee
@@ -97,6 +107,9 @@ namespace screen_to_decklink_mb
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.StopAsync();
@@ -104,6 +117,9 @@ namespace screen_to_decklink_mb
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();

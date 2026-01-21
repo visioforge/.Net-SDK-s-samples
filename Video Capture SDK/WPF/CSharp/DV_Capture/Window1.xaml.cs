@@ -1,4 +1,4 @@
-// ReSharper disable InconsistentNaming
+
 
 using System.Globalization;
 
@@ -59,6 +59,9 @@ namespace DVCapture
 
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Window1"/> class.
+        /// </summary>
         public Window1()
         {
             InitializeComponent();
@@ -66,6 +69,9 @@ namespace DVCapture
             
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -73,6 +79,9 @@ namespace DVCapture
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -87,6 +96,11 @@ namespace DVCapture
             tmRecording = null;
         }
 
+        /// <summary>
+        /// Form 1 load.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             await CreateEngineAsync();
@@ -138,6 +152,11 @@ namespace DVCapture
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Handles the bt save screenshot click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog() == true)
@@ -165,6 +184,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Cb video input device selected index changed.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -193,6 +217,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Cb video input format selected index changed.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.SelectedValue.ToString()) || string.IsNullOrEmpty(cbVideoInputDevice.SelectedValue.ToString()))
@@ -227,26 +256,51 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the cb use best video input format checked changed event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void cbUseBestVideoInputFormat_CheckedChanged(object sender, RoutedEventArgs e)
         {
             cbVideoInputFormat.IsEnabled = cbUseBestVideoInputFormat.IsChecked == false;
         }
 
+        /// <summary>
+        /// Handles the bt video capture device settings click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void btVideoCaptureDeviceSettings_Click(object sender, RoutedEventArgs e)
         {
             VideoCapture1.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.SelectedValue.ToString());
         }
 
+        /// <summary>
+        /// Handles the tb audio volume scroll event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void tbAudioVolume_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoCapture1?.Audio_OutputDevice_Volume_Set((int)tbAudioVolume.Value);
         }
 
+        /// <summary>
+        /// Handles the tb audio balance scroll event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void tbAudioBalance_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set((int)tbAudioBalance.Value);
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -255,41 +309,80 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the bt click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btDVFF_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.DV_SendCommandAsync(DVCommand.FastForward);
         }
 
+        /// <summary>
+        /// Handles the bt dv pause click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btDVPause_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.DV_SendCommandAsync(DVCommand.Pause);
         }
 
+        /// <summary>
+        /// Handles the bt dv rewind click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btDVRewind_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.DV_SendCommandAsync(DVCommand.Rew);
         }
 
+        /// <summary>
+        /// Handles the bt dv play click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btDVPlay_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.DV_SendCommandAsync(DVCommand.Play);
         }
 
+        /// <summary>
+        /// Handles the bt dv step click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btDVStepFWD_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.DV_SendCommandAsync(DVCommand.StepFw);
         }
 
+        /// <summary>
+        /// Handles the bt dv step rev click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btDVStepRev_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.DV_SendCommandAsync(DVCommand.StepRev);
         }
 
+        /// <summary>
+        /// Handles the bt dv stop click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btDVStop_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.DV_SendCommandAsync(DVCommand.Stop);
         }
 
+        /// <summary>
+        /// Set mp 4 output.
+        /// </summary>
+        /// <param name="mp4Output">MP4 Output.</param>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -300,6 +393,10 @@ namespace DVCapture
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set wmv output.
+        /// </summary>
+        /// <param name="wmvOutput">WMV Output.</param>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -311,6 +408,10 @@ namespace DVCapture
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Set mp 4 hw output.
+        /// </summary>
+        /// <param name="mp4Output">MP4 HW Output.</param>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -321,6 +422,10 @@ namespace DVCapture
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set mpegts output.
+        /// </summary>
+        /// <param name="mpegTSOutput">MPEGTS Output.</param>
         private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
@@ -331,6 +436,10 @@ namespace DVCapture
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
+        /// <summary>
+        /// Set mov output.
+        /// </summary>
+        /// <param name="mkvOutput">MOV Output.</param>
         private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
@@ -341,6 +450,10 @@ namespace DVCapture
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
+        /// <summary>
+        /// Set gif output.
+        /// </summary>
+        /// <param name="gifOutput">GIF Output.</param>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
@@ -351,6 +464,10 @@ namespace DVCapture
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Set dv output.
+        /// </summary>
+        /// <param name="dvOutput">DV Output.</param>
         private void SetDVOutput(ref DVOutput dvOutput)
         {
             if (dvSettingsDialog == null)
@@ -361,6 +478,10 @@ namespace DVCapture
             dvSettingsDialog.SaveSettings(ref dvOutput);
         }
 
+        /// <summary>
+        /// Set avi output.
+        /// </summary>
+        /// <param name="aviOutput">AVI Output.</param>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -377,6 +498,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             VideoCapture1.Video_Sample_Grabber_Enabled = true;
@@ -507,6 +633,9 @@ namespace DVCapture
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Configure video effects.
+        /// </summary>
         private void ConfigureVideoEffects()
         {
             if (tbLightness.Value > 0)
@@ -555,6 +684,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -562,27 +696,51 @@ namespace DVCapture
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void llVideoTutorials_LinkClicked(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
+        /// <param name="txt">Text.</param>
         private void Log(string txt)
         {
             Dispatcher.Invoke(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void BtPause_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Cb output format selection changed.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -627,6 +785,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the bt output configure click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void BtOutputConfigure_Click(object sender, RoutedEventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -729,6 +892,9 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = VideoCapture1.Duration_Time();
@@ -744,11 +910,21 @@ namespace DVCapture
             }));
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void BtResume_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the cb greyscale checked changed event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void cbGreyscale_CheckedChanged(object sender, RoutedEventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -768,6 +944,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the tb contrast scroll event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void tbContrast_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectContrast contrast;
@@ -787,6 +968,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the tb darkness scroll event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void tbDarkness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectDarkness darkness;
@@ -806,6 +992,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the tb lightness scroll event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void tbLightness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             IVideoEffectLightness lightness;
@@ -825,6 +1016,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the tb saturation scroll event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void tbSaturation_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoCapture1 != null)
@@ -847,6 +1043,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the cb invert checked changed event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void cbInvert_CheckedChanged(object sender, RoutedEventArgs e)
         {
             IVideoEffectInvert invert;
@@ -866,6 +1067,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void CbFlipX_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipDown flip;
@@ -885,6 +1091,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void CbFlipY_Checked(object sender, RoutedEventArgs e)
         {
             IVideoEffectFlipRight flip;
@@ -904,6 +1115,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the bt image logo add click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void BtImageLogoAdd_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new ImageLogoSettingsDialog();
@@ -919,6 +1135,11 @@ namespace DVCapture
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt text logo add click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void BtTextLogoAdd_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -934,6 +1155,11 @@ namespace DVCapture
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt logo edit click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void BtLogoEdit_Click(object sender, RoutedEventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -965,6 +1191,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Handles the bt logo remove click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void BtLogoRemove_Click(object sender, RoutedEventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -974,6 +1205,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Cb deinterlace checked.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void CbDeinterlaceCAVT_Checked(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
@@ -998,6 +1234,11 @@ namespace DVCapture
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEngine();
@@ -1005,4 +1246,3 @@ namespace DVCapture
     }
 }
 
-// ReSharper restore InconsistentNaming

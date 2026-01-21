@@ -32,61 +32,136 @@ namespace Bridge_Source_Switch
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The video ID.
+        /// </summary>
         private const string VIDEO_ID = "video_pair";
 
+        /// <summary>
+        /// The video width.
+        /// </summary>
         private const int VIDEO_WIDTH = 1280;
 
+        /// <summary>
+        /// The video height.
+        /// </summary>
         private const int VIDEO_HEIGHT = 720;
 
+        /// <summary>
+        /// The video frame rate.
+        /// </summary>
         private readonly VideoFrameRate VIDEO_FRAME_RATE = VideoFrameRate.FPS_25;
 
 
+        /// <summary>
+        /// The audio ID.
+        /// </summary>
         private const string AUDIO_ID = "audio_pair";
 
+        /// <summary>
+        /// The audio channels.
+        /// </summary>
         private const int AUDIO_CHANNELS = 2;
 
+        /// <summary>
+        /// The audio sample rate.
+        /// </summary>
         private const int AUDIO_SAMPLE_RATE = 44100;
 
+        /// <summary>
+        /// The audio format.
+        /// </summary>
         private const AudioFormatX AUDIO_FORMAT = AudioFormatX.S16LE;
 
 
+        /// <summary>
+        /// The pipeline source 1.
+        /// </summary>
         private MediaBlocksPipeline _pipelineSource1;
 
+        /// <summary>
+        /// The video source 1.
+        /// </summary>
         private VirtualVideoSourceBlock _videoSource1;
 
+        /// <summary>
+        /// The video bridge sink 1.
+        /// </summary>
         private BridgeVideoSinkBlock _videoBridgeSink1;
 
+        /// <summary>
+        /// The audio source 1.
+        /// </summary>
         private VirtualAudioSourceBlock _audioSource1;
 
+        /// <summary>
+        /// The audio bridge sink 1.
+        /// </summary>
         private BridgeAudioSinkBlock _audioBridgeSink1;
 
 
+        /// <summary>
+        /// The pipeline source 2.
+        /// </summary>
         private MediaBlocksPipeline _pipelineSource2;
 
+        /// <summary>
+        /// The video source 2.
+        /// </summary>
         private VirtualVideoSourceBlock _videoSource2;
 
+        /// <summary>
+        /// The video bridge sink 2.
+        /// </summary>
         private BridgeVideoSinkBlock _videoBridgeSink2;
 
+        /// <summary>
+        /// The audio source 2.
+        /// </summary>
         private VirtualAudioSourceBlock _audioSource2;
 
+        /// <summary>
+        /// The audio bridge sink 2.
+        /// </summary>
         private BridgeAudioSinkBlock _audioBridgeSink2;
 
 
+        /// <summary>
+        /// The main pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipelineMain;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The video bridge source.
+        /// </summary>
         private BridgeVideoSourceBlock _videoBridgeSource;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private MediaBlock _audioRenderer;
 
+        /// <summary>
+        /// The audio bridge source.
+        /// </summary>
         private BridgeAudioSourceBlock _audioBridgeSource;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -110,11 +185,17 @@ namespace Bridge_Source_Switch
             }
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Add sources.
+        /// </summary>
         private void AddSources()
         {
             // Source 1
@@ -147,6 +228,9 @@ namespace Bridge_Source_Switch
             _pipelineSource2.Connect(_audioSource2, _audioBridgeSink2);
         }
 
+        /// <summary>
+        /// Add main pipeline async.
+        /// </summary>
         private async Task AddMainPipelineAsync()
         {
             _pipelineMain = new MediaBlocksPipeline("pipeline-main");
@@ -164,6 +248,9 @@ namespace Bridge_Source_Switch
             _pipelineMain.Connect(_audioBridgeSource, _audioRenderer);
         }
 
+        /// <summary>
+        /// Destroy engines async.
+        /// </summary>
         private async Task DestroyEnginesAsync()
         {
             if (_pipelineSource1 != null)
@@ -194,6 +281,9 @@ namespace Bridge_Source_Switch
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEnginesAsync().ConfigureAwait(false);
@@ -201,6 +291,9 @@ namespace Bridge_Source_Switch
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             AddSources();
@@ -210,11 +303,17 @@ namespace Bridge_Source_Switch
             await _pipelineMain.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await DestroyEnginesAsync();
         }
 
+        /// <summary>
+        /// Handles the bt switch click event.
+        /// </summary>
         private async void btSwitch_Click(object sender, RoutedEventArgs e)
         {
             if (_pipelineSource1.State == PlaybackState.Play)

@@ -34,51 +34,114 @@ namespace Decklink_MB_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The video resize block.
+        /// </summary>
         private VideoResizeBlock _videoResize;
 
+        /// <summary>
+        /// The decklink video source.
+        /// </summary>
         private DecklinkVideoSourceBlock _videoSource;
 
+        /// <summary>
+        /// The decklink audio source.
+        /// </summary>
         private DecklinkAudioSourceBlock _audioSource;
 
+        /// <summary>
+        /// The video effects block.
+        /// </summary>
         private VideoEffectsWinBlock _videoEffects;
 
+        /// <summary>
+        /// The muxer.
+        /// </summary>
         private MediaBlock _muxer;
 
+        /// <summary>
+        /// The video encoder.
+        /// </summary>
         private MediaBlock _videoEncoder;
 
+        /// <summary>
+        /// The video tee.
+        /// </summary>
         private TeeBlock _videoTee;
 
+        /// <summary>
+        /// The audio tee.
+        /// </summary>
         private TeeBlock _audioTee;
 
+        /// <summary>
+        /// The audio encoder.
+        /// </summary>
         private MediaBlock _audioEncoder;
 
+        /// <summary>
+        /// The decklink audio sink.
+        /// </summary>
         private DecklinkAudioSinkBlock _decklinkAudioSink;
 
+        /// <summary>
+        /// The decklink video sink.
+        /// </summary>
         private DecklinkVideoSinkBlock _decklinkVideoSink;
 
+        /// <summary>
+        /// The decklink output resize.
+        /// </summary>
         private VideoResizeBlock _decklinkOutputResize;
 
+        /// <summary>
+        /// The decklink output frame rate.
+        /// </summary>
         private VideoRateBlock _decklinkOutputFrameRate;
 
+        /// <summary>
+        /// The file source.
+        /// </summary>
         private UniversalSourceBlock _fileSource;
 
+        /// <summary>
+        /// The timer.
+        /// </summary>
         private System.Timers.Timer _timer;
 
+        /// <summary>
+        /// The started flag.
+        /// </summary>
         private bool _started;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();
 
             _videoEffects = new VideoEffectsWinBlock();
         }
 
+        /// <summary>
+        /// Create pipeline.
+        /// </summary>
         private void CreatePipeline(bool live)
         {
             _started = false;
@@ -90,11 +153,17 @@ namespace Decklink_MB_Demo
             _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
+        /// <summary>
+        /// Handles the pipeline on start event.
+        /// </summary>
         private void Pipeline_OnStart(object sender, EventArgs e)
         {
             _started = true;
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -103,6 +172,9 @@ namespace Decklink_MB_Demo
             }));
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (_pipeline != null)
@@ -116,6 +188,9 @@ namespace Decklink_MB_Demo
             }
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -202,6 +277,9 @@ namespace Decklink_MB_Demo
             DeviceEnumerator.Shared.OnDecklinkSignalLost += DeviceEnumerator_OnDecklinkSignalLost;
         }
 
+        /// <summary>
+        /// Handles the device enumerator on decklink signal lost event.
+        /// </summary>
         private void DeviceEnumerator_OnDecklinkSignalLost(object sender, EventArgs e)
         {
             if (!_started)
@@ -215,6 +293,9 @@ namespace Decklink_MB_Demo
             });
         }
 
+        /// <summary>
+        /// Tb volume value changed.
+        /// </summary>
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_audioRenderer != null)
@@ -223,6 +304,9 @@ namespace Decklink_MB_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -241,6 +325,9 @@ namespace Decklink_MB_Demo
             AddVideoEffects();
         }
 
+        /// <summary>
+        /// Add text logo.
+        /// </summary>
         private void AddTextLogo()
         {
             var textOverlay = new VideoEffectTextLogo(true);
@@ -249,11 +336,17 @@ namespace Decklink_MB_Demo
             _videoEffects.Video_Effects_Add(textOverlay);
         }
 
+        /// <summary>
+        /// Remove text logo.
+        /// </summary>
         private void RemoveTextLogo()
         {
             _videoEffects.Video_Effects_Remove("TextLogo");
         }
 
+        /// <summary>
+        /// Add scrolling text logo.
+        /// </summary>
         private void AddScrollingTextLogo()
         {
             var textOverlay = new VideoEffectScrollingTextLogo(true);
@@ -262,11 +355,17 @@ namespace Decklink_MB_Demo
             _videoEffects.Video_Effects_Add(textOverlay);
         }
 
+        /// <summary>
+        /// Remove scrolling text logo.
+        /// </summary>
         private void RemoveScrollingTextLogo()
         {
             _videoEffects.Video_Effects_Remove("ScrollingTextLogo");
         }
 
+        /// <summary>
+        /// Add image logo.
+        /// </summary>
         private void AddImageLogo()
         {
             var imageOverlay = new VideoEffectImageLogo(true);
@@ -276,11 +375,17 @@ namespace Decklink_MB_Demo
             _videoEffects.Video_Effects_Add(imageOverlay);
         }
 
+        /// <summary>
+        /// Remove image logo.
+        /// </summary>
         private void RemoveImageLogo()
         {
             _videoEffects.Video_Effects_Remove("ImageLogo");
         }
 
+        /// <summary>
+        /// Create mp 4 output.
+        /// </summary>
         private void CreateMP4Output()
         {
             _videoEncoder = new H264EncoderBlock();
@@ -294,6 +399,9 @@ namespace Decklink_MB_Demo
             (_muxer as MP4SinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio);
         }
 
+        /// <summary>
+        /// Create web m output.
+        /// </summary>
         private void CreateWebMOutput()
         {
             var vpxSettings = new VP8EncoderSettings();
@@ -308,6 +416,9 @@ namespace Decklink_MB_Demo
             (_muxer as WebMSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio);
         }
 
+        /// <summary>
+        /// Create mpeg 2 output.
+        /// </summary>
         private void CreateMPEG2Output()
         {
             var videoSettings = new MPEG2VideoEncoderSettings();
@@ -324,6 +435,9 @@ namespace Decklink_MB_Demo
         }
 
 
+        /// <summary>
+        /// Create mxf output.
+        /// </summary>
         private void CreateMXFOutput()
         {
             var decklinkFormat = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
@@ -340,10 +454,13 @@ namespace Decklink_MB_Demo
             (_muxer as MXFSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio);
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             CreatePipeline(rbCaptureDeviceSource.IsChecked == true);
-      
+
             bool capture = cbOutputFormat.SelectedIndex > 0;
             if (capture)
             {
@@ -494,8 +611,8 @@ namespace Decklink_MB_Demo
                     else
                     {
                         _pipeline.Connect(_videoTee.Outputs[captureID], _videoEncoder.Input);
-                    }      
-                        
+                    }
+
                     _pipeline.Connect(_videoEncoder.Output, _muxer.GetInputPadByType(MediaBlockPadMediaType.Video));
 
                     _pipeline.Connect(_audioTee.Outputs[captureID], _audioEncoder.Input);
@@ -579,6 +696,9 @@ namespace Decklink_MB_Demo
             _timer.Start();
         }
 
+        /// <summary>
+        /// Add video effects.
+        /// </summary>
         private void AddVideoEffects()
         {
             if (cbAddTextOverlay.IsChecked == true)
@@ -597,6 +717,9 @@ namespace Decklink_MB_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new SaveFileDialog();
@@ -607,6 +730,9 @@ namespace Decklink_MB_Demo
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
@@ -622,41 +748,62 @@ namespace Decklink_MB_Demo
                 _pipeline = null;
             }
 
-            VideoView1.CallRefresh();   
-            
+            VideoView1.CallRefresh();
+
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Cb add text overlay checked.
+        /// </summary>
         private void cbAddTextOverlay_Checked(object sender, RoutedEventArgs e)
         {
             AddTextLogo();
         }
 
+        /// <summary>
+        /// Cb add text overlay unchecked.
+        /// </summary>
         private void cbAddTextOverlay_Unchecked(object sender, RoutedEventArgs e)
         {
             RemoveTextLogo();
         }
 
+        /// <summary>
+        /// Cb add image overlay checked.
+        /// </summary>
         private void cbAddImageOverlay_Checked(object sender, RoutedEventArgs e)
         {
             AddImageLogo();
         }
 
+        /// <summary>
+        /// Cb add image overlay unchecked.
+        /// </summary>
         private void cbAddImageOverlay_Unchecked(object sender, RoutedEventArgs e)
         {
             RemoveImageLogo();
         }
 
+        /// <summary>
+        /// Cb add scrolling text overlay checked.
+        /// </summary>
         private void cbAddScrollingTextOverlay_Checked(object sender, RoutedEventArgs e)
         {
             AddScrollingTextLogo();
         }
 
+        /// <summary>
+        /// Cb add scrolling text overlay unchecked.
+        /// </summary>
         private void cbAddScrollingTextOverlay_Unchecked(object sender, RoutedEventArgs e)
         {
             RemoveScrollingTextLogo();
         }
 
+        /// <summary>
+        /// Handles the bt select source file click event.
+        /// </summary>
         private void btSelectSourceFile_Click(object sender, RoutedEventArgs e)
         {
             // select source file

@@ -39,6 +39,9 @@ namespace Overlay_Manager_Demo
             };
         }
 
+        /// <summary>
+        /// Cb transparent background changed.
+        /// </summary>
         private void cbTransparentBackground_Changed(object sender, RoutedEventArgs e)
         {
             if (cbBackgroundColor == null)
@@ -47,6 +50,9 @@ namespace Overlay_Manager_Demo
             cbBackgroundColor.IsEnabled = cbTransparentBackground.IsChecked != true;
         }
 
+        /// <summary>
+        /// Handles the bt click event.
+        /// </summary>
         private void btOK_Click(object sender, RoutedEventArgs e)
         {
             // Validate text

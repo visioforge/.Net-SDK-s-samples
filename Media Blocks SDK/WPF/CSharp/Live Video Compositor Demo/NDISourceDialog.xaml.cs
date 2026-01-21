@@ -19,12 +19,18 @@ namespace Live_Video_Compositor_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// On source initialized.
+        /// </summary>
         protected override async void OnSourceInitialized(System.EventArgs e)
         {
             base.OnSourceInitialized(e);
             await RefreshNDISourcesAsync();
         }
 
+        /// <summary>
+        /// Refresh ndi sources async.
+        /// </summary>
         private async Task RefreshNDISourcesAsync()
         {
             lbNDISources.Items.Clear();
@@ -45,11 +51,17 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt refresh click event.
+        /// </summary>
         private async void btRefresh_Click(object sender, RoutedEventArgs e)
         {
             await RefreshNDISourcesAsync();
         }
 
+        /// <summary>
+        /// Handles the bt click event.
+        /// </summary>
         private void btOK_Click(object sender, RoutedEventArgs e)
         {
             if (lbNDISources.SelectedItem != null)
@@ -63,6 +75,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt cancel click event.
+        /// </summary>
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

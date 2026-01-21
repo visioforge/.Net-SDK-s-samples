@@ -1,7 +1,7 @@
-// ReSharper disable InconsistentNaming
 
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable InlineOutVariableDeclaration
+
+
+
 
 using System.Globalization;
 
@@ -32,19 +32,32 @@ namespace Nvidia_Maxine_Demo
     /// </summary>
     public partial class Window1 : IDisposable
     {    
+        /// <summary>
+        /// The tm recording.
+        /// </summary>
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        /// <summary>
+        /// The video capture 1.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// The disposed value.
+        /// </summary>
         private bool disposedValue;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Window1"/> class.
+        /// </summary>
         public Window1()
         {
-            InitializeComponent();
-
-            
+            InitializeComponent();            
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1);
@@ -53,6 +66,11 @@ namespace Nvidia_Maxine_Demo
             VideoCapture1.OnVideoFrameBuffer += VideoCapture1_OnVideoFrameBuffer;
         }
 
+        /// <summary>
+        /// Video capture 1 on video frame buffer.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="VideoFrameBufferEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnVideoFrameBuffer(object sender, VideoFrameBufferEventArgs e)
         {
             //var videoFrame = new NvidiaMaxine.VideoEffects.VideoFrame(e.Frame, false);
@@ -111,6 +129,9 @@ namespace Nvidia_Maxine_Demo
             //});
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -123,11 +144,21 @@ namespace Nvidia_Maxine_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt audio input device settings click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btAudioInputDeviceSettings_Click(object sender, RoutedEventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await CreateEngineAsync();
@@ -206,47 +237,91 @@ namespace Nvidia_Maxine_Demo
             cbVideoEffect_SelectionChanged(null, null);
         }
 
+        /// <summary>
+        /// Cb use best audio input format checked.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbUseBestAudioInputFormat_Checked(object sender, RoutedEventArgs e)
         {
             cbAudioInputFormat.IsEnabled = cbUseBestAudioInputFormat.IsChecked == false;
         }
 
+        /// <summary>
+        /// Cb use best video input format checked.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbUseBestVideoInputFormat_Checked(object sender, RoutedEventArgs e)
         {
             cbVideoInputFormat.IsEnabled = cbUseBestVideoInputFormat.IsChecked == false;
         }
 
+        /// <summary>
+        /// Handles the bt video capture device settings click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btVideoCaptureDeviceSettings_Click(object sender, RoutedEventArgs e)
         {
             VideoCapture1.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.Text);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
+        /// <param name="txt">The text.</param>
         private void Log(string txt)
         {
             Dispatcher.Invoke(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Tb audio volume value changed.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudioVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoCapture1?.Audio_OutputDevice_Volume_Set((int)tbAudioVolume.Value);
         }
 
+        /// <summary>
+        /// Tb audio balance value changed.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbAudioBalance_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set((int)tbAudioBalance.Value);
         }
 
+        /// <summary>
+        /// Lb view video tutorials mouse left button down.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void lbViewVideoTutorials_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Cb video input device selection changed.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbVideoInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -275,6 +350,11 @@ namespace Nvidia_Maxine_Demo
             }
         }
 
+        /// <summary>
+        /// Cb audio input device selection changed.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbAudioInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -325,6 +405,11 @@ namespace Nvidia_Maxine_Demo
             }
         }
         
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -422,22 +507,42 @@ namespace Nvidia_Maxine_Demo
             tmRecording.Start();
         }
         
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
 
             await VideoCapture1.StopAsync();        }
 
+        /// <summary>
+        /// Cb video effect selection changed.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbVideoEffect_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (gdDenoise == null)
@@ -507,6 +612,11 @@ namespace Nvidia_Maxine_Demo
             }
         }
 
+        /// <summary>
+        /// Cb video input format selection changed.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbVideoInputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.SelectedValue?.ToString()) || string.IsNullOrEmpty(cbVideoInputDevice.SelectedValue.ToString()))
@@ -541,6 +651,9 @@ namespace Nvidia_Maxine_Demo
             }
         }
         
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = VideoCapture1.Duration_Time();
@@ -556,11 +669,20 @@ namespace Nvidia_Maxine_Demo
             }));
         }
         
+        /// <summary>
+        /// Window closing.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -586,6 +708,9 @@ namespace Nvidia_Maxine_Demo
         //     Dispose(disposing: false);
         // }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -595,4 +720,3 @@ namespace Nvidia_Maxine_Demo
     }
 }
 
-// ReSharper restore InconsistentNaming

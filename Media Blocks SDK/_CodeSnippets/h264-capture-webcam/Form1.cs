@@ -32,6 +32,9 @@ namespace h264_capture_webcam
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -48,6 +51,9 @@ namespace h264_capture_webcam
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
+        /// <summary>
+        /// Add video sources async.
+        /// </summary>
         private async Task AddVideoSourcesAsync()
         {
             _videoSources = (await DeviceEnumerator.Shared.VideoSourcesAsync()).Where(x => x.API == VideoCaptureDeviceAPI.KS).ToList();
@@ -62,6 +68,9 @@ namespace h264_capture_webcam
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             // Create the pipeline
@@ -124,11 +133,17 @@ namespace h264_capture_webcam
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void _pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine("Error: " + e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             if (_pipeline == null)
@@ -141,6 +156,9 @@ namespace h264_capture_webcam
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_pipeline != null)
@@ -154,6 +172,9 @@ namespace h264_capture_webcam
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the cb video input device selected index changed event.
+        /// </summary>
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbVideoInputFormat.Items.Clear();
@@ -181,6 +202,9 @@ namespace h264_capture_webcam
             }
         }
 
+        /// <summary>
+        /// Handles the cb video input format selected index changed event.
+        /// </summary>
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))

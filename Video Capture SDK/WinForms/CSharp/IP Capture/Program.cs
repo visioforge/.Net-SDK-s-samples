@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 {
+    /// <summary>
+    /// Program class.
+    /// </summary>
     static class Program
     {
         /// <summary>

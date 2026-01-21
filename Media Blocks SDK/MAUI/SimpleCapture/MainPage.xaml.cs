@@ -21,40 +21,91 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace SimpleCaptureMB
 {
+    /// <summary>
+    /// The main page of the application.
+    /// </summary>
     public partial class MainPage : ContentPage, INotifyPropertyChanged
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video source.
+        /// </summary>
         private SystemVideoSourceBlock _videoSource;
 
+        /// <summary>
+        /// The audio source.
+        /// </summary>
         private MediaBlock _audioSource;
 
 #if !MOBILE
+        /// <summary>
+        /// The audio output.
+        /// </summary>
         private AudioRendererBlock _audioOutput;
 #endif
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private MediaBlock _videoRenderer;
 
+        /// <summary>
+        /// The video tee.
+        /// </summary>
         private TeeBlock _videoTee;
 
+        /// <summary>
+        /// The audio tee.
+        /// </summary>
         private TeeBlock _audioTee;
 
+        /// <summary>
+        /// The MP4 sink.
+        /// </summary>
         private MP4SinkBlock _mp4Sink;
 
+        /// <summary>
+        /// The video encoder.
+        /// </summary>
         private H264EncoderBlock _videoEncoder;
 
+        /// <summary>
+        /// The audio encoder.
+        /// </summary>
         private AACEncoderBlock _audioEncoder;
 
+        /// <summary>
+        /// The cameras.
+        /// </summary>
         private VideoCaptureDeviceInfo[] _cameras;
 
+        /// <summary>
+        /// The camera selected index.
+        /// </summary>
         private int _cameraSelectedIndex = 0;
 
+        /// <summary>
+        /// The microphones.
+        /// </summary>
         private AudioCaptureDeviceInfo[] _mics;
 
+        /// <summary>
+        /// The microphone selected index.
+        /// </summary>
         private int _micSelectedIndex = 0;
 
+        /// <summary>
+        /// The speakers.
+        /// </summary>
         private AudioOutputDeviceInfo[] _speakers;
 
+        /// <summary>
+        /// The speaker selected index.
+        /// </summary>
         private int _speakerSelectedIndex = 0;
 
         public MainPage()
@@ -69,6 +120,9 @@ namespace SimpleCaptureMB
             VisioForgeX.InitSDK();
         }
 
+        /// <summary>
+        /// Main page unloaded.
+        /// </summary>
         private void MainPage_Unloaded(object? sender, EventArgs e)
         {
             _pipeline?.Dispose();
@@ -77,6 +131,9 @@ namespace SimpleCaptureMB
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -88,6 +145,9 @@ namespace SimpleCaptureMB
             _pipeline.OnError += Core_OnError;
         }
 
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
         private async void MainPage_Loaded(object? sender, EventArgs e)
         {
             try
@@ -131,6 +191,9 @@ namespace SimpleCaptureMB
             }
         }
 
+        /// <summary>
+        /// Request camera permission async.
+        /// </summary>
         private async Task RequestCameraPermissionAsync()
         {
             var result = await Permissions.RequestAsync<Permissions.Camera>();
@@ -149,6 +212,9 @@ namespace SimpleCaptureMB
             }
         }
 
+        /// <summary>
+        /// Request mic permission async.
+        /// </summary>
         private async Task RequestMicPermissionAsync()
         {
             var result = await Permissions.RequestAsync<Permissions.Microphone>();
@@ -168,6 +234,9 @@ namespace SimpleCaptureMB
         }
 
 #if __IOS__ && !__MACCATALYST__
+        /// <summary>
+        /// Request photo permission.
+        /// </summary>
         private void RequestPhotoPermission()
         {
             Photos.PHPhotoLibrary.RequestAuthorization(status =>
@@ -180,6 +249,9 @@ namespace SimpleCaptureMB
         }
 #endif
 
+        /// <summary>
+        /// Window destroying.
+        /// </summary>
         private async void Window_Destroying(object? sender, EventArgs e)
         {
             try
@@ -201,11 +273,17 @@ namespace SimpleCaptureMB
             }
         }
 
+        /// <summary>
+        /// Core on error.
+        /// </summary>
         private void Core_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Stop all async.
+        /// </summary>
         private async Task StopAllAsync()
         {
             if (_pipeline == null)
@@ -251,6 +329,9 @@ namespace SimpleCaptureMB
         }
 
 #if __IOS__ && !__MACCATALYST__
+        /// <summary>
+        /// Add video to photos library.
+        /// </summary>
         private void AddVideoToPhotosLibrary(string filePath)
         {
             var fileUrl = Foundation.NSUrl.FromFilename(filePath);
@@ -279,6 +360,9 @@ namespace SimpleCaptureMB
         }
 #endif
 
+        /// <summary>
+        /// Handles the bt stop clicked event.
+        /// </summary>
         private async void btStop_Clicked(object? sender, EventArgs e)
         {
             try
@@ -312,6 +396,9 @@ namespace SimpleCaptureMB
             }
         }
 
+        /// <summary>
+        /// Handles the bt camera clicked event.
+        /// </summary>
         private void btCamera_Clicked(object? sender, System.EventArgs e)
         {
             if (_cameras == null || _cameras.Length == 0)
@@ -329,6 +416,9 @@ namespace SimpleCaptureMB
             btCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
         }
 
+        /// <summary>
+        /// Handles the bt mic clicked event.
+        /// </summary>
         private void btMic_Clicked(object? sender, System.EventArgs e)
         {
             if (_mics == null || _mics.Length == 0)
@@ -346,6 +436,9 @@ namespace SimpleCaptureMB
             btMic.Text = _mics[_micSelectedIndex].DisplayName;
         }
 
+        /// <summary>
+        /// Handles the bt speakers clicked event.
+        /// </summary>
         private void btSpeakers_Clicked(object? sender, System.EventArgs e)
         {
             if (_speakers == null || _speakers.Length == 0)
@@ -363,6 +456,9 @@ namespace SimpleCaptureMB
             btSpeakers.Text = _speakers[_speakerSelectedIndex].DisplayName;
         }
 
+        /// <summary>
+        /// Configure preview async.
+        /// </summary>
         private async Task ConfigurePreviewAsync(bool connect)
         {
 #if !MOBILE
@@ -433,6 +529,9 @@ namespace SimpleCaptureMB
             }
         }
 
+        /// <summary>
+        /// Generate filename.
+        /// </summary>
         private string GenerateFilename()
         {
             DateTime now = DateTime.Now;
@@ -482,6 +581,9 @@ namespace SimpleCaptureMB
             return filename;
         }
 
+        /// <summary>
+        /// Configure capture.
+        /// </summary>
         private void ConfigureCapture()
         {
             // add tee and connect
@@ -516,6 +618,9 @@ namespace SimpleCaptureMB
             _pipeline.Connect(_audioEncoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Audio));
         }
 
+        /// <summary>
+        /// Handles the bt start preview clicked event.
+        /// </summary>
         private async void btStartPreview_Clicked(object? sender, EventArgs e)
         {
             try
@@ -570,6 +675,9 @@ namespace SimpleCaptureMB
             }
         }
 
+        /// <summary>
+        /// Handles the bt start capture clicked event.
+        /// </summary>
         private async void btStartCapture_Clicked(object? sender, EventArgs e)
         {
             try

@@ -4,6 +4,9 @@ namespace MMT_MAUI
 {
     public static class FileScanner
     {
+        /// <summary>
+        /// Search video files.
+        /// </summary>
         public static List<string> SearchVideoFiles(string dir)
         {
             List<string> list = new List<string>();

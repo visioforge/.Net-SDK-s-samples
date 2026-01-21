@@ -8,6 +8,9 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace RTSP_Webcam_Server.Services;
 
+/// <summary>
+/// Visioforge service implementation.
+/// </summary>
 public class VisioForgeService : IDisposable
 {
     private MediaBlocksPipeline? _pipeline;
@@ -21,6 +24,9 @@ public class VisioForgeService : IDisposable
     public bool IsStreaming => _isStreaming;
     public string? RtspUrl { get; private set; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="VisioForgeService"/> class.
+    /// </summary>
     public VisioForgeService()
     {
         // Set default media folder path - you can change this to your preferred location
@@ -33,6 +39,9 @@ public class VisioForgeService : IDisposable
         }
     }
 
+        /// <summary>
+        /// Initialize async.
+        /// </summary>
     public async Task InitializeAsync()
     {
         if (_isInitialized) return;
@@ -45,6 +54,9 @@ public class VisioForgeService : IDisposable
         });
     }
 
+    /// <summary>
+    /// Get available media files.
+    /// </summary>
     public string[] GetAvailableMediaFiles()
     {
         if (!_isInitialized)
@@ -66,11 +78,17 @@ public class VisioForgeService : IDisposable
         return files;
     }
 
+        /// <summary>
+        /// Get media folder path.
+        /// </summary>
     public string GetMediaFolderPath()
     {
         return _mediaFolderPath;
     }
 
+        /// <summary>
+        /// Start streaming async.
+        /// </summary>
     public async Task<bool> StartStreamingAsync(string fileName, int port = 8554)
     {
         if (!_isInitialized)
@@ -131,6 +149,9 @@ public class VisioForgeService : IDisposable
         }
     }
 
+        /// <summary>
+        /// Stop streaming async.
+        /// </summary>
     public async Task StopStreamingAsync()
     {
         if (!_isStreaming) return;
@@ -155,6 +176,9 @@ public class VisioForgeService : IDisposable
         }
     }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
     public void Dispose()
     {
         if (_isStreaming)

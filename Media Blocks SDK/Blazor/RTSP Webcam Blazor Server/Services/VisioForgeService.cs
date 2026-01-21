@@ -9,6 +9,9 @@ using VisioForge.Core.Types.X.VideoCapture;
 
 namespace RTSP_Webcam_Server.Services;
 
+/// <summary>
+/// VisioForge service implementation.
+/// </summary>
 public class VisioForgeService : IDisposable
 {
     private MediaBlocksPipeline? _pipeline;
@@ -21,6 +24,9 @@ public class VisioForgeService : IDisposable
     public bool IsStreaming => _isStreaming;
     public string? RtspUrl { get; private set; }
 
+        /// <summary>
+        /// Initialize async.
+        /// </summary>
     public async Task InitializeAsync()
     {
         if (_isInitialized) return;
@@ -33,6 +39,9 @@ public class VisioForgeService : IDisposable
         });
     }
 
+    /// <summary>
+    /// Get available cameras.
+    /// </summary>
     public VideoCaptureDeviceInfo[] GetAvailableCameras()
     {
         if (!_isInitialized)
@@ -41,6 +50,9 @@ public class VisioForgeService : IDisposable
         return DeviceEnumerator.Shared.VideoSources();
     }
 
+        /// <summary>
+        /// Start streaming async.
+        /// </summary>
     public async Task<bool> StartStreamingAsync(VideoCaptureDeviceInfo cameraInfo, int port = 8554)
     {
         if (!_isInitialized)
@@ -87,6 +99,9 @@ public class VisioForgeService : IDisposable
         }
     }
 
+        /// <summary>
+        /// Stop streaming async.
+        /// </summary>
     public async Task StopStreamingAsync()
     {
         if (!_isStreaming) return;
@@ -110,6 +125,9 @@ public class VisioForgeService : IDisposable
         }
     }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
     public void Dispose()
     {
         if (_isStreaming)

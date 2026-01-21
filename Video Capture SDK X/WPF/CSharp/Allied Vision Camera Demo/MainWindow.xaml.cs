@@ -18,7 +18,8 @@ using VisioForge.Core.VideoCaptureX;
 namespace AlliedVision_Camera_Demo
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for the Allied Vision Camera Demo WPF demo's MainWindow.
+    /// Demonstrates how to discover and capture from Allied Vision industrial cameras using the X-engine.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -33,17 +34,30 @@ namespace AlliedVision_Camera_Demo
             
         }
 
+        /// <summary>
+        /// Handles the OnError event of the video capture engine.
+        /// Outputs error messages to the debug console.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void Core_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Creates a new instance of the video capture engine and configures event handlers.
+        /// </summary>
         private void CreateEngine()
         {
             _core = new VideoCaptureCoreX(VideoView1);
             _core.OnError += Core_OnError;
         }
 
+        /// <summary>
+        /// Asynchronously stops and disposes of the video capture engine.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (_core != null)
@@ -56,6 +70,9 @@ namespace AlliedVision_Camera_Demo
             }
         }
 
+        /// <summary>
+        /// Asynchronously updates the recording duration displayed in the UI.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = _core.Duration();
@@ -71,6 +88,12 @@ namespace AlliedVision_Camera_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the engine for the selected Allied Vision camera and starts the preview.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             CreateEngine();
@@ -85,6 +108,12 @@ namespace AlliedVision_Camera_Demo
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the stream and cleans up engine resources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -92,6 +121,12 @@ namespace AlliedVision_Camera_Demo
             await DestroyEngineAsync();
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the window.
+        /// Initializes the SDK and enumerates available Allied Vision cameras.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -119,6 +154,12 @@ namespace AlliedVision_Camera_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Closing event of the window.
+        /// Ensures SDK resources are released.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();

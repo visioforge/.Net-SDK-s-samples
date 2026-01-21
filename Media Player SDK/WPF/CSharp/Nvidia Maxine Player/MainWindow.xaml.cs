@@ -16,19 +16,37 @@ namespace Nvidia_Maxine_Player
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCore MediaPlayer1;
 
+        /// <summary>
+        /// The effect ID.
+        /// </summary>
         private int _effectID = 0;
 
+        /// <summary>
+        /// The models path.
+        /// </summary>
         private string _modelsPath;
 
+        /// <summary>
+        /// The timer.
+        /// </summary>
         private readonly DispatcherTimer _timer = new DispatcherTimer();
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
@@ -36,6 +54,9 @@ namespace Nvidia_Maxine_Player
             MediaPlayer1.OnStop += MediaPlayer1_OnStop;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (MediaPlayer1 != null)
@@ -48,6 +69,9 @@ namespace Nvidia_Maxine_Player
             }
         }
 
+        /// <summary>
+        /// Tb timeline value changed.
+        /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (Convert.ToInt32(_timer.Tag) == 0)
@@ -56,6 +80,9 @@ namespace Nvidia_Maxine_Player
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             edLog.Clear();
@@ -129,16 +156,25 @@ namespace Nvidia_Maxine_Player
             _timer.Start();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await MediaPlayer1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await MediaPlayer1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
         private async Task StopAsync()
         {
             _timer.Stop();
@@ -148,11 +184,17 @@ namespace Nvidia_Maxine_Player
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt open file click event.
+        /// </summary>
         private void btOpenFile_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new Microsoft.Win32.OpenFileDialog();
@@ -162,6 +204,9 @@ namespace Nvidia_Maxine_Player
             }
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             CreateEngine();
@@ -180,6 +225,9 @@ namespace Nvidia_Maxine_Player
                 };
         }
 
+        /// <summary>
+        /// Handles the timer 1 tick event.
+        /// </summary>
         private async Task timer1_Tick()
         {
             _timer.Tag = 1;
@@ -196,6 +244,9 @@ namespace Nvidia_Maxine_Player
             _timer.Tag = 0;
         }
 
+        /// <summary>
+        /// Media player 1 on error.
+        /// </summary>
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -204,6 +255,9 @@ namespace Nvidia_Maxine_Player
             }));
         }
 
+        /// <summary>
+        /// Media player 1 on stop.
+        /// </summary>
         private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -212,6 +266,9 @@ namespace Nvidia_Maxine_Player
             }));
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await StopAsync();
@@ -219,6 +276,9 @@ namespace Nvidia_Maxine_Player
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Cb video effect selection changed.
+        /// </summary>
         private void cbVideoEffect_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (gdDenoise == null)

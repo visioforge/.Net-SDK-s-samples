@@ -19,17 +19,44 @@ using Foundation;
 
 namespace SimplePlayerUno;
 
+/// <summary>
+/// The main page class.
+/// </summary>
 public sealed partial class MainPage : Page
 {
+    /// <summary>
+    /// The media player instance.
+    /// </summary>
     private MediaPlayerCoreX? _player;
+
+    /// <summary>
+    /// The filename of the media.
+    /// </summary>
     private string? _filename;
 
+    /// <summary>
+    /// The timer for position updates.
+    /// </summary>
     private readonly DispatcherTimer _tmPosition;
+
+    /// <summary>
+    /// The dispatcher queue.
+    /// </summary>
     private readonly DispatcherQueue _dispatcherQueue;
 
+    /// <summary>
+    /// Flag to indicate if the timer is updating.
+    /// </summary>
     private volatile bool _isTimerUpdate;
+
+    /// <summary>
+    /// Flag to check if the SDK is initialized.
+    /// </summary>
     private bool _sdkInitialized;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MainPage"/> class.
+    /// </summary>
     public MainPage()
     {
         InitializeComponent();
@@ -46,6 +73,9 @@ public sealed partial class MainPage : Page
         Unloaded += MainPage_Unloaded;
     }
 
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
     private async void MainPage_Loaded(object sender, RoutedEventArgs e)
     {
         if (_sdkInitialized)
@@ -79,6 +109,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Main page unloaded.
+        /// </summary>
     private async void MainPage_Unloaded(object sender, RoutedEventArgs e)
     {
         _tmPosition.Stop();
@@ -101,16 +134,25 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
     private void Player_OnError(object? sender, ErrorsEventArgs e)
     {
         System.Diagnostics.Debug.WriteLine($"Player error: {e.Message}");
     }
 
+        /// <summary>
+        /// Player on start.
+        /// </summary>
     private void Player_OnStart(object? sender, EventArgs e)
     {
         // Duration will be set in the position timer tick when available
     }
 
+        /// <summary>
+        /// Player on stop.
+        /// </summary>
     private async void Player_OnStop(object? sender, StopEventArgs e)
     {
         try
@@ -131,6 +173,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Stop all async.
+        /// </summary>
     private async Task StopAllAsync()
     {
         _tmPosition.Stop();
@@ -141,6 +186,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Handles the tm position tick event.
+        /// </summary>
     private void TmPosition_Tick(object? sender, object e)
     {
         if (_player == null)
@@ -151,6 +199,9 @@ public sealed partial class MainPage : Page
         _ = UpdatePositionAsync();
     }
 
+        /// <summary>
+        /// Update position async.
+        /// </summary>
     private async Task UpdatePositionAsync()
     {
         if (_player == null)
@@ -199,6 +250,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Sl seeking value changed.
+        /// </summary>
     private async void slSeeking_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         try
@@ -214,6 +268,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Sl volume value changed.
+        /// </summary>
     private void slVolume_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         if (_player != null)
@@ -222,6 +279,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Handles the bt play stop click event.
+        /// </summary>
     private async void btPlayStop_Click(object sender, RoutedEventArgs e)
     {
         if (_player == null)
@@ -260,6 +320,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Create source settings async.
+        /// </summary>
     private static async Task<UniversalSourceSettings> CreateSourceSettingsAsync(string input)
     {
 #if __IOS__ && !__MACCATALYST__

@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace Video_Mixer_Player
 {
+    /// <summary>
+    /// The program class.
+    /// </summary>
     internal static class Program
     {
         /// <summary>

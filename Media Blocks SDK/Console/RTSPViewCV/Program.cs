@@ -9,6 +9,9 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace RTSPViewCV
 {
+    /// <summary>
+    /// Represents the program.
+    /// </summary>
     internal class Program
     {
         static DNNFaceDetectorBlock _faceDetector;
@@ -19,6 +22,10 @@ namespace RTSPViewCV
 
         static RTSPSourceBlock _source;
 
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {
             if (args.Length != 3)
@@ -69,11 +76,21 @@ namespace RTSPViewCV
             _pipeline.Dispose();
         }
 
+        /// <summary>
+        /// Handles the OnFaceDetected event of the face detector.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VisioForge.Core.Types.Events.CVFaceDetectedEventArgs"/> instance containing the event data.</param>
         private static void FaceDetector_OnFaceDetected(object sender, VisioForge.Core.Types.Events.CVFaceDetectedEventArgs e)
         {
             Console.WriteLine($"Face detected at [{e.TimeStamp}]");
         }
 
+        /// <summary>
+        /// Handles the OnError event of the pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VisioForge.Core.Types.Events.ErrorsEventArgs"/> instance containing the event data.</param>
         private static void _pipeline_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Console.WriteLine(e.Message);

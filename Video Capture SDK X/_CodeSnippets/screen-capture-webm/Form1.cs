@@ -20,6 +20,9 @@ namespace screen_capture_webm
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create screen capture source.
+        /// </summary>
         private IScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
             var source = new ScreenCaptureDX9SourceSettings();
@@ -33,6 +36,9 @@ namespace screen_capture_webm
             return source;
         }
 
+        /// <summary>
+        /// Handles the bt start with audio click event.
+        /// </summary>
         private async void btStartWithAudio_Click(object sender, EventArgs e)
         {
             videoCapture1 = new VideoCaptureCoreX(VideoView1);
@@ -56,6 +62,9 @@ namespace screen_capture_webm
             await videoCapture1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start without audio click event.
+        /// </summary>
         private async void btStartWithoutAudio_Click(object sender, EventArgs e)
         {
             // Create VideoCaptureCoreX object
@@ -75,6 +84,9 @@ namespace screen_capture_webm
             await videoCapture1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await videoCapture1.StopAsync();
@@ -82,6 +94,9 @@ namespace screen_capture_webm
             await videoCapture1.DisposeAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -92,6 +107,9 @@ namespace screen_capture_webm
             Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             VisioForgeX.DestroySDK();

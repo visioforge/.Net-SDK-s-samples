@@ -34,6 +34,9 @@ namespace Face_AI_MB_Demo
             _core = new FaceRecognitionCore(System.AppDomain.CurrentDomain.BaseDirectory);
         }
 
+        /// <summary>
+        /// Handles the bt select images known click event.
+        /// </summary>
         private void btSelectImagesKnown_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -43,6 +46,9 @@ namespace Face_AI_MB_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt select images detect click event.
+        /// </summary>
         private void btSelectImagesDetect_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -52,6 +58,9 @@ namespace Face_AI_MB_Demo
             }
         }
 
+        /// <summary>
+        /// Find known faces in images.
+        /// </summary>
         private async Task FindKnownFacesInImages()
         {
             _sw = Stopwatch.StartNew();
@@ -94,6 +103,9 @@ namespace Face_AI_MB_Demo
             lbResults.Items.Add($"Elapsed: {_sw.ElapsedMilliseconds} ms");
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             // clear
@@ -114,6 +126,9 @@ namespace Face_AI_MB_Demo
             }
         }
 
+        /// <summary>
+        /// Find known faces in video file.
+        /// </summary>
         private async Task FindKnownFacesInVideoFile()
         {
             _sw = Stopwatch.StartNew();
@@ -139,6 +154,9 @@ namespace Face_AI_MB_Demo
             await _videoFrameSource.StartAsync(files[0], VideoFormatX.RGB, new VisioForge.Core.Types.Size(320, 180));      
         }
 
+        /// <summary>
+        /// Handles the video frame source on stop event.
+        /// </summary>
         private void _videoFrameSource_OnStop(object sender, EventArgs e)
         {
             _sw.Stop();
@@ -149,6 +167,9 @@ namespace Face_AI_MB_Demo
             });
         }
 
+        /// <summary>
+        /// Video frame source on new frame.
+        /// </summary>
         private void _videoFrameSource_OnNewFrame(object sender, VideoFrameX e)
         {
             var sw = Stopwatch.StartNew();
@@ -171,6 +192,9 @@ namespace Face_AI_MB_Demo
             Debug.WriteLine($"Frame processing time: {sw.ElapsedMilliseconds} ms");
         }
 
+        /// <summary>
+        /// Find known faces in webcam.
+        /// </summary>
         private async Task FindKnownFacesInWebcam()
         {
             _sw = Stopwatch.StartNew();
@@ -199,6 +223,9 @@ namespace Face_AI_MB_Demo
 
         FaceRecognitionDB _db = new FaceRecognitionDB();
 
+        /// <summary>
+        /// Handles the bt test load click event.
+        /// </summary>
         private void btTestLoad_Click(object sender, RoutedEventArgs e)
         {
             _db = FaceRecognitionDB.Load("c:\\Samples\\FaceAI\\faces.bin");
@@ -209,6 +236,9 @@ namespace Face_AI_MB_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt test save click event.
+        /// </summary>
         private async void btTestSave_Click(object sender, RoutedEventArgs e)
         {
             // load known faces
@@ -220,6 +250,9 @@ namespace Face_AI_MB_Demo
             _db.Save("c:\\Samples\\FaceAI\\faces.bin");
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -230,6 +263,9 @@ namespace Face_AI_MB_Demo
             Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();

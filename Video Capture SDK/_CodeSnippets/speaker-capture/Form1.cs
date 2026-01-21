@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable InconsistentNaming
+
+
 
 namespace speaker_capture
 {
@@ -19,17 +19,26 @@ namespace speaker_capture
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
 
+    /// <summary>
+    /// Speaker capture demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private VideoCaptureCore VideoCapture1;
 
         private TimeSpan _currentTimestamp;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -38,11 +47,17 @@ namespace speaker_capture
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             VideoCapture1 = new VideoCaptureCore();
@@ -55,11 +70,17 @@ namespace speaker_capture
             VideoCapture1.OnAudioFrameBuffer += VideoCapture1_OnAudioFrameBuffer;
         }
 
+        /// <summary>
+        /// Video capture 1 on audio frame buffer.
+        /// </summary>
         private void VideoCapture1_OnAudioFrameBuffer(object sender, AudioFrameBufferEventArgs e)
         {
             _currentTimestamp = e.Frame.Timestamp;
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource("VisioForge What You Hear Source");
@@ -86,6 +107,9 @@ namespace speaker_capture
             timer1.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await VideoCapture1.StopAsync();
@@ -93,16 +117,25 @@ namespace speaker_capture
             timer1.Stop();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the timer 1 tick event.
+        /// </summary>
         private void timer1_Tick(object sender, EventArgs e)
         {
             lbTimestamp.Text = _currentTimestamp.ToString(@"hh\:mm\:ss");

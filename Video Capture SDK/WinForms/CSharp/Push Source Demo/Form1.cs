@@ -1,7 +1,7 @@
-﻿// ReSharper disable StyleCop.SA1600
+﻿
 
-// ReSharper disable InconsistentNaming
-// ReSharper disable LocalizableElement
+
+
 
 namespace Push_Source_Demo
 {
@@ -18,7 +18,10 @@ namespace Push_Source_Demo
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.VideoCapture;
 
-    // ReSharper disable once StyleCop.SA1601
+    
+    /// <summary>
+    /// Push source demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private VideoCaptureCore VideoCapture1;
@@ -39,11 +42,17 @@ namespace Push_Source_Demo
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -51,6 +60,9 @@ namespace Push_Source_Demo
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -62,6 +74,9 @@ namespace Push_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngineAsync();
@@ -80,6 +95,9 @@ namespace Push_Source_Demo
             cbOutputFormat.SelectedIndex = 2;
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             if (InvokeRequired)
@@ -99,6 +117,9 @@ namespace Push_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Push images async.
+        /// </summary>
         private Task PushImagesAsync()
         {
             return Task.Run(
@@ -147,6 +168,9 @@ namespace Push_Source_Demo
                      });
         }
 
+        /// <summary>
+        /// Set mp 4 output.
+        /// </summary>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -157,6 +181,9 @@ namespace Push_Source_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set wmv output.
+        /// </summary>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -168,6 +195,9 @@ namespace Push_Source_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Set mp 4 hw output.
+        /// </summary>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -178,6 +208,9 @@ namespace Push_Source_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set mpegts output.
+        /// </summary>
         private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
@@ -188,6 +221,9 @@ namespace Push_Source_Demo
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
+        /// <summary>
+        /// Set mov output.
+        /// </summary>
         private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
@@ -198,6 +234,9 @@ namespace Push_Source_Demo
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
+        /// <summary>
+        /// Set gif output.
+        /// </summary>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
@@ -208,6 +247,9 @@ namespace Push_Source_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Set avi output.
+        /// </summary>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -224,6 +266,9 @@ namespace Push_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
@@ -321,6 +366,9 @@ namespace Push_Source_Demo
             await PushImagesAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -328,6 +376,9 @@ namespace Push_Source_Demo
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -336,11 +387,17 @@ namespace Push_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -349,6 +406,9 @@ namespace Push_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb output format selected index changed event.
+        /// </summary>
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -391,6 +451,9 @@ namespace Push_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt output configure click event.
+        /// </summary>
         private void btOutputConfigure_Click(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -476,6 +539,9 @@ namespace Push_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();

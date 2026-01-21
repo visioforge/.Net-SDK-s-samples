@@ -1,7 +1,7 @@
-// ReSharper disable InconsistentNaming
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable StyleCop.SA1601
-// ReSharper disable UseObjectOrCollectionInitializer
+
+
+
+
 
 namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 {
@@ -28,22 +28,49 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
     using System.Linq;
     using VisioForge.Core.ONVIFX;
 
+    /// <summary>
+    /// IP capture demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Settings dialog for MP4 hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MPEG-TS hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mpegTSSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MOV hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog movSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MP4 output format.
+        /// </summary>
         private MP4SettingsDialog mp4SettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for AVI output format.
+        /// </summary>
         private AVISettingsDialog aviSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for WMV output format.
+        /// </summary>
         private WMVSettingsDialog wmvSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for GIF output format.
+        /// </summary>
         private GIFSettingsDialog gifSettingsDialog;
 
+        /// <summary>
+        /// Save file dialog for screenshot capture functionality.
+        /// </summary>
         private SaveFileDialog screenshotSaveDialog = new SaveFileDialog()
         {
             FileName = "image.jpg",
@@ -51,17 +78,32 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
+        /// <summary>
+        /// ONVIF client for IP camera control and communication.
+        /// </summary>
         private ONVIFClientX onvifClient;
 
+        /// <summary>
+        /// Timer for updating recording time display.
+        /// </summary>
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        /// <summary>
+        /// The main video capture core engine instance.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -70,6 +112,9 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             VideoCapture1.OnNetworkSourceDisconnect += VideoCapture1_OnNetworkSourceDisconnect;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -82,6 +127,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngineAsync();
@@ -99,6 +149,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -107,6 +162,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
             if (onvifClient != null)
@@ -294,6 +354,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -301,12 +366,21 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked 1.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="LinkLabelLinkClickedEventArgs"/> instance containing the event data.</param>
         private void llVideoTutorials_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
+        /// <param name="txt">The text.</param>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -315,11 +389,21 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt onvif connect click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btONVIFConnect_Click(object sender, EventArgs e)
         {
             if (btONVIFConnect.Text == "Connect")
@@ -396,6 +480,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb onvif profile selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void cbONVIFProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (onvifClient == null)
@@ -414,6 +503,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt onvif right click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btONVIFRight_Click(object sender, EventArgs e)
         {
             if (onvifClient == null)
@@ -424,6 +518,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             _ = onvifClient.ContinuousMoveAsync(0.5f, 0, 0);
         }
 
+        /// <summary>
+        /// Handles the bt onvifptz set default click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btONVIFPTZSetDefault_Click(object sender, EventArgs e)
         {
             if (onvifClient == null)
@@ -438,6 +537,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt onvif left click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btONVIFLeft_Click(object sender, EventArgs e)
         {
             if (onvifClient == null)
@@ -452,6 +556,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt onvif up click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btONVIFUp_Click(object sender, EventArgs e)
         {
             if (onvifClient == null)
@@ -462,6 +571,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             _ = onvifClient.ContinuousMoveAsync(0, 0.5f, 0);
         }
 
+        /// <summary>
+        /// Handles the bt onvif down click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btONVIFDown_Click(object sender, EventArgs e)
         {
             if (onvifClient == null)
@@ -472,6 +586,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             _ = onvifClient.ContinuousMoveAsync(0, -0.5f, 0);
         }
 
+        /// <summary>
+        /// Handles the bt onvif zoom in click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btONVIFZoomIn_Click(object sender, EventArgs e)
         {
             if (onvifClient == null)
@@ -482,6 +601,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             _ = onvifClient.ContinuousMoveAsync(0, 0, 0.5f);
         }
 
+        /// <summary>
+        /// Handles the bt onvif zoom out click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btONVIFZoomOut_Click(object sender, EventArgs e)
         {
             if (onvifClient == null)
@@ -492,6 +616,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             _ = onvifClient.ContinuousMoveAsync(0, 0, -0.5f);
         }
 
+        /// <summary>
+        /// Handles the bt save screenshot click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btSaveScreenshot_Click(object sender, EventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog(this) == DialogResult.OK)
@@ -519,6 +648,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Set mp 4 output.
+        /// </summary>
+        /// <param name="mp4Output">The mp4 output.</param>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -529,6 +662,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set wmv output.
+        /// </summary>
+        /// <param name="wmvOutput">The wmv output.</param>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -540,6 +677,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Set mp 4 hw output.
+        /// </summary>
+        /// <param name="mp4Output">The mp4 output.</param>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -550,6 +691,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set mpegts output.
+        /// </summary>
+        /// <param name="mpegTSOutput">The mpeg ts output.</param>
         private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
@@ -560,6 +705,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
+        /// <summary>
+        /// Set mov output.
+        /// </summary>
+        /// <param name="mkvOutput">The mov output.</param>
         private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
@@ -570,6 +719,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
+        /// <summary>
+        /// Set gif output.
+        /// </summary>
+        /// <param name="gifOutput">The gif output.</param>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
@@ -580,6 +733,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Set avi output.
+        /// </summary>
+        /// <param name="aviOutput">The avi output.</param>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -597,6 +754,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         }
 
 
+        /// <summary>
+        /// Handles the cb output format selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -639,16 +801,31 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt output configure click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btOutputConfigure_Click(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -734,6 +911,9 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             if (IsHandleCreated)
@@ -753,6 +933,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt text logo add click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btTextLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -768,6 +953,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt image logo add click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btImageLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new ImageLogoSettingsDialog();
@@ -783,6 +973,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt logo remove click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btLogoRemove_Click(object sender, EventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -792,6 +987,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt logo edit click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btLogoEdit_Click(object sender, EventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -823,6 +1023,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb lightness scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbLightness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectLightness lightness;
@@ -842,6 +1047,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb saturation scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbSaturation_Scroll(object sender, EventArgs e)
         {
             IVideoEffectSaturation saturation;
@@ -861,6 +1071,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb contrast scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbContrast_Scroll(object sender, EventArgs e)
         {
             IVideoEffectContrast contrast;
@@ -880,6 +1095,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbFlipX_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipDown flip;
@@ -899,6 +1119,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbFlipY_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipRight flip;
@@ -918,6 +1143,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb greyscale checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbGreyscale_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -937,6 +1167,9 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Configure video effects.
+        /// </summary>
         private void ConfigureVideoEffects()
         {
             if (tbLightness.Value > 0)
@@ -980,6 +1213,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb invert checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbInvert_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectInvert invert;
@@ -999,6 +1237,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb darkness scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbDarkness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectDarkness darkness;
@@ -1018,12 +1261,22 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Lb link clicked.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="LinkLabelLinkClickedEventArgs"/> instance containing the event data.</param>
         private void lbNDI_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the bt list ndi sources click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btListNDISources_Click(object sender, EventArgs e)
         {
             cbIPURL.Items.Clear();
@@ -1040,6 +1293,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt list onvif sources click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btListONVIFSources_Click(object sender, EventArgs e)
         {
             cbIPURL.Items.Clear();
@@ -1047,6 +1305,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             await VideoCapture1.IP_Camera_ONVIF_ListSourcesAsyncEx(onDeviceDiscovered, null, null);
         }
 
+        /// <summary>
+        /// Add onvif source.
+        /// </summary>
+        /// <param name="discoveryDevice">The discovery device.</param>
         private void AddONVIFSource(DiscoveryDevice discoveryDevice)
         {
             Invoke((Action)(() => 
@@ -1060,6 +1322,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the video capture 1 on network source disconnect event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnNetworkSourceDisconnect(object sender, EventArgs e)
         {
             Invoke((Action)(
@@ -1071,6 +1338,11 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                                    }));
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
@@ -1078,4 +1350,3 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
     }
 }
 
-// ReSharper restore InconsistentNaming

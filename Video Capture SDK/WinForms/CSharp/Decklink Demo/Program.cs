@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace Decklink_Demo
 {
+    /// <summary>
+    /// Program class.
+    /// </summary>
     static class Program
     {
         /// <summary>

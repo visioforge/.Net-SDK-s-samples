@@ -63,41 +63,65 @@ namespace RTSP_MultiViewSync_Demo
             }
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void _pipeline_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             OnError?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Preload async.
+        /// </summary>
         public Task<bool> PreloadAsync()
         {
             return _pipeline.StartAsync(true);
         }
 
+        /// <summary>
+        /// Start async.
+        /// </summary>
         public Task<bool> StartAsync()
         {
             return _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Resume async.
+        /// </summary>
         public Task ResumeAsync()
         {
             return _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
         public Task<bool> StopAsync()
         {
             return _pipeline.StopAsync(true);
         }
 
+        /// <summary>
+        /// Is started.
+        /// </summary>
         public bool IsStarted()
         {
             return _pipeline.State == PlaybackState.Play;
         }
 
+        /// <summary>
+        /// Is paused.
+        /// </summary>
         public bool IsPaused()
         {
             return _pipeline.State == PlaybackState.Pause;
         }
 
+        /// <summary>
+        /// Dispose async.
+        /// </summary>
         public async ValueTask DisposeAsync()
         {
             if (!disposedValue)

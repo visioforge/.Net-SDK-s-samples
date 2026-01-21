@@ -11,16 +11,34 @@ using VisioForge.Core.Types.Events;
 
 namespace Simple_Player_MB_MAUI
 {
+    /// <summary>
+    /// The main page of the application.
+    /// </summary>
     public partial class MainPage : ContentPage
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline? _pipeline;
 
+        /// <summary>
+        /// The source.
+        /// </summary>
         private UniversalSourceBlock? _source;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private MediaBlock? _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock? _audioRenderer;
 
+        /// <summary>
+        /// The filename.
+        /// </summary>
         private string? _filename;
 
         /// <summary>
@@ -42,6 +60,9 @@ namespace Simple_Player_MB_MAUI
             _tmPosition.Elapsed += tmPosition_Elapsed;
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             if (_pipeline != null)
@@ -68,6 +89,9 @@ namespace Simple_Player_MB_MAUI
             _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
         }
 
+        /// <summary>
+        /// Player on stop.
+        /// </summary>
         private async void _player_OnStop(object? sender, StopEventArgs e)
         {
             try
@@ -90,11 +114,17 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
         private void MainPage_Loaded(object? sender, EventArgs e)
         {
             Window.Destroying += Window_Destroying;
         }
 
+        /// <summary>
+        /// Player on start.
+        /// </summary>
         private async void _player_OnStart(object? sender, EventArgs e)
         {
             try
@@ -115,6 +145,9 @@ namespace Simple_Player_MB_MAUI
             }                      
         }
 
+        /// <summary>
+        /// Window destroying.
+        /// </summary>
         private async void Window_Destroying(object? sender, EventArgs e)
         {
             try
@@ -136,11 +169,17 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void _player_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Stop all async.
+        /// </summary>
         private async Task StopAllAsync()
         {
             if (_pipeline == null)
@@ -161,6 +200,9 @@ namespace Simple_Player_MB_MAUI
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Tm position elapsed.
+        /// </summary>
         private async void tmPosition_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             if (_pipeline == null)
@@ -206,6 +248,9 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Sl seeking value changed.
+        /// </summary>
         private async void slSeeking_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             try
@@ -221,6 +266,9 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Sl volume value changed.
+        /// </summary>
         private void slVolume_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             if (_pipeline != null && _audioRenderer != null)
@@ -229,6 +277,9 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt open clicked event.
+        /// </summary>
         private async void btOpen_Clicked(object? sender, EventArgs e)
         {
             try
@@ -252,6 +303,9 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt play pause clicked event.
+        /// </summary>
         private async void btPlayPause_Clicked(object? sender, EventArgs e)
         {
             try
@@ -295,6 +349,9 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt speed clicked event.
+        /// </summary>
         private async void btSpeed_Clicked(object? sender, EventArgs e)
         {
             try
@@ -324,6 +381,9 @@ namespace Simple_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop clicked event.
+        /// </summary>
         private async void btStop_Clicked(object? sender, EventArgs e)
         {
             try

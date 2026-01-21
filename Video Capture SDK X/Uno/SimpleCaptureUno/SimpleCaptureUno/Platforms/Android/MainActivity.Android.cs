@@ -13,6 +13,9 @@ namespace SimpleCaptureUno.Droid;
 )]
 public class MainActivity : Microsoft.UI.Xaml.ApplicationActivity
 {
+        /// <summary>
+        /// On create.
+        /// </summary>
     protected override void OnCreate(Bundle? savedInstanceState)
     {
         global::AndroidX.Core.SplashScreen.SplashScreen.InstallSplashScreen(this);

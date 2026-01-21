@@ -12,26 +12,54 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
+    /// <summary>
+    /// The RTSP record engine.
+    /// </summary>
     public class RTSPRecordEngine : IAsyncDisposable
     {
+        /// <summary>
+        /// Gets the media blocks pipeline.
+        /// </summary>
         public MediaBlocksPipeline Pipeline { get; private set; }
 
+        /// <summary>
+        /// The muxer block.
+        /// </summary>
         private MediaBlock _muxer;
 
+        /// <summary>
+        /// The RTSP RAW source block.
+        /// </summary>
         private RTSPRAWSourceBlock _rtspRawSource;
 
+        /// <summary>
+        /// The decode bin block.
+        /// </summary>
         private DecodeBinBlock _decodeBin;
 
+        /// <summary>
+        /// The AAC encoder block.
+        /// </summary>
         private AACEncoderBlock _audioEncoder;
 
-        //private MP3EncoderBlock _audioEncoder;
-
+        /// <summary>
+        /// Value indicating whether the object is disposed.
+        /// </summary>
         private bool disposedValue;
 
+        /// <summary>
+        /// Occurs when an error happens.
+        /// </summary>
         public event EventHandler<ErrorsEventArgs> OnError;
 
+        /// <summary>
+        /// Gets or sets the filename.
+        /// </summary>
         public string Filename { get; set; } = "output.ts";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to re-encode audio.
+        /// </summary>
         public bool ReencodeAudio { get; set; }
 
         /// <summary>
@@ -39,6 +67,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// </summary>
         public bool MP4 { get; set; }
 
+        /// <summary>
+        /// Start async.
+        /// </summary>
         public Task<bool> StartAsync(RTSPRAWSourceSettings rtspSettings)
         {
             // Validate codec compatibility with target container
@@ -97,6 +128,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             return Pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
         public Task<bool> StopAsync()
         {
             if (Pipeline == null)
@@ -108,6 +142,9 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
         }
 
+        /// <summary>
+        /// Dispose async.
+        /// </summary>
         public async ValueTask DisposeAsync()
         {
             if (!disposedValue)

@@ -8,8 +8,14 @@ namespace Video_From_Images_CLI
     using CommandLine;
     using CommandLine.Text;
 
+    /// <summary>
+    /// Command line options.
+    /// </summary>
     public class CommandLineOptions
     {
+        /// <summary>
+        /// Gets or sets the input folder.
+        /// </summary>
         [Option(
             'i',
             "input",
@@ -17,18 +23,34 @@ namespace Video_From_Images_CLI
             HelpText = "Input folder with images. BMP, JPG, TIFF, PNG, GIF are supported.")]
         public string InputFolder { get; set; }
 
+        /// <summary>
+        /// Gets or sets the output file.
+        /// </summary>
         [Option('o', "output", Required = true, HelpText = "Output file.")]
         public string OutputFile { get; set; }
 
+        /// <summary>
+        /// Gets or sets the output format.
+        /// </summary>
         [Option('f', "format", Required = false, HelpText = "Output format. Possible values: mp4, avi, wmv.", Default = "mp4")]
         public string Format { get; set; }
 
+        /// <summary>
+        /// Gets or sets the output resolution.
+        /// </summary>
         [Option('r', "resolution", Required = true, HelpText = "Resolution option. Format is \"width:height\". Should divide into 8.")]
         public string Resolution { get; set; }
 
+        /// <summary>
+        /// Gets or sets the image duration.
+        /// </summary>
         [Option('d', "duration", Required = false, HelpText = "One image duration in video (in milliseconds).")]
         public int Duration { get; set; }
 
+        /// <summary>
+        /// Gets the usage guidelines.
+        /// </summary>
+        /// <returns>The usage guidelines.</returns>
         public static string GetUsage()
         {
             var help = new HelpText

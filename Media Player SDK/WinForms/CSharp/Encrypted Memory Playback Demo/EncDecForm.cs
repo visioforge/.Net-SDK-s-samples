@@ -11,18 +11,36 @@ using VisioForge.Core.VideoEncryption;
 
 namespace Encrypted_Memory_Playback_Demo
 {
+    /// <summary>
+    /// EncDec demo form.
+    /// </summary>
     public partial class EncDecForm : Form
     {
+        /// <summary>
+        /// The progress callback.
+        /// </summary>
         private EncryptionProgressCallback _progressCallback;
 
+        /// <summary>
+        /// The initialization vector string.
+        /// </summary>
         private const string _iv = "1234567890123456";
+        /// <summary>
+        /// The initialization vector bytes.
+        /// </summary>
         private byte[] _ivBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(_iv);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EncDecForm"/> class.
+        /// </summary>
         public EncDecForm()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -31,6 +49,9 @@ namespace Encrypted_Memory_Playback_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt save file click event.
+        /// </summary>
         private void btSaveFile_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -39,11 +60,17 @@ namespace Encrypted_Memory_Playback_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the enc dec form load event.
+        /// </summary>
         private void EncDecForm_Load(object sender, EventArgs e)
         {
             _progressCallback = new EncryptionProgressCallback(OnProgress);
         }
 
+        /// <summary>
+        /// On progress.
+        /// </summary>
         private void OnProgress(int progress)
         {
             Invoke((Action)(() =>
@@ -52,6 +79,9 @@ namespace Encrypted_Memory_Playback_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt encrypt click event.
+        /// </summary>
         private async void btEncrypt_Click(object sender, EventArgs e)
         {
             await VideoEncryptor.EncryptAsync(edSourceFile.Text, edDestFile.Text, edKey.Text, _ivBytes, _progressCallback);
@@ -61,6 +91,9 @@ namespace Encrypted_Memory_Playback_Demo
             MessageBox.Show(this, "Complete");
         }
 
+        /// <summary>
+        /// Handles the bt decrypt click event.
+        /// </summary>
         private async void btDecrypt_Click(object sender, EventArgs e)
         {
             await VideoDecryptor.DecryptAsync(edSourceFile.Text, edDestFile.Text, edKey.Text, _ivBytes, _progressCallback);

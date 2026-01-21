@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+﻿
 
 namespace multiple_ap_cams
 {
@@ -12,6 +12,9 @@ namespace multiple_ap_cams
     using VisioForge.Core.Types.VideoCapture;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Multiple IP cameras demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private System.Timers.Timer tmRecording1 = new System.Timers.Timer(1000);
@@ -22,11 +25,17 @@ namespace multiple_ap_cams
 
         private VideoCaptureCore VideoCapture2;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine 1 async.
+        /// </summary>
         private async Task CreateEngine1Async()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -34,6 +43,9 @@ namespace multiple_ap_cams
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Create engine 2 async.
+        /// </summary>
         private async Task CreateEngine2Async()
         {
             VideoCapture2 = await VideoCaptureCore.CreateAsync(VideoView2 as IVideoView);
@@ -41,6 +53,9 @@ namespace multiple_ap_cams
             VideoCapture2.OnError += VideoCapture2_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine 1.
+        /// </summary>
         private void DestroyEngine1()
         {
             if (VideoCapture1 != null)
@@ -52,6 +67,9 @@ namespace multiple_ap_cams
             }
         }
 
+        /// <summary>
+        /// Destroy engine 2.
+        /// </summary>
         private void DestroyEngine2()
         {
             if (VideoCapture2 != null)
@@ -63,6 +81,11 @@ namespace multiple_ap_cams
             }
         }
 
+        /// <summary>
+        /// Handles the bt start 1 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart1_Click(object sender, EventArgs e)
         {
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
@@ -83,6 +106,11 @@ namespace multiple_ap_cams
             tmRecording1.Start();
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             if (IsHandleCreated)
@@ -91,6 +119,11 @@ namespace multiple_ap_cams
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop 1 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStop1_Click(object sender, EventArgs e)
         {
             tmRecording1.Stop();
@@ -98,6 +131,11 @@ namespace multiple_ap_cams
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start 2 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart2_Click(object sender, EventArgs e)
         {
             VideoCapture2.IP_Camera_Source = new IPCameraSourceSettings
@@ -117,6 +155,11 @@ namespace multiple_ap_cams
             tmRecording2.Start();
         }
 
+        /// <summary>
+        /// Video capture 2 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture2_OnError(object sender, ErrorsEventArgs e)
         {
             if (IsHandleCreated)
@@ -125,12 +168,22 @@ namespace multiple_ap_cams
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop 2 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStop2_Click(object sender, EventArgs e)
         {
             tmRecording2.Stop();
             await VideoCapture2.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngine1Async();
@@ -152,6 +205,9 @@ namespace multiple_ap_cams
             VideoCapture2.Video_Renderer_SetAuto();
         }
 
+        /// <summary>
+        /// Update recording time 1.
+        /// </summary>
         private void UpdateRecordingTime1()
         {
             if (IsHandleCreated)
@@ -171,6 +227,9 @@ namespace multiple_ap_cams
             }
         }
 
+        /// <summary>
+        /// Update recording time 2.
+        /// </summary>
         private void UpdateRecordingTime2()
         {
             if (IsHandleCreated)
@@ -190,6 +249,11 @@ namespace multiple_ap_cams
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine1();
@@ -198,4 +262,3 @@ namespace multiple_ap_cams
     }
 }
 
-// ReSharper restore InconsistentNaming

@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace Computer_Vision_Demo
 {
+    /// <summary>
+    /// Program class.
+    /// </summary>
     static class Program
     {
         /// <summary>

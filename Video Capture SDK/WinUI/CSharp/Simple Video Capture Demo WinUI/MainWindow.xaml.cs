@@ -53,21 +53,33 @@ public sealed partial class MainWindow : Window
         this.InitializeComponent();
     }
 
+        /// <summary>
+        /// Handles the bt video capture device settings click event.
+        /// </summary>
     private void btVideoCaptureDeviceSettings_Click(object sender, RoutedEventArgs e)
     {
         VideoCapture1.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.SelectedValue.ToString());
     }
 
+        /// <summary>
+        /// Tb audio volume value changed.
+        /// </summary>
     private void tbAudioVolume_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         VideoCapture1?.Audio_OutputDevice_Volume_Set((int)tbAudioVolume.Value);
     }
 
+        /// <summary>
+        /// Tb audio balance value changed.
+        /// </summary>
     private void tbAudioBalance_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         VideoCapture1.Audio_OutputDevice_Balance_Set((int)tbAudioBalance.Value);
     }
 
+        /// <summary>
+        /// Cb output format selection changed.
+        /// </summary>
     private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         switch (cbOutputFormat.SelectedIndex)
@@ -110,6 +122,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
     private async void btSelectOutput_Click(object sender, RoutedEventArgs e)
     {
         string filename = await SaveFileDialog(new List<string>() { ".mp4", ".avi", ".wmv", ".ts", ".mov", ".gif" });
@@ -119,6 +134,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Tb lightness value changed.
+        /// </summary>
     private void tbLightness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         IVideoEffectLightness lightness;
@@ -138,6 +156,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Tb saturation value changed.
+        /// </summary>
     private void tbSaturation_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         if (VideoCapture1 != null)
@@ -160,6 +181,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Tb contrast value changed.
+        /// </summary>
     private void tbContrast_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         IVideoEffectContrast contrast;
@@ -179,6 +203,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Tb darkness value changed.
+        /// </summary>
     private void tbDarkness_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         IVideoEffectDarkness darkness;
@@ -198,6 +225,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Handles the cb greyscale click event.
+        /// </summary>
     private void cbGreyscale_Click(object sender, RoutedEventArgs e)
     {
         IVideoEffectGrayscale grayscale;
@@ -217,6 +247,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
     private async void btStop_Click(object sender, RoutedEventArgs e)
     {
         tmRecording.Stop();
@@ -224,16 +257,25 @@ public sealed partial class MainWindow : Window
         await VideoCapture1.StopAsync();
     }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
     private async void btResume_Click(object sender, RoutedEventArgs e)
     {
         await VideoCapture1.ResumeAsync();
     }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
     private async void btPause_Click(object sender, RoutedEventArgs e)
     {
         await VideoCapture1.PauseAsync();
     }
 
+        /// <summary>
+        /// Handles the cb invert click event.
+        /// </summary>
     private void cbInvert_Click(object sender, RoutedEventArgs e)
     {
         IVideoEffectInvert invert;
@@ -253,6 +295,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
     private void CreateEngine()
     {
         VideoCapture1 = new VideoCaptureCore(_videoView as IVideoView);
@@ -260,6 +305,9 @@ public sealed partial class MainWindow : Window
         VideoCapture1.OnError += VideoCapture1_OnError;
     }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
     private void DestroyEngine()
     {
         if (VideoCapture1 != null)
@@ -271,6 +319,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Save file dialog.
+        /// </summary>
     private async Task<string> SaveFileDialog(List<string> defaultExts)    
     {
         var picker = new FileSavePicker
@@ -293,21 +344,33 @@ public sealed partial class MainWindow : Window
         return string.Empty;
     }
 
+        /// <summary>
+        /// Handles the bt audio input device settings click event.
+        /// </summary>
     private void btAudioInputDeviceSettings_Click(object sender, RoutedEventArgs e)
     {
         VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.SelectedValue.ToString());
     }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
     private void Log(string txt)
     {
         DispatcherQueue.TryEnqueue(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
     }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
     private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
     {
         Log(e.Message);
     }
 
+        /// <summary>
+        /// Cb video input device selection changed.
+        /// </summary>
     private void cbVideoInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (cbVideoInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -336,6 +399,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Cb audio input device selection changed.
+        /// </summary>
     private void cbAudioInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -386,6 +452,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
     private async void btStart_Click(object sender, RoutedEventArgs e)
     {
         mmLog.Text = string.Empty;
@@ -497,6 +566,9 @@ public sealed partial class MainWindow : Window
         tmRecording.Start();
     }
 
+        /// <summary>
+        /// Configure video effects.
+        /// </summary>
     private void ConfigureVideoEffects()
     {
         if (tbLightness.Value > 0)
@@ -540,6 +612,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Cb video input format selection changed.
+        /// </summary>
     private void cbVideoInputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (string.IsNullOrEmpty(cbVideoInputFormat.SelectedValue?.ToString()) || string.IsNullOrEmpty(cbVideoInputDevice.SelectedValue.ToString()))
@@ -574,6 +649,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
     private void UpdateRecordingTime()
     {
         var ts = VideoCapture1.Duration_Time();
@@ -589,11 +667,17 @@ public sealed partial class MainWindow : Window
         });
     }
 
+        /// <summary>
+        /// Handles the cb invert checked changed event.
+        /// </summary>
     private void cbInvert_CheckedChanged(object sender, RoutedEventArgs e)
     {
 
     }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
     private void cbFlipX_Checked(object sender, RoutedEventArgs e)
     {
         IVideoEffectFlipDown flip;
@@ -613,6 +697,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
     private void cbFlipY_Checked(object sender, RoutedEventArgs e)
     {
         IVideoEffectFlipRight flip;
@@ -632,11 +719,17 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
         DestroyEngine();
     }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
     private void Dispose(bool disposing)
     {
         if (!disposedValue)
@@ -663,6 +756,9 @@ public sealed partial class MainWindow : Window
     //     Dispose(disposing: false);
     // }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
     public void Dispose()
     {
         // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -670,6 +766,9 @@ public sealed partial class MainWindow : Window
         GC.SuppressFinalize(this);
     }
 
+        /// <summary>
+        /// Handles the cb text logo click event.
+        /// </summary>
     private void cbTextLogo_Click(object sender, RoutedEventArgs e)
     {
         IVideoEffectTextLogo textLogo;
@@ -689,6 +788,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Handles the cb image logo click event.
+        /// </summary>
     private void cbImageLogo_Click(object sender, RoutedEventArgs e)
     {
         IVideoEffectImageLogo textLogo;
@@ -709,6 +811,9 @@ public sealed partial class MainWindow : Window
         }
     }
 
+        /// <summary>
+        /// Set icon.
+        /// </summary>
     private void SetIcon()
     {
         try
@@ -727,6 +832,9 @@ public sealed partial class MainWindow : Window
 
     private bool _isInitiated = false;
 
+        /// <summary>
+        /// Window activated.
+        /// </summary>
     private void Window_Activated(object sender, WindowActivatedEventArgs args)
     {
         if (_isInitiated)

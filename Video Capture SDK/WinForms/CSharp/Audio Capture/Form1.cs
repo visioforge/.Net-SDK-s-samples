@@ -1,7 +1,7 @@
-// ReSharper disable InconsistentNaming
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable UseObjectOrCollectionInitializer
-// ReSharper disable StyleCop.SA1601
+
+
+
+
 
 using VisioForge.Core.UI;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
@@ -22,39 +22,89 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
     using VisioForge.Core.Types.Output;
     using VisioForge.Core.Types.VideoCapture;
 
+    /// <summary>
+    /// UDP streaming demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Audio effect identifier for amplify effect.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_AMPLIFY = "amplify";
 
+        /// <summary>
+        /// Audio effect identifier for equalizer effect.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_EQ = "eq";
 
+        /// <summary>
+        /// Audio effect identifier for 3D sound effect.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_SOUND_3D = "sound3d";
 
+        /// <summary>
+        /// Audio effect identifier for true bass effect.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_TRUE_BASS = "true_bass";
 
+        /// <summary>
+        /// Settings dialog for PCM audio output format.
+        /// </summary>
         private PCMSettingsDialog pcmSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MP3 audio output format.
+        /// </summary>
         private MP3SettingsDialog mp3SettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for FLAC audio output format.
+        /// </summary>
         private FLACSettingsDialog flacSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for Ogg Vorbis audio output format.
+        /// </summary>
         private OggVorbisSettingsDialog oggVorbisSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for Speex audio output format.
+        /// </summary>
         private SpeexSettingsDialog speexSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for M4A audio output format.
+        /// </summary>
         private M4ASettingsDialog m4aSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for WMV/WMA output format.
+        /// </summary>
         private WMVSettingsDialog wmvSettingsDialog;
 
+        /// <summary>
+        /// The main video capture core engine instance.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Timer for updating recording time display.
+        /// </summary>
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync();
@@ -136,6 +186,11 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp3");
         }
 
+        /// <summary>
+        /// Handles the cb audio input device selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1)
@@ -186,102 +241,202 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             }
         }
 
+        /// <summary>
+        /// Handles the bt audio input device settings click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btAudioInputDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
         }
 
+        /// <summary>
+        /// Handles the cb use best audio input format checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbAudioInputFormat.Enabled = !cbUseBestAudioInputFormat.Checked;
         }
 
+        /// <summary>
+        /// Handles the cb audio output device selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbAudioOutputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text;
         }
 
+        /// <summary>
+        /// Handles the tb audio volume scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudioVolume_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Volume_Set(tbAudioVolume.Value);
         }
 
+        /// <summary>
+        /// Handles the tb audio balance scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudioBalance_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set(tbAudioBalance.Value);
         }
 
+        /// <summary>
+        /// Handles the cb aud amplify enabled checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud amplify amp scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudAmplifyAmp_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, false);
         }
 
+        /// <summary>
+        /// Handles the cb aud equalizer enabled checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbAudEqualizerEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 0 scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudEq0_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 0, (sbyte)tbAudEq0.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 1 scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudEq1_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 1, (sbyte)tbAudEq1.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 2 scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudEq2_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 2, (sbyte)tbAudEq2.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 3 scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudEq3_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 3, (sbyte)tbAudEq3.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 4 scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudEq4_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 4, (sbyte)tbAudEq4.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 5 scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudEq5_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 5, (sbyte)tbAudEq5.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 6 scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudEq6_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 6, (sbyte)tbAudEq6.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 7 scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudEq7_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 7, (sbyte)tbAudEq7.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 8 scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudEq8_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 8, (sbyte)tbAudEq8.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 9 scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudEq9_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 9, (sbyte)tbAudEq9.Value);
         }
 
+        /// <summary>
+        /// Handles the cb aud equalizer preset selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbAudEqualizerPreset_SelectedIndexChanged(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Preset_Set(-1, AUDIO_EFFECT_ID_EQ, (EqualizerPreset)cbAudEqualizerPreset.SelectedIndex);
             btAudEqRefresh_Click(sender, e);
         }
 
+        /// <summary>
+        /// Handles the bt aud eq refresh click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btAudEqRefresh_Click(object sender, EventArgs e)
         {
             tbAudEq0.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0);
@@ -296,26 +451,51 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             tbAudEq9.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 9);
         }
 
+        /// <summary>
+        /// Handles the cb aud true bass enabled checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbAudTrueBassEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud true bass scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAudTrueBass_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, false, (ushort)tbAudTrueBass.Value);
         }
 
+        /// <summary>
+        /// Handles the cb aud sound 3 d enabled checked changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbAudSound3DEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud 3 d sound scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbAud3DSound_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, (ushort)tbAud3DSound.Value);
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -324,6 +504,10 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             }
         }
 
+        /// <summary>
+        /// Set wma output.
+        /// </summary>
+        /// <param name="wmaOutput">The wma output.</param>
         private void SetWMAOutput(ref WMAOutput wmaOutput)
         {
             if (wmvSettingsDialog == null)
@@ -335,6 +519,10 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             wmvSettingsDialog.SaveSettings(ref wmaOutput);
         }
 
+        /// <summary>
+        /// Set acm output.
+        /// </summary>
+        /// <param name="acmOutput">The acm output.</param>
         private void SetACMOutput(ref ACMOutput acmOutput)
         {
             if (pcmSettingsDialog == null)
@@ -345,6 +533,10 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             pcmSettingsDialog.SaveSettings(ref acmOutput);
         }
 
+        /// <summary>
+        /// Set mp 3 output.
+        /// </summary>
+        /// <param name="mp3Output">The mp3 output.</param>
         private void SetMP3Output(ref MP3Output mp3Output)
         {
             if (mp3SettingsDialog == null)
@@ -355,6 +547,10 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
+        /// <summary>
+        /// Set flac output.
+        /// </summary>
+        /// <param name="flacOutput">The flac output.</param>
         private void SetFLACOutput(ref FLACOutput flacOutput)
         {
             if (flacSettingsDialog == null)
@@ -365,6 +561,10 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
 
+        /// <summary>
+        /// Set speex output.
+        /// </summary>
+        /// <param name="speexOutput">The speex output.</param>
         private void SetSpeexOutput(ref SpeexOutput speexOutput)
         {
             if (speexSettingsDialog == null)
@@ -375,6 +575,10 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             speexSettingsDialog.SaveSettings(ref speexOutput);
         }
 
+        /// <summary>
+        /// Sets the M4A output.
+        /// </summary>
+        /// <param name="m4aOutput">The M4A output.</param>
         public void SetM4AOutput(ref M4AOutput m4aOutput)
         {
             if (m4aSettingsDialog == null)
@@ -385,6 +589,10 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             m4aSettingsDialog.SaveSettings(ref m4aOutput);
         }
 
+        /// <summary>
+        /// Set ogg output.
+        /// </summary>
+        /// <param name="oggVorbisOutput">The ogg vorbis output.</param>
         private void SetOGGOutput(ref OGGVorbisOutput oggVorbisOutput)
         {
             if (oggVorbisSettingsDialog == null)
@@ -395,6 +603,11 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             oggVorbisSettingsDialog.SaveSettings(ref oggVorbisOutput);
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -503,6 +716,11 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -510,12 +728,21 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="LinkLabelLinkClickedEventArgs"/> instance containing the event data.</param>
         private void llVideoTutorials_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
+        /// <param name="txt">The text.</param>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -524,11 +751,21 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the cb output format selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -571,6 +808,11 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             }
         }
 
+        /// <summary>
+        /// Handles the bt output configure click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btOutputConfigure_Click(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -656,6 +898,11 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             }
         }
 
+        /// <summary>
+        /// Handles the video capture 1 on stop event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnStop(object sender, EventArgs e)
         {
             BeginInvoke((Action)(() =>
@@ -664,6 +911,9 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             }));
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             if (IsHandleCreated)
@@ -685,4 +935,3 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
     }
 }
 
-// ReSharper restore InconsistentNaming

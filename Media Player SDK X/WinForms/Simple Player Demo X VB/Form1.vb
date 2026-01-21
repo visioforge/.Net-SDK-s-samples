@@ -43,12 +43,18 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Player on error.
+        ''' </summary>
     Private Sub Player_OnError(sender As Object, e As ErrorsEventArgs)
         Invoke(Sub()
                    edLog.Text = edLog.Text + e.Message + Environment.NewLine
                End Sub)
     End Sub
 
+        ''' <summary>
+        ''' Player on stop.
+        ''' </summary>
     Private Sub Player_OnStop(sender As Object, e As StopEventArgs)
         If _isClosing Then
             Return
@@ -59,6 +65,9 @@ Public Class Form1
                End Sub)
     End Sub
 
+        ''' <summary>
+        ''' Create engine.
+        ''' </summary>
     Private Sub CreateEngine()
         _player = New MediaPlayerCoreX(VideoView1)
         AddHandler _player.OnError, AddressOf Player_OnError
@@ -100,6 +109,9 @@ Public Class Form1
         End If
     End Function
 
+        ''' <summary>
+        ''' Bt select file click.
+        ''' </summary>
     Private Sub btSelectFile_Click(sender As Object, e As EventArgs) Handles btSelectFile.Click
         Dim ofd As OpenFileDialog = New OpenFileDialog()
         ofd.Filter = "Video Files|*.mp4;*.ts;*.mts;*.mov;*.avi;*.mkv;*.wmv;*.webm|Audio Files|*.mp3;*.aac;*.wav;*.wma|All Files|*.*"
@@ -152,6 +164,9 @@ Public Class Form1
         Await _player.PauseAsync()
     End Sub
 
+        ''' <summary>
+        ''' Tb volume 1 scroll.
+        ''' </summary>
     Private Sub tbVolume1_Scroll(sender As Object, e As EventArgs) Handles tbVolume1.Scroll
         If _player IsNot Nothing Then
             _player.Audio_OutputDevice_Volume = tbVolume1.Value / 100.0

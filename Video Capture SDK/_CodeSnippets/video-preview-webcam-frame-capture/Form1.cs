@@ -17,20 +17,32 @@ using VisioForge.Core.Types.VideoCapture;
 
 namespace video_preview_webcam_frame_capture
 {
+    /// <summary>
+    /// Video preview webcam frame capture demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private VideoCaptureCore videoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             videoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             videoCapture1.Video_CaptureDevice = new VideoCaptureSource(videoCapture1.Video_CaptureDevices()[0].Name);
@@ -40,11 +52,17 @@ namespace video_preview_webcam_frame_capture
             await videoCapture1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await videoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt save frame click event.
+        /// </summary>
         private async void btSaveFrame_Click(object sender, EventArgs e)
         {
             await videoCapture1.Frame_SaveAsync(

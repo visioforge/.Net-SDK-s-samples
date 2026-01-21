@@ -23,6 +23,9 @@ namespace video_view_rotate_wpf
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             VideoCapture1 = new VideoCaptureCoreX(VideoView1 as IVideoView);
@@ -30,6 +33,9 @@ namespace video_view_rotate_wpf
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -41,6 +47,9 @@ namespace video_view_rotate_wpf
             }
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -59,6 +68,9 @@ namespace video_view_rotate_wpf
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
         }
 
+        /// <summary>
+        /// Device enumerator on video source added.
+        /// </summary>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -72,6 +84,9 @@ namespace video_view_rotate_wpf
             });
         }
 
+        /// <summary>
+        /// Cb video input device selection changed.
+        /// </summary>
         private async void cbVideoInputDevice_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             cbVideoInputFormat.Items.Clear();
@@ -95,6 +110,9 @@ namespace video_view_rotate_wpf
             }
         }
 
+        /// <summary>
+        /// Cb video input format selection changed.
+        /// </summary>
         private async void cbVideoInputFormat_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
@@ -138,6 +156,9 @@ namespace video_view_rotate_wpf
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
@@ -186,6 +207,9 @@ namespace video_view_rotate_wpf
             ApplyRotation();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 != null)
@@ -194,6 +218,9 @@ namespace video_view_rotate_wpf
             }
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 != null)
@@ -202,6 +229,9 @@ namespace video_view_rotate_wpf
             }
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 != null)
@@ -210,11 +240,17 @@ namespace video_view_rotate_wpf
             }
         }
 
+        /// <summary>
+        /// Cb rotation enabled checked.
+        /// </summary>
         private void cbRotationEnabled_Checked(object sender, RoutedEventArgs e)
         {
             ApplyRotation();
         }
 
+        /// <summary>
+        /// Slider rotation value changed.
+        /// </summary>
         private void sliderRotation_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (tbRotationValue != null)
@@ -225,6 +261,9 @@ namespace video_view_rotate_wpf
             ApplyRotation();
         }
 
+        /// <summary>
+        /// Apply rotation.
+        /// </summary>
         private void ApplyRotation()
         {
             if (cbRotationEnabled?.IsChecked == true)
@@ -238,6 +277,9 @@ namespace video_view_rotate_wpf
             }
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             Dispatcher.Invoke(() =>
@@ -246,11 +288,17 @@ namespace video_view_rotate_wpf
             });
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEngine();

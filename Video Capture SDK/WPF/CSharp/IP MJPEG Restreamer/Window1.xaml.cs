@@ -1,7 +1,7 @@
-﻿// ReSharper disable InconsistentNaming
+﻿
 
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable StyleCop.SA1601
+
+
 
 namespace IP_MJPEG_Restreamer
 {
@@ -25,14 +25,29 @@ namespace IP_MJPEG_Restreamer
 
     public partial class Window1 : IDisposable
     {     
+        /// <summary>
+        /// Recording timer.
+        /// </summary>
         private Timer tmRecording = new Timer(1000);
 
+        /// <summary>
+        /// The ONVIF control.
+        /// </summary>
         private ONVIFClientX onvifControl;
 
+        /// <summary>
+        /// The video capture.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// The disposed value.
+        /// </summary>
         private bool disposedValue;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Window1"/> class.
+        /// </summary>
         public Window1()
         {
             InitializeComponent();
@@ -40,6 +55,9 @@ namespace IP_MJPEG_Restreamer
             Application.EnableVisualStyles();
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
@@ -48,6 +66,9 @@ namespace IP_MJPEG_Restreamer
             VideoCapture1.OnNetworkSourceDisconnect += VideoCapture1_OnNetworkSourceDisconnect;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -60,12 +81,22 @@ namespace IP_MJPEG_Restreamer
             }
         }
 
+        /// <summary>
+        /// Lb vlc redist mouse left button down.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void lbVLCRedist_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx86UI);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Form 1 load.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void Form1_Load(object sender, RoutedEventArgs e)
         {
             CreateEngine();
@@ -79,6 +110,11 @@ namespace IP_MJPEG_Restreamer
             cbIPCameraType.SelectedIndex = 2;
 }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (onvifControl != null)
@@ -196,6 +232,11 @@ namespace IP_MJPEG_Restreamer
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -203,22 +244,41 @@ namespace IP_MJPEG_Restreamer
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void llVideoTutorials_LinkClicked(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
+        /// <param name="txt">Text.</param>
         private void Log(string txt)
         {
             Dispatcher.Invoke(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt onvif connect click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btONVIFConnect_Click(object sender, RoutedEventArgs e)
         {
             if (btONVIFConnect.Content.ToString() == "Connect")
@@ -297,6 +357,9 @@ namespace IP_MJPEG_Restreamer
             }
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = VideoCapture1.Duration_Time();
@@ -312,18 +375,33 @@ namespace IP_MJPEG_Restreamer
             }));
         }
 
+        /// <summary>
+        /// Lb vlc redist 64 mouse left button down.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void lbVLCRedist64_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistVLCx64UI);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Lb ndi vendor mouse left button down.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void lbNDIVendor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the bt list ndi sources click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btListNDISources_Click(object sender, RoutedEventArgs e)
         {
             cbIPURL.Items.Clear();
@@ -340,6 +418,11 @@ namespace IP_MJPEG_Restreamer
             }
         }
 
+        /// <summary>
+        /// Handles the bt list onvif sources click event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private async void btListONVIFSources_Click(object sender, RoutedEventArgs e)
         {
             cbIPURL.Items.Clear();
@@ -356,6 +439,11 @@ namespace IP_MJPEG_Restreamer
             }
         }
 
+        /// <summary>
+        /// Handles the video capture 1 on network source disconnect event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void VideoCapture1_OnNetworkSourceDisconnect(object sender, EventArgs e)
         {
             Dispatcher.Invoke((Action)(
@@ -367,11 +455,20 @@ namespace IP_MJPEG_Restreamer
                                    }));
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -395,12 +492,18 @@ namespace IP_MJPEG_Restreamer
             }
         }
 
+        /// <summary>
+        /// Finalizes an instance of the <see cref="Window1"/> class.
+        /// </summary>
         ~Window1()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: false);
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -410,4 +513,3 @@ namespace IP_MJPEG_Restreamer
     }
 }
 
-// ReSharper restore InconsistentNaming

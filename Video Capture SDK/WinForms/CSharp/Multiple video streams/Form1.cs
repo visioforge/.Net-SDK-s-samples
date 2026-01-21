@@ -1,8 +1,8 @@
-﻿// ReSharper disable InconsistentNaming
+﻿
 
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable StyleCop.SA1601
-// ReSharper disable LocalizableElement
+
+
+
 
 using System.Globalization;
 
@@ -20,6 +20,9 @@ namespace multiple_video_streams
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.VideoCapture;
 
+    /// <summary>
+    /// Multiple video streams demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private VideoCaptureCore videoCaptureHelper;
@@ -28,11 +31,17 @@ namespace multiple_video_streams
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -41,6 +50,9 @@ namespace multiple_video_streams
             VideoCapture1.OnVideoFrameBitmap += VideoCapture1_OnVideoFrameBitmap;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -53,6 +65,11 @@ namespace multiple_video_streams
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
             // 1st device
@@ -97,6 +114,11 @@ namespace multiple_video_streams
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -105,6 +127,11 @@ namespace multiple_video_streams
             videoScreen2.Image = null;
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngineAsync();
@@ -134,6 +161,11 @@ namespace multiple_video_streams
             };
         }
 
+        /// <summary>
+        /// Handles the cb camera 1 selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbCamera1_SelectedIndexChanged(object sender, EventArgs e)
         {
             var deviceItem = videoCaptureHelper.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera1.Text);
@@ -156,6 +188,11 @@ namespace multiple_video_streams
             }
         }
 
+        /// <summary>
+        /// Handles the cb camera 2 selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbCamera2_SelectedIndexChanged(object sender, EventArgs e)
         {
             var deviceItem = videoCaptureHelper.Video_CaptureDevices().FirstOrDefault(device => device.Name == cbCamera2.Text);
@@ -178,6 +215,11 @@ namespace multiple_video_streams
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on video frame bitmap.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="VideoFrameBitmapEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnVideoFrameBitmap(object sender, VideoFrameBitmapEventArgs e)
         {
             if (e.SourceStream == VideoStreamType.PIP1)
@@ -186,6 +228,10 @@ namespace multiple_video_streams
             }
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
+        /// <param name="txt">The text.</param>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -194,11 +240,19 @@ namespace multiple_video_streams
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             if (IsHandleCreated)
@@ -218,6 +272,11 @@ namespace multiple_video_streams
             }
         }
 
+        /// <summary>
+        /// Handles the cb video format 1 selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbVideoFormat1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoFormat1.Text))
@@ -252,6 +311,11 @@ namespace multiple_video_streams
             }
         }
 
+        /// <summary>
+        /// Handles the cb video format 2 selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbVideoFormat2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoFormat2.Text))
@@ -286,6 +350,11 @@ namespace multiple_video_streams
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
@@ -293,4 +362,3 @@ namespace multiple_video_streams
     }
 }
 
-// ReSharper restore InconsistentNaming

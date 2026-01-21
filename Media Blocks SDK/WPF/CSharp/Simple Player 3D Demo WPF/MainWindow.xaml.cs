@@ -51,6 +51,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -81,6 +84,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             Initialize3DScene();
         }
 
+        /// <summary>
+        /// Initialize 3 d scene.
+        /// </summary>
         private void Initialize3DScene()
         {
             // Create light sources
@@ -105,6 +111,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             _animationTimer.Tick += AnimationTimer_Tick;
         }
 
+        /// <summary>
+        /// Handles the animation timer tick event.
+        /// </summary>
         private void AnimationTimer_Tick(object sender, EventArgs e)
         {
             // Rotate the cube
@@ -118,6 +127,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             _cubeModel.Transform = rotateTransform;
         }
 
+        /// <summary>
+        /// Create rainbow cube.
+        /// </summary>
         private ModelVisual3D CreateRainbowCube()
         {
             var model = new ModelVisual3D();
@@ -147,6 +159,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             return model;
         }
 
+        /// <summary>
+        /// Create cube face.
+        /// </summary>
         private MeshGeometry3D CreateCubeFace(Vector3D normal)
         {
             var mesh = new MeshGeometry3D();
@@ -208,6 +223,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             return mesh;
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -216,6 +234,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             }));
         }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
         private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -225,6 +246,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             }));
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -244,6 +268,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timerFlag = true;
@@ -266,6 +293,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             _timerFlag = false;
         }
 
+        /// <summary>
+        /// Stop engine async.
+        /// </summary>
         private async Task StopEngineAsync()
         {
             if (_pipeline != null)
@@ -278,6 +308,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (_pipeline != null)
@@ -290,6 +323,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
@@ -299,6 +335,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Tb timeline value changed.
+        /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!_timerFlag && _pipeline != null)
@@ -307,6 +346,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             edLog.Clear();
@@ -324,6 +366,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             _animationTimer.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -338,18 +383,27 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.PauseAsync();
             _animationTimer.Stop();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.ResumeAsync();
             _animationTimer.Start();
         }
 
+        /// <summary>
+        /// Tb volume value changed.
+        /// </summary>
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_audioRenderer != null)
@@ -358,6 +412,9 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer?.Stop();

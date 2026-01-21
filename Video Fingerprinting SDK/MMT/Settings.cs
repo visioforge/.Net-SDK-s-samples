@@ -16,6 +16,9 @@ namespace VisioForge_MMT.Classes
     public static class Settings
     {
         #region Serialize
+        /// <summary>
+        /// Save.
+        /// </summary>
         public static bool Save(Type staticClass, string filename)
         {
             try
@@ -50,6 +53,9 @@ namespace VisioForge_MMT.Classes
             }
         }
 
+        /// <summary>
+        /// Load.
+        /// </summary>
         public static bool Load(Type staticClass, string filename)
         {
             try
@@ -88,6 +94,9 @@ namespace VisioForge_MMT.Classes
             }
         }
 
+        /// <summary>
+        /// Convert json element to type.
+        /// </summary>
         private static object ConvertJsonElementToType(JsonElement element, Type targetType)
         {
             if (targetType == typeof(string))
@@ -130,7 +139,14 @@ namespace VisioForge_MMT.Classes
         }
         #endregion
 
+        /// <summary>
+        /// Gets or sets the settings folder.
+        /// </summary>
         public static string SettingsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "VisioForge Video Duplicates Finder");
+
+        /// <summary>
+        /// Gets or sets the last path.
+        /// </summary>
         public static string LastPath;
     }
 }

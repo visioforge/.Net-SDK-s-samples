@@ -31,45 +31,106 @@ using static Android.Renderscripts.ScriptGroup;
 
 namespace Simple_Video_Capture
 {
+    /// <summary>
+    /// The main activity.
+    /// </summary>
     [Activity(Label = "@string/app_name", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
     public class MainActivity : Activity
     {
+        /// <summary>
+        /// The video view.
+        /// </summary>
         private VisioForge.Core.UI.Android.VideoViewTX videoView;
 
+        /// <summary>
+        /// The start record button.
+        /// </summary>
         private Button btStartRecord;
 
+        /// <summary>
+        /// The stop record button.
+        /// </summary>
         private Button btStopRecord;
 
+        /// <summary>
+        /// The switch camera button.
+        /// </summary>
         private Button btSwitchCam;
 
+        /// <summary>
+        /// The position timer.
+        /// </summary>
         private readonly System.Timers.Timer tmPosition = new System.Timers.Timer(500);
 
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The video source.
+        /// </summary>
         private SystemVideoSourceBlock _videoSource;
 
+        /// <summary>
+        /// The audio source.
+        /// </summary>
         private SystemAudioSourceBlock _audioSource;
 
+        /// <summary>
+        /// The video encoder.
+        /// </summary>
         private MediaBlock _videoEncoder;
 
+        /// <summary>
+        /// The audio encoder.
+        /// </summary>
         private MediaBlock _audioEncoder;
 
+        /// <summary>
+        /// The MP4 sink.
+        /// </summary>
         private MP4SinkBlock _sink;
 
+        /// <summary>
+        /// The video tee.
+        /// </summary>
         private TeeBlock _videoTee;
 
+        /// <summary>
+        /// The audio tee.
+        /// </summary>
         private TeeBlock _audioTee;
 
+        /// <summary>
+        /// The current camera index.
+        /// </summary>
         private int _cameraIndex = 1;
 
+        /// <summary>
+        /// The available cameras.
+        /// </summary>
         private VideoCaptureDeviceInfo[] _cameras;
 
+        /// <summary>
+        /// Indicates whether the preview is active.
+        /// </summary>
         private bool _isPreview;
 
+        /// <summary>
+        /// Asynchronously creates the media blocks engine pipeline and initializes blocks.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task CreateEngineAsync()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -142,6 +203,10 @@ namespace Simple_Video_Capture
             _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
         }
 
+        /// <summary>
+        /// Asynchronously destroys the media blocks engine pipeline and releases resources.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -153,11 +218,23 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the OnError event of the pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void _pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Log.Error("MainActivity", e.Message);
         }
 
+        /// <summary>
+        /// Called when the activity is starting.
+        /// </summary>
+        /// <param name="savedInstanceState">If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in <see cref="M:Android.App.Activity.OnSaveInstanceState(Android.OS.Bundle)"/>.  <format type="text/html"><a href="https://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)" target="_blank">[C# document]</a></format></param>
         protected override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -189,6 +266,9 @@ namespace Simple_Video_Capture
             CheckPermissionsAndStartPreview();
         }
 
+        /// <summary>
+        /// Called when the activity is being destroyed.
+        /// </summary>
         protected override void OnDestroy()
         {
             VisioForgeX.DestroySDK();
@@ -196,6 +276,9 @@ namespace Simple_Video_Capture
             base.OnDestroy();
         }
 
+        /// <summary>
+        /// Checks the permissions and starts the preview if granted.
+        /// </summary>
         private void CheckPermissionsAndStartPreview()
         {
             if (CheckSelfPermission(Manifest.Permission.Camera) != Android.Content.PM.Permission.Granted)
@@ -232,6 +315,14 @@ namespace Simple_Video_Capture
             });
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSwitchCam control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Handles the bt switch cam click event.
+        /// </summary>
         private async void btSwitchCam_Click(object sender, EventArgs e)
         {
             await StopAsync();
@@ -248,6 +339,10 @@ namespace Simple_Video_Capture
             await StartPreviewAsync();
         }
 
+        /// <summary>
+        /// Asynchronously stops the pipeline and destroys the engine.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task StopAsync()
         {
             if (_pipeline == null)
@@ -264,6 +359,14 @@ namespace Simple_Video_Capture
             videoView.Invalidate();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStopRecord control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Handles the bt stop record click event.
+        /// </summary>
         private async void btStopRecord_Click(object sender, EventArgs e)
         {
             await StopAsync();
@@ -273,6 +376,10 @@ namespace Simple_Video_Capture
             await StartPreviewAsync();
         }
 
+        /// <summary>
+        /// Asynchronously starts the preview.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task StartPreviewAsync()
         {
             await StopAsync();
@@ -284,6 +391,14 @@ namespace Simple_Video_Capture
             tmPosition.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStartRecord control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Handles the bt start record click event.
+        /// </summary>
         private async void btStartRecord_Click(object sender, EventArgs e)
         {
             // stop preview
@@ -316,6 +431,15 @@ namespace Simple_Video_Capture
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Called when the activity has detected the user's query for the result from a permission request.
+        /// </summary>
+        /// <param name="requestCode">The request code passed in <see cref="M:Android.App.Activity.RequestPermissions(System.String[],System.Int32)" />.</param>
+        /// <param name="permissions">The requested permissions. Never null.</param>
+        /// <param name="grantResults">The grant results for the corresponding permissions which is either <see cref="F:Android.Content.PM.Permission.Granted" /> or <see cref="F:Android.Content.PM.Permission.Denied" />. Never null.</param>
+        /// <summary>
+        /// On request permissions result.
+        /// </summary>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

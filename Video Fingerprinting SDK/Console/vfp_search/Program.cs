@@ -11,6 +11,9 @@ namespace vfp_search
 
     class Program
     {
+        /// <summary>
+        /// Main.
+        /// </summary>
         static void Main(string[] args)
         {
             Console.WriteLine(new CommandLineOptions().GetUsage());

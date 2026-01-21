@@ -6,6 +6,9 @@
 
     public static class FileScanner
     {
+        /// <summary>
+        /// Search video in folder.
+        /// </summary>
         public static IEnumerable<string> SearchVideoInFolder(string folder)
         {
             var fileList = new DirectoryInfo(folder).GetFiles("*", SearchOption.AllDirectories);

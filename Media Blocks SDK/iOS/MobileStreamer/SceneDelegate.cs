@@ -6,6 +6,9 @@ public class SceneDelegate : UIResponder, IUIWindowSceneDelegate
     [Export("window")] public UIWindow? Window { get; set; }
 
     [Export("scene:willConnectToSession:options:")]
+        /// <summary>
+        /// Will connect.
+        /// </summary>
     public void WillConnect(UIScene scene, UISceneSession session, UISceneConnectionOptions connectionOptions)
     {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -14,6 +17,9 @@ public class SceneDelegate : UIResponder, IUIWindowSceneDelegate
     }
 
     [Export("sceneDidDisconnect:")]
+        /// <summary>
+        /// Did disconnect.
+        /// </summary>
     public void DidDisconnect(UIScene scene)
     {
         // Called as the scene is being released by the system.
@@ -23,6 +29,9 @@ public class SceneDelegate : UIResponder, IUIWindowSceneDelegate
     }
 
     [Export("sceneDidBecomeActive:")]
+        /// <summary>
+        /// Did become active.
+        /// </summary>
     public void DidBecomeActive(UIScene scene)
     {
         // Called when the scene has moved from an inactive state to an active state.
@@ -30,6 +39,9 @@ public class SceneDelegate : UIResponder, IUIWindowSceneDelegate
     }
 
     [Export("sceneWillResignActive:")]
+        /// <summary>
+        /// Will resign active.
+        /// </summary>
     public void WillResignActive(UIScene scene)
     {
         // Called when the scene will move from an active state to an inactive state.
@@ -37,6 +49,9 @@ public class SceneDelegate : UIResponder, IUIWindowSceneDelegate
     }
 
     [Export("sceneWillEnterForeground:")]
+        /// <summary>
+        /// Will enter foreground.
+        /// </summary>
     public void WillEnterForeground(UIScene scene)
     {
         // Called as the scene transitions from the background to the foreground.
@@ -44,6 +59,9 @@ public class SceneDelegate : UIResponder, IUIWindowSceneDelegate
     }
 
     [Export("sceneDidEnterBackground:")]
+        /// <summary>
+        /// Did enter background.
+        /// </summary>
     public void DidEnterBackground(UIScene scene)
     {
         // Called as the scene transitions from the foreground to the background.

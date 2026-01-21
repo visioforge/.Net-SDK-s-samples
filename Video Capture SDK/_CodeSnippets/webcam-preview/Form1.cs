@@ -11,15 +11,24 @@ namespace webcam_preview
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.VideoCapture;
 
+    /// <summary>
+    /// Webcam preview demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
@@ -27,6 +36,9 @@ namespace webcam_preview
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -38,6 +50,9 @@ namespace webcam_preview
             }
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
@@ -66,6 +81,9 @@ namespace webcam_preview
             }
         }
 
+        /// <summary>
+        /// Handles the cb video input device selected index changed event.
+        /// </summary>
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             // fill video formats and frame rates
@@ -87,6 +105,9 @@ namespace webcam_preview
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             // set debug settings
@@ -114,6 +135,9 @@ namespace webcam_preview
             await VideoCapture1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the cb audio input device selected index changed event.
+        /// </summary>
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbAudioInputFormat.Items.Clear();
@@ -147,6 +171,9 @@ namespace webcam_preview
             }
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -155,26 +182,41 @@ namespace webcam_preview
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the cb video input format selected index changed event.
+        /// </summary>
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
@@ -209,6 +251,9 @@ namespace webcam_preview
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();

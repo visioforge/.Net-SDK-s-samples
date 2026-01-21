@@ -23,7 +23,8 @@ using VisioForge.Core.Types.X.AudioRenderers;
 namespace Decklink_Demo_X
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for the Decklink Demo X WPF demo's MainWindow.
+    /// Demonstrates how to discover and capture from Blackmagic Decklink devices using the X-engine.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -49,6 +50,9 @@ namespace Decklink_Demo_X
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Creates a new instance of the video capture engine and configures error event handling.
+        /// </summary>
         private void CreateEngine()
         {
             VideoCapture1 = new VideoCaptureCoreX(VideoView1 as IVideoView);
@@ -56,6 +60,10 @@ namespace Decklink_Demo_X
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Asynchronously disposes of the video capture engine and cleans up events.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (VideoCapture1 != null)
@@ -67,6 +75,13 @@ namespace Decklink_Demo_X
             }
         }
 
+        /// <summary>
+        /// Displays a save file dialog and returns the selected filename.
+        /// </summary>
+        /// <param name="defaultExt">The default extension.</param>
+        /// <param name="filter">The file filter string.</param>
+        /// <param name="filename">The output filename.</param>
+        /// <returns>True if a file was selected; otherwise, false.</returns>
         private static bool SaveFileDialog(string defaultExt, string filter, out string filename)
         {
             filename = string.Empty;
@@ -86,6 +101,12 @@ namespace Decklink_Demo_X
             return false;
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the window.
+        /// Initializes the SDK and populates the UI with Decklink devices, modes, and audio outputs.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -147,6 +168,12 @@ namespace Decklink_Demo_X
             edOutput.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// Opens a save file dialog to specify the recording output path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             string filename;
@@ -156,16 +183,31 @@ namespace Decklink_Demo_X
             }
         }
 
+        /// <summary>
+        /// Logs a message to the UI log window.
+        /// </summary>
+        /// <param name="txt">The message to log.</param>
         private void Log(string txt)
         {
             Dispatcher.Invoke(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
         }
 
+        /// <summary>
+        /// Handles the OnError event of the VideoCapture1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbVolume control.
+        /// Updates the output audio volume.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoCapture1 == null)
@@ -176,12 +218,24 @@ namespace Decklink_Demo_X
             VideoCapture1.Audio_OutputDevice_Volume = tbVolume.Value / 100.0f;
         }
 
+        /// <summary>
+        /// Handles the MouseLeftButtonDown event of the lbViewVideoTutorials control.
+        /// Opens the video tutorials URL in the default browser.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void lbViewVideoTutorials_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the engine for Decklink capture with selected video/audio settings and starts the stream.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -273,6 +327,12 @@ namespace Decklink_Demo_X
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the engine.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -280,6 +340,12 @@ namespace Decklink_Demo_X
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btOutputConfigure control.
+        /// Displays the output format configuration dialog.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btOutputConfigure_Click(object sender, RoutedEventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -321,6 +387,12 @@ namespace Decklink_Demo_X
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbOutputFormat control.
+        /// Updates the output file extension based on the selected format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (edOutput == null)
@@ -343,6 +415,9 @@ namespace Decklink_Demo_X
             }
         }
 
+        /// <summary>
+        /// Asynchronously updates the recording duration displayed in the UI.
+        /// </summary>
         private async void UpdateRecordingTime()
         {
             var ts = await VideoCapture1.DurationAsync();
@@ -358,6 +433,12 @@ namespace Decklink_Demo_X
             }));
         }
 
+        /// <summary>
+        /// Handles the Closing event of the window.
+        /// Ensures the engine is stopped and SDK resources are released.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
@@ -365,11 +446,23 @@ namespace Decklink_Demo_X
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStartCapture button.
+        /// Starts recording using the secondary capture output.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStartCapture(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.StartCaptureAsync(0, edOutput.Text);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStopCapture button.
+        /// Stops the secondary capture output.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStopCapture(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.StopCaptureAsync(0);
@@ -377,6 +470,10 @@ namespace Decklink_Demo_X
                 
         #region Dispose
 
+        /// <summary>
+        /// Disposes of the managed and unmanaged resources used by the window.
+        /// </summary>
+        /// <param name="disposing">True if called from the <see cref="Dispose()"/> method; false if called from the finalizer.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -397,6 +494,9 @@ namespace Decklink_Demo_X
             Dispose(disposing: false);
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

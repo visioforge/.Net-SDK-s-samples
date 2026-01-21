@@ -5,13 +5,22 @@ using VisioForge.Core.Types;
 
 namespace Simple_Player_MVVM.Views
 {
+    /// <summary>
+    /// Represents the main window.
+    /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Get video view.
+        /// </summary>
         public IVideoView GetVideoView()
         {
             return (Content as MainView).GetVideoView();
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();

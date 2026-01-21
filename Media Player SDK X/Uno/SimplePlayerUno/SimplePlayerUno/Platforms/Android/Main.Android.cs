@@ -27,12 +27,18 @@ public class Application : Microsoft.UI.Xaml.NativeApplication
         App.InitializeLogging();
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Application"/> class.
+    /// </summary>
     public Application(IntPtr javaReference, JniHandleOwnership transfer)
         : base(() => new App(), javaReference, transfer)
     {
         ConfigureUniversalImageLoader();
     }
 
+        /// <summary>
+        /// Configure universal image loader.
+        /// </summary>
     private static void ConfigureUniversalImageLoader()
     {
         // Create global configuration and initialize ImageLoader with this config

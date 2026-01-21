@@ -55,6 +55,9 @@ namespace MobileStreamer
             VisioForgeX.InitSDK();
         }
 
+        /// <summary>
+        /// Main page unloaded.
+        /// </summary>
         private void MainPage_Unloaded(object? sender, EventArgs e)
         {
             _pipeline?.Dispose();
@@ -63,6 +66,9 @@ namespace MobileStreamer
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -75,6 +81,9 @@ namespace MobileStreamer
             _pipeline.OnError += Core_OnError;
         }
 
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
         private async void MainPage_Loaded(object? sender, EventArgs e)
         {
 #if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
@@ -103,6 +112,9 @@ namespace MobileStreamer
             Window.Destroying += Window_Destroying;
         }
 
+        /// <summary>
+        /// Request camera permission async.
+        /// </summary>
         private async Task RequestCameraPermissionAsync()
         {
             var result = await Permissions.RequestAsync<Permissions.Camera>();
@@ -121,6 +133,9 @@ namespace MobileStreamer
             }
         }
 
+        /// <summary>
+        /// Request mic permission async.
+        /// </summary>
         private async Task RequestMicPermissionAsync()
         {
             var result = await Permissions.RequestAsync<Permissions.Microphone>();
@@ -140,6 +155,9 @@ namespace MobileStreamer
         }
 
 #if __IOS__ && !__MACCATALYST__
+        /// <summary>
+        /// Request photo permission.
+        /// </summary>
         private void RequestPhotoPermission()
         {
             Photos.PHPhotoLibrary.RequestAuthorization(status =>
@@ -152,6 +170,9 @@ namespace MobileStreamer
         }
 #endif
 
+        /// <summary>
+        /// Window destroying.
+        /// </summary>
         private async void Window_Destroying(object? sender, EventArgs e)
         {
             if (_pipeline != null)
@@ -166,11 +187,17 @@ namespace MobileStreamer
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Core on error.
+        /// </summary>
         private void Core_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Stop all async.
+        /// </summary>
         private async Task StopAllAsync()
         {
             if (_pipeline == null)
@@ -207,11 +234,17 @@ namespace MobileStreamer
             _videoRenderer = null;
         }
 
+        /// <summary>
+        /// Handles the bt stop clicked event.
+        /// </summary>
         private async void btStop_Clicked(object? sender, EventArgs e)
         {
             await StopAllAsync();
         }
 
+        /// <summary>
+        /// Handles the bt camera clicked event.
+        /// </summary>
         private void btCamera_Clicked(object? sender, System.EventArgs e)
         {
             if (_cameras == null || _cameras.Length == 0)
@@ -229,6 +262,9 @@ namespace MobileStreamer
             btCamera.Text = _cameras[_cameraSelectedIndex].DisplayName;
         }
 
+        /// <summary>
+        /// Handles the bt mic clicked event.
+        /// </summary>
         private void btMic_Clicked(object? sender, System.EventArgs e)
         {
             if (_mics == null || _mics.Length == 0)
@@ -246,6 +282,9 @@ namespace MobileStreamer
             btMic.Text = _mics[_micSelectedIndex].DisplayName;
         }
 
+        /// <summary>
+        /// Configure preview async.
+        /// </summary>
         private async Task ConfigurePreviewAsync()
         {
             // video source
@@ -301,6 +340,9 @@ namespace MobileStreamer
             _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
         }
 
+        /// <summary>
+        /// Configure capture.
+        /// </summary>
         private void ConfigureCapture()
         {
             // add tee and connect
@@ -323,6 +365,9 @@ namespace MobileStreamer
             _pipeline.Connect(_audioEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio));
         }
 
+        /// <summary>
+        /// Handles the bt start you tube clicked event.
+        /// </summary>
         private async void btStartYouTube_Clicked(object? sender, EventArgs e)
         {
             await StopAllAsync();
@@ -338,6 +383,9 @@ namespace MobileStreamer
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start facebook clicked event.
+        /// </summary>
         private async void btStartFacebook_Clicked(object? sender, EventArgs e)
         {
             await StopAllAsync();
@@ -353,6 +401,9 @@ namespace MobileStreamer
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start clicked event.
+        /// </summary>
         private async void btStartRTMP_Clicked(object? sender, EventArgs e)
         {
             await StopAllAsync();

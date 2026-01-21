@@ -18,6 +18,9 @@ namespace Simple_Player_MVVM.iOS
     public partial class AppDelegate : AvaloniaAppDelegate<App>
 #pragma warning restore CA1711 // Identifiers should not have incorrect suffix
     {
+        /// <summary>
+        /// Customize app builder.
+        /// </summary>
         protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
         {
             Locator.CurrentMutable.RegisterConstant(new IOSDocumentPickerService(), typeof(IDocumentPickerService));

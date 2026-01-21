@@ -15,47 +15,107 @@ namespace Video_Join_Demo
     using VisioForge.Core.UI;
     using VisioForge.Core.VideoEdit;
 
+    /// <summary>
+    /// Video join demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The MP4 hardware encoders settings dialog.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
+        /// <summary>
+        /// The MP4 settings dialog.
+        /// </summary>
         private MP4SettingsDialog mp4SettingsDialog;
 
+        /// <summary>
+        /// The AVI settings dialog.
+        /// </summary>
         private AVISettingsDialog aviSettingsDialog;
 
+        /// <summary>
+        /// The WMV settings dialog.
+        /// </summary>
         private WMVSettingsDialog wmvSettingsDialog;
 
+        /// <summary>
+        /// The DV settings dialog.
+        /// </summary>
         private DVSettingsDialog dvSettingsDialog;
 
+        /// <summary>
+        /// The PCM (audio) settings dialog.
+        /// </summary>
         private PCMSettingsDialog pcmSettingsDialog;
 
+        /// <summary>
+        /// The MP3 settings dialog.
+        /// </summary>
         private MP3SettingsDialog mp3SettingsDialog;
 
+        /// <summary>
+        /// The WebM settings dialog.
+        /// </summary>
         private WebMSettingsDialog webmSettingsDialog;
 
+        /// <summary>
+        /// The FFMPEG settings dialog.
+        /// </summary>
         private FFMPEGSettingsDialog ffmpegSettingsDialog;
 
+        /// <summary>
+        /// The FFMPEG EXE settings dialog.
+        /// </summary>
         private FFMPEGEXESettingsDialog ffmpegEXESettingsDialog;
 
+        /// <summary>
+        /// The FLAC settings dialog.
+        /// </summary>
         private FLACSettingsDialog flacSettingsDialog;
 
+        /// <summary>
+        /// The custom format settings dialog.
+        /// </summary>
         private CustomFormatSettingsDialog customFormatSettingsDialog;
 
+        /// <summary>
+        /// The Ogg Vorbis settings dialog.
+        /// </summary>
         private OggVorbisSettingsDialog oggVorbisSettingsDialog;
 
+        /// <summary>
+        /// The Speex settings dialog.
+        /// </summary>
         private SpeexSettingsDialog speexSettingsDialog;
 
+        /// <summary>
+        /// The M4A settings dialog.
+        /// </summary>
         private M4ASettingsDialog m4aSettingsDialog;
 
+        /// <summary>
+        /// The GIF settings dialog.
+        /// </summary>
         private GIFSettingsDialog gifSettingsDialog;
 
+        /// <summary>
+        /// The video editing engine instance.
+        /// </summary>
         private VideoEditCore VideoEdit1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Creates the video editing engine and subscribes to events.
+        /// </summary>
         private void CreateEngine()
         {
             VideoEdit1 = new VideoEditCore(VideoView1 as IVideoView);
@@ -65,6 +125,9 @@ namespace Video_Join_Demo
             VideoEdit1.OnProgress += VideoEdit1_OnProgress;
         }
 
+        /// <summary>
+        /// Destroys the video editing engine and unsubscribes from events.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoEdit1 != null)
@@ -78,12 +141,23 @@ namespace Video_Join_Demo
             }
         }
 
+        /// <summary>
+        /// Gets the file extension from the specified filename.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <returns>The file extension including the dot.</returns>
         private static string GetFileExt(string filename)
         {
             int k = filename.LastIndexOf('.');
             return filename.Substring(k, filename.Length - k);
         }
 
+        /// <summary>
+        /// Handles the Click event of the BtAddInputFile control.
+        /// Adds a video, image, or audio file to the input list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void BtAddInputFile_Click(object sender, EventArgs e)
         {
             if (OpenDialog1.ShowDialog() == DialogResult.OK)
@@ -131,6 +205,12 @@ namespace Video_Join_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the BtSelectOutput control.
+        /// Opens a file dialog to select the output file path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void BtSelectOutput_Click(object sender, EventArgs e)
         {
             if (SaveDialog1.ShowDialog() == DialogResult.OK)
@@ -139,12 +219,24 @@ namespace Video_Join_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the BtClearList control.
+        /// Clears the input files list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void BtClearList_Click(object sender, EventArgs e)
         {
             lbFiles.Items.Clear();
             VideoEdit1.Input_Clear_List();
         }
 
+        /// <summary>
+        /// Handles the Click event of the BtConfigure control.
+        /// Opens the settings dialog for the selected output format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void BtConfigure_Click(object sender, EventArgs e)
         {
             switch (cbOutputVideoFormat.SelectedIndex)
@@ -345,6 +437,12 @@ namespace Video_Join_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the cbOutputVideoFormat control.
+        /// Updates the output file extension based on the selected format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void CbOutputVideoFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbOutputVideoFormat.SelectedIndex)
@@ -448,6 +546,12 @@ namespace Video_Join_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the BtStart control.
+        /// Configures the output format and starts the video joining process.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void BtStart_Click(object sender, EventArgs e)
         {
             VideoEdit1.Debug_Mode = cbDebugMode.Checked;
@@ -608,6 +712,12 @@ namespace Video_Join_Demo
             await VideoEdit1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the BtStop control.
+        /// Stops the video joining process and clears the input list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void BtStop_Click(object sender, EventArgs e)
         {
             await VideoEdit1.StopAsync();
@@ -617,6 +727,12 @@ namespace Video_Join_Demo
             ProgressBar1.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the OnError event of the VideoEdit engine.
+        /// Logs the error message.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -625,11 +741,23 @@ namespace Video_Join_Demo
                                    }));
         }
 
+        /// <summary>
+        /// Handles the OnProgress event of the VideoEdit engine.
+        /// Updates the progress bar.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ProgressEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
         {
             Invoke((Action)(() => { ProgressBar1.Value = e.Progress; }));
         }
 
+        /// <summary>
+        /// Handles the OnStop event of the VideoEdit engine.
+        /// Resets the UI and displays a completion message.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
@@ -654,6 +782,10 @@ namespace Video_Join_Demo
             VideoEdit1.Video_Transition_Clear();
         }
 
+        /// <summary>
+        /// Configures the MP3 output settings.
+        /// </summary>
+        /// <param name="mp3Output">The MP3 output settings.</param>
         private void SetMP3Output(ref MP3Output mp3Output)
         {
             if (mp3SettingsDialog == null)
@@ -664,6 +796,10 @@ namespace Video_Join_Demo
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
+        /// <summary>
+        /// Configures the MP4 output settings.
+        /// </summary>
+        /// <param name="mp4Output">The MP4 output settings.</param>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -674,6 +810,10 @@ namespace Video_Join_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Configures the FFMPEG EXE output settings.
+        /// </summary>
+        /// <param name="ffmpegOutput">The FFMPEG EXE output settings.</param>
         private void SetFFMPEGEXEOutput(ref FFMPEGEXEOutput ffmpegOutput)
         {
             if (ffmpegEXESettingsDialog == null)
@@ -684,6 +824,10 @@ namespace Video_Join_Demo
             ffmpegEXESettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
+        /// <summary>
+        /// Configures the WMV output settings.
+        /// </summary>
+        /// <param name="wmvOutput">The WMV output settings.</param>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -695,6 +839,10 @@ namespace Video_Join_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Configures the WMA output settings.
+        /// </summary>
+        /// <param name="wmaOutput">The WMA output settings.</param>
         private void SetWMAOutput(ref WMAOutput wmaOutput)
         {
             if (wmvSettingsDialog == null)
@@ -706,6 +854,10 @@ namespace Video_Join_Demo
             wmvSettingsDialog.SaveSettings(ref wmaOutput);
         }
 
+        /// <summary>
+        /// Configures the ACM (audio) output settings.
+        /// </summary>
+        /// <param name="acmOutput">The ACM output settings.</param>
         private void SetACMOutput(ref ACMOutput acmOutput)
         {
             if (pcmSettingsDialog == null)
@@ -716,6 +868,10 @@ namespace Video_Join_Demo
             pcmSettingsDialog.SaveSettings(ref acmOutput);
         }
 
+        /// <summary>
+        /// Configures the WebM output settings.
+        /// </summary>
+        /// <param name="webmOutput">The WebM output settings.</param>
         private void SetWebMOutput(ref WebMOutput webmOutput)
         {
             if (webmSettingsDialog == null)
@@ -726,6 +882,10 @@ namespace Video_Join_Demo
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
+        /// <summary>
+        /// Configures the FFMPEG output settings.
+        /// </summary>
+        /// <param name="ffmpegOutput">The FFMPEG output settings.</param>
         private void SetFFMPEGOutput(ref FFMPEGOutput ffmpegOutput)
         {
             if (ffmpegSettingsDialog == null)
@@ -736,6 +896,10 @@ namespace Video_Join_Demo
             ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
+        /// <summary>
+        /// Configures the FLAC output settings.
+        /// </summary>
+        /// <param name="flacOutput">The FLAC output settings.</param>
         private void SetFLACOutput(ref FLACOutput flacOutput)
         {
             if (flacSettingsDialog == null)
@@ -746,6 +910,10 @@ namespace Video_Join_Demo
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
 
+        /// <summary>
+        /// Configures the MP4 hardware encoders output settings.
+        /// </summary>
+        /// <param name="mp4Output">The MP4 HW output settings.</param>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -756,6 +924,10 @@ namespace Video_Join_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Configures the Speex output settings.
+        /// </summary>
+        /// <param name="speexOutput">The Speex output settings.</param>
         private void SetSpeexOutput(ref SpeexOutput speexOutput)
         {
             if (speexSettingsDialog == null)
@@ -766,6 +938,10 @@ namespace Video_Join_Demo
             speexSettingsDialog.SaveSettings(ref speexOutput);
         }
 
+        /// <summary>
+        /// Configures the M4A output settings.
+        /// </summary>
+        /// <param name="m4aOutput">The M4A output settings.</param>
         private void SetM4AOutput(ref M4AOutput m4aOutput)
         {
             if (m4aSettingsDialog == null)
@@ -776,6 +952,10 @@ namespace Video_Join_Demo
             m4aSettingsDialog.SaveSettings(ref m4aOutput);
         }
 
+        /// <summary>
+        /// Configures the Animated GIF output settings.
+        /// </summary>
+        /// <param name="gifOutput">The GIF output settings.</param>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
@@ -786,6 +966,10 @@ namespace Video_Join_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Configures the custom output settings.
+        /// </summary>
+        /// <param name="customOutput">The custom output settings.</param>
         private void SetCustomOutput(ref CustomOutput customOutput)
         {
             if (customFormatSettingsDialog == null)
@@ -796,6 +980,10 @@ namespace Video_Join_Demo
             customFormatSettingsDialog.SaveSettings(ref customOutput);
         }
 
+        /// <summary>
+        /// Configures the DV output settings.
+        /// </summary>
+        /// <param name="dvOutput">The DV output settings.</param>
         private void SetDVOutput(ref DVOutput dvOutput)
         {
             if (dvSettingsDialog == null)
@@ -806,6 +994,10 @@ namespace Video_Join_Demo
             dvSettingsDialog.SaveSettings(ref dvOutput);
         }
 
+        /// <summary>
+        /// Configures the AVI output settings.
+        /// </summary>
+        /// <param name="aviOutput">The AVI output settings.</param>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -823,6 +1015,10 @@ namespace Video_Join_Demo
             }
         }
 
+        /// <summary>
+        /// Configures the MKV output settings.
+        /// </summary>
+        /// <param name="mkvOutput">The MKV output settings.</param>
         private void SetMKVOutput(ref MKVv1Output mkvOutput)
         {
             if (aviSettingsDialog == null)
@@ -840,6 +1036,10 @@ namespace Video_Join_Demo
             }
         }
 
+        /// <summary>
+        /// Configures the Ogg Vorbis output settings.
+        /// </summary>
+        /// <param name="oggVorbisOutput">The Ogg Vorbis output settings.</param>
         private void SetOGGOutput(ref OGGVorbisOutput oggVorbisOutput)
         {
             if (oggVorbisSettingsDialog == null)
@@ -850,6 +1050,12 @@ namespace Video_Join_Demo
             oggVorbisSettingsDialog.SaveSettings(ref oggVorbisOutput);
         }
 
+        /// <summary>
+        /// Handles the Load event of the Form1 control.
+        /// Initializes the engine and sets default values.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
@@ -864,11 +1070,23 @@ namespace Video_Join_Demo
             cbOutputVideoFormat.SelectedIndex = 15;
         }
 
+        /// <summary>
+        /// Handles the FormClosing event of the Form1 control.
+        /// Destroys the video editing engine.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Handles the LinkClicked event of the linkLabelDecoders control.
+        /// Opens the help link for LAV filters.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="LinkLabelLinkClickedEventArgs"/> instance containing the event data.</param>
         private void linkLabelDecoders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64);

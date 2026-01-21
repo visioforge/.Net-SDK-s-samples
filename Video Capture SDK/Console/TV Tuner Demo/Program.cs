@@ -21,6 +21,10 @@ namespace TV_Tuner_Demo
 
     static class Program
     {
+        /// <summary>
+        /// Main.
+        /// </summary>
+        /// <param name="args">Arguments.</param>
         static void Main(string[] args)
         {
             var videoCapture = new VideoCaptureCore();
@@ -183,11 +187,21 @@ namespace TV_Tuner_Demo
             videoCapture.Dispose();
         }
 
+        /// <summary>
+        /// Video capture on error.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private static void VideoCapture_OnError(object sender, ErrorsEventArgs e)
         {
             Console.WriteLine(@"Error: " + e.Message);
         }
 
+        /// <summary>
+        /// Video capture on tv tuner tune channels.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private static void videoCapture_OnTVTunerTuneChannels(object sender, TVTunerTuneChannelsEventArgs e)
         {
             if (e.SignalPresent)

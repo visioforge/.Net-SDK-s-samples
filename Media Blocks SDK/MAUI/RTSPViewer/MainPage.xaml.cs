@@ -13,12 +13,24 @@ namespace RTSPViewer
 {
     public partial class MainPage : ContentPage
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The RTSP source.
+        /// </summary>
         private RTSPSourceBlock _rtspSource;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private MediaBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
         public MainPage()
@@ -29,6 +41,9 @@ namespace RTSPViewer
             VisioForgeX.InitSDK();
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -36,6 +51,9 @@ namespace RTSPViewer
             _pipeline.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -47,6 +65,9 @@ namespace RTSPViewer
             }
         }
 
+        /// <summary>
+        /// Open async.
+        /// </summary>
         private async Task OpenAsync()
         {
             CreateEngine();
@@ -127,6 +148,9 @@ namespace RTSPViewer
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
         private async Task StopAsync()
         {
             if (_pipeline != null)
@@ -137,6 +161,9 @@ namespace RTSPViewer
             await DestroyEngineAsync();
         }
 
+        /// <summary>
+        /// Handles the bt play clicked event.
+        /// </summary>
         private async void btPlay_Clicked(object? sender, EventArgs e)
         {
             try
@@ -164,6 +191,9 @@ namespace RTSPViewer
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object? sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);

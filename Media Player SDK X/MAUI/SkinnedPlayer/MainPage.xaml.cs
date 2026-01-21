@@ -29,12 +29,29 @@ namespace SkinnedPlayer_MAUI
 {
     public partial class MainPage : ContentPage
     {
+        /// <summary>
+        /// The skin files.
+        /// </summary>
         private readonly string[] SKIN_FILES = { "Default.vfskin", "Violet.vfskin" };
+
+        /// <summary>
+        /// The skin names.
+        /// </summary>
         private readonly string[] SKIN_NAMES = { "Default", "Violet" };
+
+        /// <summary>
+        /// The current skin index.
+        /// </summary>
         private int _currentSkinIndex = 0;
 
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCoreX _player;
 
+        /// <summary>
+        /// The default filename.
+        /// </summary>
 #if ANDROID
         private const string DEFAULT_FILENAME = "http://test.visioforge.com/video.mp4";
 #else
@@ -93,6 +110,9 @@ namespace SkinnedPlayer_MAUI
             }
         }
         
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainPage"/> class.
+        /// </summary>
         public MainPage()
         {
             LoadAllSkins();
@@ -105,6 +125,9 @@ namespace SkinnedPlayer_MAUI
             //playerControls.SkinName = "Default";
         }
 
+        /// <summary>
+        /// Window destroying.
+        /// </summary>
         private void Window_Destroying(object? sender, EventArgs e)
         {
             if (_player != null)
@@ -119,6 +142,9 @@ namespace SkinnedPlayer_MAUI
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
         private async void MainPage_Loaded(object? sender, EventArgs e)
         {
             IVideoView vv = videoView.GetVideoView();
@@ -142,6 +168,9 @@ namespace SkinnedPlayer_MAUI
             Window.Destroying += Window_Destroying;
         }
 
+        /// <summary>
+        /// On stop.
+        /// </summary>
         private void OnStop(object? sender, EventArgs e)
         {
             if (_player != null)
@@ -151,6 +180,9 @@ namespace SkinnedPlayer_MAUI
             }
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void _player_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);

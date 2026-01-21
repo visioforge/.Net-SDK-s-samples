@@ -1,6 +1,6 @@
-// ReSharper disable NotAccessedVariable
-// ReSharper disable InconsistentNaming
-// ReSharper disable InlineOutVariableDeclaration
+
+
+
 
 namespace Media_Player_Demo
 {
@@ -29,40 +29,88 @@ namespace Media_Player_Demo
     using VisioForge.Core.UI;
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
 
+    /// <summary>
+    /// Media Player SDK Main Demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The amplify audio effect ID.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_AMPLIFY = "amplify";
 
+        /// <summary>
+        /// The equalizer audio effect ID.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_EQ = "eq";
 
+        /// <summary>
+        /// The dynamic amplify audio effect ID.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_DYN_AMPLIFY = "dyn_amplify";
 
+        /// <summary>
+        /// The sound 3D audio effect ID.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_SOUND_3D = "sound3d";
 
+        /// <summary>
+        /// The true bass audio effect ID.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_TRUE_BASS = "true_bass";
-
+        
+        /// <summary>
+        /// The pitch shift audio effect ID.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_PITCH_SHIFT = "pitch_shift";
 
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCore MediaPlayer1;
-
+        
+        /// <summary>
+        /// The audio channel mapper items.
+        /// </summary>
         private readonly List<AudioChannelMapperItem> audioChannelMapperItems = new List<AudioChannelMapperItem>();
 
         // Zoom
+        /// <summary>
+        /// The zoom value.
+        /// </summary>
         private double zoom = 1.0;
-
+        
+        /// <summary>
+        /// The zoom shift X.
+        /// </summary>
         private int zoomShiftX;
-
+        
+        /// <summary>
+        /// The zoom shift Y.
+        /// </summary>
         private int zoomShiftY;
-
+        
+        /// <summary>
+        /// The media info reader.
+        /// </summary>
         private readonly MediaInfoReader MediaInfo = new MediaInfoReader();
 
+        /// <summary>
+        /// The multiscreen windows list.
+        /// </summary>
         private readonly List<Form> multiscreenWindows = new List<Form>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the tb lightness scroll event.
+        /// </summary>
         private void tbLightness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectLightness lightness;
@@ -82,6 +130,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb saturation scroll event.
+        /// </summary>
         private void tbSaturation_Scroll(object sender, EventArgs e)
         {
             IVideoEffectSaturation saturation;
@@ -101,6 +152,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb darkness scroll event.
+        /// </summary>
         private void tbDarkness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectDarkness darkness;
@@ -120,6 +174,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb greyscale checked changed event.
+        /// </summary>
         private void cbGreyscale_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -139,6 +196,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb invert checked changed event.
+        /// </summary>
         private void cbInvert_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectInvert invert;
@@ -158,12 +218,18 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt osd clear layers click event.
+        /// </summary>
         private void btOSDClearLayers_Click(object sender, EventArgs e)
         {
             MediaPlayer1.OSD_Layers_Clear();
             lbOSDLayers.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the bt osd layer add click event.
+        /// </summary>
         private void btOSDLayerAdd_Click(object sender, EventArgs e)
         {
             MediaPlayer1.OSD_Layers_Create(
@@ -175,6 +241,9 @@ namespace Media_Player_Demo
             lbOSDLayers.Items.Add("layer " + Convert.ToString(lbOSDLayers.Items.Count + 1), CheckState.Checked);
         }
 
+        /// <summary>
+        /// Handles the bt osd select image click event.
+        /// </summary>
         private void btOSDSelectImage_Click(object sender, EventArgs e)
         {
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
@@ -183,6 +252,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the pn osd color key click event.
+        /// </summary>
         private void pnOSDColorKey_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
@@ -191,6 +263,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt osd image draw click event.
+        /// </summary>
         private void btOSDImageDraw_Click(object sender, EventArgs e)
         {
             if (!File.Exists(edOSDImageFilename.Text))
@@ -228,6 +303,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt osd select font click event.
+        /// </summary>
         private void btOSDSelectFont_Click(object sender, EventArgs e)
         {
             if (fontDialog1.ShowDialog() == DialogResult.OK)
@@ -237,6 +315,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt osd text draw click event.
+        /// </summary>
         private void btOSDTextDraw_Click(object sender, EventArgs e)
         {
             if (lbOSDLayers.SelectedIndex != -1)
@@ -258,6 +339,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt osd set transp click event.
+        /// </summary>
         private void btOSDSetTransp_Click(object sender, EventArgs e)
         {
             if (lbOSDLayers.SelectedIndex != -1)
@@ -271,11 +355,17 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt osd render layers click event.
+        /// </summary>
         private void btOSDRenderLayers_Click(object sender, EventArgs e)
         {
             MediaPlayer1.OSD_Layers_Render();
         }
 
+        /// <summary>
+        /// Handles the tb balance 1 scroll event.
+        /// </summary>
         private void tbBalance1_Scroll(object sender, EventArgs e)
         {
             if (cbAudioStream1.Checked || MediaPlayer1.Audio_Streams_AllInOne())
@@ -284,6 +374,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb balance 2 scroll event.
+        /// </summary>
         private void tbBalance2_Scroll(object sender, EventArgs e)
         {
             if (cbAudioStream2.Checked)
@@ -292,6 +385,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb balance 3 scroll event.
+        /// </summary>
         private void tbBalance3_Scroll(object sender, EventArgs e)
         {
             if (cbAudioStream3.Checked)
@@ -300,6 +396,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb balance 4 scroll event.
+        /// </summary>
         private void tbBalance4_Scroll(object sender, EventArgs e)
         {
             if (cbAudioStream4.Checked)
@@ -308,11 +407,17 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb speed scroll event.
+        /// </summary>
         private async void tbSpeed_Scroll(object sender, EventArgs e)
         {
             await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0);
         }
 
+        /// <summary>
+        /// Handles the tb volume 1 scroll event.
+        /// </summary>
         private void tbVolume1_Scroll(object sender, EventArgs e)
         {
             if (cbAudioStream1.Checked || MediaPlayer1.Audio_Streams_AllInOne())
@@ -321,6 +426,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb timeline scroll event.
+        /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (Convert.ToInt32(timer1.Tag) == 0)
@@ -329,6 +437,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb volume 2 scroll event.
+        /// </summary>
         private void tbVolume2_Scroll(object sender, EventArgs e)
         {
             if (cbAudioStream2.Checked)
@@ -337,6 +448,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb volume 3 scroll event.
+        /// </summary>
         private void tbVolume3_Scroll(object sender, EventArgs e)
         {
             if (cbAudioStream3.Checked)
@@ -345,6 +459,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb volume 4 scroll event.
+        /// </summary>
         private void tbVolume4_Scroll(object sender, EventArgs e)
         {
             if (cbAudioStream4.Checked)
@@ -353,6 +470,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt read info click event.
+        /// </summary>
         private void btReadInfo_Click(object sender, EventArgs e)
         {
             mmInfo.Clear();
@@ -386,7 +506,7 @@ namespace Media_Player_Demo
                     FilePlaybackError ErrorCode;
                     string ErrorText;
 
-                    // ReSharper disable once AccessToStaticMemberViaDerivedType
+                    
                     if (MediaInfoReader.IsFilePlayable(edFilenameOrURL.Text, out ErrorCode, out ErrorText))
                     {
                         mmInfo.Text += "This file is playable" + Environment.NewLine;
@@ -563,6 +683,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the timer 1 tick event.
+        /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Tag = 1;
@@ -579,6 +702,9 @@ namespace Media_Player_Demo
             timer1.Tag = 0;
         }
 
+        /// <summary>
+        /// Fill video renderer adjust ranges async.
+        /// </summary>
         private async Task FillVideoRendererAdjustRangesAsync()
         {
             // updating adjust settings
@@ -683,6 +809,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Configure chroma key.
+        /// </summary>
         private void ConfigureChromaKey()
         {
             if (MediaPlayer1.ChromaKey != null)
@@ -712,6 +841,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Show on screen.
+        /// </summary>
         private static void ShowOnScreen(Form window, int screenNumber)
         {
             if (screenNumber >= 0 && screenNumber < Screen.AllScreens.Length)
@@ -730,6 +862,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Set source mode.
+        /// </summary>
         private void SetSourceMode()
         {
             switch (cbSourceMode.SelectedIndex)
@@ -793,6 +928,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Add video effects.
+        /// </summary>
         private void AddVideoEffects()
         {
             // Video effects
@@ -989,6 +1127,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
@@ -1280,6 +1421,9 @@ namespace Media_Player_Demo
             timer1.Enabled = true;
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -1288,42 +1432,63 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt zoom in click event.
+        /// </summary>
         private async void btZoomIn_Click(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.Zoom_Ratio = MediaPlayer1.Video_Renderer.Zoom_Ratio + 5;
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the bt zoom out click event.
+        /// </summary>
         private async void btZoomOut_Click(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.Zoom_Ratio = MediaPlayer1.Video_Renderer.Zoom_Ratio - 5;
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the bt zoom shift down click event.
+        /// </summary>
         private async void btZoomShiftDown_Click(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.Zoom_ShiftY = MediaPlayer1.Video_Renderer.Zoom_ShiftY - 2;
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the bt zoom shift left click event.
+        /// </summary>
         private async void btZoomShiftLeft_Click(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.Zoom_ShiftX = MediaPlayer1.Video_Renderer.Zoom_ShiftX - 2;
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the bt zoom shift right click event.
+        /// </summary>
         private async void btZoomShiftRight_Click(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.Zoom_ShiftX = MediaPlayer1.Video_Renderer.Zoom_ShiftX + 2;
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the bt zoom shift up click event.
+        /// </summary>
         private async void btZoomShiftUp_Click(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.Zoom_ShiftY = MediaPlayer1.Video_Renderer.Zoom_ShiftY + 2;
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the bt zoom reset click event.
+        /// </summary>
         private async void btZoomReset_Click(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.Zoom_Ratio = 0;
@@ -1332,6 +1497,9 @@ namespace Media_Player_Demo
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the cb audio stream 1 checked changed event.
+        /// </summary>
         private async void cbAudioStream1_CheckedChanged(object sender, EventArgs e)
         {
             await MediaPlayer1.Audio_Streams_SetAsync(0, cbAudioStream1.Checked);
@@ -1348,6 +1516,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb audio stream 2 checked changed event.
+        /// </summary>
         private async void cbAudioStream2_CheckedChanged(object sender, EventArgs e)
         {
             await MediaPlayer1.Audio_Streams_SetAsync(1, cbAudioStream2.Checked);
@@ -1364,6 +1535,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb audio stream 3 checked changed event.
+        /// </summary>
         private async void cbAudioStream3_CheckedChanged(object sender, EventArgs e)
         {
             await MediaPlayer1.Audio_Streams_SetAsync(2, cbAudioStream3.Checked);
@@ -1380,6 +1554,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb audio stream 4 checked changed event.
+        /// </summary>
         private async void cbAudioStream4_CheckedChanged(object sender, EventArgs e)
         {
             await MediaPlayer1.Audio_Streams_SetAsync(3, cbAudioStream4.Checked);
@@ -1396,18 +1573,27 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb screen flip horizontal checked changed event.
+        /// </summary>
         private async void cbScreenFlipHorizontal_CheckedChanged(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.Flip_Horizontal = cbScreenFlipHorizontal.Checked;
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the cb screen flip vertical checked changed event.
+        /// </summary>
         private async void cbScreenFlipVertical_CheckedChanged(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.Flip_Vertical = cbScreenFlipVertical.Checked;
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the cb stretch checked changed event.
+        /// </summary>
         private async void cbStretch_CheckedChanged(object sender, EventArgs e)
         {
             if (cbStretch.Checked)
@@ -1422,6 +1608,9 @@ namespace Media_Player_Demo
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await MediaPlayer1.StopAsync();
@@ -1451,16 +1640,25 @@ namespace Media_Player_Demo
             multiscreenWindows.Clear();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await MediaPlayer1.ResumeAsync().ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await MediaPlayer1.PauseAsync().ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Handles the bt next frame click event.
+        /// </summary>
         private void btNextFrame_Click(object sender, EventArgs e)
         {
             MediaPlayer1.NextFrame();
@@ -1468,6 +1666,9 @@ namespace Media_Player_Demo
 
         private FileStream memoryFileStream;
 
+        /// <summary>
+        /// Load to memory.
+        /// </summary>
         private void LoadToMemory()
         {
             if (memoryFileStream != null)
@@ -1483,6 +1684,9 @@ namespace Media_Player_Demo
             MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(stream, memoryFileStream.Length);
         }
 
+        /// <summary>
+        /// Handles the tb contrast scroll event.
+        /// </summary>
         private void tbContrast_Scroll(object sender, EventArgs e)
         {
             IVideoEffectContrast contrast;
@@ -1502,6 +1706,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb aspect ratio use custom checked changed event.
+        /// </summary>
         private async void cbAspectRatioUseCustom_CheckedChanged(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.Aspect_Ratio_Override = cbAspectRatioUseCustom.Checked;
@@ -1510,6 +1717,9 @@ namespace Media_Player_Demo
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the bt aud eq refresh click event.
+        /// </summary>
         private void btAudEqRefresh_Click(object sender, EventArgs e)
         {
             tbAudEq0.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0);
@@ -1524,123 +1734,195 @@ namespace Media_Player_Demo
             tbAudEq9.Value = MediaPlayer1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 9);
         }
 
+        /// <summary>
+        /// Handles the cb aud amplify enabled checked changed event.
+        /// </summary>
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked);
             MediaPlayer1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, false);
         }
 
+        /// <summary>
+        /// Handles the cb aud dynamic amplify enabled checked changed event.
+        /// </summary>
         private void cbAudDynamicAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the cb aud equalizer enabled checked changed event.
+        /// </summary>
         private void cbAudEqualizerEnabled_CheckedChanged(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the cb aud equalizer preset selected index changed event.
+        /// </summary>
         private void cbAudEqualizerPreset_SelectedIndexChanged(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Equalizer_Preset_Set(-1, AUDIO_EFFECT_ID_EQ, (EqualizerPreset)cbAudEqualizerPreset.SelectedIndex);
             btAudEqRefresh_Click(null, null);
         }
 
+        /// <summary>
+        /// Handles the cb aud sound 3 d enabled checked changed event.
+        /// </summary>
         private void cbAudSound3DEnabled_CheckedChanged(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the cb aud true bass enabled checked changed event.
+        /// </summary>
         private void cbAudTrueBassEnabled_CheckedChanged(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud 3 d sound scroll event.
+        /// </summary>
         private void tbAud3DSound_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, tbAud3DSound.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud amplify amp scroll event.
+        /// </summary>
         private void tbAudAmplifyAmp_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, false);
         }
 
+        /// <summary>
+        /// Handles the tb aud attack scroll event.
+        /// </summary>
         private void tbAudAttack_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud dyn amp scroll event.
+        /// </summary>
         private void tbAudDynAmp_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 0 scroll event.
+        /// </summary>
         private void tbAudEq0_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 0, tbAudEq0.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 1 scroll event.
+        /// </summary>
         private void tbAudEq1_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 1, tbAudEq1.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 2 scroll event.
+        /// </summary>
         private void tbAudEq2_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 2, tbAudEq2.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 3 scroll event.
+        /// </summary>
         private void tbAudEq3_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 3, tbAudEq3.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 4 scroll event.
+        /// </summary>
         private void tbAudEq4_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 4, tbAudEq4.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 5 scroll event.
+        /// </summary>
         private void tbAudEq5_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 5, tbAudEq5.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 6 scroll event.
+        /// </summary>
         private void tbAudEq6_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 6, tbAudEq6.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 7 scroll event.
+        /// </summary>
         private void tbAudEq7_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 7, tbAudEq7.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 8 scroll event.
+        /// </summary>
         private void tbAudEq8_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 8, tbAudEq8.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 9 scroll event.
+        /// </summary>
         private void tbAudEq9_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 9, tbAudEq9.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud release scroll event.
+        /// </summary>
         private void tbAudRelease_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud true bass scroll event.
+        /// </summary>
         private void tbAudTrueBass_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, false, tbAudTrueBass.Value);
         }
 
+        /// <summary>
+        /// Media player 1 on error.
+        /// </summary>
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
             mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
         }
 
+        /// <summary>
+        /// Media player 1 on stop.
+        /// </summary>
         private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             BeginInvoke(new StopDelegate(StopDelegateMethod), null);
@@ -1648,6 +1930,9 @@ namespace Media_Player_Demo
 
         private delegate void StopDelegate();
 
+        /// <summary>
+        /// Stop delegate method.
+        /// </summary>
         private void StopDelegateMethod()
         {
             tbTimeline.Value = 0;
@@ -1668,30 +1953,45 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb adj brightness scroll event.
+        /// </summary>
         private async void tbAdjBrightness_Scroll(object sender, EventArgs e)
         {
             await MediaPlayer1.Video_Renderer_VideoAdjust_SetValueAsync(VideoRendererAdjustment.Brightness, (float)(tbAdjBrightness.Value / 10.0));
             lbAdjBrightnessCurrent.Text = "Current: " + Convert.ToString(tbAdjBrightness.Value / 10.0, CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Handles the tb adj contrast scroll event.
+        /// </summary>
         private async void tbAdjContrast_Scroll(object sender, EventArgs e)
         {
             await MediaPlayer1.Video_Renderer_VideoAdjust_SetValueAsync(VideoRendererAdjustment.Contrast, (float)(tbAdjContrast.Value / 10.0));
             lbAdjContrastCurrent.Text = "Current: " + Convert.ToString(tbAdjContrast.Value / 10.0, CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Handles the tb adj hue scroll event.
+        /// </summary>
         private async void tbAdjHue_Scroll(object sender, EventArgs e)
         {
             await MediaPlayer1.Video_Renderer_VideoAdjust_SetValueAsync(VideoRendererAdjustment.Hue, (float)(tbAdjHue.Value / 10.0));
             lbAdjHueCurrent.Text = "Current: " + Convert.ToString(tbAdjHue.Value / 10.0, CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Handles the tb adj saturation scroll event.
+        /// </summary>
         private async void tbAdjSaturation_Scroll(object sender, EventArgs e)
         {
             await MediaPlayer1.Video_Renderer_VideoAdjust_SetValueAsync(VideoRendererAdjustment.Saturation, (float)(tbAdjSaturation.Value / 10.0));
             lbAdjSaturationCurrent.Text = "Current: " + Convert.ToString(tbAdjSaturation.Value / 10.0, CultureInfo.InvariantCulture);
         }
 
+        /// <summary>
+        /// Configure motion detection.
+        /// </summary>
         private void ConfigureMotionDetection()
         {
             if (cbMotDetEnabled.Checked)
@@ -1720,11 +2020,17 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt mot det update settings click event.
+        /// </summary>
         private void btMotDetUpdateSettings_Click(object sender, EventArgs e)
         {
             ConfigureMotionDetection();
         }
 
+        /// <summary>
+        /// Handles the bt chroma key select bg image click event.
+        /// </summary>
         private void btChromaKeySelectBGImage_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -1734,6 +2040,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Configure motion detection ex.
+        /// </summary>
         private void ConfigureMotionDetectionEx()
         {
             if (cbMotionDetectionEx.Checked)
@@ -1750,11 +2059,17 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb chroma key contrast low scroll event.
+        /// </summary>
         private void tbChromaKeyContrastLow_Scroll(object sender, EventArgs e)
         {
             ConfigureChromaKey();
         }
 
+        /// <summary>
+        /// Handles the tb chroma key contrast high scroll event.
+        /// </summary>
         private void tbChromaKeyContrastHigh_Scroll(object sender, EventArgs e)
         {
             ConfigureChromaKey();
@@ -1762,6 +2077,9 @@ namespace Media_Player_Demo
 
         private delegate void MotionDelegate(MotionDetectionEventArgs e);
 
+        /// <summary>
+        /// Motion delegate method.
+        /// </summary>
         private void MotionDelegateMethod(MotionDetectionEventArgs e)
         {
             try
@@ -1792,11 +2110,17 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Media player 1 on motion.
+        /// </summary>
         private void MediaPlayer1_OnMotion(object sender, MotionDetectionEventArgs e)
         {
             BeginInvoke(new MotionDelegate(MotionDelegateMethod), e);
         }
 
+        /// <summary>
+        /// Handles the rb checked changed event.
+        /// </summary>
         private void rbVR_CheckedChanged(object sender, EventArgs e)
         {
             cbScreenFlipVertical.Enabled = rbVMR9.Checked || rbDirect2D.Checked;
@@ -1820,6 +2144,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip stretch 1 checked changed event.
+        /// </summary>
         private void cbFlipStretch1_CheckedChanged(object sender, EventArgs e)
         {
             VideoRendererStretchMode stretch;
@@ -1835,6 +2162,9 @@ namespace Media_Player_Demo
             MediaPlayer1.MultiScreen_SetParameters(0, stretch, cbFlipHorizontal1.Checked, cbFlipVertical1.Checked);
         }
 
+        /// <summary>
+        /// Handles the cb flip stretch 2 checked changed event.
+        /// </summary>
         private void cbFlipStretch2_CheckedChanged(object sender, EventArgs e)
         {
             VideoRendererStretchMode stretch;
@@ -1850,6 +2180,9 @@ namespace Media_Player_Demo
             MediaPlayer1.MultiScreen_SetParameters(1, stretch, cbFlipHorizontal2.Checked, cbFlipVertical2.Checked);
         }
 
+        /// <summary>
+        /// Form 1 form closed.
+        /// </summary>
         private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (MediaPlayer1.State() != PlaybackState.Free)
@@ -1860,6 +2193,9 @@ namespace Media_Player_Demo
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Handles the cb zoom checked changed event.
+        /// </summary>
         private void cbZoom_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectZoom zoomEffect;
@@ -1887,6 +2223,9 @@ namespace Media_Player_Demo
             zoomEffect.Enabled = cbZoom.Checked;
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom in click event.
+        /// </summary>
         private void btEffZoomIn_Click(object sender, EventArgs e)
         {
             zoom += 0.1;
@@ -1895,6 +2234,9 @@ namespace Media_Player_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom out click event.
+        /// </summary>
         private void btEffZoomOut_Click(object sender, EventArgs e)
         {
             zoom -= 0.1;
@@ -1903,6 +2245,9 @@ namespace Media_Player_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom up click event.
+        /// </summary>
         private void btEffZoomUp_Click(object sender, EventArgs e)
         {
             zoomShiftY += 20;
@@ -1910,6 +2255,9 @@ namespace Media_Player_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom down click event.
+        /// </summary>
         private void btEffZoomDown_Click(object sender, EventArgs e)
         {
             zoomShiftY -= 20;
@@ -1917,6 +2265,9 @@ namespace Media_Player_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom right click event.
+        /// </summary>
         private void btEffZoomRight_Click(object sender, EventArgs e)
         {
             zoomShiftX += 20;
@@ -1924,6 +2275,9 @@ namespace Media_Player_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom left click event.
+        /// </summary>
         private void btEffZoomLeft_Click(object sender, EventArgs e)
         {
             zoomShiftX -= 20;
@@ -1931,6 +2285,9 @@ namespace Media_Player_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the cb pan checked changed event.
+        /// </summary>
         private void cbPan_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectPan pan;
@@ -1964,6 +2321,9 @@ namespace Media_Player_Demo
             pan.StopHeight = Convert.ToInt32(edPanDestHeight.Text);
         }
 
+        /// <summary>
+        /// Handles the bt barcode reset click event.
+        /// </summary>
         private void btBarcodeReset_Click(object sender, EventArgs e)
         {
             edBarcode.Text = string.Empty;
@@ -1975,6 +2335,9 @@ namespace Media_Player_Demo
 
         private delegate void BarcodeDelegate(BarcodeEventArgs value);
 
+        /// <summary>
+        /// Barcode delegate method.
+        /// </summary>
         private void BarcodeDelegateMethod(BarcodeEventArgs value)
         {
             edBarcode.Text = value.Value;
@@ -1985,6 +2348,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Media player 1 on barcode detected.
+        /// </summary>
         private void MediaPlayer1_OnBarcodeDetected(object sender, BarcodeEventArgs e)
         {
             e.DetectorEnabled = false;
@@ -1994,11 +2360,17 @@ namespace Media_Player_Demo
 
         #endregion
 
+        /// <summary>
+        /// Handles the bt add file to playlist click event.
+        /// </summary>
         private void btAddFileToPlaylist_Click(object sender, EventArgs e)
         {
             lbSourceFiles.Items.Add(edFilenameOrURL.Text);
         }
 
+        /// <summary>
+        /// Handles the cb fade in out checked changed event.
+        /// </summary>
         private void cbFadeInOut_CheckedChanged(object sender, EventArgs e)
         {
             if (rbFadeIn.Checked)
@@ -2051,6 +2423,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Link label 1 link clicked.
+        /// </summary>
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
@@ -2077,6 +2452,9 @@ namespace Media_Player_Demo
 
         private int controlHeight;
 
+        /// <summary>
+        /// Handles the bt full screen click event.
+        /// </summary>
         private async void btFullScreen_Click(object sender, EventArgs e)
         {
             if (!fullScreen)
@@ -2138,6 +2516,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Video view 1 mouse click.
+        /// </summary>
         private void VideoView1_MouseClick(object sender, MouseEventArgs e)
         {
             if (fullScreen)
@@ -2148,11 +2529,17 @@ namespace Media_Player_Demo
 
         #endregion
 
+        /// <summary>
+        /// Handles the tb reverse playback trackbar scroll event.
+        /// </summary>
         private void tbReversePlaybackTrackbar_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.ReversePlayback_GoToFrame(tbReversePlaybackTrackbar.Value);
         }
 
+        /// <summary>
+        /// Handles the bt reverse playback click event.
+        /// </summary>
         private void btReversePlayback_Click(object sender, EventArgs e)
         {
             MediaPlayer1.ReversePlayback_CacheSize = int.Parse(edReversePlaybackCacheSize.Text);
@@ -2169,16 +2556,25 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb aud pitch shift scroll event.
+        /// </summary>
         private void tbAudPitchShift_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_PitchShift(-1, AUDIO_EFFECT_ID_PITCH_SHIFT, tbAudPitchShift.Value / 1000f);
         }
 
+        /// <summary>
+        /// Handles the cb aud pitch shift enabled checked changed event.
+        /// </summary>
         private void cbAudPitchShiftEnabled_CheckedChanged(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_PITCH_SHIFT, cbAudPitchShiftEnabled.Checked);
         }
 
+        /// <summary>
+        /// Media player 1 on audio vu meter pro volume.
+        /// </summary>
         private void MediaPlayer1_OnAudioVUMeterProVolume(object sender, AudioLevelEventArgs e)
         {
             BeginInvoke((Action)(() =>
@@ -2201,11 +2597,17 @@ namespace Media_Player_Demo
                                    }));
         }
 
+        /// <summary>
+        /// Handles the tb vu meter amplification scroll event.
+        /// </summary>
         private void tbVUMeterAmplification_Scroll(object sender, EventArgs e)
         {
             MediaPlayer1.Audio_VUMeter_Pro_Volume = tbVUMeterAmplification.Value;
         }
 
+        /// <summary>
+        /// Handles the tb vu meter boost scroll event.
+        /// </summary>
         private void tbVUMeterBoost_Scroll(object sender, EventArgs e)
         {
             volumeMeter1.Boost = tbVUMeterBoost.Value / 10.0F;
@@ -2215,6 +2617,9 @@ namespace Media_Player_Demo
             waveformPainter2.Boost = tbVUMeterBoost.Value / 10.0F;
         }
 
+        /// <summary>
+        /// Handles the cb live rotation checked changed event.
+        /// </summary>
         private void cbLiveRotation_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectRotate rotate;
@@ -2243,16 +2648,25 @@ namespace Media_Player_Demo
             rotate.Stretch = cbLiveRotationStretch.Checked;
         }
 
+        /// <summary>
+        /// Handles the tb live rotation angle scroll event.
+        /// </summary>
         private void tbLiveRotationAngle_Scroll(object sender, EventArgs e)
         {
             cbLiveRotation_CheckedChanged(sender, e);
         }
 
+        /// <summary>
+        /// Handles the cb live rotation stretch checked changed event.
+        /// </summary>
         private void cbLiveRotationStretch_CheckedChanged(object sender, EventArgs e)
         {
             cbLiveRotation_CheckedChanged(sender, e);
         }
 
+        /// <summary>
+        /// Handles the pn video renderer bg color click event.
+        /// </summary>
         private async void pnVideoRendererBGColor_Click(object sender, EventArgs e)
         {
             colorDialog1.Color = pnVideoRendererBGColor.BackColor;
@@ -2266,12 +2680,18 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb direct 2 d rotate selected index changed event.
+        /// </summary>
         private async void cbDirect2DRotate_SelectedIndexChanged(object sender, EventArgs e)
         {
             MediaPlayer1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text);
             await MediaPlayer1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the cb filters selected index changed event.
+        /// </summary>
         private void cbFilters_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbFilters.SelectedIndex != -1)
@@ -2282,6 +2702,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt filter add click event.
+        /// </summary>
         private void btFilterAdd_Click(object sender, EventArgs e)
         {
             if (cbFilters.SelectedIndex != -1)
@@ -2291,6 +2714,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt filter settings click event.
+        /// </summary>
         private void btFilterSettings_Click(object sender, EventArgs e)
         {
             string name = cbFilters.Text;
@@ -2305,6 +2731,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the lb filters selected index changed event.
+        /// </summary>
         private void lbFilters_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbFilters.SelectedIndex != -1)
@@ -2315,6 +2744,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt filter settings 2 click event.
+        /// </summary>
         private void btFilterSettings2_Click(object sender, EventArgs e)
         {
             if (lbFilters.SelectedIndex != -1)
@@ -2332,6 +2764,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt filter delete click event.
+        /// </summary>
         private void btFilterDelete_Click(object sender, EventArgs e)
         {
             if (lbFilters.SelectedIndex != -1)
@@ -2341,22 +2776,34 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt filter delete all click event.
+        /// </summary>
         private void btFilterDeleteAll_Click(object sender, EventArgs e)
         {
             lbFilters.Items.Clear();
             MediaPlayer1.Video_Filters_Clear();
         }
 
+        /// <summary>
+        /// Handles the cb audio normalize checked changed event.
+        /// </summary>
         private async void cbAudioNormalize_CheckedChanged(object sender, EventArgs e)
         {
             await MediaPlayer1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.Checked);
         }
 
+        /// <summary>
+        /// Handles the cb audio auto gain checked changed event.
+        /// </summary>
         private async void cbAudioAutoGain_CheckedChanged(object sender, EventArgs e)
         {
             await MediaPlayer1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.Checked);
         }
 
+        /// <summary>
+        /// Apply audio input gains async.
+        /// </summary>
         private async Task ApplyAudioInputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
@@ -2372,6 +2819,9 @@ namespace Media_Player_Demo
             await MediaPlayer1.Audio_Enhancer_InputGainsAsync(-1, gains);
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainL_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainL.Text = (tbAudioInputGainL.Value / 10.0f).ToString("F1");
@@ -2379,6 +2829,9 @@ namespace Media_Player_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainC_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainC.Text = (tbAudioInputGainC.Value / 10.0f).ToString("F1");
@@ -2386,6 +2839,9 @@ namespace Media_Player_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainR_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainR.Text = (tbAudioInputGainR.Value / 10.0f).ToString("F1");
@@ -2393,6 +2849,9 @@ namespace Media_Player_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainSL_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainSL.Text = (tbAudioInputGainSL.Value / 10.0f).ToString("F1");
@@ -2400,6 +2859,9 @@ namespace Media_Player_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainSR_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainSR.Text = (tbAudioInputGainSR.Value / 10.0f).ToString("F1");
@@ -2407,6 +2869,9 @@ namespace Media_Player_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainLFE_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainLFE.Text = (tbAudioInputGainLFE.Value / 10.0f).ToString("F1");
@@ -2414,6 +2879,9 @@ namespace Media_Player_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Apply audio output gains async.
+        /// </summary>
         private async Task ApplyAudioOutputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
@@ -2429,6 +2897,9 @@ namespace Media_Player_Demo
             await MediaPlayer1.Audio_Enhancer_OutputGainsAsync(-1, gains);
         }
 
+        /// <summary>
+        /// Handles the tb audio output gain scroll event.
+        /// </summary>
         private async void tbAudioOutputGainL_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainL.Text = (tbAudioOutputGainL.Value / 10.0f).ToString("F1");
@@ -2436,6 +2907,9 @@ namespace Media_Player_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio output gain scroll event.
+        /// </summary>
         private async void tbAudioOutputGainC_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainC.Text = (tbAudioOutputGainC.Value / 10.0f).ToString("F1");
@@ -2443,6 +2917,9 @@ namespace Media_Player_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio output gain scroll event.
+        /// </summary>
         private async void tbAudioOutputGainR_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainR.Text = (tbAudioOutputGainR.Value / 10.0f).ToString("F1");
@@ -2450,6 +2927,9 @@ namespace Media_Player_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio output gain scroll event.
+        /// </summary>
         private async void tbAudioOutputGainSL_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainSL.Text = (tbAudioOutputGainSL.Value / 10.0f).ToString("F1");
@@ -2457,6 +2937,9 @@ namespace Media_Player_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio output gain scroll event.
+        /// </summary>
         private async void tbAudioOutputGainSR_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainSR.Text = (tbAudioOutputGainSR.Value / 10.0f).ToString("F1");
@@ -2464,6 +2947,9 @@ namespace Media_Player_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio output gain scroll event.
+        /// </summary>
         private async void tbAudioOutputGainLFE_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainLFE.Text = (tbAudioOutputGainLFE.Value / 10.0f).ToString("F1");
@@ -2471,6 +2957,9 @@ namespace Media_Player_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio timeshift scroll event.
+        /// </summary>
         private async void tbAudioTimeshift_Scroll(object sender, EventArgs e)
         {
             lbAudioTimeshift.Text = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms";
@@ -2478,6 +2967,9 @@ namespace Media_Player_Demo
             await MediaPlayer1.Audio_Enhancer_TimeshiftAsync(-1, tbAudioTimeshift.Value);
         }
 
+        /// <summary>
+        /// Handles the bt read tags click event.
+        /// </summary>
         private void btReadTags_Click(object sender, EventArgs e)
         {
             var tags = MediaPlayer1.Tags_Read(edFilenameOrURL.Text);
@@ -2493,17 +2985,26 @@ namespace Media_Player_Demo
             edTags.Text = tags?.ToString();
         }
 
+        /// <summary>
+        /// Handles the bt reverse playback prev frame click event.
+        /// </summary>
         private void btReversePlaybackPrevFrame_Click(object sender, EventArgs e)
         {
             MediaPlayer1.ReversePlayback_PreviousFrame();
         }
 
+        /// <summary>
+        /// Handles the bt audio channel mapper clear click event.
+        /// </summary>
         private void btAudioChannelMapperClear_Click(object sender, EventArgs e)
         {
             audioChannelMapperItems.Clear();
             lbAudioChannelMapperRoutes.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the bt audio channel mapper add new route click event.
+        /// </summary>
         private void btAudioChannelMapperAddNewRoute_Click(object sender, EventArgs e)
         {
             var item = new AudioChannelMapperItem
@@ -2521,6 +3022,9 @@ namespace Media_Player_Demo
                 + (tbAudioChannelMapperVolume.Value / 1000.0f).ToString("F2"));
         }
 
+        /// <summary>
+        /// Handles the tb gpu lightness scroll event.
+        /// </summary>
         private void tbGPULightness_Scroll(object sender, EventArgs e)
         {
             IGPUVideoEffectBrightness intf;
@@ -2541,6 +3045,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb gpu saturation scroll event.
+        /// </summary>
         private void tbGPUSaturation_Scroll(object sender, EventArgs e)
         {
             IGPUVideoEffectSaturation intf;
@@ -2561,6 +3068,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb gpu contrast scroll event.
+        /// </summary>
         private void tbGPUContrast_Scroll(object sender, EventArgs e)
         {
             IGPUVideoEffectContrast intf;
@@ -2581,6 +3091,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb gpu darkness scroll event.
+        /// </summary>
         private void tbGPUDarkness_Scroll(object sender, EventArgs e)
         {
             IGPUVideoEffectDarkness intf;
@@ -2601,6 +3114,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu greyscale checked changed event.
+        /// </summary>
         private void cbGPUGreyscale_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectGrayscale intf;
@@ -2621,6 +3137,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu invert checked changed event.
+        /// </summary>
         private void cbGPUInvert_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectInvert intf;
@@ -2641,6 +3160,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu night vision checked changed event.
+        /// </summary>
         private void cbGPUNightVision_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectNightVision intf;
@@ -2661,6 +3183,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu pixelate checked changed event.
+        /// </summary>
         private void cbGPUPixelate_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectPixelate intf;
@@ -2681,6 +3206,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu denoise checked changed event.
+        /// </summary>
         private void cbGPUDenoise_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectDenoise intf;
@@ -2701,6 +3229,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu deinterlace checked changed event.
+        /// </summary>
         private void cbGPUDeinterlace_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectDeinterlaceBlend intf;
@@ -2721,6 +3252,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu old movie checked changed event.
+        /// </summary>
         private void cbGPUOldMovie_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectOldMovie intf;
@@ -2741,16 +3275,25 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt reverse playback next frame click event.
+        /// </summary>
         private void btReversePlaybackNextFrame_Click(object sender, EventArgs e)
         {
             MediaPlayer1.ReversePlayback_NextFrame();
         }
 
+        /// <summary>
+        /// Handles the bt previous frame click event.
+        /// </summary>
         private void btPreviousFrame_Click(object sender, EventArgs e)
         {
             MediaPlayer1.PreviousFrame();
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
@@ -2765,6 +3308,9 @@ namespace Media_Player_Demo
             MediaPlayer1.OnPlaylistFinished += MediaPlayer1_OnPlaylistFinished;
         }
 
+        /// <summary>
+        /// Media player 1 on motion detection ex.
+        /// </summary>
         private void MediaPlayer1_OnMotionDetectionEx(object sender, MotionDetectionExEventArgs e)
         {
             Invoke((Action)(() =>
@@ -2773,11 +3319,17 @@ namespace Media_Player_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the media player 1 on playlist finished event.
+        /// </summary>
         private void MediaPlayer1_OnPlaylistFinished(object sender, EventArgs e)
         {
             MediaPlayer1.Playlist_Clear();
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (MediaPlayer1 != null)
@@ -2796,6 +3348,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
@@ -2854,13 +3409,16 @@ namespace Media_Player_Demo
 
             rbVR_CheckedChanged(sender, e);
 
-            // ReSharper disable once CoVariantArrayConversion
+            
             cbAudEqualizerPreset.Items.AddRange(MediaPlayer1.Audio_Effects_Equalizer_Presets().ToArray());
             cbAudEqualizerPreset.SelectedIndex = 0;
 
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
+        /// <summary>
+        /// Handles the bt text logo add click event.
+        /// </summary>
         private void btTextLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -2876,6 +3434,9 @@ namespace Media_Player_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt text logo edit click event.
+        /// </summary>
         private void btTextLogoEdit_Click(object sender, EventArgs e)
         {
             if (lbTextLogos.SelectedItem != null)
@@ -2889,6 +3450,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt text logo remove click event.
+        /// </summary>
         private void btTextLogoRemove_Click(object sender, EventArgs e)
         {
             if (lbTextLogos.SelectedItem != null)
@@ -2898,6 +3462,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt image logo add click event.
+        /// </summary>
         private void btImageLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new ImageLogoSettingsDialog();
@@ -2913,6 +3480,9 @@ namespace Media_Player_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt image logo edit click event.
+        /// </summary>
         private void btImageLogoEdit_Click(object sender, EventArgs e)
         {
             if (lbTextLogos.SelectedItem != null)
@@ -2926,6 +3496,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt image logo remove click event.
+        /// </summary>
         private void btImageLogoRemove_Click(object sender, EventArgs e)
         {
             if (lbImageLogos.SelectedItem != null)
@@ -2935,6 +3508,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
         private void cbFlipX_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipDown flip;
@@ -2954,6 +3530,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
         private void cbFlipY_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipRight flip;
@@ -2973,6 +3552,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Media player 1 on midi file info.
+        /// </summary>
         private void MediaPlayer1_OnMIDIFileInfo(object sender, MIDIInfoEventArgs e)
         {
             BeginInvoke(
@@ -2983,6 +3565,9 @@ namespace Media_Player_Demo
                                 }));
         }
 
+        /// <summary>
+        /// Handles the bt osd clear layer click event.
+        /// </summary>
         private void btOSDClearLayer_Click(object sender, EventArgs e)
         {
             if (lbOSDLayers.SelectedIndex != -1)
@@ -2995,11 +3580,17 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Lb osd layers item check.
+        /// </summary>
         private void lbOSDLayers_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             MediaPlayer1.OSD_Layers_Enable(e.Index, e.NewValue == CheckState.Checked);
         }
 
+        /// <summary>
+        /// Handles the bt encryption open file click event.
+        /// </summary>
         private void btEncryptionOpenFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
@@ -3008,6 +3599,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Mn playlist item clicked.
+        /// </summary>
         private void mnPlaylist_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if (e.ClickedItem.Name == "mnPlaylistRemove")
@@ -3027,6 +3621,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb gpu blur scroll event.
+        /// </summary>
         private void tbGPUBlur_Scroll(object sender, EventArgs e)
         {
             IGPUVideoEffectBlur intf;
@@ -3048,6 +3645,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the pn chroma key color click event.
+        /// </summary>
         private void pnChromaKeyColor_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
@@ -3057,6 +3657,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb scrolling text checked changed event.
+        /// </summary>
         private void cbScrollingText_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectScrollingTextLogo textLogo;
@@ -3077,6 +3680,9 @@ namespace Media_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt save snapshot click event.
+        /// </summary>
         private async void btSaveSnapshot_Click(global::System.Object sender, global::System.EventArgs e)
         {
             var dlg = new SaveFileDialog();
@@ -3106,4 +3712,3 @@ namespace Media_Player_Demo
     }
 }
 
-// ReSharper restore InconsistentNaming

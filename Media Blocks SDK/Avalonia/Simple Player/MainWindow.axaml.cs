@@ -23,16 +23,34 @@ using System.Reactive.Linq;
 
 namespace SimplePlayerAMB
 {
+    /// <summary>
+    /// Interaction logic for MainWindow.axaml
+    /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The file source.
+        /// </summary>
         private UniversalSourceBlock _fileSource;
 
+        /// <summary>
+        /// The position timer.
+        /// </summary>
         private System.Timers.Timer _tmPosition;
 
 #if WINDOWS
@@ -41,12 +59,24 @@ namespace SimplePlayerAMB
     private AudioOutputDeviceAPI _audioOutputDeviceAPI = AudioOutputDeviceAPI.Default;
 #endif
 
+        /// <summary>
+        /// The initialized flag.
+        /// </summary>
         private bool _initialized;
 
+        /// <summary>
+        /// Gets or sets the log messages.
+        /// </summary>
         public ObservableCollection<string> Log { get; set; } = new ObservableCollection<string>();
 
+        /// <summary>
+        /// Gets or sets the available audio output devices.
+        /// </summary>
         public ObservableCollection<string> AudioOutputs { get; set; } = new ObservableCollection<string>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -62,6 +92,9 @@ namespace SimplePlayerAMB
             DataContext = this;
         }
 
+        /// <summary>
+        /// Creates the media engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -70,6 +103,10 @@ namespace SimplePlayerAMB
             _pipeline.OnStop += Pipeline_OnStop;
         }
 
+        /// <summary>
+        /// Asynchronously destroys the media engine.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -79,6 +116,11 @@ namespace SimplePlayerAMB
             }
         }
 
+        /// <summary>
+        /// Handles the Closing event of the MainWindow.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (_pipeline != null)
@@ -92,11 +134,19 @@ namespace SimplePlayerAMB
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Loads the XAML component.
+        /// </summary>
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
 
+        /// <summary>
+        /// Handles the Activated event of the MainWindow.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void MainWindow_Activated(object sender, EventArgs e)
         {
             if (_initialized)
@@ -127,10 +177,19 @@ namespace SimplePlayerAMB
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
+        /// <summary>
+        /// The timeline applying value flag.
+        /// </summary>
         private volatile bool _tbTimelineApplyingValue;
 
+        /// <summary>
+        /// The disposed value flag.
+        /// </summary>
         private bool disposedValue;
 
+        /// <summary>
+        /// Initializes the UI controls.
+        /// </summary>
         private void InitControls()
         {
             VideoView1 = this.FindControl<VisioForge.Core.UI.Avalonia.VideoView>("VideoView1");
@@ -182,6 +241,11 @@ namespace SimplePlayerAMB
             mmLog.ItemsSource = Log;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectFile control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var ofd = new OpenFileDialog();
@@ -192,6 +256,11 @@ namespace SimplePlayerAMB
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             tbSpeed.Value = 10;
@@ -237,6 +306,10 @@ namespace SimplePlayerAMB
             _tmPosition.Start();
         }
 
+        /// <summary>
+        /// Asynchronously stops the media engine.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task StopAsync()
         {
             if (_pipeline != null)
@@ -250,6 +323,11 @@ namespace SimplePlayerAMB
             await DestroyEngineAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _tmPosition?.Stop();
@@ -263,26 +341,51 @@ namespace SimplePlayerAMB
             lbTimeline.Text = "00:00:00 / 00:00:00";
         }
 
+        /// <summary>
+        /// Handles the Click event of the btResume control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btPause control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btNextFrame control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btNextFrame_Click(object sender, RoutedEventArgs e)
         {
             _pipeline.NextFrame();
         }
 
+        /// <summary>
+        /// Handles the OnError event of the Pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Log.Add(e.Message);
         }
 
+        /// <summary>
+        /// Handles the OnStop event of the Pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             _tmPosition.Stop();
@@ -293,6 +396,9 @@ namespace SimplePlayerAMB
             });
         }
 
+        /// <summary>
+        /// Handles the Scroll event of the tbTimeline control.
+        /// </summary>
         private async void tbTimeline_Scroll()
         {
             if (_tbTimelineApplyingValue && _pipeline != null)
@@ -301,6 +407,11 @@ namespace SimplePlayerAMB
             }
         }
 
+        /// <summary>
+        /// Handles the Elapsed event of the tmPosition timer.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
         private void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             Dispatcher.UIThread.InvokeAsync((Action)(async () =>
@@ -321,6 +432,9 @@ namespace SimplePlayerAMB
             }));
         }
 
+        /// <summary>
+        /// Handles the Scroll event of the tbSpeed control.
+        /// </summary>
         private async void tbSpeed_Scroll()
         {
             if (_pipeline == null)
@@ -331,6 +445,9 @@ namespace SimplePlayerAMB
             await _pipeline.Rate_SetAsync(tbSpeed.Value / 10.0);
         }
 
+        /// <summary>
+        /// Handles the Scroll event of the tbVolume control.
+        /// </summary>
         private void tbVolume_Scroll()
         {
             if (_audioRenderer == null)
@@ -341,6 +458,10 @@ namespace SimplePlayerAMB
             _audioRenderer.Volume = tbVolume.Value / 100.0;
         }
 
+        /// <summary>
+        /// Disposes of the resources used by the window.
+        /// </summary>
+        /// <param name="disposing">True if managed resources should be disposed; otherwise, false.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -355,12 +476,18 @@ namespace SimplePlayerAMB
             }
         }
 
+        /// <summary>
+        /// Finalizes an instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         ~MainWindow()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: false);
         }
 
+        /// <summary>
+        /// Disposes of the resources used by the window.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

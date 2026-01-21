@@ -17,23 +17,47 @@ namespace Multiple_IP_Cameras_Demo_WPF
     /// </summary>
     public partial class MainWindow : Window, IDisposable
     {
+        /// <summary>
+        /// The mp4 output.
+        /// </summary>
         private MP4Output mp4Output = new MP4Output();
 
+        /// <summary>
+        /// The video capture 1.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// The video capture 2.
+        /// </summary>
         private VideoCaptureCore VideoCapture2;
 
+        /// <summary>
+        /// The video capture 3.
+        /// </summary>
         private VideoCaptureCore VideoCapture3;
 
+        /// <summary>
+        /// The video capture 4.
+        /// </summary>
         private VideoCaptureCore VideoCapture4;
 
+        /// <summary>
+        /// The disposed value.
+        /// </summary>
         private bool disposedValue;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -49,6 +73,9 @@ namespace Multiple_IP_Cameras_Demo_WPF
             VideoCapture4.OnError += VideoCapture_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -80,6 +107,14 @@ namespace Multiple_IP_Cameras_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Start camera.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="preview">If set to <c>true</c> [preview].</param>
+        /// <param name="videoCapture">The video capture.</param>
+        /// <param name="index">The index.</param>
+        /// <param name="onvif">If set to <c>true</c> [onvif].</param>
         private Task StartCamera(string url, bool preview, VideoCaptureCore videoCapture, int index, bool onvif)
         {
             // source
@@ -142,11 +177,21 @@ namespace Multiple_IP_Cameras_Demo_WPF
             return videoCapture.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start 1 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart1_Click(object sender, RoutedEventArgs e)
         {
             await StartCamera(edURL1.Text, rbPreview1.IsChecked == true, VideoCapture1, 1, cbONVIF1.IsChecked == true);
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await CreateEngineAsync();
@@ -154,11 +199,21 @@ namespace Multiple_IP_Cameras_Demo_WPF
             Title += $" (SDK v{VideoCapture1.SDK_Version()})";
         }
 
+        /// <summary>
+        /// Handles the bt stop 1 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop1_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Video capture on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.BeginInvoke((Action)(() =>
@@ -167,41 +222,80 @@ namespace Multiple_IP_Cameras_Demo_WPF
                                                    }));
         }
 
+        /// <summary>
+        /// Handles the bt start 2 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart2_Click(object sender, RoutedEventArgs e)
         {
             await StartCamera(edURL2.Text, rbPreview2.IsChecked == true, VideoCapture2, 2, cbONVIF2.IsChecked == true);
         }
 
+        /// <summary>
+        /// Handles the bt stop 2 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop2_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture2.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start 3 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart3_Click(object sender, RoutedEventArgs e)
         {
             await StartCamera(edURL3.Text, rbPreview3.IsChecked == true, VideoCapture3, 3, cbONVIF3.IsChecked == true);
         }
 
+        /// <summary>
+        /// Handles the bt stop 3 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop3_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture3.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start 4 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart4_Click(object sender, RoutedEventArgs e)
         {
             await StartCamera(edURL4.Text, rbPreview4.IsChecked == true, VideoCapture4, 4, cbONVIF4.IsChecked == true);
         }
 
+        /// <summary>
+        /// Handles the bt stop 4 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop4_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture4.StopAsync();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -235,6 +329,9 @@ namespace Multiple_IP_Cameras_Demo_WPF
         //     Dispose(disposing: false);
         // }
 
+        /// <summary>
+        /// Disposes the object.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

@@ -12,10 +12,17 @@ using VisioForge.Core.Types.X.VideoEncoders;
 
 namespace HLSStreamer
 {
+    /// <summary>
+    /// Represents the program.
+    /// </summary>
     internal class Program
     {
         private const string URL = "http://localhost:8088/";
 
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {           
             VisioForgeX.InitSDK();
@@ -81,6 +88,11 @@ namespace HLSStreamer
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Handles the OnError event of the pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VisioForge.Core.Types.Events.ErrorsEventArgs"/> instance containing the event data.</param>
         private static void Pipeline_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Console.WriteLine(e.Message);

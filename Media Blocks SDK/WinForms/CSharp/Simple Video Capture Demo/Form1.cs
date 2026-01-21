@@ -25,37 +25,82 @@ using VisioForge.Core.Types.X.VideoEncoders;
 
 namespace MediaBlocks_Simple_Video_Capture_Demo
 {
+    /// <summary>
+    /// The main form of the application.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The video source.
+        /// </summary>
         private SystemVideoSourceBlock _videoSource;
 
+        /// <summary>
+        /// The audio source.
+        /// </summary>
         private SystemAudioSourceBlock _audioSource;
 
+        /// <summary>
+        /// The MP4 muxer.
+        /// </summary>
         private MP4SinkBlock _mp4Muxer;
 
+        /// <summary>
+        /// The H264 encoder.
+        /// </summary>
         private H264EncoderBlock _h264Encoder;
 
+        /// <summary>
+        /// The video tee.
+        /// </summary>
         private TeeBlock _videoTee;
 
+        /// <summary>
+        /// The audio tee.
+        /// </summary>
         private TeeBlock _audioTee;
 
+        /// <summary>
+        /// The AAC encoder.
+        /// </summary>
         private AACEncoderBlock _aacEncoder;
 
+        /// <summary>
+        /// The video sample grabber sink.
+        /// </summary>
         private VideoSampleGrabberBlock _videoSampleGrabberSink;
 
+        /// <summary>
+        /// The audio sample grabber sink.
+        /// </summary>
         private AudioSampleGrabberBlock _audioSampleGrabberSink;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Device enumerator on audio sink added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
         {
             Invoke((Action)(() =>
@@ -69,6 +114,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             }));
         }
 
+        /// <summary>
+        /// Device enumerator on audio source added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
             Invoke((Action)(() =>
@@ -82,6 +130,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             }));
         }
 
+        /// <summary>
+        /// Device enumerator on video source added.
+        /// </summary>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Invoke((Action)(() =>
@@ -95,6 +146,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -117,6 +171,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             edFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -125,6 +182,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             _pipeline = new MediaBlocksPipeline();
@@ -242,16 +302,25 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             timer1.Start();
         }
 
+        /// <summary>
+        /// Audio sample grabber on audio frame buffer.
+        /// </summary>
         private void _audioSampleGrabber_OnAudioFrameBuffer(object sender, AudioFrameBufferEventArgs e)
         {
             // received new audio frame
         }
 
+        /// <summary>
+        /// Video sample grabber on video frame buffer.
+        /// </summary>
         private void _videoSampleGrabber_OnVideoFrameBuffer(object sender, VideoFrameXBufferEventArgs e)
         {
             // received new video frame
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             timer1.Stop();
@@ -270,6 +339,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             VideoView1.Invalidate();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             if (_pipeline != null)
@@ -278,6 +350,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             if (_pipeline != null)
@@ -286,6 +361,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the timer 1 tick event.
+        /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Tag = 1;
@@ -299,6 +377,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             timer1.Tag = 0;
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             timer1.Stop();
@@ -316,6 +397,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the cb video input selected index changed event.
+        /// </summary>
         private async void cbVideoInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             var deviceName = cbVideoInput.Text;
@@ -339,6 +423,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb video format selected index changed event.
+        /// </summary>
         private async void cbVideoFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbVideoFrameRate.Items.Clear();
@@ -369,6 +456,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb audio input selected index changed event.
+        /// </summary>
         private async void cbAudioInput_SelectedIndexChanged(object sender, EventArgs e)
         {
             var deviceName = cbAudioInput.Text;
@@ -392,6 +482,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb volume 1 scroll event.
+        /// </summary>
         private void tbVolume1_Scroll(object sender, EventArgs e)
         {
             //if (_audioRenderer != null)
@@ -400,6 +493,9 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
             //}
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             var dialog = new SaveFileDialog();

@@ -4,6 +4,9 @@ using Uno.Resizetizer;
 
 namespace SimplePlayerUno.Template;
 
+/// <summary>
+/// Provides application-specific behavior to supplement the default Application class.
+/// </summary>
 public partial class App : Application
 {
     /// <summary>
@@ -15,8 +18,14 @@ public partial class App : Application
         this.InitializeComponent();
     }
 
+    /// <summary>
+    /// Gets the main window of the application.
+    /// </summary>
     protected Window? MainWindow { get; private set; }
 
+        /// <summary>
+        /// On launched.
+        /// </summary>
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
         MainWindow = new Window();

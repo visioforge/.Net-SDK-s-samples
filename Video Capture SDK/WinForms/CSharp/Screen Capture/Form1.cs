@@ -1,5 +1,5 @@
-// ReSharper disable InconsistentNaming
-// ReSharper disable StyleCop.SA1600
+
+
 
 using VisioForge.Core.UI;
 
@@ -26,26 +26,59 @@ namespace VisioForge_SDK_Screen_Capture_Demo
     using VisioForge.Core.VideoCapture;
     using ScreenCaptureMode = VisioForge.Core.Types.VideoCapture.ScreenCaptureMode;
 
+    /// <summary>
+    /// Screen capture demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Settings dialog for MP4 hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MPEG-TS hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mpegTSSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MOV hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog movSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MP4 output format.
+        /// </summary>
         private MP4SettingsDialog mp4SettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for AVI output format.
+        /// </summary>
         private AVISettingsDialog aviSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for WMV output format.
+        /// </summary>
         private WMVSettingsDialog wmvSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for GIF output format.
+        /// </summary>
         private GIFSettingsDialog gifSettingsDialog;
 
+        /// <summary>
+        /// Form for window capture source selection.
+        /// </summary>
         private WindowCaptureForm windowCaptureForm;
 
+        /// <summary>
+        /// The main video capture core engine instance.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Save file dialog for screenshot capture functionality.
+        /// </summary>
         private SaveFileDialog screenshotSaveDialog = new SaveFileDialog()
         {
             FileName = "image.jpg",
@@ -53,13 +86,22 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
+        /// <summary>
+        /// Timer for updating recording time display.
+        /// </summary>
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -67,6 +109,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -78,6 +123,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt screen capture update click event.
+        /// </summary>
         private async void btScreenCaptureUpdate_Click(object sender, EventArgs e)
         {
             await VideoCapture1.Screen_Capture_UpdateParametersAsync(
@@ -87,6 +135,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
                 cbScreenCapture_HighlightMouseCursor.Checked);
         }
 
+        /// <summary>
+        /// Handles the cb audio input device selected index changed event.
+        /// </summary>
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1)
@@ -137,16 +188,25 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt audio input device settings click event.
+        /// </summary>
         private void btAudioInputDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
         }
 
+        /// <summary>
+        /// Handles the cb use best audio input format checked changed event.
+        /// </summary>
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbAudioInputFormat.Enabled = !cbUseBestAudioInputFormat.Checked;
         }
 
+        /// <summary>
+        /// Set mp 4 output.
+        /// </summary>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -157,6 +217,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set wmv output.
+        /// </summary>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -168,6 +231,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Set mp 4 hw output.
+        /// </summary>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -178,6 +244,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set mpegts output.
+        /// </summary>
         private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
@@ -188,6 +257,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
+        /// <summary>
+        /// Set mov output.
+        /// </summary>
         private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
@@ -198,6 +270,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
+        /// <summary>
+        /// Set gif output.
+        /// </summary>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
@@ -208,6 +283,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Set avi output.
+        /// </summary>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -224,6 +302,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Create screen capture source.
+        /// </summary>
         private ScreenCaptureSourceSettings CreateScreenCaptureSource(int screenID, bool forcedFullScreen)
         {
             var source = new ScreenCaptureSourceSettings();
@@ -275,6 +356,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             return source;
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -416,6 +500,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -423,6 +510,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngineAsync();
@@ -460,12 +550,18 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             VideoCapture1.Video_Renderer_SetAuto();
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
         private void llVideoTutorials_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -474,11 +570,17 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt output configure click event.
+        /// </summary>
         private void btOutputConfigure_Click(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -564,6 +666,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb output format selected index changed event.
+        /// </summary>
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -606,6 +711,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             if (IsHandleCreated)
@@ -625,6 +733,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt save screenshot click event.
+        /// </summary>
         private async void btSaveScreenshot_Click(object sender, EventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog(this) == DialogResult.OK)
@@ -652,6 +763,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -660,16 +774,25 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt text logo add click event.
+        /// </summary>
         private void btTextLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -685,6 +808,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt image logo add click event.
+        /// </summary>
         private void btImageLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new ImageLogoSettingsDialog();
@@ -700,6 +826,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt logo remove click event.
+        /// </summary>
         private void btLogoRemove_Click(object sender, EventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -709,6 +838,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt logo edit click event.
+        /// </summary>
         private void btLogoEdit_Click(object sender, EventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -740,6 +872,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb lightness scroll event.
+        /// </summary>
         private void tbLightness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectLightness lightness;
@@ -759,6 +894,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb saturation scroll event.
+        /// </summary>
         private void tbSaturation_Scroll(object sender, EventArgs e)
         {
             IVideoEffectSaturation saturation;
@@ -778,6 +916,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb contrast scroll event.
+        /// </summary>
         private void tbContrast_Scroll(object sender, EventArgs e)
         {
             IVideoEffectContrast contrast;
@@ -797,6 +938,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
         private void cbFlipX_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipDown flip;
@@ -816,6 +960,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
         private void cbFlipY_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipRight flip;
@@ -835,6 +982,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb greyscale checked changed event.
+        /// </summary>
         private void cbGreyscale_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -854,6 +1004,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Configure video effects.
+        /// </summary>
         private void ConfigureVideoEffects()
         {
             if (tbLightness.Value > 0)
@@ -897,6 +1050,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb invert checked changed event.
+        /// </summary>
         private void cbInvert_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectInvert invert;
@@ -916,6 +1072,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb darkness scroll event.
+        /// </summary>
         private void tbDarkness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectDarkness darkness;
@@ -935,6 +1094,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt screen source window select click event.
+        /// </summary>
         private void btScreenSourceWindowSelect_Click(object sender, EventArgs e)
         {
             if (windowCaptureForm == null)
@@ -946,6 +1108,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             windowCaptureForm.StartCapture();
         }
 
+        /// <summary>
+        /// Window capture form on capture hotkey.
+        /// </summary>
         private void WindowCaptureForm_OnCaptureHotkey(object sender, WindowCaptureEventArgs e)
         {
             windowCaptureForm.StopCapture();
@@ -954,6 +1119,9 @@ namespace VisioForge_SDK_Screen_Capture_Demo
             lbScreenSourceWindowText.Text = e.Caption;
         }
 
+        /// <summary>
+        /// Form 1 form closed.
+        /// </summary>
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             DestroyEngine();
@@ -961,4 +1129,4 @@ namespace VisioForge_SDK_Screen_Capture_Demo
     }
 }
 
-// ReSharper restore InconsistentNaming
+

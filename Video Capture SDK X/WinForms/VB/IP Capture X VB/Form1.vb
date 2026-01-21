@@ -90,6 +90,9 @@ Public Class Form1
         End Try
     End Sub
 
+        ''' <summary>
+        ''' Tm recording elapsed.
+        ''' </summary>
     Private Sub tmRecording_Elapsed(sender As Object, e As Timers.ElapsedEventArgs) Handles tmRecording.Elapsed
         Dim ts = VideoCapture1.Duration()
         If Math.Abs(ts.TotalMilliseconds) < 0.01 Then Return
@@ -101,6 +104,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Log.
+        ''' </summary>
     Private Sub Log(txt As String)
         If Me.InvokeRequired Then
             Me.Invoke(Sub() mmLog.Text &= txt & Environment.NewLine)
@@ -109,10 +115,16 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on error.
+        ''' </summary>
     Private Sub VideoCapture1_OnError(sender As Object, e As ErrorsEventArgs)
         Log("Error: " & e.Message)
     End Sub
 
+        ''' <summary>
+        ''' Video capture 1 on stop.
+        ''' </summary>
     Private Sub VideoCapture1_OnStop(sender As Object, e As EventArgs)
         If Me.InvokeRequired Then
             Me.Invoke(Sub() lbTimestamp.Text = "Duration: 00:00:00")
@@ -121,6 +133,9 @@ Public Class Form1
         End If
     End Sub
 
+        ''' <summary>
+        ''' Ll video tutorials link clicked.
+        ''' </summary>
     Private Sub llVideoTutorials_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs)
         Dim startInfo = New ProcessStartInfo(HelpLinks.VideoTutorials) With {.UseShellExecute = True}
         Process.Start(startInfo)

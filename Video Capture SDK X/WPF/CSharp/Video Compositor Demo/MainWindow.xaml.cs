@@ -40,7 +40,9 @@ namespace Video_Compositor_Demo
     }
 
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for the Video Compositor Demo WPF demo's MainWindow.
+    /// Demonstrates how to mix multiple video sources (camera, screen, files, images) using the video mixer, 
+    /// apply chroma key effects, and manage Z-order and positioning in real-time.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -59,6 +61,12 @@ namespace Video_Compositor_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the OnError event of the video capture engine.
+        /// Logs error messages to the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -67,6 +75,9 @@ namespace Video_Compositor_Demo
             }));
         }
 
+        /// <summary>
+        /// Creates a new instance of the video capture engine and configures debug settings.
+        /// </summary>
         private void CreateEngine()
         {
             _videoCapture = new VideoCaptureCoreX(VideoView1);
@@ -78,6 +89,10 @@ namespace Video_Compositor_Demo
             LogMessage("Media pipeline created", LogLevel.Info);
         }
 
+        /// <summary>
+        /// Asynchronously disposes of the video capture engine and cleans up mixer stream references.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (_videoCapture != null)
@@ -97,6 +112,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAddCamera control.
+        /// Displays a dialog to select a video capture device and adds it to the compositor list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btAddCamera_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new VideoCaptureSourceDialog();
@@ -146,6 +167,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAddScreen control.
+        /// Displays a dialog to select a screen capture area and adds it to the compositor list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btAddScreen_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new ScreenSourceDialog();
@@ -169,6 +196,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAddFile control.
+        /// Opens a file dialog to select a video file and adds it to the compositor list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btAddFile_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog();
@@ -187,6 +220,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAddImage control.
+        /// Opens a file dialog to select an image file and adds it to the compositor list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btAddImage_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog();
@@ -208,6 +247,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btRemove control.
+        /// Removes the selected source from the compositor list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btRemove_Click(object sender, RoutedEventArgs e)
         {
             if (cbSources.SelectedIndex != -1)
@@ -226,6 +271,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the Window.
+        /// Initializes the SDK and prepares the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Initialize logging first
@@ -253,6 +304,9 @@ namespace Video_Compositor_Demo
             LogMessage($"Application ready (SDK v{MediaBlocksPipeline.SDK_Version})", LogLevel.Info);
         }
 
+        /// <summary>
+        /// Updates the recording duration in the UI.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = _videoCapture.Duration();
@@ -268,6 +322,12 @@ namespace Video_Compositor_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the video mixer with all added sources, sets up the selected output, and starts the capture engine.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -403,6 +463,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the capture engine and cleans up resources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             LogMessage("Stopping video compositor pipeline", LogLevel.Info);
@@ -423,6 +489,12 @@ namespace Video_Compositor_Demo
             LogMessage("Pipeline stopped", LogLevel.Info);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btUpdateRect control.
+        /// Updates the rectangle (position and size) of the selected source in real-time.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btUpdateRect_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
@@ -447,6 +519,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectFile control.
+        /// Opens a save file dialog to specify the output filename.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new SaveFileDialog();
@@ -456,6 +534,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Closing event of the Window.
+        /// Ensures the engine is stopped and SDK resources are released.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
@@ -465,11 +549,22 @@ namespace Video_Compositor_Demo
 
         #region Chroma Key Event Handlers
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbSources control.
+        /// Updates the UI fields with the settings of the newly selected source.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void CbSources_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateSourceUI();
         }
 
+        /// <summary>
+        /// Handles the Checked event of the cbEnableChromaKey control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbEnableChromaKey_Checked(object sender, RoutedEventArgs e)
         {
             if (_isUpdatingUI) return;
@@ -482,6 +577,11 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Unchecked event of the cbEnableChromaKey control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void cbEnableChromaKey_Unchecked(object sender, RoutedEventArgs e)
         {
             if (_isUpdatingUI) return;
@@ -494,6 +594,11 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbChromaColor control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbChromaColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_isUpdatingUI) return;
@@ -510,6 +615,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btCustomColor control.
+        /// Opens a color dialog to select a custom chroma key color.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btCustomColor_Click(object sender, RoutedEventArgs e)
         {
             var colorDialog = new System.Windows.Forms.ColorDialog();
@@ -525,6 +636,11 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the slSensitivity control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void slSensitivity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_isUpdatingUI) return;
@@ -542,6 +658,11 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the slNoiseLevel control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void slNoiseLevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_isUpdatingUI) return;
@@ -559,6 +680,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btUpdateChromaKey control.
+        /// Updates the chroma key settings for the selected source in the running mixer.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btUpdateChromaKey_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
@@ -568,6 +695,10 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Updates the chroma key settings for a specific source in the active video mixer.
+        /// </summary>
+        /// <param name="index">The index of the source in the list.</param>
         private void UpdateChromaKeyInMixer(int index)
         {
             if (_videoCapture.State != PlaybackState.Play)
@@ -601,6 +732,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Updates the UI controls with the settings of the currently selected source.
+        /// </summary>
         private void UpdateSourceUI()
         {
             if (_isUpdatingUI) return;
@@ -665,6 +799,11 @@ namespace Video_Compositor_Demo
 
         #region Z-Order Event Handlers
 
+        /// <summary>
+        /// Handles the TextChanged event of the edZOrder control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="TextChangedEventArgs"/> instance containing the event data.</param>
         private void edZOrder_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (_isUpdatingUI) return;
@@ -678,6 +817,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btMoveUp control.
+        /// Increments the Z-order of the selected source.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btMoveUp_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
@@ -690,6 +835,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btMoveDown control.
+        /// Decrements the Z-order of the selected source.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btMoveDown_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
@@ -702,11 +853,23 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btUpdateZOrder control.
+        /// Pushes any manual Z-order changes to the active video mixer.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btUpdateZOrder_Click(object sender, RoutedEventArgs e)
         {
             UpdateZOrderInMixer();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSortByZOrder control.
+        /// Sorts the internal source list by Z-order and refreshes the UI list accordingly.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSortByZOrder_Click(object sender, RoutedEventArgs e)
         {
             // Sort the sources list by z-order and update the combo box
@@ -735,6 +898,9 @@ namespace Video_Compositor_Demo
             // The actual z-order values in the mixer remain the same
         }
 
+        /// <summary>
+        /// Updates the Z-order for all added sources in the active video mixer.
+        /// </summary>
         private void UpdateZOrderInMixer()
         {
             var mixer = _videoCapture.GetSourceMixerControl();
@@ -748,6 +914,10 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Updates the Z-order for a specific source in the active video mixer.
+        /// </summary>
+        /// <param name="index">The index of the source in the list.</param>
         private void UpdateSingleSourceZOrder(int index)
         {
             var mixer = _videoCapture.GetSourceMixerControl();
@@ -768,6 +938,10 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Updates the display string for a source in the UI combo box to reflect its name and current Z-order.
+        /// </summary>
+        /// <param name="index">The index of the source in the list.</param>
         private void UpdateSourceDisplayName(int index)
         {
             if (index >= 0 && index < _sources.Count && index < cbSources.Items.Count)
@@ -827,6 +1001,11 @@ namespace Video_Compositor_Demo
 
         #region Logging
 
+        /// <summary>
+        /// Logs a message to the UI log window with a specific log level and optional timestamp.
+        /// </summary>
+        /// <param name="message">The message to log.</param>
+        /// <param name="level">The severity level of the log message.</param>
         private void LogMessage(string message, LogLevel level = LogLevel.Info)
         {
             // Check if message should be displayed based on current log level
@@ -872,6 +1051,12 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btClearLog control.
+        /// Clears all entries from the log window.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btClearLog_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();

@@ -1,7 +1,7 @@
-// ReSharper disable InconsistentNaming
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable StyleCop.SA1601
-// ReSharper disable RedundantNameQualifier
+
+
+
+
 
 namespace Screen_Capture_X
 {
@@ -30,6 +30,10 @@ namespace Screen_Capture_X
     using VisioForge.Core.UI.WPF.Dialogs.OutputFormats;
     using VisioForge.Core.VideoCaptureX;
 
+    /// <summary>
+    /// Interaction logic for the Screen Capture WPF demo's Window1.
+    /// Demonstrates how to capture the entire screen, a specific monitor, or a selected window using the X-engine.
+    /// </summary>
     public partial class Window1 : IDisposable
     {
         private UniversalOutputDialog mpegTSSettingsDialog;
@@ -55,6 +59,12 @@ namespace Screen_Capture_X
             InitializeComponent();            
         }
 
+        /// <summary>
+        /// Handles the OnAudioSourceAdded event of the DeviceEnumerator.
+        /// Adds newly discovered audio sources to the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="AudioCaptureDeviceInfo"/> instance containing the device information.</param>
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -68,6 +78,9 @@ namespace Screen_Capture_X
             });
         }
 
+        /// <summary>
+        /// Creates a new instance of the video capture engine and subscribes to error events.
+        /// </summary>
         private void CreateEngine()
         {
             VideoCapture1 = new VideoCaptureCoreX(VideoView1 as IVideoView);
@@ -75,6 +88,10 @@ namespace Screen_Capture_X
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Asynchronously disposes of the video capture engine and unsubscribes from events.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (VideoCapture1 != null)
@@ -86,6 +103,13 @@ namespace Screen_Capture_X
             }
         }
 
+        /// <summary>
+        /// Displays a save file dialog to select the output file path.
+        /// </summary>
+        /// <param name="defaultExt">The default file extension.</param>
+        /// <param name="filter">The file filter string.</param>
+        /// <param name="filename">The selected filename if the user clicked Save.</param>
+        /// <returns>True if a file was selected; otherwise, false.</returns>
         private static bool SaveFileDialog(string defaultExt, string filter, out string filename)
         {
             filename = string.Empty;
@@ -105,6 +129,12 @@ namespace Screen_Capture_X
             return false;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btScreenCaptureUpdate control.
+        /// Updates coordinates and cursor visibility for the active screen capture source.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btScreenCaptureUpdate_Click(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1.Video_Source is IScreenCaptureSourceSettings screen)
@@ -116,6 +146,12 @@ namespace Screen_Capture_X
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// Opens a save file dialog to select the recording output path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             string filename;
@@ -125,6 +161,10 @@ namespace Screen_Capture_X
             }
         }
 
+        /// <summary>
+        /// Creates a screen capture source for a specific application window.
+        /// </summary>
+        /// <returns>The screen capture source settings.</returns>
         private IScreenCaptureSourceSettings CreateWindowCaptureSource()
         {
             // create Direct3D11 source
@@ -140,6 +180,10 @@ namespace Screen_Capture_X
             return source;
         }
 
+        /// <summary>
+        /// Creates a screen capture source for the entire screen or a specific region.
+        /// </summary>
+        /// <returns>The screen capture source settings.</returns>
         private IScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
             var screenID = Convert.ToInt32(cbScreenCaptureDisplayIndex.Text);
@@ -174,6 +218,12 @@ namespace Screen_Capture_X
             return source;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btOutputConfigure control.
+        /// Opens the configuration dialog for the selected output format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btOutputConfigure_Click(object sender, RoutedEventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -266,6 +316,12 @@ namespace Screen_Capture_X
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbOutputFormat control.
+        /// Updates the output file extension based on the selected format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (edOutput == null)
@@ -303,16 +359,32 @@ namespace Screen_Capture_X
             }
         }
 
+        /// <summary>
+        /// Handles the Click event for starting capture while a preview is already running.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStartCapture(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.StartCaptureAsync(0, edOutput.Text);
         }
 
+        /// <summary>
+        /// Handles the Click event for stopping an ongoing capture.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStopCapture(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.StopCaptureAsync(0);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the engine for screen/window capture and starts preview/recording.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -461,6 +533,9 @@ namespace Screen_Capture_X
             //VideoCapture1.Debug_SavePipeline("videocapturex");
         }
 
+        /// <summary>
+        /// Asynchronously updates the recording duration displayed in the UI.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = VideoCapture1.Duration();
@@ -476,6 +551,12 @@ namespace Screen_Capture_X
            }));
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the engine and recording timer.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -483,6 +564,12 @@ namespace Screen_Capture_X
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the window.
+        /// Initializes the SDK, prepares the engine, and enumerates available devices and monitors.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -530,6 +617,12 @@ namespace Screen_Capture_X
         }
 
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbAudioInputDevice control.
+        /// Populates available formats for the selected audio device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbAudioInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -566,22 +659,43 @@ namespace Screen_Capture_X
             }
         }
 
+        /// <summary>
+        /// Logs a message to the UI log window.
+        /// </summary>
+        /// <param name="txt">The message to log.</param>
         private void Log(string txt)
         {
             Dispatcher.Invoke(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
         }
 
+        /// <summary>
+        /// Handles the OnError event of the main VideoCapture1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the MouseLeftButtonDown event of the lbViewVideoTutorials control.
+        /// Opens the video tutorials URL in the default browser.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         private void lbViewVideoTutorials_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectWindow control.
+        /// Initiates the process to select a specific window for capture.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectWindow_Click(object sender, RoutedEventArgs e)
         {
             if (windowCaptureForm == null)
@@ -593,6 +707,12 @@ namespace Screen_Capture_X
             windowCaptureForm.StartCapture();
         }
 
+        /// <summary>
+        /// Handles the OnCaptureHotkey event from the window capture form.
+        /// Finalizes the window selection for capture.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="WindowCaptureEventArgs"/> instance containing window information.</param>
         private void WindowCaptureForm_OnCaptureHotkey(object sender, WindowCaptureEventArgs e)
         {
             windowCaptureForm.StopCapture();
@@ -601,6 +721,12 @@ namespace Screen_Capture_X
             rbWindow.Content = "Window: " + e.Caption;
         }
 
+        /// <summary>
+        /// Handles the Closing event of the window.
+        /// Ensures engine resources are released and the SDK is destroyed.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
@@ -608,6 +734,10 @@ namespace Screen_Capture_X
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Disposes of the managed and unmanaged resources used by the window.
+        /// </summary>
+        /// <param name="disposing">True if called from the <see cref="Dispose()"/> method; false if called from the finalizer.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -628,6 +758,9 @@ namespace Screen_Capture_X
             Dispose(disposing: false);
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -637,4 +770,3 @@ namespace Screen_Capture_X
     }
 }
 
-// ReSharper restore InconsistentNaming

@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace MediaBlocks_Video_Mixer_Demo
 {
+    /// <summary>
+    /// The program class.
+    /// </summary>
     internal static class Program
     {
         /// <summary>

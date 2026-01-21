@@ -37,29 +37,65 @@ namespace Screen_Capture_MB_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The screen source.
+        /// </summary>
         private ScreenSourceBlock _screenSource;
 
+        /// <summary>
+        /// The audio input source.
+        /// </summary>
         private SystemAudioSourceBlock _audioInput;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The video tee.
+        /// </summary>
         private TeeBlock _videoTee;
 
+        /// <summary>
+        /// The audio tee.
+        /// </summary>
         private TeeBlock _audioTee;
 
+        /// <summary>
+        /// The video encoder.
+        /// </summary>
         private H264EncoderBlock _videoEncoder;
 
+        /// <summary>
+        /// The audio encoder.
+        /// </summary>
         private AACEncoderBlock _audioEncoder;
 
+        /// <summary>
+        /// The MP4 sink.
+        /// </summary>
         private MP4SinkBlock _sink;
 
+        /// <summary>
+        /// The window capture form.
+        /// </summary>
         private WindowCaptureForm windowCaptureForm;
 
         // Dialogs
+        /// <summary>
+        /// The save file dialog.
+        /// </summary>
         private readonly SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
         public MainWindow()
@@ -69,6 +105,9 @@ namespace Screen_Capture_MB_WPF
             
         }
 
+        /// <summary>
+        /// Device enumerator on audio sink added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -82,6 +121,9 @@ namespace Screen_Capture_MB_WPF
             });
         }
 
+        /// <summary>
+        /// Device enumerator on audio source added.
+        /// </summary>
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -95,6 +137,9 @@ namespace Screen_Capture_MB_WPF
             });
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -103,12 +148,18 @@ namespace Screen_Capture_MB_WPF
             }));
         }
 
+        /// <summary>
+        /// Create engines.
+        /// </summary>
         private void CreateEngines()
         {
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 
+        /// <summary>
+        /// Destroy engines async.
+        /// </summary>
         private async Task DestroyEnginesAsync()
         {
             if (_pipeline != null)
@@ -119,6 +170,9 @@ namespace Screen_Capture_MB_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -127,6 +181,9 @@ namespace Screen_Capture_MB_WPF
             }
         }
 
+        /// <summary>
+        /// Create window capture source.
+        /// </summary>
         private IScreenCaptureSourceSettings CreateWindowCaptureSource()
         { 
             // create Direct3D11 source
@@ -142,6 +199,9 @@ namespace Screen_Capture_MB_WPF
             return source;
         }
 
+        /// <summary>
+        /// Create screen capture source.
+        /// </summary>
         private IScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
             var screenID = Convert.ToInt32(cbScreenCaptureDisplayIndex.Text);
@@ -175,6 +235,9 @@ namespace Screen_Capture_MB_WPF
             return source;
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -263,6 +326,9 @@ namespace Screen_Capture_MB_WPF
             tcMain.SelectedIndex = 3;
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.StopAsync();
@@ -270,6 +336,9 @@ namespace Screen_Capture_MB_WPF
             await DestroyEnginesAsync();
         }
 
+        /// <summary>
+        /// Form 1 load.
+        /// </summary>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -302,12 +371,18 @@ namespace Screen_Capture_MB_WPF
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
         private void llVideoTutorials_LinkClicked(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEnginesAsync();
@@ -315,6 +390,9 @@ namespace Screen_Capture_MB_WPF
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt select window click event.
+        /// </summary>
         private void btSelectWindow_Click(object sender, RoutedEventArgs e)
         {
             if (windowCaptureForm == null)
@@ -326,6 +404,9 @@ namespace Screen_Capture_MB_WPF
             windowCaptureForm.StartCapture();
         }
 
+        /// <summary>
+        /// Window capture form on capture hotkey.
+        /// </summary>
         private void WindowCaptureForm_OnCaptureHotkey(object sender, WindowCaptureEventArgs e)
         {
             windowCaptureForm.StopCapture();

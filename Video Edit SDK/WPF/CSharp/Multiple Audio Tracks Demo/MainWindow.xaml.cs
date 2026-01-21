@@ -15,13 +15,25 @@ namespace Multiple_Audio_Tracks_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The video editing engine instance.
+        /// </summary>
         private VideoEditCore VideoEdit1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btOpenVideoFile control.
+        /// Opens a file dialog to select the main video file.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btOpenVideoFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -33,6 +45,12 @@ namespace Multiple_Audio_Tracks_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btOpenAudioFile1 control.
+        /// Opens a file dialog to select the first audio track.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btOpenAudioFile1_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
@@ -47,6 +65,12 @@ namespace Multiple_Audio_Tracks_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btOpenAudioFile2 control.
+        /// Opens a file dialog to select the second audio track.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btOpenAudioFile2_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
@@ -61,6 +85,12 @@ namespace Multiple_Audio_Tracks_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutputFile control.
+        /// Opens a file dialog to select the output video file path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectOutputFile_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
@@ -72,6 +102,9 @@ namespace Multiple_Audio_Tracks_Demo
             }
         }
 
+        /// <summary>
+        /// Creates the video editing engine and subscribes to events.
+        /// </summary>
         private void CreateEngine()
         {
             VideoEdit1 = new VideoEditCore(videoView);
@@ -81,6 +114,12 @@ namespace Multiple_Audio_Tracks_Demo
             VideoEdit1.OnProgress += VideoEdit1_OnProgress;
         }
 
+        /// <summary>
+        /// Handles the OnStop event of the VideoEdit engine.
+        /// Updates the UI and clears the input list.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher?.Invoke(() => {
@@ -98,6 +137,9 @@ namespace Multiple_Audio_Tracks_Demo
             });            
         }
 
+        /// <summary>
+        /// Destroys the video editing engine and unsubscribes from events.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoEdit1 != null)
@@ -111,11 +153,23 @@ namespace Multiple_Audio_Tracks_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the OnProgress event of the VideoEdit engine.
+        /// Updates the progress bar.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ProgressEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
         {
             Dispatcher?.Invoke(() => { pbProgress.Value = e.Progress; });
         }
 
+        /// <summary>
+        /// Handles the OnError event of the VideoEdit engine.
+        /// Logs the error message.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher?.Invoke(() => { 
@@ -123,6 +177,12 @@ namespace Multiple_Audio_Tracks_Demo
             });
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the Window control.
+        /// Initializes the engine and sets default values.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             CreateEngine();
@@ -132,6 +192,12 @@ namespace Multiple_Audio_Tracks_Demo
             VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Starts the video editing process with multiple audio tracks.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (!File.Exists(edVideoFile.Text))
@@ -167,6 +233,12 @@ namespace Multiple_Audio_Tracks_Demo
             await VideoEdit1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the video editing process.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await VideoEdit1.StopAsync();

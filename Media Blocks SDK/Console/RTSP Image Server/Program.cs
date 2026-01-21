@@ -17,6 +17,9 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace RTSP_Image_Server
 {
+    /// <summary>
+    /// Represents the program for RTSP Image Server.
+    /// </summary>
     internal class Program
     {
         private static MediaBlocksPipeline _pipeline;
@@ -30,6 +33,11 @@ namespace RTSP_Image_Server
         private const int FPS = 25; // VirtualVideoSource frame rate
         private const double IMAGE_DISPLAY_SECONDS = 1.0; // Display each image for 1 second
 
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         static async Task Main(string[] args)
         {
             Console.WriteLine("RTSP Image Server - VisioForge Media Blocks SDK");
@@ -87,6 +95,10 @@ namespace RTSP_Image_Server
             Console.WriteLine("Exiting...");
         }
 
+        /// <summary>
+        /// Loads images from the "Images" directory as raw BGRA byte arrays.
+        /// </summary>
+        /// <returns>An array of byte arrays containing raw pixel data.</returns>
         private static byte[][] LoadImagesAsRawData()
         {
             var imagesDir = Path.Combine(AppContext.BaseDirectory, "Images");
@@ -178,6 +190,10 @@ namespace RTSP_Image_Server
             return imageDataList;
         }
 
+        /// <summary>
+        /// Creates a black placeholder image.
+        /// </summary>
+        /// <returns>A byte array containing black BGRA pixels.</returns>
         private static byte[] CreateBlackImage()
         {
             var stride = IMAGE_WIDTH * 4; // BGRA = 4 bytes per pixel
@@ -185,6 +201,9 @@ namespace RTSP_Image_Server
             return new byte[dataSize]; // All zeros = black image
         }
 
+        /// <summary>
+        /// Configures the media pipeline.
+        /// </summary>
         private static void CreatePipeline()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -226,6 +245,11 @@ namespace RTSP_Image_Server
             };
         }
 
+        /// <summary>
+        /// Event handler for the VideoSampleGrabber to replace frames with the current image.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VideoFrameXBufferEventArgs"/> instance containing the event data.</param>
         private static void SampleGrabber_OnVideoFrameBuffer(object sender, VideoFrameXBufferEventArgs e)
         {
             // Check if it's time to switch to the next image

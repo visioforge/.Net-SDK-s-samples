@@ -11,22 +11,44 @@ using VisioForge.Core.UI.Apple;
 
 namespace SimpleMediaPlayerMBMac;
 
+/// <summary>
+/// The view controller.
+/// </summary>
 public partial class ViewController : NSViewController
 {
+    /// <summary>
+    /// The media player instance.
+    /// </summary>
     private MediaPlayerCoreX _player;
 
+    /// <summary>
+    /// The timer.
+    /// </summary>
     private Timer _timer;
 
+    /// <summary>
+    /// Flag to indicate if the timer is update.
+    /// </summary>
     private bool _timerFlag;
 
+    /// <summary>
+    /// The video view.
+    /// </summary>
     private VideoView _videoView;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ViewController"/> class.
+    /// </summary>
+    /// <param name="handle">The handle.</param>
     protected ViewController(NativeHandle handle) : base(handle)
     {
         // This constructor is required if the view controller is loaded from a xib or a storyboard.
         // Do not put any initialization here, use ViewDidLoad instead.
     }
 
+    /// <summary>
+    /// Gets or sets the represented object.
+    /// </summary>
     public override NSObject RepresentedObject
     {
         get => base.RepresentedObject;
@@ -34,6 +56,9 @@ public partial class ViewController : NSViewController
         // Update the view, if already loaded.
     }
 
+        /// <summary>
+        /// View did load.
+        /// </summary>
     public override void ViewDidLoad()
     {
         base.ViewDidLoad();
@@ -48,6 +73,9 @@ public partial class ViewController : NSViewController
         _timer = new Timer(OnTimer);
     }
 
+        /// <summary>
+        /// On timer.
+        /// </summary>
     public async void OnTimer(object stateInfo)
     {
         if (_player == null) return;
@@ -72,6 +100,9 @@ public partial class ViewController : NSViewController
         _timerFlag = false;
     }
 
+        /// <summary>
+        /// Show message.
+        /// </summary>
     private void ShowMessage(string text)
     {
         var alert = new NSAlert
@@ -83,6 +114,9 @@ public partial class ViewController : NSViewController
         alert.RunModal();
     }
 
+        /// <summary>
+        /// Start async.
+        /// </summary>
     private async Task StartAsync()
     {
         if (View.Window.Delegate == null)
@@ -111,6 +145,9 @@ public partial class ViewController : NSViewController
         _timer.Change(0, 1000);
     }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
     private async Task StopAsync()
     {
         _timer.Change(0, Timeout.Infinite);
@@ -123,16 +160,28 @@ public partial class ViewController : NSViewController
         _player = null;
     }
 
+    /// <summary>
+    /// Bt start click.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
     partial void btStart_Click(NSObject sender)
     {
         InvokeOnMainThread(async () => { await StartAsync(); });
     }
 
+    /// <summary>
+    /// Bt stop click.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
     partial void btStop_Click(NSObject sender)
     {
         InvokeOnMainThread(async () => { await StopAsync(); });
     }
 
+    /// <summary>
+    /// Bt open click.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
     partial void btOpen_Click(NSObject sender)
     {
         var dlg = NSOpenPanel.OpenPanel;
@@ -149,6 +198,10 @@ public partial class ViewController : NSViewController
         }
     }
 
+    /// <summary>
+    /// Sl position changed.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
     partial void slPositionChanged(NSObject sender)
     {
         var value = (sender as NSSlider).FloatValue;
@@ -163,9 +216,14 @@ public partial class ViewController : NSViewController
     }
 }
 
-// Custom Window delegate to close the SDK
+/// <summary>
+/// Custom Window delegate to close the SDK.
+/// </summary>
 public class CustomWindowDelegate : NSWindowDelegate
 {
+        /// <summary>
+        /// Window should close.
+        /// </summary>
     public override bool WindowShouldClose(NSObject sender)
     {
         VisioForgeX.DestroySDK();

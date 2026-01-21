@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace Video_Player_Demo
 {
+    /// <summary>
+    /// The program class.
+    /// </summary>
     static class Program
     {
         /// <summary>

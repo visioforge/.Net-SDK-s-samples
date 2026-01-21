@@ -11,8 +11,15 @@ using VisioForge.Core.Types.X.VideoCapture;
 
 namespace RTSP_Webcam_Server
 {
+    /// <summary>
+    /// Represents the program for RTSP Webcam Server.
+    /// </summary>
     internal class Program
     {
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {
             Console.WriteLine("Initializing VisioForge SDK.");

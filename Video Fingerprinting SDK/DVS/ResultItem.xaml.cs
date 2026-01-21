@@ -24,11 +24,17 @@ namespace DVS
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Stack panel size changed.
+        /// </summary>
         private void StackPanel_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             Text.Width = stackPanel.ActualWidth - 100;
         }
 
+        /// <summary>
+        /// Grid size changed.
+        /// </summary>
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             stackPanel.Width = grid.ActualWidth;

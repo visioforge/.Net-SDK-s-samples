@@ -43,6 +43,10 @@ namespace RTSP_Client
 
         private RTSPSourceBlock _source;
 
+        /// <summary>
+        /// Asynchronously destroys the media blocks engine pipeline and releases resources.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -55,11 +59,22 @@ namespace RTSP_Client
         }
 
 
+        /// <summary>
+        /// Handles the OnError event of the pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void _pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Log.Error("MainActivity", e.Message);
         }
 
+        /// <summary>
+        /// Called when the activity is being destroyed.
+        /// </summary>
         protected override void OnDestroy()
         {
             VisioForgeX.DestroySDK();
@@ -67,6 +82,10 @@ namespace RTSP_Client
             base.OnDestroy();
         }
 
+        /// <summary>
+        /// Called when the activity is starting.
+        /// </summary>
+        /// <param name="savedInstanceState">If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in <see cref="M:Android.App.Activity.OnSaveInstanceState(Android.OS.Bundle)"/>.  <format type="text/html"><a href="https://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)" target="_blank">[C# document]</a></format></param>
         protected override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -102,6 +121,14 @@ namespace RTSP_Client
             edPassword.Text = "";
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             if (_pipeline == null)
@@ -116,6 +143,14 @@ namespace RTSP_Client
             await DestroyEngineAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btPause control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             if (_pipeline == null)
@@ -135,6 +170,14 @@ namespace RTSP_Client
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             _pipeline = new MediaBlocksPipeline();
@@ -162,6 +205,15 @@ namespace RTSP_Client
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Called when the activity has detected the user's query for the result from a permission request.
+        /// </summary>
+        /// <param name="requestCode">The request code passed in <see cref="M:Android.App.Activity.RequestPermissions(System.String[],System.Int32)" />.</param>
+        /// <param name="permissions">The requested permissions. Never null.</param>
+        /// <param name="grantResults">The grant results for the corresponding permissions which is either <see cref="F:Android.Content.PM.Permission.Granted" /> or <see cref="F:Android.Content.PM.Permission.Denied" />. Never null.</param>
+        /// <summary>
+        /// On request permissions result.
+        /// </summary>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

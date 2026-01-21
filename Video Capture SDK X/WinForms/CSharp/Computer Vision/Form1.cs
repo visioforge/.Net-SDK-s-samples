@@ -18,6 +18,10 @@
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.VideoCaptureX;
 
+    /// <summary>
+    /// The main form for the Computer Vision Demo.
+    /// Demonstrates usage of various computer vision techniques such as face detection, pedestrian detection, and car counting using the X-engine.
+    /// </summary>
     public partial class Form1 : Form
     {
         private VideoCaptureCoreX VideoCapture1;
@@ -35,6 +39,12 @@
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the Load event of the Form1 control.
+        /// Initializes the SDK engine, sets up the video capture and media player cores, and starts monitoring video sources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -57,6 +67,12 @@
             await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
         }
 
+        /// <summary>
+        /// Handles the OnVideoSourceAdded event of the DeviceEnumerator.
+        /// Adds newly discovered video input devices to the UI selection.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VideoCaptureDeviceInfo"/> instance containing the device information.</param>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Invoke(() =>
@@ -70,6 +86,12 @@
             });
         }
 
+        /// <summary>
+        /// Handles the OnError event of the MediaPlayer1 control.
+        /// Logs error messages to the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error data.</param>
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
@@ -77,6 +99,9 @@
 
         #region Face detection
 
+        /// <summary>
+        /// Face detection add.
+        /// </summary>
         private void FaceDetectionAdd()
         {
             _faceDetector = new DNNFaceDetector();
@@ -87,6 +112,9 @@
             VideoCapture1.Face_Detector = _faceDetector;
         }
 
+        /// <summary>
+        /// Face detection update.
+        /// </summary>
         private void FaceDetectionUpdate()
         {
             if (_faceDetector == null)
@@ -114,11 +142,20 @@
             _faceDetector.Settings.Pixelate = cbFDMosaic.Checked;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btFDUpdate control.
+        /// Updates the face detector settings based on the current UI values.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btFDUpdate_Click(object sender, EventArgs e)
         {
             FaceDetectionUpdate();
         }
 
+        /// <summary>
+        /// Face detection remove.
+        /// </summary>
         private void FaceDetectionRemove()
         {
             if (this._faceDetector != null)
@@ -129,6 +166,12 @@
             }
         }
 
+        /// <summary>
+        /// Handles the FacesDetected event of the FaceDetector control.
+        /// Displays information about detected faces in the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="CVFaceDetectedEventArgs"/> instance containing data about detected faces.</param>
         private void OnFaceDetected(object sender, CVFaceDetectedEventArgs e)
         {
             if (e.Faces.Length == 0)
@@ -147,21 +190,33 @@
                 }));
         }
 
+        /// <summary>
+        /// Handles the tb fd skip frames scroll event.
+        /// </summary>
         private void tbFDSkipFrames_Scroll(object sender, EventArgs e)
         {
             lbFDSkipFrames.Text = tbFDSkipFrames.Value.ToString();
         }
 
+        /// <summary>
+        /// Handles the tb fd downscale scroll event.
+        /// </summary>
         private void tbFDDownscale_Scroll(object sender, EventArgs e)
         {
             lbFDDownscale.Text = (tbFDDownscale.Value / 10.0).ToString("F2");
         }
 
+        /// <summary>
+        /// Handles the tb min neighbors scroll event.
+        /// </summary>
         private void tbMinNeighbors_Scroll(object sender, EventArgs e)
         {
             lbFDMinNeighbors.Text = tbFDMinNeighbors.Value.ToString();
         }
 
+        /// <summary>
+        /// Handles the tb scale factor scroll event.
+        /// </summary>
         private void tbScaleFactor_Scroll(object sender, EventArgs e)
         {
             lbFDScaleFactor.Text = (tbFDScaleFactor.Value / 100.0).ToString("F2");
@@ -170,6 +225,9 @@
         #endregion
 
         #region Pedestrian detection
+        /// <summary>
+        /// Pedestrian detection add.
+        /// </summary>
         private void PedestrianDetectionAdd()
         {
             _pedestrianDetector = new PedestrianDetector()
@@ -185,6 +243,9 @@
             _pedestrianDetector.OnPedestrianDetected += OnPedestrianDetected;
         }
 
+        /// <summary>
+        /// Pedestrian detection remove.
+        /// </summary>
         private void PedestrianDetectionRemove()
         {
             if (_pedestrianDetector != null)
@@ -195,6 +256,12 @@
             }
         }
 
+        /// <summary>
+        /// Handles the OnPedestrianDetected event of the PedestrianDetector.
+        /// Displays information about detected pedestrians in the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="CVPedestrianDetectedEventArgs"/> instance containing data about detected pedestrians.</param>
         private void OnPedestrianDetected(object sender, CVPedestrianDetectedEventArgs e)
         {
             if (e.Items.Length == 0)
@@ -213,11 +280,17 @@
                 }));
         }
 
+        /// <summary>
+        /// Handles the tb pd downscale scroll event.
+        /// </summary>
         private void tbPDDownscale_Scroll(object sender, EventArgs e)
         {
             lbPDDownscale.Text = (tbPDDownscale.Value / 10.0).ToString("F2");
         }
 
+        /// <summary>
+        /// Handles the tb pd skip frames scroll event.
+        /// </summary>
         private void tbPDSkipFrames_Scroll(object sender, EventArgs e)
         {
             lbPDSkipFrames.Text = tbPDSkipFrames.Value.ToString();
@@ -226,6 +299,9 @@
         #endregion
 
         #region Car counter
+        /// <summary>
+        /// Car counter add.
+        /// </summary>
         private void CarCounterAdd()
         {
             _carCounter = new CarCounter()
@@ -239,6 +315,12 @@
             _carCounter.OnCarsDetected += this.OnCarsDetected;
         }
 
+        /// <summary>
+        /// Handles the OnCarsDetected event of the CarCounter control.
+        /// Updates the detected cars count in the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="CVCarDetectedEventArgs"/> instance containing car detection information.</param>
         private void OnCarsDetected(object sender, CVCarDetectedEventArgs e)
         {
             BeginInvoke(
@@ -248,6 +330,9 @@
                 }));
         }
 
+        /// <summary>
+        /// Car counter remove.
+        /// </summary>
         private void CarCounterRemove()
         {
             if (_carCounter != null)
@@ -262,6 +347,12 @@
 
         #region Video capture source
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the cbVideoInputDevice control.
+        /// Populates the video input formats for the selected device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1)
@@ -286,6 +377,9 @@
             }
         }
 
+        /// <summary>
+        /// Select ip camera source async.
+        /// </summary>
         private async Task<UniversalSourceSettings> SelectIPCameraSourceAsync()
         {
             // Auto
@@ -302,6 +396,9 @@
             return uni;
         }
 
+        /// <summary>
+        /// Select video capture source.
+        /// </summary>
         private async Task SelectVideoCaptureSource()
         {
             var videoCaptureDevice = (await VideoCapture1.Video_SourcesAsync()).FirstOrDefault(device => device.DisplayName == cbVideoInputDevice.Text);
@@ -331,6 +428,9 @@
             VideoCapture1.Video_Source = videoSourceSettings;
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -339,11 +439,20 @@
             }
         }
 
+        /// <summary>
+        /// Handles the OnError event of the VideoCapture1 control.
+        /// Logs error messages to the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Configure video capture async.
+        /// </summary>
         private async Task ConfigureVideoCaptureAsync()
         {
             // select source
@@ -382,6 +491,9 @@
 
         #region Media Player
 
+        /// <summary>
+        /// Configure media player async.
+        /// </summary>
         private async Task ConfigureMediaPlayerAsync()
         {
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
@@ -405,6 +517,12 @@
 
         #endregion
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures and starts either video capture or media playback with computer vision processing enabled.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -453,6 +571,12 @@
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops video capture and media playback, and removes computer vision processing.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await VideoCapture1.StopAsync();
@@ -463,6 +587,12 @@
             PedestrianDetectionRemove();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btOpenFile control.
+        /// Opens a file dialog to select a video file for processing.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btOpenFile_Click(object sender, EventArgs e)
         {
             if (dlgOpenFile.ShowDialog() == DialogResult.OK)
@@ -471,6 +601,12 @@
             }
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the cbVideoInputFormat control.
+        /// Populates the available frame rates for the selected video input format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))

@@ -20,9 +20,17 @@ using System.Runtime.InteropServices;
 
 namespace CSCreateProcessAsUserFromService
 {
+    /// <summary>
+    /// Wrapper class for CreateProcessAsUser.
+    /// </summary>
     class CreateProcessAsUserWrapper
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
+        /// <summary>
+        /// Launch child process.
+        /// </summary>
+        /// <param name="ChildProcName">Child process name.</param>
+        /// <param name="args">Arguments.</param>
         public static void LaunchChildProcess(string ChildProcName, string args)
         {
             IntPtr ppSessionInfo = IntPtr.Zero;
@@ -122,29 +130,88 @@ namespace CSCreateProcessAsUserFromService
         /// </summary>
         /// 
 
+        /// <summary>
+        /// Current server handle.
+        /// </summary>
         private const int WTS_CURRENT_SERVER_HANDLE = 0;
+        /// <summary>
+        /// WTS connect state class.
+        /// </summary>
         private enum WTS_CONNECTSTATE_CLASS
         {
+            /// <summary>
+            /// Active.
+            /// </summary>
             WTSActive,
+            /// <summary>
+            /// Connected.
+            /// </summary>
             WTSConnected,
+            /// <summary>
+            /// Connect query.
+            /// </summary>
             WTSConnectQuery,
+            /// <summary>
+            /// Shadow.
+            /// </summary>
             WTSShadow,
+            /// <summary>
+            /// Disconnected.
+            /// </summary>
             WTSDisconnected,
+            /// <summary>
+            /// Idle.
+            /// </summary>
             WTSIdle,
+            /// <summary>
+            /// Listen.
+            /// </summary>
             WTSListen,
+            /// <summary>
+            /// Reset.
+            /// </summary>
             WTSReset,
+            /// <summary>
+            /// Down.
+            /// </summary>
             WTSDown,
+            /// <summary>
+            /// Init.
+            /// </summary>
             WTSInit
         }
 
+        /// <summary>
+        /// WTS session info.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         private struct WTS_SESSION_INFO
         {
+            /// <summary>
+            /// Session ID.
+            /// </summary>
             public UInt32 SessionID;
+
+            /// <summary>
+            /// Window station name.
+            /// </summary>
             public string pWinStationName;
+
+            /// <summary>
+            /// State.
+            /// </summary>
             public WTS_CONNECTSTATE_CLASS State;
         }
 
+        /// <summary>
+        /// Enumerate sessions.
+        /// </summary>
+        /// <param name="hServer">Server.</param>
+        /// <param name="Reserved">Reserved.</param>
+        /// <param name="Version">Version.</param>
+        /// <param name="ppSessionInfo">Session info.</param>
+        /// <param name="pSessionInfoCount">Session info count.</param>
+        /// <returns>True if successful.</returns>
         [DllImport("WTSAPI32.DLL", SetLastError = true, CharSet = CharSet.Unicode)]
         static extern bool WTSEnumerateSessions(
             IntPtr hServer,
@@ -154,9 +221,19 @@ namespace CSCreateProcessAsUserFromService
             [MarshalAs(UnmanagedType.U4)] ref UInt32 pSessionInfoCount
             );
 
+        /// <summary>
+        /// Free memory.
+        /// </summary>
+        /// <param name="pMemory">Pointer to memory.</param>
         [DllImport("WTSAPI32.DLL", SetLastError = true, CharSet = CharSet.Unicode)]
         static extern void WTSFreeMemory(IntPtr pMemory);
 
+        /// <summary>
+        /// Query user token.
+        /// </summary>
+        /// <param name="sessionId">Session ID.</param>
+        /// <param name="Token">Token.</param>
+        /// <returns>True if successful.</returns>
         [DllImport("WTSAPI32.DLL", SetLastError = true, CharSet = CharSet.Unicode)]
         static extern bool WTSQueryUserToken(UInt32 sessionId, out IntPtr Token);
         #endregion
@@ -168,38 +245,125 @@ namespace CSCreateProcessAsUserFromService
         /// </summary>
         /// 
 
+        /// <summary>
+        /// Startup info.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         struct STARTUPINFO
         {
+            /// <summary>
+            /// CB.
+            /// </summary>
             public Int32 cb;
+            /// <summary>
+            /// Reserved.
+            /// </summary>
             public string lpReserved;
+            /// <summary>
+            /// Desktop.
+            /// </summary>
             public string lpDesktop;
+            /// <summary>
+            /// Title.
+            /// </summary>
             public string lpTitle;
+            /// <summary>
+            /// X.
+            /// </summary>
             public Int32 dwX;
+            /// <summary>
+            /// Y.
+            /// </summary>
             public Int32 dwY;
+            /// <summary>
+            /// X Size.
+            /// </summary>
             public Int32 dwXSize;
+            /// <summary>
+            /// Y Size.
+            /// </summary>
             public Int32 dwYSize;
+            /// <summary>
+            /// X Count Chars.
+            /// </summary>
             public Int32 dwXCountChars;
+            /// <summary>
+            /// Y Count Chars.
+            /// </summary>
             public Int32 dwYCountChars;
+            /// <summary>
+            /// Fill Attribute.
+            /// </summary>
             public Int32 dwFillAttribute;
+            /// <summary>
+            /// Flags.
+            /// </summary>
             public Int32 dwFlags;
+            /// <summary>
+            /// Show Window.
+            /// </summary>
             public Int16 wShowWindow;
+            /// <summary>
+            /// Reserved 2.
+            /// </summary>
             public Int16 cbReserved2;
+            /// <summary>
+            /// Reserved 2.
+            /// </summary>
             public IntPtr lpReserved2;
+            /// <summary>
+            /// Std Input.
+            /// </summary>
             public IntPtr hStdInput;
+            /// <summary>
+            /// Std Output.
+            /// </summary>
             public IntPtr hStdOutput;
+            /// <summary>
+            /// Std Error.
+            /// </summary>
             public IntPtr hStdError;
         }
 
+        /// <summary>
+        /// Process information.
+        /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         struct PROCESS_INFORMATION
         {
+            /// <summary>
+            /// Process handle.
+            /// </summary>
             public IntPtr hProcess;
+            /// <summary>
+            /// Thread handle.
+            /// </summary>
             public IntPtr hThread;
+            /// <summary>
+            /// Process ID.
+            /// </summary>
             public int dwProcessId;
+            /// <summary>
+            /// Thread ID.
+            /// </summary>
             public int dwThreadId;
         }
 
+        /// <summary>
+        /// Create process as user.
+        /// </summary>
+        /// <param name="hToken">Token.</param>
+        /// <param name="lpApplicationName">Application name.</param>
+        /// <param name="lpCommandLine">Command line.</param>
+        /// <param name="lpProcessAttributes">Process attributes.</param>
+        /// <param name="lpThreadAttributes">Thread attributes.</param>
+        /// <param name="bInheritHandles">Inherit handles.</param>
+        /// <param name="dwCreationFlags">Creation flags.</param>
+        /// <param name="lpEnvironment">Environment.</param>
+        /// <param name="lpCurrentDirectory">Current directory.</param>
+        /// <param name="lpStartupInfo">Startup info.</param>
+        /// <param name="lpProcessInformation">Process information.</param>
+        /// <returns>True if successful.</returns>
         [DllImport("ADVAPI32.DLL", SetLastError = true, CharSet = CharSet.Unicode)]
         static extern bool CreateProcessAsUser(
             IntPtr hToken,
@@ -215,6 +379,11 @@ namespace CSCreateProcessAsUserFromService
             out PROCESS_INFORMATION lpProcessInformation
             );
 
+        /// <summary>
+        /// Close handle.
+        /// </summary>
+        /// <param name="hHandle">Handle.</param>
+        /// <returns>True if successful.</returns>
         [DllImport("KERNEL32.DLL", SetLastError = true, CharSet = CharSet.Unicode)]
         static extern bool CloseHandle(IntPtr hHandle);
         #endregion

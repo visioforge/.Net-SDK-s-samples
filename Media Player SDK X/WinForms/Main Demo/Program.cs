@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace Main_Demo
 {
+    /// <summary>
+    /// The program class.
+    /// </summary>
     static class Program
     {
         /// <summary>

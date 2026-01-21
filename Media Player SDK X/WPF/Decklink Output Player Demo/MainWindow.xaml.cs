@@ -24,19 +24,37 @@ namespace Decklink_Player_Demo_X
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The timer for UI updates.
+        /// </summary>
         private System.Timers.Timer _timer;
 
+        /// <summary>
+        /// Flag to prevent re-entrant timer calls.
+        /// </summary>
         private volatile bool _timerFlag;
 
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCoreX _player;
 
+        /// <summary>
+        /// Flag to indicate if the window is closing.
+        /// </summary>
         private volatile bool _isClosing;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -93,6 +111,9 @@ namespace Decklink_Player_Demo_X
             cbDecklinkVideoMode.SelectedIndex = 10;
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void Player_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -101,6 +122,9 @@ namespace Decklink_Player_Demo_X
             }));
         }
 
+        /// <summary>
+        /// Player on stop.
+        /// </summary>
         private void Player_OnStop(object sender, StopEventArgs e)
         {
             if (_isClosing)
@@ -114,6 +138,9 @@ namespace Decklink_Player_Demo_X
             }));
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _player = new MediaPlayerCoreX(VideoView1);
@@ -123,6 +150,9 @@ namespace Decklink_Player_Demo_X
             _player.Debug_Mode = cbDebugMode.IsChecked == true;
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timerFlag = true;
@@ -150,6 +180,9 @@ namespace Decklink_Player_Demo_X
             _timerFlag = false;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_player != null)
@@ -162,6 +195,9 @@ namespace Decklink_Player_Demo_X
             }
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
@@ -171,6 +207,9 @@ namespace Decklink_Player_Demo_X
             }
         }
 
+        /// <summary>
+        /// Tb timeline value changed.
+        /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!_timerFlag)
@@ -179,15 +218,18 @@ namespace Decklink_Player_Demo_X
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             edLog.Clear();
 
             await DestroyEngineAsync();
-                        
+
             CreateEngine();
 
-            var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text); 
+            var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text);
             _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
             _player.Custom_Video_Outputs.Clear();
@@ -195,9 +237,8 @@ namespace Decklink_Player_Demo_X
             if (cbDecklinkVideoOutput.Items.Count > 0)
             {
                 var device = (await DeviceEnumerator.Shared.DecklinkVideoSinksAsync()).First(x => x.Name == cbDecklinkVideoOutput.Text);
-                var videoSettings = new DecklinkVideoSinkSettings(device);
-                
-                videoSettings.Mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbDecklinkVideoMode.Text);
+                var mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbDecklinkVideoMode.Text);
+                var videoSettings = new DecklinkVideoSinkSettings(device, mode);
 
                 if (cbDecklinkVideoOutputResize.IsChecked == true)
                 {
@@ -224,6 +265,9 @@ namespace Decklink_Player_Demo_X
             _timer.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -236,16 +280,25 @@ namespace Decklink_Player_Demo_X
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _player.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _player.ResumeAsync();
         }
 
+        /// <summary>
+        /// Tb volume value changed.
+        /// </summary>
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_player != null)
@@ -254,6 +307,9 @@ namespace Decklink_Player_Demo_X
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();

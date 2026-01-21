@@ -13,17 +13,32 @@ namespace madVR_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The open file dialog.
+        /// </summary>
         private readonly Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
 
+        /// <summary>
+        /// The timer.
+        /// </summary>
         private readonly DispatcherTimer _timer = new DispatcherTimer();
 
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCore MediaPlayer1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the timer 1 tick event.
+        /// </summary>
         private void timer1_Tick()
         {
             _timer.Tag = 1;
@@ -40,11 +55,17 @@ namespace madVR_Demo
             _timer.Tag = 0;
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             MediaPlayer1 = new MediaPlayerCore(VideoView1 as IVideoView);
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (MediaPlayer1 != null)
@@ -54,6 +75,9 @@ namespace madVR_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             if (openFileDialog1.ShowDialog() == true)
@@ -62,6 +86,9 @@ namespace madVR_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -71,6 +98,9 @@ namespace madVR_Demo
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the bt play click event.
+        /// </summary>
         private void btPlay_Click(object sender, RoutedEventArgs e)
         {
             MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
@@ -89,6 +119,9 @@ namespace madVR_Demo
             _timer.Start();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _timer.Interval = TimeSpan.FromMilliseconds(500);
@@ -104,6 +137,9 @@ namespace madVR_Demo
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
         }
 
+        /// <summary>
+        /// Tb timeline value changed.
+        /// </summary>
         private void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (Convert.ToInt32(_timer.Tag) == 0)

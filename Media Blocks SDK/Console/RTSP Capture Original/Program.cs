@@ -53,8 +53,16 @@ namespace RTSP_Capture_Original
     /// - Slightly longer startup time (waiting for keyframe)
     /// - Can be disabled for ultra-low latency scenarios
     /// </summary>
+    /// <summary>
+    /// Represents the program.
+    /// </summary>
     internal class Program
     {
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         public static async Task Main(string[] args)
         {
             Console.WriteLine("RTSP Camera Capture Utility (MP4/MPEG-TS)");

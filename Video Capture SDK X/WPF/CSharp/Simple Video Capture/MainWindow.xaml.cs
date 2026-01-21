@@ -29,7 +29,8 @@ using VisioForge.Core.VideoCaptureX;
 namespace Simple_Video_Capture
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for the Simple Video Capture WPF demo's MainWindow.
+    /// Provides a comprehensive interface for video/audio capture, preview, and effect management.
     /// </summary>
     public partial class MainWindow : IDisposable
     {
@@ -61,6 +62,12 @@ namespace Simple_Video_Capture
             InitializeComponent();            
         }
 
+        /// <summary>
+        /// Handles the OnAudioSinkAdded event of the DeviceEnumerator.
+        /// Adds newly discovered audio output devices to the UI selection.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="AudioOutputDeviceInfo"/> instance containing device information.</param>
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -74,6 +81,12 @@ namespace Simple_Video_Capture
             });
         }
 
+        /// <summary>
+        /// Handles the OnAudioSourceAdded event of the DeviceEnumerator.
+        /// Adds newly discovered audio input devices to the UI selection.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="AudioCaptureDeviceInfo"/> instance containing device information.</param>
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -87,6 +100,12 @@ namespace Simple_Video_Capture
             });
         }
 
+        /// <summary>
+        /// Handles the OnVideoSourceAdded event of the DeviceEnumerator.
+        /// Adds newly discovered video input devices to the UI selection.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VideoCaptureDeviceInfo"/> instance containing device information.</param>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -100,6 +119,9 @@ namespace Simple_Video_Capture
             });
         }
 
+        /// <summary>
+        /// Creates the video capture engine and subscribes to essential events.
+        /// </summary>
         private void CreateEngine()
         {
             VideoCapture1 = new VideoCaptureCoreX(VideoView1 as IVideoView);
@@ -108,6 +130,12 @@ namespace Simple_Video_Capture
             VideoCapture1.OnAudioVUMeter += VideoCapture1_OnAudioVUMeter;
         }
 
+        /// <summary>
+        /// Handles the OnAudioVUMeter event of the VideoCapture1 control.
+        /// Updates the UI VU meter with current amplitude levels.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VisioForge.Core.Types.X.VUMeterXEventArgs"/> instance containing VU meter data.</param>
         private void VideoCapture1_OnAudioVUMeter(object sender, VisioForge.Core.Types.X.VUMeterXEventArgs e)
         {
             Dispatcher.Invoke(() =>
@@ -118,6 +146,10 @@ namespace Simple_Video_Capture
             });
         }
 
+        /// <summary>
+        /// Disposes of the video capture engine and unsubscribes from events.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task DestroyEngineAsync()
         {
             if (VideoCapture1 != null)
@@ -130,6 +162,13 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Displays a save file dialog and returns the selected filename.
+        /// </summary>
+        /// <param name="defaultExt">The default extension.</param>
+        /// <param name="filter">The file filter.</param>
+        /// <param name="filename">The selected filename.</param>
+        /// <returns>True if a file was selected; otherwise, false.</returns>
         private static bool SaveFileDialog(string defaultExt, string filter, out string filename)
         {
             filename = string.Empty;
@@ -149,6 +188,12 @@ namespace Simple_Video_Capture
             return false;
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the Window control.
+        /// Initializes the SDK, starts device monitoring, and sets up the engine.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
@@ -175,6 +220,12 @@ namespace Simple_Video_Capture
             await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// Opens a dialog to select the output file path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             string filename;
@@ -184,16 +235,28 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             Dispatcher.Invoke(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
         }
 
+        /// <summary>
+        /// Handles the OnError event of the VideoCapture1 control.
+        /// Logs error messages to the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Tb audio volume value changed.
+        /// </summary>
         private void tbAudioVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoCapture1 == null)
@@ -204,12 +267,21 @@ namespace Simple_Video_Capture
             VideoCapture1.Audio_OutputDevice_Volume = tbAudioVolume.Value / 100.0f;
         }
 
+        /// <summary>
+        /// Lb view video tutorials mouse left button down.
+        /// </summary>
         private void lbViewVideoTutorials_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbVideoInputDevice control.
+        /// Populates the video input formats for the selected device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbVideoInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -236,6 +308,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbAudioInputDevice control.
+        /// Populates the audio input formats for the selected device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbAudioInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -272,6 +350,12 @@ namespace Simple_Video_Capture
             }
         }
         
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the engine and starts the video capture or preview.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -454,6 +538,10 @@ namespace Simple_Video_Capture
             //VideoCapture1.Debug_SavePipeline("videocapturex");
         }
 
+        /// <summary>
+        /// Asynchronously configures video effects based on current UI settings.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task ConfigureVideoEffectsAsync()
         {
             VideoCapture1.Video_Effects_Clear();
@@ -500,16 +588,34 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btResume control.
+        /// Resumes the video capture engine.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btPause control.
+        /// Pauses the video capture engine.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the video capture engine and resets recording time.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -517,6 +623,12 @@ namespace Simple_Video_Capture
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbVideoInputFormat control.
+        /// Populates the available frame rates for the selected video input format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbVideoInputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoInputFrameRate.Items.Clear();
@@ -554,6 +666,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSaveScreenshot control.
+        /// Captures a snapshot of the current video frame and saves it to a file.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btSaveScreenshot_Click(object sender, RoutedEventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog() == true)
@@ -578,6 +696,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btOutputConfigure control.
+        /// Opens a configuration dialog for the selected output format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btOutputConfigure_Click(object sender, RoutedEventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -671,6 +795,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbOutputFormat control.
+        /// Updates the output file extension based on the selected format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbOutputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (edOutput == null)
@@ -709,6 +839,9 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Periodically updates the recording time displayed in the UI.
+        /// </summary>
         private async void UpdateRecordingTime()
         {
             var ts = await VideoCapture1.DurationAsync();
@@ -724,6 +857,12 @@ namespace Simple_Video_Capture
             }));
         }
 
+        /// <summary>
+        /// Handles the Checked and Unchecked events of the cbGreyscale control.
+        /// Adds or removes the grayscale video effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void cbGreyscale_CheckedChanged(object sender, RoutedEventArgs e)
         {
             if (cbGreyscale.IsChecked == true)
@@ -737,6 +876,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbContrast control.
+        /// Updates the contrast value of the video balance effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbContrast_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoCapture1 == null)
@@ -751,6 +896,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbHue control.
+        /// Updates the hue value of the video balance effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbHue_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoCapture1 == null)
@@ -765,6 +916,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbBrightness control.
+        /// Updates the brightness value of the video balance effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbBrightness_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoCapture1 == null)
@@ -779,6 +936,12 @@ namespace Simple_Video_Capture
             }            
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbSaturation control.
+        /// Updates the saturation value of the video balance effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbSaturation_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (VideoCapture1 == null)
@@ -793,6 +956,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Checked and Unchecked events of the cbSepia control.
+        /// Adds or removes the sepia color effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void cbSepia_CheckedChanged(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
@@ -811,6 +980,9 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
         private async void cbFlipX_Checked(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
@@ -829,6 +1001,9 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Cb flip checked.
+        /// </summary>
         private async void cbFlipY_Checked(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
@@ -847,6 +1022,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Closing event of the Window control.
+        /// Stops the engine and releases SDK resources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
@@ -854,6 +1035,9 @@ namespace Simple_Video_Capture
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Bt start capture.
+        /// </summary>
         private async void btStartCapture(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
@@ -882,11 +1066,17 @@ namespace Simple_Video_Capture
             
         }
 
+        /// <summary>
+        /// Bt stop capture.
+        /// </summary>
         private async void btStopCapture(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.StopCaptureAsync(0);
         }
 
+        /// <summary>
+        /// Handles the cb text logo click event.
+        /// </summary>
         private async void cbTextLogo_Click(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
@@ -905,6 +1095,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Checked and Unchecked events of the cbImageLogo control.
+        /// Adds or removes the image logo video effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void cbImageLogo_Click(object sender, RoutedEventArgs e)
         {
             if (VideoCapture1 == null)
@@ -923,6 +1119,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the cbVideoBalance control.
+        /// Adds or removes the video balance effect and updates its settings.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void cbVideoBalance_Click(object sender, RoutedEventArgs e)
         {
             if (cbVideoBalance.IsChecked == true)
@@ -941,6 +1143,12 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectLUT control.
+        /// Opens a file dialog to select a Look-Up Table (LUT) file.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectLUT_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new Microsoft.Win32.OpenFileDialog
@@ -954,6 +1162,12 @@ namespace Simple_Video_Capture
             }
         }
         
+        /// <summary>
+        /// Handles the Checked and Unchecked events of the cbLUT control.
+        /// Adds or removes the LUT video effect.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void cbLUT_CheckedChanged(object sender, RoutedEventArgs e)
         {
             if (cbLUT.IsChecked == true)
@@ -969,6 +1183,10 @@ namespace Simple_Video_Capture
 
         #region Dispose
 
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -989,6 +1207,9 @@ namespace Simple_Video_Capture
             Dispose(disposing: false);
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

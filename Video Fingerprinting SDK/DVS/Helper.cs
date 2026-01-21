@@ -12,6 +12,11 @@
 
     public static class Helper
     {
+        /// <summary>
+        /// Gets the IWin32Window from a WPF visual.
+        /// </summary>
+        /// <param name="visual">The WPF visual.</param>
+        /// <returns>The IWin32Window.</returns>
         public static System.Windows.Forms.IWin32Window GetIWin32Window(this System.Windows.Media.Visual visual)
         {
             var source = System.Windows.PresentationSource.FromVisual(visual) as System.Windows.Interop.HwndSource;
@@ -19,22 +24,41 @@
             return win;
         }
 
+        /// <summary>
+        /// Represents an old window for IWin32Window implementation.
+        /// </summary>
         private class OldWindow : System.Windows.Forms.IWin32Window
         {
+            /// <summary>
+            /// The handle.
+            /// </summary>
             private readonly System.IntPtr _handle;
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="OldWindow"/> class.
+            /// </summary>
+            /// <param name="handle">The window handle.</param>
             public OldWindow(System.IntPtr handle)
             {
                 this._handle = handle;
             }
 
             #region IWin32Window Members
+
+            /// <summary>
+            /// Gets the handle.
+            /// </summary>
             System.IntPtr System.Windows.Forms.IWin32Window.Handle
             {
                 get { return this._handle; }
             }
+
             #endregion
         }
 
+        /// <summary>
+        /// Get image for file.
+        /// </summary>
         public static BitmapSource GetImageForFile(string filename)
         {
             var bitmap = MediaInfoReaderX.GetFileSnapshotBitmap(filename, TimeSpan.FromMilliseconds(3000));
@@ -46,6 +70,11 @@
             return BitmapConv(bitmap);
         }
 
+        /// <summary>
+        /// Deletes the object.
+        /// </summary>
+        /// <param name="objectPtr">The object pointer.</param>
+        /// <returns>True if successful.</returns>
         [Localizable(false), DllImport("gdi32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool DeleteObject([In] IntPtr objectPtr);
@@ -59,6 +88,9 @@
         /// <returns>
         /// Returns WPF BitmapSource.
         /// </returns>
+        /// <summary>
+        /// Bitmap conv.
+        /// </summary>
         private static BitmapSource BitmapConv(System.Drawing.Bitmap bitmap)
         {
             IntPtr bitmapHandle = bitmap.GetHbitmap();
@@ -68,6 +100,9 @@
             return bitmapSource;
         }
 
+        /// <summary>
+        /// Create bitmap source.
+        /// </summary>
         private static BitmapSource CreateBitmapSource(System.Windows.Media.Color color)
         {
             int width = 80;

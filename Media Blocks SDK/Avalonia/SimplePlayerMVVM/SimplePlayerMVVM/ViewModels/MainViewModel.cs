@@ -33,8 +33,14 @@ using Android.Provider;
 
 namespace Simple_Player_MVVM.ViewModels
 {
+    /// <summary>
+    /// Represents the main view model.
+    /// </summary>
     public class MainViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainViewModel"/> class.
+        /// </summary>
         public MainViewModel()
         {
             OpenFileCommand = ReactiveCommand.Create(OpenFileAsync);
@@ -195,6 +201,9 @@ namespace Simple_Player_MVVM.ViewModels
         /// </summary>
         private System.Timers.Timer _tmPosition = new System.Timers.Timer(500);
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             if (_pipeline != null)
@@ -221,6 +230,9 @@ namespace Simple_Player_MVVM.ViewModels
             _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
         }
 
+        /// <summary>
+        /// Handles the player on start event.
+        /// </summary>
         private void _player_OnStart(object sender, EventArgs e)
         {
             try
@@ -241,6 +253,9 @@ namespace Simple_Player_MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// On window closing.
+        /// </summary>
         private void OnWindowClosing()
         {
             if (_pipeline != null)
@@ -255,6 +270,9 @@ namespace Simple_Player_MVVM.ViewModels
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Open file async.
+        /// </summary>
     private async Task OpenFileAsync()
         {
             await StopAllAsync();
@@ -303,6 +321,9 @@ namespace Simple_Player_MVVM.ViewModels
 #endif
         }
 
+        /// <summary>
+        /// Play pause async.
+        /// </summary>
         private async Task PlayPauseAsync()
         {
 #if !__IOS__ && !__MACCATALYST__
@@ -339,6 +360,9 @@ namespace Simple_Player_MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
         private async Task StopAsync()
         {
             var pipeline = _pipeline.Debug_GetPipeline();
@@ -349,6 +373,9 @@ namespace Simple_Player_MVVM.ViewModels
             PlayPauseText = "PLAY";
         }
 
+        /// <summary>
+        /// Speed async.
+        /// </summary>
         private async Task SpeedAsync()
         {
             if (SpeedText == "SPEED: 1X")
@@ -371,11 +398,17 @@ namespace Simple_Player_MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Stop all async.
+        /// </summary>
         private async Task StopAllAsync()
         {
             if (_pipeline == null)
@@ -400,6 +433,9 @@ namespace Simple_Player_MVVM.ViewModels
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
+        /// <summary>
+        /// Tm position elapsed.
+        /// </summary>
         private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (_pipeline == null)
@@ -448,6 +484,9 @@ namespace Simple_Player_MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// On seeking value changed.
+        /// </summary>
         private async Task OnSeekingValueChanged()
         {
             if (!_isTimerUpdate && _pipeline != null && SeekingValue.HasValue)
@@ -456,6 +495,9 @@ namespace Simple_Player_MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// On volume value changed.
+        /// </summary>
         private void OnVolumeValueChanged()
         {
             if (_pipeline != null && VolumeValue.HasValue)

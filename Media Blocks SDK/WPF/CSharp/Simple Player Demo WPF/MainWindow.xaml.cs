@@ -23,23 +23,49 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The update timer.
+        /// </summary>
         private System.Timers.Timer _timer;
 
+        /// <summary>
+        /// Indicates whether the timer is currently processing an update.
+        /// </summary>
         private volatile bool _timerFlag;
 
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The file source.
+        /// </summary>
         private UniversalSourceBlockV2 _fileSource;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the Window.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -67,6 +93,11 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
+        /// <summary>
+        /// Handles the OnError event of the Pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -75,6 +106,11 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             }));
         }
 
+        /// <summary>
+        /// Handles the OnStop event of the Pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -84,6 +120,10 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             }));
         }
 
+        /// <summary>
+        /// Asynchronously creates the media engine.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task CreateEngineAsync()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -103,6 +143,11 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
         }
 
+        /// <summary>
+        /// Handles the Elapsed event of the timer.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timerFlag = true;
@@ -125,6 +170,10 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             _timerFlag = false;
         }
 
+        /// <summary>
+        /// Asynchronously stops the media engine.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         private async Task StopEngineAsync()
         {
             if (_pipeline != null)
@@ -137,6 +186,9 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Destroys the media engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (_pipeline != null)
@@ -149,6 +201,11 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectFile control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
@@ -158,6 +215,11 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbTimeline control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!_timerFlag && _pipeline != null)
@@ -166,6 +228,11 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             edLog.Clear();
@@ -179,6 +246,11 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             _timer.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -191,16 +263,31 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the Click event of the btPause control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btResume control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the ValueChanged event of the tbVolume control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedPropertyChangedEventArgs{Double}"/> instance containing the event data.</param>
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_audioRenderer != null)
@@ -209,6 +296,11 @@ namespace MediaBlocks_Simple_Player_Demo_WPF
             }
         }
 
+        /// <summary>
+        /// Handles the Closing event of the Window.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();

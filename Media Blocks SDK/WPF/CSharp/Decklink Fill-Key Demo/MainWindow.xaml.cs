@@ -44,11 +44,11 @@ namespace DecklinkFillKeyDemo
         private VideoMixerBlock _videoMixer;
         private VideoRendererBlock _previewRenderer;
         private TeeBlock _outputTee;
-        
+
         private DispatcherTimer _captureTimer;
         private DispatcherTimer _clockTimer;
         private System.Timers.Timer _positionTimer;
-        
+
         private UserControl _graphicsOverlay;
         private bool _isRunning = false;
         private bool _graphicsVisible = true;
@@ -59,6 +59,9 @@ namespace DecklinkFillKeyDemo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Initialize SDK
@@ -85,7 +88,7 @@ namespace DecklinkFillKeyDemo
 
             // Create initial graphics overlay
             CreateGraphicsOverlay();
-            
+
             // Set default video mode
             cbVideoMode.SelectedIndex = 0; // HD1080p25
 
@@ -99,7 +102,7 @@ namespace DecklinkFillKeyDemo
                 // Load output devices
                 var outputDevices = await DecklinkVideoSinkBlock.GetDevicesAsync();
                 cbDecklinkDevice.Items.Clear();
-                
+
                 if (outputDevices.Length > 0)
                 {
                     foreach (var device in outputDevices)
@@ -108,7 +111,7 @@ namespace DecklinkFillKeyDemo
                     }
                     cbDecklinkDevice.SelectedIndex = 0;
                     Log($"Found {outputDevices.Length} Decklink output device(s)");
-                    
+
                     // Note for Fill+Key mode
                     if (outputDevices.Length >= 2)
                     {
@@ -128,7 +131,7 @@ namespace DecklinkFillKeyDemo
                 // Load input devices for background source
                 var inputDevices = await DecklinkVideoSourceBlock.GetDevicesAsync();
                 cbDecklinkInput.Items.Clear();
-                
+
                 if (inputDevices.Length > 0)
                 {
                     foreach (var device in inputDevices)
@@ -152,6 +155,9 @@ namespace DecklinkFillKeyDemo
             }
         }
 
+        /// <summary>
+        /// Create graphics overlay.
+        /// </summary>
         private void CreateGraphicsOverlay()
         {
             _graphicsOverlay = new UserControl
@@ -162,11 +168,14 @@ namespace DecklinkFillKeyDemo
             };
 
             UpdateGraphicsContent();
-            
+
             // Add to preview
             OverlayViewbox.Child = _graphicsOverlay;
         }
 
+        /// <summary>
+        /// Update graphics content.
+        /// </summary>
         private void UpdateGraphicsContent()
         {
             if (_graphicsOverlay == null) return;
@@ -175,7 +184,7 @@ namespace DecklinkFillKeyDemo
 
             // Create lower third container
             var lowerThird = new Grid();
-            
+
             // Position based on selection
             switch (cbPosition.SelectedIndex)
             {
@@ -343,6 +352,9 @@ namespace DecklinkFillKeyDemo
             _graphicsOverlay.Content = grid;
         }
 
+        /// <summary>
+        /// Apply animation.
+        /// </summary>
         private void ApplyAnimation(FrameworkElement element)
         {
             switch (cbAnimation.SelectedIndex)
@@ -386,6 +398,9 @@ namespace DecklinkFillKeyDemo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -395,13 +410,13 @@ namespace DecklinkFillKeyDemo
                     MessageBox.Show("Please select a Decklink output device.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                
+
                 // Check if Fill+Key mode is properly configured
                 if (cbEnableKeyer.IsChecked == true && cbVideoFormat.SelectedIndex == 2)
                 {
                     var outputDevices = await DecklinkVideoSinkBlock.GetDevicesAsync();
                     uint selectedDevice = (uint)cbDecklinkDevice.SelectedIndex;
-                    
+
                     if (selectedDevice + 1 >= outputDevices.Length)
                     {
                         MessageBox.Show(
@@ -413,7 +428,7 @@ namespace DecklinkFillKeyDemo
                             MessageBoxImage.Warning);
                         return;
                     }
-                    
+
                     Log($"Fill+Key mode: Using device {selectedDevice} for Fill and device {selectedDevice + 1} for Key");
                 }
 
@@ -459,7 +474,7 @@ namespace DecklinkFillKeyDemo
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
             _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
-            
+
             if (_pipeline.Debug_Mode)
             {
                 _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "DecklinkFillKey");
@@ -476,30 +491,26 @@ namespace DecklinkFillKeyDemo
 
             // Configure Decklink outputs for Fill+Key mode
             uint deviceNumber = (uint)cbDecklinkDevice.SelectedIndex;
-            
+
             // Determine if we're using Fill+Key (External keyer) or Internal keyer
             bool useFillKey = cbEnableKeyer.IsChecked == true && cbVideoFormat.SelectedIndex == 2; // ARGB_8bit is required for Fill+Key
-            
+
             if (useFillKey)
             {
                 Log("Configuring Fill+Key mode with External keyer...");
-                
+
                 // Fill output (device N) - contains the composited video
-                var fillSettings = new DecklinkVideoSinkSettings
+                var fillSettings = new DecklinkVideoSinkSettings(deviceNumber, GetSelectedDecklinkMode())
                 {
-                    DeviceNumber = deviceNumber,
-                    Mode = GetSelectedDecklinkMode(),
                     VideoFormat = DecklinkVideoFormat.ARGB_8bit, // Must be ARGB for Fill+Key
                     KeyerMode = DecklinkKeyerMode.External,
                     IsSync = true
                 };
                 _decklinkFillSink = new DecklinkVideoSinkBlock(fillSettings);
-                
+
                 // Key output (device N+1) - contains the alpha channel
-                var keySettings = new DecklinkVideoSinkSettings
+                var keySettings = new DecklinkVideoSinkSettings(deviceNumber + 1, GetSelectedDecklinkMode())
                 {
-                    DeviceNumber = deviceNumber + 1, // Next consecutive output
-                    Mode = GetSelectedDecklinkMode(),
                     VideoFormat = DecklinkVideoFormat.ARGB_8bit, // Must match Fill format
                     KeyerMode = DecklinkKeyerMode.Off, // Key output doesn't use keyer
                     IsSync = true
@@ -510,11 +521,9 @@ namespace DecklinkFillKeyDemo
             {
                 // Single output with Internal keyer or no keying
                 Log($"Configuring single output with {(cbEnableKeyer.IsChecked == true ? "Internal keyer" : "no keying")}...");
-                
-                var decklinkSettings = new DecklinkVideoSinkSettings
+
+                var decklinkSettings = new DecklinkVideoSinkSettings(deviceNumber, GetSelectedDecklinkMode())
                 {
-                    DeviceNumber = deviceNumber,
-                    Mode = GetSelectedDecklinkMode(),
                     VideoFormat = GetSelectedVideoFormat(),
                     KeyerMode = cbEnableKeyer.IsChecked == true ? DecklinkKeyerMode.Internal : DecklinkKeyerMode.Off,
                     KeyerLevel = (int)slKeyerLevel.Value,
@@ -531,32 +540,32 @@ namespace DecklinkFillKeyDemo
                 // Add file background
                 var sourceSettings = await UniversalSourceSettings.CreateAsync(edVideoFile.Text);
                 _backgroundSource = new UniversalSourceBlock(sourceSettings);
-                
+
                 // Create video mixer with 2 inputs for background and overlay
                 var mixerSettings = new VideoMixerBaseSettings(1920, 1080, GetSelectedFrameRate());
                 mixerSettings.Background = VideoMixerBackground.Transparent;
-                
+
                 // Add stream for background (full screen)
                 mixerSettings.AddStream(new VideoMixerStream(
                     new VFRect(0, 0, 1920, 1080), // Full screen
                     0)); // Z-order 0 (background)
-                    
+
                 // Add stream for graphics overlay (full screen with alpha)
                 mixerSettings.AddStream(new VideoMixerStream(
                     new VFRect(0, 0, 1920, 1080), // Full screen
                     1)); // Z-order 1 (foreground)
-                
+
                 _videoMixer = new VideoMixerBlock(mixerSettings);
-                
+
                 _pipeline.AddBlock(_backgroundSource);
                 _pipeline.AddBlock(_videoMixer);
                 _pipeline.AddBlock(_graphicsSource);
-                
+
                 // Connect: background -> mixer input 0
                 // Connect: graphics -> mixer input 1 (overlay with alpha)
                 _pipeline.Connect(_backgroundSource.Output, _videoMixer.Inputs[0]);
                 _pipeline.Connect(_graphicsSource.Output, _videoMixer.Inputs[1]);
-                
+
                 finalOutput = _videoMixer;
             }
             else if (rbDecklinkInput.IsChecked == true && cbDecklinkInput.SelectedIndex >= 0)
@@ -567,22 +576,22 @@ namespace DecklinkFillKeyDemo
                     Mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbInputMode.SelectedItem.ToString())
                 };
                 var decklinkInput = new DecklinkVideoSourceBlock(inputSettings);
-                
+
                 // Create video mixer
                 var mixerSettings = new VideoMixerBaseSettings(1920, 1080, GetSelectedFrameRate());
                 mixerSettings.Background = VideoMixerBackground.Transparent;
                 mixerSettings.AddStream(new VideoMixerStream(new VFRect(0, 0, 1920, 1080), 0)); // Background
                 mixerSettings.AddStream(new VideoMixerStream(new VFRect(0, 0, 1920, 1080), 1)); // Overlay
-                
+
                 _videoMixer = new VideoMixerBlock(mixerSettings);
-                
+
                 _pipeline.AddBlock(decklinkInput);
                 _pipeline.AddBlock(_videoMixer);
                 _pipeline.AddBlock(_graphicsSource);
-                
+
                 _pipeline.Connect(decklinkInput.Output, _videoMixer.Inputs[0]);
                 _pipeline.Connect(_graphicsSource.Output, _videoMixer.Inputs[1]);
-                
+
                 finalOutput = _videoMixer;
             }
             else if (rbTestPattern.IsChecked == true)
@@ -596,22 +605,22 @@ namespace DecklinkFillKeyDemo
                     FrameRate = GetSelectedFrameRate(),
                     Format = VideoFormatX.RGBA  // Ensure RGBA format for compatibility with VideoMixer
                 });
-                
+
                 // Create video mixer
                 var mixerSettings = new VideoMixerBaseSettings(1920, 1080, GetSelectedFrameRate());
                 mixerSettings.Background = VideoMixerBackground.Transparent;
                 mixerSettings.AddStream(new VideoMixerStream(new VFRect(0, 0, 1920, 1080), 0)); // Background
                 mixerSettings.AddStream(new VideoMixerStream(new VFRect(0, 0, 1920, 1080), 1)); // Overlay
-                
+
                 _videoMixer = new VideoMixerBlock(mixerSettings);
-                
+
                 _pipeline.AddBlock(testPattern);
                 _pipeline.AddBlock(_videoMixer);
                 _pipeline.AddBlock(_graphicsSource);
-                
+
                 _pipeline.Connect(testPattern.Output, _videoMixer.Inputs[0]);
                 _pipeline.Connect(_graphicsSource.Output, _videoMixer.Inputs[1]);
-                
+
                 finalOutput = _videoMixer;
             }
             else
@@ -622,27 +631,27 @@ namespace DecklinkFillKeyDemo
 
             // Add tee for preview and output
             bool useFillKeyMode = cbEnableKeyer.IsChecked == true && cbVideoFormat.SelectedIndex == 2;
-            
+
             if (useFillKeyMode && _decklinkKeySink != null)
             {
                 // Fill+Key mode: Need to split output to Fill and Key
                 _outputTee = new TeeBlock(3, MediaBlockPadMediaType.Video); // 3 outputs: Fill, Key, Preview
                 _pipeline.AddBlock(_outputTee);
                 _pipeline.Connect(finalOutput.Output, _outputTee.Input);
-                
+
                 // Connect Fill output (full composited video)
                 _pipeline.AddBlock(_decklinkFillSink);
                 _pipeline.Connect(_outputTee.Outputs[0], _decklinkFillSink.Input);
-                
+
                 // For Key output, we need to extract just the alpha channel
                 // In Fill+Key mode, the key signal is typically the alpha channel
                 // Since we're sending ARGB, the Decklink will extract the alpha for the key
                 _pipeline.AddBlock(_decklinkKeySink);
                 _pipeline.Connect(_outputTee.Outputs[1], _decklinkKeySink.Input);
-                
+
                 // Use output 2 for preview
                 var previewOutput = _outputTee.Outputs[2];
-                
+
                 // Add preview renderer
                 var videoView = (VisioForge.Core.UI.WPF.VideoView)this.FindName("VideoViewBackground");
                 if (videoView != null)
@@ -658,11 +667,11 @@ namespace DecklinkFillKeyDemo
                 _outputTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
                 _pipeline.AddBlock(_outputTee);
                 _pipeline.Connect(finalOutput.Output, _outputTee.Input);
-                
+
                 // Connect to Decklink output
                 _pipeline.AddBlock(_decklinkFillSink);
                 _pipeline.Connect(_outputTee.Outputs[0], _decklinkFillSink.Input);
-                
+
                 // Add preview renderer
                 var videoView = (VisioForge.Core.UI.WPF.VideoView)this.FindName("VideoViewBackground");
                 if (videoView != null)
@@ -685,6 +694,9 @@ namespace DecklinkFillKeyDemo
             _positionTimer.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await StopBroadcast();
@@ -720,6 +732,9 @@ namespace DecklinkFillKeyDemo
             }
         }
 
+        /// <summary>
+        /// Handles the capture timer tick event.
+        /// </summary>
         private void CaptureTimer_Tick(object sender, EventArgs e)
         {
             if (!_isRunning || _graphicsSource == null || _graphicsOverlay == null)
@@ -738,13 +753,13 @@ namespace DecklinkFillKeyDemo
                 if (frame != null)
                 {
                     _graphicsSource.PushFrame(frame);
-                    
+
                     // Save frame for debugging if enabled
                     if (cbSaveFrames.IsChecked == true)
                     {
                         SaveDebugFrame(frame);
                     }
-                    
+
                     frame.Free();
                 }
             }
@@ -754,6 +769,9 @@ namespace DecklinkFillKeyDemo
             }
         }
 
+        /// <summary>
+        /// Capture user control to frame.
+        /// </summary>
         private VideoFrameX CaptureUserControlToFrame(UserControl control)
         {
             if (!control.Dispatcher.CheckAccess())
@@ -768,7 +786,7 @@ namespace DecklinkFillKeyDemo
 
             // Create render target with alpha
             var renderBitmap = new RenderTargetBitmap(1920, 1080, 96, 96, PixelFormats.Pbgra32);
-            
+
             // Clear with transparent background
             var drawingVisual = new DrawingVisual();
             using (var drawingContext = drawingVisual.RenderOpen())
@@ -803,6 +821,9 @@ namespace DecklinkFillKeyDemo
             return frame;
         }
 
+        /// <summary>
+        /// Convert pre multiplied to straight alpha.
+        /// </summary>
         private void ConvertPreMultipliedToStraightAlpha(byte[] pixels)
         {
             for (int i = 0; i < pixels.Length; i += 4)
@@ -818,24 +839,30 @@ namespace DecklinkFillKeyDemo
             }
         }
 
+        /// <summary>
+        /// Save debug frame.
+        /// </summary>
         private void SaveDebugFrame(VideoFrameX frame)
         {
             // Save frames for debugging (limited to avoid disk space issues)
             int frameCount = 0;
             if (frameCount++ % 100 == 0) // Save every 100th frame
             {
-                string debugDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), 
+                string debugDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                     "VisioForge", "DecklinkFillKey", "Frames");
                 Directory.CreateDirectory(debugDir);
-                
+
                 string filename = Path.Combine(debugDir, $"frame_{frameCount:D6}.raw");
-                
+
                 byte[] data = new byte[frame.DataSize];
                 Marshal.Copy(frame.Data, data, 0, frame.DataSize);
                 File.WriteAllBytes(filename, data);
             }
         }
 
+        /// <summary>
+        /// Update clock.
+        /// </summary>
         private void UpdateClock()
         {
             Dispatcher.Invoke(() =>
@@ -845,7 +872,7 @@ namespace DecklinkFillKeyDemo
                 {
                     foreach (var child in grid.Children)
                     {
-                        if (child is Border border && border.Child is TextBlock clockText && 
+                        if (child is Border border && border.Child is TextBlock clockText &&
                             clockText.FontFamily.Source == "Consolas")
                         {
                             clockText.Text = DateTime.Now.ToString("HH:mm:ss");
@@ -856,6 +883,9 @@ namespace DecklinkFillKeyDemo
             });
         }
 
+        /// <summary>
+        /// Handles the clock timer tick event.
+        /// </summary>
         private void ClockTimer_Tick(object sender, EventArgs e)
         {
             if (_isRunning && cbShowClock.IsChecked == true)
@@ -864,6 +894,9 @@ namespace DecklinkFillKeyDemo
             }
         }
 
+        /// <summary>
+        /// Position timer elapsed.
+        /// </summary>
         private void PositionTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (_pipeline != null && _isRunning)
@@ -876,6 +909,9 @@ namespace DecklinkFillKeyDemo
             }
         }
 
+        /// <summary>
+        /// Get selected frame rate.
+        /// </summary>
         private VideoFrameRate GetSelectedFrameRate()
         {
             return cbFrameRate.SelectedIndex switch
@@ -888,6 +924,9 @@ namespace DecklinkFillKeyDemo
             };
         }
 
+        /// <summary>
+        /// Get frame duration.
+        /// </summary>
         private TimeSpan GetFrameDuration()
         {
             return cbFrameRate.SelectedIndex switch
@@ -900,6 +939,9 @@ namespace DecklinkFillKeyDemo
             };
         }
 
+        /// <summary>
+        /// Get selected decklink mode.
+        /// </summary>
         private DecklinkMode GetSelectedDecklinkMode()
         {
             return cbVideoMode.SelectedIndex switch
@@ -914,6 +956,9 @@ namespace DecklinkFillKeyDemo
             };
         }
 
+        /// <summary>
+        /// Get selected video format.
+        /// </summary>
         private DecklinkVideoFormat GetSelectedVideoFormat()
         {
             return cbVideoFormat.SelectedIndex switch
@@ -925,6 +970,9 @@ namespace DecklinkFillKeyDemo
             };
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke(() =>
@@ -933,6 +981,9 @@ namespace DecklinkFillKeyDemo
             });
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string message)
         {
             try
@@ -954,12 +1005,18 @@ namespace DecklinkFillKeyDemo
             }
         }
 
+        /// <summary>
+        /// Handles the bt update graphics click event.
+        /// </summary>
         private void btUpdateGraphics_Click(object sender, RoutedEventArgs e)
         {
             UpdateGraphicsContent();
             Log("Graphics content updated");
         }
-        
+
+        /// <summary>
+        /// Cb enable keyer checked.
+        /// </summary>
         private void cbEnableKeyer_Checked(object sender, RoutedEventArgs e)
         {
             if (cbVideoFormat != null && cbVideoFormat.SelectedIndex == 2)
@@ -971,7 +1028,10 @@ namespace DecklinkFillKeyDemo
                 Log("Internal keyer mode enabled");
             }
         }
-        
+
+        /// <summary>
+        /// Cb video format selection changed.
+        /// </summary>
         private void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbEnableKeyer != null && cbEnableKeyer.IsChecked == true && cbVideoFormat.SelectedIndex == 2)
@@ -980,10 +1040,13 @@ namespace DecklinkFillKeyDemo
             }
         }
 
+        /// <summary>
+        /// Handles the bt toggle graphics click event.
+        /// </summary>
         private void btToggleGraphics_Click(object sender, RoutedEventArgs e)
         {
             _graphicsVisible = !_graphicsVisible;
-            
+
             if (_graphicsVisible)
             {
                 UpdateGraphicsContent();
@@ -996,11 +1059,17 @@ namespace DecklinkFillKeyDemo
             }
         }
 
+        /// <summary>
+        /// Handles the bt refresh devices click event.
+        /// </summary>
         private async void btRefreshDevices_Click(object sender, RoutedEventArgs e)
         {
             await LoadDecklinkDevices();
         }
 
+        /// <summary>
+        /// Handles the bt select video file click event.
+        /// </summary>
         private void btSelectVideoFile_Click(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog
@@ -1014,11 +1083,17 @@ namespace DecklinkFillKeyDemo
             }
         }
 
+        /// <summary>
+        /// Handles the bt clear log click event.
+        /// </summary>
         private void btClearLog_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (_isRunning)

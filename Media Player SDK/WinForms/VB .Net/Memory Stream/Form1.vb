@@ -22,10 +22,16 @@ Public Class Form1
 
     Private WithEvents MediaPlayer1 As MediaPlayerCore
 
+        ''' <summary>
+        ''' Create engine.
+        ''' </summary>
     Private Sub CreateEngine()
         MediaPlayer1 = New MediaPlayerCore(VideoView1)
     End Sub
 
+        ''' <summary>
+        ''' Destroy engine.
+        ''' </summary>
     Private Sub DestroyEngine()
         MediaPlayer1.Dispose()
         MediaPlayer1 = Nothing
@@ -83,6 +89,9 @@ Public Class Form1
         timer1.Enabled = True
     End Sub
 
+        ''' <summary>
+        ''' Form 1 load.
+        ''' </summary>
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
 
         CreateEngine()
@@ -122,6 +131,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Bt next frame click.
+        ''' </summary>
     Private Sub btNextFrame_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btNextFrame.Click
 
         MediaPlayer1.NextFrame()
@@ -134,12 +146,18 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Tb volume 1 scroll.
+        ''' </summary>
     Private Sub tbVolume1_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbVolume1.Scroll
 
         MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value)
 
     End Sub
 
+        ''' <summary>
+        ''' Tb balance 1 scroll.
+        ''' </summary>
     Private Sub tbBalance1_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbBalance1.Scroll
 
         MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value)
@@ -162,6 +180,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Media player 1 on error.
+        ''' </summary>
     Private Sub MediaPlayer1_OnError(sender As System.Object, e As ErrorsEventArgs) Handles MediaPlayer1.OnError
 
         Invoke(Sub()
@@ -170,6 +191,9 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Link label 1 link clicked.
+        ''' </summary>
     Private Sub linkLabel1_LinkClicked(sender As System.Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel1.LinkClicked
 
         Dim startInfo = New ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials)
@@ -177,12 +201,18 @@ Public Class Form1
 
     End Sub
 
+        ''' <summary>
+        ''' Form 1 form closing.
+        ''' </summary>
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         btStop_Click(Nothing, Nothing)
 
         DestroyEngine()
     End Sub
 
+        ''' <summary>
+        ''' Bt select file click.
+        ''' </summary>
     Private Sub btSelectFile_Click(sender As Object, e As EventArgs) Handles btSelectFile.Click
         If (openFileDialog1.ShowDialog() = DialogResult.OK) Then
             edFilename.Text = openFileDialog1.FileName

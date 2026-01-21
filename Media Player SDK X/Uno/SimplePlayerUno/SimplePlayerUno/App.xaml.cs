@@ -3,6 +3,9 @@ using Microsoft.Extensions.Logging;
 
 namespace SimplePlayerUno;
 
+/// <summary>
+/// The app class.
+/// </summary>
 public partial class App : Application
 {
     /// <summary>
@@ -14,8 +17,14 @@ public partial class App : Application
         this.InitializeComponent();
     }
 
+    /// <summary>
+    /// Gets the main window.
+    /// </summary>
     protected Window? MainWindow { get; private set; }
 
+        /// <summary>
+        /// On launched.
+        /// </summary>
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
         MainWindow = new Window();

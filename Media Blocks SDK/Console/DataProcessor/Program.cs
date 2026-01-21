@@ -13,12 +13,24 @@ using System.IO;
 
 namespace DataProcessorSample
 {
+    /// <summary>
+    /// Represents a grayscale processor block.
+    /// </summary>
     public class GrayscaleProcessorBlock : DataProcessorBlock
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GrayscaleProcessorBlock"/> class.
+        /// </summary>
         public GrayscaleProcessorBlock() : base("video/x-raw")
         {
         }
 
+        /// <summary>
+        /// Processes the buffer.
+        /// </summary>
+        /// <param name="buffer">The buffer.</param>
+        /// <param name="caps">The caps.</param>
+        /// <returns>FlowReturn.</returns>
         protected override FlowReturn ProcessBuffer(Gst.Buffer buffer, Gst.Caps caps)
         {
             var structure = caps.GetStructure(0);
@@ -80,8 +92,16 @@ namespace DataProcessorSample
         }
     }
 
+    /// <summary>
+    /// Represents the program.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         static async Task Main(string[] args)
         {
             Console.WriteLine("DataProcessor Grayscale Sample");

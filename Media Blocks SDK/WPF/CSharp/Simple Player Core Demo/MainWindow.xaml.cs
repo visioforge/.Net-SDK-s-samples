@@ -21,17 +21,32 @@ namespace MediaBlocks_Simple_Player_Core_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The timer.
+        /// </summary>
         private System.Timers.Timer _timer;
 
+        /// <summary>
+        /// The timer flag.
+        /// </summary>
         private volatile bool _timerFlag;
 
+        /// <summary>
+        /// The simple player core.
+        /// </summary>
         private SimplePlayerCoreX _simplePlayer;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -47,6 +62,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void Player_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -55,6 +73,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             }));
         }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
         private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -64,6 +85,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             }));
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timerFlag = true;
@@ -86,6 +110,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             _timerFlag = false;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_simplePlayer != null)
@@ -97,6 +124,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
@@ -106,6 +136,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             }
         }
 
+        /// <summary>
+        /// Tb timeline value changed.
+        /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!_timerFlag && _simplePlayer != null)
@@ -114,6 +147,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             edLog.Clear();
@@ -131,6 +167,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             _timer.Start();
         }
 
+        /// <summary>
+        /// Handles the simple player on streams info available event.
+        /// </summary>
         private void _simplePlayer_OnStreamsInfoAvailable(object sender, EventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -160,6 +199,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -176,16 +218,25 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _simplePlayer.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _simplePlayer.ResumeAsync();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
@@ -195,6 +246,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Tb volume value changed.
+        /// </summary>
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_simplePlayer == null)
@@ -205,6 +259,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             _simplePlayer.Audio_Volume = tbVolume.Value / 100.0;
         }
 
+        /// <summary>
+        /// Handles the bt select video stream click event.
+        /// </summary>
         private void btSelectVideoStream_Click(object sender, RoutedEventArgs e)
         {
             if (_simplePlayer == null || cbVideoStream.SelectedIndex == -1 || _simplePlayer.State != VisioForge.Core.Types.PlaybackState.Play)
@@ -215,6 +272,9 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             _simplePlayer.Video_Stream_Select(_simplePlayer.Video_Streams[cbVideoStream.SelectedIndex]);
         }
 
+        /// <summary>
+        /// Handles the bt select audio stream click event.
+        /// </summary>
         private void btSelectAudioStream_Click(object sender, RoutedEventArgs e)
         {
             if (_simplePlayer == null || cbAudioStream.SelectedIndex == -1 || _simplePlayer.State != VisioForge.Core.Types.PlaybackState.Play)

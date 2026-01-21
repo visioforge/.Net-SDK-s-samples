@@ -20,6 +20,9 @@ namespace video_capture_text_overlay
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             videoCapture1.Video_CaptureDevice = new VideoCaptureSource(videoCapture1.Video_CaptureDevices()[cbVideoSource.SelectedIndex].Name);
@@ -31,11 +34,17 @@ namespace video_capture_text_overlay
             await videoCapture1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await videoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             videoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
@@ -67,6 +76,9 @@ namespace video_capture_text_overlay
             }
         }
 
+        /// <summary>
+        /// Is administrator.
+        /// </summary>
         private static bool IsAdministrator()
         {
             using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
@@ -76,6 +88,9 @@ namespace video_capture_text_overlay
             }
         }
 
+        /// <summary>
+        /// Handles the bt register camera click event.
+        /// </summary>
         private void btRegisterCamera_Click(object sender, EventArgs e)
         {
             if (!IsAdministrator())

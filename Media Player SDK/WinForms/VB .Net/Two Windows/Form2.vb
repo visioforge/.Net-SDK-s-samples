@@ -4,6 +4,9 @@ Public Class Form2
 
     Public Event OnWindowSizeChanged(sender As Object, e As EventArgs)
 
+        ''' <summary>
+        ''' Log licensing.
+        ''' </summary>
     Public Sub LogLicensing(message As String)
 
         If cbLicensing.Checked Then
@@ -12,6 +15,9 @@ Public Class Form2
 
     End Sub
 
+        ''' <summary>
+        ''' Log.
+        ''' </summary>
     Public Sub Log(message As String)
 
         If cbLicensing.Checked Then
@@ -26,6 +32,9 @@ Public Class Form2
 	End Get
     End Property
 
+        ''' <summary>
+        ''' Form 2 size changed.
+        ''' </summary>
     Private Sub Form2_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged
         RaiseEvent OnWindowSizeChanged(sender, e)
     End Sub

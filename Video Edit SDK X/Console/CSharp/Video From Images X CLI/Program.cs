@@ -13,6 +13,12 @@ namespace Video_From_Images_CLI
 {
     static class Program
     {
+        /// <summary>
+        /// Scans the specified folder for files with a given extension and adds them to a list.
+        /// </summary>
+        /// <param name="inputFolder">The path to the folder to scan.</param>
+        /// <param name="ext">The file extension to look for (e.g., "*.jpg").</param>
+        /// <param name="files">A reference to the list where the found file paths will be added.</param>
         static void AddFiles(string inputFolder, string ext, ref List<string> files)
         {
             var files2 = Directory.GetFiles(inputFolder, ext);
@@ -22,6 +28,10 @@ namespace Video_From_Images_CLI
             }
         }
 
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        /// <param name="args">The command-line arguments.</param>
         static void Main(string[] args)
         {
             var res = CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args);
@@ -117,16 +127,34 @@ namespace Video_From_Images_CLI
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Event handler for the engine's Stop event.
+        /// Outputs a completion message to the console.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         private static void VideoEdit_OnStop(object sender, StopEventArgs e)
         {
             Console.WriteLine("Completed");
         }
 
+        /// <summary>
+        /// Event handler for the engine's Progress event.
+        /// Outputs the current progress percentage to the console.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="progressEventArgs">The <see cref="ProgressEventArgs"/> instance containing progress information.</param>
         private static void VideoEdit1_OnProgress(object sender, ProgressEventArgs progressEventArgs)
         {
             Console.WriteLine(progressEventArgs.Progress);
         }
 
+        /// <summary>
+        /// Event handler for the engine's Error event.
+        /// Outputs error messages to the console.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing error information.</param>
         private static void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
         {
             Console.WriteLine(e.Message);

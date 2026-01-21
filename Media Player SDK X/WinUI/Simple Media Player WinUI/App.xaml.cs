@@ -46,6 +46,9 @@ namespace Simple_Media_Player_WinUI
             m_window.Activate();
         }
 
+        /// <summary>
+        /// The main window.
+        /// </summary>
         private Window m_window;
     }
 }

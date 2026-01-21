@@ -12,6 +12,9 @@ namespace ScreenCaptureServiceHelper
     using VisioForge.Core.Types.VideoCapture;
     using VisioForge.Core.VideoCapture;
 
+    /// <summary>
+    /// Screen capture service helper main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         /// <summary>
@@ -35,8 +38,14 @@ namespace ScreenCaptureServiceHelper
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         internal static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
 
+        /// <summary>
+        /// Video capture instance.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -82,6 +91,9 @@ namespace ScreenCaptureServiceHelper
         /// <param name="e">
         /// Event args.
         /// </param>
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         protected void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             this.AddLog("helper: " + e.Message);
@@ -105,6 +117,9 @@ namespace ScreenCaptureServiceHelper
         /// <param name="log">
         /// Event text.
         /// </param>
+        /// <summary>
+        /// Add log.
+        /// </summary>
         public void AddLog(string log)
         {
             try
@@ -123,10 +138,24 @@ namespace ScreenCaptureServiceHelper
             }
         }
 
+        /// <summary>
+        /// HWND broadcast.
+        /// </summary>
         private IntPtr HWND_BROADCAST = (IntPtr)0xffff;
 
+        /// <summary>
+        /// Exit command message ID.
+        /// </summary>
         private uint VF_SCS_EXIT_COMMAND;
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private void Form1_Load(object sender, EventArgs e)
         {
             VF_SCS_EXIT_COMMAND = RegisterWindowMessage("VF_SCS_EXIT_COMMAND");
@@ -148,7 +177,12 @@ namespace ScreenCaptureServiceHelper
             }
         }
 
+        /// <summary>
+        /// Processes Windows messages.
+        /// </summary>
+        /// <param name="m">The Windows Message to process.</param>
         [EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
+
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == VF_SCS_EXIT_COMMAND)

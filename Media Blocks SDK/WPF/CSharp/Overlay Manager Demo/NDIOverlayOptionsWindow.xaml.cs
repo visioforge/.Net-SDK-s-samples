@@ -38,12 +38,18 @@ namespace Overlay_Manager_Demo
             Loaded += NDIOverlayOptionsWindow_Loaded;
         }
 
+        /// <summary>
+        /// Ndi overlay options window loaded.
+        /// </summary>
         private async void NDIOverlayOptionsWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // Load NDI sources
             await LoadNDISourcesAsync();
         }
 
+        /// <summary>
+        /// Load ndi sources async.
+        /// </summary>
         private async Task LoadNDISourcesAsync()
         {
             try
@@ -96,11 +102,17 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt refresh click event.
+        /// </summary>
         private async void btRefresh_Click(object sender, RoutedEventArgs e)
         {
             await LoadNDISourcesAsync();
         }
 
+        /// <summary>
+        /// Handles the bt click event.
+        /// </summary>
         private void btOK_Click(object sender, RoutedEventArgs e)
         {
             // Validate NDI source selection

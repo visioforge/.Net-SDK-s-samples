@@ -106,13 +106,23 @@ public class FolderPickerImplementation : IFolderPicker
     /// </summary>
     private class FolderPickerDelegate : UIDocumentPickerDelegate
     {
+        /// <summary>
+        /// The task completion source.
+        /// </summary>
         private readonly TaskCompletionSource<string> _tcs;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FolderPickerDelegate"/> class.
+        /// </summary>
+        /// <param name="tcs">The task completion source.</param>
         public FolderPickerDelegate(TaskCompletionSource<string> tcs)
         {
             _tcs = tcs;
         }
 
+        /// <summary>
+        /// Did pick document.
+        /// </summary>
         public override void DidPickDocument(UIDocumentPickerViewController controller, NSUrl[] urls)
         {
             if (urls != null && urls.Length > 0)
@@ -155,6 +165,9 @@ public class FolderPickerImplementation : IFolderPicker
             controller.DismissViewController(true, null);
         }
 
+        /// <summary>
+        /// Was cancelled.
+        /// </summary>
         public override void WasCancelled(UIDocumentPickerViewController controller)
         {
             _tcs.SetResult(null);

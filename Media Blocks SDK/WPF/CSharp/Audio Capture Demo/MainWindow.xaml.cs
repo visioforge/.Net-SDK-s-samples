@@ -24,31 +24,62 @@ namespace Audio_Capture_Demo_MB
     using VisioForge.Core.Types.X.AudioEncoders;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The save file dialog.
+        /// </summary>
         private readonly Microsoft.Win32.SaveFileDialog saveFileDialog1 = new Microsoft.Win32.SaveFileDialog();
 
+        /// <summary>
+        /// The recording timer.
+        /// </summary>
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        /// <summary>
+        /// The disposed value.
+        /// </summary>
         private bool disposedValue;
 
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The audio source.
+        /// </summary>
         private SystemAudioSourceBlock _audioSource;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The tee.
+        /// </summary>
         private TeeBlock _tee;
 
+        /// <summary>
+        /// The MP3 output.
+        /// </summary>
         private MP3OutputBlock _mp3Output;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-
-            
         }
 
+        /// <summary>
+        /// Create pipeline.
+        /// </summary>
         private void CreatePipeline()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -56,6 +87,9 @@ namespace Audio_Capture_Demo_MB
             _pipeline.OnStop += Pipeline_OnStop;
         }
 
+        /// <summary>
+        /// Destroy pipeline async.
+        /// </summary>
         private async Task DestroyPipelineAsync()
         {
             if ( _pipeline == null )
@@ -67,6 +101,9 @@ namespace Audio_Capture_Demo_MB
             _pipeline = null;
         }
 
+        /// <summary>
+        /// Form 1 load.
+        /// </summary>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -119,6 +156,9 @@ namespace Audio_Capture_Demo_MB
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp3");
         }
 
+        /// <summary>
+        /// Cb audio input device selected index changed.
+        /// </summary>
         private async void cbAudioInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -143,6 +183,9 @@ namespace Audio_Capture_Demo_MB
             }
         }
 
+        /// <summary>
+        /// Handles the tb audio volume scroll event.
+        /// </summary>
         private void tbAudioVolume_Scroll(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_audioRenderer == null)
@@ -153,6 +196,9 @@ namespace Audio_Capture_Demo_MB
             _audioRenderer.Volume = tbAudioVolume.Value / 100.0;
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
         private void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == true)
@@ -161,6 +207,9 @@ namespace Audio_Capture_Demo_MB
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -224,6 +273,9 @@ namespace Audio_Capture_Demo_MB
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -233,6 +285,9 @@ namespace Audio_Capture_Demo_MB
             await DestroyPipelineAsync();
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = _pipeline.Position_Get();
@@ -248,22 +303,34 @@ namespace Audio_Capture_Demo_MB
             }));
         }
 
+        /// <summary>
+        /// Ll video tutorials mouse down.
+        /// </summary>
         private void llVideoTutorials_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             Dispatcher.Invoke((Action)(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; }));
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the pipeline on stop event.
+        /// </summary>
         private void Pipeline_OnStop(object sender, EventArgs e)
         {
             Dispatcher.BeginInvoke((Action)(() =>
@@ -272,6 +339,9 @@ namespace Audio_Capture_Demo_MB
             }));
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyPipelineAsync();
@@ -281,4 +351,3 @@ namespace Audio_Capture_Demo_MB
     }
 }
 
-// ReSharper restore InconsistentNaming

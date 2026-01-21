@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable InconsistentNaming
+
+
 
 namespace read_file_info
 {
@@ -9,8 +9,14 @@ namespace read_file_info
     using VisioForge.Core.MediaInfo;
     using VisioForge.Core.Types.MediaPlayer;
 
+    /// <summary>
+    /// Read file info demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -18,6 +24,9 @@ namespace read_file_info
             MediaInfoReader.ConfigureLocalRedist();
         }
 
+        /// <summary>
+        /// Handles the bt open file click event.
+        /// </summary>
         private void btOpenFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog(this) != DialogResult.OK)

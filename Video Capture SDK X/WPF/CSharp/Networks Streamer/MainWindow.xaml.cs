@@ -26,7 +26,8 @@ using Rect = VisioForge.Core.Types.Rect;
 namespace Networks_Streamer_Demo
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for the Networks Streamer WPF demo's MainWindow.
+    /// Demonstrates streaming to various online platforms and network protocols (YouTube, Facebook, RTSP, RTMP, SRT, NDI, HLS, etc.) using the X-engine.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -39,6 +40,12 @@ namespace Networks_Streamer_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the OnAudioSinkAdded event of the DeviceEnumerator.
+        /// Adds newly discovered audio output devices to the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="AudioOutputDeviceInfo"/> instance containing the device information.</param>
         private void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -52,6 +59,12 @@ namespace Networks_Streamer_Demo
             });
         }
 
+        /// <summary>
+        /// Handles the OnAudioSourceAdded event of the DeviceEnumerator.
+        /// Adds newly discovered audio input sources to the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="AudioCaptureDeviceInfo"/> instance containing the device information.</param>
         private void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -65,6 +78,12 @@ namespace Networks_Streamer_Demo
             });
         }
 
+        /// <summary>
+        /// Handles the OnVideoSourceAdded event of the DeviceEnumerator.
+        /// Adds newly discovered video input sources to the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VideoCaptureDeviceInfo"/> instance containing the device information.</param>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -78,6 +97,12 @@ namespace Networks_Streamer_Demo
             });
         }
 
+        /// <summary>
+        /// Handles the OnError event of the _videoCapture control.
+        /// Logs error messages to the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void VideoCapture_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -86,6 +111,12 @@ namespace Networks_Streamer_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the Loaded event of the Window control.
+        /// Initializes the SDK, sets up the engine, and starts device monitoring.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -114,6 +145,12 @@ namespace Networks_Streamer_Demo
             await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
         }
 
+        /// <summary>
+        /// Handles the Elapsed event of the _timer control.
+        /// Updates the streaming duration displayed in the UI.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             var position = await _videoCapture.DurationAsync();
@@ -124,6 +161,12 @@ namespace Networks_Streamer_Demo
             });
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the engine with selected capture devices and network output, then starts streaming.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -297,6 +340,12 @@ namespace Networks_Streamer_Demo
             _timer.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops the network stream and resets UI state.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -306,6 +355,12 @@ namespace Networks_Streamer_Demo
             VideoView1.CallRefresh();
         }
 
+        /// <summary>
+        /// Handles the Closing event of the Window control.
+        /// Ensures the engine is stopped and resources are released.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
@@ -321,6 +376,12 @@ namespace Networks_Streamer_Demo
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbVideoInput control.
+        /// Populates available video formats for the selected camera.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFormat.Items.Clear();
@@ -350,6 +411,12 @@ namespace Networks_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbVideoFormat control.
+        /// Populates available frame rates for the selected video format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFrameRate.Items.Clear();
@@ -383,6 +450,12 @@ namespace Networks_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbAudioInput control.
+        /// Populates available audio formats for the selected device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -409,6 +482,12 @@ namespace Networks_Streamer_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbPlatform control.
+        /// Updates the default streaming key or URL text depending on the selected platform.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private void cbPlatform_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (edStreamingKey == null)

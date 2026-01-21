@@ -17,6 +17,9 @@ namespace Separate_Capture_Demo
     using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
     using VisioForge.Core.VideoCapture;
 
+    /// <summary>
+    /// Separate capture demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
@@ -35,11 +38,17 @@ namespace Separate_Capture_Demo
 
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -47,6 +56,9 @@ namespace Separate_Capture_Demo
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -58,6 +70,9 @@ namespace Separate_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngineAsync();
@@ -143,6 +158,9 @@ namespace Separate_Capture_Demo
             VideoCapture1.Video_Renderer_SetAuto();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -150,6 +168,9 @@ namespace Separate_Capture_Demo
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -278,6 +299,9 @@ namespace Separate_Capture_Demo
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -286,26 +310,41 @@ namespace Separate_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb audio balance scroll event.
+        /// </summary>
         private void tbAudioBalance_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set(tbAudioBalance.Value);
         }
 
+        /// <summary>
+        /// Handles the tb audio volume scroll event.
+        /// </summary>
         private void tbAudioVolume_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Volume_Set(tbAudioVolume.Value);
         }
 
+        /// <summary>
+        /// Handles the bt video capture device settings click event.
+        /// </summary>
         private void btVideoCaptureDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.Text);
         }
 
+        /// <summary>
+        /// Handles the cb use best video input format checked changed event.
+        /// </summary>
         private void cbUseBestVideoInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbVideoInputFormat.Enabled = !cbUseBestVideoInputFormat.Checked;
         }
 
+        /// <summary>
+        /// Handles the cb video input format selected index changed event.
+        /// </summary>
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
@@ -340,6 +379,9 @@ namespace Separate_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb video input device selected index changed event.
+        /// </summary>
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1)
@@ -366,16 +408,25 @@ namespace Separate_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb use best audio input format checked changed event.
+        /// </summary>
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbAudioInputFormat.Enabled = !cbUseBestAudioInputFormat.Checked;
         }
 
+        /// <summary>
+        /// Handles the bt audio input device settings click event.
+        /// </summary>
         private void btAudioInputDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
         }
 
+        /// <summary>
+        /// Handles the cb audio input device selected index changed event.
+        /// </summary>
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1)
@@ -426,12 +477,18 @@ namespace Separate_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
         private void llVideoTutorials_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -440,11 +497,17 @@ namespace Separate_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Set mp 4 output.
+        /// </summary>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -455,6 +518,9 @@ namespace Separate_Capture_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set wmv output.
+        /// </summary>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -466,6 +532,9 @@ namespace Separate_Capture_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Set mp 4 hw output.
+        /// </summary>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -476,6 +545,9 @@ namespace Separate_Capture_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set mpegts output.
+        /// </summary>
         private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
@@ -486,6 +558,9 @@ namespace Separate_Capture_Demo
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
+        /// <summary>
+        /// Set mov output.
+        /// </summary>
         private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
@@ -496,6 +571,9 @@ namespace Separate_Capture_Demo
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
+        /// <summary>
+        /// Set avi output.
+        /// </summary>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -512,6 +590,9 @@ namespace Separate_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb output format selected index changed event.
+        /// </summary>
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -549,6 +630,9 @@ namespace Separate_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt output configure click event.
+        /// </summary>
         private void btOutputConfigure_Click(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -623,6 +707,9 @@ namespace Separate_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             if (IsHandleCreated)
@@ -642,31 +729,49 @@ namespace Separate_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt separate capture start click event.
+        /// </summary>
         private async void btSeparateCaptureStart_Click(object sender, EventArgs e)
         {
             await VideoCapture1.SeparateCapture_StartAsync(edOutput.Text);
         }
 
+        /// <summary>
+        /// Handles the bt separate capture pause click event.
+        /// </summary>
         private async void btSeparateCapturePause_Click(object sender, EventArgs e)
         {
             await VideoCapture1.SeparateCapture_PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt separate capture resume click event.
+        /// </summary>
         private async void btSeparateCaptureResume_Click(object sender, EventArgs e)
         {
             await VideoCapture1.SeparateCapture_ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt separate capture stop click event.
+        /// </summary>
         private async void btSeparateCaptureStop_Click(object sender, EventArgs e)
         {
             await VideoCapture1.SeparateCapture_StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt separate capture change filename click event.
+        /// </summary>
         private async void btSeparateCaptureChangeFilename_Click(object sender, EventArgs e)
         {
             await VideoCapture1.SeparateCapture_ChangeFilenameOnTheFlyAsync(edNewFilename.Text);
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();

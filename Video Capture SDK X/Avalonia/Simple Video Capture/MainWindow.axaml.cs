@@ -25,6 +25,10 @@ using VisioForge.Core.VideoCaptureX;
 
 namespace SimpleVideoCaptureA
 {
+    /// <summary>
+    /// Interaction logic for the Avalonia Simple Video Capture demo's MainWindow.
+    /// Demonstrates basic video capture capabilities using the X-engine in an Avalonia application.
+    /// </summary>
 
     public partial class MainWindow : Window, IDisposable
     {
@@ -71,6 +75,12 @@ namespace SimpleVideoCaptureA
             DataContext = this;
         }
 
+        /// <summary>
+        /// Handles the event when a new audio sink (output device) is added by the device enumerator.
+        /// Updates the AudioOutputDevices collection on the UI thread.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="AudioOutputDeviceInfo"/> instance containing the new device information.</param>
         private async void DeviceEnumerator_OnAudioSinkAdded(object sender, AudioOutputDeviceInfo e)
         {
             await Dispatcher.UIThread.InvokeAsync((Action)(() =>
@@ -84,6 +94,12 @@ namespace SimpleVideoCaptureA
             }));
         }
 
+        /// <summary>
+        /// Handles the event when a new audio source (input device) is added by the device enumerator.
+        /// Updates the AudioInputDevices collection on the UI thread.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="AudioCaptureDeviceInfo"/> instance containing the new device information.</param>
         private async void DeviceEnumerator_OnAudioSourceAdded(object sender, AudioCaptureDeviceInfo e)
         {
             await Dispatcher.UIThread.InvokeAsync(() =>
@@ -97,6 +113,12 @@ namespace SimpleVideoCaptureA
             });
         }
 
+        /// <summary>
+        /// Handles the event when a new video source is added by the device enumerator.
+        /// Updates the VideoInputDevices collection on the UI thread.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="VideoCaptureDeviceInfo"/> instance containing the new device information.</param>
         private async void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             await Dispatcher.UIThread.InvokeAsync(() =>
@@ -110,11 +132,20 @@ namespace SimpleVideoCaptureA
             });
         }
 
+        /// <summary>
+        /// Initializes the Avalonia component loader.
+        /// </summary>
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
 
+        /// <summary>
+        /// Handles the Activated event of the MainWindow.
+        /// Performs one-time initialization, such as checking permissions (on macOS) and populating device lists.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void MainWindow_Activated(object sender, EventArgs e)
         {
             if (_initialized)
@@ -206,6 +237,9 @@ namespace SimpleVideoCaptureA
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Initializes UI controls by finding them in the visual tree and attaching event handlers.
+        /// </summary>
         private void InitControls()
         {
             VideoView1 = this.FindControl<VideoView>("VideoView1");
@@ -271,12 +305,21 @@ namespace SimpleVideoCaptureA
 
         }
 
+        /// <summary>
+        /// Handles the PointerPressed event for the Video Tutorials label.
+        /// Opens the video tutorials URL in the default browser.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="Avalonia.Input.PointerPressedEventArgs"/> instance containing the event data.</param>
         private void LbViewVideoTutorials_PointerPressed(object sender, Avalonia.Input.PointerPressedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Creates a new instance of the video capture engine and configures event handlers.
+        /// </summary>
         private void CreateEngine()
         {
             VideoCapture1 = new VideoCaptureCoreX(VideoView1);
@@ -284,6 +327,9 @@ namespace SimpleVideoCaptureA
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Disposes of the video capture engine and releases resources.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -295,6 +341,10 @@ namespace SimpleVideoCaptureA
             }
         }
 
+        /// <summary>
+        /// Opens a save file dialog for selecting a video output file.
+        /// </summary>
+        /// <returns>The confirmed filename, or null if cancelled.</returns>
         private async Task<string> SaveVideoFileDialogAsync()
         {
             var sfd = new SaveFileDialog();
@@ -313,6 +363,12 @@ namespace SimpleVideoCaptureA
             return await sfd.ShowAsync(this);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// Opens a dialog to select the output video file path.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             string filename = await SaveVideoFileDialogAsync();
@@ -322,16 +378,32 @@ namespace SimpleVideoCaptureA
             }
         }
 
+        /// <summary>
+        /// Adds a message to the logs collection.
+        /// </summary>
+        /// <param name="txt">The message to log.</param>
         private void Log(string txt)
         {
             Logs.Add(txt);
         }
 
+        /// <summary>
+        /// Handles the OnError event of the video capture engine.
+        /// Logs the error message.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the PropertyChanged event of the tbAudioVolume control.
+        /// Updates the audio output volume when the slider value changes.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="AvaloniaPropertyChangedEventArgs"/> instance containing the event data.</param>
         private void tbAudioVolume_PropertyChanged(object sender, AvaloniaPropertyChangedEventArgs e)
         {
             if (e.Property.ToString() == "Value")
@@ -340,6 +412,12 @@ namespace SimpleVideoCaptureA
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbVideoInputDevice control.
+        /// Populates available video formats for the selected video device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbVideoInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -366,6 +444,12 @@ namespace SimpleVideoCaptureA
             }
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbAudioInputDevice control.
+        /// Populates available audio formats for the selected audio device.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbAudioInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -390,6 +474,12 @@ namespace SimpleVideoCaptureA
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStart control.
+        /// Configures the engine with selected video/audio sources and settings, then starts the capture.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             Logs.Clear();
@@ -475,16 +565,34 @@ namespace SimpleVideoCaptureA
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btResume control.
+        /// Resumes the video capture if it was paused.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btPause control.
+        /// Pauses the video capture.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btStop control.
+        /// Stops video capture and resets the recording timer.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -492,6 +600,12 @@ namespace SimpleVideoCaptureA
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the SelectionChanged event of the cbVideoInputFormat control.
+        /// Populates available frame rates based on the selected video format.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
         private async void cbVideoInputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.SelectedItem.ToString()) || string.IsNullOrEmpty(cbVideoInputDevice.SelectedItem.ToString()))
@@ -532,6 +646,12 @@ namespace SimpleVideoCaptureA
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSaveSnapshot control.
+        /// Captures a snapshot of the current video frame and saves it to a file.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btSaveSnapshot_Click(object sender, RoutedEventArgs e)
         {
             var sfd = new SaveFileDialog();
@@ -571,6 +691,10 @@ namespace SimpleVideoCaptureA
             }
         }
 
+        /// <summary>
+        /// Asynchronously updates the recording timestamp displayed on the UI.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task UpdateRecordingTimeAsync()
         {
             var ts = await VideoCapture1.DurationAsync();
@@ -586,6 +710,12 @@ namespace SimpleVideoCaptureA
             }));
         }
 
+        /// <summary>
+        /// Handles the Closing event of the window.
+        /// Ensures resources are cleaned up and the SDK is destroyed.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEngine();
@@ -593,6 +723,10 @@ namespace SimpleVideoCaptureA
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Disposes of the managed resources used by the window.
+        /// </summary>
+        /// <param name="disposing">True if called from the <see cref="Dispose()"/> method; false if called from the finalizer.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -621,6 +755,9 @@ namespace SimpleVideoCaptureA
         //     Dispose(disposing: false);
         // }
 
+        /// <summary>
+        /// Disposes of the resources utilized by the current instance.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

@@ -6,6 +6,9 @@ using CoreGraphics;
 
 public class Toast
 {
+        /// <summary>
+        /// Show.
+        /// </summary>
     public static void Show(string message, UIViewController controller, double seconds = 2.0)
     {
         var toastLabel = new UILabel(new CGRect(10, controller.View.Frame.Size.Height - 100, controller.View.Frame.Size.Width - 20, 35))

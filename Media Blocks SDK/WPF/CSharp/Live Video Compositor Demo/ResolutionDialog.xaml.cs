@@ -21,10 +21,19 @@ namespace Live_Video_Compositor_Demo
     /// </summary>
     public partial class ResolutionDialog : Window
     {
+        /// <summary>
+        /// Get width.
+        /// </summary>
         public int GetWidth() => Convert.ToInt32(edWidth.Text);
 
+        /// <summary>
+        /// Get height.
+        /// </summary>
         public int GetHeight() => Convert.ToInt32(edHeight.Text);
 
+        /// <summary>
+        /// Get mixer type.
+        /// </summary>
         public LVCMixerType GetMixerType()
         {
             switch (cbMixerEngine.SelectedIndex)
@@ -38,6 +47,9 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Get frame rate.
+        /// </summary>
         public VideoFrameRate GetFrameRate()
         {
             var frameRate = Convert.ToInt32(edFrameRate.Text);
@@ -49,6 +61,9 @@ namespace Live_Video_Compositor_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt click event.
+        /// </summary>
         private void btOK_Click(object sender, RoutedEventArgs e)
         {
             Close();

@@ -27,41 +27,92 @@ namespace Bridge_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The video ID.
+        /// </summary>
         private const string VIDEO_ID = "video_pair";
 
+        /// <summary>
+        /// The audio ID.
+        /// </summary>
         private const string AUDIO_ID = "audio_pair";
 
+        /// <summary>
+        /// The pipeline source.
+        /// </summary>
         private MediaBlocksPipeline _pipelineSource;
 
+        /// <summary>
+        /// The pipeline file output.
+        /// </summary>
         private MediaBlocksPipeline _pipelineFileOutput;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The video bridge sink.
+        /// </summary>
         private BridgeVideoSinkBlock _videoBridgeSink;
 
+        /// <summary>
+        /// The video bridge source.
+        /// </summary>
         private BridgeVideoSourceBlock _videoBridgeSource;
 
+        /// <summary>
+        /// The audio bridge sink.
+        /// </summary>
         private BridgeAudioSinkBlock _audioBridgeSink;
 
+        /// <summary>
+        /// The audio bridge source.
+        /// </summary>
         private BridgeAudioSourceBlock _audioBridgeSource;
 
+        /// <summary>
+        /// The video tee.
+        /// </summary>
         private TeeBlock _videoTee;
 
+        /// <summary>
+        /// The audio tee.
+        /// </summary>
         private TeeBlock _audioTee;
 
+        /// <summary>
+        /// The video source.
+        /// </summary>
         private VirtualVideoSourceBlock _videoSource;
 
+        /// <summary>
+        /// The audio source.
+        /// </summary>
         private VirtualAudioSourceBlock _audioSource;
 
+        /// <summary>
+        /// The MP4 output.
+        /// </summary>
         private MP4OutputBlock _mp4Output;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -79,11 +130,17 @@ namespace Bridge_Demo
             await _pipelineSource.StartAsync();
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Create source engine async.
+        /// </summary>
         private async Task CreateSourceEngineAsync()
         {
             _pipelineSource = new MediaBlocksPipeline(name: "SOURCE");
@@ -119,6 +176,9 @@ namespace Bridge_Demo
             _pipelineSource.Connect(_audioTee.Outputs[1], _audioRenderer.Input);
         }
 
+        /// <summary>
+        /// Create file output engine.
+        /// </summary>
         private void CreateFileOutputEngine()
         {
             _pipelineFileOutput = new MediaBlocksPipeline(name: "FILE_OUTPUT");
@@ -139,6 +199,9 @@ namespace Bridge_Demo
             _pipelineFileOutput.Connect(_audioBridgeSource.Output, _mp4Output.CreateNewInput(MediaBlockPadMediaType.Audio));
         }
 
+        /// <summary>
+        /// Destroy engines async.
+        /// </summary>
         private async Task DestroyEnginesAsync()
         {
             if (_pipelineSource != null)
@@ -158,6 +221,9 @@ namespace Bridge_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new SaveFileDialog();
@@ -167,6 +233,9 @@ namespace Bridge_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             CreateFileOutputEngine();
@@ -174,6 +243,9 @@ namespace Bridge_Demo
             await _pipelineFileOutput.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             if (_pipelineFileOutput != null)
@@ -182,6 +254,9 @@ namespace Bridge_Demo
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEnginesAsync().ConfigureAwait(false);

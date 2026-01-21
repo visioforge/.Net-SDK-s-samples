@@ -19,6 +19,9 @@ namespace PhotoCapture
             set;
         }
 
+        /// <summary>
+        /// Create photo view.
+        /// </summary>
         private void CreatePhotoView(UIView view)
         {
             var rect = new CGRect(0, 0, Window!.Frame.Width, Window!.Frame.Height);
@@ -28,6 +31,9 @@ namespace PhotoCapture
             view!.AddSubview(_photoView);
         }
 
+        /// <summary>
+        /// Finished launching.
+        /// </summary>
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             // create a new window instance based on the screen size
@@ -66,11 +72,17 @@ namespace PhotoCapture
             return true;
         }
 
+        /// <summary>
+        /// Request photo library permissions.
+        /// </summary>
         private void RequestPhotoLibraryPermissions(Action<PHAuthorizationStatus> completionHandler)
         {
             PHPhotoLibrary.RequestAuthorization((status) => { completionHandler(status); });
         }
 
+        /// <summary>
+        /// Add buttons.
+        /// </summary>
         private void AddButtons(UIView parent)
         {
             // select camera
@@ -132,6 +144,9 @@ namespace PhotoCapture
             parent!.AddSubview(btSavePhoto);
         }
 
+        /// <summary>
+        /// Save photo to library.
+        /// </summary>
         private void SavePhotoToLibrary(string filePath)
         {
             PHPhotoLibrary.SharedPhotoLibrary.PerformChanges(() =>

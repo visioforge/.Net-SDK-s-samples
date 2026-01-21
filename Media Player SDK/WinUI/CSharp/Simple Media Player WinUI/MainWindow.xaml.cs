@@ -23,15 +23,30 @@ namespace Simple_Media_Player_WinUI
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCore MediaPlayer1;
 
+        /// <summary>
+        /// The video view.
+        /// </summary>
         private VideoView _videoView;
 
         //timer
+        /// <summary>
+        /// The timer.
+        /// </summary>
         private readonly DispatcherTimer _timer = new DispatcherTimer();
 
+        /// <summary>
+        /// The timer tag.
+        /// </summary>
         private volatile byte _timerTag = 0;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             this.InitializeComponent();
@@ -62,6 +77,9 @@ namespace Simple_Media_Player_WinUI
             InitTimer();
         }
 
+        /// <summary>
+        /// Set icon.
+        /// </summary>
         private void SetIcon()
         {
             IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(this);
@@ -71,6 +89,9 @@ namespace Simple_Media_Player_WinUI
         }
 
 #pragma warning disable S3168 // "async" methods should not return "void"
+        /// <summary>
+        /// Handles the timer tick event.
+        /// </summary>
         private async void _timer_Tick(object sender, object e)
 #pragma warning restore S3168 // "async" methods should not return "void"
         {
@@ -88,17 +109,26 @@ namespace Simple_Media_Player_WinUI
             _timerTag = 0;
         }
 
+        /// <summary>
+        /// Init timer.
+        /// </summary>
         private void InitTimer()
         {
             _timer.Interval = TimeSpan.FromMilliseconds(500);
             _timer.Tick += _timer_Tick;
         }
 
+        /// <summary>
+        /// Media player 1 on error.
+        /// </summary>
         private void MediaPlayer1_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt open file click event.
+        /// </summary>
         private async void btOpenFile_Click(object sender, RoutedEventArgs e)
         {
             FileOpenPicker open = new FileOpenPicker();
@@ -115,6 +145,9 @@ namespace Simple_Media_Player_WinUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await MediaPlayer1.StopAsync();
@@ -122,16 +155,25 @@ namespace Simple_Media_Player_WinUI
             _timer.Stop();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await MediaPlayer1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await MediaPlayer1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt play click event.
+        /// </summary>
         private async void btPlay_Click(object sender, RoutedEventArgs e)
         {
             MediaPlayer1.Playlist_Clear();
@@ -142,6 +184,9 @@ namespace Simple_Media_Player_WinUI
             _timer.Start();
         }
 
+        /// <summary>
+        /// Sl position value changed.
+        /// </summary>
         private async void slPosition_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             if (_timerTag == 0)

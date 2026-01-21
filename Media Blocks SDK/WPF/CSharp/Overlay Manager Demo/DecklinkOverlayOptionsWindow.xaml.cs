@@ -47,6 +47,9 @@ namespace Overlay_Manager_Demo
             Loaded += DecklinkOverlayOptionsWindow_Loaded;
         }
 
+        /// <summary>
+        /// Decklink overlay options window loaded.
+        /// </summary>
         private async void DecklinkOverlayOptionsWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // Load Decklink devices
@@ -56,6 +59,9 @@ namespace Overlay_Manager_Demo
             await LoadAudioDevicesAsync();
         }
 
+        /// <summary>
+        /// Load devices async.
+        /// </summary>
         private async Task LoadDevicesAsync()
         {
             try
@@ -101,6 +107,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Load audio devices async.
+        /// </summary>
         private async Task LoadAudioDevicesAsync()
         {
             try
@@ -135,6 +144,9 @@ namespace Overlay_Manager_Demo
             }
         }
 
+        /// <summary>
+        /// Cb enable audio changed.
+        /// </summary>
         private void cbEnableAudio_Changed(object sender, RoutedEventArgs e)
         {
             if (cbAudioDevice == null)
@@ -143,6 +155,9 @@ namespace Overlay_Manager_Demo
             cbAudioDevice.IsEnabled = cbEnableAudio.IsChecked == true;
         }
 
+        /// <summary>
+        /// Handles the bt click event.
+        /// </summary>
         private void btOK_Click(object sender, RoutedEventArgs e)
         {
             // Validate device selection

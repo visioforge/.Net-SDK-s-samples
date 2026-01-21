@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable InconsistentNaming
+
+
 
 namespace read_file_info
 {
@@ -16,6 +16,9 @@ namespace read_file_info
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt open file click event.
+        /// </summary>
         private async void btOpenFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog(this) != DialogResult.OK)
@@ -85,6 +88,9 @@ namespace read_file_info
             mmInfo.Text += tags?.ToString();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start

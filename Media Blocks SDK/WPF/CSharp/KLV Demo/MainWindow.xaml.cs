@@ -51,6 +51,9 @@ namespace KLV_Demo
             VisioForgeX.InitSDK();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -63,11 +66,17 @@ namespace KLV_Demo
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -76,6 +85,9 @@ namespace KLV_Demo
             }));
         }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
         private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -86,6 +98,9 @@ namespace KLV_Demo
             _pipeline.Close();
         }
 
+        /// <summary>
+        /// Create extract engine.
+        /// </summary>
         private void CreateExtractEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -119,6 +134,9 @@ namespace KLV_Demo
         //    _pipeline.Connect(_demux.VideoOutput, _sink.CreateNewInput(MediaBlockPadMediaType.Video));
         //}
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -130,6 +148,9 @@ namespace KLV_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt open ts file click event.
+        /// </summary>
         private void btOpenTSFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -139,6 +160,9 @@ namespace KLV_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt save klv file click event.
+        /// </summary>
         private void btSaveKLVFile_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -148,6 +172,9 @@ namespace KLV_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start extract click event.
+        /// </summary>
         private async void btStartExtract_Click(object sender, RoutedEventArgs e)
         {
             await DestroyEngineAsync();
@@ -156,6 +183,9 @@ namespace KLV_Demo
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop extract click event.
+        /// </summary>
         private async void btStopExtract_Click(object sender, RoutedEventArgs e)
         {
             if (_pipeline == null)
@@ -215,6 +245,9 @@ namespace KLV_Demo
         //    }
         //}
 
+        /// <summary>
+        /// Handles the bt open viewer src klv file click event.
+        /// </summary>
         private void btOpenViewerSrcKLVFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -224,6 +257,9 @@ namespace KLV_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt viewer parse click event.
+        /// </summary>
         private void btViewerParse_Click(object sender, RoutedEventArgs e)
         {
             edViewerData.Text = string.Empty;

@@ -15,8 +15,16 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace FileConvert
 {
+    /// <summary>
+    /// Represents the program.
+    /// </summary>
     internal class Program
     {
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        /// <returns>A task that represents the asynchronous operation.</returns>
         static async Task Main(string[] args)
         {
             Console.WriteLine("The application can convert any source video file to an MP4 file. Use the source file name as the first parameter.");
@@ -80,11 +88,21 @@ namespace FileConvert
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the OnStop event of the pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         private static void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Console.WriteLine("Convering...Done.");
         }
 
+        /// <summary>
+        /// Handles the OnError event of the pipeline.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private static void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Console.WriteLine("Error: " + e.Message);

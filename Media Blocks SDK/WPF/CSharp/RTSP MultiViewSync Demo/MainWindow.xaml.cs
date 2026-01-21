@@ -28,6 +28,9 @@ namespace RTSP_MultiViewSync_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             await DestroyAllAsync();
@@ -55,6 +58,9 @@ namespace RTSP_MultiViewSync_Demo
             await _engines[2].ResumeAsync().ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Destroy all async.
+        /// </summary>
         private async Task DestroyAllAsync()
         {
             if (_engines[0] != null)
@@ -76,6 +82,9 @@ namespace RTSP_MultiViewSync_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private void btStop_Click(object sender, RoutedEventArgs e)
         {
             _engines[0].StopAsync();
@@ -83,6 +92,9 @@ namespace RTSP_MultiViewSync_Demo
             _engines[2].StopAsync();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyAllAsync();
@@ -90,6 +102,9 @@ namespace RTSP_MultiViewSync_Demo
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start

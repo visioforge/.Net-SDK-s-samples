@@ -8,6 +8,9 @@ namespace vr360_media_player
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// On startup.
+        /// </summary>
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -16,6 +19,9 @@ namespace vr360_media_player
             await VisioForgeX.InitSDKAsync();
         }
 
+        /// <summary>
+        /// On exit.
+        /// </summary>
         protected override void OnExit(ExitEventArgs e)
         {
             // Cleanup VisioForge SDK

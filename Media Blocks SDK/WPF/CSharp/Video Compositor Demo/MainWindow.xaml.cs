@@ -43,37 +43,77 @@ namespace Video_Compositor_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The sources.
+        /// </summary>
         private List<CompositorSource> _sources = new List<CompositorSource>();
 
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The is updating UI.
+        /// </summary>
         private bool _isUpdatingUI = false;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The video tee.
+        /// </summary>
         private TeeBlock _videoTee;
 
+        /// <summary>
+        /// The MP4 output.
+        /// </summary>
         private MP4OutputBlock _mp4Output;
 
+        /// <summary>
+        /// The you tube output.
+        /// </summary>
         private YouTubeOutputBlock _youTubeOutput;
 
+        /// <summary>
+        /// The facebook output.
+        /// </summary>
         private FacebookLiveOutputBlock _facebookOutput;
 
+        /// <summary>
+        /// The NDI sink.
+        /// </summary>
         private NDISinkBlock _ndiSink;
 
+        /// <summary>
+        /// The video mixer.
+        /// </summary>
         private VideoMixerBlock _videoMixer;
 
+        /// <summary>
+        /// The fake audio source.
+        /// </summary>
         private VirtualAudioSourceBlock _fakeAudioSource;
 
+        /// <summary>
+        /// The recording timer.
+        /// </summary>
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-
-
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -82,6 +122,9 @@ namespace Video_Compositor_Demo
             }));
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -90,6 +133,9 @@ namespace Video_Compositor_Demo
             LogMessage("Media pipeline created", LogLevel.Info);
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -102,6 +148,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add camera click event.
+        /// </summary>
         private async void btAddCamera_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new VideoCaptureSourceDialog();
@@ -149,6 +198,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add screen click event.
+        /// </summary>
         private void btAddScreen_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new ScreenSourceDialog();
@@ -172,6 +224,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add file click event.
+        /// </summary>
         private async void btAddFile_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog();
@@ -190,6 +245,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add image click event.
+        /// </summary>
         private void btAddImage_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog();
@@ -211,6 +269,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt remove click event.
+        /// </summary>
         private void btRemove_Click(object sender, RoutedEventArgs e)
         {
             if (cbSources.SelectedIndex != -1)
@@ -229,6 +290,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Initialize logging first
@@ -256,6 +320,9 @@ namespace Video_Compositor_Demo
             LogMessage($"Application ready (SDK v{MediaBlocksPipeline.SDK_Version})", LogLevel.Info);
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             var ts = _pipeline.Position_Get();
@@ -271,6 +338,9 @@ namespace Video_Compositor_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -403,6 +473,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             if (_pipeline == null)
@@ -428,6 +501,9 @@ namespace Video_Compositor_Demo
             LogMessage("Pipeline stopped", LogLevel.Info);
         }
 
+        /// <summary>
+        /// Handles the bt update rect click event.
+        /// </summary>
         private void btUpdateRect_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
@@ -452,6 +528,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Cb keep aspect ratio checked.
+        /// </summary>
         private void cbKeepAspectRatio_Checked(object sender, RoutedEventArgs e)
         {
             if (_isUpdatingUI) return;
@@ -464,6 +543,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Cb keep aspect ratio unchecked.
+        /// </summary>
         private void cbKeepAspectRatio_Unchecked(object sender, RoutedEventArgs e)
         {
             if (_isUpdatingUI) return;
@@ -476,6 +558,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Update keep aspect ratio in mixer.
+        /// </summary>
         private void UpdateKeepAspectRatioInMixer(int index)
         {
             if (_videoMixer != null && index >= 0 && index < _sources.Count && _sources[index].MixerStream != null && _sources[index].MixerStream.ID != Guid.Empty)
@@ -490,6 +575,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new SaveFileDialog();
@@ -499,6 +587,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEngineAsync();
@@ -508,12 +599,18 @@ namespace Video_Compositor_Demo
 
         #region Chroma Key Event Handlers
 
+        /// <summary>
+        /// Cb sources selection changed.
+        /// </summary>
         private void CbSources_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateChromaKeyUI();
             UpdateFadeUI();
         }
 
+        /// <summary>
+        /// Cb enable chroma key checked.
+        /// </summary>
         private void cbEnableChromaKey_Checked(object sender, RoutedEventArgs e)
         {
             if (_isUpdatingUI) return;
@@ -526,6 +623,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Cb enable chroma key unchecked.
+        /// </summary>
         private void cbEnableChromaKey_Unchecked(object sender, RoutedEventArgs e)
         {
             if (_isUpdatingUI) return;
@@ -538,6 +638,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Cb chroma color selection changed.
+        /// </summary>
         private void cbChromaColor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_isUpdatingUI) return;
@@ -554,6 +657,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt custom color click event.
+        /// </summary>
         private void btCustomColor_Click(object sender, RoutedEventArgs e)
         {
             var colorDialog = new System.Windows.Forms.ColorDialog();
@@ -569,6 +675,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Sl sensitivity value changed.
+        /// </summary>
         private void slSensitivity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_isUpdatingUI) return;
@@ -586,6 +695,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Sl noise level value changed.
+        /// </summary>
         private void slNoiseLevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_isUpdatingUI) return;
@@ -603,6 +715,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt update chroma key click event.
+        /// </summary>
         private void btUpdateChromaKey_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
@@ -612,6 +727,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Update chroma key in mixer.
+        /// </summary>
         private void UpdateChromaKeyInMixer(int index)
         {
             if (_videoMixer != null && index >= 0 && index < _sources.Count && _sources[index].MixerStream != null && _sources[index].MixerStream.ID != Guid.Empty)
@@ -639,6 +757,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Update chroma key ui.
+        /// </summary>
         private void UpdateChromaKeyUI()
         {
             if (_isUpdatingUI) return; 
@@ -700,6 +821,9 @@ namespace Video_Compositor_Demo
 
         #region Z-Order Event Handlers
 
+        /// <summary>
+        /// Ed z order text changed.
+        /// </summary>
         private void edZOrder_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (_isUpdatingUI) return;
@@ -713,6 +837,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt move up click event.
+        /// </summary>
         private void btMoveUp_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
@@ -725,6 +852,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt move down click event.
+        /// </summary>
         private void btMoveDown_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
@@ -737,11 +867,17 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt update z order click event.
+        /// </summary>
         private void btUpdateZOrder_Click(object sender, RoutedEventArgs e)
         {
             UpdateZOrderInMixer();
         }
 
+        /// <summary>
+        /// Handles the bt sort by z order click event.
+        /// </summary>
         private void btSortByZOrder_Click(object sender, RoutedEventArgs e)
         {
             // Sort the sources list by z-order and update the combo box
@@ -770,6 +906,9 @@ namespace Video_Compositor_Demo
             // The actual z-order values in the mixer remain the same
         }
 
+        /// <summary>
+        /// Update z order in mixer.
+        /// </summary>
         private void UpdateZOrderInMixer()
         {
             if (_videoMixer != null)
@@ -782,6 +921,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Update single source z order.
+        /// </summary>
         private void UpdateSingleSourceZOrder(int index)
         {
             if (_videoMixer != null && index >= 0 && index < _sources.Count && _sources[index].MixerStream != null && _sources[index].MixerStream.ID != Guid.Empty)
@@ -801,6 +943,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Update source display name.
+        /// </summary>
         private void UpdateSourceDisplayName(int index)
         {
             if (index >= 0 && index < _sources.Count)
@@ -821,6 +966,9 @@ namespace Video_Compositor_Demo
 
         #region Fade Effects Event Handlers
 
+        /// <summary>
+        /// Handles the bt fade in click event.
+        /// </summary>
         private void btFadeIn_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
@@ -853,6 +1001,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt fade out click event.
+        /// </summary>
         private void btFadeOut_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
@@ -885,6 +1036,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Sl alpha value changed.
+        /// </summary>
         private void slAlpha_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (lblAlpha != null)
@@ -893,6 +1047,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt apply alpha click event.
+        /// </summary>
         private void btApplyAlpha_Click(object sender, RoutedEventArgs e)
         {
             int index = cbSources.SelectedIndex;
@@ -921,6 +1078,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Update fade ui.
+        /// </summary>
         private void UpdateFadeUI()
         {
             int index = cbSources.SelectedIndex;
@@ -945,6 +1105,9 @@ namespace Video_Compositor_Demo
 
         #region Logging
 
+        /// <summary>
+        /// Log message.
+        /// </summary>
         private void LogMessage(string message, LogLevel level = LogLevel.Info)
         {
             // Check if message should be displayed based on current log level
@@ -990,6 +1153,9 @@ namespace Video_Compositor_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt clear log click event.
+        /// </summary>
         private void btClearLog_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();

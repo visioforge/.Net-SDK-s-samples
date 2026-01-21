@@ -1,15 +1,15 @@
-// ReSharper disable InconsistentNaming
-
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable RedundantArgumentDefaultValue
-// ReSharper disable UnusedParameter.Local
 
 
 
-// ReSharper disable NotAccessedVariable
-// ReSharper disable InlineOutVariableDeclaration
 
-// ReSharper disable StringLiteralTypo
+
+
+
+
+
+
+
+
 namespace VideoEdit_CS_Demo
 {
     using System;
@@ -38,84 +38,185 @@ namespace VideoEdit_CS_Demo
     using M4AOutput = VisioForge.Core.Types.Output.M4AOutput;
 
     /// <summary>
-    /// Main demo form.
+    /// The main form for the Video Edit SDK Main Demo.
+    /// Provides a comprehensive interface for video editing, effects, and output configuration.
     /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The video edit core.
+        /// </summary>
         private VideoEditCore VideoEdit1;
 
+        /// <summary>
+        /// The audio effect ID for amplify.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_AMPLIFY = "amplify";
 
+        /// <summary>
+        /// The audio effect ID for equalizer.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_EQ = "eq";
 
+        /// <summary>
+        /// The audio effect ID for dynamic amplify.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_DYN_AMPLIFY = "dyn_amplify";
 
+        /// <summary>
+        /// The audio effect ID for sound 3D.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_SOUND_3D = "sound3d";
 
+        /// <summary>
+        /// The audio effect ID for true bass.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_TRUE_BASS = "true_bass";
 
+        /// <summary>
+        /// The audio effect ID for fade in.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_FADE_IN = "fade_in";
 
+        /// <summary>
+        /// The audio effect ID for fade out.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_FADE_OUT = "fade_out";
 
+        /// <summary>
+        /// The MP4 HW settings dialog.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
+        /// <summary>
+        /// The MP4 settings dialog.
+        /// </summary>
         private MP4SettingsDialog mp4SettingsDialog;
 
+        /// <summary>
+        /// The AVI settings dialog.
+        /// </summary>
         private AVISettingsDialog aviSettingsDialog;
 
+        /// <summary>
+        /// The WMV settings dialog.
+        /// </summary>
         private WMVSettingsDialog wmvSettingsDialog;
 
+        /// <summary>
+        /// The DV settings dialog.
+        /// </summary>
         private DVSettingsDialog dvSettingsDialog;
 
+        /// <summary>
+        /// The PCM settings dialog.
+        /// </summary>
         private PCMSettingsDialog pcmSettingsDialog;
 
+        /// <summary>
+        /// The MP3 settings dialog.
+        /// </summary>
         private MP3SettingsDialog mp3SettingsDialog;
 
+        /// <summary>
+        /// The WebM settings dialog.
+        /// </summary>
         private WebMSettingsDialog webmSettingsDialog;
 
+        /// <summary>
+        /// The FFMPEG settings dialog.
+        /// </summary>
         private FFMPEGSettingsDialog ffmpegSettingsDialog;
 
+        /// <summary>
+        /// The FFMPEG EXE settings dialog.
+        /// </summary>
         private FFMPEGEXESettingsDialog ffmpegEXESettingsDialog;
 
+        /// <summary>
+        /// The FLAC settings dialog.
+        /// </summary>
         private FLACSettingsDialog flacSettingsDialog;
 
+        /// <summary>
+        /// The custom format settings dialog.
+        /// </summary>
         private CustomFormatSettingsDialog customFormatSettingsDialog;
 
+        /// <summary>
+        /// The Ogg Vorbis settings dialog.
+        /// </summary>
         private OggVorbisSettingsDialog oggVorbisSettingsDialog;
 
+        /// <summary>
+        /// The Speex settings dialog.
+        /// </summary>
         private SpeexSettingsDialog speexSettingsDialog;
 
+        /// <summary>
+        /// The M4A settings dialog.
+        /// </summary>
         private M4ASettingsDialog m4aSettingsDialog;
 
+        /// <summary>
+        /// The GIF settings dialog.
+        /// </summary>
         private GIFSettingsDialog gifSettingsDialog;
 
+        /// <summary>
+        /// The audio channel mapper items.
+        /// </summary>
         private readonly List<AudioChannelMapperItem> audioChannelMapperItems = new List<AudioChannelMapperItem>();
 
         // Zoom
+        /// <summary>
+        /// The zoom level.
+        /// </summary>
         private double zoom = 1.0;
 
+        /// <summary>
+        /// The zoom shift X.
+        /// </summary>
         private int zoomShiftX;
 
+        /// <summary>
+        /// The zoom shift Y.
+        /// </summary>
         private int zoomShiftY;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Gets the file extension from the specified filename.
+        /// </summary>
+        /// <param name="filename">The filename.</param>
+        /// <returns>The file extension including the dot.</returns>
         private static string GetFileExt(string filename)
         {
             int k = filename.LastIndexOf('.');
             return filename.Substring(k, filename.Length - k);
         }
 
+        /// <summary>
+        /// Handles the Click event of the btClearList control.
+        /// Clears the input files list and resets relevant UI elements.
+        /// </summary>
         private void btClearList_Click(object sender, EventArgs e)
         {
             lbFiles.Items.Clear();
             VideoEdit1.Input_Clear_List();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btAddInputFile control.
+        /// Opens a file dialog to select and add video, image, or audio files to the timeline.
+        /// </summary>
         private async void btAddInputFile_Click(object sender, EventArgs e)
         {
             if (OpenDialog1.ShowDialog() == DialogResult.OK)
@@ -243,6 +344,10 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btSelectOutput control.
+        /// Opens a file dialog to select the output file path.
+        /// </summary>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (SaveDialog1.ShowDialog() == DialogResult.OK)
@@ -251,6 +356,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Creates the video editing engine, subscribes to events, and configures default settings.
+        /// </summary>
         private void CreateEngine()
         {
             VideoEdit1 = new VideoEditCore(VideoView1 as IVideoView);
@@ -268,6 +376,9 @@ namespace VideoEdit_CS_Demo
             VideoEdit1.OnProgress += VideoEdit1_OnProgress;
         }
 
+        /// <summary>
+        /// Destroys the video editing engine and unsubscribes from events to release resources.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoEdit1 != null)
@@ -289,6 +400,10 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the Load event of the Form.
+        /// Initializes the engine, sets the SDK version in the title, and populates UI with default values.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
@@ -347,11 +462,14 @@ namespace VideoEdit_CS_Demo
 
             cbTransitionName.SelectedIndex = 0;
 
-            // ReSharper disable once CoVariantArrayConversion
+            
             cbAudEqualizerPreset.Items.AddRange(VideoEdit1.Audio_Effects_Equalizer_Presets().ToArray());
             cbAudEqualizerPreset.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Configure vu meters.
+        /// </summary>
         private void ConfigureVUMeters()
         {
             VideoEdit1.Audio_VUMeter_Enabled = cbVUMeter.Checked;
@@ -369,6 +487,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Set mp 3 output.
+        /// </summary>
         private void SetMP3Output(ref MP3Output mp3Output)
         {
             if (mp3SettingsDialog == null)
@@ -379,6 +500,9 @@ namespace VideoEdit_CS_Demo
             mp3SettingsDialog.SaveSettings(ref mp3Output);
         }
 
+        /// <summary>
+        /// Set mp 4 output.
+        /// </summary>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -389,6 +513,9 @@ namespace VideoEdit_CS_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set ffmpegexe output.
+        /// </summary>
         private void SetFFMPEGEXEOutput(ref FFMPEGEXEOutput ffmpegOutput)
         {
             if (ffmpegEXESettingsDialog == null)
@@ -399,6 +526,9 @@ namespace VideoEdit_CS_Demo
             ffmpegEXESettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
+        /// <summary>
+        /// Set wmv output.
+        /// </summary>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -410,6 +540,9 @@ namespace VideoEdit_CS_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Set wma output.
+        /// </summary>
         private void SetWMAOutput(ref WMAOutput wmaOutput)
         {
             if (wmvSettingsDialog == null)
@@ -421,6 +554,9 @@ namespace VideoEdit_CS_Demo
             wmvSettingsDialog.SaveSettings(ref wmaOutput);
         }
 
+        /// <summary>
+        /// Set acm output.
+        /// </summary>
         private void SetACMOutput(ref ACMOutput acmOutput)
         {
             if (pcmSettingsDialog == null)
@@ -431,6 +567,9 @@ namespace VideoEdit_CS_Demo
             pcmSettingsDialog.SaveSettings(ref acmOutput);
         }
 
+        /// <summary>
+        /// Set web m output.
+        /// </summary>
         private void SetWebMOutput(ref WebMOutput webmOutput)
         {
             if (webmSettingsDialog == null)
@@ -441,6 +580,9 @@ namespace VideoEdit_CS_Demo
             webmSettingsDialog.SaveSettings(ref webmOutput);
         }
 
+        /// <summary>
+        /// Set ffmpeg output.
+        /// </summary>
         private void SetFFMPEGOutput(ref FFMPEGOutput ffmpegOutput)
         {
             if (ffmpegSettingsDialog == null)
@@ -451,6 +593,9 @@ namespace VideoEdit_CS_Demo
             ffmpegSettingsDialog.SaveSettings(ref ffmpegOutput);
         }
 
+        /// <summary>
+        /// Set flac output.
+        /// </summary>
         private void SetFLACOutput(ref FLACOutput flacOutput)
         {
             if (flacSettingsDialog == null)
@@ -461,6 +606,9 @@ namespace VideoEdit_CS_Demo
             flacSettingsDialog.SaveSettings(ref flacOutput);
         }
 
+        /// <summary>
+        /// Set mp 4 hw output.
+        /// </summary>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -471,6 +619,9 @@ namespace VideoEdit_CS_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set speex output.
+        /// </summary>
         private void SetSpeexOutput(ref SpeexOutput speexOutput)
         {
             if (speexSettingsDialog == null)
@@ -481,6 +632,9 @@ namespace VideoEdit_CS_Demo
             speexSettingsDialog.SaveSettings(ref speexOutput);
         }
 
+        /// <summary>
+        /// Set m 4 a output.
+        /// </summary>
         private void SetM4AOutput(ref M4AOutput m4aOutput)
         {
             if (m4aSettingsDialog == null)
@@ -491,6 +645,9 @@ namespace VideoEdit_CS_Demo
             m4aSettingsDialog.SaveSettings(ref m4aOutput);
         }
 
+        /// <summary>
+        /// Set gif output.
+        /// </summary>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
@@ -501,6 +658,9 @@ namespace VideoEdit_CS_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Set custom output.
+        /// </summary>
         private void SetCustomOutput(ref CustomOutput customOutput)
         {
             if (customFormatSettingsDialog == null)
@@ -511,6 +671,9 @@ namespace VideoEdit_CS_Demo
             customFormatSettingsDialog.SaveSettings(ref customOutput);
         }
 
+        /// <summary>
+        /// Set dv output.
+        /// </summary>
         private void SetDVOutput(ref DVOutput dvOutput)
         {
             if (dvSettingsDialog == null)
@@ -521,6 +684,9 @@ namespace VideoEdit_CS_Demo
             dvSettingsDialog.SaveSettings(ref dvOutput);
         }
 
+        /// <summary>
+        /// Set avi output.
+        /// </summary>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -538,6 +704,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Set mkv output.
+        /// </summary>
         private void SetMKVOutput(ref MKVv1Output mkvOutput)
         {
             if (aviSettingsDialog == null)
@@ -555,6 +724,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Set ogg output.
+        /// </summary>
         private void SetOGGOutput(ref OGGVorbisOutput oggVorbisOutput)
         {
             if (oggVorbisSettingsDialog == null)
@@ -565,6 +737,9 @@ namespace VideoEdit_CS_Demo
             oggVorbisSettingsDialog.SaveSettings(ref oggVorbisOutput);
         }
 
+        /// <summary>
+        /// Configure network streaming.
+        /// </summary>
         private void ConfigureNetworkStreaming()
         {
             VideoEdit1.Network_Streaming_Enabled = cbNetworkStreaming.Checked;
@@ -735,6 +910,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             VideoEdit1.Debug_Mode = cbDebugMode.Checked;
@@ -1161,6 +1339,9 @@ namespace VideoEdit_CS_Demo
             lbTransitions.Items.Clear();
         }
 
+        /// <summary>
+        /// Add video effects.
+        /// </summary>
         private void AddVideoEffects()
         {
             VideoEdit1.Video_Effects_Enabled = cbEffects.Checked;
@@ -1179,7 +1360,7 @@ namespace VideoEdit_CS_Demo
                     }
                     else
                     {
-                        // ReSharper disable once TryCastAlwaysSucceeds
+                        
                         blend = effect as IVideoEffectDeinterlaceBlend;
                     }
 
@@ -1347,6 +1528,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await VideoEdit1.StopAsync();
@@ -1370,6 +1554,9 @@ namespace VideoEdit_CS_Demo
             lbTextLogos.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the cb greyscale checked changed event.
+        /// </summary>
         private void cbGreyscale_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -1389,6 +1576,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb invert checked changed event.
+        /// </summary>
         private void cbInvert_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectInvert invert;
@@ -1408,11 +1598,17 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             await VideoEdit1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the tb darkness scroll event.
+        /// </summary>
         private void tbDarkness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectDarkness darkness;
@@ -1432,6 +1628,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb lightness scroll event.
+        /// </summary>
         private void tbLightness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectLightness lightness;
@@ -1451,6 +1650,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb saturation scroll event.
+        /// </summary>
         private void tbSaturation_Scroll(object sender, EventArgs e)
         {
             IVideoEffectSaturation saturation;
@@ -1470,12 +1672,18 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Link label 1 link clicked.
+        /// </summary>
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the tb contrast scroll event.
+        /// </summary>
         private void tbContrast_Scroll(object sender, EventArgs e)
         {
             IVideoEffectContrast contrast;
@@ -1495,6 +1703,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb filters selected index changed event.
+        /// </summary>
         private void cbFilters_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbFilters.SelectedIndex != -1)
@@ -1505,6 +1716,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt filter add click event.
+        /// </summary>
         private void btFilterAdd_Click(object sender, EventArgs e)
         {
             if (cbFilters.SelectedIndex != -1)
@@ -1514,6 +1728,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt filter settings click event.
+        /// </summary>
         private void btFilterSettings_Click(object sender, EventArgs e)
         {
             string name = cbFilters.Text;
@@ -1529,6 +1746,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the lb filters selected index changed event.
+        /// </summary>
         private void lbFilters_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbFilters.SelectedIndex != -1)
@@ -1539,6 +1759,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt filter settings 2 click event.
+        /// </summary>
         private void btFilterSettings2_Click(object sender, EventArgs e)
         {
             if (lbFilters.SelectedIndex != -1)
@@ -1556,83 +1779,131 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt filter delete all click event.
+        /// </summary>
         private void btFilterDeleteAll_Click(object sender, EventArgs e)
         {
             lbFilters.Items.Clear();
             VideoEdit1.Video_Filters_Clear();
         }
 
+        /// <summary>
+        /// Handles the cb aud amplify enabled checked changed event.
+        /// </summary>
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud amplify amp scroll event.
+        /// </summary>
         private void tbAudAmplifyAmp_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, false);
         }
 
+        /// <summary>
+        /// Handles the cb aud equalizer enabled checked changed event.
+        /// </summary>
         private void cbAudEqualizerEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 0 scroll event.
+        /// </summary>
         private void tbAudEq0_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 0, tbAudEq0.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 1 scroll event.
+        /// </summary>
         private void tbAudEq1_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 1, tbAudEq1.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 2 scroll event.
+        /// </summary>
         private void tbAudEq2_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 2, tbAudEq2.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 3 scroll event.
+        /// </summary>
         private void tbAudEq3_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 3, tbAudEq3.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 4 scroll event.
+        /// </summary>
         private void tbAudEq4_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 4, tbAudEq4.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 5 scroll event.
+        /// </summary>
         private void tbAudEq5_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 5, tbAudEq5.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 6 scroll event.
+        /// </summary>
         private void tbAudEq6_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 6, tbAudEq6.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 7 scroll event.
+        /// </summary>
         private void tbAudEq7_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 7, tbAudEq7.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 8 scroll event.
+        /// </summary>
         private void tbAudEq8_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 8, tbAudEq8.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 9 scroll event.
+        /// </summary>
         private void tbAudEq9_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 9, tbAudEq9.Value);
         }
 
+        /// <summary>
+        /// Handles the cb aud equalizer preset selected index changed event.
+        /// </summary>
         private void cbAudEqualizerPreset_SelectedIndexChanged(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Equalizer_Preset_Set(-1, AUDIO_EFFECT_ID_EQ, (EqualizerPreset)cbAudEqualizerPreset.SelectedIndex);
             btAudEqRefresh_Click(sender, e);
         }
 
+        /// <summary>
+        /// Handles the bt aud eq refresh click event.
+        /// </summary>
         private void btAudEqRefresh_Click(object sender, EventArgs e)
         {
             tbAudEq0.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0);
@@ -1647,46 +1918,73 @@ namespace VideoEdit_CS_Demo
             tbAudEq9.Value = VideoEdit1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 9);
         }
 
+        /// <summary>
+        /// Handles the cb aud dynamic amplify enabled checked changed event.
+        /// </summary>
         private void cbAudDynamicAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, cbAudDynamicAmplifyEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud dyn amp scroll event.
+        /// </summary>
         private void tbAudDynAmp_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud attack scroll event.
+        /// </summary>
         private void tbAudAttack_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud release scroll event.
+        /// </summary>
         private void tbAudRelease_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_DynamicAmplify(-1, AUDIO_EFFECT_ID_DYN_AMPLIFY, tbAudAttack.Value, tbAudDynAmp.Value, tbAudRelease.Value);
         }
 
+        /// <summary>
+        /// Handles the cb aud sound 3 d enabled checked changed event.
+        /// </summary>
         private void cbAudSound3DEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_SOUND_3D, cbAudSound3DEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud 3 d sound scroll event.
+        /// </summary>
         private void tbAud3DSound_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Sound3D(-1, AUDIO_EFFECT_ID_SOUND_3D, tbAud3DSound.Value);
         }
 
+        /// <summary>
+        /// Handles the cb aud true bass enabled checked changed event.
+        /// </summary>
         private void cbAudTrueBassEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud true bass scroll event.
+        /// </summary>
         private void tbAudTrueBass_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, false, tbAudTrueBass.Value);
         }
 
+        /// <summary>
+        /// Handles the rb checked changed event.
+        /// </summary>
         private void rbVR_CheckedChanged(object sender, EventArgs e)
         {
             cbScreenFlipVertical.Enabled = rbVMR9.Checked || rbDirect2D.Checked;
@@ -1695,6 +1993,9 @@ namespace VideoEdit_CS_Demo
             ConfigureVideoRenderer();
         }
 
+        /// <summary>
+        /// Handles the cb stretch checked changed event.
+        /// </summary>
         private async void cbStretch_CheckedChanged(object sender, EventArgs e)
         {
             if (cbStretch.Checked)
@@ -1709,28 +2010,43 @@ namespace VideoEdit_CS_Demo
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the cb screen flip vertical checked changed event.
+        /// </summary>
         private async void cbScreenFlipVertical_CheckedChanged(object sender, EventArgs e)
         {
             VideoEdit1.Video_Renderer.Flip_Vertical = cbScreenFlipVertical.Checked;
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the cb screen flip horizontal checked changed event.
+        /// </summary>
         private async void cbScreenFlipHorizontal_CheckedChanged(object sender, EventArgs e)
         {
             VideoEdit1.Video_Renderer.Flip_Horizontal = cbScreenFlipHorizontal.Checked;
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the tb speed scroll event.
+        /// </summary>
         private void tbSpeed_Scroll(object sender, EventArgs e)
         {
             lbSpeed.Text = Convert.ToInt32(tbSpeed.Value) + "%";
         }
 
+        /// <summary>
+        /// Handles the tb seeking scroll event.
+        /// </summary>
         private void tbSeeking_Scroll(object sender, EventArgs e)
         {
             VideoEdit1.Position_Set(TimeSpan.FromMilliseconds(tbSeeking.Value));
         }
 
+        /// <summary>
+        /// Video edit 1 on error.
+        /// </summary>
         private void VideoEdit1_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -1739,6 +2055,9 @@ namespace VideoEdit_CS_Demo
                                    }));
         }
 
+        /// <summary>
+        /// Handles the video edit 1 on start event.
+        /// </summary>
         private void VideoEdit1_OnStart(object sender, EventArgs e)
         {
             Invoke((Action)(() =>
@@ -1747,6 +2066,9 @@ namespace VideoEdit_CS_Demo
                                    }));
         }
 
+        /// <summary>
+        /// Video edit 1 on progress.
+        /// </summary>
         private void VideoEdit1_OnProgress(object sender, ProgressEventArgs e)
         {
             Invoke((Action)(() =>
@@ -1755,6 +2077,9 @@ namespace VideoEdit_CS_Demo
                                    }));
         }
 
+        /// <summary>
+        /// Video edit 1 on stop.
+        /// </summary>
         private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
@@ -1790,6 +2115,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Configure object detection.
+        /// </summary>
         private void ConfigureObjectDetection()
         {
             if (cbAFMotionDetection.Checked)
@@ -1810,16 +2138,25 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb af motion detection checked changed event.
+        /// </summary>
         private void cbAFMotionDetection_CheckedChanged(object sender, EventArgs e)
         {
             ConfigureObjectDetection();
         }
 
+        /// <summary>
+        /// Handles the cb af motion highlight checked changed event.
+        /// </summary>
         private void cbAFMotionHighlight_CheckedChanged(object sender, EventArgs e)
         {
             ConfigureObjectDetection();
         }
 
+        /// <summary>
+        /// Handles the bt chroma key select bg image click event.
+        /// </summary>
         private void btChromaKeySelectBGImage_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -1828,6 +2165,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Configure motion detection.
+        /// </summary>
         private void ConfigureMotionDetection()
         {
             if (cbMotDetEnabled.Checked)
@@ -1856,6 +2196,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt mot det update settings click event.
+        /// </summary>
         private void btMotDetUpdateSettings_Click(object sender, EventArgs e)
         {
             ConfigureMotionDetection();
@@ -1863,6 +2206,9 @@ namespace VideoEdit_CS_Demo
 
         private delegate void MotionDelegate(MotionDetectionEventArgs e);
 
+        /// <summary>
+        /// Motion delegate method.
+        /// </summary>
         private void MotionDelegateMethod(MotionDetectionEventArgs e)
         {
             string s = string.Empty;
@@ -1886,11 +2232,17 @@ namespace VideoEdit_CS_Demo
             pbMotionLevel.Value = e.Level;
         }
 
+        /// <summary>
+        /// Video edit 1 on motion.
+        /// </summary>
         private void VideoEdit1_OnMotion(object sender, MotionDetectionEventArgs e)
         {
             BeginInvoke(new MotionDelegate(MotionDelegateMethod), e);
         }
 
+        /// <summary>
+        /// Handles the cb zoom checked changed event.
+        /// </summary>
         private void cbZoom_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectZoom zoomEffect;
@@ -1918,6 +2270,9 @@ namespace VideoEdit_CS_Demo
             zoomEffect.Enabled = cbZoom.Checked;
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom in click event.
+        /// </summary>
         private void btEffZoomIn_Click(object sender, EventArgs e)
         {
             zoom += 0.1;
@@ -1926,6 +2281,9 @@ namespace VideoEdit_CS_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom out click event.
+        /// </summary>
         private void btEffZoomOut_Click(object sender, EventArgs e)
         {
             zoom -= 0.1;
@@ -1934,6 +2292,9 @@ namespace VideoEdit_CS_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom up click event.
+        /// </summary>
         private void btEffZoomUp_Click(object sender, EventArgs e)
         {
             zoomShiftY += 20;
@@ -1941,6 +2302,9 @@ namespace VideoEdit_CS_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom down click event.
+        /// </summary>
         private void btEffZoomDown_Click(object sender, EventArgs e)
         {
             zoomShiftY -= 20;
@@ -1948,6 +2312,9 @@ namespace VideoEdit_CS_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom right click event.
+        /// </summary>
         private void btEffZoomRight_Click(object sender, EventArgs e)
         {
             zoomShiftX += 20;
@@ -1955,6 +2322,9 @@ namespace VideoEdit_CS_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the bt eff zoom left click event.
+        /// </summary>
         private void btEffZoomLeft_Click(object sender, EventArgs e)
         {
             zoomShiftX -= 20;
@@ -1962,6 +2332,9 @@ namespace VideoEdit_CS_Demo
             cbZoom_CheckedChanged(null, null);
         }
 
+        /// <summary>
+        /// Handles the cb pan checked changed event.
+        /// </summary>
         private void cbPan_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectPan pan;
@@ -1999,6 +2372,9 @@ namespace VideoEdit_CS_Demo
 
         private delegate void BarcodeDelegate(BarcodeEventArgs value);
 
+        /// <summary>
+        /// Barcode delegate method.
+        /// </summary>
         private void BarcodeDelegateMethod(BarcodeEventArgs value)
         {
             edBarcode.Text = value.Value;
@@ -2009,6 +2385,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Video edit 1 on barcode detected.
+        /// </summary>
         private void VideoEdit1_OnBarcodeDetected(object sender, BarcodeEventArgs e)
         {
             e.DetectorEnabled = false;
@@ -2018,6 +2397,9 @@ namespace VideoEdit_CS_Demo
 
         #endregion
 
+        /// <summary>
+        /// Handles the bt barcode reset click event.
+        /// </summary>
         private void btBarcodeReset_Click(object sender, EventArgs e)
         {
             edBarcode.Text = string.Empty;
@@ -2025,6 +2407,9 @@ namespace VideoEdit_CS_Demo
             VideoEdit1.Barcode_Reader_Enabled = true;
         }
 
+        /// <summary>
+        /// Handles the bt refresh clients click event.
+        /// </summary>
         private void btRefreshClients_Click(object sender, EventArgs e)
         {
             lbNetworkClients.Items.Clear();
@@ -2041,6 +2426,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt select wmv profile network click event.
+        /// </summary>
         private void btSelectWMVProfileNetwork_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -2049,6 +2437,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Configures the Decklink output settings based on the UI selection.
+        /// </summary>
         private void ConfigureDecklinkOutput()
         {
             if (cbDecklinkOutput.Checked)
@@ -2085,6 +2476,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Configures the video renderer settings, including scaling, rotation, and background color.
+        /// </summary>
         private void ConfigureVideoRenderer()
         {
             if (rbVMR9.Checked)
@@ -2120,6 +2514,9 @@ namespace VideoEdit_CS_Demo
             VideoEdit1.Video_Renderer.Flip_Vertical = cbScreenFlipVertical.Checked;
         }
 
+        /// <summary>
+        /// Configures the chroma key effect with the specified color, sensitivity, and smoothing.
+        /// </summary>
         private void ConfigureChromaKey()
         {
             if (VideoEdit1.ChromaKey != null)
@@ -2149,6 +2546,10 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the CheckedChanged event of the cbFadeInOut control.
+        /// Enables or disables the fade-in and fade-out effects.
+        /// </summary>
         private void cbFadeInOut_CheckedChanged(object sender, EventArgs e)
         {
             if (rbVideoFadeIn.Checked)
@@ -2203,14 +2604,29 @@ namespace VideoEdit_CS_Demo
 
         #region Full screen
 
+        /// <summary>
+        /// Indicates whether the application is in full screen mode.
+        /// </summary>
         private bool fullScreen;
 
+        /// <summary>
+        /// The window left position.
+        /// </summary>
         private int windowLeft;
 
+        /// <summary>
+        /// The window top position.
+        /// </summary>
         private int windowTop;
 
+        /// <summary>
+        /// The window width.
+        /// </summary>
         private int windowWidth;
 
+        /// <summary>
+        /// The window height.
+        /// </summary>
         private int windowHeight;
 
         private int controlLeft;
@@ -2221,6 +2637,10 @@ namespace VideoEdit_CS_Demo
 
         private int controlHeight;
 
+        /// <summary>
+        /// Handles the Click event of the btFullScreen control.
+        /// Toggles the full-screen playback mode.
+        /// </summary>
         private async void btFullScreen_Click(object sender, EventArgs e)
         {
             if (!fullScreen)
@@ -2282,6 +2702,10 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the MouseClick event of the VideoView1 control.
+        /// Can be used for interactions with the video preview.
+        /// </summary>
         private void VideoView1_MouseClick(object sender, MouseEventArgs e)
         {
             if (fullScreen)
@@ -2292,24 +2716,36 @@ namespace VideoEdit_CS_Demo
 
         #endregion
 
+        /// <summary>
+        /// Link label 5 link clicked.
+        /// </summary>
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.StreamingToAdobeFlashServer);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Link label 4 link clicked.
+        /// </summary>
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.StreamingMSExpressionEncoder);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Link label 6 link clicked.
+        /// </summary>
         private void linkLabel6_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.IISSmoothStreaming);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the bt add input file 2 click event.
+        /// </summary>
         private void btAddInputFile2_Click(object sender, EventArgs e)
         {
             if (OpenDialog1.ShowDialog() == DialogResult.OK)
@@ -2327,6 +2763,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add input file 3 click event.
+        /// </summary>
         private void btAddInputFile3_Click(object sender, EventArgs e)
         {
             if (OpenDialog1.ShowDialog() == DialogResult.OK)
@@ -2345,17 +2784,26 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt clear list 3 click event.
+        /// </summary>
         private void btClearList3_Click(object sender, EventArgs e)
         {
             lbFiles2.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the cb direct 2 d rotate selected index changed event.
+        /// </summary>
         private async void cbDirect2DRotate_SelectedIndexChanged(object sender, EventArgs e)
         {
             VideoEdit1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text);
             await VideoEdit1.Video_Renderer_UpdateAsync();
         }
 
+        /// <summary>
+        /// Handles the pn video renderer bg color click event.
+        /// </summary>
         private async void pnVideoRendererBGColor_Click(object sender, EventArgs e)
         {
             colorDialog1.Color = pnVideoRendererBGColor.BackColor;
@@ -2369,6 +2817,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt add transition click event.
+        /// </summary>
         private void btAddTransition_Click(object sender, EventArgs e)
         {
             // get id
@@ -2382,16 +2833,26 @@ namespace VideoEdit_CS_Demo
             "(Start: " + edTransStartTime.Text + ", stop: " + edTransStopTime.Text + ")");
         }
 
+        /// <summary>
+        /// Handles the cb audio normalize checked changed event.
+        /// </summary>
         private async void cbAudioNormalize_CheckedChanged(object sender, EventArgs e)
         {
             await VideoEdit1.Audio_Enhancer_NormalizeAsync(-1, cbAudioNormalize.Checked);
         }
 
+        /// <summary>
+        /// Handles the cb audio auto gain checked changed event.
+        /// </summary>
         private async void cbAudioAutoGain_CheckedChanged(object sender, EventArgs e)
         {
             await VideoEdit1.Audio_Enhancer_AutoGainAsync(-1, cbAudioAutoGain.Checked);
         }
 
+        /// <summary>
+        /// Asynchronously applies the audio input gains for all channels.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task ApplyAudioInputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
@@ -2407,6 +2868,9 @@ namespace VideoEdit_CS_Demo
             await VideoEdit1.Audio_Enhancer_InputGainsAsync(-1, gains);
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainL_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainL.Text = (tbAudioInputGainL.Value / 10.0f).ToString("F1");
@@ -2414,6 +2878,9 @@ namespace VideoEdit_CS_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainC_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainC.Text = (tbAudioInputGainC.Value / 10.0f).ToString("F1");
@@ -2421,6 +2888,9 @@ namespace VideoEdit_CS_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainR_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainR.Text = (tbAudioInputGainR.Value / 10.0f).ToString("F1");
@@ -2428,6 +2898,9 @@ namespace VideoEdit_CS_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainSL_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainSL.Text = (tbAudioInputGainSL.Value / 10.0f).ToString("F1");
@@ -2435,6 +2908,9 @@ namespace VideoEdit_CS_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainSR_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainSR.Text = (tbAudioInputGainSR.Value / 10.0f).ToString("F1");
@@ -2442,6 +2918,9 @@ namespace VideoEdit_CS_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio input gain scroll event.
+        /// </summary>
         private async void tbAudioInputGainLFE_Scroll(object sender, EventArgs e)
         {
             lbAudioInputGainLFE.Text = (tbAudioInputGainLFE.Value / 10.0f).ToString("F1");
@@ -2449,6 +2928,10 @@ namespace VideoEdit_CS_Demo
             await ApplyAudioInputGainsAsync();
         }
 
+        /// <summary>
+        /// Asynchronously applies the audio output gains for all channels.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         private async Task ApplyAudioOutputGainsAsync()
         {
             AudioEnhancerGains gains = new AudioEnhancerGains
@@ -2464,6 +2947,9 @@ namespace VideoEdit_CS_Demo
             await VideoEdit1.Audio_Enhancer_OutputGainsAsync(-1, gains);
         }
 
+        /// <summary>
+        /// Handles the tb audio output gain scroll event.
+        /// </summary>
         private async void tbAudioOutputGainL_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainL.Text = (tbAudioOutputGainL.Value / 10.0f).ToString("F1");
@@ -2471,6 +2957,9 @@ namespace VideoEdit_CS_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio output gain scroll event.
+        /// </summary>
         private async void tbAudioOutputGainC_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainC.Text = (tbAudioOutputGainC.Value / 10.0f).ToString("F1");
@@ -2478,6 +2967,9 @@ namespace VideoEdit_CS_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio output gain scroll event.
+        /// </summary>
         private async void tbAudioOutputGainSL_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainSL.Text = (tbAudioOutputGainSL.Value / 10.0f).ToString("F1");
@@ -2485,6 +2977,9 @@ namespace VideoEdit_CS_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio output gain scroll event.
+        /// </summary>
         private async void tbAudioOutputGainSR_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainSR.Text = (tbAudioOutputGainSR.Value / 10.0f).ToString("F1");
@@ -2492,6 +2987,9 @@ namespace VideoEdit_CS_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio output gain scroll event.
+        /// </summary>
         private async void tbAudioOutputGainLFE_Scroll(object sender, EventArgs e)
         {
             lbAudioOutputGainLFE.Text = (tbAudioOutputGainLFE.Value / 10.0f).ToString("F1");
@@ -2499,6 +2997,9 @@ namespace VideoEdit_CS_Demo
             await ApplyAudioOutputGainsAsync();
         }
 
+        /// <summary>
+        /// Handles the tb audio timeshift scroll event.
+        /// </summary>
         private async void tbAudioTimeshift_Scroll(object sender, EventArgs e)
         {
             lbAudioTimeshift.Text = tbAudioTimeshift.Value.ToString(CultureInfo.InvariantCulture) + " ms";
@@ -2508,6 +3009,9 @@ namespace VideoEdit_CS_Demo
 
         private delegate void FFMPEGInfoDelegate(string message);
 
+        /// <summary>
+        /// Ffmpeg info delegate method.
+        /// </summary>
         private void FFMPEGInfoDelegateMethod(string message)
         {
             // if (VideoCapture1.Debug_Mode)
@@ -2518,11 +3022,17 @@ namespace VideoEdit_CS_Demo
             // }
         }
 
+        /// <summary>
+        /// Video edit 1 on ffmpeg info.
+        /// </summary>
         private void VideoEdit1_OnFFMPEGInfo(object sender, FFMPEGInfoEventArgs e)
         {
             BeginInvoke(new FFMPEGInfoDelegate(FFMPEGInfoDelegateMethod), e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt encryption open file click event.
+        /// </summary>
         private void btEncryptionOpenFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -2531,6 +3041,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start cut click event.
+        /// </summary>
         private async void btStartCut_Click(object sender, EventArgs e)
         {
             await VideoEdit1.FastEdit_CutFileAsync(
@@ -2540,11 +3053,17 @@ namespace VideoEdit_CS_Demo
                 edOutputFileCut.Text);
         }
 
+        /// <summary>
+        /// Handles the bt stop cut click event.
+        /// </summary>
         private async void btStopCut_Click(object sender, EventArgs e)
         {
             await VideoEdit1.FastEdit_StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start join click event.
+        /// </summary>
         private async void btStartJoin_Click(object sender, EventArgs e)
         {
             List<string> files = new List<string>();
@@ -2558,11 +3077,17 @@ namespace VideoEdit_CS_Demo
                 edOutputFileCut.Text);
         }
 
+        /// <summary>
+        /// Handles the bt stop join click event.
+        /// </summary>
         private async void btStopJoin_Click(object sender, EventArgs e)
         {
             await VideoEdit1.FastEdit_StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt select output cut click event.
+        /// </summary>
         private void btSelectOutputCut_Click(object sender, EventArgs e)
         {
             if (SaveDialog1.ShowDialog() == DialogResult.OK)
@@ -2571,6 +3096,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt select output join click event.
+        /// </summary>
         private void btSelectOutputJoin_Click(object sender, EventArgs e)
         {
             if (SaveDialog1.ShowDialog() == DialogResult.OK)
@@ -2579,6 +3107,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the img tag cover click event.
+        /// </summary>
         private void imgTagCover_Click(object sender, EventArgs e)
         {
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
@@ -2588,6 +3119,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start mux click event.
+        /// </summary>
         private async void btStartMux_Click(object sender, EventArgs e)
         {
             var streams = new List<FFMPEGStream>();
@@ -2607,6 +3141,9 @@ namespace VideoEdit_CS_Demo
             await VideoEdit1.FastEdit_MuxStreamsAsync(streams, cbMuxStreamsShortest.Checked, edMuxStreamsOutputFile.Text);
         }
 
+        /// <summary>
+        /// Handles the bt mux streams select file click event.
+        /// </summary>
         private void btMuxStreamsSelectFile_Click(object sender, EventArgs e)
         {
             if (OpenDialog1.ShowDialog() == DialogResult.OK)
@@ -2615,6 +3152,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt mux streams add click event.
+        /// </summary>
         private void btMuxStreamsAdd_Click(object sender, EventArgs e)
         {
             string prefix;
@@ -2638,11 +3178,17 @@ namespace VideoEdit_CS_Demo
             lbMuxStreamsList.Items.Add(prefix + ": " + edMuxStreamsSourceFile.Text);
         }
 
+        /// <summary>
+        /// Handles the bt mux streams clear click event.
+        /// </summary>
         private void btMuxStreamsClear_Click(object sender, EventArgs e)
         {
             lbMuxStreamsList.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the bt mux streams select output click event.
+        /// </summary>
         private void btMuxStreamsSelectOutput_Click(object sender, EventArgs e)
         {
             if (SaveDialog1.ShowDialog() == DialogResult.OK)
@@ -2651,17 +3197,26 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop mux click event.
+        /// </summary>
         private async void btStopMux_Click(object sender, EventArgs e)
         {
             await VideoEdit1.FastEdit_StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt audio channel mapper clear click event.
+        /// </summary>
         private void btAudioChannelMapperClear_Click(object sender, EventArgs e)
         {
             audioChannelMapperItems.Clear();
             lbAudioChannelMapperRoutes.Items.Clear();
         }
 
+        /// <summary>
+        /// Handles the bt audio channel mapper add new route click event.
+        /// </summary>
         private void btAudioChannelMapperAddNewRoute_Click(object sender, EventArgs e)
         {
             var item = new AudioChannelMapperItem
@@ -2679,12 +3234,18 @@ namespace VideoEdit_CS_Demo
                 + (tbAudioChannelMapperVolume.Value / 1000.0f).ToString("F2"));
         }
 
+        /// <summary>
+        /// Link label 11 link clicked.
+        /// </summary>
         private void linkLabel11_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NetworkStreamingToYouTube);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the bt subtitles select file click event.
+        /// </summary>
         private void btSubtitlesSelectFile_Click(object sender, EventArgs e)
         {
             if (openFileDialogSubtitles.ShowDialog() == DialogResult.OK)
@@ -2693,6 +3254,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb gpu lightness scroll event.
+        /// </summary>
         private void tbGPULightness_Scroll(object sender, EventArgs e)
         {
             IGPUVideoEffectBrightness intf;
@@ -2713,6 +3277,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb gpu saturation scroll event.
+        /// </summary>
         private void tbGPUSaturation_Scroll(object sender, EventArgs e)
         {
             IGPUVideoEffectSaturation intf;
@@ -2733,6 +3300,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb gpu contrast scroll event.
+        /// </summary>
         private void tbGPUContrast_Scroll(object sender, EventArgs e)
         {
             IGPUVideoEffectContrast intf;
@@ -2753,6 +3323,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb gpu darkness scroll event.
+        /// </summary>
         private void tbGPUDarkness_Scroll(object sender, EventArgs e)
         {
             IGPUVideoEffectDarkness intf;
@@ -2773,6 +3346,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu greyscale checked changed event.
+        /// </summary>
         private void cbGPUGreyscale_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectGrayscale intf;
@@ -2793,6 +3369,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu invert checked changed event.
+        /// </summary>
         private void cbGPUInvert_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectInvert intf;
@@ -2813,6 +3392,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu night vision checked changed event.
+        /// </summary>
         private void cbGPUNightVision_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectNightVision intf;
@@ -2833,6 +3415,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu pixelate checked changed event.
+        /// </summary>
         private void cbGPUPixelate_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectPixelate intf;
@@ -2853,6 +3438,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu denoise checked changed event.
+        /// </summary>
         private void cbGPUDenoise_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectDenoise intf;
@@ -2873,6 +3461,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu deinterlace checked changed event.
+        /// </summary>
         private void cbGPUDeinterlace_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectDeinterlaceBlend intf;
@@ -2893,6 +3484,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb gpu old movie checked changed event.
+        /// </summary>
         private void cbGPUOldMovie_CheckedChanged(object sender, EventArgs e)
         {
             IGPUVideoEffectOldMovie intf;
@@ -2915,11 +3509,17 @@ namespace VideoEdit_CS_Demo
 
         private delegate void VUDelegate(VUMeterEventArgs e);
 
+        /// <summary>
+        /// Vu delegate method.
+        /// </summary>
         private void VUDelegateMethod(VUMeterEventArgs e)
         {
             peakMeterCtrl1.SetData(e.MeterData, 0, 19);
         }
 
+        /// <summary>
+        /// Video edit 1 on audio vu meter.
+        /// </summary>
         private void VideoEdit1_OnAudioVUMeter(object sender, VUMeterEventArgs e)
         {
             if (VideoEdit1.State() == PlaybackState.Free)
@@ -2930,6 +3530,9 @@ namespace VideoEdit_CS_Demo
             BeginInvoke(new VUDelegate(VUDelegateMethod), e);
         }
 
+        /// <summary>
+        /// Video edit 1 on audio vu meter pro volume.
+        /// </summary>
         private void VideoEdit1_OnAudioVUMeterProVolume(object sender, AudioLevelEventArgs e)
         {
             Invoke((Action)(() =>
@@ -2945,6 +3548,9 @@ namespace VideoEdit_CS_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt configure click event.
+        /// </summary>
         private void btConfigure_Click(object sender, EventArgs e)
         {
             switch (cbOutputVideoFormat.SelectedIndex)
@@ -3145,6 +3751,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb output video format selected index changed event.
+        /// </summary>
         private void cbOutputVideoFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbOutputVideoFormat.SelectedIndex)
@@ -3248,6 +3857,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt text logo add click event.
+        /// </summary>
         private void btTextLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -3263,6 +3875,9 @@ namespace VideoEdit_CS_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt text logo remove click event.
+        /// </summary>
         private void btTextLogoRemove_Click(object sender, EventArgs e)
         {
             if (lbTextLogos.SelectedItem != null)
@@ -3272,6 +3887,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt text logo edit click event.
+        /// </summary>
         private void btTextLogoEdit_Click(object sender, EventArgs e)
         {
             if (lbTextLogos.SelectedItem != null)
@@ -3285,6 +3903,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt image logo add click event.
+        /// </summary>
         private void btImageLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new ImageLogoSettingsDialog();
@@ -3300,6 +3921,9 @@ namespace VideoEdit_CS_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt image logo edit click event.
+        /// </summary>
         private void btImageLogoEdit_Click(object sender, EventArgs e)
         {
             if (lbImageLogos.SelectedItem != null)
@@ -3313,6 +3937,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt image logo remove click event.
+        /// </summary>
         private void btImageLogoRemove_Click(object sender, EventArgs e)
         {
             if (lbImageLogos.SelectedItem != null)
@@ -3322,6 +3949,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
         private void cbFlipX_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipDown flip;
@@ -3341,6 +3971,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
         private void cbFlipY_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipRight flip;
@@ -3360,6 +3993,9 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb fade in enabled checked changed event.
+        /// </summary>
         private void cbFadeInEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_FADE_IN, cbFadeInEnabled.Checked);
@@ -3374,6 +4010,9 @@ namespace VideoEdit_CS_Demo
                 false);
         }
 
+        /// <summary>
+        /// Handles the cb fade out enabled checked changed event.
+        /// </summary>
         private void cbFadeOutEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoEdit1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_FADE_OUT, cbFadeOutEnabled.Checked);
@@ -3388,6 +4027,9 @@ namespace VideoEdit_CS_Demo
                 false);
         }
 
+        /// <summary>
+        /// Handles the tb gpu blur scroll event.
+        /// </summary>
         private void tbGPUBlur_Scroll(object sender, EventArgs e)
         {
             IGPUVideoEffectBlur intf;
@@ -3409,16 +4051,25 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb chroma key threshold sensitivity scroll event.
+        /// </summary>
         private void tbChromaKeyThresholdSensitivity_Scroll(object sender, EventArgs e)
         {
             ConfigureChromaKey();
         }
 
+        /// <summary>
+        /// Handles the tb chroma key smoothing scroll event.
+        /// </summary>
         private void tbChromaKeySmoothing_Scroll(object sender, EventArgs e)
         {
             ConfigureChromaKey();
         }
 
+        /// <summary>
+        /// Pn chroma key color mouse down.
+        /// </summary>
         private void pnChromaKeyColor_MouseDown(object sender, MouseEventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
@@ -3428,24 +4079,36 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Lb link clicked.
+        /// </summary>
         private void lbNDI_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.NDIVendor);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Ll xiph x 86 link clicked.
+        /// </summary>
         private void llXiphX86_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx86);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Ll xiph x 64 link clicked.
+        /// </summary>
         private void llXiphX64_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistXIPHx64);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the bt select hls output folder click event.
+        /// </summary>
         private void btSelectHLSOutputFolder_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -3454,12 +4117,18 @@ namespace VideoEdit_CS_Demo
             }
         }
 
+        /// <summary>
+        /// Lb hls configure link clicked.
+        /// </summary>
         private void lbHLSConfigure_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.HLSStreaming);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Link label decoders link clicked.
+        /// </summary>
         private void linkLabelDecoders_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.RedistLAVx64);
@@ -3468,4 +4137,4 @@ namespace VideoEdit_CS_Demo
     }
 }
 
-// ReSharper restore InconsistentNaming
+

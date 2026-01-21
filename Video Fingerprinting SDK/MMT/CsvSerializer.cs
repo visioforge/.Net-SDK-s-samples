@@ -126,6 +126,9 @@
         /// </summary>
         /// <param name="stream">stream</param>
         /// <returns></returns>
+        /// <summary>
+        /// Deserialize.
+        /// </summary>
         public IList<T> Deserialize(Stream stream)
         {
             string[] columns;
@@ -222,6 +225,9 @@
         /// </summary>
         /// <param name="stream">stream</param>
         /// <param name="data">data</param>
+        /// <summary>
+        /// Serialize.
+        /// </summary>
         public void Serialize(Stream stream, IList<T> data)
         {
             var sb = new StringBuilder();

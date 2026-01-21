@@ -31,28 +31,64 @@ using VisioForge.Core.VideoCaptureX;
 
 namespace SimpleVideoCaptureAMB
 {
+    /// <summary>
+    /// Interaction logic for MainWindow.axaml
+    /// </summary>
     public partial class MainWindow : Window, IDisposable
     {
+        /// <summary>
+        /// The initialized flag.
+        /// </summary>
         private bool _initialized;
 
+        /// <summary>
+        /// The recording timer.
+        /// </summary>
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The video source.
+        /// </summary>
         private SystemVideoSourceBlock _videoSource;
 
+        /// <summary>
+        /// The audio source.
+        /// </summary>
         private MediaBlock _audioSource;
 
+        /// <summary>
+        /// The MP4 output.
+        /// </summary>
         private MP4OutputBlock _mp4Output;
 
+        /// <summary>
+        /// The video tee.
+        /// </summary>
         private TeeBlock _videoTee;
 
+        /// <summary>
+        /// The audio tee.
+        /// </summary>
         private TeeBlock _audioTee;
 
+        /// <summary>
+        /// The disposed value.
+        /// </summary>
         private bool disposedValue;
 
         #region Controls
@@ -92,6 +128,9 @@ namespace SimpleVideoCaptureAMB
             DataContext = this;
         }
 
+        /// <summary>
+        /// Device enumerator on video source added.
+        /// </summary>
         private async void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             await Dispatcher.UIThread.InvokeAsync(() =>
@@ -105,11 +144,17 @@ namespace SimpleVideoCaptureAMB
             });
         }
 
+        /// <summary>
+        /// Initialize component.
+        /// </summary>
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
 
+        /// <summary>
+        /// Handles the main window activated event.
+        /// </summary>
         private async void MainWindow_Activated(object sender, EventArgs e)
         {
             if (_initialized)
@@ -162,6 +207,9 @@ namespace SimpleVideoCaptureAMB
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
+        /// <summary>
+        /// Init controls.
+        /// </summary>
         private void InitControls()
         {
             VideoView1 = this.FindControl<VideoView>("VideoView1");
@@ -226,17 +274,26 @@ namespace SimpleVideoCaptureAMB
             edLog = this.FindControl<TextBox>("edLog");
         }
 
+        /// <summary>
+        /// Lb view video tutorials pointer pressed.
+        /// </summary>
         private void LbViewVideoTutorials_PointerPressed(object sender, Avalonia.Input.PointerPressedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
 
         }
 
+        /// <summary>
+        /// Save video file dialog async.
+        /// </summary>
         private async Task<string> SaveVideoFileDialogAsync()
         {
             var sfd = new SaveFileDialog();
@@ -255,6 +312,9 @@ namespace SimpleVideoCaptureAMB
             return await sfd.ShowAsync(this);
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
         private async void btSelectOutput_Click(object sender, RoutedEventArgs e)
         {
             string filename = await SaveVideoFileDialogAsync();
@@ -264,16 +324,25 @@ namespace SimpleVideoCaptureAMB
             }
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             Dispatcher.UIThread.InvokeAsync(() => { edLog.Text += txt + Environment.NewLine; });
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Tb audio volume property changed.
+        /// </summary>
         private void tbAudioVolume_PropertyChanged(object sender, AvaloniaPropertyChangedEventArgs e)
         {
             if (_audioRenderer != null && e.Property.ToString() == "Value")
@@ -282,6 +351,9 @@ namespace SimpleVideoCaptureAMB
             }
         }
 
+        /// <summary>
+        /// Cb video input device selection changed.
+        /// </summary>
         private async void cbVideoInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -308,6 +380,9 @@ namespace SimpleVideoCaptureAMB
             }
         }
 
+        /// <summary>
+        /// Cb audio input device selection changed.
+        /// </summary>
         private async void cbAudioInputDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -332,6 +407,9 @@ namespace SimpleVideoCaptureAMB
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             edLog.Text = string.Empty;
@@ -432,6 +510,9 @@ namespace SimpleVideoCaptureAMB
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             if (_pipeline != null)
@@ -440,6 +521,9 @@ namespace SimpleVideoCaptureAMB
             }
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             if (_pipeline != null)
@@ -448,6 +532,9 @@ namespace SimpleVideoCaptureAMB
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             tmRecording.Stop();
@@ -463,6 +550,9 @@ namespace SimpleVideoCaptureAMB
             }
         }
 
+        /// <summary>
+        /// Cb video input format selection changed.
+        /// </summary>
         private async void cbVideoInputFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.SelectedItem.ToString()) || string.IsNullOrEmpty(cbVideoInputDevice.SelectedItem.ToString()))
@@ -503,6 +593,9 @@ namespace SimpleVideoCaptureAMB
             }
         }
 
+        /// <summary>
+        /// Update recording time async.
+        /// </summary>
         private async Task UpdateRecordingTimeAsync()
         {
             if (_pipeline == null)
@@ -523,6 +616,9 @@ namespace SimpleVideoCaptureAMB
             }));
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (_pipeline != null)
@@ -536,6 +632,9 @@ namespace SimpleVideoCaptureAMB
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -569,6 +668,9 @@ namespace SimpleVideoCaptureAMB
         //     Dispose(disposing: false);
         // }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

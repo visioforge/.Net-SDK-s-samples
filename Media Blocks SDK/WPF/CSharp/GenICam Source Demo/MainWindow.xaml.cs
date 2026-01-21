@@ -60,17 +60,26 @@ namespace GenICam_Source_Demo
             UpdateGenTLPathDisplay();
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -86,6 +95,9 @@ namespace GenICam_Source_Demo
             _mp4Output = null;
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             if (_pipeline == null)
@@ -111,6 +123,9 @@ namespace GenICam_Source_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -218,6 +233,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -245,12 +263,18 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt refresh click event.
+        /// </summary>
         private async void btRefresh_Click(object sender, RoutedEventArgs e)
         {
             await LoadCameraList();
             UpdateGenTLPathDisplay();
         }
 
+        /// <summary>
+        /// Cb camera selection changed.
+        /// </summary>
         private async void cbCamera_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbCamera.SelectedItem != null)
@@ -259,6 +283,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt update settings click event.
+        /// </summary>
         private async void btUpdateSettings_Click(object sender, RoutedEventArgs e)
         {
             if (_currentCamera != null)
@@ -267,6 +294,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt browse click event.
+        /// </summary>
         private void btBrowse_Click(object sender, RoutedEventArgs e)
         {
             var saveFileDialog = new SaveFileDialog
@@ -283,6 +313,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -311,6 +344,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
@@ -330,6 +366,9 @@ namespace GenICam_Source_Demo
 
         #region Camera Information Methods
 
+        /// <summary>
+        /// Update gen tl path display.
+        /// </summary>
         private void UpdateGenTLPathDisplay()
         {
             try
@@ -353,6 +392,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Load camera list.
+        /// </summary>
         private async Task LoadCameraList()
         {
             try
@@ -395,6 +437,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Load camera information.
+        /// </summary>
         private async Task LoadCameraInformation(string cameraName)
         {
             try
@@ -475,6 +520,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Display camera information.
+        /// </summary>
         private void DisplayCameraInformation()
         {
             if (_currentCamera == null) return;
@@ -517,6 +565,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Display basic camera information.
+        /// </summary>
         private void DisplayBasicCameraInformation()
         {
             if (string.IsNullOrEmpty(_currentCameraDeviceId)) return;
@@ -535,6 +586,9 @@ namespace GenICam_Source_Demo
             DisplayTechnicalSpecifications();
         }
 
+        /// <summary>
+        /// Display technical specifications.
+        /// </summary>
         private void DisplayTechnicalSpecifications()
         {
             // Pixel Formats
@@ -708,6 +762,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Update current camera settings.
+        /// </summary>
         private void UpdateCurrentCameraSettings()
         {
             if (_currentCamera == null)
@@ -818,6 +875,9 @@ namespace GenICam_Source_Demo
             }
         }
 
+        /// <summary>
+        /// Update connection status.
+        /// </summary>
         private void UpdateConnectionStatus()
         {
             if (_currentCamera != null)
@@ -832,6 +892,9 @@ namespace GenICam_Source_Demo
             tbAcquisitionStatus.Text = _pipeline != null && _pipeline.State == VisioForge.Core.Types.PlaybackState.Play ? "Running" : "Stopped";
         }
 
+        /// <summary>
+        /// Clear camera information.
+        /// </summary>
         private void ClearCameraInformation()
         {
             // Basic Information
@@ -859,6 +922,9 @@ namespace GenICam_Source_Demo
             ClearCurrentSettings();
         }
 
+        /// <summary>
+        /// Clear current settings.
+        /// </summary>
         private void ClearCurrentSettings()
         {
             tbCurrentRegion.Text = "-";

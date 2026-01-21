@@ -1,8 +1,8 @@
-// ReSharper disable InconsistentNaming
 
-// ReSharper disable StyleCop.SA1600
-// ReSharper disable UseObjectOrCollectionInitializer
-// ReSharper disable StyleCop.SA1601
+
+
+
+
 
 using System.Globalization;
 
@@ -28,28 +28,64 @@ namespace VisioForge_SDK_Video_Capture_Demo
     using VisioForge.Core.UI.WinForms.Dialogs.VideoEffects;
     using VisioForge.Core.VideoCapture;
 
+    /// <summary>
+    /// Simple video capture demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Audio effect identifier for amplify effect.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_AMPLIFY = "amplify";
 
+        /// <summary>
+        /// Audio effect identifier for equalizer effect.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_EQ = "eq";
 
+        /// <summary>
+        /// Audio effect identifier for true bass effect.
+        /// </summary>
         private const string AUDIO_EFFECT_ID_TRUE_BASS = "true_bass";
 
+        /// <summary>
+        /// Settings dialog for MP4 hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MPEG-TS hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog mpegTSSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MOV hardware encoder output.
+        /// </summary>
         private HWEncodersOutputSettingsDialog movSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for MP4 output format.
+        /// </summary>
         private MP4SettingsDialog mp4SettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for AVI output format.
+        /// </summary>
         private AVISettingsDialog aviSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for WMV output format.
+        /// </summary>
         private WMVSettingsDialog wmvSettingsDialog;
 
+        /// <summary>
+        /// Settings dialog for GIF output format.
+        /// </summary>
         private GIFSettingsDialog gifSettingsDialog;
 
+        /// <summary>
+        /// Save file dialog for screenshot capture functionality.
+        /// </summary>
         private SaveFileDialog screenshotSaveDialog = new SaveFileDialog()
         {
             FileName = "image.jpg",
@@ -57,15 +93,27 @@ namespace VisioForge_SDK_Video_Capture_Demo
             InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
         };
 
+        /// <summary>
+        /// Timer for updating recording time display.
+        /// </summary>
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
+        /// <summary>
+        /// The main video capture core engine instance.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -73,6 +121,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             VideoCapture1.OnError += VideoCapture1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -84,6 +135,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb audio input device selected index changed event.
+        /// </summary>
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbAudioInputDevice.SelectedIndex != -1)
@@ -134,16 +188,25 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt audio input device settings click event.
+        /// </summary>
         private void btAudioInputDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Audio_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbAudioInputDevice.Text);
         }
 
+        /// <summary>
+        /// Handles the cb use best audio input format checked changed event.
+        /// </summary>
         private void cbUseBestAudioInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbAudioInputFormat.Enabled = !cbUseBestAudioInputFormat.Checked;
         }
 
+        /// <summary>
+        /// Handles the cb video input device selected index changed event.
+        /// </summary>
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1)
@@ -170,6 +233,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb video input format selected index changed event.
+        /// </summary>
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
@@ -204,97 +270,154 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb use best video input format checked changed event.
+        /// </summary>
         private void cbUseBestVideoInputFormat_CheckedChanged(object sender, EventArgs e)
         {
             cbVideoInputFormat.Enabled = !cbUseBestVideoInputFormat.Checked;
         }
 
+        /// <summary>
+        /// Handles the bt video capture device settings click event.
+        /// </summary>
         private void btVideoCaptureDeviceSettings_Click(object sender, EventArgs e)
         {
             VideoCapture1.Video_CaptureDevice_SettingsDialog_Show(IntPtr.Zero, cbVideoInputDevice.Text);
         }
 
+        /// <summary>
+        /// Handles the tb audio volume scroll event.
+        /// </summary>
         private void tbAudioVolume_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Volume_Set(tbAudioVolume.Value);
         }
 
+        /// <summary>
+        /// Handles the tb audio balance scroll event.
+        /// </summary>
         private void tbAudioBalance_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_OutputDevice_Balance_Set(tbAudioBalance.Value);
         }
 
+        /// <summary>
+        /// Handles the cb aud amplify enabled checked changed event.
+        /// </summary>
         private void cbAudAmplifyEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_AMPLIFY, cbAudAmplifyEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud amplify amp scroll event.
+        /// </summary>
         private void tbAudAmplifyAmp_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Amplify(-1, AUDIO_EFFECT_ID_AMPLIFY, tbAudAmplifyAmp.Value * 10, false);
         }
 
+        /// <summary>
+        /// Handles the cb aud equalizer enabled checked changed event.
+        /// </summary>
         private void cbAudEqualizerEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_EQ, cbAudEqualizerEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 0 scroll event.
+        /// </summary>
         private void tbAudEq0_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 0, (sbyte)tbAudEq0.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 1 scroll event.
+        /// </summary>
         private void tbAudEq1_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 1, (sbyte)tbAudEq1.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 2 scroll event.
+        /// </summary>
         private void tbAudEq2_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 2, (sbyte)tbAudEq2.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 3 scroll event.
+        /// </summary>
         private void tbAudEq3_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 3, (sbyte)tbAudEq3.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 4 scroll event.
+        /// </summary>
         private void tbAudEq4_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 4, (sbyte)tbAudEq4.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 5 scroll event.
+        /// </summary>
         private void tbAudEq5_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 5, (sbyte)tbAudEq5.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 6 scroll event.
+        /// </summary>
         private void tbAudEq6_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 6, (sbyte)tbAudEq6.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 7 scroll event.
+        /// </summary>
         private void tbAudEq7_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 7, (sbyte)tbAudEq7.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 8 scroll event.
+        /// </summary>
         private void tbAudEq8_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 8, (sbyte)tbAudEq8.Value);
         }
 
+        /// <summary>
+        /// Handles the tb aud eq 9 scroll event.
+        /// </summary>
         private void tbAudEq9_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Band_Set(-1, AUDIO_EFFECT_ID_EQ, 9, (sbyte)tbAudEq9.Value);
         }
 
+        /// <summary>
+        /// Handles the cb aud equalizer preset selected index changed event.
+        /// </summary>
         private void cbAudEqualizerPreset_SelectedIndexChanged(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Equalizer_Preset_Set(-1, AUDIO_EFFECT_ID_EQ, (EqualizerPreset)cbAudEqualizerPreset.SelectedIndex);
             btAudEqRefresh_Click(sender, e);
         }
 
+        /// <summary>
+        /// Handles the bt aud eq refresh click event.
+        /// </summary>
         private void btAudEqRefresh_Click(object sender, EventArgs e)
         {
             tbAudEq0.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 0);
@@ -309,16 +432,25 @@ namespace VisioForge_SDK_Video_Capture_Demo
             tbAudEq9.Value = VideoCapture1.Audio_Effects_Equalizer_Band_Get(-1, AUDIO_EFFECT_ID_EQ, 9);
         }
 
+        /// <summary>
+        /// Handles the cb aud true bass enabled checked changed event.
+        /// </summary>
         private void cbAudTrueBassEnabled_CheckedChanged(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_Enable(-1, AUDIO_EFFECT_ID_TRUE_BASS, cbAudTrueBassEnabled.Checked);
         }
 
+        /// <summary>
+        /// Handles the tb aud true bass scroll event.
+        /// </summary>
         private void tbAudTrueBass_Scroll(object sender, EventArgs e)
         {
             VideoCapture1.Audio_Effects_TrueBass(-1, AUDIO_EFFECT_ID_TRUE_BASS, 200, false, (ushort)tbAudTrueBass.Value);
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -327,6 +459,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -466,6 +601,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             tmRecording.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmRecording.Stop();
@@ -473,6 +611,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngineAsync();
@@ -562,12 +703,18 @@ namespace VisioForge_SDK_Video_Capture_Demo
             VideoCapture1.Video_Renderer_SetAuto();
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
         private void llVideoTutorials_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -576,11 +723,17 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt save screenshot click event.
+        /// </summary>
         private async void btSaveScreenshot_Click(object sender, EventArgs e)
         {
             if (screenshotSaveDialog.ShowDialog(this) == DialogResult.OK)
@@ -608,6 +761,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Set mp 4 output.
+        /// </summary>
         private void SetMP4Output(ref MP4Output mp4Output)
         {
             if (this.mp4SettingsDialog == null)
@@ -618,6 +774,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             this.mp4SettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set wmv output.
+        /// </summary>
         private void SetWMVOutput(ref WMVOutput wmvOutput)
         {
             if (wmvSettingsDialog == null)
@@ -629,6 +788,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             wmvSettingsDialog.SaveSettings(ref wmvOutput);
         }
 
+        /// <summary>
+        /// Set mp 4 hw output.
+        /// </summary>
         private void SetMP4HWOutput(ref MP4HWOutput mp4Output)
         {
             if (mp4HWSettingsDialog == null)
@@ -639,6 +801,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        /// <summary>
+        /// Set mpegts output.
+        /// </summary>
         private void SetMPEGTSOutput(ref MPEGTSOutput mpegTSOutput)
         {
             if (mpegTSSettingsDialog == null)
@@ -649,6 +814,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             mpegTSSettingsDialog.SaveSettings(ref mpegTSOutput);
         }
 
+        /// <summary>
+        /// Set mov output.
+        /// </summary>
         private void SetMOVOutput(ref MOVOutput mkvOutput)
         {
             if (movSettingsDialog == null)
@@ -659,6 +827,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             movSettingsDialog.SaveSettings(ref mkvOutput);
         }
 
+        /// <summary>
+        /// Set gif output.
+        /// </summary>
         private void SetGIFOutput(ref AnimatedGIFOutput gifOutput)
         {
             if (gifSettingsDialog == null)
@@ -669,6 +840,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             gifSettingsDialog.SaveSettings(ref gifOutput);
         }
 
+        /// <summary>
+        /// Set avi output.
+        /// </summary>
         private void SetAVIOutput(ref AVIOutput aviOutput)
         {
             if (aviSettingsDialog == null)
@@ -685,6 +859,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb output format selected index changed event.
+        /// </summary>
         private void cbOutputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -727,16 +904,25 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt output configure click event.
+        /// </summary>
         private void btOutputConfigure_Click(object sender, EventArgs e)
         {
             switch (cbOutputFormat.SelectedIndex)
@@ -822,6 +1008,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Update recording time.
+        /// </summary>
         private void UpdateRecordingTime()
         {
             if (IsHandleCreated)
@@ -841,6 +1030,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt text logo add click event.
+        /// </summary>
         private void btTextLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new TextLogoSettingsDialog();
@@ -856,6 +1048,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt image logo add click event.
+        /// </summary>
         private void btImageLogoAdd_Click(object sender, EventArgs e)
         {
             var dlg = new ImageLogoSettingsDialog();
@@ -871,6 +1066,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             dlg.Dispose();
         }
 
+        /// <summary>
+        /// Handles the bt logo remove click event.
+        /// </summary>
         private void btLogoRemove_Click(object sender, EventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -880,6 +1078,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt logo edit click event.
+        /// </summary>
         private void btLogoEdit_Click(object sender, EventArgs e)
         {
             if (lbLogos.SelectedItem != null)
@@ -911,6 +1112,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb lightness scroll event.
+        /// </summary>
         private void tbLightness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectLightness lightness;
@@ -930,6 +1134,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb saturation scroll event.
+        /// </summary>
         private void tbSaturation_Scroll(object sender, EventArgs e)
         {
             IVideoEffectSaturation saturation;
@@ -949,6 +1156,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb contrast scroll event.
+        /// </summary>
         private void tbContrast_Scroll(object sender, EventArgs e)
         {
             IVideoEffectContrast contrast;
@@ -968,6 +1178,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
         private void cbFlipX_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipDown flip;
@@ -987,6 +1200,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb flip checked changed event.
+        /// </summary>
         private void cbFlipY_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectFlipRight flip;
@@ -1006,6 +1222,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb greyscale checked changed event.
+        /// </summary>
         private void cbGreyscale_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectGrayscale grayscale;
@@ -1025,6 +1244,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Configure video effects.
+        /// </summary>
         private void ConfigureVideoEffects()
         {
             if (tbLightness.Value > 0)
@@ -1073,6 +1295,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb invert checked changed event.
+        /// </summary>
         private void cbInvert_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectInvert invert;
@@ -1092,6 +1317,9 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb darkness scroll event.
+        /// </summary>
         private void tbDarkness_Scroll(object sender, EventArgs e)
         {
             IVideoEffectDarkness darkness;
@@ -1111,11 +1339,17 @@ namespace VisioForge_SDK_Video_Capture_Demo
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Handles the cb scrolling text checked changed event.
+        /// </summary>
         private void cbScrollingText_CheckedChanged(object sender, EventArgs e)
         {
             IVideoEffectScrollingTextLogo textLogo;
@@ -1138,4 +1372,3 @@ namespace VisioForge_SDK_Video_Capture_Demo
     }
 }
 
-// ReSharper restore InconsistentNaming

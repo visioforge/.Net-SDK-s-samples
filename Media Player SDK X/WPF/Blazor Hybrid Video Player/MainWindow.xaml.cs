@@ -19,6 +19,9 @@ namespace Video_Preview_Blazor_Hybrid;
 /// </summary>
 public partial class MainWindow : Window
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MainWindow"/> class.
+    /// </summary>
     public MainWindow()
     {
         InitializeComponent();
@@ -31,11 +34,17 @@ public partial class MainWindow : Window
         VisioForgeX.InitSDK();
     }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
        
     }
 
+        /// <summary>
+        /// Window unloaded.
+        /// </summary>
     private void Window_Unloaded(object sender, RoutedEventArgs e)
     {
         VisioForgeX.DestroySDK();

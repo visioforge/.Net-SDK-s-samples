@@ -28,26 +28,56 @@ using System.Reactive.Linq;
 
 namespace Simple_Media_Player
 {
+    /// <summary>
+    /// The main window class.
+    /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Timer for updating the UI.
+        /// </summary>
         private System.Timers.Timer _tmPosition;
 
+        /// <summary>
+        /// Flag to indicate if the window is initialized.
+        /// </summary>
         private bool _initialized;
 
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCoreX _player;
 
 #if WINDOWS
+        /// <summary>
+        /// The audio output device API.
+        /// </summary>
         private AudioOutputDeviceAPI? _audioOutputDeviceAPI = AudioOutputDeviceAPI.DirectSound;
 #else
+        /// <summary>
+        /// The audio output device API.
+        /// </summary>
         private AudioOutputDeviceAPI? _audioOutputDeviceAPI = null;
 #endif
 
+        /// <summary>
+        /// Gets or sets the log messages.
+        /// </summary>
         public ObservableCollection<string> Log { get; set; } = new ObservableCollection<string>();
 
+        /// <summary>
+        /// Gets or sets the info messages.
+        /// </summary>
         public ObservableCollection<string> Info { get; set; } = new ObservableCollection<string>();
 
+        /// <summary>
+        /// Gets or sets the available audio output devices.
+        /// </summary>
         public ObservableCollection<string> AudioOutputDevices { get; set; } = new ObservableCollection<string>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -63,6 +93,9 @@ namespace Simple_Media_Player
             DataContext = this;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_player != null)
@@ -75,6 +108,9 @@ namespace Simple_Media_Player
             }
         }
 
+        /// <summary>
+        /// Main window closing.
+        /// </summary>
         private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (_player == null)
@@ -88,11 +124,17 @@ namespace Simple_Media_Player
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Initialize component.
+        /// </summary>
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
 
+        /// <summary>
+        /// Show message async.
+        /// </summary>
         private async Task ShowMessageAsync(string message)
         {
             var messageBoxStandardWindow = MsBox.Avalonia.MessageBoxManager
@@ -101,6 +143,9 @@ namespace Simple_Media_Player
             await messageBoxStandardWindow.ShowAsync();
         }
 
+        /// <summary>
+        /// Handles the main window activated event.
+        /// </summary>
         private async void MainWindow_Activated(object sender, EventArgs e)
         {
             if (_initialized)
@@ -129,6 +174,9 @@ namespace Simple_Media_Player
             }
         }
 
+        /// <summary>
+        /// Init player.
+        /// </summary>
         private void InitPlayer()
         {
             _player = new MediaPlayerCoreX(VideoView1);
@@ -136,10 +184,19 @@ namespace Simple_Media_Player
             _player.OnError += Player_OnError;
         }
 
+        /// <summary>
+        /// Flag to prevent recursive timeline updates.
+        /// </summary>
         private volatile bool _tbTimelineApplyingValue;
 
+        /// <summary>
+        /// Flag to indicate if the object has been disposed.
+        /// </summary>
         private bool disposedValue;
 
+        /// <summary>
+        /// Init controls.
+        /// </summary>
         private void InitControls()
         {
             VideoView1 = this.FindControl<VideoView>("VideoView1");
@@ -202,6 +259,9 @@ namespace Simple_Media_Player
             cbAudioOutputDevice.ItemsSource = AudioOutputDevices;
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private async void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -214,6 +274,9 @@ namespace Simple_Media_Player
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             tbSpeed.Value = 10;
@@ -233,6 +296,9 @@ namespace Simple_Media_Player
             _tmPosition.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _tmPosition.Stop();
@@ -243,26 +309,41 @@ namespace Simple_Media_Player
             lbTimeline.Text = "00:00:00 / 00:00:00";
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _player.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _player.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt next frame click event.
+        /// </summary>
         private void btNextFrame_Click(object sender, RoutedEventArgs e)
         {
             _player.NextFrame();
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void Player_OnError(object sender, ErrorsEventArgs e)
         {
             Log.Add(e.Message);
         }
 
+        /// <summary>
+        /// Player on stop.
+        /// </summary>
         private void Player_OnStop(object sender, StopEventArgs e)
         {
             _tmPosition.Stop();
@@ -274,6 +355,9 @@ namespace Simple_Media_Player
             });
         }
 
+        /// <summary>
+        /// Handles the tb timeline scroll event.
+        /// </summary>
         private async void tbTimeline_Scroll()
         {
             if (_tbTimelineApplyingValue)
@@ -282,6 +366,9 @@ namespace Simple_Media_Player
             }
         }
 
+        /// <summary>
+        /// Tm position elapsed.
+        /// </summary>
         private void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             Dispatcher.UIThread.InvokeAsync((Action)(() =>
@@ -302,6 +389,9 @@ namespace Simple_Media_Player
             }));
         }
 
+        /// <summary>
+        /// Handles the tb speed scroll event.
+        /// </summary>
         private async void tbSpeed_Scroll()
         {
             if (_player == null)
@@ -312,6 +402,9 @@ namespace Simple_Media_Player
             await _player.Rate_SetAsync(tbSpeed.Value / 10.0);
         }
 
+        /// <summary>
+        /// Handles the tb volume scroll event.
+        /// </summary>
         private void tbVolume_Scroll()
         {
             if (_player == null)
@@ -322,6 +415,9 @@ namespace Simple_Media_Player
             _player.Audio_OutputDevice_Volume = tbVolume.Value / 100.0;
         }
 
+        /// <summary>
+        /// Handles the bt read tags click event.
+        /// </summary>
         private void btReadTags_Click(object sender, RoutedEventArgs e)
         {
             var tags = _player.Tags_Read(edFilenameOrURL.Text);
@@ -329,6 +425,9 @@ namespace Simple_Media_Player
             Info.Add(tags?.ToString());
         }
 
+        /// <summary>
+        /// Handles the bt read info click event.
+        /// </summary>
         private async void btReadInfo_Click(object sender, RoutedEventArgs e)
         {
             Info.Clear();
@@ -355,6 +454,9 @@ namespace Simple_Media_Player
             }
         }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -369,12 +471,18 @@ namespace Simple_Media_Player
             }
         }
 
+        /// <summary>
+        /// Finalizes an instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         ~MainWindow()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: false);
         }
 
+        /// <summary>
+        /// Dispose.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

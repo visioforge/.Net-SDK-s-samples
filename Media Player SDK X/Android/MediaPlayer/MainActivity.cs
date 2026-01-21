@@ -7,31 +7,70 @@ using Xamarin.Essentials;
 
 namespace MediaPlayer
 {
+    /// <summary>
+    /// The main activity class.
+    /// </summary>
     [Activity(Label = "@string/app_name", MainLauncher = true)]
     public class MainActivity : Activity
     {
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCoreX _player;
 
+        /// <summary>
+        /// The video view.
+        /// </summary>
         private VisioForge.Core.UI.Android.VideoViewTX videoView;
 
+        /// <summary>
+        /// The open file button.
+        /// </summary>
         private Button btOpenFile;
 
+        /// <summary>
+        /// The start button.
+        /// </summary>
         private Button btStart;
 
+        /// <summary>
+        /// The pause button.
+        /// </summary>
         private Button btPause;
 
+        /// <summary>
+        /// The stop button.
+        /// </summary>
         private Button btStop;
 
+        /// <summary>
+        /// The URL edit text.
+        /// </summary>
         private EditText edURL;
 
+        /// <summary>
+        /// The timeline seek bar.
+        /// </summary>
         private SeekBar sbTimeline;
 
+        /// <summary>
+        /// The position text view.
+        /// </summary>
         private TextView lbPosition;
 
+        /// <summary>
+        /// The position timer.
+        /// </summary>
         private readonly System.Timers.Timer tmPosition = new System.Timers.Timer(500);
 
+        /// <summary>
+        /// The seeking flag.
+        /// </summary>
         private bool isSeeking = false;
 
+        /// <summary>
+        /// On create.
+        /// </summary>
         protected override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -78,6 +117,9 @@ namespace MediaPlayer
             edURL = FindViewById<EditText>(Resource.Id.edURL);
         }
 
+        /// <summary>
+        /// On destroy.
+        /// </summary>
         protected override void OnDestroy()
         {
             VisioForgeX.DestroySDK();
@@ -85,11 +127,17 @@ namespace MediaPlayer
             base.OnDestroy();
         }
 
+        /// <summary>
+        /// Handles the player on start event.
+        /// </summary>
         private void _player_OnStart(object sender, EventArgs e)
         {
             sbTimeline.Max = (int)_player.Duration().TotalMilliseconds;
         }
 
+        /// <summary>
+        /// Sb timeline progress changed.
+        /// </summary>
         private void sbTimeline_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
         {
             if (isSeeking)
@@ -98,6 +146,9 @@ namespace MediaPlayer
             }
         }
 
+        /// <summary>
+        /// Handles the bt open file click event.
+        /// </summary>
         private async void btOpenFile_Click(object sender, EventArgs e)
         {
             try
@@ -119,6 +170,9 @@ namespace MediaPlayer
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmPosition.Stop();
@@ -126,6 +180,9 @@ namespace MediaPlayer
             await _player.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             if (_player == null)
@@ -145,6 +202,9 @@ namespace MediaPlayer
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             isSeeking = false;
@@ -155,11 +215,17 @@ namespace MediaPlayer
             tmPosition.Start();
         }
 
+        /// <summary>
+        /// On resume.
+        /// </summary>
         protected override void OnResume()
         {
             base.OnResume();
         }
 
+        /// <summary>
+        /// Tm position elapsed.
+        /// </summary>
         private void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (isSeeking)
@@ -198,6 +264,9 @@ namespace MediaPlayer
             }
         }
 
+        /// <summary>
+        /// On pause.
+        /// </summary>
         protected override void OnPause()
         {
             base.OnPause();
@@ -205,6 +274,9 @@ namespace MediaPlayer
             _player.StopAsync();
         }
 
+        /// <summary>
+        /// On request permissions result.
+        /// </summary>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

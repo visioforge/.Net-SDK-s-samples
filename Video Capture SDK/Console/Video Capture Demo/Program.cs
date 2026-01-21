@@ -21,6 +21,10 @@ namespace Video_Capture_Demo
 
     static class Program
     {
+        /// <summary>
+        /// Main.
+        /// </summary>
+        /// <param name="args">Arguments.</param>
         static void Main(string[] args)
         {
             var videoCapture = new VideoCaptureCore();
@@ -202,6 +206,11 @@ namespace Video_Capture_Demo
             videoCapture.Dispose();
         }
 
+        /// <summary>
+        /// Video capture on error.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="e">Event args.</param>
         private static void VideoCapture_OnError(object sender, ErrorsEventArgs e)
         {
             if (e.Message.Contains("FULL SDK"))

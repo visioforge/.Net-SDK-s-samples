@@ -37,6 +37,9 @@ namespace replace_audio
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -47,6 +50,9 @@ namespace replace_audio
             Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
             
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             if (!File.Exists(edSourceVideoFile.Text))
@@ -111,6 +117,9 @@ namespace replace_audio
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
         private void _pipeline_OnStop(object sender, StopEventArgs e)
         {
             _pipeline.OnStop -= _pipeline_OnStop;
@@ -124,6 +133,9 @@ namespace replace_audio
             });
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         { 
             if (_pipeline == null)
@@ -136,11 +148,17 @@ namespace replace_audio
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt select video click event.
+        /// </summary>
         private void btSelectVideo_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new Microsoft.Win32.OpenFileDialog();
@@ -152,6 +170,9 @@ namespace replace_audio
             }
         }
 
+        /// <summary>
+        /// Handles the bt select audio click event.
+        /// </summary>
         private void btSelectAudio_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new Microsoft.Win32.OpenFileDialog();

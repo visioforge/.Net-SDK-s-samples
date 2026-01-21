@@ -1,5 +1,5 @@
-﻿// ReSharper disable StyleCop.SA1600
-// ReSharper disable UseObjectOrCollectionInitializer
+﻿
+
 
 using System.Linq;
 
@@ -27,17 +27,32 @@ namespace Main_Demo
     using VisioForge.Core;
     using VisioForge.Core.Types.X.AudioRenderers;
 
+    /// <summary>
+    /// The main demo form class.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The media player instance.
+        /// </summary>
         private MediaPlayerCoreX _player;
 
+        /// <summary>
+        /// Flag to indicate if the form is closing.
+        /// </summary>
         private volatile bool _closing;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Audio effect update amplify.
+        /// </summary>
         private void AudioEffectUpdateAmplify()
         {
             if (cbAudAmplifyEnabled.Checked)
@@ -47,6 +62,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Audio effect update balance.
+        /// </summary>
         private void AudioEffectUpdateBalance()
         {
             if (cbAudBalanceEnabled.Checked)
@@ -56,6 +74,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Audio effect update echo.
+        /// </summary>
         private void AudioEffectUpdateEcho()
         {
             if (cbAudEchoEnabled.Checked)
@@ -70,6 +91,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Audio effect update equalizer.
+        /// </summary>
         private void AudioEffectUpdateEqualizer()
         {
             if (cbAudEqualizerEnabled.Checked)
@@ -91,6 +115,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Add audio effects.
+        /// </summary>
         private void AddAudioEffects()
         {
             _player.Audio_Effects_Clear();
@@ -101,6 +128,9 @@ namespace Main_Demo
             AudioEffectUpdateEqualizer();
         }
 
+        /// <summary>
+        /// Add video effects async.
+        /// </summary>
         private async Task AddVideoEffectsAsync()
         {
             if (cbResizeEnabled.Checked)
@@ -158,6 +188,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Update image overlay async.
+        /// </summary>
         private async Task UpdateImageOverlayAsync()
         {
             if (cbImageOverlayEnabled.Checked)
@@ -189,6 +222,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Update gaussian blur async.
+        /// </summary>
         private async Task UpdateGaussianBlurAsync()
         {
             if (cbGaussianBlurEnabled.Checked)
@@ -198,6 +234,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Update color balance async.
+        /// </summary>
         private async Task UpdateColorBalanceAsync()
         {
             if (cbVideoBalanceEnabled.Checked)
@@ -214,6 +253,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Update color effect async.
+        /// </summary>
         private async Task UpdateColorEffectAsync()
         {
             if (cbColorEffectEnabled.Checked)
@@ -223,6 +265,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Update flip rotate async.
+        /// </summary>
         private async Task UpdateFlipRotateAsync()
         {
             if (cbFlipRotateEnabled.Checked)
@@ -232,6 +277,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Update deinterlace async.
+        /// </summary>
         private async Task UpdateDeinterlaceAsync()
         {
             if (cbDeinterlaceEnabled.Checked)
@@ -251,6 +299,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Update text overlay async.
+        /// </summary>
         private async Task UpdateTextOverlayAsync()
         {
             if (cbTextOverlayEnabled.Checked)
@@ -292,6 +343,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Add motion detection.
+        /// </summary>
         private void AddMotionDetection()
         {
             _player.OnMotionDetection -= _player_OnMotionDetection;
@@ -312,6 +366,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Add barcode reader.
+        /// </summary>
         private void AddBarcodeReader()
         {
             _player.OnBarcodeDetected -= _player_OnBarcodeDetected;
@@ -332,6 +389,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Player on motion detection.
+        /// </summary>
         private void _player_OnMotionDetection(object sender, MotionDetectionExEventArgs e)
         {
             Invoke((Action)(() =>
@@ -340,6 +400,9 @@ namespace Main_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Text = "";
@@ -393,6 +456,9 @@ namespace Main_Demo
             tmPosition.Start();
         }
 
+        /// <summary>
+        /// Handles the form 1 shown event.
+        /// </summary>
         private async void Form1_Shown(object sender, EventArgs e)
         {
             if (_player == null)
@@ -425,6 +491,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Player on barcode detected.
+        /// </summary>
         private void _player_OnBarcodeDetected(object sender, BarcodeEventArgs e)
         {
             e.DetectorEnabled = false;
@@ -440,6 +509,9 @@ namespace Main_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the player on streams info available event.
+        /// </summary>
         private void _player_OnStreamsInfoAvailable(object sender, EventArgs e)
         {
             Invoke(
@@ -461,6 +533,9 @@ namespace Main_Demo
                 ));
         }
 
+        /// <summary>
+        /// Player on audio vu meter.
+        /// </summary>
         private void _player_OnAudioVUMeter(object sender, VUMeterXEventArgs e)
         {
             Invoke((Action)(() =>
@@ -474,6 +549,9 @@ namespace Main_Demo
             }));
         }
 
+        /// <summary>
+        /// Player on error.
+        /// </summary>
         private void _player_OnError(object sender, ErrorsEventArgs e)
         {
             BeginInvoke((Action)(() =>
@@ -482,6 +560,9 @@ namespace Main_Demo
            }));
         }
 
+        /// <summary>
+        /// Player on stop.
+        /// </summary>
         private void _player_OnStop(object sender, StopEventArgs e)
         {
             tmPosition.Stop();
@@ -499,16 +580,25 @@ namespace Main_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await _player.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await _player.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmPosition.Stop();
@@ -523,6 +613,9 @@ namespace Main_Demo
             volumeMeter2.Clear();
         }
 
+        /// <summary>
+        /// Handles the tm position tick event.
+        /// </summary>
         private async void tmPosition_Tick(object sender, EventArgs e)
         {
             var position = await _player.Position_GetAsync();
@@ -538,11 +631,17 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb timeline scroll event.
+        /// </summary>
         private void tbTimeline_Scroll(object sender, EventArgs e)
         {
             _player.Position_Set(TimeSpan.FromSeconds(tbTimeline.Value));
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -551,6 +650,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb speed scroll event.
+        /// </summary>
         private void tbSpeed_Scroll(object sender, EventArgs e)
         {
             var speed = tbSpeed.Value / 10.0;
@@ -560,6 +662,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt next frame click event.
+        /// </summary>
         private void btNextFrame_Click(object sender, EventArgs e)
         {
             _player.NextFrame();
@@ -569,84 +674,132 @@ namespace Main_Demo
             lbSpeed.Text = $"Speed: {speed:F1}";
         }
 
+        /// <summary>
+        /// Handles the tb volume 1 scroll event.
+        /// </summary>
         private void tbVolume1_Scroll(object sender, EventArgs e)
         {
             _player.Audio_OutputDevice_Volume = tbVolume1.Value / 100.0;
         }
 
+        /// <summary>
+        /// Handles the tb aud amplify amp scroll event.
+        /// </summary>
         private void tbAudAmplifyAmp_Scroll(object sender, EventArgs e)
         {
             AudioEffectUpdateAmplify();
         }
 
+        /// <summary>
+        /// Handles the tb aud balance level scroll event.
+        /// </summary>
         private void tbAudBalanceLevel_Scroll(object sender, EventArgs e)
         {
             AudioEffectUpdateBalance();
         }
 
+        /// <summary>
+        /// Handles the tb aud echo delay scroll event.
+        /// </summary>
         private void tbAudEchoDelay_Scroll(object sender, EventArgs e)
         {
             lbAudEchoDelay.Text = tbAudEchoDelay.Value.ToString();
             AudioEffectUpdateEcho();
         }
 
+        /// <summary>
+        /// Handles the tb aud echo intensity scroll event.
+        /// </summary>
         private void tbAudEchoIntensity_Scroll(object sender, EventArgs e)
         {
             lbAudEchoIntensity.Text = (tbAudEchoIntensity.Value / 100.0).ToString("F2");
             AudioEffectUpdateEcho();
         }
 
+        /// <summary>
+        /// Handles the tb aud echo feedback scroll event.
+        /// </summary>
         private void tbAudEchoFeedback_Scroll(object sender, EventArgs e)
         {
             lbAudEchoFeedback.Text = (tbAudEchoFeedback.Value / 100.0).ToString("F2");
             AudioEffectUpdateEcho();
         }
 
+        /// <summary>
+        /// Handles the bt aud eq update click event.
+        /// </summary>
         private void btAudEqUpdate_Click(object sender, EventArgs e)
         {
             AudioEffectUpdateEqualizer();
         }
 
+        /// <summary>
+        /// Handles the tb video brightness scroll event.
+        /// </summary>
         private async void tbVideoBrightness_Scroll(object sender, EventArgs e)
         {
             await UpdateColorBalanceAsync();
         }
 
+        /// <summary>
+        /// Handles the tb video saturation scroll event.
+        /// </summary>
         private async void tbVideoSaturation_Scroll(object sender, EventArgs e)
         {
             await UpdateColorBalanceAsync();
         }
 
+        /// <summary>
+        /// Handles the tb video contrast scroll event.
+        /// </summary>
         private async void tbVideoContrast_Scroll(object sender, EventArgs e)
         {
             await UpdateColorBalanceAsync();
         }
 
+        /// <summary>
+        /// Handles the tb video hue scroll event.
+        /// </summary>
         private async void tbVideoHue_Scroll(object sender, EventArgs e)
         {
             await UpdateColorBalanceAsync();
         }
 
+        /// <summary>
+        /// Handles the cb color effect selected index changed event.
+        /// </summary>
         private async void cbColorEffect_SelectedIndexChanged(object sender, EventArgs e)
         {
             await UpdateColorEffectAsync();
         }
 
+        /// <summary>
+        /// Handles the cb flip rotate selected index changed event.
+        /// </summary>
         private async void cbFlipRotate_SelectedIndexChanged(object sender, EventArgs e)
         {
             await UpdateFlipRotateAsync();
         }
 
+        /// <summary>
+        /// Handles the tb gaussian blur scroll event.
+        /// </summary>
         private async void tbGaussianBlur_Scroll(object sender, EventArgs e)
         {
             await UpdateGaussianBlurAsync();
         }
 
+        /// <summary>
+        /// Handles the bt text overlay update click event.
+        /// </summary>
         private async void btTextOverlayUpdate_Click(object sender, EventArgs e)
         {
             await UpdateTextOverlayAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -680,6 +833,9 @@ namespace Main_Demo
             rbMotionDetectionDetector.SelectedIndex = 1;
         }
 
+        /// <summary>
+        /// Handles the pn text overlay color click event.
+        /// </summary>
         private void pnTextOverlayColor_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
@@ -688,21 +844,33 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb rtsprtp block size scroll event.
+        /// </summary>
         private void tbRTSPRTPBlockSize_Scroll(object sender, EventArgs e)
         {
             lbRTSPRTPBlockSize.Text = tbRTSPRTPBlockSize.Value.ToString();
         }
 
+        /// <summary>
+        /// Handles the tb rtspudp buffer size scroll event.
+        /// </summary>
         private void tbRTSPUDPBufferSize_Scroll(object sender, EventArgs e)
         {
             lbRTSPUDPBufferSize.Text = tbRTSPUDPBufferSize.Value.ToString();
         }
 
+        /// <summary>
+        /// Handles the tb rtsp latency scroll event.
+        /// </summary>
         private void tbRTSPLatency_Scroll(object sender, EventArgs e)
         {
             lbRTSPLatency.Text = tbRTSPLatency.Value.ToString();
         }
 
+        /// <summary>
+        /// Handles the bt read tags click event.
+        /// </summary>
         private void btReadTags_Click(object sender, EventArgs e)
         {
             var tags = _player.Tags_Read(edFilenameOrURL.Text);
@@ -710,6 +878,9 @@ namespace Main_Demo
             mmInfo.Text = tags?.ToString();
         }
 
+        /// <summary>
+        /// Handles the bt read info click event.
+        /// </summary>
         private async void btReadInfo_Click(object sender, EventArgs e)
         {
             var infoReader = new MediaInfoReaderX(_player);
@@ -735,6 +906,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt save snapshot click event.
+        /// </summary>
         private async void btSaveSnapshot_Click(object sender, EventArgs e)
         {
             using (var dlg = new SaveFileDialog())
@@ -747,6 +921,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb audio stream selected index changed event.
+        /// </summary>
         private void cbAudioStream_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_player.State == PlaybackState.Play && cbAudioStream.Tag == null)
@@ -755,6 +932,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb subtitles custom settings checked changed event.
+        /// </summary>
         private void cbSubtitlesCustomSettings_CheckedChanged(object sender, EventArgs e)
         {
             var fontSize = Convert.ToInt32(cbTextOverlayFontSize.Text);
@@ -765,6 +945,9 @@ namespace Main_Demo
             _player.Subtitles_Settings_Update();
         }
 
+        /// <summary>
+        /// Handles the cb subtitles enabled checked changed event.
+        /// </summary>
         private void cbSubtitlesEnabled_CheckedChanged(object sender, EventArgs e)
         {
             _player.Subtitles_Settings.Visible = cbSubtitlesEnabled.Checked;
@@ -772,6 +955,9 @@ namespace Main_Demo
             _player.Subtitles_Settings_Update();
         }
 
+        /// <summary>
+        /// Handles the bt image overlay open click event.
+        /// </summary>
         private void btImageOverlayOpen_Click(object sender, EventArgs e)
         {
             if (dlgOpenImage.ShowDialog(this) == DialogResult.OK)
@@ -780,6 +966,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt prev frame click event.
+        /// </summary>
         private void btPrevFrame_Click(object sender, EventArgs e)
         {
             _player.PrevFrame();
@@ -789,11 +978,17 @@ namespace Main_Demo
             lbSpeed.Text = $"Speed: {speed:F1}";
         }
 
+        /// <summary>
+        /// Handles the cb image overlay enabled click event.
+        /// </summary>
         private async void cbImageOverlayEnabled_Click(object sender, EventArgs e)
         {
             await UpdateImageOverlayAsync();
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             _closing = true;
@@ -804,6 +999,9 @@ namespace Main_Demo
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the cb text overlay font name selected index changed event.
+        /// </summary>
         private void cbTextOverlayFontName_SelectedIndexChanged(object sender, EventArgs e)
         {
             var font = _player.Fonts.FirstOrDefault(f => f.Name == cbTextOverlayFontName.Text);
@@ -822,6 +1020,9 @@ namespace Main_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt select lut file click event.
+        /// </summary>
         private void btSelectLUTFile_Click(object sender, EventArgs e)
         {
             var dlg = new OpenFileDialog();

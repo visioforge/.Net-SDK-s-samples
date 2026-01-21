@@ -59,6 +59,9 @@ namespace MPEG_TS_Player_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -86,6 +89,9 @@ namespace MPEG_TS_Player_Demo
             Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -94,6 +100,9 @@ namespace MPEG_TS_Player_Demo
             }));
         }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
         private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -103,6 +112,9 @@ namespace MPEG_TS_Player_Demo
             }));
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             // create the pipeline
@@ -203,6 +215,9 @@ namespace MPEG_TS_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Pipeline on bus stream collection.
+        /// </summary>
         private void Pipeline_OnBusStreamCollection(object sender, Tuple<VideoStreamInfo[], AudioStreamInfo[], SubtitleStreamInfo[]> e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -272,6 +287,9 @@ namespace MPEG_TS_Player_Demo
             }));
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timerFlag = true;
@@ -294,6 +312,9 @@ namespace MPEG_TS_Player_Demo
             _timerFlag = false;
         }
 
+        /// <summary>
+        /// Stop engine async.
+        /// </summary>
         private async Task StopEngineAsync()
         {
             if (_pipeline != null)
@@ -313,6 +334,9 @@ namespace MPEG_TS_Player_Demo
             _mediaInfo = null;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (_pipeline != null)
@@ -332,6 +356,9 @@ namespace MPEG_TS_Player_Demo
             _mediaInfo = null;
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new OpenFileDialog();
@@ -341,6 +368,9 @@ namespace MPEG_TS_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Tb timeline value changed.
+        /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!_timerFlag && _pipeline != null)
@@ -349,6 +379,9 @@ namespace MPEG_TS_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Restart playback.
+        /// </summary>
         private async Task RestartPlayback()
         {
             edLog.Clear();
@@ -364,6 +397,9 @@ namespace MPEG_TS_Player_Demo
             _timer.Start();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             cbProgramStream.Items.Clear();
@@ -383,6 +419,9 @@ namespace MPEG_TS_Player_Demo
             await RestartPlayback();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
@@ -395,16 +434,25 @@ namespace MPEG_TS_Player_Demo
             tbTimeline.Value = 0;
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Tb volume value changed.
+        /// </summary>
         private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_audioRenderer != null)
@@ -413,6 +461,9 @@ namespace MPEG_TS_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
@@ -425,6 +476,9 @@ namespace MPEG_TS_Player_Demo
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Cb program stream selection changed.
+        /// </summary>
         private async void cbProgramStream_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (cbProgramStream.SelectedIndex == -1 || (bool)cbProgramStream.Tag)
@@ -435,6 +489,9 @@ namespace MPEG_TS_Player_Demo
             await RestartPlayback();
         }
 
+        /// <summary>
+        /// Cb video stream selection changed.
+        /// </summary>
         private void cbVideoStream_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (cbVideoStream.SelectedIndex == -1 || (bool)cbVideoStream.Tag)
@@ -450,6 +507,9 @@ namespace MPEG_TS_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Cb audio stream selection changed.
+        /// </summary>
         private void cbAudioStream_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (cbAudioStream.SelectedIndex == -1 || (bool)cbAudioStream.Tag)

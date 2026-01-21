@@ -14,6 +14,9 @@ using VisioForge.Core.Types.X.AudioEncoders;
 
 namespace Multiple_Encoders
 {
+    /// <summary>
+    /// Represents an independent video capture and encoding engine instance.
+    /// </summary>
     internal class EncodeEngine
     {
         private VideoCaptureCoreX _core;
@@ -25,6 +28,14 @@ namespace Multiple_Encoders
             _videoView = videoView;
         }
 
+        /// <summary>
+        /// Asynchronously starts the capture and encoding process.
+        /// </summary>
+        /// <param name="videoSource">The video source device info.</param>
+        /// <param name="audioSource">The audio source device info.</param>
+        /// <param name="videoEncoder">The video encoder settings.</param>
+        /// <param name="filename">The output filename.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
         public async Task StartAsync(
             VideoCaptureDeviceInfo videoSource, 
             AudioCaptureDeviceInfo audioSource,
@@ -66,6 +77,10 @@ namespace Multiple_Encoders
             await _core.StartAsync();
         }
 
+        /// <summary>
+        /// Asynchronously stops the capture and encoding process and disposes of resources.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         public async Task StopAsync()
         {
             if (_core != null)

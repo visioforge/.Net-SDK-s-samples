@@ -26,6 +26,9 @@ namespace video_capture_text_overlay
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -36,6 +39,9 @@ namespace video_capture_text_overlay
             Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             // create MediaBlocks pipeline
@@ -80,6 +86,9 @@ namespace video_capture_text_overlay
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await _pipeline.StopAsync();
@@ -87,6 +96,9 @@ namespace video_capture_text_overlay
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             VisioForgeX.DestroySDK();

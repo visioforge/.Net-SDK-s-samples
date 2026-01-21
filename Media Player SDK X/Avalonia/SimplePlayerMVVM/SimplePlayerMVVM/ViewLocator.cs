@@ -5,8 +5,14 @@ using System;
 
 namespace Simple_Player_MVVM
 {
+    /// <summary>
+    /// View locator.
+    /// </summary>
     public class ViewLocator : IDataTemplate
     {
+        /// <summary>
+        /// Build control.
+        /// </summary>
         public Control? Build(object? data)
         {
             if (data is null)
@@ -23,6 +29,9 @@ namespace Simple_Player_MVVM
             return new TextBlock { Text = "Not Found: " + name };
         }
 
+        /// <summary>
+        /// Match.
+        /// </summary>
         public bool Match(object? data)
         {
             return data is ViewModelBase;

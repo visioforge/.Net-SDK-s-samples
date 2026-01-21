@@ -21,20 +21,53 @@ using DebugLogger = System.Diagnostics.Debug;
 
 namespace SimplePlayerUno.Template;
 
+/// <summary>
+/// An empty page that can be used on its own or navigated to within a Frame.
+/// </summary>
 public sealed partial class MainPage : Page
 {
+    /// <summary>
+    /// The pipeline.
+    /// </summary>
     private MediaBlocksPipeline? _pipeline;
+    /// <summary>
+    /// The source.
+    /// </summary>
     private UniversalSourceBlock? _source;
+    /// <summary>
+    /// The renderer.
+    /// </summary>
     private VideoRendererBlock? _renderer;
 
+    /// <summary>
+    /// The position timer.
+    /// </summary>
     private readonly DispatcherTimer _positionTimer;
+    /// <summary>
+    /// The dispatcher queue.
+    /// </summary>
     private readonly DispatcherQueue _dispatcherQueue;
 
+    /// <summary>
+    /// Indicates whether the timer is updating.
+    /// </summary>
     private volatile bool _isTimerUpdate;
+    /// <summary>
+    /// Indicates whether the media is prepared.
+    /// </summary>
     private bool _mediaPrepared;
+    /// <summary>
+    /// Indicates whether the SDK is initialized.
+    /// </summary>
     private bool _sdkInitialized;
+    /// <summary>
+    /// Indicates whether the media is playing.
+    /// </summary>
     private bool _isPlaying;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MainPage"/> class.
+    /// </summary>
     public MainPage()
     {
         InitializeComponent();
@@ -51,6 +84,9 @@ public sealed partial class MainPage : Page
         Unloaded += MainPage_Unloaded;
     }
 
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
     private void MainPage_Loaded(object sender, RoutedEventArgs e)
     {
         if (_sdkInitialized)
@@ -69,6 +105,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Main page unloaded.
+        /// </summary>
     private async void MainPage_Unloaded(object sender, RoutedEventArgs e)
     {
         await CleanupPipelineAsync();
@@ -80,6 +119,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Handles the btn play stop click event.
+        /// </summary>
     private async void BtnPlayStop_Click(object sender, RoutedEventArgs e)
     {
         if (_isPlaying)
@@ -99,6 +141,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Load and play async.
+        /// </summary>
     private async Task LoadAndPlayAsync()
     {
         try
@@ -157,6 +202,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Resume async.
+        /// </summary>
     private async Task ResumeAsync()
     {
         if (_pipeline == null || !_mediaPrepared)
@@ -177,6 +225,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Stop playback async.
+        /// </summary>
     private async Task StopPlaybackAsync()
     {
         if (_pipeline == null)
@@ -200,6 +251,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Cleanup pipeline async.
+        /// </summary>
     private async Task CleanupPipelineAsync()
     {
         var pipeline = _pipeline;
@@ -241,6 +295,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Create source settings async.
+        /// </summary>
     private static async Task<UniversalSourceSettings> CreateSourceSettingsAsync(string input)
     {
         DebugLogger.WriteLine($"CreateSourceSettingsAsync: input = {input}");
@@ -290,6 +347,9 @@ public sealed partial class MainPage : Page
 #endif
     }
 
+        /// <summary>
+        /// Reset timeline.
+        /// </summary>
     private void ResetTimeline()
     {
         _isTimerUpdate = true;
@@ -301,6 +361,9 @@ public sealed partial class MainPage : Page
         _isTimerUpdate = false;
     }
 
+        /// <summary>
+        /// Handles the position timer tick event.
+        /// </summary>
     private void PositionTimer_Tick(object? sender, object e)
     {
         if (_pipeline == null)
@@ -311,6 +374,9 @@ public sealed partial class MainPage : Page
         _ = UpdatePositionAsync();
     }
 
+        /// <summary>
+        /// Update position async.
+        /// </summary>
     private async Task UpdatePositionAsync()
     {
         if (_pipeline == null)
@@ -363,11 +429,17 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Format time.
+        /// </summary>
     private static string FormatTime(TimeSpan value)
     {
         return value.TotalHours >= 1 ? value.ToString("hh\\:mm\\:ss") : value.ToString("mm\\:ss");
     }
 
+        /// <summary>
+        /// Timeline slider value changed.
+        /// </summary>
     private async void TimelineSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
     {
         try
@@ -383,26 +455,41 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Timeline slider pointer pressed.
+        /// </summary>
     private void TimelineSlider_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
         // No longer needed - kept for XAML compatibility
     }
 
+        /// <summary>
+        /// Timeline slider pointer released.
+        /// </summary>
     private void TimelineSlider_PointerReleased(object sender, PointerRoutedEventArgs e)
     {
         // No longer needed - kept for XAML compatibility
     }
 
+        /// <summary>
+        /// Timeline slider pointer capture lost.
+        /// </summary>
     private void TimelineSlider_PointerCaptureLost(object sender, PointerRoutedEventArgs e)
     {
         // No longer needed - kept for XAML compatibility
     }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
     private void Pipeline_OnError(object? sender, ErrorsEventArgs e)
     {
         ShowToast($"Error: {e.Message}");
     }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
     private void Pipeline_OnStop(object? sender, StopEventArgs e)
     {
         _dispatcherQueue.TryEnqueue(() =>
@@ -415,6 +502,9 @@ public sealed partial class MainPage : Page
         });
     }
 
+        /// <summary>
+        /// Show toast.
+        /// </summary>
     private void ShowToast(string message)
     {
         DebugLogger.WriteLine(message);

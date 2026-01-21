@@ -8,12 +8,12 @@ namespace VisioForge_MMT.Classes
     using System.Xml.Serialization;
 
     /// <summary>
-    /// Helper класс для работы с XML
+    /// Helper     XML
     /// </summary>
     public class XmlUtility
     {
         /// <summary>
-        /// Сериализует объект в строку XML
+        ///     XML
         /// </summary>
         public static string Obj2XmlStr(object obj, string nameSpace)
         {
@@ -36,7 +36,7 @@ namespace VisioForge_MMT.Classes
         }
 
         /// <summary>
-        /// Сериализует объект в строку XML
+        ///     XML
         /// </summary>
         public static string Obj2XmlStr(object obj)
         {
@@ -55,7 +55,7 @@ namespace VisioForge_MMT.Classes
         }
 
         /// <summary>
-        /// Десериализует строку XML в объект заданного типа
+        ///   XML    
         /// </summary>
         /// <param name="xml"></param>
         /// <param name="type"></param>
@@ -71,10 +71,13 @@ namespace VisioForge_MMT.Classes
         }
 		
         /// <summary>
-        /// Преобразует строку XML в XmlElement
+        ///   XML  XmlElement
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
+        /// <summary>
+        /// Xml str 2 xml dom.
+        /// </summary>
         public static  XmlElement XmlStr2XmlDom(string xml)
         {
             XmlDocument doc = new XmlDocument();
@@ -83,11 +86,14 @@ namespace VisioForge_MMT.Classes
         }
 
         /// <summary>
-        /// Преобразует объект в XmlElement
+        ///    XmlElement
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="nameSpace"></param>
         /// <returns></returns>
+        /// <summary>
+        /// Obj 2 xml dom.
+        /// </summary>
         public static  XmlElement Obj2XmlDom(object obj, string nameSpace)
         {
             return XmlStr2XmlDom(Obj2XmlStr(obj, nameSpace));
@@ -98,11 +104,14 @@ namespace VisioForge_MMT.Classes
     }
 
     /// <summary>
-    /// Кэш для используемых сериалайзеров 
+    ///     
     /// </summary>
     internal class SerializerCache
     {
         private static readonly Hashtable Hash = new Hashtable();
+        /// <summary>
+        /// Get serializer.
+        /// </summary>
         public static XmlSerializer GetSerializer(Type type)
         {
             XmlSerializer res;

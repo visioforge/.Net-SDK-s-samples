@@ -6,6 +6,9 @@ namespace SimpleCaptureUno.iOS;
 public class EntryPoint
 {
     // This is the main entry point of the application.
+        /// <summary>
+        /// Main.
+        /// </summary>
     public static void Main(string[] args)
     {
         App.InitializeLogging();

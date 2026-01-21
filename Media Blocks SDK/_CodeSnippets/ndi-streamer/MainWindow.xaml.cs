@@ -35,6 +35,9 @@ namespace ndi_streamer_mb
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create screen capture source.
+        /// </summary>
         private IScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
             var source = new ScreenCaptureD3D11SourceSettings();
@@ -47,6 +50,9 @@ namespace ndi_streamer_mb
             return source;
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -57,6 +63,9 @@ namespace ndi_streamer_mb
             Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             // Create the pipeline
@@ -87,6 +96,9 @@ namespace ndi_streamer_mb
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.StopAsync();
@@ -94,6 +106,9 @@ namespace ndi_streamer_mb
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             VisioForgeX.DestroySDK();

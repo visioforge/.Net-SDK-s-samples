@@ -39,11 +39,17 @@ namespace HLS_Player_MB_MAUI
             pickerSampleStreams.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
         private void MainPage_Loaded(object? sender, EventArgs e)
         {
             Window.Destroying += Window_Destroying;
         }
 
+        /// <summary>
+        /// Window destroying.
+        /// </summary>
         private async void Window_Destroying(object? sender, EventArgs e)
         {
             try
@@ -58,6 +64,9 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Dispose pipeline async.
+        /// </summary>
         private async Task DisposePipelineAsync()
         {
             if (_pipeline != null)
@@ -71,6 +80,9 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync(string hlsUrl)
         {
             // Clean up any existing pipeline
@@ -104,6 +116,9 @@ namespace HLS_Player_MB_MAUI
             _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void _pipeline_OnError(object? sender, ErrorsEventArgs e)
         {
             Debug.WriteLine($"Pipeline Error: {e.Message}");
@@ -116,6 +131,9 @@ namespace HLS_Player_MB_MAUI
             });
         }
 
+        /// <summary>
+        /// Pipeline on start.
+        /// </summary>
         private void _pipeline_OnStart(object? sender, EventArgs e)
         {
             MainThread.BeginInvokeOnMainThread(async () =>
@@ -165,6 +183,9 @@ namespace HLS_Player_MB_MAUI
             });
         }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
         private void _pipeline_OnStop(object? sender, StopEventArgs e)
         {
             _tmPosition.Stop();
@@ -176,6 +197,9 @@ namespace HLS_Player_MB_MAUI
             });
         }
 
+        /// <summary>
+        /// Update connection status.
+        /// </summary>
         private void UpdateConnectionStatus(bool connected)
         {
             if (connected)
@@ -194,6 +218,9 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Reset ui.
+        /// </summary>
         private void ResetUI()
         {
             btPlay.Text = "PLAY";
@@ -208,6 +235,9 @@ namespace HLS_Player_MB_MAUI
             lblAudioInfo.Text = "";
         }
 
+        /// <summary>
+        /// Stop all async.
+        /// </summary>
         private async Task StopAllAsync()
         {
             _tmPosition.Stop();
@@ -225,6 +255,9 @@ namespace HLS_Player_MB_MAUI
             });
         }
 
+        /// <summary>
+        /// Tm position elapsed.
+        /// </summary>
         private async void tmPosition_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             if (_pipeline == null || _pipeline.State != PlaybackState.Play)
@@ -267,6 +300,9 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Picker sample streams selected index changed.
+        /// </summary>
         private void pickerSampleStreams_SelectedIndexChanged(object? sender, EventArgs e)
         {
             if (pickerSampleStreams.SelectedIndex >= 0)
@@ -279,6 +315,9 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt play clicked event.
+        /// </summary>
         private async void btPlay_Clicked(object? sender, EventArgs e)
         {
             try
@@ -321,6 +360,9 @@ namespace HLS_Player_MB_MAUI
         }
 
 
+        /// <summary>
+        /// Handles the bt stop clicked event.
+        /// </summary>
         private async void btStop_Clicked(object? sender, EventArgs e)
         {
             try
@@ -345,6 +387,9 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Sl seeking value changed.
+        /// </summary>
         private async void slSeeking_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             try
@@ -360,6 +405,9 @@ namespace HLS_Player_MB_MAUI
             }
         }
 
+        /// <summary>
+        /// Sl volume value changed.
+        /// </summary>
         private void slVolume_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             if (_audioRenderer != null)

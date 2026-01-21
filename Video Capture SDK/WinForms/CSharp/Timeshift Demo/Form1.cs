@@ -15,17 +15,26 @@
     using VisioForge.Core.Types.VideoEffects;
     using VisioForge.Core.VideoCapture;
 
+    /// <summary>
+    /// Timeshift demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private VideoCaptureCore VideoCapture1;
 
         private MediaPlayerCore MediaPlayer1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine capture async.
+        /// </summary>
         private async Task CreateEngineCaptureAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoViewCapture as IVideoView);
@@ -34,6 +43,9 @@
             VideoCapture1.OnTimeshiftFileCreated += VideoCapture1_OnTimeshiftFileCreated;
         }
 
+        /// <summary>
+        /// Destroy engine capture.
+        /// </summary>
         private void DestroyEngineCapture()
         {
             if (VideoCapture1 != null)
@@ -46,6 +58,9 @@
             }
         }
 
+        /// <summary>
+        /// Create engine player async.
+        /// </summary>
         private async Task CreateEnginePlayerAsync()
         {
             MediaPlayer1 = await MediaPlayerCore.CreateAsync(VideoViewPlayer as IVideoView);
@@ -53,6 +68,9 @@
             MediaPlayer1.OnError += MediaPlayer1_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine player.
+        /// </summary>
         private void DestroyEnginePlayer()
         {
             MediaPlayer1.OnError -= MediaPlayer1_OnError;
@@ -61,6 +79,9 @@
             MediaPlayer1 = null;
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             await CreateEngineCaptureAsync();
@@ -99,6 +120,9 @@
             MediaPlayer1.Video_Renderer_SetAuto();
         }
 
+        /// <summary>
+        /// Handles the cb video input device selected index changed event.
+        /// </summary>
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1)
@@ -124,6 +148,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the cb video input format selected index changed event.
+        /// </summary>
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
@@ -158,6 +185,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the cb audio input device selected index changed event.
+        /// </summary>
         private void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbAudioInputFormat.Items.Clear();
@@ -191,6 +221,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt select output click event.
+        /// </summary>
         private void btSelectOutput_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -199,6 +232,9 @@
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -349,28 +385,43 @@
             timer1.Enabled = true;
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await MediaPlayer1.StopAsync();
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt player pause click event.
+        /// </summary>
         private async void btPlayerPause_Click(object sender, EventArgs e)
         {
             //VideoCapture1.Test();
             await MediaPlayer1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt player resume click event.
+        /// </summary>
         private async void btPlayerResume_Click(object sender, EventArgs e)
         {
             await MediaPlayer1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Format time.
+        /// </summary>
         private string FormatTime(TimeSpan span)
         {
             return span.ToString(@"hh\:mm\:ss");
         }
 
+        /// <summary>
+        /// Handles the timer 1 tick event.
+        /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
             var spanDur = await MediaPlayer1.Duration_TimeAsync();
@@ -394,11 +445,17 @@
             lbPostion.Text = FormatTime(spanPos);
         }
 
+        /// <summary>
+        /// Tb timeline mouse down.
+        /// </summary>
         private void tbTimeline_MouseDown(object sender, MouseEventArgs e)
         {
             timer1.Enabled = false;
         }
 
+        /// <summary>
+        /// Tb timeline mouse up.
+        /// </summary>
         private async void tbTimeline_MouseUp(object sender, MouseEventArgs e)
         {
             await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
@@ -406,6 +463,9 @@
             timer1.Enabled = true;
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -414,16 +474,25 @@
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Media player 1 on error.
+        /// </summary>
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Video capture 1 on timeshift file created.
+        /// </summary>
         private async void VideoCapture1_OnTimeshiftFileCreated(object sender, TimeshiftFileEventArgs e)
         {
             MediaPlayer1.Debug_Mode = true;
@@ -439,6 +508,9 @@
             await MediaPlayer1.PlayAsync();
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngineCapture();

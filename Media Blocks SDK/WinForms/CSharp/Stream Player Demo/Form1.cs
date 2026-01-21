@@ -1,4 +1,4 @@
-// ReSharper disable InconsistentNaming
+
 
 namespace MediaBlocks_Memory_Player_Demo
 {
@@ -18,20 +18,44 @@ namespace MediaBlocks_Memory_Player_Demo
     using System.Threading.Tasks;
     using VisioForge.Core;
 
+    /// <summary>
+    /// The main form of the application.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The audio renderer.
+        /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The stream source.
+        /// </summary>
         private StreamSourceBlock _source;
 
+        /// <summary>
+        /// The source stream.
+        /// </summary>
         private Stream _sourceStream;
 
+        /// <summary>
+        /// The decode bin.
+        /// </summary>
         private DecodeBinBlock _decodeBin;
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             _pipeline = new MediaBlocksPipeline();
@@ -40,6 +64,9 @@ namespace MediaBlocks_Memory_Player_Demo
             _pipeline.OnStop += Pipeline_OnStop;
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -51,11 +78,17 @@ namespace MediaBlocks_Memory_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt select file click event.
+        /// </summary>
         private void btSelectFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -64,12 +97,18 @@ namespace MediaBlocks_Memory_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Link label 1 link clicked.
+        /// </summary>
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Handles the tb timeline scroll event.
+        /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (Convert.ToInt32(_tmPosition.Tag) == 0)
@@ -78,6 +117,9 @@ namespace MediaBlocks_Memory_Player_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmError.Clear();
@@ -130,6 +172,9 @@ namespace MediaBlocks_Memory_Player_Demo
             _tmPosition.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             _tmPosition.Stop();
@@ -149,21 +194,33 @@ namespace MediaBlocks_Memory_Player_Demo
             _sourceStream = null;
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await _pipeline.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await _pipeline.ResumeAsync();
         }
 
+        /// <summary>
+        /// Handles the tb volume 1 scroll event.
+        /// </summary>
         private void tbVolume1_Scroll(object sender, EventArgs e)
         {
             _audioRenderer.Volume = tbVolume1.Value / 100.0;
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -176,6 +233,9 @@ namespace MediaBlocks_Memory_Player_Demo
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
+        /// <summary>
+        /// Handles the tm position tick event.
+        /// </summary>
         private async void tmPosition_Tick(object sender, EventArgs e)
         {
             _tmPosition.Tag = 1;
@@ -195,6 +255,9 @@ namespace MediaBlocks_Memory_Player_Demo
             _tmPosition.Tag = 0;
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
@@ -203,6 +266,9 @@ namespace MediaBlocks_Memory_Player_Demo
                                    }));
         }
 
+        /// <summary>
+        /// Pipeline on stop.
+        /// </summary>
         private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
@@ -211,6 +277,9 @@ namespace MediaBlocks_Memory_Player_Demo
                                    }));
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             _tmPosition.Stop();
@@ -227,4 +296,4 @@ namespace MediaBlocks_Memory_Player_Demo
     }
 }
 
-// ReSharper restore InconsistentNaming
+

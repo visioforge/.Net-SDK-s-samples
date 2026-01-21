@@ -11,16 +11,25 @@ using VisioForge.Core.Types.X.AudioRenderers;
 
 namespace video_capture_webcam_mp4
 {
+    /// <summary>
+    /// Video capture webcam MP4 X demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         // Core Video Capture object
         private VideoCaptureCoreX videoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             // Create VideoCaptureCoreX instance and set VideoView for video rendering
@@ -53,6 +62,9 @@ namespace video_capture_webcam_mp4
             await videoCapture1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -63,6 +75,9 @@ namespace video_capture_webcam_mp4
             Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             // Stop capture
@@ -72,12 +87,18 @@ namespace video_capture_webcam_mp4
             await videoCapture1.DisposeAsync();
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Release SDK
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt save snapshot click event.
+        /// </summary>
         private async void btSaveSnapshot_Click(object sender, EventArgs e)
         {
             await videoCapture1.Snapshot_SaveAsync(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "snapshot.jpg"), SkiaSharp.SKEncodedImageFormat.Jpeg);

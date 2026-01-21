@@ -16,36 +16,75 @@ using VisioForge.Core.Types.X.VideoEffects;
 
 namespace MediaBlocks_Video_Mixer_Demo
 {
+    /// <summary>
+    /// The CPU mixer engine.
+    /// </summary>
     internal class CPUMixerEngine : IMixerEngine
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The first source.
+        /// </summary>
         private UniversalSourceBlock _source1;
 
+        /// <summary>
+        /// The second source.
+        /// </summary>
         private UniversalSourceBlock _source2;
 
+        /// <summary>
+        /// The video mixer.
+        /// </summary>
         private VideoMixerBlock _videoMixer;
 
+        /// <summary>
+        /// The first null renderer.
+        /// </summary>
         private NullRendererBlock _nullRenderer1;
 
+        /// <summary>
+        /// The second null renderer.
+        /// </summary>
         private NullRendererBlock _nullRenderer2;
 
+        /// <summary>
+        /// The settings.
+        /// </summary>
         private VideoMixerSettings _settings;
 
+        /// <summary>
+        /// Occurs when an error happens.
+        /// </summary>
         public event EventHandler<ErrorsEventArgs> OnError;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CPUMixerEngine"/> class.
+        /// </summary>
         public CPUMixerEngine()
         {
             _settings = new VideoMixerSettings(0, 0, VideoFrameRate.Empty);
         }
 
+        /// <summary>
+        /// Add stream.
+        /// </summary>
         public void AddStream(Rect rect, uint zorder)
         {
             _settings.AddStream(new VideoMixerStream(rect, zorder));
         }
 
+        /// <summary>
+        /// Start async.
+        /// </summary>
         public async Task StartAsync(string filename1, string filename2, IVideoView videoView)
         {
             _pipeline = new MediaBlocksPipeline();
@@ -79,11 +118,17 @@ namespace MediaBlocks_Video_Mixer_Demo
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void _pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             OnError?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
         public async Task StopAsync()
         {
             if (_pipeline != null)

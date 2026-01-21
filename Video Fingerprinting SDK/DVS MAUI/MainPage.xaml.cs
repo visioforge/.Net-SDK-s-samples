@@ -8,10 +8,24 @@ namespace DVS_MAUI
 
     public partial class MainPage : ContentPage
     {
+        /// <summary>
+        /// The folder picker.
+        /// </summary>
         private IFolderPicker _folderPicker;
+
+        /// <summary>
+        /// The source folders.
+        /// </summary>
         private ObservableCollection<string> _sourceFolders = new ObservableCollection<string>();
+
+        /// <summary>
+        /// The results.
+        /// </summary>
         private ObservableCollection<ResultItemViewModel> _results = new ObservableCollection<ResultItemViewModel>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainPage"/> class.
+        /// </summary>
         public MainPage()
         {
             InitializeComponent();
@@ -31,6 +45,9 @@ namespace DVS_MAUI
             LoadSettings();
         }
         
+        /// <summary>
+        /// On appearing.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -42,6 +59,9 @@ namespace DVS_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt add folder click event.
+        /// </summary>
         private async void btAddFolder_Click(object? sender, EventArgs e)
         {
             try
@@ -84,6 +104,9 @@ namespace DVS_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt remove folder click event.
+        /// </summary>
         private void btRemoveFolder_Click(object? sender, EventArgs e)
         {
             if (lbSourceFolders.SelectedItem is string selectedFolder)
@@ -92,6 +115,9 @@ namespace DVS_MAUI
             }
         }
 
+        /// <summary>
+        /// Handles the bt search click event.
+        /// </summary>
         private async void btSearch_Click(object? sender, EventArgs e)
         {
             try
@@ -274,6 +300,9 @@ namespace DVS_MAUI
         }
 
 
+        /// <summary>
+        /// Handles the bt delete click event.
+        /// </summary>
         private async void btDelete_Click(object? sender, EventArgs e)
         {
             var itemsToDelete = _results.Where(r => r.IsChecked && !r.IsGroupHeader).ToList();
@@ -324,6 +353,9 @@ namespace DVS_MAUI
             }
         }
 
+        /// <summary>
+        /// Sl sensitivity value changed.
+        /// </summary>
         private void slSensitivity_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             if (lbSensitivity != null)
@@ -332,6 +364,9 @@ namespace DVS_MAUI
             }
         }
 
+        /// <summary>
+        /// Sl max shift value changed.
+        /// </summary>
         private void slMaxShift_ValueChanged(object? sender, ValueChangedEventArgs e)
         {
             if (lbMaxShift != null)
@@ -340,6 +375,9 @@ namespace DVS_MAUI
             }
         }
 
+        /// <summary>
+        /// Save settings.
+        /// </summary>
         private void SaveSettings()
         {
             try
@@ -360,6 +398,9 @@ namespace DVS_MAUI
             }
         }
 
+        /// <summary>
+        /// Load settings.
+        /// </summary>
         private void LoadSettings()
         {
             try
@@ -378,12 +419,18 @@ namespace DVS_MAUI
             }
         }
 
+        /// <summary>
+        /// On disappearing.
+        /// </summary>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
             SaveSettings();
         }
 
+        /// <summary>
+        /// Error callback.
+        /// </summary>
         private void ErrorCallback(string error)
         {
             MainThread.BeginInvokeOnMainThread(() =>
@@ -395,8 +442,19 @@ namespace DVS_MAUI
 
     public class ResultItemViewModel
     {
+        /// <summary>
+        /// Gets or sets the file path.
+        /// </summary>
         public string FilePath { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is checked.
+        /// </summary>
         public bool IsChecked { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is group header.
+        /// </summary>
         public bool IsGroupHeader { get; set; }
     }
 }

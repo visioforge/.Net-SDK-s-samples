@@ -26,16 +26,34 @@ namespace Computer_Vision_Demo
 
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The video capture.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// The media player.
+        /// </summary>
         private MediaPlayerCore MediaPlayer1;
 
+        /// <summary>
+        /// The face detector.
+        /// </summary>
         private DNNFaceDetector _faceDetector;
 
+        /// <summary>
+        /// The car counter.
+        /// </summary>
         private CarCounter _carCounter;
 
+        /// <summary>
+        /// The pedestrian detector.
+        /// </summary>
         private PedestrianDetector _pedestrianDetector;
 
+        /// <summary>
+        /// The covered detector.
+        /// </summary>
         private CameraCoveredDetector _coveredDetector;
 
         public Form1()
@@ -43,6 +61,11 @@ namespace Computer_Vision_Demo
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoCaptureView as IVideoView);
@@ -69,6 +92,11 @@ namespace Computer_Vision_Demo
             cbIPCameraType.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Media player 1 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
@@ -76,6 +104,9 @@ namespace Computer_Vision_Demo
 
         #region Face detection
 
+        /// <summary>
+        /// Face detection add.
+        /// </summary>
         private void FaceDetectionAdd()
         {
             _faceDetector = new DNNFaceDetector();
@@ -84,6 +115,9 @@ namespace Computer_Vision_Demo
             FaceDetectionUpdate();
         }
 
+        /// <summary>
+        /// Face detection update.
+        /// </summary>
         private void FaceDetectionUpdate()
         {
             if (_faceDetector == null)
@@ -111,11 +145,19 @@ namespace Computer_Vision_Demo
             _faceDetector.Settings.MinFaceSize = new VisioForge.Core.Types.Size(Convert.ToInt32(edFDMinFaceWidth.Text), Convert.ToInt32(edFDMinFaceHeight.Text));
         }
 
+        /// <summary>
+        /// Handles the bt fd update click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btFDUpdate_Click(object sender, EventArgs e)
         {
             FaceDetectionUpdate();
         }
 
+        /// <summary>
+        /// Face detection remove.
+        /// </summary>
         private void FaceDetectionRemove()
         {
             if (this._faceDetector != null)
@@ -126,6 +168,11 @@ namespace Computer_Vision_Demo
             }
         }
 
+        /// <summary>
+        /// On face detected.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="CVFaceDetectedEventArgs"/> instance containing the event data.</param>
         private void OnFaceDetected(object sender, CVFaceDetectedEventArgs e)
         {
             if (e.Faces.Length == 0)
@@ -144,21 +191,41 @@ namespace Computer_Vision_Demo
                 }));
         }
 
+        /// <summary>
+        /// Handles the tb fd skip frames scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbFDSkipFrames_Scroll(object sender, EventArgs e)
         {
             lbFDSkipFrames.Text = tbFDSkipFrames.Value.ToString();
         }
 
+        /// <summary>
+        /// Handles the tb fd downscale scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbFDDownscale_Scroll(object sender, EventArgs e)
         {
             lbFDDownscale.Text = (tbFDDownscale.Value / 10.0).ToString("F2");
         }
 
+        /// <summary>
+        /// Handles the tb min neighbors scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbMinNeighbors_Scroll(object sender, EventArgs e)
         {
             lbFDMinNeighbors.Text = tbFDMinNeighbors.Value.ToString();
         }
 
+        /// <summary>
+        /// Handles the tb scale factor scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbScaleFactor_Scroll(object sender, EventArgs e)
         {
             lbFDScaleFactor.Text = (tbFDScaleFactor.Value / 100.0).ToString("F2");
@@ -167,6 +234,9 @@ namespace Computer_Vision_Demo
         #endregion
 
         #region Pedestrian detection
+        /// <summary>
+        /// Pedestrian detection add.
+        /// </summary>
         private void PedestrianDetectionAdd()
         {
             _pedestrianDetector = new PedestrianDetector()
@@ -182,6 +252,9 @@ namespace Computer_Vision_Demo
             _pedestrianDetector.OnPedestrianDetected += OnPedestrianDetected;
         }
 
+        /// <summary>
+        /// Pedestrian detection remove.
+        /// </summary>
         private void PedestrianDetectionRemove()
         {
             if (_pedestrianDetector != null)
@@ -192,6 +265,11 @@ namespace Computer_Vision_Demo
             }
         }
 
+        /// <summary>
+        /// On pedestrian detected.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="CVPedestrianDetectedEventArgs"/> instance containing the event data.</param>
         private void OnPedestrianDetected(object sender, CVPedestrianDetectedEventArgs e)
         {
             if (e.Items.Length == 0)
@@ -210,11 +288,21 @@ namespace Computer_Vision_Demo
                 }));
         }
 
+        /// <summary>
+        /// Handles the tb pd downscale scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbPDDownscale_Scroll(object sender, EventArgs e)
         {
             lbPDDownscale.Text = (tbPDDownscale.Value / 10.0).ToString("F2");
         }
 
+        /// <summary>
+        /// Handles the tb pd skip frames scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbPDSkipFrames_Scroll(object sender, EventArgs e)
         {
             lbPDSkipFrames.Text = tbPDSkipFrames.Value.ToString();
@@ -223,6 +311,9 @@ namespace Computer_Vision_Demo
         #endregion
 
         #region Car counter
+        /// <summary>
+        /// Car counter add.
+        /// </summary>
         private void CarCounterAdd()
         {
             _carCounter = new CarCounter()
@@ -236,6 +327,11 @@ namespace Computer_Vision_Demo
             _carCounter.OnCarsDetected += this.OnCarsDetected;
         }
 
+        /// <summary>
+        /// On cars detected.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="CVCarDetectedEventArgs"/> instance containing the event data.</param>
         private void OnCarsDetected(object sender, CVCarDetectedEventArgs e)
         {
             BeginInvoke(
@@ -245,6 +341,9 @@ namespace Computer_Vision_Demo
                 }));
         }
 
+        /// <summary>
+        /// Car counter remove.
+        /// </summary>
         private void CarCounterRemove()
         {
             if (_carCounter != null)
@@ -259,6 +358,9 @@ namespace Computer_Vision_Demo
 
         #region Camera covered detector
 
+        /// <summary>
+        /// Camera covered detector add.
+        /// </summary>
         private void CameraCoveredDetectorAdd()
         {
             _coveredDetector = new CameraCoveredDetector()
@@ -270,6 +372,11 @@ namespace Computer_Vision_Demo
             _coveredDetector.OnCameraCovered += OnCameraCovered;
         }
 
+        /// <summary>
+        /// On camera covered.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="CameraCoveredDetectorEventArgs"/> instance containing the event data.</param>
         private void OnCameraCovered(object sender, CameraCoveredDetectorEventArgs e)
         {
             BeginInvoke(
@@ -279,6 +386,9 @@ namespace Computer_Vision_Demo
                }));
         }
 
+        /// <summary>
+        /// Object detector remove.
+        /// </summary>
         private void ObjectDetectorRemove()
         {
             if (_coveredDetector != null)
@@ -288,16 +398,31 @@ namespace Computer_Vision_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the tb ccd skip frames scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbCCDSkipFrames_Scroll(object sender, EventArgs e)
         {
             lbCCDSkipFrames.Text = tbCCDSkipFrames.Value.ToString();
         }
 
+        /// <summary>
+        /// Handles the tb ccd threshold scroll event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void tbCCDThreshold_Scroll(object sender, EventArgs e)
         {
             lbCCDThreshold.Text = tbCCDThreshold.Value.ToString();
         }
 
+        /// <summary>
+        /// Handles the bt ccd update click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btCCDUpdate_Click(object sender, EventArgs e)
         {
             if (_coveredDetector != null)
@@ -310,6 +435,10 @@ namespace Computer_Vision_Demo
         #endregion
 
 
+        /// <summary>
+        /// Process frame.
+        /// </summary>
+        /// <param name="frame">The video frame.</param>
         private void ProcessFrame(VideoFrame frame)
         {
             _faceDetector?.ProcessFrame(frame);
@@ -320,11 +449,21 @@ namespace Computer_Vision_Demo
 
         #region Video capture source
 
+        /// <summary>
+        /// Video capture 1 on video frame buffer.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="VideoFrameBufferEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnVideoFrameBuffer(object sender, VideoFrameBufferEventArgs e)
         {
             ProcessFrame(e.Frame);
         }
 
+        /// <summary>
+        /// Handles the cb video input device selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbVideoInputDevice.SelectedIndex != -1)
@@ -349,6 +488,10 @@ namespace Computer_Vision_Demo
             }
         }
 
+        /// <summary>
+        /// Select ip camera source.
+        /// </summary>
+        /// <param name="settings">The settings.</param>
         private void SelectIPCameraSource(out IPCameraSourceSettings settings)
         {
             settings = new IPCameraSourceSettings
@@ -379,6 +522,9 @@ namespace Computer_Vision_Demo
             settings.Debug_Filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "ip_cam_log.txt");
         }
 
+        /// <summary>
+        /// Select video capture source.
+        /// </summary>
         private void SelectVideoCaptureSource()
         {
             VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInputDevice.Text);
@@ -391,6 +537,10 @@ namespace Computer_Vision_Demo
             }
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
+        /// <param name="txt">The text.</param>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -399,11 +549,19 @@ namespace Computer_Vision_Demo
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Configure video capture.
+        /// </summary>
         private void ConfigureVideoCapture()
         {
             // select source
@@ -446,6 +604,9 @@ namespace Computer_Vision_Demo
 
         #region Media Player
 
+        /// <summary>
+        /// Configure media player.
+        /// </summary>
         private void ConfigureMediaPlayer()
         {
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
@@ -458,6 +619,11 @@ namespace Computer_Vision_Demo
             MediaPlayer1.Video_Renderer_SetAuto();
         }
 
+        /// <summary>
+        /// Media player 1 on video frame buffer.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="VideoFrameBufferEventArgs"/> instance containing the event data.</param>
         private void MediaPlayer1_OnVideoFrameBuffer(object sender, VideoFrameBufferEventArgs e)
         {
             ProcessFrame(e.Frame);
@@ -465,6 +631,11 @@ namespace Computer_Vision_Demo
 
         #endregion
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
             mmLog.Clear();
@@ -517,6 +688,11 @@ namespace Computer_Vision_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await VideoCapture1.StopAsync();
@@ -528,6 +704,11 @@ namespace Computer_Vision_Demo
             ObjectDetectorRemove();
         }
 
+        /// <summary>
+        /// Handles the bt open file click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btOpenFile_Click(object sender, EventArgs e)
         {
             if (dlgOpenFile.ShowDialog() == DialogResult.OK)
@@ -536,6 +717,11 @@ namespace Computer_Vision_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the cb video input format selected index changed event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))

@@ -41,6 +41,9 @@ namespace Simple_Video_Capture
 
         private string _filename;
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             _core = new VideoCaptureCoreX(videoView);
@@ -55,6 +58,9 @@ namespace Simple_Video_Capture
             _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync();
         }
 
+        /// <summary>
+        /// Destroy engine async.
+        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_core != null)
@@ -66,11 +72,17 @@ namespace Simple_Video_Capture
             }
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void _pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Log.Error("MainActivity", e.Message);
         }
 
+        /// <summary>
+        /// On create.
+        /// </summary>
         protected override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -104,6 +116,9 @@ namespace Simple_Video_Capture
             CheckPermissionsAndStartPreview();
         }
 
+        /// <summary>
+        /// Check permissions and start preview.
+        /// </summary>
         private void CheckPermissionsAndStartPreview()
         {
             if (CheckSelfPermission(Manifest.Permission.Camera) != Android.Content.PM.Permission.Granted)
@@ -139,6 +154,9 @@ namespace Simple_Video_Capture
             });
         }
 
+        /// <summary>
+        /// Start preview async.
+        /// </summary>
         private async Task StartPreviewAsync()
         {
             await CreateEngineAsync();
@@ -189,6 +207,9 @@ namespace Simple_Video_Capture
             tmPosition.Start();
         }
 
+        /// <summary>
+        /// On destroy.
+        /// </summary>
         protected override void OnDestroy()
         {
             VisioForgeX.DestroySDK();
@@ -196,6 +217,9 @@ namespace Simple_Video_Capture
             base.OnDestroy();
         }
 
+        /// <summary>
+        /// Handles the bt switch cam click event.
+        /// </summary>
         private async void btSwitchCam_Click(object sender, EventArgs e)
         {
             await StopAsync();
@@ -212,6 +236,9 @@ namespace Simple_Video_Capture
             await StartAsync();
         }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
         private async Task StopAsync()
         {
             if (_core == null)
@@ -226,6 +253,9 @@ namespace Simple_Video_Capture
             videoView.Invalidate();
         }
 
+        /// <summary>
+        /// Handles the bt stop record click event.
+        /// </summary>
         private async void btStopRecord_Click(object sender, EventArgs e)
         {
             await _core.StopCaptureAsync(0);
@@ -233,11 +263,17 @@ namespace Simple_Video_Capture
             await PhotoGalleryHelper.AddVideoToGalleryAsync(_filename);
         }
 
+        /// <summary>
+        /// Start async.
+        /// </summary>
         private async Task StartAsync()
         {
             await StartPreviewAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start record click event.
+        /// </summary>
         private async void btStartRecord_Click(object sender, EventArgs e)
         {
             var now = DateTime.Now;
@@ -245,6 +281,9 @@ namespace Simple_Video_Capture
             await _core.StartCaptureAsync(0, _filename);
         }
 
+        /// <summary>
+        /// On request permissions result.
+        /// </summary>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

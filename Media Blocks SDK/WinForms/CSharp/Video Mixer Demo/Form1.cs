@@ -6,16 +6,28 @@ using VisioForge.Core.Types;
 
 namespace MediaBlocks_Video_Mixer_Demo
 {
+    /// <summary>
+    /// The main form of the application.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The mixer engine.
+        /// </summary>
         private IMixerEngine _engine;
                 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Form 1 load.
+        /// </summary>
         private async void Form1_Load(object sender, System.EventArgs e)
         {
             // We have to initialize the engine on start
@@ -28,6 +40,9 @@ namespace MediaBlocks_Video_Mixer_Demo
             Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, System.EventArgs e)
         {
             if (rbCPU.Checked)
@@ -45,6 +60,9 @@ namespace MediaBlocks_Video_Mixer_Demo
             await _engine.StartAsync(edFile1.Text, edFile2.Text, videoView1);
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void _pipeline_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Invoke(new Action(() =>
@@ -53,6 +71,9 @@ namespace MediaBlocks_Video_Mixer_Demo
             }));
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, System.EventArgs e)
         {
             if (_engine != null)
@@ -64,6 +85,9 @@ namespace MediaBlocks_Video_Mixer_Demo
             videoView1.Invalidate();
         }
 
+        /// <summary>
+        /// Handles the bt open file 1 click event.
+        /// </summary>
         private void btOpenFile1_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -72,6 +96,9 @@ namespace MediaBlocks_Video_Mixer_Demo
             }
         }
 
+        /// <summary>
+        /// Handles the bt open file 2 click event.
+        /// </summary>
         private void btOpenFile2_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -80,6 +107,9 @@ namespace MediaBlocks_Video_Mixer_Demo
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             VisioForgeX.DestroySDK();

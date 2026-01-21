@@ -32,6 +32,10 @@ namespace ScreenCaptureService
             InitializeComponent();
         }
 
+        /// <summary>
+        /// On start.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         protected override void OnStart(string[] args)
         {
             //System.Diagnostics.Debugger.Launch();
@@ -42,6 +46,9 @@ namespace ScreenCaptureService
             ProcessCreationThread.Start();
         }
 
+        /// <summary>
+        /// On stop.
+        /// </summary>
         protected override void OnStop()
         {
             //System.Diagnostics.Debugger.Launch();
@@ -50,8 +57,9 @@ namespace ScreenCaptureService
             ProcessCreationThread.Start();
         }
 
-        // This thread function would launch a child process 
-        // in the interactive session of the logged-on user.
+        /// <summary>
+        /// This thread function would launch a child process in the interactive session of the logged-on user.
+        /// </summary>
         public static void MyThreadFuncStart()
         {
            // System.Diagnostics.Debugger.Launch();
@@ -59,8 +67,9 @@ namespace ScreenCaptureService
             CreateProcessAsUserWrapper.LaunchChildProcess(AppDomain.CurrentDomain.BaseDirectory + "ScreenCaptureServiceHelper.exe", string.Empty); //"C:\\Windows\\notepad.exe");
         }
 
-        // This thread function would launch a child process 
-        // in the interactive session of the logged-on user.
+        /// <summary>
+        /// This thread function would launch a child process in the interactive session of the logged-on user.
+        /// </summary>
         public static void MyThreadFuncStop()
         {
             // System.Diagnostics.Debugger.Launch();

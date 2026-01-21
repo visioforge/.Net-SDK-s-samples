@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+﻿
 
 namespace MultipleWebCameras
 {
@@ -18,12 +18,24 @@ namespace MultipleWebCameras
     /// </summary>
     public partial class MainWindow : IDisposable
     {
+        /// <summary>
+        /// The video capture 1.
+        /// </summary>
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// The video capture 2.
+        /// </summary>
         private VideoCaptureCore VideoCapture2;
 
+        /// <summary>
+        /// The disposed value.
+        /// </summary>
         private bool disposedValue;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +43,9 @@ namespace MultipleWebCameras
             
         }
 
+        /// <summary>
+        /// Create engine async.
+        /// </summary>
         private async Task CreateEngineAsync()
         {
             VideoCapture1 = await VideoCaptureCore.CreateAsync(VideoView1 as IVideoView);
@@ -40,6 +55,9 @@ namespace MultipleWebCameras
             VideoCapture2.OnError += VideoCapture2_OnError;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -57,6 +75,11 @@ namespace MultipleWebCameras
             }
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await CreateEngineAsync();
@@ -76,6 +99,11 @@ namespace MultipleWebCameras
             }
         }
 
+        /// <summary>
+        /// Handles the bt start 1 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart1_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(cbCamera1.Text))
@@ -110,11 +138,21 @@ namespace MultipleWebCameras
             await VideoCapture1.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop 1 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop1_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt start 2 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart2_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(cbCamera2.Text))
@@ -148,26 +186,50 @@ namespace MultipleWebCameras
             await VideoCapture2.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop 2 click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop2_Click(object sender, RoutedEventArgs e)
         {
             await VideoCapture2.StopAsync();
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine("CAM1: " + e.Message);
         }
 
+        /// <summary>
+        /// Video capture 2 on error.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture2_OnError(object sender, ErrorsEventArgs e)
         {
             Debug.WriteLine("CAM2: " + e.Message);
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             DestroyEngine();
         }
 
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -195,6 +257,9 @@ namespace MultipleWebCameras
         //     Dispose(disposing: false);
         // }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -204,4 +269,3 @@ namespace MultipleWebCameras
     }
 }
 
-// ReSharper restore InconsistentNaming

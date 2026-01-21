@@ -92,6 +92,9 @@ public sealed partial class MainPage : Page
         VisioForgeX.InitSDK();
     }
 
+        /// <summary>
+        /// Main page unloaded.
+        /// </summary>
     private async void MainPage_Unloaded(object sender, RoutedEventArgs e)
     {
         try
@@ -108,6 +111,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
     private void CreateEngine()
     {
         try
@@ -129,6 +135,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
     private async void MainPage_Loaded(object sender, RoutedEventArgs e)
     {
         try
@@ -206,6 +215,9 @@ public sealed partial class MainPage : Page
     }
 
 #if __IOS__ || __MACCATALYST__
+        /// <summary>
+        /// Ensure apple permissions async.
+        /// </summary>
     private async Task<bool> EnsureApplePermissionsAsync()
     {
         try
@@ -242,6 +254,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Request record permission async.
+        /// </summary>
     private Task<bool> RequestRecordPermissionAsync()
     {
         var tcs = new TaskCompletionSource<bool>();
@@ -274,6 +289,9 @@ public sealed partial class MainPage : Page
         _permissionTcs.TrySetResult(allGranted);
     }
 
+        /// <summary>
+        /// Ensure android permissions async.
+        /// </summary>
     private async Task<bool> EnsureAndroidPermissionsAsync()
     {
         try
@@ -325,6 +343,9 @@ public sealed partial class MainPage : Page
 #endif
 
 #if NET_WINDOWS
+        /// <summary>
+        /// Ensure windows permissions async.
+        /// </summary>
     private async Task<bool> EnsureWindowsPermissionsAsync()
     {
         try
@@ -377,11 +398,17 @@ public sealed partial class MainPage : Page
         return tcs.Task;
     }
 
+        /// <summary>
+        /// Core on error.
+        /// </summary>
     private void Core_OnError(object? sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
     {
         DebugLogger.WriteLine(e.Message);
     }
 
+        /// <summary>
+        /// Stop all async.
+        /// </summary>
     private async Task StopAllAsync()
     {
         if (_pipeline == null)
@@ -436,6 +463,9 @@ public sealed partial class MainPage : Page
     }
 
 #if __IOS__ && !__MACCATALYST__
+        /// <summary>
+        /// Add video to photos library.
+        /// </summary>
     private void AddVideoToPhotosLibrary(string filePath)
     {
         var fileUrl = Foundation.NSUrl.FromFilename(filePath);
@@ -464,6 +494,9 @@ public sealed partial class MainPage : Page
     }
 #endif
 
+        /// <summary>
+        /// Handles the bt stop clicked event.
+        /// </summary>
     private async void btStop_Clicked(object sender, RoutedEventArgs e)
     {
         try
@@ -500,6 +533,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Handles the bt camera clicked event.
+        /// </summary>
     private void btCamera_Clicked(object sender, RoutedEventArgs e)
     {
         if (_cameras == null || _cameras.Length == 0)
@@ -517,6 +553,9 @@ public sealed partial class MainPage : Page
         btCamera.Content = _cameras[_cameraSelectedIndex].DisplayName;
     }
 
+        /// <summary>
+        /// Handles the bt mic clicked event.
+        /// </summary>
     private void btMic_Clicked(object sender, RoutedEventArgs e)
     {
         if (_mics == null || _mics.Length == 0)
@@ -534,6 +573,9 @@ public sealed partial class MainPage : Page
         btMic.Content = _mics[_micSelectedIndex].DisplayName;
     }
 
+        /// <summary>
+        /// Handles the bt speakers clicked event.
+        /// </summary>
     private void btSpeakers_Clicked(object sender, RoutedEventArgs e)
     {
         if (_speakers == null || _speakers.Length == 0)
@@ -551,6 +593,9 @@ public sealed partial class MainPage : Page
         btSpeakers.Content = _speakers[_speakerSelectedIndex].DisplayName;
     }
 
+        /// <summary>
+        /// Configure preview async.
+        /// </summary>
     private async Task ConfigurePreviewAsync(bool connect)
     {
 #if !MOBILE
@@ -641,6 +686,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Generate filename.
+        /// </summary>
     private string GenerateFilename()
     {
         DateTime now = DateTime.Now;
@@ -696,6 +744,9 @@ public sealed partial class MainPage : Page
         return filename;
     }
 
+        /// <summary>
+        /// Configure capture.
+        /// </summary>
     private void ConfigureCapture()
     {
         if (_pipeline == null || _videoSource == null || _audioSource == null || _videoRenderer == null)
@@ -760,6 +811,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Handles the bt start preview clicked event.
+        /// </summary>
     private async void btStartPreview_Clicked(object sender, RoutedEventArgs e)
     {
         try
@@ -828,6 +882,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Handles the bt start capture clicked event.
+        /// </summary>
     private async void btStartCapture_Clicked(object sender, RoutedEventArgs e)
     {
         try
@@ -898,6 +955,9 @@ public sealed partial class MainPage : Page
         }
     }
 
+        /// <summary>
+        /// Show message async.
+        /// </summary>
     private async Task ShowMessageAsync(string title, string message)
     {
 #if __ANDROID__
@@ -929,6 +989,9 @@ public sealed partial class MainPage : Page
     }
 
 #if !__ANDROID__
+        /// <summary>
+        /// Show dialog on ui thread async.
+        /// </summary>
     private async Task ShowDialogOnUIThreadAsync(string title, string message)
     {
         try

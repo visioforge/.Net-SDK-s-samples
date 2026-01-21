@@ -21,21 +21,42 @@ namespace Face_Detector_Live
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The pipeline.
+        /// </summary>
         private MediaBlocksPipeline _pipeline;
 
+        /// <summary>
+        /// The video renderer.
+        /// </summary>
         private VideoRendererBlock _videoRenderer;
 
+        /// <summary>
+        /// The video source.
+        /// </summary>
         private SystemVideoSourceBlock _videoSource;
 
+        /// <summary>
+        /// The face detector.
+        /// </summary>
         private DNNFaceDetectorBlock _faceDetect;
 
+        /// <summary>
+        /// The timer.
+        /// </summary>
         private System.Timers.Timer _timer;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -44,6 +65,9 @@ namespace Face_Detector_Live
             }));
         }
 
+        /// <summary>
+        /// Window loaded.
+        /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -73,6 +97,9 @@ namespace Face_Detector_Live
             }
         }
 
+        /// <summary>
+        /// Timer elapsed.
+        /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             var position = await _pipeline.Position_GetAsync();
@@ -83,6 +110,9 @@ namespace Face_Detector_Live
             });
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer.Stop();
@@ -103,6 +133,9 @@ namespace Face_Detector_Live
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Cb video input selection changed.
+        /// </summary>
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
@@ -130,6 +163,9 @@ namespace Face_Detector_Live
             }
         }
 
+        /// <summary>
+        /// Cb video format selection changed.
+        /// </summary>
         private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             cbVideoFrameRate.Items.Clear();
@@ -163,6 +199,9 @@ namespace Face_Detector_Live
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -217,6 +256,9 @@ namespace Face_Detector_Live
             _timer.Start();
         }
 
+        /// <summary>
+        /// Detector hand detected.
+        /// </summary>
         private void _detector_HandDetected(object sender, CVHandDetectedEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -225,6 +267,9 @@ namespace Face_Detector_Live
             }));
         }
 
+        /// <summary>
+        /// Detector face detected.
+        /// </summary>
         private void _detector_FaceDetected(object sender, CVFaceDetectedEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -233,6 +278,9 @@ namespace Face_Detector_Live
             }));
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();

@@ -10,19 +10,37 @@ using VisioForge.Core.Types.MediaPlayer;
 
 namespace memory_playback
 {
+    /// <summary>
+    /// Memory playback demo form.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// The media player.
+        /// </summary>
         MediaPlayerCore _player;
 
+        /// <summary>
+        /// The managed stream.
+        /// </summary>
         private ManagedIStream _stream;
 
+        /// <summary>
+        /// The memory stream.
+        /// </summary>
         private MemoryStream _memoryStream;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
 

@@ -2,8 +2,8 @@
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
-// ReSharper disable InconsistentNaming
-// ReSharper disable StyleCop.SA1600
+
+
 
 namespace face_detection
 {
@@ -14,15 +14,27 @@ namespace face_detection
     using VisioForge.Core.Types.VideoProcessing;
     using VisioForge.Core.VideoCapture;
 
+    /// <summary>
+    /// Face detection demo main form.
+    /// </summary>
     public partial class Form1 : Form
     {
         private VideoCaptureCore VideoCapture1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create engine.
+        /// </summary>
         private void CreateEngine()
         {
             VideoCapture1 = new VideoCaptureCore(VideoView1 as IVideoView);
@@ -31,6 +43,9 @@ namespace face_detection
             VideoCapture1.OnFaceDetected += VideoCapture1_OnFaceDetected;
         }
 
+        /// <summary>
+        /// Destroy engine.
+        /// </summary>
         private void DestroyEngine()
         {
             if (VideoCapture1 != null)
@@ -43,6 +58,9 @@ namespace face_detection
             }
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private void Form1_Load(object sender, EventArgs e)
         {
             CreateEngine();
@@ -65,6 +83,9 @@ namespace face_detection
             cbFaceTrackingSearchMode.SelectedIndex = 1;
         }
 
+        /// <summary>
+        /// Handles the cb video input device selected index changed event.
+        /// </summary>
         private void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
             // fill video formats and frame rates
@@ -86,6 +107,9 @@ namespace face_detection
             }
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             // set debug settings
@@ -126,6 +150,9 @@ namespace face_detection
             await VideoCapture1.StartAsync();
         }
 
+        /// <summary>
+        /// Log.
+        /// </summary>
         private void Log(string txt)
         {
             if (IsHandleCreated)
@@ -134,33 +161,56 @@ namespace face_detection
             }
         }
 
+        /// <summary>
+        /// Video capture 1 on error.
+        /// </summary>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
             Log(e.Message);
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             await VideoCapture1.StopAsync();
         }
 
+        /// <summary>
+        /// Handles the bt pause click event.
+        /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
             await VideoCapture1.PauseAsync();
         }
 
+        /// <summary>
+        /// Handles the bt resume click event.
+        /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
             await VideoCapture1.ResumeAsync();
         }
 
+        /// <summary>
+        /// Video capture 1 on face detected.
+        /// </summary>
         private void VideoCapture1_OnFaceDetected(object sender, AFFaceDetectionEventArgs e)
         {
             BeginInvoke(new FaceDelegate(FaceDelegateMethod), e);
         }
 
+        /// <summary>
+        /// Face delegate.
+        /// </summary>
+        /// <param name="e">Event args.</param>
         public delegate void FaceDelegate(AFFaceDetectionEventArgs e);
 
+        /// <summary>
+        /// Face delegate method.
+        /// </summary>
+        /// <param name="e">Event args.</param>
         public void FaceDelegateMethod(AFFaceDetectionEventArgs e)
         {
             edFaceTrackingFaces.Text = string.Empty;
@@ -172,6 +222,9 @@ namespace face_detection
             }
         }
 
+        /// <summary>
+        /// Handles the cb video input format selected index changed event.
+        /// </summary>
         private void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
@@ -206,6 +259,9 @@ namespace face_detection
             }
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             DestroyEngine();

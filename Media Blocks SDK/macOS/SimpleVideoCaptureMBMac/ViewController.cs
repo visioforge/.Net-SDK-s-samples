@@ -13,18 +13,39 @@ using VisioForge.Core.UI.Apple;
 
 namespace SimpleVideoCaptureMB;
 
+/// <summary>
+/// The view controller.
+/// </summary>
 public partial class ViewController : NSViewController
 {
+    /// <summary>
+    /// The audio renderer.
+    /// </summary>
     private AudioRendererBlock _audioRenderer;
 
+    /// <summary>
+    /// The audio source.
+    /// </summary>
     private SystemAudioSourceBlock _audioSource;
 
+    /// <summary>
+    /// The pipeline.
+    /// </summary>
     private MediaBlocksPipeline _pipeline;
 
+    /// <summary>
+    /// The video renderer.
+    /// </summary>
     private VideoRendererBlock _videoRenderer;
 
+    /// <summary>
+    /// The video source.
+    /// </summary>
     private MediaBlock _videoSource;
 
+    /// <summary>
+    /// The video view.
+    /// </summary>
     private VideoView _videoView;
 
     protected ViewController(NativeHandle handle) : base(handle)
@@ -40,6 +61,9 @@ public partial class ViewController : NSViewController
         // Update the view, if already loaded.
     }
 
+        /// <summary>
+        /// View did load.
+        /// </summary>
     public override void ViewDidLoad()
     {
         base.ViewDidLoad();
@@ -62,6 +86,9 @@ public partial class ViewController : NSViewController
         });
     }
 
+        /// <summary>
+        /// Show message.
+        /// </summary>
     private void ShowMessage(string text)
     {
         InvokeOnMainThread(async () =>
@@ -76,6 +103,9 @@ public partial class ViewController : NSViewController
         });
     }
 
+        /// <summary>
+        /// Load devices async.
+        /// </summary>
     private async Task LoadDevicesAsync()
     {
         // video sources
@@ -112,6 +142,9 @@ public partial class ViewController : NSViewController
         if (audioOutputs.Length > 0) cbAudioOutput.Select(new NSString(audioOutputs[0].DisplayName));
     }
 
+        /// <summary>
+        /// Handles the cb video format selection changed event.
+        /// </summary>
     private async void cbVideoFormat_SelectionChanged(object sender, EventArgs e)
     {
         cbVideoFrameRate.RemoveAll();
@@ -141,6 +174,9 @@ public partial class ViewController : NSViewController
         }
     }
 
+        /// <summary>
+        /// Handles the cb audio source selection changed event.
+        /// </summary>
     private async void cbAudioSource_SelectionChanged(object sender, EventArgs e)
     {
         if (cbAudioSource.SelectedIndex != -1 && e != null)
@@ -163,6 +199,9 @@ public partial class ViewController : NSViewController
         }
     }
 
+        /// <summary>
+        /// Handles the cb video source selection changed event.
+        /// </summary>
     private async void cbVideoSource_SelectionChanged(object sender, EventArgs e)
     {
         if (cbVideoSource.SelectedIndex != -1)
@@ -186,6 +225,9 @@ public partial class ViewController : NSViewController
         }
     }
 
+        /// <summary>
+        /// Start async.
+        /// </summary>
     private async Task StartAsync()
     {
         // Do any additional setup after loading the view.
@@ -260,6 +302,9 @@ public partial class ViewController : NSViewController
         await _pipeline.StartAsync();
     }
 
+        /// <summary>
+        /// Stop async.
+        /// </summary>
     private async Task StopAsync()
     {
         if (_pipeline == null) return;
@@ -270,20 +315,31 @@ public partial class ViewController : NSViewController
         _pipeline = null;
     }
 
+    /// <summary>
+    /// Handles the Click event of the btStart button.
+    /// </summary>
     partial void btStartClick(NSObject sender)
     {
         InvokeOnMainThread(async () => { await StartAsync(); });
     }
 
+    /// <summary>
+    /// Handles the Click event of the btStop button.
+    /// </summary>
     partial void btStopClick(NSObject sender)
     {
         InvokeOnMainThread(async () => { await StopAsync(); });
     }
 }
 
-// Custom Window delegate to close the SDK
+/// <summary>
+/// Custom Window delegate to close the SDK
+/// </summary>
 public class CustomWindowDelegate : NSWindowDelegate
 {
+        /// <summary>
+        /// Window should close.
+        /// </summary>
     public override bool WindowShouldClose(NSObject sender)
     {
         VisioForgeX.DestroySDK();

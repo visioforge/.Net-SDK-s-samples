@@ -50,6 +50,9 @@ namespace Live_Source_Switch_Demo
             
         }
 
+        /// <summary>
+        /// Shared on video source added.
+        /// </summary>
         private void Shared_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
             Dispatcher.Invoke(() =>
@@ -60,6 +63,9 @@ namespace Live_Source_Switch_Demo
             });
         }
 
+        /// <summary>
+        /// Pipeline on error.
+        /// </summary>
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
             Dispatcher.Invoke((Action)(() =>
@@ -68,12 +74,18 @@ namespace Live_Source_Switch_Demo
             }));
         }
 
+        /// <summary>
+        /// Create engines.
+        /// </summary>
         private void CreateEngines()
         {
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
         }
 
+        /// <summary>
+        /// Destroy engines async.
+        /// </summary>
         private async Task DestroyEnginesAsync()
         {
             if (_pipeline != null)
@@ -84,6 +96,9 @@ namespace Live_Source_Switch_Demo
             }
         }
 
+        /// <summary>
+        /// Create screen capture source.
+        /// </summary>
         private ScreenCaptureDX9SourceSettings CreateScreenCaptureSource()
         {
             var screenID = Convert.ToInt32(0);
@@ -100,6 +115,9 @@ namespace Live_Source_Switch_Demo
             return source;
         }
 
+        /// <summary>
+        /// Create camera source async.
+        /// </summary>
         private async Task<VideoCaptureDeviceSourceSettings> CreateCameraSourceAsync()
         {
             VideoCaptureDeviceSourceSettings videoSourceSettings = null;
@@ -126,6 +144,9 @@ namespace Live_Source_Switch_Demo
             return videoSourceSettings;
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             mmLog.Clear();
@@ -159,6 +180,9 @@ namespace Live_Source_Switch_Demo
             await _pipeline.StartAsync();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             await _pipeline.StopAsync();
@@ -166,6 +190,9 @@ namespace Live_Source_Switch_Demo
             await DestroyEnginesAsync();
         }
 
+        /// <summary>
+        /// Form 1 load.
+        /// </summary>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
             // We have to initialize the engine on start
@@ -184,12 +211,18 @@ namespace Live_Source_Switch_Demo
             DeviceEnumerator.Shared.StartVideoSourceMonitor();
         }
 
+        /// <summary>
+        /// Ll video tutorials link clicked.
+        /// </summary>
         private void llVideoTutorials_LinkClicked(object sender, MouseButtonEventArgs e)
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.VideoTutorials);
             Process.Start(startInfo);
         }
 
+        /// <summary>
+        /// Window closing.
+        /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             await DestroyEnginesAsync();
@@ -197,6 +230,9 @@ namespace Live_Source_Switch_Demo
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt switch click event.
+        /// </summary>
         private void btSwitch_Click(object sender, RoutedEventArgs e)
         {
             if (_switch != null)

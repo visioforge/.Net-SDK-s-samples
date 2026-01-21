@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace VideoCapture_CSharp_Demo
 {
+    /// <summary>
+    /// Program class.
+    /// </summary>
     static class Program
     {
         /// <summary>

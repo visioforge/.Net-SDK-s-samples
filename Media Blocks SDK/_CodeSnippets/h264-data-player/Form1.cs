@@ -50,6 +50,9 @@ namespace media_player
             _tmPosition.Elapsed += _tmPosition_Elapsed;
         }
 
+        /// <summary>
+        /// Tm position elapsed.
+        /// </summary>
         private void _tmPosition_Elapsed(object sender, ElapsedEventArgs e)
         {
             Invoke(new Action(async () =>
@@ -62,6 +65,9 @@ namespace media_player
             }));
         }
 
+        /// <summary>
+        /// Handles the bt start click event.
+        /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(edFilename.Text))
@@ -152,6 +158,9 @@ namespace media_player
             _tmPosition.Start();
         }
 
+        /// <summary>
+        /// Handles the bt stop click event.
+        /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
             _stopFlag = true;
@@ -163,6 +172,9 @@ namespace media_player
             await _pipeline.DisposeAsync();
         }
 
+        /// <summary>
+        /// Open http stream async.
+        /// </summary>
         private async Task<Stream> OpenHTTPStreamAsync()
         {
             using (HttpClient httpClient = new HttpClient())
@@ -174,6 +186,9 @@ namespace media_player
             }
         }
 
+        /// <summary>
+        /// Handles the form 1 load event.
+        /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
             // We have to initialize the engine on start
@@ -184,11 +199,17 @@ namespace media_player
             Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
         }
 
+        /// <summary>
+        /// Form 1 form closing.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             VisioForgeX.DestroySDK();
         }
 
+        /// <summary>
+        /// Handles the bt open file click event.
+        /// </summary>
         private void btOpenFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
