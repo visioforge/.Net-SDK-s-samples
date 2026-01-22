@@ -368,3 +368,23 @@ jobs:
       run: dotnet restore "Dialogs Source Code/VideoEffects/VideoEffects_VB_net8.vbproj"
     - name: Build (Dialogs VB net8)
       run: msbuild "Dialogs Source Code/VideoEffects/VideoEffects_VB_net8.vbproj" -t:rebuild -property:Configuration=Release
+    - name: Clean (Dialogs VB net8)
+      run: msbuild "Dialogs Source Code/VideoEffects/VideoEffects_VB_net8.vbproj" -t:clean -property:Configuration=Release
+
+    # ==================== .NET 8 WinUI ====================
+
+    # Media Player (WinUI)
+    - name: Restore (Media Player WinUI)
+      run: dotnet restore "Media Player SDK/VisioForge.MediaPlayer.Demos.CS WinUI.sln"
+    - name: Build (Media Player WinUI)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS WinUI.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Player WinUI)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS WinUI.sln" -t:clean -property:Configuration=Release
+
+    # Video Capture (WinUI)
+    - name: Restore (Video Capture WinUI)
+      run: dotnet restore "Video Capture SDK/VisioForge.VideoCapture.Demos.CS WinUI.sln"
+    - name: Build (Video Capture WinUI)
+      run: dotnet build "Video Capture SDK/VisioForge.VideoCapture.Demos.CS WinUI.sln" --configuration Release --no-restore
+    - name: Clean (Video Capture WinUI)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS WinUI.sln" -t:clean -property:Configuration=Release
