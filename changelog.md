@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.1.16
+
+* [Media Blocks SDK .Net] BridgeVideoSourceSettings: Added DoTimestamp property to enable fresh timestamp generation for cross-pipeline scenarios
+
 ## 2026.1.15
 
 * [Media Blocks SDK .Net] DecklinkVideoSinkSettings: Made Mode parameter required in constructor to prevent frame rate mismatch issues (was defaulting to Unknown mode causing unexpected 23.98fps output)
