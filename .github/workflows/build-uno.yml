@@ -30,7 +30,7 @@ jobs:
 
     - name: Install workloads (Windows)
       if: runner.os == 'Windows'
-      run: dotnet workload install android ios macos windows
+      run: dotnet workload install android ios macos
 
     - name: Install workloads (macOS)
       if: runner.os == 'macOS'
