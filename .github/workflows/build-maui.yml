@@ -9,7 +9,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-2022, macos-14]
+        os: [windows-2022, macos-26]
     runs-on: ${{ matrix.os }}
 
     env:
