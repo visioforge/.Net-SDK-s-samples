@@ -1,0 +1,370 @@
+name: Build .Net Legacy (4.7.2 - 8.0)
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          5.0.x
+          6.0.x
+          7.0.x
+          8.0.x
+
+    - name: Setup NuGet
+      uses: nuget/setup-nuget@v2
+      with:
+        nuget-version: 'latest'
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Clear NuGet cache
+      run: nuget locals all -clear
+
+    # ==================== .NET Framework 4.7.2 ====================
+
+    # Media Blocks (net472)
+    - name: Restore (Media Blocks net472)
+      run: nuget restore "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net472.sln"
+    - name: Build (Media Blocks net472)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net472.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Blocks net472)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net472.sln" -t:clean -property:Configuration=Release
+
+    # Media Player (net472)
+    - name: Restore (Media Player SDK net472)
+      run: nuget restore "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net472.sln"
+    - name: Build (Media Player SDK net472)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net472.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Player SDK net472)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net472.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Media Player X net472)
+      run: nuget restore "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net472.sln"
+    - name: Build (Media Player X net472)
+      run: msbuild "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net472.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Player X net472)
+      run: msbuild "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net472.sln" -t:clean -property:Configuration=Release
+
+    # Video Capture (net472)
+    - name: Restore (Video Capture SDK net472)
+      run: nuget restore "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net472.sln"
+    - name: Build (Video Capture SDK net472)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net472.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture SDK net472)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net472.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture SDK CV net472)
+      run: nuget restore "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net472.sln"
+    - name: Build (Video Capture SDK CV net472)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net472.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture SDK CV net472)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net472.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture X net472)
+      run: nuget restore "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net472.sln"
+    - name: Build (Video Capture X net472)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net472.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture X net472)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net472.sln" -t:clean -property:Configuration=Release
+
+    # Video Edit (net472)
+    - name: Restore (Video Edit SDK net472)
+      run: nuget restore "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net472.sln"
+    - name: Build (Video Edit SDK net472)
+      run: msbuild "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net472.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit SDK net472)
+      run: msbuild "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net472.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Edit X net472)
+      run: nuget restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net472.sln"
+    - name: Build (Video Edit X net472)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net472.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit X net472)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net472.sln" -t:clean -property:Configuration=Release
+
+    # ==================== .NET 5 ====================
+
+    # Media Blocks (net5)
+    - name: Restore (Media Blocks net5)
+      run: dotnet restore "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net5.sln"
+    - name: Build (Media Blocks net5)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net5.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Blocks net5)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net5.sln" -t:clean -property:Configuration=Release
+
+    # Media Player (net5)
+    - name: Restore (Media Player SDK net5)
+      run: dotnet restore "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net5.sln"
+    - name: Build (Media Player SDK net5)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net5.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Player SDK net5)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net5.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Media Player X net5)
+      run: dotnet restore "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net5.sln"
+    - name: Build (Media Player X net5)
+      run: msbuild "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net5.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Player X net5)
+      run: msbuild "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net5.sln" -t:clean -property:Configuration=Release
+
+    # Video Capture (net5)
+    - name: Restore (Video Capture SDK net5)
+      run: dotnet restore "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net5.sln"
+    - name: Build (Video Capture SDK net5)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net5.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture SDK net5)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net5.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture SDK CV net5)
+      run: dotnet restore "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net5.sln"
+    - name: Build (Video Capture SDK CV net5)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net5.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture SDK CV net5)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net5.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture X net5)
+      run: dotnet restore "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net5.sln"
+    - name: Build (Video Capture X net5)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net5.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture X net5)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net5.sln" -t:clean -property:Configuration=Release
+
+    # Video Edit (net5)
+    - name: Restore (Video Edit SDK net5)
+      run: dotnet restore "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net5.sln"
+    - name: Build (Video Edit SDK net5)
+      run: msbuild "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net5.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit SDK net5)
+      run: msbuild "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net5.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Edit X net5)
+      run: dotnet restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net5.sln"
+    - name: Build (Video Edit X net5)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net5.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit X net5)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net5.sln" -t:clean -property:Configuration=Release
+
+    # ==================== .NET 6 ====================
+
+    # Media Blocks (net6)
+    - name: Restore (Media Blocks net6)
+      run: dotnet restore "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net6.sln"
+    - name: Build (Media Blocks net6)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net6.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Blocks net6)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net6.sln" -t:clean -property:Configuration=Release
+
+    # Media Player (net6)
+    - name: Restore (Media Player SDK net6)
+      run: dotnet restore "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net6.sln"
+    - name: Build (Media Player SDK net6)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net6.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Player SDK net6)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net6.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Media Player X net6)
+      run: dotnet restore "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net6.sln"
+    - name: Build (Media Player X net6)
+      run: msbuild "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net6.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Player X net6)
+      run: msbuild "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net6.sln" -t:clean -property:Configuration=Release
+
+    # Video Capture (net6)
+    - name: Restore (Video Capture SDK net6)
+      run: dotnet restore "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net6.sln"
+    - name: Build (Video Capture SDK net6)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net6.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture SDK net6)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net6.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture SDK CV net6)
+      run: dotnet restore "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net6.sln"
+    - name: Build (Video Capture SDK CV net6)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net6.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture SDK CV net6)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net6.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture X net6)
+      run: dotnet restore "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net6.sln"
+    - name: Build (Video Capture X net6)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net6.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture X net6)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net6.sln" -t:clean -property:Configuration=Release
+
+    # Video Edit (net6)
+    - name: Restore (Video Edit SDK net6)
+      run: dotnet restore "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net6.sln"
+    - name: Build (Video Edit SDK net6)
+      run: msbuild "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net6.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit SDK net6)
+      run: msbuild "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net6.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Edit X net6)
+      run: dotnet restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net6.sln"
+    - name: Build (Video Edit X net6)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net6.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit X net6)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net6.sln" -t:clean -property:Configuration=Release
+
+    # ==================== .NET 7 ====================
+
+    # Media Blocks (net7)
+    - name: Restore (Media Blocks net7)
+      run: dotnet restore "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net7.sln"
+    - name: Build (Media Blocks net7)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net7.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Blocks net7)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net7.sln" -t:clean -property:Configuration=Release
+
+    # Media Player (net7)
+    - name: Restore (Media Player SDK net7)
+      run: dotnet restore "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net7.sln"
+    - name: Build (Media Player SDK net7)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net7.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Player SDK net7)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net7.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Media Player X net7)
+      run: dotnet restore "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net7.sln"
+    - name: Build (Media Player X net7)
+      run: msbuild "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net7.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Player X net7)
+      run: msbuild "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net7.sln" -t:clean -property:Configuration=Release
+
+    # Video Capture (net7)
+    - name: Restore (Video Capture SDK net7)
+      run: dotnet restore "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net7.sln"
+    - name: Build (Video Capture SDK net7)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net7.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture SDK net7)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net7.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture SDK CV net7)
+      run: dotnet restore "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net7.sln"
+    - name: Build (Video Capture SDK CV net7)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net7.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture SDK CV net7)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net7.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture X net7)
+      run: dotnet restore "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net7.sln"
+    - name: Build (Video Capture X net7)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net7.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture X net7)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net7.sln" -t:clean -property:Configuration=Release
+
+    # Video Edit (net7)
+    - name: Restore (Video Edit SDK net7)
+      run: dotnet restore "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net7.sln"
+    - name: Build (Video Edit SDK net7)
+      run: msbuild "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net7.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit SDK net7)
+      run: msbuild "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net7.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Edit X net7)
+      run: dotnet restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net7.sln"
+    - name: Build (Video Edit X net7)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net7.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit X net7)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net7.sln" -t:clean -property:Configuration=Release
+
+    # ==================== .NET 8 ====================
+
+    # Media Blocks (net8)
+    - name: Restore (Media Blocks net8)
+      run: dotnet restore "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net8.sln"
+    - name: Build (Media Blocks net8)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net8.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Blocks net8)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS net8.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Media Blocks Console net8)
+      run: dotnet restore "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Console.sln"
+    - name: Build (Media Blocks Console net8)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Console.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Blocks Console net8)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Console.sln" -t:clean -property:Configuration=Release
+
+    # Media Player (net8)
+    - name: Restore (Media Player SDK net8)
+      run: dotnet restore "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net8.sln"
+    - name: Build (Media Player SDK net8)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net8.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Player SDK net8)
+      run: msbuild "Media Player SDK/VisioForge.MediaPlayer.Demos.CS (NuGet) net8.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Media Player X net8)
+      run: dotnet restore "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net8.sln"
+    - name: Build (Media Player X net8)
+      run: msbuild "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net8.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Player X net8)
+      run: msbuild "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Windows net8.sln" -t:clean -property:Configuration=Release
+
+    # Video Capture (net8)
+    - name: Restore (Video Capture SDK net8)
+      run: dotnet restore "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net8.sln"
+    - name: Build (Video Capture SDK net8)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net8.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture SDK net8)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS (NuGet) net8.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture SDK CV net8)
+      run: dotnet restore "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net8.sln"
+    - name: Build (Video Capture SDK CV net8)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net8.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture SDK CV net8)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.CS.CV (NuGet) net8.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture X net8)
+      run: dotnet restore "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net8.sln"
+    - name: Build (Video Capture X net8)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net8.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture X net8)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net8.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture X CV net8)
+      run: dotnet restore "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS CV net8.sln"
+    - name: Build (Video Capture X CV net8)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS CV net8.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture X CV net8)
+      run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS CV net8.sln" -t:clean -property:Configuration=Release
+
+    # Video Edit (net8)
+    - name: Restore (Video Edit SDK net8)
+      run: dotnet restore "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net8.sln"
+    - name: Build (Video Edit SDK net8)
+      run: msbuild "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net8.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit SDK net8)
+      run: msbuild "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net8.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Edit X net8)
+      run: dotnet restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net8.sln"
+    - name: Build (Video Edit X net8)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net8.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit X net8)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net8.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Edit X Console net8)
+      run: dotnet restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.Console.sln"
+    - name: Build (Video Edit X Console net8)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.Console.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit X Console net8)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.Console.sln" -t:clean -property:Configuration=Release
+
+    # Dialogs Source Code (VB.NET - net8)
+    - name: Restore (Dialogs VB net8)
+      run: dotnet restore "Dialogs Source Code/VideoEffects/VideoEffects_VB_net8.vbproj"
+    - name: Build (Dialogs VB net8)
+      run: msbuild "Dialogs Source Code/VideoEffects/VideoEffects_VB_net8.vbproj" -t:rebuild -property:Configuration=Release
