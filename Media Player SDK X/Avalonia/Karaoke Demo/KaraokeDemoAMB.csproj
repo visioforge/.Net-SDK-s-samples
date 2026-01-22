@@ -23,6 +23,7 @@
   </PropertyGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.9.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS.Adds" Version="2025.9.1" />
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
     <TargetFramework>net10.0</TargetFramework>
