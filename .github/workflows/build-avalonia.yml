@@ -4,63 +4,66 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+
 jobs:
   build:
+    strategy:
+      matrix:
+        os: [windows-2022, macos-14, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+
     env:
       Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Avalonia.sln"
       Solution_Name_MP: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Avalonia.sln"
       Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS Avalonia.sln"
       Solution_Name_VE: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.Avalonia.sln"
-    runs-on: windows-2022
+
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Setup .NET 
-      uses: actions/setup-dotnet@v1
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: | 
+        dotnet-version: |
           9.0.x
           10.0.x
-          
-    # Install required workloads
-    - name: Install .NET workloads
+
+    - name: Install .NET workloads (Windows)
+      if: runner.os == 'Windows'
       run: |
-        dotnet workload install ios
-        dotnet workload install android
-        dotnet workload install macos
-        dotnet workload install windows
-        
-        # Install all MAUI-related workloads
-        dotnet workload install maui
-        dotnet workload install maui-android
-        dotnet workload install maui-ios
-        dotnet workload install maui-maccatalyst
-        dotnet workload install maui-windows
-        dotnet workload install maui-desktop
-          
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
-        
-    ## Media Blocks
-    - name: Restore dependencies $env:Solution_Name_MB
-      run: dotnet restore $env:Solution_Name_MB
-    - name: Build app for release $env:Solution_Name_MB
-      run: msbuild $env:Solution_Name_MB -t:rebuild -verbosity:diag -property:Configuration=Release
-      
-    ## Media Player
-    - name: Restore dependencies $env:Solution_Name_MP
-      run: dotnet restore $env:Solution_Name_MP
-    - name: Build app for release $env:Solution_Name_MP
-      run: msbuild $env:Solution_Name_MP -t:rebuild -verbosity:diag -property:Configuration=Release
-      
-    ## Video Capture
-    - name: Restore dependencies $env:Solution_Name_VC
-      run: dotnet restore $env:Solution_Name_VC
-    - name: Build app for release $env:Solution_Name_VC
-      run: msbuild $env:Solution_Name_VC -t:rebuild -verbosity:diag -property:Configuration=Release
-      
-    ## Video Edit
-    - name: Restore dependencies $env:Solution_Name_VE
-      run: dotnet restore $env:Solution_Name_VE
-    - name: Build app for release $env:Solution_Name_VE
-      run: msbuild $env:Solution_Name_VE -t:rebuild -verbosity:diag -property:Configuration=Release
+        dotnet workload install ios android macos windows
+        dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-windows maui-desktop
+
+    - name: Install .NET workloads (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        dotnet workload install ios android macos maccatalyst
+        dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-desktop
+
+    - name: Install .NET workloads (Linux)
+      if: runner.os == 'Linux'
+      run: dotnet workload install android
+
+    # Media Blocks
+    - name: Restore dependencies (Media Blocks)
+      run: dotnet restore "${{ env.Solution_Name_MB }}"
+    - name: Build (Media Blocks)
+      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore
+
+    # Media Player
+    - name: Restore dependencies (Media Player)
+      run: dotnet restore "${{ env.Solution_Name_MP }}"
+    - name: Build (Media Player)
+      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore
+
+    # Video Capture
+    - name: Restore dependencies (Video Capture)
+      run: dotnet restore "${{ env.Solution_Name_VC }}"
+    - name: Build (Video Capture)
+      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore
+
+    # Video Edit
+    - name: Restore dependencies (Video Edit)
+      run: dotnet restore "${{ env.Solution_Name_VE }}"
+    - name: Build (Video Edit)
+      run: dotnet build "${{ env.Solution_Name_VE }}" --configuration Release --no-restore
