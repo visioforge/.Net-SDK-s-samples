@@ -1,0 +1,39 @@
+name: Build iOS
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: macos-26
+
+    env:
+      Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS iOS.sln"
+      Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS iOS.sln"
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          10.0.x
+          9.0.x
+
+    - name: Install workloads
+      run: dotnet workload install ios
+
+    # Media Blocks
+    - name: Restore (Media Blocks)
+      run: dotnet restore "${{ env.Solution_Name_MB }}"
+    - name: Build (Media Blocks)
+      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore
+
+    # Video Capture
+    - name: Restore (Video Capture)
+      run: dotnet restore "${{ env.Solution_Name_VC }}"
+    - name: Build (Video Capture)
+      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore
