@@ -1,0 +1,17 @@
+<Project>
+  <!-- Detect build platform -->
+  <PropertyGroup>
+    <_BuildingOnLinux Condition="$([MSBuild]::IsOSPlatform('Linux'))">true</_BuildingOnLinux>
+  </PropertyGroup>
+
+  <!-- For iOS/macOS-only projects on Linux, redirect to net8.0 so restore works -->
+  <PropertyGroup Condition="'$(_BuildingOnLinux)' == 'true' AND '$(TargetFramework)' != ''">
+    <_IsApplePlatformOnly Condition="$(TargetFramework.Contains('-ios')) OR $(TargetFramework.Contains('-maccatalyst')) OR $(TargetFramework.Contains('-macos'))">true</_IsApplePlatformOnly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(_BuildingOnLinux)' == 'true' AND '$(_IsApplePlatformOnly)' == 'true'">
+    <_OriginalTargetFramework>$(TargetFramework)</_OriginalTargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
+    <_SkipBuildOnLinux>true</_SkipBuildOnLinux>
+  </PropertyGroup>
+</Project>
