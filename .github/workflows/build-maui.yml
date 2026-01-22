@@ -13,16 +13,9 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      # Media Blocks SDK
       Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS MAUI.sln"
-      # Media Player SDK X
-      Solution_Name_MPX: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.MAUI.sln"
-      # Media Player SDK
-      Solution_Name_MP: "Media Player SDK/VisioForge.MediaPlayer.X.Demos.CS.MAUI.sln"
-      # Video Capture SDK X
-      Solution_Name_VCX: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS MAUI.sln"
-      # Video Capture SDK
-      Solution_Name_VC: "Video Capture SDK/VisioForge.VideoCaptureX.Demos.CS MAUI.sln"
+      Solution_Name_MP: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.MAUI.sln"
+      Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS MAUI.sln"
 
     steps:
     - uses: actions/checkout@v4
@@ -67,24 +60,6 @@ jobs:
       continue-on-error: true
 
     # Media Player SDK X
-    - name: Restore (Media Player X)
-      run: dotnet restore "${{ env.Solution_Name_MPX }}"
-
-    - name: Build Media Player X (Windows)
-      if: runner.os == 'Windows'
-      run: dotnet build "${{ env.Solution_Name_MPX }}" --configuration Release --no-restore -f net8.0-windows10.0.19041.0
-      continue-on-error: true
-
-    - name: Build Media Player X (macOS)
-      if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Name_MPX }}" --configuration Release --no-restore -f net8.0-maccatalyst
-      continue-on-error: true
-
-    - name: Build Media Player X (Android)
-      run: dotnet build "${{ env.Solution_Name_MPX }}" --configuration Release --no-restore -f net8.0-android
-      continue-on-error: true
-
-    # Media Player SDK
     - name: Restore (Media Player)
       run: dotnet restore "${{ env.Solution_Name_MP }}"
 
@@ -103,24 +78,6 @@ jobs:
       continue-on-error: true
 
     # Video Capture SDK X
-    - name: Restore (Video Capture X)
-      run: dotnet restore "${{ env.Solution_Name_VCX }}"
-
-    - name: Build Video Capture X (Windows)
-      if: runner.os == 'Windows'
-      run: dotnet build "${{ env.Solution_Name_VCX }}" --configuration Release --no-restore -f net8.0-windows10.0.19041.0
-      continue-on-error: true
-
-    - name: Build Video Capture X (macOS)
-      if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Name_VCX }}" --configuration Release --no-restore -f net8.0-maccatalyst
-      continue-on-error: true
-
-    - name: Build Video Capture X (Android)
-      run: dotnet build "${{ env.Solution_Name_VCX }}" --configuration Release --no-restore -f net8.0-android
-      continue-on-error: true
-
-    # Video Capture SDK
     - name: Restore (Video Capture)
       run: dotnet restore "${{ env.Solution_Name_VC }}"
 
