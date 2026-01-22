@@ -9,7 +9,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-2022, macos-14, ubuntu-24.04]
+        os: [windows-2022, macos-14]
     runs-on: ${{ matrix.os }}
 
     env:
@@ -35,8 +35,6 @@ jobs:
     - name: Install workloads (macOS)
       if: runner.os == 'macOS'
       run: dotnet workload install android ios macos maccatalyst
-
-    # No workloads needed for Linux - Uno uses Skia.GTK which is bundled
 
     # Media Blocks
     - name: Restore (Media Blocks)
