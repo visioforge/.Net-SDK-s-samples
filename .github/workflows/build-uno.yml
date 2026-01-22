@@ -36,9 +36,7 @@ jobs:
       if: runner.os == 'macOS'
       run: dotnet workload install android ios macos maccatalyst
 
-    - name: Install workloads (Linux)
-      if: runner.os == 'Linux'
-      run: dotnet workload install android
+    # No workloads needed for Linux - Uno uses Skia.GTK which is bundled
 
     # Media Blocks
     - name: Restore (Media Blocks)

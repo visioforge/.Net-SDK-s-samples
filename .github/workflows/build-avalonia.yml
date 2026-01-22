@@ -14,7 +14,9 @@ jobs:
 
     env:
       Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Avalonia.sln"
+      Solution_Name_MB_Linux: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Avalonia.Linux.sln"
       Solution_Name_MP: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Avalonia.sln"
+      Solution_Name_MP_Linux: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Avalonia.Linux.sln"
       Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS Avalonia.sln"
       Solution_Name_VE: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.Avalonia.sln"
 
@@ -44,25 +46,45 @@ jobs:
       if: runner.os == 'Linux'
       run: dotnet workload install android
 
-    # Media Blocks
+    # Media Blocks (Windows/macOS)
     - name: Restore dependencies (Media Blocks)
+      if: runner.os != 'Linux'
       run: dotnet restore "${{ env.Solution_Name_MB }}"
     - name: Build (Media Blocks)
+      if: runner.os != 'Linux'
       run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore
 
-    # Media Player
+    # Media Blocks (Linux - uses solution without iOS)
+    - name: Restore dependencies (Media Blocks - Linux)
+      if: runner.os == 'Linux'
+      run: dotnet restore "${{ env.Solution_Name_MB_Linux }}"
+    - name: Build (Media Blocks - Linux)
+      if: runner.os == 'Linux'
+      run: dotnet build "${{ env.Solution_Name_MB_Linux }}" --configuration Release --no-restore
+
+    # Media Player (Windows/macOS)
     - name: Restore dependencies (Media Player)
+      if: runner.os != 'Linux'
       run: dotnet restore "${{ env.Solution_Name_MP }}"
     - name: Build (Media Player)
+      if: runner.os != 'Linux'
       run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore
 
-    # Video Capture
+    # Media Player (Linux - uses solution without iOS)
+    - name: Restore dependencies (Media Player - Linux)
+      if: runner.os == 'Linux'
+      run: dotnet restore "${{ env.Solution_Name_MP_Linux }}"
+    - name: Build (Media Player - Linux)
+      if: runner.os == 'Linux'
+      run: dotnet build "${{ env.Solution_Name_MP_Linux }}" --configuration Release --no-restore
+
+    # Video Capture (all platforms - no iOS projects)
     - name: Restore dependencies (Video Capture)
       run: dotnet restore "${{ env.Solution_Name_VC }}"
     - name: Build (Video Capture)
       run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore
 
-    # Video Edit
+    # Video Edit (all platforms - no iOS projects)
     - name: Restore dependencies (Video Edit)
       run: dotnet restore "${{ env.Solution_Name_VE }}"
     - name: Build (Video Edit)
