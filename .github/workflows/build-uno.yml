@@ -1,9 +1,9 @@
 name: Build Uno Platform
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -18,57 +18,75 @@ jobs:
       Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS Uno.sln"
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Select Xcode 26.2
-      if: runner.os == 'macOS'
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '26.2'
+      - name: Select Xcode 26.2
+        if: runner.os == 'macOS'
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "26.2"
 
-    - name: Setup .NET
-      if: runner.os != 'macOS'
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: |
-          10.0.x
-          9.0.x
-          8.0.x
+      - name: Setup .NET
+        if: runner.os != 'macOS'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            10.0.x
+            9.0.x
+            8.0.x
 
-    - name: Setup .NET (macOS ARM64)
-      if: runner.os == 'macOS'
-      run: |
-        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 8.0 --architecture arm64
-        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 9.0 --architecture arm64
-        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0 --architecture arm64
-        echo "$HOME/.dotnet" >> $GITHUB_PATH
-        echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
+      - name: Setup .NET (macOS ARM64)
+        if: runner.os == 'macOS'
+        run: |
+          curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 8.0 --architecture arm64
+          curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 9.0 --architecture arm64
+          curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0 --architecture arm64
+          echo "$HOME/.dotnet" >> $GITHUB_PATH
+          echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
 
-    - name: Install workloads (Windows)
-      if: runner.os == 'Windows'
-      run: dotnet workload install android ios macos
+      - name: Install workloads (Windows)
+        if: runner.os == 'Windows'
+        run: dotnet workload install android ios macos
 
-    - name: Install workloads (macOS)
-      if: runner.os == 'macOS'
-      run: dotnet workload install android ios macos maccatalyst
+      - name: Install workloads (macOS)
+        if: runner.os == 'macOS'
+        run: dotnet workload install android ios macos maccatalyst
 
-    # Media Blocks
-    - name: Restore (Media Blocks)
-      run: dotnet restore "${{ env.Solution_Name_MB }}"
+      # Media Blocks (Windows)
+      - name: Restore (Media Blocks)
+        if: runner.os == 'Windows'
+        run: dotnet restore "${{ env.Solution_Name_MB }}"
+      - name: Build (Media Blocks)
+        if: runner.os == 'Windows'
+        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore
 
-    - name: Build (Media Blocks)
-      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore
+      # Media Blocks (macOS)
+      - name: Build (Media Blocks - macOS)
+        if: runner.os == 'macOS'
+        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release
 
-    # Media Player
-    - name: Restore (Media Player)
-      run: dotnet restore "${{ env.Solution_Name_MP }}"
+      # Media Player (Windows)
+      - name: Restore (Media Player)
+        if: runner.os == 'Windows'
+        run: dotnet restore "${{ env.Solution_Name_MP }}"
+      - name: Build (Media Player)
+        if: runner.os == 'Windows'
+        run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore
 
-    - name: Build (Media Player)
-      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore
+      # Media Player (macOS)
+      - name: Build (Media Player - macOS)
+        if: runner.os == 'macOS'
+        run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release
 
-    # Video Capture
-    - name: Restore (Video Capture)
-      run: dotnet restore "${{ env.Solution_Name_VC }}"
+      # Video Capture (Windows)
+      - name: Restore (Video Capture)
+        if: runner.os == 'Windows'
+        run: dotnet restore "${{ env.Solution_Name_VC }}"
+      - name: Build (Video Capture)
+        if: runner.os == 'Windows'
+        run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore
 
-    - name: Build (Video Capture)
-      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore
+      # Video Capture (macOS)
+      - name: Build (Video Capture - macOS)
+        if: runner.os == 'macOS'
+        run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release

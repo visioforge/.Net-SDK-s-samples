@@ -1,9 +1,9 @@
 name: Build ALL (Avalonia)
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -21,86 +21,110 @@ jobs:
       Solution_Name_VE: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.Avalonia.sln"
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Select Xcode 26.2
-      if: runner.os == 'macOS'
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '26.2'
+      - name: Select Xcode 26.2
+        if: runner.os == 'macOS'
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "26.2"
 
-    - name: Setup .NET
-      if: runner.os != 'macOS'
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: |
-          9.0.x
-          10.0.x
+      - name: Setup .NET
+        if: runner.os != 'macOS'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            9.0.x
+            10.0.x
 
-    - name: Setup .NET (macOS ARM64)
-      if: runner.os == 'macOS'
-      run: |
-        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 9.0 --architecture arm64
-        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0 --architecture arm64
-        echo "$HOME/.dotnet" >> $GITHUB_PATH
-        echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
+      - name: Setup .NET (macOS ARM64)
+        if: runner.os == 'macOS'
+        run: |
+          curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 9.0 --architecture arm64
+          curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0 --architecture arm64
+          echo "$HOME/.dotnet" >> $GITHUB_PATH
+          echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
 
-    - name: Install .NET workloads (Windows)
-      if: runner.os == 'Windows'
-      run: |
-        dotnet workload install ios android macos windows
-        dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-windows maui-desktop
+      - name: Install .NET workloads (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          dotnet workload install ios android macos windows
+          dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-windows maui-desktop
 
-    - name: Install .NET workloads (macOS)
-      if: runner.os == 'macOS'
-      run: |
-        dotnet workload install ios android macos maccatalyst
-        dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-desktop
+      - name: Install .NET workloads (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          dotnet workload install ios android macos maccatalyst
+          dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-desktop
 
-    - name: Install .NET workloads (Linux)
-      if: runner.os == 'Linux'
-      run: dotnet workload install android
+      - name: Install .NET workloads (Linux)
+        if: runner.os == 'Linux'
+        run: dotnet workload install android
 
-    # Media Blocks (Windows/macOS)
-    - name: Restore dependencies (Media Blocks)
-      if: runner.os != 'Linux'
-      run: dotnet restore "${{ env.Solution_Name_MB }}"
-    - name: Build (Media Blocks)
-      if: runner.os != 'Linux'
-      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore
+      # Media Blocks (Windows)
+      - name: Restore dependencies (Media Blocks)
+        if: runner.os == 'Windows'
+        run: dotnet restore "${{ env.Solution_Name_MB }}"
+      - name: Build (Media Blocks)
+        if: runner.os == 'Windows'
+        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore
 
-    # Media Blocks (Linux - uses solution without iOS)
-    - name: Restore dependencies (Media Blocks - Linux)
-      if: runner.os == 'Linux'
-      run: dotnet restore "${{ env.Solution_Name_MB_Linux }}"
-    - name: Build (Media Blocks - Linux)
-      if: runner.os == 'Linux'
-      run: dotnet build "${{ env.Solution_Name_MB_Linux }}" --configuration Release --no-restore
+      # Media Blocks (macOS)
+      - name: Build (Media Blocks - macOS)
+        if: runner.os == 'macOS'
+        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release
 
-    # Media Player (Windows/macOS)
-    - name: Restore dependencies (Media Player)
-      if: runner.os != 'Linux'
-      run: dotnet restore "${{ env.Solution_Name_MP }}"
-    - name: Build (Media Player)
-      if: runner.os != 'Linux'
-      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore
+      # Media Blocks (Linux - uses solution without iOS)
+      - name: Restore dependencies (Media Blocks - Linux)
+        if: runner.os == 'Linux'
+        run: dotnet restore "${{ env.Solution_Name_MB_Linux }}"
+      - name: Build (Media Blocks - Linux)
+        if: runner.os == 'Linux'
+        run: dotnet build "${{ env.Solution_Name_MB_Linux }}" --configuration Release --no-restore
 
-    # Media Player (Linux - uses solution without iOS)
-    - name: Restore dependencies (Media Player - Linux)
-      if: runner.os == 'Linux'
-      run: dotnet restore "${{ env.Solution_Name_MP_Linux }}"
-    - name: Build (Media Player - Linux)
-      if: runner.os == 'Linux'
-      run: dotnet build "${{ env.Solution_Name_MP_Linux }}" --configuration Release --no-restore
+      # Media Player (Windows)
+      - name: Restore dependencies (Media Player)
+        if: runner.os == 'Windows'
+        run: dotnet restore "${{ env.Solution_Name_MP }}"
+      - name: Build (Media Player)
+        if: runner.os == 'Windows'
+        run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore
 
-    # Video Capture (all platforms - no iOS projects)
-    - name: Restore dependencies (Video Capture)
-      run: dotnet restore "${{ env.Solution_Name_VC }}"
-    - name: Build (Video Capture)
-      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore
+      # Media Player (macOS)
+      - name: Build (Media Player - macOS)
+        if: runner.os == 'macOS'
+        run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release
 
-    # Video Edit (all platforms - no iOS projects)
-    - name: Restore dependencies (Video Edit)
-      run: dotnet restore "${{ env.Solution_Name_VE }}"
-    - name: Build (Video Edit)
-      run: dotnet build "${{ env.Solution_Name_VE }}" --configuration Release --no-restore
+      # Media Player (Linux - uses solution without iOS)
+      - name: Restore dependencies (Media Player - Linux)
+        if: runner.os == 'Linux'
+        run: dotnet restore "${{ env.Solution_Name_MP_Linux }}"
+      - name: Build (Media Player - Linux)
+        if: runner.os == 'Linux'
+        run: dotnet build "${{ env.Solution_Name_MP_Linux }}" --configuration Release --no-restore
+
+      # Video Capture (Windows/Linux)
+      - name: Restore dependencies (Video Capture)
+        if: runner.os != 'macOS'
+        run: dotnet restore "${{ env.Solution_Name_VC }}"
+      - name: Build (Video Capture)
+        if: runner.os != 'macOS'
+        run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore
+
+      # Video Capture (macOS)
+      - name: Build (Video Capture - macOS)
+        if: runner.os == 'macOS'
+        run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release
+
+      # Video Edit (Windows/Linux)
+      - name: Restore dependencies (Video Edit)
+        if: runner.os != 'macOS'
+        run: dotnet restore "${{ env.Solution_Name_VE }}"
+      - name: Build (Video Edit)
+        if: runner.os != 'macOS'
+        run: dotnet build "${{ env.Solution_Name_VE }}" --configuration Release --no-restore
+
+      # Video Edit (macOS)
+      - name: Build (Video Edit - macOS)
+        if: runner.os == 'macOS'
+        run: dotnet build "${{ env.Solution_Name_VE }}" --configuration Release
