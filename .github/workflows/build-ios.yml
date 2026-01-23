@@ -1,9 +1,9 @@
 name: Build iOS
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -14,31 +14,27 @@ jobs:
       Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS iOS.sln"
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Select Xcode 26.2
-      uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '26.2'
+      - name: Select Xcode 26.2
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "26.2"
 
-    - name: Setup .NET (ARM64)
-      run: |
-        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 9.0 --architecture arm64
-        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0 --architecture arm64
-        echo "$HOME/.dotnet" >> $GITHUB_PATH
-        echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
+      - name: Setup .NET (ARM64)
+        run: |
+          curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 9.0 --architecture arm64
+          curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0 --architecture arm64
+          echo "$HOME/.dotnet" >> $GITHUB_PATH
+          echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
 
-    - name: Install workloads
-      run: dotnet workload install ios
+      - name: Install workloads
+        run: dotnet workload install ios
 
-    # Media Blocks
-    - name: Restore (Media Blocks)
-      run: dotnet restore "${{ env.Solution_Name_MB }}"
-    - name: Build (Media Blocks)
-      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore
+      # Media Blocks
+      - name: Build (Media Blocks)
+        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release /p:_RequireCodeSigning=false /p:CodesignKey="-"
 
-    # Video Capture
-    - name: Restore (Video Capture)
-      run: dotnet restore "${{ env.Solution_Name_VC }}"
-    - name: Build (Video Capture)
-      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore
+      # Video Capture
+      - name: Build (Video Capture)
+        run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release /p:_RequireCodeSigning=false /p:CodesignKey="-"
