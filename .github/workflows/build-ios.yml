@@ -21,12 +21,12 @@ jobs:
       with:
         xcode-version: '26.2'
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: |
-          10.0.x
-          9.0.x
+    - name: Setup .NET (ARM64)
+      run: |
+        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 9.0 --architecture arm64
+        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0 --architecture arm64
+        echo "$HOME/.dotnet" >> $GITHUB_PATH
+        echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
 
     - name: Install workloads
       run: dotnet workload install ios

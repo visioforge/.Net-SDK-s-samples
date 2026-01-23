@@ -18,7 +18,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="2025.11.0" />
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
-    <TargetFramework>net10.0-macos26.2</TargetFramework>
+    <TargetFramework>net10.0-macos</TargetFramework>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">

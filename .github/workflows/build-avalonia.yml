@@ -30,11 +30,20 @@ jobs:
         xcode-version: '26.2'
 
     - name: Setup .NET
+      if: runner.os != 'macOS'
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
           9.0.x
           10.0.x
+
+    - name: Setup .NET (macOS ARM64)
+      if: runner.os == 'macOS'
+      run: |
+        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 9.0 --architecture arm64
+        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0 --architecture arm64
+        echo "$HOME/.dotnet" >> $GITHUB_PATH
+        echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
 
     - name: Install .NET workloads (Windows)
       if: runner.os == 'Windows'
