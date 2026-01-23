@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using VisioForge.Core;
@@ -17,6 +18,7 @@ using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Libs.GStreamer;
 
 namespace KaraokeDemoAMB;
 
@@ -85,6 +87,63 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
+    /// Load CDG plugin manually from application directory (Linux only).
+    /// </summary>
+    private void LoadCDGPlugin()
+    {
+#if !WINDOWS && !OSX
+        try
+        {
+            // Check if cdgparse element is already available (from system GStreamer plugins)
+            if (VisioForge.Core.GStreamer.Helpers.ElementHelper.IsAvailable("cdgparse"))
+            {
+                Console.WriteLine("CDG plugin already available from system GStreamer plugins");
+                return;
+            }
+
+            var appDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            // Detect architecture
+            var arch = RuntimeInformation.ProcessArchitecture switch
+            {
+                Architecture.X64 => "linux-x64",
+                Architecture.Arm64 => "linux-arm64",
+                _ => null
+            };
+
+            if (arch == null)
+            {
+                Console.WriteLine($"Unsupported architecture: {RuntimeInformation.ProcessArchitecture}");
+                return;
+            }
+
+            var cdgPluginPath = Path.Combine(appDir, "runtimes", arch, "native", "libgstcdg.so");
+
+            if (File.Exists(cdgPluginPath))
+            {
+                var plugin = Gst.Plugin.LoadFile(cdgPluginPath);
+                if (plugin != null)
+                {
+                    Console.WriteLine($"CDG plugin loaded successfully from: {cdgPluginPath}");
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to load CDG plugin from: {cdgPluginPath}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"CDG plugin not found at: {cdgPluginPath}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading CDG plugin: {ex.Message}");
+        }
+#endif
+    }
+
+    /// <summary>
     /// Initialize controls and wire up events.
     /// </summary>
     private void InitControls()
@@ -132,6 +191,9 @@ public partial class MainWindow : Window
         _player = new MediaPlayerCoreX(VideoView1);
         _player.OnError += Player_OnError;
         _player.OnStop += Player_OnStop;
+
+        // Load CDG plugin manually after GStreamer is initialized
+        LoadCDGPlugin();
 
         Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
         _player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");

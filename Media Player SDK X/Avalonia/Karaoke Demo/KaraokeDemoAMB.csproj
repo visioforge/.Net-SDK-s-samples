@@ -25,6 +25,9 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.9.1" />
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS.Adds" Version="2025.9.1" />
   </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Linux.GST1.24.CDG" Version="2026.1.1" />
+  </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
