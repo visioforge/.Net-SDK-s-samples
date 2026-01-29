@@ -34,6 +34,6 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.11.0" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.11.0" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.1.17" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.1.20" />
   </ItemGroup>
 </Project>
