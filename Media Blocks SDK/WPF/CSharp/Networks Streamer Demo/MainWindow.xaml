@@ -61,6 +61,7 @@
                     <ComboBoxItem>SRT (configure in code)</ComboBoxItem>
                     <ComboBoxItem>NDI (set the name)</ComboBoxItem>
                     <ComboBoxItem>RTSP (create server)</ComboBoxItem>
+                    <ComboBoxItem>WebRTC WHIP</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
 

@@ -56,6 +56,8 @@ namespace Networks_Streamer_Demo
 
         private RTSPServerBlock _rtspSink;
 
+        private WHIPSinkBlock _whipSink;
+
         private H264EncoderBlock _h264Encoder;
 
         private NDISinkBlock _ndiSink;
@@ -65,6 +67,8 @@ namespace Networks_Streamer_Demo
         private TeeBlock _audioTee;
 
         private AACEncoderBlock _aacEncoder;
+
+        private OPUSEncoderBlock _opusEncoder;
 
         private System.Timers.Timer _timer;
 
@@ -290,6 +294,28 @@ namespace Networks_Streamer_Demo
                     _pipeline.Connect(_audioTee.Outputs[1], _rtspSink.AudioInput);
                 }
             }
+            // WebRTC WHIP (requires H264 + Opus)
+            else if (cbPlatform.SelectedIndex == 8)
+            {
+                var h264Settings = new OpenH264EncoderSettings() { GOPSize = 10, ParseStream = false };
+                _h264Encoder = new H264EncoderBlock(h264Settings);
+                _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
+
+                var whipSettings = new WHIPSinkSettings()
+                {
+                    Location = edStreamingKey.Text
+                };
+
+                _whipSink = new WHIPSinkBlock(whipSettings);
+                _pipeline.Connect(_h264Encoder.Output, _whipSink.CreateNewInput(MediaBlockPadMediaType.Video));
+
+                if (audioEnabled)
+                {
+                    _opusEncoder = new OPUSEncoderBlock(new OPUSEncoderSettings());
+                    _pipeline.Connect(_audioTee.Outputs[1], _opusEncoder.Input);
+                    _pipeline.Connect(_opusEncoder.Output, _whipSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                }
+            }
             // Streaming with H264/AAC encoders
             else
             {
@@ -390,7 +416,7 @@ namespace Networks_Streamer_Demo
                 }
                 // SRT
                 else if (cbPlatform.SelectedIndex == 5)
-                {                    
+                {
                     _srtSink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = "srt://:8888" });
                     _h264Encoder.Settings.ParseStream = false; // we have to disable parsing for SRT for H264 and HEVC encoders
                     _pipeline.Connect(_h264Encoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Video));
@@ -400,7 +426,7 @@ namespace Networks_Streamer_Demo
                         _pipeline.Connect(_aacEncoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Audio));
                     }
                 }
-            }            
+            }
 
             // start
             await _pipeline.StartAsync();
@@ -572,6 +598,9 @@ namespace Networks_Streamer_Demo
                     break;
                 case 7:
                     edStreamingKey.Text = "rtsp://127.0.0.1:7777/live";
+                    break;
+                case 8:
+                    edStreamingKey.Text = "http://localhost:8889/stream/whip";
                     break;
             }
         }

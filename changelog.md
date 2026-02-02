@@ -9,6 +9,17 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.2.2
+
+* [Core] VideoCaptureDeviceInfo: Extended Windows device path population to support Media Foundation (MF) devices in addition to KS
+* [Core] VideoCaptureDeviceInfo: Fixed pre-existing bug where V4L2 device path validation checked wrong variable
+* [Core] VideoCaptureDeviceSourceSettings: Added FindByDevicePath() static methods for restoring saved camera profiles by device path
+* [Core] DeviceEnumerator: Added FindVideoSourceByDevicePathAsync() method for looking up devices by path
+* [Media Blocks SDK .Net] Added RIST (Reliable Internet Stream Transport) MPEG-TS sink output support
+* [Media Blocks SDK .Net] Added WebRTC WHIP (WebRTC-HTTP Ingestion Protocol) output support
+* [Video Capture SDK .Net] Added WebRTC WHIP streaming output
+* [Video Capture SDK .Net] Added RIST streaming output
+
 ## 2026.1.16
 
 * [Media Blocks SDK .Net] BridgeVideoSourceSettings: Added DoTimestamp property to enable fresh timestamp generation for cross-pipeline scenarios

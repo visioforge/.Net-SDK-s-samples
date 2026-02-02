@@ -1,0 +1,71 @@
+<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebRTC_WHIP_Streamer_Demo"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        x:Class="WebRTC_WHIP_Streamer_Demo.MainWindow"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - WebRTC WHIP Streamer Demo" Height="613" Width="1031" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+
+        <WPF:VideoView x:Name="VideoView1" HorizontalAlignment="Left" Height="360" Margin="366,10,0,0" VerticalAlignment="Top" Width="640"/>
+
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="366,383,0,0">
+            <Button x:Name="btStart" Content="Start" Width="50" Click="btStart_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="50" Margin="10,0,0,0" Click="btStop_Click"/>
+            <TextBlock x:Name="lbTime" Text="00:00:00" Margin="15,0,0,0" />
+        </StackPanel>
+
+        <TextBox x:Name="mmLog" HorizontalAlignment="Left" Height="170" Margin="366,410,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="640" VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="340">
+
+            <RadioButton x:Name="rbCameraSource" IsChecked="true" Content="Camera source" />
+            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                <Label Content="Device" HorizontalAlignment="Left" Width="90"/>
+                <ComboBox x:Name="cbVideoInput" HorizontalAlignment="Left" Width="230" VerticalContentAlignment="Center" SelectionChanged="cbVideoInput_SelectionChanged"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                <Label Content="Format" HorizontalAlignment="Left" Width="80"/>
+                <ComboBox x:Name="cbVideoFormat" HorizontalAlignment="Left" Margin="10,0,0,0" Width="150" VerticalContentAlignment="Center" SelectionChanged="cbVideoFormat_SelectionChanged"/>
+                <ComboBox x:Name="cbVideoFrameRate" HorizontalAlignment="Left" Margin="10,0,0,0" Width="50" VerticalContentAlignment="Center"/>
+                <Label Content="fps" HorizontalAlignment="Left" />
+            </StackPanel>
+
+            <RadioButton x:Name="rbScreenSource" IsChecked="false" Margin="0,10,0,0" Content="Screen source" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                <Label Content="Audio source" HorizontalAlignment="Left" Width="90" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cbAudioInput" HorizontalAlignment="Left" Margin="10,0,0,0" Width="230" VerticalContentAlignment="Center" SelectionChanged="cbAudioInput_SelectionChanged"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Format" HorizontalAlignment="Left" Margin="10,0,0,0" Width="80"/>
+                <ComboBox x:Name="cbAudioFormat" HorizontalAlignment="Left" Margin="10,0,0,0" Width="230" VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+            <Separator Margin="0,15,0,0"/>
+
+            <Label Content="WebRTC WHIP Settings" FontWeight="Bold" Margin="0,10,0,0"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <Label Content="WHIP URL" HorizontalAlignment="Left" Width="90"/>
+                <TextBox x:Name="edWHIPEndpoint" HorizontalAlignment="Left" Margin="10,0,0,0" Width="230" Text="http://localhost:8889/test/whip" VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="Auth token" HorizontalAlignment="Left" Width="90"/>
+                <TextBox x:Name="edAuthToken" HorizontalAlignment="Left" Margin="10,0,0,0" Width="230" Text="" VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="STUN server" HorizontalAlignment="Left" Width="90"/>
+                <TextBox x:Name="edStunServer" HorizontalAlignment="Left" Margin="10,0,0,0" Width="230" Text="" VerticalContentAlignment="Center"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>

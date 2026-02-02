@@ -333,6 +333,12 @@ namespace Networks_Streamer_Demo
                 var hlsOutput = new HLSOutput(settings);
                 _videoCapture.Outputs_Add(hlsOutput, true);
             }
+            // WebRTC WHIP
+            else if (cbPlatform.SelectedIndex == 9)
+            {
+                var whipOutput = new WHIPOutput(edStreamingKey.Text);
+                _videoCapture.Outputs_Add(whipOutput, true);
+            }
 
             // start
             await _videoCapture.StartAsync();
@@ -523,6 +529,9 @@ namespace Networks_Streamer_Demo
                     break;
                 case 8:
                     edStreamingKey.Text = "http://localhost:8088/";
+                    break;
+                case 9:
+                    edStreamingKey.Text = "http://localhost:8889/stream/whip";
                     break;
             }
         }

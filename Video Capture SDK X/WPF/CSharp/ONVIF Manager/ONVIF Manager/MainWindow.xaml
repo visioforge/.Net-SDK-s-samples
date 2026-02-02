@@ -1,0 +1,166 @@
+﻿<Window x:Class="ONVIF_Manager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ONVIF_Manager"
+        mc:Ignorable="d"
+        Title="ONVIF Manager" Height="800" Width="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="10" Orientation="Horizontal">
+            <Label Content="URL" Margin="0,0,5,0" VerticalAlignment="Center" />
+            <TextBox Name="edURL" Width="200" Margin="0,0,10,0" Text="http://192.168.1.22/onvif/device_service" />
+            <Label Content="Username" Margin="0,0,5,0" VerticalAlignment="Center" />
+            <TextBox Name="edUsername" Width="100" Margin="0,0,10,0" Text="admin" />
+            <Label Content="Password" Margin="0,0,5,0" VerticalAlignment="Center" />
+            <TextBox Name="edPassword" Width="100" Margin="0,0,10,0" Text="dancer23" />
+            <Button Name="btnConnect" Width="75" Click="btnConnect_Click">Connect</Button>
+        </StackPanel>
+
+        <TabControl Grid.Row="1" Margin="10" Name="tabControl">
+            <TabItem Header="Camera Information">
+                <Grid Margin="10">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <!-- Device Information Section -->
+                            <GroupBox Header="Device Information" Margin="0,0,0,10">
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Grid.Column="0" Content="Manufacturer:" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Name="txtManufacturer" Text="-" VerticalAlignment="Center"/>
+
+                                    <Label Grid.Row="1" Grid.Column="0" Content="Model:" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Name="txtModel" Text="-" VerticalAlignment="Center"/>
+
+                                    <Label Grid.Row="2" Grid.Column="0" Content="Firmware Version:" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Name="txtFirmware" Text="-" VerticalAlignment="Center"/>
+
+                                    <Label Grid.Row="3" Grid.Column="0" Content="Serial Number:" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Name="txtSerialNumber" Text="-" VerticalAlignment="Center"/>
+
+                                    <Label Grid.Row="4" Grid.Column="0" Content="Hardware ID:" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" Name="txtHardwareId" Text="-" VerticalAlignment="Center"/>
+                                </Grid>
+                            </GroupBox>
+
+                            <!-- Network Information Section -->
+                            <GroupBox Header="Network Information" Margin="0,0,0,10">
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Grid.Column="0" Content="IP Address:" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Name="txtIPAddress" Text="-" VerticalAlignment="Center"/>
+
+                                    <Label Grid.Row="1" Grid.Column="0" Content="MAC Address:" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Name="txtMACAddress" Text="-" VerticalAlignment="Center"/>
+
+                                    <Label Grid.Row="2" Grid.Column="0" Content="DHCP:" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Name="txtDHCP" Text="-" VerticalAlignment="Center"/>
+                                </Grid>
+                            </GroupBox>
+
+                            <!-- Stream Information Section -->
+                            <GroupBox Header="Stream Information" Margin="0,0,0,10">
+                                <Grid Margin="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Content="RTSP URL:" FontWeight="SemiBold"/>
+                                        <TextBlock Grid.Column="1" Name="txtRTSPUrl" Text="-" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    </Grid>
+
+                                    <Label Grid.Row="1" Content="Available Media Profiles:" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                                    <DataGrid Grid.Row="2" Name="dgProfiles" AutoGenerateColumns="False" Margin="0,5,0,0" IsReadOnly="True" HeadersVisibility="Column">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Profile Name" Binding="{Binding Name}" Width="120"/>
+                                            <!-- Video Encoder Section -->
+                                            <DataGridTextColumn Header="Video Resolution" Binding="{Binding Resolution}" Width="100"/>
+                                            <DataGridTextColumn Header="Video Encoding" Binding="{Binding Encoding}" Width="100"/>
+                                            <DataGridTextColumn Header="Framerate" Binding="{Binding Framerate}" Width="80"/>
+                                            <DataGridTextColumn Header="Video Bitrate" Binding="{Binding Bitrate}" Width="90"/>
+                                            <!-- Audio Encoder Section -->
+                                            <DataGridTextColumn Header="Audio Encoding" Binding="{Binding AudioEncoding}" Width="100"/>
+                                            <DataGridTextColumn Header="Audio Bitrate" Binding="{Binding AudioBitrate}" Width="90"/>
+                                            <DataGridTextColumn Header="Sample Rate" Binding="{Binding AudioSampleRate}" Width="90"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                            </GroupBox>
+
+                            <!-- System Information Section -->
+                            <GroupBox Header="System Information" Margin="0,0,0,10">
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Grid.Column="0" Content="Device Time:" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Name="txtDeviceTime" Text="-" VerticalAlignment="Center"/>
+
+                                    <Label Grid.Row="1" Grid.Column="0" Content="Time Sync Method:" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Name="txtTimeSyncMethod" Text="-" VerticalAlignment="Center"/>
+
+                                    <Label Grid.Row="2" Grid.Column="0" Content="Device Status:" FontWeight="SemiBold"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Name="txtDeviceStatus" Text="-" VerticalAlignment="Center"/>
+                                </Grid>
+                            </GroupBox>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Preview and PTZ Control">
+                <StackPanel Margin="10">
+                    <Label Content="Preview and PTZ Control will be displayed here." />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Event Management">
+                <StackPanel Margin="10">
+                    <Label Content="Event Management will be displayed here." />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Recording Management">
+                <StackPanel Margin="10">
+                    <Label Content="Recording Management will be displayed here." />
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
