@@ -14,6 +14,6 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.2.2" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.2.3" />
   </ItemGroup>
 </Project>
