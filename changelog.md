@@ -9,6 +9,14 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.2.4
+
+* [Media Blocks SDK .Net] Added H264PushSourceBlock for pushing raw H.264 encoded data into a decoding pipeline, with automatic AVC-to-byte-stream conversion and PTS rebasing
+* [Core] Added RtspDescribeClient: lightweight cross-platform RTSP DESCRIBE client for fast stream discovery (~100-200ms), with SDP parsing and Basic/Digest auth support
+* [Core] RTSPSourceSettings: Added fast RTSP discovery path using RtspDescribeClient
+* [Core] RTSPRAWSourceSettings: Added fast RTSP discovery path using RtspDescribeClient
+* [Core] UniversalSourceSettings: Added fast RTSP discovery path for rtsp:// and rtsps:// URIs
+
 ## 2026.2.2
 
 * [Core] VideoCaptureDeviceInfo: Extended Windows device path population to support Media Foundation (MF) devices in addition to KS

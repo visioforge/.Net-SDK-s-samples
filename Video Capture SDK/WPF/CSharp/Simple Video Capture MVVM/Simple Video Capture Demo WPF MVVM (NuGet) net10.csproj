@@ -40,7 +40,7 @@
     <PackageReference Include="Prism.Core" Version="9.0.537" />
     <PackageReference Include="Prism.Unity" Version="9.0.537" />
     <PackageReference Include="Prism.Wpf" Version="9.0.537" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.2.3" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.2.4" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
