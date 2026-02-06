@@ -227,7 +227,7 @@ namespace RIST_Streamer_Demo
             // AAC encoder for audio
             if (audioEnabled)
             {
-                _aacEncoder = new AACEncoderBlock(new AACEncoderSettings());
+                _aacEncoder = new AACEncoderBlock();
                 _pipeline.Connect(_audioTee.Outputs[1], _aacEncoder.Input);
             }
 
