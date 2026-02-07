@@ -1,0 +1,112 @@
+<Window x:Class="Video_From_Images_X.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="VisioForge Video Edit SDK .Net - Video From Images" Height="700" Width="850"
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left panel - Settings -->
+        <TabControl Grid.Column="0">
+            <TabItem Header="Output">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                        <CheckBox x:Name="cbResize" Content="Resize" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBox x:Name="edWidth" Width="60" Text="768" Margin="0,0,5,0"/>
+                        <TextBlock Text="x" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                        <TextBox x:Name="edHeight" Width="60" Text="576"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                        <TextBlock Text="Frame rate:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <ComboBox x:Name="cbFrameRate" Width="60">
+                            <ComboBoxItem Content="1"/>
+                            <ComboBoxItem Content="2"/>
+                            <ComboBoxItem Content="5"/>
+                            <ComboBoxItem Content="10"/>
+                            <ComboBoxItem Content="12"/>
+                            <ComboBoxItem Content="15"/>
+                            <ComboBoxItem Content="20"/>
+                            <ComboBoxItem Content="25"/>
+                            <ComboBoxItem Content="30"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <TextBlock Text="Format" Margin="0,0,0,5"/>
+                    <ComboBox x:Name="cbOutputFormat" Margin="0,0,0,5">
+                        <ComboBoxItem Content="MP4"/>
+                        <ComboBoxItem Content="AVI"/>
+                        <ComboBoxItem Content="MKV (Matroska)"/>
+                        <ComboBoxItem Content="WMV (Windows Media Video)"/>
+                        <ComboBoxItem Content="WebM"/>
+                    </ComboBox>
+                    <TextBlock Text="You can use code to configure format settings" Margin="0,0,0,15" FontStyle="Italic"/>
+
+                    <TextBlock Text="Other output formats available in Main Demo" Margin="0,150,0,10" FontStyle="Italic"/>
+
+                    <TextBlock Text="Output file" Margin="0,0,0,5"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edOutput" Width="260" Margin="0,0,5,0"/>
+                        <Button x:Name="btSelectOutput" Content="..." Width="30" Click="btSelectOutput_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Log">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                        <CheckBox x:Name="cbDebugMode" Content="Debug mode" Margin="0,0,15,0"/>
+                        <CheckBox x:Name="cbLicensing" Content="Licensing info"/>
+                    </StackPanel>
+                    <TextBlock Text="Errors and warnings" Margin="0,0,0,5"/>
+                    <TextBox x:Name="mmLog" Height="400" IsReadOnly="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <!-- Right panel -->
+        <Grid Grid.Column="1" Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,5">
+                <TextBlock Text="Input files:" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock x:Name="linkLabel1" Visibility="Collapsed"/>
+            </StackPanel>
+
+            <Grid Grid.Row="1" Margin="0,0,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ListBox x:Name="lbFiles" Grid.Column="0" Height="90"/>
+                <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                    <Button x:Name="btAddInputFile" Content="Add" Width="75" Margin="0,0,0,5" Click="btAddInputFile_Click"/>
+                    <Button x:Name="btClearList" Content="Clear" Width="75" Click="btClearList_Click"/>
+                </StackPanel>
+            </Grid>
+
+            <wpf:VideoView x:Name="VideoView1" Grid.Row="2" Background="Black"/>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,5">
+                <RadioButton x:Name="rbConvert" Content="Convert video" VerticalAlignment="Center" Margin="0,0,15,0"/>
+                <RadioButton x:Name="rbPreview" Content="Preview" IsChecked="True" VerticalAlignment="Center" Margin="0,0,15,0"/>
+                <Button x:Name="btStart" Content="Start" Width="75" FontWeight="Bold" Margin="0,0,5,0" Click="btStart_Click"/>
+                <Button x:Name="btStop" Content="Stop" Width="75" FontWeight="Bold" Click="btStop_Click"/>
+            </StackPanel>
+
+            <ProgressBar x:Name="ProgressBar1" Grid.Row="4" Height="25"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -22,7 +22,8 @@ jobs:
 
       Solution_Name_VE1: "Video Edit SDK/VisioForge.VideoEdit.Demos.CS (NuGet) net10.sln"
       Solution_Name_VE2: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net10.sln"
-      Solution_Name_VE_VB: "Video Edit SDK/VisioForge.VideoEdit.Demos.VB (NuGet) net10.sln"  
+      Solution_Name_VE3: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net10.sln"
+      Solution_Name_VE_VB: "Video Edit SDK/VisioForge.VideoEdit.Demos.VB (NuGet) net10.sln"
 
     runs-on: windows-2022
 
@@ -117,6 +118,12 @@ jobs:
 
     - name: Build app for release $env:Solution_Name_VE2
       run: msbuild $env:Solution_Name_VE2 -t:rebuild -verbosity:diag -property:Configuration=Release
+
+    - name: Restore dependencies $env:Solution_Name_VE3
+      run: dotnet restore $env:Solution_Name_VE3
+
+    - name: Build app for release $env:Solution_Name_VE3
+      run: msbuild $env:Solution_Name_VE3 -t:rebuild -verbosity:diag -property:Configuration=Release
 
     - name: Restore dependencies $env:Solution_Name_VE_VB
       run: dotnet restore $env:Solution_Name_VE_VB

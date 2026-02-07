@@ -94,6 +94,13 @@ jobs:
     - name: Clean (Video Edit X net472)
       run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net472.sln" -t:clean -property:Configuration=Release
 
+    - name: Restore (Video Edit X WPF net472)
+      run: nuget restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net472.sln"
+    - name: Build (Video Edit X WPF net472)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net472.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit X WPF net472)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net472.sln" -t:clean -property:Configuration=Release
+
     # ==================== .NET 5 ====================
 
     # Media Blocks (net5)
@@ -155,6 +162,13 @@ jobs:
       run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net5.sln" -t:rebuild -property:Configuration=Release
     - name: Clean (Video Edit X net5)
       run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net5.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Edit X WPF net5)
+      run: dotnet restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net5.sln"
+    - name: Build (Video Edit X WPF net5)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net5.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit X WPF net5)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net5.sln" -t:clean -property:Configuration=Release
 
     # ==================== .NET 6 ====================
 
@@ -218,6 +232,13 @@ jobs:
     - name: Clean (Video Edit X net6)
       run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net6.sln" -t:clean -property:Configuration=Release
 
+    - name: Restore (Video Edit X WPF net6)
+      run: dotnet restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net6.sln"
+    - name: Build (Video Edit X WPF net6)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net6.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit X WPF net6)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net6.sln" -t:clean -property:Configuration=Release
+
     # ==================== .NET 7 ====================
 
     # Media Blocks (net7)
@@ -279,6 +300,13 @@ jobs:
       run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net7.sln" -t:rebuild -property:Configuration=Release
     - name: Clean (Video Edit X net7)
       run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net7.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Edit X WPF net7)
+      run: dotnet restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net7.sln"
+    - name: Build (Video Edit X WPF net7)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net7.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit X WPF net7)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net7.sln" -t:clean -property:Configuration=Release
 
     # ==================== .NET 8 ====================
 
@@ -355,6 +383,13 @@ jobs:
       run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net8.sln" -t:rebuild -property:Configuration=Release
     - name: Clean (Video Edit X net8)
       run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net8.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Edit X WPF net8)
+      run: dotnet restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net8.sln"
+    - name: Build (Video Edit X WPF net8)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net8.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Edit X WPF net8)
+      run: msbuild "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net8.sln" -t:clean -property:Configuration=Release
 
     - name: Restore (Video Edit X Console net8)
       run: dotnet restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.Console.sln"

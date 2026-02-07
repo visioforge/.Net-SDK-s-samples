@@ -1,0 +1,307 @@
+<Window x:Class="VideoEdit_CS_Demo_X.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="VisioForge Video Edit SDK .Net - Main Demo X (Crossplatform)" Height="900" Width="1100"
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top: Input files and insert settings -->
+        <Grid Grid.Row="0" Margin="0,0,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="402"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!-- File time settings -->
+            <StackPanel Grid.Column="0">
+                <GroupBox Header="Time settings">
+                    <StackPanel Margin="5">
+                        <CheckBox x:Name="cbAddFullFile" Content="Add full file" IsChecked="True" Margin="0,0,0,5"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                            <TextBlock Text="Start time" VerticalAlignment="Center" Width="60"/>
+                            <TextBox x:Name="edStartTime" Width="60" Text="0" Margin="0,0,10,0"/>
+                            <TextBlock Text="ms" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBlock Text="Stop time" VerticalAlignment="Center" Width="60"/>
+                            <TextBox x:Name="edStopTime" Width="60" Text="5000"/>
+                            <TextBlock Text="ms" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Insert position">
+                    <StackPanel Margin="5">
+                        <CheckBox x:Name="cbInsertAfterPreviousFile" Content="Insert after previous file" IsChecked="True" Margin="0,0,0,5"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Insert time" VerticalAlignment="Center" Width="70"/>
+                            <TextBox x:Name="edInsertTime" Width="60" Text="0"/>
+                            <TextBlock Text="ms" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+
+            <!-- Input files list -->
+            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                <TextBlock Text="Input files" FontWeight="Bold" Margin="0,0,0,5"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ListBox x:Name="lbFiles" Grid.Column="0" Height="90"/>
+                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                        <Button x:Name="btAddInputFile" Content="Add" Width="75" Margin="0,0,0,5" Click="btAddInputFile_Click"/>
+                        <Button x:Name="btClearList" Content="Clear" Width="75" Click="btClearList_Click"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+
+        <!-- Middle: Tabs + Video preview -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Settings Tabs -->
+            <TabControl Grid.Column="0">
+                <!-- Output tab -->
+                <TabItem Header="Output">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Output format" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <ComboBox x:Name="cbOutputVideoFormat" Margin="0,0,0,5">
+                            <ComboBoxItem Content="MP4"/>
+                            <ComboBoxItem Content="WebM"/>
+                            <ComboBoxItem Content="MKV (Matroska)"/>
+                            <ComboBoxItem Content="WMV (Windows Media Video)"/>
+                            <ComboBoxItem Content="PCM (WAV)"/>
+                            <ComboBoxItem Content="MP3"/>
+                            <ComboBoxItem Content="M4A (AAC)"/>
+                            <ComboBoxItem Content="WMA (Windows Media Audio)"/>
+                            <ComboBoxItem Content="Ogg Vorbis"/>
+                            <ComboBoxItem Content="FLAC"/>
+                            <ComboBoxItem Content="Speex"/>
+                        </ComboBox>
+                        <TextBlock Text="You can use API to configure format settings" FontStyle="Italic" Margin="0,0,0,10"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <CheckBox x:Name="cbResize" Content="Resize" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBox x:Name="edWidth" Width="60" Text="1280" Margin="0,0,5,0"/>
+                            <TextBlock Text="x" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBox x:Name="edHeight" Width="60" Text="720" Margin="0,0,15,0"/>
+                            <TextBlock Text="Frame rate" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <ComboBox x:Name="cbFrameRate" Width="60">
+                                <ComboBoxItem Content="0"/>
+                                <ComboBoxItem Content="5"/>
+                                <ComboBoxItem Content="10"/>
+                                <ComboBoxItem Content="15"/>
+                                <ComboBoxItem Content="20"/>
+                                <ComboBoxItem Content="25"/>
+                                <ComboBoxItem Content="30"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <TextBlock Text="Rotation" Margin="0,0,0,5"/>
+                        <ComboBox x:Name="cbRotate" Margin="0,0,0,10">
+                            <ComboBoxItem Content="None"/>
+                            <ComboBoxItem Content="Rotate 90 Right"/>
+                            <ComboBoxItem Content="Rotate 180"/>
+                            <ComboBoxItem Content="Rotate 90 Left"/>
+                        </ComboBox>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <CheckBox x:Name="cbFlipX" Content="Flip X" Margin="0,0,15,0"/>
+                            <CheckBox x:Name="cbFlipY" Content="Flip Y"/>
+                        </StackPanel>
+
+                        <CheckBox x:Name="cbCrop" Content="Crop" Margin="0,0,0,5"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                            <TextBlock Text="Left" VerticalAlignment="Center" Width="40"/>
+                            <TextBox x:Name="edCropLeft" Width="50" Text="0" Margin="0,0,10,0"/>
+                            <TextBlock Text="Top" VerticalAlignment="Center" Width="30"/>
+                            <TextBox x:Name="edCropTop" Width="50" Text="0" Margin="0,0,10,0"/>
+                            <TextBlock Text="Right" VerticalAlignment="Center" Width="40"/>
+                            <TextBox x:Name="edCropRight" Width="50" Text="0" Margin="0,0,10,0"/>
+                            <TextBlock Text="Bottom" VerticalAlignment="Center" Width="50"/>
+                            <TextBox x:Name="edCropBottom" Width="50" Text="0"/>
+                        </StackPanel>
+
+                        <TextBlock Text="Output file" Margin="0,10,0,5"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="edOutput" Width="300" Margin="0,0,5,0"/>
+                            <Button x:Name="btSelectOutput" Content="..." Width="30" Click="btSelectOutput_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+
+                <!-- Video Effects tab -->
+                <TabItem Header="Video effects">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Margin="10">
+                            <CheckBox x:Name="cbEffects" Content="Enable video effects" Margin="0,0,0,10"/>
+                            <CheckBox x:Name="cbDeinterlace" Content="Deinterlace" Margin="0,0,0,5"/>
+                            <CheckBox x:Name="cbDenoise" Content="Denoise" Margin="0,0,0,5"/>
+                            <CheckBox x:Name="cbGreyscale" Content="Greyscale" Margin="0,0,0,5"/>
+                            <CheckBox x:Name="cbSepia" Content="Sepia" Margin="0,0,0,5"/>
+                            <CheckBox x:Name="cbTextOverlay" Content="Text overlay" Margin="0,0,0,5"/>
+                            <CheckBox x:Name="cbImageOverlay" Content="Image overlay" Margin="0,0,0,10"/>
+
+                            <TextBlock Text="Brightness" Margin="0,0,0,2"/>
+                            <Slider x:Name="tbBrightness" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" IsSnapToTickEnabled="True"/>
+
+                            <TextBlock Text="Contrast" Margin="0,5,0,2"/>
+                            <Slider x:Name="tbContrast" Minimum="0" Maximum="200" Value="100" TickFrequency="10" IsSnapToTickEnabled="True"/>
+
+                            <TextBlock Text="Hue" Margin="0,5,0,2"/>
+                            <Slider x:Name="tbHue" Minimum="-100" Maximum="100" Value="0" TickFrequency="10" IsSnapToTickEnabled="True"/>
+
+                            <TextBlock Text="Saturation" Margin="0,5,0,2"/>
+                            <Slider x:Name="tbSaturation" Minimum="0" Maximum="200" Value="100" TickFrequency="10" IsSnapToTickEnabled="True"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+                <!-- Subtitles tab -->
+                <TabItem Header="Subtitles">
+                    <StackPanel Margin="10">
+                        <CheckBox x:Name="cbSubtitlesEnabled" Content="Enabled" Margin="0,0,0,5"/>
+                        <TextBlock Text="Subtitles file" Margin="0,0,0,5"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="edSubtitlesFilename" Width="280" Margin="0,0,5,0"/>
+                            <Button x:Name="btSubtitlesSelectFile" Content="..." Width="30" Click="btSubtitlesSelectFile_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+
+                <!-- Audio Effects tab -->
+                <TabItem Header="Audio effects">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel Margin="10">
+                            <CheckBox x:Name="cbAudioEffectsEnabled" Content="Enable audio effects" Margin="0,0,0,10"/>
+
+                            <CheckBox x:Name="cbAudAmplifyEnabled" Content="Amplify" Margin="0,0,0,5"/>
+                            <TextBlock Text="Amplification" Margin="0,0,0,2"/>
+                            <Slider x:Name="tbAudAmplifyAmp" Minimum="0" Maximum="500" Value="100" TickFrequency="50" IsSnapToTickEnabled="True"/>
+
+                            <CheckBox x:Name="cbAudEqualizerEnabled" Content="10-Band Equalizer" Margin="0,10,0,10"/>
+
+                            <UniformGrid Columns="10">
+                                <StackPanel>
+                                    <TextBlock Text="60" HorizontalAlignment="Center" FontSize="9"/>
+                                    <Slider x:Name="tbAudEq0" Orientation="Vertical" Minimum="-100" Maximum="100" Value="0" Height="100"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="170" HorizontalAlignment="Center" FontSize="9"/>
+                                    <Slider x:Name="tbAudEq1" Orientation="Vertical" Minimum="-100" Maximum="100" Value="0" Height="100"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="310" HorizontalAlignment="Center" FontSize="9"/>
+                                    <Slider x:Name="tbAudEq2" Orientation="Vertical" Minimum="-100" Maximum="100" Value="0" Height="100"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="600" HorizontalAlignment="Center" FontSize="9"/>
+                                    <Slider x:Name="tbAudEq3" Orientation="Vertical" Minimum="-100" Maximum="100" Value="0" Height="100"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="1K" HorizontalAlignment="Center" FontSize="9"/>
+                                    <Slider x:Name="tbAudEq4" Orientation="Vertical" Minimum="-100" Maximum="100" Value="0" Height="100"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="3K" HorizontalAlignment="Center" FontSize="9"/>
+                                    <Slider x:Name="tbAudEq5" Orientation="Vertical" Minimum="-100" Maximum="100" Value="0" Height="100"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="6K" HorizontalAlignment="Center" FontSize="9"/>
+                                    <Slider x:Name="tbAudEq6" Orientation="Vertical" Minimum="-100" Maximum="100" Value="0" Height="100"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="12K" HorizontalAlignment="Center" FontSize="9"/>
+                                    <Slider x:Name="tbAudEq7" Orientation="Vertical" Minimum="-100" Maximum="100" Value="0" Height="100"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="14K" HorizontalAlignment="Center" FontSize="9"/>
+                                    <Slider x:Name="tbAudEq8" Orientation="Vertical" Minimum="-100" Maximum="100" Value="0" Height="100"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="16K" HorizontalAlignment="Center" FontSize="9"/>
+                                    <Slider x:Name="tbAudEq9" Orientation="Vertical" Minimum="-100" Maximum="100" Value="0" Height="100"/>
+                                </StackPanel>
+                            </UniformGrid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+                <!-- Transitions tab -->
+                <TabItem Header="Transitions">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Transition name" Margin="0,0,0,5"/>
+                        <ComboBox x:Name="cbTransitionName" Margin="0,0,0,10"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                            <TextBlock Text="Start time" VerticalAlignment="Center" Width="60"/>
+                            <TextBox x:Name="edTransStartTime" Width="60" Text="0" Margin="0,0,10,0"/>
+                            <TextBlock Text="ms" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <TextBlock Text="Stop time" VerticalAlignment="Center" Width="60"/>
+                            <TextBox x:Name="edTransStopTime" Width="60" Text="3000"/>
+                            <TextBlock Text="ms" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        </StackPanel>
+
+                        <Button x:Name="btAddTransition" Content="Add transition" Width="120" HorizontalAlignment="Left" Margin="0,5,0,10" Click="btAddTransition_Click"/>
+
+                        <TextBlock Text="Transitions list" Margin="0,0,0,5"/>
+                        <ListBox x:Name="lbTransitions" Height="150"/>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+
+            <!-- Video view -->
+            <Grid Grid.Column="1" Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <wpf:VideoView x:Name="VideoView1" Grid.Row="0" Background="Black"/>
+                <Slider x:Name="tbSeeking" Grid.Row="1" Margin="0,5,0,0" ValueChanged="tbSeeking_ValueChanged"/>
+            </Grid>
+        </Grid>
+
+        <!-- Bottom: Controls -->
+        <Grid Grid.Row="2" Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Height="20">
+                <TextBlock Text="Mode" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <ComboBox x:Name="cbMode" Width="100" Margin="0,0,15,0">
+                    <ComboBoxItem Content="Convert"/>
+                    <ComboBoxItem Content="Preview"/>
+                </ComboBox>
+
+                <CheckBox x:Name="cbDebugMode" Content="Debug" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <CheckBox x:Name="cbLicensing" Content="Licensing" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <CheckBox x:Name="cbTelemetry" Content="Telemetry" IsChecked="True" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <TextBox x:Name="mmLog" Grid.Column="1" Height="60" IsReadOnly="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Margin="10,0,10,0"/>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                <ProgressBar x:Name="ProgressBar1" Width="200" Height="25" Margin="0,0,10,0"/>
+                <Button x:Name="btStart" Content="Start" Width="75" FontWeight="Bold" Margin="0,0,5,0" Click="btStart_Click"/>
+                <Button x:Name="btStop" Content="Stop" Width="75" FontWeight="Bold" Click="btStop_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
