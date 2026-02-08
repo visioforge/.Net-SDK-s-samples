@@ -1,0 +1,98 @@
+<Window x:Class="Video_Join_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Video_Join_Demo"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="Video Edit SDK .Net - Video Join Demo (WPF)" Height="680" Width="900"
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Column: VideoView + Input Files -->
+        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+            <wpf:VideoView x:Name="VideoView1" Height="300" />
+
+            <TextBlock Text="Input files" Margin="0,10,0,5" />
+            <ListBox x:Name="lbFiles" Height="150" />
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <Button Content="Add file" Click="btAddInputFile_Click" Width="80" />
+                <Button Content="Clear list" Click="btClearList_Click" Width="80" Margin="10,0,0,0" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Right Column: Settings -->
+        <StackPanel Grid.Column="1">
+            <CheckBox x:Name="cbResize" Content="Resize" Margin="0,0,0,5" />
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <TextBlock Text="Width" Width="50" VerticalAlignment="Center" />
+                <TextBox x:Name="edWidth" Text="768" Width="60" />
+                <TextBlock Text="Height" Width="50" VerticalAlignment="Center" Margin="10,0,0,0" />
+                <TextBox x:Name="edHeight" Text="576" Width="60" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBlock Text="Frame rate" Width="80" VerticalAlignment="Center" />
+                <ComboBox x:Name="cbFrameRate" Width="80">
+                    <ComboBoxItem Content="0" />
+                    <ComboBoxItem Content="5" />
+                    <ComboBoxItem Content="10" />
+                    <ComboBoxItem Content="15" />
+                    <ComboBoxItem Content="20" />
+                    <ComboBoxItem Content="25" />
+                    <ComboBoxItem Content="29.97" />
+                    <ComboBoxItem Content="30" />
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBlock Text="Output format" Width="80" VerticalAlignment="Center" />
+                <ComboBox x:Name="cbOutputVideoFormat" Width="200" SelectionChanged="cbOutputVideoFormat_SelectionChanged">
+                    <ComboBoxItem Content="AVI" />
+                    <ComboBoxItem Content="MKV" />
+                    <ComboBoxItem Content="WMV" />
+                    <ComboBoxItem Content="DV" />
+                    <ComboBoxItem Content="PCM (uncompressed audio)" />
+                    <ComboBoxItem Content="MP3" />
+                    <ComboBoxItem Content="M4A" />
+                    <ComboBoxItem Content="WMA" />
+                    <ComboBoxItem Content="Ogg Vorbis" />
+                    <ComboBoxItem Content="FLAC" />
+                    <ComboBoxItem Content="Speex" />
+                    <ComboBoxItem Content="Custom" />
+                    <ComboBoxItem Content="WebM" />
+                    <ComboBoxItem Content="FFMPEG (sw)" />
+                    <ComboBoxItem Content="FFMPEG (exe)" />
+                    <ComboBoxItem Content="MP4 (sw)" />
+                    <ComboBoxItem Content="MP4 (hw)" />
+                    <ComboBoxItem Content="Animated GIF" />
+                    <ComboBoxItem Content="Encrypted" />
+                </ComboBox>
+                <Button Content="Configure" Click="btConfigure_Click" Width="70" Margin="10,0,0,0" />
+            </StackPanel>
+
+            <TextBlock Text="Output file" Margin="0,5,0,0" />
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <TextBox x:Name="edOutput" Width="370" />
+                <Button Content="..." Click="btSelectOutput_Click" Width="25" Margin="10,0,0,0" />
+            </StackPanel>
+
+            <CheckBox x:Name="cbDebugMode" Content="Debug mode" Margin="0,10,0,0" />
+            <CheckBox x:Name="cbTelemetry" Content="Telemetry" Margin="0,5,0,0" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                <Button x:Name="btStart" Content="Start" Click="btStart_Click" Width="75" Height="30" />
+                <Button x:Name="btStop" Content="Stop" Click="btStop_Click" Width="75" Height="30" Margin="10,0,0,0" IsEnabled="False" />
+                <ProgressBar x:Name="ProgressBar1" Width="250" Height="25" Margin="10,0,0,0" />
+            </StackPanel>
+
+            <TextBlock Text="Log" Margin="0,10,0,5" />
+            <TextBox x:Name="mmLog" Height="130" IsReadOnly="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" AcceptsReturn="True" />
+        </StackPanel>
+    </Grid>
+</Window>

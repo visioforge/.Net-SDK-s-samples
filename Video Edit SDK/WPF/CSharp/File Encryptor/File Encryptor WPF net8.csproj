@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>File_Encryptor</RootNamespace>
+    <Platform>x64</Platform>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="visioforge_main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.2.4" />
+  </ItemGroup>
+</Project>

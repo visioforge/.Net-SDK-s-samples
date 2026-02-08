@@ -1,0 +1,40 @@
+<Window x:Class="Audio_Extractor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Audio_Extractor"
+        mc:Ignorable="d"
+        Title="Video Edit SDK .Net - Audio Extractor Demo (WPF)" Height="500" Width="550"
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="10,10,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <TextBlock Text="Source file" />
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="edSourceFile" Width="470" Margin="0,0,10,0" Text="c:\Samples\!video.mp4" />
+                <Button Content="..." Click="btSelectInput_Click" Width="20" />
+            </StackPanel>
+
+            <TextBlock Text="Output file" Margin="0,10,0,0" />
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="edOutputFile" Width="470" Margin="0,0,10,0" />
+                <Button Content="..." Click="btSelectOutput_Click" Width="20" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                <RadioButton x:Name="rbReencodeMP3" Content="Reencode to MP3" IsChecked="True" Margin="0,0,15,0" />
+                <RadioButton x:Name="rbReencodeM4A" Content="Reencode to M4A" Margin="0,0,15,0" />
+                <RadioButton x:Name="rbExtract" Content="Extract (specify correct file extension)" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                <Button x:Name="btStart" Content="Start" Click="btStart_Click" Width="75" />
+                <Button x:Name="btStop" Content="Stop" Click="btStop_Click" Width="75" Margin="10,0,0,0" IsEnabled="False" />
+                <ProgressBar x:Name="pbProgress" Width="330" Margin="10,0,0,0" Height="25" />
+            </StackPanel>
+
+            <TextBlock Text="Log" Margin="0,15,0,5" />
+            <TextBox x:Name="edLog" Height="180" IsReadOnly="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" AcceptsReturn="True" />
+        </StackPanel>
+    </Grid>
+</Window>

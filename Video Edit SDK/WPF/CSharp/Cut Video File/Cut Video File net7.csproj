@@ -14,7 +14,5 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.2.4" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="2026.2.4" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2026.2.4" />
   </ItemGroup>
 </Project>

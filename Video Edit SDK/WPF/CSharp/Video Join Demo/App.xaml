@@ -1,0 +1,9 @@
+<Application x:Class="Video_Join_Demo.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Video_Join_Demo"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+    </Application.Resources>
+</Application>
