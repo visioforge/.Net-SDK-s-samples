@@ -67,8 +67,8 @@
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.3.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.2.4" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.2.4" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.2.5" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.2.5" />
     <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.20" />
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.20" />
   </ItemGroup>

@@ -9,6 +9,13 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.2.8
+
+* [Media Blocks SDK .Net] Added OverlayManagerImageSequence: image sequence overlay with per-frame durations, looping, position/size animation, fade effects, and easing support
+* [Media Blocks SDK .Net] Added ImageSequenceItem data class for defining image sequence frames
+* [Media Blocks SDK .Net] OverlayManagerBlock: Added convenience methods for image sequence overlays (Video_Overlay_AddImageSequence, UpdateImageSequencePosition, AnimateImageSequence, ImageSequenceFadeIn/Out)
+* [Core] Extracted OverlayManagerEasingHelper: shared easing functions for all overlay animation types (Image, Fade, Pan, Squeezeback, ImageSequence)
+
 ## 2026.2.4
 
 * [Media Blocks SDK .Net] Added H264PushSourceBlock for pushing raw H.264 encoded data into a decoding pipeline, with automatic AVC-to-byte-stream conversion and PTS rebasing
