@@ -67,4 +67,7 @@ public partial class App : Application
         throw new InvalidOperationException($"Failed to load {e.SourcePageType.FullName}: {e.Exception}");
     }
 
+    public static void InitializeLogging()
+    {
+    }
 }

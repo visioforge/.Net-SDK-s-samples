@@ -284,7 +284,7 @@ namespace Simple_Video_Capture
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                System.Diagnostics.Debug.WriteLine(ex);
             }
 
             VisioForgeX.DestroySDK();
@@ -358,7 +358,7 @@ namespace Simple_Video_Capture
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                System.Diagnostics.Debug.WriteLine(ex);
             }
         }
 
@@ -402,7 +402,7 @@ namespace Simple_Video_Capture
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                System.Diagnostics.Debug.WriteLine(ex);
             }
         }
 
@@ -464,7 +464,7 @@ namespace Simple_Video_Capture
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                System.Diagnostics.Debug.WriteLine(ex);
             }
         }
 

@@ -274,7 +274,7 @@ using System.Diagnostics;
         /// </summary>
         private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
-            BeginInvoke(() => tbTimeline.Value = 0);
+            BeginInvoke(new Action(() => tbTimeline.Value = 0));
         }
 
         /// <summary>
