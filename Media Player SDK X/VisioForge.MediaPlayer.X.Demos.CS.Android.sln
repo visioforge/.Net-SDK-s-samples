@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.31911.260
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11505.172 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaPlayer", "Android\MediaPlayer\MediaPlayer.csproj", "{3650E895-910B-45C6-8344-941D91A4F653}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisioForge.Core.Android.X9", "..\AndroidDependency\VisioForge.Core.Android.X9.csproj", "{95D3F6E3-9727-4A12-B359-09CFD89B21DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X10", "..\AndroidDependency\VisioForge.Core.Android.X10.csproj", "{621AD692-5F1C-9918-4F67-140B24AED986}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,10 @@ Global
 		{3650E895-910B-45C6-8344-941D91A4F653}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3650E895-910B-45C6-8344-941D91A4F653}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3650E895-910B-45C6-8344-941D91A4F653}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{95D3F6E3-9727-4A12-B359-09CFD89B21DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{95D3F6E3-9727-4A12-B359-09CFD89B21DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{95D3F6E3-9727-4A12-B359-09CFD89B21DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{95D3F6E3-9727-4A12-B359-09CFD89B21DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{621AD692-5F1C-9918-4F67-140B24AED986}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

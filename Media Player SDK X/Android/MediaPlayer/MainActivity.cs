@@ -3,8 +3,7 @@ using Android.Views;
 using System.Globalization;
 using VisioForge.Core;
 using VisioForge.Core.MediaPlayerX;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Storage;
+using Xamarin.Essentials;
 
 namespace MediaPlayer
 {
@@ -18,6 +17,11 @@ namespace MediaPlayer
         /// The media player instance.
         /// </summary>
         private MediaPlayerCoreX _player;
+
+        /// <summary>
+        /// Seeking flag.
+        /// </summary>
+        private volatile bool _isSeeking;
 
         /// <summary>
         /// The video view.
