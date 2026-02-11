@@ -58,10 +58,12 @@ namespace Video_Mixer_Player
         /// </summary>
         private void btAddFile_Click(object sender, System.EventArgs e)
         {
-            using var openFileDialog1 = new OpenFileDialog();
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            using (var openFileDialog1 = new OpenFileDialog())
             {
-                lbSourceFiles.Items.Add(openFileDialog1.FileName);
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    lbSourceFiles.Items.Add(openFileDialog1.FileName);
+                }
             }
         }
 
@@ -184,7 +186,7 @@ namespace Video_Mixer_Player
             _compositor.OnError += (senderX, args) =>
             {
                 Debug.WriteLine(args.Message);
-                BeginInvoke(() => MessageBox.Show(args.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error));
+                BeginInvoke(new Action(() => MessageBox.Show(args.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)));
             };
 
             await AddFileSourceAsync(lbSourceFiles.Items[0].ToString(), new Rect(0, 0, 1920, 1080));

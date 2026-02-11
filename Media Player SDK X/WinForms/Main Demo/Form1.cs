@@ -435,7 +435,7 @@ namespace Main_Demo
             AddBarcodeReader();
 
             string source = edFilenameOrURL.Text;
-            if (source.Contains("rtsp://", StringComparison.OrdinalIgnoreCase))
+            if (source.IndexOf("rtsp://", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 var rtspSource = await RTSPSourceSettings.CreateAsync(new Uri(source), edRTSPUserName.Text, edRTSPPassword.Text, true);
                 rtspSource.Latency = TimeSpan.FromMilliseconds(tbRTSPLatency.Value);
@@ -1060,10 +1060,12 @@ namespace Main_Demo
         /// </summary>
         private void btSelectLUTFile_Click(object sender, EventArgs e)
         {
-            using var dlg = new OpenFileDialog();
-            if (dlg.ShowDialog(this) == DialogResult.OK)
+            using (var dlg = new OpenFileDialog())
             {
-                edLUTFilename.Text = dlg.FileName;
+                if (dlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    edLUTFilename.Text = dlg.FileName;
+                }
             }
         }
     }
