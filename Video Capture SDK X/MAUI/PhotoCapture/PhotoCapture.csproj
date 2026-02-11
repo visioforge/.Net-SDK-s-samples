@@ -56,8 +56,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.2.11" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.2.11" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.2.12" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.2.12" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.33" />
