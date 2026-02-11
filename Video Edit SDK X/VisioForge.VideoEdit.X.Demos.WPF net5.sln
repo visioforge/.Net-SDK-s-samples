@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.31911.260
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11505.172 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{B2C3D4E5-2002-4002-8002-200000000001}"
 EndProject
@@ -39,6 +39,6 @@ Global
 		{B2C3D4E5-2002-4002-8002-200000000004} = {B2C3D4E5-2002-4002-8002-200000000001}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B2C3D4E5-2002-4002-8002-200000000005}
+		SolutionGuid = {B2C3D4E5-2002-4002-8002-200000000010}
 	EndGlobalSection
 EndGlobal
