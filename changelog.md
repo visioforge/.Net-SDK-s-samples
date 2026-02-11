@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.2.11
+
+* [Media Player SDK .Net], [Media Blocks SDK .Net] Fixed audio effects pipeline routing
+
 ## 2026.2.10
 
 * [Core] Added UNC (SMB/Samba) network path support for file sources across all X-engines, fixing File.Exists() failures on network shares
