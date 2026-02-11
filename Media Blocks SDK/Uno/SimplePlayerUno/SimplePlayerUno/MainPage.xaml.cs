@@ -123,7 +123,7 @@ public sealed partial class MainPage : Page
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex);
+            DebugLogger.WriteLine(ex);
         }
     }
 
@@ -152,7 +152,7 @@ public sealed partial class MainPage : Page
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex);
+            DebugLogger.WriteLine(ex);
         }
     }
 

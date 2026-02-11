@@ -29,6 +29,7 @@ using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X.VideoEncoders;
 using static Android.Renderscripts.ScriptGroup;
 using System.Diagnostics;
+using Activity = Android.App.Activity;
 
 namespace Simple_Video_Capture
 {

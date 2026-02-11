@@ -15,6 +15,7 @@ using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.Types;
 using System.Diagnostics;
+using Activity = Android.App.Activity;
 
 namespace Mobile_Streamer
 {

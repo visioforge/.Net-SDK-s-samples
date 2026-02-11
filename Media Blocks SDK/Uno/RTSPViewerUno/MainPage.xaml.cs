@@ -73,7 +73,7 @@ public sealed partial class MainPage : Page
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(ex);
+            System.Diagnostics.Debug.WriteLine(ex);
         }
     }
 

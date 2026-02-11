@@ -12,6 +12,7 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
 using System.Diagnostics;
+using Activity = Android.App.Activity;
 
 namespace RTSP_Client
 {
