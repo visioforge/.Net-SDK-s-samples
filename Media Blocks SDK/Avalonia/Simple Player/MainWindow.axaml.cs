@@ -149,32 +149,39 @@ namespace SimplePlayerAMB
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void MainWindow_Activated(object sender, EventArgs e)
         {
-            if (_initialized)
+            try
             {
-                return;
+                if (_initialized)
+                {
+                    return;
+                }
+
+                _initialized = true;
+
+                InitControls();
+
+                foreach (var device in await AudioRendererBlock.GetDevicesAsync(_audioOutputDeviceAPI))
+                {
+                    AudioOutputs.Add(device.Name);
+                }
+
+                if (AudioOutputs.Count > 0)
+                {
+                    cbAudioOutput.SelectedIndex = 0;
+                }
+
+                var audioInput = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
+                foreach (var device in audioInput)
+                {
+                    Debug.WriteLine(device);
+                }
+
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
             }
-
-            _initialized = true;
-
-            InitControls();
-
-            foreach (var device in await AudioRendererBlock.GetDevicesAsync(_audioOutputDeviceAPI))
+            catch (Exception ex)
             {
-                AudioOutputs.Add(device.Name);
+                Debug.WriteLine(ex);
             }
-
-            if (AudioOutputs.Count > 0)
-            {
-                cbAudioOutput.SelectedIndex = 0;
-            }
-
-            var audioInput = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
-            foreach (var device in audioInput)
-            {
-                Debug.WriteLine(device);
-            }
-
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
         }
 
         /// <summary>
@@ -248,11 +255,18 @@ namespace SimplePlayerAMB
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
-            var ofd = new OpenFileDialog();
-            string[] files = await ofd.ShowAsync(this);
-            if (files != null && files.Length > 0)
+            try
             {
-                edFilenameOrURL.Text = files[0];
+                var ofd = new OpenFileDialog();
+                string[] files = await ofd.ShowAsync(this);
+                if (files != null && files.Length > 0)
+                {
+                    edFilenameOrURL.Text = files[0];
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -263,47 +277,54 @@ namespace SimplePlayerAMB
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            tbSpeed.Value = 10;
-            Log.Clear();
-
-            CreateEngine();
-
-            _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
-
-            var mediaInfo = new MediaInfoReaderX();
-            bool videoStream = true;
-            bool audioStream = true;
-            if (await mediaInfo.OpenAsync(new Uri(edFilenameOrURL.Text)))
+            try
             {
-                if (mediaInfo.Info.VideoStreams.Count == 0)
+                tbSpeed.Value = 10;
+                Log.Clear();
+
+                CreateEngine();
+
+                _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
+
+                var mediaInfo = new MediaInfoReaderX();
+                bool videoStream = true;
+                bool audioStream = true;
+                if (await mediaInfo.OpenAsync(new Uri(edFilenameOrURL.Text)))
                 {
-                    videoStream = false;
+                    if (mediaInfo.Info.VideoStreams.Count == 0)
+                    {
+                        videoStream = false;
+                    }
+
+                    if (mediaInfo.Info.AudioStreams.Count == 0)
+                    {
+                        audioStream = false;
+                    }
                 }
 
-                if (mediaInfo.Info.AudioStreams.Count == 0)
+                _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(edFilenameOrURL.Text, renderVideo: videoStream, renderAudio: audioStream));
+
+                if (videoStream)
                 {
-                    audioStream = false;
+                    _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+                    _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
                 }
+
+                if (audioStream)
+                {
+                    var audioOutputDevice = (await AudioRendererBlock.GetDevicesAsync(_audioOutputDeviceAPI))[cbAudioOutput.SelectedIndex];
+                    _audioRenderer = new AudioRendererBlock(audioOutputDevice);
+                    _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
+                }
+
+                await _pipeline.StartAsync();
+
+                _tmPosition.Start();
             }
-
-            _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(edFilenameOrURL.Text, renderVideo: videoStream, renderAudio: audioStream));
-
-            if (videoStream)
+            catch (Exception ex)
             {
-                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
-                _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
+                Debug.WriteLine(ex);
             }
-
-            if (audioStream)
-            {
-                var audioOutputDevice = AudioRendererBlock.GetDevicesAsync(_audioOutputDeviceAPI).Result[cbAudioOutput.SelectedIndex];
-                _audioRenderer = new AudioRendererBlock(audioOutputDevice);
-                _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
-            }
-
-            await _pipeline.StartAsync();
-
-            _tmPosition.Start();
         }
 
         /// <summary>
@@ -330,15 +351,22 @@ namespace SimplePlayerAMB
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _tmPosition?.Stop();
+            try
+            {
+                _tmPosition?.Stop();
 
-            await StopAsync();
+                await StopAsync();
 
-            tbTimeline.Value = 0;
+                tbTimeline.Value = 0;
 
-            VideoView1?.InvalidateVisual();
+                VideoView1?.InvalidateVisual();
 
-            lbTimeline.Text = "00:00:00 / 00:00:00";
+                lbTimeline.Text = "00:00:00 / 00:00:00";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -348,7 +376,14 @@ namespace SimplePlayerAMB
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
-            await _pipeline.ResumeAsync();
+            try
+            {
+                await _pipeline.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -358,7 +393,14 @@ namespace SimplePlayerAMB
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            await _pipeline.PauseAsync();
+            try
+            {
+                await _pipeline.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -401,9 +443,16 @@ namespace SimplePlayerAMB
         /// </summary>
         private async void tbTimeline_Scroll()
         {
-            if (_tbTimelineApplyingValue && _pipeline != null)
+            try
             {
-                await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (_tbTimelineApplyingValue && _pipeline != null)
+                {
+                    await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -437,12 +486,19 @@ namespace SimplePlayerAMB
         /// </summary>
         private async void tbSpeed_Scroll()
         {
-            if (_pipeline == null)
+            try
             {
-                return;
+                if (_pipeline == null)
+                {
+                    return;
 
+                }
+                await _pipeline.Rate_SetAsync(tbSpeed.Value / 10.0);
             }
-            await _pipeline.Rate_SetAsync(tbSpeed.Value / 10.0);
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

@@ -13,7 +13,6 @@ using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
-using Windows.ApplicationModel;
 using Windows.Storage.Pickers;
 using Windows.UI;
 using VisioForge.Core.UI.WinUI;
@@ -50,50 +49,6 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private volatile byte _timerTag = 0;
 
-        // Example frame dimensions
-       // private int frameWidth = 800;
-       // private int frameHeight = 450;
-
-        //private void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
-        //{
-        //    // Example: Generate a test RGB frame (you would replace this with your actual frame data)
-        //    byte[] rgbFrame = GenerateTestRGBFrame(frameWidth, frameHeight);
-
-        //    // Convert the byte array to a CanvasBitmap
-        //    using (var bitmap = CanvasBitmap.CreateFromBytes(sender, rgbFrame, frameWidth, frameHeight, Windows.Graphics.DirectX.DirectXPixelFormat.B8G8R8A8UIntNormalized))
-        //    {
-        //        // Draw the bitmap to the CanvasControl
-        //        args.DrawingSession.DrawImage(bitmap);
-        //    }
-        //}
-
-        //// This method generates a test RGB frame with a simple gradient pattern
-        //private byte[] GenerateTestRGBFrame(int width, int height)
-        //{
-        //    byte[] rgbFrame = new byte[width * height * 4]; // 4 bytes per pixel (BGRA format)
-
-        //    for (int y = 0; y < height; y++)
-        //    {
-        //        for (int x = 0; x < width; x++)
-        //        {
-        //            int index = (y * width + x) * 4;
-        //            rgbFrame[index] = (byte)(x % 256);       // Blue
-        //            rgbFrame[index + 1] = (byte)(y % 256);   // Green
-        //            rgbFrame[index + 2] = 0;                // Red
-        //            rgbFrame[index + 3] = 255;              // Alpha (fully opaque)
-        //        }
-        //    }
-
-        //    return rgbFrame;
-        //}
-
-        //// Important: Dispose the CanvasControl to free resources
-        //private void CanvasControl_Unloaded(object sender, RoutedEventArgs e)
-        //{
-        //    canvasControl.RemoveFromVisualTree();
-        //    canvasControl = null;
-        //}
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
@@ -103,15 +58,13 @@ namespace Simple_Media_Player_WinUI
 
             this.Closed += MainWindow_Closed;
 
-            edFilename.Text = @"c:\samples\!video.mp4";
+            edFilename.Text = string.Empty;
 
             _videoView = new VideoView(canvasControl);
             MediaPlayer1 = new MediaPlayerCoreX(_videoView);
             MediaPlayer1.Audio_Play = true;
             MediaPlayer1.OnError += MediaPlayer1_OnError;
             Title = $"Media Player SDK .Net - Simple Media Player for WinUI 3 Desktop (SDK v{MediaPlayerCoreX.SDK_Version})";
-
-            // SetIcon();
 
             IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this); // m_window in App.cs
             WindowId windowId = Win32Interop.GetWindowIdFromWindow(hWnd);
@@ -131,22 +84,18 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void MainWindow_Closed(object sender, WindowEventArgs args)
         {
-            MediaPlayer1.Stop();
+            try
+            {
+                await MediaPlayer1.StopAsync();
 
-            await MediaPlayer1.DisposeAsync();
+                await MediaPlayer1.DisposeAsync();
 
-            VisioForgeX.DestroySDK();
-        }
-
-        /// <summary>
-        /// Set icon.
-        /// </summary>
-        private void SetIcon()
-        {
-            IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(this);
-            WindowId windowId = Win32Interop.GetWindowIdFromWindow(windowHandle);
-            var appWindow = AppWindow.GetFromWindowId(windowId);
-            appWindow.SetIcon(Path.Combine(Package.Current.InstalledLocation.Path, "Assets", "visioforge_main_icon.ico"));
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Window closed error: {ex.Message}");
+            }
         }
 
 #pragma warning disable S3168 // "async" methods should not return "void"
@@ -156,20 +105,27 @@ namespace Simple_Media_Player_WinUI
         private async void _timer_Tick(object sender, object e)
 #pragma warning restore S3168 // "async" methods should not return "void"
         {
-            _timerTag = 1;
-            var dur = await MediaPlayer1.DurationAsync();
-            slPosition.Maximum = (int)dur.TotalSeconds;
-
-            var pos = await MediaPlayer1.Position_GetAsync();
-            int value = (int)pos.TotalSeconds;
-            if ((value > 0) && (value < slPosition.Maximum))
+            try
             {
-                slPosition.Value = value;
+                _timerTag = 1;
+                var dur = await MediaPlayer1.DurationAsync();
+                slPosition.Maximum = (int)dur.TotalSeconds;
+
+                var pos = await MediaPlayer1.Position_GetAsync();
+                int value = (int)pos.TotalSeconds;
+                if ((value > 0) && (value < slPosition.Maximum))
+                {
+                    slPosition.Value = value;
+                }
+
+                lbPosition.Text = pos.ToString(@"hh\:mm\:ss") + "/" + dur.ToString(@"hh\:mm\:ss");
+
+                _timerTag = 0;
             }
-
-            lbPosition.Text = pos.ToString(@"hh\:mm\:ss") + "/" + dur.ToString(@"hh\:mm\:ss");
-
-            _timerTag = 0;
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Timer error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -194,17 +150,24 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void btOpenFile_Click(object sender, RoutedEventArgs e)
         {
-            FileOpenPicker open = new FileOpenPicker();
-            open.SuggestedStartLocation = PickerLocationId.VideosLibrary;
-            open.FileTypeFilter.Add("*");
-
-            var m_hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-            WinRT.Interop.InitializeWithWindow.Initialize(open, m_hwnd);
-
-            var file = await open.PickSingleFileAsync();
-            if (file != null)
+            try
             {
-                edFilename.Text = file.Path;
+                FileOpenPicker open = new FileOpenPicker();
+                open.SuggestedStartLocation = PickerLocationId.VideosLibrary;
+                open.FileTypeFilter.Add("*");
+
+                var m_hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+                WinRT.Interop.InitializeWithWindow.Initialize(open, m_hwnd);
+
+                var file = await open.PickSingleFileAsync();
+                if (file != null)
+                {
+                    edFilename.Text = file.Path;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Open file error: {ex.Message}");
             }
         }
 
@@ -213,9 +176,16 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            await MediaPlayer1.StopAsync();
+            try
+            {
+                await MediaPlayer1.StopAsync();
 
-            _timer.Stop();
+                _timer.Stop();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Stop error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -223,8 +193,15 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
-            //canvasControl.Invalidate();
-            await MediaPlayer1.ResumeAsync();
+            try
+            {
+                //canvasControl.Invalidate();
+                await MediaPlayer1.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Resume error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -232,7 +209,14 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            await MediaPlayer1.PauseAsync();
+            try
+            {
+                await MediaPlayer1.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Pause error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -240,15 +224,27 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void btPlay_Click(object sender, RoutedEventArgs e)
         {
-            var audioOutputDevice = (await MediaPlayer1.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First();
-            MediaPlayer1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+            try
+            {
+                var audioOutputDevice = (await MediaPlayer1.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault();
+                if (audioOutputDevice == null)
+                {
+                    Debug.WriteLine("No audio output devices available");
+                    return;
+                }
+                MediaPlayer1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
-            var fileSource = await UniversalSourceSettings.CreateAsync(edFilename.Text);
-            await MediaPlayer1.OpenAsync(fileSource);
+                var fileSource = await UniversalSourceSettings.CreateAsync(edFilename.Text);
+                await MediaPlayer1.OpenAsync(fileSource);
 
-            await MediaPlayer1.PlayAsync();
+                await MediaPlayer1.PlayAsync();
 
-            _timer.Start();
+                _timer.Start();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Play error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -256,9 +252,16 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void slPosition_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            if (_timerTag == 0)
+            try
             {
-                await MediaPlayer1.Position_SetAsync(TimeSpan.FromSeconds(slPosition.Value));
+                if (_timerTag == 0)
+                {
+                    await MediaPlayer1.Position_SetAsync(TimeSpan.FromSeconds(slPosition.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Seek error: {ex.Message}");
             }
         }
     }

@@ -37,6 +37,7 @@
                     <Label Content="Display ID" Height="28" HorizontalAlignment="Left" Margin="12,187,0,0" x:Name="label55" VerticalAlignment="Top" />
                     <Button x:Name="btSelectWindow" Content="Select window" HorizontalAlignment="Left" Margin="183,39,0,0" VerticalAlignment="Top" Width="116" Click="btSelectWindow_Click"/>
                     <CheckBox Height="16" HorizontalAlignment="Left" Margin="12,164,0,0" x:Name="cbScreenCapture_GrabMouseCursor" VerticalAlignment="Top" Width="146" Content="Capture mouse cursor"/>
+                    <CheckBox Height="16" HorizontalAlignment="Left" Margin="183,164,0,0" x:Name="cbMouseHighlight" VerticalAlignment="Top" Width="146" Content="Mouse click highlight"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Output" IsSelected="True">

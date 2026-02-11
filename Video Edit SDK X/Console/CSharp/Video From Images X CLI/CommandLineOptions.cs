@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using CommandLine;
+using CommandLine.Text;
 
 namespace Video_From_Images_CLI
 {
-    using CommandLine;
-    using CommandLine.Text;
-
     /// <summary>
     /// Command line options.
     /// </summary>
@@ -22,7 +18,7 @@ namespace Video_From_Images_CLI
             Required = true,
             HelpText = "Input folder with images. BMP, JPG, TIFF, PNG, GIF are supported.")]
         public string InputFolder { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the output file.
         /// </summary>
@@ -38,19 +34,19 @@ namespace Video_From_Images_CLI
         /// <summary>
         /// Gets or sets the output width.
         /// </summary>
-        [Option('w', "width", Required = true, HelpText = "Width. Should divide into 8.", Default = 1280)]
+        [Option('w', "width", Required = false, HelpText = "Width. Should divide into 8.", Default = 1280)]
         public int Width { get; set; }
 
         /// <summary>
         /// Gets or sets the output height.
         /// </summary>
-        [Option('h', "height", Required = true, HelpText = "Height. Should divide into 8.", Default = 720)]
+        [Option('h', "height", Required = false, HelpText = "Height. Should divide into 8.", Default = 720)]
         public int Height { get; set; }
 
         /// <summary>
         /// Gets or sets the image duration.
         /// </summary>
-        [Option('d', "duration", Required = false, HelpText = "One image duration in video (in milliseconds).")]
+        [Option('d', "duration", Required = false, HelpText = "One image duration in video (in milliseconds).", Default = 2000)]
         public int Duration { get; set; }
 
         /// <summary>
@@ -62,8 +58,8 @@ namespace Video_From_Images_CLI
         {
             var help = new HelpText
             {
-                Heading = new HeadingInfo("Video Edit SDK Video From Images CLI Demo", "10.5"),
-                Copyright = new CopyrightInfo("VisioForge", 2022),
+                Heading = new HeadingInfo("Video Edit SDK X - Video From Images CLI Demo", "2026.1"),
+                Copyright = new CopyrightInfo("VisioForge", 2025),
                 AdditionalNewLineAfterOption = true,
                 AddDashesToOption = true
             };

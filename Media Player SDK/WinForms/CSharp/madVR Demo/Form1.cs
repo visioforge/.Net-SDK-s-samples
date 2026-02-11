@@ -5,6 +5,7 @@ namespace madVR_Player_Demo
     using System;
     using System.Diagnostics;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.Types;
@@ -78,18 +79,18 @@ namespace madVR_Player_Demo
         /// <summary>
         /// Handles the tb timeline scroll event.
         /// </summary>
-        private void tbTimeline_Scroll(object sender, EventArgs e)
+        private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
             if (Convert.ToInt32(timer1.Tag) == 0)
             {
-                MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value));
+                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
         }
 
         /// <summary>
         /// Handles the bt start click event.
         /// </summary>
-        private void btStart_Click(object sender, EventArgs e)
+        private async void btStart_Click(object sender, EventArgs e)
         {
             mmError.Clear();
 
@@ -120,7 +121,7 @@ namespace madVR_Player_Demo
 
             MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
 
-            MediaPlayer1.Play();
+            await MediaPlayer1.PlayAsync();
 
             // set audio volume for each stream
             MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
@@ -132,19 +133,19 @@ namespace madVR_Player_Demo
         /// <summary>
         /// Handles the bt stop click event.
         /// </summary>
-        private void btStop_Click(object sender, EventArgs e)
+        private async void btStop_Click(object sender, EventArgs e)
         {
-            Stop();
+            await StopAsync();
         }
 
         /// <summary>
         /// Stop.
         /// </summary>
-        private void Stop()
+        private async Task StopAsync()
         {
             timer1.Stop();
 
-            MediaPlayer1.Stop();
+            await MediaPlayer1.StopAsync();
 
             tbTimeline.Value = 0;
         }
@@ -152,17 +153,17 @@ namespace madVR_Player_Demo
         /// <summary>
         /// Handles the bt pause click event.
         /// </summary>
-        private void btPause_Click(object sender, EventArgs e)
+        private async void btPause_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.Pause();
+            await MediaPlayer1.PauseAsync();
         }
 
         /// <summary>
         /// Handles the bt resume click event.
         /// </summary>
-        private void btResume_Click(object sender, EventArgs e)
+        private async void btResume_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.Resume();
+            await MediaPlayer1.ResumeAsync();
         }
 
         /// <summary>
@@ -196,12 +197,12 @@ namespace madVR_Player_Demo
         /// <summary>
         /// Handles the timer 1 tick event.
         /// </summary>
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
             timer1.Tag = 1;
-            tbTimeline.Maximum = (int)(MediaPlayer1.Duration_Time()).TotalSeconds;
+            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
-            int value = (int)(MediaPlayer1.Position_Get_Time()).TotalSeconds;
+            int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
             if ((value > 0) && (value < tbTimeline.Maximum))
             {
                 tbTimeline.Value = value;
@@ -219,7 +220,7 @@ namespace madVR_Player_Demo
         {
             Invoke((Action)(() =>
                                    {
-                                       mmError.Text = mmError.Text + e.Message + Environment.NewLine;
+                                       mmError.AppendText(e.Message + Environment.NewLine);
                                    }));
         }
 
@@ -245,13 +246,11 @@ namespace madVR_Player_Demo
         /// <summary>
         /// Form 1 form closing.
         /// </summary>
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Stop();
+            await StopAsync();
 
             DestroyEngine();
         }
     }
 }
-
-

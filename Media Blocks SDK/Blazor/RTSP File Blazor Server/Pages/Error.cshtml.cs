@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
 
-namespace RTSP_Webcam_Server.Pages;
+namespace RTSP_File_Server.Pages;
 
 /// <summary>
 /// Error model.

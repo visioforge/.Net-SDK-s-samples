@@ -49,30 +49,37 @@ namespace RTSP_RAW_Capture_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // Initialize SDK
-            Title += " [INITIALIZING SDK...]";
-            IsEnabled = false;
-            
             try
             {
-                await VisioForgeX.InitSDKAsync();
-                Title = Title.Replace(" [INITIALIZING SDK...]", "");
-                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                // Initialize SDK
+                Title += " [INITIALIZING SDK...]";
+                IsEnabled = false;
+
+                try
+                {
+                    await VisioForgeX.InitSDKAsync();
+                    Title = Title.Replace(" [INITIALIZING SDK...]", "");
+                    Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to initialize SDK: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Close();
+                    return;
+                }
+                finally
+                {
+                    IsEnabled = true;
+                }
+
+                edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+
+                LogMessage("SDK initialized successfully.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to initialize SDK: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Close();
-                return;
+                Debug.WriteLine(ex);
             }
-            finally
-            {
-                IsEnabled = true;
-            }
-
-            edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
-
-            LogMessage("SDK initialized successfully.");
         }
 
         /// <summary>
@@ -89,59 +96,66 @@ namespace RTSP_RAW_Capture_Demo
         /// </summary>
         private async void btStartPreview_Click(object sender, RoutedEventArgs e)
         {
-            if (_isPreviewStarted)
-            {
-                LogMessage("Preview is already started.");
-                return;
-            }
-
             try
             {
-                LogMessage("Starting preview...");
-
-                // Create pipeline
-                _previewPipeline = new MediaBlocksPipeline();
-                _previewPipeline.OnError += Pipeline_OnError;
-
-                // Create RTSP source with decoding for preview
-                var rtspSettings = await RTSPSourceSettings.CreateAsync(
-                    new Uri(edURL.Text),
-                    edLogin.Text,
-                    edPassword.Password,
-                    cbAudioEnabled.IsChecked == true);
-
-                _previewSource = new RTSPSourceBlock(rtspSettings);
-
-                // Create video renderer for preview
-                _videoRenderer = new VideoRendererBlock(_previewPipeline, VideoView1);
-                _previewPipeline.Connect(_previewSource.VideoOutput, _videoRenderer.Input);
-
-                // Create audio renderer if audio is enabled
-                if (cbAudioEnabled.IsChecked == true)
+                if (_isPreviewStarted)
                 {
-                    _audioRenderer = new AudioRendererBlock();
-                    _previewPipeline.Connect(_previewSource.AudioOutput, _audioRenderer.Input);
+                    LogMessage("Preview is already started.");
+                    return;
                 }
 
-                // Start pipeline
-                var result = await _previewPipeline.StartAsync();
-                if (result)
+                try
                 {
-                    _isPreviewStarted = true;
-                    lbStatus.Text = "Status: Preview Running";
-                    LogMessage("Preview started successfully.");
+                    LogMessage("Starting preview...");
+
+                    // Create pipeline
+                    _previewPipeline = new MediaBlocksPipeline();
+                    _previewPipeline.OnError += Pipeline_OnError;
+
+                    // Create RTSP source with decoding for preview
+                    var rtspSettings = await RTSPSourceSettings.CreateAsync(
+                        new Uri(edURL.Text),
+                        edLogin.Text,
+                        edPassword.Password,
+                        cbAudioEnabled.IsChecked == true);
+
+                    _previewSource = new RTSPSourceBlock(rtspSettings);
+
+                    // Create video renderer for preview
+                    _videoRenderer = new VideoRendererBlock(_previewPipeline, VideoView1);
+                    _previewPipeline.Connect(_previewSource.VideoOutput, _videoRenderer.Input);
+
+                    // Create audio renderer if audio is enabled
+                    if (cbAudioEnabled.IsChecked == true)
+                    {
+                        _audioRenderer = new AudioRendererBlock();
+                        _previewPipeline.Connect(_previewSource.AudioOutput, _audioRenderer.Input);
+                    }
+
+                    // Start pipeline
+                    var result = await _previewPipeline.StartAsync();
+                    if (result)
+                    {
+                        _isPreviewStarted = true;
+                        lbStatus.Text = "Status: Preview Running";
+                        LogMessage("Preview started successfully.");
+                    }
+                    else
+                    {
+                        LogMessage("Failed to start preview.");
+                        await CleanupPreviewAsync();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    LogMessage("Failed to start preview.");
+                    LogMessage($"Error starting preview: {ex.Message}");
+                    MessageBox.Show($"Failed to start preview: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     await CleanupPreviewAsync();
                 }
             }
             catch (Exception ex)
             {
-                LogMessage($"Error starting preview: {ex.Message}");
-                MessageBox.Show($"Failed to start preview: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                await CleanupPreviewAsync();
+                Debug.WriteLine(ex);
             }
         }
 
@@ -150,16 +164,23 @@ namespace RTSP_RAW_Capture_Demo
         /// </summary>
         private async void btStopPreview_Click(object sender, RoutedEventArgs e)
         {
-            if (!_isPreviewStarted)
+            try
             {
-                LogMessage("Preview is not running.");
-                return;
-            }
+                if (!_isPreviewStarted)
+                {
+                    LogMessage("Preview is not running.");
+                    return;
+                }
 
-            LogMessage("Stopping preview...");
-            await CleanupPreviewAsync();
-            lbStatus.Text = "Status: Preview Stopped";
-            LogMessage("Preview stopped.");
+                LogMessage("Stopping preview...");
+                await CleanupPreviewAsync();
+                lbStatus.Text = "Status: Preview Stopped";
+                LogMessage("Preview stopped.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -192,120 +213,127 @@ namespace RTSP_RAW_Capture_Demo
         /// </summary>
         private async void btStartRecord_Click(object sender, RoutedEventArgs e)
         {
-            if (_isRecordingStarted)
-            {
-                LogMessage("Recording is already started.");
-                return;
-            }
-
             try
             {
-                LogMessage("Starting recording...");
+                if (_isRecordingStarted)
+                {
+                    LogMessage("Recording is already started.");
+                    return;
+                }
 
-                // Create pipeline
-                _recordPipeline = new MediaBlocksPipeline();
-                _recordPipeline.OnError += Pipeline_OnError;
-
-                // Create RTSP RAW source (no video decoding)
-                RTSPRAWSourceSettings rtspSettings;
                 try
                 {
-                    rtspSettings = await RTSPRAWSourceSettings.CreateAsync(
-                        new Uri(edURL.Text),
-                        edLogin.Text,
-                        edPassword.Password,
-                        cbAudioEnabled.IsChecked == true);
-                }
-                catch (Exception ex)
-                {
-                    LogMessage($"Failed to connect to RTSP stream: {ex.Message}");
-                    MessageBox.Show($"Failed to connect to RTSP stream: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    await CleanupRecordingAsync();
-                    return;
-                }
+                    LogMessage("Starting recording...");
 
-                // Validate codec compatibility with target container
-                bool isMP4 = rbMP4Output.IsChecked == true;
-                string targetContainer = isMP4 ? "mp4" : "mpegts";
-                
-                var mediaInfo = rtspSettings.GetInfo();
-                if (!CodecValidationHelper.IsCodecCompatibleWithContainer(mediaInfo, targetContainer, out string errorMessage))
-                {
-                    LogMessage($"Codec compatibility error: {errorMessage}");
-                    MessageBox.Show(errorMessage, "Codec Not Compatible", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    await CleanupRecordingAsync();
-                    return;
-                }
+                    // Create pipeline
+                    _recordPipeline = new MediaBlocksPipeline();
+                    _recordPipeline.OnError += Pipeline_OnError;
 
-                string codec = CodecValidationHelper.GetVideoCodec(mediaInfo);
-                LogMessage($"Video codec detected: {codec ?? "Unknown"}");
-
-                _recordSource = new RTSPRAWSourceBlock(rtspSettings);
-
-                // Create muxer based on output format
-                if (isMP4)
-                {
-                    _muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
-                    LogMessage("Using MP4 muxer.");
-                }
-                else
-                {
-                    _muxer = new MPEGTSSinkBlock(new MPEGTSSinkSettings(edFilename.Text));
-                    LogMessage("Using MPEG-TS muxer.");
-                }
-
-                // Connect video (no re-encoding, RAW)
-                var inputVideoPad = (_muxer as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video);
-                _recordPipeline.Connect(_recordSource.VideoOutput, inputVideoPad);
-                LogMessage("Video connected (no re-encoding).");
-
-                // Connect audio
-                if (rtspSettings.AudioEnabled)
-                {
-                    var inputAudioPad = (_muxer as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio);
-
-                    if (cbReencodeAudio.IsChecked == true)
+                    // Create RTSP RAW source (no video decoding)
+                    RTSPRAWSourceSettings rtspSettings;
+                    try
                     {
-                        // Re-encode audio to AAC
-                        _decodeBin = new DecodeBinBlock(false, true, false)
-                        {
-                            DisableAudioConverter = true
-                        };
+                        rtspSettings = await RTSPRAWSourceSettings.CreateAsync(
+                            new Uri(edURL.Text),
+                            edLogin.Text,
+                            edPassword.Password,
+                            cbAudioEnabled.IsChecked == true);
+                    }
+                    catch (Exception ex)
+                    {
+                        LogMessage($"Failed to connect to RTSP stream: {ex.Message}");
+                        MessageBox.Show($"Failed to connect to RTSP stream: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        await CleanupRecordingAsync();
+                        return;
+                    }
 
-                        _audioEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings());
+                    // Validate codec compatibility with target container
+                    bool isMP4 = rbMP4Output.IsChecked == true;
+                    string targetContainer = isMP4 ? "mp4" : "mpegts";
 
-                        _recordPipeline.Connect(_recordSource.AudioOutput, _decodeBin.Input);
-                        _recordPipeline.Connect(_decodeBin.AudioOutput, _audioEncoder.Input);
-                        _recordPipeline.Connect(_audioEncoder.Output, inputAudioPad);
-                        LogMessage("Audio connected (with AAC re-encoding).");
+                    var mediaInfo = rtspSettings.GetInfo();
+                    if (!CodecValidationHelper.IsCodecCompatibleWithContainer(mediaInfo, targetContainer, out string errorMessage))
+                    {
+                        LogMessage($"Codec compatibility error: {errorMessage}");
+                        MessageBox.Show(errorMessage, "Codec Not Compatible", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        await CleanupRecordingAsync();
+                        return;
+                    }
+
+                    string codec = CodecValidationHelper.GetVideoCodec(mediaInfo);
+                    LogMessage($"Video codec detected: {codec ?? "Unknown"}");
+
+                    _recordSource = new RTSPRAWSourceBlock(rtspSettings);
+
+                    // Create muxer based on output format
+                    if (isMP4)
+                    {
+                        _muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
+                        LogMessage("Using MP4 muxer.");
                     }
                     else
                     {
-                        // No audio re-encoding
-                        _recordPipeline.Connect(_recordSource.AudioOutput, inputAudioPad);
-                        LogMessage("Audio connected (no re-encoding).");
+                        _muxer = new MPEGTSSinkBlock(new MPEGTSSinkSettings(edFilename.Text));
+                        LogMessage("Using MPEG-TS muxer.");
+                    }
+
+                    // Connect video (no re-encoding, RAW)
+                    var inputVideoPad = (_muxer as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video);
+                    _recordPipeline.Connect(_recordSource.VideoOutput, inputVideoPad);
+                    LogMessage("Video connected (no re-encoding).");
+
+                    // Connect audio
+                    if (rtspSettings.AudioEnabled)
+                    {
+                        var inputAudioPad = (_muxer as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio);
+
+                        if (cbReencodeAudio.IsChecked == true)
+                        {
+                            // Re-encode audio to AAC
+                            _decodeBin = new DecodeBinBlock(false, true, false)
+                            {
+                                DisableAudioConverter = true
+                            };
+
+                            _audioEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings());
+
+                            _recordPipeline.Connect(_recordSource.AudioOutput, _decodeBin.Input);
+                            _recordPipeline.Connect(_decodeBin.AudioOutput, _audioEncoder.Input);
+                            _recordPipeline.Connect(_audioEncoder.Output, inputAudioPad);
+                            LogMessage("Audio connected (with AAC re-encoding).");
+                        }
+                        else
+                        {
+                            // No audio re-encoding
+                            _recordPipeline.Connect(_recordSource.AudioOutput, inputAudioPad);
+                            LogMessage("Audio connected (no re-encoding).");
+                        }
+                    }
+
+                    // Start recording
+                    var result = await _recordPipeline.StartAsync();
+                    if (result)
+                    {
+                        _isRecordingStarted = true;
+                        lbStatus.Text = "Status: Recording";
+                        LogMessage($"Recording started to: {edFilename.Text}");
+                    }
+                    else
+                    {
+                        LogMessage("Failed to start recording.");
+                        await CleanupRecordingAsync();
                     }
                 }
-
-                // Start recording
-                var result = await _recordPipeline.StartAsync();
-                if (result)
+                catch (Exception ex)
                 {
-                    _isRecordingStarted = true;
-                    lbStatus.Text = "Status: Recording";
-                    LogMessage($"Recording started to: {edFilename.Text}");
-                }
-                else
-                {
-                    LogMessage("Failed to start recording.");
+                    LogMessage($"Error starting recording: {ex.Message}");
+                    MessageBox.Show($"Failed to start recording: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     await CleanupRecordingAsync();
                 }
             }
             catch (Exception ex)
             {
-                LogMessage($"Error starting recording: {ex.Message}");
-                MessageBox.Show($"Failed to start recording: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                await CleanupRecordingAsync();
+                Debug.WriteLine(ex);
             }
         }
 
@@ -314,16 +342,23 @@ namespace RTSP_RAW_Capture_Demo
         /// </summary>
         private async void btStopRecord_Click(object sender, RoutedEventArgs e)
         {
-            if (!_isRecordingStarted)
+            try
             {
-                LogMessage("Recording is not running.");
-                return;
-            }
+                if (!_isRecordingStarted)
+                {
+                    LogMessage("Recording is not running.");
+                    return;
+                }
 
-            LogMessage("Stopping recording...");
-            await CleanupRecordingAsync();
-            lbStatus.Text = "Status: Recording Stopped";
-            LogMessage("Recording stopped.");
+                LogMessage("Stopping recording...");
+                await CleanupRecordingAsync();
+                lbStatus.Text = "Status: Recording Stopped";
+                LogMessage("Recording stopped.");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -415,14 +450,21 @@ namespace RTSP_RAW_Capture_Demo
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Stop and cleanup preview
-            await CleanupPreviewAsync();
+            try
+            {
+                // Stop and cleanup preview
+                await CleanupPreviewAsync();
 
-            // Stop and cleanup recording
-            await CleanupRecordingAsync();
+                // Stop and cleanup recording
+                await CleanupRecordingAsync();
 
-            // Cleanup SDK
-            VisioForgeX.DestroySDK();
+                // Cleanup SDK
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

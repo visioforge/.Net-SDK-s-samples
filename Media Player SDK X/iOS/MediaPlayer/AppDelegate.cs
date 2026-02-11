@@ -64,7 +64,8 @@ public class AppDelegate : UIApplicationDelegate
             Message = message
         };
         alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-        UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
+        var rootViewController = Window?.RootViewController;
+        rootViewController?.PresentViewController(alert, true, null);
     }
 
         /// <summary>
@@ -78,7 +79,7 @@ public class AppDelegate : UIApplicationDelegate
         // create a UIViewController with a single UILabel
         _vc = new CustomViewController(Window, out _videoView);
         
-        _vc.SelectButton.TouchUpInside += async (sender, args) => 
+        _vc.SelectButton.TouchUpInside += (sender, args) =>
         {
             _vc.OpenFilePicker();
         };
@@ -231,7 +232,7 @@ public class AppDelegate : UIApplicationDelegate
         await StopAllAsync();
 
         // run in UI thread
-        UIApplication.SharedApplication.InvokeOnMainThread(async () =>
+        UIApplication.SharedApplication.InvokeOnMainThread(() =>
         {
             _vc.PositionSlider.Value = 0;
             _vc.PlayButton.SetTitle("PLAY", UIControlState.Normal);
@@ -251,10 +252,10 @@ public class AppDelegate : UIApplicationDelegate
         /// </summary>
     private void PlayerOnStart(object sender, EventArgs e)
     {
-        try
+        // run in UI thread
+        UIApplication.SharedApplication.InvokeOnMainThread(async () =>
         {
-            // run in UI thread
-            UIApplication.SharedApplication.InvokeOnMainThread(async () =>
+            try
             {
                 if (_player == null)
                 {
@@ -263,11 +264,11 @@ public class AppDelegate : UIApplicationDelegate
 
                 var duration = (float)(await _player.DurationAsync()).TotalSeconds;
                 _vc.PositionSlider.MaxValue = duration;
-            });
-        }
-        catch (Exception exception)
-        {
-            System.Diagnostics.Debug.WriteLine(exception);
-        }
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
+        });
     }
 }

@@ -19,9 +19,14 @@ namespace vfpgen
         /// </summary>
         static async Task Main(string[] args)
         {
-            Console.WriteLine(new CommandLineOptions().GetUsage());
+            CommandLineOptions options = null;
+            var parseResult = CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args);
+            parseResult.WithParsed(opts => options = opts)
+                       .WithNotParsed(errors =>
+                       {
+                           Console.WriteLine(new CommandLineOptions().GetUsage());
+                       });
 
-            var options = CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args).Value;
             if (options == null)
             {
                 return;
@@ -48,40 +53,45 @@ namespace vfpgen
 
             await VisioForgeX.InitSDKAsync();
 
-            VFPAnalyzer.SetLicenseKey(options.LicenseKey);
-
-            Console.WriteLine("Starting analyze.");
-
-            var time = DateTime.Now;
-
-            var source = new VFPFingerprintSource(options.InputFile);
-            if (options.Duration > 0)
+            try
             {
-                source.StopTime = TimeSpan.FromMilliseconds(options.Duration);
-            }
+                VFPAnalyzer.SetLicenseKey(options.LicenseKey);
 
-            VFPFingerPrint fp = null;
-            if (options.Type == "search")
+                Console.WriteLine("Starting analyze.");
+
+                var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
+                var source = new VFPFingerprintSource(options.InputFile);
+                if (options.Duration > 0)
+                {
+                    source.StopTime = TimeSpan.FromMilliseconds(options.Duration);
+                }
+
+                VFPFingerPrint fp = null;
+                if (options.Type == "search")
+                {
+                    fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, ErrorCallback);
+                }
+                else
+                {
+                    fp = await VFPAnalyzer.GetComparingFingerprintForVideoFileAsync(source, ErrorCallback);
+                }
+
+                if (fp == null)
+                {
+                    Console.WriteLine("Unable to get fingerprint.");
+                    return;
+                }
+
+                stopwatch.Stop();
+                Console.WriteLine("Analyze finished. Elapsed time: " + stopwatch.Elapsed.ToString("g"));
+
+                fp.Save(options.OutputFile);
+            }
+            finally
             {
-                fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, ErrorCallback);
+                VisioForgeX.DestroySDK();
             }
-            else
-            {
-                fp = await VFPAnalyzer.GetComparingFingerprintForVideoFileAsync(source, ErrorCallback);
-            }
-
-            if (fp == null)
-            {
-                Console.WriteLine("Unable to get fingerprint.");
-                return;
-            }
-
-            var elapsed = DateTime.Now - time;
-            Console.WriteLine("Analyze finished. Elapsed time: " + elapsed.ToString("g"));
-
-            fp.Save(options.OutputFile);
-
-            VisioForgeX.DestroySDK();
         }
 
         /// <summary>

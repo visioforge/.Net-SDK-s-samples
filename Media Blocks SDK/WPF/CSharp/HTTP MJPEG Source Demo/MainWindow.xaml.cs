@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -73,25 +73,32 @@ namespace HTTP_Source_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
-
-            //_pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            var settings = new HTTPSourceSettings(new Uri(edURL.Text))
+            try
             {
-                UserID = edUserName.Text,
-                UserPassword = edPassword.Text
-            };
+                CreateEngine();
 
-            _source = new HTTPSourceBlock(settings);
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
-            _jpegDecoder = new JPEGDecoderBlock();
+                //_pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            _pipeline.Connect(_source.Output, _jpegDecoder.Input);
-            _pipeline.Connect(_jpegDecoder.Output, _videoRenderer.Input);
+                var settings = new HTTPSourceSettings(new Uri(edURL.Text))
+                {
+                    UserID = edUserName.Text,
+                    UserPassword = edPassword.Text
+                };
 
-            await _pipeline.StartAsync();
+                _source = new HTTPSourceBlock(settings);
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+                _jpegDecoder = new JPEGDecoderBlock();
+
+                _pipeline.Connect(_source.Output, _jpegDecoder.Input);
+                _pipeline.Connect(_jpegDecoder.Output, _videoRenderer.Input);
+
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -99,7 +106,14 @@ namespace HTTP_Source_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            await DestroyEngineAsync();
+            try
+            {
+                await DestroyEngineAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

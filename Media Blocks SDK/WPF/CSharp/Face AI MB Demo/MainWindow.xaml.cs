@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -108,21 +108,28 @@ namespace Face_AI_MB_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            // clear
-            lbResults.Items.Clear();
-            _core.Clear();
-
-            switch (cbMode.SelectedIndex)
+            try
             {
-                case 0:
-                    await FindKnownFacesInImages();
-                    break;
-                case 1:
-                    await FindKnownFacesInVideoFile();
-                    break;
-                case 2:
-                    await FindKnownFacesInWebcam();
-                    break;
+                // clear
+                lbResults.Items.Clear();
+                _core.Clear();
+
+                switch (cbMode.SelectedIndex)
+                {
+                    case 0:
+                        await FindKnownFacesInImages();
+                        break;
+                    case 1:
+                        await FindKnownFacesInVideoFile();
+                        break;
+                    case 2:
+                        await FindKnownFacesInWebcam();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -241,13 +248,20 @@ namespace Face_AI_MB_Demo
         /// </summary>
         private async void btTestSave_Click(object sender, RoutedEventArgs e)
         {
-            // load known faces
-            var files = System.IO.Directory.GetFiles(edImagesKnown.Text);
-            await _core.AddKnownPersonsAsync(files);
+            try
+            {
+                // load known faces
+                var files = System.IO.Directory.GetFiles(edImagesKnown.Text);
+                await _core.AddKnownPersonsAsync(files);
 
-            _db.Persons.AddRange(_core.KnownPersons);
+                _db.Persons.AddRange(_core.KnownPersons);
 
-            _db.Save("c:\\Samples\\FaceAI\\faces.bin");
+                _db.Save("c:\\Samples\\FaceAI\\faces.bin");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -255,12 +269,19 @@ namespace Face_AI_MB_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

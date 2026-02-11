@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Security.Policy;
@@ -22,6 +22,7 @@ using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEncoders;
+using System.Diagnostics;
 
 namespace Networks_Streamer_Demo
 {
@@ -120,29 +121,36 @@ namespace Networks_Streamer_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+                DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+                DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
 
-            _timer = new System.Timers.Timer(500);
-            _timer.Elapsed += _timer_Elapsed;
+                _timer = new System.Timers.Timer(500);
+                _timer.Elapsed += _timer_Elapsed;
 
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += Pipeline_OnError;
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnError += Pipeline_OnError;
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            cbAudioInput.Items.Add("None");
-            cbAudioInput.SelectedIndex = 0;
+                cbAudioInput.Items.Add("None");
+                cbAudioInput.SelectedIndex = 0;
 
-            await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
-            await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
+                await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
+                await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -150,12 +158,19 @@ namespace Networks_Streamer_Demo
         /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            var position = await _pipeline.Position_GetAsync();
-
-            Dispatcher.Invoke(() =>
+            try
             {
-                lbTime.Text = position.ToString("hh\\:mm\\:ss");
-            });
+                var position = await _pipeline.Position_GetAsync();
+
+                Dispatcher.Invoke(() =>
+                {
+                    lbTime.Text = position.ToString("hh\\:mm\\:ss");
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -163,275 +178,282 @@ namespace Networks_Streamer_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            mmLog.Clear();
-
-            if (cbVideoInput.SelectedIndex < 0)
+            try
             {
-                MessageBox.Show(this, "Select video input device");
-                return;
-            }
+                mmLog.Clear();
 
-            bool audioEnabled = cbAudioInput.SelectedIndex > 0;
-
-            // video source
-            if (rbCameraSource.IsChecked == true)
-            {
-                // camera source
-                VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-
-                var deviceName = cbVideoInput.Text;
-                var format = cbVideoFormat.Text;
-                if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+                if (cbVideoInput.SelectedIndex < 0)
                 {
-                    var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                    if (device != null)
+                    MessageBox.Show(this, "Select video input device");
+                    return;
+                }
+
+                bool audioEnabled = cbAudioInput.SelectedIndex > 0;
+
+                // video source
+                if (rbCameraSource.IsChecked == true)
+                {
+                    // camera source
+                    VideoCaptureDeviceSourceSettings videoSourceSettings = null;
+
+                    var deviceName = cbVideoInput.Text;
+                    var format = cbVideoFormat.Text;
+                    if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                     {
-                        var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
-                        if (formatItem != null)
+                        var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                        if (device != null)
                         {
-                            videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                            var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
+                            if (formatItem != null)
                             {
-                                Format = formatItem.ToFormat()
-                            };
+                                videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                                {
+                                    Format = formatItem.ToFormat()
+                                };
 
-                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                                videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                            }
                         }
                     }
+
+                    _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
+                }
+                else
+                {
+                    // screen source
+                    var screenSourceSettings = new ScreenCaptureD3D11SourceSettings() { Rectangle = new VisioForge.Core.Types.Rect(0, 0 , 640, 480) };   
+                    _videoSource = new ScreenSourceBlock(screenSourceSettings);                
                 }
 
-                _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
-            }
-            else
-            {
-                // screen source
-                var screenSourceSettings = new ScreenCaptureD3D11SourceSettings() { Rectangle = new VisioForge.Core.Types.Rect(0, 0 , 640, 480) };   
-                _videoSource = new ScreenSourceBlock(screenSourceSettings);                
-            }
-
-            // audio source
-            if (audioEnabled)
-            {
-                IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
-
-                var deviceName = cbAudioInput.Text;
-                var format = cbAudioFormat.Text;
-                if (!string.IsNullOrEmpty(deviceName))
+                // audio source
+                if (audioEnabled)
                 {
-                    var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                    if (device != null)
+                    IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
+
+                    var deviceName = cbAudioInput.Text;
+                    var format = cbAudioFormat.Text;
+                    if (!string.IsNullOrEmpty(deviceName))
                     {
-                        var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
-                        if (formatItem != null)
+                        var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                        if (device != null)
                         {
-                            audioSourceSettings = device.CreateSourceSettings(formatItem.ToFormat());
+                            var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
+                            if (formatItem != null)
+                            {
+                                audioSourceSettings = device.CreateSourceSettings(formatItem.ToFormat());
+                            }
                         }
                     }
+
+                    _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
                 }
 
-                _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
-            }
+                // video renderer
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
-            // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+                // audio renderer
+                if (audioEnabled)
+                {
+                    _audioRenderer = new AudioRendererBlock() { IsSync = false };
+                }
 
-            // audio renderer
-            if (audioEnabled)
-            {
-                _audioRenderer = new AudioRendererBlock() { IsSync = false };
-            }
-
-            // capture
-            _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
-
-            if (audioEnabled)
-            {
-                _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
-            }
-
-            // connect inputs
-            _pipeline.Connect(_videoSource.Output, _videoTee.Input);
-            _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-
-            if (audioEnabled)
-            {
-                _pipeline.Connect(_audioSource.Output, _audioTee.Input);
-                _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
-            }
-
-            // MJPEG
-            if (cbPlatform.SelectedIndex == 3)
-            {
-                _mjpegSink = new HTTPMJPEGLiveSinkBlock(8090);
-                _pipeline.Connect(_videoTee.Outputs[1], _mjpegSink.Input);
-                edStreamingKey.Text = "IMG tag URL is http://127.0.0.1:8090";
-            }
-            // NDI
-            else if (cbPlatform.SelectedIndex == 6)
-            {
-                _ndiSink = new NDISinkBlock(edStreamingKey.Text);
-                _pipeline.Connect(_videoTee.Outputs[1], _ndiSink.CreateNewInput(MediaBlockPadMediaType.Video));
+                // capture
+                _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
 
                 if (audioEnabled)
                 {
-                    _pipeline.Connect(_audioTee.Outputs[1], _ndiSink.CreateNewInput(MediaBlockPadMediaType.Audio));
-                }
-            }
-            // RTSP
-            else if (cbPlatform.SelectedIndex == 7)
-            {
-                IVideoEncoder videoEncoder = new OpenH264EncoderSettings();
-                IAudioEncoder audioEncoder = null;
-                if (audioEnabled)
-                {
-                    audioEncoder = new VOAACEncoderSettings();
+                    _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
                 }
 
-                _rtspSink = new RTSPServerBlock(new RTSPServerSettings(new Uri("rtsp://127.0.0.1/live"), videoEncoder, audioEncoder));
-                _pipeline.Connect(_videoTee.Outputs[1], _rtspSink.VideoInput);
+                // connect inputs
+                _pipeline.Connect(_videoSource.Output, _videoTee.Input);
+                _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
 
                 if (audioEnabled)
                 {
-                    _pipeline.Connect(_audioTee.Outputs[1], _rtspSink.AudioInput);
-                }
-            }
-            // WebRTC WHIP (requires H264 + Opus)
-            else if (cbPlatform.SelectedIndex == 8)
-            {
-                var h264Settings = new OpenH264EncoderSettings() { GOPSize = 10, ParseStream = false };
-                _h264Encoder = new H264EncoderBlock(h264Settings);
-                _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
-
-                var whipSettings = new WHIPSinkSettings()
-                {
-                    Location = edStreamingKey.Text
-                };
-
-                _whipSink = new WHIPSinkBlock(whipSettings);
-                _pipeline.Connect(_h264Encoder.Output, _whipSink.CreateNewInput(MediaBlockPadMediaType.Video));
-
-                if (audioEnabled)
-                {
-                    _opusEncoder = new OPUSEncoderBlock(new OPUSEncoderSettings());
-                    _pipeline.Connect(_audioTee.Outputs[1], _opusEncoder.Input);
-                    _pipeline.Connect(_opusEncoder.Output, _whipSink.CreateNewInput(MediaBlockPadMediaType.Audio));
-                }
-            }
-            // Streaming with H264/AAC encoders
-            else
-            {
-                // Create H264 encoder
-                var h264Settings = new OpenH264EncoderSettings() { GOPSize = 10 };
-                _h264Encoder = new H264EncoderBlock(h264Settings);
-
-                if (audioEnabled)
-                {
-                    // Create AAC encoder
-                    _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
+                    _pipeline.Connect(_audioSource.Output, _audioTee.Input);
+                    _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
                 }
 
-                _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
-
-                if (audioEnabled)
+                // MJPEG
+                if (cbPlatform.SelectedIndex == 3)
                 {
-                    _pipeline.Connect(_audioTee.Outputs[1], _aacEncoder.Input);
+                    _mjpegSink = new HTTPMJPEGLiveSinkBlock(8090);
+                    _pipeline.Connect(_videoTee.Outputs[1], _mjpegSink.Input);
+                    edStreamingKey.Text = "IMG tag URL is http://127.0.0.1:8090";
                 }
-
-                // YouTube
-                if (cbPlatform.SelectedIndex == 0)
+                // NDI
+                else if (cbPlatform.SelectedIndex == 6)
                 {
-                    _youtubeSink = new YouTubeSinkBlock(new YouTubeSinkSettings(edStreamingKey.Text));
-                    _pipeline.Connect(_h264Encoder.Output, _youtubeSink.CreateNewInput(MediaBlockPadMediaType.Video));
+                    _ndiSink = new NDISinkBlock(edStreamingKey.Text);
+                    _pipeline.Connect(_videoTee.Outputs[1], _ndiSink.CreateNewInput(MediaBlockPadMediaType.Video));
 
                     if (audioEnabled)
                     {
-                        _pipeline.Connect(_aacEncoder.Output, _youtubeSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                        _pipeline.Connect(_audioTee.Outputs[1], _ndiSink.CreateNewInput(MediaBlockPadMediaType.Audio));
                     }
                 }
-                // Facebook Live
-                else if (cbPlatform.SelectedIndex == 1)
+                // RTSP
+                else if (cbPlatform.SelectedIndex == 7)
                 {
-                    _facebookSink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(edStreamingKey.Text));
-                    _pipeline.Connect(_h264Encoder.Output, _facebookSink.CreateNewInput(MediaBlockPadMediaType.Video));
+                    IVideoEncoder videoEncoder = new OpenH264EncoderSettings();
+                    IAudioEncoder audioEncoder = null;
+                    if (audioEnabled)
+                    {
+                        audioEncoder = new VOAACEncoderSettings();
+                    }
+
+                    _rtspSink = new RTSPServerBlock(new RTSPServerSettings(new Uri("rtsp://127.0.0.1/live"), videoEncoder, audioEncoder));
+                    _pipeline.Connect(_videoTee.Outputs[1], _rtspSink.VideoInput);
 
                     if (audioEnabled)
                     {
-                        _pipeline.Connect(_aacEncoder.Output, _facebookSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                        _pipeline.Connect(_audioTee.Outputs[1], _rtspSink.AudioInput);
                     }
                 }
-                // HLS
-                else if (cbPlatform.SelectedIndex == 2)
+                // WebRTC WHIP (requires H264 + Opus)
+                else if (cbPlatform.SelectedIndex == 8)
                 {
-                    const string URL = "http://localhost:8088/";
-                    string serverPath = AppContext.BaseDirectory;
-                    var hlsSettings = new HLSSinkSettings
+                    var h264Settings = new OpenH264EncoderSettings() { GOPSize = 10, ParseStream = false };
+                    _h264Encoder = new H264EncoderBlock(h264Settings);
+                    _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
+
+                    var whipSettings = new WHIPSinkSettings()
                     {
-                        Location = Path.Combine(serverPath, "segment_%05d.ts"),
-                        MaxFiles = 10,
-                        PlaylistLength = 5,
-                        PlaylistLocation = Path.Combine(serverPath, "playlist.m3u8"),
-                        PlaylistRoot = URL,
-                        SendKeyframeRequests = true,
-                        TargetDuration = TimeSpan.FromSeconds(5),
-                        Custom_HTTP_Server_Enabled = true,
-                        Custom_HTTP_Server_Port = 8088
+                        Location = edStreamingKey.Text
                     };
 
-                    _hlsSink = new HLSSinkBlock(hlsSettings);
-                    _pipeline.Connect(_h264Encoder.Output, _hlsSink.CreateNewInput(MediaBlockPadMediaType.Video));
+                    _whipSink = new WHIPSinkBlock(whipSettings);
+                    _pipeline.Connect(_h264Encoder.Output, _whipSink.CreateNewInput(MediaBlockPadMediaType.Video));
 
                     if (audioEnabled)
                     {
-                        _pipeline.Connect(_aacEncoder.Output, _hlsSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                        _opusEncoder = new OPUSEncoderBlock(new OPUSEncoderSettings());
+                        _pipeline.Connect(_audioTee.Outputs[1], _opusEncoder.Input);
+                        _pipeline.Connect(_opusEncoder.Output, _whipSink.CreateNewInput(MediaBlockPadMediaType.Audio));
                     }
-
-                    MessageBox.Show($"Open {URL} in your browser to see HLS stream. Open {URL}playlist.m3u8 in VLC or other player.");
                 }
-                // AWS S3
-                else if (cbPlatform.SelectedIndex == 4)
+                // Streaming with H264/AAC encoders
+                else
                 {
-                    // mux into MP4 stream
-                    var mp4Settings = new MP4SinkSettings() { MuxOnly = true };
-                    _mp4Sink = new MP4SinkBlock(mp4Settings);
-
-                    _pipeline.Connect(_h264Encoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video));
+                    // Create H264 encoder
+                    var h264Settings = new OpenH264EncoderSettings() { GOPSize = 10 };
+                    _h264Encoder = new H264EncoderBlock(h264Settings);
 
                     if (audioEnabled)
                     {
-                        _pipeline.Connect(_aacEncoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                        // Create AAC encoder
+                        _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
                     }
 
-                    // S3 sink
-                    var s3settings = new AWSS3SinkSettings();
-                    s3settings.Region = "us-west-2";
-                    s3settings.ContentType = "video/mp4";
-                    s3settings.Uri = "s3://us-west-2/my-bucket-name/output.mp4";
-
-                    s3settings.AccessKey = "#####";
-                    s3settings.SecretAccessKey = "#####";
-
-                    _awsS3Sink = new AWSS3SinkBlock(s3settings);
-
-                    // connect
-                    _pipeline.Connect(_mp4Sink.Output, _awsS3Sink.Input);
-                }
-                // SRT
-                else if (cbPlatform.SelectedIndex == 5)
-                {
-                    _srtSink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = "srt://:8888" });
-                    _h264Encoder.Settings.ParseStream = false; // we have to disable parsing for SRT for H264 and HEVC encoders
-                    _pipeline.Connect(_h264Encoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Video));
+                    _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
 
                     if (audioEnabled)
                     {
-                        _pipeline.Connect(_aacEncoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                        _pipeline.Connect(_audioTee.Outputs[1], _aacEncoder.Input);
+                    }
+
+                    // YouTube
+                    if (cbPlatform.SelectedIndex == 0)
+                    {
+                        _youtubeSink = new YouTubeSinkBlock(new YouTubeSinkSettings(edStreamingKey.Text));
+                        _pipeline.Connect(_h264Encoder.Output, _youtubeSink.CreateNewInput(MediaBlockPadMediaType.Video));
+
+                        if (audioEnabled)
+                        {
+                            _pipeline.Connect(_aacEncoder.Output, _youtubeSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                        }
+                    }
+                    // Facebook Live
+                    else if (cbPlatform.SelectedIndex == 1)
+                    {
+                        _facebookSink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(edStreamingKey.Text));
+                        _pipeline.Connect(_h264Encoder.Output, _facebookSink.CreateNewInput(MediaBlockPadMediaType.Video));
+
+                        if (audioEnabled)
+                        {
+                            _pipeline.Connect(_aacEncoder.Output, _facebookSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                        }
+                    }
+                    // HLS
+                    else if (cbPlatform.SelectedIndex == 2)
+                    {
+                        const string URL = "http://localhost:8088/";
+                        string serverPath = AppContext.BaseDirectory;
+                        var hlsSettings = new HLSSinkSettings
+                        {
+                            Location = Path.Combine(serverPath, "segment_%05d.ts"),
+                            MaxFiles = 10,
+                            PlaylistLength = 5,
+                            PlaylistLocation = Path.Combine(serverPath, "playlist.m3u8"),
+                            PlaylistRoot = URL,
+                            SendKeyframeRequests = true,
+                            TargetDuration = TimeSpan.FromSeconds(5),
+                            Custom_HTTP_Server_Enabled = true,
+                            Custom_HTTP_Server_Port = 8088
+                        };
+
+                        _hlsSink = new HLSSinkBlock(hlsSettings);
+                        _pipeline.Connect(_h264Encoder.Output, _hlsSink.CreateNewInput(MediaBlockPadMediaType.Video));
+
+                        if (audioEnabled)
+                        {
+                            _pipeline.Connect(_aacEncoder.Output, _hlsSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                        }
+
+                        MessageBox.Show($"Open {URL} in your browser to see HLS stream. Open {URL}playlist.m3u8 in VLC or other player.");
+                    }
+                    // AWS S3
+                    else if (cbPlatform.SelectedIndex == 4)
+                    {
+                        // mux into MP4 stream
+                        var mp4Settings = new MP4SinkSettings() { MuxOnly = true };
+                        _mp4Sink = new MP4SinkBlock(mp4Settings);
+
+                        _pipeline.Connect(_h264Encoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video));
+
+                        if (audioEnabled)
+                        {
+                            _pipeline.Connect(_aacEncoder.Output, _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                        }
+
+                        // S3 sink
+                        var s3settings = new AWSS3SinkSettings();
+                        s3settings.Region = "us-west-2";
+                        s3settings.ContentType = "video/mp4";
+                        s3settings.Uri = "s3://us-west-2/my-bucket-name/output.mp4";
+
+                        s3settings.AccessKey = "#####";
+                        s3settings.SecretAccessKey = "#####";
+
+                        _awsS3Sink = new AWSS3SinkBlock(s3settings);
+
+                        // connect
+                        _pipeline.Connect(_mp4Sink.Output, _awsS3Sink.Input);
+                    }
+                    // SRT
+                    else if (cbPlatform.SelectedIndex == 5)
+                    {
+                        _srtSink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = "srt://:8888" });
+                        _h264Encoder.Settings.ParseStream = false; // we have to disable parsing for SRT for H264 and HEVC encoders
+                        _pipeline.Connect(_h264Encoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Video));
+
+                        if (audioEnabled)
+                        {
+                            _pipeline.Connect(_aacEncoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                        }
                     }
                 }
+
+                // start
+                await _pipeline.StartAsync();
+
+                _timer.Start();
             }
-
-            // start
-            await _pipeline.StartAsync();
-
-            _timer.Start();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -439,13 +461,20 @@ namespace Networks_Streamer_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _timer.Stop();
+            try
+            {
+                _timer.Stop();
 
-            await _pipeline?.StopAsync();
+                await _pipeline?.StopAsync();
 
-            _pipeline?.ClearBlocks();
+                _pipeline?.ClearBlocks();
 
-            VideoView1.CallRefresh();
+                VideoView1.CallRefresh();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -453,19 +482,26 @@ namespace Networks_Streamer_Demo
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _timer.Stop();
-
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.StopAsync();
+                _timer.Stop();
 
-                _pipeline.OnError -= Pipeline_OnError;
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync();
 
-                await _pipeline.DisposeAsync();
-                _pipeline = null;
+                    _pipeline.OnError -= Pipeline_OnError;
+
+                    await _pipeline.DisposeAsync();
+                    _pipeline = null;
+                }
+
+                VisioForgeX.DestroySDK();
             }
-
-            VisioForgeX.DestroySDK();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -473,28 +509,35 @@ namespace Networks_Streamer_Demo
         /// </summary>
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+            try
             {
-                var deviceName = (string)e.AddedItems[0];
-
-                if (!string.IsNullOrEmpty(deviceName))
+                if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
                 {
-                    cbVideoFormat.Items.Clear();
+                    var deviceName = (string)e.AddedItems[0];
 
-                    var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                    if (device != null)
+                    if (!string.IsNullOrEmpty(deviceName))
                     {
-                        foreach (var item in device.VideoFormats)
-                        {
-                            cbVideoFormat.Items.Add(item.Name);
-                        }
+                        cbVideoFormat.Items.Clear();
 
-                        if (cbVideoFormat.Items.Count > 0)
+                        var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                        if (device != null)
                         {
-                            cbVideoFormat.SelectedIndex = 0;
+                            foreach (var item in device.VideoFormats)
+                            {
+                                cbVideoFormat.Items.Add(item.Name);
+                            }
+
+                            if (cbVideoFormat.Items.Count > 0)
+                            {
+                                cbVideoFormat.SelectedIndex = 0;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -503,34 +546,41 @@ namespace Networks_Streamer_Demo
         /// </summary>
         private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cbVideoFrameRate.Items.Clear();
-
-            if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+            try
             {
-                var deviceName = cbVideoInput.SelectedValue.ToString();
-                var format = (string)e.AddedItems[0];
-                if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
-                {
-                    var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                    if (device != null)
-                    {
-                        var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
-                        if (formatItem != null)
-                        {
-                            // build int range from tuple (min, max)    
-                            var frameRateList = formatItem.GetFrameRateRangeAsStringList();
-                            foreach (var item in frameRateList)
-                            {
-                                cbVideoFrameRate.Items.Add(item);
-                            }
+                cbVideoFrameRate.Items.Clear();
 
-                            if (cbVideoFrameRate.Items.Count > 0)
+                if (cbVideoInput.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+                {
+                    var deviceName = cbVideoInput.SelectedValue.ToString();
+                    var format = (string)e.AddedItems[0];
+                    if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+                    {
+                        var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                        if (device != null)
+                        {
+                            var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
+                            if (formatItem != null)
                             {
-                                cbVideoFrameRate.SelectedIndex = 0;
+                                // build int range from tuple (min, max)    
+                                var frameRateList = formatItem.GetFrameRateRangeAsStringList();
+                                foreach (var item in frameRateList)
+                                {
+                                    cbVideoFrameRate.Items.Add(item);
+                                }
+
+                                if (cbVideoFrameRate.Items.Count > 0)
+                                {
+                                    cbVideoFrameRate.SelectedIndex = 0;
+                                }
                             }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -539,27 +589,34 @@ namespace Networks_Streamer_Demo
         /// </summary>
         private async void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cbAudioFormat.Items.Clear();
-
-            if (cbAudioInput.SelectedIndex > 0 && e != null && e.AddedItems.Count > 0)
+            try
             {
-                var deviceName = (string)e.AddedItems[0];
-                if (!string.IsNullOrEmpty(deviceName))
-                {
-                    var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                    if (device != null)
-                    {
-                        foreach (var format in device.Formats)
-                        {
-                            cbAudioFormat.Items.Add(format.Name);
-                        }
+                cbAudioFormat.Items.Clear();
 
-                        if (cbAudioFormat.Items.Count > 0)
+                if (cbAudioInput.SelectedIndex > 0 && e != null && e.AddedItems.Count > 0)
+                {
+                    var deviceName = (string)e.AddedItems[0];
+                    if (!string.IsNullOrEmpty(deviceName))
+                    {
+                        var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                        if (device != null)
                         {
-                            cbAudioFormat.SelectedIndex = 0;
+                            foreach (var format in device.Formats)
+                            {
+                                cbAudioFormat.Items.Add(format.Name);
+                            }
+
+                            if (cbAudioFormat.Items.Count > 0)
+                            {
+                                cbAudioFormat.SelectedIndex = 0;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 

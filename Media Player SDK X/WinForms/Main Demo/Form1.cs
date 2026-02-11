@@ -135,15 +135,20 @@ namespace Main_Demo
         {
             if (cbResizeEnabled.Checked)
             {
-                var resize = new ResizeVideoEffect(
-                    Convert.ToInt32(edResizeWidth.Text),
-                    Convert.ToInt32(edResizeHeight.Text))
+                if (!int.TryParse(edResizeWidth.Text, out int width) || !int.TryParse(edResizeHeight.Text, out int height))
                 {
-                    Letterbox = cbResizeLetterbox.Checked,
-                    Method = (VideoScaleMethod)cbResizeMethod.SelectedIndex
-                };
+                    mmLog.Text += "Invalid resize dimensions" + Environment.NewLine;
+                }
+                else
+                {
+                    var resize = new ResizeVideoEffect(width, height)
+                    {
+                        Letterbox = cbResizeLetterbox.Checked,
+                        Method = (VideoScaleMethod)cbResizeMethod.SelectedIndex
+                    };
 
-                await _player.Video_Effects_AddOrUpdateAsync(resize);
+                    await _player.Video_Effects_AddOrUpdateAsync(resize);
+                }
             }
 
             if (cbDeinterlaceEnabled.Checked)
@@ -209,10 +214,13 @@ namespace Main_Demo
                     Y = Convert.ToInt32(edImageOverlayY.Text)
                 };
 
-                var bmp = new Bitmap(filename);
-                imageOverlay.Width = bmp.Width;
-                imageOverlay.Height = bmp.Height;
-                bmp.Dispose();
+                // Use FileStream with validateImageData: false to read dimensions without loading full image
+                using (var fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read))
+                using (var img = Image.FromStream(fs, false, false))
+                {
+                    imageOverlay.Width = img.Width;
+                    imageOverlay.Height = img.Height;
+                }
 
                 await _player.Video_Effects_AddOrUpdateAsync(imageOverlay);
             }
@@ -412,6 +420,11 @@ namespace Main_Demo
             _player.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             _player.Audio_Play = cbPlayAudio.Checked;
             var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(device => device.Name == cbAudioOutputDevice.Text);
+            if (audioOutputDevice == null)
+            {
+                mmLog.Text = "Selected audio output device not found" + Environment.NewLine;
+                return;
+            }
             _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
             _player.Subtitles_Enabled = cbSubtitlesEnabled.Checked;
             _player.Snapshot_Grabber_Enabled = true;
@@ -422,7 +435,7 @@ namespace Main_Demo
             AddBarcodeReader();
 
             string source = edFilenameOrURL.Text;
-            if (source.Contains("rtsp://"))
+            if (source.Contains("rtsp://", StringComparison.OrdinalIgnoreCase))
             {
                 var rtspSource = await RTSPSourceSettings.CreateAsync(new Uri(source), edRTSPUserName.Text, edRTSPPassword.Text, true);
                 rtspSource.Latency = TimeSpan.FromMilliseconds(tbRTSPLatency.Value);
@@ -883,8 +896,30 @@ namespace Main_Demo
         /// </summary>
         private async void btReadInfo_Click(object sender, EventArgs e)
         {
+            var input = edFilenameOrURL.Text;
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                mmInfo.Text += "Please enter a filename or URL" + Environment.NewLine;
+                return;
+            }
+
+            // Try to create URI - handle both file paths and URLs
+            if (!Uri.TryCreate(input, UriKind.Absolute, out var uri))
+            {
+                // If not a valid absolute URI, try as file path
+                if (File.Exists(input))
+                {
+                    uri = new Uri(Path.GetFullPath(input));
+                }
+                else
+                {
+                    mmInfo.Text += "Invalid filename or URL" + Environment.NewLine;
+                    return;
+                }
+            }
+
             var infoReader = new MediaInfoReaderX(_player);
-            if (await infoReader.OpenAsync(new Uri(edFilenameOrURL.Text)))
+            if (await infoReader.OpenAsync(uri))
             {
                 if (infoReader.Info.VideoStreams.Count > 0)
                 {
@@ -1025,7 +1060,7 @@ namespace Main_Demo
         /// </summary>
         private void btSelectLUTFile_Click(object sender, EventArgs e)
         {
-            var dlg = new OpenFileDialog();
+            using var dlg = new OpenFileDialog();
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
                 edLUTFilename.Text = dlg.FileName;

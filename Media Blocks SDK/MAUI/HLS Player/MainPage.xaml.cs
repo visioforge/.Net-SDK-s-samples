@@ -260,43 +260,50 @@ namespace HLS_Player_MB_MAUI
         /// </summary>
         private async void tmPosition_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
-            if (_pipeline == null || _pipeline.State != PlaybackState.Play)
-                return;
-
             try
             {
-                var pos = await _pipeline.Position_GetAsync();
-                var progress = (int)pos.TotalMilliseconds;
+                if (_pipeline == null || _pipeline.State != PlaybackState.Play)
+                    return;
 
-                await MainThread.InvokeOnMainThreadAsync(async () =>
+                try
                 {
-                    if (_pipeline == null)
-                        return;
+                    var pos = await _pipeline.Position_GetAsync();
+                    var progress = (int)pos.TotalMilliseconds;
 
-                    _isTimerUpdate = true;
-
-                    var duration = await _pipeline.DurationAsync();
-                    
-                    if (duration.TotalMilliseconds > 0)
+                    await MainThread.InvokeOnMainThreadAsync(async () =>
                     {
-                        slSeeking.Maximum = duration.TotalMilliseconds;
-                        
-                        if (progress > slSeeking.Maximum)
-                            slSeeking.Value = slSeeking.Maximum;
-                        else
-                            slSeeking.Value = progress;
-                        
-                        lbDuration.Text = duration.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
-                    }
-                    
-                    lbPosition.Text = pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
+                        if (_pipeline == null)
+                            return;
 
-                    _isTimerUpdate = false;
-                });
+                        _isTimerUpdate = true;
+
+                        var duration = await _pipeline.DurationAsync();
+
+                        if (duration.TotalMilliseconds > 0)
+                        {
+                            slSeeking.Maximum = duration.TotalMilliseconds;
+
+                            if (progress > slSeeking.Maximum)
+                                slSeeking.Value = slSeeking.Maximum;
+                            else
+                                slSeeking.Value = progress;
+
+                            lbDuration.Text = duration.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
+                        }
+
+                        lbPosition.Text = pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
+
+                        _isTimerUpdate = false;
+                    });
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Timer error: {ex.Message}");
+                }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Timer error: {ex.Message}");
+                Debug.WriteLine(ex);
             }
         }
 

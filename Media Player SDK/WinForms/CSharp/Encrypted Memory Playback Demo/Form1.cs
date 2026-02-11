@@ -68,12 +68,6 @@ namespace Encrypted_Memory_Playback_Demo
         private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
             timer1.Enabled = false;
-
-            _fileStream?.Dispose();
-            _fileStream = null;
-
-            _decryptor?.Dispose();
-            _decryptor = null;
         }
 
         /// <summary>
@@ -126,9 +120,16 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(timer1.Tag) == 0)
+            try
             {
-                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (Convert.ToInt32(timer1.Tag) == 0)
+                {
+                    await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -137,49 +138,58 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            mmError.Text = string.Empty;
-
-            // video and audio present in file. tune this settings to play audio files or video files without audio
-            bool videoPresent;
-            bool audioPresent;
-            if (rbVideoWithAudio.Checked)
+            try
             {
-                videoPresent = true;
-                audioPresent = true;
+                mmError.Text = string.Empty;
+
+                // video and audio present in file. tune this settings to play audio files or video files without audio
+                bool videoPresent;
+                bool audioPresent;
+                if (rbVideoWithAudio.Checked)
+                {
+                    videoPresent = true;
+                    audioPresent = true;
+                }
+                else if (rbVideoWithoutAudio.Checked)
+                {
+                    videoPresent = true;
+                    audioPresent = false;
+                }
+                else
+                {
+                    videoPresent = false;
+                    audioPresent = true;
+                }
+
+                // WARNING: This IV is hardcoded for demonstration purposes only.
+                // In production, use a cryptographically random IV for each encryption operation.
+                string iv = "1234567890123456";
+                var ivBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(iv);
+
+                _decryptor = new VideoDecryptorStream();
+                _fileStream = new FileStream(edFilename.Text, FileMode.Open);
+                var decStream = _decryptor.DecryptToStream(_fileStream, edKey.Text, ivBytes);
+
+                _stream = new ManagedIStream(decStream);
+                MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoPresent, audioPresent, decStream.Length);
+
+                MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS;
+
+                MediaPlayer1.Audio_PlayAudio = audioPresent;
+                MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
+
+                MediaPlayer1.Video_Renderer_SetAuto();
+
+                MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
+                await MediaPlayer1.PlayAsync();
+
+                tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
+                timer1.Enabled = true;
             }
-            else if (rbVideoWithoutAudio.Checked)
+            catch (Exception ex)
             {
-                videoPresent = true;
-                audioPresent = false;
+                Debug.WriteLine(ex);
             }
-            else
-            {
-                videoPresent = false;
-                audioPresent = true;
-            }
-
-            string iv = "1234567890123456";
-            var ivBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(iv);
-
-            _decryptor = new VideoDecryptorStream();
-            _fileStream = new FileStream(edFilename.Text, FileMode.Open);
-            var decStream = _decryptor.DecryptToStream(_fileStream, edKey.Text, ivBytes);
-
-            _stream = new ManagedIStream(decStream);
-            MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoPresent, audioPresent, decStream.Length);
-
-            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS;
-
-            MediaPlayer1.Audio_PlayAudio = audioPresent;
-            MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
-
-            MediaPlayer1.Video_Renderer_SetAuto();
-
-            MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
-            await MediaPlayer1.PlayAsync();
-
-            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
-            timer1.Enabled = true;
         }
 
         /// <summary>
@@ -187,7 +197,14 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.ResumeAsync();
+            try
+            {
+                await MediaPlayer1.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -195,7 +212,14 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.PauseAsync();
+            try
+            {
+                await MediaPlayer1.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -206,6 +230,8 @@ namespace Encrypted_Memory_Playback_Demo
             await MediaPlayer1.StopAsync();
             timer1.Enabled = false;
             tbTimeline.Value = 0;
+
+            _stream = null;
 
             _fileStream?.Dispose();
             _fileStream = null;
@@ -219,7 +245,14 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            await StopAsync();
+            try
+            {
+                await StopAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -245,7 +278,7 @@ namespace Encrypted_Memory_Playback_Demo
         {
             Invoke((Action)(() =>
             {
-                mmError.Text = mmError.Text + e.Message + Environment.NewLine;
+                mmError.AppendText(e.Message + Environment.NewLine);
             }));
         }
 
@@ -254,9 +287,16 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await StopAsync();
+            try
+            {
+                await StopAsync();
 
-            DestroyEngine();
+                DestroyEngine();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -273,18 +313,25 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Tag = 1;
-            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
-
-            int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
-            if ((value > 0) && (value < tbTimeline.Maximum))
+            try
             {
-                tbTimeline.Value = value;
+                timer1.Tag = 1;
+                tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
+
+                int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
+                if ((value > 0) && (value < tbTimeline.Maximum))
+                {
+                    tbTimeline.Value = value;
+                }
+
+                lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+
+                timer1.Tag = 0;
             }
-
-            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
-
-            timer1.Tag = 0;
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

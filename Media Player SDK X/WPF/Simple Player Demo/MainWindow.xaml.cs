@@ -53,30 +53,37 @@ namespace Simple_Player_Demo_X
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-            _timer = new System.Timers.Timer(500);
-            _timer.Elapsed += _timer_Elapsed;
-
-            Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
-
-            await VisioForgeX.InitSDKAsync();
-
-            CreateEngine();
-
-            foreach (var device in await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound))
+            try
             {
-                cbAudioOutput.Items.Add(device.Name);
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+                _timer = new System.Timers.Timer(500);
+                _timer.Elapsed += _timer_Elapsed;
+
+                Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
+
+                await VisioForgeX.InitSDKAsync();
+
+                CreateEngine();
+
+                foreach (var device in await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound))
+                {
+                    cbAudioOutput.Items.Add(device.Name);
+                }
+
+                if (cbAudioOutput.Items.Count > 0)
+                {
+                    cbAudioOutput.SelectedIndex = 0;
+                }
             }
-
-            if (cbAudioOutput.Items.Count > 0)
+            catch (Exception ex)
             {
-                cbAudioOutput.SelectedIndex = 0;
+                System.Diagnostics.Debug.WriteLine($"Window_Loaded error: {ex.Message}");
             }
         }
 
@@ -125,29 +132,36 @@ namespace Simple_Player_Demo_X
         /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _timerFlag = true;
-
-            if (_player == null)
+            try
             {
-                return;
-            }
+                _timerFlag = true;
 
-            var position = await _player.Position_GetAsync();
-            var duration = await _player.DurationAsync();
-
-            Dispatcher.Invoke((Action)(() =>
-            {
-                tbTimeline.Maximum = (int)duration.TotalSeconds;
-
-                lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
-
-                if (tbTimeline.Maximum >= position.TotalSeconds)
+                if (_player == null)
                 {
-                    tbTimeline.Value = (int)position.TotalSeconds;
+                    return;
                 }
-            }));
 
-            _timerFlag = false;
+                var position = await _player.Position_GetAsync();
+                var duration = await _player.DurationAsync();
+
+                Dispatcher.Invoke((Action)(() =>
+                {
+                    tbTimeline.Maximum = (int)duration.TotalSeconds;
+
+                    lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
+
+                    if (tbTimeline.Maximum >= position.TotalSeconds)
+                    {
+                        tbTimeline.Value = (int)position.TotalSeconds;
+                    }
+                }));
+
+                _timerFlag = false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Timer error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -194,9 +208,16 @@ namespace Simple_Player_Demo_X
         /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!_timerFlag && _player != null)
+            try
             {
-                await _player.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (!_timerFlag && _player != null)
+                {
+                    await _player.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Seek error: {ex.Message}");
             }
         }
 
@@ -205,37 +226,44 @@ namespace Simple_Player_Demo_X
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            edLog.Clear();
-
-            await DestroyEngineAsync();
-
-            CreateEngine();
-
-            var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text);
-            _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
-
-            if (string.IsNullOrEmpty(edSubFilename.Text))
+            try
             {
-                _player.Subtitles_Enabled = false;
+                edLog.Clear();
+
+                await DestroyEngineAsync();
+
+                CreateEngine();
+
+                var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text);
+                _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+
+                if (string.IsNullOrEmpty(edSubFilename.Text))
+                {
+                    _player.Subtitles_Enabled = false;
+                }
+                else
+                {
+                    _player.Subtitles_Enabled = true;
+                    _player.Subtitles_ExternalFile = edSubFilename.Text;
+                    _player.Subtitles_Settings = new SubtitleOverlaySettings();
+                }
+
+                _player.OnStreamsInfoAvailable += _player_OnStreamsInfoAvailable;
+
+                cbVideoStream.Items.Clear();
+                cbAudioStream.Items.Clear();
+
+                var source = await UniversalSourceSettingsV2.CreateAsync(new Uri(edFilename.Text));
+                await _player.OpenAsync(source);
+
+                await _player.PlayAsync();
+
+                _timer.Start();
             }
-            else
+            catch (Exception ex)
             {
-                _player.Subtitles_Enabled = true;
-                _player.Subtitles_ExternalFile = edSubFilename.Text;
-                _player.Subtitles_Settings = new SubtitleOverlaySettings();
+                edLog.Text += $"Start error: {ex.Message}{Environment.NewLine}";
             }
-
-            _player.OnStreamsInfoAvailable += _player_OnStreamsInfoAvailable;
-
-            cbVideoStream.Items.Clear();
-            cbAudioStream.Items.Clear();
-
-            var source = await UniversalSourceSettingsV2.CreateAsync(new Uri(edFilename.Text));
-            await _player.OpenAsync(source);
-
-            await _player.PlayAsync();
-
-            _timer.Start();
         }
 
         /// <summary>
@@ -282,16 +310,23 @@ namespace Simple_Player_Demo_X
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _timer.Stop();
-
-            if (_player != null)
+            try
             {
-                await _player.StopAsync();
-                await DestroyEngineAsync();
-                _player = null;
-            }
+                _timer.Stop();
 
-            tbTimeline.Value = 0;
+                if (_player != null)
+                {
+                    await _player.StopAsync();
+                    await DestroyEngineAsync();
+                    _player = null;
+                }
+
+                tbTimeline.Value = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Stop error: {ex.Message}");
+            }
         }
 
 
@@ -300,7 +335,17 @@ namespace Simple_Player_Demo_X
         /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            await _player.PauseAsync();
+            try
+            {
+                if (_player != null)
+                {
+                    await _player.PauseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Pause error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -308,7 +353,17 @@ namespace Simple_Player_Demo_X
         /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
-            await _player.ResumeAsync();
+            try
+            {
+                if (_player != null)
+                {
+                    await _player.ResumeAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Resume error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -327,13 +382,20 @@ namespace Simple_Player_Demo_X
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _timer.Stop();
+            try
+            {
+                _timer.Stop();
 
-            _isClosing = true;
+                _isClosing = true;
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Window closing error: {ex.Message}");
+            }
         }
 
         /// <summary>

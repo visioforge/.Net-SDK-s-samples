@@ -84,9 +84,9 @@
         InvokeAsync(StateHasChanged);
     }
 
-    private void OnPlayerStateChanged(bool isPlaying)
+    private void OnPlayerStateChanged(object sender, PlayerStateChangedEventArgs e)
     {
-        _isPlaying = isPlaying;
+        _isPlaying = e.IsPlaying;
 
         InvokeAsync(StateHasChanged);
     }
@@ -122,9 +122,9 @@
         await PlayVideoAsync();
     }
 
-    private void OnFrameCaptured(byte[] png)
+    private void OnFrameCaptured(object sender, FrameCapturedEventArgs e)
     {
-        var imageBytes = png;
+        var imageBytes = e.Frame;
         var base64 = Convert.ToBase64String(imageBytes);
         _imageData = $"data:image/jpeg;base64,{base64}";
         InvokeAsync(StateHasChanged);

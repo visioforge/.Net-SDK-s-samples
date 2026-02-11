@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -90,37 +90,44 @@ namespace VNC_Source_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
-
-            //_pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            var vncSettings = new VNCSourceSettings(); ;
-            if (rbHost.IsChecked == true)
+            try
             {
-                vncSettings.Host = edHost.Text;
-                vncSettings.Port = Convert.ToInt32(edPort.Text);
+                CreateEngine();
+
+                //_pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+                var vncSettings = new VNCSourceSettings(); ;
+                if (rbHost.IsChecked == true)
+                {
+                    vncSettings.Host = edHost.Text;
+                    vncSettings.Port = Convert.ToInt32(edPort.Text);
+                }
+                else
+                {
+                    vncSettings.Uri = edURL.Text;
+                }
+
+
+                vncSettings.Password = edPassword.Text;
+
+                _source = new VNCSourceBlock(vncSettings);
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+                //_audioRenderer = new AudioRendererBlock();
+
+                _pipeline.Connect(_source.Output, _videoRenderer.Input);
+               // _pipeline.Connect(_ndiSource.AudioOutput, _audioRenderer.Input);
+
+                await _pipeline.StartAsync();
+
+                //_pipeline.SavePipeline("ndi_source");
+
+                tmRecording.Start();
             }
-            else
+            catch (Exception ex)
             {
-                vncSettings.Uri = edURL.Text;
+                Debug.WriteLine(ex);
             }
-
-            
-            vncSettings.Password = edPassword.Text;
-
-            _source = new VNCSourceBlock(vncSettings);
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
-            //_audioRenderer = new AudioRendererBlock();
-
-            _pipeline.Connect(_source.Output, _videoRenderer.Input);
-           // _pipeline.Connect(_ndiSource.AudioOutput, _audioRenderer.Input);
-
-            await _pipeline.StartAsync();
-
-            //_pipeline.SavePipeline("ndi_source");
-
-            tmRecording.Start();
         }
 
         /// <summary>
@@ -128,9 +135,16 @@ namespace VNC_Source_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            tmRecording.Stop();            
+            try
+            {
+                tmRecording.Stop();            
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -138,18 +152,25 @@ namespace VNC_Source_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            CreateEngine();
+                CreateEngine();
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+                tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

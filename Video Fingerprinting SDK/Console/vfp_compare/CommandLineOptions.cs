@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace vfp_compare
+﻿namespace vfp_compare
 {
     using CommandLine;
     using CommandLine.Text;

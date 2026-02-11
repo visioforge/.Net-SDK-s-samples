@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -43,36 +43,43 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// </summary>
         private async void btSearch_Click(object sender, EventArgs e)
         {
-            cbSources.Items.Clear();
-
-            _cts?.Cancel();
-            _cts = new CancellationTokenSource();
-
             try
             {
-                await _onvifDiscovery.Discover(5, (device) =>
-                {
-                    if (device.XAdresses?.Any() == true)
-                    {
-                        Invoke((Action)(() =>
-                        {
-                            var address = device.XAdresses.FirstOrDefault();
-                            if (!string.IsNullOrEmpty(address))
-                            {
-                                cbSources.Items.Add(address);
+                cbSources.Items.Clear();
 
-                                if (cbSources.Items.Count == 1)
+                _cts?.Cancel();
+                _cts = new CancellationTokenSource();
+
+                try
+                {
+                    await _onvifDiscovery.Discover(5, (device) =>
+                    {
+                        if (device.XAdresses?.Any() == true)
+                        {
+                            Invoke((Action)(() =>
+                            {
+                                var address = device.XAdresses.FirstOrDefault();
+                                if (!string.IsNullOrEmpty(address))
                                 {
-                                    cbSources.SelectedIndex = 0;
+                                    cbSources.Items.Add(address);
+
+                                    if (cbSources.Items.Count == 1)
+                                    {
+                                        cbSources.SelectedIndex = 0;
+                                    }
                                 }
-                            }
-                        }));
-                    }
-                }, _cts.Token);
+                            }));
+                        }
+                    }, _cts.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                    // Discovery cancelled
+                }
             }
-            catch (OperationCanceledException)
+            catch (Exception ex)
             {
-                // Discovery cancelled
+                Debug.WriteLine(ex);
             }
         }
 
@@ -81,34 +88,41 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// </summary>
         private async void btReadProfiles_Click(object sender, EventArgs e)
         {
-            var onvifClient = new ONVIFClientX();
-            var result = await onvifClient.ConnectAsync(cbSources.Text, edUsername.Text, edPassword.Text);
-            if (!result)
+            try
             {
-                MessageBox.Show(this, "Unable to connect to ONVIF camera.");
-                return;
-            }
-
-            Debug.WriteLine($"Name {onvifClient.DeviceInformation?.Model}, s/n {onvifClient.DeviceInformation?.SerialNumber}");
-            
-            cbProfiles.Items.Clear();
-            var profiles = await onvifClient.GetProfilesAsync();
-            if (profiles != null)
-            {
-                foreach (var profile in profiles)
+                var onvifClient = new ONVIFClientX();
+                var result = await onvifClient.ConnectAsync(cbSources.Text, edUsername.Text, edPassword.Text);
+                if (!result)
                 {
-                    var mediaUri = await onvifClient.GetStreamUriAsync(profile);
-                    if (mediaUri != null && !string.IsNullOrEmpty(mediaUri.Uri))
+                    MessageBox.Show(this, "Unable to connect to ONVIF camera.");
+                    return;
+                }
+
+                Debug.WriteLine($"Name {onvifClient.DeviceInformation?.Model}, s/n {onvifClient.DeviceInformation?.SerialNumber}");
+
+                cbProfiles.Items.Clear();
+                var profiles = await onvifClient.GetProfilesAsync();
+                if (profiles != null)
+                {
+                    foreach (var profile in profiles)
                     {
-                        cbProfiles.Items.Add(mediaUri.Uri);
-                        Debug.WriteLine($"{profile.Name} {mediaUri.Uri}");
+                        var mediaUri = await onvifClient.GetStreamUriAsync(profile);
+                        if (mediaUri != null && !string.IsNullOrEmpty(mediaUri.Uri))
+                        {
+                            cbProfiles.Items.Add(mediaUri.Uri);
+                            Debug.WriteLine($"{profile.Name} {mediaUri.Uri}");
+                        }
                     }
                 }
-            }
 
-            if (cbProfiles.Items.Count > 0)
+                if (cbProfiles.Items.Count > 0)
+                {
+                    cbProfiles.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
             {
-                cbProfiles.SelectedIndex = 0;
+                Debug.WriteLine(ex);
             }
         }
     }

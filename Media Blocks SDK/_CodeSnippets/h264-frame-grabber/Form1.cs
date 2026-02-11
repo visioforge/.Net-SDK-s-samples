@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 
 using VisioForge.Core;
@@ -11,6 +11,7 @@ using System.Timers;
 using System.IO;
 
 using VisioForge.Core.MediaBlocks.Special;
+using System.Diagnostics;
 
 namespace media_player
 {
@@ -60,66 +61,73 @@ namespace media_player
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            _frameCount = 0;
-
-            if (string.IsNullOrEmpty(edFilename.Text))
+            try
             {
-                MessageBox.Show("Please select an H264 file.");
-                return;
+                _frameCount = 0;
+
+                if (string.IsNullOrEmpty(edFilename.Text))
+                {
+                    MessageBox.Show("Please select an H264 file.");
+                    return;
+                }
+
+                var filename = edFilename.Text;
+                var httpSource = filename.Contains("http://") || filename.Contains("https://");
+
+                // Create MediaBlocks pipeline
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnStop += (sender2, args) =>
+                {
+                    Invoke(new Action(() =>
+                    {
+                        _tmPosition.Stop();
+
+                        MessageBox.Show("Playback complete.");
+                    }));
+                };
+
+                _pipeline.Debug_Mode = true;
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+                // Create file source
+                _fileSource = new BasicFileSourceBlock(edFilename.Text);
+
+                // Create demux
+                _demux = new ParseBinBlock();
+
+                // Add decoder and parser
+                _parse = new H264ParseBlock();
+
+                // Add sample grabber
+                _sampleGrabber = new DataSampleGrabberBlock(MediaBlockPadMediaType.Video);
+                _sampleGrabber.OnDataFrame += (sender2, args) =>
+                {
+                    Invoke(new Action(() =>
+                    {
+                        _frameCount++;
+                        lbStatus.Text = $"Received frames: {_frameCount}";
+                    }));
+                };
+
+                // Add null renderer
+                _nullRenderer = new NullRendererBlock(MediaBlockPadMediaType.Video);
+                _nullRenderer.IsSync = false; // disable sync to play as fast as possible
+
+                // Connect blocks
+                _pipeline.Connect(_fileSource, _demux);
+                _pipeline.Connect(_demux.GetOutputPadByType(MediaBlockPadMediaType.Video), _parse.Input);
+                _pipeline.Connect(_parse, _sampleGrabber);
+                _pipeline.Connect(_sampleGrabber, _nullRenderer);
+
+                // Create pipeline and configure elements
+                await _pipeline.StartAsync();     
+
+                _tmPosition.Start();
             }
-
-            var filename = edFilename.Text;
-            var httpSource = filename.Contains("http://") || filename.Contains("https://");
-
-            // Create MediaBlocks pipeline
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnStop += (sender2, args) =>
+            catch (Exception ex)
             {
-                Invoke(new Action(() =>
-                {
-                    _tmPosition.Stop();
-
-                    MessageBox.Show("Playback complete.");
-                }));
-            };
-
-            _pipeline.Debug_Mode = true;
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            // Create file source
-            _fileSource = new BasicFileSourceBlock(edFilename.Text);
-
-            // Create demux
-            _demux = new ParseBinBlock();
-
-            // Add decoder and parser
-            _parse = new H264ParseBlock();
-
-            // Add sample grabber
-            _sampleGrabber = new DataSampleGrabberBlock(MediaBlockPadMediaType.Video);
-            _sampleGrabber.OnDataFrame += (sender2, args) =>
-            {
-                Invoke(new Action(() =>
-                {
-                    _frameCount++;
-                    lbStatus.Text = $"Received frames: {_frameCount}";
-                }));
-            };
-
-            // Add null renderer
-            _nullRenderer = new NullRendererBlock(MediaBlockPadMediaType.Video);
-            _nullRenderer.IsSync = false; // disable sync to play as fast as possible
-
-            // Connect blocks
-            _pipeline.Connect(_fileSource, _demux);
-            _pipeline.Connect(_demux.GetOutputPadByType(MediaBlockPadMediaType.Video), _parse.Input);
-            _pipeline.Connect(_parse, _sampleGrabber);
-            _pipeline.Connect(_sampleGrabber, _nullRenderer);
-
-            // Create pipeline and configure elements
-            await _pipeline.StartAsync();     
-
-            _tmPosition.Start();
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -127,11 +135,18 @@ namespace media_player
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            _tmPosition.Stop();
+            try
+            {
+                _tmPosition.Stop();
 
-            await _pipeline.StopAsync();
+                await _pipeline.StopAsync();
 
-            await _pipeline.DisposeAsync();
+                await _pipeline.DisposeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -139,19 +154,33 @@ namespace media_player
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            // We have to initialize the engine on start
-            Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.Enabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.Enabled = true;
-            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.Enabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.Enabled = true;
+                Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
         /// Form 1 form closing.
         /// </summary>
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
 

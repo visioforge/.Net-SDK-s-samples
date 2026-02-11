@@ -51,53 +51,60 @@ namespace vr360_media_player
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(edFilename.Text))
-            {
-                MessageBox.Show("Please select a file.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
             try
             {
-                // Create MediaBlocks pipeline
-                _pipeline = new MediaBlocksPipeline();
-
-                // Add file source
-                var fileSourceSettings = await UniversalSourceSettings.CreateAsync(edFilename.Text);
-                var info = fileSourceSettings.GetInfo();
-                var videoStreamAvailable = info.VideoStreams.Count > 0;
-                var audioStreamAvailable = info.AudioStreams.Count > 0;
-
-                var fileSource = new UniversalSourceBlock(fileSourceSettings);
-
-                // Add video renderer
-                if (videoStreamAvailable)
+                if (string.IsNullOrEmpty(edFilename.Text))
                 {
-                    _processor = new VR360ProcessorBlock(new D3D11VR360RendererSettings());
-
-                    var videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
-                    VideoView1.SetNativeRendering(false);
-
-                    _pipeline.Connect(fileSource.VideoOutput, _processor.Input);
-                    _pipeline.Connect(_processor.Output, videoRenderer.Input);
+                    MessageBox.Show("Please select a file.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
                 }
 
-                // Add audio output
-                if (audioStreamAvailable)
+                try
                 {
-                    var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))[0];
-                    var audioOutput = new AudioRendererBlock(new AudioRendererSettings(audioOutputDevice));
-                    _pipeline.Connect(fileSource, audioOutput);
+                    // Create MediaBlocks pipeline
+                    _pipeline = new MediaBlocksPipeline();
+
+                    // Add file source
+                    var fileSourceSettings = await UniversalSourceSettings.CreateAsync(edFilename.Text);
+                    var info = fileSourceSettings.GetInfo();
+                    var videoStreamAvailable = info.VideoStreams.Count > 0;
+                    var audioStreamAvailable = info.AudioStreams.Count > 0;
+
+                    var fileSource = new UniversalSourceBlock(fileSourceSettings);
+
+                    // Add video renderer
+                    if (videoStreamAvailable)
+                    {
+                        _processor = new VR360ProcessorBlock(new D3D11VR360RendererSettings());
+
+                        var videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+                        VideoView1.SetNativeRendering(false);
+
+                        _pipeline.Connect(fileSource.VideoOutput, _processor.Input);
+                        _pipeline.Connect(_processor.Output, videoRenderer.Input);
+                    }
+
+                    // Add audio output
+                    if (audioStreamAvailable)
+                    {
+                        var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))[0];
+                        var audioOutput = new AudioRendererBlock(new AudioRendererSettings(audioOutputDevice));
+                        _pipeline.Connect(fileSource, audioOutput);
+                    }
+
+                    // Start playback
+                    await _pipeline.StartAsync();
+
+                    _timer.Start();
                 }
-
-                // Start playback
-                await _pipeline.StartAsync();
-
-                _timer.Start();
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error starting playback: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error starting playback: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Debug.WriteLine(ex);
             }
         }
 
@@ -106,26 +113,33 @@ namespace vr360_media_player
         /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            if (_pipeline == null) return;
-
-            if (btPause.Content.ToString() == "Resume")
+            try
             {
-                btPause.Content = "Pause";
-                await _pipeline.ResumeAsync();
+                if (_pipeline == null) return;
 
-                _pausedFrame?.Free();
-                _pausedFrame = null;
-                
-                imgPauseView.Visibility = Visibility.Collapsed;
-                VideoView1.Visibility = Visibility.Visible;
+                if (btPause.Content.ToString() == "Resume")
+                {
+                    btPause.Content = "Pause";
+                    await _pipeline.ResumeAsync();
+
+                    _pausedFrame?.Free();
+                    _pausedFrame = null;
+
+                    imgPauseView.Visibility = Visibility.Collapsed;
+                    VideoView1.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    btPause.Content = "Resume";
+                    await _pipeline.PauseAsync();
+
+                    // Set frame to imgPauseView
+                    UpdatePausedFrame();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                btPause.Content = "Resume";
-                await _pipeline.PauseAsync();
-
-                // Set frame to imgPauseView
-                UpdatePausedFrame();
+                Debug.WriteLine(ex);
             }
         }
 
@@ -134,26 +148,33 @@ namespace vr360_media_player
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _timer.Stop();
-
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.StopAsync(force: true);
-                await _pipeline.DisposeAsync();
-                _pipeline = null;
-            }
+                _timer.Stop();
 
-            _pausedFrame?.Free();
-            _pausedFrame = null;
-            
-            // Clean up processor
-            _processor?.Dispose();
-            _processor = null;
-            
-            imgPauseView.Source = null;
-            imgPauseView.Visibility = Visibility.Collapsed;
-            VideoView1.Visibility = Visibility.Visible;
-            btPause.Content = "Pause";
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync(force: true);
+                    await _pipeline.DisposeAsync();
+                    _pipeline = null;
+                }
+
+                _pausedFrame?.Free();
+                _pausedFrame = null;
+
+                // Clean up processor
+                _processor?.Dispose();
+                _processor = null;
+
+                imgPauseView.Source = null;
+                imgPauseView.Visibility = Visibility.Collapsed;
+                VideoView1.Visibility = Visibility.Visible;
+                btPause.Content = "Pause";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -280,29 +301,36 @@ namespace vr360_media_player
         /// </summary>
         private async void Timer_Tick(object sender, EventArgs e)
         {
-            if (_pipeline == null) return;
-
             try
             {
-                var duration = await _pipeline.DurationAsync();
-                var position = await _pipeline.Position_GetAsync();
+                if (_pipeline == null) return;
 
-                tbTimeline.Maximum = duration.TotalSeconds;
-
-                if (position.TotalSeconds > 0 && position.TotalSeconds < tbTimeline.Maximum)
+                try
                 {
-                    // Temporarily remove event handler to avoid recursion
-                    tbTimeline.ValueChanged -= tbTimeline_ValueChanged;
-                    tbTimeline.Value = position.TotalSeconds;
-                    tbTimeline.ValueChanged += tbTimeline_ValueChanged;
-                }
+                    var duration = await _pipeline.DurationAsync();
+                    var position = await _pipeline.Position_GetAsync();
 
-                lbTime.Content = $"{position:hh\\:mm\\:ss}/{duration:hh\\:mm\\:ss}";
+                    tbTimeline.Maximum = duration.TotalSeconds;
+
+                    if (position.TotalSeconds > 0 && position.TotalSeconds < tbTimeline.Maximum)
+                    {
+                        // Temporarily remove event handler to avoid recursion
+                        tbTimeline.ValueChanged -= tbTimeline_ValueChanged;
+                        tbTimeline.Value = position.TotalSeconds;
+                        tbTimeline.ValueChanged += tbTimeline_ValueChanged;
+                    }
+
+                    lbTime.Content = $"{position:hh\\:mm\\:ss}/{duration:hh\\:mm\\:ss}";
+                }
+                catch (Exception ex)
+                {
+                    // Handle any timing-related exceptions silently
+                    System.Diagnostics.Debug.WriteLine($"Timer error: {ex.Message}");
+                }
             }
             catch (Exception ex)
             {
-                // Handle any timing-related exceptions silently
-                System.Diagnostics.Debug.WriteLine($"Timer error: {ex.Message}");
+                Debug.WriteLine(ex);
             }
         }
 
@@ -311,16 +339,23 @@ namespace vr360_media_player
         /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (_pipeline != null && !_timer.IsEnabled)
+            try
             {
-                try
+                if (_pipeline != null && !_timer.IsEnabled)
                 {
-                    await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                    try
+                    {
+                        await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Seek error: {ex.Message}");
+                    }
                 }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Seek error: {ex.Message}");
-                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -393,25 +428,32 @@ namespace vr360_media_player
         /// </summary>
         protected override async void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            _timer.Stop();
-
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.StopAsync(force: true);
-                await _pipeline.DisposeAsync();
-                _pipeline = null;
+                _timer.Stop();
+
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync(force: true);
+                    await _pipeline.DisposeAsync();
+                    _pipeline = null;
+                }
+
+                _pausedFrame?.Free();
+                _pausedFrame = null;
+
+                // Clean up processor
+                _processor?.Dispose();
+                _processor = null;
+
+                imgPauseView.Source = null;
+
+                base.OnClosing(e);
             }
-
-            _pausedFrame?.Free();
-            _pausedFrame = null;
-            
-            // Clean up processor
-            _processor?.Dispose();
-            _processor = null;
-            
-            imgPauseView.Source = null;
-
-            base.OnClosing(e);
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

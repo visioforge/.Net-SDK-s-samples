@@ -45,8 +45,9 @@ namespace DVS
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Failed to save settings: {ex.Message}");
                 return false;
             }
         }
@@ -86,8 +87,9 @@ namespace DVS
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Failed to load settings: {ex.Message}");
                 return false;
             }
         }
@@ -123,7 +125,13 @@ namespace DVS
             }
             else if (targetType.IsEnum)
             {
-                return Enum.Parse(targetType, element.GetString());
+                var enumString = element.GetString();
+                if (Enum.TryParse(targetType, enumString, out object enumValue))
+                {
+                    return enumValue;
+                }
+                // Return default enum value if parsing fails
+                return Enum.GetValues(targetType).GetValue(0);
             }
             else if (targetType == typeof(Guid))
             {

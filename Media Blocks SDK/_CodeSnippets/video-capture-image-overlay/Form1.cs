@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -16,6 +16,7 @@ using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaBlocks;
+using System.Diagnostics;
 
 namespace video_capture_image_overlay
 {
@@ -33,12 +34,19 @@ namespace video_capture_image_overlay
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            // We have to initialize the engine on start
-            Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.Enabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.Enabled = true;
-            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.Enabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.Enabled = true;
+                Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -46,47 +54,54 @@ namespace video_capture_image_overlay
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            // create MediaBlocks pipeline
-            _pipeline = new MediaBlocksPipeline();
+            try
+            {
+                // create MediaBlocks pipeline
+                _pipeline = new MediaBlocksPipeline();
 
-            // add default video and audio sources
-            var videoSources = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList();
-            var videoSource = new SystemVideoSourceBlock(new VideoCaptureDeviceSourceSettings(videoSources[0]));
+                // add default video and audio sources
+                var videoSources = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList();
+                var videoSource = new SystemVideoSourceBlock(new VideoCaptureDeviceSourceSettings(videoSources[0]));
 
-            var audioSources = (await DeviceEnumerator.Shared.AudioSourcesAsync()).ToList();
-            var audioSource = new SystemAudioSourceBlock(audioSources[0].CreateSourceSettings());
+                var audioSources = (await DeviceEnumerator.Shared.AudioSourcesAsync()).ToList();
+                var audioSource = new SystemAudioSourceBlock(audioSources[0].CreateSourceSettings());
 
-            // add video renderer
-            var videoRenderer = new VideoRendererBlock(_pipeline, videoView: VideoView1);
+                // add video renderer
+                var videoRenderer = new VideoRendererBlock(_pipeline, videoView: VideoView1);
 
-            // add audio renderer
-            var audioRenderers = (await DeviceEnumerator.Shared.AudioOutputsAsync()).ToList();
-            var audioRenderer = new AudioRendererBlock(new AudioRendererSettings(audioRenderers[0]));
+                // add audio renderer
+                var audioRenderers = (await DeviceEnumerator.Shared.AudioOutputsAsync()).ToList();
+                var audioRenderer = new AudioRendererBlock(new AudioRendererSettings(audioRenderers[0]));
 
-            // configure MP4 output
-            var output = new MP4OutputBlock(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4"));
+                // configure MP4 output
+                var output = new MP4OutputBlock(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4"));
 
-            // add video and audio tees
-            var videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
-            var audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
+                // add video and audio tees
+                var videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+                var audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
 
-            // Add image overlay
-            var imageFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo.png");
-            var imageOverlay = new ImageOverlayCairoBlock(new ImageOverlaySettings(imageFile) { X = 100, Y = 100 });
+                // Add image overlay
+                var imageFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo.png");
+                var imageOverlay = new ImageOverlayCairoBlock(new ImageOverlaySettings(imageFile) { X = 100, Y = 100 });
 
-            // connect everything
-            _pipeline.Connect(videoSource, imageOverlay);
-            _pipeline.Connect(imageOverlay, videoTee);
-            _pipeline.Connect(audioSource, audioTee);
+                // connect everything
+                _pipeline.Connect(videoSource, imageOverlay);
+                _pipeline.Connect(imageOverlay, videoTee);
+                _pipeline.Connect(audioSource, audioTee);
 
-            _pipeline.Connect(videoTee, videoRenderer);
-            _pipeline.Connect(audioTee, audioRenderer);
+                _pipeline.Connect(videoTee, videoRenderer);
+                _pipeline.Connect(audioTee, audioRenderer);
 
-            _pipeline.Connect(videoTee, output);
-            _pipeline.Connect(audioTee, output);
+                _pipeline.Connect(videoTee, output);
+                _pipeline.Connect(audioTee, output);
 
-            // start
-            await _pipeline.StartAsync();
+                // start
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -94,16 +109,30 @@ namespace video_capture_image_overlay
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            await _pipeline.StopAsync();
+            try
+            {
+                await _pipeline.StopAsync();
 
-            await _pipeline.DisposeAsync();
+                await _pipeline.DisposeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
         /// Form 1 form closing.
         /// </summary>
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
     }

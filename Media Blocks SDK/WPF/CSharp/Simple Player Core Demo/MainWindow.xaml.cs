@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,7 @@ using VisioForge.Core.SimplePlayerX;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
+using System.Diagnostics;
 
 namespace MediaBlocks_Simple_Player_Core_Demo
 {
@@ -49,17 +50,24 @@ namespace MediaBlocks_Simple_Player_Core_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            _timer = new System.Timers.Timer(500);
-            _timer.Elapsed += _timer_Elapsed;
+                _timer = new System.Timers.Timer(500);
+                _timer.Elapsed += _timer_Elapsed;
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -90,24 +98,31 @@ namespace MediaBlocks_Simple_Player_Core_Demo
         /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _timerFlag = true;
-
-            var position = await _simplePlayer.Position_GetAsync();
-            var duration = await _simplePlayer.DurationAsync();
-
-            Dispatcher.Invoke((Action)(() =>
+            try
             {
-                tbTimeline.Maximum = (int)duration.TotalSeconds;
+                _timerFlag = true;
 
-                lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
+                var position = await _simplePlayer.Position_GetAsync();
+                var duration = await _simplePlayer.DurationAsync();
 
-                if (tbTimeline.Maximum >= position.TotalSeconds)
+                Dispatcher.Invoke((Action)(() =>
                 {
-                    tbTimeline.Value = (int)position.TotalSeconds;
-                }
-            }));
+                    tbTimeline.Maximum = (int)duration.TotalSeconds;
 
-            _timerFlag = false;
+                    lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
+
+                    if (tbTimeline.Maximum >= position.TotalSeconds)
+                    {
+                        tbTimeline.Value = (int)position.TotalSeconds;
+                    }
+                }));
+
+                _timerFlag = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -141,9 +156,16 @@ namespace MediaBlocks_Simple_Player_Core_Demo
         /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!_timerFlag && _simplePlayer != null)
+            try
             {
-                await _simplePlayer.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (!_timerFlag && _simplePlayer != null)
+                {
+                    await _simplePlayer.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -152,19 +174,26 @@ namespace MediaBlocks_Simple_Player_Core_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            edLog.Clear();
+            try
+            {
+                edLog.Clear();
 
-            VideoView1.SetNativeRendering(true);
+                VideoView1.SetNativeRendering(true);
 
-            _simplePlayer = new SimplePlayerCoreX(VideoView1);
-            _simplePlayer.Audio_Streams_MixAll = cbPlayAllAudioStreams.IsChecked == true;
+                _simplePlayer = new SimplePlayerCoreX(VideoView1);
+                _simplePlayer.Audio_Streams_MixAll = cbPlayAllAudioStreams.IsChecked == true;
 
-            _simplePlayer.OnStreamsInfoAvailable += _simplePlayer_OnStreamsInfoAvailable;
-            _simplePlayer.OnError += Player_OnError;
+                _simplePlayer.OnStreamsInfoAvailable += _simplePlayer_OnStreamsInfoAvailable;
+                _simplePlayer.OnError += Player_OnError;
 
-            await _simplePlayer.StartAsync(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
+                await _simplePlayer.StartAsync(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
 
-            _timer.Start();
+                _timer.Start();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -204,18 +233,25 @@ namespace MediaBlocks_Simple_Player_Core_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _timer.Stop();
-
-            if (_simplePlayer != null)
+            try
             {
-                //_simplePlayer.Debug_SavePipeline("before-stop");
-                await _simplePlayer.StopAsync();
-                await DestroyEngineAsync();
+                _timer.Stop();
 
-                _simplePlayer = null;
-            }            
+                if (_simplePlayer != null)
+                {
+                    //_simplePlayer.Debug_SavePipeline("before-stop");
+                    await _simplePlayer.StopAsync();
+                    await DestroyEngineAsync();
 
-            tbTimeline.Value = 0;
+                    _simplePlayer = null;
+                }            
+
+                tbTimeline.Value = 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -223,7 +259,14 @@ namespace MediaBlocks_Simple_Player_Core_Demo
         /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            await _simplePlayer.PauseAsync();
+            try
+            {
+                await _simplePlayer.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -231,7 +274,14 @@ namespace MediaBlocks_Simple_Player_Core_Demo
         /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
-            await _simplePlayer.ResumeAsync();
+            try
+            {
+                await _simplePlayer.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -239,11 +289,18 @@ namespace MediaBlocks_Simple_Player_Core_Demo
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _timer.Stop();
+            try
+            {
+                _timer.Stop();
 
-            await DestroyEngineAsync(); 
+                await DestroyEngineAsync(); 
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

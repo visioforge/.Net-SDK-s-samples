@@ -15,38 +15,32 @@ namespace MMT_MAUI
         public static void SerializeToCsv<T>(this List<T> genericList, string fileName, char separator)
         {
             var sb = new StringBuilder();
-            var header = string.Empty;
             var info = typeof(T).GetProperties();
-            if (!File.Exists(fileName))
+            bool writeHeader = !File.Exists(fileName);
+
+            if (writeHeader && info.Length > 0)
             {
-                var file = File.Create(fileName);
-                file.Close();
-                foreach (var prop in typeof(T).GetProperties())
-                {
-                    header += prop.Name + separator;
-                }
-                header = header.Substring(0, header.Length - 1);
-                sb.AppendLine(header);
-                using (var sw = new StreamWriter(fileName))
-                {
-                    sw.Write(sb.ToString());
-                }
-            }
-            sb = new StringBuilder();
-            foreach (var obj in genericList)
-            {
-                sb = new StringBuilder();
-                var line = string.Empty;
+                var headerParts = new List<string>();
                 foreach (var prop in info)
                 {
-                    line += prop.GetValue(obj, null)?.ToString() + separator;
+                    headerParts.Add(prop.Name);
                 }
-                line = line.Substring(0, line.Length - 1);
-                sb.AppendLine(line);
-                using (var sw = new StreamWriter(fileName, true))
+                sb.AppendLine(string.Join(separator.ToString(), headerParts));
+            }
+
+            foreach (var obj in genericList)
+            {
+                var lineParts = new List<string>();
+                foreach (var prop in info)
                 {
-                    sw.Write(sb.ToString());
+                    lineParts.Add(prop.GetValue(obj, null)?.ToString() ?? string.Empty);
                 }
+                sb.AppendLine(string.Join(separator.ToString(), lineParts));
+            }
+
+            using (var sw = new StreamWriter(fileName, append: !writeHeader))
+            {
+                sw.Write(sb.ToString());
             }
         }
     }

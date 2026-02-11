@@ -114,14 +114,21 @@ namespace RTSP_Preview_WinForms
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            // We have to initialize the engine on start
-            Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.Enabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.Enabled = true;
-            Text = Text.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.Enabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.Enabled = true;
+                Text = Text.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            Text += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
+                Text += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -129,62 +136,69 @@ namespace RTSP_Preview_WinForms
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            CreateEngine();
-
-            if (onvifClient != null)
+            try
             {
-                onvifClient.Dispose();
-                onvifClient = null;
+                CreateEngine();
 
-                btONVIFConnect.Text = "Connect";
+                if (onvifClient != null)
+                {
+                    onvifClient.Dispose();
+                    onvifClient = null;
+
+                    btONVIFConnect.Text = "Connect";
+                }
+
+                mmLog.Clear();
+
+                var audioEnabled = cbIPAudioCapture.Checked;
+                var lowLatencyMode = cbLowLatencyMode.Checked;
+                _pipeline.Debug_Mode = cbDebugMode.Checked;
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+                var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, audioEnabled);
+
+                // Enable low latency mode if checkbox is checked
+                if (lowLatencyMode)
+                {
+                    rtsp.LowLatencyMode = true;
+                    mmLog.Text += "Low latency mode enabled (latency=80ms, no buffering)" + Environment.NewLine;
+                }
+
+                var info = rtsp.GetInfo();
+
+                if (info == null)
+                {
+                    MessageBox.Show(this, "Unable to get RTSP source info. Please, use the direct RTSP URL, not HTTP ONVIF");
+                    return;
+                }
+
+                _rtspSource = new RTSPSourceBlock(rtsp);
+
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+
+                // Disable sync for low latency mode to reduce display latency
+                if (lowLatencyMode)
+                {
+                    _videoRenderer.IsSync = false;
+                    mmLog.Text += "Video renderer sync disabled for low latency" + Environment.NewLine;
+                }
+
+                _pipeline.Connect(_rtspSource.VideoOutput, _videoRenderer.Input);
+
+                if (audioEnabled && info.AudioStreams.Count > 0)
+                {
+                    _audioRenderer = new AudioRendererBlock();
+                    _pipeline.Connect(_rtspSource.AudioOutput, _audioRenderer.Input);
+                }
+
+                await _pipeline.StartAsync();
+
+                tmRecording.Start();
             }
-
-            mmLog.Clear();
-
-            var audioEnabled = cbIPAudioCapture.Checked;
-            var lowLatencyMode = cbLowLatencyMode.Checked;
-            _pipeline.Debug_Mode = cbDebugMode.Checked;
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, audioEnabled);
-            
-            // Enable low latency mode if checkbox is checked
-            if (lowLatencyMode)
+            catch (Exception ex)
             {
-                rtsp.LowLatencyMode = true;
-                mmLog.Text += "Low latency mode enabled (latency=80ms, no buffering)" + Environment.NewLine;
+                Debug.WriteLine(ex);
             }
-            
-            var info = rtsp.GetInfo();
-
-            if (info == null)
-            {
-                MessageBox.Show(this, "Unable to get RTSP source info. Please, use the direct RTSP URL, not HTTP ONVIF");
-                return;
-            }
-
-            _rtspSource = new RTSPSourceBlock(rtsp);
-
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
-            
-            // Disable sync for low latency mode to reduce display latency
-            if (lowLatencyMode)
-            {
-                _videoRenderer.IsSync = false;
-                mmLog.Text += "Video renderer sync disabled for low latency" + Environment.NewLine;
-            }
-
-            _pipeline.Connect(_rtspSource.VideoOutput, _videoRenderer.Input);
-
-            if (audioEnabled && info.AudioStreams.Count > 0)
-            {
-                _audioRenderer = new AudioRendererBlock();
-                _pipeline.Connect(_rtspSource.AudioOutput, _audioRenderer.Input);
-            }
-
-            await _pipeline.StartAsync();
-
-            tmRecording.Start();
         }
 
         /// <summary>
@@ -192,11 +206,18 @@ namespace RTSP_Preview_WinForms
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            tmRecording.Stop();
+            try
+            {
+                tmRecording.Stop();
 
-            await _pipeline.StopAsync();
-            await _pipeline.DisposeAsync();
-            _pipeline = null;
+                await _pipeline.StopAsync();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -236,79 +257,86 @@ namespace RTSP_Preview_WinForms
         /// </summary>
         private async void btONVIFConnect_Click(object sender, EventArgs e)
         {
-            if (btONVIFConnect.Text == "Connect")
+            try
             {
-                try
+                if (btONVIFConnect.Text == "Connect")
                 {
-                    btONVIFConnect.Enabled = false;
-                    btONVIFConnect.Text = "Connecting";
+                    try
+                    {
+                        btONVIFConnect.Enabled = false;
+                        btONVIFConnect.Text = "Connecting";
+
+                        if (onvifClient != null)
+                        {
+                            onvifClient.Dispose();
+                            onvifClient = null;
+                        }
+
+                        if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
+                        {
+                            MessageBox.Show(this, "Please specify IP camera user name and password.");
+                            return;
+                        }
+
+                        onvifClient = new ONVIFClientX();
+                        var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
+                        if (!result)
+                        {
+                            onvifClient = null;
+                            MessageBox.Show(this, "Unable to connect to ONVIF camera.");
+                            return;
+                        }
+
+                        lbONVIFCameraInfo.Text = $"Camera name {onvifClient.DeviceInformation?.Model}, serial number {onvifClient.DeviceInformation?.SerialNumber}";
+
+                        cbONVIFProfile.Items.Clear();
+                        var profiles = await onvifClient.GetProfilesAsync();
+                        if (profiles != null && profiles.Length > 0)
+                        {
+                            foreach (var profile in profiles)
+                            {
+                                cbONVIFProfile.Items.Add($"{profile.Name}");
+                            }
+
+                            if (cbONVIFProfile.Items.Count > 0)
+                            {
+                                cbONVIFProfile.SelectedIndex = 0;
+                            }
+
+                            var mediaUri = await onvifClient.GetStreamUriAsync(profiles[0]);
+                            if (mediaUri != null)
+                            {
+                                edONVIFLiveVideoURL.Text = cbIPURL.Text = mediaUri.Uri;
+                            }
+                        }
+
+                        edIPLogin.Text = edONVIFLogin.Text;
+                        edIPPassword.Text = edONVIFPassword.Text;
+
+                        btONVIFConnect.Text = "Disconnect";
+                    }
+                    catch (Exception ex)
+                    {
+                        Log($"ONVIF connection error: {ex.Message}");
+                        btONVIFConnect.Text = "Connect";
+                    }
+
+                    btONVIFConnect.Enabled = true;
+                }
+                else
+                {
+                    btONVIFConnect.Text = "Connect";
 
                     if (onvifClient != null)
                     {
                         onvifClient.Dispose();
                         onvifClient = null;
                     }
-
-                    if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
-                    {
-                        MessageBox.Show(this, "Please specify IP camera user name and password.");
-                        return;
-                    }
-
-                    onvifClient = new ONVIFClientX();
-                    var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
-                    if (!result)
-                    {
-                        onvifClient = null;
-                        MessageBox.Show(this, "Unable to connect to ONVIF camera.");
-                        return;
-                    }
-
-                    lbONVIFCameraInfo.Text = $"Camera name {onvifClient.DeviceInformation?.Model}, serial number {onvifClient.DeviceInformation?.SerialNumber}";
-
-                    cbONVIFProfile.Items.Clear();
-                    var profiles = await onvifClient.GetProfilesAsync();
-                    if (profiles != null && profiles.Length > 0)
-                    {
-                        foreach (var profile in profiles)
-                        {
-                            cbONVIFProfile.Items.Add($"{profile.Name}");
-                        }
-
-                        if (cbONVIFProfile.Items.Count > 0)
-                        {
-                            cbONVIFProfile.SelectedIndex = 0;
-                        }
-
-                        var mediaUri = await onvifClient.GetStreamUriAsync(profiles[0]);
-                        if (mediaUri != null)
-                        {
-                            edONVIFLiveVideoURL.Text = cbIPURL.Text = mediaUri.Uri;
-                        }
-                    }
-
-                    edIPLogin.Text = edONVIFLogin.Text;
-                    edIPPassword.Text = edONVIFPassword.Text;
-
-                    btONVIFConnect.Text = "Disconnect";
                 }
-                catch (Exception ex)
-                {
-                    Log($"ONVIF connection error: {ex.Message}");
-                    btONVIFConnect.Text = "Connect";
-                }
-
-                btONVIFConnect.Enabled = true;
             }
-            else
+            catch (Exception ex)
             {
-                btONVIFConnect.Text = "Connect";
-
-                if (onvifClient != null)
-                {
-                    onvifClient.Dispose();
-                    onvifClient = null;
-                }
+                Debug.WriteLine(ex);
             }
         }
 
@@ -317,12 +345,19 @@ namespace RTSP_Preview_WinForms
         /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
-            }
+                if (_pipeline == null)
+                {
+                    return;
+                }
 
-            await _pipeline.ResumeAsync();
+                await _pipeline.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -330,12 +365,19 @@ namespace RTSP_Preview_WinForms
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
-            }
+                if (_pipeline == null)
+                {
+                    return;
+                }
 
-            await _pipeline.PauseAsync();
+                await _pipeline.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -417,30 +459,37 @@ namespace RTSP_Preview_WinForms
         /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // If already processed closing, allow the form to close
-            if (_isClosing)
+            try
             {
-                return;
+                // If already processed closing, allow the form to close
+                if (_isClosing)
+                {
+                    return;
+                }
+
+                // Prevent the form from closing until cleanup is complete
+                e.Cancel = true;
+                _isClosing = true;
+
+                tmRecording.Stop();
+
+                await DestroyEngineAsync();
+
+                if (onvifClient != null)
+                {
+                    onvifClient.Dispose();
+                    onvifClient = null;
+                }
+
+                VisioForgeX.DestroySDK();
+
+                // Now allow the form to close
+                Application.Exit();
             }
-
-            // Prevent the form from closing until cleanup is complete
-            e.Cancel = true;
-            _isClosing = true;
-
-            tmRecording.Stop();
-
-            await DestroyEngineAsync();
-
-            if (onvifClient != null)
+            catch (Exception ex)
             {
-                onvifClient.Dispose();
-                onvifClient = null;
+                Debug.WriteLine(ex);
             }
-
-            VisioForgeX.DestroySDK();
-
-            // Now allow the form to close
-            Application.Exit();
         }
 
         /// <summary>

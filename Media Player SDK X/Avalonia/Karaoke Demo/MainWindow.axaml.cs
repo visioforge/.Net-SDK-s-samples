@@ -4,6 +4,7 @@ using Avalonia.Diagnostics;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
@@ -19,6 +20,7 @@ using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Libs.GStreamer;
+using Avalonia.Platform.Storage;
 
 namespace KaraokeDemoAMB;
 
@@ -179,35 +181,42 @@ public partial class MainWindow : Window
     /// </summary>
     private async void MainWindow_Activated(object sender, EventArgs e)
     {
-        if (_initialized)
+        try
         {
-            return;
+            if (_initialized)
+            {
+                return;
+            }
+
+            _initialized = true;
+
+            InitControls();
+
+            _player = new MediaPlayerCoreX(VideoView1);
+            _player.OnError += Player_OnError;
+            _player.OnStop += Player_OnStop;
+
+            // Load CDG plugin manually after GStreamer is initialized
+            LoadCDGPlugin();
+
+            Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
+            _player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+            // Populate audio output devices
+            var audioOutputs = await _player.Audio_OutputDevicesAsync(_audioOutputDeviceAPI);
+            foreach (var item in audioOutputs)
+            {
+                AudioOutputDevices.Add(item.DisplayName);
+            }
+
+            if (AudioOutputDevices.Count > 0)
+            {
+                cbAudioOutputDevice.SelectedIndex = 0;
+            }
         }
-
-        _initialized = true;
-
-        InitControls();
-
-        _player = new MediaPlayerCoreX(VideoView1);
-        _player.OnError += Player_OnError;
-        _player.OnStop += Player_OnStop;
-
-        // Load CDG plugin manually after GStreamer is initialized
-        LoadCDGPlugin();
-
-        Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
-        _player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-        // Populate audio output devices
-        var audioOutputs = await _player.Audio_OutputDevicesAsync(_audioOutputDeviceAPI);
-        foreach (var item in audioOutputs)
+        catch (Exception ex)
         {
-            AudioOutputDevices.Add(item.DisplayName);
-        }
-
-        if (AudioOutputDevices.Count > 0)
-        {
-            cbAudioOutputDevice.SelectedIndex = 0;
+            System.Diagnostics.Debug.WriteLine($"MainWindow_Activated error: {ex.Message}");
         }
     }
 
@@ -228,7 +237,7 @@ public partial class MainWindow : Window
             edAudioFilename.IsEnabled = false;
             btSelectAudioFile.IsEnabled = false;
             lbAudioLabel.Opacity = 0.5;
-            edFilename.Text = "c:\\1.zip";
+            edFilename.Text = string.Empty;
         }
         else
         {
@@ -237,8 +246,8 @@ public partial class MainWindow : Window
             edAudioFilename.IsEnabled = true;
             btSelectAudioFile.IsEnabled = true;
             lbAudioLabel.Opacity = 1.0;
-            edFilename.Text = "c:\\1.cdg";
-            edAudioFilename.Text = "c:\\1.mp3";
+            edFilename.Text = string.Empty;
+            edAudioFilename.Text = string.Empty;
         }
     }
 
@@ -247,24 +256,35 @@ public partial class MainWindow : Window
     /// </summary>
     private async void btSelectFile_Click(object sender, RoutedEventArgs e)
     {
-#pragma warning disable CS0618 // Type or member is obsolete
-        var ofd = new OpenFileDialog();
-#pragma warning restore CS0618
+        try
+        {
+            var fileTypes = new List<FilePickerFileType>();
 
-        if (rbZipMode.IsChecked == true)
-        {
-            ofd.Filters.Add(new FileDialogFilter { Name = "ZIP archives", Extensions = { "zip" } });
-        }
-        else
-        {
-            ofd.Filters.Add(new FileDialogFilter { Name = "CDG files", Extensions = { "cdg" } });
-        }
-        ofd.Filters.Add(new FileDialogFilter { Name = "All files", Extensions = { "*" } });
+            if (rbZipMode.IsChecked == true)
+            {
+                fileTypes.Add(new FilePickerFileType("ZIP archives") { Patterns = new[] { "*.zip" } });
+            }
+            else
+            {
+                fileTypes.Add(new FilePickerFileType("CDG files") { Patterns = new[] { "*.cdg" } });
+            }
+            fileTypes.Add(new FilePickerFileType("All files") { Patterns = new[] { "*" } });
 
-        var files = await ofd.ShowAsync(this);
-        if (files != null && files.Length > 0)
+            var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = "Select file",
+                AllowMultiple = false,
+                FileTypeFilter = fileTypes
+            });
+
+            if (files != null && files.Count > 0)
+            {
+                edFilename.Text = files[0].Path.LocalPath;
+            }
+        }
+        catch (Exception ex)
         {
-            edFilename.Text = files[0];
+            System.Diagnostics.Debug.WriteLine($"Select file error: {ex.Message}");
         }
     }
 
@@ -273,17 +293,29 @@ public partial class MainWindow : Window
     /// </summary>
     private async void btSelectAudioFile_Click(object sender, RoutedEventArgs e)
     {
-#pragma warning disable CS0618 // Type or member is obsolete
-        var ofd = new OpenFileDialog();
-#pragma warning restore CS0618
-
-        ofd.Filters.Add(new FileDialogFilter { Name = "Audio files", Extensions = { "mp3", "wav", "ogg", "flac", "m4a", "aac" } });
-        ofd.Filters.Add(new FileDialogFilter { Name = "All files", Extensions = { "*" } });
-
-        var files = await ofd.ShowAsync(this);
-        if (files != null && files.Length > 0)
+        try
         {
-            edAudioFilename.Text = files[0];
+            var fileTypes = new List<FilePickerFileType>
+            {
+                new FilePickerFileType("Audio files") { Patterns = new[] { "*.mp3", "*.wav", "*.ogg", "*.flac", "*.m4a", "*.aac" } },
+                new FilePickerFileType("All files") { Patterns = new[] { "*" } }
+            };
+
+            var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = "Select audio file",
+                AllowMultiple = false,
+                FileTypeFilter = fileTypes
+            });
+
+            if (files != null && files.Count > 0)
+            {
+                edAudioFilename.Text = files[0].Path.LocalPath;
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Select audio file error: {ex.Message}");
         }
     }
 
@@ -292,44 +324,51 @@ public partial class MainWindow : Window
     /// </summary>
     private async void btStart_Click(object sender, RoutedEventArgs e)
     {
-        mmError.Text = string.Empty;
-
-        _player.Audio_Play = true;
-
-        var audioOutputs = await _player.Audio_OutputDevicesAsync(_audioOutputDeviceAPI);
-        var audioOutputDevice = audioOutputs.FirstOrDefault(device => device.DisplayName == cbAudioOutputDevice.SelectedItem?.ToString());
-        if (audioOutputDevice != null)
+        try
         {
-            _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+            mmError.Text = string.Empty;
+
+            _player.Audio_Play = true;
+
+            var audioOutputs = await _player.Audio_OutputDevicesAsync(_audioOutputDeviceAPI);
+            var audioOutputDevice = audioOutputs.FirstOrDefault(device => device.DisplayName == cbAudioOutputDevice.SelectedItem?.ToString());
+            if (audioOutputDevice != null)
+            {
+                _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+            }
+
+            _player.Debug_Mode = cbDebugMode.IsChecked == true;
+
+            // Create CDG source settings based on input mode
+            if (rbZipMode.IsChecked == true)
+            {
+                // ZIP archive containing CDG and audio files
+                var zipFile = edFilename.Text;
+                _currentSettings = new CDGSourceSettings(zipFile);
+            }
+            else
+            {
+                // Separate CDG and audio files
+                var cdgFile = edFilename.Text;
+                var audioFile = edAudioFilename.Text;
+                _currentSettings = new CDGSourceSettings(cdgFile, audioFile);
+            }
+
+            // Set pitch from slider (semitones) and enable runtime pitch control
+            _currentSettings.EnablePitchShifting = true;
+            _currentSettings.PitchSemitones = (int)tbPitch.Value;
+
+            await _player.OpenAsync(_currentSettings);
+            await _player.PlayAsync();
+
+            _player.Audio_OutputDevice_Volume = tbVolume.Value / 100.0;
+
+            _tmPosition.Start();
         }
-
-        _player.Debug_Mode = cbDebugMode.IsChecked == true;
-
-        // Create CDG source settings based on input mode
-        if (rbZipMode.IsChecked == true)
+        catch (Exception ex)
         {
-            // ZIP archive containing CDG and audio files
-            var zipFile = edFilename.Text;
-            _currentSettings = new CDGSourceSettings(zipFile);
+            mmError.Text += $"Start error: {ex.Message}{Environment.NewLine}";
         }
-        else
-        {
-            // Separate CDG and audio files
-            var cdgFile = edFilename.Text;
-            var audioFile = edAudioFilename.Text;
-            _currentSettings = new CDGSourceSettings(cdgFile, audioFile);
-        }
-
-        // Set pitch from slider (semitones) and enable runtime pitch control
-        _currentSettings.EnablePitchShifting = true;
-        _currentSettings.PitchSemitones = (int)tbPitch.Value;
-
-        await _player.OpenAsync(_currentSettings);
-        await _player.PlayAsync();
-
-        _player.Audio_OutputDevice_Volume = tbVolume.Value / 100.0;
-
-        _tmPosition.Start();
     }
 
     /// <summary>
@@ -337,7 +376,17 @@ public partial class MainWindow : Window
     /// </summary>
     private async void btResume_Click(object sender, RoutedEventArgs e)
     {
-        await _player.ResumeAsync();
+        try
+        {
+            if (_player != null)
+            {
+                await _player.ResumeAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Resume error: {ex.Message}");
+        }
     }
 
     /// <summary>
@@ -345,7 +394,17 @@ public partial class MainWindow : Window
     /// </summary>
     private async void btPause_Click(object sender, RoutedEventArgs e)
     {
-        await _player.PauseAsync();
+        try
+        {
+            if (_player != null)
+            {
+                await _player.PauseAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Pause error: {ex.Message}");
+        }
     }
 
     /// <summary>
@@ -353,14 +412,24 @@ public partial class MainWindow : Window
     /// </summary>
     private async void btStop_Click(object sender, RoutedEventArgs e)
     {
-        _tmPosition.Stop();
+        try
+        {
+            _tmPosition.Stop();
 
-        await _player.StopAsync();
+            if (_player != null)
+            {
+                await _player.StopAsync();
+            }
 
-        _currentSettings = null;
+            _currentSettings = null;
 
-        tbTimeline.Value = 0;
-        lbTime.Text = "00:00:00 | 00:00:00";
+            tbTimeline.Value = 0;
+            lbTime.Text = "00:00:00 | 00:00:00";
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Stop error: {ex.Message}");
+        }
     }
 
     /// <summary>
@@ -368,9 +437,16 @@ public partial class MainWindow : Window
     /// </summary>
     private async void tbTimeline_Scroll()
     {
-        if (_tbTimelineApplyingValue && _player != null)
+        try
         {
-            await _player.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+            if (_tbTimelineApplyingValue && _player != null)
+            {
+                await _player.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Seek error: {ex.Message}");
         }
     }
 
@@ -470,7 +546,7 @@ public partial class MainWindow : Window
         {
             _player.OnError -= Player_OnError;
             _player.OnStop -= Player_OnStop;
-            Thread.Sleep(500);
+            await Task.Delay(500);
             await _player.DisposeAsync();
             _player = null;
         }
@@ -481,17 +557,24 @@ public partial class MainWindow : Window
     /// </summary>
     private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
-        if (_player == null)
+        try
         {
-            return;
+            if (_player == null)
+            {
+                return;
+            }
+
+            _tmPosition?.Stop();
+            _tmPosition?.Dispose();
+
+            await _player.StopAsync();
+            await DestroyEngineAsync();
+
+            VisioForgeX.DestroySDK();
         }
-
-        _tmPosition?.Stop();
-        _tmPosition?.Dispose();
-
-        _player.Stop();
-        await DestroyEngineAsync();
-
-        VisioForgeX.DestroySDK();
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Window closing error: {ex.Message}");
+        }
     }
 }

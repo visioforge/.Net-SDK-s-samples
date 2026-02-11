@@ -197,16 +197,23 @@ namespace ScreenCaptureMB
         /// </summary>
         private async void Window_Destroying(object? sender, EventArgs e)
         {
-            if (_pipeline != null)
+            try
             {
-                _pipeline.OnError -= _player_OnError;
-                await _pipeline.StopAsync();
+                if (_pipeline != null)
+                {
+                    _pipeline.OnError -= _player_OnError;
+                    await _pipeline.StopAsync();
 
-                _pipeline.Dispose();
-                _pipeline = null;
+                    _pipeline.Dispose();
+                    _pipeline = null;
+                }
+
+                VisioForgeX.DestroySDK();
             }
-
-            VisioForgeX.DestroySDK();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -214,10 +221,17 @@ namespace ScreenCaptureMB
         /// </summary>
         private async void OnStop(object? sender, EventArgs e)
         {
-            if (_pipeline != null)
+            try
             {
-                _pipeline.OnError -= _player_OnError;
-                await _pipeline.StopAsync();
+                if (_pipeline != null)
+                {
+                    _pipeline.OnError -= _player_OnError;
+                    await _pipeline.StopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -257,26 +271,33 @@ namespace ScreenCaptureMB
         /// </summary>
         private async void tmPosition_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
-            if (_pipeline == null)
-            {
-                return;
-            }
-
             try
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
+                if (_pipeline == null)
                 {
-                    if (_pipeline == null)
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    lbDuration.Text = $"{(await _pipeline.Position_GetAsync()).ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
-                });
+                try
+                {
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        if (_pipeline == null)
+                        {
+                            return;
+                        }
+
+                        lbDuration.Text = $"{(await _pipeline.Position_GetAsync()).ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                    });
+                }
+                catch (Exception exception)
+                {
+                    System.Diagnostics.Debug.WriteLine(exception);
+                }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(exception);
+                Debug.WriteLine(ex);
             }
         }
 
@@ -285,11 +306,18 @@ namespace ScreenCaptureMB
         /// </summary>
         private async void btStart_Clicked(object? sender, EventArgs e)
         {
-            await CreateEngineAsync();
+            try
+            {
+                await CreateEngineAsync();
 
-            await _pipeline.StartAsync();
+                await _pipeline.StartAsync();
 
-            _tmPosition.Start();
+                _tmPosition.Start();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -297,18 +325,25 @@ namespace ScreenCaptureMB
         /// </summary>
         private async void btStop_Clicked(object? sender, EventArgs e)
         {
-#if __IOS__ && !__MACCATALYST__
-            var filename = _mp4Sink.GetFilenameOrURL();            
-#endif
+            try
+            {
+    #if __IOS__ && !__MACCATALYST__
+                var filename = _mp4Sink.GetFilenameOrURL();            
+    #endif
 
-            await StopAllAsync();
+                await StopAllAsync();
 
-            // save video to iOS photo library
-#if __IOS__ && !__MACCATALYST__
-            AddVideoToPhotosLibrary(filename);
-#endif            
+                // save video to iOS photo library
+    #if __IOS__ && !__MACCATALYST__
+                AddVideoToPhotosLibrary(filename);
+    #endif            
 
-            lbFilename.IsVisible = false;
+                lbFilename.IsVisible = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

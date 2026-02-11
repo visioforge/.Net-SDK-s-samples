@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -102,24 +102,31 @@ namespace AlliedVision_Source_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            var devices = await DeviceEnumerator.Shared.AlliedVisionSourcesAsync();
-            var camera = devices.First(x => x.Name == cbCamera.Text);
+            try
+            {
+                var devices = await DeviceEnumerator.Shared.AlliedVisionSourcesAsync();
+                var camera = devices.First(x => x.Name == cbCamera.Text);
 
-            //camera.ReadFeatures(out var features);
-            //camera.ReadInfo();
+                //camera.ReadFeatures(out var features);
+                //camera.ReadInfo();
 
-            CreateEngine();
+                CreateEngine();
 
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            _source = new AlliedVisionSourceBlock(new AlliedVisionSourceSettings(camera, 640, 480));
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+                _source = new AlliedVisionSourceBlock(new AlliedVisionSourceSettings(camera, 640, 480));
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
-            _pipeline.Connect(_source.Output, _videoRenderer.Input);
+                _pipeline.Connect(_source.Output, _videoRenderer.Input);
 
-            await _pipeline.StartAsync();
+                await _pipeline.StartAsync();
 
-            tmRecording.Start();
+                tmRecording.Start();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -127,9 +134,16 @@ namespace AlliedVision_Source_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            tmRecording.Stop();
+            try
+            {
+                tmRecording.Stop();
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -137,28 +151,35 @@ namespace AlliedVision_Source_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-            CreateEngine();
-
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-
-            tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
-
-            var devices = await DeviceEnumerator.Shared.AlliedVisionSourcesAsync();
-            foreach (var device in devices)
+            try
             {
-                cbCamera.Items.Add(device.Name);
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+                CreateEngine();
+
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+
+                tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+
+                var devices = await DeviceEnumerator.Shared.AlliedVisionSourcesAsync();
+                foreach (var device in devices)
+                {
+                    cbCamera.Items.Add(device.Name);
+                }
+
+                if (cbCamera.Items.Count > 0)
+                {
+                    cbCamera.SelectedIndex = 0;
+                }
             }
-
-            if (cbCamera.Items.Count > 0)
+            catch (Exception ex)
             {
-                cbCamera.SelectedIndex = 0;
+                Debug.WriteLine(ex);
             }
         }
 

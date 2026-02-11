@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -25,6 +25,7 @@ using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.VideoCapture;
+using System.Diagnostics;
 
 namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 {
@@ -89,49 +90,56 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
-
-            _timer = new System.Timers.Timer(500);
-            _timer.Elapsed += _timer_Elapsed;
-
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += Pipeline_OnError;
-
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-
-            await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
-
-            VideoCapture1 = await VideoCaptureCore.CreateAsync();
-            VideoCapture1.OnError += VideoCapture1_OnError;
-
-            foreach (var device in VideoCapture1.Video_CaptureDevices())
+            try
             {
-                cbVideoInput.Items.Add(device.Name);
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+                DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+
+                _timer = new System.Timers.Timer(500);
+                _timer.Elapsed += _timer_Elapsed;
+
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnError += Pipeline_OnError;
+
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+
+                await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
+
+                VideoCapture1 = await VideoCaptureCore.CreateAsync();
+                VideoCapture1.OnError += VideoCapture1_OnError;
+
+                foreach (var device in VideoCapture1.Video_CaptureDevices())
+                {
+                    cbVideoInput.Items.Add(device.Name);
+                }
+
+                if (cbVideoInput.Items.Count > 0)
+                {
+                    cbVideoInput.SelectedIndex = 0;
+                }
+
+                cbVideoInput_SelectionChanged(null, null);
+
+                foreach (var device in VideoCapture1.Audio_CaptureDevices())
+                {
+                    cbAudioInput.Items.Add(device.Name);
+                }
+
+                if (cbAudioInput.Items.Count > 0)
+                {
+                    cbAudioInput.SelectedIndex = 0;
+                    cbAudioInput_SelectionChanged(null, null);
+                }
             }
-
-            if (cbVideoInput.Items.Count > 0)
+            catch (Exception ex)
             {
-                cbVideoInput.SelectedIndex = 0;
-            }
-
-            cbVideoInput_SelectionChanged(null, null);
-
-            foreach (var device in VideoCapture1.Audio_CaptureDevices())
-            {
-                cbAudioInput.Items.Add(device.Name);
-            }
-
-            if (cbAudioInput.Items.Count > 0)
-            {
-                cbAudioInput.SelectedIndex = 0;
-                cbAudioInput_SelectionChanged(null, null);
+                Debug.WriteLine(ex);
             }
         }
 
@@ -204,90 +212,97 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            if (cbVideoFrameRate.SelectedIndex == -1)
+            try
             {
-                MessageBox.Show("The frame rate should be specified.");
-                return;
+                if (cbVideoFrameRate.SelectedIndex == -1)
+                {
+                    MessageBox.Show("The frame rate should be specified.");
+                    return;
+                }
+
+                _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
+                _pipeline.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+                mmLog.Clear();
+
+                if (cbVideoInput.SelectedIndex < 0)
+                {
+                    MessageBox.Show(this, "Select video input device");
+                    return;
+                }
+
+                // Configure DirectShow video/audio source
+                VideoCapture1.Video_Sample_Grabber_Enabled = true;
+
+                VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
+                VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+                // Set NULL audio output, because we don't need real audio output but need to get audio frames in sample grabber    
+                VideoCapture1.Audio_PlayAudio = true;
+                VideoCapture1.Audio_OutputDevice = "NULL";
+                VideoCapture1.Audio_Sample_Grabber_Enabled = true;
+
+                // Set video and audio devices
+                VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInput.Text);
+                VideoCapture1.Video_CaptureDevice.Format = cbVideoFormat.Text;
+                VideoCapture1.Video_CaptureDevice.Format_UseBest = false;
+
+                VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInput.Text);
+                VideoCapture1.Audio_CaptureDevice.Format = cbAudioFormat.Text;
+                VideoCapture1.Audio_CaptureDevice.Format_UseBest = false;
+
+                var frameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                VideoCapture1.Video_CaptureDevice.FrameRate = frameRate;
+
+                VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
+
+                // Disable video renderer
+                VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
+
+                // Add video and audio frame callbacks
+                VideoCapture1.OnVideoFrameBuffer += VideoCapture1_OnVideoFrameBuffer;
+                VideoCapture1.OnAudioFrameBuffer += VideoCapture1_OnAudioFrameBuffer;
+
+                // Configure Media Blocks      
+                ParseVideoFormat(cbVideoFormat.Text, out int width, out int height);
+                var videoSettings = new PushVideoSourceSettings(width, height, frameRate, VideoFormatX.BGR);
+                _videoSource = new PushVideoSourceBlock(videoSettings); //new PushVideoSourceBlock(videoSettings);
+
+                ParseAudioFormat(cbAudioFormat.Text, out int sampleRate, out int channels, out int bps);
+                if (bps != 16)
+                {
+                    MessageBox.Show("Only 16-bit audio is supported in this sample to make it simpler.");
+                    return;
+                }
+
+                var audioSettings = new PushAudioSourceSettings(isLive: true, sampleRate, channels, AudioFormatX.S16LE);
+                audioSettings.DoTimestamp = true;
+                _audioSource = new PushAudioSourceBlock(audioSettings);
+
+                // Video renderer
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+
+                // Audio renderer
+                _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.Name == cbAudioOutput.Text).First()) { IsSync = false };
+
+                // Connect all          
+                _pipeline.Connect(_audioSource.Output, _audioRenderer.Input);
+                _pipeline.Connect(_videoSource.Output, _videoRenderer.Input);
+
+                // Start DirectShow part first
+                await VideoCapture1.StartAsync();
+
+                await Task.Delay(500); // give some time to DirectShow to start
+
+                // Start Media Blocks part
+                await _pipeline.StartAsync();
+
+                _timer.Start();
             }
-
-            _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
-            _pipeline.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            mmLog.Clear();
-
-            if (cbVideoInput.SelectedIndex < 0)
+            catch (Exception ex)
             {
-                MessageBox.Show(this, "Select video input device");
-                return;
+                Debug.WriteLine(ex);
             }
-
-            // Configure DirectShow video/audio source
-            VideoCapture1.Video_Sample_Grabber_Enabled = true;
-
-            VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
-            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            // Set NULL audio output, because we don't need real audio output but need to get audio frames in sample grabber    
-            VideoCapture1.Audio_PlayAudio = true;
-            VideoCapture1.Audio_OutputDevice = "NULL";
-            VideoCapture1.Audio_Sample_Grabber_Enabled = true;
-
-            // Set video and audio devices
-            VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInput.Text);
-            VideoCapture1.Video_CaptureDevice.Format = cbVideoFormat.Text;
-            VideoCapture1.Video_CaptureDevice.Format_UseBest = false;
-
-            VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInput.Text);
-            VideoCapture1.Audio_CaptureDevice.Format = cbAudioFormat.Text;
-            VideoCapture1.Audio_CaptureDevice.Format_UseBest = false;
-
-            var frameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
-            VideoCapture1.Video_CaptureDevice.FrameRate = frameRate;
-
-            VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
-
-            // Disable video renderer
-            VideoCapture1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
-
-            // Add video and audio frame callbacks
-            VideoCapture1.OnVideoFrameBuffer += VideoCapture1_OnVideoFrameBuffer;
-            VideoCapture1.OnAudioFrameBuffer += VideoCapture1_OnAudioFrameBuffer;
-
-            // Configure Media Blocks      
-            ParseVideoFormat(cbVideoFormat.Text, out int width, out int height);
-            var videoSettings = new PushVideoSourceSettings(width, height, frameRate, VideoFormatX.BGR);
-            _videoSource = new PushVideoSourceBlock(videoSettings); //new PushVideoSourceBlock(videoSettings);
-
-            ParseAudioFormat(cbAudioFormat.Text, out int sampleRate, out int channels, out int bps);
-            if (bps != 16)
-            {
-                MessageBox.Show("Only 16-bit audio is supported in this sample to make it simpler.");
-                return;
-            }
-
-            var audioSettings = new PushAudioSourceSettings(isLive: true, sampleRate, channels, AudioFormatX.S16LE);
-            audioSettings.DoTimestamp = true;
-            _audioSource = new PushAudioSourceBlock(audioSettings);
-
-            // Video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
-
-            // Audio renderer
-            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.Name == cbAudioOutput.Text).First()) { IsSync = false };
-            
-            // Connect all          
-            _pipeline.Connect(_audioSource.Output, _audioRenderer.Input);
-            _pipeline.Connect(_videoSource.Output, _videoRenderer.Input);
-
-            // Start DirectShow part first
-            await VideoCapture1.StartAsync();
-
-            await Task.Delay(500); // give some time to DirectShow to start
-
-            // Start Media Blocks part
-            await _pipeline.StartAsync();
-
-            _timer.Start();
         }
 
         /// <summary>
@@ -311,15 +326,22 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _timer.Stop();
+            try
+            {
+                _timer.Stop();
 
-            await VideoCapture1.StopAsync();
+                await VideoCapture1.StopAsync();
 
-            await _pipeline?.StopAsync();
+                await _pipeline?.StopAsync();
 
-            _pipeline?.ClearBlocks();
+                _pipeline?.ClearBlocks();
 
-            VideoView1.CallRefresh();
+                VideoView1.CallRefresh();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }      
 
         /// <summary>
@@ -327,12 +349,19 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
         /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            var position = await _pipeline.Position_GetAsync();
-
-            Dispatcher.Invoke(() =>
+            try
             {
-                lbTime.Text = position.ToString("hh\\:mm\\:ss");
-            });           
+                var position = await _pipeline.Position_GetAsync();
+
+                Dispatcher.Invoke(() =>
+                {
+                    lbTime.Text = position.ToString("hh\\:mm\\:ss");
+                });           
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -340,27 +369,34 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _timer.Stop();
-
-            if (VideoCapture1 != null)
+            try
             {
-                VideoCapture1.OnError -= VideoCapture1_OnError;
+                _timer.Stop();
 
-                VideoCapture1.Dispose();
-                VideoCapture1 = null;
+                if (VideoCapture1 != null)
+                {
+                    VideoCapture1.OnError -= VideoCapture1_OnError;
+
+                    VideoCapture1.Dispose();
+                    VideoCapture1 = null;
+                }
+
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync();
+
+                    _pipeline.OnError -= Pipeline_OnError;
+
+                    await _pipeline.DisposeAsync();
+                    _pipeline = null;
+                }
+
+                VisioForgeX.DestroySDK();
             }
-
-            if (_pipeline != null)
+            catch (Exception ex)
             {
-                await _pipeline.StopAsync();
-
-                _pipeline.OnError -= Pipeline_OnError;
-
-                await _pipeline.DisposeAsync();
-                _pipeline = null;
+                Debug.WriteLine(ex);
             }
-
-            VisioForgeX.DestroySDK();
         }
 
         /// <summary>

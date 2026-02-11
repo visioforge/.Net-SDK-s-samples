@@ -42,6 +42,7 @@ namespace Video_From_Images_CLI
 
                 Console.Write("Press any key to exit.");
                 Console.ReadKey();
+                return;
             }
 
             //var str = "-i c:\\samples\\pics\\ -o output_file.mp4 -r 1920:1080 -d 2000 -f mp4";
@@ -77,6 +78,26 @@ namespace Video_From_Images_CLI
                 return;
             }
 
+            // Validate resolution before allocating resources
+            var res = options.Resolution.Split(':');
+            if (res.Length != 2)
+            {
+                Console.WriteLine("Invalid resolution format. Use 'width:height' (e.g., '1920:1080').");
+                return;
+            }
+
+            if (!int.TryParse(res[0], out int videoWidth) || !int.TryParse(res[1], out int videoHeight))
+            {
+                Console.WriteLine("Invalid resolution values. Width and height must be integers.");
+                return;
+            }
+
+            if (videoWidth <= 0 || videoHeight <= 0)
+            {
+                Console.WriteLine("Invalid resolution values. Width and height must be positive.");
+                return;
+            }
+
             if (File.Exists(options.OutputFile))
             {
                 File.Delete(options.OutputFile);
@@ -85,18 +106,14 @@ namespace Video_From_Images_CLI
             var videoEdit = new VisioForge.Core.VideoEdit.VideoEditCore();
 
             int insertTime = 0;
-
-            var res = options.Resolution.Split(':');
-            int videoWidth = Convert.ToInt32(res[0]);
-            int videoHeight = Convert.ToInt32(res[1]);
+            int imageDuration = options.Duration > 0 ? options.Duration : 2000;
 
             foreach (string img in files)
             {
-                videoEdit.Input_AddImageFile(img, TimeSpan.FromMilliseconds(2000), TimeSpan.FromMilliseconds(insertTime), VideoEditStretchMode.Letterbox, 0, videoWidth, videoHeight);
-                insertTime += 2000;
+                videoEdit.Input_AddImageFile(img, TimeSpan.FromMilliseconds(imageDuration), TimeSpan.FromMilliseconds(insertTime), VideoEditStretchMode.Letterbox, 0, videoWidth, videoHeight);
+                insertTime += imageDuration;
             }
 
-            videoEdit.Video_Effects_Clear();
             videoEdit.Mode = VideoEditMode.Convert;
 
             videoEdit.Video_Resize = true;

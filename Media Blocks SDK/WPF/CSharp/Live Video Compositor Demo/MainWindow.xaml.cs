@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Windows;
 
@@ -28,6 +28,7 @@ using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X;
 using VisioForge.Core.Helpers;
 using VisioForge.Core.GStreamer;
+using System.Diagnostics;
 
 namespace Live_Video_Compositor_Demo
 {
@@ -68,6 +69,24 @@ namespace Live_Video_Compositor_Demo
             }));
         }
 
+        private void Compositor_OnAudioVUMeter(object sender, VUMeterXEventArgs e)
+        {
+            Dispatcher.BeginInvoke((Action)(() =>
+            {
+                if (e.MeterData == null || e.MeterData.ChannelsCount == 0)
+                    return;
+
+                volumeMeterL.Amplitude = (float)e.MeterData.Peak[0];
+                volumeMeterL.Update();
+
+                if (e.MeterData.ChannelsCount > 1)
+                {
+                    volumeMeterR.Amplitude = (float)e.MeterData.Peak[1];
+                    volumeMeterR.Update();
+                }
+            }));
+        }
+
         /// <summary>
         /// Create engine.
         /// </summary>
@@ -80,6 +99,7 @@ namespace Live_Video_Compositor_Demo
 
             _compositor = new LiveVideoCompositor(settings);
             _compositor.OnError += Compositor_OnError;
+            _compositor.OnAudioVUMeter += Compositor_OnAudioVUMeter;
         }
 
         /// <summary>
@@ -90,6 +110,7 @@ namespace Live_Video_Compositor_Demo
             if (_compositor != null)
             {
                 _compositor.OnError -= Compositor_OnError;
+                _compositor.OnAudioVUMeter -= Compositor_OnAudioVUMeter;
 
                 _compositor.Dispose();
                 _compositor = null;
@@ -215,34 +236,41 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var resDialog = new ResolutionDialog();
-            resDialog.Owner = this;
-            resDialog.ShowDialog();
+            try
+            {
+                var resDialog = new ResolutionDialog();
+                resDialog.Owner = this;
+                resDialog.ShowDialog();
 
-            _videoWidth = resDialog.GetWidth();
-            _videoHeight = resDialog.GetHeight();
-            _videoFrameRate = resDialog.GetFrameRate();
-            _mixerType = resDialog.GetMixerType();
+                _videoWidth = resDialog.GetWidth();
+                _videoHeight = resDialog.GetHeight();
+                _videoFrameRate = resDialog.GetFrameRate();
+                _mixerType = resDialog.GetMixerType();
 
-            lbResolution.Content = $"Video: {_videoWidth}x{_videoHeight}@{_videoFrameRate}fps";
+                lbResolution.Content = $"Video: {_videoWidth}x{_videoHeight}@{_videoFrameRate}fps";
 
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            CreateEngine();
+                CreateEngine();
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+                tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
-            DeviceEnumerator.Shared.OnAudioSinkAdded += Shared_OnAudioSinkAdded;
-            await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
+                DeviceEnumerator.Shared.OnAudioSinkAdded += Shared_OnAudioSinkAdded;
+                await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
 
-            VideoView1.SetNativeRendering(true);
+                VideoView1.SetNativeRendering(true);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -266,17 +294,24 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void UpdateRecordingTime()
         {
-            var ts = await _compositor.DurationAsync();
-
-            if (Math.Abs(ts.TotalMilliseconds) < 0.01)
+            try
             {
-                return;
+                var ts = await _compositor.DurationAsync();
+
+                if (Math.Abs(ts.TotalMilliseconds) < 0.01)
+                {
+                    return;
+                }
+
+                Dispatcher.BeginInvoke((Action)(() =>
+                {
+                    lbTimestamp.Content = ts.ToString(@"hh\:mm\:ss");
+                }));
             }
-
-            Dispatcher.BeginInvoke((Action)(() =>
+            catch (Exception ex)
             {
-                lbTimestamp.Content = ts.ToString(@"hh\:mm\:ss");
-            }));
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -284,14 +319,23 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            _compositor.Settings.VideoView = VideoView1;
-            _compositor.Settings.AudioOutput = new AudioRendererBlock(
-                (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioRenderer.Text));
+            try
+            {
+                _compositor.Settings.VideoView = VideoView1;
+                _compositor.Settings.AudioOutput = new AudioRendererBlock(
+                    (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioRenderer.Text));
 
 
-            await _compositor.StartAsync();
+                await _compositor.StartAsync();
 
-            tmRecording.Start();
+                volumeMeterL.Start();
+                volumeMeterR.Start();
+                tmRecording.Start();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -299,15 +343,27 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            tmRecording.Stop();
+            try
+            {
+                tmRecording.Stop();
 
-            await _compositor.StopAsync();
-            
-            DestroyEngine();
-            CreateEngine();
+                volumeMeterL.Stop();
+                volumeMeterL.Clear();
+                volumeMeterR.Stop();
+                volumeMeterR.Clear();
 
-            lbOutputs.Items.Clear();
-            lbSources.Items.Clear();
+                await _compositor.StopAsync();
+
+                DestroyEngine();
+                CreateEngine();
+
+                lbOutputs.Items.Clear();
+                lbSources.Items.Clear();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -632,6 +688,94 @@ namespace Live_Video_Compositor_Demo
         }
 
         /// <summary>
+        /// Add RTSP source async.
+        /// </summary>
+        private async Task AddRTSPSourceAsync()
+        {
+            var dlg = new RTSPSourceDialog();
+            dlg.Owner = this;
+            if (dlg.ShowDialog() == true)
+            {
+                var rect = new Rect(
+                    Convert.ToInt32(edRectLeft.Text),
+                    Convert.ToInt32(edRectTop.Text),
+                    Convert.ToInt32(edRectRight.Text),
+                    Convert.ToInt32(edRectBottom.Text));
+
+                this.IsEnabled = false;
+                var originalTitle = this.Title;
+                this.Title = $"{originalTitle} - Connecting to RTSP source...";
+
+                try
+                {
+                    var rtspSettings = await RTSPSourceSettings.CreateAsync(
+                        new Uri(dlg.URL),
+                        dlg.Login,
+                        dlg.Password,
+                        dlg.AudioEnabled);
+
+                    if (rtspSettings == null)
+                    {
+                        MessageBox.Show(this, "Unable to connect to RTSP source. Please check the URL and credentials.", "RTSP Source Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    var info = rtspSettings.GetInfo();
+                    if (info == null || info.VideoStreams.Count == 0)
+                    {
+                        MessageBox.Show(this, "RTSP source does not contain video streams.", "RTSP Source Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    var name = $"RTSP [{dlg.URL}]";
+                    var sourceBlock = new RTSPSourceBlock(rtspSettings);
+                    var videoInfo = info.GetVideoInfo();
+
+                    if (dlg.AudioEnabled && info.AudioStreams.Count > 0)
+                    {
+                        var audioInfo = info.GetAudioInfo();
+                        var src = new LVCVideoAudioInput(name, _compositor, sourceBlock, videoInfo, audioInfo, rect, autostart: true, live: true);
+                        src.ZOrder = (uint)_compositor.Input_Count();
+
+                        if (await _compositor.Input_AddAsync(src))
+                        {
+                            lbSources.Items.Add(name);
+                            lbSources.SelectedIndex = lbSources.Items.Count - 1;
+                        }
+                        else
+                        {
+                            src.Dispose();
+                        }
+                    }
+                    else
+                    {
+                        var src = new LVCVideoInput(name, _compositor, sourceBlock, videoInfo, rect, autostart: true);
+                        src.ZOrder = (uint)_compositor.Input_Count();
+
+                        if (await _compositor.Input_AddAsync(src))
+                        {
+                            lbSources.Items.Add(name);
+                            lbSources.SelectedIndex = lbSources.Items.Count - 1;
+                        }
+                        else
+                        {
+                            src.Dispose();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, $"Error connecting to RTSP source: {ex.Message}", "RTSP Source Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    this.IsEnabled = true;
+                    this.Title = originalTitle;
+                }
+            }
+        }
+
+        /// <summary>
         /// Add ndi source async.
         /// </summary>
         private async Task AddNDISourceAsync()
@@ -786,6 +930,12 @@ namespace Live_Video_Compositor_Demo
                 await AddNDISourceAsync();
             };
 
+            var miRTSPSource = new MenuItem() { Header = "RTSP source" };
+            miRTSPSource.Click += async (senderm, args) =>
+            {
+                await AddRTSPSourceAsync();
+            };
+
             ctx.Items.Add(miScreen);
             ctx.Items.Add(miCamera);
             ctx.Items.Add(miFile);
@@ -797,6 +947,7 @@ namespace Live_Video_Compositor_Demo
             ctx.Items.Add(new Separator());
             ctx.Items.Add(miDecklinkSource);
             ctx.Items.Add(miNDISource);
+            ctx.Items.Add(miRTSPSource);
             ctx.PlacementTarget = sender as Button;
             ctx.IsOpen = true;
         }
@@ -806,15 +957,22 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void btRemoveSource_Click(object sender, RoutedEventArgs e)
         {
-            if (lbSources.SelectedIndex != -1)
+            try
             {
-                var index = lbSources.SelectedIndex;
-                var input = _compositor.Input_Get(index);
-                if (input != null)
+                if (lbSources.SelectedIndex != -1)
                 {
-                    await _compositor.Input_RemoveAsync(input.ID);
+                    var index = lbSources.SelectedIndex;
+                    var input = _compositor.Input_Get(index);
+                    if (input != null)
+                    {
+                        await _compositor.Input_RemoveAsync(input.ID);
+                    }
+                    lbSources.Items.RemoveAt(index);
                 }
-                lbSources.Items.RemoveAt(index);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -865,7 +1023,14 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void lbSources_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            await UpdateSourceSelectionAsync();
+            try
+            {
+                await UpdateSourceSelectionAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -873,7 +1038,14 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void lbSources_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            await UpdateSourceSelectionAsync();
+            try
+            {
+                await UpdateSourceSelectionAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -921,16 +1093,23 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void btRemoveOutput_Click(object sender, RoutedEventArgs e)
         {
-            if (lbOutputs.SelectedIndex != -1)
+            try
             {
-                var index = lbOutputs.SelectedIndex;
-                var output = _compositor.Output_Get(index);
-                if (output != null)
+                if (lbOutputs.SelectedIndex != -1)
                 {
-                    await _compositor.Output_RemoveAsync(output.ID);
+                    var index = lbOutputs.SelectedIndex;
+                    var output = _compositor.Output_Get(index);
+                    if (output != null)
+                    {
+                        await _compositor.Output_RemoveAsync(output.ID);
+                    }
+                    lbOutputs.Items.RemoveAt(index);
+                    lbOutputs.SelectedIndex = lbOutputs.Items.Count - 1;
                 }
-                lbOutputs.Items.RemoveAt(index);
-                lbOutputs.SelectedIndex = lbOutputs.Items.Count - 1;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -939,12 +1118,19 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_compositor != null)
+            try
             {
-                await _compositor.DisposeAsync();
-            }
+                if (_compositor != null)
+                {
+                    await _compositor.DisposeAsync();
+                }
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -952,10 +1138,17 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void btStartOutput_Click(object sender, RoutedEventArgs e)
         {
-            if (lbOutputs.SelectedIndex != -1)
+            try
             {
-                var output = _compositor.Output_Get(lbOutputs.SelectedIndex);
-                await output.StartAsync();
+                if (lbOutputs.SelectedIndex != -1)
+                {
+                    var output = _compositor.Output_Get(lbOutputs.SelectedIndex);
+                    await output.StartAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -964,10 +1157,17 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void btStopOutput_Click(object sender, RoutedEventArgs e)
         {
-            if (lbOutputs.SelectedIndex != -1)
+            try
             {
-                var output = _compositor.Output_Get(lbOutputs.SelectedIndex);
-                await output.StopAsync();
+                if (lbOutputs.SelectedIndex != -1)
+                {
+                    var output = _compositor.Output_Get(lbOutputs.SelectedIndex);
+                    await output.StopAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -978,21 +1178,28 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private async void tbSeeking_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!_timelineSeeking)
+            try
             {
-                return;
-            }
-
-            int index = lbSources.SelectedIndex;
-            if (index != -1)
-            {
-                var fileInput = _compositor.Input_VideoAudio_Get(index);
-                if (fileInput == null)
+                if (!_timelineSeeking)
                 {
                     return;
                 }
 
-                await fileInput?.Pipeline?.Position_SetAsync(TimeSpan.FromSeconds(e.NewValue));
+                int index = lbSources.SelectedIndex;
+                if (index != -1)
+                {
+                    var fileInput = _compositor.Input_VideoAudio_Get(index);
+                    if (fileInput == null)
+                    {
+                        return;
+                    }
+
+                    await fileInput?.Pipeline?.Position_SetAsync(TimeSpan.FromSeconds(e.NewValue));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
     }

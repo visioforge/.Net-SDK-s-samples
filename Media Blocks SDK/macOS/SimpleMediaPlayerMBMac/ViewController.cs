@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using ObjCRuntime;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
@@ -19,7 +19,7 @@ public partial class ViewController : NSViewController
     /// The audio renderer.
     /// </summary>
     private AudioRendererBlock _audioRenderer;
-    
+
     /// <summary>
     /// The pipeline.
     /// </summary>
@@ -85,23 +85,29 @@ public partial class ViewController : NSViewController
         /// </summary>
     public async void OnTimer(object stateInfo)
     {
-        if (_pipeline == null) return;
-
-        _timerFlag = true;
-
-        var position = await _pipeline.Position_GetAsync();
-        var duration = await _pipeline.DurationAsync();
-
-        InvokeOnMainThread(() =>
+        try
         {
-            slPosition.MaxValue = duration.TotalSeconds;
+            if (_pipeline == null) return;
 
-            // lbTimeX.StringValue = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
+            _timerFlag = true;
 
-            if (slPosition.MaxValue >= position.TotalSeconds) slPosition.DoubleValue = position.TotalSeconds;
-        });
+            var position = await _pipeline.Position_GetAsync();
+            var duration = await _pipeline.DurationAsync();
 
-        _timerFlag = false;
+            InvokeOnMainThread(() =>
+            {
+                slPosition.MaxValue = duration.TotalSeconds;
+
+
+                if (slPosition.MaxValue >= position.TotalSeconds) slPosition.DoubleValue = position.TotalSeconds;
+            });
+
+            _timerFlag = false;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+        }
     }
 
         /// <summary>
@@ -170,7 +176,7 @@ public partial class ViewController : NSViewController
         /// </summary>
     private async Task StopAsync()
     {
-        _timer.Change(0, Timeout.Infinite);
+        _timer.Change(Timeout.Infinite, Timeout.Infinite);
 
         if (_pipeline == null) return;
 
@@ -239,6 +245,13 @@ public class CustomWindowDelegate : NSWindowDelegate
         /// </summary>
     public override bool WindowShouldClose(NSObject sender)
     {
+        if (_pipeline != null)
+        {
+            _pipeline.StopAsync().GetAwaiter().GetResult();
+            _pipeline.DisposeAsync().GetAwaiter().GetResult();
+            _pipeline = null;
+        }
+
         VisioForgeX.DestroySDK();
 
         // Return true to allow the window to close, false to cancel.

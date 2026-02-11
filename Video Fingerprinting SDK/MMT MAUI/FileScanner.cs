@@ -4,6 +4,8 @@ namespace MMT_MAUI
 {
     public static class FileScanner
     {
+        private static readonly string[] VideoExtensions = { "*.mp4", "*.avi", "*.wmv", "*.3gp", "*.mov", "*.mkv", "*.m2v", "*.mts", "*.ts" };
+
         /// <summary>
         /// Search video files.
         /// </summary>
@@ -11,19 +13,31 @@ namespace MMT_MAUI
         {
             List<string> list = new List<string>();
 
-            list.AddRange(System.IO.Directory.GetFiles(dir, "*.mp4"));
-            list.AddRange(System.IO.Directory.GetFiles(dir, "*.avi"));
-            list.AddRange(System.IO.Directory.GetFiles(dir, "*.wmv"));
-            list.AddRange(System.IO.Directory.GetFiles(dir, "*.3gp"));
-            list.AddRange(System.IO.Directory.GetFiles(dir, "*.mov"));
-            list.AddRange(System.IO.Directory.GetFiles(dir, "*.mkv"));
-            list.AddRange(System.IO.Directory.GetFiles(dir, "*.m2v"));
-            list.AddRange(System.IO.Directory.GetFiles(dir, "*.mts"));
-            list.AddRange(System.IO.Directory.GetFiles(dir, "*.ts"));
-
-            foreach (string dir2 in System.IO.Directory.GetDirectories(dir))
+            try
             {
-                list.AddRange(SearchVideoFiles(dir2));
+                foreach (var extension in VideoExtensions)
+                {
+                    try
+                    {
+                        list.AddRange(Directory.GetFiles(dir, extension, SearchOption.AllDirectories));
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        // Skip directories we don't have access to
+                    }
+                    catch (DirectoryNotFoundException)
+                    {
+                        // Skip directories that no longer exist
+                    }
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                // Cannot access root directory
+            }
+            catch (DirectoryNotFoundException)
+            {
+                // Root directory doesn't exist
             }
 
             return list;

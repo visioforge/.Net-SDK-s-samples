@@ -1,23 +1,10 @@
-//using VisioForge.Core.UI.MAUI;
 using System.Diagnostics;
-using SkiaSharp;
-using SkiaSharp.Views.Maui;
-using System.Globalization;
-using VisioForge.Core.MediaBlocks.Sources;
-using VisioForge.Core.MediaBlocks.Special;
-using VisioForge.Core.MediaBlocks;
-
-using VisioForge.Core.MediaBlocks.VideoRendering;
-
-using VisioForge.Core.MediaPlayerX;
-using VisioForge.Core.UI.Skins;
-using Stream = System.IO.Stream;
 using System.Reflection;
-using System.Drawing.Printing;
-using VisioForge.Core.Types.X.Output;
+
 using VisioForge.Core;
-using VisioForge.Core.Types;
+using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.X.AudioRenderers;
+using VisioForge.Core.UI.Skins;
 
 
 #if ANDROID
@@ -53,9 +40,9 @@ namespace SkinnedPlayer_MAUI
         /// The default filename.
         /// </summary>
 #if ANDROID
-        private const string DEFAULT_FILENAME = "http://test.visioforge.com/video.mp4";
+        private const string DEFAULT_FILENAME = "https://test.visioforge.com/video.mp4";
 #else
-        private const string DEFAULT_FILENAME = @"c:\samples\!video.mp4";
+        private const string DEFAULT_FILENAME = "";
 #endif
 
         /// <summary>
@@ -75,7 +62,7 @@ namespace SkinnedPlayer_MAUI
                         using (var stream = assembly.GetManifestResourceStream(resourceKey))
                         {
                             var data = new byte[stream.Length];
-                            stream.Read(data, 0, data.Length);
+                            stream.ReadExactly(data);
 
                             // Extract skin name from file name (remove .vfskin)
                             var skinName = skinFile.Replace(".vfskin", "");
@@ -128,14 +115,14 @@ namespace SkinnedPlayer_MAUI
         /// <summary>
         /// Window destroying.
         /// </summary>
-        private void Window_Destroying(object? sender, EventArgs e)
+        private async void Window_Destroying(object? sender, EventArgs e)
         {
             if (_player != null)
             {
                 _player.OnError -= _player_OnError;
-                _player.Stop();
+                await _player.StopAsync();
 
-                _player.Dispose();
+                await _player.DisposeAsync();
                 _player = null;
             }
 

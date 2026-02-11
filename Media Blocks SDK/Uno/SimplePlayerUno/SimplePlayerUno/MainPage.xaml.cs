@@ -18,6 +18,7 @@ using Foundation;
 using Android.Widget;
 #endif
 using DebugLogger = System.Diagnostics.Debug;
+using System.Diagnostics;
 
 namespace SimplePlayerUno.Template;
 
@@ -110,12 +111,19 @@ public sealed partial class MainPage : Page
         /// </summary>
     private async void MainPage_Unloaded(object sender, RoutedEventArgs e)
     {
-        await CleanupPipelineAsync();
-
-        if (_sdkInitialized)
+        try
         {
-            VisioForge.Core.VisioForgeX.DestroySDK();
-            _sdkInitialized = false;
+            await CleanupPipelineAsync();
+
+            if (_sdkInitialized)
+            {
+                VisioForge.Core.VisioForgeX.DestroySDK();
+                _sdkInitialized = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
         }
     }
 
@@ -124,20 +132,27 @@ public sealed partial class MainPage : Page
         /// </summary>
     private async void BtnPlayStop_Click(object sender, RoutedEventArgs e)
     {
-        if (_isPlaying)
+        try
         {
-            // Stop playback
-            await StopPlaybackAsync();
+            if (_isPlaying)
+            {
+                // Stop playback
+                await StopPlaybackAsync();
+            }
+            else if (_mediaPrepared)
+            {
+                // Resume
+                await ResumeAsync();
+            }
+            else
+            {
+                // Load and play
+                await LoadAndPlayAsync();
+            }
         }
-        else if (_mediaPrepared)
+        catch (Exception ex)
         {
-            // Resume
-            await ResumeAsync();
-        }
-        else
-        {
-            // Load and play
-            await LoadAndPlayAsync();
+            Debug.WriteLine(ex);
         }
     }
 

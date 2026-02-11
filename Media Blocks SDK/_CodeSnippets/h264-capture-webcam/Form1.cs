@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -37,18 +37,25 @@ namespace h264_capture_webcam
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            // We have to initialize the engine on start
-            Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.Enabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.Enabled = true;
-            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.Enabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.Enabled = true;
+                Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            edOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+                edOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 
-            await AddVideoSourcesAsync();
+                await AddVideoSourcesAsync();
 
-            Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -73,64 +80,71 @@ namespace h264_capture_webcam
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            // Create the pipeline
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += _pipeline_OnError;
-
-            // video source
-            VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-
-            var deviceName = cbVideoInputDevice.Text;
-            var format = cbVideoInputFormat.Text;
-            if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+            try
             {
-                var device = _videoSources.Find(x => x.Name == deviceName);
-                if (device != null)
+                // Create the pipeline
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnError += _pipeline_OnError;
+
+                // video source
+                VideoCaptureDeviceSourceSettings videoSourceSettings = null;
+
+                var deviceName = cbVideoInputDevice.Text;
+                var format = cbVideoInputFormat.Text;
+                if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var formatItem = device.VideoFormats.ToList().Find(x => x.Name == format);
-                    if (formatItem != null)
+                    var device = _videoSources.Find(x => x.Name == deviceName);
+                    if (device != null)
                     {
-                        videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                        var formatItem = device.VideoFormats.ToList().Find(x => x.Name == format);
+                        if (formatItem != null)
                         {
-                            Format = formatItem.ToFormat()
-                        };
+                            videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                            {
+                                Format = formatItem.ToFormat()
+                            };
 
-                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
+                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
 
-                        // Disable H264 decoder, because if we are capturing H264, we don't need to decode it.
-                        videoSourceSettings.DisableH264Decoder = true;
+                            // Disable H264 decoder, because if we are capturing H264, we don't need to decode it.
+                            videoSourceSettings.DisableH264Decoder = true;
+                        }
                     }
                 }
-            }
 
-            if (videoSourceSettings == null)
+                if (videoSourceSettings == null)
+                {
+                    MessageBox.Show("Please select video source and format.");
+                    return;
+                }
+
+                var videoSource = new SystemVideoSourceBlock(videoSourceSettings);
+
+                // Add video renderer and specify VideoView control
+                var videoRenderer = new VideoRendererBlock(_pipeline, videoView: VideoView1);
+
+                // Add video tee
+                var videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+
+                // Add H264 decoder
+                var h264Decoder = new H264DecoderBlock(new FFMPEGH264DecoderSettings());
+
+                // Add MP4 sink
+                var mp4sink = new MP4SinkBlock(edOutputFile.Text);
+
+                // Connect everything
+                _pipeline.Connect(videoSource, videoTee);
+                _pipeline.Connect(videoTee, h264Decoder);
+                _pipeline.Connect(h264Decoder, videoRenderer);
+                _pipeline.Connect(videoTee.Outputs[1], mp4sink.CreateNewInput(MediaBlockPadMediaType.Video));
+
+                // Start MP4 recording
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Please select video source and format.");
-                return;
+                Debug.WriteLine(ex);
             }
-
-            var videoSource = new SystemVideoSourceBlock(videoSourceSettings);
-
-            // Add video renderer and specify VideoView control
-            var videoRenderer = new VideoRendererBlock(_pipeline, videoView: VideoView1);
-
-            // Add video tee
-            var videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
-
-            // Add H264 decoder
-            var h264Decoder = new H264DecoderBlock(new FFMPEGH264DecoderSettings());
-
-            // Add MP4 sink
-            var mp4sink = new MP4SinkBlock(edOutputFile.Text);
-
-            // Connect everything
-            _pipeline.Connect(videoSource, videoTee);
-            _pipeline.Connect(videoTee, h264Decoder);
-            _pipeline.Connect(h264Decoder, videoRenderer);
-            _pipeline.Connect(videoTee.Outputs[1], mp4sink.CreateNewInput(MediaBlockPadMediaType.Video));
-
-            // Start MP4 recording
-            await _pipeline.StartAsync();
         }
 
         /// <summary>
@@ -146,14 +160,21 @@ namespace h264_capture_webcam
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
+                if (_pipeline == null)
+                {
+                    return;
+                }
+
+                await _pipeline.StopAsync();
+
+                await _pipeline.DisposeAsync();
             }
-
-            await _pipeline.StopAsync();
-
-            await _pipeline.DisposeAsync();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

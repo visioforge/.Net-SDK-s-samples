@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -70,28 +70,35 @@ namespace HTTP_Source_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
-
-            //_pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            var settings = new HTTPSourceSettings(new Uri(edURL.Text))
+            try
             {
-                UserID = edUserName.Text,
-                UserPassword = edPassword.Text
-            };
+                CreateEngine();
 
-            // You can add custom headers using the following code:
-            // settings.ExtraHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3");
+                //_pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            _source = new HTTPSourceBlock(settings);
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
-            _demuxer = new DecodeBinBlock(renderAudio: false);
+                var settings = new HTTPSourceSettings(new Uri(edURL.Text))
+                {
+                    UserID = edUserName.Text,
+                    UserPassword = edPassword.Text
+                };
 
-            _pipeline.Connect(_source.Output, _demuxer.Input);
-            _pipeline.Connect(_demuxer.VideoOutput, _videoRenderer.Input);
+                // You can add custom headers using the following code:
+                // settings.ExtraHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3");
 
-            await _pipeline.StartAsync();
+                _source = new HTTPSourceBlock(settings);
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+                _demuxer = new DecodeBinBlock(renderAudio: false);
+
+                _pipeline.Connect(_source.Output, _demuxer.Input);
+                _pipeline.Connect(_demuxer.VideoOutput, _videoRenderer.Input);
+
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -99,7 +106,14 @@ namespace HTTP_Source_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            await DestroyEngineAsync();
+            try
+            {
+                await DestroyEngineAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -107,16 +121,23 @@ namespace HTTP_Source_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            CreateEngine();
+                CreateEngine();
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

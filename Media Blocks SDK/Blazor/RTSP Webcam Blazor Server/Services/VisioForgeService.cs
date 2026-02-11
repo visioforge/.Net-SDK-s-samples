@@ -12,7 +12,7 @@ namespace RTSP_Webcam_Server.Services;
 /// <summary>
 /// VisioForge service implementation.
 /// </summary>
-public class VisioForgeService : IDisposable
+public class VisioForgeService : IAsyncDisposable
 {
     private MediaBlocksPipeline? _pipeline;
     private RTSPServerBlock? _rtspBlock;
@@ -86,7 +86,7 @@ public class VisioForgeService : IDisposable
             _pipeline.Connect(_cameraSource.Output, _rtspBlock.Input);
 
             // Start the pipeline
-            await Task.Run(() => _pipeline.Start());
+            await _pipeline.StartAsync();
 
             _isStreaming = true;
             return true;
@@ -128,11 +128,11 @@ public class VisioForgeService : IDisposable
         /// <summary>
         /// Dispose.
         /// </summary>
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
         if (_isStreaming)
         {
-            Task.Run(async () => await StopStreamingAsync()).Wait();
+            await StopStreamingAsync();
         }
 
         if (_isInitialized)
@@ -141,4 +141,4 @@ public class VisioForgeService : IDisposable
             _isInitialized = false;
         }
     }
-} 
+}

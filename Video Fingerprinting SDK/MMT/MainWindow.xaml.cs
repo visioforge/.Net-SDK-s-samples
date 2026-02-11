@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
-
-namespace VisioForge_MMT
+﻿namespace VisioForge_MMT
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
+
+    using Microsoft.Win32;
 
     using VisioForge.Core.VideoFingerPrinting;
 
@@ -30,6 +30,11 @@ namespace VisioForge_MMT
         private VFPFingerPrintDB _db;
 
         /// <summary>
+        /// Indicates whether media is currently playing.
+        /// </summary>
+        private bool _isPlaying;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
         public MainWindow()
@@ -42,17 +47,17 @@ namespace VisioForge_MMT
         /// </summary>
         private void btAddBroadcastFolder_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new System.Windows.Forms.FolderBrowserDialog
+            var dlg = new OpenFolderDialog
             {
-                SelectedPath = Settings.LastPath
+                InitialDirectory = Settings.LastPath
             };
 
-            System.Windows.Forms.DialogResult result = dlg.ShowDialog(this.GetIWin32Window());
+            bool? result = dlg.ShowDialog(this);
 
-            if (result == System.Windows.Forms.DialogResult.OK)
+            if (result == true)
             {
-                lbBroadcastFolders.Items.Add(dlg.SelectedPath);
-                Settings.LastPath = dlg.SelectedPath;
+                lbBroadcastFolders.Items.Add(dlg.FolderName);
+                Settings.LastPath = dlg.FolderName;
             }
         }
 
@@ -61,17 +66,17 @@ namespace VisioForge_MMT
         /// </summary>
         private void btAddAdFolder_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new System.Windows.Forms.FolderBrowserDialog
+            var dlg = new OpenFolderDialog
             {
-                SelectedPath = Settings.LastPath
+                InitialDirectory = Settings.LastPath
             };
 
-            System.Windows.Forms.DialogResult result = dlg.ShowDialog(this.GetIWin32Window());
+            bool? result = dlg.ShowDialog(this);
 
-            if (result == System.Windows.Forms.DialogResult.OK)
+            if (result == true)
             {
-                lbAdFolders.Items.Add(dlg.SelectedPath);
-                Settings.LastPath = dlg.SelectedPath;
+                lbAdFolders.Items.Add(dlg.FolderName);
+                Settings.LastPath = dlg.FolderName;
             }
         }
 
@@ -92,11 +97,14 @@ namespace VisioForge_MMT
         }
 
         /// <summary>
-        /// Error delegate.
+        /// Error delegate. Uses Dispatcher to safely show message box from any thread.
         /// </summary>
         private void errorDelegate(string error)
         {
-            MessageBox.Show(error);
+            Dispatcher.Invoke(() =>
+            {
+                MessageBox.Show(this, error, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            });
         }
 
         /// <summary>
@@ -111,155 +119,190 @@ namespace VisioForge_MMT
 
             btStart.IsEnabled = false;
 
-            results.Clear();
-            lvResults.Items.Refresh();
-
-            lbStatus.Content = "Step 1: Searching video files";
-
-            List<string> adList = new List<string>();
-            List<string> broadcastList = new List<string>();
-
-            List<VFPFingerPrint> adVFPList = new List<VFPFingerPrint>();
-            List<VFPFingerPrint> broadcastVFPList = new List<VFPFingerPrint>();
-
-            foreach (string item in lbAdFolders.Items)
+            try
             {
-                bool isDir = (File.GetAttributes(item) & FileAttributes.Directory) == FileAttributes.Directory;
-                if (isDir)
+                results.Clear();
+                lvResults.Items.Refresh();
+
+                lbStatus.Content = "Step 1: Searching video files";
+
+                List<string> adList = new List<string>();
+                List<string> broadcastList = new List<string>();
+
+                List<VFPFingerPrint> adVFPList = new List<VFPFingerPrint>();
+                List<VFPFingerPrint> broadcastVFPList = new List<VFPFingerPrint>();
+
+                foreach (string item in lbAdFolders.Items)
                 {
-                    adList.AddRange(FileScanner.SearchVideoInFolder(item));
-                }
-                else
-                {
-                    adList.Add(item);
-                }
-            }
-
-            foreach (string item in lbBroadcastFolders.Items)
-            {
-                bool isDir = (File.GetAttributes(item) & FileAttributes.Directory) == FileAttributes.Directory;
-                if (isDir)
-                {
-                    broadcastList.AddRange(FileScanner.SearchVideoInFolder(item));
-                }
-                else
-                {
-                    broadcastList.Add(item);
-                }
-            }
-
-            lbStatus.Content = "Step 2: Getting fingerprints for ads files";
-
-            int progress = 0;
-            foreach (string filename in adList)
-            {
-                pbProgress.Value = progress;
-
-                var source = new VFPFingerprintSource(filename);
-                foreach (var area in _ignoredAreas)
-                {
-                    source.IgnoredAreas.Add(area);
-                }
-
-                VFPFingerPrint fp = _db.GetFingerprint(source);
-
-                if (fp == null)
-                {
-                    fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, errorDelegate);
-
-                    if (fp == null)
+                    try
                     {
-                        MessageBox.Show("Unable to get fingerprint for the video file: " + filename);
-                    }
-                    else
-                    {
-                        _db.Items.Add(fp);
-                        AddDBItem(fp);
-                    }
-                }
-
-                adVFPList.Add(fp);
-
-                progress += 100 / adList.Count;
-            }
-
-            pbProgress.Value = 100;
-
-            lbStatus.Content = "Step 3: Getting fingerprints for broadcast files";
-            progress = 0;
-            foreach (string filename in broadcastList)
-            {
-                pbProgress.Value = progress;
-
-                var source = new VFPFingerprintSource(filename);
-                foreach (var area in _ignoredAreas)
-                {
-                    source.IgnoredAreas.Add(area);
-                }
-
-                VFPFingerPrint fp = _db.GetFingerprint(source);
-                if (fp == null)
-                {
-                    fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, errorDelegate);
-                    if (fp == null)
-                    {
-                        MessageBox.Show("Unable to get fingerprint for the video file: " + filename);
-                        return;
-                    }
-                    else
-                    {
-                        _db.Items.Add(fp);
-                        AddDBItem(fp);
-                    }
-                }
-
-                broadcastVFPList.Add(fp);
-
-                progress += 100 / broadcastList.Count;
-            }
-
-            pbProgress.Value = 100;
-
-            lbStatus.Content = "Step 4: Analyzing data";
-            progress = 0;
-            int foundCount = 0;
-            foreach (var broadcast in broadcastVFPList)
-            {
-                pbProgress.Value = progress;
-
-                foreach (var ad in adVFPList)
-                {
-                   var positions = await VFPAnalyzer.SearchAsync(ad, broadcast, ad.Duration, (int)slDifference.Value, true);
-
-                    if (positions.Count > 0)
-                    {
-                        foreach (var pos in positions)
+                        bool isDir = (File.GetAttributes(item) & FileAttributes.Directory) == FileAttributes.Directory;
+                        if (isDir)
                         {
-                            foundCount++;
-                            int minutes = (int)(pos.TotalSeconds / 60);
-                            int seconds = (int)(pos.TotalSeconds % 60);
-
-                            results.Add(
-                                new ResultsViewModel()
-                                {
-                                    Sample = ad.OriginalFilename,
-                                    DumpFile = broadcast.OriginalFilename,
-                                    Position = minutes + ":" + seconds
-                                });
+                            adList.AddRange(FileScanner.SearchVideoInFolder(item));
+                        }
+                        else
+                        {
+                            adList.Add(item);
                         }
                     }
+                    catch (FileNotFoundException)
+                    {
+                        MessageBox.Show($"Path not found: {item}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    catch (DirectoryNotFoundException)
+                    {
+                        MessageBox.Show($"Directory not found: {item}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
 
-                progress += 100 / broadcastList.Count;
+                foreach (string item in lbBroadcastFolders.Items)
+                {
+                    try
+                    {
+                        bool isDir = (File.GetAttributes(item) & FileAttributes.Directory) == FileAttributes.Directory;
+                        if (isDir)
+                        {
+                            broadcastList.AddRange(FileScanner.SearchVideoInFolder(item));
+                        }
+                        else
+                        {
+                            broadcastList.Add(item);
+                        }
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        MessageBox.Show($"Path not found: {item}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    catch (DirectoryNotFoundException)
+                    {
+                        MessageBox.Show($"Directory not found: {item}", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+
+                lbStatus.Content = "Step 2: Getting fingerprints for ads files";
+
+                int progress = 0;
+                foreach (string filename in adList)
+                {
+                    pbProgress.Value = progress;
+
+                    var source = new VFPFingerprintSource(filename);
+                    foreach (var area in _ignoredAreas)
+                    {
+                        source.IgnoredAreas.Add(area);
+                    }
+
+                    VFPFingerPrint fp = _db.GetFingerprint(source);
+
+                    if (fp == null)
+                    {
+                        fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, errorDelegate);
+
+                        if (fp == null)
+                        {
+                            MessageBox.Show("Unable to get fingerprint for the video file: " + filename);
+                        }
+                        else
+                        {
+                            _db.Items.Add(fp);
+                            AddDBItem(fp);
+                        }
+                    }
+
+                    // Only add non-null fingerprints to avoid NullReferenceException during search
+                    if (fp != null)
+                    {
+                        adVFPList.Add(fp);
+                    }
+
+                    progress += adList.Count > 0 ? 100 / adList.Count : 0;
+                }
+
+                pbProgress.Value = 100;
+
+                lbStatus.Content = "Step 3: Getting fingerprints for broadcast files";
+                progress = 0;
+                foreach (string filename in broadcastList)
+                {
+                    pbProgress.Value = progress;
+
+                    var source = new VFPFingerprintSource(filename);
+                    foreach (var area in _ignoredAreas)
+                    {
+                        source.IgnoredAreas.Add(area);
+                    }
+
+                    VFPFingerPrint fp = _db.GetFingerprint(source);
+                    if (fp == null)
+                    {
+                        fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, errorDelegate);
+                        if (fp == null)
+                        {
+                            MessageBox.Show("Unable to get fingerprint for the video file: " + filename);
+                            return;
+                        }
+                        else
+                        {
+                            _db.Items.Add(fp);
+                            AddDBItem(fp);
+                        }
+                    }
+
+                    broadcastVFPList.Add(fp);
+
+                    progress += broadcastList.Count > 0 ? 100 / broadcastList.Count : 0;
+                }
+
+                pbProgress.Value = 100;
+
+                lbStatus.Content = "Step 4: Analyzing data";
+                progress = 0;
+                int foundCount = 0;
+                foreach (var broadcast in broadcastVFPList)
+                {
+                    pbProgress.Value = progress;
+
+                    foreach (var ad in adVFPList)
+                    {
+                        var positions = await VFPAnalyzer.SearchAsync(ad, broadcast, ad.Duration, (int)slDifference.Value, true);
+
+                        if (positions.Count > 0)
+                        {
+                            foreach (var pos in positions)
+                            {
+                                foundCount++;
+                                int minutes = (int)(pos.TotalSeconds / 60);
+                                int seconds = (int)(pos.TotalSeconds % 60);
+
+                                results.Add(
+                                    new ResultsViewModel()
+                                    {
+                                        Sample = ad.OriginalFilename,
+                                        DumpFile = broadcast.OriginalFilename,
+                                        Position = minutes + ":" + seconds
+                                    });
+                            }
+                        }
+                    }
+
+                    progress += broadcastList.Count > 0 ? 100 / broadcastList.Count : 0;
+                }
+
+                pbProgress.Value = 0;
+
+                lvResults.Items.Refresh();
+
+                lbStatus.Content = "Step 5: Done. " + foundCount + " ads found.";
             }
-
-            pbProgress.Value = 0;
-
-            lvResults.Items.Refresh();
-
-            lbStatus.Content = "Step 5: Done. " + foundCount + " ads found.";
-
-            btStart.IsEnabled = true;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                btStart.IsEnabled = true;
+            }
         }
 
         #region List view
@@ -286,18 +329,20 @@ namespace VisioForge_MMT
                 return;
             }
 
-            if ((string)btPlay.Content == "Play")
+            if (!_isPlaying)
             {
                 MediaPlayer1.Source = new Uri(((ResultsViewModel)lvResults.SelectedItem).DumpFile);
 
                 MediaPlayer1.Play();
 
+                _isPlaying = true;
                 btPlay.Content = "Stop";
             }
             else
             {
                 MediaPlayer1.Stop();
 
+                _isPlaying = false;
                 btPlay.Content = "Play";
             }
         }
@@ -307,26 +352,21 @@ namespace VisioForge_MMT
         /// </summary>
         private void btSaveResults_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new System.Windows.Forms.SaveFileDialog
+            var dlg = new SaveFileDialog
             {
-                Filter = @"XML file|*.xml|CSV file|*.csv"
+                Filter = "XML file|*.xml|CSV file|*.csv"
             };
-            System.Windows.Forms.DialogResult result = dlg.ShowDialog(this.GetIWin32Window());
+            bool? result = dlg.ShowDialog(this);
 
-            if (result == System.Windows.Forms.DialogResult.OK)
+            if (result == true)
             {
                 string filename = dlg.FileName;
 
-                if (File.Exists(filename))
-                {
-                    File.Delete(filename);
-                }
-
-                if (!File.Exists(filename))
+                try
                 {
                     if (Path.GetExtension(filename.ToLowerInvariant()) == ".xml")
                     {
-                        // XML
+                        // XML - File.CreateText will overwrite existing files
                         string xml = XmlUtility.Obj2XmlStr(results);
 
                         using (StreamWriter sw = File.CreateText(filename))
@@ -336,13 +376,21 @@ namespace VisioForge_MMT
                     }
                     else
                     {
-                        // CSV
+                        // CSV - FileMode.Create will overwrite existing files
                         using (var stream = new FileStream(filename, FileMode.Create, FileAccess.Write))
                         {
                             var cs = new CsvSerializer<ResultsViewModel>();
                             cs.Serialize(stream, results);
                         }
                     }
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show($"Error saving file: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    MessageBox.Show($"Access denied: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -352,7 +400,7 @@ namespace VisioForge_MMT
         /// </summary>
         private void SaveSettings()
         {
-            string filename = Settings.SettingsFolder + "settings.xml";
+            string filename = Path.Combine(Settings.SettingsFolder, "settings.xml");
 
             if (File.Exists(filename))
             {
@@ -372,7 +420,7 @@ namespace VisioForge_MMT
         /// </summary>
         private void LoadSettings()
         {
-            string filename = Settings.SettingsFolder + "settings.xml";
+            string filename = Path.Combine(Settings.SettingsFolder, "settings.xml");
 
             if (File.Exists(filename))
             {
@@ -469,22 +517,25 @@ namespace VisioForge_MMT
         /// </summary>
         private void btAddBroadcastFile_Click(Object sender, RoutedEventArgs e)
         {
-            var dlg = new System.Windows.Forms.OpenFileDialog
+            var dlg = new OpenFileDialog
             {
                 InitialDirectory = Settings.LastPath,
                 Multiselect = true
             };
 
-            System.Windows.Forms.DialogResult result = dlg.ShowDialog(this.GetIWin32Window());
+            bool? result = dlg.ShowDialog(this);
 
-            if (result == System.Windows.Forms.DialogResult.OK)
+            if (result == true)
             {
                 foreach (var name in dlg.FileNames)
                 {
                     lbBroadcastFolders.Items.Add(name);
                 }
 
-                Settings.LastPath = Path.GetFullPath(dlg.FileNames[0]);
+                if (dlg.FileNames.Length > 0)
+                {
+                    Settings.LastPath = Path.GetDirectoryName(dlg.FileNames[0]) ?? string.Empty;
+                }
             }
         }
 
@@ -493,22 +544,25 @@ namespace VisioForge_MMT
         /// </summary>
         private void btAddAdFile_Click(Object sender, RoutedEventArgs e)
         {
-            var dlg = new System.Windows.Forms.OpenFileDialog
+            var dlg = new OpenFileDialog
             {
                 InitialDirectory = Settings.LastPath,
                 Multiselect = true
             };
 
-            System.Windows.Forms.DialogResult result = dlg.ShowDialog(this.GetIWin32Window());
+            bool? result = dlg.ShowDialog(this);
 
-            if (result == System.Windows.Forms.DialogResult.OK)
+            if (result == true)
             {
                 foreach (var name in dlg.FileNames)
                 {
                     lbAdFolders.Items.Add(name);
                 }
 
-                Settings.LastPath = Path.GetFullPath(dlg.FileNames[0]);
+                if (dlg.FileNames.Length > 0)
+                {
+                    Settings.LastPath = Path.GetDirectoryName(dlg.FileNames[0]) ?? string.Empty;
+                }
             }
         }
 
@@ -517,12 +571,21 @@ namespace VisioForge_MMT
         /// </summary>
         private void btIgnoredAreaAdd_Click(object sender, RoutedEventArgs e)
         {
+            if (!int.TryParse(edIgnoredAreaLeft.Text, out int left) ||
+                !int.TryParse(edIgnoredAreaTop.Text, out int top) ||
+                !int.TryParse(edIgnoredAreaRight.Text, out int right) ||
+                !int.TryParse(edIgnoredAreaBottom.Text, out int bottom))
+            {
+                MessageBox.Show("Please enter valid numeric values for all coordinates.", "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             var rect = new Rect()
             {
-                Left = Convert.ToInt32(edIgnoredAreaLeft.Text),
-                Top = Convert.ToInt32(edIgnoredAreaTop.Text),
-                Right = Convert.ToInt32(edIgnoredAreaRight.Text),
-                Bottom = Convert.ToInt32(edIgnoredAreaBottom.Text)
+                Left = left,
+                Top = top,
+                Right = right,
+                Bottom = bottom
             };
 
             _ignoredAreas.Add(rect);

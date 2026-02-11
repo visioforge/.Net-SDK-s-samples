@@ -1,21 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
-using VisioForge.Core;
-
-using System.Drawing.Imaging;
-using System.Drawing;
-using System.Runtime.InteropServices;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.UI;
-using System.Windows.Media;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types;
 
 namespace Video_Preview_Blazor_Hybrid
 {
+    /// <summary>
+    /// Event args for frame captured events.
+    /// </summary>
+    public class FrameCapturedEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Gets the JPEG frame data.
+        /// </summary>
+        public byte[] Frame { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FrameCapturedEventArgs"/> class.
+        /// </summary>
+        public FrameCapturedEventArgs(byte[] frame)
+        {
+            Frame = frame;
+        }
+    }
+
+    /// <summary>
+    /// Event args for player state changed events.
+    /// </summary>
+    public class PlayerStateChangedEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Gets a value indicating whether the player is playing.
+        /// </summary>
+        public bool IsPlaying { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PlayerStateChangedEventArgs"/> class.
+        /// </summary>
+        public PlayerStateChangedEventArgs(bool isPlaying)
+        {
+            IsPlaying = isPlaying;
+        }
+    }
+
     public class VideoPlayerService : IDisposable
     {
         /// <summary>
@@ -53,9 +82,15 @@ namespace Video_Preview_Blazor_Hybrid
         /// </summary>
         private JPEGCallbackVideoView _videoView;
 
-        public event Action<byte[]> FrameCaptured;
+        /// <summary>
+        /// Occurs when a frame is captured.
+        /// </summary>
+        public event EventHandler<FrameCapturedEventArgs> FrameCaptured;
 
-        public event Action<bool> PlayerStateChanged;
+        /// <summary>
+        /// Occurs when the player state changes.
+        /// </summary>
+        public event EventHandler<PlayerStateChangedEventArgs> PlayerStateChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VideoPlayerService"/> class.
@@ -99,8 +134,6 @@ namespace Video_Preview_Blazor_Hybrid
                 await _core.OpenAsync(_sourceSettings);
 
                 _isRunning = true;
-                              
-                //await _core.PlayAsync();
 
                 return true;
             }
@@ -135,16 +168,16 @@ namespace Video_Preview_Blazor_Hybrid
         private void _core_OnStop(object sender, VisioForge.Core.Types.Events.StopEventArgs e)
         {
             _isPlaying = false;
-            PlayerStateChanged?.Invoke(_isPlaying);
+            PlayerStateChanged?.Invoke(this, new PlayerStateChangedEventArgs(_isPlaying));
         }
 
         /// <summary>
         /// Handles the core on start event.
         /// </summary>
-        private async void _core_OnStart(object sender, EventArgs e)
+        private void _core_OnStart(object sender, EventArgs e)
         {
             _isPlaying = true;
-            PlayerStateChanged?.Invoke(_isPlaying);
+            PlayerStateChanged?.Invoke(this, new PlayerStateChangedEventArgs(_isPlaying));
         }
 
         /// <summary>
@@ -158,7 +191,7 @@ namespace Video_Preview_Blazor_Hybrid
             if (_isRunning && !_cts.Token.IsCancellationRequested)
             {
                 // Notify UI
-                FrameCaptured?.Invoke(frame);
+                FrameCaptured?.Invoke(this, new FrameCapturedEventArgs(frame));
             }
         }
 
@@ -216,8 +249,9 @@ namespace Video_Preview_Blazor_Hybrid
                     await _core.Position_SetAsync(TimeSpan.FromSeconds(positionInSeconds));
                     return true;
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Console.WriteLine($"Seek failed: {ex.Message}");
                     return false;
                 }
             }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace vfpgen
+﻿namespace vfpgen
 {
     using CommandLine;
     using CommandLine.Text;
@@ -47,7 +42,7 @@ namespace vfpgen
         {
             var help = new HelpText
             {
-                Heading = new HeadingInfo("VisioForge Video Fingerprinting SDK signatures generator", "10.0"),
+                Heading = new HeadingInfo("VisioForge Video Fingerprinting SDK signatures generator", "v2025"),
                 Copyright = new CopyrightInfo("VisioForge", 2025),
                 AdditionalNewLineAfterOption = true,
                 AddDashesToOption = true

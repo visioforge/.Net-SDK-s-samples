@@ -268,8 +268,15 @@ namespace GenICam_Source_Demo
         /// </summary>
         private async void btRefresh_Click(object sender, RoutedEventArgs e)
         {
-            await LoadCameraList();
-            UpdateGenTLPathDisplay();
+            try
+            {
+                await LoadCameraList();
+                UpdateGenTLPathDisplay();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -277,9 +284,16 @@ namespace GenICam_Source_Demo
         /// </summary>
         private async void cbCamera_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbCamera.SelectedItem != null)
+            try
             {
-                await LoadCameraInformation(cbCamera.SelectedItem.ToString());
+                if (cbCamera.SelectedItem != null)
+                {
+                    await LoadCameraInformation(cbCamera.SelectedItem.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -288,9 +302,16 @@ namespace GenICam_Source_Demo
         /// </summary>
         private async void btUpdateSettings_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentCamera != null)
+            try
             {
-                UpdateCurrentCameraSettings();
+                if (_currentCamera != null)
+                {
+                    UpdateCurrentCameraSettings();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -318,29 +339,36 @@ namespace GenICam_Source_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-
             try
             {
-                await VisioForgeX.InitSDKAsync();
-                this.IsEnabled = true;
-                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
 
-                CreateEngine();
+                try
+                {
+                    await VisioForgeX.InitSDKAsync();
+                    this.IsEnabled = true;
+                    Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                    CreateEngine();
 
-                tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+                    Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-                await LoadCameraList();
+                    tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+
+                    await LoadCameraList();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error initializing SDK: {ex.Message}");
+                    this.IsEnabled = true;
+                    Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", " - ERROR");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error initializing SDK: {ex.Message}");
-                this.IsEnabled = true;
-                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", " - ERROR");
+                Debug.WriteLine(ex);
             }
         }
 

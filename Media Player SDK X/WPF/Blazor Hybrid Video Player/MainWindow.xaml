@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Video_Preview_Blazor_Hybrid"
         xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
-        Loaded="Window_Loaded" Unloaded="Window_Unloaded"
+        Unloaded="Window_Unloaded"
         mc:Ignorable="d"
         Title="Video Player Blazor Hybrid Sample" Height="660" Width="820" Icon="visioforge_main_icon.ico">
     <Grid>

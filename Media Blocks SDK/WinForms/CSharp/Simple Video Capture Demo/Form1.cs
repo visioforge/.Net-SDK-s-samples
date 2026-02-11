@@ -1,4 +1,4 @@
-﻿using Gst;
+using Gst;
 using System;
 
 using System.IO;
@@ -22,6 +22,7 @@ using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEncoders;
+using System.Diagnostics;
 
 namespace MediaBlocks_Simple_Video_Capture_Demo
 {
@@ -151,24 +152,31 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            // We have to initialize the engine on start
-            Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.Enabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.Enabled = true;
-            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.Enabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.Enabled = true;
+                Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+                DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+                DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+                DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
 
-            await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
-            await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
-            await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
+                await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
+                await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
+                await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
 
-            edFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+                edFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -187,119 +195,126 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += Pipeline_OnError;
-
-            bool capture = cbCapture.Checked;
-
-            mmLog.Clear();
-
-            if (cbVideoInput.SelectedIndex < 0)
+            try
             {
-                MessageBox.Show(this, "Select video input device");
-                return;
-            }
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnError += Pipeline_OnError;
 
-            // video source
-            VideoCaptureDeviceSourceSettings videoSourceSettings = null;
+                bool capture = cbCapture.Checked;
 
-            var deviceName = cbVideoInput.Text;
-            var format = cbVideoFormat.Text;
-            if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
-            {
-                var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                if (device != null)
+                mmLog.Clear();
+
+                if (cbVideoInput.SelectedIndex < 0)
                 {
-                    var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
-                    if (formatItem != null)
+                    MessageBox.Show(this, "Select video input device");
+                    return;
+                }
+
+                // video source
+                VideoCaptureDeviceSourceSettings videoSourceSettings = null;
+
+                var deviceName = cbVideoInput.Text;
+                var format = cbVideoFormat.Text;
+                if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+                {
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    if (device != null)
                     {
-                        videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                        var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
+                        if (formatItem != null)
                         {
-                            Format = formatItem.ToFormat()
-                        };
+                            videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                            {
+                                Format = formatItem.ToFormat()
+                            };
 
-                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                        }
                     }
                 }
-            }
 
-            _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
+                _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
-            // audio source
-            IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
+                // audio source
+                IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
 
-            deviceName = cbAudioInput.Text;
-            format = cbAudioFormat.Text;
-            if (!string.IsNullOrEmpty(deviceName))
-            {
-                var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                if (device != null)
+                deviceName = cbAudioInput.Text;
+                format = cbAudioFormat.Text;
+                if (!string.IsNullOrEmpty(deviceName))
                 {
-                    var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
-                    if (formatItem != null)
+                    var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    if (device != null)
                     {
-                        audioSourceSettings = device.CreateSourceSettings(formatItem.ToFormat());
+                        var formatItem = device.Formats.FirstOrDefault(x => x.Name == format);
+                        if (formatItem != null)
+                        {
+                            audioSourceSettings = device.CreateSourceSettings(formatItem.ToFormat());
+                        }
                     }
                 }
+
+                _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
+
+                // video renderer
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+
+                // audio renderer
+                var audioOutputDevice = (await AudioRendererBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == cbAudioOutput.Text);
+                _audioRenderer = new AudioRendererBlock(audioOutputDevice) { IsSync = false };
+
+                // tees
+                int num = 2;
+                if (capture)
+                {
+                    num++;
+                }
+
+                _videoTee = new TeeBlock(num, MediaBlockPadMediaType.Video);
+                _audioTee = new TeeBlock(num, MediaBlockPadMediaType.Audio);
+
+                // capture
+                if (capture)
+                {
+                    _h264Encoder = new H264EncoderBlock();
+                    _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
+                    _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
+                }
+
+                // create video sample grabber
+                _videoSampleGrabberSink = new VideoSampleGrabberBlock();
+                _videoSampleGrabberSink.OnVideoFrameBuffer += _videoSampleGrabber_OnVideoFrameBuffer;
+
+                // audio sample grabber
+                _audioSampleGrabberSink = new AudioSampleGrabberBlock();
+                _audioSampleGrabberSink.OnAudioFrameBuffer += _audioSampleGrabber_OnAudioFrameBuffer;
+
+                // connect all
+                _pipeline.Connect(_videoSource.Output, _videoSampleGrabberSink.Input);
+                _pipeline.Connect(_videoSampleGrabberSink.Output, _videoTee.Input);
+                _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
+
+                _pipeline.Connect(_audioSource.Output, _audioSampleGrabberSink.Input);
+                _pipeline.Connect(_audioSampleGrabberSink.Output, _audioTee.Input);
+                _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
+
+                if (capture)
+                {
+                    _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
+                    _pipeline.Connect(_h264Encoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Video));
+
+                    _pipeline.Connect(_audioTee.Outputs[1], _aacEncoder.Input);
+                    _pipeline.Connect(_aacEncoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Audio));
+                }
+
+                // start
+                await _pipeline.StartAsync();
+
+                timer1.Start();
             }
-
-            _audioSource = new SystemAudioSourceBlock(audioSourceSettings);
-
-            // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
-
-            // audio renderer
-            var audioOutputDevice = (await AudioRendererBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == cbAudioOutput.Text);
-            _audioRenderer = new AudioRendererBlock(audioOutputDevice) { IsSync = false };
-
-            // tees
-            int num = 2;
-            if (capture)
+            catch (Exception ex)
             {
-                num++;
+                Debug.WriteLine(ex);
             }
-
-            _videoTee = new TeeBlock(num, MediaBlockPadMediaType.Video);
-            _audioTee = new TeeBlock(num, MediaBlockPadMediaType.Audio);
-
-            // capture
-            if (capture)
-            {
-                _h264Encoder = new H264EncoderBlock();
-                _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
-                _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
-            }
-
-            // create video sample grabber
-            _videoSampleGrabberSink = new VideoSampleGrabberBlock();
-            _videoSampleGrabberSink.OnVideoFrameBuffer += _videoSampleGrabber_OnVideoFrameBuffer;
-
-            // audio sample grabber
-            _audioSampleGrabberSink = new AudioSampleGrabberBlock();
-            _audioSampleGrabberSink.OnAudioFrameBuffer += _audioSampleGrabber_OnAudioFrameBuffer;
-
-            // connect all
-            _pipeline.Connect(_videoSource.Output, _videoSampleGrabberSink.Input);
-            _pipeline.Connect(_videoSampleGrabberSink.Output, _videoTee.Input);
-            _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-
-            _pipeline.Connect(_audioSource.Output, _audioSampleGrabberSink.Input);
-            _pipeline.Connect(_audioSampleGrabberSink.Output, _audioTee.Input);
-            _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
-
-            if (capture)
-            {
-                _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);
-                _pipeline.Connect(_h264Encoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Video));
-
-                _pipeline.Connect(_audioTee.Outputs[1], _aacEncoder.Input);
-                _pipeline.Connect(_aacEncoder.Output, _mp4Muxer.CreateNewInput(MediaBlockPadMediaType.Audio));
-            }
-
-            // start
-            await _pipeline.StartAsync();
-
-            timer1.Start();
         }
 
         /// <summary>
@@ -323,20 +338,27 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            timer1.Stop();
-
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.StopAsync();
-                _pipeline.ClearBlocks();
+                timer1.Stop();
 
-                _pipeline.OnError -= Pipeline_OnError;
-                await _pipeline.DisposeAsync();
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync();
+                    _pipeline.ClearBlocks();
 
-                _pipeline = null;
+                    _pipeline.OnError -= Pipeline_OnError;
+                    await _pipeline.DisposeAsync();
+
+                    _pipeline = null;
+                }
+
+                VideoView1.Invalidate();
             }
-
-            VideoView1.Invalidate();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -344,9 +366,16 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.PauseAsync();
+                if (_pipeline != null)
+                {
+                    await _pipeline.PauseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -355,9 +384,16 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.ResumeAsync();
+                if (_pipeline != null)
+                {
+                    await _pipeline.ResumeAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -366,15 +402,22 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Tag = 1;
-
-            if (_pipeline != null)
+            try
             {
-                var position = await _pipeline.Position_GetAsync();
-                lbTime.Text = position.ToString("hh\\:mm\\:ss");
-            }
+                timer1.Tag = 1;
 
-            timer1.Tag = 0;
+                if (_pipeline != null)
+                {
+                    var position = await _pipeline.Position_GetAsync();
+                    lbTime.Text = position.ToString("hh\\:mm\\:ss");
+                }
+
+                timer1.Tag = 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -382,19 +425,26 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            timer1.Stop();
-
-            if (_pipeline != null)
+            try
             {
-                _pipeline.OnError -= Pipeline_OnError;
-                await _pipeline.StopAsync();
-                await _pipeline.DisposeAsync();
-                _pipeline = null;
+                timer1.Stop();
+
+                if (_pipeline != null)
+                {
+                    _pipeline.OnError -= Pipeline_OnError;
+                    await _pipeline.StopAsync();
+                    await _pipeline.DisposeAsync();
+                    _pipeline = null;
+                }
+
+                VideoView1.Invalidate();
+
+                VisioForgeX.DestroySDK();
             }
-
-            VideoView1.Invalidate();
-
-            VisioForgeX.DestroySDK();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -402,24 +452,31 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// </summary>
         private async void cbVideoInput_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var deviceName = cbVideoInput.Text;
-            if (!string.IsNullOrEmpty(deviceName))
+            try
             {
-                cbVideoFormat.Items.Clear();
-
-                var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                if (device != null)
+                var deviceName = cbVideoInput.Text;
+                if (!string.IsNullOrEmpty(deviceName))
                 {
-                    foreach (var item in device.VideoFormats)
-                    {
-                        cbVideoFormat.Items.Add(item.Name);
-                    }
+                    cbVideoFormat.Items.Clear();
 
-                    if (cbVideoFormat.Items.Count > 0)
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    if (device != null)
                     {
-                        cbVideoFormat.SelectedIndex = 0;
+                        foreach (var item in device.VideoFormats)
+                        {
+                            cbVideoFormat.Items.Add(item.Name);
+                        }
+
+                        if (cbVideoFormat.Items.Count > 0)
+                        {
+                            cbVideoFormat.SelectedIndex = 0;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -428,31 +485,38 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// </summary>
         private async void cbVideoFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbVideoFrameRate.Items.Clear();
-
-            var deviceName = cbVideoInput.Text;
-            var format = cbVideoFormat.Text;
-            if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+            try
             {
-                var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                if (device != null)
-                {
-                    var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
-                    if (formatItem != null)
-                    {
-                        // build int range from tuple (min, max)    
-                        var frameRateList = formatItem.GetFrameRateRangeAsStringList();
-                        foreach (var item in frameRateList)
-                        {
-                            cbVideoFrameRate.Items.Add(item);
-                        }
+                cbVideoFrameRate.Items.Clear();
 
-                        if (cbVideoFrameRate.Items.Count > 0)
+                var deviceName = cbVideoInput.Text;
+                var format = cbVideoFormat.Text;
+                if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+                {
+                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    if (device != null)
+                    {
+                        var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
+                        if (formatItem != null)
                         {
-                            cbVideoFrameRate.SelectedIndex = 0;
+                            // build int range from tuple (min, max)    
+                            var frameRateList = formatItem.GetFrameRateRangeAsStringList();
+                            foreach (var item in frameRateList)
+                            {
+                                cbVideoFrameRate.Items.Add(item);
+                            }
+
+                            if (cbVideoFrameRate.Items.Count > 0)
+                            {
+                                cbVideoFrameRate.SelectedIndex = 0;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -461,24 +525,31 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// </summary>
         private async void cbAudioInput_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var deviceName = cbAudioInput.Text;
-            if (!string.IsNullOrEmpty(deviceName))
+            try
             {
-                cbAudioFormat.Items.Clear();
-
-                var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                if (device != null)
+                var deviceName = cbAudioInput.Text;
+                if (!string.IsNullOrEmpty(deviceName))
                 {
-                    foreach (var format in device.Formats)
-                    {
-                        cbAudioFormat.Items.Add(format.Name);
-                    }
+                    cbAudioFormat.Items.Clear();
 
-                    if (cbAudioFormat.Items.Count > 0)
+                    var device = (await SystemAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    if (device != null)
                     {
-                        cbAudioFormat.SelectedIndex = 0;
+                        foreach (var format in device.Formats)
+                        {
+                            cbAudioFormat.Items.Add(format.Name);
+                        }
+
+                        if (cbAudioFormat.Items.Count > 0)
+                        {
+                            cbAudioFormat.SelectedIndex = 0;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 

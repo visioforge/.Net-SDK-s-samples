@@ -6,12 +6,12 @@ using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 
-namespace RTSP_Webcam_Server.Services;
+namespace RTSP_File_Server.Services;
 
 /// <summary>
 /// Visioforge service implementation.
 /// </summary>
-public class VisioForgeService : IDisposable
+public class VisioForgeService : IAsyncDisposable
 {
     private MediaBlocksPipeline? _pipeline;
     private RTSPServerBlock? _rtspBlock;
@@ -31,7 +31,7 @@ public class VisioForgeService : IDisposable
     {
         // Set default media folder path - you can change this to your preferred location
         _mediaFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Media");
-        
+
         // Create media folder if it doesn't exist
         if (!Directory.Exists(_mediaFolderPath))
         {
@@ -66,7 +66,7 @@ public class VisioForgeService : IDisposable
             return Array.Empty<string>();
 
         var supportedExtensions = new[] { ".mp4", ".avi", ".mov", ".mkv", ".wmv", ".flv", ".webm", ".m4v", ".3gp", ".ts", ".mts" };
-        
+
         var files = Directory.GetFiles(_mediaFolderPath)
             .Where(file => supportedExtensions.Contains(Path.GetExtension(file).ToLowerInvariant()))
             .Select(Path.GetFileName)
@@ -101,7 +101,7 @@ public class VisioForgeService : IDisposable
             throw new ArgumentException("File name cannot be empty.", nameof(fileName));
 
         var filePath = Path.Combine(_mediaFolderPath, fileName);
-        
+
         if (!File.Exists(filePath))
             throw new ArgumentException($"File '{fileName}' does not exist in the media folder.", nameof(fileName));
 
@@ -113,7 +113,7 @@ public class VisioForgeService : IDisposable
             // Create file source settings
             var fileSourceSettings = await UniversalSourceSettings.CreateAsync(filePath);
             var fileInfo = fileSourceSettings.GetInfo();
-            
+
             // Check if file has video streams
             if (fileInfo.VideoStreams.Count == 0)
             {
@@ -163,7 +163,7 @@ public class VisioForgeService : IDisposable
                 await _pipeline.StopAsync(force: true);
                 await _pipeline.DisposeAsync();
             }
-            
+
             _pipeline = null;
             _fileSource = null;
             _rtspBlock = null;
@@ -179,11 +179,11 @@ public class VisioForgeService : IDisposable
         /// <summary>
         /// Dispose.
         /// </summary>
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
         if (_isStreaming)
         {
-            Task.Run(async () => await StopStreamingAsync()).Wait();
+            await StopStreamingAsync();
         }
 
         if (_isInitialized)
@@ -192,4 +192,4 @@ public class VisioForgeService : IDisposable
             _isInitialized = false;
         }
     }
-} 
+}

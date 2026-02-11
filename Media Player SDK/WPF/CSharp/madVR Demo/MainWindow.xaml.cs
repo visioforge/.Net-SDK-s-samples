@@ -39,12 +39,12 @@ namespace madVR_Demo
         /// <summary>
         /// Handles the timer 1 tick event.
         /// </summary>
-        private void timer1_Tick()
+        private async void timer1_Tick()
         {
             _timer.Tag = 1;
-            tbTimeline.Maximum = (int)(MediaPlayer1.Duration_Time()).TotalSeconds;
+            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
-            int value = (int)(MediaPlayer1.Position_Get_Time()).TotalSeconds;
+            int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
             if ((value > 0) && (value < tbTimeline.Maximum))
             {
                 tbTimeline.Value = value;
@@ -89,11 +89,11 @@ namespace madVR_Demo
         /// <summary>
         /// Handles the bt stop click event.
         /// </summary>
-        private void btStop_Click(object sender, RoutedEventArgs e)
+        private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
 
-            MediaPlayer1.Stop();
+            await MediaPlayer1.StopAsync();
 
             tbTimeline.Value = 0;
         }
@@ -101,7 +101,7 @@ namespace madVR_Demo
         /// <summary>
         /// Handles the bt play click event.
         /// </summary>
-        private void btPlay_Click(object sender, RoutedEventArgs e)
+        private async void btPlay_Click(object sender, RoutedEventArgs e)
         {
             MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
 
@@ -114,7 +114,7 @@ namespace madVR_Demo
 
             MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.MadVR;
 
-            MediaPlayer1.Play();
+            await MediaPlayer1.PlayAsync();
 
             _timer.Start();
         }
@@ -140,12 +140,27 @@ namespace madVR_Demo
         /// <summary>
         /// Tb timeline value changed.
         /// </summary>
-        private void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (Convert.ToInt32(_timer.Tag) == 0)
             {
-                MediaPlayer1.Position_Set_Time(TimeSpan.FromSeconds(tbTimeline.Value));
+                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
+        }
+
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            try
+            {
+                _timer.Stop();
+                await MediaPlayer1.StopAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+
+            DestroyEngine();
         }
     }
 }

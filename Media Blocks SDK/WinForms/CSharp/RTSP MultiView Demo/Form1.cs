@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
@@ -11,6 +11,7 @@ using VisioForge.Core.Types.X.MediaPlayer;
 using System.Linq;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core;
+using System.Diagnostics;
 
 namespace MediaBlocks_RTSP_MultiView_Demo
 {
@@ -47,42 +48,49 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            // We have to initialize the engine on start
-            Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.Enabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.Enabled = true;
-            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-            Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-
-            cbCameraIndex.SelectedIndex = 0;
-            edURL.Text = "rtsp://";
-            edFilename.Text = @"c:\vf\outputxx.ts";
-
-            // HW decoders
-            cbGPUDecoder.Items.Add("None");
-
-            var hwDecoders = MediaBlocksPipeline.GetHardwareDecoders(new[] { "H264", "H265", "HEVC", "H.264", "H.265" });
-            var swH264Decoders = MediaBlocksPipeline.GetSoftwareH264Decoders();
-            var swH265Decoders = MediaBlocksPipeline.GetSoftwareH265Decoders();
-
-            _customDecoders = new List<Tuple<string, string>>();
-            _customDecoders.AddRange(hwDecoders);
-            _customDecoders.AddRange(swH264Decoders);
-            _customDecoders.AddRange(swH265Decoders);
-
-            foreach (var item in _customDecoders)
+            try
             {
-                cbGPUDecoder.Items.Add(item.Item2.Replace("Direct3D11/DXVA", ""));
+                // We have to initialize the engine on start
+                Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.Enabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.Enabled = true;
+                Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+                Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+
+                cbCameraIndex.SelectedIndex = 0;
+                edURL.Text = "rtsp://";
+                edFilename.Text = @"c:\vf\outputxx.ts";
+
+                // HW decoders
+                cbGPUDecoder.Items.Add("None");
+
+                var hwDecoders = MediaBlocksPipeline.GetHardwareDecoders(new[] { "H264", "H265", "HEVC", "H.264", "H.265" });
+                var swH264Decoders = MediaBlocksPipeline.GetSoftwareH264Decoders();
+                var swH265Decoders = MediaBlocksPipeline.GetSoftwareH265Decoders();
+
+                _customDecoders = new List<Tuple<string, string>>();
+                _customDecoders.AddRange(hwDecoders);
+                _customDecoders.AddRange(swH264Decoders);
+                _customDecoders.AddRange(swH265Decoders);
+
+                foreach (var item in _customDecoders)
+                {
+                    cbGPUDecoder.Items.Add(item.Item2.Replace("Direct3D11/DXVA", ""));
+                }
+
+                cbGPUDecoder.SelectedIndex = 0;
+
+                if (cbGPUDecoder.Items.Count > 1)
+                {
+                    cbGPUDecoder.Enabled = true;
+                    cbUseGPU.Enabled = true;
+                }
             }
-
-            cbGPUDecoder.SelectedIndex = 0;
-
-            if (cbGPUDecoder.Items.Count > 1)
+            catch (Exception ex)
             {
-                cbGPUDecoder.Enabled = true;
-                cbUseGPU.Enabled = true;
+                Debug.WriteLine(ex);
             }
         }
 
@@ -121,54 +129,61 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            edLog.Text = string.Empty;
-
-            int id = cbCameraIndex.SelectedIndex;
-            if (_playEngines[id] != null)
+            try
             {
-                await _playEngines[id].StopAsync();
-                await _playEngines[id].DisposeAsync();
-                _playEngines[id] = null;
-            }
+                edLog.Text = string.Empty;
 
-            if (cbUseMJPEG.Checked)
-            {
-                _playEngines[id] = new HTTPPlayEngine();
-                await ((HTTPPlayEngine)_playEngines[id]).CreateAsync(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
-            }
-            else
-            {
-                var rtspSettings = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, cbAudioEnabled.Checked);
-
-                rtspSettings.UseGPUDecoder = cbUseGPU.Checked;
-                rtspSettings.CompatibilityMode = cbCompatibilityMode.Checked;
-                rtspSettings.EnableRAWVideoAudioEvents = cbRAWEvents.Checked;
-                
-                // Enable low latency mode - optimized for real-time surveillance
-                // This sets latency=80ms, buffer-mode=0, optimized queues for 60-120ms total latency
-                rtspSettings.LowLatencyMode = true;
-
-                if (cbGPUDecoder.SelectedIndex > 0)
+                int id = cbCameraIndex.SelectedIndex;
+                if (_playEngines[id] != null)
                 {
-                    rtspSettings.CustomVideoDecoder = _customDecoders[cbGPUDecoder.SelectedIndex - 1].Item1;
+                    await _playEngines[id].StopAsync();
+                    await _playEngines[id].DisposeAsync();
+                    _playEngines[id] = null;
                 }
 
-                var engine = new RTSPPlayEngine(rtspSettings, GetVideoViewByIndex(id));
-                _playEngines[id] = engine;
-
-                if (rtspSettings.EnableRAWVideoAudioEvents)
+                if (cbUseMJPEG.Checked)
                 {
-                    engine.OnAudioRAWFrame += Engine_OnAudioRAWFrame;
-                    engine.OnVideoRAWFrame += Engine_OnVideoRAWFrame;
+                    _playEngines[id] = new HTTPPlayEngine();
+                    await ((HTTPPlayEngine)_playEngines[id]).CreateAsync(edURL.Text, edLogin.Text, edPassword.Text, GetVideoViewByIndex(id), cbAudioEnabled.Checked);
                 }
+                else
+                {
+                    var rtspSettings = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, cbAudioEnabled.Checked);
+
+                    rtspSettings.UseGPUDecoder = cbUseGPU.Checked;
+                    rtspSettings.CompatibilityMode = cbCompatibilityMode.Checked;
+                    rtspSettings.EnableRAWVideoAudioEvents = cbRAWEvents.Checked;
+
+                    // Enable low latency mode - optimized for real-time surveillance
+                    // This sets latency=80ms, buffer-mode=0, optimized queues for 60-120ms total latency
+                    rtspSettings.LowLatencyMode = true;
+
+                    if (cbGPUDecoder.SelectedIndex > 0)
+                    {
+                        rtspSettings.CustomVideoDecoder = _customDecoders[cbGPUDecoder.SelectedIndex - 1].Item1;
+                    }
+
+                    var engine = new RTSPPlayEngine(rtspSettings, GetVideoViewByIndex(id));
+                    _playEngines[id] = engine;
+
+                    if (rtspSettings.EnableRAWVideoAudioEvents)
+                    {
+                        engine.OnAudioRAWFrame += Engine_OnAudioRAWFrame;
+                        engine.OnVideoRAWFrame += Engine_OnVideoRAWFrame;
+                    }
+                }
+
+                _playEngines[id].OnError += Engine_OnError;
+
+                _rawVideoFrameReceived = false;
+                _rawAudioFrameReceived = false;
+
+                await _playEngines[id].StartAsync();
             }
-
-            _playEngines[id].OnError += Engine_OnError;
-
-            _rawVideoFrameReceived = false;
-            _rawAudioFrameReceived = false;
-
-            await _playEngines[id].StartAsync();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         bool _rawVideoFrameReceived;
@@ -225,17 +240,24 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            int id = cbCameraIndex.SelectedIndex;
-            if (_playEngines[id] != null)
+            try
             {
-                await _playEngines[id].StopAsync();
+                int id = cbCameraIndex.SelectedIndex;
+                if (_playEngines[id] != null)
+                {
+                    await _playEngines[id].StopAsync();
 
-                _playEngines[id].OnError -= Engine_OnError;
-                await _playEngines[id].DisposeAsync();
-                _playEngines[id] = null;
+                    _playEngines[id].OnError -= Engine_OnError;
+                    await _playEngines[id].DisposeAsync();
+                    _playEngines[id] = null;
+                }
+
+                GetVideoViewByIndex(id).CallRefresh();
             }
-
-            GetVideoViewByIndex(id).CallRefresh();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -273,16 +295,23 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            for (int i = 0; i < _playEngines.Length; i++)
+            try
             {
-                if (_playEngines[i] != null)
+                for (int i = 0; i < _playEngines.Length; i++)
                 {
-                    await _playEngines[i].DisposeAsync();
-                    _playEngines[i] = null;
+                    if (_playEngines[i] != null)
+                    {
+                        await _playEngines[i].DisposeAsync();
+                        _playEngines[i] = null;
+                    }
                 }
-            }
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -290,37 +319,44 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// </summary>
         private async void btReadInfo_Click(object sender, EventArgs e)
         {
-            var infoReader = new MediaInfoReaderX();
-
-            var uriBuilder = new UriBuilder(edURL.Text);
-            if (!string.IsNullOrEmpty(edLogin.Text) && !string.IsNullOrEmpty(edPassword.Text))
+            try
             {
-                uriBuilder.UserName = edLogin.Text;
-                uriBuilder.Password = edPassword.Text;
+                var infoReader = new MediaInfoReaderX();
+
+                var uriBuilder = new UriBuilder(edURL.Text);
+                if (!string.IsNullOrEmpty(edLogin.Text) && !string.IsNullOrEmpty(edPassword.Text))
+                {
+                    uriBuilder.UserName = edLogin.Text;
+                    uriBuilder.Password = edPassword.Text;
+                }
+
+                var res = await infoReader.OpenAsync(uriBuilder.Uri);
+                if (res)
+                {
+                    if (infoReader.Info.VideoStreams.Count > 0)
+                    {
+                        edLog.Text += "Video streams: " + Environment.NewLine;
+                        foreach (var item in infoReader.Info.VideoStreams)
+                        {
+                            edLog.Text += $"  {item.Codec} {item.Width}x{item.Height}" + Environment.NewLine;
+                        }
+                    }
+
+                    edLog.Text += Environment.NewLine;
+
+                    if (infoReader.Info.AudioStreams.Count > 0)
+                    {
+                        edLog.Text += "Audio streams: " + Environment.NewLine;
+                        foreach (var item in infoReader.Info.AudioStreams)
+                        {
+                            edLog.Text += $"  {item.Codec} {item.Channels} ch {item.SampleRate} Hz" + Environment.NewLine;
+                        }
+                    }
+                }
             }
-
-            var res = await infoReader.OpenAsync(uriBuilder.Uri);
-            if (res)
+            catch (Exception ex)
             {
-                if (infoReader.Info.VideoStreams.Count > 0)
-                {
-                    edLog.Text += "Video streams: " + Environment.NewLine;
-                    foreach (var item in infoReader.Info.VideoStreams)
-                    {
-                        edLog.Text += $"  {item.Codec} {item.Width}x{item.Height}" + Environment.NewLine;
-                    }
-                }
-
-                edLog.Text += Environment.NewLine;
-
-                if (infoReader.Info.AudioStreams.Count > 0)
-                {
-                    edLog.Text += "Audio streams: " + Environment.NewLine;
-                    foreach (var item in infoReader.Info.AudioStreams)
-                    {
-                        edLog.Text += $"  {item.Codec} {item.Channels} ch {item.SampleRate} Hz" + Environment.NewLine;
-                    }
-                }
+                Debug.WriteLine(ex);
             }
         }
 
@@ -329,55 +365,62 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// </summary>
         private async void btStartRecord_Click(object sender, EventArgs e)
         {
-            edLog.Text = string.Empty;
-
-            int id = cbCameraIndex.SelectedIndex;
-
-            if (_recordEngines[id] != null)
-            {
-                await _recordEngines[id].StopAsync();
-                await _recordEngines[id].DisposeAsync();
-                _recordEngines[id] = null;
-            }
-
-            RTSPRAWSourceSettings rtspSettings;
             try
             {
-                rtspSettings = await RTSPRAWSourceSettings.CreateAsync(
-                    new Uri(edURL.Text),
-                    edLogin.Text,
-                    edPassword.Text,
-                    cbAudioEnabled.Checked);
+                edLog.Text = string.Empty;
+
+                int id = cbCameraIndex.SelectedIndex;
+
+                if (_recordEngines[id] != null)
+                {
+                    await _recordEngines[id].StopAsync();
+                    await _recordEngines[id].DisposeAsync();
+                    _recordEngines[id] = null;
+                }
+
+                RTSPRAWSourceSettings rtspSettings;
+                try
+                {
+                    rtspSettings = await RTSPRAWSourceSettings.CreateAsync(
+                        new Uri(edURL.Text),
+                        edLogin.Text,
+                        edPassword.Text,
+                        cbAudioEnabled.Checked);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to connect to RTSP stream: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                _recordEngines[id] = new RTSPRecordEngine();
+                _recordEngines[id].OnError += Engine_OnError;
+                _recordEngines[id].Filename = edFilename.Text;
+                _recordEngines[id].ReencodeAudio = cbReencodeAudio.Checked;
+                _recordEngines[id].MP4 = rbMP4Output.Checked;
+
+                try
+                {
+                    await _recordEngines[id].StartAsync(rtspSettings);
+                }
+                catch (CodecNotCompatibleException ex)
+                {
+                    MessageBox.Show(ex.Message, "Codec Not Compatible", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    _recordEngines[id].OnError -= Engine_OnError;
+                    await _recordEngines[id].DisposeAsync();
+                    _recordEngines[id] = null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to start recording: {ex.Message}", "Recording Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _recordEngines[id].OnError -= Engine_OnError;
+                    await _recordEngines[id].DisposeAsync();
+                    _recordEngines[id] = null;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to connect to RTSP stream: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            _recordEngines[id] = new RTSPRecordEngine();
-            _recordEngines[id].OnError += Engine_OnError;
-            _recordEngines[id].Filename = edFilename.Text;
-            _recordEngines[id].ReencodeAudio = cbReencodeAudio.Checked;
-            _recordEngines[id].MP4 = rbMP4Output.Checked;
-
-            try
-            {
-                await _recordEngines[id].StartAsync(rtspSettings);
-            }
-            catch (CodecNotCompatibleException ex)
-            {
-                MessageBox.Show(ex.Message, "Codec Not Compatible", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                _recordEngines[id].OnError -= Engine_OnError;
-                await _recordEngines[id].DisposeAsync();
-                _recordEngines[id] = null;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to start recording: {ex.Message}", "Recording Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                _recordEngines[id].OnError -= Engine_OnError;
-                await _recordEngines[id].DisposeAsync();
-                _recordEngines[id] = null;
+                Debug.WriteLine(ex);
             }
         }
 
@@ -386,15 +429,22 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// </summary>
         private async void btStopRecord_Click(object sender, EventArgs e)
         {
-            int id = cbCameraIndex.SelectedIndex;
-
-            if (_recordEngines[id] != null)
+            try
             {
-                await _recordEngines[id].StopAsync();
+                int id = cbCameraIndex.SelectedIndex;
 
-                _recordEngines[id].OnError -= Engine_OnError;
-                await _recordEngines[id].DisposeAsync();
-                _recordEngines[id] = null;
+                if (_recordEngines[id] != null)
+                {
+                    await _recordEngines[id].StopAsync();
+
+                    _recordEngines[id].OnError -= Engine_OnError;
+                    await _recordEngines[id].DisposeAsync();
+                    _recordEngines[id] = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 

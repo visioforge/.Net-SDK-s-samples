@@ -5,10 +5,10 @@ public class SceneDelegate : UIResponder, IUIWindowSceneDelegate
 {
     [Export("window")] public UIWindow? Window { get; set; }
 
+    /// <summary>
+    /// Will connect.
+    /// </summary>
     [Export("scene:willConnectToSession:options:")]
-        /// <summary>
-        /// Will connect.
-        /// </summary>
     public void WillConnect(UIScene scene, UISceneSession session, UISceneConnectionOptions connectionOptions)
     {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -16,10 +16,10 @@ public class SceneDelegate : UIResponder, IUIWindowSceneDelegate
         // This delegate does not imply the connecting scene or session are new (see UIApplicationDelegate `GetConfiguration` instead).
     }
 
+    /// <summary>
+    /// Did disconnect.
+    /// </summary>
     [Export("sceneDidDisconnect:")]
-        /// <summary>
-        /// Did disconnect.
-        /// </summary>
     public void DidDisconnect(UIScene scene)
     {
         // Called as the scene is being released by the system.
@@ -28,40 +28,40 @@ public class SceneDelegate : UIResponder, IUIWindowSceneDelegate
         // The scene may re-connect later, as its session was not neccessarily discarded (see UIApplicationDelegate `DidDiscardSceneSessions` instead).
     }
 
+    /// <summary>
+    /// Did become active.
+    /// </summary>
     [Export("sceneDidBecomeActive:")]
-        /// <summary>
-        /// Did become active.
-        /// </summary>
     public void DidBecomeActive(UIScene scene)
     {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
     }
 
+    /// <summary>
+    /// Will resign active.
+    /// </summary>
     [Export("sceneWillResignActive:")]
-        /// <summary>
-        /// Will resign active.
-        /// </summary>
     public void WillResignActive(UIScene scene)
     {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
     }
 
+    /// <summary>
+    /// Will enter foreground.
+    /// </summary>
     [Export("sceneWillEnterForeground:")]
-        /// <summary>
-        /// Will enter foreground.
-        /// </summary>
     public void WillEnterForeground(UIScene scene)
     {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
     }
 
+    /// <summary>
+    /// Did enter background.
+    /// </summary>
     [Export("sceneDidEnterBackground:")]
-        /// <summary>
-        /// Did enter background.
-        /// </summary>
     public void DidEnterBackground(UIScene scene)
     {
         // Called as the scene transitions from the foreground to the background.

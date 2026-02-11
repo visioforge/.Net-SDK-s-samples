@@ -14,83 +14,26 @@
     /// </summary>
     public class CsvSerializer<T> where T : class, new()
     {
-        #region Fields
-        private bool _ignoreEmptyLines = true;
-
-        private bool _ignoreReferenceTypesExceptString = true;
-
-        private string _newlineReplacement = ((char)0x254).ToString();
-
         private List<PropertyInfo> _properties;
 
-        private string _replacement = ((char)0x255).ToString();
-
-        private string _rowNumberColumnTitle = "RowNumber";
-
-        private char _separator = ',';
-
-        private bool _useEofLiteral = false;
-
-        private bool _useLineNumbers = true;
-
-        private bool _useTextQualifier = false;
-
-        #endregion Fields
-
         #region Properties
-        public bool IgnoreEmptyLines
-        {
-            get { return _ignoreEmptyLines; }
-            set { _ignoreEmptyLines = value; }
-        }
+        public bool IgnoreEmptyLines { get; set; } = true;
 
-        public bool IgnoreReferenceTypesExceptString
-        {
-            get { return _ignoreReferenceTypesExceptString; }
-            set { _ignoreReferenceTypesExceptString = value; }
-        }
+        public bool IgnoreReferenceTypesExceptString { get; set; } = true;
 
-        public string NewlineReplacement
-        {
-            get { return _newlineReplacement; }
-            set { _newlineReplacement = value; }
-        }
+        public string NewlineReplacement { get; set; } = ((char)0x254).ToString();
 
-        public string Replacement
-        {
-            get { return _replacement; }
-            set { _replacement = value; }
-        }
+        public string Replacement { get; set; } = ((char)0x255).ToString();
 
-        public string RowNumberColumnTitle
-        {
-            get { return _rowNumberColumnTitle; }
-            set { _rowNumberColumnTitle = value; }
-        }
+        public string RowNumberColumnTitle { get; set; } = "RowNumber";
 
-        public char Separator
-        {
-            get { return _separator; }
-            set { _separator = value; }
-        }
+        public char Separator { get; set; } = ',';
 
-        public bool UseEofLiteral
-        {
-            get { return _useEofLiteral; }
-            set { _useEofLiteral = value; }
-        }
+        public bool UseEofLiteral { get; set; }
 
-        public bool UseLineNumbers
-        {
-            get { return _useLineNumbers; }
-            set { _useLineNumbers = value; }
-        }
+        public bool UseLineNumbers { get; set; } = true;
 
-        public bool UseTextQualifier
-        {
-            get { return _useTextQualifier; }
-            set { _useTextQualifier = value; }
-        }
+        public bool UseTextQualifier { get; set; }
 
         #endregion Properties
 
@@ -138,10 +81,19 @@
             {
                 using (var sr = new StreamReader(stream))
                 {
-                    columns = sr.ReadLine().Split(Separator);
+                    var headerLine = sr.ReadLine();
+                    if (headerLine == null)
+                    {
+                        throw new InvalidCsvFormatException("The CSV File is empty or has no header line.");
+                    }
+                    columns = headerLine.Split(Separator);
                     rows = sr.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
                 }
 
+            }
+            catch (InvalidCsvFormatException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -176,6 +128,12 @@
                 var start = UseLineNumbers ? 1 : 0;
                 for (int i = start; i < parts.Length; i++)
                 {
+                    // Skip if index exceeds column count (malformed CSV)
+                    if (i >= columns.Length)
+                    {
+                        continue;
+                    }
+
                     var value = parts[i];
                     var column = columns[i];
 
@@ -193,18 +151,18 @@
                     var p = _properties.FirstOrDefault(a => a.Name.Equals(column, StringComparison.InvariantCultureIgnoreCase));
 
 
-                    /// ignore property csv column, Property not found on targing type
+                    // Ignore property csv column - Property not found on targeting type
                     if (p == null)
                     {
                         continue;
                     }
 
-                    if (UseTextQualifier)
+                    if (UseTextQualifier && value.Length > 0)
                     {
                         if (value.IndexOf("\"") == 0)
                             value = value.Substring(1);
 
-                        if (value[value.Length - 1].ToString() == "\"")
+                        if (value.Length > 0 && value[value.Length - 1].ToString() == "\"")
                             value = value.Substring(0, value.Length - 1);
                     }
 

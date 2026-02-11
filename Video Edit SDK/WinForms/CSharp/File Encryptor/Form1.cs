@@ -49,6 +49,35 @@ namespace File_Encryptor
         }
 
         /// <summary>
+        /// Handles the FormClosing event.
+        /// Disposes the video editing engine to release resources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            tmProgress.Stop();
+
+            if (_videoEdit != null)
+            {
+                _videoEdit.OnError -= _videoEdit_OnError;
+                _videoEdit.OnStop -= _videoEdit_OnStop;
+
+                if (_fastEncrypt)
+                {
+                    _videoEdit.FastEncrypt_Stop();
+                }
+                else
+                {
+                    _videoEdit.Stop();
+                }
+
+                _videoEdit.Dispose();
+                _videoEdit = null;
+            }
+        }
+
+        /// <summary>
         /// Handles the OnStop event of the VideoEdit engine.
         /// Displays a completion message.
         /// </summary>
@@ -58,6 +87,10 @@ namespace File_Encryptor
         {
             Invoke((Action)(() =>
             {
+                tmProgress.Stop();
+                pbProgress.Value = 0;
+                btStart.Enabled = true;
+                btStop.Enabled = false;
                 MessageBox.Show(this, "Complete");
             }));
         }
@@ -82,21 +115,43 @@ namespace File_Encryptor
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btStart_Click(object sender, EventArgs e)
+        private async void btStart_Click(object sender, EventArgs e)
         {
             if (!File.Exists(edInputFile.Text))
             {
-                MessageBox.Show(this, "Inout file does not exists.");
+                MessageBox.Show(this, "Input file does not exist.");
                 return;
             }
 
+            if (string.IsNullOrWhiteSpace(edKey.Text))
+            {
+                MessageBox.Show(this, "Please enter an encryption key. An empty key provides no security.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(edOutputFile.Text))
+            {
+                MessageBox.Show(this, "Please select an output file.");
+                return;
+            }
+
+            btStart.Enabled = false;
+            btStop.Enabled = true;
+
+            bool hasVideoStream;
+            bool hasAudioStream;
+
             var mediaInfo = new MediaInfoReader();
+
             mediaInfo.Filename = edInputFile.Text;
             mediaInfo.ReadFileInfo(true);
 
+            hasVideoStream = mediaInfo.VideoStreams.Count > 0;
+            hasAudioStream = mediaInfo.AudioStreams.Count > 0;
+
             // H264 check
             _fastEncrypt = true;
-            if (mediaInfo.VideoStreams.Count > 0)
+            if (hasVideoStream)
             {
                 if (!mediaInfo.VideoStreams[0].Codec.Contains("264"))
                 {
@@ -105,7 +160,7 @@ namespace File_Encryptor
             }
 
             // AAC check
-            if (mediaInfo.AudioStreams.Count > 0)
+            if (hasAudioStream)
             {
                 if (!mediaInfo.AudioStreams[0].Codec.ToLowerInvariant().Contains("aac"))
                 {
@@ -125,12 +180,12 @@ namespace File_Encryptor
             }
             else
             {
-                if (mediaInfo.VideoStreams.Count > 0)
+                if (hasVideoStream)
                 {
                     _videoEdit.Input_AddVideoFile(edInputFile.Text);
                 }
 
-                if (mediaInfo.AudioStreams.Count > 0)
+                if (hasAudioStream)
                 {
                     _videoEdit.Input_AddAudioFile(edInputFile.Text, edInputFile.Text);
                 }
@@ -148,7 +203,7 @@ namespace File_Encryptor
 
                 _videoEdit.Video_Renderer.VideoRenderer = VideoRendererMode.None;
 
-                _videoEdit.Start();
+                await _videoEdit.StartAsync();
             }
 
             tmProgress.Start();
@@ -163,6 +218,8 @@ namespace File_Encryptor
         private async void btStop_Click(object sender, EventArgs e)
         {
             tmProgress.Stop();
+            btStart.Enabled = true;
+            btStop.Enabled = false;
 
             if (_fastEncrypt)
             {

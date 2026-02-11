@@ -1,4 +1,4 @@
-﻿namespace VisioForge_MMT
+﻿namespace DVS
 {
     using System.Collections.Generic;
 

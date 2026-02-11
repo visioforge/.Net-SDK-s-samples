@@ -45,8 +45,9 @@ namespace DVS_MAUI
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Failed to save settings: {ex.Message}");
                 return false;
             }
         }
@@ -86,8 +87,9 @@ namespace DVS_MAUI
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine($"Failed to load settings: {ex.Message}");
                 return false;
             }
         }
@@ -121,7 +123,12 @@ namespace DVS_MAUI
             else if (targetType.IsEnum)
             {
                 var stringValue = element.GetString();
-                return stringValue != null ? Enum.Parse(targetType, stringValue) : null;
+                if (stringValue != null && Enum.TryParse(targetType, stringValue, out object? enumValue))
+                {
+                    return enumValue;
+                }
+                // Return default enum value if parsing fails
+                return Enum.GetValues(targetType).GetValue(0);
             }
             else if (targetType == typeof(Guid))
             {
@@ -139,20 +146,8 @@ namespace DVS_MAUI
         /// <summary>
         /// Gets the settings folder.
         /// </summary>
-        public static string SettingsFolder 
-        { 
-            get
-            {
-                // Use platform-specific folder
-#if WINDOWS
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "VisioForge Video Duplicates Finder");
-#elif MACCATALYST
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "VisioForge Video Duplicates Finder");
-#else
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "VisioForge Video Duplicates Finder");
-#endif
-            }
-        }
+        public static string SettingsFolder =>
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "VisioForge Video Duplicates Finder");
 
         /// <summary>
         /// Gets or sets the last path.

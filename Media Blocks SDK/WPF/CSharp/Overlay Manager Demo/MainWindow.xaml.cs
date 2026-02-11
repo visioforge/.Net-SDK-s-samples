@@ -55,6 +55,8 @@ namespace Overlay_Manager_Demo
         // Dictionary to track external VideoView windows for video overlays
         private Dictionary<OverlayManagerVideo, VideoOverlayViewWindow> _videoOverlayWindows = new Dictionary<OverlayManagerVideo, VideoOverlayViewWindow>();
 
+        private List<OverlayManagerImageSequence> _imageSequenceOverlays = new List<OverlayManagerImageSequence>();
+
         // Zoom/Pan overlay references
         private OverlayManagerZoom _currentZoom = null;
         private List<OverlayManagerPan> _panOverlays = new List<OverlayManagerPan>();
@@ -302,6 +304,9 @@ namespace Overlay_Manager_Demo
             }
             _overlayGroups.Clear();
 
+            // Clear image sequence overlays
+            _imageSequenceOverlays.Clear();
+
             // Clear zoom/pan/fade overlays
             _currentZoom = null;
             _panOverlays.Clear();
@@ -340,6 +345,31 @@ namespace Overlay_Manager_Demo
                     _overlayManager.Video_Overlay_Add(new OverlayManagerImage(dlg.FileName, 100, 100));
                     lbOverlays.Items.Add($"[Image] {dlg.FileName}");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Handles the bt add image sequence click event.
+        /// </summary>
+        private void btAddImageSequence_Click(object sender, RoutedEventArgs e)
+        {
+            var optionsWindow = new ImageSequenceOptionsWindow();
+            if (optionsWindow.ShowDialog() == true)
+            {
+                var imageSequence = new OverlayManagerImageSequence(
+                    optionsWindow.Items,
+                    optionsWindow.X, optionsWindow.Y,
+                    optionsWindow.SequenceWidth, optionsWindow.SequenceHeight)
+                {
+                    Loop = optionsWindow.Loop,
+                    Opacity = optionsWindow.OpacityLevel,
+                    ZIndex = 5,
+                    Name = $"ImgSeq_{_imageSequenceOverlays.Count + 1}"
+                };
+
+                _imageSequenceOverlays.Add(imageSequence);
+                _overlayManager.Video_Overlay_Add(imageSequence);
+                lbOverlays.Items.Add($"[ImgSeq] {imageSequence.Name} ({imageSequence.FrameCount} frames)");
             }
         }
 
@@ -552,6 +582,17 @@ namespace Overlay_Manager_Demo
                         _overlayManager.Video_Overlay_Remove(fadeOverlay);
                         _fadeOverlays.Remove(fadeOverlay);
                     }
+                }
+                else if (selectedItem != null && selectedItem.StartsWith("[ImgSeq]"))
+                {
+                    // Find and remove the image sequence overlay
+                    var seqOverlay = _imageSequenceOverlays.Find(s => selectedItem.Contains(s.Name));
+                    if (seqOverlay != null)
+                    {
+                        _imageSequenceOverlays.Remove(seqOverlay);
+                    }
+
+                    _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 }
                 else
                 {

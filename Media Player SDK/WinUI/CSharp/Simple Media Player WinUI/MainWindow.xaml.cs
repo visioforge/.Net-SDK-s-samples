@@ -51,7 +51,7 @@ namespace Simple_Media_Player_WinUI
         {
             this.InitializeComponent();
 
-            edFilename.Text = @"c:\samples\!video.mp4";
+            edFilename.Text = string.Empty;
 
             _videoView = new VideoView(canvasControl);
 
@@ -62,7 +62,7 @@ namespace Simple_Media_Player_WinUI
 
             Title = $"Media Player SDK .Net - Simple Media Player for WinUI 3 Desktop (SDK v{MediaPlayer1.SDK_Version()})";
 
-            // SetIcon();
+            SetIcon();
 
             IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this); // m_window in App.cs
             WindowId windowId = Win32Interop.GetWindowIdFromWindow(hWnd);
@@ -75,6 +75,8 @@ namespace Simple_Media_Player_WinUI
             appWindow.Resize(size);
 
             InitTimer();
+
+            this.Closed += MainWindow_Closed;
         }
 
         /// <summary>
@@ -88,6 +90,21 @@ namespace Simple_Media_Player_WinUI
             appWindow.SetIcon(Path.Combine(Package.Current.InstalledLocation.Path, "Assets", "visioforge_main_icon.ico"));
         }
 
+        /// <summary>
+        /// Handles the window closed event.
+        /// </summary>
+        private void MainWindow_Closed(object sender, WindowEventArgs args)
+        {
+            _timer.Stop();
+
+            if (MediaPlayer1 != null)
+            {
+                MediaPlayer1.OnError -= MediaPlayer1_OnError;
+                MediaPlayer1.Dispose();
+                MediaPlayer1 = null;
+            }
+        }
+
 #pragma warning disable S3168 // "async" methods should not return "void"
         /// <summary>
         /// Handles the timer tick event.
@@ -95,18 +112,25 @@ namespace Simple_Media_Player_WinUI
         private async void _timer_Tick(object sender, object e)
 #pragma warning restore S3168 // "async" methods should not return "void"
         {
-            _timerTag = 1;
-            slPosition.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
-
-            int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
-            if ((value > 0) && (value < slPosition.Maximum))
+            try
             {
-                slPosition.Value = value;
+                _timerTag = 1;
+                slPosition.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
+
+                int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
+                if ((value > 0) && (value < slPosition.Maximum))
+                {
+                    slPosition.Value = value;
+                }
+
+                lbPosition.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted((int)slPosition.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted((int)slPosition.Maximum);
+
+                _timerTag = 0;
             }
-
-            lbPosition.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted((int)slPosition.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted((int)slPosition.Maximum);
-
-            _timerTag = 0;
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -131,17 +155,24 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void btOpenFile_Click(object sender, RoutedEventArgs e)
         {
-            FileOpenPicker open = new FileOpenPicker();
-            open.SuggestedStartLocation = PickerLocationId.VideosLibrary;
-            open.FileTypeFilter.Add("*");
-
-            var m_hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-            WinRT.Interop.InitializeWithWindow.Initialize(open, m_hwnd);
-
-            var file = await open.PickSingleFileAsync();
-            if (file != null)
+            try
             {
-                edFilename.Text = file.Path;
+                FileOpenPicker open = new FileOpenPicker();
+                open.SuggestedStartLocation = PickerLocationId.VideosLibrary;
+                open.FileTypeFilter.Add("*");
+
+                var m_hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+                WinRT.Interop.InitializeWithWindow.Initialize(open, m_hwnd);
+
+                var file = await open.PickSingleFileAsync();
+                if (file != null)
+                {
+                    edFilename.Text = file.Path;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -150,9 +181,16 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            await MediaPlayer1.StopAsync();
+            try
+            {
+                await MediaPlayer1.StopAsync();
 
-            _timer.Stop();
+                _timer.Stop();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -160,7 +198,14 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
-            await MediaPlayer1.ResumeAsync();
+            try
+            {
+                await MediaPlayer1.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -168,7 +213,14 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            await MediaPlayer1.PauseAsync();
+            try
+            {
+                await MediaPlayer1.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -176,12 +228,19 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void btPlay_Click(object sender, RoutedEventArgs e)
         {
-            MediaPlayer1.Playlist_Clear();
-            MediaPlayer1.Playlist_Add(edFilename.Text);
+            try
+            {
+                MediaPlayer1.Playlist_Clear();
+                MediaPlayer1.Playlist_Add(edFilename.Text);
 
-            await MediaPlayer1.PlayAsync();
+                await MediaPlayer1.PlayAsync();
 
-            _timer.Start();
+                _timer.Start();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -189,9 +248,16 @@ namespace Simple_Media_Player_WinUI
         /// </summary>
         private async void slPosition_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            if (_timerTag == 0)
+            try
             {
-                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(slPosition.Value));
+                if (_timerTag == 0)
+                {
+                    await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(slPosition.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
     }

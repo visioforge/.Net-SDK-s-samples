@@ -1,4 +1,4 @@
-﻿
+
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -438,49 +438,56 @@ namespace Simple_Player_MVVM.ViewModels
         /// </summary>
         private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (_pipeline == null)
-            {
-                return;
-            }
-
-            var pos = await _pipeline.Position_GetAsync();
-            var progress = (int)pos.TotalMilliseconds;
-
             try
             {
-                await Dispatcher.UIThread.InvokeAsync(async () =>
+                if (_pipeline == null)
                 {
-                    if (_pipeline == null)
+                    return;
+                }
+
+                var pos = await _pipeline.Position_GetAsync();
+                var progress = (int)pos.TotalMilliseconds;
+
+                try
+                {
+                    await Dispatcher.UIThread.InvokeAsync(async () =>
                     {
-                        return;
-                    }
+                        if (_pipeline == null)
+                        {
+                            return;
+                        }
 
-                    if (SeekingMaximum == null)
-                    {
-                        SeekingMaximum = (await _pipeline.DurationAsync()).TotalMilliseconds;
-                    }
+                        if (SeekingMaximum == null)
+                        {
+                            SeekingMaximum = (await _pipeline.DurationAsync()).TotalMilliseconds;
+                        }
 
-                    _isTimerUpdate = true;
+                        _isTimerUpdate = true;
 
-                    if (progress > SeekingMaximum)
-                    {
-                        SeekingValue = SeekingMaximum;
-                    }
-                    else
-                    {
-                        SeekingValue = progress;
-                    }
+                        if (progress > SeekingMaximum)
+                        {
+                            SeekingValue = SeekingMaximum;
+                        }
+                        else
+                        {
+                            SeekingValue = progress;
+                        }
 
-                    // This is where the received data is passed
-                    Position = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
-                    Duration = $"{(await _pipeline.DurationAsync()).ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                        // This is where the received data is passed
+                        Position = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                        Duration = $"{(await _pipeline.DurationAsync()).ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
 
-                    _isTimerUpdate = false;
-                });
+                        _isTimerUpdate = false;
+                    });
+                }
+                catch (Exception exception)
+                {
+                    System.Diagnostics.Debug.WriteLine(exception);
+                }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(exception);
+                Debug.WriteLine(ex);
             }
         }
 

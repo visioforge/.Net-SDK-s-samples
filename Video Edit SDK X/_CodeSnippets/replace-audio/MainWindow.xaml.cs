@@ -4,15 +4,9 @@ using System.IO;
 using System.ComponentModel;
 
 using VisioForge.Core;
-using VisioForge.Core.MediaBlocks;
-using VisioForge.Core.MediaBlocks.Sources;
-using VisioForge.Core.MediaBlocks.Special;
-using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.MediaBlocks.Parsers;
 using VisioForge.Core.VideoEditX;
 using VisioForge.Core.Types.X.Output;
-using VisioForge.Core.Types.X.VideoEncoders;
 
 namespace replace_audio
 {
@@ -65,52 +59,23 @@ namespace replace_audio
 
             // Create VideoEditCoreX object
             _core = new VideoEditCoreX();
-            _core.OnStop += _pipeline_OnStop;
+            _core.OnStop += _core_OnStop;
 
-            // Create video source
+            // Add the video file (video track only, no audio)
             _core.Input_AddVideoFile(edSourceVideoFile.Text);
 
-            //_core.Input_AddAudioFile(edSourceAudioFile.Text);
+            // Add the replacement audio file if not removing audio
+            if (cbRemoveAudio.IsChecked == false)
+            {
+                _core.Input_AddAudioFile(edSourceAudioFile.Text);
+            }
 
-            // MP4 output
-            _outputFile = Path.Combine(Path.GetDirectoryName(edSourceVideoFile.Text), "new_output.mp4");
-            _core.Output_Format = new MP4Output(_outputFile, new NVENCH264EncoderSettings());
-           
-            //// Create audio source
-            //if (cbRemoveAudio.IsChecked == false)
-            //{
-            //    _audioSourceFile = new BasicFileSourceBlock(edSourceAudioFile.Text);
+            // MP4 output (use default encoder settings for better compatibility)
+            var outputDir = Path.GetDirectoryName(edSourceVideoFile.Text);
+            _outputFile = Path.Combine(outputDir ?? Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "new_output.mp4");
+            _core.Output_Format = new MP4Output(_outputFile);
 
-            //    bool mp3 = edSourceAudioFile.Text.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase);
-            //    if (mp3)
-            //    {
-            //        _audioSource = new MPEGAudioParseBlock();
-            //    }
-            //    else
-            //    {
-            //        _audioSource = new ParseBinBlock();
-            //    }
-            //}
-         
-            //// Connect everything
-            //_pipeline.Connect(_videoSourceFile.Output, _videoSource.Input);
-                        
-            //var videoInputPad = _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video);
-
-            //// Catch EOS for video stream, to prevent creation of files with long audio and short video. File duration = video duration.
-            //videoInputPad.OnEOS += async (senderX, argsX) => { 
-            //    _pipeline.SendEOS();
-            //};
-
-            //_pipeline.Connect(_videoSource.GetOutputPadByType(MediaBlockPadMediaType.Video), videoInputPad);
-
-            //if (cbRemoveAudio.IsChecked == false)
-            //{
-            //    _pipeline.Connect(_audioSourceFile.Output, _audioSource.Input);
-            //    _pipeline.Connect(_audioSource.GetOutputPadByType(MediaBlockPadMediaType.Audio), _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Audio));
-            //}
-
-            // Start
+            // Start processing
             _core.Start();
         }
 
@@ -118,33 +83,40 @@ namespace replace_audio
         /// Event handler for the engine's OnStop event.
         /// Cleans up resources and notifies the user of completion.
         /// </summary>
-        private void _pipeline_OnStop(object sender, StopEventArgs e)
+        private void _core_OnStop(object sender, StopEventArgs e)
         {
-            _core.OnStop -= _pipeline_OnStop;
-
             Dispatcher.Invoke(() =>
             {
-                _core?.Dispose();
-                _core = null;
+                if (_core != null)
+                {
+                    _core.OnStop -= _core_OnStop;
+                    _core.Dispose();
+                    _core = null;
+                }
 
-                MessageBox.Show("Done. Video saved to " + _outputFile);
+                if (e.Successful)
+                {
+                    MessageBox.Show("Done. Video saved to " + _outputFile);
+                }
+                else
+                {
+                    MessageBox.Show("Processing failed.");
+                }
             });
         }
 
         /// <summary>
         /// Handles the Click event of the btStop control.
-        /// Stops the current operation and disposes of the engine.
+        /// Stops the current operation.
         /// </summary>
-        private async void btStop_Click(object sender, RoutedEventArgs e)
-        { 
+        private void btStop_Click(object sender, RoutedEventArgs e)
+        {
             if (_core == null)
             {
                 return;
             }
-                    
-            _core.Stop();
 
-            _core.Dispose();
+            _core.Stop();
         }
 
         /// <summary>
@@ -153,6 +125,14 @@ namespace replace_audio
         /// </summary>
         private void Window_Closing(object sender, CancelEventArgs e)
         {
+            if (_core != null)
+            {
+                _core.OnStop -= _core_OnStop;
+                _core.Stop();
+                _core.Dispose();
+                _core = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
 

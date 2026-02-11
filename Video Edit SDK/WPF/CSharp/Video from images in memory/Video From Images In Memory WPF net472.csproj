@@ -15,7 +15,7 @@
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.2.5" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.2.10" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\1.jpg" />

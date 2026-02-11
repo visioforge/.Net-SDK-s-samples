@@ -27,8 +27,8 @@
     <_RequireCodeSigning>false</_RequireCodeSigning>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.2.5" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2026.2.5" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.2.10" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2026.2.10" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="$(NuGetPackageRoot)visioforge.dotnet.core.ui.uno\2026.1.1\lib\net10.0-windows10.0.19041\VisioForge.Core.UI.Uno\nuget.png" />

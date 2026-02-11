@@ -8,11 +8,21 @@ namespace DVS_MAUI.Platforms.MacCatalyst;
 /// Mac Catalyst-specific implementation of the folder picker.
 /// </summary>
 /// <remarks>
-/// Mac Catalyst cannot directly use AppKit NSOpenPanel. 
+/// Mac Catalyst cannot directly use AppKit NSOpenPanel.
 /// This implementation uses UIDocumentPickerViewController which is available in Mac Catalyst.
 /// </remarks>
 public class FolderPickerImplementation : IFolderPicker
 {
+    /// <summary>
+    /// Tracks active security-scoped resources that need to be released.
+    /// </summary>
+    private static readonly Dictionary<string, NSUrl> _activeSecurityScopedResources = new();
+
+    /// <summary>
+    /// Lock object for thread-safe access to the resources dictionary.
+    /// </summary>
+    private static readonly object _lock = new();
+
     /// <summary>
     /// Restores security-scoped access to a folder using stored bookmark data.
     /// </summary>
@@ -28,14 +38,27 @@ public class FolderPickerImplementation : IFolderPicker
             var defaults = NSUserDefaults.StandardUserDefaults;
             var key = $"FolderBookmark_{folderPath.GetHashCode()}";
             var bookmarkData = defaults.DataForKey(key);
-            
+
             if (bookmarkData != null)
             {
                 var url = NSUrl.FromBookmarkData(bookmarkData, NSUrlBookmarkResolutionOptions.WithSecurityScope, null, out var isStale, out var error);
-                
+
                 if (url != null && error == null && !isStale)
                 {
-                    return url.StartAccessingSecurityScopedResource();
+                    if (url.StartAccessingSecurityScopedResource())
+                    {
+                        // Track the resource so it can be released later
+                        lock (_lock)
+                        {
+                            // Release previous resource if path already exists to avoid leak
+                            if (_activeSecurityScopedResources.TryGetValue(folderPath, out var existingUrl))
+                            {
+                                existingUrl.StopAccessingSecurityScopedResource();
+                            }
+                            _activeSecurityScopedResources[folderPath] = url;
+                        }
+                        return true;
+                    }
                 }
             }
         }
@@ -43,8 +66,43 @@ public class FolderPickerImplementation : IFolderPicker
         {
             System.Diagnostics.Debug.WriteLine($"Failed to restore security-scoped access for {folderPath}: {ex.Message}");
         }
-        
+
         return false;
+    }
+
+    /// <summary>
+    /// Stops accessing a security-scoped resource for the given folder path.
+    /// </summary>
+    /// <param name="folderPath">The folder path to stop accessing.</param>
+    public static void StopSecurityScopedAccess(string folderPath)
+    {
+        if (string.IsNullOrEmpty(folderPath))
+            return;
+
+        lock (_lock)
+        {
+            if (_activeSecurityScopedResources.TryGetValue(folderPath, out var url))
+            {
+                url.StopAccessingSecurityScopedResource();
+                _activeSecurityScopedResources.Remove(folderPath);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Stops accessing all active security-scoped resources.
+    /// Call this when the application is terminating or no longer needs folder access.
+    /// </summary>
+    public static void StopAllSecurityScopedAccess()
+    {
+        lock (_lock)
+        {
+            foreach (var kvp in _activeSecurityScopedResources)
+            {
+                kvp.Value.StopAccessingSecurityScopedResource();
+            }
+            _activeSecurityScopedResources.Clear();
+        }
     }
 
     /// <summary>
@@ -128,7 +186,7 @@ public class FolderPickerImplementation : IFolderPicker
             if (urls != null && urls.Length > 0)
             {
                 var url = urls[0];
-                
+
                 // Start accessing security-scoped resource for macOS sandboxing
                 if (url != null && url.StartAccessingSecurityScopedResource())
                 {
@@ -137,20 +195,35 @@ public class FolderPickerImplementation : IFolderPicker
                         // Store the URL in NSUserDefaults so the app can access it later
                         var defaults = NSUserDefaults.StandardUserDefaults;
                         var bookmarkData = url.CreateBookmarkData(NSUrlBookmarkCreationOptions.WithSecurityScope, null, null, out var error);
-                        
+
                         if (bookmarkData != null && error == null)
                         {
                             var key = $"FolderBookmark_{url.Path?.GetHashCode()}";
                             defaults.SetValueForKey(bookmarkData, new NSString(key));
                             defaults.Synchronize();
                         }
-                        
+
+                        // Track the active security-scoped resource
+                        if (!string.IsNullOrEmpty(url.Path))
+                        {
+                            lock (_lock)
+                            {
+                                // Release previous resource if path already exists to avoid leak
+                                if (_activeSecurityScopedResources.TryGetValue(url.Path, out var existingUrl))
+                                {
+                                    existingUrl.StopAccessingSecurityScopedResource();
+                                }
+                                _activeSecurityScopedResources[url.Path] = url;
+                            }
+                        }
+
                         _tcs.SetResult(url.Path);
                     }
-                    finally
+                    catch
                     {
-                        // Don't stop accessing here - we need continued access
-                        // url.StopAccessingSecurityScopedResource();
+                        // If something fails, stop accessing to avoid leaks
+                        url.StopAccessingSecurityScopedResource();
+                        throw;
                     }
                 }
                 else

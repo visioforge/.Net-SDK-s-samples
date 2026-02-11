@@ -67,8 +67,14 @@ public class CustomViewController : UIViewController, IUIDocumentPickerDelegate
     {
         try
         {
-            var allowedTypes = new string[] { UTType.Content, UTType.Item, "public.data" };
-            _documentPicker = new UIDocumentPickerViewController(allowedTypes, UIDocumentPickerMode.Open)
+            // Use UTType array for iOS 14+ compatible document picker
+            var contentTypes = new UniformTypeIdentifiers.UTType[]
+            {
+                UniformTypeIdentifiers.UTTypes.Content,
+                UniformTypeIdentifiers.UTTypes.Item,
+                UniformTypeIdentifiers.UTTypes.Data
+            };
+            _documentPicker = new UIDocumentPickerViewController(contentTypes, asCopy: false)
             {
                 Delegate = this,
                 ModalPresentationStyle = UIModalPresentationStyle.FullScreen
@@ -82,20 +88,20 @@ public class CustomViewController : UIViewController, IUIDocumentPickerDelegate
         }
     }
 
+    /// <summary>
+    /// Did pick document.
+    /// </summary>
     [Export("documentPicker:didPickDocumentsAtURLs:")]
-        /// <summary>
-        /// Did pick document.
-        /// </summary>
     public void DidPickDocument(UIDocumentPickerViewController controller, NSUrl[] urls)
     {
         _sourceFileUrl = urls.FirstOrDefault();
         controller.DismissViewController(true, null);
     }
 
+    /// <summary>
+    /// Was cancelled.
+    /// </summary>
     [Export("documentPickerWasCancelled:")]
-        /// <summary>
-        /// Was cancelled.
-        /// </summary>
     public void WasCancelled(UIDocumentPickerViewController controller)
     {
         // Handle cancellation if needed

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VisioForge.Core.VideoEncryption;
+using System.Diagnostics;
 
 namespace Encrypted_Memory_Playback_Demo
 {
@@ -24,6 +25,8 @@ namespace Encrypted_Memory_Playback_Demo
         /// <summary>
         /// The initialization vector string.
         /// </summary>
+        // WARNING: This IV is hardcoded for demonstration purposes only.
+        // In production, use a cryptographically random IV for each encryption operation.
         private const string _iv = "1234567890123456";
         /// <summary>
         /// The initialization vector bytes.
@@ -84,11 +87,18 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private async void btEncrypt_Click(object sender, EventArgs e)
         {
-            await VideoEncryptor.EncryptAsync(edSourceFile.Text, edDestFile.Text, edKey.Text, _ivBytes, _progressCallback);
+            try
+            {
+                await VideoEncryptor.EncryptAsync(edSourceFile.Text, edDestFile.Text, edKey.Text, _ivBytes, _progressCallback);
 
-            pbProgress.Value = 0;
+                pbProgress.Value = 0;
 
-            MessageBox.Show(this, "Complete");
+                MessageBox.Show(this, "Complete");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -96,11 +106,18 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private async void btDecrypt_Click(object sender, EventArgs e)
         {
-            await VideoDecryptor.DecryptAsync(edSourceFile.Text, edDestFile.Text, edKey.Text, _ivBytes, _progressCallback);
+            try
+            {
+                await VideoDecryptor.DecryptAsync(edSourceFile.Text, edDestFile.Text, edKey.Text, _ivBytes, _progressCallback);
 
-            pbProgress.Value = 0;
+                pbProgress.Value = 0;
 
-            MessageBox.Show(this, "Complete");
+                MessageBox.Show(this, "Complete");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

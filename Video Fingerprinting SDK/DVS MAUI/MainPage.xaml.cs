@@ -66,7 +66,7 @@ namespace DVS_MAUI
         {
             try
             {
-                string result = null;
+                string? result = null;
                 
                 // Use platform-specific folder picker if available
                 if (_folderPicker != null)
@@ -173,7 +173,7 @@ namespace DVS_MAUI
 
                 foreach (string filename in filenames)
                 {
-                    await MainThread.InvokeOnMainThreadAsync(() => pbProgress.Progress = progress / 100.0);
+                    pbProgress.Progress = progress / 100.0;
 
                     VFPFingerPrint? fp = null;
                     try
@@ -205,7 +205,7 @@ namespace DVS_MAUI
                         fingerPrints.Add(fp);
                     }
 
-                    progress += 100 / filenames.Count;
+                    progress += filenames.Count > 0 ? 100 / filenames.Count : 0;
                 }
 
                 await MainThread.InvokeOnMainThreadAsync(() => pbProgress.Progress = 1.0);
@@ -219,7 +219,7 @@ namespace DVS_MAUI
 
                 foreach (var first in fingerPrints)
                 {
-                    await MainThread.InvokeOnMainThreadAsync(() => pbProgress.Progress = progress / 100.0);
+                    pbProgress.Progress = progress / 100.0;
 
                     if (first == null || clonesToIgnore.Contains(first.OriginalFilename))
                         continue;
@@ -253,7 +253,7 @@ namespace DVS_MAUI
                         }
                     }
 
-                    progress += 100 / fingerPrints.Count;
+                    progress += fingerPrints.Count > 0 ? 100 / fingerPrints.Count : 0;
                 }
 
                 await MainThread.InvokeOnMainThreadAsync(() => pbProgress.Progress = 0);

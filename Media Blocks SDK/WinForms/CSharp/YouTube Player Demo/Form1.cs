@@ -1,4 +1,4 @@
-﻿namespace youtube_player
+namespace youtube_player
 {
     using System;
     using System.Collections.Generic;
@@ -16,6 +16,7 @@
 
     using YoutubeExplode;
     using YoutubeExplode.Videos.Streams;
+using System.Diagnostics;
 
     /// <summary>
     /// The main form of the application.
@@ -83,51 +84,58 @@
         /// </summary>
         private async void BtStart_Click(object sender, EventArgs e)
         {
-            mmLog.Text = string.Empty;
-
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += MediaPlayer1_OnError;
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            _pipeline.Debug_Mode = cbDebugMode.Checked;
-
-            if (_videoInfoList.Count == 0)
+            try
             {
-                MessageBox.Show(this, "Please read formats first.");
-                return;
-            }
+                mmLog.Text = string.Empty;
 
-            // video stream
-            var videoSourceSettings = await UniversalSourceSettings.CreateAsync(_videoInfoList[cbVideoStream.SelectedIndex].Url);
-            var audioMuxed = videoSourceSettings.GetInfo().AudioStreams.Count > 0;
-            _videoSource = new UniversalSourceBlock(videoSourceSettings);
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnError += MediaPlayer1_OnError;
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+                _pipeline.Debug_Mode = cbDebugMode.Checked;
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
-
-            _pipeline.Connect(_videoSource, _videoRenderer);
-
-            // audio stream
-            var audioOutputs = await AudioRendererBlock.GetDevicesAsync(VisioForge.Core.Types.X.Output.AudioOutputDeviceAPI.DirectSound);
-            _audioRenderer = new AudioRendererBlock(audioOutputs[cbAudioOutput.SelectedIndex]);
-
-            if (audioMuxed)
-            {
-                _pipeline.Connect(_videoSource, _audioRenderer);
-            }
-            else
-            {
-                if (cbAudioStream.SelectedIndex > 0)
+                if (_videoInfoList.Count == 0)
                 {
-                    var audioSourceSettings = await UniversalSourceSettings.CreateAsync(_audioInfoList[cbAudioStream.SelectedIndex].Url);
-                    _audioSource = new UniversalSourceBlock(audioSourceSettings);
-
-                    _pipeline.Connect(_audioSource, _audioRenderer);
+                    MessageBox.Show(this, "Please read formats first.");
+                    return;
                 }
+
+                // video stream
+                var videoSourceSettings = await UniversalSourceSettings.CreateAsync(_videoInfoList[cbVideoStream.SelectedIndex].Url);
+                var audioMuxed = videoSourceSettings.GetInfo().AudioStreams.Count > 0;
+                _videoSource = new UniversalSourceBlock(videoSourceSettings);
+
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+
+                _pipeline.Connect(_videoSource, _videoRenderer);
+
+                // audio stream
+                var audioOutputs = await AudioRendererBlock.GetDevicesAsync(VisioForge.Core.Types.X.Output.AudioOutputDeviceAPI.DirectSound);
+                _audioRenderer = new AudioRendererBlock(audioOutputs[cbAudioOutput.SelectedIndex]);
+
+                if (audioMuxed)
+                {
+                    _pipeline.Connect(_videoSource, _audioRenderer);
+                }
+                else
+                {
+                    if (cbAudioStream.SelectedIndex > 0)
+                    {
+                        var audioSourceSettings = await UniversalSourceSettings.CreateAsync(_audioInfoList[cbAudioStream.SelectedIndex].Url);
+                        _audioSource = new UniversalSourceBlock(audioSourceSettings);
+
+                        _pipeline.Connect(_audioSource, _audioRenderer);
+                    }
+                }
+
+                // start
+                await _pipeline.StartAsync();
+
+                timer1.Start();
             }
-
-            // start
-            await _pipeline.StartAsync();
-
-            timer1.Start();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -135,11 +143,18 @@
         /// </summary>
         private async void BtStop_Click(object sender, EventArgs e)
         {
-            timer1.Stop();
+            try
+            {
+                timer1.Stop();
 
-            await _pipeline.StopAsync();
+                await _pipeline.StopAsync();
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -158,39 +173,46 @@
         /// </summary>
         private async void BtReadFormats_Click(object sender, EventArgs e)
         {
-            _videoInfoList.Clear();
-            _audioInfoList.Clear();
-
-            cbVideoStream.Items.Clear();
-            cbAudioStream.Items.Clear();
-            cbAudioStream.Items.Add("None");
-
-            var youtube = new YoutubeClient();
-
-            // You can specify video ID or URL
-            var video = await youtube.Videos.GetAsync(edURL.Text);
-            var streamManifest = await youtube.Videos.Streams.GetManifestAsync(video.Id.Value);
-
-            var videos = streamManifest.GetVideoOnlyStreams();
-            foreach (var stream in videos)
+            try
             {
-                cbVideoStream.Items.Add(stream.ToString());
-                _videoInfoList.Add(stream);
-            }
+                _videoInfoList.Clear();
+                _audioInfoList.Clear();
 
-            var audios = streamManifest.GetAudioOnlyStreams();
-            foreach (var stream in audios)
+                cbVideoStream.Items.Clear();
+                cbAudioStream.Items.Clear();
+                cbAudioStream.Items.Add("None");
+
+                var youtube = new YoutubeClient();
+
+                // You can specify video ID or URL
+                var video = await youtube.Videos.GetAsync(edURL.Text);
+                var streamManifest = await youtube.Videos.Streams.GetManifestAsync(video.Id.Value);
+
+                var videos = streamManifest.GetVideoOnlyStreams();
+                foreach (var stream in videos)
+                {
+                    cbVideoStream.Items.Add(stream.ToString());
+                    _videoInfoList.Add(stream);
+                }
+
+                var audios = streamManifest.GetAudioOnlyStreams();
+                foreach (var stream in audios)
+                {
+                    cbAudioStream.Items.Add($"{stream.ToString()} [{stream.Bitrate.ToString()}]");
+                    _audioInfoList.Add(stream);
+                }
+
+                if (cbVideoStream.Items.Count > 0)
+                {
+                    cbVideoStream.SelectedIndex = 0;
+                }
+
+                cbAudioStream.SelectedIndex = 0;
+            }
+            catch (Exception ex)
             {
-                cbAudioStream.Items.Add($"{stream.ToString()} [{stream.Bitrate.ToString()}]");
-                _audioInfoList.Add(stream);
+                Debug.WriteLine(ex);
             }
-
-            if (cbVideoStream.Items.Count > 0)
-            {
-                cbVideoStream.SelectedIndex = 0;
-            }
-
-            cbAudioStream.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -198,19 +220,26 @@
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-
-            await VisioForgeX.InitSDKAsync();
-
-            var audioOutputs = await AudioRendererBlock.GetDevicesAsync(VisioForge.Core.Types.X.Output.AudioOutputDeviceAPI.DirectSound);
-            foreach (var audioOutput in audioOutputs)
+            try
             {
-                cbAudioOutput.Items.Add(audioOutput.Name);
+                Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+
+                await VisioForgeX.InitSDKAsync();
+
+                var audioOutputs = await AudioRendererBlock.GetDevicesAsync(VisioForge.Core.Types.X.Output.AudioOutputDeviceAPI.DirectSound);
+                foreach (var audioOutput in audioOutputs)
+                {
+                    cbAudioOutput.Items.Add(audioOutput.Name);
+                }
+
+                if (cbAudioOutput.Items.Count > 0)
+                {
+                    cbAudioOutput.SelectedIndex = 0;
+                }
             }
-
-            if (cbAudioOutput.Items.Count > 0)
+            catch (Exception ex)
             {
-                cbAudioOutput.SelectedIndex = 0;
+                Debug.WriteLine(ex);
             }
         }
 
@@ -219,10 +248,17 @@
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            var duration = await _pipeline.DurationAsync();
-            var position = await _pipeline.Position_GetAsync();
+            try
+            {
+                var duration = await _pipeline.DurationAsync();
+                var position = await _pipeline.Position_GetAsync();
 
-            lbTime.Text = position.ToString("hh\\:mm\\:ss", CultureInfo.InvariantCulture) + " | " + duration.ToString("hh\\:mm\\:ss", CultureInfo.InvariantCulture);
+                lbTime.Text = position.ToString("hh\\:mm\\:ss", CultureInfo.InvariantCulture) + " | " + duration.ToString("hh\\:mm\\:ss", CultureInfo.InvariantCulture);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
 
@@ -231,9 +267,16 @@
         /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await DestroyEngineAsync();
+            try
+            {
+                await DestroyEngineAsync();
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

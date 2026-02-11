@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using VisioForge.Core;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AudioRenderers;
@@ -54,22 +55,32 @@ namespace SyncPlayback
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _timer = new System.Timers.Timer(500);
-            _timer.Elapsed += _timer_Elapsed;
-
-            Title += $" (SDK v{VisioForge.Core.MediaPlayerX.MediaPlayerCoreX.SDK_Version})";
-
-            CreateEngines();
-
-            var audioOutputs = await _player1.Audio_OutputDevicesAsync();
-            foreach (var device in audioOutputs)
+            try
             {
-                cbAudioOutput.Items.Add(device);
+                // Initialize the SDK
+                await VisioForgeX.InitSDKAsync();
+
+                _timer = new System.Timers.Timer(500);
+                _timer.Elapsed += _timer_Elapsed;
+
+                Title += $" (SDK v{VisioForge.Core.MediaPlayerX.MediaPlayerCoreX.SDK_Version})";
+
+                CreateEngines();
+
+                var audioOutputs = await _player1.Audio_OutputDevicesAsync();
+                foreach (var device in audioOutputs)
+                {
+                    cbAudioOutput.Items.Add(device);
+                }
+
+                if (cbAudioOutput.Items.Count > 0)
+                {
+                    cbAudioOutput.SelectedIndex = 0;
+                }
             }
-
-            if (cbAudioOutput.Items.Count > 0)
+            catch (Exception ex)
             {
-                cbAudioOutput.SelectedIndex = 0;
+                System.Diagnostics.Debug.WriteLine($"Window_Loaded error: {ex.Message}");
             }
         }
 
@@ -114,7 +125,6 @@ namespace SyncPlayback
 
             _player2 = new MediaPlayerCoreX(VideoView2);
             _player2.OnError += Player_OnError;
-            //_player2.OnStop += Player2_OnStop;
 
             _player2.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             _player2.Debug_Mode = cbDebugMode.IsChecked == true;
@@ -126,29 +136,36 @@ namespace SyncPlayback
         /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _timerFlag = true;
-
-            if (_player1 == null)
+            try
             {
-                return;
-            }
+                _timerFlag = true;
 
-            var position = await _player1.Position_GetAsync();
-            var duration = await _player1.DurationAsync();
-
-            Dispatcher.Invoke((Action)(() =>
-            {
-                tbTimeline.Maximum = (int)duration.TotalSeconds;
-
-                lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
-
-                if (tbTimeline.Maximum >= position.TotalSeconds)
+                if (_player1 == null)
                 {
-                    tbTimeline.Value = (int)position.TotalSeconds;
+                    return;
                 }
-            }));
 
-            _timerFlag = false;
+                var position = await _player1.Position_GetAsync();
+                var duration = await _player1.DurationAsync();
+
+                Dispatcher.Invoke((Action)(() =>
+                {
+                    tbTimeline.Maximum = (int)duration.TotalSeconds;
+
+                    lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
+
+                    if (tbTimeline.Maximum >= position.TotalSeconds)
+                    {
+                        tbTimeline.Value = (int)position.TotalSeconds;
+                    }
+                }));
+
+                _timerFlag = false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Timer error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -168,7 +185,6 @@ namespace SyncPlayback
             if (_player2 != null)
             {
                 _player2.OnError -= Player_OnError;
-                //_player2.OnStop -= Player2_OnStop;
                 await Task.Delay(500);
                 await _player2.DisposeAsync();
                 _player2 = null;
@@ -204,14 +220,21 @@ namespace SyncPlayback
         /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!_timerFlag && _player1 != null)
+            try
             {
-                await _player1.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
-            }
+                if (!_timerFlag && _player1 != null)
+                {
+                    await _player1.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
 
-            if (!_timerFlag && _player2 != null)
+                if (!_timerFlag && _player2 != null)
+                {
+                    await _player2.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
             {
-                await _player2.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                System.Diagnostics.Debug.WriteLine($"Seek error: {ex.Message}");
             }
         }
 
@@ -220,38 +243,47 @@ namespace SyncPlayback
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            edLog.Clear();
+            try
+            {
+                edLog.Clear();
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
 
-            CreateEngines();
+                CreateEngines();
 
-            var audioOutputs = await _player1.Audio_OutputDevicesAsync();
+                var audioOutputs = await _player1.Audio_OutputDevicesAsync();
 
-            // Configure player 1
-            var audioOutputDevice = audioOutputs.First(x => x.DisplayName == cbAudioOutput.Text);
-            _player1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
-            await _player1.OpenAsync(edFilename1.Text);
+                // Configure player 1
+                var audioOutputDevice = audioOutputs.FirstOrDefault(x => x.DisplayName == cbAudioOutput.Text);
+                if (audioOutputDevice == null)
+                {
+                    edLog.Text = "Selected audio output device not found" + Environment.NewLine;
+                    return;
+                }
+                _player1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+                await _player1.OpenAsync(edFilename1.Text);
 
-            // Configure player 2
-            _player2.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
-            await _player2.OpenAsync(edFilename2.Text);
+                // Configure player 2
+                _player2.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+                await _player2.OpenAsync(edFilename2.Text);
 
-            // Preload playerw
-            //  _player1.Play_DelayEnabled = true;
-            await _player1.PlayAsync(onlyPreload: true);
+                // Preload players
+                await _player1.PlayAsync(onlyPreload: true);
+                await _player2.PlayAsync(onlyPreload: true);
 
-        //    _player2.Play_DelayEnabled = true;
-            await _player2.PlayAsync(onlyPreload: true);
+                await Task.Delay(500);
 
-            await Task.Delay(500);
+                // Start players
+                await _player1.ResumeAsync();
+                await _player2.ResumeAsync();
 
-            // Start players
-            await _player1.ResumeAsync();
-            await _player2.ResumeAsync();
-
-            // Start timer
-            _timer.Start();
+                // Start timer
+                _timer.Start();
+            }
+            catch (Exception ex)
+            {
+                edLog.Text += $"Start error: {ex.Message}{Environment.NewLine}";
+            }
         }
 
         /// <summary>
@@ -259,23 +291,30 @@ namespace SyncPlayback
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _timer.Stop();
-
-            if (_player1 != null)
+            try
             {
-                await _player1.StopAsync();
-                await DestroyEngineAsync();
-                _player1 = null;
-            }
+                _timer.Stop();
 
-            if (_player2 != null)
+                // Stop both players first
+                if (_player1 != null)
+                {
+                    await _player1.StopAsync();
+                }
+
+                if (_player2 != null)
+                {
+                    await _player2.StopAsync();
+                }
+
+                // DestroyEngineAsync disposes both players, so only call it once
+                await DestroyEngineAsync();
+
+                tbTimeline.Value = 0;
+            }
+            catch (Exception ex)
             {
-                await _player2.StopAsync();
-                await DestroyEngineAsync();
-                _player2 = null;
+                System.Diagnostics.Debug.WriteLine($"Stop error: {ex.Message}");
             }
-
-            tbTimeline.Value = 0;
         }
 
         /// <summary>
@@ -283,8 +322,22 @@ namespace SyncPlayback
         /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            await _player1.PauseAsync();
-            await _player2.PauseAsync();
+            try
+            {
+                if (_player1 != null)
+                {
+                    await _player1.PauseAsync();
+                }
+
+                if (_player2 != null)
+                {
+                    await _player2.PauseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Pause error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -292,8 +345,22 @@ namespace SyncPlayback
         /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
-            await _player1.ResumeAsync();
-            await _player2.ResumeAsync();
+            try
+            {
+                if (_player1 != null)
+                {
+                    await _player1.ResumeAsync();
+                }
+
+                if (_player2 != null)
+                {
+                    await _player2.ResumeAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Resume error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -317,11 +384,20 @@ namespace SyncPlayback
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _timer.Stop();
+            try
+            {
+                _timer.Stop();
 
-            _isClosing = true;
+                _isClosing = true;
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
+
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Window closing error: {ex.Message}");
+            }
         }
     }
 }

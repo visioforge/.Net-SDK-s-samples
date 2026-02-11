@@ -86,95 +86,91 @@ public partial class MainPage : ContentPage
     }
 
 
-        /// <summary>
-        /// Main page unloaded.
-        /// </summary>
+    /// <summary>
+    /// Main page unloaded.
+    /// </summary>
     private void MainPage_Unloaded(object? sender, EventArgs e)
     {
         // Destroy SDK
         VisioForgeX.DestroySDK();
     }
 
-        /// <summary>
-        /// Handles the bt add broadcast file click event.
-        /// </summary>
+    /// <summary>
+    /// Picks a video file and adds it to the specified collection and UI container.
+    /// </summary>
+    /// <param name="pickerTitle">Title for the file picker dialog.</param>
+    /// <param name="targetCollection">Collection to add the selected file path to.</param>
+    /// <param name="targetContainer">UI container to add the label to.</param>
+    private async Task PickAndAddVideoFileAsync(string pickerTitle, ObservableCollection<string> targetCollection, VerticalStackLayout targetContainer)
+    {
+#if MACCATALYST
+        var customFileType = new FilePickerFileType(
+            new Dictionary<DevicePlatform, IEnumerable<string>>
+            {
+                { DevicePlatform.MacCatalyst, new[] { "public.movie", "public.video", "public.mpeg-4", "public.avi", "public.mpeg" } }
+            });
+
+        var options = new PickOptions
+        {
+            PickerTitle = pickerTitle,
+            FileTypes = customFileType
+        };
+
+        FileResult file = MainThread.IsMainThread
+            ? await FilePicker.Default.PickAsync(options)
+            : await MainThread.InvokeOnMainThreadAsync(async () => await FilePicker.Default.PickAsync(options));
+
+        if (file != null)
+        {
+            targetCollection.Add(file.FullPath);
+            var label = new Label
+            {
+                Text = file.FullPath,
+                TextColor = Colors.Black,
+                Padding = new Thickness(5),
+                GestureRecognizers = { new TapGestureRecognizer() }
+            };
+            targetContainer.Children.Add(label);
+            Settings.LastPath = Path.GetDirectoryName(file.FullPath);
+        }
+#else
+        var options = new PickOptions
+        {
+            PickerTitle = pickerTitle,
+            FileTypes = new FilePickerFileType(
+                new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                    { DevicePlatform.WinUI, new[] { ".mp4", ".mov", ".avi", ".mkv", ".m4v", ".wmv", ".flv", ".webm", ".mpg", ".mpeg" } },
+                    { DevicePlatform.Android, new[] { "video/*" } },
+                    { DevicePlatform.iOS, new[] { "public.movie", "public.video" } }
+                })
+        };
+
+        var result = await FilePicker.Default.PickAsync(options);
+        if (result != null)
+        {
+            targetCollection.Add(result.FullPath);
+            var label = new Label
+            {
+                Text = result.FullPath,
+                TextColor = Colors.Black,
+                Padding = new Thickness(5),
+                GestureRecognizers = { new TapGestureRecognizer() }
+            };
+            targetContainer.Children.Add(label);
+            Settings.LastPath = Path.GetDirectoryName(result.FullPath) ?? "";
+        }
+#endif
+    }
+
+    /// <summary>
+    /// Handles the bt add broadcast file click event.
+    /// </summary>
     private async void btAddBroadcastFile_Click(object? sender, EventArgs e)
     {
         try
         {
-#if MACCATALYST
-            // Mac Catalyst specific implementation
-            var customFileType = new FilePickerFileType(
-                new Dictionary<DevicePlatform, IEnumerable<string>>
-                {
-                    { DevicePlatform.MacCatalyst, new[] { "public.movie", "public.video", "public.mpeg-4", "public.avi", "public.mpeg" } }
-                });
-            
-            var options = new PickOptions
-            {
-                PickerTitle = "Select broadcast video file",
-                FileTypes = customFileType
-            };
-            
-            // Ensure we're on the main thread
-            FileResult file = null;
-            if (MainThread.IsMainThread)
-            {
-                file = await FilePicker.Default.PickAsync(options);
-            }
-            else
-            {
-                file = await MainThread.InvokeOnMainThreadAsync(async () => 
-                    await FilePicker.Default.PickAsync(options));
-            }
-            
-            if (file != null)
-            {
-                // Add to UI for feedback
-                broadcastFolders.Add(file.FullPath);
-                var label = new Label 
-                { 
-                    Text = file.FullPath,
-                    TextColor = Colors.Black,
-                    Padding = new Thickness(5),
-                    GestureRecognizers = { new TapGestureRecognizer() }
-                };
-                lbBroadcastFolders.Children.Add(label);
-                
-                Settings.LastPath = Path.GetDirectoryName(file.FullPath);
-            }
-#else
-            // Use single file picker on all platforms
-            var options = new PickOptions
-            {
-                PickerTitle = "Select video file",
-                FileTypes = new FilePickerFileType(
-                    new Dictionary<DevicePlatform, IEnumerable<string>>
-                    {
-                        { DevicePlatform.WinUI, new[] { ".mp4", ".mov", ".avi", ".mkv", ".m4v", ".wmv", ".flv", ".webm", ".mpg", ".mpeg" } },
-                        { DevicePlatform.Android, new[] { "video/*" } },
-                        { DevicePlatform.iOS, new[] { "public.movie", "public.video" } }
-                    })
-            };
-
-            var result = await FilePicker.Default.PickAsync(options);
-            if (result != null)
-            {
-                broadcastFolders.Add(result.FullPath);
-                
-                // Add label directly to the UI
-                var label = new Label 
-                { 
-                    Text = result.FullPath,
-                    TextColor = Colors.Black,
-                    Padding = new Thickness(5),
-                    GestureRecognizers = { new TapGestureRecognizer() }
-                };
-                lbBroadcastFolders.Children.Add(label);
-                
-                Settings.LastPath = Path.GetDirectoryName(result.FullPath) ?? "";
-            }
-#endif
+            await PickAndAddVideoFileAsync("Select broadcast video file", broadcastFolders, lbBroadcastFolders);
         }
         catch (Exception ex)
         {
@@ -182,86 +178,14 @@ public partial class MainPage : ContentPage
         }
     }
 
-        /// <summary>
-        /// Handles the bt add ad file click event.
-        /// </summary>
+    /// <summary>
+    /// Handles the bt add ad file click event.
+    /// </summary>
     private async void btAddAdFile_Click(object? sender, EventArgs e)
     {
         try
         {
-#if MACCATALYST
-            // Mac Catalyst specific implementation
-            var customFileType = new FilePickerFileType(
-                new Dictionary<DevicePlatform, IEnumerable<string>>
-                {
-                    { DevicePlatform.MacCatalyst, new[] { "public.movie", "public.video", "public.mpeg-4", "public.avi", "public.mpeg" } }
-                });
-            
-            var options = new PickOptions
-            {
-                PickerTitle = "Select ad video file",
-                FileTypes = customFileType
-            };
-            
-            // Ensure we're on the main thread
-            FileResult file = null;
-            if (MainThread.IsMainThread)
-            {
-                file = await FilePicker.Default.PickAsync(options);
-            }
-            else
-            {
-                file = await MainThread.InvokeOnMainThreadAsync(async () => 
-                    await FilePicker.Default.PickAsync(options));
-            }
-            
-            if (file != null)
-            {
-                // Add to UI for feedback
-                adFolders.Add(file.FullPath);
-                var label = new Label 
-                { 
-                    Text = file.FullPath,
-                    TextColor = Colors.Black,
-                    Padding = new Thickness(5),
-                    GestureRecognizers = { new TapGestureRecognizer() }
-                };
-                lbAdFolders.Children.Add(label);
-                
-                Settings.LastPath = Path.GetDirectoryName(file.FullPath);
-            }
-#else
-            // Use single file picker on all platforms
-            var options = new PickOptions
-            {
-                PickerTitle = "Select ad video file",
-                FileTypes = new FilePickerFileType(
-                    new Dictionary<DevicePlatform, IEnumerable<string>>
-                    {
-                        { DevicePlatform.WinUI, new[] { ".mp4", ".mov", ".avi", ".mkv", ".m4v", ".wmv", ".flv", ".webm", ".mpg", ".mpeg" } },
-                        { DevicePlatform.Android, new[] { "video/*" } },
-                        { DevicePlatform.iOS, new[] { "public.movie", "public.video" } }
-                    })
-            };
-
-            var result = await FilePicker.Default.PickAsync(options);
-            if (result != null)
-            {
-                adFolders.Add(result.FullPath);
-                
-                // Add label directly to the UI
-                var label = new Label 
-                { 
-                    Text = result.FullPath,
-                    TextColor = Colors.Black,
-                    Padding = new Thickness(5),
-                    GestureRecognizers = { new TapGestureRecognizer() }
-                };
-                lbAdFolders.Children.Add(label);
-                
-                Settings.LastPath = Path.GetDirectoryName(result.FullPath) ?? "";
-            }
-#endif
+            await PickAndAddVideoFileAsync("Select ad video file", adFolders, lbAdFolders);
         }
         catch (Exception ex)
         {
@@ -269,35 +193,42 @@ public partial class MainPage : ContentPage
         }
     }
 
-        /// <summary>
-        /// Handles the bt clear ads click event.
-        /// </summary>
+    /// <summary>
+    /// Handles the bt clear ads click event.
+    /// </summary>
     private void btClearAds_Click(object? sender, EventArgs e)
     {
         adFolders.Clear();
         lbAdFolders.Children.Clear();
     }
 
-        /// <summary>
-        /// Handles the bt clear broadcast click event.
-        /// </summary>
+    /// <summary>
+    /// Handles the bt clear broadcast click event.
+    /// </summary>
     private void btClearBroadcast_Click(object? sender, EventArgs e)
     {
         broadcastFolders.Clear();
         lbBroadcastFolders.Children.Clear();
     }
 
-        /// <summary>
-        /// Error delegate.
-        /// </summary>
-    private async void errorDelegate(string error)
+    /// <summary>
+    /// Error delegate.
+    /// </summary>
+    private async void ErrorDelegate(string error)
     {
-        await DisplayAlertAsync("Error", error, "OK");
+        try
+        {
+            await DisplayAlertAsync("Error", error, "OK");
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Failed to display error alert: {ex.Message}");
+        }
     }
 
-        /// <summary>
-        /// Handles the bt start click event.
-        /// </summary>
+    /// <summary>
+    /// Handles the bt start click event.
+    /// </summary>
     private async void btStart_Click(object? sender, EventArgs e)
     {
         try
@@ -360,7 +291,7 @@ public partial class MainPage : ContentPage
 
                 if (fp == null)
                 {
-                    fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, errorDelegate);
+                    fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, ErrorDelegate);
 
                     if (fp == null)
                     {
@@ -401,7 +332,7 @@ public partial class MainPage : ContentPage
                 VFPFingerPrint? fp = _db?.GetFingerprint(source);
                 if (fp == null)
                 {
-                    fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, errorDelegate);
+                    fp = await VFPAnalyzer.GetSearchFingerprintForVideoFileAsync(source, ErrorDelegate);
                     if (fp == null)
                     {
                         await DisplayAlertAsync("Error", "Unable to get fingerprint for the video file: " + filename, "OK");
@@ -473,9 +404,10 @@ public partial class MainPage : ContentPage
         }
     }
 
-        /// <summary>
-        /// Handles the bt play click event.
-        /// </summary>
+    /// <summary>
+    /// Handles the bt play click event. Shows file information since video playback
+    ///requires MediaBlocks pipeline which is not included in this demo.
+    /// </summary>
     private async void btPlay_Click(object? sender, EventArgs e)
     {
         if (lvResults.SelectedItem == null)
@@ -483,18 +415,13 @@ public partial class MainPage : ContentPage
             return;
         }
 
-        // VideoView playback requires MediaBlocks pipeline setup
-        // For simplicity, just show the file path for now
         var selected = (ResultsViewModel)lvResults.SelectedItem;
-        await DisplayAlertAsync("Play Video", $"Selected file: {selected.DumpFile}", "OK");
-        
-        // TODO: Implement MediaBlocks pipeline for video playback
-        // Requires: UniversalSourceBlock, VideoRendererBlock, AudioRendererBlock
+        await DisplayAlertAsync("File Info", $"File: {selected.DumpFile}\nPosition: {selected.Position}", "OK");
     }
 
-        /// <summary>
-        /// Handles the bt save results click event.
-        /// </summary>
+    /// <summary>
+    /// Handles the bt save results click event.
+    /// </summary>
     private async void btSaveResults_Click(object? sender, EventArgs e)
     {
         try
@@ -603,9 +530,9 @@ public partial class MainPage : ContentPage
         }
     }
 
-        /// <summary>
-        /// Save results as xml.
-        /// </summary>
+    /// <summary>
+    /// Save results as xml.
+    /// </summary>
     private void SaveResultsAsXml(string filename)
     {
         using (var writer = new System.Xml.XmlTextWriter(filename, System.Text.Encoding.UTF8))
@@ -628,9 +555,9 @@ public partial class MainPage : ContentPage
         }
     }
 
-        /// <summary>
-        /// Sl difference value changed.
-        /// </summary>
+    /// <summary>
+    /// Sl difference value changed.
+    /// </summary>
     private void slDifference_ValueChanged(object? sender, ValueChangedEventArgs e)
     {
         if (lbDifference != null)
@@ -639,9 +566,9 @@ public partial class MainPage : ContentPage
         }
     }
 
-        /// <summary>
-        /// Handles the bt ignored area add click event.
-        /// </summary>
+    /// <summary>
+    /// Handles the bt ignored area add click event.
+    /// </summary>
     private void btIgnoredAreaAdd_Click(object? sender, EventArgs e)
     {
         var rect = new Rect()
@@ -667,9 +594,9 @@ public partial class MainPage : ContentPage
         lbIgnoredAreas.Children.Add(label);
     }
 
-        /// <summary>
-        /// Handles the bt ignored areas remove item click event.
-        /// </summary>
+    /// <summary>
+    /// Handles the bt ignored areas remove item click event.
+    /// </summary>
     private void btIgnoredAreasRemoveItem_Click(object? sender, EventArgs e)
     {
         // Since we don't have selection anymore, remove the last item
@@ -684,9 +611,9 @@ public partial class MainPage : ContentPage
         }
     }
 
-        /// <summary>
-        /// Handles the bt ignored areas remove all click event.
-        /// </summary>
+    /// <summary>
+    /// Handles the bt ignored areas remove all click event.
+    /// </summary>
     private void btIgnoredAreasRemoveAll_Click(object? sender, EventArgs e)
     {
         ignoredAreasList.Clear();
@@ -694,9 +621,9 @@ public partial class MainPage : ContentPage
         lbIgnoredAreas.Children.Clear();
     }
 
-        /// <summary>
-        /// Handles the bt db clear click event.
-        /// </summary>
+    /// <summary>
+    /// Handles the bt db clear click event.
+    /// </summary>
     private void btDBClear_Click(object? sender, EventArgs e)
     {
         if (_db != null)
@@ -707,9 +634,9 @@ public partial class MainPage : ContentPage
         lbDB.Children.Clear();
     }
 
-        /// <summary>
-        /// Add db item.
-        /// </summary>
+    /// <summary>
+    /// Add db item.
+    /// </summary>
     private void AddDBItem(VFPFingerPrint fp)
     {
         var txt = $"{fp.OriginalFilename} [{fp.Width}x{fp.Height}, {fp.OriginalDuration.ToString("g")}]";
@@ -731,32 +658,46 @@ public partial class MainPage : ContentPage
         lbDB.Children.Add(label);
     }
 
-        /// <summary>
-        /// Load db.
-        /// </summary>
+    /// <summary>
+    /// Load db.
+    /// </summary>
     private void LoadDB()
     {
-        var dbFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "mmt.db");
-        lbDBLocation.Text = $"DB file: {dbFile}";
-        
-        if (File.Exists(dbFile))
+        try
         {
-            _db = VFPFingerPrintDB.Load(dbFile);
-        }
-        else
-        {
-            _db = new VFPFingerPrintDB();
-        }
+            var dbFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "mmt.db");
+            lbDBLocation.Text = $"DB file: {dbFile}";
 
-        foreach (var item in _db.Items)
+            if (File.Exists(dbFile))
+            {
+                _db = VFPFingerPrintDB.Load(dbFile);
+            }
+            else
+            {
+                _db = new VFPFingerPrintDB();
+            }
+
+            foreach (var item in _db.Items)
+            {
+                AddDBItem(item);
+            }
+        }
+        catch (Exception ex)
         {
-            AddDBItem(item);
+            System.Diagnostics.Debug.WriteLine($"Failed to load database: {ex.Message}");
+            _db = new VFPFingerPrintDB();
+
+            // Show notification on UI thread after page is loaded
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await DisplayAlert("Warning", $"Failed to load existing database. Starting with empty database.\n\nError: {ex.Message}", "OK");
+            });
         }
     }
 
-        /// <summary>
-        /// Save db.
-        /// </summary>
+    /// <summary>
+    /// Save db.
+    /// </summary>
     private void SaveDB()
     {
         if (_db != null)
@@ -766,9 +707,9 @@ public partial class MainPage : ContentPage
         }
     }
 
-        /// <summary>
-        /// On disappearing.
-        /// </summary>
+    /// <summary>
+    /// On disappearing.
+    /// </summary>
     protected override void OnDisappearing()
     {
         base.OnDisappearing();

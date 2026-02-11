@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +19,7 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
+using System.Diagnostics;
 
 namespace video_preview_webcam_frame_capture
 {
@@ -38,12 +39,19 @@ namespace video_preview_webcam_frame_capture
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            // We have to initialize the engine on start
-            Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.Enabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.Enabled = true;
-            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.Enabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.Enabled = true;
+                Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -51,35 +59,42 @@ namespace video_preview_webcam_frame_capture
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            // Create MediaBlocksPipeline object
-            _pipeline = new MediaBlocksPipeline();
+            try
+            {
+                // Create MediaBlocksPipeline object
+                _pipeline = new MediaBlocksPipeline();
 
-            // Add default video and audio sources
-            var videoSources = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList();
-            var videoSource = new SystemVideoSourceBlock(new VideoCaptureDeviceSourceSettings(videoSources.Find(x => x.Name.Contains("920"))));
+                // Add default video and audio sources
+                var videoSources = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList();
+                var videoSource = new SystemVideoSourceBlock(new VideoCaptureDeviceSourceSettings(videoSources.Find(x => x.Name.Contains("920"))));
 
-            var audioSources = (await DeviceEnumerator.Shared.AudioSourcesAsync()).ToList();
-            var audioSource = new SystemAudioSourceBlock(audioSources[0].CreateSourceSettings());
+                var audioSources = (await DeviceEnumerator.Shared.AudioSourcesAsync()).ToList();
+                var audioSource = new SystemAudioSourceBlock(audioSources[0].CreateSourceSettings());
 
-            // Add video renderer
-            var videoRenderer = new VideoRendererBlock(_pipeline, videoView: VideoView1);
+                // Add video renderer
+                var videoRenderer = new VideoRendererBlock(_pipeline, videoView: VideoView1);
 
-            // Add audio renderer
-            var audioRenderers = (await DeviceEnumerator.Shared.AudioOutputsAsync()).ToList();
-            var audioRenderer = new AudioRendererBlock(new AudioRendererSettings(audioRenderers[0]));
+                // Add audio renderer
+                var audioRenderers = (await DeviceEnumerator.Shared.AudioOutputsAsync()).ToList();
+                var audioRenderer = new AudioRendererBlock(new AudioRendererSettings(audioRenderers[0]));
 
-            // add sample grabber
-            _videoSampleGrabber = new VideoSampleGrabberBlock(VisioForge.Core.Types.X.VideoFormatX.RGB);
-            _videoSampleGrabber.SaveLastFrame = true;
+                // add sample grabber
+                _videoSampleGrabber = new VideoSampleGrabberBlock(VisioForge.Core.Types.X.VideoFormatX.RGB);
+                _videoSampleGrabber.SaveLastFrame = true;
 
-            // Connect everything
-            _pipeline.Connect(videoSource, _videoSampleGrabber);
-            _pipeline.Connect(_videoSampleGrabber, videoRenderer);
+                // Connect everything
+                _pipeline.Connect(videoSource, _videoSampleGrabber);
+                _pipeline.Connect(_videoSampleGrabber, videoRenderer);
 
-            _pipeline.Connect(audioSource, audioRenderer);            
+                _pipeline.Connect(audioSource, audioRenderer);            
 
-            // Start preview
-            await _pipeline.StartAsync();
+                // Start preview
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -87,16 +102,30 @@ namespace video_preview_webcam_frame_capture
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            await _pipeline.StopAsync();
+            try
+            {
+                await _pipeline.StopAsync();
 
-            await _pipeline.DisposeAsync();
+                await _pipeline.DisposeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
         /// Form 1 form closing.
         /// </summary>
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
 

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Live_Video_Compositor_Demo" 
         xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        xmlns:VolumeMeterPro="clr-namespace:VisioForge.Core.UI.WPF.VolumeMeterPro;assembly=VisioForge.Core"
         mc:Ignorable="d"
         Title="Media Blocks SDK .Net - Live Video Compositor Demo"
         Height="980"
@@ -54,6 +55,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="0" BorderBrush="#673ab7" BorderThickness="2" Margin="1,0,0,2">
@@ -153,11 +155,21 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Column="3" BorderBrush="#673ab7" BorderThickness="2" Margin="2,0,1,2">
+            <Border Grid.Column="3" BorderBrush="#673ab7" BorderThickness="2" Margin="2,0,0,2">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="LOGS" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" Padding="0,8,0,0" TextAlignment="Center" Background="#673ab7" Foreground="White" />
 
                     <TextBox x:Name="mmLog" TextWrapping="Wrap" Margin="10,10,10,10" Height="200" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="4" BorderBrush="#673ab7" BorderThickness="2" Margin="2,0,1,2">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="VU" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" Padding="0,8,0,0" TextAlignment="Center" Background="#673ab7" Foreground="White" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                        <VolumeMeterPro:VolumeMeter x:Name="volumeMeterL" Width="14" Height="200" />
+                        <VolumeMeterPro:VolumeMeter x:Name="volumeMeterR" Width="14" Height="200" Margin="4,0,0,0" />
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </Grid>

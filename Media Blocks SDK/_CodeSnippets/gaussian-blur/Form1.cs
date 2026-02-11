@@ -267,12 +267,19 @@ namespace GaussianBlurDemo
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            Text += " [INITIALIZING SDK...]";
-            this.Enabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.Enabled = true;
-            Text = Text.Replace(" [INITIALIZING SDK...]", "");
-            Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+            try
+            {
+                Text += " [INITIALIZING SDK...]";
+                this.Enabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.Enabled = true;
+                Text = Text.Replace(" [INITIALIZING SDK...]", "");
+                Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -295,86 +302,93 @@ namespace GaussianBlurDemo
         /// </summary>
         private async void btnStart_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(edFilename.Text))
-            {
-                MessageBox.Show("Please select a video file first.");
-                return;
-            }
-
-            if (!File.Exists(edFilename.Text))
-            {
-                MessageBox.Show("Selected file does not exist.");
-                return;
-            }
-
-            mmError.Clear();
-
-            CreateEngine();
-
             try
             {
-                // Get media info to check streams
-                var mediaInfo = new MediaInfoReaderX(_pipeline.GetContext());
-                bool hasVideo = true;
-                bool hasAudio = true;
-                
-                if (await mediaInfo.OpenAsync(new Uri(edFilename.Text)))
+                if (string.IsNullOrEmpty(edFilename.Text))
                 {
-                    if (mediaInfo.Info.VideoStreams.Count == 0)
-                    {
-                        hasVideo = false;
-                    }
-                    else
-                    {
-                        var videoStream = mediaInfo.Info.VideoStreams[0];
-                        _videoWidth = (float)videoStream.Width;
-                        _videoHeight = (float)videoStream.Height;
-                    }
-
-                    if (mediaInfo.Info.AudioStreams.Count == 0)
-                    {
-                        hasAudio = false;
-                    }
+                    MessageBox.Show("Please select a video file first.");
+                    return;
                 }
 
-                // Create source
-                _fileSource = new UniversalSourceBlock(
-                    await UniversalSourceSettings.CreateAsync(
-                        new Uri(edFilename.Text), 
-                        renderVideo: hasVideo, 
-                        renderAudio: hasAudio));
-
-                if (hasVideo)
+                if (!File.Exists(edFilename.Text))
                 {
-                    _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+                    MessageBox.Show("Selected file does not exist.");
+                    return;
+                }
 
-                    switch (_blurMode)
+                mmError.Clear();
+
+                CreateEngine();
+
+                try
+                {
+                    // Get media info to check streams
+                    var mediaInfo = new MediaInfoReaderX(_pipeline.GetContext());
+                    bool hasVideo = true;
+                    bool hasAudio = true;
+
+                    if (await mediaInfo.OpenAsync(new Uri(edFilename.Text)))
                     {
-                        case 2: // Simple single-pass
-                            SetupSinglePassBlur();
-                            break;
-                        case 1: // High quality two-pass
-                            SetupTwoPassBlur(true);
-                            break;
-                        default: // Standard two-pass
-                            SetupTwoPassBlur(false);
-                            break;
+                        if (mediaInfo.Info.VideoStreams.Count == 0)
+                        {
+                            hasVideo = false;
+                        }
+                        else
+                        {
+                            var videoStream = mediaInfo.Info.VideoStreams[0];
+                            _videoWidth = (float)videoStream.Width;
+                            _videoHeight = (float)videoStream.Height;
+                        }
+
+                        if (mediaInfo.Info.AudioStreams.Count == 0)
+                        {
+                            hasAudio = false;
+                        }
                     }
-                }
 
-                if (hasAudio)
+                    // Create source
+                    _fileSource = new UniversalSourceBlock(
+                        await UniversalSourceSettings.CreateAsync(
+                            new Uri(edFilename.Text), 
+                            renderVideo: hasVideo, 
+                            renderAudio: hasAudio));
+
+                    if (hasVideo)
+                    {
+                        _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+
+                        switch (_blurMode)
+                        {
+                            case 2: // Simple single-pass
+                                SetupSinglePassBlur();
+                                break;
+                            case 1: // High quality two-pass
+                                SetupTwoPassBlur(true);
+                                break;
+                            default: // Standard two-pass
+                                SetupTwoPassBlur(false);
+                                break;
+                        }
+                    }
+
+                    if (hasAudio)
+                    {
+                        _audioRenderer = new AudioRendererBlock();
+                        _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
+                    }
+
+                    await _pipeline.StartAsync();
+                    _positionTimer.Start();
+                }
+                catch (Exception ex)
                 {
-                    _audioRenderer = new AudioRendererBlock();
-                    _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
+                    MessageBox.Show($"Error starting playback: {ex.Message}");
+                    mmError.Text = ex.ToString();
                 }
-
-                await _pipeline.StartAsync();
-                _positionTimer.Start();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error starting playback: {ex.Message}");
-                mmError.Text = ex.ToString();
+                Debug.WriteLine(ex);
             }
         }
 
@@ -485,18 +499,25 @@ namespace GaussianBlurDemo
         /// </summary>
         private async void cbBlurMode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool wasRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
-            
-            if (wasRunning)
+            try
             {
-                btnStop_Click(null, null);
+                bool wasRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
+
+                if (wasRunning)
+                {
+                    btnStop_Click(null, null);
+                }
+
+                _blurMode = cbBlurMode.SelectedIndex;
+
+                if (wasRunning && !string.IsNullOrEmpty(edFilename.Text))
+                {
+                    btnStart_Click(null, null);
+                }
             }
-
-            _blurMode = cbBlurMode.SelectedIndex;
-
-            if (wasRunning && !string.IsNullOrEmpty(edFilename.Text))
+            catch (Exception ex)
             {
-                btnStart_Click(null, null);
+                Debug.WriteLine(ex);
             }
         }
 
@@ -505,16 +526,23 @@ namespace GaussianBlurDemo
         /// </summary>
         private async void btnStop_Click(object sender, EventArgs e)
         {
-            _positionTimer.Stop();
-
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.StopAsync();
-                await DestroyEngineAsync();
-            }
+                _positionTimer.Stop();
 
-            lbPosition.Text = "Position: 00:00:00 / 00:00:00";
-            tbTimeline.Value = 0;
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync();
+                    await DestroyEngineAsync();
+                }
+
+                lbPosition.Text = "Position: 00:00:00 / 00:00:00";
+                tbTimeline.Value = 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -522,9 +550,16 @@ namespace GaussianBlurDemo
         /// </summary>
         private async void btnPause_Click(object sender, EventArgs e)
         {
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.PauseAsync();
+                if (_pipeline != null)
+                {
+                    await _pipeline.PauseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -533,9 +568,16 @@ namespace GaussianBlurDemo
         /// </summary>
         private async void btnResume_Click(object sender, EventArgs e)
         {
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.ResumeAsync();
+                if (_pipeline != null)
+                {
+                    await _pipeline.ResumeAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -544,14 +586,21 @@ namespace GaussianBlurDemo
         /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
-            if (_pipeline != null && _pipeline.State == PlaybackState.Play)
+            try
             {
-                var duration = await _pipeline.DurationAsync();
-                if (duration != TimeSpan.Zero)
+                if (_pipeline != null && _pipeline.State == PlaybackState.Play)
                 {
-                    var position = TimeSpan.FromSeconds(tbTimeline.Value * duration.TotalSeconds / 100);
-                    await _pipeline.Position_SetAsync(position);
+                    var duration = await _pipeline.DurationAsync();
+                    if (duration != TimeSpan.Zero)
+                    {
+                        var position = TimeSpan.FromSeconds(tbTimeline.Value * duration.TotalSeconds / 100);
+                        await _pipeline.Position_SetAsync(position);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -560,17 +609,24 @@ namespace GaussianBlurDemo
         /// </summary>
         private async void tmPosition_Tick(object sender, EventArgs e)
         {
-            if (_pipeline != null && _pipeline.State == PlaybackState.Play)
+            try
             {
-                var position = await _pipeline.Position_GetAsync();
-                var duration = await _pipeline.DurationAsync();
-
-                lbPosition.Text = $"Position: {position:hh\\:mm\\:ss} / {duration:hh\\:mm\\:ss}";
-
-                if (duration != TimeSpan.Zero)
+                if (_pipeline != null && _pipeline.State == PlaybackState.Play)
                 {
-                    tbTimeline.Value = (int)(position.TotalSeconds * 100 / duration.TotalSeconds);
+                    var position = await _pipeline.Position_GetAsync();
+                    var duration = await _pipeline.DurationAsync();
+
+                    lbPosition.Text = $"Position: {position:hh\\:mm\\:ss} / {duration:hh\\:mm\\:ss}";
+
+                    if (duration != TimeSpan.Zero)
+                    {
+                        tbTimeline.Value = (int)(position.TotalSeconds * 100 / duration.TotalSeconds);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -632,9 +688,16 @@ namespace GaussianBlurDemo
         /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _positionTimer?.Stop();
-            await DestroyEngineAsync();
-            VisioForgeX.DestroySDK();
+            try
+            {
+                _positionTimer?.Stop();
+                await DestroyEngineAsync();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

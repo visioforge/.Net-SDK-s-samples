@@ -95,9 +95,16 @@
         /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(timer1.Tag) == 0)
+            try
             {
-                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (Convert.ToInt32(timer1.Tag) == 0)
+                {
+                    await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -106,47 +113,54 @@
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            _x = 0;
-            _y = 0;
-
-            mmError.Clear();
-
-            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
-
-            MediaPlayer1.Playlist_Clear();
-            MediaPlayer1.Playlist_Add(edFilename.Text);
-
-            MediaPlayer1.Audio_PlayAudio = true;
-            MediaPlayer1.Info_UseLibMediaInfo = true;
-            MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
-
-            MediaPlayer1.Video_Renderer_SetAuto();
-
-            MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
-
-
-            MediaPlayer1.Video_Effects_GPU_Enabled = true;
-            MediaPlayer1.Video_Effects_GPU_Clear();
-
-            if (rbVRCubemap.Checked)
+            try
             {
-                vr = new GPUVideoEffectEquiangularCubemap360(true, 0, 0, 0, 80, "VR");
+                _x = 0;
+                _y = 0;
+
+                mmError.Clear();
+
+                MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
+
+                MediaPlayer1.Playlist_Clear();
+                MediaPlayer1.Playlist_Add(edFilename.Text);
+
+                MediaPlayer1.Audio_PlayAudio = true;
+                MediaPlayer1.Info_UseLibMediaInfo = true;
+                MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
+
+                MediaPlayer1.Video_Renderer_SetAuto();
+
+                MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
+
+
+                MediaPlayer1.Video_Effects_GPU_Enabled = true;
+                MediaPlayer1.Video_Effects_GPU_Clear();
+
+                if (rbVRCubemap.Checked)
+                {
+                    vr = new GPUVideoEffectEquiangularCubemap360(true, 0, 0, 0, 80, "VR");
+                }
+                else
+                {
+                    vr = new GPUVideoEffectEquirectangular360(true, 0, 0, 0, 80, "VR");
+                }
+
+                MediaPlayer1.Video_Effects_GPU_Add(vr);
+                // MediaPlayer1.Video_Effects_GPU_Add(new GPUVideoEffectEquirectangular360(true));
+
+                await MediaPlayer1.PlayAsync();
+
+                // set audio volume for each stream
+                MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
+                MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
+
+                timer1.Enabled = true;
             }
-            else
+            catch (Exception ex)
             {
-                vr = new GPUVideoEffectEquirectangular360(true, 0, 0, 0, 80, "VR");
+                Debug.WriteLine(ex);
             }
-
-            MediaPlayer1.Video_Effects_GPU_Add(vr);
-            // MediaPlayer1.Video_Effects_GPU_Add(new GPUVideoEffectEquirectangular360(true));
-
-            await MediaPlayer1.PlayAsync();
-
-            // set audio volume for each stream
-            MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
-            MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
-
-            timer1.Enabled = true;
         }
 
         /// <summary>
@@ -154,10 +168,17 @@
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.StopAsync();
+            try
+            {
+                await MediaPlayer1.StopAsync();
 
-            timer1.Enabled = false;
-            tbTimeline.Value = 0;
+                timer1.Enabled = false;
+                tbTimeline.Value = 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -165,7 +186,14 @@
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.PauseAsync();
+            try
+            {
+                await MediaPlayer1.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -173,7 +201,14 @@
         /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.ResumeAsync();
+            try
+            {
+                await MediaPlayer1.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -209,18 +244,25 @@
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Tag = 1;
-            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
-
-            int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
-            if ((value > 0) && (value < tbTimeline.Maximum))
+            try
             {
-                tbTimeline.Value = value;
+                timer1.Tag = 1;
+                tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
+
+                int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
+                if ((value > 0) && (value < tbTimeline.Maximum))
+                {
+                    tbTimeline.Value = value;
+                }
+
+                lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+
+                timer1.Tag = 0;
             }
-
-            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
-
-            timer1.Tag = 0;
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -230,7 +272,7 @@
         {
             Invoke((Action)(() =>
                                    {
-                                       mmError.Text = mmError.Text + e.Message + Environment.NewLine;
+                                       mmError.AppendText(e.Message + Environment.NewLine);
                                    }));
         }
 
@@ -311,8 +353,13 @@
         /// <summary>
         /// Form 1 form closing.
         /// </summary>
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (MediaPlayer1 != null)
+            {
+                await MediaPlayer1.StopAsync();
+            }
+
             DestroyEngine();
         }
 

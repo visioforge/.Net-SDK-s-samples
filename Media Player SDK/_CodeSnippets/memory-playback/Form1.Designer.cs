@@ -34,9 +34,9 @@ namespace memory_playback
             btOpen = new Button();
             videoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             SuspendLayout();
-            // 
+            //
             // btOpen
-            // 
+            //
             btOpen.Location = new Point(12, 400);
             btOpen.Name = "btOpen";
             btOpen.Size = new Size(539, 46);
@@ -44,18 +44,18 @@ namespace memory_playback
             btOpen.Text = "Select file and play";
             btOpen.UseVisualStyleBackColor = true;
             btOpen.Click += btOpen_Click;
-            // 
+            //
             // videoView1
-            // 
+            //
             videoView1.BackColor = Color.Black;
             videoView1.Location = new Point(12, 12);
             videoView1.Name = "videoView1";
             videoView1.Size = new Size(539, 382);
             videoView1.StatusOverlay = null;
             videoView1.TabIndex = 2;
-            // 
+            //
             // Form1
-            // 
+            //
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(571, 472);
@@ -63,7 +63,7 @@ namespace memory_playback
             Controls.Add(btOpen);
             Name = "Form1";
             Text = "Media Player SDK .Net - Memory Playback code snippet";
-            Load += Form1_Load;
+            FormClosing += Form1_FormClosing;
             ResumeLayout(false);
         }
 

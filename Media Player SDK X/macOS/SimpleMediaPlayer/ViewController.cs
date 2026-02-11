@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using ObjCRuntime;
+using UniformTypeIdentifiers;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
@@ -89,8 +90,6 @@ public partial class ViewController : NSViewController
         {
             slPosition.MaxValue = duration.TotalSeconds;
 
-            // lbTimeX.StringValue = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
-
             if (slPosition.MaxValue >= position.TotalSeconds)
             {
                 slPosition.DoubleValue = position.TotalSeconds;
@@ -121,7 +120,7 @@ public partial class ViewController : NSViewController
     {
         if (View.Window.Delegate == null)
         {
-            View.Window.Delegate = new CustomWindowDelegate();
+            View.Window.Delegate = new CustomWindowDelegate(this);
         }
 
         if (!File.Exists(edFilename.StringValue))
@@ -148,9 +147,9 @@ public partial class ViewController : NSViewController
         /// <summary>
         /// Stop async.
         /// </summary>
-    private async Task StopAsync()
+    public async Task StopAsync()
     {
-        _timer.Change(0, Timeout.Infinite);
+        _timer.Change(Timeout.Infinite, Timeout.Infinite);
 
         if (_player == null) return;
 
@@ -187,7 +186,16 @@ public partial class ViewController : NSViewController
         var dlg = NSOpenPanel.OpenPanel;
         dlg.CanChooseFiles = true;
         dlg.CanChooseDirectories = false;
-        dlg.AllowedFileTypes = new[] { "mp4", "mov", "webm", "mkv", "mp3", "m4a", "ogg", "wav" };
+        // Use AllowedContentTypes (macOS 12+) instead of deprecated AllowedFileTypes
+        dlg.AllowedContentTypes = new[]
+        {
+            UTTypes.Mpeg4Movie,
+            UTTypes.QuickTimeMovie,
+            UTTypes.Movie,
+            UTTypes.Audio,
+            UTTypes.Mp3,
+            UTTypes.Wav
+        };
 
         if (dlg.RunModal() == 1)
         {
@@ -204,7 +212,12 @@ public partial class ViewController : NSViewController
     /// <param name="sender">The sender.</param>
     partial void slPositionChanged(NSObject sender)
     {
-        var value = (sender as NSSlider).FloatValue;
+        if (sender is not NSSlider slider)
+        {
+            return;
+        }
+
+        var value = slider.FloatValue;
 
         InvokeOnMainThread(async () =>
         {
@@ -221,11 +234,25 @@ public partial class ViewController : NSViewController
 /// </summary>
 public class CustomWindowDelegate : NSWindowDelegate
 {
+    private readonly ViewController _viewController;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CustomWindowDelegate"/> class.
+    /// </summary>
+    /// <param name="viewController">The view controller.</param>
+    public CustomWindowDelegate(ViewController viewController)
+    {
+        _viewController = viewController;
+    }
+
         /// <summary>
         /// Window should close.
         /// </summary>
     public override bool WindowShouldClose(NSObject sender)
     {
+        // Stop the player before destroying the SDK
+        _viewController.StopAsync().GetAwaiter().GetResult();
+
         VisioForgeX.DestroySDK();
 
         // Return true to allow the window to close, false to cancel.

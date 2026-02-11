@@ -246,7 +246,7 @@ namespace Simple_Player_MVVM.ViewModels
         /// <summary>
         /// Backing field for SeekingValue property.
         /// </summary>
-        public double? _SeekingValue = 0;
+        private double? _SeekingValue = 0;
 
         /// <summary>
         /// Gets or sets the seeking value.
@@ -260,7 +260,7 @@ namespace Simple_Player_MVVM.ViewModels
         /// <summary>
         /// Backing field for SeekingMaximum property.
         /// </summary>
-        public double? _SeekingMaximum = null;
+        private double? _SeekingMaximum = null;
 
         /// <summary>
         /// Gets or sets the maximum seeking value.
@@ -289,7 +289,7 @@ namespace Simple_Player_MVVM.ViewModels
         /// <summary>
         /// The position timer.
         /// </summary>
-        private System.Timers.Timer _tmPosition = new System.Timers.Timer(500);
+        private System.Timers.Timer _tmPosition;
 
         /// <summary>
         /// Create engine async.
@@ -302,13 +302,19 @@ namespace Simple_Player_MVVM.ViewModels
                 await _player.DisposeAsync();
             }
 
+            if (string.IsNullOrWhiteSpace(_Filename))
+            {
+                Console.WriteLine("No file selected.");
+                return;
+            }
+
             _player = new MediaPlayerCoreX(VideoViewIntf);
 
             _player.OnError += _player_OnError;
 
             _player.Audio_Play = true;
-            
-            var sourceSettings = await UniversalSourceSettings.CreateAsync(_Filename);           
+
+            var sourceSettings = await UniversalSourceSettings.CreateAsync(_Filename);
             await _player.OpenAsync(sourceSettings);
         }
 
@@ -384,6 +390,7 @@ namespace Simple_Player_MVVM.ViewModels
             catch (Exception ex)
             {
                 // The user canceled or something went wrong
+                Debug.WriteLine($"Error opening file: {ex.Message}");
             }
             
 #endif

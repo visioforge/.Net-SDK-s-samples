@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +19,7 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Decklink;
 using VisioForge.Core.MediaBlocks.Special;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace screen_to_decklink_mb
 {
@@ -54,22 +55,29 @@ namespace screen_to_decklink_mb
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-            var devices = await DeviceEnumerator.Shared.DecklinkVideoSinksAsync();
-            foreach (var device in devices)
+            try
             {
-                cbDecklinkOutput.Items.Add(device.Name);
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+                var devices = await DeviceEnumerator.Shared.DecklinkVideoSinksAsync();
+                foreach (var device in devices)
+                {
+                    cbDecklinkOutput.Items.Add(device.Name);
+                }
+
+                if (devices.Length > 0)
+                {
+                    cbDecklinkOutput.SelectedIndex = 0;
+                }
             }
-
-            if (devices.Length > 0)
+            catch (Exception ex)
             {
-                cbDecklinkOutput.SelectedIndex = 0;
+                Debug.WriteLine(ex);
             }
         }
 
@@ -78,33 +86,40 @@ namespace screen_to_decklink_mb
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            // Create VideoCaptureCoreX object
-            _pipeline = new MediaBlocksPipeline();
-
-            // Create video renderer
-            var videoRenderer = new VideoRendererBlock(_pipeline, videoView1);
-
-            // Set screen capture with full screen enabled
-            var videoSource = new ScreenSourceBlock(CreateScreenCaptureSource());
-
-            // Add Decklink output
-            var videoSinks = await DeviceEnumerator.Shared.DecklinkVideoSinksAsync();
-            var videoSink = new DecklinkVideoSinkSettings(videoSinks[cbDecklinkOutput.SelectedIndex], DecklinkMode.HD1080p60)
+            try
             {
-                CustomVideoSize = new ResizeVideoEffect(1920, 1080)
-            };
-            var decklinkVideoOutput = new DecklinkVideoSinkBlock(videoSink);
+                // Create VideoCaptureCoreX object
+                _pipeline = new MediaBlocksPipeline();
 
-            // Video tee
-            var tee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+                // Create video renderer
+                var videoRenderer = new VideoRendererBlock(_pipeline, videoView1);
 
-            // Connect blocks
-            _pipeline.Connect(videoSource, tee);
-            _pipeline.Connect(tee, videoRenderer);
-            _pipeline.Connect(tee, decklinkVideoOutput);
+                // Set screen capture with full screen enabled
+                var videoSource = new ScreenSourceBlock(CreateScreenCaptureSource());
 
-            // Start
-            await _pipeline.StartAsync();
+                // Add Decklink output
+                var videoSinks = await DeviceEnumerator.Shared.DecklinkVideoSinksAsync();
+                var videoSink = new DecklinkVideoSinkSettings(videoSinks[cbDecklinkOutput.SelectedIndex], DecklinkMode.HD1080p60)
+                {
+                    CustomVideoSize = new ResizeVideoEffect(1920, 1080)
+                };
+                var decklinkVideoOutput = new DecklinkVideoSinkBlock(videoSink);
+
+                // Video tee
+                var tee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+
+                // Connect blocks
+                _pipeline.Connect(videoSource, tee);
+                _pipeline.Connect(tee, videoRenderer);
+                _pipeline.Connect(tee, decklinkVideoOutput);
+
+                // Start
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -112,16 +127,30 @@ namespace screen_to_decklink_mb
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            await _pipeline.StopAsync();
+            try
+            {
+                await _pipeline.StopAsync();
 
-            await _pipeline.DisposeAsync();
+                await _pipeline.DisposeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
         /// Window closing.
         /// </summary>
-        private void Window_Closing(object sender, CancelEventArgs e)
+        private async void Window_Closing(object sender, CancelEventArgs e)
         {
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
     }

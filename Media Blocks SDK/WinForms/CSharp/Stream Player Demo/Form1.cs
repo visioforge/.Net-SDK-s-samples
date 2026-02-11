@@ -111,9 +111,16 @@ namespace MediaBlocks_Memory_Player_Demo
         /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(_tmPosition.Tag) == 0)
+            try
             {
-                await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (Convert.ToInt32(_tmPosition.Tag) == 0)
+                {
+                    await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -122,54 +129,61 @@ namespace MediaBlocks_Memory_Player_Demo
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            mmError.Clear();
-
-            CreateEngine();
-
-            _pipeline.Debug_Mode = cbDebugMode.Checked;
-
-            var mediaInfo = new MediaInfoReaderX();
-            bool videoStream = true;
-            bool audioStream = true;
-            if (await mediaInfo.OpenAsync(new Uri(edFilename.Text)))
+            try
             {
-                if (mediaInfo.Info.VideoStreams.Count == 0)
+                mmError.Clear();
+
+                CreateEngine();
+
+                _pipeline.Debug_Mode = cbDebugMode.Checked;
+
+                var mediaInfo = new MediaInfoReaderX();
+                bool videoStream = true;
+                bool audioStream = true;
+                if (await mediaInfo.OpenAsync(new Uri(edFilename.Text)))
                 {
-                    videoStream = false;
+                    if (mediaInfo.Info.VideoStreams.Count == 0)
+                    {
+                        videoStream = false;
+                    }
+
+                    if (mediaInfo.Info.AudioStreams.Count == 0)
+                    {
+                        audioStream = false;
+                    }
                 }
 
-                if (mediaInfo.Info.AudioStreams.Count == 0)
+                _sourceStream = new FileStream(edFilename.Text, FileMode.Open, FileAccess.Read);
+                _source = new StreamSourceBlock(_sourceStream);
+
+                _decodeBin = new DecodeBinBlock(renderVideo: videoStream, renderAudio: audioStream);
+
+                _pipeline.Connect(_source.Output, _decodeBin.Input);
+
+                if (videoStream)
                 {
-                    audioStream = false;
+                    _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+                    _pipeline.Connect(_decodeBin.VideoOutput, _videoRenderer.Input);
                 }
+
+                if (audioStream)
+                {
+                    _audioRenderer = new AudioRendererBlock();
+                    _pipeline.Connect(_decodeBin.AudioOutput, _audioRenderer.Input);
+                }
+
+                await _pipeline.StartAsync();
+
+                // set audio volume for each stream
+                // _pipeline.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
+                // _pipeline.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
+
+                _tmPosition.Start();
             }
-
-            _sourceStream = new FileStream(edFilename.Text, FileMode.Open, FileAccess.Read);
-            _source = new StreamSourceBlock(_sourceStream);
-
-            _decodeBin = new DecodeBinBlock(renderVideo: videoStream, renderAudio: audioStream);
-
-            _pipeline.Connect(_source.Output, _decodeBin.Input);
-
-            if (videoStream)
+            catch (Exception ex)
             {
-                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
-                _pipeline.Connect(_decodeBin.VideoOutput, _videoRenderer.Input);
+                Debug.WriteLine(ex);
             }
-
-            if (audioStream)
-            {
-                _audioRenderer = new AudioRendererBlock();
-                _pipeline.Connect(_decodeBin.AudioOutput, _audioRenderer.Input);
-            }
-
-            await _pipeline.StartAsync();
-
-            // set audio volume for each stream
-            // _pipeline.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
-            // _pipeline.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
-
-            _tmPosition.Start();
         }
 
         /// <summary>
@@ -177,21 +191,28 @@ namespace MediaBlocks_Memory_Player_Demo
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            _tmPosition.Stop();
-
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.StopAsync(true);
+                _tmPosition.Stop();
+
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync(true);
+                }
+
+                tbTimeline.Value = 0;
+
+                VideoView1.Invalidate();
+
+                await DestroyEngineAsync();
+
+                _sourceStream?.Dispose();
+                _sourceStream = null;
             }
-
-            tbTimeline.Value = 0;
-
-            VideoView1.Invalidate();
-
-            await DestroyEngineAsync();
-
-            _sourceStream?.Dispose();
-            _sourceStream = null;
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -199,7 +220,14 @@ namespace MediaBlocks_Memory_Player_Demo
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            await _pipeline.PauseAsync();
+            try
+            {
+                await _pipeline.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -207,7 +235,14 @@ namespace MediaBlocks_Memory_Player_Demo
         /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
-            await _pipeline.ResumeAsync();
+            try
+            {
+                await _pipeline.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -223,14 +258,21 @@ namespace MediaBlocks_Memory_Player_Demo
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            // We have to initialize the engine on start
-            Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.Enabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.Enabled = true;
-            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Text += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.Enabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.Enabled = true;
+                Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -238,21 +280,28 @@ namespace MediaBlocks_Memory_Player_Demo
         /// </summary>
         private async void tmPosition_Tick(object sender, EventArgs e)
         {
-            _tmPosition.Tag = 1;
-
-            var position = await _pipeline.Position_GetAsync();
-            var duration = await _pipeline.DurationAsync();
-
-            tbTimeline.Maximum = (int)duration.TotalSeconds;
-
-            lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
-
-            if (tbTimeline.Maximum >= position.TotalSeconds)
+            try
             {
-                tbTimeline.Value = (int)position.TotalSeconds;
-            }
+                _tmPosition.Tag = 1;
 
-            _tmPosition.Tag = 0;
+                var position = await _pipeline.Position_GetAsync();
+                var duration = await _pipeline.DurationAsync();
+
+                tbTimeline.Maximum = (int)duration.TotalSeconds;
+
+                lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
+
+                if (tbTimeline.Maximum >= position.TotalSeconds)
+                {
+                    tbTimeline.Value = (int)position.TotalSeconds;
+                }
+
+                _tmPosition.Tag = 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -282,16 +331,23 @@ namespace MediaBlocks_Memory_Player_Demo
         /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _tmPosition.Stop();
-
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.StopAsync(true);
+                _tmPosition.Stop();
+
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync(true);
+                }
+
+                await DestroyEngineAsync();
+
+                VisioForgeX.DestroySDK();
             }
-
-            await DestroyEngineAsync();
-
-            VisioForgeX.DestroySDK();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 
 using VisioForge.Core.Types.X.AudioRenderers;
@@ -12,6 +12,7 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Special;
 using System.IO;
+using System.Diagnostics;
 
 namespace ip_camera_capture_mp4
 {
@@ -29,42 +30,49 @@ namespace ip_camera_capture_mp4
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            // create MediaBlocks pipeline
-            _pipeline = new MediaBlocksPipeline();
-
-            // video renderer
-            var videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
-
-            // RTSP camera source
-            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, audioEnabled: true);
-            var rtspSource = new RTSPSourceBlock(rtsp);
-                  
-            // configure MP4 output
-            var mp4Output = new MP4OutputBlock(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4"));
-
-            // add video tee
-            var videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
-            _pipeline.Connect(rtspSource, videoTee);
-
-            // connect video tee to video renderer and MP4 output
-            _pipeline.Connect(videoTee, videoRenderer);
-            _pipeline.Connect(videoTee, mp4Output);
-
-            // audio output
-            if (rtsp.IsAudioAvailable())
+            try
             {
-                var audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
+                // create MediaBlocks pipeline
+                _pipeline = new MediaBlocksPipeline();
 
-                var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))[0];
-                var audioOutput = new AudioRendererBlock(new AudioRendererSettings(audioOutputDevice));
+                // video renderer
+                var videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
-                _pipeline.Connect(rtspSource, audioTee);
-                _pipeline.Connect(audioTee, audioOutput);
-                _pipeline.Connect(audioTee, mp4Output);
+                // RTSP camera source
+                var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, audioEnabled: true);
+                var rtspSource = new RTSPSourceBlock(rtsp);
+
+                // configure MP4 output
+                var mp4Output = new MP4OutputBlock(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4"));
+
+                // add video tee
+                var videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+                _pipeline.Connect(rtspSource, videoTee);
+
+                // connect video tee to video renderer and MP4 output
+                _pipeline.Connect(videoTee, videoRenderer);
+                _pipeline.Connect(videoTee, mp4Output);
+
+                // audio output
+                if (rtsp.IsAudioAvailable())
+                {
+                    var audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
+
+                    var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))[0];
+                    var audioOutput = new AudioRendererBlock(new AudioRendererSettings(audioOutputDevice));
+
+                    _pipeline.Connect(rtspSource, audioTee);
+                    _pipeline.Connect(audioTee, audioOutput);
+                    _pipeline.Connect(audioTee, mp4Output);
+                }
+
+                // start
+                await _pipeline.StartAsync();
             }
-
-            // start
-            await _pipeline.StartAsync();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -72,9 +80,16 @@ namespace ip_camera_capture_mp4
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            await _pipeline.StopAsync();
+            try
+            {
+                await _pipeline.StopAsync();
 
-            await _pipeline.DisposeAsync();
+                await _pipeline.DisposeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -82,14 +97,28 @@ namespace ip_camera_capture_mp4
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            await VisioForgeX.InitSDKAsync();
+            try
+            {
+                await VisioForgeX.InitSDKAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
         /// Form 1 form closing.
         /// </summary>
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
     }

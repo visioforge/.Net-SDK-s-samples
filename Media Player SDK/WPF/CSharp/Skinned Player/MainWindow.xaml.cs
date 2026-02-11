@@ -7,6 +7,7 @@ using VisioForge.Core.MediaPlayer;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.UI.Skins;
+using System.Diagnostics;
 
 namespace Skinned_Player
 {
@@ -102,9 +103,6 @@ namespace Skinned_Player
             var skinFile = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Skins", "Default.vfskin");
             SkinManager.LoadFromFile(skinFile);
 
-            //var skinPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Skins", "Default");
-            //SkinManager.LoadFromFolder(skinPath);
-
             InitializeComponent();
 
             StateChanged += MainWindowStateChangeRaised;
@@ -152,9 +150,16 @@ namespace Skinned_Player
         /// </summary>
         private async void PlayerControls_OnAction(object sender, SkinActionEventArgs e)
         {
-            if (e.Type == SkinElementType.FullScreen)
+            try
             {
-                await ToggleFullScreenAsync();
+                if (e.Type == SkinElementType.FullScreen)
+                {
+                    await ToggleFullScreenAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -186,7 +191,6 @@ namespace Skinned_Player
         /// </summary>
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //VideoView1.Height = e.NewSize.Height - playerControls.ActualHeight - 45;
         }
 
         #region Full screen
@@ -255,7 +259,6 @@ namespace Skinned_Player
                 ResizeMode = ResizeMode.NoResize;
                 WindowState = WindowState.Maximized;
                 WindowStyle = WindowStyle.None;
-                //Topmost = true;
 
                 Left = 0;
                 Top = 0;
@@ -291,7 +294,6 @@ namespace Skinned_Player
 
                 WindowStyle = WindowStyle.SingleBorderWindow;
                 WindowState = WindowState.Normal;
-                //Topmost = false;
                 ResizeMode = ResizeMode.CanResize;
 
                 playerControls.Visibility = Visibility.Visible;
@@ -306,9 +308,16 @@ namespace Skinned_Player
         /// </summary>
         private async void MediaPlayer1_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (fullScreen)
+            try
             {
-                await ToggleFullScreenAsync();
+                if (fullScreen)
+                {
+                    await ToggleFullScreenAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -327,19 +336,9 @@ namespace Skinned_Player
 
                 DestroyEngine();
 
-                MediaPlayer1?.Dispose();
-                MediaPlayer1 = null;
-
                 disposedValue = true;
             }
         }
-
-        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-        // ~MainWindow()
-        // {
-        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-        //     Dispose(disposing: false);
-        // }
 
         /// <summary>
         /// Dispose.
@@ -349,6 +348,11 @@ namespace Skinned_Player
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Dispose();
         }
     }
 }

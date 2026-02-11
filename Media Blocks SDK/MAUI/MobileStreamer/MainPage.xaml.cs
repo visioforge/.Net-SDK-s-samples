@@ -86,30 +86,37 @@ namespace MobileStreamer
         /// </summary>
         private async void MainPage_Loaded(object? sender, EventArgs e)
         {
-#if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
-            await RequestCameraPermissionAsync();
-            await RequestMicPermissionAsync();
-#endif
-
-#if __IOS__ && !__MACCATALYST__
-            RequestPhotoPermission();
-#endif
-
-            // cameras
-            _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
-            if (_cameras.Length > 0)
+            try
             {
-                btCamera.Text = _cameras[0].DisplayName;
-            }
+    #if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
+                await RequestCameraPermissionAsync();
+                await RequestMicPermissionAsync();
+    #endif
 
-            // mics
-            _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
-            if (_mics.Length > 0)
+    #if __IOS__ && !__MACCATALYST__
+                RequestPhotoPermission();
+    #endif
+
+                // cameras
+                _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
+                if (_cameras.Length > 0)
+                {
+                    btCamera.Text = _cameras[0].DisplayName;
+                }
+
+                // mics
+                _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
+                if (_mics.Length > 0)
+                {
+                    btMic.Text = _mics[0].DisplayName;
+                }
+
+                Window.Destroying += Window_Destroying;
+            }
+            catch (Exception ex)
             {
-                btMic.Text = _mics[0].DisplayName;
+                Debug.WriteLine(ex);
             }
-
-            Window.Destroying += Window_Destroying;
         }
 
         /// <summary>
@@ -175,16 +182,23 @@ namespace MobileStreamer
         /// </summary>
         private async void Window_Destroying(object? sender, EventArgs e)
         {
-            if (_pipeline != null)
+            try
             {
-                _pipeline.OnError -= Core_OnError;
-                await _pipeline.StopAsync();
+                if (_pipeline != null)
+                {
+                    _pipeline.OnError -= Core_OnError;
+                    await _pipeline.StopAsync();
 
-                _pipeline.Dispose();
-                _pipeline = null;
+                    _pipeline.Dispose();
+                    _pipeline = null;
+                }
+
+                VisioForgeX.DestroySDK();
             }
-
-            VisioForgeX.DestroySDK();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -239,7 +253,14 @@ namespace MobileStreamer
         /// </summary>
         private async void btStop_Clicked(object? sender, EventArgs e)
         {
-            await StopAllAsync();
+            try
+            {
+                await StopAllAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -370,17 +391,24 @@ namespace MobileStreamer
         /// </summary>
         private async void btStartYouTube_Clicked(object? sender, EventArgs e)
         {
-            await StopAllAsync();
+            try
+            {
+                await StopAllAsync();
 
-            CreateEngine();
+                CreateEngine();
 
-            await ConfigurePreviewAsync();
+                await ConfigurePreviewAsync();
 
-            _sink = new YouTubeSinkBlock(new YouTubeSinkSettings(edKey.Text));
+                _sink = new YouTubeSinkBlock(new YouTubeSinkSettings(edKey.Text));
 
-            ConfigureCapture();
-            
-            await _pipeline.StartAsync();
+                ConfigureCapture();
+
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -388,17 +416,24 @@ namespace MobileStreamer
         /// </summary>
         private async void btStartFacebook_Clicked(object? sender, EventArgs e)
         {
-            await StopAllAsync();
+            try
+            {
+                await StopAllAsync();
 
-            CreateEngine();
+                CreateEngine();
 
-            await ConfigurePreviewAsync();
+                await ConfigurePreviewAsync();
 
-            _sink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(edKey.Text));
+                _sink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(edKey.Text));
 
-            ConfigureCapture();
+                ConfigureCapture();
 
-            await _pipeline.StartAsync();
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -406,18 +441,25 @@ namespace MobileStreamer
         /// </summary>
         private async void btStartRTMP_Clicked(object? sender, EventArgs e)
         {
-            await StopAllAsync();
+            try
+            {
+                await StopAllAsync();
 
-            CreateEngine();
+                CreateEngine();
 
-            await ConfigurePreviewAsync();
+                await ConfigurePreviewAsync();
 
-            // streaming to RTMP server
-            _sink = new RTMPSinkBlock(new RTMPSinkSettings() { Location = edKey.Text });
+                // streaming to RTMP server
+                _sink = new RTMPSinkBlock(new RTMPSinkSettings() { Location = edKey.Text });
 
-            ConfigureCapture();
+                ConfigureCapture();
 
-            await _pipeline.StartAsync();
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

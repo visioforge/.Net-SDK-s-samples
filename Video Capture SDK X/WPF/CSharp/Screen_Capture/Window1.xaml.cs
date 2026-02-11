@@ -27,6 +27,7 @@ namespace Screen_Capture_X
     using VisioForge.Core.Types.X.VideoCapture;
     using VisioForge.Core.UI;
     using VisioForge.Core.UI.WinForms.Dialogs;
+    using VisioForge.Core.Types.X.VideoEffects;
     using VisioForge.Core.UI.WPF.Dialogs.OutputFormats;
     using VisioForge.Core.VideoCaptureX;
 
@@ -177,6 +178,11 @@ namespace Screen_Capture_X
             // get handle of the window
             source.WindowHandle = windowCaptureForm.CapturedWindowHandle;
 
+            if (cbMouseHighlight.IsChecked == true)
+            {
+                source.MouseHighlight = new MouseHighlightSettings();
+            }
+
             return source;
         }
 
@@ -214,6 +220,11 @@ namespace Screen_Capture_X
 
             source.CaptureCursor = cbScreenCapture_GrabMouseCursor.IsChecked == true;
             source.MonitorIndex = screenID;
+
+            if (cbMouseHighlight.IsChecked == true)
+            {
+                source.MouseHighlight = new MouseHighlightSettings();
+            }
 
             return source;
         }

@@ -1,4 +1,4 @@
-﻿using Android;
+using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -10,6 +10,7 @@ using Avalonia.ReactiveUI;
 using Simple_Player_MVVM.ViewModels;
 using SimplePlayerMVVM;
 using System;
+using System.Diagnostics;
 
 namespace Simple_Player_MVVM.Android
 {
@@ -63,11 +64,18 @@ namespace Simple_Player_MVVM.Android
         /// </summary>
         private async void RequestPermissionsAsync()
         {
-            RequestPermissions(
-                new String[]{
-                        Manifest.Permission.Internet,
-                        Manifest.Permission.ReadExternalStorage,
-                        Manifest.Permission.ReadMediaVideo}, 1004);
+            try
+            {
+                RequestPermissions(
+                    new String[]{
+                            Manifest.Permission.Internet,
+                            Manifest.Permission.ReadExternalStorage,
+                            Manifest.Permission.ReadMediaVideo}, 1004);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

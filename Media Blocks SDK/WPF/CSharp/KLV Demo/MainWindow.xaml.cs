@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +25,7 @@ using VisioForge.Core.Metadata.KLV;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Metadata;
 using VisioForge.Core.Types.X.Sinks;
+using System.Diagnostics;
 
 namespace KLV_Demo
 {
@@ -56,14 +57,21 @@ namespace KLV_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -177,10 +185,17 @@ namespace KLV_Demo
         /// </summary>
         private async void btStartExtract_Click(object sender, RoutedEventArgs e)
         {
-            await DestroyEngineAsync();
-            CreateExtractEngine();
+            try
+            {
+                await DestroyEngineAsync();
+                CreateExtractEngine();
 
-            await _pipeline.StartAsync();
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -188,14 +203,21 @@ namespace KLV_Demo
         /// </summary>
         private async void btStopExtract_Click(object sender, RoutedEventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
+                if (_pipeline == null)
+                {
+                    return;
+                }
+
+                await _pipeline.StopAsync();
+
+                await DestroyEngineAsync();
             }
-
-            await _pipeline.StopAsync();
-
-            await DestroyEngineAsync();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         //private async void btStartRemux_Click(object sender, RoutedEventArgs e)

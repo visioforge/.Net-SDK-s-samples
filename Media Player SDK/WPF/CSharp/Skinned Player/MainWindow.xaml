@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Skinned_Player"
-        xmlns:skins="clr-namespace:VisioForge.Core.UI.WPF.Skins;assembly=VisioForge.Core" 
+        xmlns:skins="clr-namespace:VisioForge.Core.UI.WPF.Skins;assembly=VisioForge.Core"
         xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
         mc:Ignorable="d"
-        Title="Media Player SDK .Net - Skinned Player" Height="1080" Width="1920" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged"
+        Title="Media Player SDK .Net - Skinned Player" Height="1080" Width="1920" Loaded="Window_Loaded" Closing="Window_Closing" SizeChanged="Window_SizeChanged"
         Background="Green" Icon="visioforge_main_icon.ico">
 
     <!--Add the WindowChrome object-->
@@ -24,7 +24,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
                             <Grid x:Name="LayoutRoot" Background="Transparent" Width="44" Height="30">
-                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" FontFamily="Segoe MDL2 Assets" FontSize="10" 
+                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" FontFamily="Segoe MDL2 Assets" FontSize="10"
                                    Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"
                                    RenderOptions.ClearTypeHint="Auto" TextOptions.TextRenderingMode="Aliased"  TextOptions.TextFormattingMode="Display"/>
                             </Grid>
@@ -90,9 +90,9 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                     <Button Style="{StaticResource MinimizeButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
                             Command="{x:Static SystemCommands.MinimizeWindowCommand}"/>
-                    <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}" 
+                    <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}"
                             Command="{x:Static SystemCommands.RestoreWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Restore"/>
-                    <Button x:Name="MaximizeButton" Visibility="Visible" Style="{StaticResource MaximizeButtonStyle}" 
+                    <Button x:Name="MaximizeButton" Visibility="Visible" Style="{StaticResource MaximizeButtonStyle}"
                             Command="{x:Static SystemCommands.MaximizeWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Maximize" />
                     <Button Style="{StaticResource CloseButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Close"
                             Command="{x:Static SystemCommands.CloseWindowCommand}"/>
@@ -101,8 +101,8 @@
 
             <!--App content-->
             <Grid Grid.Row="1" x:Name="AppArea">
-               
-                <wpf:VideoView 
+
+                <wpf:VideoView
                     x:Name="VideoView1"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
@@ -112,15 +112,15 @@
 
                 <skins:SkinPlaylist
                     x:Name="playlist"
-                    SkinName="Default" 
-                    HorizontalAlignment="Right" 
+                    SkinName="Default"
+                    HorizontalAlignment="Right"
                     VerticalAlignment="Stretch">
                 </skins:SkinPlaylist>
 
                 <skins:SkinPlayerControls
                     x:Name="playerControls"
-                    SkinName="Default" 
-                    HorizontalAlignment="Stretch" 
+                    SkinName="Default"
+                    HorizontalAlignment="Stretch"
                     VerticalAlignment="Bottom"
                     Height="150">
                 </skins:SkinPlayerControls>

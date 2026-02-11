@@ -3,7 +3,8 @@ using Android.Views;
 using System.Globalization;
 using VisioForge.Core;
 using VisioForge.Core.MediaPlayerX;
-using Xamarin.Essentials;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Storage;
 
 namespace MediaPlayer
 {
@@ -66,7 +67,7 @@ namespace MediaPlayer
         /// <summary>
         /// The seeking flag.
         /// </summary>
-        private bool isSeeking = false;
+        private bool __isSeeking = false;
 
         /// <summary>
         /// On create.
@@ -78,7 +79,7 @@ namespace MediaPlayer
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            Platform.Init(this, savedInstanceState);
 
             tmPosition.Elapsed += tmPosition_Elapsed;
 
@@ -104,12 +105,12 @@ namespace MediaPlayer
 
             sbTimeline.StartTrackingTouch += delegate (object sender, SeekBar.StartTrackingTouchEventArgs args)
             {
-                isSeeking = true;
+                _isSeeking = true;
             };
 
             sbTimeline.StopTrackingTouch += delegate (object sender, SeekBar.StopTrackingTouchEventArgs args)
             {
-                isSeeking = false;
+                _isSeeking = false;
             };
 
             lbPosition = FindViewById<TextView>(Resource.Id.lbPosition);
@@ -120,8 +121,16 @@ namespace MediaPlayer
         /// <summary>
         /// On destroy.
         /// </summary>
-        protected override void OnDestroy()
+        protected override async void OnDestroy()
         {
+            if (_player != null)
+            {
+                _player.OnStart -= _player_OnStart;
+                await _player.StopAsync();
+                await _player.DisposeAsync();
+                _player = null;
+            }
+
             VisioForgeX.DestroySDK();
 
             base.OnDestroy();
@@ -140,7 +149,7 @@ namespace MediaPlayer
         /// </summary>
         private void sbTimeline_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
         {
-            if (isSeeking)
+            if (_isSeeking)
             {
                 _player.Position_Set(TimeSpan.FromMilliseconds(e.Progress));
             }
@@ -153,7 +162,7 @@ namespace MediaPlayer
         {
             try
             {
-                Thread.Sleep(200);
+                await Task.Delay(200);
 
                 var file = await FilePicker.PickAsync();
                 if (file == null)
@@ -207,7 +216,7 @@ namespace MediaPlayer
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            isSeeking = false;
+            _isSeeking = false;
 
             await _player.OpenAsync(new Uri(edURL.Text));
             await _player.PlayAsync();
@@ -228,7 +237,7 @@ namespace MediaPlayer
         /// </summary>
         private void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (isSeeking)
+            if (_isSeeking)
             {
                 return;
             }
@@ -267,11 +276,14 @@ namespace MediaPlayer
         /// <summary>
         /// On pause.
         /// </summary>
-        protected override void OnPause()
+        protected override async void OnPause()
         {
             base.OnPause();
 
-            _player.StopAsync();
+            if (_player != null)
+            {
+                await _player.StopAsync();
+            }
         }
 
         /// <summary>
@@ -279,7 +291,7 @@ namespace MediaPlayer
         /// </summary>
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }

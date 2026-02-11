@@ -42,10 +42,10 @@ namespace read_file_info
             // check file playable
             if (cbIsPlayable.Checked)
             {
-                FilePlaybackError ErrorCode;
-                string ErrorText;
+                FilePlaybackError errorCode;
+                string errorText;
 
-                if (MediaInfoReader.IsFilePlayable(filename, out ErrorCode, out ErrorText))
+                if (MediaInfoReader.IsFilePlayable(filename, out errorCode, out errorText))
                 {
                     mmInfo.Text += "This file is playable" + Environment.NewLine;
                 }

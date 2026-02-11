@@ -38,26 +38,26 @@
             this.edUsername = new System.Windows.Forms.TextBox();
             this.edPassword = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(22, 82);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Sources";
-            // 
+            //
             // cbSources
-            // 
+            //
             this.cbSources.FormattingEnabled = true;
             this.cbSources.Location = new System.Drawing.Point(26, 105);
             this.cbSources.Name = "cbSources";
             this.cbSources.Size = new System.Drawing.Size(752, 28);
             this.cbSources.TabIndex = 1;
-            // 
+            //
             // btSearch
-            // 
+            //
             this.btSearch.Location = new System.Drawing.Point(291, 21);
             this.btSearch.Name = "btSearch";
             this.btSearch.Size = new System.Drawing.Size(229, 49);
@@ -65,9 +65,9 @@
             this.btSearch.Text = "Search sources";
             this.btSearch.UseVisualStyleBackColor = true;
             this.btSearch.Click += new System.EventHandler(this.btSearch_Click);
-            // 
+            //
             // btReadProfiles
-            // 
+            //
             this.btReadProfiles.Location = new System.Drawing.Point(255, 147);
             this.btReadProfiles.Name = "btReadProfiles";
             this.btReadProfiles.Size = new System.Drawing.Size(135, 49);
@@ -75,42 +75,42 @@
             this.btReadProfiles.Text = "Read profiles";
             this.btReadProfiles.UseVisualStyleBackColor = true;
             this.btReadProfiles.Click += new System.EventHandler(this.btReadProfiles_Click);
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(22, 223);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(61, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Profiles";
-            // 
+            //
             // cbProfiles
-            // 
+            //
             this.cbProfiles.FormattingEnabled = true;
             this.cbProfiles.Location = new System.Drawing.Point(26, 246);
             this.cbProfiles.Name = "cbProfiles";
             this.cbProfiles.Size = new System.Drawing.Size(752, 28);
             this.cbProfiles.TabIndex = 5;
-            // 
+            //
             // edUsername
-            // 
+            //
             this.edUsername.Location = new System.Drawing.Point(26, 158);
             this.edUsername.Name = "edUsername";
             this.edUsername.Size = new System.Drawing.Size(100, 26);
             this.edUsername.TabIndex = 6;
             this.edUsername.Text = "admin";
-            // 
+            //
             // edPassword
-            // 
+            //
             this.edPassword.Location = new System.Drawing.Point(132, 158);
             this.edPassword.Name = "edPassword";
             this.edPassword.Size = new System.Drawing.Size(100, 26);
             this.edPassword.TabIndex = 7;
-            this.edPassword.Text = "password";
-            // 
+            this.edPassword.Text = "";
+            //
             // ONVIFDiscovery
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 300);

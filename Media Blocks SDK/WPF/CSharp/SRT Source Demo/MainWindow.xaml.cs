@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Security.Policy;
@@ -92,41 +92,48 @@ namespace SRT_Source_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
-
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            var settings = await SRTSourceSettings.CreateAsync(edURL.Text);
-            _source = new SRTSourceBlock(settings);
-
-            bool hasVideo = true;
-            bool hasAudio = true;
-
-            if (settings.GetInfo()?.VideoStreams.Count == 0)
+            try
             {
-                hasVideo = false;
-            }
+                CreateEngine();
 
-            if (settings.GetInfo()?.AudioStreams.Count == 0)
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+                var settings = await SRTSourceSettings.CreateAsync(edURL.Text);
+                _source = new SRTSourceBlock(settings);
+
+                bool hasVideo = true;
+                bool hasAudio = true;
+
+                if (settings.GetInfo()?.VideoStreams.Count == 0)
+                {
+                    hasVideo = false;
+                }
+
+                if (settings.GetInfo()?.AudioStreams.Count == 0)
+                {
+                    hasAudio = false;
+                }
+
+                if (hasVideo)
+                {
+                    _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+                    _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
+                }
+
+                if (hasAudio)
+                {
+                    _audioRenderer = new AudioRendererBlock() { IsSync = false };
+                    _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
+                }
+
+                await _pipeline.StartAsync();
+
+                tmRecording.Start();
+            }
+            catch (Exception ex)
             {
-                hasAudio = false;
+                Debug.WriteLine(ex);
             }
-
-            if (hasVideo)
-            {
-                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
-                _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
-            }
-
-            if (hasAudio)
-            {
-                _audioRenderer = new AudioRendererBlock() { IsSync = false };
-                _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
-            }
-
-            await _pipeline.StartAsync();
-
-            tmRecording.Start();
         }
 
         /// <summary>
@@ -134,9 +141,16 @@ namespace SRT_Source_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            tmRecording.Stop();            
+            try
+            {
+                tmRecording.Stop();            
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -144,18 +158,25 @@ namespace SRT_Source_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            CreateEngine();
+                CreateEngine();
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+                tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

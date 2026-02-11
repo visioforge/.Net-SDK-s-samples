@@ -1,18 +1,18 @@
 using Microsoft.Win32;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using VisioForge.Core;
 using VisioForge.Core.MediaPlayer;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.MediaPlayer;
+using System.Diagnostics;
 
 namespace Custom_Source_Player
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml.
-    /// Custom Source Player demo demonstrates how to use MediaPlayerCore 
+    /// Custom Source Player demo demonstrates how to use MediaPlayerCore
     /// with a custom DirectShow source filter (MediaPlayerSourceMode.CustomSource).
     /// </summary>
     public partial class MainWindow : Window
@@ -115,29 +115,36 @@ namespace Custom_Source_Player
         /// </summary>
         private async void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _timerFlag = true;
-
-            if (_player == null)
+            try
             {
-                return;
-            }
+                _timerFlag = true;
 
-            var position = await _player.Position_Get_TimeAsync();
-            var duration = await _player.Duration_TimeAsync();
-
-            Dispatcher.Invoke(() =>
-            {
-                tbTimeline.Maximum = (int)duration.TotalSeconds;
-
-                lbTime.Text = position.ToString(@"hh\:mm\:ss") + " / " + duration.ToString(@"hh\:mm\:ss");
-
-                if (tbTimeline.Maximum >= position.TotalSeconds)
+                if (_player == null)
                 {
-                    tbTimeline.Value = (int)position.TotalSeconds;
+                    return;
                 }
-            });
 
-            _timerFlag = false;
+                var position = await _player.Position_Get_TimeAsync();
+                var duration = await _player.Duration_TimeAsync();
+
+                Dispatcher.Invoke(() =>
+                {
+                    tbTimeline.Maximum = (int)duration.TotalSeconds;
+
+                    lbTime.Text = position.ToString(@"hh\:mm\:ss") + " / " + duration.ToString(@"hh\:mm\:ss");
+
+                    if (tbTimeline.Maximum >= position.TotalSeconds)
+                    {
+                        tbTimeline.Value = (int)position.TotalSeconds;
+                    }
+                });
+
+                _timerFlag = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -149,7 +156,7 @@ namespace Custom_Source_Player
             {
                 _player.OnError -= Player_OnError;
                 _player.OnStop -= Player_OnStop;
-                Thread.Sleep(500);
+                await Task.Delay(500);
                 await _player.DisposeAsync();
                 _player = null;
             }
@@ -176,9 +183,16 @@ namespace Custom_Source_Player
         /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!_timerFlag && _player != null)
+            try
             {
-                await _player.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (!_timerFlag && _player != null)
+                {
+                    await _player.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -187,43 +201,50 @@ namespace Custom_Source_Player
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            // Validate CLSID
-            string clsid = edFilterCLSID.Text.Trim();
-            if (string.IsNullOrEmpty(clsid))
+            try
             {
-                MessageBox.Show(this, "Please specify a custom source filter CLSID.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
+                // Validate CLSID
+                string clsid = edFilterCLSID.Text.Trim();
+                if (string.IsNullOrEmpty(clsid))
+                {
+                    MessageBox.Show(this, "Please specify a custom source filter CLSID.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
 
-            // Validate file
-            if (string.IsNullOrEmpty(edFilename.Text))
+                // Validate file
+                if (string.IsNullOrEmpty(edFilename.Text))
+                {
+                    MessageBox.Show(this, "Please specify a file to play.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                await DestroyEngineAsync();
+
+                CreateEngine();
+
+                _player.Debug_Mode = cbDebugMode.IsChecked == true;
+
+                // Set audio output device
+                _player.Audio_OutputDevice = cbAudioOutput.Text;
+
+                // Configure custom source mode
+                _player.Source_Mode = MediaPlayerSourceMode.CustomSource;
+                _player.Source_Custom_CLSID = clsid;
+
+                // Add file to playlist
+                _player.Playlist_Clear();
+                _player.Playlist_Add(edFilename.Text);
+
+                // Start playback
+                await _player.PlayAsync();
+
+                // Start position/duration update timer
+                _timer.Start();
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show(this, "Please specify a file to play.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                Debug.WriteLine(ex);
             }
-
-            await DestroyEngineAsync();
-
-            CreateEngine();
-
-            _player.Debug_Mode = cbDebugMode.IsChecked == true;
-
-            // Set audio output device
-            _player.Audio_OutputDevice = cbAudioOutput.Text;
-
-            // Configure custom source mode
-            _player.Source_Mode = MediaPlayerSourceMode.CustomSource;
-            _player.Source_Custom_CLSID = clsid;
-
-            // Add file to playlist
-            _player.Playlist_Clear();
-            _player.Playlist_Add(edFilename.Text);
-
-            // Start playback
-            await _player.PlayAsync();
-
-            // Start position/duration update timer
-            _timer.Start();
         }
 
         /// <summary>
@@ -231,9 +252,16 @@ namespace Custom_Source_Player
         /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            if (_player != null)
+            try
             {
-                await _player.PauseAsync();
+                if (_player != null)
+                {
+                    await _player.PauseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -242,9 +270,16 @@ namespace Custom_Source_Player
         /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
-            if (_player != null)
+            try
             {
-                await _player.ResumeAsync();
+                if (_player != null)
+                {
+                    await _player.ResumeAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -253,17 +288,24 @@ namespace Custom_Source_Player
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _timer.Stop();
-
-            if (_player != null)
+            try
             {
-                await _player.StopAsync();
-                await DestroyEngineAsync();
-                _player = null;
-            }
+                _timer.Stop();
 
-            tbTimeline.Value = 0;
-            lbTime.Text = "00:00:00 / 00:00:00";
+                if (_player != null)
+                {
+                    await _player.StopAsync();
+                    await DestroyEngineAsync();
+                    _player = null;
+                }
+
+                tbTimeline.Value = 0;
+                lbTime.Text = "00:00:00 / 00:00:00";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -282,11 +324,18 @@ namespace Custom_Source_Player
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _timer.Stop();
+            try
+            {
+                _timer.Stop();
 
-            _isClosing = true;
+                _isClosing = true;
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

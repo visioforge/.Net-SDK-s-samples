@@ -14,6 +14,8 @@ using Android.Runtime;
 using System.Globalization;
 using Xamarin.Essentials;
 using Android;
+using System.Diagnostics;
+using Activity = Android.App.Activity;
 
 
 namespace MediaPlayer
@@ -134,8 +136,15 @@ namespace MediaPlayer
         /// </summary>
         private async void _pipeline_OnStart(object sender, EventArgs e)
         {
-            var duration = await _pipeline.DurationAsync();
-            sbTimeline.Max = (int)duration.TotalMilliseconds;
+            try
+            {
+                var duration = await _pipeline.DurationAsync();
+                sbTimeline.Max = (int)duration.TotalMilliseconds;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -170,8 +179,22 @@ namespace MediaPlayer
         /// <summary>
         /// Called when the activity is being destroyed.
         /// </summary>
-        protected override void OnDestroy()
+        protected override async void OnDestroy()
         {
+            try
+            {
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync();
+                    await _pipeline.DisposeAsync();
+                    _pipeline = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
             VisioForgeX.DestroySDK();
 
             base.OnDestroy();
@@ -242,9 +265,16 @@ namespace MediaPlayer
         /// </summary>
         private async void sbTimeline_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
         {
-            if (isSeeking)
+            try
             {
-                await _pipeline.Position_SetAsync(TimeSpan.FromMilliseconds(e.Progress));
+                if (isSeeking)
+                {
+                    await _pipeline.Position_SetAsync(TimeSpan.FromMilliseconds(e.Progress));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -287,19 +317,26 @@ namespace MediaPlayer
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
+                if (_pipeline == null)
+                {
+                    return;
+                }
+
+                tmPosition.Stop();
+
+                await DestroyEngineAsync();
+
+                RunOnUiThread(() =>
+                {
+                    sbTimeline.Progress = 0;
+                });
             }
-
-            tmPosition.Stop();
-
-            await DestroyEngineAsync();
-
-            RunOnUiThread(() =>
+            catch (Exception ex)
             {
-                sbTimeline.Progress = 0;
-            });
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -312,20 +349,27 @@ namespace MediaPlayer
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
-            }
+                if (_pipeline == null)
+                {
+                    return;
+                }
 
-            if (btPause.Text == "Pause")
-            {
-                await _pipeline.PauseAsync();
-                btPause.Text = "Resume";
+                if (btPause.Text == "Pause")
+                {
+                    await _pipeline.PauseAsync();
+                    btPause.Text = "Resume";
+                }
+                else
+                {
+                    await _pipeline.ResumeAsync();
+                    btPause.Text = "Pause";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await _pipeline.ResumeAsync();
-                btPause.Text = "Pause";
+                Debug.WriteLine(ex);
             }
         }
 
@@ -339,42 +383,49 @@ namespace MediaPlayer
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            CreateEngine();
-
-            isSeeking = false;
-
-            var mediaInfo = new MediaInfoReaderX();
-            bool videoStream = true;
-            bool audioStream = true;
-            if (await mediaInfo.OpenAsync(new Uri(edURL.Text)))
+            try
             {
-                if (mediaInfo.Info.VideoStreams.Count == 0)
+                CreateEngine();
+
+                isSeeking = false;
+
+                var mediaInfo = new MediaInfoReaderX();
+                bool videoStream = true;
+                bool audioStream = true;
+                if (await mediaInfo.OpenAsync(new Uri(edURL.Text)))
                 {
-                    videoStream = false;
+                    if (mediaInfo.Info.VideoStreams.Count == 0)
+                    {
+                        videoStream = false;
+                    }
+
+                    if (mediaInfo.Info.AudioStreams.Count == 0)
+                    {
+                        audioStream = false;
+                    }
                 }
 
-                if (mediaInfo.Info.AudioStreams.Count == 0)
+                _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(edURL.Text, renderVideo: videoStream, renderAudio: audioStream));
+
+                if (videoStream)
                 {
-                    audioStream = false;
+                    _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
                 }
+
+                if (audioStream)
+                {
+                    _audioRenderer = new AudioRendererBlock();
+                    _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
+                }
+
+                await _pipeline.StartAsync();
+
+                tmPosition.Start();
             }
-
-            _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(edURL.Text, renderVideo: videoStream, renderAudio: audioStream));
-
-            if (videoStream)
+            catch (Exception ex)
             {
-                _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
+                Debug.WriteLine(ex);
             }
-
-            if (audioStream)
-            {
-                _audioRenderer = new AudioRendererBlock();
-                _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
-            }
-
-            await _pipeline.StartAsync();
-
-            tmPosition.Start();
         }
 
         /// <summary>
@@ -395,42 +446,49 @@ namespace MediaPlayer
         /// </summary>
         private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (isSeeking)
-            {
-                return;
-            }
-
-            var duration = await _pipeline.DurationAsync();
-            var pos = await _pipeline.Position_GetAsync();
-            var progress = (int)pos.TotalMilliseconds;
-
             try
             {
-                RunOnUiThread(() =>
+                if (isSeeking)
                 {
-                    if (_pipeline == null)
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    sbTimeline.Max = (int)duration.TotalMilliseconds;
+                var duration = await _pipeline.DurationAsync();
+                var pos = await _pipeline.Position_GetAsync();
+                var progress = (int)pos.TotalMilliseconds;
 
-                    if (progress > sbTimeline.Max)
+                try
+                {
+                    RunOnUiThread(() =>
                     {
-                        sbTimeline.Progress = sbTimeline.Max;
-                    }
-                    else
-                    {
-                        sbTimeline.Progress = progress;
-                    }
+                        if (_pipeline == null)
+                        {
+                            return;
+                        }
 
-                    // This is where the received data is passed
-                    lbPosition.Text = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}/{duration.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
-                });
+                        sbTimeline.Max = (int)duration.TotalMilliseconds;
+
+                        if (progress > sbTimeline.Max)
+                        {
+                            sbTimeline.Progress = sbTimeline.Max;
+                        }
+                        else
+                        {
+                            sbTimeline.Progress = progress;
+                        }
+
+                        // This is where the received data is passed
+                        lbPosition.Text = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}/{duration.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                    });
+                }
+                catch (Exception exception)
+                {
+                    System.Diagnostics.Debug.WriteLine(exception);
+                }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(exception);
+                Debug.WriteLine(ex);
             }
         }
 

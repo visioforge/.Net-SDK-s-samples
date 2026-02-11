@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using AVFoundation;
 using ObjCRuntime;
 using VisioForge.Core;
@@ -147,30 +147,37 @@ public partial class ViewController : NSViewController
         /// </summary>
     private async void cbVideoFormat_SelectionChanged(object sender, EventArgs e)
     {
-        cbVideoFrameRate.RemoveAll();
-
-        if (cbVideoSource.SelectedIndex != -1 && e != null)
+        try
         {
-            var deviceName = cbVideoSource.SelectedValue.ToString();
-            var format = cbVideoFormat.SelectedValue.ToString();
-            if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
-            {
-                var device =
-                    (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x =>
-                        x.DisplayName == deviceName);
-                if (device != null)
-                {
-                    var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
-                    if (formatItem != null)
-                    {
-                        // build int range from tuple (min, max)    
-                        var frameRateList = formatItem.GetFrameRateRangeAsStringList();
-                        foreach (var item in frameRateList) cbVideoFrameRate.Add(new NSString(item));
+            cbVideoFrameRate.RemoveAll();
 
-                        if (frameRateList.Length > 0) cbVideoFrameRate.Select(new NSString(frameRateList[0]));
+            if (cbVideoSource.SelectedIndex != -1 && e != null)
+            {
+                var deviceName = cbVideoSource.SelectedValue.ToString();
+                var format = cbVideoFormat.SelectedValue.ToString();
+                if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+                {
+                    var device =
+                        (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x =>
+                            x.DisplayName == deviceName);
+                    if (device != null)
+                    {
+                        var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
+                        if (formatItem != null)
+                        {
+                            // build int range from tuple (min, max)    
+                            var frameRateList = formatItem.GetFrameRateRangeAsStringList();
+                            foreach (var item in frameRateList) cbVideoFrameRate.Add(new NSString(item));
+
+                            if (frameRateList.Length > 0) cbVideoFrameRate.Select(new NSString(frameRateList[0]));
+                        }
                     }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
         }
     }
 
@@ -179,23 +186,30 @@ public partial class ViewController : NSViewController
         /// </summary>
     private async void cbAudioSource_SelectionChanged(object sender, EventArgs e)
     {
-        if (cbAudioSource.SelectedIndex != -1 && e != null)
+        try
         {
-            var deviceName = cbAudioSource.SelectedValue.ToString();
-            if (!string.IsNullOrEmpty(deviceName))
+            if (cbAudioSource.SelectedIndex != -1 && e != null)
             {
-                cbAudioFormat.RemoveAll();
-
-                var device =
-                    (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x =>
-                        x.DisplayName == deviceName);
-                if (device != null)
+                var deviceName = cbAudioSource.SelectedValue.ToString();
+                if (!string.IsNullOrEmpty(deviceName))
                 {
-                    foreach (var format in device.Formats) cbAudioFormat.Add(new NSString(format.Name));
+                    cbAudioFormat.RemoveAll();
 
-                    if (device.Formats.Count > 0) cbAudioFormat.Select(new NSString(device.Formats[0].Name));
+                    var device =
+                        (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x =>
+                            x.DisplayName == deviceName);
+                    if (device != null)
+                    {
+                        foreach (var format in device.Formats) cbAudioFormat.Add(new NSString(format.Name));
+
+                        if (device.Formats.Count > 0) cbAudioFormat.Select(new NSString(device.Formats[0].Name));
+                    }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
         }
     }
 
@@ -204,24 +218,31 @@ public partial class ViewController : NSViewController
         /// </summary>
     private async void cbVideoSource_SelectionChanged(object sender, EventArgs e)
     {
-        if (cbVideoSource.SelectedIndex != -1)
+        try
         {
-            var deviceName = cbVideoSource.SelectedValue.ToString();
-
-            if (!string.IsNullOrEmpty(deviceName))
+            if (cbVideoSource.SelectedIndex != -1)
             {
-                cbVideoFormat.RemoveAll();
+                var deviceName = cbVideoSource.SelectedValue.ToString();
 
-                var device =
-                    (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x =>
-                        x.DisplayName == deviceName);
-                if (device != null)
+                if (!string.IsNullOrEmpty(deviceName))
                 {
-                    foreach (var item in device.VideoFormats) cbVideoFormat.Add(new NSString(item.Name));
+                    cbVideoFormat.RemoveAll();
 
-                    if (device.VideoFormats.Count > 0) cbVideoFormat.Select(new NSString(device.VideoFormats[0].Name));
+                    var device =
+                        (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x =>
+                            x.DisplayName == deviceName);
+                    if (device != null)
+                    {
+                        foreach (var item in device.VideoFormats) cbVideoFormat.Add(new NSString(item.Name));
+
+                        if (device.VideoFormats.Count > 0) cbVideoFormat.Select(new NSString(device.VideoFormats[0].Name));
+                    }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
         }
     }
 
@@ -342,6 +363,13 @@ public class CustomWindowDelegate : NSWindowDelegate
         /// </summary>
     public override bool WindowShouldClose(NSObject sender)
     {
+        if (_pipeline != null)
+        {
+            _pipeline.StopAsync().GetAwaiter().GetResult();
+            _pipeline.DisposeAsync().GetAwaiter().GetResult();
+            _pipeline = null;
+        }
+
         VisioForgeX.DestroySDK();
 
         // Return true to allow the window to close, false to cancel.

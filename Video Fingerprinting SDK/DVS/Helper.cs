@@ -8,54 +8,9 @@
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
     using VisioForge.Core.MediaInfoReaderX;
-    using VisioForge.Core.VideoFingerPrinting;
 
     public static class Helper
     {
-        /// <summary>
-        /// Gets the IWin32Window from a WPF visual.
-        /// </summary>
-        /// <param name="visual">The WPF visual.</param>
-        /// <returns>The IWin32Window.</returns>
-        public static System.Windows.Forms.IWin32Window GetIWin32Window(this System.Windows.Media.Visual visual)
-        {
-            var source = System.Windows.PresentationSource.FromVisual(visual) as System.Windows.Interop.HwndSource;
-            System.Windows.Forms.IWin32Window win = new OldWindow(source.Handle);
-            return win;
-        }
-
-        /// <summary>
-        /// Represents an old window for IWin32Window implementation.
-        /// </summary>
-        private class OldWindow : System.Windows.Forms.IWin32Window
-        {
-            /// <summary>
-            /// The handle.
-            /// </summary>
-            private readonly System.IntPtr _handle;
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="OldWindow"/> class.
-            /// </summary>
-            /// <param name="handle">The window handle.</param>
-            public OldWindow(System.IntPtr handle)
-            {
-                this._handle = handle;
-            }
-
-            #region IWin32Window Members
-
-            /// <summary>
-            /// Gets the handle.
-            /// </summary>
-            System.IntPtr System.Windows.Forms.IWin32Window.Handle
-            {
-                get { return this._handle; }
-            }
-
-            #endregion
-        }
-
         /// <summary>
         /// Get image for file.
         /// </summary>
@@ -83,21 +38,32 @@
         /// Converts WinForms Bitmap to WPF BitmapSource.
         /// </summary>
         /// <param name="bitmap">
-        /// Source bitmap.
+        /// Source bitmap. Will be disposed after conversion.
         /// </param>
         /// <returns>
         /// Returns WPF BitmapSource.
         /// </returns>
-        /// <summary>
-        /// Bitmap conv.
-        /// </summary>
         private static BitmapSource BitmapConv(System.Drawing.Bitmap bitmap)
         {
-            IntPtr bitmapHandle = bitmap.GetHbitmap();
-            BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
-                bitmapHandle, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-            DeleteObject(bitmapHandle);
-            return bitmapSource;
+            try
+            {
+                IntPtr bitmapHandle = bitmap.GetHbitmap();
+                try
+                {
+                    BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                        bitmapHandle, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                    return bitmapSource;
+                }
+                finally
+                {
+                    DeleteObject(bitmapHandle);
+                }
+            }
+            finally
+            {
+                // Dispose the source bitmap to prevent GDI resource leak
+                bitmap.Dispose();
+            }
         }
 
         /// <summary>

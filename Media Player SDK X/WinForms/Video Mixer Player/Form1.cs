@@ -58,7 +58,7 @@ namespace Video_Mixer_Player
         /// </summary>
         private void btAddFile_Click(object sender, System.EventArgs e)
         {
-            var openFileDialog1 = new OpenFileDialog();
+            using var openFileDialog1 = new OpenFileDialog();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 lbSourceFiles.Items.Add(openFileDialog1.FileName);
@@ -184,6 +184,7 @@ namespace Video_Mixer_Player
             _compositor.OnError += (senderX, args) =>
             {
                 Debug.WriteLine(args.Message);
+                BeginInvoke(() => MessageBox.Show(args.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error));
             };
 
             await AddFileSourceAsync(lbSourceFiles.Items[0].ToString(), new Rect(0, 0, 1920, 1080));
@@ -210,8 +211,27 @@ namespace Video_Mixer_Player
         /// <summary>
         /// Form 1 form closing.
         /// </summary>
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            tmPosition.Stop();
+
+            if (_compositor != null)
+            {
+                await _compositor.StopAsync();
+
+                foreach (var input in _inputs)
+                {
+                    input.Dispose();
+                }
+                _inputs.Clear();
+
+                _videoRendererOutput?.Dispose();
+                _videoRendererOutput = null;
+
+                await _compositor.DisposeAsync();
+                _compositor = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
     }

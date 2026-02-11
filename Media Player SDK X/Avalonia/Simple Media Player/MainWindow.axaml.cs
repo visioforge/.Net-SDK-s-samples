@@ -23,6 +23,7 @@ using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI.Avalonia;
+using Avalonia.Platform.Storage;
 
 using System.Reactive.Linq;
 
@@ -102,7 +103,7 @@ namespace Simple_Media_Player
             {
                 _player.OnError -= Player_OnError;
                 _player.OnStop -= Player_OnStop;
-                Thread.Sleep(500);
+                await Task.Delay(500);
                 await _player.DisposeAsync();
                 _player = null;
             }
@@ -113,15 +114,27 @@ namespace Simple_Media_Player
         /// </summary>
         private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_player == null)
+            try
             {
-                return;
+                _tmPosition?.Stop();
+                _tmPosition?.Dispose();
+                _tmPosition = null;
+
+                if (_player != null)
+                {
+                    await _player.StopAsync();
+                    await DestroyEngineAsync();
+                }
+
+                VideoView1?.Dispose();
+                VideoView1 = null;
+
+                VisioForgeX.DestroySDK();
             }
-
-            _player.Stop();
-            await DestroyEngineAsync();
-
-            VisioForgeX.DestroySDK();
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Window closing error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -148,29 +161,36 @@ namespace Simple_Media_Player
         /// </summary>
         private async void MainWindow_Activated(object sender, EventArgs e)
         {
-            if (_initialized)
+            try
             {
-                return;
+                if (_initialized)
+                {
+                    return;
+                }
+
+                _initialized = true;
+
+                InitControls();
+
+                InitPlayer();
+
+                Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
+                _player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+                AudioOutputDeviceInfo[] audioOutputs = await _player.Audio_OutputDevicesAsync(_audioOutputDeviceAPI);
+                foreach (var item in audioOutputs)
+                {
+                    AudioOutputDevices.Add(item.DisplayName);
+                }
+
+                if (AudioOutputDevices.Count > 0)
+                {
+                    cbAudioOutputDevice.SelectedIndex = 0;
+                }
             }
-
-            _initialized = true;
-
-            InitControls();
-
-            InitPlayer();
-
-            Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
-            _player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            AudioOutputDeviceInfo[] audioOutputs = await _player.Audio_OutputDevicesAsync(_audioOutputDeviceAPI);
-            foreach (var item in audioOutputs)
+            catch (Exception ex)
             {
-                AudioOutputDevices.Add(item.DisplayName);
-            }
-
-            if (AudioOutputDevices.Count > 0)
-            {
-                cbAudioOutputDevice.SelectedIndex = 0;
+                System.Diagnostics.Debug.WriteLine($"MainWindow_Activated error: {ex.Message}");
             }
         }
 
@@ -188,11 +208,6 @@ namespace Simple_Media_Player
         /// Flag to prevent recursive timeline updates.
         /// </summary>
         private volatile bool _tbTimelineApplyingValue;
-
-        /// <summary>
-        /// Flag to indicate if the object has been disposed.
-        /// </summary>
-        private bool disposedValue;
 
         /// <summary>
         /// Init controls.
@@ -264,13 +279,22 @@ namespace Simple_Media_Player
         /// </summary>
         private async void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
-#pragma warning disable CS0618 // Type or member is obsolete
-            var ofd = new OpenFileDialog();
-#pragma warning restore CS0618 // Type or member is obsolete
-            string[] files = await ofd.ShowAsync(this);
-            if (files != null && files.Length > 0)
+            try
             {
-                edFilenameOrURL.Text = files[0];
+                var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                {
+                    Title = "Select media file",
+                    AllowMultiple = false
+                });
+
+                if (files != null && files.Count > 0)
+                {
+                    edFilenameOrURL.Text = files[0].Path.LocalPath;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Select file error: {ex.Message}");
             }
         }
 
@@ -279,21 +303,28 @@ namespace Simple_Media_Player
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            tbSpeed.Value = 10;
-            _player.Debug_Mode = cbDebugMode.IsChecked == true;
+            try
+            {
+                tbSpeed.Value = 10;
+                _player.Debug_Mode = cbDebugMode.IsChecked == true;
 
-            string source = edFilenameOrURL.Text;
+                string source = edFilenameOrURL.Text;
 
-            _player.Audio_Play = cbPlayAudio.IsChecked == true;
+                _player.Audio_Play = cbPlayAudio.IsChecked == true;
 
-            var audioOutputs = await _player.Audio_OutputDevicesAsync(_audioOutputDeviceAPI);
-            var audioOutputDevice = audioOutputs.First(device => device.DisplayName == cbAudioOutputDevice.SelectedItem.ToString());
-            _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+                var audioOutputs = await _player.Audio_OutputDevicesAsync(_audioOutputDeviceAPI);
+                var audioOutputDevice = audioOutputs.First(device => device.DisplayName == cbAudioOutputDevice.SelectedItem.ToString());
+                _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
-            await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(source)));
-            await _player.PlayAsync();
+                await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(source)));
+                await _player.PlayAsync();
 
-            _tmPosition.Start();
+                _tmPosition.Start();
+            }
+            catch (Exception ex)
+            {
+                Log.Add($"Start error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -301,12 +332,22 @@ namespace Simple_Media_Player
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _tmPosition.Stop();
+            try
+            {
+                _tmPosition.Stop();
 
-            await _player.StopAsync();
+                if (_player != null)
+                {
+                    await _player.StopAsync();
+                }
 
-            tbTimeline.Value = 0;
-            lbTimeline.Text = "00:00:00 / 00:00:00";
+                tbTimeline.Value = 0;
+                lbTimeline.Text = "00:00:00 / 00:00:00";
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Stop error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -314,7 +355,17 @@ namespace Simple_Media_Player
         /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
-            await _player.ResumeAsync();
+            try
+            {
+                if (_player != null)
+                {
+                    await _player.ResumeAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Resume error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -322,7 +373,17 @@ namespace Simple_Media_Player
         /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            await _player.PauseAsync();
+            try
+            {
+                if (_player != null)
+                {
+                    await _player.PauseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Pause error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -360,9 +421,16 @@ namespace Simple_Media_Player
         /// </summary>
         private async void tbTimeline_Scroll()
         {
-            if (_tbTimelineApplyingValue)
+            try
             {
-                await _player.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (_tbTimelineApplyingValue && _player != null)
+                {
+                    await _player.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Seek error: {ex.Message}");
             }
         }
 
@@ -394,12 +462,19 @@ namespace Simple_Media_Player
         /// </summary>
         private async void tbSpeed_Scroll()
         {
-            if (_player == null)
+            try
             {
-                return;
-            }
+                if (_player == null)
+                {
+                    return;
+                }
 
-            await _player.Rate_SetAsync(tbSpeed.Value / 10.0);
+                await _player.Rate_SetAsync(tbSpeed.Value / 10.0);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Speed change error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -430,64 +505,35 @@ namespace Simple_Media_Player
         /// </summary>
         private async void btReadInfo_Click(object sender, RoutedEventArgs e)
         {
-            Info.Clear();
-
-            var infoReader = new MediaInfoReaderX(_player);
-            await infoReader.OpenAsync(new Uri(edFilenameOrURL.Text));
-
-            if (infoReader.Info.VideoStreams.Count > 0)
+            try
             {
-                Info.Add("Video streams:");
-                foreach (var video in infoReader.Info.VideoStreams)
+                Info.Clear();
+
+                var infoReader = new MediaInfoReaderX(_player);
+                await infoReader.OpenAsync(new Uri(edFilenameOrURL.Text));
+
+                if (infoReader.Info.VideoStreams.Count > 0)
                 {
-                    Info.Add($"{video.Width}x{video.Height}, {video.FrameRate:F2} fps, Duration: {video.Duration.ToString()}");
+                    Info.Add("Video streams:");
+                    foreach (var video in infoReader.Info.VideoStreams)
+                    {
+                        Info.Add($"{video.Width}x{video.Height}, {video.FrameRate:F2} fps, Duration: {video.Duration.ToString()}");
+                    }
+                }
+
+                if (infoReader.Info.AudioStreams.Count > 0)
+                {
+                    Info.Add("Audio streams:");
+                    foreach (var audio in infoReader.Info.AudioStreams)
+                    {
+                        Info.Add($"{audio.SampleRate} Hz, {audio.Channels} channels, Duration: {audio.Duration.ToString()}");
+                    }
                 }
             }
-
-            if (infoReader.Info.AudioStreams.Count > 0)
+            catch (Exception ex)
             {
-                Info.Add("Audio streams:");
-                foreach (var audio in infoReader.Info.AudioStreams)
-                {
-                    Info.Add($"{audio.SampleRate} Hz, {audio.Channels} channels, Duration: {audio.Duration.ToString()}");
-                }
+                Info.Add($"Error reading info: {ex.Message}");
             }
-        }
-
-        /// <summary>
-        /// Dispose.
-        /// </summary>
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                _tmPosition?.Dispose();
-                _tmPosition = null;
-
-                VideoView1?.Dispose();
-                VideoView1 = null;
-
-                disposedValue = true;
-            }
-        }
-
-        /// <summary>
-        /// Finalizes an instance of the <see cref="MainWindow"/> class.
-        /// </summary>
-        ~MainWindow()
-        {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: false);
-        }
-
-        /// <summary>
-        /// Dispose.
-        /// </summary>
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
         }
     }
 }

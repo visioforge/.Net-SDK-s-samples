@@ -17,6 +17,7 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
+using System.Diagnostics;
 
 
 namespace MediaBlocks_Simple_Player_3D_Demo_WPF
@@ -56,32 +57,39 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-            _timer = new System.Timers.Timer(500);
-            _timer.Elapsed += _timer_Elapsed;
-
-            var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
-            cbAudioOutput.Items.Clear();
-            if (audioOutputDevices.Length > 0)
+            try
             {
-                foreach (var item in audioOutputDevices)
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+                _timer = new System.Timers.Timer(500);
+                _timer.Elapsed += _timer_Elapsed;
+
+                var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
+                cbAudioOutput.Items.Clear();
+                if (audioOutputDevices.Length > 0)
                 {
-                    cbAudioOutput.Items.Add(item.DisplayName);
+                    foreach (var item in audioOutputDevices)
+                    {
+                        cbAudioOutput.Items.Add(item.DisplayName);
+                    }
+
+                    cbAudioOutput.SelectedIndex = 0;
                 }
 
-                cbAudioOutput.SelectedIndex = 0;
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+
+                // Initialize 3D scene
+                Initialize3DScene();
             }
-
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-
-            // Initialize 3D scene
-            Initialize3DScene();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -273,24 +281,31 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
         /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _timerFlag = true;
-
-            var position = await _pipeline.Position_GetAsync();
-            var duration = await _pipeline.DurationAsync();
-
-            Dispatcher.Invoke((Action)(() =>
+            try
             {
-                tbTimeline.Maximum = (int)duration.TotalSeconds;
+                _timerFlag = true;
 
-                lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
+                var position = await _pipeline.Position_GetAsync();
+                var duration = await _pipeline.DurationAsync();
 
-                if (tbTimeline.Maximum >= position.TotalSeconds)
+                Dispatcher.Invoke((Action)(() =>
                 {
-                    tbTimeline.Value = (int)position.TotalSeconds;
-                }
-            }));
+                    tbTimeline.Maximum = (int)duration.TotalSeconds;
 
-            _timerFlag = false;
+                    lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
+
+                    if (tbTimeline.Maximum >= position.TotalSeconds)
+                    {
+                        tbTimeline.Value = (int)position.TotalSeconds;
+                    }
+                }));
+
+                _timerFlag = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -340,9 +355,16 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
         /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!_timerFlag && _pipeline != null)
+            try
             {
-                await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (!_timerFlag && _pipeline != null)
+                {
+                    await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -351,19 +373,26 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            edLog.Clear();
+            try
+            {
+                edLog.Clear();
 
-            await CreateEngineAsync();
+                await CreateEngineAsync();
 
-            _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
+                _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
 
-            await _pipeline.StartAsync();
+                await _pipeline.StartAsync();
 
-            _timer.Start();
+                _timer.Start();
 
-            // Show and start cube rotation animation when playback starts
-            _cubeContainer.Visibility = Visibility.Visible;
-            _animationTimer.Start();
+                // Show and start cube rotation animation when playback starts
+                _cubeContainer.Visibility = Visibility.Visible;
+                _animationTimer.Start();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -371,16 +400,23 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _timer.Stop();
-            _animationTimer.Stop();
-            _cubeContainer.Visibility = Visibility.Hidden;
-
-            if (_pipeline != null)
+            try
             {
-                await StopEngineAsync();
-            }
+                _timer.Stop();
+                _animationTimer.Stop();
+                _cubeContainer.Visibility = Visibility.Hidden;
 
-            tbTimeline.Value = 0;
+                if (_pipeline != null)
+                {
+                    await StopEngineAsync();
+                }
+
+                tbTimeline.Value = 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -388,8 +424,15 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
         /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            await _pipeline.PauseAsync();
-            _animationTimer.Stop();
+            try
+            {
+                await _pipeline.PauseAsync();
+                _animationTimer.Stop();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -397,8 +440,15 @@ namespace MediaBlocks_Simple_Player_3D_Demo_WPF
         /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
-            await _pipeline.ResumeAsync();
-            _animationTimer.Start();
+            try
+            {
+                await _pipeline.ResumeAsync();
+                _animationTimer.Start();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

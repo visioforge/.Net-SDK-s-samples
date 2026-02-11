@@ -205,46 +205,53 @@ namespace Simple_Player_MB_MAUI
         /// </summary>
         private async void tmPosition_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
-            if (_pipeline == null)
-            {
-                return;
-            }
-
             try
             {
-                var pos = await _pipeline.Position_GetAsync();
-                var progress = (int)pos.TotalMilliseconds;
-
-                await MainThread.InvokeOnMainThreadAsync(async () =>
+                if (_pipeline == null)
                 {
-                    if (_pipeline == null)
+                    return;
+                }
+
+                try
+                {
+                    var pos = await _pipeline.Position_GetAsync();
+                    var progress = (int)pos.TotalMilliseconds;
+
+                    await MainThread.InvokeOnMainThreadAsync(async () =>
                     {
-                        return;
-                    }
+                        if (_pipeline == null)
+                        {
+                            return;
+                        }
 
-                    _isTimerUpdate = true;
+                        _isTimerUpdate = true;
 
-                    slSeeking.Maximum = (await _pipeline.DurationAsync()).TotalMilliseconds;
+                        slSeeking.Maximum = (await _pipeline.DurationAsync()).TotalMilliseconds;
 
-                    if (progress > slSeeking.Maximum)
-                    {
-                        slSeeking.Value = slSeeking.Maximum;
-                    }
-                    else
-                    {
-                        slSeeking.Value = progress;
-                    }
+                        if (progress > slSeeking.Maximum)
+                        {
+                            slSeeking.Value = slSeeking.Maximum;
+                        }
+                        else
+                        {
+                            slSeeking.Value = progress;
+                        }
 
-                    // This is where the received data is passed
-                    lbPosition.Text = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
-                    lbDuration.Text = $"{(await _pipeline.DurationAsync()).ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                        // This is where the received data is passed
+                        lbPosition.Text = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                        lbDuration.Text = $"{(await _pipeline.DurationAsync()).ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
 
-                    _isTimerUpdate = false;
-                });
+                        _isTimerUpdate = false;
+                    });
+                }
+                catch (Exception exception)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Error in timer update: {exception.Message}");
+                }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error in timer update: {exception.Message}");
+                Debug.WriteLine(ex);
             }
         }
 

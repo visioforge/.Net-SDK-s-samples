@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,6 +17,7 @@ namespace webcam_preview
     using VisioForge.Core.Types.X.Output;
     using VisioForge.Core.Types.X.Sources;
     using VisioForge.Core.Types.X.VideoCapture;
+using System.Diagnostics;
 
     public partial class Form1 : Form
     {
@@ -56,22 +57,29 @@ namespace webcam_preview
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            // We have to initialize the engine on start
-            Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.Enabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.Enabled = true;
-            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.Enabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.Enabled = true;
+                Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+                DeviceEnumerator.Shared.OnVideoSourceAdded += DeviceEnumerator_OnVideoSourceAdded;
+                DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+                DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
 
-            await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
-            await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
-            await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
+                await DeviceEnumerator.Shared.StartVideoSourceMonitorAsync();
+                await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
+                await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
 
-            Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Text += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -127,24 +135,31 @@ namespace webcam_preview
         /// </summary>
         private async void cbVideoInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbVideoInputFormat.Items.Clear();
-
-            var devices = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList();
-            var deviceItem = devices.Find(device => device.DisplayName == cbVideoInputDevice.Text);
-            if (deviceItem == null)
+            try
             {
-                return;
+                cbVideoInputFormat.Items.Clear();
+
+                var devices = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList();
+                var deviceItem = devices.Find(device => device.DisplayName == cbVideoInputDevice.Text);
+                if (deviceItem == null)
+                {
+                    return;
+                }
+
+                foreach (var format in deviceItem.VideoFormats)
+                {
+                    cbVideoInputFormat.Items.Add(format.Name);
+                }
+
+                if (cbVideoInputFormat.Items.Count > 0)
+                {
+                    cbVideoInputFormat.SelectedIndex = 0;
+                    cbVideoInputFormat_SelectedIndexChanged(null, null);
+                }
             }
-
-            foreach (var format in deviceItem.VideoFormats)
+            catch (Exception ex)
             {
-                cbVideoInputFormat.Items.Add(format.Name);
-            }
-
-            if (cbVideoInputFormat.Items.Count > 0)
-            {
-                cbVideoInputFormat.SelectedIndex = 0;
-                cbVideoInputFormat_SelectedIndexChanged(null, null);
+                Debug.WriteLine(ex);
             }
         }
 
@@ -153,72 +168,79 @@ namespace webcam_preview
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            CreateEngine();
-
-            // set debug settings
-            _pipeline.Debug_Mode = cbDebugMode.Checked;
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            _pipeline.Debug_Telemetry = cbTelemetry.Checked;
-            mmLog.Clear();
-
-            // video source
-            VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-
-            var deviceName = cbVideoInputDevice.Text;
-            var format = cbVideoInputFormat.Text;
-            if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+            try
             {
-                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList().Find(x => x.DisplayName == deviceName);
-                if (device != null)
+                CreateEngine();
+
+                // set debug settings
+                _pipeline.Debug_Mode = cbDebugMode.Checked;
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+                _pipeline.Debug_Telemetry = cbTelemetry.Checked;
+                mmLog.Clear();
+
+                // video source
+                VideoCaptureDeviceSourceSettings videoSourceSettings = null;
+
+                var deviceName = cbVideoInputDevice.Text;
+                var format = cbVideoInputFormat.Text;
+                if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
                 {
-                    var formatItem = device.VideoFormats.ToList().Find(x => x.Name == format);
-                    if (formatItem != null)
+                    var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList().Find(x => x.DisplayName == deviceName);
+                    if (device != null)
                     {
-                        videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                        var formatItem = device.VideoFormats.ToList().Find(x => x.Name == format);
+                        if (formatItem != null)
                         {
-                            Format = formatItem.ToFormat()
-                        };
+                            videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                            {
+                                Format = formatItem.ToFormat()
+                            };
 
-                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
+                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
+                        }
                     }
                 }
-            }
 
-            var videoSource = new SystemVideoSourceBlock(videoSourceSettings);
+                var videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
-            // audio source
-            IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
+                // audio source
+                IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
 
-            deviceName = cbAudioInputDevice.Text;
-            format = cbAudioInputFormat.Text;
-            if (!string.IsNullOrEmpty(deviceName))
-            {
-                var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).ToList().Find(x => x.DisplayName == deviceName);
-                if (device != null)
+                deviceName = cbAudioInputDevice.Text;
+                format = cbAudioInputFormat.Text;
+                if (!string.IsNullOrEmpty(deviceName))
                 {
-                    var formatItem = device.Formats.ToList().Find(x => x.Name == format);
-                    if (formatItem != null)
+                    var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).ToList().Find(x => x.DisplayName == deviceName);
+                    if (device != null)
                     {
-                        audioSourceSettings = device.CreateSourceSettings(formatItem.ToFormat());
+                        var formatItem = device.Formats.ToList().Find(x => x.Name == format);
+                        if (formatItem != null)
+                        {
+                            audioSourceSettings = device.CreateSourceSettings(formatItem.ToFormat());
+                        }
                     }
                 }
+
+                var audioSource = new SystemAudioSourceBlock(audioSourceSettings);
+
+                // audio sink
+                var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).ToList().Find(x => x.DisplayName == cbAudioOutputDevice.Text);
+                var audioRenderer = new AudioRendererBlock(new AudioRendererSettings(audioOutputDevice));
+
+                // video renderer
+                var videoRenderer = new VideoRendererBlock(_pipeline, videoView: VideoView1);
+
+                // connect everything
+                _pipeline.Connect(videoSource, videoRenderer);
+                _pipeline.Connect(audioSource, audioRenderer);
+
+                // start
+                await _pipeline.StartAsync();
             }
-
-            var audioSource = new SystemAudioSourceBlock(audioSourceSettings);
-
-            // audio sink
-            var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).ToList().Find(x => x.DisplayName == cbAudioOutputDevice.Text);
-            var audioRenderer = new AudioRendererBlock(new AudioRendererSettings(audioOutputDevice));
-
-            // video renderer
-            var videoRenderer = new VideoRendererBlock(_pipeline, videoView: VideoView1);
-
-            // connect everything
-            _pipeline.Connect(videoSource, videoRenderer);
-            _pipeline.Connect(audioSource, audioRenderer);
-
-            // start
-            await _pipeline.StartAsync();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -226,37 +248,44 @@ namespace webcam_preview
         /// </summary>
         private async void cbAudioInputDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbAudioInputFormat.Items.Clear();
-
-            if (cbAudioInputDevice.SelectedIndex != -1)
+            try
             {
-                var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).ToList().Find(device => device.DisplayName == cbAudioInputDevice.Text);
-                if (deviceItem == null)
-                {
-                    return;
-                }
+                cbAudioInputFormat.Items.Clear();
 
-                var defaultValue = "S16LE 44100 Hz 2 ch.";
-                var defaultValueExists = false;
-                foreach (var format in deviceItem.Formats)
+                if (cbAudioInputDevice.SelectedIndex != -1)
                 {
-                    cbAudioInputFormat.Items.Add(format.Name);
-
-                    if (defaultValue == format.Name)
+                    var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).ToList().Find(device => device.DisplayName == cbAudioInputDevice.Text);
+                    if (deviceItem == null)
                     {
-                        defaultValueExists = true;
+                        return;
+                    }
+
+                    var defaultValue = "S16LE 44100 Hz 2 ch.";
+                    var defaultValueExists = false;
+                    foreach (var format in deviceItem.Formats)
+                    {
+                        cbAudioInputFormat.Items.Add(format.Name);
+
+                        if (defaultValue == format.Name)
+                        {
+                            defaultValueExists = true;
+                        }
+                    }
+
+                    if (cbAudioInputFormat.Items.Count > 0)
+                    {
+                        cbAudioInputFormat.SelectedIndex = 0;
+
+                        if (defaultValueExists)
+                        {
+                            cbAudioInputFormat.Text = defaultValue;
+                        }
                     }
                 }
-
-                if (cbAudioInputFormat.Items.Count > 0)
-                {
-                    cbAudioInputFormat.SelectedIndex = 0;
-
-                    if (defaultValueExists)
-                    {
-                        cbAudioInputFormat.Text = defaultValue;
-                    }
-                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -284,12 +313,19 @@ namespace webcam_preview
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
-            }
+                if (_pipeline == null)
+                {
+                    return;
+                }
 
-            await _pipeline.StopAsync();
+                await _pipeline.StopAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -297,12 +333,19 @@ namespace webcam_preview
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
-            }
+                if (_pipeline == null)
+                {
+                    return;
+                }
 
-            await _pipeline.PauseAsync();
+                await _pipeline.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -310,12 +353,19 @@ namespace webcam_preview
         /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
-            }
+                if (_pipeline == null)
+                {
+                    return;
+                }
 
-            await _pipeline.ResumeAsync();
+                await _pipeline.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -323,44 +373,51 @@ namespace webcam_preview
         /// </summary>
         private async void cbVideoInputFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
+            try
             {
-                return;
-            }
-
-            cbVideoInputFrameRate.Items.Clear();
-
-            if (string.IsNullOrEmpty(cbVideoInputFormat.Text) || string.IsNullOrEmpty(cbVideoInputDevice.Text))
-            {
-                return;
-            }
-
-            if (cbVideoInputDevice.SelectedIndex != -1)
-            {
-                var devices = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList();
-                var deviceItem = devices.Find(device => device.DisplayName == cbVideoInputDevice.Text);
-                if (deviceItem == null)
+                if (string.IsNullOrEmpty(cbVideoInputFormat.Text))
                 {
                     return;
                 }
 
-                var videoFormat = deviceItem.VideoFormats.Find(format => format.Name == cbVideoInputFormat.Text);
-                if (videoFormat == null)
+                cbVideoInputFrameRate.Items.Clear();
+
+                if (string.IsNullOrEmpty(cbVideoInputFormat.Text) || string.IsNullOrEmpty(cbVideoInputDevice.Text))
                 {
                     return;
                 }
 
-                // build int range from tuple (min, max)    
-                var frameRateList = videoFormat.GetFrameRateRangeAsStringList();
-                foreach (var item in frameRateList)
+                if (cbVideoInputDevice.SelectedIndex != -1)
                 {
-                    cbVideoInputFrameRate.Items.Add(item);
-                }
+                    var devices = (await DeviceEnumerator.Shared.VideoSourcesAsync()).ToList();
+                    var deviceItem = devices.Find(device => device.DisplayName == cbVideoInputDevice.Text);
+                    if (deviceItem == null)
+                    {
+                        return;
+                    }
 
-                if (cbVideoInputFrameRate.Items.Count > 0)
-                {
-                    cbVideoInputFrameRate.SelectedIndex = 0;
+                    var videoFormat = deviceItem.VideoFormats.Find(format => format.Name == cbVideoInputFormat.Text);
+                    if (videoFormat == null)
+                    {
+                        return;
+                    }
+
+                    // build int range from tuple (min, max)    
+                    var frameRateList = videoFormat.GetFrameRateRangeAsStringList();
+                    foreach (var item in frameRateList)
+                    {
+                        cbVideoInputFrameRate.Items.Add(item);
+                    }
+
+                    if (cbVideoInputFrameRate.Items.Count > 0)
+                    {
+                        cbVideoInputFrameRate.SelectedIndex = 0;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 

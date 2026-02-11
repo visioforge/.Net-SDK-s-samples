@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -87,23 +87,30 @@ namespace USB3V_GigE_Spinnaker
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            CreateEngine();
+            try
+            {
+                CreateEngine();
 
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            var sources = await DeviceEnumerator.Shared.SpinnakerSourcesAsync();
-            var sourceInfo = sources.ToList().Find(x => x.Name == cbCamera.Text);
+                var sources = await DeviceEnumerator.Shared.SpinnakerSourcesAsync();
+                var sourceInfo = sources.ToList().Find(x => x.Name == cbCamera.Text);
 
-            var settings = new SpinnakerSourceSettings(cbCamera.Text, new VisioForge.Core.Types.Rect(0, 0, Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text)), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
-            _source = new SpinnakerSourceBlock(settings);
+                var settings = new SpinnakerSourceSettings(cbCamera.Text, new VisioForge.Core.Types.Rect(0, 0, Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text)), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
+                _source = new SpinnakerSourceBlock(settings);
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
-            _pipeline.Connect(_source.Output, _videoRenderer.Input);
+                _pipeline.Connect(_source.Output, _videoRenderer.Input);
 
-            await _pipeline.StartAsync();
+                await _pipeline.StartAsync();
 
-            tmRecording.Start();
+                tmRecording.Start();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -111,9 +118,16 @@ namespace USB3V_GigE_Spinnaker
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            tmRecording.Stop();
+            try
+            {
+                tmRecording.Stop();
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -121,29 +135,36 @@ namespace USB3V_GigE_Spinnaker
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-            CreateEngine();
-
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-
-            tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
-
-            var cameras = await DeviceEnumerator.Shared.SpinnakerSourcesAsync();
-
-            foreach (var device in cameras)
+            try
             {
-                cbCamera.Items.Add(device.Name);
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+                CreateEngine();
+
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+
+                tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+
+                var cameras = await DeviceEnumerator.Shared.SpinnakerSourcesAsync();
+
+                foreach (var device in cameras)
+                {
+                    cbCamera.Items.Add(device.Name);
+                }
+
+                if (cbCamera.Items.Count > 0)
+                {
+                    cbCamera.SelectedIndex = 0;
+                }
             }
-
-            if (cbCamera.Items.Count > 0)
+            catch (Exception ex)
             {
-                cbCamera.SelectedIndex = 0;
+                Debug.WriteLine(ex);
             }
         }
 

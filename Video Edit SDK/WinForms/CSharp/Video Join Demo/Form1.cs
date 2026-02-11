@@ -148,8 +148,7 @@ namespace Video_Join_Demo
         /// <returns>The file extension including the dot.</returns>
         private static string GetFileExt(string filename)
         {
-            int k = filename.LastIndexOf('.');
-            return filename.Substring(k, filename.Length - k);
+            return Path.GetExtension(filename);
         }
 
         /// <summary>
@@ -554,6 +553,9 @@ namespace Video_Join_Demo
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void BtStart_Click(object sender, EventArgs e)
         {
+            btStart.Enabled = false;
+            btStop.Enabled = true;
+
             VideoEdit1.Debug_Mode = cbDebugMode.Checked;
             VideoEdit1.Debug_Telemetry = cbTelemetry.Checked;
 
@@ -566,11 +568,35 @@ namespace Video_Join_Demo
 
             if (VideoEdit1.Video_Resize)
             {
-                VideoEdit1.Video_Resize_Width = Convert.ToInt32(edWidth.Text);
-                VideoEdit1.Video_Resize_Height = Convert.ToInt32(edHeight.Text);
+                if (!int.TryParse(edWidth.Text, out int width) || width <= 0)
+                {
+                    MessageBox.Show(this, "Please enter a valid positive width value.");
+                    btStart.Enabled = true;
+                    btStop.Enabled = false;
+                    return;
+                }
+
+                if (!int.TryParse(edHeight.Text, out int height) || height <= 0)
+                {
+                    MessageBox.Show(this, "Please enter a valid positive height value.");
+                    btStart.Enabled = true;
+                    btStop.Enabled = false;
+                    return;
+                }
+
+                VideoEdit1.Video_Resize_Width = width;
+                VideoEdit1.Video_Resize_Height = height;
             }
 
-            VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture));
+            if (!double.TryParse(cbFrameRate.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out double frameRate) || frameRate <= 0)
+            {
+                MessageBox.Show(this, "Please enter a valid positive frame rate.");
+                btStart.Enabled = true;
+                btStop.Enabled = false;
+                return;
+            }
+
+            VideoEdit1.Video_FrameRate = new VideoFrameRate(frameRate);
 
             VideoEdit1.Output_Filename = edOutput.Text;
 
@@ -704,6 +730,8 @@ namespace Video_Join_Demo
                     }
                 case 18:
                     MessageBox.Show(this, "Please use Main Demo to create encrypted files.");
+                    btStart.Enabled = true;
+                    btStop.Enabled = false;
                     return;
             }
 
@@ -761,25 +789,25 @@ namespace Video_Join_Demo
         private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
-                                   {
-                                        ProgressBar1.Value = 0;
-                                        lbFiles.Items.Clear();
-
-                                        if (e.Successful)
             {
-                MessageBox.Show(this, "Completed successfully", string.Empty, MessageBoxButtons.OK);
-            }
-            else
-            {
-                MessageBox.Show(this, "Stopped with error", string.Empty, MessageBoxButtons.OK);
-            }
-                                   }));
+                btStart.Enabled = true;
+                btStop.Enabled = false;
 
-          
+                ProgressBar1.Value = 0;
+                lbFiles.Items.Clear();
 
-            VideoEdit1.Input_Clear_List();
+                VideoEdit1.Input_Clear_List();
+                VideoEdit1.Video_Transition_Clear();
 
-            VideoEdit1.Video_Transition_Clear();
+                if (e.Successful)
+                {
+                    MessageBox.Show(this, "Completed successfully", string.Empty, MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show(this, "Stopped with error", string.Empty, MessageBoxButtons.OK);
+                }
+            }));
         }
 
         /// <summary>
@@ -1068,6 +1096,8 @@ namespace Video_Join_Demo
 
             cbFrameRate.SelectedIndex = 0;
             cbOutputVideoFormat.SelectedIndex = 15;
+
+            btStop.Enabled = false;
         }
 
         /// <summary>

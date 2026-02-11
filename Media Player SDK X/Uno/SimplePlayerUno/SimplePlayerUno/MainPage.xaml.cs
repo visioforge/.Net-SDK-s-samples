@@ -189,6 +189,10 @@ public sealed partial class MainPage : Page
         /// <summary>
         /// Handles the tm position tick event.
         /// </summary>
+        /// <remarks>
+        /// Uses fire-and-forget pattern with discard (_) because DispatcherTimer.Tick
+        /// cannot be async. The async method handles its own exceptions internally.
+        /// </remarks>
     private void TmPosition_Tick(object? sender, object e)
     {
         if (_player == null)
@@ -196,6 +200,7 @@ public sealed partial class MainPage : Page
             return;
         }
 
+        // Fire-and-forget: UpdatePositionAsync handles exceptions internally
         _ = UpdatePositionAsync();
     }
 

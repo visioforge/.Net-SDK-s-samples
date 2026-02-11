@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 
 using VisioForge.Core.Types.VideoCapture;
@@ -19,6 +19,7 @@ using System.Timers;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace media_player
 {
@@ -70,92 +71,99 @@ namespace media_player
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(edFilename.Text))
+            try
             {
-                MessageBox.Show("Please select an H264 file.");
-                return;
+                if (string.IsNullOrEmpty(edFilename.Text))
+                {
+                    MessageBox.Show("Please select an H264 file.");
+                    return;
+                }
+
+                var filename = edFilename.Text;
+                var httpSource = filename.Contains("http://") || filename.Contains("https://");
+
+                // Create MediaBlocks pipeline
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnStop += (sender2, args) =>
+                {
+                    _stopFlag = true;
+                };
+
+                // Add source
+                var sourceSettings = new PushDataSourceSettings();
+                var caps = new Gst.Caps("video/x-h264");
+                caps.SetValue("stream-format", new GLib.Value("byte-stream"));
+                sourceSettings.Caps = caps;
+                sourceSettings.PushFormat = PushSourceFormat.Time;
+                sourceSettings.IsLive = true;
+                sourceSettings.PadMediaType = MediaBlockPadMediaType.Video;
+                sourceSettings.BlockPushData = true;
+
+                _source = new PushSourceBlock(sourceSettings);
+
+                // Add decoder and parser
+                _decoder = new H264DecoderBlock(new FFMPEGH264DecoderSettings());
+                _parse = new H264ParseBlock();
+
+                // Add video renderer
+                _renderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = true };
+
+                // Connect blocks
+                _pipeline.Connect(_source, _parse);
+                _pipeline.Connect(_parse, _decoder);
+                _pipeline.Connect(_decoder, _renderer);
+
+                _stopFlag = false;
+
+                // Create pipeline and configure elements
+                await _pipeline.StartAsync(onlyPreload: true);
+
+                // Push data loop
+                _pushThread = new Thread(async () =>
+                {
+                    Stream stream = null;
+                    HttpClient httpClient = null;
+                    HttpResponseMessage response = null;
+
+                    if (httpSource)
+                    {
+                        httpClient = new HttpClient();
+                        response = await httpClient.GetAsync(edFilename.Text, HttpCompletionOption.ResponseHeadersRead);
+                        response.EnsureSuccessStatusCode();
+
+                        stream = await response.Content.ReadAsStreamAsync();
+                    }
+                    else
+                    {
+                        stream = System.IO.File.OpenRead(edFilename.Text);
+                    }
+
+                    var buffer = new byte[CHUNK_SIZE];
+                    int len = 0;
+                    while ((len = stream.Read(buffer, 0, CHUNK_SIZE)) > 0 && !_stopFlag)
+                    {
+                        _source.PushData(buffer, len);
+                    }
+
+                    stream.Close();
+
+                    response?.Dispose();
+                    httpClient?.Dispose();
+
+                    _source.SendEOS();
+                });
+
+                _pushThread.Start();
+
+                // Start playback
+                await _pipeline.ResumeAsync();
+
+                _tmPosition.Start();
             }
-
-            var filename = edFilename.Text;
-            var httpSource = filename.Contains("http://") || filename.Contains("https://");
-
-            // Create MediaBlocks pipeline
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnStop += (sender2, args) =>
+            catch (Exception ex)
             {
-                _stopFlag = true;
-            };
-
-            // Add source
-            var sourceSettings = new PushDataSourceSettings();
-            var caps = new Gst.Caps("video/x-h264");
-            caps.SetValue("stream-format", new GLib.Value("byte-stream"));
-            sourceSettings.Caps = caps;
-            sourceSettings.PushFormat = PushSourceFormat.Time;
-            sourceSettings.IsLive = true;
-            sourceSettings.PadMediaType = MediaBlockPadMediaType.Video;
-            sourceSettings.BlockPushData = true;
-
-            _source = new PushSourceBlock(sourceSettings);
-
-            // Add decoder and parser
-            _decoder = new H264DecoderBlock(new FFMPEGH264DecoderSettings());
-            _parse = new H264ParseBlock();
-
-            // Add video renderer
-            _renderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = true };
-
-            // Connect blocks
-            _pipeline.Connect(_source, _parse);
-            _pipeline.Connect(_parse, _decoder);
-            _pipeline.Connect(_decoder, _renderer);
-
-            _stopFlag = false;
-
-            // Create pipeline and configure elements
-            await _pipeline.StartAsync(onlyPreload: true);
-
-            // Push data loop
-            _pushThread = new Thread(async () =>
-            {
-                Stream stream = null;
-                HttpClient httpClient = null;
-                HttpResponseMessage response = null;
-
-                if (httpSource)
-                {
-                    httpClient = new HttpClient();
-                    response = await httpClient.GetAsync(edFilename.Text, HttpCompletionOption.ResponseHeadersRead);
-                    response.EnsureSuccessStatusCode();
-
-                    stream = await response.Content.ReadAsStreamAsync();
-                }
-                else
-                {
-                    stream = System.IO.File.OpenRead(edFilename.Text);
-                }
-
-                var buffer = new byte[CHUNK_SIZE];
-                int len = 0;
-                while ((len = stream.Read(buffer, 0, CHUNK_SIZE)) > 0 && !_stopFlag)
-                {
-                    _source.PushData(buffer, len);
-                }
-
-                stream.Close();
-
-                response?.Dispose();
-                httpClient?.Dispose();
-
-                _source.SendEOS();
-            });
-
-            _pushThread.Start();
-
-            // Start playback
-            await _pipeline.ResumeAsync();
-
-            _tmPosition.Start();
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -163,26 +171,19 @@ namespace media_player
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            _stopFlag = true;
-
-            _tmPosition.Stop();
-
-            await _pipeline.StopAsync();
-
-            await _pipeline.DisposeAsync();
-        }
-
-        /// <summary>
-        /// Open http stream async.
-        /// </summary>
-        private async Task<Stream> OpenHTTPStreamAsync()
-        {
-            using (HttpClient httpClient = new HttpClient())
-            using (HttpResponseMessage response = await httpClient.GetAsync(edFilename.Text, HttpCompletionOption.ResponseHeadersRead))
+            try
             {
-                response.EnsureSuccessStatusCode();
+                _stopFlag = true;
 
-                return await response.Content.ReadAsStreamAsync();
+                _tmPosition.Stop();
+
+                await _pipeline.StopAsync();
+
+                await _pipeline.DisposeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -191,19 +192,33 @@ namespace media_player
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
-            // We have to initialize the engine on start
-            Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.Enabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.Enabled = true;
-            Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.Enabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.Enabled = true;
+                Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
         /// Form 1 form closing.
         /// </summary>
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
 

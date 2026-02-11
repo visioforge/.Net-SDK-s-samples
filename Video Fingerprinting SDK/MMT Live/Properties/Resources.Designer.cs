@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VisioForge_MMT.Properties {
+namespace VisioForge_MMT_Live.Properties {
     using System;
     
     

@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -37,31 +37,38 @@ namespace key_frame_detector_mb
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await VisioForgeX.InitSDKAsync();
-
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-
-            _timer = new System.Timers.Timer(250);
-            _timer.Elapsed += async (s, ev) =>
+            try
             {
-                if (_pipeline != null)
+                await VisioForgeX.InitSDKAsync();
+
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+
+                _timer = new System.Timers.Timer(250);
+                _timer.Elapsed += async (s, ev) =>
                 {
-                    var pos = await _pipeline.Position_GetAsync();
-                    var dur = await _pipeline.DurationAsync();
-
-                    if (dur.Ticks == 0)
+                    if (_pipeline != null)
                     {
-                        return;
+                        var pos = await _pipeline.Position_GetAsync();
+                        var dur = await _pipeline.DurationAsync();
+
+                        if (dur.Ticks == 0)
+                        {
+                            return;
+                        }
+
+                        var progress = (int)(100 * pos.Ticks / dur.Ticks);
+
+                        await Dispatcher.InvokeAsync(() =>
+                        {
+                            pbProgress.Value = progress;
+                        });
                     }
-
-                    var progress = (int)(100 * pos.Ticks / dur.Ticks);
-
-                    await Dispatcher.InvokeAsync(() =>
-                    {
-                        pbProgress.Value = progress;
-                    });
-                }
-            };
+                };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -77,16 +84,23 @@ namespace key_frame_detector_mb
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            btStart.IsEnabled = true;
-            btStop.IsEnabled = false;
-
-            if (_pipeline == null)
+            try
             {
-                return;
-            }
+                btStart.IsEnabled = true;
+                btStop.IsEnabled = false;
 
-            await _pipeline.StopAsync();
-            await _pipeline.DisposeAsync();
+                if (_pipeline == null)
+                {
+                    return;
+                }
+
+                await _pipeline.StopAsync();
+                await _pipeline.DisposeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -94,63 +108,70 @@ namespace key_frame_detector_mb
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            var sourceFile = edSourceFile.Text;
-            string jsonFile = sourceFile + ".json";
-
-            // create pipeline
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnStop += async (senderx, ex) =>
+            try
             {
-                _timer.Stop();
+                var sourceFile = edSourceFile.Text;
+                string jsonFile = sourceFile + ".json";
 
-                Debug.WriteLine("Pipeline stopped.");
-
-                await _pipeline.DisposeAsync();
-                _pipeline = null;
-
-                await Dispatcher.InvokeAsync(() =>
+                // create pipeline
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnStop += async (senderx, ex) =>
                 {
-                    btStart.IsEnabled = true;
-                    btStop.IsEnabled = false;
-                    pbProgress.Value = 0;
+                    _timer.Stop();
 
-                    MessageBox.Show(this, $"Timestamps saved to {jsonFile}.");
-                });
-            };
+                    Debug.WriteLine("Pipeline stopped.");
 
-            // add file source
-            var fileSource = new BasicFileSourceBlock(sourceFile);
+                    await _pipeline.DisposeAsync();
+                    _pipeline = null;
 
-            // read video info
-            var infoReader = new MediaInfoReaderX();
-            await infoReader.OpenAsync(sourceFile);
+                    await Dispatcher.InvokeAsync(() =>
+                    {
+                        btStart.IsEnabled = true;
+                        btStop.IsEnabled = false;
+                        pbProgress.Value = 0;
 
-            // add demux
-            var demux = new UniversalDemuxBlock(infoReader.Info, renderVideo: true, renderAudio: false);
+                        MessageBox.Show(this, $"Timestamps saved to {jsonFile}.");
+                    });
+                };
 
-            var videoNullRenderer = new NullRendererBlock(MediaBlockPadMediaType.Video);
-            videoNullRenderer.IsSync = false;
+                // add file source
+                var fileSource = new BasicFileSourceBlock(sourceFile);
 
-            // add key frame detector and finish pipeline with null renderer
-            var keyFrameDetector = new KeyFrameDetectorBlock();
-            keyFrameDetector.JSONFilename = jsonFile;
-            keyFrameDetector.OnKeyFrameDetected += (senderx, ex) =>
+                // read video info
+                var infoReader = new MediaInfoReaderX();
+                await infoReader.OpenAsync(sourceFile);
+
+                // add demux
+                var demux = new UniversalDemuxBlock(infoReader.Info, renderVideo: true, renderAudio: false);
+
+                var videoNullRenderer = new NullRendererBlock(MediaBlockPadMediaType.Video);
+                videoNullRenderer.IsSync = false;
+
+                // add key frame detector and finish pipeline with null renderer
+                var keyFrameDetector = new KeyFrameDetectorBlock();
+                keyFrameDetector.JSONFilename = jsonFile;
+                keyFrameDetector.OnKeyFrameDetected += (senderx, ex) =>
+                {
+                    Debug.WriteLine($"Key frame detected at {ex}");
+                };
+
+                // link blocks
+                _pipeline.Connect(fileSource.Output, demux.Input);
+                _pipeline.Connect(demux.GetVideoOutput(), keyFrameDetector.Input);
+                _pipeline.Connect(keyFrameDetector.Output, videoNullRenderer.Input);
+
+                // run pipeline
+                await _pipeline.StartAsync();
+
+                btStart.IsEnabled = false;
+                btStop.IsEnabled = true;
+
+                _timer.Start();
+            }
+            catch (Exception ex)
             {
-                Debug.WriteLine($"Key frame detected at {ex}");
-            };
-
-            // link blocks
-            _pipeline.Connect(fileSource.Output, demux.Input);
-            _pipeline.Connect(demux.GetVideoOutput(), keyFrameDetector.Input);
-            _pipeline.Connect(keyFrameDetector.Output, videoNullRenderer.Input);
-
-            // run pipeline
-            await _pipeline.StartAsync();
-
-            btStart.IsEnabled = false;
-            btStop.IsEnabled = true;
-
-            _timer.Start();
+                Debug.WriteLine(ex);
+            }
         }
     
         /// <summary>

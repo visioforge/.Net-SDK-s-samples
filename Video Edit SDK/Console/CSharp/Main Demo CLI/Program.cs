@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using VisioForge.Core;
+﻿using VisioForge.Core;
 
 namespace VE_Main_Demo_CLI
 {
@@ -23,7 +22,8 @@ namespace VE_Main_Demo_CLI
         /// </summary>
         /// <param name="option">The option array containing file path and segment information.</param>
         /// <param name="core">The VideoEditCore instance.</param>
-        private static void AddVideoSourceFromOption(string[] option, VideoEditCore core)
+        /// <returns>True if the video source was added successfully, false otherwise.</returns>
+        private static bool AddVideoSourceFromOption(string[] option, VideoEditCore core)
         {
             VideoSource src;
             if (option.Length == 2)
@@ -31,22 +31,36 @@ namespace VE_Main_Demo_CLI
                 src = new VideoSource(
                     option[0],
                     new[] { new FileSegment(null, null) });
-            }
-            else
-            {
-                src = new VideoSource(
-                    option[0],
-                    new[] { new FileSegment(TimeSpan.FromMilliseconds(Convert.ToInt32(option[2])), TimeSpan.FromMilliseconds(Convert.ToInt32(option[3]))) });
-            }
-
-            if (option.Length == 2)
-            {
                 core.Input_AddVideoFile(src);
             }
+            else if (option.Length >= 5)
+            {
+                if (!int.TryParse(option[2], out int startMs) ||
+                    !int.TryParse(option[3], out int endMs) ||
+                    !int.TryParse(option[4], out int insertMs))
+                {
+                    Console.WriteLine("Invalid numeric values in video source option.");
+                    return false;
+                }
+
+                if ((startMs < -1) || (endMs < -1) || (insertMs < -1))
+                {
+                    Console.WriteLine("Time values must be non-negative or -1 in video source option.");
+                    return false;
+                }
+
+                src = new VideoSource(
+                    option[0],
+                    new[] { new FileSegment(TimeSpan.FromMilliseconds(startMs), TimeSpan.FromMilliseconds(endMs)) });
+                core.Input_AddVideoFile(src, TimeSpan.FromMilliseconds(insertMs));
+            }
             else
             {
-                core.Input_AddVideoFile(src, TimeSpan.FromMilliseconds(Convert.ToInt32(option[4])));
+                Console.WriteLine("Invalid video source option format. Expected 2 or 5+ elements.");
+                return false;
             }
+
+            return true;
         }
 
         /// <summary>
@@ -54,7 +68,8 @@ namespace VE_Main_Demo_CLI
         /// </summary>
         /// <param name="option">The option array containing file path and segment information.</param>
         /// <param name="core">The VideoEditCore instance.</param>
-        private static void AddAudioSourceFromOption(string[] option, VideoEditCore core)
+        /// <returns>True if the audio source was added successfully, false otherwise.</returns>
+        private static bool AddAudioSourceFromOption(string[] option, VideoEditCore core)
         {
             AudioSource src;
             if (option.Length == 2)
@@ -62,22 +77,36 @@ namespace VE_Main_Demo_CLI
                 src = new AudioSource(
                     option[0],
                     new[] { new FileSegment(null, null) });
-            }
-            else
-            {
-                src = new AudioSource(
-                    option[0],
-                    new[] { new FileSegment(TimeSpan.FromMilliseconds(Convert.ToInt32(option[2])), TimeSpan.FromMilliseconds(Convert.ToInt32(option[3]))) });
-            }
-
-            if (option.Length == 2)
-            {
                 core.Input_AddAudioFile(src);
             }
+            else if (option.Length >= 5)
+            {
+                if (!int.TryParse(option[2], out int startMs) ||
+                    !int.TryParse(option[3], out int endMs) ||
+                    !int.TryParse(option[4], out int insertMs))
+                {
+                    Console.WriteLine("Invalid numeric values in audio source option.");
+                    return false;
+                }
+
+                if ((startMs < -1) || (endMs < -1) || (insertMs < -1))
+                {
+                    Console.WriteLine("Time values must be non-negative or -1 in audio source option.");
+                    return false;
+                }
+
+                src = new AudioSource(
+                    option[0],
+                    new[] { new FileSegment(TimeSpan.FromMilliseconds(startMs), TimeSpan.FromMilliseconds(endMs)) });
+                core.Input_AddAudioFile(src, TimeSpan.FromMilliseconds(insertMs));
+            }
             else
             {
-                core.Input_AddAudioFile(src, TimeSpan.FromMilliseconds(Convert.ToInt32(option[4])));
+                Console.WriteLine("Invalid audio source option format. Expected 2 or 5+ elements.");
+                return false;
             }
+
+            return true;
         }
 
         /// <summary>
@@ -88,22 +117,32 @@ namespace VE_Main_Demo_CLI
         /// <returns>True if sources were added successfully, false otherwise.</returns>
         private static bool AddSources(string[] option, VideoEditCore core)
         {
+            if (option == null || option.Length < 2)
+            {
+                Console.WriteLine("Invalid source option: insufficient elements.");
+                return false;
+            }
+
             if (option[1] == "x")
             {
-                AddVideoSourceFromOption(option, core);
-                AddAudioSourceFromOption(option, core);
+                if (!AddVideoSourceFromOption(option, core))
+                    return false;
+                if (!AddAudioSourceFromOption(option, core))
+                    return false;
             }
             else if (option[1] == "a")
             {
-                AddAudioSourceFromOption(option, core);
+                if (!AddAudioSourceFromOption(option, core))
+                    return false;
             }
             else if (option[1] == "v")
             {
-                AddVideoSourceFromOption(option, core);
+                if (!AddVideoSourceFromOption(option, core))
+                    return false;
             }
             else
             {
-                Console.WriteLine("Wrong type parameter for input file.");
+                Console.WriteLine("Wrong type parameter for input file. Use 'v' for video, 'a' for audio, or 'x' for both.");
                 return false;
             }
 
@@ -144,29 +183,64 @@ namespace VE_Main_Demo_CLI
             // resize
             if (!string.IsNullOrEmpty(options.Resize))
             {
-                core.Video_Resize = true;
-
                 var resize = options.Resize.Split(':');
-                core.Video_Resize_Width = Convert.ToInt32(resize[0]);
-                core.Video_Resize_Height = Convert.ToInt32(resize[1]);
+                if (resize.Length != 2 ||
+                    !int.TryParse(resize[0], out int width) ||
+                    !int.TryParse(resize[1], out int height))
+                {
+                    Console.WriteLine("Invalid resize format. Expected 'width:height' with numeric values.");
+                    core.Dispose();
+                    return;
+                }
+
+                if (width <= 0 || height <= 0)
+                {
+                    Console.WriteLine("Invalid resize dimensions. Width and height must be positive values.");
+                    core.Dispose();
+                    return;
+                }
+
+                core.Video_Resize = true;
+                core.Video_Resize_Width = width;
+                core.Video_Resize_Height = height;
             }
 
             // add source files
-            AddSources(options.InputFile1, core);
+            if (!AddSources(options.InputFile1, core))
+            {
+                Console.WriteLine("Failed to add primary input file.");
+                core.Dispose();
+                return;
+            }
 
             if (options.InputFile2 != null)
             {
-                AddSources(options.InputFile2, core);
+                if (!AddSources(options.InputFile2, core))
+                {
+                    Console.WriteLine("Failed to add input file 2.");
+                    core.Dispose();
+                    return;
+                }
             }
 
             if (options.InputFile3 != null)
             {
-                AddSources(options.InputFile3, core);
+                if (!AddSources(options.InputFile3, core))
+                {
+                    Console.WriteLine("Failed to add input file 3.");
+                    core.Dispose();
+                    return;
+                }
             }
 
             if (options.InputFile4 != null)
             {
-                AddSources(options.InputFile4, core);
+                if (!AddSources(options.InputFile4, core))
+                {
+                    Console.WriteLine("Failed to add input file 4.");
+                    core.Dispose();
+                    return;
+                }
             }
 
             if (string.IsNullOrEmpty(options.Format))
@@ -263,6 +337,9 @@ namespace VE_Main_Demo_CLI
             core.Start();
 
             Console.ReadKey();
+
+            core.Stop();
+            core.Dispose();
         }
     }
 }

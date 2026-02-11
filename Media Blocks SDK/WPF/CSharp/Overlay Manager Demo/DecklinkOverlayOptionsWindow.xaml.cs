@@ -8,6 +8,7 @@ using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.Types.X.Decklink;
 using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X.Output;
+using System.Diagnostics;
 
 namespace Overlay_Manager_Demo
 {
@@ -52,11 +53,18 @@ namespace Overlay_Manager_Demo
         /// </summary>
         private async void DecklinkOverlayOptionsWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // Load Decklink devices
-            await LoadDevicesAsync();
-            
-            // Load audio devices
-            await LoadAudioDevicesAsync();
+            try
+            {
+                // Load Decklink devices
+                await LoadDevicesAsync();
+
+                // Load audio devices
+                await LoadAudioDevicesAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

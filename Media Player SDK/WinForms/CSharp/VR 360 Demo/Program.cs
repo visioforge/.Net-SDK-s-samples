@@ -14,9 +14,7 @@ namespace VR_360_Demo
         [STAThread]
         static void Main()
         {
-#if NETCOREAPP
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
-#endif
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

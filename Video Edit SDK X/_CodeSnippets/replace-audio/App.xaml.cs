@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 
 namespace replace_audio
 {
@@ -10,5 +8,4 @@ namespace replace_audio
     public partial class App : Application
     {
     }
-
 }

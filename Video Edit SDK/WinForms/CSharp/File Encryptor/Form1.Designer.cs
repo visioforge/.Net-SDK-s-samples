@@ -249,6 +249,7 @@
             Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "Video Encryptor Demo";
+            FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();

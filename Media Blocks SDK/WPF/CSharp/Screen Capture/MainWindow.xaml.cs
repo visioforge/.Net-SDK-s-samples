@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -10,6 +10,7 @@ using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.MediaBlocks.Sources;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 using VisioForge.Core;
@@ -196,6 +197,11 @@ namespace Screen_Capture_MB_WPF
             // get handle of the window
             source.WindowHandle = windowCaptureForm.CapturedWindowHandle;
 
+            if (cbMouseHighlight.IsChecked == true)
+            {
+                source.MouseHighlight = new MouseHighlightSettings();
+            }
+
             return source;
         }
 
@@ -232,6 +238,11 @@ namespace Screen_Capture_MB_WPF
             source.CaptureCursor = cbScreenCapture_GrabMouseCursor.IsChecked == true;
             source.Monitor = screenID;
 
+            if (cbMouseHighlight.IsChecked == true)
+            {
+                source.MouseHighlight = new MouseHighlightSettings();
+            }
+
             return source;
         }
 
@@ -240,90 +251,102 @@ namespace Screen_Capture_MB_WPF
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            mmLog.Clear();
-
-            CreateEngines();
-
-            _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            // screen source
-
-            if (rbWindow.IsChecked == true)
+            try
             {
-                var windowSettings = CreateWindowCaptureSource();
-                _screenSource = new ScreenSourceBlock(windowSettings);
-            }
-            else
-            {
+                mmLog.Clear();
+
+                CreateEngines();
+
+                _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
                 // screen source
-                var screenSettings = CreateScreenCaptureSource();
-                _screenSource = new ScreenSourceBlock(screenSettings);
-            }
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
-
-            if (rbPreview.IsChecked == true)
-            {
-                _pipeline.Connect(_screenSource.Output, _videoRenderer.Input);
-            }
-            else
-            {
-                _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
-
-                _pipeline.Connect(_screenSource.Output, _videoTee.Input);
-
-                _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-
-                _videoEncoder = new H264EncoderBlock(new OpenH264EncoderSettings());
-                _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
-
-                _sink = new MP4SinkBlock(new MP4SinkSettings(edOutput.Text));
-                _pipeline.Connect(_videoEncoder.Output, _sink.CreateNewInput(MediaBlockPadMediaType.Video));                
-            }
-
-            // audio source
-            if (cbRecordAudio.IsChecked == true)
-            {
-                // audio source
-                IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
-
-                var deviceName = cbAudioInputDevice.Text;
-                if (!string.IsNullOrEmpty(deviceName))
+                if (rbWindow.IsChecked == true)
                 {
-                    var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                    if (device != null)
-                    {
-                        audioSourceSettings = device.CreateSourceSettings();
-                    }
-                }
-
-                _audioInput = new SystemAudioSourceBlock(audioSourceSettings);
-
-                // audio renderer
-                _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(x => x.DisplayName == cbAudioOutputDevice.Text).First()) { IsSync = false };
-
-                if (rbPreview.IsChecked == true)
-                {
-                    _pipeline.Connect(_audioInput.Output, _audioRenderer.Input);
+                    var windowSettings = CreateWindowCaptureSource();
+                    _screenSource = new ScreenSourceBlock(windowSettings);
                 }
                 else
                 {
-                    _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
-
-                    _pipeline.Connect(_audioInput.Output, _audioTee.Input);
-
-                    _audioEncoder = new AACEncoderBlock(new VOAACEncoderSettings());
-                    _pipeline.Connect(_audioTee.Outputs[0], _audioEncoder.Input);
-                    _pipeline.Connect(_audioEncoder.Output, _sink.CreateNewInput(MediaBlockPadMediaType.Audio));
-
-                    _pipeline.Connect(_audioTee.Outputs[1], _audioRenderer.Input);
+                    // screen source
+                    var screenSettings = CreateScreenCaptureSource();
+                    _screenSource = new ScreenSourceBlock(screenSettings);
                 }
+
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+
+                if (rbPreview.IsChecked == true)
+                {
+                    _pipeline.Connect(_screenSource.Output, _videoRenderer.Input);
+                }
+                else
+                {
+                    _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+
+                    _pipeline.Connect(_screenSource.Output, _videoTee.Input);
+
+                    _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
+
+                    _videoEncoder = new H264EncoderBlock(new OpenH264EncoderSettings());
+                    _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
+
+                    _sink = new MP4SinkBlock(new MP4SinkSettings(edOutput.Text));
+                    _pipeline.Connect(_videoEncoder.Output, _sink.CreateNewInput(MediaBlockPadMediaType.Video));                
+                }
+
+                // audio source
+                if (cbRecordAudio.IsChecked == true)
+                {
+                    // audio source
+                    IAudioCaptureDeviceSourceSettings audioSourceSettings = null;
+
+                    var deviceName = cbAudioInputDevice.Text;
+                    if (!string.IsNullOrEmpty(deviceName))
+                    {
+                        var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                        if (device != null)
+                        {
+                            audioSourceSettings = device.CreateSourceSettings();
+                        }
+                    }
+
+                    _audioInput = new SystemAudioSourceBlock(audioSourceSettings);
+
+                    // audio renderer
+                    _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(x => x.DisplayName == cbAudioOutputDevice.Text).First()) { IsSync = false };
+
+                    if (rbPreview.IsChecked == true)
+                    {
+                        _pipeline.Connect(_audioInput.Output, _audioRenderer.Input);
+                    }
+                    else
+                    {
+                        _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
+
+                        _pipeline.Connect(_audioInput.Output, _audioTee.Input);
+
+                        _audioEncoder = new AACEncoderBlock(new VOAACEncoderSettings());
+                        _pipeline.Connect(_audioTee.Outputs[0], _audioEncoder.Input);
+                        _pipeline.Connect(_audioEncoder.Output, _sink.CreateNewInput(MediaBlockPadMediaType.Audio));
+
+                        _pipeline.Connect(_audioTee.Outputs[1], _audioRenderer.Input);
+                    }
+                }
+
+                await _pipeline.StartAsync();
+
+                if (cbMouseHighlight.IsChecked == true)
+                {
+                    _screenSource.MouseHighlightSubscribe();
+                }
+
+                tcMain.SelectedIndex = 3;
             }
-
-            await _pipeline.StartAsync();
-
-            tcMain.SelectedIndex = 3;
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -331,9 +354,16 @@ namespace Screen_Capture_MB_WPF
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            await _pipeline.StopAsync();
+            try
+            {
+                await _pipeline.StopAsync();
 
-            await DestroyEnginesAsync();
+                await DestroyEnginesAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -341,34 +371,41 @@ namespace Screen_Capture_MB_WPF
         /// </summary>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-            DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
-            DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
-
-            CreateEngines();
-
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-
-            await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
-            await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
-
-            for (int i = 0; i < System.Windows.Forms.Screen.AllScreens.Length; i++)
+            try
             {
-                cbScreenCaptureDisplayIndex.Items.Add(i.ToString());
-            }
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            if (cbScreenCaptureDisplayIndex.Items.Count > 0)
+                DeviceEnumerator.Shared.OnAudioSourceAdded += DeviceEnumerator_OnAudioSourceAdded;
+                DeviceEnumerator.Shared.OnAudioSinkAdded += DeviceEnumerator_OnAudioSinkAdded;
+
+                CreateEngines();
+
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+
+                await DeviceEnumerator.Shared.StartAudioSourceMonitorAsync();
+                await DeviceEnumerator.Shared.StartAudioSinkMonitorAsync();
+
+                for (int i = 0; i < System.Windows.Forms.Screen.AllScreens.Length; i++)
+                {
+                    cbScreenCaptureDisplayIndex.Items.Add(i.ToString());
+                }
+
+                if (cbScreenCaptureDisplayIndex.Items.Count > 0)
+                {
+                    cbScreenCaptureDisplayIndex.SelectedIndex = 0;
+                }
+
+                edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+            }
+            catch (Exception ex)
             {
-                cbScreenCaptureDisplayIndex.SelectedIndex = 0;
+                Debug.WriteLine(ex);
             }
-
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
         }
 
         /// <summary>
@@ -385,9 +422,16 @@ namespace Screen_Capture_MB_WPF
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            await DestroyEnginesAsync();
+            try
+            {
+                await DestroyEnginesAsync();
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

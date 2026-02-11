@@ -137,14 +137,14 @@ namespace Simple_Player_MAUI
         /// <summary>
         /// Window destroying.
         /// </summary>
-        private void Window_Destroying(object? sender, EventArgs e)
+        private async void Window_Destroying(object? sender, EventArgs e)
         {
             if (_player != null)
             {
                 _player.OnError -= _player_OnError;
-                _player.Stop();
+                await _player.StopAsync();
 
-                _player.Dispose();
+                await _player.DisposeAsync();
                 _player = null;
             }
 
@@ -310,11 +310,6 @@ namespace Simple_Player_MAUI
                     break;
                 case PlaybackState.Free:
                     {
-                        if (_player.State == PlaybackState.Play || _player.State == PlaybackState.Pause)
-                        {
-                            return;
-                        }
-
                         await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(
                             new Uri(_filename))
                             );

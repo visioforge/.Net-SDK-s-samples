@@ -71,6 +71,26 @@ namespace Audio_Extractor
         }
 
         /// <summary>
+        /// Handles the FormClosing event.
+        /// Disposes the video editing engine to release resources.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_core != null)
+            {
+                _core.OnProgress -= _core_OnProgress;
+                _core.OnError -= _core_OnError;
+                _core.OnStop -= _core_OnStop;
+
+                _core.Stop();
+                _core.Dispose();
+                _core = null;
+            }
+        }
+
+        /// <summary>
         /// Handles the OnStop event of the VideoEdit engine.
         /// Updates the UI and displays a completion message.
         /// </summary>
@@ -130,6 +150,24 @@ namespace Audio_Extractor
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edSourceFile.Text))
+            {
+                MessageBox.Show(this, "Please select a source file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!File.Exists(edSourceFile.Text))
+            {
+                MessageBox.Show(this, "Source file does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(edOutputFile.Text))
+            {
+                MessageBox.Show(this, "Please select an output file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             btStart.Enabled = false;
             btStop.Enabled = true;
 

@@ -13,13 +13,16 @@ namespace Video_From_Images_CLI
 {
     static class Program
     {
+        private static readonly ManualResetEvent _completionEvent = new ManualResetEvent(false);
+        private static bool _completedSuccessfully;
+
         /// <summary>
         /// Scans the specified folder for files with a given extension and adds them to a list.
         /// </summary>
         /// <param name="inputFolder">The path to the folder to scan.</param>
         /// <param name="ext">The file extension to look for (e.g., "*.jpg").</param>
-        /// <param name="files">A reference to the list where the found file paths will be added.</param>
-        static void AddFiles(string inputFolder, string ext, ref List<string> files)
+        /// <param name="files">The list where the found file paths will be added.</param>
+        static void AddFiles(string inputFolder, string ext, List<string> files)
         {
             var files2 = Directory.GetFiles(inputFolder, ext);
             foreach (var s in files2)
@@ -54,12 +57,12 @@ namespace Video_From_Images_CLI
             }
 
             var files = new List<string>();
-            AddFiles(options.InputFolder, "*.jpg", ref files);
-            AddFiles(options.InputFolder, "*.jpeg", ref files);
-            AddFiles(options.InputFolder, "*.png", ref files);
-            AddFiles(options.InputFolder, "*.bmp", ref files);
-            AddFiles(options.InputFolder, "*.gif", ref files);
-            AddFiles(options.InputFolder, "*.tif", ref files);
+            AddFiles(options.InputFolder, "*.jpg", files);
+            AddFiles(options.InputFolder, "*.jpeg", files);
+            AddFiles(options.InputFolder, "*.png", files);
+            AddFiles(options.InputFolder, "*.bmp", files);
+            AddFiles(options.InputFolder, "*.gif", files);
+            AddFiles(options.InputFolder, "*.tif", files);
 
             if (files.Count == 0)
             {
@@ -72,70 +75,84 @@ namespace Video_From_Images_CLI
                 File.Delete(options.OutputFile);
             }
 
-            var videoEdit = new VisioForge.Core.VideoEditX.VideoEditCoreX();
-
-            int insertTime = 0;
-
-            int videoWidth = options.Width;
-            int videoHeight = options.Height;
-
-            foreach (string img in files)
+            using (var videoEdit = new VisioForge.Core.VideoEditX.VideoEditCoreX())
             {
-                videoEdit.Input_AddImageFile(img, TimeSpan.FromMilliseconds(2000), TimeSpan.FromMilliseconds(insertTime));
-                insertTime += 2000;
+                // Subscribe to events early to ensure no events are missed
+                videoEdit.OnError += VideoEdit1_OnError;
+                videoEdit.OnProgress += VideoEdit1_OnProgress;
+                videoEdit.OnStop += VideoEdit_OnStop;
+
+                int insertTime = 0;
+
+                int videoWidth = options.Width;
+                int videoHeight = options.Height;
+                int imageDuration = options.Duration;
+
+                foreach (string img in files)
+                {
+                    videoEdit.Input_AddImageFile(img, TimeSpan.FromMilliseconds(imageDuration), TimeSpan.FromMilliseconds(insertTime));
+                    insertTime += imageDuration;
+                }
+
+                videoEdit.Output_VideoSize = new Size(videoWidth, videoHeight);
+                videoEdit.Output_VideoFrameRate = new VideoFrameRate(25);
+
+                if (string.IsNullOrEmpty(options.Format))
+                {
+                    options.Format = "mp4";
+                }
+
+                switch (options.Format)
+                {
+                    case "mp4":
+                        videoEdit.Output_Format = new MP4Output(options.OutputFile);
+                        break;
+                    case "avi":
+                        videoEdit.Output_Format = new AVIOutput(options.OutputFile);
+                        break;
+                    case "wmv":
+                        videoEdit.Output_Format = new WMVOutput(options.OutputFile);
+                        break;
+                    default:
+                        Console.WriteLine("Wrong output format. MP4 will be used.");
+                        videoEdit.Output_Format = new MP4Output(options.OutputFile);
+                        break;
+                }
+
+                videoEdit.ConsoleUsage = true;
+
+                _completionEvent.Reset();
+                videoEdit.Start();
+
+                Console.WriteLine("Processing...");
+                _completionEvent.WaitOne();
+
+                if (_completedSuccessfully)
+                {
+                    Console.WriteLine(@"Video saved to: " + options.OutputFile);
+                }
+                else
+                {
+                    Console.WriteLine("Video processing failed.");
+                }
             }
-
-            videoEdit.Output_VideoSize = new Size(videoWidth, videoHeight);
-            videoEdit.Output_VideoFrameRate = new VideoFrameRate(25);
-
-            if (string.IsNullOrEmpty(options.Format))
-            {
-                options.Format = "mp4";
-            }
-
-            switch (options.Format)
-            {
-                case "mp4":
-                    videoEdit.Output_Format = new MP4Output(options.OutputFile);
-                    break;
-                case "avi":
-                    videoEdit.Output_Format = new AVIOutput(options.OutputFile);
-                    break;
-                case "wmv":
-                    videoEdit.Output_Format = new WMVOutput(options.OutputFile);
-                    break;
-                default:
-                    Console.WriteLine("Wrong output format. MP4 will be used.");
-                    videoEdit.Output_Format = new MP4Output(options.OutputFile);
-                    break;
-            }
-            
-            videoEdit.OnError += VideoEdit1_OnError;
-            videoEdit.OnProgress += VideoEdit1_OnProgress;
-            videoEdit.OnStop += VideoEdit_OnStop;
-
-            videoEdit.ConsoleUsage = true;
-
-            videoEdit.Start();
-
-            Console.WriteLine(@"Video saved to: " + options.OutputFile);
-            Console.Write("Press any key to exit.");
-            Console.ReadKey();
-
-            videoEdit.Dispose();
 
             VisioForgeX.DestroySDK();
+
+            Console.Write("Press any key to exit.");
+            Console.ReadKey();
         }
 
         /// <summary>
         /// Event handler for the engine's Stop event.
-        /// Outputs a completion message to the console.
+        /// Signals completion to the main thread.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         private static void VideoEdit_OnStop(object sender, StopEventArgs e)
         {
-            Console.WriteLine("Completed");
+            _completedSuccessfully = e.Successful;
+            _completionEvent.Set();
         }
 
         /// <summary>

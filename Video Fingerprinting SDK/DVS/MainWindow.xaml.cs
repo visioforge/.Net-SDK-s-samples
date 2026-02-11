@@ -4,15 +4,13 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
+    using System.Threading;
+    using System.Threading.Tasks;
     using System.Windows;
-    using System.Windows.Forms;
+
+    using Microsoft.Win32;
 
     using VisioForge.Core.VideoFingerPrinting;
-
-    using VisioForge_MMT;
-
-    using HorizontalAlignment = System.Windows.HorizontalAlignment;
-    using MessageBox = System.Windows.MessageBox;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -20,11 +18,15 @@
     public partial class MainWindow
     {
         /// <summary>
+        /// Cancellation token source for the search operation.
+        /// </summary>
+        private CancellationTokenSource _searchCts;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
         /// </summary>
         public MainWindow()
         {
-            // StyleManager.ApplicationTheme = new Windows8Theme();
             InitializeComponent();
         }
 
@@ -33,17 +35,17 @@
         /// </summary>
         private void btAddFolder_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new System.Windows.Forms.FolderBrowserDialog
+            var dlg = new OpenFolderDialog
             {
-                SelectedPath = Settings.LastPath
+                InitialDirectory = Settings.LastPath
             };
 
-            DialogResult result = dlg.ShowDialog(this.GetIWin32Window());
+            bool? result = dlg.ShowDialog(this);
 
-            if (result == System.Windows.Forms.DialogResult.OK)
+            if (result == true)
             {
-                lbSourceFolders.Items.Add(dlg.SelectedPath);
-                Settings.LastPath = dlg.SelectedPath;
+                lbSourceFolders.Items.Add(dlg.FolderName);
+                Settings.LastPath = dlg.FolderName;
             }
         }
 
@@ -63,204 +65,231 @@
         /// </summary>
         private async void btSearch_Click(object sender, RoutedEventArgs e)
         {
-            btSearch.IsEnabled = false;
+            // Handle cancel request
+            if (_searchCts != null)
+            {
+                _searchCts.Cancel();
+                return;
+            }
+
+            _searchCts = new CancellationTokenSource();
+            var cancellationToken = _searchCts.Token;
+
+            btSearch.Content = "Cancel";
             edErrors.Text = string.Empty;
 
-            // Settings
-            int indexingTime = 5;
-            switch (cbIndexingTime.SelectedIndex)
+            try
             {
-                case 0:
-                    indexingTime = 3;
-                    break;
-                case 1:
-                    indexingTime = 5;
-                    break;
-                case 2:
-                    indexingTime = 10;
-                    break;
-                case 3:
-                    indexingTime = 30;
-                    break;
-            }
-
-            List<string> extensions = new List<string>();
-            if (cbFormatAVI.IsChecked == true)
-            {
-                extensions.Add("avi");
-            }
-
-            if (cbFormatFLV.IsChecked == true)
-            {
-                extensions.Add("flv");
-            }
-
-            if (cbFormatMKV.IsChecked == true)
-            {
-                extensions.Add("mkv");
-            }
-
-            if (cbFormatMOV.IsChecked == true)
-            {
-                extensions.Add("mov");
-            }
-
-            if (cbFormatMP4.IsChecked == true)
-            {
-                extensions.Add("mp4");
-            }
-
-            if (cbFormatMPG.IsChecked == true)
-            {
-                extensions.Add("mpg");
-            }
-
-            if (cbFormatTS.IsChecked == true)
-            {
-                extensions.Add("ts");
-            }
-
-            if (cbFormatWMV.IsChecked == true)
-            {
-                extensions.Add("wmv");
-            }
-
-            lbStatus.Text = "Step 1: Searching video files";
-
-            List<string> filenames = new List<string>();
-
-            List<VFPFingerPrint> fingerPrints = new List<VFPFingerPrint>();
-
-            foreach (string item in lbSourceFolders.Items)
-            {
-                filenames.AddRange(FileScanner.SearchVideoInFolder(item, extensions));
-            }
-
-            lbStatus.Text = "Step 2: Getting fingerprints for video files";
-
-            int progress = 0;
-            foreach (string filename in filenames)
-            {
-                pbProgress.Value = progress;
-
-                VFPFingerPrint fp = null;
-                string error = null;
-
-                try
+                // Settings
+                int indexingTime = 5;
+                switch (cbIndexingTime.SelectedIndex)
                 {
-                    var source = new VFPFingerprintSource(filename)
+                    case 0:
+                        indexingTime = 3;
+                        break;
+                    case 1:
+                        indexingTime = 5;
+                        break;
+                    case 2:
+                        indexingTime = 10;
+                        break;
+                    case 3:
+                        indexingTime = 30;
+                        break;
+                }
+
+                List<string> extensions = new List<string>();
+                if (cbFormatAVI.IsChecked == true)
+                {
+                    extensions.Add("avi");
+                }
+
+                if (cbFormatFLV.IsChecked == true)
+                {
+                    extensions.Add("flv");
+                }
+
+                if (cbFormatMKV.IsChecked == true)
+                {
+                    extensions.Add("mkv");
+                }
+
+                if (cbFormatMOV.IsChecked == true)
+                {
+                    extensions.Add("mov");
+                }
+
+                if (cbFormatMP4.IsChecked == true)
+                {
+                    extensions.Add("mp4");
+                }
+
+                if (cbFormatMPG.IsChecked == true)
+                {
+                    extensions.Add("mpg");
+                }
+
+                if (cbFormatTS.IsChecked == true)
+                {
+                    extensions.Add("ts");
+                }
+
+                if (cbFormatWMV.IsChecked == true)
+                {
+                    extensions.Add("wmv");
+                }
+
+                lbStatus.Text = "Step 1: Searching video files";
+
+                List<string> filenames = new List<string>();
+
+                List<VFPFingerPrint> fingerPrints = new List<VFPFingerPrint>();
+
+                foreach (string item in lbSourceFolders.Items)
+                {
+                    filenames.AddRange(FileScanner.SearchVideoInFolder(item, extensions));
+                }
+
+                cancellationToken.ThrowIfCancellationRequested();
+
+                lbStatus.Text = "Step 2: Getting fingerprints for video files";
+
+                int progress = 0;
+                foreach (string filename in filenames)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+
+                    pbProgress.Value = progress;
+
+                    VFPFingerPrint fp = null;
+
+                    try
                     {
-                        StopTime = TimeSpan.FromSeconds(indexingTime)
-                    };
-
-                    fp = await VFPAnalyzer.GetComparingFingerprintForVideoFileAsync(source, ErrorCallback);
-                }
-                catch (Exception ex)
-                {
-                    edErrors.Text += ex.Message + Environment.NewLine;
-                }
-
-                if (fp != null)
-                {
-                    fingerPrints.Add(fp);
-                }
-
-                if (error != null)
-                {
-                    edErrors.Text += error + Environment.NewLine;
-                }
-
-                progress += 100 / filenames.Count;
-            }
-
-            pbProgress.Value = 100;
-
-            List<SearchResult> results = new List<SearchResult>();
-
-            results.Clear();
-            lbResults.Items.Clear();
-            lbStatus.Text = "Step 3: Analyzing data";
-            progress = 0;
-            int foundCount = 0;
-
-            List<string> clonesToIgnore = new List<string>();
-            foreach (var first in fingerPrints)
-            {
-                pbProgress.Value = progress;
-
-                if (first == null)
-                {
-                    continue;
-                }
-
-                if (clonesToIgnore.Contains(first.OriginalFilename))
-                {
-                    continue;
-                }
-
-                foreach (var second in fingerPrints)
-                {
-                    if (second == null)
-                    {
-                        continue;
-                    }
-
-                    if (first.OriginalFilename == second.OriginalFilename)
-                    {
-                        continue;
-                    }
-
-                    int diff = VFPAnalyzer.Compare(first, second, TimeSpan.FromSeconds(slMaxShift.Value));
-
-                    if (diff < slSensitivity.Value * 10)
-                    {
-                        foundCount++;
-
-                        clonesToIgnore.Add(second.OriginalFilename);
-
-                        var result = new SearchResult()
+                        var source = new VFPFingerprintSource(filename)
                         {
-                            GroupFile = first.OriginalFilename
+                            StopTime = TimeSpan.FromSeconds(indexingTime)
                         };
-                        result.Clones.Add(second.OriginalFilename);
 
-                        results.Add(result);
+                        fp = await VFPAnalyzer.GetComparingFingerprintForVideoFileAsync(source, ErrorCallback);
+                    }
+                    catch (Exception ex)
+                    {
+                        edErrors.Text += ex.Message + Environment.NewLine;
+                    }
+
+                    if (fp != null)
+                    {
+                        fingerPrints.Add(fp);
+                    }
+
+                    progress += filenames.Count > 0 ? 100 / filenames.Count : 0;
+                }
+
+                pbProgress.Value = 100;
+
+                lbResults.Items.Clear();
+                lbStatus.Text = "Step 3: Analyzing data";
+
+                // Capture UI values for background processing
+                double maxShiftValue = slMaxShift.Value;
+                double sensitivityValue = slSensitivity.Value;
+
+                // Run the O(n^2) comparison on a background thread to keep UI responsive
+                var (results, foundCount) = await Task.Run(() =>
+                {
+                    var searchResults = new List<SearchResult>();
+                    int matchCount = 0;
+                    int bgProgress = 0;
+
+                    var clonesToIgnore = new HashSet<string>();
+                    foreach (var first in fingerPrints)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
+
+                        if (first == null || clonesToIgnore.Contains(first.OriginalFilename))
+                        {
+                            continue;
+                        }
+
+                        foreach (var second in fingerPrints)
+                        {
+                            if (second == null || first.OriginalFilename == second.OriginalFilename)
+                            {
+                                continue;
+                            }
+
+                            int diff = VFPAnalyzer.Compare(first, second, TimeSpan.FromSeconds(maxShiftValue));
+
+                            if (diff < sensitivityValue * 10)
+                            {
+                                matchCount++;
+
+                                clonesToIgnore.Add(second.OriginalFilename);
+
+                                var result = new SearchResult()
+                                {
+                                    GroupFile = first.OriginalFilename
+                                };
+                                result.Clones.Add(second.OriginalFilename);
+
+                                searchResults.Add(result);
+                            }
+                        }
+
+                        bgProgress += fingerPrints.Count > 0 ? 100 / fingerPrints.Count : 0;
+
+                        // Update progress on UI thread
+                        Dispatcher.Invoke(() => pbProgress.Value = bgProgress);
+                    }
+
+                    return (searchResults, matchCount);
+                }, cancellationToken);
+
+                pbProgress.Value = 0;
+
+                foreach (var result in results)
+                {
+                    ResultItem item = new ResultItem
+                    {
+                        Text = { Text = result.GroupFile },
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        Screenshot = { Source = Helper.GetImageForFile(result.GroupFile) }
+                    };
+
+                    lbResults.Items.Add(item);
+
+                    foreach (var clone in result.Clones)
+                    {
+                        ResultItem item2 = new ResultItem
+                        {
+                            Text = { Text = clone },
+                            Checked = { IsChecked = true },
+                            HorizontalAlignment = HorizontalAlignment.Stretch,
+                            Screenshot = { Source = Helper.GetImageForFile(clone) }
+                        };
+
+                        lbResults.Items.Add(item2);
                     }
                 }
 
-                progress += 100 / fingerPrints.Count;
+                lbStatus.Text = "Step 4: Done. " + foundCount + " copies found.";
             }
-
-            pbProgress.Value = 0;
-
-            foreach (var result in results)
+            catch (OperationCanceledException)
             {
-                ResultItem item = new ResultItem
-                {
-                    Text = { Text = result.GroupFile },
-                    HorizontalAlignment = HorizontalAlignment.Stretch,
-                    Screenshot = { Source = Helper.GetImageForFile(result.GroupFile) }
-                };
-
-                lbResults.Items.Add(item);
-
-                foreach (var clone in result.Clones)
-                {
-                    ResultItem item2 = new ResultItem
-                    {
-                        Text = { Text = clone },
-                        Checked = { IsChecked = true },
-                        HorizontalAlignment = HorizontalAlignment.Stretch,
-                        Screenshot = { Source = Helper.GetImageForFile(clone) }
-                    };
-
-                    lbResults.Items.Add(item2);
-                }
+                lbStatus.Text = "Search cancelled.";
+                pbProgress.Value = 0;
             }
-
-            lbStatus.Text = "Step 4: Done. " + foundCount + " copies found.";
-
-            btSearch.IsEnabled = true;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred during search: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                edErrors.Text += ex.Message + Environment.NewLine;
+            }
+            finally
+            {
+                _searchCts?.Dispose();
+                _searchCts = null;
+                btSearch.Content = "Search";
+            }
         }
 
         /// <summary>
@@ -268,30 +297,65 @@
         /// </summary>
         private void btDelete_Click(object sender, RoutedEventArgs e)
         {
-            bool removed = false;
-
             List<ResultItem> toRemove = new List<ResultItem>();
 
             foreach (ResultItem item in lbResults.Items)
             {
                 if (item.Checked.IsChecked == true)
                 {
-                    removed = true;
-
-                    File.Delete(item.Text.Text);
-
                     toRemove.Add(item);
                 }
             }
 
-            foreach (var item in toRemove)
+            if (toRemove.Count == 0)
             {
-                lbResults.Items.Remove(item);
+                return;
             }
 
-            if (removed)
+            // Show confirmation dialog before deleting files
+            var confirmResult = MessageBox.Show(
+                $"Are you sure you want to permanently delete {toRemove.Count} file(s)?\n\nThis action cannot be undone.",
+                "Confirm Deletion",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (confirmResult != MessageBoxResult.Yes)
             {
-                MessageBox.Show("File(s) has been removed!");
+                return;
+            }
+
+            int deletedCount = 0;
+            List<string> failedFiles = new List<string>();
+
+            foreach (var item in toRemove)
+            {
+                try
+                {
+                    File.Delete(item.Text.Text);
+                    lbResults.Items.Remove(item);
+                    deletedCount++;
+                }
+                catch (Exception ex)
+                {
+                    failedFiles.Add($"{item.Text.Text}: {ex.Message}");
+                }
+            }
+
+            if (failedFiles.Count > 0)
+            {
+                MessageBox.Show(
+                    $"Successfully deleted {deletedCount} file(s).\n\nFailed to delete {failedFiles.Count} file(s):\n{string.Join("\n", failedFiles)}",
+                    "Deletion Results",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            }
+            else if (deletedCount > 0)
+            {
+                MessageBox.Show(
+                    $"Successfully deleted {deletedCount} file(s).",
+                    "Deletion Complete",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
             }
         }
 
@@ -322,7 +386,7 @@
         /// </summary>
         private void SaveSettings()
         {
-            string filename = Settings.SettingsFolder + "settings.xml";
+            string filename = Path.Combine(Settings.SettingsFolder, "settings.xml");
 
             if (File.Exists(filename))
             {
@@ -342,7 +406,7 @@
         /// </summary>
         private void LoadSettings()
         {
-            string filename = Settings.SettingsFolder + "settings.xml";
+            string filename = Path.Combine(Settings.SettingsFolder, "settings.xml");
 
             if (File.Exists(filename))
             {

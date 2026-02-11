@@ -61,6 +61,11 @@ namespace Karaoke_Demo
                 e.Cancel = true;
                 Hide();
             }
+            else
+            {
+                // Dispose VideoView when form is actually closing
+                VideoView?.Dispose();
+            }
         }
     }
 }

@@ -57,58 +57,65 @@ namespace Decklink_Player_Demo_X
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-            _timer = new System.Timers.Timer(500);
-            _timer.Elapsed += _timer_Elapsed;
-
-            Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
-
-            CreateEngine();
-
-            // audio outputs
-            foreach (var device in await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound))
+            try
             {
-                cbAudioOutput.Items.Add(device.Name);
-            }
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            if (cbAudioOutput.Items.Count > 0)
+                _timer = new System.Timers.Timer(500);
+                _timer.Elapsed += _timer_Elapsed;
+
+                Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
+
+                CreateEngine();
+
+                // audio outputs
+                foreach (var device in await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound))
+                {
+                    cbAudioOutput.Items.Add(device.Name);
+                }
+
+                if (cbAudioOutput.Items.Count > 0)
+                {
+                    cbAudioOutput.SelectedIndex = 0;
+                }
+
+                // Decklink outputs
+                foreach (var device in await DeviceEnumerator.Shared.DecklinkVideoSinksAsync())
+                {
+                    cbDecklinkVideoOutput.Items.Add(device.Name);
+                }
+
+                if (cbDecklinkVideoOutput.Items.Count > 0)
+                {
+                    cbDecklinkVideoOutput.SelectedIndex = 0;
+                }
+
+                foreach (var device in await DeviceEnumerator.Shared.DecklinkAudioSinksAsync())
+                {
+                    cbDecklinkAudioOutput.Items.Add(device.Name);
+                }
+
+                if (cbDecklinkAudioOutput.Items.Count > 0)
+                {
+                    cbDecklinkAudioOutput.SelectedIndex = 0;
+                }
+
+                foreach (var name in Enum.GetNames(typeof(DecklinkMode)))
+                {
+                    cbDecklinkVideoMode.Items.Add(name);
+                }
+
+                cbDecklinkVideoMode.SelectedIndex = 10;
+            }
+            catch (Exception ex)
             {
-                cbAudioOutput.SelectedIndex = 0;
+                System.Diagnostics.Debug.WriteLine($"Window_Loaded error: {ex.Message}");
             }
-
-            // Decklink outputs
-            foreach (var device in await DeviceEnumerator.Shared.DecklinkVideoSinksAsync())
-            {
-                cbDecklinkVideoOutput.Items.Add(device.Name);
-            }
-
-            if (cbDecklinkVideoOutput.Items.Count > 0)
-            {
-                cbDecklinkVideoOutput.SelectedIndex = 0;
-            }
-
-            foreach (var device in await DeviceEnumerator.Shared.DecklinkAudioSinksAsync())
-            {
-                cbDecklinkAudioOutput.Items.Add(device.Name);
-            }
-
-            if (cbDecklinkAudioOutput.Items.Count > 0)
-            {
-                cbDecklinkAudioOutput.SelectedIndex = 0;
-            }
-
-            foreach (var name in Enum.GetNames(typeof(DecklinkMode)))
-            {
-                cbDecklinkVideoMode.Items.Add(name);
-            }
-
-            cbDecklinkVideoMode.SelectedIndex = 10;
         }
 
         /// <summary>
@@ -155,29 +162,36 @@ namespace Decklink_Player_Demo_X
         /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            _timerFlag = true;
-
-            if (_player == null)
+            try
             {
-                return;
-            }
+                _timerFlag = true;
 
-            var position = await _player.Position_GetAsync();
-            var duration = await _player.DurationAsync();
-
-            Dispatcher.Invoke((Action)(() =>
-            {
-                tbTimeline.Maximum = (int)duration.TotalSeconds;
-
-                lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
-
-                if (tbTimeline.Maximum >= position.TotalSeconds)
+                if (_player == null)
                 {
-                    tbTimeline.Value = (int)position.TotalSeconds;
+                    return;
                 }
-            }));
 
-            _timerFlag = false;
+                var position = await _player.Position_GetAsync();
+                var duration = await _player.DurationAsync();
+
+                Dispatcher.Invoke((Action)(() =>
+                {
+                    tbTimeline.Maximum = (int)duration.TotalSeconds;
+
+                    lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
+
+                    if (tbTimeline.Maximum >= position.TotalSeconds)
+                    {
+                        tbTimeline.Value = (int)position.TotalSeconds;
+                    }
+                }));
+
+                _timerFlag = false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Timer error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -212,9 +226,16 @@ namespace Decklink_Player_Demo_X
         /// </summary>
         private async void tbTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!_timerFlag)
+            try
             {
-                await _player.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (!_timerFlag && _player != null)
+                {
+                    await _player.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Seek error: {ex.Message}");
             }
         }
 
@@ -223,46 +244,46 @@ namespace Decklink_Player_Demo_X
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            edLog.Clear();
-
-            await DestroyEngineAsync();
-
-            CreateEngine();
-
-            var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text);
-            _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
-
-            _player.Custom_Video_Outputs.Clear();
-            _player.Custom_Audio_Outputs.Clear();
-            if (cbDecklinkVideoOutput.Items.Count > 0)
+            try
             {
-                var device = (await DeviceEnumerator.Shared.DecklinkVideoSinksAsync()).First(x => x.Name == cbDecklinkVideoOutput.Text);
-                var mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbDecklinkVideoMode.Text);
-                var videoSettings = new DecklinkVideoSinkSettings(device, mode);
+                edLog.Clear();
 
-                if (cbDecklinkVideoOutputResize.IsChecked == true)
+                await DestroyEngineAsync();
+
+                CreateEngine();
+
+                var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutput.Text);
+                _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+
+                _player.Custom_Video_Outputs.Clear();
+                _player.Custom_Audio_Outputs.Clear();
+                if (cbDecklinkVideoOutput.Items.Count > 0)
                 {
-                    DecklinkHelper.GetVideoInfoFromMode(videoSettings.Mode, out var width, out var height, out var framerate);
-                    videoSettings.CustomVideoSize = new ResizeVideoEffect(width, height);
-                    videoSettings.CustomFrameRate = framerate;
+                    var device = (await DeviceEnumerator.Shared.DecklinkVideoSinksAsync()).First(x => x.Name == cbDecklinkVideoOutput.Text);
+                    var mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbDecklinkVideoMode.Text);
+                    var videoSettings = new DecklinkVideoSinkSettings(device, mode);
+
+                    if (cbDecklinkVideoOutputResize.IsChecked == true)
+                    {
+                        DecklinkHelper.GetVideoInfoFromMode(videoSettings.Mode, out var width, out var height, out var framerate);
+                        videoSettings.CustomVideoSize = new ResizeVideoEffect(width, height);
+                        videoSettings.CustomFrameRate = framerate;
+                    }
+
+                    var videoOutput = new DecklinkVideoSinkBlock(videoSettings);
+                    _player.Custom_Video_Outputs.Add(videoOutput);
                 }
 
-                var videoOutput = new DecklinkVideoSinkBlock(videoSettings);
-                _player.Custom_Video_Outputs.Add(videoOutput);
+                await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
+
+                await _player.PlayAsync();
+
+                _timer.Start();
             }
-
-            //if (cbDecklinkAudioOutput.Items.Count > 0)
-            //{
-            //    var device = (await _deviceEnumerator.DecklinkAudioSinksAsync()).First(x => x.Name == cbDecklinkAudioOutput.Text);
-            //    var audioOutput = new DecklinkAudioSinkBlock(new DecklinkAudioSinkSettings(device));
-            //    _player.Custom_Audio_Outputs.Add(audioOutput);
-            //}
-
-            await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
-
-            await _player.PlayAsync();
-
-            _timer.Start();
+            catch (Exception ex)
+            {
+                edLog.Text += $"Start error: {ex.Message}{Environment.NewLine}";
+            }
         }
 
         /// <summary>
@@ -270,14 +291,21 @@ namespace Decklink_Player_Demo_X
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _timer.Stop();
-
-            if (_player != null)
+            try
             {
-                await _player.StopAsync();
-            }
+                _timer.Stop();
 
-            tbTimeline.Value = 0;
+                if (_player != null)
+                {
+                    await _player.StopAsync();
+                }
+
+                tbTimeline.Value = 0;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Stop error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -285,7 +313,17 @@ namespace Decklink_Player_Demo_X
         /// </summary>
         private async void btPause_Click(object sender, RoutedEventArgs e)
         {
-            await _player.PauseAsync();
+            try
+            {
+                if (_player != null)
+                {
+                    await _player.PauseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Pause error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -293,7 +331,17 @@ namespace Decklink_Player_Demo_X
         /// </summary>
         private async void btResume_Click(object sender, RoutedEventArgs e)
         {
-            await _player.ResumeAsync();
+            try
+            {
+                if (_player != null)
+                {
+                    await _player.ResumeAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Resume error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -312,13 +360,20 @@ namespace Decklink_Player_Demo_X
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _timer.Stop();
+            try
+            {
+                _timer.Stop();
 
-            _isClosing = true;
+                _isClosing = true;
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Window closing error: {ex.Message}");
+            }
         }
     }
 }

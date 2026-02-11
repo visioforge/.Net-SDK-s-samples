@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using VisioForge.Core;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEffects;
+using System.Diagnostics;
 
 namespace Overlay_Manager_Demo
 {
@@ -43,8 +44,15 @@ namespace Overlay_Manager_Demo
         /// </summary>
         private async void NDIOverlayOptionsWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // Load NDI sources
-            await LoadNDISourcesAsync();
+            try
+            {
+                // Load NDI sources
+                await LoadNDISourcesAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -107,7 +115,14 @@ namespace Overlay_Manager_Demo
         /// </summary>
         private async void btRefresh_Click(object sender, RoutedEventArgs e)
         {
-            await LoadNDISourcesAsync();
+            try
+            {
+                await LoadNDISourcesAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

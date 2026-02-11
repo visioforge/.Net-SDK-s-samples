@@ -78,9 +78,16 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(timer1.Tag) == 0)
+            try
             {
-                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (Convert.ToInt32(timer1.Tag) == 0)
+                {
+                    await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -89,7 +96,14 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void tbSpeed_Scroll(object sender, EventArgs e)
         {
-            await MediaPlayer1.DVD_SetSpeedAsync(tbSpeed.Value / 10.0, false);
+            try
+            {
+                await MediaPlayer1.DVD_SetSpeedAsync(tbSpeed.Value / 10.0, false);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -97,7 +111,14 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.ResumeAsync();
+            try
+            {
+                await MediaPlayer1.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -105,7 +126,14 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.PauseAsync();
+            try
+            {
+                await MediaPlayer1.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -125,7 +153,14 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            await StopAsync();
+            try
+            {
+                await StopAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -141,56 +176,63 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void cbDVDControlTitle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbDVDControlTitle.SelectedIndex != -1)
+            try
             {
-                // fill info
-                cbDVDControlAudio.Items.Clear();
-                cbDVDControlSubtitles.Items.Clear();
-                cbDVDControlChapter.Items.Clear();
-
-                var title = MediaInfo.Info.Titles[cbDVDControlTitle.SelectedIndex];
-                for (int i = 0; i < title.NumberOfChapters; i++)
+                if (cbDVDControlTitle.SelectedIndex != -1)
                 {
-                    cbDVDControlChapter.Items.Add("Chapter " + Convert.ToString(i + 1));
+                    // fill info
+                    cbDVDControlAudio.Items.Clear();
+                    cbDVDControlSubtitles.Items.Clear();
+                    cbDVDControlChapter.Items.Clear();
+
+                    var title = MediaInfo.Info.Titles[cbDVDControlTitle.SelectedIndex];
+                    for (int i = 0; i < title.NumberOfChapters; i++)
+                    {
+                        cbDVDControlChapter.Items.Add("Chapter " + Convert.ToString(i + 1));
+                    }
+
+                    if (cbDVDControlChapter.Items.Count > 0)
+                    {
+                        cbDVDControlChapter.SelectedIndex = 0;
+                    }
+
+                    for (int i = 0; i < title.MainAttributes.NumberOfAudioStreams; i++)
+                    {
+                        var audioStream = title.MainAttributes.AudioAttributes[i];
+                        string s = audioStream.AudioFormat.ToString();
+
+                        s = s + " - ";
+                        s = s + audioStream.NumberOfChannels + "ch" + " - ";
+                        s = s + audioStream.Language;
+
+                        cbDVDControlAudio.Items.Add(s);
+                    }
+
+                    if (cbDVDControlAudio.Items.Count > 0)
+                    {
+                        cbDVDControlAudio.SelectedIndex = 0;
+                    }
+
+                    cbDVDControlSubtitles.Items.Add("Disabled");
+                    for (int i = 0; i < title.MainAttributes.NumberOfSubpictureStreams; i++)
+                    {
+                        cbDVDControlSubtitles.Items.Add(title.MainAttributes.SubpictureAttributes[i].Language);
+                    }
+
+                    cbDVDControlSubtitles.SelectedIndex = 0;
+
+                    // if (null we just enumerate titles and chapters
+                    if (sender != null)
+                    {
+                        // play title
+                        await MediaPlayer1.DVD_Title_PlayAsync(cbDVDControlTitle.SelectedIndex);
+                        tbTimeline.Maximum = (int)((await MediaPlayer1.DVD_Title_GetDurationAsync()).TotalSeconds);
+                    }
                 }
-
-                if (cbDVDControlChapter.Items.Count > 0)
-                {
-                    cbDVDControlChapter.SelectedIndex = 0;
-                }
-
-                for (int i = 0; i < title.MainAttributes.NumberOfAudioStreams; i++)
-                {
-                    var audioStream = title.MainAttributes.AudioAttributes[i];
-                    string s = audioStream.AudioFormat.ToString();
-
-                    s = s + " - ";
-                    s = s + audioStream.NumberOfChannels + "ch" + " - ";
-                    s = s + audioStream.Language;
-
-                    cbDVDControlAudio.Items.Add(s);
-                }
-
-                if (cbDVDControlAudio.Items.Count > 0)
-                {
-                    cbDVDControlAudio.SelectedIndex = 0;
-                }
-
-                cbDVDControlSubtitles.Items.Add("Disabled");
-                for (int i = 0; i < title.MainAttributes.NumberOfSubpictureStreams; i++)
-                {
-                    cbDVDControlSubtitles.Items.Add(title.MainAttributes.SubpictureAttributes[i].Language);
-                }
-
-                cbDVDControlSubtitles.SelectedIndex = 0;
-
-                // if (null we just enumerate titles and chapters
-                if (sender != null)
-                {
-                    // play title
-                    await MediaPlayer1.DVD_Title_PlayAsync(cbDVDControlTitle.SelectedIndex);
-                    tbTimeline.Maximum = (int)((await MediaPlayer1.DVD_Title_GetDurationAsync()).TotalSeconds);
-                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -199,9 +241,16 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void cbDVDControlAudio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbDVDControlAudio.SelectedIndex > 0)
+            try
             {
-                await MediaPlayer1.DVD_Select_AudioStreamAsync(cbDVDControlAudio.SelectedIndex);
+                if (cbDVDControlAudio.SelectedIndex > 0)
+                {
+                    await MediaPlayer1.DVD_Select_AudioStreamAsync(cbDVDControlAudio.SelectedIndex);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -210,9 +259,16 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void cbDVDControlChapter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbDVDControlChapter.SelectedIndex > 0)
+            try
             {
-                await MediaPlayer1.DVD_Chapter_SelectAsync(cbDVDControlChapter.SelectedIndex);
+                if (cbDVDControlChapter.SelectedIndex > 0)
+                {
+                    await MediaPlayer1.DVD_Chapter_SelectAsync(cbDVDControlChapter.SelectedIndex);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -221,13 +277,20 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void cbDVDControlSubtitles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbDVDControlSubtitles.SelectedIndex > 0)
+            try
             {
-                await MediaPlayer1.DVD_Select_SubpictureStreamAsync(cbDVDControlSubtitles.SelectedIndex - 1);
-            }
+                if (cbDVDControlSubtitles.SelectedIndex > 0)
+                {
+                    await MediaPlayer1.DVD_Select_SubpictureStreamAsync(cbDVDControlSubtitles.SelectedIndex - 1);
+                }
 
-            // 0 - x - subtitles
-            // -1 - disable subtitles
+                // 0 - x - subtitles
+                // -1 - disable subtitles
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -235,7 +298,14 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void btDVDControlTitleMenu_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title);
+            try
+            {
+                await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -243,7 +313,14 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void btDVDControlRootMenu_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Root);
+            try
+            {
+                await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Root);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -251,52 +328,59 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            mmError.Clear();
-
-            MediaPlayer1.Playlist_Clear();
-            MediaPlayer1.Playlist_Add(edFilename.Text);
-            MediaPlayer1.Loop = cbLoop.Checked;
-            MediaPlayer1.Audio_PlayAudio = true;
-
-            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.DVD_DS;
-
-            // read DVD info
-            cbDVDControlTitle.Items.Clear();
-            cbDVDControlChapter.Items.Clear();
-            cbDVDControlAudio.Items.Clear();
-            cbDVDControlSubtitles.Items.Clear();
-
-            MediaInfo.Filename = edFilename.Text;
-            MediaInfo.ReadDVDInfo();
-
-            for (int i = 0; i < MediaInfo.Info.Disc_NumOfTitles; i++)
+            try
             {
-                cbDVDControlTitle.Items.Add("Title " + (i + 1));
+                mmError.Clear();
+
+                MediaPlayer1.Playlist_Clear();
+                MediaPlayer1.Playlist_Add(edFilename.Text);
+                MediaPlayer1.Loop = cbLoop.Checked;
+                MediaPlayer1.Audio_PlayAudio = true;
+
+                MediaPlayer1.Source_Mode = MediaPlayerSourceMode.DVD_DS;
+
+                // read DVD info
+                cbDVDControlTitle.Items.Clear();
+                cbDVDControlChapter.Items.Clear();
+                cbDVDControlAudio.Items.Clear();
+                cbDVDControlSubtitles.Items.Clear();
+
+                MediaInfo.Filename = edFilename.Text;
+                MediaInfo.ReadDVDInfo();
+
+                for (int i = 0; i < MediaInfo.Info.Disc_NumOfTitles; i++)
+                {
+                    cbDVDControlTitle.Items.Add("Title " + (i + 1));
+                }
+
+                MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
+
+                MediaPlayer1.Video_Renderer_SetAuto();
+
+                MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
+
+                await MediaPlayer1.PlayAsync();
+
+                // DVD
+                // select and play first title
+                if (cbDVDControlTitle.Items.Count > 0)
+                {
+                    cbDVDControlTitle.SelectedIndex = 0;
+                    cbDVDControlTitle_SelectedIndexChanged(null, null);
+                }
+
+                // show title menu
+                await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title);
+
+                MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
+                MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
+
+                timer1.Enabled = true;
             }
-
-            MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
-
-            MediaPlayer1.Video_Renderer_SetAuto();
-
-            MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
-
-            await MediaPlayer1.PlayAsync();
-
-            // DVD
-            // select and play first title
-            if (cbDVDControlTitle.Items.Count > 0)
+            catch (Exception ex)
             {
-                cbDVDControlTitle.SelectedIndex = 0;
-                cbDVDControlTitle_SelectedIndexChanged(null, null);
+                Debug.WriteLine(ex);
             }
-
-            // show title menu
-            await MediaPlayer1.DVD_Menu_ShowAsync(DVDMenu.Title);
-
-            MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
-            MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
-
-            timer1.Enabled = true;
         }
 
         /// <summary>
@@ -304,26 +388,25 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Tag = 1;
-            tbTimeline.Maximum = (int)((await MediaPlayer1.Duration_TimeAsync()).TotalSeconds);
-
-            int value = (int)((await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds);
-            if ((value > 0) && (value < tbTimeline.Maximum))
+            try
             {
-                tbTimeline.Value = value;
-            }
+                timer1.Tag = 1;
+                tbTimeline.Maximum = (int)((await MediaPlayer1.Duration_TimeAsync()).TotalSeconds);
 
-            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
-
-            if (cbDVDControlChapter.Items.Count > 0)
-            {
-                if (MediaPlayer1.DVD_Chapter_GetCurrent() != cbDVDControlChapter.SelectedIndex)
+                int value = (int)((await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds);
+                if ((value > 0) && (value < tbTimeline.Maximum))
                 {
-                    //cbDVDControlChapter.SelectedIndex =  MediaPlayer1.DVD_Chapter_GetCurrent();
+                    tbTimeline.Value = value;
                 }
-            }
 
-            timer1.Tag = 0;
+                lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+
+                timer1.Tag = 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -371,7 +454,7 @@ namespace DVD_Player_Demo
         {
             Invoke((Action)(() =>
                                    {
-                                       mmError.Text = mmError.Text + e.Message + Environment.NewLine;
+                                       mmError.AppendText(e.Message + Environment.NewLine);
                                    }));
 
         }
@@ -383,7 +466,7 @@ namespace DVD_Player_Demo
         {
             Invoke((Action)(() =>
                                    {
-                                       mmError.Text = mmError.Text + e.Message + Environment.NewLine;
+                                       mmError.AppendText(e.Message + Environment.NewLine);
                                    }));
 
         }
@@ -405,10 +488,16 @@ namespace DVD_Player_Demo
         /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await StopAsync();
+            try
+            {
+                await StopAsync();
 
-            DestroyEngine();
+                DestroyEngine();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }
-

@@ -14,6 +14,7 @@ using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.Types;
+using System.Diagnostics;
 
 namespace Mobile_Streamer
 {
@@ -93,8 +94,22 @@ namespace Mobile_Streamer
         /// <summary>
         /// Called when the activity is being destroyed.
         /// </summary>
-        protected override void OnDestroy()
+        protected override async void OnDestroy()
         {
+            try
+            {
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync();
+                    await _pipeline.DisposeAsync();
+                    _pipeline = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
             VisioForgeX.DestroySDK();
 
             base.OnDestroy();
@@ -252,18 +267,25 @@ namespace Mobile_Streamer
         /// </summary>
         private async void btSwitchCam_Click(object sender, EventArgs e)
         {
-            await StopAsync();
-
-            if (_cameraIndex == 0)
+            try
             {
-                _cameraIndex = 1;
-            }
-            else
-            {
-                _cameraIndex = 0;
-            }
+                await StopAsync();
 
-            await StartPreviewAsync();
+                if (_cameraIndex == 0)
+                {
+                    _cameraIndex = 1;
+                }
+                else
+                {
+                    _cameraIndex = 0;
+                }
+
+                await StartPreviewAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -296,9 +318,16 @@ namespace Mobile_Streamer
         /// </summary>
         private async void btStopRecord_Click(object sender, EventArgs e)
         {
-            await StopAsync();
+            try
+            {
+                await StopAsync();
 
-            await StartPreviewAsync();
+                await StartPreviewAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -344,7 +373,7 @@ namespace Mobile_Streamer
                 // Facebook Live
                 var sinkSettings = new FacebookLiveSinkSettings(STREAMING_KEY);
                 _sink = new FacebookLiveSinkBlock(sinkSettings);
-            } 
+            }
             else
             {
                 // YouTube
@@ -377,7 +406,14 @@ namespace Mobile_Streamer
         /// </summary>
         private async void btStartRecord_Click(object sender, EventArgs e)
         {
-            await StartRecordAsync();
+            try
+            {
+                await StartRecordAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

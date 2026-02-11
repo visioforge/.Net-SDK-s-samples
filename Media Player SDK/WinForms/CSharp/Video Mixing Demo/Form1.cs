@@ -101,8 +101,6 @@
             info.ZOrder = _lastZOrder--;
 
             _pipInfos.Add(info);
-
-            //lbSourceFiles.SelectedIndex = _pipInfos.Count - 1;
         }
 
         /// <summary>
@@ -139,25 +137,32 @@
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
-            MediaPlayer1.Info_UseLibMediaInfo = true;
+            try
+            {
+                MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
+                MediaPlayer1.Info_UseLibMediaInfo = true;
 
-            mmLog.Clear();
+                mmLog.Clear();
 
-            MediaPlayer1.Video_Renderer.Zoom_Ratio = 0;
-            MediaPlayer1.Video_Renderer.Zoom_ShiftX = 0;
-            MediaPlayer1.Video_Renderer.Zoom_ShiftY = 0;
+                MediaPlayer1.Video_Renderer.Zoom_Ratio = 0;
+                MediaPlayer1.Video_Renderer.Zoom_ShiftX = 0;
+                MediaPlayer1.Video_Renderer.Zoom_ShiftY = 0;
 
-            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
-            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.VMR9;
+                MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
 
-            await MediaPlayer1.PlayAsync();
+                await MediaPlayer1.PlayAsync();
 
-            await MediaPlayer1.PIP_Sources_SetSourcePositionAsync(0, _pipInfos[0].Rect, 1.0f);
+                await MediaPlayer1.PIP_Sources_SetSourcePositionAsync(0, _pipInfos[0].Rect, 1.0f);
 
-            lbSourceFiles.SelectedIndex = 0;
+                lbSourceFiles.SelectedIndex = 0;
 
-            timer1.Start();
+                timer1.Start();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -176,11 +181,9 @@
         /// </summary>
         private void btTest_Click(object sender, EventArgs e)
         {
-            string filename1 = @"e:\_movies\The Mighty Boosh.Saliour Tour 2009.mkv";
-            string filename2 = @"e:\_TV\The Mighty Boosh\s02e05.mkv";
-            //string filename2 = @"c:\samples\!video.avi";
-            //string filename2 = @"c:\samples\!video.avi";
-            //string filename2 = @"c:\samples\Biking_Girl_Alpha.mov";
+            // Set your test file paths here
+            string filename1 = string.Empty;
+            string filename2 = string.Empty;
 
             AddFile(filename1);
             AddFile(filename2);
@@ -191,13 +194,20 @@
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            timer1.Stop();
+            try
+            {
+                timer1.Stop();
 
-            await MediaPlayer1.StopAsync();
+                await MediaPlayer1.StopAsync();
 
-            _pipInfos.Clear();
-            MediaPlayer1.PIP_Sources_Clear();
-            lbSourceFiles.Items.Clear();
+                _pipInfos.Clear();
+                MediaPlayer1.PIP_Sources_Clear();
+                lbSourceFiles.Items.Clear();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -205,7 +215,14 @@
         /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.ResumeAsync();
+            try
+            {
+                await MediaPlayer1.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -213,7 +230,14 @@
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.PauseAsync();
+            try
+            {
+                await MediaPlayer1.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -250,33 +274,40 @@
         /// </summary>
         private async void btUpdateRect_Click(object sender, EventArgs e)
         {
-            int index = lbSourceFiles.SelectedIndex;
-            if (index >= 0)
+            try
             {
-                int left = Convert.ToInt32(edPIPFileLeft.Text);
-                int top = Convert.ToInt32(edPIPFileTop.Text);
-                int width = Convert.ToInt32(edPIPFileWidth.Text);
-                int height = Convert.ToInt32(edPIPFileHeight.Text);
-                _pipInfos[index].Rect = new Rectangle(left, top, width, height);
-
-                _pipInfos[index].ZOrder = Convert.ToInt32(edZOrder.Text);
-                _pipInfos[index].Alpha = tbStreamTransparency.Value / 100.0f;
-
-                if (left == 0 && top == 0 && width == 0 && height == 0)
+                int index = lbSourceFiles.SelectedIndex;
+                if (index >= 0)
                 {
-                    lbSourceFiles.Items[index] = $@"{_pipInfos[index].Filename} (entire screen)";
-                }
-                else
-                {
-                    lbSourceFiles.Items[index] = $@"{_pipInfos[index].Filename} ({left}.{top}px, width: {width}px, height: {height}px)";
-                }
+                    int left = Convert.ToInt32(edPIPFileLeft.Text);
+                    int top = Convert.ToInt32(edPIPFileTop.Text);
+                    int width = Convert.ToInt32(edPIPFileWidth.Text);
+                    int height = Convert.ToInt32(edPIPFileHeight.Text);
+                    _pipInfos[index].Rect = new Rectangle(left, top, width, height);
 
-                var transp = tbStreamTransparency.Value / 100.0f;
-                await MediaPlayer1.PIP_Sources_SetSourcePositionAsync(
-                        index,
-                        _pipInfos[index].Rect,
-                        transp);
-                await MediaPlayer1.PIP_Sources_SetSourceOrderAsync(index, _pipInfos[index].ZOrder);
+                    _pipInfos[index].ZOrder = Convert.ToInt32(edZOrder.Text);
+                    _pipInfos[index].Alpha = tbStreamTransparency.Value / 100.0f;
+
+                    if (left == 0 && top == 0 && width == 0 && height == 0)
+                    {
+                        lbSourceFiles.Items[index] = $@"{_pipInfos[index].Filename} (entire screen)";
+                    }
+                    else
+                    {
+                        lbSourceFiles.Items[index] = $@"{_pipInfos[index].Filename} ({left}.{top}px, width: {width}px, height: {height}px)";
+                    }
+
+                    var transp = tbStreamTransparency.Value / 100.0f;
+                    await MediaPlayer1.PIP_Sources_SetSourcePositionAsync(
+                            index,
+                            _pipInfos[index].Rect,
+                            transp);
+                    await MediaPlayer1.PIP_Sources_SetSourceOrderAsync(index, _pipInfos[index].ZOrder);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -321,18 +352,25 @@
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Tag = 1;
-            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
-
-            int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
-            if ((value > 0) && (value < tbTimeline.Maximum))
+            try
             {
-                tbTimeline.Value = value;
+                timer1.Tag = 1;
+                tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
+
+                int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
+                if ((value > 0) && (value < tbTimeline.Maximum))
+                {
+                    tbTimeline.Value = value;
+                }
+
+                lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+
+                timer1.Tag = 0;
             }
-
-            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
-
-            timer1.Tag = 0;
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -340,7 +378,14 @@
         /// </summary>
         private async void tbSpeed_Scroll(object sender, EventArgs e)
         {
-            await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0);
+            try
+            {
+                await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -348,9 +393,16 @@
         /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(timer1.Tag) == 0)
+            try
             {
-                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (Convert.ToInt32(timer1.Tag) == 0)
+                {
+                    await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -359,12 +411,19 @@
         /// </summary>
         private async void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (MediaPlayer1.State() != PlaybackState.Free)
+            try
             {
-                await MediaPlayer1.StopAsync();
-            }
+                if (MediaPlayer1.State() != PlaybackState.Free)
+                {
+                    await MediaPlayer1.StopAsync();
+                }
 
-            DestroyEngine();
+                DestroyEngine();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

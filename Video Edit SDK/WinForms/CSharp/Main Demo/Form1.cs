@@ -199,8 +199,7 @@ namespace VideoEdit_CS_Demo
         /// <returns>The file extension including the dot.</returns>
         private static string GetFileExt(string filename)
         {
-            int k = filename.LastIndexOf('.');
-            return filename.Substring(k, filename.Length - k);
+            return Path.GetExtension(filename);
         }
 
         /// <summary>
@@ -370,7 +369,6 @@ namespace VideoEdit_CS_Demo
             VideoEdit1.OnMotionDetection += VideoEdit1_OnMotion;
             VideoEdit1.OnAudioVUMeter += VideoEdit1_OnAudioVUMeter;
             VideoEdit1.OnFFMPEGInfo += VideoEdit1_OnFFMPEGInfo;
-            VideoEdit1.OnAudioVUMeter += VideoEdit1_OnAudioVUMeter;
             VideoEdit1.OnStart += VideoEdit1_OnStart;
             VideoEdit1.OnStop += VideoEdit1_OnStop;
             VideoEdit1.OnProgress += VideoEdit1_OnProgress;
@@ -390,7 +388,6 @@ namespace VideoEdit_CS_Demo
                 VideoEdit1.OnMotionDetection -= VideoEdit1_OnMotion;
                 VideoEdit1.OnAudioVUMeter -= VideoEdit1_OnAudioVUMeter;
                 VideoEdit1.OnFFMPEGInfo -= VideoEdit1_OnFFMPEGInfo;
-                VideoEdit1.OnAudioVUMeter -= VideoEdit1_OnAudioVUMeter;
                 VideoEdit1.OnStart -= VideoEdit1_OnStart;
                 VideoEdit1.OnStop -= VideoEdit1_OnStop;
                 VideoEdit1.OnProgress -= VideoEdit1_OnProgress;

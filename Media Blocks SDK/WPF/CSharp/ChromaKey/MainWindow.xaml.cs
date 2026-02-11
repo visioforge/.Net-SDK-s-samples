@@ -20,6 +20,7 @@ using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEffects;
+using System.Diagnostics;
 
 namespace MediaBlocks_ChromaKey_Demo_WPF
 {
@@ -484,7 +485,14 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            await StopPipeline();
+            try
+            {
+                await StopPipeline();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -552,25 +560,32 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
         /// </summary>
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cbVideoFormat.Items.Clear();
-            cbVideoFrameRate.Items.Clear();
-
-            if (cbVideoInput.SelectedIndex >= 0)
+            try
             {
-                var deviceName = cbVideoInput.Text;
-                var devices = await DeviceEnumerator.Shared.VideoSourcesAsync();
-                var device = devices.FirstOrDefault(x => x.DisplayName == deviceName);
+                cbVideoFormat.Items.Clear();
+                cbVideoFrameRate.Items.Clear();
 
-                if (device != null)
+                if (cbVideoInput.SelectedIndex >= 0)
                 {
-                    foreach (var format in device.VideoFormats)
-                    {
-                        cbVideoFormat.Items.Add(format.Name);
-                    }
+                    var deviceName = cbVideoInput.Text;
+                    var devices = await DeviceEnumerator.Shared.VideoSourcesAsync();
+                    var device = devices.FirstOrDefault(x => x.DisplayName == deviceName);
 
-                    if (cbVideoFormat.Items.Count > 0)
-                        cbVideoFormat.SelectedIndex = 0;
+                    if (device != null)
+                    {
+                        foreach (var format in device.VideoFormats)
+                        {
+                            cbVideoFormat.Items.Add(format.Name);
+                        }
+
+                        if (cbVideoFormat.Items.Count > 0)
+                            cbVideoFormat.SelectedIndex = 0;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -579,37 +594,44 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
         /// </summary>
         private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cbVideoFrameRate.Items.Clear();
-
-            var devices = await DeviceEnumerator.Shared.VideoSourcesAsync();
-            var device = devices.FirstOrDefault(x => x.DisplayName == cbVideoInput.Text);
-            if (device == null || cbVideoFormat.SelectedIndex < 0)
+            try
             {
-                return;
+                cbVideoFrameRate.Items.Clear();
+
+                var devices = await DeviceEnumerator.Shared.VideoSourcesAsync();
+                var device = devices.FirstOrDefault(x => x.DisplayName == cbVideoInput.Text);
+                if (device == null || cbVideoFormat.SelectedIndex < 0)
+                {
+                    return;
+                }
+
+                var format = device.VideoFormats.FirstOrDefault(x => x.Name == cbVideoFormat.Text);
+                if (format == null)
+                {
+                    return;
+                }
+
+                // Populate frame rates based on selected video format
+                if (format.FrameRateList == null || format.FrameRateList.Count == 0)
+                {
+                    LogMessage("No frame rates available for the selected video format.");
+                    return;
+                }
+
+                // Add available frame rates to the combo box
+                foreach (var frameRate in format.FrameRateList)
+                {
+                    cbVideoFrameRate.Items.Add(frameRate.ToString());
+                }
+
+                if (cbVideoFormat.SelectedIndex >= 0)
+                {
+                    cbVideoFrameRate.SelectedIndex = 0;
+                }
             }
-
-            var format = device.VideoFormats.FirstOrDefault(x => x.Name == cbVideoFormat.Text);
-            if (format == null)
+            catch (Exception ex)
             {
-                return;
-            }
-
-            // Populate frame rates based on selected video format
-            if (format.FrameRateList == null || format.FrameRateList.Count == 0)
-            {
-                LogMessage("No frame rates available for the selected video format.");
-                return;
-            }
-
-            // Add available frame rates to the combo box
-            foreach (var frameRate in format.FrameRateList)
-            {
-                cbVideoFrameRate.Items.Add(frameRate.ToString());
-            }
-
-            if (cbVideoFormat.SelectedIndex >= 0)
-            {
-                cbVideoFrameRate.SelectedIndex = 0;
+                Debug.WriteLine(ex);
             }
         }
 
@@ -618,24 +640,31 @@ namespace MediaBlocks_ChromaKey_Demo_WPF
         /// </summary>
         private async void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cbAudioFormat.Items.Clear();
-
-            if (cbAudioInput.SelectedIndex >= 0)
+            try
             {
-                var deviceName = cbAudioInput.Text;
-                var devices = await DeviceEnumerator.Shared.AudioSourcesAsync();
-                var device = devices.FirstOrDefault(x => x.DisplayName == deviceName);
+                cbAudioFormat.Items.Clear();
 
-                if (device != null)
+                if (cbAudioInput.SelectedIndex >= 0)
                 {
-                    foreach (var format in device.Formats)
-                    {
-                        cbAudioFormat.Items.Add(format.Name);
-                    }
+                    var deviceName = cbAudioInput.Text;
+                    var devices = await DeviceEnumerator.Shared.AudioSourcesAsync();
+                    var device = devices.FirstOrDefault(x => x.DisplayName == deviceName);
 
-                    if (cbAudioFormat.Items.Count > 0)
-                        cbAudioFormat.SelectedIndex = 0;
+                    if (device != null)
+                    {
+                        foreach (var format in device.Formats)
+                        {
+                            cbAudioFormat.Items.Add(format.Name);
+                        }
+
+                        if (cbAudioFormat.Items.Count > 0)
+                            cbAudioFormat.SelectedIndex = 0;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 

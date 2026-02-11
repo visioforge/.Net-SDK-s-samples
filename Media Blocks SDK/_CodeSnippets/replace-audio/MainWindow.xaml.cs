@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.IO;
 using System.ComponentModel;
@@ -10,6 +10,7 @@ using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.MediaBlocks.Parsers;
+using System.Diagnostics;
 
 namespace replace_audio
 {
@@ -42,12 +43,19 @@ namespace replace_audio
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
             
         /// <summary>
@@ -55,66 +63,73 @@ namespace replace_audio
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            if (!File.Exists(edSourceVideoFile.Text))
+            try
             {
-                MessageBox.Show("Please select video file.");
-                return;
-            }
-
-            if (cbRemoveAudio.IsChecked == false && !File.Exists(edSourceAudioFile.Text))
-            {
-                MessageBox.Show("Please select audio file.");
-                return;
-            }
-
-            // Create VideoCaptureCoreX object
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnStop += _pipeline_OnStop;
-
-            // Create video source
-            _videoSourceFile = new BasicFileSourceBlock(edSourceVideoFile.Text);
-            _videoSource = new ParseBinBlock();
-
-            // MP4 output
-            _outputFile = Path.Combine(Path.GetDirectoryName(edSourceVideoFile.Text), "new_output.mp4");
-            _mp4Sink = new MP4SinkBlock(_outputFile);
-
-            // Create audio source
-            if (cbRemoveAudio.IsChecked == false)
-            {
-                _audioSourceFile = new BasicFileSourceBlock(edSourceAudioFile.Text);
-
-                bool mp3 = edSourceAudioFile.Text.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase);
-                if (mp3)
+                if (!File.Exists(edSourceVideoFile.Text))
                 {
-                    _audioSource = new MPEGAudioParseBlock();
+                    MessageBox.Show("Please select video file.");
+                    return;
                 }
-                else
+
+                if (cbRemoveAudio.IsChecked == false && !File.Exists(edSourceAudioFile.Text))
                 {
-                    _audioSource = new ParseBinBlock();
+                    MessageBox.Show("Please select audio file.");
+                    return;
                 }
+
+                // Create VideoCaptureCoreX object
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnStop += _pipeline_OnStop;
+
+                // Create video source
+                _videoSourceFile = new BasicFileSourceBlock(edSourceVideoFile.Text);
+                _videoSource = new ParseBinBlock();
+
+                // MP4 output
+                _outputFile = Path.Combine(Path.GetDirectoryName(edSourceVideoFile.Text), "new_output.mp4");
+                _mp4Sink = new MP4SinkBlock(_outputFile);
+
+                // Create audio source
+                if (cbRemoveAudio.IsChecked == false)
+                {
+                    _audioSourceFile = new BasicFileSourceBlock(edSourceAudioFile.Text);
+
+                    bool mp3 = edSourceAudioFile.Text.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase);
+                    if (mp3)
+                    {
+                        _audioSource = new MPEGAudioParseBlock();
+                    }
+                    else
+                    {
+                        _audioSource = new ParseBinBlock();
+                    }
+                }
+
+                // Connect everything
+                _pipeline.Connect(_videoSourceFile.Output, _videoSource.Input);
+
+                var videoInputPad = _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video);
+
+                // Catch EOS for video stream, to prevent creation of files with long audio and short video. File duration = video duration.
+                videoInputPad.OnEOS += async (senderX, argsX) => { 
+                    _pipeline.SendEOS();
+                };
+
+                _pipeline.Connect(_videoSource.GetOutputPadByType(MediaBlockPadMediaType.Video), videoInputPad);
+
+                if (cbRemoveAudio.IsChecked == false)
+                {
+                    _pipeline.Connect(_audioSourceFile.Output, _audioSource.Input);
+                    _pipeline.Connect(_audioSource.GetOutputPadByType(MediaBlockPadMediaType.Audio), _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                }
+
+                // Start
+                await _pipeline.StartAsync();
             }
-         
-            // Connect everything
-            _pipeline.Connect(_videoSourceFile.Output, _videoSource.Input);
-                        
-            var videoInputPad = _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Video);
-
-            // Catch EOS for video stream, to prevent creation of files with long audio and short video. File duration = video duration.
-            videoInputPad.OnEOS += async (senderX, argsX) => { 
-                _pipeline.SendEOS();
-            };
-
-            _pipeline.Connect(_videoSource.GetOutputPadByType(MediaBlockPadMediaType.Video), videoInputPad);
-
-            if (cbRemoveAudio.IsChecked == false)
+            catch (Exception ex)
             {
-                _pipeline.Connect(_audioSourceFile.Output, _audioSource.Input);
-                _pipeline.Connect(_audioSource.GetOutputPadByType(MediaBlockPadMediaType.Audio), _mp4Sink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                Debug.WriteLine(ex);
             }
-
-            // Start
-            await _pipeline.StartAsync();
         }
 
         /// <summary>
@@ -138,21 +153,35 @@ namespace replace_audio
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         { 
-            if (_pipeline == null)
+            try
             {
-                return;
-            }
-                    
-            await _pipeline.StopAsync();
+                if (_pipeline == null)
+                {
+                    return;
+                }
 
-            await _pipeline.DisposeAsync();
+                await _pipeline.StopAsync();
+
+                await _pipeline.DisposeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
         /// Window closing.
         /// </summary>
-        private void Window_Closing(object sender, CancelEventArgs e)
+        private async void Window_Closing(object sender, CancelEventArgs e)
         {
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
 

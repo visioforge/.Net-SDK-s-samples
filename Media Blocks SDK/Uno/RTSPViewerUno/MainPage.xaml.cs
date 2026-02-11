@@ -61,12 +61,19 @@ public sealed partial class MainPage : Page
         /// </summary>
     private async void MainPage_Unloaded(object sender, RoutedEventArgs e)
     {
-        await StopAsync();
-
-        if (_sdkInitialized)
+        try
         {
-            VisioForgeX.DestroySDK();
-            _sdkInitialized = false;
+            await StopAsync();
+
+            if (_sdkInitialized)
+            {
+                VisioForgeX.DestroySDK();
+                _sdkInitialized = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
         }
     }
 

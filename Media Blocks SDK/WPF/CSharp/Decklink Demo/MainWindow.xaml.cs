@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Linq;
@@ -26,6 +26,7 @@ using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X.VideoEncoders;
+using System.Diagnostics;
 
 namespace Decklink_MB_Demo
 {
@@ -177,14 +178,21 @@ namespace Decklink_MB_Demo
         /// </summary>
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (_pipeline != null)
+            try
             {
-                var position = await _pipeline.Position_GetAsync();
-
-                Dispatcher.Invoke(() =>
+                if (_pipeline != null)
                 {
-                    lbTime.Text = position.ToString("hh\\:mm\\:ss");
-                });
+                    var position = await _pipeline.Position_GetAsync();
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        lbTime.Text = position.ToString("hh\\:mm\\:ss");
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -193,88 +201,95 @@ namespace Decklink_MB_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-            _timer = new System.Timers.Timer(500);
-            _timer.Elapsed += _timer_Elapsed;
-
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-
-            cbOutputFormat.SelectedIndex = 0;
-
-            var videoCaptureDevices = await DecklinkVideoSourceBlock.GetDevicesAsync();
-            if (videoCaptureDevices.Length > 0)
+            try
             {
-                foreach (var item in videoCaptureDevices)
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+                _timer = new System.Timers.Timer(500);
+                _timer.Elapsed += _timer_Elapsed;
+
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+
+                cbOutputFormat.SelectedIndex = 0;
+
+                var videoCaptureDevices = await DecklinkVideoSourceBlock.GetDevicesAsync();
+                if (videoCaptureDevices.Length > 0)
                 {
-                    cbVideoInput.Items.Add(item.Name);
+                    foreach (var item in videoCaptureDevices)
+                    {
+                        cbVideoInput.Items.Add(item.Name);
+                    }
+
+                    cbVideoInput.SelectedIndex = 0;
                 }
 
-                cbVideoInput.SelectedIndex = 0;
-            }
-
-            var audioCaptureDevices = await DecklinkAudioSourceBlock.GetDevicesAsync();
-            if (audioCaptureDevices.Length > 0)
-            {
-                foreach (var item in audioCaptureDevices)
+                var audioCaptureDevices = await DecklinkAudioSourceBlock.GetDevicesAsync();
+                if (audioCaptureDevices.Length > 0)
                 {
-                    cbAudioInput.Items.Add(item.Name);
+                    foreach (var item in audioCaptureDevices)
+                    {
+                        cbAudioInput.Items.Add(item.Name);
+                    }
+
+                    cbAudioInput.SelectedIndex = 0;
                 }
 
-                cbAudioInput.SelectedIndex = 0;
-            }
-
-            var videoSinkDevices = await DecklinkVideoSinkBlock.GetDevicesAsync();
-            if (videoSinkDevices.Length > 0)
-            {
-                foreach (var item in videoSinkDevices)
+                var videoSinkDevices = await DecklinkVideoSinkBlock.GetDevicesAsync();
+                if (videoSinkDevices.Length > 0)
                 {
-                    cbDecklinkVideoOutput.Items.Add(item.Name);
+                    foreach (var item in videoSinkDevices)
+                    {
+                        cbDecklinkVideoOutput.Items.Add(item.Name);
+                    }
+
+                    cbDecklinkVideoOutput.SelectedIndex = 0;
                 }
 
-                cbDecklinkVideoOutput.SelectedIndex = 0;
-            }
-
-            var audioSinkDevices = await DecklinkAudioSinkBlock.GetDevicesAsync();
-            if (audioSinkDevices.Length > 0)
-            {
-                foreach (var item in audioSinkDevices)
+                var audioSinkDevices = await DecklinkAudioSinkBlock.GetDevicesAsync();
+                if (audioSinkDevices.Length > 0)
                 {
-                    cbDecklinkAudioOutput.Items.Add(item.Name);
+                    foreach (var item in audioSinkDevices)
+                    {
+                        cbDecklinkAudioOutput.Items.Add(item.Name);
+                    }
+
+                    cbDecklinkAudioOutput.SelectedIndex = 0;
                 }
 
-                cbDecklinkAudioOutput.SelectedIndex = 0;
-            }
-
-            var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
-            if (audioOutputDevices.Length > 0)
-            {
-                foreach (var item in audioOutputDevices)
+                var audioOutputDevices = (await AudioRendererBlock.GetDevicesAsync(AudioOutputDeviceAPI.DirectSound)).ToArray();
+                if (audioOutputDevices.Length > 0)
                 {
-                    cbAudioOutput.Items.Add(item);
+                    foreach (var item in audioOutputDevices)
+                    {
+                        cbAudioOutput.Items.Add(item);
+                    }
+
+                    cbAudioOutput.SelectedIndex = 0;
                 }
 
-                cbAudioOutput.SelectedIndex = 0;
-            }
+                var decklinkModes = Enum.GetValues(typeof(DecklinkMode));
+                foreach (var item in decklinkModes)
+                {
+                    cbVideoMode.Items.Add(item.ToString());
+                    cbDecklinkOutputMode.Items.Add(item.ToString());
+                }
 
-            var decklinkModes = Enum.GetValues(typeof(DecklinkMode));
-            foreach (var item in decklinkModes)
+                cbVideoMode.SelectedIndex = 0;
+                cbDecklinkOutputMode.SelectedIndex = 0;
+
+                edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+
+                DeviceEnumerator.Shared.OnDecklinkSignalLost += DeviceEnumerator_OnDecklinkSignalLost;
+            }
+            catch (Exception ex)
             {
-                cbVideoMode.Items.Add(item.ToString());
-                cbDecklinkOutputMode.Items.Add(item.ToString());
+                Debug.WriteLine(ex);
             }
-
-            cbVideoMode.SelectedIndex = 0;
-            cbDecklinkOutputMode.SelectedIndex = 0;
-
-            edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
-
-            DeviceEnumerator.Shared.OnDecklinkSignalLost += DeviceEnumerator_OnDecklinkSignalLost;
         }
 
         /// <summary>
@@ -309,20 +324,27 @@ namespace Decklink_MB_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _timer.Stop();
-
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.StopAsync();
-                _pipeline.ClearBlocks();
+                _timer.Stop();
+
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync();
+                    _pipeline.ClearBlocks();
+                }
+
+                VideoView1.CallRefresh();
+
+                _videoEffects?.Dispose();
+                _videoEffects = new VideoEffectsWinBlock();
+
+                AddVideoEffects();
             }
-
-            VideoView1.CallRefresh();
-
-            _videoEffects?.Dispose();
-            _videoEffects = new VideoEffectsWinBlock();
-
-            AddVideoEffects();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -459,240 +481,247 @@ namespace Decklink_MB_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            CreatePipeline(rbCaptureDeviceSource.IsChecked == true);
-
-            bool capture = cbOutputFormat.SelectedIndex > 0;
-            if (capture)
+            try
             {
-                var decklinkFormat = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
-                if (decklinkFormat == DecklinkMode.Unknown)
+                CreatePipeline(rbCaptureDeviceSource.IsChecked == true);
+
+                bool capture = cbOutputFormat.SelectedIndex > 0;
+                if (capture)
                 {
-                    MessageBox.Show(this, "Decklink mode must be set to a specific value if you want to capture to the output file.");
-                    return;
-                }
-            }
-
-            bool decklinkOutput = cbDecklinkOutput.IsChecked == true;
-            bool tee = capture || decklinkOutput;
-
-            mmLog.Clear();
-
-            MediaBlockPad videoSourcePad = null;
-            MediaBlockPad audioSourcePad = null;
-
-            if (rbCaptureDeviceSource.IsChecked == true)
-            {
-                if (cbVideoInput.SelectedIndex < 0)
-                {
-                    MessageBox.Show(this, "Select video input device");
-                    return;
-                }
-
-                // video source
-                DecklinkVideoSourceSettings videoSourceSettings = null;
-
-                var deviceName = cbVideoInput.Text;
-                if (!string.IsNullOrEmpty(deviceName))
-                {
-                    var device = (await DecklinkVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
-                    if (device != null)
+                    var decklinkFormat = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
+                    if (decklinkFormat == DecklinkMode.Unknown)
                     {
-                        videoSourceSettings = new DecklinkVideoSourceSettings(device);
-                        videoSourceSettings.Mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
+                        MessageBox.Show(this, "Decklink mode must be set to a specific value if you want to capture to the output file.");
+                        return;
                     }
                 }
 
-                _videoSource = new DecklinkVideoSourceBlock(videoSourceSettings);
+                bool decklinkOutput = cbDecklinkOutput.IsChecked == true;
+                bool tee = capture || decklinkOutput;
 
-                // audio source
-                DecklinkAudioSourceSettings audioSourceSettings = null;
+                mmLog.Clear();
 
-                deviceName = cbAudioInput.Text;
-                if (!string.IsNullOrEmpty(deviceName))
+                MediaBlockPad videoSourcePad = null;
+                MediaBlockPad audioSourcePad = null;
+
+                if (rbCaptureDeviceSource.IsChecked == true)
                 {
-                    var device = (await DecklinkAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
-                    if (device != null)
+                    if (cbVideoInput.SelectedIndex < 0)
                     {
-                        audioSourceSettings = new DecklinkAudioSourceSettings(device);
+                        MessageBox.Show(this, "Select video input device");
+                        return;
                     }
+
+                    // video source
+                    DecklinkVideoSourceSettings videoSourceSettings = null;
+
+                    var deviceName = cbVideoInput.Text;
+                    if (!string.IsNullOrEmpty(deviceName))
+                    {
+                        var device = (await DecklinkVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                        if (device != null)
+                        {
+                            videoSourceSettings = new DecklinkVideoSourceSettings(device);
+                            videoSourceSettings.Mode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
+                        }
+                    }
+
+                    _videoSource = new DecklinkVideoSourceBlock(videoSourceSettings);
+
+                    // audio source
+                    DecklinkAudioSourceSettings audioSourceSettings = null;
+
+                    deviceName = cbAudioInput.Text;
+                    if (!string.IsNullOrEmpty(deviceName))
+                    {
+                        var device = (await DecklinkAudioSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                        if (device != null)
+                        {
+                            audioSourceSettings = new DecklinkAudioSourceSettings(device);
+                        }
+                    }
+
+                    _audioSource = new DecklinkAudioSourceBlock(audioSourceSettings);
+
+                    videoSourcePad = _videoSource.Output;
+                    audioSourcePad = _audioSource.Output;
+                }
+                else
+                {
+                    // file source
+                    //edSourceFilename.Text = @"c:\Projects\_Projects\CustomDevelopment\HRC_REC\test_24bit_audio.mkv";
+                    _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(edSourceFilename.Text));
+
+                    videoSourcePad = _fileSource.VideoOutput;
+                    audioSourcePad = _fileSource.AudioOutput;
                 }
 
-                _audioSource = new DecklinkAudioSourceBlock(audioSourceSettings);
+                // video renderer
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
-                videoSourcePad = _videoSource.Output;
-                audioSourcePad = _audioSource.Output;
-            }
-            else
-            {
-                // file source
-                //edSourceFilename.Text = @"c:\Projects\_Projects\CustomDevelopment\HRC_REC\test_24bit_audio.mkv";
-                _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(edSourceFilename.Text));
+                // audio renderer
+                _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
 
-                videoSourcePad = _fileSource.VideoOutput;
-                audioSourcePad = _fileSource.AudioOutput;
-            }
+                // effects
+                AddVideoEffects();
 
-            // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
+                _pipeline.Connect(videoSourcePad, _videoEffects.Input);
 
-            // audio renderer
-            _audioRenderer = new AudioRendererBlock((await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).Where(device => device.DisplayName == cbAudioOutput.Text).First());
+                // tees
+                int captureID = -1;
+                int decklinkOutputID = -1;
+                if (capture || decklinkOutput)
+                {
+                    int k = 1;
+                    if (capture)
+                    {
+                        captureID = k;
+                        k++;
+                    }
 
-            // effects
-            AddVideoEffects();
+                    if (decklinkOutput)
+                    {
+                        decklinkOutputID = k;
+                        k++;
+                    }
 
-            _pipeline.Connect(videoSourcePad, _videoEffects.Input);
+                    _videoTee = new TeeBlock(k, MediaBlockPadMediaType.Video);
+                    _audioTee = new TeeBlock(k, MediaBlockPadMediaType.Audio);
 
-            // tees
-            int captureID = -1;
-            int decklinkOutputID = -1;
-            if (capture || decklinkOutput)
-            {
-                int k = 1;
+                    _pipeline.Connect(_videoEffects.Output, _videoTee.Input);
+                    _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
+
+                    _pipeline.Connect(audioSourcePad, _audioTee.Input);
+                    _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
+                }
+
+                // capture
                 if (capture)
                 {
-                    captureID = k;
-                    k++;
-                }
+                    switch (cbOutputFormat.SelectedIndex)
+                    {
+                        case 1:
+                            CreateMP4Output();
+                            break;
+                        case 2:
+                            CreateWebMOutput();
+                            break;
+                        case 3:
+                            CreateMXFOutput();
+                            break;
+                        case 4:
+                            CreateMPEG2Output();
+                            break;
+                        default:
+                            break;
+                    }
 
-                if (decklinkOutput)
-                {
-                    decklinkOutputID = k;
-                    k++;
-                }
-
-                _videoTee = new TeeBlock(k, MediaBlockPadMediaType.Video);
-                _audioTee = new TeeBlock(k, MediaBlockPadMediaType.Audio);
-
-                _pipeline.Connect(_videoEffects.Output, _videoTee.Input);
-                _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-
-                _pipeline.Connect(audioSourcePad, _audioTee.Input);
-                _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
-            }
-
-            // capture
-            if (capture)
-            {
-                switch (cbOutputFormat.SelectedIndex)
-                {
-                    case 1:
-                        CreateMP4Output();
-                        break;
-                    case 2:
-                        CreateWebMOutput();
-                        break;
-                    case 3:
-                        CreateMXFOutput();
-                        break;
-                    case 4:
-                        CreateMPEG2Output();
-                        break;
-                    default:
-                        break;
-                }
-
-                if (cbResizeVideo.IsChecked == true)
-                {
-                    _videoResize = new VideoResizeBlock(new ResizeVideoEffect(Convert.ToInt32(edResizeWidth.Text), Convert.ToInt32(edResizeHeight.Text)));
-                }
-            }
-
-            // connect all
-            if (tee)
-            {
-                if (capture)
-                {
                     if (cbResizeVideo.IsChecked == true)
                     {
-                        _pipeline.Connect(_videoTee.Outputs[captureID], _videoResize.Input);
-                        _pipeline.Connect(_videoResize.Output, _videoEncoder.Input);
+                        _videoResize = new VideoResizeBlock(new ResizeVideoEffect(Convert.ToInt32(edResizeWidth.Text), Convert.ToInt32(edResizeHeight.Text)));
                     }
-                    else
-                    {
-                        _pipeline.Connect(_videoTee.Outputs[captureID], _videoEncoder.Input);
-                    }
-
-                    _pipeline.Connect(_videoEncoder.Output, _muxer.GetInputPadByType(MediaBlockPadMediaType.Video));
-
-                    _pipeline.Connect(_audioTee.Outputs[captureID], _audioEncoder.Input);
-                    _pipeline.Connect(_audioEncoder.Output, _muxer.GetInputPadByType(MediaBlockPadMediaType.Audio));
                 }
 
-                if (decklinkOutput)
+                // connect all
+                if (tee)
                 {
-                    DecklinkVideoSinkSettings videoSinkSettings = null;
-
-                    // Determine the output mode - use custom mode if enabled, otherwise use input mode
-                    DecklinkMode outputMode;
-                    bool useCustomFormat = cbDecklinkOutputCustomFormat.IsChecked == true;
-                    if (useCustomFormat)
+                    if (capture)
                     {
-                        outputMode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbDecklinkOutputMode.Text);
-                    }
-                    else
-                    {
-                        outputMode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
-                    }
-
-                    var deviceName = cbDecklinkVideoOutput.Text;
-                    if (!string.IsNullOrEmpty(deviceName))
-                    {
-                        var device = (await DecklinkVideoSinkBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
-                        if (device != null)
+                        if (cbResizeVideo.IsChecked == true)
                         {
-                            videoSinkSettings = new DecklinkVideoSinkSettings(device, outputMode);
+                            _pipeline.Connect(_videoTee.Outputs[captureID], _videoResize.Input);
+                            _pipeline.Connect(_videoResize.Output, _videoEncoder.Input);
                         }
-                    }
-
-                    _decklinkVideoSink = new DecklinkVideoSinkBlock(videoSinkSettings);
-
-                    DecklinkAudioSinkSettings audioSinkSettings = null;
-
-                    deviceName = cbDecklinkAudioOutput.Text;
-                    if (!string.IsNullOrEmpty(deviceName))
-                    {
-                        var device = (await DecklinkAudioSinkBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
-                        if (device != null)
+                        else
                         {
-                            audioSinkSettings = new DecklinkAudioSinkSettings(device);
+                            _pipeline.Connect(_videoTee.Outputs[captureID], _videoEncoder.Input);
                         }
+
+                        _pipeline.Connect(_videoEncoder.Output, _muxer.GetInputPadByType(MediaBlockPadMediaType.Video));
+
+                        _pipeline.Connect(_audioTee.Outputs[captureID], _audioEncoder.Input);
+                        _pipeline.Connect(_audioEncoder.Output, _muxer.GetInputPadByType(MediaBlockPadMediaType.Audio));
                     }
 
-                    _decklinkAudioSink = new DecklinkAudioSinkBlock(audioSinkSettings);
-
-                    // Get output format info for custom format conversion
-                    if (useCustomFormat && outputMode != DecklinkMode.Unknown)
+                    if (decklinkOutput)
                     {
-                        DecklinkHelper.GetVideoInfoFromMode(outputMode, out var outputWidth, out var outputHeight, out var outputFrameRate);
+                        DecklinkVideoSinkSettings videoSinkSettings = null;
 
-                        // Create resize and frame rate blocks for format conversion
-                        _decklinkOutputResize = new VideoResizeBlock(new ResizeVideoEffect(outputWidth, outputHeight));
-                        _decklinkOutputFrameRate = new VideoRateBlock(outputFrameRate);
+                        // Determine the output mode - use custom mode if enabled, otherwise use input mode
+                        DecklinkMode outputMode;
+                        bool useCustomFormat = cbDecklinkOutputCustomFormat.IsChecked == true;
+                        if (useCustomFormat)
+                        {
+                            outputMode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbDecklinkOutputMode.Text);
+                        }
+                        else
+                        {
+                            outputMode = (DecklinkMode)Enum.Parse(typeof(DecklinkMode), cbVideoMode.Text);
+                        }
 
-                        // Connect: tee -> resize -> framerate -> decklink sink
-                        _pipeline.Connect(_videoTee.Outputs[decklinkOutputID], _decklinkOutputResize.Input);
-                        _pipeline.Connect(_decklinkOutputResize.Output, _decklinkOutputFrameRate.Input);
-                        _pipeline.Connect(_decklinkOutputFrameRate.Output, _decklinkVideoSink.Input);
+                        var deviceName = cbDecklinkVideoOutput.Text;
+                        if (!string.IsNullOrEmpty(deviceName))
+                        {
+                            var device = (await DecklinkVideoSinkBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                            if (device != null)
+                            {
+                                videoSinkSettings = new DecklinkVideoSinkSettings(device, outputMode);
+                            }
+                        }
+
+                        _decklinkVideoSink = new DecklinkVideoSinkBlock(videoSinkSettings);
+
+                        DecklinkAudioSinkSettings audioSinkSettings = null;
+
+                        deviceName = cbDecklinkAudioOutput.Text;
+                        if (!string.IsNullOrEmpty(deviceName))
+                        {
+                            var device = (await DecklinkAudioSinkBlock.GetDevicesAsync()).FirstOrDefault(x => x.Name == deviceName);
+                            if (device != null)
+                            {
+                                audioSinkSettings = new DecklinkAudioSinkSettings(device);
+                            }
+                        }
+
+                        _decklinkAudioSink = new DecklinkAudioSinkBlock(audioSinkSettings);
+
+                        // Get output format info for custom format conversion
+                        if (useCustomFormat && outputMode != DecklinkMode.Unknown)
+                        {
+                            DecklinkHelper.GetVideoInfoFromMode(outputMode, out var outputWidth, out var outputHeight, out var outputFrameRate);
+
+                            // Create resize and frame rate blocks for format conversion
+                            _decklinkOutputResize = new VideoResizeBlock(new ResizeVideoEffect(outputWidth, outputHeight));
+                            _decklinkOutputFrameRate = new VideoRateBlock(outputFrameRate);
+
+                            // Connect: tee -> resize -> framerate -> decklink sink
+                            _pipeline.Connect(_videoTee.Outputs[decklinkOutputID], _decklinkOutputResize.Input);
+                            _pipeline.Connect(_decklinkOutputResize.Output, _decklinkOutputFrameRate.Input);
+                            _pipeline.Connect(_decklinkOutputFrameRate.Output, _decklinkVideoSink.Input);
+                        }
+                        else
+                        {
+                            _pipeline.Connect(_videoTee.Outputs[decklinkOutputID], _decklinkVideoSink.Input);
+                        }
+
+                        _pipeline.Connect(_audioTee.Outputs[decklinkOutputID], _decklinkAudioSink.Input);
                     }
-                    else
-                    {
-                        _pipeline.Connect(_videoTee.Outputs[decklinkOutputID], _decklinkVideoSink.Input);
-                    }
-
-                    _pipeline.Connect(_audioTee.Outputs[decklinkOutputID], _decklinkAudioSink.Input);
                 }
+                else
+                {
+                    _pipeline.Connect(audioSourcePad, _audioRenderer.Input);
+                    _pipeline.Connect(_videoEffects.Output, _videoRenderer.Input);
+                }
+
+                // start
+                await _pipeline.StartAsync();
+
+                _timer.Start();
             }
-            else
+            catch (Exception ex)
             {
-                _pipeline.Connect(audioSourcePad, _audioRenderer.Input);
-                _pipeline.Connect(_videoEffects.Output, _videoRenderer.Input);
+                Debug.WriteLine(ex);
             }
-
-            // start
-            await _pipeline.StartAsync();
-
-            _timer.Start();
         }
 
         /// <summary>
@@ -734,22 +763,29 @@ namespace Decklink_MB_Demo
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _timer.Stop();
-
-            if (_pipeline != null)
+            try
             {
-                await _pipeline.StopAsync();
+                _timer.Stop();
 
-                _pipeline.OnError -= Pipeline_OnError;
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync();
 
-                await _pipeline.DisposeAsync();
+                    _pipeline.OnError -= Pipeline_OnError;
 
-                _pipeline = null;
+                    await _pipeline.DisposeAsync();
+
+                    _pipeline = null;
+                }
+
+                VideoView1.CallRefresh();
+
+                VisioForgeX.DestroySDK();
             }
-
-            VideoView1.CallRefresh();
-
-            VisioForgeX.DestroySDK();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

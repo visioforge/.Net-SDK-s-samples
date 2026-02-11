@@ -101,9 +101,16 @@ namespace Memory_Stream_Demo
         /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(timer1.Tag) == 0)
+            try
             {
-                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (Convert.ToInt32(timer1.Tag) == 0)
+                {
+                    await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -112,58 +119,66 @@ namespace Memory_Stream_Demo
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            mmError.Text = string.Empty;
-            bool videoAvailable;
-            bool audioAvailable;
-
-            if (rbSTreamTypeFile.Checked)
+            try
             {
-                _fileStream = new FileStream(edFilename.Text, FileMode.Open);
-                _stream = new ManagedIStream(_fileStream);
+                mmError.Text = string.Empty;
+                bool videoAvailable;
+                bool audioAvailable;
 
-                MediaInfoReader.GetStreamAvailabilityFromMemoryStream(MediaPlayer1.GetContext(), _stream, _fileStream.Length, out videoAvailable, out audioAvailable);
+                if (rbSTreamTypeFile.Checked)
+                {
+                    _fileStream = new FileStream(edFilename.Text, FileMode.Open);
+                    _stream = new ManagedIStream(_fileStream);
 
-                // specifying settings
-                MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoAvailable, audioAvailable, _fileStream.Length);
+                    MediaInfoReader.GetStreamAvailabilityFromMemoryStream(MediaPlayer1.GetContext(), _stream, _fileStream.Length, out videoAvailable, out audioAvailable);
+
+                    // specifying settings
+                    MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoAvailable, audioAvailable, _fileStream.Length);
+                }
+                else
+                {
+                    // WARNING: ReadAllBytes loads the entire file into memory. For large video files, consider using FileStream instead.
+                    _memorySource = File.ReadAllBytes(edFilename.Text);
+                    _memoryStream = new MemoryStream(_memorySource);
+                    _stream = new ManagedIStream(_memoryStream);
+
+                    MediaInfoReader.GetStreamAvailabilityFromMemoryStream(MediaPlayer1.GetContext(), _stream, _memoryStream.Length, out videoAvailable, out audioAvailable);
+
+                    // specifying settings
+                    MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoAvailable, audioAvailable, _memoryStream.Length);
+                }
+
+                MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS;
+
+                if (audioAvailable)
+                {
+                    MediaPlayer1.Audio_PlayAudio = true;
+                    MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
+                }
+                else
+                {
+                    MediaPlayer1.Audio_PlayAudio = false;
+                }
+
+                if (videoAvailable)
+                {
+                    MediaPlayer1.Video_Renderer_SetAuto();
+                }
+                else
+                {
+                    MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
+                }
+
+                MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
+                await MediaPlayer1.PlayAsync();
+
+                tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
+                timer1.Enabled = true;
             }
-            else
+            catch (Exception ex)
             {
-                _memorySource = File.ReadAllBytes(edFilename.Text);
-                _memoryStream = new MemoryStream(_memorySource);
-                _stream = new ManagedIStream(_memoryStream);
-
-                MediaInfoReader.GetStreamAvailabilityFromMemoryStream(MediaPlayer1.GetContext(), _stream, _memoryStream.Length, out videoAvailable, out audioAvailable);
-
-                // specifying settings
-                MediaPlayer1.Source_MemoryStream = new MemoryStreamSource(_stream, videoAvailable, audioAvailable, _memoryStream.Length);
+                Debug.WriteLine(ex);
             }
-
-            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS;
-
-            if (audioAvailable)
-            {
-                MediaPlayer1.Audio_PlayAudio = true;
-                MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
-            }
-            else
-            {
-                MediaPlayer1.Audio_PlayAudio = false;
-            }
-
-            if (videoAvailable)
-            {
-                MediaPlayer1.Video_Renderer_SetAuto();
-            }
-            else
-            {
-                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
-            }
-
-            MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
-            await MediaPlayer1.PlayAsync();
-
-            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
-            timer1.Enabled = true;
         }
 
         /// <summary>
@@ -182,7 +197,14 @@ namespace Memory_Stream_Demo
         /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.ResumeAsync();
+            try
+            {
+                await MediaPlayer1.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -190,7 +212,14 @@ namespace Memory_Stream_Demo
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.PauseAsync();
+            try
+            {
+                await MediaPlayer1.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -223,7 +252,14 @@ namespace Memory_Stream_Demo
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            await StopAsync();
+            try
+            {
+                await StopAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -239,7 +275,14 @@ namespace Memory_Stream_Demo
         /// </summary>
         private async void tbSpeed_Scroll(object sender, EventArgs e)
         {
-            await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0);
+            try
+            {
+                await MediaPlayer1.SetSpeedAsync(tbSpeed.Value / 10.0);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -263,18 +306,25 @@ namespace Memory_Stream_Demo
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Tag = 1;
-            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
-
-            int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
-            if ((value > 0) && (value < tbTimeline.Maximum))
+            try
             {
-                tbTimeline.Value = value;
+                timer1.Tag = 1;
+                tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
+
+                int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
+                if ((value > 0) && (value < tbTimeline.Maximum))
+                {
+                    tbTimeline.Value = value;
+                }
+
+                lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+
+                timer1.Tag = 0;
             }
-
-            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
-
-            timer1.Tag = 0;
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -284,7 +334,7 @@ namespace Memory_Stream_Demo
         {
             Invoke((Action)(() =>
                                    {
-                                       mmError.Text = mmError.Text + e.Message + Environment.NewLine;
+                                       mmError.AppendText(e.Message + Environment.NewLine);
                                    }));
         }
 
@@ -293,10 +343,16 @@ namespace Memory_Stream_Demo
         /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await StopAsync();
+            try
+            {
+                await StopAsync();
 
-            DestroyEngine();
+                DestroyEngine();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }
-

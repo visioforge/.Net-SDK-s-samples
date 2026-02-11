@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
@@ -97,17 +97,24 @@ namespace NDI_Source_Demo
         /// </summary>
         private async void UpdateRecordingTime()
         {
-            var ts = await _pipeline.Position_GetAsync();
-
-            if (Math.Abs(ts.TotalMilliseconds) < 0.01)
+            try
             {
-                return;
+                var ts = await _pipeline.Position_GetAsync();
+
+                if (Math.Abs(ts.TotalMilliseconds) < 0.01)
+                {
+                    return;
+                }
+
+                await Dispatcher.BeginInvoke((Action)(() =>
+                {
+                    lbTimestamp.Text = ts.ToString(@"hh\:mm\:ss");
+                }));
             }
-
-            await Dispatcher.BeginInvoke((Action)(() =>
+            catch (Exception ex)
             {
-                lbTimestamp.Text = ts.ToString(@"hh\:mm\:ss");
-            }));
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -115,40 +122,47 @@ namespace NDI_Source_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            if (cbNDISources.SelectedIndex == -1)
+            try
             {
-                MessageBox.Show("Please select NDI source");
-                return;
+                if (cbNDISources.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select NDI source");
+                    return;
+                }
+
+                CreateEngine();
+
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+                var ndiSettings = await NDISourceSettings.CreateAsync(_pipeline.GetContext(), _ndiSources[cbNDISources.SelectedIndex]);
+                if (ndiSettings == null || !ndiSettings.IsValid())
+                {
+                    MessageBox.Show("Selected NDI source is not valid.");
+                    return;
+                }
+
+                _ndiSource = new NDISourceBlock(ndiSettings);
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+
+                _pipeline.Connect(_ndiSource.VideoOutput, _videoRenderer.Input);
+
+                // Set audio output device if one is selected
+                if (ndiSettings.GetInfo().AudioStreams.Count > 0 && cbAudioOutputDevices.SelectedIndex >= 0 && _audioOutputDevices != null && _audioOutputDevices.Length > cbAudioOutputDevices.SelectedIndex)
+                {
+                    var audioOutputSettings = new AudioRendererSettings(_audioOutputDevices[cbAudioOutputDevices.SelectedIndex]);
+                    _audioRenderer = new AudioRendererBlock(audioOutputSettings);
+
+                    _pipeline.Connect(_ndiSource.AudioOutput, _audioRenderer.Input);
+                }
+
+                await _pipeline.StartAsync();
+
+                tmRecording.Start();
             }
-
-            CreateEngine();
-
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            var ndiSettings = await NDISourceSettings.CreateAsync(_pipeline.GetContext(), _ndiSources[cbNDISources.SelectedIndex]);
-            if (ndiSettings == null || !ndiSettings.IsValid())
+            catch (Exception ex)
             {
-                MessageBox.Show("Selected NDI source is not valid.");
-                return;
+                Debug.WriteLine(ex);
             }
-
-            _ndiSource = new NDISourceBlock(ndiSettings);
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
-
-            _pipeline.Connect(_ndiSource.VideoOutput, _videoRenderer.Input);
-
-            // Set audio output device if one is selected
-            if (ndiSettings.GetInfo().AudioStreams.Count > 0 && cbAudioOutputDevices.SelectedIndex >= 0 && _audioOutputDevices != null && _audioOutputDevices.Length > cbAudioOutputDevices.SelectedIndex)
-            {
-                var audioOutputSettings = new AudioRendererSettings(_audioOutputDevices[cbAudioOutputDevices.SelectedIndex]);
-                _audioRenderer = new AudioRendererBlock(audioOutputSettings);
-
-                _pipeline.Connect(_ndiSource.AudioOutput, _audioRenderer.Input);
-            }
-
-            await _pipeline.StartAsync();
-
-            tmRecording.Start();
         }
 
         /// <summary>
@@ -156,11 +170,18 @@ namespace NDI_Source_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            tmRecording.Stop();
+            try
+            {
+                tmRecording.Stop();
 
-            await _pipeline.StopAsync();
+                await _pipeline.StopAsync();
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -168,21 +189,28 @@ namespace NDI_Source_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            CreateEngine();
+                CreateEngine();
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+                tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
-             // Load audio output devices
-            await LoadAudioOutputDevicesAsync();
+                 // Load audio output devices
+                await LoadAudioOutputDevicesAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -217,18 +245,25 @@ namespace NDI_Source_Demo
         /// </summary>
         private async void btListNDISources_Click(object sender, RoutedEventArgs e)
         {
-            _ndiSources = await DeviceEnumerator.Shared.NDISourcesAsync();
-
-            cbNDISources.Items.Clear();
-
-            foreach (var ndiSource in _ndiSources)
+            try
             {
-                cbNDISources.Items.Add(ndiSource.Name);
+                _ndiSources = await DeviceEnumerator.Shared.NDISourcesAsync();
+
+                cbNDISources.Items.Clear();
+
+                foreach (var ndiSource in _ndiSources)
+                {
+                    cbNDISources.Items.Add(ndiSource.Name);
+                }
+
+                if (cbNDISources.Items.Count > 0)
+                {
+                    cbNDISources.SelectedIndex = 0;
+                }
             }
-
-            if (cbNDISources.Items.Count > 0)
+            catch (Exception ex)
             {
-                cbNDISources.SelectedIndex = 0;
+                Debug.WriteLine(ex);
             }
         }
 
@@ -237,13 +272,20 @@ namespace NDI_Source_Demo
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            tmRecording?.Stop();
+            try
+            {
+                tmRecording?.Stop();
 
-            Thread.Sleep(500);
+                Thread.Sleep(500);
 
-            await DestroyEngineAsync();
+                await DestroyEngineAsync();
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

@@ -229,8 +229,7 @@ namespace Main_Demo
         /// <returns>The file extension including the dot.</returns>
         private static string GetFileExt(string filename)
         {
-            int k = filename.LastIndexOf('.');
-            return filename.Substring(k, filename.Length - k);
+            return Path.GetExtension(filename);
         }
 
         /// <summary>
@@ -283,6 +282,28 @@ namespace Main_Demo
                 VideoEdit1.Dispose();
                 VideoEdit1 = null;
             }
+
+            // Dispose settings dialogs
+            mp4HWSettingsDialog?.Dispose();
+            mp4SettingsDialog?.Dispose();
+            aviSettingsDialog?.Dispose();
+            wmvSettingsDialog?.Dispose();
+            dvSettingsDialog?.Dispose();
+            pcmSettingsDialog?.Dispose();
+            mp3SettingsDialog?.Dispose();
+            webmSettingsDialog?.Dispose();
+            ffmpegSettingsDialog?.Dispose();
+            ffmpegEXESettingsDialog?.Dispose();
+            flacSettingsDialog?.Dispose();
+            customFormatSettingsDialog?.Dispose();
+            oggVorbisSettingsDialog?.Dispose();
+            speexSettingsDialog?.Dispose();
+            m4aSettingsDialog?.Dispose();
+            gifSettingsDialog?.Dispose();
+
+            // Dispose WinForms dialogs
+            fontDialog?.Dispose();
+            colorDialog1?.Dispose();
         }
 
         /// <summary>
@@ -315,9 +336,10 @@ namespace Main_Demo
             edOutputFileJoin.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
             VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            for (int i = 0; i < VideoEdit1.Video_Transition_Names().Count; i++)
+            var transitionNames = VideoEdit1.Video_Transition_Names();
+            for (int i = 0; i < transitionNames.Count; i++)
             {
-                cbTransitionName.Items.Add(VideoEdit1.Video_Transition_Names()[i]);
+                cbTransitionName.Items.Add(transitionNames[i]);
             }
 
             cbTransitionName.SelectedIndex = 0;
@@ -523,7 +545,7 @@ namespace Main_Demo
         /// Configures the M4A output settings.
         /// </summary>
         /// <param name="m4aOutput">The M4A output settings.</param>
-        public void SetM4AOutput(ref M4AOutput m4aOutput)
+        private void SetM4AOutput(ref M4AOutput m4aOutput)
         {
             if (m4aSettingsDialog == null)
             {
@@ -689,7 +711,7 @@ namespace Main_Demo
                 VideoEdit1.Video_Subtitles = null;
             }
 
-            VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text));
+            VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture));
 
             if (rbWPF.IsChecked == true)
             {

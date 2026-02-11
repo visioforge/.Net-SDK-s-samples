@@ -23,7 +23,7 @@
         /// <summary>
         /// The media player instance.
         /// </summary>
-        private MediaPlayerCoreX MediaPlayer1;
+        private MediaPlayerCoreX _player;
 
         /// <summary>
         /// The current CDG source settings.
@@ -39,6 +39,11 @@
         /// The secondary video renderer.
         /// </summary>
         private VideoRendererBlock _secondaryRenderer;
+
+        /// <summary>
+        /// Flag to indicate if the timer is currently updating the UI.
+        /// </summary>
+        private bool _isTimerUpdating;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Form1"/> class.
@@ -60,12 +65,12 @@
             this.Enabled = true;
             Text = Text.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            MediaPlayer1 = new MediaPlayerCoreX(VideoView1);
-            MediaPlayer1.OnError += MediaPlayer1_OnError;
-            MediaPlayer1.OnStop += MediaPlayer1_OnStop;
+            _player = new MediaPlayerCoreX(VideoView1);
+            _player.OnError += _player_OnError;
+            _player.OnStop += _player_OnStop;
 
             Text += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
-            MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+            _player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             // Initialize and show secondary window
             _secondaryWindow = new SecondaryVideoWindow();
@@ -74,7 +79,7 @@
 #pragma warning restore S6966
 
             // audio output
-            foreach (var item in await MediaPlayer1.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound))
+            foreach (var item in await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound))
             {
                 cbAudioOutputDevice.Items.Add(item.Name);
             }
@@ -116,9 +121,9 @@
         /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(timer1.Tag) == 0)
+            if (!_isTimerUpdating)
             {
-                await MediaPlayer1.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                await _player.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
         }
 
@@ -129,19 +134,24 @@
         {
             mmError.Clear();
 
-            MediaPlayer1.Audio_Play = true;
-            var audioOutputDevice = (await MediaPlayer1.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).First(x => x.Name == cbAudioOutputDevice.Text);
-            MediaPlayer1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+            _player.Audio_Play = true;
+            var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == cbAudioOutputDevice.Text);
+            if (audioOutputDevice == null)
+            {
+                mmError.Text = "Selected audio output device not found";
+                return;
+            }
+            _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
-            MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
+            _player.Debug_Mode = cbDebugMode.Checked;
 
             // Add secondary video output if window should be visible
             if (_secondaryWindow != null)
             {
                 // Create a secondary video renderer for the second window
                 _secondaryRenderer = new VideoRendererBlock(null, _secondaryWindow.VideoView);
-                MediaPlayer1.Custom_Video_Outputs.Clear();
-                MediaPlayer1.Custom_Video_Outputs.Add(_secondaryRenderer);
+                _player.Custom_Video_Outputs.Clear();
+                _player.Custom_Video_Outputs.Add(_secondaryRenderer);
             }
 
             if (rbZipMode.Checked)
@@ -162,10 +172,10 @@
             _currentSettings.EnablePitchShifting = true;
             _currentSettings.PitchSemitones = tbPitch.Value;
 
-            await MediaPlayer1.OpenAsync(_currentSettings);
-            await MediaPlayer1.PlayAsync();
+            await _player.OpenAsync(_currentSettings);
+            await _player.PlayAsync();
 
-            MediaPlayer1.Audio_OutputDevice_Volume = tbVolume1.Value;
+            _player.Audio_OutputDevice_Volume = tbVolume1.Value;
 
             timer1.Enabled = true;
         }
@@ -175,7 +185,7 @@
         /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.ResumeAsync();
+            await _player.ResumeAsync();
         }
 
         /// <summary>
@@ -183,7 +193,7 @@
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.PauseAsync();
+            await _player.PauseAsync();
         }
 
         /// <summary>
@@ -191,14 +201,14 @@
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.StopAsync();
+            await _player.StopAsync();
 
             _currentSettings = null;
 
             // Clean up secondary renderer
             if (_secondaryRenderer != null)
             {
-                MediaPlayer1.Custom_Video_Outputs.Clear();
+                _player.Custom_Video_Outputs.Clear();
                 _secondaryRenderer = null;
             }
 
@@ -211,7 +221,7 @@
         /// </summary>
         private void tbVolume1_Scroll(object sender, EventArgs e)
         {
-            MediaPlayer1.Audio_OutputDevice_Volume = tbVolume1.Value;
+            _player.Audio_OutputDevice_Volume = tbVolume1.Value;
         }
 
         /// <summary>
@@ -241,7 +251,7 @@
                 edAudioFilename.Enabled = false;
                 btSelectAudioFile.Enabled = false;
                 label2.Enabled = false;
-                edFilename.Text = "c:\\1.zip";
+                edFilename.Text = string.Empty;
             }
             else
             {
@@ -250,8 +260,8 @@
                 edAudioFilename.Enabled = true;
                 btSelectAudioFile.Enabled = true;
                 label2.Enabled = true;
-                edFilename.Text = "c:\\1.cdg";
-                edAudioFilename.Text = "c:\\1.mp3";
+                edFilename.Text = string.Empty;
+                edAudioFilename.Text = string.Empty;
             }
         }
 
@@ -272,10 +282,10 @@
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Tag = 1;
+            _isTimerUpdating = true;
 
-            var position = await MediaPlayer1.Position_GetAsync();
-            var duration = await MediaPlayer1.DurationAsync();
+            var position = await _player.Position_GetAsync();
+            var duration = await _player.DurationAsync();
 
             tbTimeline.Maximum = (int)(duration.TotalSeconds);
 
@@ -286,7 +296,7 @@
 
             lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
 
-            timer1.Tag = 0;
+            _isTimerUpdating = false;
         }
 
         /// <summary>
@@ -301,7 +311,7 @@
         /// <summary>
         /// Media player 1 on error.
         /// </summary>
-        private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
+        private void _player_OnError(object sender, ErrorsEventArgs e)
         {
             Invoke((Action)(() =>
                                    {
@@ -312,7 +322,7 @@
         /// <summary>
         /// Media player 1 on stop.
         /// </summary>
-        private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
+        private void _player_OnStop(object sender, StopEventArgs e)
         {
             Invoke((Action)(() =>
                                    {
@@ -327,9 +337,9 @@
         {
             timer1.Enabled = false;
 
-            await MediaPlayer1.StopAsync();
+            await _player.StopAsync();
 
-            await MediaPlayer1.DisposeAsync();
+            await _player.DisposeAsync();
 
             _secondaryWindow?.Close();
             _secondaryWindow?.Dispose();

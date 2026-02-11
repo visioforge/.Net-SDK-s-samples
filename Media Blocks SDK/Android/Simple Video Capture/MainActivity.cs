@@ -28,6 +28,7 @@ using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X.VideoEncoders;
 using static Android.Renderscripts.ScriptGroup;
+using System.Diagnostics;
 
 namespace Simple_Video_Capture
 {
@@ -187,7 +188,7 @@ namespace Simple_Video_Capture
             // connect video pads
             _pipeline.Connect(_videoSource.Output, _videoTee.Input);
             _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-           
+
             // audio source
             _audioSource = new SystemAudioSourceBlock(new AndroidAudioSourceSettings());
 
@@ -269,8 +270,22 @@ namespace Simple_Video_Capture
         /// <summary>
         /// Called when the activity is being destroyed.
         /// </summary>
-        protected override void OnDestroy()
+        protected override async void OnDestroy()
         {
+            try
+            {
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync();
+                    await _pipeline.DisposeAsync();
+                    _pipeline = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
             VisioForgeX.DestroySDK();
 
             base.OnDestroy();
@@ -325,18 +340,25 @@ namespace Simple_Video_Capture
         /// </summary>
         private async void btSwitchCam_Click(object sender, EventArgs e)
         {
-            await StopAsync();
-
-            if (_cameraIndex == 0)
+            try
             {
-                _cameraIndex = 1;
-            }
-            else
-            {
-                _cameraIndex = 0;
-            }
+                await StopAsync();
 
-            await StartPreviewAsync();
+                if (_cameraIndex == 0)
+                {
+                    _cameraIndex = 1;
+                }
+                else
+                {
+                    _cameraIndex = 0;
+                }
+
+                await StartPreviewAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -369,11 +391,18 @@ namespace Simple_Video_Capture
         /// </summary>
         private async void btStopRecord_Click(object sender, EventArgs e)
         {
-            await StopAsync();
+            try
+            {
+                await StopAsync();
 
-            await PhotoGalleryHelper.AddVideoToGalleryAsync(_sink.GetFilenameOrURL());
+                await PhotoGalleryHelper.AddVideoToGalleryAsync(_sink.GetFilenameOrURL());
 
-            await StartPreviewAsync();
+                await StartPreviewAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -401,34 +430,41 @@ namespace Simple_Video_Capture
         /// </summary>
         private async void btStartRecord_Click(object sender, EventArgs e)
         {
-            // stop preview
-            await StopAsync();
+            try
+            {
+                // stop preview
+                await StopAsync();
 
-            // create engine
-            await CreateEngineAsync();
+                // create engine
+                await CreateEngineAsync();
 
-            // video encoder
-             _videoEncoder = new H264EncoderBlock();
+                // video encoder
+                 _videoEncoder = new H264EncoderBlock();
 
-            // create MP4 muxer
-            var now = DateTime.Now;
-            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
+                // create MP4 muxer
+                var now = DateTime.Now;
+                var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
 
-            _sink = new MP4SinkBlock(new MP4SinkSettings(filename));
+                _sink = new MP4SinkBlock(new MP4SinkSettings(filename));
 
-            // connect video pads
-            _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
-            _pipeline.Connect(_videoEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video));
+                // connect video pads
+                _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
+                _pipeline.Connect(_videoEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video));
 
-            // create audio encoder
-            _audioEncoder = new AACEncoderBlock();
+                // create audio encoder
+                _audioEncoder = new AACEncoderBlock();
 
-            // connect audio pads
-            _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
-            _pipeline.Connect(_audioEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio));
+                // connect audio pads
+                _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
+                _pipeline.Connect(_audioEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio));
 
-            // start pipeline
-            await _pipeline.StartAsync();
+                // start pipeline
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

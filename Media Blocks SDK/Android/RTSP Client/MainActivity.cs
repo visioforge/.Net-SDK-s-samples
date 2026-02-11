@@ -11,13 +11,14 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
+using System.Diagnostics;
 
 namespace RTSP_Client
 {
     [Activity(Label = "@string/app_name", MainLauncher = true)]
     public class MainActivity : Activity
     {
-        private string TEST_URL = "rtsp://";
+        private string TEST_URL = "rtsp://camera-ip:554/stream";
 
         private VisioForge.Core.UI.Android.VideoViewTX videoView;
 
@@ -75,8 +76,22 @@ namespace RTSP_Client
         /// <summary>
         /// Called when the activity is being destroyed.
         /// </summary>
-        protected override void OnDestroy()
+        protected override async void OnDestroy()
         {
+            try
+            {
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync();
+                    await _pipeline.DisposeAsync();
+                    _pipeline = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
             VisioForgeX.DestroySDK();
 
             base.OnDestroy();
@@ -100,24 +115,24 @@ namespace RTSP_Client
                         Manifest.Permission.AccessWifiState},
                 1004);
 
-            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewTX>(RTSP_Client.Resource.Id.videoView);
+            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewTX>(RTSP_Client.Resource.Id.videoView)!;
 
-            btStart = FindViewById<Button>(RTSP_Client.Resource.Id.btStart);
+            btStart = FindViewById<Button>(RTSP_Client.Resource.Id.btStart)!;
             btStart.Click += btStart_Click;
 
-            btPause = FindViewById<Button>(RTSP_Client.Resource.Id.btPause);
+            btPause = FindViewById<Button>(RTSP_Client.Resource.Id.btPause)!;
             btPause.Click += btPause_Click;
 
-            btStop = FindViewById<Button>(RTSP_Client.Resource.Id.btStop);
+            btStop = FindViewById<Button>(RTSP_Client.Resource.Id.btStop)!;
             btStop.Click += btStop_Click;
 
-            edURL = FindViewById<EditText>(RTSP_Client.Resource.Id.edURL);
+            edURL = FindViewById<EditText>(RTSP_Client.Resource.Id.edURL)!;
             edURL.Text = TEST_URL;
 
-            edLogin = FindViewById<EditText>(RTSP_Client.Resource.Id.edLogin);
+            edLogin = FindViewById<EditText>(RTSP_Client.Resource.Id.edLogin)!;
             edLogin.Text = "admin";
 
-            edPassword = FindViewById<EditText>(RTSP_Client.Resource.Id.edPassword);
+            edPassword = FindViewById<EditText>(RTSP_Client.Resource.Id.edPassword)!;
             edPassword.Text = "";
         }
 
@@ -131,16 +146,23 @@ namespace RTSP_Client
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
+                if (_pipeline == null)
+                {
+                    return;
+                }
+
+                await _pipeline.StopAsync();
+
+                videoView.Invalidate();
+
+                await DestroyEngineAsync();
             }
-
-            await _pipeline.StopAsync();
-
-            videoView.Invalidate();
-
-            await DestroyEngineAsync();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -153,20 +175,27 @@ namespace RTSP_Client
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
-            }
+                if (_pipeline == null)
+                {
+                    return;
+                }
 
-            if (btPause.Text == "Pause")
-            {
-                await _pipeline.PauseAsync();
-                btPause.Text = "Resume";
+                if (btPause.Text == "Pause")
+                {
+                    await _pipeline.PauseAsync();
+                    btPause.Text = "Resume";
+                }
+                else
+                {
+                    await _pipeline.ResumeAsync();
+                    btPause.Text = "Pause";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await _pipeline.ResumeAsync();
-                btPause.Text = "Pause";
+                Debug.WriteLine(ex);
             }
         }
 
@@ -180,29 +209,36 @@ namespace RTSP_Client
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += _pipeline_OnError;
-
-            var rtspSource = await RTSPSourceSettings.CreateAsync(new System.Uri(edURL.Text), edLogin.Text, edPassword.Text, audioEnabled: true);
-            
-            // Enable low latency mode by default for Android real-time surveillance (60-120ms latency)
-            rtspSource.LowLatencyMode = true;
-
-            _source = new RTSPSourceBlock(rtspSource);
-
-            if (_source.Settings.IsVideoAvailable())
+            try
             {
-                _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
-                _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
-            }
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnError += _pipeline_OnError;
 
-            if (_source.Settings.IsAudioAvailable())
+                var rtspSource = await RTSPSourceSettings.CreateAsync(new System.Uri(edURL.Text), edLogin.Text, edPassword.Text, audioEnabled: true);
+
+                // Enable low latency mode by default for Android real-time surveillance (60-120ms latency)
+                rtspSource.LowLatencyMode = true;
+
+                _source = new RTSPSourceBlock(rtspSource);
+
+                if (_source.Settings.IsVideoAvailable())
+                {
+                    _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
+                    _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
+                }
+
+                if (_source.Settings.IsAudioAvailable())
+                {
+                    _audioRenderer = new AudioRendererBlock();
+                    _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
+                }
+
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
             {
-                _audioRenderer = new AudioRendererBlock();
-                _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
+                Debug.WriteLine(ex);
             }
-
-            await _pipeline.StartAsync();
         }
 
         /// <summary>

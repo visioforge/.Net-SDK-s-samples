@@ -1,4 +1,4 @@
-﻿using VisioForge.Core.UI;
+using VisioForge.Core.UI;
 
 namespace Audio_Capture_Demo_MB
 {
@@ -106,54 +106,61 @@ namespace Audio_Capture_Demo_MB
         /// </summary>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-            tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
-
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
-            cbMode.SelectedIndex = 0;
-
-            // enumerate audio sources
-            var audioSources = await DeviceEnumerator.Shared.AudioSourcesAsync();
-
-            foreach (var source in audioSources)
+            try
             {
-                cbAudioInputDevice.Items.Add(source.DisplayName);
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-                if (cbAudioInputDevice.Items.Count == 1)
+                tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                cbMode.SelectedIndex = 0;
+
+                // enumerate audio sources
+                var audioSources = await DeviceEnumerator.Shared.AudioSourcesAsync();
+
+                foreach (var source in audioSources)
                 {
-                    cbAudioInputDevice.SelectedIndex = 0;
-                }
-            }
+                    cbAudioInputDevice.Items.Add(source.DisplayName);
 
-            // enumerate audio sinks
-            var audioSinks = await DeviceEnumerator.Shared.AudioOutputsAsync();
-            foreach (var sink in audioSinks)
-            {
-                cbAudioOutputDevice.Items.Add(sink.DisplayName);
-
-                if (cbAudioOutputDevice.Items.Count == 1)
-                {
-                    cbAudioOutputDevice.SelectedIndex = 0;
-                }
-
-                if (sink.API == AudioOutputDeviceAPI.WASAPI2)
-                {
-                    cbAudioLoopbackDevice.Items.Add(sink.Name);
-
-                    if (cbAudioLoopbackDevice.Items.Count == 1)
+                    if (cbAudioInputDevice.Items.Count == 1)
                     {
-                        cbAudioLoopbackDevice.SelectedIndex = 0;
+                        cbAudioInputDevice.SelectedIndex = 0;
                     }
                 }
-            }
 
-            edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp3");
+                // enumerate audio sinks
+                var audioSinks = await DeviceEnumerator.Shared.AudioOutputsAsync();
+                foreach (var sink in audioSinks)
+                {
+                    cbAudioOutputDevice.Items.Add(sink.DisplayName);
+
+                    if (cbAudioOutputDevice.Items.Count == 1)
+                    {
+                        cbAudioOutputDevice.SelectedIndex = 0;
+                    }
+
+                    if (sink.API == AudioOutputDeviceAPI.WASAPI2)
+                    {
+                        cbAudioLoopbackDevice.Items.Add(sink.Name);
+
+                        if (cbAudioLoopbackDevice.Items.Count == 1)
+                        {
+                            cbAudioLoopbackDevice.SelectedIndex = 0;
+                        }
+                    }
+                }
+
+                edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp3");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -161,25 +168,32 @@ namespace Audio_Capture_Demo_MB
         /// </summary>
         private async void cbAudioInputDevice_SelectedIndexChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+            try
             {
-                cbAudioInputFormat.Items.Clear();
+                if (cbAudioInputDevice.SelectedIndex != -1 && e != null && e.AddedItems.Count > 0)
+                {
+                    cbAudioInputFormat.Items.Clear();
 
-                var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
-                if (deviceItem == null)
-                {
-                    return;
-                }
-             
-                foreach (var format in deviceItem.Formats)
-                {
-                    cbAudioInputFormat.Items.Add(format.Name);
-                }
+                    var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == e.AddedItems[0].ToString());
+                    if (deviceItem == null)
+                    {
+                        return;
+                    }
 
-                if (cbAudioInputFormat.Items.Count > 0)
-                {
-                    cbAudioInputFormat.SelectedIndex = 0;
+                    foreach (var format in deviceItem.Formats)
+                    {
+                        cbAudioInputFormat.Items.Add(format.Name);
+                    }
+
+                    if (cbAudioInputFormat.Items.Count > 0)
+                    {
+                        cbAudioInputFormat.SelectedIndex = 0;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -212,65 +226,72 @@ namespace Audio_Capture_Demo_MB
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            mmLog.Clear();
-
-            CreatePipeline();
-
-            _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-            // audio output
-            var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First();
-            _audioRenderer = new AudioRendererBlock(audioOutputDevice) { IsSync = false };
-
-            // audio input
-            if (rbSystemAudio.IsChecked == true)
+            try
             {
-                var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbAudioInputDevice.Text);
-                if (deviceItem == null)
+                mmLog.Clear();
+
+                CreatePipeline();
+
+                _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+
+                // audio output
+                var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutputDevice.Text).First();
+                _audioRenderer = new AudioRendererBlock(audioOutputDevice) { IsSync = false };
+
+                // audio input
+                if (rbSystemAudio.IsChecked == true)
                 {
-                    return;
+                    var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbAudioInputDevice.Text);
+                    if (deviceItem == null)
+                    {
+                        return;
+                    }
+
+                    AudioCaptureDeviceFormat format = null;
+                    var formats = deviceItem.Formats.Where(fmt => fmt.Name == cbAudioInputFormat.Text).ToList();
+                    if (formats.Count > 0)
+                    {
+                        format = formats[0].ToFormat();
+                    }
+
+                    var audioSource = deviceItem.CreateSourceSettings(format);
+                    _audioSource = new SystemAudioSourceBlock(audioSource);
+                }
+                else
+                {
+                    var deviceItem = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.WASAPI2)).FirstOrDefault(device => device.Name == cbAudioLoopbackDevice.Text);
+                    if (deviceItem == null)
+                    {
+                        return;
+                    }
+
+                    var audioSource = new LoopbackAudioCaptureDeviceSourceSettings(deviceItem);
+                    _audioSource = new SystemAudioSourceBlock(audioSource);
                 }
 
-                AudioCaptureDeviceFormat format = null;
-                var formats = deviceItem.Formats.Where(fmt => fmt.Name == cbAudioInputFormat.Text).ToList();
-                if (formats.Count > 0)
+                if (cbMode.SelectedIndex == 0)
                 {
-                    format = formats[0].ToFormat();
+                    _pipeline.Connect(_audioSource.Output, _audioRenderer.Input);
+                }
+                else
+                {
+                    _tee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
+                    _mp3Output = new MP3OutputBlock(edOutput.Text, new MP3EncoderSettings());
+
+                    _pipeline.Connect(_audioSource.Output, _tee.Input);
+                    _pipeline.Connect(_tee.Outputs[0], _audioRenderer.Input);
+                    _pipeline.Connect(_tee.Outputs[1], _mp3Output.Input);
                 }
 
-                var audioSource = deviceItem.CreateSourceSettings(format);
-                _audioSource = new SystemAudioSourceBlock(audioSource);
+                await _pipeline.StartAsync();
+
+                tmRecording.Start();
             }
-            else
+            catch (Exception ex)
             {
-                var deviceItem = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.WASAPI2)).FirstOrDefault(device => device.Name == cbAudioLoopbackDevice.Text);
-                if (deviceItem == null)
-                {
-                    return;
-                }
-
-                var audioSource = new LoopbackAudioCaptureDeviceSourceSettings(deviceItem);
-                _audioSource = new SystemAudioSourceBlock(audioSource);
+                Debug.WriteLine(ex);
             }
-
-            if (cbMode.SelectedIndex == 0)
-            {
-                _pipeline.Connect(_audioSource.Output, _audioRenderer.Input);
-            }
-            else
-            {
-                _tee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
-                _mp3Output = new MP3OutputBlock(edOutput.Text, new MP3EncoderSettings());
-
-                _pipeline.Connect(_audioSource.Output, _tee.Input);
-                _pipeline.Connect(_tee.Outputs[0], _audioRenderer.Input);
-                _pipeline.Connect(_tee.Outputs[1], _mp3Output.Input);
-            }
-
-            await _pipeline.StartAsync();
-
-            tmRecording.Start();
         }
 
         /// <summary>
@@ -278,11 +299,18 @@ namespace Audio_Capture_Demo_MB
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            tmRecording.Stop();
+            try
+            {
+                tmRecording.Stop();
 
-            await _pipeline.StopAsync();
+                await _pipeline.StopAsync();
 
-            await DestroyPipelineAsync();
+                await DestroyPipelineAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -344,9 +372,16 @@ namespace Audio_Capture_Demo_MB
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            await DestroyPipelineAsync();
+            try
+            {
+                await DestroyPipelineAsync();
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

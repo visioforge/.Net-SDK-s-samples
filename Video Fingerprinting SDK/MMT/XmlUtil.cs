@@ -18,20 +18,21 @@ namespace VisioForge_MMT.Classes
         public static string Obj2XmlStr(object obj, string nameSpace)
         {
             if (obj == null) return string.Empty;
-            XmlSerializer sr = SerializerCache.GetSerializer(obj.GetType()); 
-			
+            XmlSerializer sr = SerializerCache.GetSerializer(obj.GetType());
+
             StringBuilder sb = new StringBuilder();
-            StringWriter w = new StringWriter(sb, System.Globalization.CultureInfo.InvariantCulture);
-			
-            sr.Serialize(
-                w, 
-                obj, 
-                new XmlSerializerNamespaces(
-                    new XmlQualifiedName[] 
-                        {
-                            new XmlQualifiedName("", nameSpace)
-                        }
-                    ));
+            using (StringWriter w = new StringWriter(sb, System.Globalization.CultureInfo.InvariantCulture))
+            {
+                sr.Serialize(
+                    w,
+                    obj,
+                    new XmlSerializerNamespaces(
+                        new XmlQualifiedName[]
+                            {
+                                new XmlQualifiedName("", nameSpace)
+                            }
+                        ));
+            }
             return sb.ToString();
         }
 
@@ -41,15 +42,16 @@ namespace VisioForge_MMT.Classes
         public static string Obj2XmlStr(object obj)
         {
             if (obj == null) return string.Empty;
-            XmlSerializer sr = SerializerCache.GetSerializer(obj.GetType()); 
-			
+            XmlSerializer sr = SerializerCache.GetSerializer(obj.GetType());
+
             StringBuilder sb = new StringBuilder();
-            StringWriter w = new StringWriter(sb, System.Globalization.CultureInfo.InvariantCulture);
-			
-            sr.Serialize(
-                w, 
-                obj, 
-                new XmlSerializerNamespaces( new XmlQualifiedName[] { new XmlQualifiedName(string.Empty) } ) );
+            using (StringWriter w = new StringWriter(sb, System.Globalization.CultureInfo.InvariantCulture))
+            {
+                sr.Serialize(
+                    w,
+                    obj,
+                    new XmlSerializerNamespaces(new XmlQualifiedName[] { new XmlQualifiedName(string.Empty) }));
+            }
 
             return sb.ToString();
         }
@@ -60,14 +62,16 @@ namespace VisioForge_MMT.Classes
         /// <param name="xml"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static T XmlStr2Obj<T>(string xml) 
+        public static T XmlStr2Obj<T>(string xml)
         {
             if (xml == null) return default(T);
             if (xml == string.Empty) return (T)Activator.CreateInstance(typeof(T));
 
-            StringReader reader = new StringReader(xml);
-            XmlSerializer sr = SerializerCache.GetSerializer(typeof(T));
-            return (T)sr.Deserialize(reader);
+            using (StringReader reader = new StringReader(xml))
+            {
+                XmlSerializer sr = SerializerCache.GetSerializer(typeof(T));
+                return (T)sr.Deserialize(reader);
+            }
         }
 		
         /// <summary>
@@ -78,9 +82,10 @@ namespace VisioForge_MMT.Classes
         /// <summary>
         /// Xml str 2 xml dom.
         /// </summary>
-        public static  XmlElement XmlStr2XmlDom(string xml)
+        public static XmlElement XmlStr2XmlDom(string xml)
         {
             XmlDocument doc = new XmlDocument();
+            doc.XmlResolver = null; // Prevent XXE attacks
             doc.LoadXml(xml);
             return doc.DocumentElement;
         }

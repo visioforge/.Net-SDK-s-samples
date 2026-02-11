@@ -211,6 +211,7 @@ namespace Audio_Extractor
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Video Edit SDK .Net - Audio Extractor Demo";
+            FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();

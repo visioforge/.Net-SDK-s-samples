@@ -91,8 +91,8 @@ public partial class ViewController : NSViewController
     {
         if (_pipeline != null)
         {
-            await _pipeline.StopAsync();
-            await _pipeline.DisposeAsync();
+            _pipeline.StopAsync().GetAwaiter().GetResult();
+            _pipeline.DisposeAsync().GetAwaiter().GetResult();
         }
 
         _pipeline = new MediaBlocksPipeline();
@@ -131,10 +131,17 @@ public partial class ViewController : NSViewController
         /// </summary>
     private async void OnStop(object sender, EventArgs e)
     {
-        if (_pipeline != null)
+        try
         {
-            _pipeline.OnError -= _pipeline_OnError;
-            await _pipeline.StopAsync();
+            if (_pipeline != null)
+            {
+                _pipeline.OnError -= _pipeline_OnError;
+                _pipeline.StopAsync().GetAwaiter().GetResult();
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
         }
     }
 
@@ -168,21 +175,28 @@ public partial class ViewController : NSViewController
         /// </summary>
     private async void tmPosition_Elapsed(object sender, ElapsedEventArgs e)
     {
-        if (_pipeline == null) return;
-
         try
         {
-            InvokeOnMainThread(async () =>
-            {
-                if (_pipeline == null) return;
+            if (_pipeline == null) return;
 
-                lbDurationX.StringValue =
-                    $"{(await _pipeline.Position_GetAsync()).ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
-            });
+            try
+            {
+                InvokeOnMainThread(async () =>
+                {
+                    if (_pipeline == null) return;
+
+                    lbDurationX.StringValue =
+                        $"{(await _pipeline.Position_GetAsync()).ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                });
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+            }
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            Debug.WriteLine(exception);
+            Debug.WriteLine(ex);
         }
     }
 
@@ -212,6 +226,13 @@ public class CustomWindowDelegate : NSWindowDelegate
         /// </summary>
     public override bool WindowShouldClose(NSObject sender)
     {
+        if (_pipeline != null)
+        {
+            _pipeline.StopAsync().GetAwaiter().GetResult();
+            _pipeline.DisposeAsync().GetAwaiter().GetResult();
+            _pipeline = null;
+        }
+
         VisioForgeX.DestroySDK();
 
         // Return true to allow the window to close, false to cancel.

@@ -1,6 +1,7 @@
 ﻿
 
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 using VisioForge.Core.UI;
 using VisioForge.Core.UI.WinForms.Dialogs.OutputFormats;
@@ -122,8 +123,7 @@ namespace Video_From_Images
         /// <returns>The file extension including the dot.</returns>
         private static string GetFileExt(string filename)
         {
-            int k = filename.LastIndexOf('.');
-            return filename.Substring(k, filename.Length - k);
+            return Path.GetExtension(filename);
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Video_From_Images
         {
             if (OpenDialog1.ShowDialog() == DialogResult.OK)
             {
-                VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text));
+                VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture));
 
                 // resize if required
                 int customWidth = 0;
@@ -431,7 +431,7 @@ namespace Video_From_Images
                 VideoEdit1.Video_Resize_Height = Convert.ToInt32(edHeight.Text);
             }
 
-            VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text));
+            VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture));
 
             // apply capture parameters
 

@@ -55,7 +55,7 @@ namespace Two_Windows_Demo
         /// <param name="message">The message.</param>
         public void Log(string message)
         {
-            mmError.Text = mmError.Text + message + Environment.NewLine;
+            mmError.AppendText(message + Environment.NewLine);
         }
 
         /// <summary>

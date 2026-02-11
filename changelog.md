@@ -9,6 +9,11 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.2.10
+
+* [Core] Added UNC (SMB/Samba) network path support for file sources across all X-engines, fixing File.Exists() failures on network shares
+* [Media Blocks SDK .Net], [Video Capture SDK .Net] Added mouse click highlight support for screen capture with auto-subscribe/unsubscribe, manual click input, and real-time settings update
+
 ## 2026.2.8
 
 * [Media Blocks SDK .Net] Added OverlayManagerImageSequence: image sequence overlay with per-frame durations, looping, position/size animation, fade effects, and easing support

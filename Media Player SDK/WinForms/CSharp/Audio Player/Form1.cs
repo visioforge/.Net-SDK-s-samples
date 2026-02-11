@@ -57,9 +57,16 @@ namespace Audio_Player_Demo
         /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(timer1.Tag) == 0)
+            try
             {
-                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                if (Convert.ToInt32(timer1.Tag) == 0)
+                {
+                    await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -68,26 +75,33 @@ namespace Audio_Player_Demo
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            mmError.Clear();
+            try
+            {
+                mmError.Clear();
 
-            MediaPlayer1.Playlist_Clear();
-            MediaPlayer1.Playlist_Add(edFilename.Text);
-            MediaPlayer1.Audio_PlayAudio = true;
+                MediaPlayer1.Playlist_Clear();
+                MediaPlayer1.Playlist_Add(edFilename.Text);
+                MediaPlayer1.Audio_PlayAudio = true;
 
-            MediaPlayer1.Source_Mode = MediaPlayerSourceMode.File_DS;
-            MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
+                MediaPlayer1.Source_Mode = MediaPlayerSourceMode.File_DS;
+                MediaPlayer1.Audio_OutputDevice = "Default DirectSound Device";
 
-            MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
+                MediaPlayer1.Video_Renderer.VideoRenderer = VideoRendererMode.None;
 
-            MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
-            MediaPlayer1.Info_UseLibMediaInfo = true;
+                MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
+                MediaPlayer1.Info_UseLibMediaInfo = true;
 
-            await MediaPlayer1.PlayAsync();
+                await MediaPlayer1.PlayAsync();
 
-            MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
-            MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
+                MediaPlayer1.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
+                MediaPlayer1.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
 
-            timer1.Enabled = true;
+                timer1.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -95,7 +109,14 @@ namespace Audio_Player_Demo
         /// </summary>
         private async void btResume_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.ResumeAsync();
+            try
+            {
+                await MediaPlayer1.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -103,7 +124,14 @@ namespace Audio_Player_Demo
         /// </summary>
         private async void btPause_Click(object sender, EventArgs e)
         {
-            await MediaPlayer1.PauseAsync();
+            try
+            {
+                await MediaPlayer1.PauseAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -123,7 +151,14 @@ namespace Audio_Player_Demo
         /// </summary>
         private async void btStop_Click(object sender, EventArgs e)
         {
-            await StopAsync();
+            try
+            {
+                await StopAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -158,18 +193,25 @@ namespace Audio_Player_Demo
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Tag = 1;
-            tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
-
-            int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
-            if ((value > 0) && (value < tbTimeline.Maximum))
+            try
             {
-                tbTimeline.Value = value;
+                timer1.Tag = 1;
+                tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
+
+                int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
+                if ((value > 0) && (value < tbTimeline.Maximum))
+                {
+                    tbTimeline.Value = value;
+                }
+
+                lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+
+                timer1.Tag = 0;
             }
-
-            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
-
-            timer1.Tag = 0;
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -186,7 +228,7 @@ namespace Audio_Player_Demo
         /// </summary>
         private void MediaPlayer1_OnError(object sender, ErrorsEventArgs e)
         {
-            Invoke((Action)(() => mmError.Text = mmError.Text + e.Message + Environment.NewLine));
+            Invoke((Action)(() => mmError.AppendText(e.Message + Environment.NewLine)));
         }
 
         /// <summary>
@@ -202,8 +244,27 @@ namespace Audio_Player_Demo
         /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            await StopAsync();
+            try
+            {
+                await StopAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            DestroyEngine();
+        }
+
+        private void DestroyEngine()
+        {
+            if (MediaPlayer1 != null)
+            {
+                MediaPlayer1.OnError -= MediaPlayer1_OnError;
+                MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+                MediaPlayer1.Dispose();
+                MediaPlayer1 = null;
+            }
         }
     }
 }
-

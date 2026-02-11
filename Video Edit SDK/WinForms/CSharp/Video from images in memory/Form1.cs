@@ -5,6 +5,7 @@ namespace Video_From_Images
     using Properties;
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Diagnostics;
     using System.Drawing;
     using System.IO;
@@ -372,7 +373,7 @@ namespace Video_From_Images
                 VideoEdit1.Video_Resize_Height = Convert.ToInt32(edHeight.Text);
             }
 
-            VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text));
+            VideoEdit1.Video_FrameRate = new VideoFrameRate(Convert.ToDouble(cbFrameRate.Text, CultureInfo.InvariantCulture));
 
             // apply capture parameters            
             VideoEdit1.Video_Renderer_SetAuto();
@@ -513,6 +514,12 @@ namespace Video_From_Images
 
                 _loadedFiles = EnumerateImageFiles(edImagesFolder.Text);
 
+                if (_loadedFiles.Length == 0)
+                {
+                    MessageBox.Show(this, "No image files found in the selected folder!");
+                    return;
+                }
+
                 int width = Convert.ToInt32(edWidth.Text);
                 int height = Convert.ToInt32(edHeight.Text);
 
@@ -601,6 +608,16 @@ namespace Video_From_Images
             else
             {
                 int index = (int)Math.Truncate(e.Timestamp.TotalMilliseconds / 2000);
+                if (_loadedFiles == null || _loadedFiles.Length == 0)
+                {
+                    return;
+                }
+
+                if (index >= _loadedFiles.Length)
+                {
+                    index = _loadedFiles.Length - 1;
+                }
+
                 if (_loadedImageFilename == _loadedFiles[index])
                 {
                     frame = _loadedImage;
@@ -621,6 +638,8 @@ namespace Video_From_Images
                 e.UpdateData = true;
             }
 
+            // Dispose frame when using predefined images since each Resources._X access
+            // creates a new Bitmap instance that must be disposed to prevent memory leaks.
             if (_predefinedImagesUsed)
             {
                 frame.Dispose();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +27,7 @@ using VisioForge.Core.UI.WPF.Dialogs.Sources;
 using VisioForge.Core;
 using VisioForge.Core.Types.X.OpenGL;
 using Size = VisioForge.Core.Types.Size;
+using System.Diagnostics;
 
 namespace Video_Compositor_Demo
 {
@@ -153,48 +154,55 @@ namespace Video_Compositor_Demo
         /// </summary>
         private async void btAddCamera_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new VideoCaptureSourceDialog();
-            if (dlg.ShowDialog() == true)
+            try
             {
-                var src = new CompositorSource();
-
-                VideoCaptureDeviceSourceSettings settings = null;
-
-                var deviceName = dlg.Device;
-                var format = dlg.Format;
-                if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+                var dlg = new VideoCaptureSourceDialog();
+                if (dlg.ShowDialog() == true)
                 {
-                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                    if (device != null)
-                    {
-                        var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
-                        if (formatItem != null)
-                        {
-                            settings = new VideoCaptureDeviceSourceSettings(device)
-                            {
-                                Format = formatItem.ToFormat()
-                            };
+                    var src = new CompositorSource();
 
-                            settings.Format.FrameRate = dlg.FrameRate;
+                    VideoCaptureDeviceSourceSettings settings = null;
+
+                    var deviceName = dlg.Device;
+                    var format = dlg.Format;
+                    if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+                    {
+                        var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                        if (device != null)
+                        {
+                            var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
+                            if (formatItem != null)
+                            {
+                                settings = new VideoCaptureDeviceSourceSettings(device)
+                                {
+                                    Format = formatItem.ToFormat()
+                                };
+
+                                settings.Format.FrameRate = dlg.FrameRate;
+                            }
                         }
                     }
+
+                    if (settings == null)
+                    {
+                        MessageBox.Show(this, "Unable to configure video capture device.");
+                        return;
+                    }
+
+                    src.Source = new SystemVideoSourceBlock(settings);
+                    src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
+                    src.DisplayName = $"Camera [{dlg.Device}]";
+                    src.ZOrder = _sources.Count; // Set default z-order
+
+                    _sources.Add(src);
+
+                    cbSources.Items.Add(src.DisplayName + $" (Z:{src.ZOrder})");
+                    cbSources.SelectedIndex = cbSources.Items.Count - 1;
                 }
-
-                if (settings == null)
-                {
-                    MessageBox.Show(this, "Unable to configure video capture device.");
-                    return;
-                }
-
-                src.Source = new SystemVideoSourceBlock(settings);
-                src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
-                src.DisplayName = $"Camera [{dlg.Device}]";
-                src.ZOrder = _sources.Count; // Set default z-order
-
-                _sources.Add(src);
-
-                cbSources.Items.Add(src.DisplayName + $" (Z:{src.ZOrder})");
-                cbSources.SelectedIndex = cbSources.Items.Count - 1;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -229,19 +237,26 @@ namespace Video_Compositor_Demo
         /// </summary>
         private async void btAddFile_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new OpenFileDialog();
-            if (dlg.ShowDialog() == true)
+            try
             {
-                var src = new CompositorSource();
-                src.Source = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(dlg.FileName, renderAudio: false));
-                src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
-                src.DisplayName = $"Video [{System.IO.Path.GetFileName(dlg.FileName)}]";
-                src.ZOrder = _sources.Count; // Set default z-order
+                var dlg = new OpenFileDialog();
+                if (dlg.ShowDialog() == true)
+                {
+                    var src = new CompositorSource();
+                    src.Source = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(dlg.FileName, renderAudio: false));
+                    src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
+                    src.DisplayName = $"Video [{System.IO.Path.GetFileName(dlg.FileName)}]";
+                    src.ZOrder = _sources.Count; // Set default z-order
 
-                _sources.Add(src);
+                    _sources.Add(src);
 
-                cbSources.Items.Add(src.DisplayName + $" (Z:{src.ZOrder})");
-                cbSources.SelectedIndex = cbSources.Items.Count - 1;
+                    cbSources.Items.Add(src.DisplayName + $" (Z:{src.ZOrder})");
+                    cbSources.SelectedIndex = cbSources.Items.Count - 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
@@ -295,29 +310,36 @@ namespace Video_Compositor_Demo
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // Initialize logging first
-            LogMessage("Application starting up", LogLevel.Info);
+            try
+            {
+                // Initialize logging first
+                LogMessage("Application starting up", LogLevel.Info);
 
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            LogMessage("Initializing VisioForge SDK", LogLevel.Info);
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-            LogMessage("VisioForge SDK initialized successfully", LogLevel.Info);
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                LogMessage("Initializing VisioForge SDK", LogLevel.Info);
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+                LogMessage("VisioForge SDK initialized successfully", LogLevel.Info);
 
-            CreateEngine();
+                CreateEngine();
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
+                tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
-            // Initialize chroma key UI
-            cbSources.SelectionChanged += CbSources_SelectionChanged;
-            UpdateChromaKeyUI();
+                // Initialize chroma key UI
+                cbSources.SelectionChanged += CbSources_SelectionChanged;
+                UpdateChromaKeyUI();
 
-            LogMessage($"Application ready (SDK v{MediaBlocksPipeline.SDK_Version})", LogLevel.Info);
+                LogMessage($"Application ready (SDK v{MediaBlocksPipeline.SDK_Version})", LogLevel.Info);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -478,27 +500,34 @@ namespace Video_Compositor_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
+                if (_pipeline == null)
+                {
+                    return;
+                }
+
+                LogMessage("Stopping video compositor pipeline", LogLevel.Info);
+
+                tmRecording.Stop();
+
+                if (rbOutputFile.IsChecked == true)
+                {
+                    await _pipeline.StopAsync();
+                }
+                else
+                {
+                    await _pipeline.StopAsync(true);
+                }
+
+                await DestroyEngineAsync();
+
+                LogMessage("Pipeline stopped", LogLevel.Info);
             }
-
-            LogMessage("Stopping video compositor pipeline", LogLevel.Info);
-
-            tmRecording.Stop();
-
-            if (rbOutputFile.IsChecked == true)
+            catch (Exception ex)
             {
-                await _pipeline.StopAsync();
+                Debug.WriteLine(ex);
             }
-            else
-            {
-                await _pipeline.StopAsync(true);
-            }
-
-            await DestroyEngineAsync();
-
-            LogMessage("Pipeline stopped", LogLevel.Info);
         }
 
         /// <summary>
@@ -592,9 +621,16 @@ namespace Video_Compositor_Demo
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            await DestroyEngineAsync();
+            try
+            {
+                await DestroyEngineAsync();
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         #region Chroma Key Event Handlers

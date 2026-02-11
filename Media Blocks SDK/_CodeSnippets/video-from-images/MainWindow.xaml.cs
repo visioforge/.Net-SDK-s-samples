@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,6 +28,7 @@ using VisioForge.Core.Types.Events;
 using System.Drawing;
 using System.Threading;
 using System;
+using System.Diagnostics;
 
 namespace video_from_images
 {
@@ -56,14 +57,21 @@ namespace video_from_images
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            edSourceFolder.Text = "c:\\Samples\\pics\\src\\";
+                edSourceFolder.Text = "c:\\Samples\\pics\\src\\";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -104,62 +112,69 @@ namespace video_from_images
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            // Create VideoCaptureCoreX object
-            _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnStop += _pipeline_OnStop;
-
-            // Create video renderer
-            var videoRenderer = new VideoRendererBlock(_pipeline, videoView1) { IsSync = false };
-
-            // Load images
-            if (!LoadImages(out int width, out int height))
-                { 
-                return; 
-            }
-
-            // Create source
-            var jpegSource = new PushJPEGSourceSettings(1280, 720, VideoFrameRate.FPS_25);
-            _source = new PushSourceBlock(jpegSource);
-
-            // JPEG decoder
-            _jpegDecoder = new JPEGDecoderBlock();
-
-            // Video tee
-            var tee = new TeeBlock(2, MediaBlockPadMediaType.Video);
-
-            // Connect blocks
-            _pipeline.Connect(_source, _jpegDecoder);
-            _pipeline.Connect(_jpegDecoder, tee);
-            _pipeline.Connect(tee, videoRenderer);
-
-            // MP4 output
-            _outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "jpegs.mp4");
-            var mp4Output = new MP4OutputBlock(new MP4SinkSettings(_outputFile), h264settings: new OpenH264EncoderSettings(), aacSettings: null);
-            _pipeline.Connect(tee.Outputs[1], mp4Output.CreateNewInput(MediaBlockPadMediaType.Video));
-
-            // Start
-            await _pipeline.StartAsync(onlyPreload: true);
-
-            // Push data loop
-            var _pushThread = new Thread(async () =>
+            try
             {
+                // Create VideoCaptureCoreX object
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnStop += _pipeline_OnStop;
+
+                // Create video renderer
+                var videoRenderer = new VideoRendererBlock(_pipeline, videoView1) { IsSync = false };
+
                 // Load images
-                foreach (var file in _files)
-                {
-                    var data = System.IO.File.ReadAllBytes(file);
-                    for (int i = 0; i < VideoFrameRate.FPS_25.Num; i++)
-                    {
-                        _source.PushData(data, data.Length);
-                    }
+                if (!LoadImages(out int width, out int height))
+                    { 
+                    return; 
                 }
 
-                _source.SendEOS();
-            });
+                // Create source
+                var jpegSource = new PushJPEGSourceSettings(1280, 720, VideoFrameRate.FPS_25);
+                _source = new PushSourceBlock(jpegSource);
 
-            _pushThread.Start();
+                // JPEG decoder
+                _jpegDecoder = new JPEGDecoderBlock();
 
-            // Start playback
-            await _pipeline.ResumeAsync();
+                // Video tee
+                var tee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+
+                // Connect blocks
+                _pipeline.Connect(_source, _jpegDecoder);
+                _pipeline.Connect(_jpegDecoder, tee);
+                _pipeline.Connect(tee, videoRenderer);
+
+                // MP4 output
+                _outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "jpegs.mp4");
+                var mp4Output = new MP4OutputBlock(new MP4SinkSettings(_outputFile), h264settings: new OpenH264EncoderSettings(), aacSettings: null);
+                _pipeline.Connect(tee.Outputs[1], mp4Output.CreateNewInput(MediaBlockPadMediaType.Video));
+
+                // Start
+                await _pipeline.StartAsync(onlyPreload: true);
+
+                // Push data loop
+                var _pushThread = new Thread(async () =>
+                {
+                    // Load images
+                    foreach (var file in _files)
+                    {
+                        var data = System.IO.File.ReadAllBytes(file);
+                        for (int i = 0; i < VideoFrameRate.FPS_25.Num; i++)
+                        {
+                            _source.PushData(data, data.Length);
+                        }
+                    }
+
+                    _source.SendEOS();
+                });
+
+                _pushThread.Start();
+
+                // Start playback
+                await _pipeline.ResumeAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -183,21 +198,35 @@ namespace video_from_images
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            if (_pipeline == null)
+            try
             {
-                return;
+                if (_pipeline == null)
+                {
+                    return;
+                }
+
+                await _pipeline.StopAsync();
+
+                await _pipeline.DisposeAsync();
             }
-
-            await _pipeline.StopAsync();
-
-            await _pipeline.DisposeAsync();
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
         /// Window closing.
         /// </summary>
-        private void Window_Closing(object sender, CancelEventArgs e)
+        private async void Window_Closing(object sender, CancelEventArgs e)
         {
+            if (_pipeline != null)
+            {
+                await _pipeline.StopAsync();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
 

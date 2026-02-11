@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Text;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.VideoEdit;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Cut_Video_File
 {
@@ -86,10 +76,46 @@ namespace Cut_Video_File
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edSourceVideoFile.Text))
+            {
+                MessageBox.Show("Please select a source video file.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!File.Exists(edSourceVideoFile.Text))
+            {
+                MessageBox.Show("Source video file does not exist.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(edOutputVideoFile.Text))
+            {
+                MessageBox.Show("Please select an output video file.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!int.TryParse(edStartTime.Text, out int startTime) || startTime < 0)
+            {
+                MessageBox.Show("Please enter a valid start time (non-negative integer).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!int.TryParse(edStopTime.Text, out int stopTime) || stopTime < 0)
+            {
+                MessageBox.Show("Please enter a valid stop time (non-negative integer).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (stopTime <= startTime)
+            {
+                MessageBox.Show("Stop time must be greater than start time.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             await _core.FastEdit_CutFileAsync(
                 edSourceVideoFile.Text,
-                TimeSpan.FromSeconds(Convert.ToInt32(edStartTime.Text)),
-                TimeSpan.FromSeconds(Convert.ToInt32(edStopTime.Text)),
+                TimeSpan.FromSeconds(startTime),
+                TimeSpan.FromSeconds(stopTime),
                 edOutputVideoFile.Text);
         }
 
@@ -115,11 +141,10 @@ namespace Cut_Video_File
         /// <param name="e">The <see cref="StopEventArgs"/> instance containing the event data.</param>
         private void VideoEdit1_OnStop(object sender, StopEventArgs e)
         {
-            MessageBox.Show("Completed");
-
             Dispatcher.Invoke(() =>
             {
                 ProgressBar1.Value = 0;
+                MessageBox.Show("Completed");
             });
         }
 
@@ -162,7 +187,16 @@ namespace Cut_Video_File
         /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _core.Dispose();
+            if (_core != null)
+            {
+                _core.OnError -= VideoEdit1_OnError;
+                _core.OnStop -= VideoEdit1_OnStop;
+                _core.OnProgress -= VideoEdit1_OnProgress;
+
+                _core.Stop();
+                _core.Dispose();
+                _core = null;
+            }
         }
     }
 }

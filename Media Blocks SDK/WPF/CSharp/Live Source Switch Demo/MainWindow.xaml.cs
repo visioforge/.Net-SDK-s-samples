@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
 using System.Windows;
 using System.Windows.Input;
@@ -149,35 +149,42 @@ namespace Live_Source_Switch_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            mmLog.Clear();
+            try
+            {
+                mmLog.Clear();
 
-            CreateEngines();
+                CreateEngines();
 
-            _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
-            _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+                _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
+                _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            // screen source
-            var screenSettings = CreateScreenCaptureSource();
-            _screenSource = new ScreenSourceBlock(screenSettings);
+                // screen source
+                var screenSettings = CreateScreenCaptureSource();
+                _screenSource = new ScreenSourceBlock(screenSettings);
 
-            // camera source
-            var cameraSettings = await CreateCameraSourceAsync();
-            _cameraSource = new SystemVideoSourceBlock(cameraSettings);
+                // camera source
+                var cameraSettings = await CreateCameraSourceAsync();
+                _cameraSource = new SystemVideoSourceBlock(cameraSettings);
 
-            // switch
-            var switchSettings = new SourceSwitchSettings(2);
-            _switch = new SourceSwitchBlock(switchSettings);
+                // switch
+                var switchSettings = new SourceSwitchSettings(2);
+                _switch = new SourceSwitchBlock(switchSettings);
 
-            // video renderer
-            _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+                // video renderer
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
-            // connect
-            _pipeline.Connect(_screenSource.Output, _switch.Inputs[0]);
-            _pipeline.Connect(_cameraSource.Output, _switch.Inputs[1]);
+                // connect
+                _pipeline.Connect(_screenSource.Output, _switch.Inputs[0]);
+                _pipeline.Connect(_cameraSource.Output, _switch.Inputs[1]);
 
-            _pipeline.Connect(_switch.Output, _videoRenderer.Input);
+                _pipeline.Connect(_switch.Output, _videoRenderer.Input);
 
-            await _pipeline.StartAsync();
+                await _pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -185,9 +192,16 @@ namespace Live_Source_Switch_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            await _pipeline.StopAsync();
+            try
+            {
+                await _pipeline.StopAsync();
 
-            await DestroyEnginesAsync();
+                await DestroyEnginesAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -195,20 +209,27 @@ namespace Live_Source_Switch_Demo
         /// </summary>
         private async void Form1_Load(object sender, RoutedEventArgs e)
         {
-            // We have to initialize the engine on start
-            Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-            this.IsEnabled = false;
-            await VisioForgeX.InitSDKAsync();
-            this.IsEnabled = true;
-            Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            try
+            {
+                // We have to initialize the engine on start
+                Title += "[FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+                this.IsEnabled = false;
+                await VisioForgeX.InitSDKAsync();
+                this.IsEnabled = true;
+                Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
 
-            DeviceEnumerator.Shared.OnVideoSourceAdded += Shared_OnVideoSourceAdded;
+                DeviceEnumerator.Shared.OnVideoSourceAdded += Shared_OnVideoSourceAdded;
 
-            CreateEngines();
+                CreateEngines();
 
-            Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
+                Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-            DeviceEnumerator.Shared.StartVideoSourceMonitor();
+                DeviceEnumerator.Shared.StartVideoSourceMonitor();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>
@@ -225,9 +246,16 @@ namespace Live_Source_Switch_Demo
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            await DestroyEnginesAsync();
+            try
+            {
+                await DestroyEnginesAsync();
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
-﻿namespace VisioForge_MMT
+﻿namespace DVS
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -10,15 +11,24 @@
         /// Search video in folder.
         /// </summary>
         public static IEnumerable<string> SearchVideoInFolder(string folder, List<string> extensions)
-        {   
-            var fileList = new DirectoryInfo(folder).GetFiles("*", SearchOption.AllDirectories);
-            var fileList2 = fileList.Where(a => 
-                extensions.Contains(a.Extension.ToLowerInvariant().Replace(".", "")));
+        {
+            List<string> files = new List<string>();
 
-            List<string> files = new List<string>(); 
-            foreach (var fileInfo in fileList2)
+            try
             {
-                files.Add(fileInfo.FullName);
+                var fileList = new DirectoryInfo(folder).GetFiles("*", SearchOption.AllDirectories);
+                var matchingFiles = fileList.Where(a =>
+                    extensions.Contains(a.Extension.ToLowerInvariant().Replace(".", "")));
+
+                files.AddRange(matchingFiles.Select(f => f.FullName));
+            }
+            catch (UnauthorizedAccessException)
+            {
+                // Skip directories we don't have access to
+            }
+            catch (DirectoryNotFoundException)
+            {
+                // Skip directories that no longer exist
             }
 
             return files;
