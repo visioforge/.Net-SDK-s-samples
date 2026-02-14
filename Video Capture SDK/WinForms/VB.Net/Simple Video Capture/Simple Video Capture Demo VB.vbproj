@@ -33,9 +33,9 @@
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.2.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.2.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2026.2.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2026.2.12" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.2.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.2.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2026.2.16" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2026.2.16" />
   </ItemGroup>
 </Project>

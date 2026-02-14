@@ -9,6 +9,16 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.2.16
+
+* [Media Blocks SDK .Net] Added PreEventRecordingBlock for circular buffer (pre-event) video recording with configurable buffer duration, keyframe-aware drain, and automatic post-event stop
+* [Video Capture SDK .Net] VideoCaptureCoreX: Added pre-event recording API with TriggerPreEventRecording, ExtendPreEventRecording, StopPreEventRecording, and state query methods
+* [Video Capture SDK .Net] VideoCaptureCoreX: Added PreEventRecordingOutput for configuring circular buffer recording with MP4, MPEG-TS, and MKV container support
+
+## 2026.2.12
+
+* [Media Blocks SDK .Net] Added OnNetworkSourceDisconnect event for detecting network source disconnections (RTSP, HTTP, SRT, NDI, RTMP, etc.) with detailed error information and source URI
+
 ## 2026.2.11
 
 * [Media Player SDK .Net], [Media Blocks SDK .Net] Fixed audio effects pipeline routing

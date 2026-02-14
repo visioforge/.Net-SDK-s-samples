@@ -1,0 +1,121 @@
+<Window x:Class="PreEventRecordingDemoMBWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d" d:DesignWidth="960" d:DesignHeight="650"
+        Title="Pre-Event Recording Demo - Media Blocks SDK .Net (WPF)" Height="650" Width="960"
+        Icon="visioforge_main_icon.ico">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="420"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left panel: controls -->
+        <ScrollViewer Grid.Column="0" Margin="8">
+            <StackPanel Margin="0,0,0,10">
+                <!-- Source type selection -->
+                <TextBlock FontWeight="Bold" Text="Source Type" Margin="0,0,0,3" />
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                    <RadioButton x:Name="rbCamera" Content="Camera" IsChecked="True" Margin="0,0,16,0"
+                                 Checked="RbSourceType_Changed" />
+                    <RadioButton x:Name="rbRTSP" Content="RTSP" Checked="RbSourceType_Changed" />
+                </StackPanel>
+
+                <!-- Camera source -->
+                <StackPanel x:Name="pnlCamera">
+                    <TextBlock FontWeight="Bold" Text="Video Device" Margin="0,0,0,3" />
+                    <ComboBox x:Name="cbVideoDevice" Margin="0,0,0,6" />
+                    <ComboBox x:Name="cbVideoFormat" Margin="0,0,0,6" />
+                </StackPanel>
+
+                <!-- RTSP source -->
+                <StackPanel x:Name="pnlRTSP" Visibility="Collapsed">
+                    <TextBlock FontWeight="Bold" Text="RTSP URL" Margin="0,0,0,3" />
+                    <TextBox x:Name="edRtspUrl" Text="rtsp://localhost:554/stream" Margin="0,0,0,6" />
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <TextBlock Text="Login:" VerticalAlignment="Center" Margin="0,0,8,0" Width="55" />
+                        <TextBox x:Name="edRtspLogin" Width="150" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <TextBlock Text="Password:" VerticalAlignment="Center" Margin="0,0,8,0" Width="55" />
+                        <PasswordBox x:Name="edRtspPassword" Width="150" />
+                    </StackPanel>
+                </StackPanel>
+
+                <CheckBox x:Name="cbRecordAudio" Content="Record audio" IsChecked="True" Margin="0,4,0,3" />
+                <StackPanel x:Name="pnlAudioDevice">
+                    <ComboBox x:Name="cbAudioDevice" Margin="0,0,0,6" />
+                </StackPanel>
+
+                <Separator Margin="0,6" />
+
+                <!-- Pre-event settings -->
+                <TextBlock FontWeight="Bold" Text="Pre-Event Settings" Margin="0,0,0,3" />
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                    <TextBlock Text="Pre-event (s):" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <Slider x:Name="slPreEvent" Minimum="5" Maximum="60" Value="10" Width="150" Margin="0,0,8,0" />
+                    <TextBlock x:Name="lbPreEvent" Text="10" VerticalAlignment="Center" Width="30" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                    <TextBlock Text="Post-event (s):" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <Slider x:Name="slPostEvent" Minimum="5" Maximum="30" Value="10" Width="150" Margin="0,0,8,0" />
+                    <TextBlock x:Name="lbPostEvent" Text="10" VerticalAlignment="Center" Width="30" />
+                </StackPanel>
+
+                <Separator Margin="0,6" />
+
+                <!-- Output folder -->
+                <TextBlock FontWeight="Bold" Text="Output Folder" Margin="0,0,0,3" />
+                <TextBox x:Name="edOutputFolder" Margin="0,0,0,6" />
+
+                <!-- Pipeline control -->
+                <StackPanel Orientation="Horizontal" Margin="0,8,0,6">
+                    <Button x:Name="btStart" Content="Start Pipeline" FontWeight="Bold" Margin="0,0,8,0" Padding="8,4" />
+                    <Button x:Name="btStop" Content="Stop Pipeline" FontWeight="Bold" Padding="8,4" />
+                </StackPanel>
+
+                <Separator Margin="0,6" />
+
+                <!-- Motion detection trigger -->
+                <TextBlock FontWeight="Bold" Text="Motion Detection" Margin="0,0,0,3" />
+                <CheckBox x:Name="cbMotionTrigger" Content="Trigger recording by motion" Margin="0,0,0,3" />
+                <TextBlock x:Name="lbMotion" Text="Motion: —" Margin="0,0,0,6" />
+
+                <Separator Margin="0,6" />
+
+                <!-- Recording control -->
+                <TextBlock FontWeight="Bold" Text="Recording Control" Margin="0,0,0,3" />
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                    <Button x:Name="btTrigger" Content="Trigger Recording" Margin="0,0,8,0" Padding="8,4" />
+                    <Button x:Name="btStopRec" Content="Stop Recording" Margin="0,0,8,0" Padding="8,4" />
+                    <Button x:Name="btExtend" Content="Extend" Padding="8,4" />
+                </StackPanel>
+
+                <Separator Margin="0,6" />
+
+                <!-- Status -->
+                <TextBlock FontWeight="Bold" Text="Status" Margin="0,0,0,3" />
+                <TextBlock x:Name="lbState" Text="State: Idle" Margin="0,0,0,3" />
+                <TextBlock x:Name="lbBufferStats" Text="Buffer: 0 frames, 0 bytes, 0.0s" Margin="0,0,0,3" />
+                <TextBlock x:Name="lbRecFile" Text="File: —" TextWrapping="Wrap" Margin="0,0,0,6" />
+
+                <Separator Margin="0,6" />
+
+                <!-- Log -->
+                <TextBlock FontWeight="Bold" Text="Log" Margin="0,0,0,3" />
+                <TextBox x:Name="edLog" Height="120" AcceptsReturn="True" IsReadOnly="True"
+                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Right panel: video preview -->
+        <Border Grid.Column="1" Margin="4,8,8,8" Background="#0C0C0C">
+            <WPF:VideoView x:Name="VideoView1" HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" Background="#0C0C0C" />
+        </Border>
+    </Grid>
+</Window>

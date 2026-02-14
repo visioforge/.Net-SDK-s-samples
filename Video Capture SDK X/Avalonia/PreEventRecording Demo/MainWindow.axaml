@@ -1,0 +1,115 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avalonia="clr-namespace:VisioForge.Core.UI.Avalonia;assembly=VisioForge.Core.UI.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="960" d:DesignHeight="650"
+        x:Class="PreEventRecordingDemoVCXA.MainWindow"
+        Title="Pre-Event Recording Demo - VideoCaptureCoreX .Net" Height="650" Width="960">
+
+    <Grid ColumnDefinitions="420,*">
+        <!-- Left panel: controls -->
+        <ScrollViewer Grid.Column="0" Margin="8">
+            <StackPanel Spacing="6">
+                <!-- Source type selection -->
+                <TextBlock FontWeight="Bold" Text="Source Type" />
+                <StackPanel Orientation="Horizontal" Spacing="16">
+                    <RadioButton x:Name="rbCamera" Content="Camera" IsChecked="True"
+                                 IsCheckedChanged="RbSourceType_Changed" />
+                    <RadioButton x:Name="rbRTSP" Content="RTSP"
+                                 IsCheckedChanged="RbSourceType_Changed" />
+                </StackPanel>
+
+                <!-- Camera source -->
+                <StackPanel x:Name="pnlCamera" Spacing="6">
+                    <TextBlock FontWeight="Bold" Text="Video Device" />
+                    <ComboBox x:Name="cbVideoDevice" HorizontalAlignment="Stretch" />
+                    <ComboBox x:Name="cbVideoFormat" HorizontalAlignment="Stretch" />
+                </StackPanel>
+
+                <!-- RTSP source -->
+                <StackPanel x:Name="pnlRTSP" IsVisible="False" Spacing="6">
+                    <TextBlock FontWeight="Bold" Text="RTSP URL" />
+                    <TextBox x:Name="edRtspUrl" Text="rtsp://localhost:554/stream" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBlock Text="Login:" VerticalAlignment="Center" Width="55" />
+                        <TextBox x:Name="edRtspLogin" Width="150" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBlock Text="Password:" VerticalAlignment="Center" Width="55" />
+                        <TextBox x:Name="edRtspPassword" PasswordChar="*" Width="150" />
+                    </StackPanel>
+                </StackPanel>
+
+                <CheckBox x:Name="cbRecordAudio" Content="Record audio" IsChecked="True" Margin="0,4,0,0" />
+                <StackPanel x:Name="pnlAudioDevice">
+                    <ComboBox x:Name="cbAudioDevice" HorizontalAlignment="Stretch" />
+                </StackPanel>
+
+                <Separator Margin="0,6" />
+
+                <!-- Motion detection trigger -->
+                <TextBlock FontWeight="Bold" Text="Motion Detection" />
+                <CheckBox x:Name="cbMotionTrigger" Content="Trigger recording by motion" />
+                <TextBlock x:Name="lbMotion" Text="Motion: —" />
+
+                <Separator Margin="0,6" />
+
+                <!-- Pre-event settings -->
+                <TextBlock FontWeight="Bold" Text="Pre-Event Settings" />
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="Pre-event (s):" VerticalAlignment="Center" />
+                    <Slider x:Name="slPreEvent" Minimum="5" Maximum="60" Value="10" Width="150" />
+                    <TextBlock x:Name="lbPreEvent" Text="10" VerticalAlignment="Center" Width="30" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="Post-event (s):" VerticalAlignment="Center" />
+                    <Slider x:Name="slPostEvent" Minimum="5" Maximum="30" Value="5" Width="150" />
+                    <TextBlock x:Name="lbPostEvent" Text="5" VerticalAlignment="Center" Width="30" />
+                </StackPanel>
+
+                <Separator Margin="0,6" />
+
+                <!-- Output folder -->
+                <TextBlock FontWeight="Bold" Text="Output Folder" />
+                <TextBox x:Name="edOutputFolder" Watermark="Output folder path" />
+
+                <!-- Pipeline control -->
+                <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+                    <Button x:Name="btStart" Content="Start" FontWeight="Bold" />
+                    <Button x:Name="btStop" Content="Stop" FontWeight="Bold" />
+                </StackPanel>
+
+                <Separator Margin="0,6" />
+
+                <!-- Recording control -->
+                <TextBlock FontWeight="Bold" Text="Recording Control" />
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button x:Name="btTrigger" Content="Trigger Recording" />
+                    <Button x:Name="btStopRec" Content="Stop Recording" />
+                    <Button x:Name="btExtend" Content="Extend" />
+                </StackPanel>
+
+                <Separator Margin="0,6" />
+
+                <!-- Status -->
+                <TextBlock FontWeight="Bold" Text="Status" />
+                <TextBlock x:Name="lbState" Text="State: Idle" />
+                <TextBlock x:Name="lbRecFile" Text="File: —" TextWrapping="Wrap" />
+
+                <Separator Margin="0,6" />
+
+                <!-- Debug -->
+                <TextBlock FontWeight="Bold" Text="Log" />
+                <TextBox x:Name="edLog" Height="200" AcceptsReturn="True" IsReadOnly="True"
+                         TextWrapping="Wrap" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Right panel: video preview -->
+        <Panel Grid.Column="1" Margin="4,8,8,8" Background="#0C0C0C">
+            <avalonia:VideoView x:Name="VideoView1" HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" Background="#0C0C0C" />
+        </Panel>
+    </Grid>
+</Window>
