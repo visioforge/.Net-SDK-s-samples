@@ -345,10 +345,10 @@ namespace PreEventRecordingDemoVCX
 
             bool isMotion = e.LevelPercent >= 5;
 
-            Dispatcher.BeginInvoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 lbMotion.Text = isMotion ? $"Motion: detected ({e.LevelPercent}%)" : $"Motion: idle ({e.LevelPercent}%)";
-            });
+            }));
 
             if (!isMotion || cbMotionTrigger.Dispatcher.Invoke(() => cbMotionTrigger.IsChecked != true))
             {

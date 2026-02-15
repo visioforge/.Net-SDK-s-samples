@@ -414,10 +414,10 @@ namespace PreEventRecordingDemoMBWPF
 
             bool isMotion = e.Level >= _motionSettings.MotionThreshold;
 
-            Dispatcher.BeginInvoke(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
                 lbMotion.Text = isMotion ? $"Motion: detected ({e.Level})" : $"Motion: idle ({e.Level})";
-            });
+            }));
 
             if (!isMotion || cbMotionTrigger.Dispatcher.Invoke(() => cbMotionTrigger.IsChecked != true))
             {
