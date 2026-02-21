@@ -165,6 +165,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP RAW Camera H264 Callba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreEventRecording Demo MB net6", "WPF\CSharp\PreEventRecording Demo\PreEventRecording Demo MB net6.csproj", "{0F99B676-507B-428A-823A-CD4BDAC2F7A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transparent Video Mixer Demo net6", "WPF\CSharp\Transparent Video Mixer Demo\Transparent Video Mixer Demo net6.csproj", "{48503E05-449C-4038-A7FC-2C8AC5405839}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1111,6 +1113,18 @@ Global
 		{0F99B676-507B-428A-823A-CD4BDAC2F7A7}.Release|x64.Build.0 = Release|Any CPU
 		{0F99B676-507B-428A-823A-CD4BDAC2F7A7}.Release|x86.ActiveCfg = Release|Any CPU
 		{0F99B676-507B-428A-823A-CD4BDAC2F7A7}.Release|x86.Build.0 = Release|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Debug|x64.Build.0 = Debug|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Debug|x86.Build.0 = Debug|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Release|x64.ActiveCfg = Release|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Release|x64.Build.0 = Release|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Release|x86.ActiveCfg = Release|Any CPU
+		{48503E05-449C-4038-A7FC-2C8AC5405839}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1194,6 +1208,7 @@ Global
 		{EC601153-BB94-44C3-854C-6413BF3AE8A6} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{F3D2DF44-CB35-4977-AE0A-83D1E1F04F6E} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{0F99B676-507B-428A-823A-CD4BDAC2F7A7} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{48503E05-449C-4038-A7FC-2C8AC5405839} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

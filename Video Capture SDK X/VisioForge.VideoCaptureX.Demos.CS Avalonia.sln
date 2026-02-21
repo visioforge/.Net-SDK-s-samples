@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.3.11505.172 d18.3
+VisualStudioVersion = 18.3.11505.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleVideoCaptureA", "Avalonia\Simple Video Capture\SimpleVideoCaptureA.csproj", "{6DC6D7AA-1B6D-4C82-B91D-AB21BEC46949}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreEventRecordingDemoVCXA", "Avalonia\PreEventRecording Demo\PreEventRecordingDemoVCXA.csproj", "{40823E0D-3151-4CD2-9650-5F14E514E230}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreEventRecordingDemoVCXA", "Avalonia\PreEventRecording\PreEventRecordingDemoVCXA.csproj", "{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,18 +29,18 @@ Global
 		{6DC6D7AA-1B6D-4C82-B91D-AB21BEC46949}.Release|x64.Build.0 = Release|Any CPU
 		{6DC6D7AA-1B6D-4C82-B91D-AB21BEC46949}.Release|x86.ActiveCfg = Release|Any CPU
 		{6DC6D7AA-1B6D-4C82-B91D-AB21BEC46949}.Release|x86.Build.0 = Release|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Debug|x64.Build.0 = Debug|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Debug|x86.Build.0 = Debug|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Release|x64.ActiveCfg = Release|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Release|x64.Build.0 = Release|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Release|x86.ActiveCfg = Release|Any CPU
-		{40823E0D-3151-4CD2-9650-5F14E514E230}.Release|x86.Build.0 = Release|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Debug|x64.Build.0 = Debug|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Debug|x86.Build.0 = Debug|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Release|x64.ActiveCfg = Release|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Release|x64.Build.0 = Release|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Release|x86.ActiveCfg = Release|Any CPU
+		{6FBF7754-2D12-BDE0-D243-EEDEFAC1F5C9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

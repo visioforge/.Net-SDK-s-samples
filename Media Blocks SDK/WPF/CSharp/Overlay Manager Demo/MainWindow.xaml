@@ -251,6 +251,44 @@
                                             Click="btAddTimeOverlay_Click"/>
                                 </StackPanel>
 
+                                <!-- WPF Controls -->
+                                <Label Content="WPF Controls:" FontWeight="SemiBold" Margin="0,10,0,5"/>
+                                <StackPanel Margin="0,0,0,5">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                        <Button x:Name="btAddWPFClock"
+                                                Content="Analog Clock"
+                                                Width="85"
+                                                Height="25"
+                                                Margin="0,0,5,0"
+                                                ToolTip="Animated analog clock with rotating hands"
+                                                Click="btAddWPFClock_Click"/>
+
+                                        <Button x:Name="btAddWPFPulseBadge"
+                                                Content="Pulse Badge"
+                                                Width="85"
+                                                Height="25"
+                                                Margin="0,0,5,0"
+                                                ToolTip="Pulsing badge with scale and glow animation"
+                                                Click="btAddWPFPulseBadge_Click"/>
+
+                                        <Button x:Name="btAddWPFProgress"
+                                                Content="Progress Bar"
+                                                Width="85"
+                                                Height="25"
+                                                ToolTip="Animated progress bar with shimmer effect"
+                                                Click="btAddWPFProgress_Click"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="btAddWPFColorText"
+                                                Content="Color Text"
+                                                Width="85"
+                                                Height="25"
+                                                Margin="0,0,5,0"
+                                                ToolTip="Text with cycling color animation"
+                                                Click="btAddWPFColorText_Click"/>
+                                    </StackPanel>
+                                </StackPanel>
+
                                 <!-- Overlay Groups -->
                                 <Label Content="Overlay Groups:" FontWeight="SemiBold" Margin="0,10,0,5"/>
                                 <StackPanel Margin="0,0,0,5">

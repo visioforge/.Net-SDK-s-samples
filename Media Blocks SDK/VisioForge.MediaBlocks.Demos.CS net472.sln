@@ -163,6 +163,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP RAW Camera H264 Callba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreEventRecording Demo MB net472", "WPF\CSharp\PreEventRecording Demo\PreEventRecording Demo MB net472.csproj", "{3B7BA29D-464F-4971-A1B1-2B38F8AE509D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transparent Video Mixer Demo net472", "WPF\CSharp\Transparent Video Mixer Demo\Transparent Video Mixer Demo net472.csproj", "{80ADF74B-99BD-4026-9E0D-99296449B4D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1097,6 +1099,18 @@ Global
 		{3B7BA29D-464F-4971-A1B1-2B38F8AE509D}.Release|x64.Build.0 = Release|Any CPU
 		{3B7BA29D-464F-4971-A1B1-2B38F8AE509D}.Release|x86.ActiveCfg = Release|Any CPU
 		{3B7BA29D-464F-4971-A1B1-2B38F8AE509D}.Release|x86.Build.0 = Release|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Debug|x64.Build.0 = Debug|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Debug|x86.Build.0 = Debug|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Release|x64.ActiveCfg = Release|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Release|x64.Build.0 = Release|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Release|x86.ActiveCfg = Release|Any CPU
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1179,6 +1193,7 @@ Global
 		{D04EA89C-8336-467B-AF11-3F38AE83F9F9} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 		{4A571854-2D40-4F2D-89D1-80F233B361ED} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 		{3B7BA29D-464F-4971-A1B1-2B38F8AE509D} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
+		{80ADF74B-99BD-4026-9E0D-99296449B4D9} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

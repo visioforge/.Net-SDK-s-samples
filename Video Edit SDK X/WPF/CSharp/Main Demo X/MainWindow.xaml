@@ -17,8 +17,8 @@
         <!-- Top: Input files and insert settings -->
         <Grid Grid.Row="0" Margin="0,0,0,5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="402"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!-- File time settings -->
@@ -283,7 +283,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Orientation="Horizontal" Height="20">
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Height="25">
                 <TextBlock Text="Mode" VerticalAlignment="Center" Margin="0,0,5,0"/>
                 <ComboBox x:Name="cbMode" Width="100" Margin="0,0,15,0">
                     <ComboBoxItem Content="Convert"/>
@@ -300,7 +300,8 @@
             <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
                 <ProgressBar x:Name="ProgressBar1" Width="200" Height="25" Margin="0,0,10,0"/>
                 <Button x:Name="btStart" Content="Start" Width="75" FontWeight="Bold" Margin="0,0,5,0" Click="btStart_Click"/>
-                <Button x:Name="btStop" Content="Stop" Width="75" FontWeight="Bold" Click="btStop_Click"/>
+                <Button x:Name="btStop" Content="Stop" Width="75" FontWeight="Bold" Margin="0,0,5,0" Click="btStop_Click"/>
+                <Button x:Name="btSaveDiagram" Content="Save diagram" Width="90" Click="btSaveDiagram_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
@@ -692,6 +692,32 @@ namespace Simple_Video_Capture
                     case ".png":
                         await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Png);
                         break;
+                }
+            }
+        }
+
+        private void btSaveDiagram_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.SaveFileDialog
+            {
+                FileName = "pipeline_diagram.png",
+                Filter = "PNG Image|*.png"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                using (var image = VideoCapture1.GetDiagramAsImage())
+                {
+                    if (image != null)
+                    {
+                        using (var data = image.Encode(SkiaSharp.SKEncodedImageFormat.Png, 100))
+                        {
+                            using (var stream = File.Create(dlg.FileName))
+                            {
+                                data.SaveTo(stream);
+                            }
+                        }
+                    }
                 }
             }
         }

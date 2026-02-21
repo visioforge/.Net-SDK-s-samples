@@ -32,6 +32,7 @@ using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEncoders;
 using System.Diagnostics;
+using System.IO;
 
 namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 {
@@ -387,6 +388,32 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+        }
+
+        private void btSaveDiagram_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new SaveFileDialog
+            {
+                FileName = "pipeline_diagram.png",
+                Filter = "PNG Image|*.png"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                using (var image = _pipeline.GetDiagramAsImage())
+                {
+                    if (image != null)
+                    {
+                        using (var data = image.Encode(SkiaSharp.SKEncodedImageFormat.Png, 100))
+                        {
+                            using (var stream = File.Create(dlg.FileName))
+                            {
+                                data.SaveTo(stream);
+                            }
+                        }
+                    }
+                }
             }
         }
 

@@ -19,7 +19,6 @@ using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
-using VisioForge.Libs.GStreamer;
 using Avalonia.Platform.Storage;
 
 namespace KaraokeDemoAMB;

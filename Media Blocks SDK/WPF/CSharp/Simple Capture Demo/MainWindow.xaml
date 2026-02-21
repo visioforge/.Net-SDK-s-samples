@@ -64,9 +64,10 @@
 
             <TabItem Header="Log">
                 <Grid>
-                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
-                        <CheckBox x:Name="cbDebugMode" Width="110">Debug mode</CheckBox>
-                        <CheckBox x:Name="cbTelemetry">Telemetry</CheckBox>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" VerticalAlignment="Top" Height="20">
+                        <CheckBox x:Name="cbDebugMode" Width="110" VerticalAlignment="Center">Debug mode</CheckBox>
+                        <CheckBox x:Name="cbTelemetry" VerticalAlignment="Center">Telemetry</CheckBox>
+                        <Button x:Name="btSaveDiagram" Content="Save diagram" Click="btSaveDiagram_Click" VerticalAlignment="Center" Margin="30,0,0,0"/>
                     </StackPanel>
 
                     <TextBox x:Name="mmLog" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="10,40,0,10" TextWrapping="Wrap" Width="360"/>

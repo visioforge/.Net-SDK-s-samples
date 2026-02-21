@@ -74,7 +74,7 @@ namespace Simple_Player_MVVM.Android
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                System.Diagnostics.Debug.WriteLine(ex);
             }
         }
 

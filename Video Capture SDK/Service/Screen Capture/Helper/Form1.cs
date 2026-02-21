@@ -5,7 +5,6 @@ namespace ScreenCaptureServiceHelper
 {
     using System.Diagnostics;
     using System.Runtime.InteropServices;
-    using System.Security.Permissions;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.Output;
@@ -181,8 +180,6 @@ namespace ScreenCaptureServiceHelper
         /// Processes Windows messages.
         /// </summary>
         /// <param name="m">The Windows Message to process.</param>
-        [EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == VF_SCS_EXIT_COMMAND)

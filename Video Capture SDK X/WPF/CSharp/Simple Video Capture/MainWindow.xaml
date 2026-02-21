@@ -114,8 +114,12 @@
             </TabItem>
             <TabItem Header="Log">
                 <Grid>
-                    <CheckBox x:Name="cbDebugMode" Height="17" Width="94" TabIndex="75" Margin="0,10,298,0" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Debug mode"/>
-                    <TextBox x:Name="mmLog" TabIndex="74" Margin="10,32,10,10" TextWrapping="Wrap"/>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,0,0" VerticalAlignment="Top" Height="20">
+                        <CheckBox x:Name="cbDebugMode" VerticalAlignment="Center">Debug mode</CheckBox>
+                        <Button x:Name="btSaveDiagram" Content="Save diagram" Click="btSaveDiagram_Click" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                    </StackPanel>
+                    
+                    <TextBox x:Name="mmLog" TabIndex="74" Margin="10,43,10,10" TextWrapping="Wrap"/>
                 </Grid>
             </TabItem>
         </TabControl>

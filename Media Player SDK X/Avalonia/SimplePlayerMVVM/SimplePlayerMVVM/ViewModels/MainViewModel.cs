@@ -302,11 +302,19 @@ namespace Simple_Player_MVVM.ViewModels
                 await _player.DisposeAsync();
             }
 
+#if __IOS__ && !__MACCATALYST__
+            if (_Filename == null)
+            {
+                Console.WriteLine("No file selected.");
+                return;
+            }
+#else
             if (string.IsNullOrWhiteSpace(_Filename))
             {
                 Console.WriteLine("No file selected.");
                 return;
             }
+#endif
 
             _player = new MediaPlayerCoreX(VideoViewIntf);
 

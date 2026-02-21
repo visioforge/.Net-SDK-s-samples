@@ -505,6 +505,32 @@ namespace VideoEdit_CS_Demo_X
             VideoEdit1.Video_Effects.Clear();
         }
 
+        private void btSaveDiagram_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.SaveFileDialog
+            {
+                FileName = "pipeline_diagram.png",
+                Filter = "PNG Image|*.png"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                using (var image = VideoEdit1.GetDiagramAsImage())
+                {
+                    if (image != null)
+                    {
+                        using (var data = image.Encode(SkiaSharp.SKEncodedImageFormat.Png, 100))
+                        {
+                            using (var stream = File.Create(dlg.FileName))
+                            {
+                                data.SaveTo(stream);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Handles the Closing event of the Window.
         /// </summary>

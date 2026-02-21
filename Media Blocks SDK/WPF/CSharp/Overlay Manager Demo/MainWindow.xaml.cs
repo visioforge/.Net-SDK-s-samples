@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -61,6 +64,8 @@ namespace Overlay_Manager_Demo
         private OverlayManagerZoom _currentZoom = null;
         private List<OverlayManagerPan> _panOverlays = new List<OverlayManagerPan>();
         private List<OverlayManagerFade> _fadeOverlays = new List<OverlayManagerFade>();
+
+        private List<OverlayManagerWPFControl> _wpfOverlays = new List<OverlayManagerWPFControl>();
 
         public MainWindow()
         {
@@ -306,6 +311,13 @@ namespace Overlay_Manager_Demo
 
             // Clear image sequence overlays
             _imageSequenceOverlays.Clear();
+
+            // Dispose WPF overlays
+            foreach (var wpfOverlay in _wpfOverlays)
+            {
+                wpfOverlay?.Dispose();
+            }
+            _wpfOverlays.Clear();
 
             // Clear zoom/pan/fade overlays
             _currentZoom = null;
@@ -593,6 +605,23 @@ namespace Overlay_Manager_Demo
                     }
 
                     _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
+                }
+                else if (selectedItem != null && selectedItem.StartsWith("[WPF]"))
+                {
+                    _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
+
+                    var displaySuffix = selectedItem.Substring(6).Trim();
+                    var wpfOverlay = _wpfOverlays.Find(w =>
+                        (w.Name == "WPF_Clock" && displaySuffix == "Analog Clock") ||
+                        (w.Name == "WPF_PulseBadge" && displaySuffix == "Pulse Badge") ||
+                        (w.Name == "WPF_ProgressBar" && displaySuffix == "Progress Bar") ||
+                        (w.Name == "WPF_ColorText" && displaySuffix == "Color-Cycling Text"));
+
+                    if (wpfOverlay != null)
+                    {
+                        wpfOverlay.Dispose();
+                        _wpfOverlays.Remove(wpfOverlay);
+                    }
                 }
                 else
                 {
@@ -1571,6 +1600,455 @@ namespace Overlay_Manager_Demo
             catch (Exception ex)
             {
                 MessageBox.Show($"Error creating fade out effect: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        #endregion
+
+        #region WPF Control Overlays
+
+        private void btAddWPFClock_Click(object sender, RoutedEventArgs e)
+        {
+            var wpfOverlay = _overlayManager.Video_Overlay_AddWPFControl(() =>
+            {
+                var canvas = new System.Windows.Controls.Canvas
+                {
+                    Width = 200,
+                    Height = 200,
+                    Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(160, 0, 0, 0))
+                };
+
+                // Clock face
+                var face = new Ellipse
+                {
+                    Width = 180,
+                    Height = 180,
+                    Stroke = System.Windows.Media.Brushes.White,
+                    StrokeThickness = 3,
+                    Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(80, 255, 255, 255))
+                };
+                System.Windows.Controls.Canvas.SetLeft(face, 10);
+                System.Windows.Controls.Canvas.SetTop(face, 10);
+                canvas.Children.Add(face);
+
+                // Hour marks
+                for (int i = 0; i < 12; i++)
+                {
+                    var tick = new Line
+                    {
+                        X1 = 100, Y1 = 18,
+                        X2 = 100, Y2 = (i % 3 == 0) ? 30 : 25,
+                        Stroke = System.Windows.Media.Brushes.White,
+                        StrokeThickness = (i % 3 == 0) ? 2 : 1,
+                        RenderTransform = new RotateTransform(i * 30, 100, 100)
+                    };
+                    canvas.Children.Add(tick);
+                }
+
+                var now = DateTime.Now;
+
+                // Second hand
+                var secondHand = new Line
+                {
+                    X1 = 100, Y1 = 100,
+                    X2 = 100, Y2 = 25,
+                    Stroke = System.Windows.Media.Brushes.Red,
+                    StrokeThickness = 1
+                };
+                var secondRotate = new RotateTransform(now.Second * 6, 100, 100);
+                secondHand.RenderTransform = secondRotate;
+                canvas.Children.Add(secondHand);
+
+                // Minute hand
+                var minuteHand = new Line
+                {
+                    X1 = 100, Y1 = 100,
+                    X2 = 100, Y2 = 30,
+                    Stroke = System.Windows.Media.Brushes.White,
+                    StrokeThickness = 2
+                };
+                var minuteRotate = new RotateTransform(now.Minute * 6 + now.Second * 0.1, 100, 100);
+                minuteHand.RenderTransform = minuteRotate;
+                canvas.Children.Add(minuteHand);
+
+                // Hour hand
+                var hourHand = new Line
+                {
+                    X1 = 100, Y1 = 100,
+                    X2 = 100, Y2 = 45,
+                    Stroke = System.Windows.Media.Brushes.White,
+                    StrokeThickness = 3
+                };
+                var hourRotate = new RotateTransform((now.Hour % 12) * 30 + now.Minute * 0.5, 100, 100);
+                hourHand.RenderTransform = hourRotate;
+                canvas.Children.Add(hourHand);
+
+                // Center dot
+                var centerDot = new Ellipse
+                {
+                    Width = 8, Height = 8,
+                    Fill = System.Windows.Media.Brushes.Red
+                };
+                System.Windows.Controls.Canvas.SetLeft(centerDot, 96);
+                System.Windows.Controls.Canvas.SetTop(centerDot, 96);
+                canvas.Children.Add(centerDot);
+
+                // Animate second hand
+                var secondAnim = new DoubleAnimation
+                {
+                    From = now.Second * 6,
+                    To = now.Second * 6 + 360,
+                    Duration = TimeSpan.FromSeconds(60),
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                secondRotate.BeginAnimation(RotateTransform.AngleProperty, secondAnim);
+
+                // Animate minute hand
+                var minuteAnim = new DoubleAnimation
+                {
+                    From = now.Minute * 6 + now.Second * 0.1,
+                    To = now.Minute * 6 + now.Second * 0.1 + 360,
+                    Duration = TimeSpan.FromSeconds(3600),
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                minuteRotate.BeginAnimation(RotateTransform.AngleProperty, minuteAnim);
+
+                // Animate hour hand
+                var hourAnim = new DoubleAnimation
+                {
+                    From = (now.Hour % 12) * 30 + now.Minute * 0.5,
+                    To = (now.Hour % 12) * 30 + now.Minute * 0.5 + 360,
+                    Duration = TimeSpan.FromSeconds(43200),
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                hourRotate.BeginAnimation(RotateTransform.AngleProperty, hourAnim);
+
+                return canvas;
+            },
+            x: 20, y: 20, width: 200, height: 200,
+            refreshRate: 30, name: "WPF_Clock");
+
+            if (wpfOverlay != null)
+            {
+                _wpfOverlays.Add(wpfOverlay);
+                lbOverlays.Items.Add("[WPF] Analog Clock");
+            }
+            else
+            {
+                MessageBox.Show("Failed to initialize WPF clock overlay.",
+                    "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btAddWPFPulseBadge_Click(object sender, RoutedEventArgs e)
+        {
+            var wpfOverlay = _overlayManager.Video_Overlay_AddWPFControl(() =>
+            {
+                var grid = new System.Windows.Controls.Grid
+                {
+                    Width = 150,
+                    Height = 150
+                };
+
+                // Outer glow
+                var glow = new Ellipse
+                {
+                    Width = 140,
+                    Height = 140,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    Fill = new RadialGradientBrush(
+                        System.Windows.Media.Color.FromArgb(100, 0, 150, 255),
+                        System.Windows.Media.Color.FromArgb(0, 0, 150, 255))
+                };
+                var glowScale = new ScaleTransform(1, 1);
+                glow.RenderTransform = glowScale;
+                glow.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
+                grid.Children.Add(glow);
+
+                // Main badge
+                var badge = new Ellipse
+                {
+                    Width = 100,
+                    Height = 100,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    Fill = new SolidColorBrush(System.Windows.Media.Color.FromArgb(200, 0, 120, 255)),
+                    Stroke = System.Windows.Media.Brushes.White,
+                    StrokeThickness = 2
+                };
+                var badgeScale = new ScaleTransform(1, 1);
+                badge.RenderTransform = badgeScale;
+                badge.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
+                grid.Children.Add(badge);
+
+                // "LIVE" text
+                var text = new System.Windows.Controls.TextBlock
+                {
+                    Text = "LIVE",
+                    FontSize = 24,
+                    FontWeight = FontWeights.Bold,
+                    Foreground = System.Windows.Media.Brushes.White,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Center
+                };
+                grid.Children.Add(text);
+
+                // Pulse animation on badge
+                var ease = new SineEase { EasingMode = EasingMode.EaseInOut };
+                var scaleXAnim = new DoubleAnimation
+                {
+                    From = 0.9, To = 1.1,
+                    Duration = TimeSpan.FromSeconds(0.8),
+                    AutoReverse = true,
+                    RepeatBehavior = RepeatBehavior.Forever,
+                    EasingFunction = ease
+                };
+                var scaleYAnim = new DoubleAnimation
+                {
+                    From = 0.9, To = 1.1,
+                    Duration = TimeSpan.FromSeconds(0.8),
+                    AutoReverse = true,
+                    RepeatBehavior = RepeatBehavior.Forever,
+                    EasingFunction = ease
+                };
+                badgeScale.BeginAnimation(ScaleTransform.ScaleXProperty, scaleXAnim);
+                badgeScale.BeginAnimation(ScaleTransform.ScaleYProperty, scaleYAnim);
+
+                // Glow pulse (slower, larger)
+                var glowScaleAnim = new DoubleAnimation
+                {
+                    From = 1.0, To = 1.3,
+                    Duration = TimeSpan.FromSeconds(1.2),
+                    AutoReverse = true,
+                    RepeatBehavior = RepeatBehavior.Forever,
+                    EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
+                };
+                glowScale.BeginAnimation(ScaleTransform.ScaleXProperty, glowScaleAnim);
+                glowScale.BeginAnimation(ScaleTransform.ScaleYProperty, glowScaleAnim);
+
+                // Opacity pulse on glow
+                var opacityAnim = new DoubleAnimation
+                {
+                    From = 0.4, To = 1.0,
+                    Duration = TimeSpan.FromSeconds(1.2),
+                    AutoReverse = true,
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                glow.BeginAnimation(UIElement.OpacityProperty, opacityAnim);
+
+                return grid;
+            },
+            x: 240, y: 20, width: 150, height: 150,
+            refreshRate: 30, name: "WPF_PulseBadge");
+
+            if (wpfOverlay != null)
+            {
+                _wpfOverlays.Add(wpfOverlay);
+                lbOverlays.Items.Add("[WPF] Pulse Badge");
+            }
+            else
+            {
+                MessageBox.Show("Failed to initialize WPF pulse badge overlay.",
+                    "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btAddWPFProgress_Click(object sender, RoutedEventArgs e)
+        {
+            var wpfOverlay = _overlayManager.Video_Overlay_AddWPFControl(() =>
+            {
+                var grid = new System.Windows.Controls.Grid
+                {
+                    Width = 300,
+                    Height = 40,
+                    Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(180, 0, 0, 0))
+                };
+
+                // Label
+                var label = new System.Windows.Controls.TextBlock
+                {
+                    Text = "RENDERING",
+                    FontSize = 10,
+                    Foreground = System.Windows.Media.Brushes.White,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                    Margin = new Thickness(10, 3, 0, 0)
+                };
+                grid.Children.Add(label);
+
+                // Track background
+                var track = new System.Windows.Controls.Border
+                {
+                    Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(100, 255, 255, 255)),
+                    CornerRadius = new CornerRadius(4),
+                    Height = 16,
+                    Margin = new Thickness(10, 18, 10, 6),
+                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom
+                };
+                grid.Children.Add(track);
+
+                // Progress fill
+                var gradientBrush = new LinearGradientBrush
+                {
+                    StartPoint = new System.Windows.Point(0, 0),
+                    EndPoint = new System.Windows.Point(1, 0)
+                };
+                gradientBrush.GradientStops.Add(new GradientStop(System.Windows.Media.Color.FromRgb(0, 180, 255), 0.0));
+                gradientBrush.GradientStops.Add(new GradientStop(System.Windows.Media.Color.FromRgb(0, 255, 150), 0.5));
+                gradientBrush.GradientStops.Add(new GradientStop(System.Windows.Media.Color.FromRgb(0, 200, 255), 1.0));
+
+                var fillContainer = new System.Windows.Controls.Border
+                {
+                    CornerRadius = new CornerRadius(4),
+                    Height = 16,
+                    Margin = new Thickness(10, 18, 10, 6),
+                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    Width = 0,
+                    Background = gradientBrush,
+                    ClipToBounds = true
+                };
+                grid.Children.Add(fillContainer);
+
+                // Shimmer overlay
+                var shimmer = new System.Windows.Shapes.Rectangle
+                {
+                    Width = 60,
+                    Height = 16,
+                    Fill = new LinearGradientBrush(
+                        System.Windows.Media.Color.FromArgb(0, 255, 255, 255),
+                        System.Windows.Media.Color.FromArgb(80, 255, 255, 255),
+                        new System.Windows.Point(0, 0), new System.Windows.Point(1, 0)),
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                    Margin = new Thickness(10, 18, 10, 6),
+                    Opacity = 0.7
+                };
+                var shimmerTranslate = new TranslateTransform(-60, 0);
+                shimmer.RenderTransform = shimmerTranslate;
+                grid.Children.Add(shimmer);
+
+                // Percentage text
+                var percentText = new System.Windows.Controls.TextBlock
+                {
+                    Text = "0%",
+                    FontSize = 10,
+                    FontWeight = FontWeights.Bold,
+                    Foreground = System.Windows.Media.Brushes.White,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top,
+                    Margin = new Thickness(0, 3, 10, 0)
+                };
+                grid.Children.Add(percentText);
+
+                // Animate progress bar width
+                double maxWidth = 280;
+                var widthAnim = new DoubleAnimation
+                {
+                    From = 0,
+                    To = maxWidth,
+                    Duration = TimeSpan.FromSeconds(8),
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                fillContainer.BeginAnimation(FrameworkElement.WidthProperty, widthAnim);
+
+                // Shimmer animation
+                var shimmerAnim = new DoubleAnimation
+                {
+                    From = -60,
+                    To = 300,
+                    Duration = TimeSpan.FromSeconds(2),
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                shimmerTranslate.BeginAnimation(TranslateTransform.XProperty, shimmerAnim);
+
+                // Update percentage text
+                var startTime = DateTime.Now;
+                var timer = new System.Windows.Threading.DispatcherTimer
+                {
+                    Interval = TimeSpan.FromMilliseconds(200)
+                };
+                timer.Tick += (s, args) =>
+                {
+                    var elapsed = (DateTime.Now - startTime).TotalSeconds % 8.0;
+                    var percent = (int)(elapsed / 8.0 * 100);
+                    percentText.Text = $"{percent}%";
+                };
+                timer.Start();
+
+                return grid;
+            },
+            x: 20, y: 380, width: 300, height: 40,
+            refreshRate: 30, name: "WPF_ProgressBar");
+
+            if (wpfOverlay != null)
+            {
+                _wpfOverlays.Add(wpfOverlay);
+                lbOverlays.Items.Add("[WPF] Progress Bar");
+            }
+            else
+            {
+                MessageBox.Show("Failed to initialize WPF progress bar overlay.",
+                    "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void btAddWPFColorText_Click(object sender, RoutedEventArgs e)
+        {
+            var wpfOverlay = _overlayManager.Video_Overlay_AddWPFControl(() =>
+            {
+                var border = new System.Windows.Controls.Border
+                {
+                    Width = 350,
+                    Height = 60,
+                    Background = new SolidColorBrush(System.Windows.Media.Color.FromArgb(160, 0, 0, 0)),
+                    CornerRadius = new CornerRadius(8),
+                    Padding = new Thickness(15, 5, 15, 5)
+                };
+
+                var text = new System.Windows.Controls.TextBlock
+                {
+                    Text = "VisioForge Media Framework",
+                    FontSize = 28,
+                    FontWeight = FontWeights.Bold,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Center,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center
+                };
+
+                var brush = new SolidColorBrush(Colors.Red);
+                text.Foreground = brush;
+                border.Child = text;
+
+                // Color animation: Red -> Gold -> Lime -> Cyan -> Magenta -> Red
+                var colorAnim = new ColorAnimationUsingKeyFrames
+                {
+                    Duration = TimeSpan.FromSeconds(5),
+                    RepeatBehavior = RepeatBehavior.Forever
+                };
+                colorAnim.KeyFrames.Add(new LinearColorKeyFrame(Colors.Red, KeyTime.FromPercent(0.0)));
+                colorAnim.KeyFrames.Add(new LinearColorKeyFrame(Colors.Gold, KeyTime.FromPercent(0.2)));
+                colorAnim.KeyFrames.Add(new LinearColorKeyFrame(Colors.Lime, KeyTime.FromPercent(0.4)));
+                colorAnim.KeyFrames.Add(new LinearColorKeyFrame(Colors.Cyan, KeyTime.FromPercent(0.6)));
+                colorAnim.KeyFrames.Add(new LinearColorKeyFrame(Colors.Magenta, KeyTime.FromPercent(0.8)));
+                colorAnim.KeyFrames.Add(new LinearColorKeyFrame(Colors.Red, KeyTime.FromPercent(1.0)));
+
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, colorAnim);
+
+                return border;
+            },
+            x: 50, y: 300, width: 350, height: 60,
+            refreshRate: 30, name: "WPF_ColorText");
+
+            if (wpfOverlay != null)
+            {
+                _wpfOverlays.Add(wpfOverlay);
+                lbOverlays.Items.Add("[WPF] Color-Cycling Text");
+            }
+            else
+            {
+                MessageBox.Show("Failed to initialize WPF color text overlay.",
+                    "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

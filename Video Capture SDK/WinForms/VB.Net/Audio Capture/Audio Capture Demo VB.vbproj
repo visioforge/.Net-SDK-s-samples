@@ -33,7 +33,7 @@
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.2.18" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.2.18" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.2.21" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.2.21" />
   </ItemGroup>
 </Project>
