@@ -520,7 +520,7 @@ namespace Live_Video_Compositor_Demo
             var dlg = new StreamingKeyDialog("YouTube Live");
             if (dlg.ShowDialog() == true)
             {
-                var name = $"YouTube [{dlg.Key[..Math.Min(8, dlg.Key.Length)]}...]";
+                var name = $"YouTube [{dlg.Key.Substring(0, Math.Min(8, dlg.Key.Length))}...]";
                 var outputBlock = new YouTubeOutputBlock(
                     new YouTubeSinkSettings(dlg.Key),
                     new OpenH264EncoderSettings(),
@@ -544,7 +544,7 @@ namespace Live_Video_Compositor_Demo
             var dlg = new StreamingKeyDialog("Facebook Live");
             if (dlg.ShowDialog() == true)
             {
-                var name = $"Facebook [{dlg.Key[..Math.Min(8, dlg.Key.Length)]}...]";
+                var name = $"Facebook [{dlg.Key.Substring(0, Math.Min(8, dlg.Key.Length))}...]";
                 var outputBlock = new FacebookLiveOutputBlock(
                     new FacebookLiveSinkSettings(dlg.Key),
                     new OpenH264EncoderSettings(),
