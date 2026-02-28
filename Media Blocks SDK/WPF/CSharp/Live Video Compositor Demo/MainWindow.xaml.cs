@@ -515,6 +515,54 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        private async Task AddYouTubeOutputAsync()
+        {
+            var dlg = new StreamingKeyDialog("YouTube Live");
+            if (dlg.ShowDialog() == true)
+            {
+                var name = $"YouTube [{dlg.Key[..Math.Min(8, dlg.Key.Length)]}...]";
+                var outputBlock = new YouTubeOutputBlock(
+                    new YouTubeSinkSettings(dlg.Key),
+                    new OpenH264EncoderSettings(),
+                    new MFAACEncoderSettings());
+                var output = new LVCVideoAudioOutput(name, _compositor, outputBlock, autostart: true);
+
+                if (await _compositor.Output_AddAsync(output))
+                {
+                    lbOutputs.Items.Add(name);
+                    lbOutputs.SelectedIndex = lbOutputs.Items.Count - 1;
+                }
+                else
+                {
+                    output.Dispose();
+                }
+            }
+        }
+
+        private async Task AddFacebookLiveOutputAsync()
+        {
+            var dlg = new StreamingKeyDialog("Facebook Live");
+            if (dlg.ShowDialog() == true)
+            {
+                var name = $"Facebook [{dlg.Key[..Math.Min(8, dlg.Key.Length)]}...]";
+                var outputBlock = new FacebookLiveOutputBlock(
+                    new FacebookLiveSinkSettings(dlg.Key),
+                    new OpenH264EncoderSettings(),
+                    new MFAACEncoderSettings());
+                var output = new LVCVideoAudioOutput(name, _compositor, outputBlock, autostart: true);
+
+                if (await _compositor.Output_AddAsync(output))
+                {
+                    lbOutputs.Items.Add(name);
+                    lbOutputs.SelectedIndex = lbOutputs.Items.Count - 1;
+                }
+                else
+                {
+                    output.Dispose();
+                }
+            }
+        }
+
         /// <summary>
         /// Add audio source async.
         /// </summary>
@@ -1079,11 +1127,26 @@ namespace Live_Video_Compositor_Demo
                 await AddDecklinkVideoOutputAsync();
             };
 
+            var miYouTube = new MenuItem() { Header = "YouTube Live" };
+            miYouTube.Click += async (senderm, args) =>
+            {
+                await AddYouTubeOutputAsync();
+            };
+
+            var miFacebook = new MenuItem() { Header = "Facebook Live" };
+            miFacebook.Click += async (senderm, args) =>
+            {
+                await AddFacebookLiveOutputAsync();
+            };
+
             ctx.Items.Add(miMP4);
             ctx.Items.Add(miWebM);
             ctx.Items.Add(miMP3);
             ctx.Items.Add(new Separator());
             ctx.Items.Add(miDecklink);
+            ctx.Items.Add(new Separator());
+            ctx.Items.Add(miYouTube);
+            ctx.Items.Add(miFacebook);
             ctx.PlacementTarget = sender as Button;
             ctx.IsOpen = true;
         }
