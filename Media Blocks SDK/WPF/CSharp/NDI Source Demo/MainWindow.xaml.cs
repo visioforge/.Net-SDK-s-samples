@@ -142,7 +142,7 @@ namespace NDI_Source_Demo
                 }
 
                 _ndiSource = new NDISourceBlock(ndiSettings);
-                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+                _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
                 _pipeline.Connect(_ndiSource.VideoOutput, _videoRenderer.Input);
 

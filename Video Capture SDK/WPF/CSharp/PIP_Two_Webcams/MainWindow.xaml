@@ -1,0 +1,91 @@
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+    x:Class="PIP_Two_Webcams.MainWindow"
+    Title="Video Capture SDK .Net - PIP Two Webcams Demo"
+    Height="550" Width="900"
+    Loaded="Window_Loaded"
+    Icon="visioforge_main_icon.ico"
+    Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Left panel: Controls -->
+        <StackPanel Grid.Column="0" Margin="5">
+            <!-- Main Camera -->
+            <GroupBox Header="Main Camera" Padding="5" Margin="0,0,0,5">
+                <StackPanel>
+                    <TextBlock Text="Device:" Margin="0,0,0,2" />
+                    <ComboBox x:Name="cbMainDevice" SelectionChanged="cbMainDevice_SelectionChanged" />
+                    <TextBlock Text="Format:" Margin="0,5,0,2" />
+                    <ComboBox x:Name="cbMainFormat" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- PIP Camera -->
+            <GroupBox Header="PIP Camera" Padding="5" Margin="0,0,0,5">
+                <StackPanel>
+                    <TextBlock Text="Device:" Margin="0,0,0,2" />
+                    <ComboBox x:Name="cbPIPDevice" SelectionChanged="cbPIPDevice_SelectionChanged" />
+                    <TextBlock Text="Format:" Margin="0,5,0,2" />
+                    <ComboBox x:Name="cbPIPFormat" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- PIP Position -->
+            <GroupBox Header="PIP Position" Padding="5" Margin="0,0,0,5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Left:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,2" />
+                    <TextBox x:Name="edPIPLeft" Text="10" Grid.Row="0" Grid.Column="1" Margin="0,0,5,2" />
+                    <TextBlock Text="Top:" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,5,2" />
+                    <TextBox x:Name="edPIPTop" Text="10" Grid.Row="0" Grid.Column="3" Margin="0,0,0,2" />
+
+                    <TextBlock Text="Width:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,5,2" />
+                    <TextBox x:Name="edPIPWidth" Text="320" Grid.Row="1" Grid.Column="1" Margin="0,0,5,2" />
+                    <TextBlock Text="Height:" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,5,2" />
+                    <TextBox x:Name="edPIPHeight" Text="240" Grid.Row="1" Grid.Column="3" Margin="0,0,0,2" />
+
+                    <Button x:Name="btUpdatePIP" Content="Update position" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,5,0,0" Click="btUpdatePIP_Click" />
+                </Grid>
+            </GroupBox>
+
+            <!-- PIP Transparency -->
+            <GroupBox Header="PIP Transparency" Padding="5" Margin="0,0,0,5">
+                <StackPanel>
+                    <Slider x:Name="slTransparency" Minimum="0" Maximum="255" Value="255" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="slTransparency_ValueChanged" />
+                    <TextBlock x:Name="tbTransparencyValue" Text="255" HorizontalAlignment="Center" />
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Start / Stop -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                <Button x:Name="btStart" Content="Start" Width="75" Margin="0,0,5,0" Click="btStart_Click" />
+                <Button x:Name="btStop" Content="Stop" Width="75" IsEnabled="False" Click="btStop_Click" />
+            </StackPanel>
+
+            <!-- Log -->
+            <TextBox x:Name="mmLog" Height="80" IsReadOnly="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
+        </StackPanel>
+
+        <!-- Right panel: Video -->
+        <Grid Grid.Column="1" Margin="5" Background="Black">
+            <WPF:VideoView x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </Grid>
+    </Grid>
+</Window>

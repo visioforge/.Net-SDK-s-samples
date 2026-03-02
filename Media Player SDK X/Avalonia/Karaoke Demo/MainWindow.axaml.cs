@@ -92,7 +92,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void LoadCDGPlugin()
     {
-#if !WINDOWS && !OSX
+#if !WINDOWS && !__MACOS__ && !__MACCATALYST__
         try
         {
             // Check if cdgparse element is already available (from system GStreamer plugins)

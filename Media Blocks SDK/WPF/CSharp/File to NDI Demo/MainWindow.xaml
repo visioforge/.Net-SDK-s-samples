@@ -1,0 +1,62 @@
+<Window x:Class="File_to_NDI_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:File_to_NDI_Demo"
+        mc:Ignorable="d"
+        Title="File to NDI Demo - Media Blocks SDK .Net" Height="400" Width="550"
+        Icon="visioforge_main_icon.ico"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 0: File selection -->
+        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,5">
+            <TextBlock Text="File name" Margin="0,0,0,3"/>
+            <DockPanel>
+                <Button x:Name="btSelectFile" Content="..." DockPanel.Dock="Right" Width="30" Margin="5,0,0,0" Click="btSelectFile_Click"/>
+                <TextBox x:Name="edFilename" Text="C:\samples\!video.mp4"/>
+            </DockPanel>
+        </StackPanel>
+
+        <!-- Row 1: NDI settings -->
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,5,0,5">
+            <TextBlock Text="NDI stream name" Margin="0,0,0,3"/>
+            <TextBox x:Name="edNDIName" Text="VisioForge NDI File Player"/>
+            <DockPanel Margin="0,3,0,0">
+                <Button x:Name="btCopyNDIURL" Content="Copy" DockPanel.Dock="Right" Width="40" Margin="5,0,0,0" Click="btCopyNDIURL_Click"/>
+                <TextBox x:Name="edNDIURL" Text="" IsReadOnly="True" Foreground="Gray" FontSize="11" BorderThickness="0" Background="Transparent"/>
+            </DockPanel>
+        </StackPanel>
+
+        <!-- Row 2: Controls -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,5">
+            <Button x:Name="btStart" Content="Start" Width="60" Margin="0,0,5,0" Click="btStart_Click"/>
+            <Button x:Name="btPause" Content="Pause" Width="60" Margin="0,0,5,0" Click="btPause_Click"/>
+            <Button x:Name="btResume" Content="Resume" Width="60" Margin="0,0,5,0" Click="btResume_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="60" Margin="0,0,15,0" Click="btStop_Click"/>
+            <CheckBox x:Name="cbLoop" Content="Loop" VerticalAlignment="Center" Margin="0,0,15,0"/>
+            <CheckBox x:Name="cbDebugMode" Content="Debug mode" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Row 3: Timeline -->
+        <DockPanel Grid.Row="3" Margin="0,5,0,5">
+            <TextBlock x:Name="lbTime" Text="00:00:00 | 00:00:00" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10,0,0,0" Width="130" TextAlignment="Right"/>
+            <Slider x:Name="tbTimeline" Minimum="0" Maximum="100" ValueChanged="tbTimeline_ValueChanged"/>
+        </DockPanel>
+
+        <!-- Row 4: Label -->
+        <TextBlock Grid.Row="4" Text="Log" Margin="0,5,0,3"/>
+
+        <!-- Row 5: Error log -->
+        <TextBox Grid.Row="5" x:Name="edLog" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" AcceptsReturn="True"/>
+    </Grid>
+</Window>
