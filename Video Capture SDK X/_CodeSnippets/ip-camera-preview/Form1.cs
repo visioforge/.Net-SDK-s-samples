@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 
 using VisioForge.Core.Types.VideoCapture;
@@ -31,19 +31,26 @@ namespace ip_camera_preview
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            // Create VideoCaptureCoreX instance
-            videoCapture1 = new VideoCaptureCoreX(VideoView1);
+            try
+            {
+                // Create VideoCaptureCoreX instance
+                videoCapture1 = new VideoCaptureCoreX(VideoView1);
 
-            // Configure RTSP camera source
-            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, cbAudioStream.Checked);
-            videoCapture1.Video_Source = rtsp;
+                // Configure RTSP camera source
+                var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, cbAudioStream.Checked);
+                videoCapture1.Video_Source = rtsp;
 
-            // Set audio output device
-            var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))[0];
-            videoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+                // Set audio output device
+                var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))[0];
+                videoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
-            // Start IP preview
-            await videoCapture1.StartAsync();
+                // Start IP preview
+                await videoCapture1.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>

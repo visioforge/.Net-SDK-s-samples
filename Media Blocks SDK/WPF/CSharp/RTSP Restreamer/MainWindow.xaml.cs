@@ -150,6 +150,7 @@ namespace RTSP_Restreamer
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Debug.WriteLine(ex);
             }
         }

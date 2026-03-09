@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
@@ -13,13 +13,13 @@ namespace RTSPView
     /// Represents the program.
     /// </summary>
     internal class Program
-    {      
+    {
         /// <summary>
         /// Defines the entry point of the application.
         /// </summary>
         /// <param name="args">The arguments.</param>
         static void Main(string[] args)
-        {        
+        {
             if (args.Length != 3)
             {
                 Console.WriteLine("RTSPView sample.");
@@ -42,22 +42,30 @@ namespace RTSPView
             string username = args[1];
             string password = args[2];
 
-            var rtspSettings = RTSPSourceSettings.CreateAsync(new Uri(url), username, password, audioEnabled).Result;
-            audioEnabled = rtspSettings.GetInfo().AudioStreams.Count > 0;
-
-            _source = new RTSPSourceBlock(rtspSettings);
-
-            _videoRenderer = new VideoRendererBlock(_pipeline, null) { IsSync = false };
-
-            _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
-
-            if (audioEnabled)
+            try
             {
-                var audioRenderer = new AudioRendererBlock() { IsSync = false };
-                _pipeline.Connect(_source.AudioOutput, audioRenderer.Input);
-            }
+                var rtspSettings = RTSPSourceSettings.CreateAsync(new Uri(url), username, password, audioEnabled).Result;
+                audioEnabled = rtspSettings.GetInfo().AudioStreams.Count > 0;
 
-            _pipeline.Start();
+                _source = new RTSPSourceBlock(rtspSettings);
+
+                _videoRenderer = new VideoRendererBlock(_pipeline, null) { IsSync = false };
+
+                _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
+
+                if (audioEnabled)
+                {
+                    var audioRenderer = new AudioRendererBlock() { IsSync = false };
+                    _pipeline.Connect(_source.AudioOutput, audioRenderer.Input);
+                }
+
+                _pipeline.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return;
+            }
 
             Console.WriteLine("Press any key to stop!");
             Console.ReadLine();

@@ -182,6 +182,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             }
             catch (Exception ex)
             {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine(ex);
             }
         }

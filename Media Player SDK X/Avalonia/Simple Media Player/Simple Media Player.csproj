@@ -13,8 +13,8 @@
     <OutputType>WinExe</OutputType>
   </PropertyGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2025.11.0" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2025.11.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.3.8" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.3.8" />
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
     <TargetFramework>net10.0-macos</TargetFramework>
@@ -37,7 +37,7 @@
     <PackageReference Include="System.Reactive" Version="6.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.3.1" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2026.3.1" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.3.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2026.3.7" />
   </ItemGroup>
 </Project>

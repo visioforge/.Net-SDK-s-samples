@@ -53,6 +53,8 @@ namespace Overlay_Manager_Demo
 
         private List<OverlayManagerNDIVideo> _ndiOverlays = new List<OverlayManagerNDIVideo>();
 
+        private List<OverlayManagerWebView2Video> _webView2Overlays = new List<OverlayManagerWebView2Video>();
+
         private List<OverlayManagerGroup> _overlayGroups = new List<OverlayManagerGroup>();
 
         // Dictionary to track external VideoView windows for video overlays
@@ -229,6 +231,18 @@ namespace Overlay_Manager_Demo
                 overlayGroup.Play();
             }
 
+            // Start any WebView2 overlays that were added before the main pipeline started
+            foreach (var wv2Overlay in _webView2Overlays)
+            {
+                wv2Overlay.Play();
+            }
+
+            // Start any NDI overlays that were added before the main pipeline started
+            foreach (var ndiOverlay in _ndiOverlays)
+            {
+                ndiOverlay.Play();
+            }
+
             _timer.Start();
         }
 
@@ -257,9 +271,21 @@ namespace Overlay_Manager_Demo
                 overlayGroup.Pause();
             }
 
+            // Pause all WebView2 overlays when stopping main pipeline
+            foreach (var wv2Overlay in _webView2Overlays)
+            {
+                wv2Overlay.Pause();
+            }
+
+            // Pause all NDI overlays when stopping main pipeline
+            foreach (var ndiOverlay in _ndiOverlays)
+            {
+                ndiOverlay.Pause();
+            }
+
             if (_pipeline != null)
             {
-                await _pipeline.StopAsync();
+                await _pipeline.StopAsync(true);
             }
 
             tbTimeline.Value = 0;
@@ -301,6 +327,13 @@ namespace Overlay_Manager_Demo
                 ndiOverlay?.Dispose();
             }
             _ndiOverlays.Clear();
+
+            // Dispose WebView2 overlays
+            foreach (var wv2Overlay in _webView2Overlays)
+            {
+                wv2Overlay?.Dispose();
+            }
+            _webView2Overlays.Clear();
 
             // Dispose overlay groups
             foreach (var overlayGroup in _overlayGroups)
@@ -541,6 +574,18 @@ namespace Overlay_Manager_Demo
                     }
 
                     // Remove from overlay manager - this will also dispose the overlay
+                    _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
+                }
+                else if (selectedItem != null && selectedItem.StartsWith("[WebView2]"))
+                {
+                    // Find the WebView2 overlay
+                    var wv2Overlay = _webView2Overlays.Find(v => selectedItem.Contains(v.Name));
+                    if (wv2Overlay != null)
+                    {
+                        wv2Overlay.Stop();
+                        _webView2Overlays.Remove(wv2Overlay);
+                    }
+
                     _overlayManager.Video_Overlay_RemoveAt(lbOverlays.SelectedIndex);
                 }
                 else if (selectedItem != null && selectedItem.StartsWith("[GROUP]"))
@@ -1148,6 +1193,71 @@ namespace Overlay_Manager_Demo
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Error creating NDI overlay: {ex.Message}",
+                        "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the bt add WebView2 click event.
+        /// </summary>
+        private void btAddWebView2_Click(object sender, RoutedEventArgs e)
+        {
+            var optionsWindow = new WebView2OverlayOptionsWindow();
+            if (optionsWindow.ShowDialog() == true)
+            {
+                try
+                {
+                    var wv2Overlay = new OverlayManagerWebView2Video(
+                        location: optionsWindow.Url,
+                        x: optionsWindow.X,
+                        y: optionsWindow.Y,
+                        width: optionsWindow.VideoWidth,
+                        height: optionsWindow.VideoHeight)
+                    {
+                        Opacity = optionsWindow.OpacityLevel,
+                        StretchMode = optionsWindow.StretchMode,
+                        ZIndex = 5
+                    };
+
+                    if (optionsWindow.JavaScript != null)
+                    {
+                        wv2Overlay.JavaScript = optionsWindow.JavaScript;
+                    }
+
+                    if (optionsWindow.EnableShadow)
+                    {
+                        wv2Overlay.Shadow = new OverlayManagerShadowSettings
+                        {
+                            Enabled = true,
+                            Color = SKColors.Black,
+                            Opacity = 0.5,
+                            BlurRadius = 5,
+                            Depth = 5,
+                            Direction = 45
+                        };
+                    }
+
+                    bool mainPipelineRunning = _pipeline != null && _pipeline.State == PlaybackState.Play;
+
+                    bool initialized = wv2Overlay.Initialize(autoStart: mainPipelineRunning);
+
+                    if (initialized)
+                    {
+                        _webView2Overlays.Add(wv2Overlay);
+                        _overlayManager.Video_Overlay_Add(wv2Overlay);
+                        lbOverlays.Items.Add($"[WebView2] {wv2Overlay.Name}");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to initialize WebView2 overlay. Please check if the GStreamer WebView2 plugin is installed.",
+                            "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        wv2Overlay.Dispose();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error creating WebView2 overlay: {ex.Message}",
                         "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }

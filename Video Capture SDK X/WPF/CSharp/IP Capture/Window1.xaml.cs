@@ -1,4 +1,3 @@
-﻿
 
 
 
@@ -150,7 +149,7 @@ namespace IP_Capture
                 }
                 else
                 {
-                    cbAudioOutputDevice.Text = defaultAudioRenderer;                                              
+                    cbAudioOutputDevice.Text = defaultAudioRenderer;
                 }
             }
 
@@ -209,193 +208,200 @@ namespace IP_Capture
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            if (onvifDevice != null)
+            try
             {
-                onvifDevice.Dispose();
-                onvifDevice = null;
+                if (onvifDevice != null)
+                {
+                    onvifDevice.Dispose();
+                    onvifDevice = null;
 
-                btONVIFConnect.Content = "Connect";
-            }
+                    btONVIFConnect.Content = "Connect";
+                }
 
-            mmLog.Clear();
+                mmLog.Clear();
 
-            var audioEnabled = cbIPAudioCapture.IsChecked == true; 
-            VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
-            VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+                var audioEnabled = cbIPAudioCapture.IsChecked == true;
+                VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
+                VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            VideoCapture1.Audio_Record = audioEnabled;
-            VideoCapture1.Audio_Play = audioEnabled;
+                VideoCapture1.Audio_Record = audioEnabled;
+                VideoCapture1.Audio_Play = audioEnabled;
 
-            var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(device => device.DisplayName == cbAudioOutputDevice.Text);
-            VideoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice); 
+                var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound)).First(device => device.DisplayName == cbAudioOutputDevice.Text);
+                VideoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
-            var login = edIPLogin.Text;
-            var password = edIPPassword.Text;
+                var login = edIPLogin.Text;
+                var password = edIPPassword.Text;
 
-            switch (cbIPCameraType.SelectedIndex)
-            {
-                case 0:
-                    {
-                        // Auto
-                        bool audio = cbIPAudioCapture.IsChecked == true;
-                        var uri = new Uri(cbIPURL.Text);
-                        if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
-                        {
-                            uri = new UriBuilder(uri) { UserName = login, Password = password }.Uri;
-                        }
-
-                        var uni = await UniversalSourceSettings.CreateAsync(uri, renderAudio: audio);
-
-                        VideoCapture1.Video_Source = uni;
-                    }
-
-                    break;
-                case 1:
-                    {
-                        // RTSP
-                        var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, cbIPAudioCapture.IsChecked == true);
-                        
-                        // Enable low latency mode if checkbox is checked
-                        if (cbLowLatencyMode.IsChecked == true)
-                        {
-                            rtsp.LowLatencyMode = true;
-                        }
-                        
-                        VideoCapture1.Video_Source = rtsp;
-                    }
-
-                    break;
-                case 2:
-                    {
-                        // HTTP MJPEG
-                        var mjpeg = await HTTPMJPEGSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text);
-                        VideoCapture1.Video_Source = mjpeg;
-                    }
-
-                    break;
-                case 3:
-                    {
-                        // NDI URL
-                        var ndiSettings = await NDISourceSettings.CreateAsync(VideoCapture1.GetContext(), null, cbIPURL.Text);
-                        VideoCapture1.Video_Source = ndiSettings;
-                    }
-
-                    break;
-                case 4:
-                    {
-                        // NDI Name
-                        var ndiSettings = await NDISourceSettings.CreateAsync(VideoCapture1.GetContext(), cbIPURL.Text, null);
-                        VideoCapture1.Video_Source = ndiSettings;
-                    }
-
-                    break;
-                case 5:
-                    {
-                        // SRT
-                        var srt = await SRTSourceSettings.CreateAsync(cbIPURL.Text);
-                        VideoCapture1.Video_Source = srt;
-                    }
-
-                    break;
-            }
-
-            //if (cbIPDisconnect.IsChecked == true)
-            //{
-            //    VideoCapture1.IP_Camera_Source.DisconnectEventInterval = TimeSpan.FromSeconds(10);
-            //}
-            //else
-            //{
-            //    VideoCapture1.IP_Camera_Source.DisconnectEventInterval = TimeSpan.Zero;
-            //}
-
-            VideoCapture1.Outputs_Clear();
-            
-            if (rbCapture.IsChecked == true)
-            {
-                switch (cbOutputFormat.SelectedIndex)
+                switch (cbIPCameraType.SelectedIndex)
                 {
                     case 0:
                         {
-                            if (mp4SettingsDialog == null)
+                            // Auto
+                            bool audio = cbIPAudioCapture.IsChecked == true;
+                            var uri = new Uri(cbIPURL.Text);
+                            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
                             {
-                                VideoCapture1.Outputs_Add(new MP4Output(edOutput.Text), true);
-                            }
-                            else
-                            {
-                                VideoCapture1.Outputs_Add(mp4SettingsDialog.GetOutputVC(), true);
+                                uri = new UriBuilder(uri) { UserName = login, Password = password }.Uri;
                             }
 
-                            break;
+                            var uni = await UniversalSourceSettings.CreateAsync(uri, renderAudio: audio);
+
+                            VideoCapture1.Video_Source = uni;
                         }
+
+                        break;
                     case 1:
                         {
-                            if (aviSettingsDialog == null)
+                            // RTSP
+                            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, cbIPAudioCapture.IsChecked == true);
+
+                            // Enable low latency mode if checkbox is checked
+                            if (cbLowLatencyMode.IsChecked == true)
                             {
-                                VideoCapture1.Outputs_Add(new AVIOutput(edOutput.Text), true);
-                            }
-                            else
-                            {
-                                VideoCapture1.Outputs_Add(aviSettingsDialog.GetOutputVC(), true);
+                                rtsp.LowLatencyMode = true;
                             }
 
-                            break;
+                            VideoCapture1.Video_Source = rtsp;
                         }
+
+                        break;
                     case 2:
                         {
-                            if (webMSettingsDialog == null)
-                            {
-                                VideoCapture1.Outputs_Add(new WebMOutput(edOutput.Text), true);
-                            }
-                            else
-                            {
-                                VideoCapture1.Outputs_Add(webMSettingsDialog.GetOutputVC(), true);
-                            }
-
-                            break;
+                            // HTTP MJPEG
+                            var mjpeg = await HTTPMJPEGSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text);
+                            VideoCapture1.Video_Source = mjpeg;
                         }
+
+                        break;
                     case 3:
                         {
-                            if (mpegTSSettingsDialog == null)
-                            {
-                                VideoCapture1.Outputs_Add(new MPEGTSOutput(edOutput.Text), true);
-                            }
-                            else
-                            {
-                                VideoCapture1.Outputs_Add(mpegTSSettingsDialog.GetOutputVC(), true);
-                            }
-
-
-                            break;
+                            // NDI URL
+                            var ndiSettings = await NDISourceSettings.CreateAsync(VideoCapture1.GetContext(), null, cbIPURL.Text);
+                            VideoCapture1.Video_Source = ndiSettings;
                         }
+
+                        break;
                     case 4:
                         {
-                            if (movSettingsDialog == null)
-                            {
-                                VideoCapture1.Outputs_Add(new MOVOutput(edOutput.Text), true);
-                            }
-                            else
-                            {
-                                VideoCapture1.Outputs_Add(movSettingsDialog.GetOutputVC(), true);
-                            }
-
-                            break;
+                            // NDI Name
+                            var ndiSettings = await NDISourceSettings.CreateAsync(VideoCapture1.GetContext(), cbIPURL.Text, null);
+                            VideoCapture1.Video_Source = ndiSettings;
                         }
+
+                        break;
+                    case 5:
+                        {
+                            // SRT
+                            var srt = await SRTSourceSettings.CreateAsync(cbIPURL.Text);
+                            VideoCapture1.Video_Source = srt;
+                        }
+
+                        break;
                 }
+
+                //if (cbIPDisconnect.IsChecked == true)
+                //{
+                //    VideoCapture1.IP_Camera_Source.DisconnectEventInterval = TimeSpan.FromSeconds(10);
+                //}
+                //else
+                //{
+                //    VideoCapture1.IP_Camera_Source.DisconnectEventInterval = TimeSpan.Zero;
+                //}
+
+                VideoCapture1.Outputs_Clear();
+
+                if (rbCapture.IsChecked == true)
+                {
+                    switch (cbOutputFormat.SelectedIndex)
+                    {
+                        case 0:
+                            {
+                                if (mp4SettingsDialog == null)
+                                {
+                                    VideoCapture1.Outputs_Add(new MP4Output(edOutput.Text), true);
+                                }
+                                else
+                                {
+                                    VideoCapture1.Outputs_Add(mp4SettingsDialog.GetOutputVC(), true);
+                                }
+
+                                break;
+                            }
+                        case 1:
+                            {
+                                if (aviSettingsDialog == null)
+                                {
+                                    VideoCapture1.Outputs_Add(new AVIOutput(edOutput.Text), true);
+                                }
+                                else
+                                {
+                                    VideoCapture1.Outputs_Add(aviSettingsDialog.GetOutputVC(), true);
+                                }
+
+                                break;
+                            }
+                        case 2:
+                            {
+                                if (webMSettingsDialog == null)
+                                {
+                                    VideoCapture1.Outputs_Add(new WebMOutput(edOutput.Text), true);
+                                }
+                                else
+                                {
+                                    VideoCapture1.Outputs_Add(webMSettingsDialog.GetOutputVC(), true);
+                                }
+
+                                break;
+                            }
+                        case 3:
+                            {
+                                if (mpegTSSettingsDialog == null)
+                                {
+                                    VideoCapture1.Outputs_Add(new MPEGTSOutput(edOutput.Text), true);
+                                }
+                                else
+                                {
+                                    VideoCapture1.Outputs_Add(mpegTSSettingsDialog.GetOutputVC(), true);
+                                }
+
+
+                                break;
+                            }
+                        case 4:
+                            {
+                                if (movSettingsDialog == null)
+                                {
+                                    VideoCapture1.Outputs_Add(new MOVOutput(edOutput.Text), true);
+                                }
+                                else
+                                {
+                                    VideoCapture1.Outputs_Add(movSettingsDialog.GetOutputVC(), true);
+                                }
+
+                                break;
+                            }
+                    }
+                }
+
+                VideoView1.StatusOverlay = new TextStatusOverlay();
+
+                VideoCapture1.Snapshot_Grabber_Enabled = true;
+
+                await VideoCapture1.StartAsync();
+
+                //if (rbCapture.IsChecked == true)
+                //{
+                //    await VideoCapture1.StartCaptureAsync(0, edOutput.Text);
+                //}
+
+                tcMain.SelectedIndex = 3;
+                tmRecording.Start();
             }
-
-            VideoView1.StatusOverlay = new TextStatusOverlay();
-
-            VideoCapture1.Snapshot_Grabber_Enabled = true;
-
-            await VideoCapture1.StartAsync();
-
-            //if (rbCapture.IsChecked == true)
-            //{
-            //    await VideoCapture1.StartCaptureAsync(0, edOutput.Text);
-            //}
-
-            tcMain.SelectedIndex = 3;
-            tmRecording.Start();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -492,7 +498,7 @@ namespace IP_Capture
                     {
                         lbONVIFCameraInfo.Content = "Device information not available";
                     }
-                    
+
                     cbONVIFProfile.Items.Clear();
                     var profiles = await onvifDevice.GetProfilesAsync();
                     foreach (var profile in profiles)
@@ -520,7 +526,7 @@ namespace IP_Capture
                     btONVIFConnect.Content = "Disconnect";
                 }
                 catch
-                {                   
+                {
                     btONVIFConnect.Content = "Connect";
                 }
 
@@ -1024,4 +1030,3 @@ namespace IP_Capture
         }
     }
 }
-

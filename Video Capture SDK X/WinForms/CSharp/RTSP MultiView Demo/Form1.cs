@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using System.Windows.Forms;
@@ -46,7 +46,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             Text += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
             cbCameraIndex.SelectedIndex = 0;
-            edURL.Text = "http://localhost:8000/camera/mjpeg"; 
+            edURL.Text = "http://localhost:8000/camera/mjpeg";
             edFilename.Text = @"c:\vf\outputxx.ts";
 
             // HW decoders
@@ -115,62 +115,69 @@ namespace MediaBlocks_RTSP_MultiView_Demo
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            edLog.Text = string.Empty;
-
-            int id = cbCameraIndex.SelectedIndex;
-            if (_engines[id] != null)
+            try
             {
-                await _engines[id].Core.StopAsync();
-                await _engines[id].Core.DisposeAsync();
-                _engines[id] = null;
-            }
+                edLog.Text = string.Empty;
 
-            _engines[id] = new Engine(GetVideoViewByIndex(id));
-            _engines[id].Core.OnError += Engine_OnError;
-
-            _engines[id].URL = edURL.Text;
-            _engines[id].Login = edLogin.Text;
-            _engines[id].Password = edPassword.Text;
-            _engines[id].Filename = edFilename.Text;
-            _engines[id].AudioEnabled = cbAudioEnabled.Checked;
-
-            if (cbUseMJPEG.Checked)
-            {
-                var urix = new UriBuilder(_engines[id].URL);
-                urix.UserName = _engines[id].Login;
-                urix.Password = _engines[id].Password;
-
-                var uniSettings = await UniversalSourceSettings.CreateAsync(urix.Uri, renderAudio: _engines[id].AudioEnabled);
-
-                _engines[id].Core.Video_Source = uniSettings;                
-            }
-            else
-            {
-                var rtspSettings = await RTSPSourceSettings.CreateAsync(new Uri(_engines[id].URL), _engines[id].Login, _engines[id].Password, _engines[id].AudioEnabled);
-                rtspSettings.UseGPUDecoder = cbUseGPU.Checked;
-                rtspSettings.CompatibilityMode = cbCompatibilityMode.Checked;
-                
-                // Enable low latency mode if checkbox is checked
-                if (cbLowLatencyMode.Checked)
+                int id = cbCameraIndex.SelectedIndex;
+                if (_engines[id] != null)
                 {
-                    rtspSettings.LowLatencyMode = true;
-                }
-                
-                if (cbGPUDecoder.SelectedIndex > 0)
-                {
-                    rtspSettings.CustomVideoDecoder = _customDecoders[cbGPUDecoder.SelectedIndex - 1].Item1;
+                    await _engines[id].Core.StopAsync();
+                    await _engines[id].Core.DisposeAsync();
+                    _engines[id] = null;
                 }
 
-                _engines[id].Core.Video_Source = rtspSettings;
-            }
+                _engines[id] = new Engine(GetVideoViewByIndex(id));
+                _engines[id].Core.OnError += Engine_OnError;
 
-            _engines[id].Core.Outputs_Clear();
-            if (cbCapture.Checked)
+                _engines[id].URL = edURL.Text;
+                _engines[id].Login = edLogin.Text;
+                _engines[id].Password = edPassword.Text;
+                _engines[id].Filename = edFilename.Text;
+                _engines[id].AudioEnabled = cbAudioEnabled.Checked;
+
+                if (cbUseMJPEG.Checked)
+                {
+                    var urix = new UriBuilder(_engines[id].URL);
+                    urix.UserName = _engines[id].Login;
+                    urix.Password = _engines[id].Password;
+
+                    var uniSettings = await UniversalSourceSettings.CreateAsync(urix.Uri, renderAudio: _engines[id].AudioEnabled);
+
+                    _engines[id].Core.Video_Source = uniSettings;
+                }
+                else
+                {
+                    var rtspSettings = await RTSPSourceSettings.CreateAsync(new Uri(_engines[id].URL), _engines[id].Login, _engines[id].Password, _engines[id].AudioEnabled);
+                    rtspSettings.UseGPUDecoder = cbUseGPU.Checked;
+                    rtspSettings.CompatibilityMode = cbCompatibilityMode.Checked;
+
+                    // Enable low latency mode if checkbox is checked
+                    if (cbLowLatencyMode.Checked)
+                    {
+                        rtspSettings.LowLatencyMode = true;
+                    }
+
+                    if (cbGPUDecoder.SelectedIndex > 0)
+                    {
+                        rtspSettings.CustomVideoDecoder = _customDecoders[cbGPUDecoder.SelectedIndex - 1].Item1;
+                    }
+
+                    _engines[id].Core.Video_Source = rtspSettings;
+                }
+
+                _engines[id].Core.Outputs_Clear();
+                if (cbCapture.Checked)
+                {
+                    _engines[id].Core.Outputs_Add(new MP4Output(edFilename.Text));
+                }
+
+                await _engines[id].Core.StartAsync();
+            }
+            catch (Exception ex)
             {
-                _engines[id].Core.Outputs_Add(new MP4Output(edFilename.Text));
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            await _engines[id].Core.StartAsync();
         }
 
         /// <summary>

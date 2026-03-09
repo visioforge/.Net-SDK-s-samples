@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net8.0-windows</TargetFrameworks>
+    <TargetFramework Condition="$([MSBuild]::IsOsPlatform('Linux'))">net8.0</TargetFramework>
+    <TargetFramework Condition="$([MSBuild]::IsOsPlatform('MacOS'))">net9.0-macos15.0</TargetFramework>
+    <RootNamespace>DeviceEnumeratorDiag</RootNamespace>
+    <Nullable>disable</Nullable>
+    <LangVersion>9.0</LangVersion>
+    <ApplicationId>com.visioforge.deviceenumerator</ApplicationId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.3.7" />
+  </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.3.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.9.1" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <UseSGen>false</UseSGen>
+    <WarningLevel>4</WarningLevel>
+    <LinkMode>None</LinkMode>
+    <AOTMode>None</AOTMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <EnableCodeSigning>false</EnableCodeSigning>
+    <UseSGen>false</UseSGen>
+    <LinkMode>None</LinkMode>
+    <AOTMode>None</AOTMode>
+  </PropertyGroup>
+</Project>

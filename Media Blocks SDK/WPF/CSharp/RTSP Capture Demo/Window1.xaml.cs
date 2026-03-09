@@ -296,6 +296,7 @@ namespace RTSP_Capture
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Debug.WriteLine(ex);
             }
         }

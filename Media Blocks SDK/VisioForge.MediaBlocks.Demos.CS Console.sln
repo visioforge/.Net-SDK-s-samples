@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Webcam Server", "Conso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTSP Image Server", "Console\RTSP Image Server\RTSP Image Server.csproj", "{8D6E64FD-15F1-3E4D-F3CA-FFF13DFC4FAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeviceEnumerator", "Console\DeviceEnumerator\DeviceEnumerator.csproj", "{A3B2C1D0-E4F5-6789-ABCD-EF0123456789}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{8D6E64FD-15F1-3E4D-F3CA-FFF13DFC4FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D6E64FD-15F1-3E4D-F3CA-FFF13DFC4FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D6E64FD-15F1-3E4D-F3CA-FFF13DFC4FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3B2C1D0-E4F5-6789-ABCD-EF0123456789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3B2C1D0-E4F5-6789-ABCD-EF0123456789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3B2C1D0-E4F5-6789-ABCD-EF0123456789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3B2C1D0-E4F5-6789-ABCD-EF0123456789}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,22 +37,29 @@ namespace ip_camera_capture_mp4
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            videoCapture1 = new VideoCaptureCoreX(VideoView1);
+            try
+            {
+                videoCapture1 = new VideoCaptureCoreX(VideoView1);
 
-            // RTSP camera source
-            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, cbAudioStream.Checked);
-            videoCapture1.Video_Source = rtsp;
+                // RTSP camera source
+                var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edURL.Text), edLogin.Text, edPassword.Text, cbAudioStream.Checked);
+                videoCapture1.Video_Source = rtsp;
 
-            // audio output device
-            var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))[0];
-            videoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+                // audio output device
+                var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound))[0];
+                videoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
-            // configure MP4 output
-            var mp4Output = new MP4Output(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4"));
-            videoCapture1.Outputs_Add(mp4Output);
+                // configure MP4 output
+                var mp4Output = new MP4Output(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4"));
+                videoCapture1.Outputs_Add(mp4Output);
 
-            // start
-            await videoCapture1.StartAsync();
+                // start
+                await videoCapture1.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>

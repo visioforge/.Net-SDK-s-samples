@@ -1,0 +1,55 @@
+<Window x:Class="Overlay_Manager_Demo.WebView2OverlayOptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="WebView2 Overlay Options" Height="480" Width="400"
+        Icon="visioforge_main_icon.ico"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid>
+        <Label Content="Web Page Settings" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+
+        <Label Content="URL:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbUrl" HorizontalAlignment="Left" Margin="100,42,0,0" Text="https://www.google.com" VerticalAlignment="Top" Width="270"/>
+
+        <Label Content="JavaScript:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbJavaScript" HorizontalAlignment="Left" Margin="100,72,0,0" VerticalAlignment="Top" Width="270" Height="40"
+                 TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
+                 ToolTip="Optional JavaScript to execute on navigation completed"/>
+
+        <Label Content="Position and Size" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+
+        <Label Content="X:" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbX" HorizontalAlignment="Left" Margin="100,157,0,0" Text="100" VerticalAlignment="Top" Width="60"/>
+
+        <Label Content="Y:" HorizontalAlignment="Left" Margin="180,155,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbY" HorizontalAlignment="Left" Margin="260,157,0,0" Text="100" VerticalAlignment="Top" Width="60"/>
+
+        <Label Content="Width:" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbWidth" HorizontalAlignment="Left" Margin="100,187,0,0" Text="640" VerticalAlignment="Top" Width="60"/>
+
+        <Label Content="Height:" HorizontalAlignment="Left" Margin="180,185,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbHeight" HorizontalAlignment="Left" Margin="260,187,0,0" Text="480" VerticalAlignment="Top" Width="60"/>
+
+        <Label Content="Visual Effects" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+
+        <Label Content="Opacity:" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="slOpacity" HorizontalAlignment="Left" Margin="100,254,0,0" VerticalAlignment="Top" Width="150" Minimum="0" Maximum="1" Value="1" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+        <Label x:Name="lbOpacityValue" Content="1.0" HorizontalAlignment="Left" Margin="260,250,0,0" VerticalAlignment="Top"/>
+
+        <Label Content="Stretch Mode:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbStretchMode" HorizontalAlignment="Left" Margin="100,282,0,0" VerticalAlignment="Top" Width="150">
+            <ComboBoxItem Content="None"/>
+            <ComboBoxItem Content="Stretch"/>
+            <ComboBoxItem Content="Letterbox" IsSelected="True"/>
+            <ComboBoxItem Content="Crop to Fill"/>
+        </ComboBox>
+
+        <CheckBox x:Name="cbEnableShadow" Content="Enable shadow" HorizontalAlignment="Left" Margin="10,315,0,0" VerticalAlignment="Top"/>
+
+        <Button x:Name="btOK" Content="OK" HorizontalAlignment="Left" Margin="100,395,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="btOK_Click"/>
+        <Button x:Name="btCancel" Content="Cancel" HorizontalAlignment="Left" Margin="200,395,0,0" VerticalAlignment="Top" Width="75" Height="25" IsCancel="True"/>
+    </Grid>
+</Window>

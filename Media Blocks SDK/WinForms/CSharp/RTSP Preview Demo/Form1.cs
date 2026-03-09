@@ -197,6 +197,7 @@ namespace RTSP_Preview_WinForms
             }
             catch (Exception ex)
             {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine(ex);
             }
         }

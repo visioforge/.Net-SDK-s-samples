@@ -238,6 +238,7 @@ namespace RTSP_Client
             }
             catch (Exception ex)
             {
+                Android.Widget.Toast.MakeText(this, ex.Message, Android.Widget.ToastLength.Long)?.Show();
                 Debug.WriteLine(ex);
             }
         }

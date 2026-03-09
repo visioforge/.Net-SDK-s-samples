@@ -222,6 +222,14 @@
                                                 Height="25"
                                                 ToolTip="Add NDI network video source overlay"
                                                 Click="btAddNDI_Click"/>
+
+                                        <Button x:Name="btAddWebView2"
+                                                Content="WebView2"
+                                                Width="85"
+                                                Height="25"
+                                                Margin="5,0,0,0"
+                                                ToolTip="Add web page overlay (WebView2)"
+                                                Click="btAddWebView2_Click"/>
                                     </StackPanel>
                                 </StackPanel>
 

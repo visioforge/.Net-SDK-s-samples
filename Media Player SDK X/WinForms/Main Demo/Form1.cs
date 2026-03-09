@@ -1,4 +1,3 @@
-﻿
 
 
 using System.Linq;
@@ -413,60 +412,67 @@ namespace Main_Demo
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            mmLog.Text = "";
-
-            tbSpeed.Value = 10;
-            _player.Debug_Mode = cbDebugMode.Checked;
-            _player.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            _player.Audio_Play = cbPlayAudio.Checked;
-            var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(device => device.Name == cbAudioOutputDevice.Text);
-            if (audioOutputDevice == null)
+            try
             {
-                mmLog.Text = "Selected audio output device not found" + Environment.NewLine;
-                return;
-            }
-            _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
-            _player.Subtitles_Enabled = cbSubtitlesEnabled.Checked;
-            _player.Snapshot_Grabber_Enabled = true;
+                mmLog.Text = "";
 
-            AddAudioEffects();
-            await AddVideoEffectsAsync();
-            AddMotionDetection();
-            AddBarcodeReader();
-
-            string source = edFilenameOrURL.Text;
-            if (source.IndexOf("rtsp://", StringComparison.OrdinalIgnoreCase) >= 0)
-            {
-                var rtspSource = await RTSPSourceSettings.CreateAsync(new Uri(source), edRTSPUserName.Text, edRTSPPassword.Text, true);
-                rtspSource.Latency = TimeSpan.FromMilliseconds(tbRTSPLatency.Value);
-                rtspSource.RTPBlockSize = tbRTSPRTPBlockSize.Value * 1024;
-                rtspSource.UDPBufferSize = tbRTSPUDPBufferSize.Value * 1024;
-
-                switch (cbRTSPProtocol.SelectedIndex)
+                tbSpeed.Value = 10;
+                _player.Debug_Mode = cbDebugMode.Checked;
+                _player.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+                _player.Audio_Play = cbPlayAudio.Checked;
+                var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(device => device.Name == cbAudioOutputDevice.Text);
+                if (audioOutputDevice == null)
                 {
-                    case 0: break;
-                    case 1:
-                        rtspSource.AllowedProtocols = RTSPSourceProtocol.TCP;
-                        break;
-                    case 2:
-                        rtspSource.AllowedProtocols = RTSPSourceProtocol.UDP;
-                        break;
-                    case 3:
-                        rtspSource.AllowedProtocols = RTSPSourceProtocol.HTTP;
-                        break;
+                    mmLog.Text = "Selected audio output device not found" + Environment.NewLine;
+                    return;
+                }
+                _player.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
+                _player.Subtitles_Enabled = cbSubtitlesEnabled.Checked;
+                _player.Snapshot_Grabber_Enabled = true;
+
+                AddAudioEffects();
+                await AddVideoEffectsAsync();
+                AddMotionDetection();
+                AddBarcodeReader();
+
+                string source = edFilenameOrURL.Text;
+                if (source.IndexOf("rtsp://", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    var rtspSource = await RTSPSourceSettings.CreateAsync(new Uri(source), edRTSPUserName.Text, edRTSPPassword.Text, true);
+                    rtspSource.Latency = TimeSpan.FromMilliseconds(tbRTSPLatency.Value);
+                    rtspSource.RTPBlockSize = tbRTSPRTPBlockSize.Value * 1024;
+                    rtspSource.UDPBufferSize = tbRTSPUDPBufferSize.Value * 1024;
+
+                    switch (cbRTSPProtocol.SelectedIndex)
+                    {
+                        case 0: break;
+                        case 1:
+                            rtspSource.AllowedProtocols = RTSPSourceProtocol.TCP;
+                            break;
+                        case 2:
+                            rtspSource.AllowedProtocols = RTSPSourceProtocol.UDP;
+                            break;
+                        case 3:
+                            rtspSource.AllowedProtocols = RTSPSourceProtocol.HTTP;
+                            break;
+                    }
+
+                    await _player.OpenAsync(rtspSource);
+                }
+                else
+                {
+                    var uniSource = await UniversalSourceSettings.CreateAsync(new Uri(source));
+                    await _player.OpenAsync(uniSource);
                 }
 
-                await _player.OpenAsync(rtspSource);
+                await _player.PlayAsync();
+
+                tmPosition.Start();
             }
-            else
+            catch (Exception ex)
             {
-                var uniSource = await UniversalSourceSettings.CreateAsync(new Uri(source));
-                await _player.OpenAsync(uniSource);
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            await _player.PlayAsync();
-
-            tmPosition.Start();
         }
 
         /// <summary>

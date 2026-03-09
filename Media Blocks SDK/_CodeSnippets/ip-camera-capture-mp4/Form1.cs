@@ -71,6 +71,7 @@ namespace ip_camera_capture_mp4
             }
             catch (Exception ex)
             {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Debug.WriteLine(ex);
             }
         }

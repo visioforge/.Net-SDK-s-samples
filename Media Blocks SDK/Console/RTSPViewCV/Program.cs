@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using VisioForge.Core.CV;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -44,30 +44,38 @@ namespace RTSPViewCV
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += _pipeline_OnError;
 
-            string url = args[0]; 
+            string url = args[0];
             string username = args[1];
             string password = args[2];
 
-            var rtspSettings = RTSPSourceSettings.CreateAsync(new Uri(url), username, password, audioEnabled).Result;
+            try
+            {
+                var rtspSettings = RTSPSourceSettings.CreateAsync(new Uri(url), username, password, audioEnabled).Result;
 
-            _source = new RTSPSourceBlock(rtspSettings);
-            //_source = new FileSourceBlock(@"c:\samples\!video.avi");
+                _source = new RTSPSourceBlock(rtspSettings);
+                //_source = new FileSourceBlock(@"c:\samples\!video.avi");
 
-            _videoRenderer = new VideoRendererBlock(_pipeline, null) { IsSync = false };
+                _videoRenderer = new VideoRendererBlock(_pipeline, null) { IsSync = false };
 
-            _faceDetector = new DNNFaceDetectorBlock();
-            _faceDetector.OnFaceDetected += FaceDetector_OnFaceDetected;
+                _faceDetector = new DNNFaceDetectorBlock();
+                _faceDetector.OnFaceDetected += FaceDetector_OnFaceDetected;
 
-            _pipeline.Connect(_source.VideoOutput, _faceDetector.Input);
-            _pipeline.Connect(_faceDetector.Output, _videoRenderer.Input);
+                _pipeline.Connect(_source.VideoOutput, _faceDetector.Input);
+                _pipeline.Connect(_faceDetector.Output, _videoRenderer.Input);
 
-            //if (rtspSettings.AudioEnabled)
-            //{
-            //    _audioRenderer = new AudioRendererBlock();
-            //    _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
-            //}
+                //if (rtspSettings.AudioEnabled)
+                //{
+                //    _audioRenderer = new AudioRendererBlock();
+                //    _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
+                //}
 
-            _pipeline.Start();
+                _pipeline.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return;
+            }
 
             Console.WriteLine("Press any key to stop!");
             Console.ReadLine();

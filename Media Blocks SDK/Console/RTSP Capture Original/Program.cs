@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,34 +21,34 @@ namespace RTSP_Capture_Original
 {
     /// <summary>
     /// Console application demonstrating RTSP stream capture with keyframe synchronization.
-    /// 
+    ///
     /// This demo showcases the new keyframe synchronization features in RTSPRAWSourceBlock:
-    /// 
+    ///
     /// 1. WaitForKeyframe property:
     ///    - When set to true, the source will wait for an I-frame (keyframe) before starting playback
     ///    - This ensures clean video start without artifacts that can occur when starting from P-frames
     ///    - Particularly important for recording scenarios where you want a clean start
-    /// 
+    ///
     /// 2. SyncAudioWithKeyframe property:
     ///    - When set to true, audio data is synchronized with the first video keyframe
     ///    - Prevents audio from starting before video is ready
     ///    - Maintains proper A/V sync from the beginning of playback
-    /// 
+    ///
     /// 3. Output format flexibility:
     ///    - Supports both MP4 and MPEG-TS output formats
     ///    - MPEG-TS is ideal for streaming and broadcast applications
     ///    - MP4 provides better compression and compatibility
-    /// 
+    ///
     /// 4. Smart audio encoding:
     ///    - Automatically detects if source audio is already AAC
     ///    - Only re-encodes audio when necessary, preserving quality
-    /// 
+    ///
     /// Benefits of keyframe synchronization:
     /// - Clean video start without compression artifacts
     /// - Proper A/V synchronization from the first frame
     /// - Better recording quality when capturing RTSP streams
     /// - Reduced buffering and startup issues
-    /// 
+    ///
     /// Trade-offs:
     /// - Slightly longer startup time (waiting for keyframe)
     /// - Can be disabled for ultra-low latency scenarios
@@ -127,114 +127,125 @@ namespace RTSP_Capture_Original
 
             var rtspUri = new Uri(rtspUrl);
 
-            // Create RTSP source settings with media info
-            var rtspSettings = await RTSPRAWSourceSettings.CreateAsync(
-                rtspUri,
-                username,
-                password,
-                audioEnabled: true);
-
-            // Configure additional RTSP parameters
-            rtspSettings.Latency = 100; // Low latency mode
-            rtspSettings.AllowedProtocols = RTSPSourceProtocol.TCP; // Use TCP for reliable transport
-            rtspSettings.DoRTCP = true; // Enable RTCP for better sync
-            rtspSettings.RTPBlockSize = 65536; // Larger RTP block size for better performance
-            rtspSettings.UDPBufferSize = 524288; // Larger UDP buffer if using UDP
-            rtspSettings.WaitForKeyframe = true; // Wait for I-frame before starting
-            rtspSettings.SyncAudioWithKeyframe = true; // Sync audio with video keyframe
-
-            // Get media info to check audio codec
-            var mediaInfo = rtspSettings.GetInfo();
+            MediaBlocksPipeline pipeline = null;
+            RTSPRAWSourceSettings rtspSettings = null;
             bool audioNeedsEncoding = false;
             string audioCodec = "none";
 
-            if (rtspSettings.AudioEnabled && mediaInfo != null && mediaInfo.AudioStreams.Count > 0)
+            try
             {
-                audioCodec = mediaInfo.AudioStreams[0].Codec?.ToUpperInvariant() ?? "";
-                // Check if audio is NOT already AAC
-                audioNeedsEncoding = !audioCodec.Contains("AAC") && !audioCodec.Contains("MP4A");
-                Console.WriteLine($"Detected audio codec: {audioCodec}");
-                if (audioNeedsEncoding)
+                // Create RTSP source settings with media info
+                rtspSettings = await RTSPRAWSourceSettings.CreateAsync(
+                    rtspUri,
+                    username,
+                    password,
+                    audioEnabled: true);
+
+                // Configure additional RTSP parameters
+                rtspSettings.Latency = 100; // Low latency mode
+                rtspSettings.AllowedProtocols = RTSPSourceProtocol.TCP; // Use TCP for reliable transport
+                rtspSettings.DoRTCP = true; // Enable RTCP for better sync
+                rtspSettings.RTPBlockSize = 65536; // Larger RTP block size for better performance
+                rtspSettings.UDPBufferSize = 524288; // Larger UDP buffer if using UDP
+                rtspSettings.WaitForKeyframe = true; // Wait for I-frame before starting
+                rtspSettings.SyncAudioWithKeyframe = true; // Sync audio with video keyframe
+
+                // Get media info to check audio codec
+                var mediaInfo = rtspSettings.GetInfo();
+
+                if (rtspSettings.AudioEnabled && mediaInfo != null && mediaInfo.AudioStreams.Count > 0)
                 {
-                    Console.WriteLine("Audio will be encoded to AAC for compatibility.");
-                }
-                else
-                {
-                    Console.WriteLine("Audio is already AAC, no re-encoding needed.");
-                }
-            }
-
-            // Create the pipeline
-            var pipeline = new MediaBlocksPipeline();
-
-            // Create RTSP source block (keyframe sync configured in settings)
-            var rtspSource = new RTSPRAWSourceBlock(rtspSettings);
-
-            // Add source to pipeline
-            pipeline.AddBlock(rtspSource);
-
-            // Create appropriate sink based on format choice
-            MediaBlock sinkBlock;
-            if (useMP4)
-            {
-                // Create MP4 sink for recording         
-                sinkBlock = new MP4SinkBlock(new MP4SinkSettings(outputFilePath));
-            }
-            else
-            {
-                // Create MPEG-TS sink for recording
-                sinkBlock = new MPEGTSSinkBlock(new MPEGTSSinkSettings(outputFilePath));
-            }
-            pipeline.AddBlock(sinkBlock);
-
-            // Create dynamic input pads for video and audio
-            var videoInputPad = (sinkBlock as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video);
-            MediaBlockPad audioInputPad = null;
-            if (rtspSettings.AudioEnabled)
-            {
-                audioInputPad = (sinkBlock as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio);
-            }
-
-            // Connect the pipeline
-            Console.WriteLine("Connecting pipeline components...");
-
-            // Connect video directly to sink (raw H264/H265 stream)
-            pipeline.Connect(rtspSource.VideoOutput, videoInputPad);
-
-            // Connect audio with optional AAC encoding
-            if (rtspSettings.AudioEnabled && audioInputPad != null)
-            {
-                if (audioNeedsEncoding)
-                {
-                    // Audio needs to be re-encoded to AAC
-                    Console.WriteLine("Setting up audio re-encoding pipeline...");
-
-                    // Create decoder block (audio only)
-                    var decodeBin = new DecodeBinBlock(false, true, false)
+                    audioCodec = mediaInfo.AudioStreams[0].Codec?.ToUpperInvariant() ?? "";
+                    // Check if audio is NOT already AAC
+                    audioNeedsEncoding = !audioCodec.Contains("AAC") && !audioCodec.Contains("MP4A");
+                    Console.WriteLine($"Detected audio codec: {audioCodec}");
+                    if (audioNeedsEncoding)
                     {
-                        DisableAudioConverter = true
-                    };
-                    pipeline.AddBlock(decodeBin);
+                        Console.WriteLine("Audio will be encoded to AAC for compatibility.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Audio is already AAC, no re-encoding needed.");
+                    }
+                }
 
-                    // Create AAC encoder
-                    var aacEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings());
-                    pipeline.AddBlock(aacEncoder);
+                // Create the pipeline
+                pipeline = new MediaBlocksPipeline();
 
-                    // Connect: RTSP audio -> decoder -> AAC encoder -> sink
-                    pipeline.Connect(rtspSource.AudioOutput, decodeBin.Input);
-                    pipeline.Connect(decodeBin.AudioOutput, aacEncoder.Input);
-                    pipeline.Connect(aacEncoder.Output, audioInputPad);
+                // Create RTSP source block (keyframe sync configured in settings)
+                var rtspSource = new RTSPRAWSourceBlock(rtspSettings);
+
+                // Add source to pipeline
+                pipeline.AddBlock(rtspSource);
+
+                // Create appropriate sink based on format choice
+                MediaBlock sinkBlock;
+                if (useMP4)
+                {
+                    // Create MP4 sink for recording
+                    sinkBlock = new MP4SinkBlock(new MP4SinkSettings(outputFilePath));
                 }
                 else
                 {
-                    // Audio is already AAC, connect directly
-                    pipeline.Connect(rtspSource.AudioOutput, audioInputPad);
+                    // Create MPEG-TS sink for recording
+                    sinkBlock = new MPEGTSSinkBlock(new MPEGTSSinkSettings(outputFilePath));
                 }
-            }
+                pipeline.AddBlock(sinkBlock);
 
-            // Start the pipeline
-            Console.WriteLine("Starting recording with keyframe synchronization...");
-            await pipeline.StartAsync();
+                // Create dynamic input pads for video and audio
+                var videoInputPad = (sinkBlock as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video);
+                MediaBlockPad audioInputPad = null;
+                if (rtspSettings.AudioEnabled)
+                {
+                    audioInputPad = (sinkBlock as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio);
+                }
+
+                // Connect the pipeline
+                Console.WriteLine("Connecting pipeline components...");
+
+                // Connect video directly to sink (raw H264/H265 stream)
+                pipeline.Connect(rtspSource.VideoOutput, videoInputPad);
+
+                // Connect audio with optional AAC encoding
+                if (rtspSettings.AudioEnabled && audioInputPad != null)
+                {
+                    if (audioNeedsEncoding)
+                    {
+                        // Audio needs to be re-encoded to AAC
+                        Console.WriteLine("Setting up audio re-encoding pipeline...");
+
+                        // Create decoder block (audio only)
+                        var decodeBin = new DecodeBinBlock(false, true, false)
+                        {
+                            DisableAudioConverter = true
+                        };
+                        pipeline.AddBlock(decodeBin);
+
+                        // Create AAC encoder
+                        var aacEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings());
+                        pipeline.AddBlock(aacEncoder);
+
+                        // Connect: RTSP audio -> decoder -> AAC encoder -> sink
+                        pipeline.Connect(rtspSource.AudioOutput, decodeBin.Input);
+                        pipeline.Connect(decodeBin.AudioOutput, aacEncoder.Input);
+                        pipeline.Connect(aacEncoder.Output, audioInputPad);
+                    }
+                    else
+                    {
+                        // Audio is already AAC, connect directly
+                        pipeline.Connect(rtspSource.AudioOutput, audioInputPad);
+                    }
+                }
+
+                // Start the pipeline
+                Console.WriteLine("Starting recording with keyframe synchronization...");
+                await pipeline.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return;
+            }
 
             Console.WriteLine($"Recording to {formatName} file: {outputFilePath}");
             Console.WriteLine("The recording will start from the first keyframe with synchronized audio.");
