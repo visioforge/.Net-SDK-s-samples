@@ -98,7 +98,7 @@ namespace SRT_Source_Demo
 
                 _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-                var settings = await SRTSourceSettings.CreateAsync(edURL.Text);
+                var settings = await SRTSourceSettings.CreateAsync(new Uri(edURL.Text));
                 _source = new SRTSourceBlock(settings);
 
                 bool hasVideo = true;
@@ -133,6 +133,7 @@ namespace SRT_Source_Demo
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                MessageBox.Show(ex.Message);
             }
         }
 

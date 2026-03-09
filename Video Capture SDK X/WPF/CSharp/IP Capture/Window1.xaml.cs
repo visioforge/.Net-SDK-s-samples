@@ -293,7 +293,7 @@ namespace IP_Capture
                     case 5:
                         {
                             // SRT
-                            var srt = await SRTSourceSettings.CreateAsync(cbIPURL.Text);
+                            var srt = await SRTSourceSettings.CreateAsync(new Uri(cbIPURL.Text));
                             VideoCapture1.Video_Source = srt;
                         }
 

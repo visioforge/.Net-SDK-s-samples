@@ -434,8 +434,7 @@ namespace Networks_Streamer_Demo
                     // SRT
                     else if (cbPlatform.SelectedIndex == 5)
                     {
-                        _srtSink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = "srt://:8888" });
-                        _h264Encoder.Settings.ParseStream = false; // we have to disable parsing for SRT for H264 and HEVC encoders
+                        _srtSink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = edStreamingKey.Text });
                         _pipeline.Connect(_h264Encoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Video));
 
                         if (audioEnabled)
@@ -484,7 +483,7 @@ namespace Networks_Streamer_Demo
         {
             try
             {
-                _timer.Stop();
+                _timer?.Stop();
 
                 if (_pipeline != null)
                 {
@@ -648,7 +647,7 @@ namespace Networks_Streamer_Demo
                     edStreamingKey.Text = "AWS S3 URL";
                     break;
                 case 5:
-                    edStreamingKey.Text = "SRT streaming URL";
+                    edStreamingKey.Text = "srt://192.168.1.44:8890?streamid=publish:testxxx";
                     break;
                 case 6:
                     edStreamingKey.Text = "NDI name";

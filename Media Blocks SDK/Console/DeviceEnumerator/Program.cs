@@ -100,7 +100,31 @@ namespace DeviceEnumeratorDiag
             Console.WriteLine($"\n  AudioOutputs count: {audioOutputs.Length}");
             foreach (var ao in audioOutputs)
             {
-                Console.WriteLine($"    [{ao.API}] {ao.Name} (Internal: {ao.InternalName})");
+                Console.WriteLine($"    [{ao.API}] {ao.Name} (Internal: {ao.InternalName}, Path: {ao.DevicePath}, Guid: {ao.Guid})");
+            }
+
+            // DirectSound-specific enumeration
+            Console.WriteLine("\n========================================");
+            Console.WriteLine("DirectSound-specific devices:");
+            Console.WriteLine("========================================");
+
+            var dsAudioSources = await DeviceEnumerator.Shared.AudioSourcesAsync(VisioForge.Core.Types.X.Sources.AudioCaptureDeviceAPI.DirectSound);
+            Console.WriteLine($"\n  DirectSound Sources count: {dsAudioSources.Length}");
+            foreach (var src in dsAudioSources)
+            {
+                Console.WriteLine($"    {src.Name} (Internal: {src.InternalName}, Path: {src.DevicePath})");
+                var formats = src.Formats;
+                foreach (var fmt in formats)
+                {
+                    Console.WriteLine($"      Format: {fmt}");
+                }
+            }
+
+            var dsAudioOutputs = await DeviceEnumerator.Shared.AudioOutputsAsync(VisioForge.Core.Types.X.Output.AudioOutputDeviceAPI.DirectSound);
+            Console.WriteLine($"\n  DirectSound Outputs count: {dsAudioOutputs.Length}");
+            foreach (var ao in dsAudioOutputs)
+            {
+                Console.WriteLine($"    {ao.Name} (Internal: {ao.InternalName}, Path: {ao.DevicePath}, Guid: {ao.Guid})");
             }
 
             Console.WriteLine("\n=== Done ===");
