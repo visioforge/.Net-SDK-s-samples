@@ -15,6 +15,7 @@ using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
+using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X;
 using System.Diagnostics;
@@ -33,6 +34,7 @@ namespace vr360_media_player
         private bool _isMouseDragging;
         private VideoFrameX _pausedFrame;
         private volatile bool _pauseDrawing = false;
+        private bool _isUpdatingTimelineFromTimer = false;
 
         public MainWindow()
         {
@@ -64,7 +66,6 @@ namespace vr360_media_player
                     // Create MediaBlocks pipeline
                     _pipeline = new MediaBlocksPipeline();
 
-                    // Add file source
                     var fileSourceSettings = await UniversalSourceSettings.CreateAsync(edFilename.Text);
                     var info = fileSourceSettings.GetInfo();
                     var videoStreamAvailable = info.VideoStreams.Count > 0;
@@ -75,7 +76,12 @@ namespace vr360_media_player
                     // Add video renderer
                     if (videoStreamAvailable)
                     {
-                        _processor = new VR360ProcessorBlock(new D3D11VR360RendererSettings());
+                        var vrMode = cbVRMode.SelectedIndex switch
+                        {
+                            1 => VRMode.Cubemap,
+                            _ => VRMode.Equirectangular
+                        };
+                        _processor = new VR360ProcessorBlock(new D3D11VR360RendererSettings { Mode = vrMode });
 
                         var videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
                         VideoView1.SetNativeRendering(false);
@@ -201,11 +207,10 @@ namespace vr360_media_player
         {
             if (_processor != null)
             {
-                _processor.Settings.Yaw -= 5.0f;
-                _processor.Update();
+                _processor.Yaw -= 5.0f;
             }
 
-            if (_pipeline.State == VisioForge.Core.Types.PlaybackState.Pause)
+            if (_pipeline?.State == VisioForge.Core.Types.PlaybackState.Pause)
             {
                 UpdatePausedFrame();
             }
@@ -218,11 +223,10 @@ namespace vr360_media_player
         {
             if (_processor != null)
             {
-                _processor.Settings.Yaw += 5.0f;
-                _processor.Update();
+                _processor.Yaw += 5.0f;
             }
 
-            if (_pipeline.State == VisioForge.Core.Types.PlaybackState.Pause)
+            if (_pipeline?.State == VisioForge.Core.Types.PlaybackState.Pause)
             {
                 UpdatePausedFrame();
             }
@@ -235,11 +239,10 @@ namespace vr360_media_player
         {
             if (_processor != null)
             {
-                _processor.Settings.Pitch -= 2.0f;
-                _processor.Update();
+                _processor.Pitch -= 2.0f;
             }
 
-            if (_pipeline.State == VisioForge.Core.Types.PlaybackState.Pause)
+            if (_pipeline?.State == VisioForge.Core.Types.PlaybackState.Pause)
             {
                 UpdatePausedFrame();
             }
@@ -252,11 +255,10 @@ namespace vr360_media_player
         {
             if (_processor != null)
             {
-                _processor.Settings.Pitch += 2.0f;
-                _processor.Update();
+                _processor.Pitch += 2.0f;
             }
 
-            if (_pipeline.State == VisioForge.Core.Types.PlaybackState.Pause)
+            if (_pipeline?.State == VisioForge.Core.Types.PlaybackState.Pause)
             {
                 UpdatePausedFrame();
             }
@@ -269,11 +271,10 @@ namespace vr360_media_player
         {
             if (_processor != null)
             {
-                _processor.Settings.FOV -= 5.0f;
-                _processor.Update();
+                _processor.FieldOfView -= 5.0f;
             }
 
-            if (_pipeline.State == VisioForge.Core.Types.PlaybackState.Pause)
+            if (_pipeline?.State == VisioForge.Core.Types.PlaybackState.Pause)
             {
                 UpdatePausedFrame();
             }
@@ -286,11 +287,33 @@ namespace vr360_media_player
         {
             if (_processor != null)
             {
-                _processor.Settings.FOV += 5.0f;
-                _processor.Update();
+                _processor.FieldOfView += 5.0f;
             }
 
-            if (_pipeline.State == VisioForge.Core.Types.PlaybackState.Pause)
+            if (_pipeline?.State == VisioForge.Core.Types.PlaybackState.Pause)
+            {
+                UpdatePausedFrame();
+            }
+        }
+
+        /// <summary>
+        /// Handles the VR mode selection changed event.
+        /// </summary>
+        private void cbVRMode_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (_processor == null) return;
+
+            switch (cbVRMode.SelectedIndex)
+            {
+                case 0:
+                    _processor.Mode = VRMode.Equirectangular;
+                    break;
+                case 1:
+                    _processor.Mode = VRMode.Cubemap;
+                    break;
+            }
+
+            if (_pipeline?.State == VisioForge.Core.Types.PlaybackState.Pause)
             {
                 UpdatePausedFrame();
             }
@@ -314,10 +337,15 @@ namespace vr360_media_player
 
                     if (position.TotalSeconds > 0 && position.TotalSeconds < tbTimeline.Maximum)
                     {
-                        // Temporarily remove event handler to avoid recursion
-                        tbTimeline.ValueChanged -= tbTimeline_ValueChanged;
-                        tbTimeline.Value = position.TotalSeconds;
-                        tbTimeline.ValueChanged += tbTimeline_ValueChanged;
+                        _isUpdatingTimelineFromTimer = true;
+                        try
+                        {
+                            tbTimeline.Value = position.TotalSeconds;
+                        }
+                        finally
+                        {
+                            _isUpdatingTimelineFromTimer = false;
+                        }
                     }
 
                     lbTime.Content = $"{position:hh\\:mm\\:ss}/{duration:hh\\:mm\\:ss}";
@@ -341,7 +369,7 @@ namespace vr360_media_player
         {
             try
             {
-                if (_pipeline != null && !_timer.IsEnabled)
+                if (_pipeline != null && !_isUpdatingTimelineFromTimer)
                 {
                     try
                     {
@@ -383,13 +411,12 @@ namespace vr360_media_player
             var deltaX = currentPosition.X - _lastMousePosition.X;
             var deltaY = currentPosition.Y - _lastMousePosition.Y;
 
-            _processor.Settings.Yaw += (float)(deltaX * 0.5);
-            _processor.Settings.Pitch += (float)(deltaY * 0.5);
+            _processor.Yaw += (float)(deltaX * 0.5);
+            _processor.Pitch += (float)(deltaY * 0.5);
 
             _lastMousePosition = currentPosition;
-            _processor.Update();
 
-            if (_pipeline.State == VisioForge.Core.Types.PlaybackState.Pause)
+            if (_pipeline?.State == VisioForge.Core.Types.PlaybackState.Pause)
             {
                 UpdatePausedFrame();
             }

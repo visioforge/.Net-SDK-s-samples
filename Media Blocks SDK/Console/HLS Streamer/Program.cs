@@ -1,4 +1,4 @@
-﻿using VisioForge.Core;
+using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioEncoders;
 using VisioForge.Core.MediaBlocks.Sinks;
@@ -23,49 +23,87 @@ namespace HLSStreamer
         /// Defines the entry point of the application.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        static void Main(string[] args)
-        {           
+        static async Task Main(string[] args)
+        {
             VisioForgeX.InitSDK();
 
             Console.Clear();
 
-            Console.WriteLine("The HLS Streamer app can stream sample video and audio sources using the HLS protocol. You can open localhost IP with port 8088 in your browser. H264 and AAC encoders were used.");
+            Console.WriteLine("HLS Streamer - streams video and audio using the HLS protocol.");
+            Console.WriteLine("H264 and AAC encoders are used.");
+            Console.WriteLine();
+
+            // Enumerate video devices
+            var videoDevices = await DeviceEnumerator.Shared.VideoSourcesAsync();
+            if (videoDevices.Length == 0)
+            {
+                Console.WriteLine("No video capture devices found.");
+                return;
+            }
+
+            Console.WriteLine("Available video devices:");
+            for (int i = 0; i < videoDevices.Length; i++)
+            {
+                Console.WriteLine($"  {i}: [{videoDevices[i].API}] {videoDevices[i].Name}");
+            }
+
+            Console.Write("Select video device number: ");
+            if (!int.TryParse(Console.ReadLine(), out int videoIndex) || videoIndex < 0 || videoIndex >= videoDevices.Length)
+            {
+                Console.WriteLine("Invalid selection.");
+                return;
+            }
+
+            Console.WriteLine();
+
+            // Enumerate audio devices
+            var audioDevices = await DeviceEnumerator.Shared.AudioSourcesAsync();
+            if (audioDevices.Length == 0)
+            {
+                Console.WriteLine("No audio capture devices found.");
+                return;
+            }
+
+            Console.WriteLine("Available audio devices:");
+            for (int i = 0; i < audioDevices.Length; i++)
+            {
+                Console.WriteLine($"  {i}: [{audioDevices[i].API}] {audioDevices[i].Name}");
+            }
+
+            Console.Write("Select audio device number: ");
+            if (!int.TryParse(Console.ReadLine(), out int audioIndex) || audioIndex < 0 || audioIndex >= audioDevices.Length)
+            {
+                Console.WriteLine("Invalid selection.");
+                return;
+            }
+
+            Console.WriteLine();
 
             // Pipeline
             var pipeline = new MediaBlocksPipeline();
             pipeline.OnError += Pipeline_OnError;
 
-            // video and audio sources
-            var virtualVideoSource = new VirtualVideoSourceSettings
-            {
-                Width = 1280,
-                Height = 720,
-                FrameRate = VideoFrameRate.FPS_25,
-            };
+            // Video source
+            var videoSettings = new VideoCaptureDeviceSourceSettings(videoDevices[videoIndex]);
+            var videoSource = new SystemVideoSourceBlock(videoSettings);
 
-            var videoSource = new VirtualVideoSourceBlock(virtualVideoSource);
-
-            var virtualAudioSource = new VirtualAudioSourceSettings
-            {
-                Channels = 2,
-                SampleRate = 44100,
-            };
-
-            var audioSource = new VirtualAudioSourceBlock(virtualAudioSource);
+            // Audio source
+            var audioSettings = new AudioCaptureDeviceSourceSettings(audioDevices[audioIndex]);
+            var audioSource = new SystemAudioSourceBlock(audioSettings);
 
             // H264/AAC encoders
             var h264Settings = new OpenH264EncoderSettings();
             var h264Encoder = new H264EncoderBlock(h264Settings);
             var aacEncoder = new AACEncoderBlock();
 
-            // HLS sink - automatically uses hlssink3 or hlscmafsink (if available), falls back to hlssink2
+            // HLS sink
             var settings = new HLSSinkSettings
             {
                 Location = Path.Combine(AppContext.BaseDirectory, "segment_%05d.ts"),
                 MaxFiles = 10,
                 PlaylistLength = 5,
                 PlaylistLocation = Path.Combine(AppContext.BaseDirectory, "playlist.m3u8"),
-                PlaylistRoot = URL,
+                PlaylistRoot = URL.TrimEnd('/'),
                 SendKeyframeRequests = true,
                 TargetDuration = TimeSpan.FromSeconds(5),
                 Custom_HTTP_Server_Enabled = true,
@@ -82,10 +120,25 @@ namespace HLSStreamer
             pipeline.Connect(aacEncoder.Output, hlsSink.CreateNewInput(MediaBlockPadMediaType.Audio));
 
             // Start
-            pipeline.Start();
+            var startResult = pipeline.Start();
+            if (!startResult)
+            {
+                Console.WriteLine("Failed to start the pipeline. Check GStreamer installation and dependencies.");
+                pipeline.Dispose();
+                return;
+            }
 
-            Console.WriteLine($"Open {URL} in your web browser. Press 'Enter' to stop");
+            Console.WriteLine("Pipeline started successfully. Generating HLS segments...");
+            Console.WriteLine("Please wait a few seconds for the first segment to be created.");
+            Console.WriteLine($"Then open {URL}index.htm in your web browser.");
+            Console.WriteLine("Press 'Enter' to stop streaming");
             Console.ReadLine();
+
+            // Cleanup
+            Console.WriteLine("Stopping pipeline...");
+            pipeline.Stop();
+            pipeline.Dispose();
+            Console.WriteLine("Pipeline stopped and disposed.");
         }
 
         /// <summary>
@@ -95,7 +148,7 @@ namespace HLSStreamer
         /// <param name="e">The <see cref="VisioForge.Core.Types.Events.ErrorsEventArgs"/> instance containing the event data.</param>
         private static void Pipeline_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
-            Console.WriteLine(e.Message);
+            Console.WriteLine($"ERROR: {e.Message}");
         }
     }
 }

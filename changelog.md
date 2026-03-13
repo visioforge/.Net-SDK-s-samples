@@ -9,6 +9,11 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.3.11
+
+* [Core] Device enumeration: Blackmagic ATEM and Web Presenter devices now appear in regular video/audio device lists instead of being filtered as Decklink hardware. These devices use standard USB/UVC drivers, not the Decklink SDK. Applies to both DirectShow and GStreamer enumeration paths.
+* [Core] RTSP info reader: Added audio channel count and sample rate parsing from SDP rtpmap and GStreamer pad caps.
+
 ## 2026.2.16
 
 * [Media Blocks SDK .Net] Added PreEventRecordingBlock for circular buffer (pre-event) video recording with configurable buffer duration, keyframe-aware drain, and automatic post-event stop

@@ -80,9 +80,16 @@
                             Height="70" Margin="2" Click="bt360Right_Click"/>
 
                     <!-- Down button -->
-                    <Button x:Name="bt360Down" Grid.Row="2" Grid.Column="1" Content="Down" 
+                    <Button x:Name="bt360Down" Grid.Row="2" Grid.Column="1" Content="Down"
                             Height="35" Margin="2" Click="bt360Down_Click"/>
                 </Grid>
+
+                <!-- VR Mode selector -->
+                <Label Content="VR Mode:" Margin="0,10,0,2"/>
+                <ComboBox x:Name="cbVRMode" SelectedIndex="0" SelectionChanged="cbVRMode_SelectionChanged">
+                    <ComboBoxItem Content="Equirectangular"/>
+                    <ComboBoxItem Content="Cubemap"/>
+                </ComboBox>
             </StackPanel>
         </Grid>
 

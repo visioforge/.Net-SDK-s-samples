@@ -51,8 +51,8 @@
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.3.8" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.3.8" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.3.12" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.3.12" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
@@ -61,8 +61,8 @@
   </ItemGroup>
   <!-- VisioForge SDK Deployment -->
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.3.8" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2026.3.8" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.3.12" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2026.3.12" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.33" />
