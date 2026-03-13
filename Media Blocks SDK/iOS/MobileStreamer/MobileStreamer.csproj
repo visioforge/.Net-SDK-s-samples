@@ -23,6 +23,7 @@
     <CreatePackage>false</CreatePackage>
     <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
     <MtouchDebug>True</MtouchDebug>
+    <MtouchInterpreter>all</MtouchInterpreter>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.3.12" />

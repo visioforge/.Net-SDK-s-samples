@@ -17,10 +17,10 @@ jobs:
     runs-on: windows-2022
 
     steps:
-    - uses: actions/checkout@v2
-    
+    - uses: actions/checkout@v4
+
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
           9.0.x
@@ -28,9 +28,9 @@ jobs:
 
     - name: Install workloads
       run: dotnet workload install android
-          
+
     - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
+      uses: microsoft/setup-msbuild@v2
         
     ## Media Blocks
 
