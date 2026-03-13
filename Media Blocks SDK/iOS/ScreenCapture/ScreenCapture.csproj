@@ -14,7 +14,7 @@
     <CreatePackage>false</CreatePackage>
     <WarningLevel>4</WarningLevel>
     <MtouchLink>SdkOnly</MtouchLink>
-    <MtouchInterpreter>all</MtouchInterpreter>
+    <MtouchInterpreter>VisioForge.Core.dll</MtouchInterpreter>
     <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
     <MtouchDebug>True</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
@@ -24,7 +24,7 @@
     <CreatePackage>false</CreatePackage>
     <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
     <MtouchDebug>True</MtouchDebug>
-    <MtouchInterpreter>all</MtouchInterpreter>
+    <MtouchInterpreter>VisioForge.Core.dll</MtouchInterpreter>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.3.12" />
