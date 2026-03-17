@@ -9,6 +9,13 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.3.17
+
+* [Media Blocks SDK .Net] Added UDPSinkBlock and MultiUDPSinkBlock for raw UDP streaming output with single and multi-destination support
+* [Media Blocks SDK .Net] Added UDPMPEGTSSinkBlock and MultiUDPMPEGTSSinkBlock for MPEG-TS multiplexed UDP streaming with single and multi-destination support
+* [Media Blocks SDK .Net] Added UDPSinkSettings, MultiUDPSinkSettings, and UDPSinkSettingsBase for UDP sink configuration with IPv6 support and URL parsing
+* [Media Blocks SDK .Net] Added UDP MPEG-TS streamer demo (screen capture to UDP output)
+
 ## 2026.3.11
 
 * [Core] Device enumeration: Blackmagic ATEM and Web Presenter devices now appear in regular video/audio device lists instead of being filtered as Decklink hardware. These devices use standard USB/UVC drivers, not the Decklink SDK. Applies to both DirectShow and GStreamer enumeration paths.
