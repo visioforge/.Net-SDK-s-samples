@@ -6,6 +6,6 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.3.17" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.3.18" />
   </ItemGroup>
 </Project>
