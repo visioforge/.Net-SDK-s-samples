@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.3.18
+
+* [Media Blocks SDK .Net] Fixed missed context menu issue in WPF VideoView
+
 ## 2026.3.17
 
 * [Media Blocks SDK .Net] Added UDPSinkBlock and MultiUDPSinkBlock for raw UDP streaming output with single and multi-destination support
@@ -85,7 +89,7 @@ Changes and updates for all .Net SDKs.
 * [Media Blocks SDK .Net] RTSPSourceBlock: Fixed video freeze when audio capture is disabled for cameras with multiple audio streams
 * [Media Blocks SDK .Net] RTSPRAWSourceBlock: Added fakesink handling for disabled audio streams to prevent pipeline stalls
 * [Core] MediaInfoReaderCore: Added logging for discovered audio, video, and RTP streams
-* [Core] MediaInfoReaderCore: Fixed excessive blocksize (5MB) being set for RTSP sources, improving discovery speed
+* [Core] MediaInfoReaderCore: Fixed excessive block size (5MB) being set for RTSP sources, improving discovery speed
 
 ## 2026.1.10
 
