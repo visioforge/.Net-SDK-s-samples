@@ -13,6 +13,18 @@ This application captures video and audio from local devices, encodes them to H.
 * `AACEncoderBlock` - AAC audio encoding
 * `RISTMPEGTSSinkBlock` - RIST MPEG-TS streaming output
 
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> TeeBlock_Video[TeeBlock]
+    TeeBlock_Video -- video --> VideoRendererBlock
+    TeeBlock_Video -- video --> H264EncoderBlock --> RISTMPEGTSSinkBlock
+    SystemAudioSourceBlock -- audio --> TeeBlock_Audio[TeeBlock]
+    TeeBlock_Audio -- audio --> AudioRendererBlock
+    TeeBlock_Audio -- audio --> AACEncoderBlock --> RISTMPEGTSSinkBlock
+```
+
 ## Supported frameworks
 
 * .Net 10

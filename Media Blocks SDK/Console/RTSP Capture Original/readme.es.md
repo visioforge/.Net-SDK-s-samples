@@ -7,6 +7,14 @@ Esta aplicación guarda la salida en formato MP4.
 * `AACEncoderBlock` - AAC audio encoding
 * `MP4SinkBlock` - MP4 file output
 
+## Pipeline
+
+```mermaid
+graph LR
+    RTSPRAWSourceBlock -- video --> MP4SinkBlock
+    RTSPRAWSourceBlock -- audio --> DecodeBinBlock --> AACEncoderBlock --> MP4SinkBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -16,6 +24,7 @@ Esta aplicación guarda la salida en formato MP4.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

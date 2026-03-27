@@ -4,7 +4,16 @@ This application includes AI-powered face detection.
 
 ## Used media blocks
 
+* `SystemVideoSourceBlock` - Webcam video capture
+* `DNNFaceDetectorBlock` - DNN-based face detection/blur
 * `VideoRendererBlock` - Real-time video display
+
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> DNNFaceDetectorBlock -- video --> VideoRendererBlock
+```
 
 ## Supported frameworks
 
@@ -15,6 +24,7 @@ This application includes AI-powered face detection.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

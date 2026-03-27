@@ -4,9 +4,17 @@ Esta aplicación se conecta a cámaras RTSP/IP para transmisión de video en viv
 
 ## Bloques de medios utilizados
 
-* `RTSPSourceBlock` - RTSP stream input
-* `VideoRendererBlock` - Real-time video display
-* `AudioRendererBlock` - Real-time audio playback
+* `RTSPSourceBlock` - Entrada de flujo RTSP
+* `VideoRendererBlock` - Visualización de video en tiempo real
+* `AudioRendererBlock` - Reproducción de audio en tiempo real
+
+## Pipeline
+
+```mermaid
+graph LR
+    RTSPSourceBlock -- video --> VideoRendererBlock
+    RTSPSourceBlock -- audio --> AudioRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -17,6 +25,7 @@ Esta aplicación se conecta a cámaras RTSP/IP para transmisión de video en viv
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

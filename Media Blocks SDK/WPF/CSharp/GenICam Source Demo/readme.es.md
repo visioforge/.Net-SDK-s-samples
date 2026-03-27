@@ -4,9 +4,20 @@ Esta aplicación divide el flujo de video para múltiples salidas.
 
 ## Bloques de medios utilizados
 
-* `H264EncoderBlock` - H.264/AVC video encoding
+* `GenICamSourceBlock` - GenICam camera source
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
+* `H264EncoderBlock` - H.264/AVC video encoding
+* `MP4OutputBlock` - MP4 file output
+
+## Pipeline
+
+```mermaid
+graph LR
+    GenICamSourceBlock -- video --> TeeBlock
+    TeeBlock -- video --> VideoRendererBlock
+    TeeBlock -- video --> MP4OutputBlock
+```
 
 ## Frameworks soportados
 
@@ -17,6 +28,7 @@ Esta aplicación divide el flujo de video para múltiples salidas.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

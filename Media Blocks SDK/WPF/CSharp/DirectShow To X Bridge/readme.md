@@ -4,8 +4,18 @@ This application demonstrates the SDK capabilities.
 
 ## Used media blocks
 
+* `PushVideoSourceBlock` - Push video frames from DirectShow
+* `PushAudioSourceBlock` - Push audio frames from DirectShow
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
+
+## Pipeline
+
+```mermaid
+graph LR
+    PushVideoSourceBlock -- video --> VideoRendererBlock
+    PushAudioSourceBlock -- audio --> AudioRendererBlock
+```
 
 ## Supported frameworks
 
@@ -16,6 +26,7 @@ This application demonstrates the SDK capabilities.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

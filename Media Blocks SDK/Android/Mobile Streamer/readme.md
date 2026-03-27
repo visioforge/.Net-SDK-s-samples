@@ -4,6 +4,7 @@ This application captures system audio output, streams to YouTube Live, streams 
 
 ## Used media blocks
 
+* `SystemVideoSourceBlock` - System video camera capture
 * `SystemAudioSourceBlock` - System audio capture
 * `H264EncoderBlock` - H.264/AVC video encoding
 * `AACEncoderBlock` - AAC audio encoding
@@ -12,6 +13,21 @@ This application captures system audio output, streams to YouTube Live, streams 
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
+
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock --> TeeBlock_Video
+    TeeBlock_Video -- preview --> VideoRendererBlock
+    TeeBlock_Video -- stream --> H264EncoderBlock
+    H264EncoderBlock -- video --> StreamingSink[YouTubeSinkBlock / FacebookLiveSinkBlock]
+
+    SystemAudioSourceBlock --> TeeBlock_Audio
+    TeeBlock_Audio -- preview --> AudioRendererBlock
+    TeeBlock_Audio -- stream --> AACEncoderBlock
+    AACEncoderBlock -- audio --> StreamingSink
+```
 
 ## Supported frameworks
 
@@ -22,6 +38,7 @@ This application captures system audio output, streams to YouTube Live, streams 
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

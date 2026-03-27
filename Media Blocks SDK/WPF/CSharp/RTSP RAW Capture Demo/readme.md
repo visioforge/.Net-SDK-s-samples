@@ -56,6 +56,20 @@ This approach provides:
 - **Lossless video quality** - Original H264/HEVC stream preserved
 - **Flexibility** - Choose whether to re-encode audio based on compatibility needs
 
+## Pipeline
+
+```mermaid
+graph LR
+    subgraph Preview Pipeline
+        RTSPSourceBlock -- video --> VideoRendererBlock
+        RTSPSourceBlock -- audio --> AudioRendererBlock
+    end
+    subgraph Recording Pipeline
+        RTSPRAWSourceBlock -- video raw --> MP4SinkBlock
+        RTSPRAWSourceBlock -- audio --> AACEncoderBlock --> MP4SinkBlock
+    end
+```
+
 ## Requirements
 
 - Windows 10/11

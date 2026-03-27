@@ -10,6 +10,17 @@ Esta aplicación captura contenido de escritorio/pantalla, guarda la salida en f
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
 
+## Pipeline
+
+```mermaid
+graph LR
+    ScreenSourceBlock -- video --> VideoResizeBlock
+    VideoResizeBlock -- video --> TeeBlock
+    TeeBlock -- video --> VideoRendererBlock
+    TeeBlock -- video --> H264EncoderBlock
+    H264EncoderBlock -- h264 --> MP4SinkBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -19,6 +30,7 @@ Esta aplicación captura contenido de escritorio/pantalla, guarda la salida en f
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

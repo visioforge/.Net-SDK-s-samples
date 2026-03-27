@@ -11,6 +11,16 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * `NDISourceBlock` - NDI network input
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    Sources["Multiple Sources"] -- video/audio --> LiveVideoCompositor
+    LiveVideoCompositor -- video --> VideoView
+    LiveVideoCompositor -- audio --> AudioOutput
+    LiveVideoCompositor -- video/audio --> StreamOutput["Stream/File Output"]
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -20,6 +30,7 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

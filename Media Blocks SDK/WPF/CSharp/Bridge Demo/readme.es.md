@@ -1,15 +1,39 @@
 # Media Blocks SDK .Net - Bridge Demo (C#/WPF)
 
-Esta aplicación genera fotogramas de video sintéticos para pruebas y benchmarking, divide el flujo de video para múltiples salidas.
+Esta aplicacion demuestra la comunicacion entre pipelines usando bloques bridge para transferir video y audio entre un pipeline fuente y un pipeline de salida a archivo.
 
 ## Bloques de medios utilizados
 
-* `VirtualVideoSourceBlock` - Synthetic video generation
-* `H264EncoderBlock` - H.264/AVC video encoding
-* `AACEncoderBlock` - AAC audio encoding
-* `TeeBlock` - Stream splitting
-* `VideoRendererBlock` - Real-time video display
-* `AudioRendererBlock` - Real-time audio playback
+* `VirtualVideoSourceBlock` - Generacion de video sintetico
+* `VirtualAudioSourceBlock` - Generacion de audio sintetico
+* `TeeBlock` - Division de flujo (video y audio)
+* `BridgeVideoSinkBlock` - Salida de bridge de video
+* `BridgeVideoSourceBlock` - Entrada de bridge de video
+* `BridgeAudioSinkBlock` - Salida de bridge de audio
+* `BridgeAudioSourceBlock` - Entrada de bridge de audio
+* `VideoRendererBlock` - Visualizacion de video en tiempo real
+* `AudioRendererBlock` - Reproduccion de audio en tiempo real
+* `MP4OutputBlock` - Grabacion de archivo MP4
+* `H264EncoderBlock` - Codificacion de video H.264/AVC
+* `AACEncoderBlock` - Codificacion de audio AAC
+
+## Pipeline
+
+```mermaid
+graph LR
+    subgraph Source Pipeline
+        VirtualVideoSourceBlock -- video --> TeeBlock_Video
+        TeeBlock_Video -- video --> VideoRendererBlock
+        TeeBlock_Video -- video --> BridgeVideoSinkBlock
+        VirtualAudioSourceBlock -- audio --> TeeBlock_Audio
+        TeeBlock_Audio -- audio --> AudioRendererBlock
+        TeeBlock_Audio -- audio --> BridgeAudioSinkBlock
+    end
+    subgraph File Output Pipeline
+        BridgeVideoSourceBlock -- video --> MP4OutputBlock
+        BridgeAudioSourceBlock -- audio --> MP4OutputBlock
+    end
+```
 
 ## Frameworks soportados
 
@@ -20,6 +44,7 @@ Esta aplicación genera fotogramas de video sintéticos para pruebas y benchmark
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

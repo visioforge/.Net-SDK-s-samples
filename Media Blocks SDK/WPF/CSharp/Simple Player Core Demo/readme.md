@@ -1,6 +1,18 @@
 # Media Blocks SDK .Net - Simple Player Core Demo (C#/WPF)
 
-This application demonstrates the SDK capabilities.
+This application plays media files using the SimplePlayerCoreX high-level API.
+
+## Used media blocks
+
+* `SimplePlayerCoreX` - High-level media player
+
+## Pipeline
+
+```mermaid
+graph LR
+    SimplePlayerCoreX -- video --> VideoView
+    SimplePlayerCoreX -- audio --> AudioOutput
+```
 
 ## Supported frameworks
 
@@ -11,6 +23,7 @@ This application demonstrates the SDK capabilities.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

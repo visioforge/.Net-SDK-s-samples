@@ -9,6 +9,18 @@ Esta aplicación captura la salida de audio del sistema, divide el flujo de vide
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -->|Video| ImageOverlayCairoBlock -->|Video| VideoTeeBlock[TeeBlock]
+    SystemAudioSourceBlock -->|Audio| AudioTeeBlock[TeeBlock]
+    VideoTeeBlock -->|Video| VideoRendererBlock
+    AudioTeeBlock -->|Audio| AudioRendererBlock
+    VideoTeeBlock -->|Video| MP4OutputBlock
+    AudioTeeBlock -->|Audio| MP4OutputBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -18,6 +30,7 @@ Esta aplicación captura la salida de audio del sistema, divide el flujo de vide
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

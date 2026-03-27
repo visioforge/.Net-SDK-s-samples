@@ -7,6 +7,13 @@ This application plays media files using the universal source decoder.
 * `UniversalSourceBlock` - Universal media file playback
 * `H264EncoderBlock` - H.264/AVC video encoding
 
+## Pipeline
+
+```mermaid
+graph LR
+    UniversalSourceBlock -- video --> RTSPServerBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -16,6 +23,7 @@ This application plays media files using the universal source decoder.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

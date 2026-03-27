@@ -563,6 +563,24 @@ namespace Live_Video_Compositor_Demo
             }
         }
 
+        private async Task AddVirtualCameraOutputAsync()
+        {
+            var vcSettings = new VirtualCameraSinkSettings();
+            var vcBlock = new VirtualCameraSinkBlock(vcSettings);
+            var name = "Virtual Camera";
+            var output = new LVCVideoAudioOutput(name, _compositor, vcBlock, autostart: true);
+
+            if (await _compositor.Output_AddAsync(output))
+            {
+                lbOutputs.Items.Add(name);
+                lbOutputs.SelectedIndex = lbOutputs.Items.Count - 1;
+            }
+            else
+            {
+                output.Dispose();
+            }
+        }
+
         /// <summary>
         /// Add audio source async.
         /// </summary>
@@ -1147,6 +1165,15 @@ namespace Live_Video_Compositor_Demo
             ctx.Items.Add(new Separator());
             ctx.Items.Add(miYouTube);
             ctx.Items.Add(miFacebook);
+            ctx.Items.Add(new Separator());
+
+            var miVirtualCamera = new MenuItem() { Header = "Virtual Camera" };
+            miVirtualCamera.Click += async (senderm, args) =>
+            {
+                await AddVirtualCameraOutputAsync();
+            };
+            ctx.Items.Add(miVirtualCamera);
+
             ctx.PlacementTarget = sender as Button;
             ctx.IsOpen = true;
         }

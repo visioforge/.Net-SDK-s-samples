@@ -56,6 +56,20 @@ Este enfoque proporciona:
 - **Calidad de video sin pérdidas** - Transmisión H264/HEVC original preservada
 - **Flexibilidad** - Elija si recodificar audio según necesidades de compatibilidad
 
+## Pipeline
+
+```mermaid
+graph LR
+    subgraph Preview Pipeline
+        RTSPSourceBlock -- video --> VideoRendererBlock
+        RTSPSourceBlock -- audio --> AudioRendererBlock
+    end
+    subgraph Recording Pipeline
+        RTSPRAWSourceBlock -- video raw --> MP4SinkBlock
+        RTSPRAWSourceBlock -- audio --> AACEncoderBlock --> MP4SinkBlock
+    end
+```
+
 ## Requisitos
 
 - Windows 10/11

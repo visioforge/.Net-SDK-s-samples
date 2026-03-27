@@ -14,6 +14,23 @@ This application captures system audio output, saves output to MP4 format, captu
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> VideoSampleGrabberBlock
+    VideoSampleGrabberBlock -- video --> TeeBlock-Video
+    TeeBlock-Video -- video --> VideoRendererBlock
+    TeeBlock-Video -- video --> H264EncoderBlock
+    H264EncoderBlock -- h264 --> MP4SinkBlock
+
+    SystemAudioSourceBlock -- audio --> AudioSampleGrabberBlock
+    AudioSampleGrabberBlock -- audio --> TeeBlock-Audio
+    TeeBlock-Audio -- audio --> AudioRendererBlock
+    TeeBlock-Audio -- audio --> AACEncoderBlock
+    AACEncoderBlock -- aac --> MP4SinkBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -23,6 +40,7 @@ This application captures system audio output, saves output to MP4 format, captu
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

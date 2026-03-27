@@ -13,6 +13,18 @@ Esta aplicación captura la salida de audio del sistema, guarda la salida en for
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> TeeBlock_Video[TeeBlock]
+    TeeBlock_Video -- video --> VideoRendererBlock
+    TeeBlock_Video -- video --> VideoEncoder --> FileSink["MP4/WebM Sink"]
+    SystemAudioSourceBlock -- audio --> TeeBlock_Audio[TeeBlock]
+    TeeBlock_Audio -- audio --> AudioRendererBlock
+    TeeBlock_Audio -- audio --> AudioEncoder --> FileSink
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -22,6 +34,7 @@ Esta aplicación captura la salida de audio del sistema, guarda la salida en for
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

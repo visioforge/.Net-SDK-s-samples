@@ -6,6 +6,13 @@ This application demonstrates the SDK capabilities.
 
 * `VideoRendererBlock` - Real-time video display
 
+## Pipeline
+
+```mermaid
+graph LR
+    StreamSourceBlock -->|Data| DecodeBinBlock -->|Video| VideoRendererBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -15,6 +22,7 @@ This application demonstrates the SDK capabilities.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

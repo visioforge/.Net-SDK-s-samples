@@ -8,6 +8,15 @@ This application captures desktop/screen content, splits video stream for multip
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
 
+## Pipeline
+
+```mermaid
+graph LR
+    ScreenSourceBlock -->|Video| TeeBlock
+    TeeBlock -->|Video| VideoRendererBlock
+    TeeBlock -->|Video| DecklinkVideoSinkBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -17,6 +26,7 @@ This application captures desktop/screen content, splits video stream for multip
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

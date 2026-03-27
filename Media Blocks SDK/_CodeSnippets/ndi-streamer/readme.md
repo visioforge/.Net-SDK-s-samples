@@ -9,6 +9,16 @@ This application captures desktop/screen content, streams via NDI network protoc
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
 
+## Pipeline
+
+```mermaid
+graph LR
+    ScreenSourceBlock -->|Video| TeeBlock
+    TeeBlock -->|Video| VideoRendererBlock
+    TeeBlock -->|Video| NDISinkBlock
+    VirtualAudioSourceBlock -->|Audio| NDISinkBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -18,6 +28,7 @@ This application captures desktop/screen content, streams via NDI network protoc
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

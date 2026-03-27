@@ -4,7 +4,15 @@ This application demonstrates the SDK capabilities.
 
 ## Used media blocks
 
+* `SpinnakerSourceBlock` - FLIR Spinnaker camera source
 * `VideoRendererBlock` - Real-time video display
+
+## Pipeline
+
+```mermaid
+graph LR
+    SpinnakerSourceBlock -- video --> VideoRendererBlock
+```
 
 ## Supported frameworks
 
@@ -15,6 +23,7 @@ This application demonstrates the SDK capabilities.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

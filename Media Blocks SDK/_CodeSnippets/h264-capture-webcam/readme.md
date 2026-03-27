@@ -1,12 +1,23 @@
-# Media Blocks SDK .Net - h264-capture-webcam (C#/Console)
+# Media Blocks SDK .Net - h264-capture-webcam (C#/WinForms)
 
-This application saves output to MP4 format, splits video stream for multiple outputs.
+This application captures H264 video from a webcam, previews it with decoding, and simultaneously saves the raw H264 stream to an MP4 file.
 
 ## Used media blocks
 
-* `MP4SinkBlock` - MP4 file output
+* `SystemVideoSourceBlock` - Webcam video capture
 * `TeeBlock` - Stream splitting
+* `H264DecoderBlock` - H.264/AVC video decoding
 * `VideoRendererBlock` - Real-time video display
+* `MP4SinkBlock` - MP4 file output
+
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> TeeBlock
+    TeeBlock --> H264DecoderBlock --> VideoRendererBlock
+    TeeBlock --> MP4SinkBlock
+```
 
 ## Supported frameworks
 
@@ -17,6 +28,7 @@ This application saves output to MP4 format, splits video stream for multiple ou
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

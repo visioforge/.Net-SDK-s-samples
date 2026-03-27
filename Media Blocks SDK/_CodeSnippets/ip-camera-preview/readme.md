@@ -1,12 +1,20 @@
-# Media Blocks SDK .Net - ip-camera-preview (C#/Console)
+# Media Blocks SDK .Net - ip-camera-preview (C#/WinForms)
 
-This application connects to RTSP/IP cameras for live video streaming.
+This application connects to an RTSP/IP camera for live video and audio preview.
 
 ## Used media blocks
 
 * `RTSPSourceBlock` - RTSP stream input
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
+
+## Pipeline
+
+```mermaid
+graph LR
+    RTSPSourceBlock -- video --> VideoRendererBlock
+    RTSPSourceBlock -- audio --> AudioRendererBlock
+```
 
 ## Supported frameworks
 
@@ -17,6 +25,7 @@ This application connects to RTSP/IP cameras for live video streaming.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

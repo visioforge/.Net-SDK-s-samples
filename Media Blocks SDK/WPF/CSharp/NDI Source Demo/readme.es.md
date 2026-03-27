@@ -8,6 +8,14 @@ Esta aplicación recibe video vía protocolo de red NDI.
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    NDISourceBlock -- video --> VideoRendererBlock
+    NDISourceBlock -- audio --> AudioRendererBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -17,6 +25,7 @@ Esta aplicación recibe video vía protocolo de red NDI.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

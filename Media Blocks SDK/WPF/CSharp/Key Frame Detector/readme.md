@@ -1,6 +1,20 @@
 # Media Blocks SDK .Net - Key Frame Detector (C#/WPF)
 
-This application demonstrates the SDK capabilities.
+This application detects key frames in video files and saves timestamps to JSON.
+
+## Used media blocks
+
+* `BasicFileSourceBlock` - File source
+* `UniversalDemuxBlock` - Media demuxer
+* `KeyFrameDetectorBlock` - Key frame detection
+* `NullRendererBlock` - Null output sink
+
+## Pipeline
+
+```mermaid
+graph LR
+    BasicFileSourceBlock --> UniversalDemuxBlock -- video --> KeyFrameDetectorBlock --> NullRendererBlock
+```
 
 ## Supported frameworks
 
@@ -11,6 +25,7 @@ This application demonstrates the SDK capabilities.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

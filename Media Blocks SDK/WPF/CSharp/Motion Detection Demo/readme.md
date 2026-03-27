@@ -4,7 +4,16 @@ This application demonstrates the SDK capabilities.
 
 ## Used media blocks
 
+* `SystemVideoSourceBlock` - Webcam video capture
+* `CVMotionCellsBlock` - Motion detection
 * `VideoRendererBlock` - Real-time video display
+
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> CVMotionCellsBlock -- video --> VideoRendererBlock
+```
 
 ## Supported frameworks
 
@@ -15,6 +24,7 @@ This application demonstrates the SDK capabilities.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

@@ -1,10 +1,20 @@
 # Media Blocks SDK .Net - Barcode Detection Demo (C#/WPF)
 
-Esta aplicación realiza reconocimiento de códigos de barras.
+Esta aplicación realiza detección de códigos de barras en tiempo real desde una fuente de cámara con visualización en pantalla.
 
 ## Bloques de medios utilizados
 
-* `VideoRendererBlock` - Real-time video display
+* `SystemVideoSourceBlock` - Captura de cámara del sistema
+* `BarcodeDetectorBlock` - Detección y reconocimiento de códigos de barras
+* `VideoRendererBlock` - Visualización de video en tiempo real
+
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> BarcodeDetectorBlock
+    BarcodeDetectorBlock -- video --> VideoRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -15,6 +25,7 @@ Esta aplicación realiza reconocimiento de códigos de barras.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

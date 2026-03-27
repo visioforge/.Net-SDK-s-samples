@@ -8,6 +8,17 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * `VideoCompositorBlock` - Multi-source compositing
 * `VideoRendererBlock` - Real-time video display
 
+## Pipeline
+
+```mermaid
+graph LR
+    UniversalSourceBlock-1 -- video --> VideoMixerBlock
+    UniversalSourceBlock-2 -- video --> VideoMixerBlock
+    VideoMixerBlock -- video --> VideoRendererBlock
+    UniversalSourceBlock-1 -- audio --> NullRendererBlock-1
+    UniversalSourceBlock-2 -- audio --> NullRendererBlock-2
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -17,6 +28,7 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

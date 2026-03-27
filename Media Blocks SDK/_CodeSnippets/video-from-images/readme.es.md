@@ -7,6 +7,15 @@ Esta aplicación divide el flujo de video para múltiples salidas.
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
 
+## Pipeline
+
+```mermaid
+graph LR
+    PushSourceBlock -->|JPEG| JPEGDecoderBlock -->|Video| TeeBlock
+    TeeBlock -->|Video| VideoRendererBlock
+    TeeBlock -->|Video| MP4OutputBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -16,6 +25,7 @@ Esta aplicación divide el flujo de video para múltiples salidas.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

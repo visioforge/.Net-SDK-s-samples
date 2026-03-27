@@ -1,14 +1,27 @@
 # Media Blocks SDK .Net - Decklink Fill-Key Demo (C#/WPF)
 
-Esta aplicación reproduce archivos multimedia usando el decodificador universal, genera fotogramas de video sintéticos para pruebas y benchmarking, compone múltiples fuentes de video en una sola salida, divide el flujo de video para múltiples salidas.
+Esta aplicación demuestra gráficos de transmisión en tiempo real con salida Decklink Fill+Key, combinando gráficos generados por WPF con fondos de video para superposiciones de transmisión profesional.
 
 ## Bloques de medios utilizados
 
-* `UniversalSourceBlock` - Universal media file playback
-* `VirtualVideoSourceBlock` - Synthetic video generation
-* `VideoCompositorBlock` - Multi-source compositing
-* `TeeBlock` - Stream splitting
-* `VideoRendererBlock` - Real-time video display
+* `PushVideoSourceBlock` - Fuente de fotogramas gráficos
+* `UniversalSourceBlock` - Fuente de video de fondo
+* `VideoMixerBlock` - Composición de video
+* `TeeBlock` - División de flujo para vista previa y salida dual
+* `VideoRendererBlock` - Vista previa de video en tiempo real
+* `DecklinkVideoSinkBlock` - Salidas de video Decklink Fill y Key
+
+## Pipeline
+
+```mermaid
+graph LR
+    PushVideoSourceBlock -- graphics --> VideoMixerBlock
+    UniversalSourceBlock -- background --> VideoMixerBlock
+    VideoMixerBlock -- video --> TeeBlock
+    TeeBlock -- video --> VideoRendererBlock
+    TeeBlock -- video --> DecklinkVideoSinkBlock_Fill
+    TeeBlock -- video --> DecklinkVideoSinkBlock_Key
+```
 
 ## Frameworks soportados
 
@@ -19,6 +32,7 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

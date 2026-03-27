@@ -4,13 +4,32 @@ Esta aplicación captura la salida de audio del sistema, transmite a YouTube Liv
 
 ## Bloques de medios utilizados
 
+* `SystemVideoSourceBlock` - System video camera capture
 * `SystemAudioSourceBlock` - System audio capture
 * `H264EncoderBlock` - H.264/AVC video encoding
 * `AACEncoderBlock` - AAC audio encoding
+* `OPUSEncoderBlock` - OPUS audio encoding
 * `YouTubeSinkBlock` - YouTube Live streaming
 * `FacebookLiveSinkBlock` - Facebook Live streaming
+* `SRTMPEGTSSinkBlock` - SRT MPEG-TS streaming
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
+
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock --> TeeBlock
+    TeeBlock -- preview --> VideoRendererBlock
+    TeeBlock -- stream --> H264EncoderBlock
+    H264EncoderBlock -- video --> StreamingSink
+
+    SystemAudioSourceBlock --> AudioEncoder
+    AudioEncoder -- audio --> StreamingSink
+
+    StreamingSink["YouTubeSinkBlock / FacebookLiveSinkBlock / SRTMPEGTSSinkBlock"]
+    AudioEncoder["AACEncoderBlock / OPUSEncoderBlock"]
+```
 
 ## Frameworks soportados
 
@@ -21,6 +40,7 @@ Esta aplicación captura la salida de audio del sistema, transmite a YouTube Liv
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

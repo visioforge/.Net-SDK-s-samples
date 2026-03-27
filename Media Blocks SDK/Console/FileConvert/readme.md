@@ -9,6 +9,14 @@ This application plays media files using the universal source decoder, saves out
 * `AACEncoderBlock` - AAC audio encoding
 * `MP4SinkBlock` - MP4 file output
 
+## Pipeline
+
+```mermaid
+graph LR
+    UniversalSourceBlock -- video --> H264EncoderBlock --> MP4SinkBlock
+    UniversalSourceBlock -- audio --> AACEncoderBlock --> MP4SinkBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -18,6 +26,7 @@ This application plays media files using the universal source decoder, saves out
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

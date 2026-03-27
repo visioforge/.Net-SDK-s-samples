@@ -4,8 +4,15 @@ Esta aplicación demuestra las capacidades del SDK.
 
 ## Bloques de medios utilizados
 
+* `VNCSourceBlock` - VNC remote desktop source
 * `VideoRendererBlock` - Real-time video display
-* `AudioRendererBlock` - Real-time audio playback
+
+## Pipeline
+
+```mermaid
+graph LR
+    VNCSourceBlock -- video --> VideoRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -16,6 +23,7 @@ Esta aplicación demuestra las capacidades del SDK.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

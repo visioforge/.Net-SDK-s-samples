@@ -9,6 +9,14 @@ This application captures system audio output, captures individual video frames 
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -->|Video| VideoSampleGrabberBlock -->|Video| VideoRendererBlock
+    SystemAudioSourceBlock -->|Audio| AudioRendererBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -18,6 +26,7 @@ This application captures system audio output, captures individual video frames 
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 
