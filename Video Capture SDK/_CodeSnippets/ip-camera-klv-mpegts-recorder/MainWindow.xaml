@@ -1,0 +1,55 @@
+<Window x:Class="ip_camera_klv_mpegts_recorder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        Title="Video Capture SDK .Net - KLV MPEG-TS Recorder / Streamer"
+        Width="900" Height="650"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="300" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Video preview -->
+        <vf:VideoView x:Name="VideoView1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                       Background="Black" Margin="0,0,10,0" />
+
+        <!-- Settings -->
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Source UDP MPEGTS URL:" Margin="0,0,0,4" />
+            <TextBox x:Name="edURL" Text="udp://239.1.1.1:1234" />
+
+            <TextBlock Text="Output mode:" Margin="0,8,0,4" />
+            <ComboBox x:Name="cbOutputMode" SelectionChanged="cbOutputMode_SelectionChanged">
+                <ComboBoxItem Content="MPEG-TS File (MF Mux)" IsSelected="True" />
+                <ComboBoxItem Content="UDP Streaming (ffmpeg.exe)" />
+            </ComboBox>
+
+            <TextBlock Text="Output file / UDP URL:" Margin="0,8,0,4" />
+            <TextBox x:Name="edOutput" Text="output.ts" />
+        </StackPanel>
+
+        <!-- KLV log -->
+        <DockPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock DockPanel.Dock="Top" Text="KLV Packets:" Margin="0,0,0,4" />
+            <TextBox x:Name="tbKLV" FontSize="11" IsReadOnly="True"
+                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                     TextWrapping="NoWrap" AcceptsReturn="True" />
+        </DockPanel>
+
+        <!-- Controls -->
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"
+                    Orientation="Horizontal" Margin="0,10,0,0">
+            <Button x:Name="btStart" Content="Start" Width="80" Margin="0,0,8,0"
+                    Click="btStart_Click" />
+            <Button x:Name="btStop" Content="Stop" Width="80" IsEnabled="False"
+                    Click="btStop_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

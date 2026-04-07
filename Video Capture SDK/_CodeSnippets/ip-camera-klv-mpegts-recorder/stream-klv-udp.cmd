@@ -1,0 +1,3 @@
+@echo off
+echo Streaming KLV2.ts to UDP multicast 239.1.1.1:1234 (looped)...
+ffmpeg -stream_loop -1 -re -i "C:\Samples\KLV\KLV2.ts" -map 0 -c copy -f mpegts udp://239.1.1.1:1234?pkt_size=1316

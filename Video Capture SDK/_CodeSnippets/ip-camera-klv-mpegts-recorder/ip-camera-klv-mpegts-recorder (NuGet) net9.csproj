@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>net9.0-windows</TargetFrameworks>
+    <RootNamespace>ip_camera_klv_mpegts_recorder</RootNamespace>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.4.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.4.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2026.4.7" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2026.4.7" />
+  </ItemGroup>
+</Project>
