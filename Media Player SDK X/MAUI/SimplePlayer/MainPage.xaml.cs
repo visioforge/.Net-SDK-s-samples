@@ -98,7 +98,7 @@ namespace Simple_Player_MAUI
                 // update UI controls using invoke
                 await MainThread.InvokeOnMainThreadAsync(() =>
                 {
-                    btSpeed.Text = "SPEED: 1X";
+                    btSpeed.Text = "1X";
                     btPlayPause.Text = "PLAY";
                     slSeeking.Value = 0;
                     lbDuration.Text = "00:00:00";
@@ -192,7 +192,9 @@ namespace Simple_Player_MAUI
             try
             {
                 var pos = await _player.Position_GetAsync();
+                var duration = await _player.DurationAsync();
                 var progress = (int)pos.TotalMilliseconds;
+                var durationMs = duration.TotalMilliseconds;
 
                 await MainThread.InvokeOnMainThreadAsync(() =>
                 {
@@ -203,6 +205,11 @@ namespace Simple_Player_MAUI
 
                     _isTimerUpdate = true;
 
+                    if (durationMs > 0)
+                    {
+                        slSeeking.Maximum = durationMs;
+                    }
+
                     if (progress > slSeeking.Maximum)
                     {
                         slSeeking.Value = slSeeking.Maximum;
@@ -212,9 +219,8 @@ namespace Simple_Player_MAUI
                         slSeeking.Value = progress;
                     }
 
-                    // This is where the received data is passed
-                    lbPosition.Text = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
-                    lbDuration.Text = $"{_player.Duration().ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                    lbPosition.Text = pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
+                    lbDuration.Text = duration.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
 
                     _isTimerUpdate = false;
                 });
@@ -261,22 +267,25 @@ namespace Simple_Player_MAUI
         {
             try
             {
+                var result = await FilePicker.Default.PickAsync();
+                if (result == null)
+                {
+                    return;
+                }
+
                 await StopAllAsync();
 
-                btPlayPause.Text = "PLAY";
+                _filename = result.FullPath;
 
-                var result = await FilePicker.Default.PickAsync();
-                if (result != null)
-                {
-                    _filename = result.FullPath;
-                    lbFilename.Text = _filename;
-                    lbFilename.IsVisible = true;
-                }
+                await _player.OpenAsync(await UniversalSourceSettings.CreateAsync(new Uri(_filename)));
+                await _player.PlayAsync();
+
+                _tmPosition.Start();
+                btPlayPause.Text = "PAUSE";
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error opening file: {ex.Message}");
-                // The user canceled or something went wrong
             }
         }
 
@@ -331,22 +340,22 @@ namespace Simple_Player_MAUI
         /// </summary>
         private async void btSpeed_Clicked(object? sender, EventArgs e)
         {         
-            if (btSpeed.Text == "SPEED: 1X")
+            if (btSpeed.Text == "1X")
             {
                 // set 2x
-                btSpeed.Text = "SPEED: 2X";
+                btSpeed.Text = "2X";
                 await _player.Rate_SetAsync(2.0);
             }
-            else if (btSpeed.Text == "SPEED: 2X")
+            else if (btSpeed.Text == "2X")
             {
                 // set 0.5x
-                btSpeed.Text = "SPEED: 0.5X";
+                btSpeed.Text = "0.5X";
                 await _player.Rate_SetAsync(0.5);
             }
-            else if (btSpeed.Text == "SPEED: 0.5X")
+            else if (btSpeed.Text == "0.5X")
             {
                 // set 1x
-                btSpeed.Text = "SPEED: 1X";
+                btSpeed.Text = "1X";
                 await _player.Rate_SetAsync(1.0);
             }
         }
@@ -358,7 +367,7 @@ namespace Simple_Player_MAUI
         {
             await StopAllAsync();
 
-            btSpeed.Text = "SPEED: 1X";
+            btSpeed.Text = "1X";
             btPlayPause.Text = "PLAY";
         }
     }

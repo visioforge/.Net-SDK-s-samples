@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <VisioForge.Core.UI.Android.VideoViewTX
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:id="@+id/videoView"
-        android:layout_above="@id/layoutControls" />
+    <VisioForge.Core.UI.Android.VideoViewGL
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/videoView" />
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layoutControls"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="5px">
-        <Button
-            android:text="Start record"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="5px"
-            android:id="@+id/btStartRecord" />
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/panel_background"
+        android:paddingTop="20dp"
+        android:paddingBottom="24dp"
+        android:paddingHorizontal="16dp"
+        android:layout_marginBottom="53dp">
 
-        <Button
-            android:text="Stop record"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="5px"
-            android:id="@+id/btStopRecord" />
+        <ImageButton
+            android:id="@+id/btStartRecord"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/btn_record"
+            android:src="@drawable/ic_record"
+            android:scaleType="centerInside"
+            android:padding="16dp"
+            android:contentDescription="Record" />
 
-        <Button
-            android:text="SWITCH cam"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="5px"
-            android:id="@+id/btSwitchCam" />
+        <ImageButton
+            android:id="@+id/btSwitchCam"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/btn_circle"
+            android:src="@drawable/ic_switch_camera"
+            android:scaleType="centerInside"
+            android:padding="14dp"
+            android:contentDescription="Switch camera" />
+
     </LinearLayout>
-</RelativeLayout >
+
+</FrameLayout>

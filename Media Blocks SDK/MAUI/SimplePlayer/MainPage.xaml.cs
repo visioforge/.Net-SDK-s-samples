@@ -67,7 +67,7 @@ namespace Simple_Player_MB_MAUI
         {
             if (_pipeline != null)
             {
-                await _pipeline.StopAsync();
+                await _pipeline.StopAsync(true);
                 await _pipeline.DisposeAsync();
             }
 
@@ -101,7 +101,7 @@ namespace Simple_Player_MB_MAUI
                 // update UI controls using invoke
                 await MainThread.InvokeOnMainThreadAsync(() =>
                 {
-                    btSpeed.Text = "SPEED: 1X";
+                    btSpeed.Text = "1X";
                     btPlayPause.Text = "PLAY";
                     slSeeking.Value = 0;
                     lbDuration.Text = "00:00:00";
@@ -155,7 +155,7 @@ namespace Simple_Player_MB_MAUI
                 if (_pipeline != null)
                 {
                     _pipeline.OnError -= _player_OnError;
-                    await _pipeline.StopAsync();
+                    await _pipeline.StopAsync(true);
 
                     _pipeline.Dispose();
                     _pipeline = null!;
@@ -191,7 +191,7 @@ namespace Simple_Player_MB_MAUI
 
             if (_pipeline != null)
             {
-                await _pipeline.StopAsync();
+                await _pipeline.StopAsync(true);
             }
         }
 
@@ -291,22 +291,25 @@ namespace Simple_Player_MB_MAUI
         {
             try
             {
+                var result = await FilePicker.Default.PickAsync();
+                if (result == null)
+                {
+                    return;
+                }
+
                 await StopAllAsync();
 
-                btPlayPause.Text = "PLAY";
+                _filename = result.FullPath;
 
-                var result = await FilePicker.Default.PickAsync();
-                if (result != null)
-                {
-                    _filename = result.FullPath;
-                    lbFilename.Text = _filename;
-                    lbFilename.IsVisible = true;
-                }
+                await CreateEngineAsync();
+                await _pipeline!.StartAsync();
+
+                _tmPosition.Start();
+                btPlayPause.Text = "PAUSE";
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error opening file: {ex.Message}");
-                // The user canceled or something went wrong
             }
         }
 
@@ -363,22 +366,22 @@ namespace Simple_Player_MB_MAUI
         {
             try
             {
-                if (btSpeed.Text == "SPEED: 1X")
+                if (btSpeed.Text == "1X")
                 {
                     // set 2x
-                    btSpeed.Text = "SPEED: 2X";
+                    btSpeed.Text = "2X";
                     await _pipeline!.Rate_SetAsync(2.0);
                 }
-                else if (btSpeed.Text == "SPEED: 2X")
+                else if (btSpeed.Text == "2X")
                 {
                     // set 0.5x
-                    btSpeed.Text = "SPEED: 0.5X";
+                    btSpeed.Text = "0.5X";
                     await _pipeline!.Rate_SetAsync(0.5);
                 }
-                else if (btSpeed.Text == "SPEED: 0.5X")
+                else if (btSpeed.Text == "0.5X")
                 {
                     // set 1x
-                    btSpeed.Text = "SPEED: 1X";
+                    btSpeed.Text = "1X";
                     await _pipeline!.Rate_SetAsync(1.0);
                 }
             }
@@ -397,7 +400,7 @@ namespace Simple_Player_MB_MAUI
             {
                 await StopAllAsync();
 
-                btSpeed.Text = "SPEED: 1X";
+                btSpeed.Text = "1X";
                 btPlayPause.Text = "PLAY";
                 slSeeking.Value = 0;
                 lbDuration.Text = "00:00:00";

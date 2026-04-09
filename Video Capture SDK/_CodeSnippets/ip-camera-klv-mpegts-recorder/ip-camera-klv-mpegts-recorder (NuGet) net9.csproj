@@ -6,9 +6,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.4.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.4.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2026.4.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2026.4.7" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.4.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.4.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2026.4.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2026.4.9" />
   </ItemGroup>
 </Project>

@@ -9,6 +9,13 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.4.8
+
+* [Android] Added live camera switching (SwitchCamera) to SystemVideoSourceBlock — switches between front/back cameras without recreating the GStreamer pipeline, preserving resolution and frame rate
+* [Video Capture SDK X] Added Video_Source_SwitchCamera for live camera switching on Android without pipeline restart
+* [Video Capture SDK X] Added Video_Renderer_IsSync and Audio_Renderer_IsSync properties (default false) for lower-latency live preview
+* [Android] New NuGet native version v2026.4.1
+
 ## 2026.3.27
 
 * [Core] Fixed UNC path media info reading failure: `MediaInfoReaderAlt` now correctly handles SDK initialization guard, null caps in `OnPadAdded`, and falls through to `MediaInfoReaderX` on failure. `IsSambaURL()` extended to detect `file://host/path` UNC URIs. `OpenAsync` uses `uri.LocalPath` for correct Windows UNC path.

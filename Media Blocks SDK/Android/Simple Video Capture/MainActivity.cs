@@ -27,8 +27,7 @@ using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core.Types.X.VideoEncoders;
-using static Android.Renderscripts.ScriptGroup;
-using System.Diagnostics;
+using VisioForge.Core.Types.X.Special;
 using Activity = Android.App.Activity;
 
 namespace Simple_Video_Capture
@@ -36,28 +35,28 @@ namespace Simple_Video_Capture
     /// <summary>
     /// The main activity.
     /// </summary>
-    [Activity(Label = "@string/app_name", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "@string/app_name", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, Theme = "@android:style/Theme.NoTitleBar.Fullscreen")]
     public class MainActivity : Activity
     {
         /// <summary>
         /// The video view.
         /// </summary>
-        private VisioForge.Core.UI.Android.VideoViewTX videoView;
+        private VisioForge.Core.UI.Android.VideoViewGL videoView;
 
         /// <summary>
-        /// The start record button.
+        /// The record/stop toggle button.
         /// </summary>
-        private Button btStartRecord;
-
-        /// <summary>
-        /// The stop record button.
-        /// </summary>
-        private Button btStopRecord;
+        private ImageButton btStartRecord;
 
         /// <summary>
         /// The switch camera button.
         /// </summary>
-        private Button btSwitchCam;
+        private ImageButton btSwitchCam;
+
+        /// <summary>
+        /// Indicates whether recording is active.
+        /// </summary>
+        private bool _isRecording;
 
         /// <summary>
         /// The position timer.
@@ -105,6 +104,11 @@ namespace Simple_Video_Capture
         private MP4SinkBlock _sink;
 
         /// <summary>
+        /// The filename of the current recording, stored when the sink is created.
+        /// </summary>
+        private string _recordingFilename;
+
+        /// <summary>
         /// The video tee.
         /// </summary>
         private TeeBlock _videoTee;
@@ -124,10 +128,7 @@ namespace Simple_Video_Capture
         /// </summary>
         private VideoCaptureDeviceInfo[] _cameras;
 
-        /// <summary>
-        /// Indicates whether the preview is active.
-        /// </summary>
-        private bool _isPreview;
+        private int _previewStarted;
 
         /// <summary>
         /// Asynchronously creates the media blocks engine pipeline and initializes blocks.
@@ -138,7 +139,7 @@ namespace Simple_Video_Capture
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += _pipeline_OnError;
 
-            // video source
+            // video source (Camera2 API)
             if (_cameras == null)
             {
                 _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
@@ -147,10 +148,10 @@ namespace Simple_Video_Capture
             if (_cameras.Length == 0)
             {
                 Toast.MakeText(this, "No video sources found", ToastLength.Long).Show();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
                 return;
             }
-
-            VideoCaptureDeviceSourceSettings videoSourceSettings = null;
 
             if (_cameraIndex >= _cameras.Length)
             {
@@ -158,51 +159,61 @@ namespace Simple_Video_Capture
             }
 
             var device = _cameras[_cameraIndex];
-            if (device != null)
+            if (device == null)
             {
-                var formatItem = device.GetHDOrAnyVideoFormatAndFrameRate(out var frameRate);
-                if (formatItem != null)
-                {
-                    videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
-                    {
-                        Format = formatItem.ToFormat()
-                    };
-
-                    videoSourceSettings.Format.FrameRate = frameRate;
-                }
-            }
-
-            if (videoSourceSettings == null)
-            {
-                Toast.MakeText(this, "Unable to configure camera settings", ToastLength.Long).Show();
+                Toast.MakeText(this, "Camera device is null", ToastLength.Long).Show();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
                 return;
             }
 
-            _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
+            Log.Info("SimpleVideoCapture", $"Camera: {device.Name}, API: {device.API}, Formats: {device.VideoFormats?.Count ?? 0}");
+            if (device.VideoFormats != null)
+            {
+                foreach (var f in device.VideoFormats)
+                {
+                    Log.Info("SimpleVideoCapture", $"  Format: {f.Width}x{f.Height}, FPS: {string.Join(",", f.FrameRateList)}");
+                }
+            }
 
-            // create video tee
-            _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+            var formatItem = device.GetVideoFormatAndFrameRate(1920, 1080, out var framerate);
+            VideoCaptureDeviceSourceSettings videoSourceSettings;
+            if (formatItem != null)
+            {
+                videoSourceSettings = new VideoCaptureDeviceSourceSettings(device, formatItem.ToFormat());
+                videoSourceSettings.Format.FrameRate = framerate;
+            }
+            else
+            {
+                videoSourceSettings = new VideoCaptureDeviceSourceSettings(device);
+            }
+
+            if (videoSourceSettings.Format == null)
+            {
+                Toast.MakeText(this, "Unable to configure camera settings", ToastLength.Long).Show();
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+                return;
+            }
+
+            Log.Info("SimpleVideoCapture", $"Selected format: {videoSourceSettings.Format.Width}x{videoSourceSettings.Format.Height} @ {videoSourceSettings.Format.FrameRate}");
+
+            _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
             // video renderer
             _videoRenderer = new VideoRendererBlock(_pipeline, videoView) { IsSync = false };
 
-            // connect video pads
-            _pipeline.Connect(_videoSource.Output, _videoTee.Input);
-            _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
-
             // audio source
             _audioSource = new SystemAudioSourceBlock(new AndroidAudioSourceSettings());
 
-            // create audio tee
-            _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
-
             // audio renderer
             var audioSinks = await DeviceEnumerator.Shared.AudioOutputsAsync();
-            _audioRenderer = new AudioRendererBlock(audioSinks[0]) { IsSync = false };
+            if (audioSinks.Length == 0)
+            {
+                throw new InvalidOperationException("No audio output devices found.");
+            }
 
-            // connect audio pads
-            _pipeline.Connect(_audioSource.Output, _audioTee.Input);
-            _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
+            _audioRenderer = new AudioRendererBlock(audioSinks[0]) { IsSync = false };
         }
 
         /// <summary>
@@ -249,23 +260,18 @@ namespace Simple_Video_Capture
                         Manifest.Permission.Camera,
                         Manifest.Permission.Internet,
                         Manifest.Permission.RecordAudio,
-                        Manifest.Permission.ModifyAudioSettings,
-                        Manifest.Permission.ReadExternalStorage,
-                        Manifest.Permission.WriteExternalStorage
+                        Manifest.Permission.ModifyAudioSettings
                }, 1004);
 
-            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewTX>(Resource.Id.videoView);
+            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewGL>(Resource.Id.videoView);
 
-            btStartRecord = FindViewById<Button>(Resource.Id.btStartRecord);
+            btStartRecord = FindViewById<ImageButton>(Resource.Id.btStartRecord);
             btStartRecord.Click += btStartRecord_Click;
 
-            btStopRecord = FindViewById<Button>(Resource.Id.btStopRecord);
-            btStopRecord.Click += btStopRecord_Click;
-
-            btSwitchCam = FindViewById<Button>(Resource.Id.btSwitchCam);
+            btSwitchCam = FindViewById<ImageButton>(Resource.Id.btSwitchCam);
             btSwitchCam.Click += btSwitchCam_Click;
 
-            CheckPermissionsAndStartPreview();
+            // Don't start here — OnRequestPermissionsResult will handle it.
         }
 
         /// <summary>
@@ -275,16 +281,12 @@ namespace Simple_Video_Capture
         {
             try
             {
-                if (_pipeline != null)
-                {
-                    await _pipeline.StopAsync();
-                    await _pipeline.DisposeAsync();
-                    _pipeline = null;
-                }
+                tmPosition.Stop();
+                await DestroyEngineAsync();
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex);
+                Log.Error("MainActivity", ex.ToString());
             }
 
             VisioForgeX.DestroySDK();
@@ -297,37 +299,33 @@ namespace Simple_Video_Capture
         /// </summary>
         private void CheckPermissionsAndStartPreview()
         {
+            if (Interlocked.CompareExchange(ref _previewStarted, 1, 0) != 0)
+            {
+                return;
+            }
+
             if (CheckSelfPermission(Manifest.Permission.Camera) != Android.Content.PM.Permission.Granted)
             {
+                Interlocked.Exchange(ref _previewStarted, 0);
                 return;
             }
 
             if (CheckSelfPermission(Manifest.Permission.RecordAudio) != Android.Content.PM.Permission.Granted)
             {
+                Interlocked.Exchange(ref _previewStarted, 0);
                 return;
             }
-
-            if (CheckSelfPermission(Manifest.Permission.WriteExternalStorage) != Android.Content.PM.Permission.Granted)
-            {
-                return;
-            }
-
-            if (CheckSelfPermission(Manifest.Permission.ReadExternalStorage) != Android.Content.PM.Permission.Granted)
-            {
-                return;
-            }
-
 
             Task.Run(async () =>
             {
-                if (_isPreview)
+                try
                 {
-                    return;
+                    await StartPreviewAsync();
                 }
-
-                _isPreview = true;
-
-                await StartPreviewAsync();
+                catch (Exception ex)
+                {
+                    Android.Util.Log.Error("SimpleVideoCapture", ex.ToString());
+                }
             });
         }
 
@@ -343,22 +341,54 @@ namespace Simple_Video_Capture
         {
             try
             {
-                await StopAsync();
-
-                if (_cameraIndex == 0)
+                var newIndex = (_cameraIndex == 0) ? 1 : 0;
+                if (newIndex >= _cameras.Length)
                 {
-                    _cameraIndex = 1;
+                    return;
+                }
+
+                // Try live switch — must match current resolution and fps
+                var newDevice = _cameras[newIndex];
+                var formatItem = newDevice.GetVideoFormatAndFrameRate(1920, 1080, out var framerate);
+                if (formatItem == null)
+                {
+                    formatItem = newDevice.GetVideoFormatAndFrameRate(1280, 720, out framerate);
+                }
+
+                VideoCaptureDeviceSourceSettings newSettings;
+                if (formatItem != null)
+                {
+                    newSettings = new VideoCaptureDeviceSourceSettings(newDevice, formatItem.ToFormat());
+                    newSettings.Format.FrameRate = framerate;
                 }
                 else
                 {
-                    _cameraIndex = 0;
+                    newSettings = new VideoCaptureDeviceSourceSettings(newDevice);
                 }
 
+                var switched = await Task.Run(() => _videoSource.SwitchCamera(newSettings));
+                if (switched)
+                {
+                    _cameraIndex = newIndex;
+                    return;
+                }
+
+                // Fallback: full pipeline restart (stops recording if active)
+                Log.Warn("MainActivity", "Live camera switch failed, falling back to full restart.");
+                if (_isRecording)
+                {
+                    _isRecording = false;
+                    btStartRecord.SetImageResource(Resource.Drawable.ic_record);
+                    btStartRecord.SetBackgroundResource(Resource.Drawable.btn_record);
+                }
+
+                await StopAsync();
+                _cameraIndex = newIndex;
                 await StartPreviewAsync();
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex);
+                Log.Error("MainActivity", ex.ToString());
             }
         }
 
@@ -366,20 +396,22 @@ namespace Simple_Video_Capture
         /// Asynchronously stops the pipeline and destroys the engine.
         /// </summary>
         /// <returns>A task that represents the asynchronous operation.</returns>
-        private async Task StopAsync()
+        private async Task StopAsync(bool force = true)
         {
+            Interlocked.Exchange(ref _previewStarted, 0);
+
             if (_pipeline == null)
             {
                 return;
             }
 
-            await _pipeline.StopAsync();
+            await _pipeline.StopAsync(force);
 
             tmPosition.Stop();
 
             await DestroyEngineAsync();
 
-            videoView.Invalidate();
+            RunOnUiThread(() => videoView.Invalidate());
         }
 
         /// <summary>
@@ -390,22 +422,6 @@ namespace Simple_Video_Capture
         /// <summary>
         /// Handles the bt stop record click event.
         /// </summary>
-        private async void btStopRecord_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                await StopAsync();
-
-                await PhotoGalleryHelper.AddVideoToGalleryAsync(_sink.GetFilenameOrURL());
-
-                await StartPreviewAsync();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex);
-            }
-        }
-
         /// <summary>
         /// Asynchronously starts the preview.
         /// </summary>
@@ -416,55 +432,85 @@ namespace Simple_Video_Capture
 
             await CreateEngineAsync();
 
+            // connect directly: source → renderer (no tee needed for preview)
+            _pipeline.Connect(_videoSource.Output, _videoRenderer.Input);
+            _pipeline.Connect(_audioSource.Output, _audioRenderer.Input);
+
             await _pipeline.StartAsync();
 
             tmPosition.Start();
         }
 
         /// <summary>
-        /// Handles the Click event of the btStartRecord control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        /// <summary>
-        /// Handles the bt start record click event.
+        /// Handles the record/stop toggle button click.
         /// </summary>
         private async void btStartRecord_Click(object sender, EventArgs e)
         {
             try
             {
-                // stop preview
-                await StopAsync();
+                if (!_isRecording)
+                {
+                    // start recording
+                    await StopAsync();
+                    await CreateEngineAsync();
 
-                // create engine
-                await CreateEngineAsync();
+                    if (_pipeline == null)
+                    {
+                        // Engine creation failed (e.g. no camera found), fall back to preview
+                        await StartPreviewAsync();
+                        return;
+                    }
 
-                // video encoder
-                 _videoEncoder = new H264EncoderBlock();
+                    // create tees to split source → renderer + encoder
+                    var teeSettings = new TeeQueueSettings
+                    {
+                        MaxSizeBuffers = 3,
+                        Leaky = TeeQueueLeaky.Downstream
+                    };
+                    _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video, teeSettings);
+                    _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio, teeSettings);
 
-                // create MP4 muxer
-                var now = DateTime.Now;
-                var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
+                    _pipeline.Connect(_videoSource.Output, _videoTee.Input);
+                    _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
+                    _pipeline.Connect(_audioSource.Output, _audioTee.Input);
+                    _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
 
-                _sink = new MP4SinkBlock(new MP4SinkSettings(filename));
+                    _videoEncoder = new H264EncoderBlock();
 
-                // connect video pads
-                _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
-                _pipeline.Connect(_videoEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video));
+                    var now = DateTime.Now;
+                    var moviesDir = GetExternalFilesDir(Android.OS.Environment.DirectoryMovies);
+                    moviesDir.Mkdirs();
+                    _recordingFilename = Path.Combine(moviesDir.AbsolutePath, $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
+                    _sink = new MP4SinkBlock(new MP4SinkSettings(_recordingFilename));
 
-                // create audio encoder
-                _audioEncoder = new AACEncoderBlock();
+                    _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
+                    _pipeline.Connect(_videoEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video));
 
-                // connect audio pads
-                _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
-                _pipeline.Connect(_audioEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio));
+                    _audioEncoder = new AACEncoderBlock();
+                    _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
+                    _pipeline.Connect(_audioEncoder.Output, (_sink as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Audio));
 
-                // start pipeline
-                await _pipeline.StartAsync();
+                    await _pipeline.StartAsync();
+
+                    _isRecording = true;
+                    btStartRecord.SetImageResource(Resource.Drawable.ic_stop);
+                    btStartRecord.SetBackgroundResource(Resource.Drawable.btn_circle);
+                }
+                else
+                {
+                    // stop recording
+                    await StopAsync(force: false);
+                    await PhotoGalleryHelper.AddVideoToGalleryAsync(_recordingFilename);
+                    await StartPreviewAsync();
+
+                    _isRecording = false;
+                    btStartRecord.SetImageResource(Resource.Drawable.ic_record);
+                    btStartRecord.SetBackgroundResource(Resource.Drawable.btn_record);
+                }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex);
+                Log.Error("MainActivity", ex.ToString());
             }
         }
 

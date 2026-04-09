@@ -65,8 +65,8 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.4.7" />
-    <PackageReference Include="VisioForge.DotNet.Core.CV" Version="2026.4.7" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.4.9" />
+    <PackageReference Include="VisioForge.DotNet.Core.CV" Version="2026.4.9" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.3.12" />

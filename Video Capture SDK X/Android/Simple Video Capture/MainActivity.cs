@@ -1,6 +1,4 @@
 using Android;
-using Android.Icu.Util;
-using Android.Media;
 using Android.Runtime;
 using Android.Util;
 using VisioForge.Core;
@@ -14,16 +12,16 @@ using VisioForge.Core.VideoCaptureX;
 
 namespace Simple_Video_Capture
 {
-    [Activity(Label = "@string/app_name", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
+    [Activity(Label = "@string/app_name", MainLauncher = true, ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait, Theme = "@android:style/Theme.NoTitleBar.Fullscreen")]
     public class MainActivity : Activity
     {
-        private VisioForge.Core.UI.Android.VideoViewTX videoView;
+        private VisioForge.Core.UI.Android.VideoViewGL videoView;
 
-        private Button btStartRecord;
+        private ImageButton btStartRecord;
 
-        private Button btStopRecord;
+        private ImageButton btSwitchCam;
 
-        private Button btSwitchCam;
+        private bool _isRecording;
 
         private readonly System.Timers.Timer tmPosition = new System.Timers.Timer(500);
 
@@ -31,63 +29,101 @@ namespace Simple_Video_Capture
 
         private VideoCaptureDeviceInfo[] _cameras;
 
-        private AudioCaptureDeviceInfo[] _mics;
-
-        private AudioOutputDeviceInfo[] _speakers;
-
         private int _cameraIndex = 0;
 
-        private bool _isPreview = false;
+        private bool _previewStarted;
+
+        private bool _busy;
 
         private string _filename;
 
-        /// <summary>
-        /// Create engine async.
-        /// </summary>
         private async Task CreateEngineAsync()
         {
             _core = new VideoCaptureCoreX(videoView);
+            _core.OnError += _core_OnError;
 
-            // cameras
-            _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
+            if (_cameras == null)
+            {
+                _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
+            }
 
-            // mics
-            _mics = await DeviceEnumerator.Shared.AudioSourcesAsync();
+            if (_cameras.Length == 0)
+            {
+                Toast.MakeText(this, "No video sources found", ToastLength.Long).Show();
+                await _core.DisposeAsync();
+                _core = null;
+                return;
+            }
 
-            // audio outputs
-            _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync();
+            if (_cameraIndex >= _cameras.Length)
+            {
+                _cameraIndex = 0;
+            }
+
+            var device = _cameras[_cameraIndex];
+            if (device == null)
+            {
+                Toast.MakeText(this, "Camera device is null", ToastLength.Long).Show();
+                await _core.DisposeAsync();
+                _core = null;
+                return;
+            }
+
+            Log.Info("SimpleVideoCapture", $"Camera: {device.Name}, API: {device.API}, Formats: {device.VideoFormats?.Count ?? 0}");
+
+            var videoSourceSettings = new VideoCaptureDeviceSourceSettings(device);
+            if (videoSourceSettings.Format == null)
+            {
+                Toast.MakeText(this, "Unable to configure camera settings", ToastLength.Long).Show();
+                await _core.DisposeAsync();
+                _core = null;
+                return;
+            }
+
+            Log.Info("SimpleVideoCapture", $"Selected format: {videoSourceSettings.Format.Width}x{videoSourceSettings.Format.Height} @ {videoSourceSettings.Format.FrameRate}");
+
+            _core.Video_Source = videoSourceSettings;
+            _core.Video_Play = true;
+
+            // audio source
+            var audioSources = await DeviceEnumerator.Shared.AudioSourcesAsync();
+            if (audioSources.Length > 0)
+            {
+                _core.Audio_Source = audioSources[0].CreateSourceSettingsVC();
+                _core.Audio_Play = false;
+                _core.Audio_Record = true;
+            }
+
+            // Pre-configure the MP4 output before StartAsync so the output pipeline
+            // is materialized. Use autoStart: false so recording only begins when
+            // StartCaptureAsync is called.
+            // Use placeholder path — actual filename is set in btStartRecord_Click via StartCaptureAsync
+            var moviesDir = GetExternalFilesDir(Android.OS.Environment.DirectoryMovies);
+            moviesDir.Mkdirs();
+            _filename = Path.Combine(moviesDir.AbsolutePath, "placeholder.mp4");
+            _core.Outputs_Add(new MP4Output(_filename), false);
         }
 
-        /// <summary>
-        /// Destroy engine async.
-        /// </summary>
         private async Task DestroyEngineAsync()
         {
             if (_core != null)
             {
-                _core.OnError -= _pipeline_OnError;
+                _core.OnError -= _core_OnError;
 
                 await _core.DisposeAsync();
                 _core = null;
             }
         }
 
-        /// <summary>
-        /// Pipeline on error.
-        /// </summary>
-        private void _pipeline_OnError(object sender, ErrorsEventArgs e)
+        private void _core_OnError(object sender, ErrorsEventArgs e)
         {
             Log.Error("MainActivity", e.Message);
         }
 
-        /// <summary>
-        /// On create.
-        /// </summary>
         protected override void OnCreate(Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
             RequestPermissions(
@@ -95,32 +131,177 @@ namespace Simple_Video_Capture
                         Manifest.Permission.Camera,
                         Manifest.Permission.Internet,
                         Manifest.Permission.RecordAudio,
-                        Manifest.Permission.ModifyAudioSettings,
-                        Manifest.Permission.ReadExternalStorage,
-                        Manifest.Permission.WriteExternalStorage
+                        Manifest.Permission.ModifyAudioSettings
                 }, 1004);
 
-            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewTX>(Resource.Id.videoView);
+            videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewGL>(Resource.Id.videoView);
 
-            //tmPosition.Elapsed += tmPosition_Elapsed;
-
-            btStartRecord = FindViewById<Button>(Resource.Id.btStartRecord);
+            btStartRecord = FindViewById<ImageButton>(Resource.Id.btStartRecord);
             btStartRecord.Click += btStartRecord_Click;
 
-            btStopRecord = FindViewById<Button>(Resource.Id.btStopRecord);
-            btStopRecord.Click += btStopRecord_Click;
-
-            btSwitchCam = FindViewById<Button>(Resource.Id.btSwitchCam);
+            btSwitchCam = FindViewById<ImageButton>(Resource.Id.btSwitchCam);
             btSwitchCam.Click += btSwitchCam_Click;
-
-            CheckPermissionsAndStartPreview();
         }
 
-        /// <summary>
-        /// Check permissions and start preview.
-        /// </summary>
-        private void CheckPermissionsAndStartPreview()
+        protected override async void OnDestroy()
         {
+            try
+            {
+                tmPosition.Stop();
+                await DestroyEngineAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("MainActivity", ex.ToString());
+            }
+
+            VisioForgeX.DestroySDK();
+
+            base.OnDestroy();
+        }
+
+        private async void btSwitchCam_Click(object sender, EventArgs e)
+        {
+            if (_busy)
+            {
+                return;
+            }
+
+            _busy = true;
+            try
+            {
+                var newIndex = (_cameraIndex == 0) ? 1 : 0;
+                if (newIndex >= _cameras.Length)
+                {
+                    return;
+                }
+
+                // Try live switch — must match current resolution and fps
+                var newDevice = _cameras[newIndex];
+                var formatItem = newDevice.GetVideoFormatAndFrameRate(1920, 1080, out var framerate);
+                VideoCaptureDeviceSourceSettings newSettings;
+                if (formatItem != null)
+                {
+                    newSettings = new VideoCaptureDeviceSourceSettings(newDevice, formatItem.ToFormat());
+                    newSettings.Format.FrameRate = framerate;
+                }
+                else
+                {
+                    newSettings = new VideoCaptureDeviceSourceSettings(newDevice);
+                }
+
+                var switched = await Task.Run(() => _core.Video_Source_SwitchCamera(newSettings));
+                if (switched)
+                {
+                    _cameraIndex = newIndex;
+                    return;
+                }
+
+                // Fallback: full pipeline restart
+                Log.Warn("MainActivity", "Live camera switch failed, falling back to full restart.");
+                if (_isRecording)
+                {
+                    await _core.StopCaptureAsync(0);
+                    await PhotoGalleryHelper.AddVideoToGalleryAsync(_filename);
+                    _isRecording = false;
+                    btStartRecord.SetImageResource(Resource.Drawable.ic_record);
+                    btStartRecord.SetBackgroundResource(Resource.Drawable.btn_record);
+                }
+
+                await StopAsync();
+                _cameraIndex = newIndex;
+                await StartPreviewAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("MainActivity", ex.ToString());
+            }
+            finally
+            {
+                _busy = false;
+            }
+        }
+
+        private async Task StopAsync()
+        {
+            if (_core == null)
+            {
+                return;
+            }
+
+            await _core.StopAsync();
+
+            tmPosition.Stop();
+
+            await DestroyEngineAsync();
+
+            RunOnUiThread(() => videoView.Invalidate());
+        }
+
+        private async Task StartPreviewAsync()
+        {
+            await StopAsync();
+
+            await CreateEngineAsync();
+
+            if (_core == null)
+            {
+                return;
+            }
+
+            await _core.StartAsync();
+
+            tmPosition.Start();
+        }
+
+        private async void btStartRecord_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_core == null) return;
+
+                if (!_isRecording)
+                {
+                    // Output was already configured in CreateEngineAsync before StartAsync.
+                    // Generate a fresh filename for this recording session.
+                    var now = DateTime.Now;
+                    var moviesDir = GetExternalFilesDir(Android.OS.Environment.DirectoryMovies);
+                    moviesDir.Mkdirs();
+                    _filename = Path.Combine(moviesDir.AbsolutePath, $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
+                    await _core.StartCaptureAsync(0, _filename);
+
+                    _isRecording = true;
+                    btStartRecord.SetImageResource(Resource.Drawable.ic_stop);
+                    btStartRecord.SetBackgroundResource(Resource.Drawable.btn_circle);
+                }
+                else
+                {
+                    await _core.StopCaptureAsync(0);
+                    await PhotoGalleryHelper.AddVideoToGalleryAsync(_filename);
+
+                    _isRecording = false;
+                    btStartRecord.SetImageResource(Resource.Drawable.ic_record);
+                    btStartRecord.SetBackgroundResource(Resource.Drawable.btn_record);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("MainActivity", ex.ToString());
+            }
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            // Guard: only start preview once, all permission checks on UI thread
+            if (_previewStarted)
+            {
+                return;
+            }
+
             if (CheckSelfPermission(Manifest.Permission.Camera) != Android.Content.PM.Permission.Granted)
             {
                 return;
@@ -131,166 +312,19 @@ namespace Simple_Video_Capture
                 return;
             }
 
-            if (CheckSelfPermission(Manifest.Permission.WriteExternalStorage) != Android.Content.PM.Permission.Granted)
-            {
-                return;
-            }
-
-            if (CheckSelfPermission(Manifest.Permission.ReadExternalStorage) != Android.Content.PM.Permission.Granted)
-            {
-                return;
-            }
+            _previewStarted = true;
 
             Task.Run(async () =>
             {
-                if (_isPreview)
+                try
                 {
-                    return;
+                    await StartPreviewAsync();
                 }
-
-                _isPreview = true;
-
-                await StartPreviewAsync();
+                catch (Exception ex)
+                {
+                    Log.Error("MainActivity", ex.ToString());
+                }
             });
-        }
-
-        /// <summary>
-        /// Start preview async.
-        /// </summary>
-        private async Task StartPreviewAsync()
-        {
-            await CreateEngineAsync();
-
-            var videoSources = await DeviceEnumerator.Shared.VideoSourcesAsync();
-            if (videoSources.Length == 0)
-            {
-                Toast.MakeText(this, "No video sources found", ToastLength.Long).Show();
-                return;
-            }
-
-            if (_core.State == PlaybackState.Play || _core.State == PlaybackState.Pause)
-            {
-                return;
-            }
-
-            // video source
-            VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-            var device = _cameras[_cameraIndex];
-            if (device != null)
-            {
-                var formatItem = device.GetHDOrAnyVideoFormatAndFrameRate(out var frameRate);
-                if (formatItem != null)
-                {
-                    videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
-                    {
-                        Format = formatItem.ToFormat()
-                    };
-
-                    videoSourceSettings.Format.FrameRate = frameRate;
-                }
-            }
-            //  }
-
-            _core.Video_Source = videoSourceSettings;
-
-            if (videoSourceSettings == null)
-            {
-                Toast.MakeText(this, "Unable to configure camera settings", ToastLength.Long).Show();
-            }
-
-            var now = DateTime.Now;
-            var filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
-            _core.Outputs_Add(new MP4Output(filename, videoEnc: new OpenH264EncoderSettings()), false);
-
-            await _core.StartAsync();
-
-            tmPosition.Start();
-        }
-
-        /// <summary>
-        /// On destroy.
-        /// </summary>
-        protected override void OnDestroy()
-        {
-            VisioForgeX.DestroySDK();
-
-            base.OnDestroy();
-        }
-
-        /// <summary>
-        /// Handles the bt switch cam click event.
-        /// </summary>
-        private async void btSwitchCam_Click(object sender, EventArgs e)
-        {
-            await StopAsync();
-
-            if (_cameraIndex == 0)
-            {
-                _cameraIndex = 1;
-            }
-            else
-            {
-                _cameraIndex = 0;
-            }
-
-            await StartAsync();
-        }
-
-        /// <summary>
-        /// Stop async.
-        /// </summary>
-        private async Task StopAsync()
-        {
-            if (_core == null)
-            {
-                return;
-            }
-
-            tmPosition.Stop();
-
-            await DestroyEngineAsync();
-
-            videoView.Invalidate();
-        }
-
-        /// <summary>
-        /// Handles the bt stop record click event.
-        /// </summary>
-        private async void btStopRecord_Click(object sender, EventArgs e)
-        {
-            await _core.StopCaptureAsync(0);
-
-            await PhotoGalleryHelper.AddVideoToGalleryAsync(_filename);
-        }
-
-        /// <summary>
-        /// Start async.
-        /// </summary>
-        private async Task StartAsync()
-        {
-            await StartPreviewAsync();
-        }
-
-        /// <summary>
-        /// Handles the bt start record click event.
-        /// </summary>
-        private async void btStartRecord_Click(object sender, EventArgs e)
-        {
-            var now = DateTime.Now;
-            _filename = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim).AbsolutePath, "Camera", $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
-            await _core.StartCaptureAsync(0, _filename);
-        }
-
-        /// <summary>
-        /// On request permissions result.
-        /// </summary>
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            CheckPermissionsAndStartPreview();
         }
     }
 }

@@ -11,17 +11,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.util.Log;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.system.Os;
 
 public class GStreamer {
+    private static final String TAG = "GStreamer";
+
+    static {
+        System.loadLibrary("gstreamer_android");
+    }
+
     private static native void nativeInit(Context context) throws Exception;
 
     public static void init(Context context) throws Exception {
+        Log.e(TAG, "GStreamerJAVA initializing...");
+
         //copyFonts(context);
         //copyCaCertificates(context);
         nativeInit(context);
+       
+        Log.e(TAG, "GStreamerJAVA initialized!");
     }
 
     private static void copyFonts(Context context) {

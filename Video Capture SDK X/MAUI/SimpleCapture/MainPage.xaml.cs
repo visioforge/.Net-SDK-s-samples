@@ -227,7 +227,7 @@ namespace SimpleCapture
             // Enumerate audio outputs
             _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync(null);
             if (_speakers.Length > 0)
-            {                
+            {
                 btSpeakers.Text = _speakers[0].DisplayName;
             }
 

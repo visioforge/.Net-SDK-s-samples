@@ -1,96 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:id="@+id/relativeLayout1">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
 
-	<VisioForge.Core.UI.Android.VideoViewGL
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:id="@+id/videoView"
-        android:layout_above="@id/layoutURL" />
-
-    <RelativeLayout
+    <VisioForge.Core.UI.Android.VideoViewTX
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layoutURL"
-        android:layout_above="@id/layoutSeeking"
-        android:layout_marginTop="5px">
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5px"
-            android:layout_toLeftOf="@+id/btOpenFile"
-            android:inputType="text|textUri"
-            android:text="SELECT FILE"
-            android:id="@+id/edURL" >
-        </EditText>
-        <Button
-            android:text="..."
-            android:id="@+id/btOpenFile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="5px"
-            android:layout_marginRight="5px"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layoutSeeking"
-        android:layout_above="@id/layoutControls"
-        android:layout_marginTop="5px">
-        <SeekBar
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10px"
-            android:layout_toLeftOf="@+id/lbPosition"
-            android:id="@+id/sbTimeline" >
-        </SeekBar>
-        <TextView
-            android:id="@+id/lbPosition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="00:00:00/00:00:00"
-            android:layout_marginLeft="10px"
-            android:layout_marginRight="10px"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:id="@+id/videoView" />
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
+        android:id="@+id/panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layoutControls"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="5px">
-        <Button
-            android:text="Start"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="5px"
-            android:id="@+id/btStart" />
-        <Button
-            android:text="Pause"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="5px"
-            android:id="@+id/btPause" />
-        <Button
-            android:text="Stop"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="5px"
-            android:id="@+id/btStop" />
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:background="@drawable/panel_background"
+        android:paddingTop="16dp"
+        android:paddingBottom="20dp"
+        android:paddingHorizontal="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/edURL"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:inputType="text|textUri"
+                android:hint="Select file..."
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textColorHint="#80FFFFFF"
+                android:textSize="13sp"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="12dp"
+                android:singleLine="true" />
+
+            <ImageButton
+                android:id="@+id/btOpenFile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/btn_small"
+                android:src="@drawable/ic_folder"
+                android:scaleType="centerInside"
+                android:padding="8dp"
+                android:contentDescription="Open file" />
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/sbTimeline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:progressTint="#4FC3F7"
+            android:thumbTint="#4FC3F7" />
+
+        <TextView
+            android:id="@+id/lbPosition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00:00:00 / 00:00:00"
+            android:textColor="#B0FFFFFF"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/btStart"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/btn_circle"
+                android:src="@drawable/ic_play"
+                android:scaleType="centerInside"
+                android:padding="14dp"
+                android:contentDescription="Play" />
+
+            <ImageButton
+                android:id="@+id/btStop"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/btn_circle"
+                android:src="@drawable/ic_stop"
+                android:scaleType="centerInside"
+                android:padding="14dp"
+                android:contentDescription="Stop" />
+        </LinearLayout>
+
     </LinearLayout>
-</RelativeLayout >
+
+</FrameLayout>

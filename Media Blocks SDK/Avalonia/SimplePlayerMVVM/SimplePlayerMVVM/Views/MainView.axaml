@@ -8,54 +8,40 @@
              x:Class="Simple_Player_MVVM.Views.MainView"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
 
 	<Grid RowDefinitions="*,Auto" ColumnDefinitions="*">
-		<!-- Video View Placeholder -->
+		<!-- Video View -->
 		<Border Grid.Row="0" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-			<avalonia:VideoView x:Name="videoView1" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#0C0C0C"  />
+			<avalonia:VideoView x:Name="videoView1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#0C0C0C" />
 		</Border>
 
 		<!-- Controls -->
 		<StackPanel Grid.Row="1" Background="#1e1e1e" Orientation="Vertical">
 
-			<!-- Slider for seeking -->
-			<Slider Name="slSeeking" Margin="16,16,16,0" VerticalAlignment="Center" Maximum="{Binding SeekingMaximum}" Value="{Binding SeekingValue}"/>
+			<!-- Seek slider -->
+			<Slider Name="slSeeking" Margin="12,8,12,0" MinHeight="48" Maximum="{Binding SeekingMaximum}" Value="{Binding SeekingValue}"/>
 
-			<!-- Time and filename display -->
-			<Grid Margin="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="auto"/>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="auto"/>
-				</Grid.ColumnDefinitions>
-
-				<!-- Position -->
-				<TextBlock Grid.Column="0" Text="{Binding Position}" Foreground="White" VerticalAlignment="Center" Margin="5,0,5,0"/>
-
-				<!-- Filename -->
-				<TextBlock Grid.Column="1" Text="{Binding Filename}" Foreground="White" HorizontalAlignment="Center" />
-
-				<!-- Duration -->
-				<TextBlock Grid.Column="2" Text="{Binding Duration}" Foreground="White" VerticalAlignment="Center" Margin="5,0,5,0"/>
+			<!-- Position / Duration -->
+			<Grid Margin="12,0" ColumnDefinitions="Auto,*,Auto">
+				<TextBlock Grid.Column="0" Text="{Binding Position}" Foreground="#B0FFFFFF" FontSize="12" VerticalAlignment="Center"/>
+				<TextBlock Grid.Column="2" Text="{Binding Duration}" Foreground="#B0FFFFFF" FontSize="12" VerticalAlignment="Center"/>
 			</Grid>
 
-			<!-- Playback Controls -->
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16,0,5,0">
-				<Button Command="{Binding OpenFileCommand}" Content="OPEN FILE" Margin="5" VerticalAlignment="Center"/>
-				<Button Name="btPlayPause" Command="{Binding PlayPauseCommand}" Content="{Binding PlayPauseText}" Margin="5"/>
-				<Button Name="btStop" Command="{Binding StopCommand}" Content="STOP" Margin="5"/>
-			</StackPanel>
+			<!-- Playback buttons -->
+			<UniformGrid Columns="3" Margin="12,4,12,0">
+				<Button Command="{Binding OpenFileCommand}" Content="OPEN" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0,0,4,0"/>
+				<Button Command="{Binding PlayPauseCommand}" Content="{Binding PlayPauseText}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="2,0"/>
+				<Button Command="{Binding StopCommand}" Content="STOP" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="4,0,0,0"/>
+			</UniformGrid>
 
-			<!-- Volume and Speed Controls -->
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="16,0,5,5">
-				<TextBlock Text="Volume" Foreground="White" VerticalAlignment="Center"/>
-				<Slider Value="{Binding VolumeValue}" Minimum="0" Maximum="100" Width="150" Margin="15,0,5,0" VerticalAlignment="Center"/>
-				<Button Command="{Binding SpeedCommand}" Content="{Binding SpeedText}" Margin="5"/>
-			</StackPanel>
+			<!-- Volume + Speed -->
+			<Grid Margin="12,4,12,8" ColumnDefinitions="Auto,*,Auto">
+				<TextBlock Grid.Column="0" Text="Vol" Foreground="White" FontSize="12" VerticalAlignment="Center" Margin="0,0,8,0"/>
+				<Slider Grid.Column="1" Value="{Binding VolumeValue}" Minimum="0" Maximum="100" MinHeight="48" VerticalAlignment="Center"/>
+				<Button Grid.Column="2" Command="{Binding SpeedCommand}" Content="{Binding SpeedText}" Margin="8,0,0,0" MinWidth="50" HorizontalContentAlignment="Center"/>
+			</Grid>
 		</StackPanel>
 
 	</Grid>

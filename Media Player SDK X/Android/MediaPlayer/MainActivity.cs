@@ -1,5 +1,6 @@
 using Android.Runtime;
 using Android.Views;
+using Android.Widget;
 using System.Globalization;
 using VisioForge.Core;
 using VisioForge.Core.MediaPlayerX;
@@ -10,7 +11,7 @@ namespace MediaPlayer
     /// <summary>
     /// The main activity class.
     /// </summary>
-    [Activity(Label = "@string/app_name", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", MainLauncher = true, Theme = "@android:style/Theme.NoTitleBar.Fullscreen", ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
     public class MainActivity : Activity
     {
         /// <summary>
@@ -23,6 +24,10 @@ namespace MediaPlayer
         /// </summary>
         private volatile bool _isSeeking;
 
+        private bool _isPlaying;
+
+        private bool _isPaused;
+
         /// <summary>
         /// The video view.
         /// </summary>
@@ -31,22 +36,17 @@ namespace MediaPlayer
         /// <summary>
         /// The open file button.
         /// </summary>
-        private Button btOpenFile;
+        private ImageButton btOpenFile;
 
         /// <summary>
-        /// The start button.
+        /// The start/pause toggle button.
         /// </summary>
-        private Button btStart;
-
-        /// <summary>
-        /// The pause button.
-        /// </summary>
-        private Button btPause;
+        private ImageButton btStart;
 
         /// <summary>
         /// The stop button.
         /// </summary>
-        private Button btStop;
+        private ImageButton btStop;
 
         /// <summary>
         /// The URL edit text.
@@ -68,10 +68,12 @@ namespace MediaPlayer
         /// </summary>
         private readonly System.Timers.Timer tmPosition = new System.Timers.Timer(500);
 
-        /// <summary>
-        /// The seeking flag.
-        /// </summary>
-        private bool __isSeeking = false;
+        private View _panelView;
+
+        private int _panelPaddingLeft;
+        private int _panelPaddingTop;
+        private int _panelPaddingRight;
+        private int _panelPaddingBottom;
 
         /// <summary>
         /// On create.
@@ -80,7 +82,6 @@ namespace MediaPlayer
         {
             base.OnCreate(savedInstanceState);
 
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
             Platform.Init(this, savedInstanceState);
@@ -92,16 +93,13 @@ namespace MediaPlayer
             _player = new MediaPlayerCoreX(videoView);
             _player.OnStart += _player_OnStart;
 
-            btOpenFile = FindViewById<Button>(Resource.Id.btOpenFile);
+            btOpenFile = FindViewById<ImageButton>(Resource.Id.btOpenFile);
             btOpenFile.Click += btOpenFile_Click;
 
-            btStart = FindViewById<Button>(Resource.Id.btStart);
+            btStart = FindViewById<ImageButton>(Resource.Id.btStart);
             btStart.Click += btStart_Click;
 
-            btPause = FindViewById<Button>(Resource.Id.btPause);
-            btPause.Click += btPause_Click;
-
-            btStop = FindViewById<Button>(Resource.Id.btStop);
+            btStop = FindViewById<ImageButton>(Resource.Id.btStop);
             btStop.Click += btStop_Click;
 
             sbTimeline = FindViewById<SeekBar>(Resource.Id.sbTimeline);
@@ -118,8 +116,77 @@ namespace MediaPlayer
             };
 
             lbPosition = FindViewById<TextView>(Resource.Id.lbPosition);
-
             edURL = FindViewById<EditText>(Resource.Id.edURL);
+
+            _panelView = FindViewById<View>(Resource.Id.panel);
+            ConfigureSystemInsets();
+        }
+
+        private void ConfigureSystemInsets()
+        {
+            var contentView = FindViewById<ViewGroup>(Android.Resource.Id.Content)?.GetChildAt(0);
+            if (contentView == null || _panelView == null)
+            {
+                return;
+            }
+
+            _panelPaddingLeft = _panelView.PaddingLeft;
+            _panelPaddingTop = _panelView.PaddingTop;
+            _panelPaddingRight = _panelView.PaddingRight;
+            _panelPaddingBottom = _panelView.PaddingBottom;
+
+            contentView.SetOnApplyWindowInsetsListener(new SystemInsetsListener(this));
+            contentView.RequestApplyInsets();
+        }
+
+        private void ApplySystemInsets(WindowInsets insets)
+        {
+            if (_panelView == null || insets == null)
+            {
+                return;
+            }
+
+            int leftInset;
+            int rightInset;
+            int bottomInset;
+
+            if (Android.OS.Build.VERSION.SdkInt >= Android.OS.BuildVersionCodes.R)
+            {
+                var systemBarsInsets = insets.GetInsets(WindowInsets.Type.SystemBars());
+                leftInset = systemBarsInsets.Left;
+                rightInset = systemBarsInsets.Right;
+                bottomInset = systemBarsInsets.Bottom;
+            }
+            else
+            {
+#pragma warning disable CA1422
+                leftInset = insets.SystemWindowInsetLeft;
+                rightInset = insets.SystemWindowInsetRight;
+                bottomInset = insets.SystemWindowInsetBottom;
+#pragma warning restore CA1422
+            }
+
+            _panelView.SetPadding(
+                _panelPaddingLeft + leftInset,
+                _panelPaddingTop,
+                _panelPaddingRight + rightInset,
+                _panelPaddingBottom + bottomInset);
+        }
+
+        private sealed class SystemInsetsListener : Java.Lang.Object, View.IOnApplyWindowInsetsListener
+        {
+            private readonly MainActivity _activity;
+
+            public SystemInsetsListener(MainActivity activity)
+            {
+                _activity = activity;
+            }
+
+            public WindowInsets OnApplyWindowInsets(View view, WindowInsets insets)
+            {
+                _activity.ApplySystemInsets(insets);
+                return view.OnApplyWindowInsets(insets);
+            }
         }
 
         /// <summary>
@@ -127,6 +194,8 @@ namespace MediaPlayer
         /// </summary>
         protected override async void OnDestroy()
         {
+            tmPosition.Stop();
+
             if (_player != null)
             {
                 _player.OnStart -= _player_OnStart;
@@ -145,7 +214,8 @@ namespace MediaPlayer
         /// </summary>
         private void _player_OnStart(object sender, EventArgs e)
         {
-            sbTimeline.Max = (int)_player.Duration().TotalMilliseconds;
+            var duration = (int)_player.Duration().TotalMilliseconds;
+            RunOnUiThread(() => sbTimeline.Max = duration);
         }
 
         /// <summary>
@@ -153,7 +223,7 @@ namespace MediaPlayer
         /// </summary>
         private void sbTimeline_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
         {
-            if (_isSeeking)
+            if (e.FromUser && _isSeeking && _player != null)
             {
                 _player.Position_Set(TimeSpan.FromMilliseconds(e.Progress));
             }
@@ -170,7 +240,7 @@ namespace MediaPlayer
 
                 var file = await FilePicker.PickAsync();
                 if (file == null)
-                    return; // user canceled file picking
+                    return;
 
                 RunOnUiThread(() =>
                 {
@@ -190,42 +260,63 @@ namespace MediaPlayer
         {
             tmPosition.Stop();
 
-            await _player.StopAsync();
+            if (_player != null)
+            {
+                await _player.StopAsync();
+            }
+
+            _isPlaying = false;
+            _isPaused = false;
+
+            RunOnUiThread(() =>
+            {
+                sbTimeline.Progress = 0;
+                btStart.SetImageResource(Resource.Drawable.ic_play);
+            });
         }
 
         /// <summary>
-        /// Handles the bt pause click event.
-        /// </summary>
-        private async void btPause_Click(object sender, EventArgs e)
-        {
-            if (_player == null)
-            {
-                return;
-            }
-
-            if (btPause.Text == "Pause")
-            {
-                await _player.PauseAsync();
-                btPause.Text = "Resume";
-            }
-            else
-            {
-                await _player.ResumeAsync();
-                btPause.Text = "Pause";
-            }
-        }
-
-        /// <summary>
-        /// Handles the bt start click event.
+        /// Handles the play/pause toggle button click.
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
-            _isSeeking = false;
+            try
+            {
+                if (!_isPlaying)
+                {
+                    if (string.IsNullOrWhiteSpace(edURL?.Text))
+                    {
+                        return;
+                    }
 
-            await _player.OpenAsync(new Uri(edURL.Text));
-            await _player.PlayAsync();
+                    _isSeeking = false;
 
-            tmPosition.Start();
+                    await _player.OpenAsync(new Uri(edURL.Text));
+                    await _player.PlayAsync();
+
+                    tmPosition.Start();
+
+                    _isPlaying = true;
+                    _isPaused = false;
+                    btStart.SetImageResource(Resource.Drawable.ic_pause);
+                }
+                else if (!_isPaused)
+                {
+                    await _player.PauseAsync();
+                    _isPaused = true;
+                    btStart.SetImageResource(Resource.Drawable.ic_play);
+                }
+                else
+                {
+                    await _player.ResumeAsync();
+                    _isPaused = false;
+                    btStart.SetImageResource(Resource.Drawable.ic_pause);
+                }
+            }
+            catch (Exception ex)
+            {
+                Android.Util.Log.Error("MainActivity", ex.ToString());
+            }
         }
 
         /// <summary>
@@ -246,8 +337,16 @@ namespace MediaPlayer
                 return;
             }
 
-            var pos = _player.Position_Get();
+            var player = _player;
+            if (player == null)
+            {
+                return;
+            }
+
+            var pos = player.Position_Get();
+            var duration = player.Duration();
             var progress = (int)pos.TotalMilliseconds;
+            var durationMs = (int)duration.TotalMilliseconds;
 
             try
             {
@@ -256,6 +355,11 @@ namespace MediaPlayer
                     if (_player == null)
                     {
                         return;
+                    }
+
+                    if (durationMs > 0)
+                    {
+                        sbTimeline.Max = durationMs;
                     }
 
                     if (progress > sbTimeline.Max)
@@ -267,7 +371,6 @@ namespace MediaPlayer
                         sbTimeline.Progress = progress;
                     }
 
-                    // This is where the received data is passed
                     lbPosition.Text = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}/{_player.Duration().ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
                 });
             }
