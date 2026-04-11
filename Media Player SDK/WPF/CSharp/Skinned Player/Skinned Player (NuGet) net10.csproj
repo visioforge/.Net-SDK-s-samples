@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net10.0-windows</TargetFrameworks>
+    <TargetFrameworks>net10.0-windows10.0.19041.0</TargetFrameworks>
     <RootNamespace>Skinned_Player</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>

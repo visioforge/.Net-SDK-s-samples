@@ -53,8 +53,8 @@ jobs:
     - name: Setup Java JDK
       uses: actions/setup-java@v4
       with:
-        distribution: 'microsoft'
-        java-version: '11'
+        distribution: 'temurin'
+        java-version: '17'
 
     # Media Blocks SDK
     - name: Restore (Media Blocks)

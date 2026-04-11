@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net8.0-windows10.0.19041.0</TargetFrameworks>
     <PlatformTarget>x64</PlatformTarget>
     <RootNamespace>Skinned_Player</RootNamespace>
     <UseWPF>true</UseWPF>
