@@ -35,7 +35,7 @@
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.6" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="3.119.2" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.3.12" />
@@ -45,7 +45,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.9.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.4.9" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.4.11" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />

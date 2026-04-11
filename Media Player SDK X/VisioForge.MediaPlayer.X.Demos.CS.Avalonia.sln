@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplePlayerMVVM.Desktop", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplePlayerMVVM.iOS", "Avalonia\SimplePlayerMVVM\SimplePlayerMVVM.iOS\SimplePlayerMVVM.iOS.csproj", "{ED879188-0D93-7624-602B-4541BE229FCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X9", "..\AndroidDependency\VisioForge.Core.Android.X9.csproj", "{6CEB9299-675D-8FAB-0423-1A0209F60B14}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X10", "..\AndroidDependency\VisioForge.Core.Android.X10.csproj", "{6CEB9299-675D-8FAB-0423-1A0209F60B14}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaraokeDemoAMB", "Avalonia\Karaoke Demo\KaraokeDemoAMB.csproj", "{92DB0EF1-417B-439E-8290-DD7E23823640}"
 EndProject

@@ -19,6 +19,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.4.9" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.4.11" />
   </ItemGroup>
 </Project>

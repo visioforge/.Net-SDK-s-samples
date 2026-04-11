@@ -9,6 +9,12 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.4.11
+
+* [Media Player SDK X] Added `Play_PauseAtFirstFrame` property to MediaPlayerCoreX — pauses at the first rendered frame for preview/thumbnail scenarios, matching the existing MediaPlayerCore API
+* [Core] Migrated SkiaSharp from 2.88.9 to 3.119.2 — updated text rendering to SKFont API, replaced SKFilterQuality with SKSamplingOptions, switched SVG library from SkiaSharp.Svg to Svg.Skia
+* [UI] Updated SkiaSharp.Views.WPF and SkiaSharp.Views.Maui.Controls to 3.119.2; WPF skins now use DrawImage with high-quality Mitchell resampling
+
 ## 2026.4.8
 
 * [Android] Added live camera switching (SwitchCamera) to SystemVideoSourceBlock — switches between front/back cameras without recreating the GStreamer pipeline, preserving resolution and frame rate
