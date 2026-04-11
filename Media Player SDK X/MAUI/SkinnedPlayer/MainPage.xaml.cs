@@ -3,6 +3,7 @@ using System.Reflection;
 
 using VisioForge.Core;
 using VisioForge.Core.MediaPlayerX;
+using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.UI.Skins;
 
