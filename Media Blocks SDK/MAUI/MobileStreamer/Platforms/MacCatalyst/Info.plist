@@ -26,5 +26,9 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs access to the camera for video streaming.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs access to the microphone for audio streaming.</string>
 </dict>
 </plist>

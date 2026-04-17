@@ -3,6 +3,7 @@ using System.Reflection;
 
 using VisioForge.Core;
 using VisioForge.Core.MediaPlayerX;
+using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.UI.Skins;
 
@@ -107,26 +108,31 @@ namespace SkinnedPlayer_MAUI
             InitializeComponent();
 
             Loaded += MainPage_Loaded;
+            Unloaded += MainPage_Unloaded;
 
             //playlist.SkinName = "Default";
             //playerControls.SkinName = "Default";
+        }
+
+        private void MainPage_Unloaded(object sender, EventArgs e)
+        {
+            if (_player != null)
+            {
+                _player.OnError -= _player_OnError;
+                _player.Stop();
+
+                _player.Dispose();
+                _player = null;
+            }
+
+            VisioForgeX.DestroySDK();
         }
 
         /// <summary>
         /// Window destroying.
         /// </summary>
         private async void Window_Destroying(object? sender, EventArgs e)
-        {
-            if (_player != null)
-            {
-                _player.OnError -= _player_OnError;
-                await _player.StopAsync();
-
-                await _player.DisposeAsync();
-                _player = null;
-            }
-
-            VisioForgeX.DestroySDK();
+        {            
         }
 
         /// <summary>

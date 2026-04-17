@@ -28,5 +28,7 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access to the photo library is used to pick a video to play.</string>
 </dict>
 </plist>

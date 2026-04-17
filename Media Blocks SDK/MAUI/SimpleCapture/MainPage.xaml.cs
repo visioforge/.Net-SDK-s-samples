@@ -14,6 +14,7 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.Helpers;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sinks;
@@ -367,24 +368,24 @@ namespace SimpleCaptureMB
         {
             try
             {
-#if __IOS__ && !__MACCATALYST__
                 bool capture = _mp4Sink != null;
                 string filename = null;
                 if (capture)
                 {
                     filename = _mp4Sink.GetFilenameOrURL();
                 }
-#endif
 
                 await StopAllAsync();
 
-                // save video to iOS photo library
-#if __IOS__ && !__MACCATALYST__
-                if (capture)
+                // save video to gallery
+                if (capture && !string.IsNullOrEmpty(filename))
                 {
+#if __IOS__ && !__MACCATALYST__
                     AddVideoToPhotosLibrary(filename);
-                }
+#elif __ANDROID__
+                    await PhotoGalleryHelper.AddVideoToGalleryAsync(filename);
 #endif
+                }
 
                 btStartPreview.Text = "PREVIEW";
                 btStartCapture.Text = "CAPTURE";
@@ -493,10 +494,6 @@ namespace SimpleCaptureMB
                 await DisplayAlertAsync("Error", "Unable to configure camera settings", "OK");
                 return;
             }
-
-#if __IOS__ && !__MACCATALYST__
-            videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
-#endif
 
             _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 

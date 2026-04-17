@@ -25,11 +25,18 @@ namespace MobileStreamer;
 [Register("AppDelegate")]
 public class AppDelegate : UIApplicationDelegate
 {
-    private const string SRT_URL = "srt://:8888";
+    // Persisted per-protocol user input (NSUserDefaults keys).
+    private const string PREF_SRT_URL   = "pref_srt_url";
+    private const string PREF_YT_KEY    = "pref_youtube_key";
+    private const string PREF_FB_KEY    = "pref_facebook_key";
 
-    private string FACEBOOK_LIVE_KEY = "";
+    // Default shown in the SRT prompt on first launch: listen on port 8888.
+    private const string DEFAULT_SRT_URL = "srt://:8888";
 
-    private string YOUTUBE_LIVE_KEY = "";
+    // Remembered between stream starts; filled via the prompt.
+    private string _srtUrl;
+    private string _youTubeKey;
+    private string _facebookKey;
 
     private MediaBlocksPipeline _pipeline;
 
@@ -51,7 +58,7 @@ public class AppDelegate : UIApplicationDelegate
 
     private VideoCaptureDeviceInfo[] _cameras;
 
-    private VideoViewGL _videoView;
+    private VideoView _videoView;
 
     public override UIWindow? Window { get; set; }
 
@@ -92,7 +99,7 @@ public class AppDelegate : UIApplicationDelegate
         _pipeline.Connect(_audioSource.Output, _audioEncoder.Input);
 
         // sink
-        _sink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = SRT_URL });
+        _sink = new SRTMPEGTSSinkBlock(new SRTSinkSettings() { Uri = _srtUrl });
         _pipeline.Connect(_videoEncoder.Output,
             (_sink as SRTMPEGTSSinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
         _pipeline.Connect(_audioEncoder.Output,
@@ -114,7 +121,7 @@ public class AppDelegate : UIApplicationDelegate
         _pipeline.Connect(_audioSource.Output, _audioEncoder.Input);
 
         // sink
-        _sink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(FACEBOOK_LIVE_KEY));
+        _sink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(_facebookKey));
         _pipeline.Connect(_videoEncoder.Output, (_sink as FacebookLiveSinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
         _pipeline.Connect(_audioEncoder.Output, (_sink as FacebookLiveSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
     }
@@ -134,7 +141,7 @@ public class AppDelegate : UIApplicationDelegate
         _pipeline.Connect(_audioSource.Output, _audioEncoder.Input);
 
         // sink
-        _sink = new YouTubeSinkBlock(new YouTubeSinkSettings(YOUTUBE_LIVE_KEY));
+        _sink = new YouTubeSinkBlock(new YouTubeSinkSettings(_youTubeKey));
         _pipeline.Connect(_videoEncoder.Output, (_sink as YouTubeSinkBlock).CreateNewInput(MediaBlockPadMediaType.Video));
         _pipeline.Connect(_audioEncoder.Output, (_sink as YouTubeSinkBlock).CreateNewInput(MediaBlockPadMediaType.Audio));
     }
@@ -187,7 +194,6 @@ public class AppDelegate : UIApplicationDelegate
             return;
         }
 
-        videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
         _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 
         // create video tee
@@ -227,145 +233,261 @@ public class AppDelegate : UIApplicationDelegate
         Debug.WriteLine(e.Message);
     }
 
+    private UIButton _btFlip;
+    private UIView _btSRT;
+    private UIView _btYouTube;
+    private UIView _btFacebook;
+
+    private enum StreamKind { None, SRT, YouTube, Facebook }
+    private StreamKind _active = StreamKind.None;
+
         /// <summary>
-        /// Add buttons.
+        /// Build a pill-shaped view with an SF Symbol icon stacked above a caption.
+        /// Uses a vertical UIStackView inside a rounded container so centering is correct.
+        /// </summary>
+    private UIView MakePill(string symbolName, string caption, Action onTap)
+    {
+        var container = new UIView
+        {
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            BackgroundColor = UIColor.FromWhiteAlpha(1f, 0.12f),
+            UserInteractionEnabled = true
+        };
+        container.Layer.CornerRadius = 16f;
+
+        var config = UIImageSymbolConfiguration.Create(22f, UIImageSymbolWeight.Regular);
+        var iv = new UIImageView(UIImage.GetSystemImage(symbolName, config))
+        {
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            ContentMode = UIViewContentMode.ScaleAspectFit,
+            TintColor = UIColor.White
+        };
+
+        var lbl = new UILabel
+        {
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            Text = caption,
+            TextColor = UIColor.White,
+            TextAlignment = UITextAlignment.Center,
+            Font = UIFont.SystemFontOfSize(11f, UIFontWeight.Semibold)
+        };
+
+        var stack = new UIStackView(new UIView[] { iv, lbl })
+        {
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            Axis = UILayoutConstraintAxis.Vertical,
+            Alignment = UIStackViewAlignment.Center,
+            Spacing = 3f,
+            UserInteractionEnabled = false
+        };
+        container.AddSubview(stack);
+
+        NSLayoutConstraint.ActivateConstraints(new[]
+        {
+            stack.CenterXAnchor.ConstraintEqualTo(container.CenterXAnchor),
+            stack.CenterYAnchor.ConstraintEqualTo(container.CenterYAnchor),
+            iv.HeightAnchor.ConstraintEqualTo(26f),
+            iv.WidthAnchor.ConstraintEqualTo(32f)
+        });
+
+        var tap = new UITapGestureRecognizer(() => onTap());
+        container.AddGestureRecognizer(tap);
+
+        return container;
+    }
+
+        /// <summary>
+        /// Add bottom control bar: camera-flip icon on the left + three protocol pill buttons (SRT, YouTube, Facebook).
         /// </summary>
     private void AddButtons(UIView parent)
     {
-        // select camera
-        var btSelectCamera = new UIButton(new CGRect(20, 20, 200, 50))
+        var controlBar = new UIView
         {
-            BackgroundColor = UIColor.Gray,
-            AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Center,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            BackgroundColor = UIColor.FromWhiteAlpha(0f, 0.35f)
         };
-        btSelectCamera.SetTitle("BACK", UIControlState.Normal);
-        btSelectCamera.TouchUpInside += async (sender, e) =>
-        {
-            if (btSelectCamera.CurrentTitle == "BACK")
-            {
-                _cameraIndex = 1;
-                btSelectCamera.SetTitle("FRONT", UIControlState.Normal);
-            }
-            else
-            {
-                _cameraIndex = 0;
-                btSelectCamera.SetTitle("BACK", UIControlState.Normal);
-            }
-        };
+        parent.AddSubview(controlBar);
 
-        parent!.AddSubview(btSelectCamera);
+        NSLayoutConstraint.ActivateConstraints(new[]
+        {
+            controlBar.LeadingAnchor.ConstraintEqualTo(parent.LeadingAnchor),
+            controlBar.TrailingAnchor.ConstraintEqualTo(parent.TrailingAnchor),
+            controlBar.BottomAnchor.ConstraintEqualTo(parent.BottomAnchor),
+            controlBar.HeightAnchor.ConstraintEqualTo(140f)
+        });
 
-        // start Facebook
-        var btStartFacebook = new UIButton(new CGRect(240, 20, 200, 50))
+        // camera flip — leading
+        var flipConfig = UIImageSymbolConfiguration.Create(26f, UIImageSymbolWeight.Regular);
+        var flipImage = UIImage.GetSystemImage("arrow.triangle.2.circlepath.camera.fill", flipConfig);
+
+        _btFlip = new UIButton(UIButtonType.System)
         {
-            BackgroundColor = UIColor.Gray,
-            AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Center,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            TintColor = UIColor.White
         };
-        btStartFacebook.SetTitle("START FACEBOOK", UIControlState.Normal);
-        btStartFacebook.TouchUpInside += async (sender, e) =>
+        _btFlip.SetImage(flipImage, UIControlState.Normal);
+        _btFlip.TouchUpInside += async (sender, e) =>
         {
-            if (_pipeline != null)
+            if (_active != StreamKind.None)
             {
-                await StopCamera();
-                btStartFacebook.SetTitle("START FACEBOOK", UIControlState.Normal);
+                Toast.Show("Stop streaming first to flip camera.", Window.RootViewController);
+                return;
             }
-            else
+            _cameraIndex = _cameraIndex == 0 ? 1 : 0;
+            await StartPreviewAsync();
+        };
+        controlBar.AddSubview(_btFlip);
+
+        NSLayoutConstraint.ActivateConstraints(new[]
+        {
+            _btFlip.LeadingAnchor.ConstraintEqualTo(controlBar.SafeAreaLayoutGuide.LeadingAnchor, 20f),
+            _btFlip.CenterYAnchor.ConstraintEqualTo(controlBar.SafeAreaLayoutGuide.BottomAnchor, -54f),
+            _btFlip.WidthAnchor.ConstraintEqualTo(50f),
+            _btFlip.HeightAnchor.ConstraintEqualTo(50f)
+        });
+
+        // protocol pills — trailing stack
+        _btSRT      = MakePill("antenna.radiowaves.left.and.right", "SRT",      async () => await ToggleStreamAsync(StreamKind.SRT));
+        _btYouTube  = MakePill("play.rectangle.fill",               "YouTube",  async () => await ToggleStreamAsync(StreamKind.YouTube));
+        _btFacebook = MakePill("f.cursive.circle.fill",             "Facebook", async () => await ToggleStreamAsync(StreamKind.Facebook));
+
+        var stack = new UIStackView(new UIView[] { _btSRT, _btYouTube, _btFacebook })
+        {
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            Axis = UILayoutConstraintAxis.Horizontal,
+            Spacing = 10f,
+            Distribution = UIStackViewDistribution.FillEqually,
+            Alignment = UIStackViewAlignment.Fill
+        };
+        controlBar.AddSubview(stack);
+
+        NSLayoutConstraint.ActivateConstraints(new[]
+        {
+            stack.LeadingAnchor.ConstraintEqualTo(_btFlip.TrailingAnchor, 16f),
+            stack.TrailingAnchor.ConstraintEqualTo(controlBar.SafeAreaLayoutGuide.TrailingAnchor, -20f),
+            stack.CenterYAnchor.ConstraintEqualTo(_btFlip.CenterYAnchor),
+            stack.HeightAnchor.ConstraintEqualTo(62f)
+        });
+    }
+
+        /// <summary>
+        /// Prompt the user for a string value, prefilled with a previously saved one.
+        /// </summary>
+    private Task<string> PromptAsync(string title, string message, string prefill, string placeholder)
+    {
+        var tcs = new TaskCompletionSource<string>();
+
+        var alert = UIAlertController.Create(title, message, UIAlertControllerStyle.Alert);
+        alert.AddTextField(tf =>
+        {
+            tf.Text = prefill ?? string.Empty;
+            tf.Placeholder = placeholder;
+            tf.AutocorrectionType = UITextAutocorrectionType.No;
+            tf.AutocapitalizationType = UITextAutocapitalizationType.None;
+        });
+        alert.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, _ => tcs.TrySetResult(null)));
+        alert.AddAction(UIAlertAction.Create("OK",     UIAlertActionStyle.Default, _ => tcs.TrySetResult(alert.TextFields![0].Text ?? string.Empty)));
+
+        Window?.RootViewController?.PresentViewController(alert, true, null);
+        return tcs.Task;
+    }
+
+        /// <summary>
+        /// Toggle a stream — start if nothing running, stop if the same protocol is active, otherwise refuse.
+        /// </summary>
+    private async Task ToggleStreamAsync(StreamKind kind)
+    {
+        try
+        {
+            if (_active == kind)
             {
-                if (string.IsNullOrEmpty(FACEBOOK_LIVE_KEY))
+                await StartPreviewAsync();
+                _active = StreamKind.None;
+                UpdatePillState(null);
+                return;
+            }
+
+            if (_active != StreamKind.None)
+            {
+                Toast.Show("Another stream is active. Stop it first.", Window.RootViewController);
+                return;
+            }
+
+            var defaults = NSUserDefaults.StandardUserDefaults;
+
+            switch (kind)
+            {
+                case StreamKind.SRT:
                 {
-                    Toast.Show("Facebook Live Key is empty. Please set it in code.", Window.RootViewController);
-                    return;
+                    var saved = defaults.StringForKey(PREF_SRT_URL) ?? DEFAULT_SRT_URL;
+                    var value = await PromptAsync("SRT URL", "Enter the SRT URI. Use srt://:PORT for listener mode.", saved, "srt://:8888");
+                    if (string.IsNullOrWhiteSpace(value)) return;
+                    _srtUrl = value.Trim();
+                    defaults.SetString(_srtUrl, PREF_SRT_URL);
+                    break;
                 }
-            
-                await CreateEngineAsync();
-            
-                AddFacebookSink();
-            
-                await _pipeline.StartAsync();
-            
-                btStartFacebook.SetTitle("STOP FACEBOOK", UIControlState.Normal);
-            }
-        };
-
-        parent!.AddSubview(btStartFacebook);
-        
-        // start YouTube 
-        var btStartYouTube = new UIButton(new CGRect(460, 20, 200, 50))
-        {
-            BackgroundColor = UIColor.Gray,
-            AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Center,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
-        };
-        btStartYouTube.SetTitle("START YOUTUBE", UIControlState.Normal);
-        btStartYouTube.TouchUpInside += async (sender, e) =>
-        {
-            if (_pipeline != null)
-            {
-                await StopCamera();
-                btStartYouTube.SetTitle("START YOUTUBE", UIControlState.Normal);
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(YOUTUBE_LIVE_KEY))
+                case StreamKind.YouTube:
                 {
-                    Toast.Show("YouTube Live Key is empty. Please set it in code.", Window.RootViewController);
-                    return;
+                    var saved = defaults.StringForKey(PREF_YT_KEY) ?? string.Empty;
+                    var value = await PromptAsync("YouTube Live Key", "Paste the stream key from YouTube Studio.", saved, "xxxx-xxxx-xxxx-xxxx");
+                    if (string.IsNullOrWhiteSpace(value)) return;
+                    _youTubeKey = value.Trim();
+                    defaults.SetString(_youTubeKey, PREF_YT_KEY);
+                    break;
                 }
-
-                await CreateEngineAsync();
-
-                AddYouTubeSink();
-
-                await _pipeline.StartAsync();
-
-                btStartYouTube.SetTitle("STOP YOUTUBE", UIControlState.Normal);
+                case StreamKind.Facebook:
+                {
+                    var saved = defaults.StringForKey(PREF_FB_KEY) ?? string.Empty;
+                    var value = await PromptAsync("Facebook Live Key", "Paste the stream key from Facebook Live Producer.", saved, "FB-xxx-xxx");
+                    if (string.IsNullOrWhiteSpace(value)) return;
+                    _facebookKey = value.Trim();
+                    defaults.SetString(_facebookKey, PREF_FB_KEY);
+                    break;
+                }
             }
-        };
 
-        parent!.AddSubview(btStartYouTube);
+            await CreateEngineAsync();
 
-        // start SRT
-        var btStartSRT = new UIButton(new CGRect(680, 20, 200, 50))
-        {
-            BackgroundColor = UIColor.Gray,
-            AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Center,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
-        };
-        btStartSRT.SetTitle("START SRT", UIControlState.Normal);
-        btStartSRT.TouchUpInside += async (sender, e) =>
-        {
-            if (_pipeline != null)
+            switch (kind)
             {
-                await StopCamera();
-                btStartSRT.SetTitle("START SRT", UIControlState.Normal);
+                case StreamKind.SRT:      AddSRTSink(); break;
+                case StreamKind.YouTube:  AddYouTubeSink(); break;
+                case StreamKind.Facebook: AddFacebookSink(); break;
             }
-            else
+
+            await _pipeline.StartAsync();
+
+            _active = kind;
+            UpdatePillState(kind);
+
+            if (kind == StreamKind.SRT && _srtUrl.Contains(":8888") && !_srtUrl.Contains("@"))
             {
-                await CreateEngineAsync();
-
-                AddSRTSink();
-
-                await _pipeline.StartAsync();
-
+                // Listener mode — surface the IP so a remote client knows where to connect.
                 var ip = GetLocalIpAddress();
                 if (!string.IsNullOrEmpty(ip))
                 {
-                    var msg = "SRT URL: srt://" + ip + ":8888";
-                    Debug.WriteLine(msg);
-                    Toast.Show(msg, Window.RootViewController);
+                    Toast.Show("SRT URL: srt://" + ip + ":8888", Window.RootViewController);
                 }
-
-                btStartSRT.SetTitle("STOP SRT", UIControlState.Normal);
             }
-        };
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            Toast.Show("Stream error: " + ex.Message, Window.RootViewController);
+        }
+    }
 
-        parent!.AddSubview(btStartSRT);
+        /// <summary>
+        /// Highlight the active protocol pill; dim the others.
+        /// </summary>
+    private void UpdatePillState(StreamKind? active)
+    {
+        var red = UIColor.SystemRed;
+        var idle = UIColor.FromWhiteAlpha(1f, 0.12f);
+
+        _btSRT.BackgroundColor      = active == StreamKind.SRT      ? red : idle;
+        _btYouTube.BackgroundColor  = active == StreamKind.YouTube  ? red : idle;
+        _btFacebook.BackgroundColor = active == StreamKind.Facebook ? red : idle;
     }
 
         /// <summary>
@@ -384,12 +506,29 @@ public class AppDelegate : UIApplicationDelegate
     }
 
         /// <summary>
-        /// Add video view.
+        /// Start preview-only pipeline (video source → tee → renderer). No sink, no encoders.
+        /// </summary>
+    private async Task StartPreviewAsync()
+    {
+        await StopCamera();
+        await CreateEngineAsync();
+        if (_pipeline != null)
+        {
+            await _pipeline.StartAsync();
+        }
+    }
+
+        /// <summary>
+        /// Add video view that fills its parent using autoresizing.
         /// </summary>
     private void AddVideoView(UIView view)
     {
-        var rect = new CGRect(0, 0, Window!.Frame.Width, Window!.Frame.Height);
-        _videoView = new VideoViewGL(rect);
+        _videoView = new VideoView(view.Bounds)
+        {
+            AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight,
+            BackgroundColor = UIColor.Black,
+            DisableAspectRatioResize = true
+        };
 
         view!.AddSubview(_videoView);
     }
@@ -414,6 +553,11 @@ public class AppDelegate : UIApplicationDelegate
         Window.MakeKeyAndVisible();
 
         VisioForgeX.InitSDK();
+
+        InvokeOnMainThread(async () =>
+        {
+            await StartPreviewAsync();
+        });
 
         return true;
     }

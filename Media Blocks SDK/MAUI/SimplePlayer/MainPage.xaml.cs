@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Globalization;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.VideoEffects;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -67,7 +68,7 @@ namespace Simple_Player_MB_MAUI
         {
             if (_pipeline != null)
             {
-                await _pipeline.StopAsync();
+                await _pipeline.StopAsync(true);
                 await _pipeline.DisposeAsync();
             }
 
@@ -78,15 +79,30 @@ namespace Simple_Player_MB_MAUI
             _pipeline.OnStop += _player_OnStop;
 
             _audioRenderer = new AudioRendererBlock();
-            
-            _source = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(_filename!)));
-            
+
             var vv = videoView.GetVideoView();
             _videoRenderer = new VideoRendererBlock(_pipeline, vv);
             _audioRenderer = new AudioRendererBlock();
 
-            _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
-            _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
+            var settings = await UniversalSourceSettings.CreateAsync(new Uri(_filename!));
+            // Auto-rotate portrait phone recordings via videoflip inside the source block;
+            // no FlipRotateBlock needed in the pipeline.
+            settings.VideoFlipRotate = VideoFlipRotateMethod.Automatic;
+            var info = settings.GetInfo();
+            _source = new UniversalSourceBlock(settings);
+
+            // Only connect pads for streams that actually exist — gallery videos can be
+            // muted (no audio track) and connecting an unused audio pad leaves the
+            // pipeline stuck in PAUSED waiting for data that never arrives.
+            if (info.VideoStreams.Count > 0)
+            {
+                _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
+            }
+
+            if (info.AudioStreams.Count > 0)
+            {
+                _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
+            }
         }
 
         /// <summary>
@@ -101,7 +117,7 @@ namespace Simple_Player_MB_MAUI
                 // update UI controls using invoke
                 await MainThread.InvokeOnMainThreadAsync(() =>
                 {
-                    btSpeed.Text = "SPEED: 1X";
+                    btSpeed.Text = "1X";
                     btPlayPause.Text = "PLAY";
                     slSeeking.Value = 0;
                     lbDuration.Text = "00:00:00";
@@ -155,7 +171,7 @@ namespace Simple_Player_MB_MAUI
                 if (_pipeline != null)
                 {
                     _pipeline.OnError -= _player_OnError;
-                    await _pipeline.StopAsync();
+                    await _pipeline.StopAsync(true);
 
                     _pipeline.Dispose();
                     _pipeline = null!;
@@ -191,7 +207,7 @@ namespace Simple_Player_MB_MAUI
 
             if (_pipeline != null)
             {
-                await _pipeline.StopAsync();
+                await _pipeline.StopAsync(true);
             }
         }
 
@@ -291,22 +307,79 @@ namespace Simple_Player_MB_MAUI
         {
             try
             {
+                var result = await FilePicker.Default.PickAsync();
+                if (result == null)
+                {
+                    return;
+                }
+
                 await StopAllAsync();
 
-                btPlayPause.Text = "PLAY";
+                _filename = result.FullPath;
 
-                var result = await FilePicker.Default.PickAsync();
-                if (result != null)
-                {
-                    _filename = result.FullPath;
-                    lbFilename.Text = _filename;
-                    lbFilename.IsVisible = true;
-                }
+                await CreateEngineAsync();
+                await _pipeline!.StartAsync();
+
+                _tmPosition.Start();
+                btPlayPause.Text = "PAUSE";
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error opening file: {ex.Message}");
-                // The user canceled or something went wrong
+            }
+        }
+
+        /// <summary>
+        /// Handles the bt gallery clicked event — picks a video from the device photo library.
+        /// </summary>
+        private async void btGallery_Clicked(object? sender, EventArgs e)
+        {
+            try
+            {
+                Console.WriteLine("[SimplePlayer] btGallery_Clicked: enter");
+
+                var result = await MediaPicker.Default.PickVideoAsync();
+                if (result == null)
+                {
+                    Console.WriteLine("[SimplePlayer] PickVideoAsync: cancelled");
+                    return;
+                }
+
+                Console.WriteLine($"[SimplePlayer] picked: FileName='{result.FileName}', FullPath='{result.FullPath}'");
+
+                await StopAllAsync();
+
+                // Android: MediaPicker already copies to a cache path, so FullPath is
+                // absolute and usable. iOS: PHPicker hands us an NSItemProvider and MAUI
+                // only exposes the original filename in FullPath, so we have to copy the
+                // stream into our cache to get a real filesystem path.
+                if (Path.IsPathRooted(result.FullPath) && File.Exists(result.FullPath))
+                {
+                    _filename = result.FullPath;
+                }
+                else
+                {
+                    var cachePath = Path.Combine(FileSystem.Current.CacheDirectory, result.FileName);
+                    using (var src = await result.OpenReadAsync())
+                    using (var dst = File.Create(cachePath))
+                    {
+                        await src.CopyToAsync(dst);
+                    }
+
+                    _filename = cachePath;
+                }
+
+                await CreateEngineAsync();
+                await _pipeline!.StartAsync();
+
+                _tmPosition.Start();
+                btPlayPause.Text = "PAUSE";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[SimplePlayer] EXC btGallery: {ex.GetType().Name}: {ex.Message}");
+                Console.WriteLine(ex.StackTrace ?? "(no stack)");
+                await DisplayAlertAsync("Gallery", $"{ex.GetType().Name}: {ex.Message}", "OK");
             }
         }
 
@@ -363,22 +436,22 @@ namespace Simple_Player_MB_MAUI
         {
             try
             {
-                if (btSpeed.Text == "SPEED: 1X")
+                if (btSpeed.Text == "1X")
                 {
                     // set 2x
-                    btSpeed.Text = "SPEED: 2X";
+                    btSpeed.Text = "2X";
                     await _pipeline!.Rate_SetAsync(2.0);
                 }
-                else if (btSpeed.Text == "SPEED: 2X")
+                else if (btSpeed.Text == "2X")
                 {
                     // set 0.5x
-                    btSpeed.Text = "SPEED: 0.5X";
+                    btSpeed.Text = "0.5X";
                     await _pipeline!.Rate_SetAsync(0.5);
                 }
-                else if (btSpeed.Text == "SPEED: 0.5X")
+                else if (btSpeed.Text == "0.5X")
                 {
                     // set 1x
-                    btSpeed.Text = "SPEED: 1X";
+                    btSpeed.Text = "1X";
                     await _pipeline!.Rate_SetAsync(1.0);
                 }
             }
@@ -397,7 +470,7 @@ namespace Simple_Player_MB_MAUI
             {
                 await StopAllAsync();
 
-                btSpeed.Text = "SPEED: 1X";
+                btSpeed.Text = "1X";
                 btPlayPause.Text = "PLAY";
                 slSeeking.Value = 0;
                 lbDuration.Text = "00:00:00";

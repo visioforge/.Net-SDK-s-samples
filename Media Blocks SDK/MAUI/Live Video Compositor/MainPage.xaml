@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI"
+             x:Class="Live_Video_Compositor_MB_MAUI.MainPage"
+             Title="Live Video Compositor">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Video View -->
+        <my:VideoView x:Name="videoView" Grid.Row="0" BackgroundColor="Black" />
+
+        <!-- Controls Panel -->
+        <ScrollView Grid.Row="1" HeightRequest="300">
+            <VerticalStackLayout Spacing="10" Padding="10">
+                
+                <!-- Sources Section -->
+                <Frame BorderColor="#673ab7" Padding="10">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="SOURCES" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                        
+                        <CollectionView x:Name="lbSources" HeightRequest="100" SelectionMode="Single" SelectionChanged="lbSources_SelectionChanged">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding}" Padding="5" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        
+                        <HorizontalStackLayout Spacing="5">
+                            <Button x:Name="btAddSource" Text="Add" Clicked="btAddSource_Clicked" />
+                            <Button x:Name="btRemoveSource" Text="Remove" Clicked="btRemoveSource_Clicked" />
+                        </HorizontalStackLayout>
+                        
+                        <Label Text="Rectangle settings:" FontSize="14" />
+                        <Grid ColumnDefinitions="*,*,*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="5">
+                            <Label Grid.Column="0" Grid.Row="0" Text="Left" FontSize="12" />
+                            <Entry Grid.Column="0" Grid.Row="1" x:Name="edRectLeft" Text="0" Keyboard="Numeric" />
+                            
+                            <Label Grid.Column="1" Grid.Row="0" Text="Top" FontSize="12" />
+                            <Entry Grid.Column="1" Grid.Row="1" x:Name="edRectTop" Text="0" Keyboard="Numeric" />
+                            
+                            <Label Grid.Column="2" Grid.Row="0" Text="Right" FontSize="12" />
+                            <Entry Grid.Column="2" Grid.Row="1" x:Name="edRectRight" Text="640" Keyboard="Numeric" />
+                            
+                            <Label Grid.Column="3" Grid.Row="0" Text="Bottom" FontSize="12" />
+                            <Entry Grid.Column="3" Grid.Row="1" x:Name="edRectBottom" Text="480" Keyboard="Numeric" />
+                            
+                            <Label Grid.Column="4" Grid.Row="0" Text="Z-order" FontSize="12" />
+                            <Entry Grid.Column="4" Grid.Row="1" x:Name="edZOrder" Text="0" Keyboard="Numeric" />
+                        </Grid>
+                        
+                        <Button x:Name="btUpdateSource" Text="Update source" Clicked="btUpdateSource_Clicked" HorizontalOptions="Center" />
+                        
+                        <Label Text="Seeking (file source)" FontSize="12" HorizontalTextAlignment="Center" />
+                        <Slider x:Name="tbSeeking" ValueChanged="tbSeeking_ValueChanged" />
+                    </VerticalStackLayout>
+                </Frame>
+                
+                <!-- Outputs Section -->
+                <Frame BorderColor="#673ab7" Padding="10">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="OUTPUTS" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                        <Label Text="Files will be saved to app folder" FontSize="12" HorizontalTextAlignment="Center" />
+                        
+                        <CollectionView x:Name="lbOutputs" HeightRequest="80">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding}" Padding="5" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        
+                        <HorizontalStackLayout Spacing="5">
+                            <Button x:Name="btAddOutput" Text="Add" Clicked="btAddOutput_Clicked" />
+                            <Button x:Name="btRemoveOutput" Text="Remove" Clicked="btRemoveOutput_Clicked" />
+                            <Button x:Name="btStartOutput" Text="Start" Clicked="btStartOutput_Clicked" />
+                            <Button x:Name="btStopOutput" Text="Stop" Clicked="btStopOutput_Clicked" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+                
+                <!-- Controls Section -->
+                <Frame BorderColor="#673ab7" Padding="10">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="CONTROLS" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                        
+                        <Label x:Name="lbResolution" Text="Video: " />
+                        
+                        <HorizontalStackLayout Spacing="5">
+                            <Label Text="Audio output:" VerticalOptions="Center" />
+                            <Picker x:Name="cbAudioRenderer" WidthRequest="200" />
+                        </HorizontalStackLayout>
+                        
+                        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                            <Button x:Name="btStart" Text="Start" Clicked="btStart_Clicked" WidthRequest="100" />
+                            <Button x:Name="btStop" Text="Stop" Clicked="btStop_Clicked" WidthRequest="100" />
+                            <Label Text="Duration:" VerticalOptions="Center" />
+                            <Label x:Name="lbTimestamp" Text="00:00:00" VerticalOptions="Center" />
+                            <Label Text="FPS:" VerticalOptions="Center" />
+                            <Label x:Name="lbRenderFps" Text="-- / --" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+                
+                <!-- Logs Section -->
+                <Frame BorderColor="#673ab7" Padding="10">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="LOGS" FontSize="16" FontAttributes="Bold" HorizontalTextAlignment="Center" />
+                        <Editor x:Name="mmLog" HeightRequest="100" IsReadOnly="True" />
+                    </VerticalStackLayout>
+                </Frame>
+                
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

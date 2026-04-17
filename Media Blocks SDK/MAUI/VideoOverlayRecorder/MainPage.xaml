@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vf="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI"
+             x:Class="VideoOverlayRecorderMB.MainPage"
+             Title="Video Overlay Recorder">
+
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- File Selection -->
+        <HorizontalStackLayout Grid.Row="0" Spacing="10" Margin="0,0,0,10">
+            <Button x:Name="btSelectFile" Text="Select Video File" Clicked="btSelectFile_Clicked" WidthRequest="150"/>
+            <Label x:Name="lbFilename" Text="No file selected" VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <!-- Video Preview -->
+        <Border Grid.Row="1" Stroke="Gray" StrokeThickness="1">
+            <vf:VideoView x:Name="videoView" BackgroundColor="Black"/>
+        </Border>
+
+        <!-- Playback and Recording Controls -->
+        <Grid Grid.Row="2" Margin="0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Playback Controls -->
+            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                <HorizontalStackLayout Spacing="10">
+                    <Button x:Name="btPlay" Text="Play" Clicked="btPlay_Clicked" WidthRequest="80"/>
+                    <Button x:Name="btPause" Text="Pause" Clicked="btPause_Clicked" WidthRequest="80"/>
+                    <Button x:Name="btStop" Text="Stop" Clicked="btStop_Clicked" WidthRequest="80"/>
+                </HorizontalStackLayout>
+                
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Position:" VerticalOptions="Center"/>
+                    <Slider x:Name="slPosition" HorizontalOptions="FillAndExpand" Minimum="0" Maximum="100" ValueChanged="slPosition_ValueChanged"/>
+                    <Label x:Name="lbTime" Text="00:00:00 / 00:00:00" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Recording Controls -->
+            <VerticalStackLayout Grid.Column="1" Spacing="5" Margin="20,0,0,0">
+                <Button x:Name="btStartRecording" Text="Start Recording" Clicked="btStartRecording_Clicked" WidthRequest="150" BackgroundColor="Red" TextColor="White"/>
+                <Button x:Name="btStopRecording" Text="Stop Recording" Clicked="btStopRecording_Clicked" WidthRequest="150" IsEnabled="False"/>
+                <Label x:Name="lbRecordingStatus" Text="Ready" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Overlay Controls -->
+        <Grid Grid.Row="3" Margin="0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Add Overlay Controls -->
+            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                <Label Text="Add Overlays:" FontAttributes="Bold"/>
+                <HorizontalStackLayout Spacing="5">
+                    <Button x:Name="btAddText" Text="Add Text" Clicked="btAddText_Clicked" WidthRequest="100"/>
+                    <Entry x:Name="edTextOverlay" Text="Hello World!" HorizontalOptions="FillAndExpand"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="5">
+                    <Button x:Name="btAddImage" Text="Add Image" Clicked="btAddImage_Clicked" WidthRequest="100"/>
+                    <Button x:Name="btAddRectangle" Text="Rectangle" Clicked="btAddRectangle_Clicked" WidthRequest="100"/>
+                    <Button x:Name="btAddCircle" Text="Circle" Clicked="btAddCircle_Clicked" WidthRequest="100"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="5">
+                    <Button x:Name="btAddLine" Text="Add Line" Clicked="btAddLine_Clicked" WidthRequest="100"/>
+                    <Button x:Name="btAddTimestamp" Text="Timestamp" Clicked="btAddTimestamp_Clicked" WidthRequest="100"/>
+                    <Button x:Name="btAddFrameCounter" Text="Frame Counter" Clicked="btAddFrameCounter_Clicked" WidthRequest="100"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Overlay List -->
+            <VerticalStackLayout Grid.Column="1" Spacing="5" Margin="20,0,0,0">
+                <Label Text="Active Overlays:" FontAttributes="Bold"/>
+                <Border Stroke="Gray" StrokeThickness="1" HeightRequest="100">
+                    <ListView x:Name="lbOverlays" SelectionMode="Single"/>
+                </Border>
+                <Button x:Name="btRemoveOverlay" Text="Remove Selected" Clicked="btRemoveOverlay_Clicked" WidthRequest="150"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Status and Log -->
+        <VerticalStackLayout Grid.Row="4" Spacing="5">
+            <Label x:Name="lbStatus" Text="Status: Ready" FontAttributes="Bold"/>
+            <Border Stroke="Gray" StrokeThickness="1" HeightRequest="60">
+                <Editor x:Name="edLog" IsReadOnly="True" FontSize="12" BackgroundColor="LightGray"/>
+            </Border>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SRT_Streamer</string>
+    <string-array name="srt_modes">
+        <item>Caller</item>
+        <item>Listener</item>
+        <item>Rendezvous</item>
+    </string-array>
+</resources>

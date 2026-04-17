@@ -24,57 +24,67 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <StackLayout Orientation="Vertical" Grid.Column="0" HorizontalOptions="StartAndExpand" Margin="5">
                         <Label Text="CAMERA" VerticalOptions="Center" HorizontalOptions="Center" Margin="5" TextColor="White" />
-                        <Button x:Name="btCamera" Text="CAMERA" MinimumWidthRequest="200" Clicked="btCamera_Clicked" />
+                        <Button x:Name="btCamera" Text="CAMERA" MinimumWidthRequest="160" Clicked="btCamera_Clicked" />
                     </StackLayout>
 
-                    <StackLayout Orientation="Vertical" Grid.Column="1" HorizontalOptions="CenterAndExpand" Margin="5">
+                    <StackLayout Orientation="Vertical" Grid.Column="1" HorizontalOptions="EndAndExpand" Margin="5">
                         <Label Text="MICROPHONE" VerticalOptions="Center" HorizontalOptions="Center" Margin="5" TextColor="White" />
-                        <Button x:Name="btMic" Text="MICROPHONE" MinimumWidthRequest="200" Clicked="btMic_Clicked" />
-                    </StackLayout>
-
-                    <StackLayout Orientation="Vertical" Grid.Column="2" HorizontalOptions="EndAndExpand" Margin="5">
-                        <Entry x:Name="edKey" Text="Enter YouTube/Facebook key" />
+                        <Button x:Name="btMic" Text="MICROPHONE" MinimumWidthRequest="160" Clicked="btMic_Clicked" />
                     </StackLayout>
                 </Grid>
 
-                <StackLayout 
-                    Orientation="Horizontal"
-                    HorizontalOptions="Center"
-                    Margin="5, 0, 5, 0">
+                <Entry x:Name="edUrl"
+                       Margin="5, 0, 5, 0"
+                       Text="srt://192.168.1.44:8890?streamid=publish:mobile"
+                       Placeholder="Stream URL / key (srt://…, rtmp://…, YouTube/Facebook key)" />
 
-                    <Button  
-                        x:Name="btStartYouTube"   
-                        Text="START YOUTUBE" 
-                        Margin="5" 
+
+                <FlexLayout
+                    Direction="Row"
+                    Wrap="Wrap"
+                    JustifyContent="Center"
+                    AlignItems="Center"
+                    Margin="5, 0, 5, 5">
+
+                    <Button
+                        x:Name="btStartYouTube"
+                        Text="YOUTUBE"
+                        Margin="3"
                         Clicked="btStartYouTube_Clicked"
-                        MinimumWidthRequest="100" />
+                        MinimumWidthRequest="90" />
 
-                    <Button  
-                        x:Name="btStartFacebook"   
-                        Text="START FACEBOOK" 
-                        Margin="5" 
+                    <Button
+                        x:Name="btStartFacebook"
+                        Text="FACEBOOK"
+                        Margin="3"
                         Clicked="btStartFacebook_Clicked"
-                        MinimumWidthRequest="100" />
+                        MinimumWidthRequest="90" />
 
-                    <Button  
-                        x:Name="btStartRTMP"   
-                        Text="START RTMP" 
-                        Margin="5" 
+                    <Button
+                        x:Name="btStartRTMP"
+                        Text="RTMP"
+                        Margin="3"
                         Clicked="btStartRTMP_Clicked"
-                        MinimumWidthRequest="100" />
+                        MinimumWidthRequest="90" />
 
-                    <Button  
-                        x:Name="btStop"   
-                        Text="STOP" 
-                        Margin="5" 
-                        Clicked="btStop_Clicked" 
-                        MinimumWidthRequest="100" />
-                </StackLayout>
+                    <Button
+                        x:Name="btStartSRT"
+                        Text="SRT"
+                        Margin="3"
+                        Clicked="btStartSRT_Clicked"
+                        MinimumWidthRequest="90" />
+
+                    <Button
+                        x:Name="btStop"
+                        Text="STOP"
+                        Margin="3"
+                        Clicked="btStop_Clicked"
+                        MinimumWidthRequest="90" />
+                </FlexLayout>
             </StackLayout>
         </Grid>
     </Grid>

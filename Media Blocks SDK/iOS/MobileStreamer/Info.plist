@@ -5,7 +5,7 @@
     <key>CFBundleDisplayName</key>
     <string>MobileStreamer</string>
     <key>CFBundleIdentifier</key>
-    <string>com.companyname.MobileStreamer</string>
+    <string>com.visioforge.mobilestreamer</string>
     <key>CFBundleShortVersionString</key>
     <string>1.0</string>
     <key>CFBundleVersion</key>

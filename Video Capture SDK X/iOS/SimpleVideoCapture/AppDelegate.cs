@@ -44,6 +44,10 @@ public class AppDelegate : UIApplicationDelegate
 
     private UIButton _btStartCapture;
 
+    private bool _isCapturing;
+
+    private bool _isFrontCamera = true;
+
     public override UIWindow? Window { get; set; }
 
         /// <summary>
@@ -110,8 +114,6 @@ public class AppDelegate : UIApplicationDelegate
                 return;
             }
 
-            videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
-
             _player.Video_Source = videoSourceSettings;
 
             _player.Outputs_Clear();
@@ -121,7 +123,7 @@ public class AppDelegate : UIApplicationDelegate
 
             // configure encoders
             var videoEncoder = new AppleMediaH264EncoderSettings();
-           // var audioEncoder = new VOAACEncoderSettings();
+           // var audioEncoder = new AVENCAACEncoderSettings();
             
             GenerateFilename();
             var mp4Output = new MP4Output(_filename, videoEncoder, null);//audioEncoder);
@@ -165,53 +167,36 @@ public class AppDelegate : UIApplicationDelegate
     }
 
         /// <summary>
-        /// Add buttons.
+        /// Add bottom control bar with icon-based camera-flip and record buttons.
         /// </summary>
     private void AddButtons(UIView parent)
     {
-        // select camera
-        _btSelectCamera = new UIButton(new CGRect(10, 0, 150, 50))
+        var controlBar = new UIView
         {
-            BackgroundColor = UIColor.Gray,
-            AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Center,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
-        };
-        _btSelectCamera.SetTitle("FRONT", UIControlState.Normal);
-        _btSelectCamera.TouchUpInside += async (sender, e) =>
-        {
-            if (_player != null)
-            {
-                await StopCamera();
-            }
-
-            if (_btSelectCamera.CurrentTitle == "BACK")
-            {
-                _cameraIndex = 1;
-                _btSelectCamera.SetTitle("FRONT", UIControlState.Normal);
-            }
-            else
-            {
-                _cameraIndex = 0;
-                _btSelectCamera.SetTitle("BACK", UIControlState.Normal);
-            }
-
-            _btStartCapture?.SetTitle("START CAPTURE", UIControlState.Normal);
-
-            await StartAsync();
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            BackgroundColor = UIColor.FromWhiteAlpha(0f, 0.35f)
         };
 
-        parent!.AddSubview(_btSelectCamera);
+        parent.AddSubview(controlBar);
 
-        // start capture
-        _btStartCapture = new UIButton(new CGRect(170, 00, 200, 50))
+        NSLayoutConstraint.ActivateConstraints(new[]
         {
-            BackgroundColor = UIColor.Gray,
-            AutoresizingMask = UIViewAutoresizing.All,
-            VerticalAlignment = UIControlContentVerticalAlignment.Center,
-            HorizontalAlignment = UIControlContentHorizontalAlignment.Center
+            controlBar.LeadingAnchor.ConstraintEqualTo(parent.LeadingAnchor),
+            controlBar.TrailingAnchor.ConstraintEqualTo(parent.TrailingAnchor),
+            controlBar.BottomAnchor.ConstraintEqualTo(parent.BottomAnchor),
+            controlBar.HeightAnchor.ConstraintEqualTo(120f)
+        });
+
+        _btStartCapture = new UIButton(UIButtonType.Custom)
+        {
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            BackgroundColor = UIColor.Clear
         };
-        _btStartCapture.SetTitle("START CAPTURE", UIControlState.Normal);
+        _btStartCapture.Layer.CornerRadius = 34f;
+        _btStartCapture.Layer.BorderWidth = 4f;
+        _btStartCapture.Layer.BorderColor = UIColor.White.CGColor;
+        UpdateCaptureButtonAppearance();
+
         _btStartCapture.TouchUpInside += async (sender, e) =>
         {
             if (_player == null)
@@ -219,22 +204,107 @@ public class AppDelegate : UIApplicationDelegate
                 return;
             }
 
-            if (_btStartCapture.CurrentTitle == "STOP CAPTURE")
+            if (_isCapturing)
             {
-                _btStartCapture.SetTitle("START CAPTURE", UIControlState.Normal);
-
                 await _player.StopCaptureAsync(0);
+                _isCapturing = false;
+                UpdateCaptureButtonAppearance();
             }
             else
-            { 
-                _btStartCapture.SetTitle("STOP CAPTURE", UIControlState.Normal);
-                
+            {
                 GenerateFilename();
                 await _player.StartCaptureAsync(0, _filename);
+                _isCapturing = true;
+                UpdateCaptureButtonAppearance();
             }
         };
 
-        parent!.AddSubview(_btStartCapture);
+        controlBar.AddSubview(_btStartCapture);
+
+        NSLayoutConstraint.ActivateConstraints(new[]
+        {
+            _btStartCapture.CenterXAnchor.ConstraintEqualTo(controlBar.CenterXAnchor),
+            _btStartCapture.CenterYAnchor.ConstraintEqualTo(controlBar.SafeAreaLayoutGuide.BottomAnchor, -44f),
+            _btStartCapture.WidthAnchor.ConstraintEqualTo(68f),
+            _btStartCapture.HeightAnchor.ConstraintEqualTo(68f)
+        });
+
+        var flipConfig = UIImageSymbolConfiguration.Create(26f, UIImageSymbolWeight.Regular);
+        var flipImage = UIImage.GetSystemImage("arrow.triangle.2.circlepath.camera.fill", flipConfig);
+
+        _btSelectCamera = new UIButton(UIButtonType.System)
+        {
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            TintColor = UIColor.White
+        };
+        _btSelectCamera.SetImage(flipImage, UIControlState.Normal);
+        _btSelectCamera.TouchUpInside += async (sender, e) =>
+        {
+            if (_player != null)
+            {
+                await StopCamera();
+            }
+
+            _isFrontCamera = !_isFrontCamera;
+            _cameraIndex = _isFrontCamera ? 1 : 0;
+
+            _isCapturing = false;
+            UpdateCaptureButtonAppearance();
+
+            await StartAsync();
+        };
+
+        controlBar.AddSubview(_btSelectCamera);
+
+        NSLayoutConstraint.ActivateConstraints(new[]
+        {
+            _btSelectCamera.CenterYAnchor.ConstraintEqualTo(_btStartCapture.CenterYAnchor),
+            _btSelectCamera.LeadingAnchor.ConstraintEqualTo(_btStartCapture.TrailingAnchor, 48f),
+            _btSelectCamera.WidthAnchor.ConstraintEqualTo(44f),
+            _btSelectCamera.HeightAnchor.ConstraintEqualTo(44f)
+        });
+    }
+
+        /// <summary>
+        /// Update the capture button's inner shape — red dot when idle, red square when recording.
+        /// </summary>
+    private void UpdateCaptureButtonAppearance()
+    {
+        foreach (var sub in _btStartCapture.Subviews)
+        {
+            if (sub.Tag == 99)
+            {
+                sub.RemoveFromSuperview();
+            }
+        }
+
+        var inner = new UIView
+        {
+            TranslatesAutoresizingMaskIntoConstraints = false,
+            UserInteractionEnabled = false,
+            Tag = 99
+        };
+
+        if (_isCapturing)
+        {
+            inner.BackgroundColor = UIColor.SystemRed;
+            inner.Layer.CornerRadius = 6f;
+        }
+        else
+        {
+            inner.BackgroundColor = UIColor.SystemRed;
+            inner.Layer.CornerRadius = 26f;
+        }
+
+        _btStartCapture.AddSubview(inner);
+
+        NSLayoutConstraint.ActivateConstraints(new[]
+        {
+            inner.CenterXAnchor.ConstraintEqualTo(_btStartCapture.CenterXAnchor),
+            inner.CenterYAnchor.ConstraintEqualTo(_btStartCapture.CenterYAnchor),
+            inner.WidthAnchor.ConstraintEqualTo(_isCapturing ? 28f : 52f),
+            inner.HeightAnchor.ConstraintEqualTo(_isCapturing ? 28f : 52f)
+        });
     }
 
         /// <summary>
@@ -292,12 +362,16 @@ public class AppDelegate : UIApplicationDelegate
     }
 
         /// <summary>
-        /// Create video view.
+        /// Create video view that fills its parent using auto-layout.
         /// </summary>
     private void CreateVideoView(UIView view)
     {
-        var rect = new CGRect(0, 0, Window!.Frame.Width, Window!.Frame.Height);
-        _videoView = new VideoView(rect);
+        _videoView = new VideoView(view.Bounds)
+        {
+            AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight,
+            BackgroundColor = UIColor.Black,
+            DisableAspectRatioResize = true
+        };
 
         view!.AddSubview(_videoView);
     }

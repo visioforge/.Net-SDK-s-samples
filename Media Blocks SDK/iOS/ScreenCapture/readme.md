@@ -4,13 +4,21 @@ This application captures system audio output, captures desktop/screen content, 
 
 ## Used media blocks
 
-* `SystemAudioSourceBlock` - System audio capture
-* `ScreenSourceBlock` - Desktop screen capture
+* `ScreenSourceBlock` - Screen capture
 * `H264EncoderBlock` - H.264/AVC video encoding
-* `AACEncoderBlock` - AAC audio encoding
 * `MP4SinkBlock` - MP4 file output
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
+
+## Pipeline
+
+```mermaid
+graph LR
+    ScreenSourceBlock --> TeeBlock
+    TeeBlock -- preview --> VideoRendererBlock
+    TeeBlock -- record --> H264EncoderBlock
+    H264EncoderBlock --> MP4SinkBlock
+```
 
 ## Supported frameworks
 
@@ -21,6 +29,7 @@ This application captures system audio output, captures desktop/screen content, 
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

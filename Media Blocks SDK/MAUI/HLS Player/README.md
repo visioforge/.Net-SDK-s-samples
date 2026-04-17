@@ -212,6 +212,31 @@ Building a cross-platform HLS streaming app doesn't have to be complex. With .NE
 
 The complete source code is available in the VisioForge demos repository. The SDK offers a trial license for development, and the documentation includes many more examples for advanced scenarios.
 
+## Used media blocks
+
+* `UniversalSourceBlockMini` - Universal media file playback
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
+
+## Pipeline
+
+```mermaid
+graph LR
+    UniversalSourceBlockMini -- video --> VideoRendererBlock
+    UniversalSourceBlockMini -- audio --> AudioRendererBlock
+```
+
+## Supported frameworks
+
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
+* .Net 10
+
 ## Resources
 
 - [VisioForge Media Blocks SDK Documentation](https://www.visioforge.com/media-blocks-sdk)

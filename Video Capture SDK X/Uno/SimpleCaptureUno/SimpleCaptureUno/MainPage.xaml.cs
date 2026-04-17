@@ -345,7 +345,7 @@ public sealed partial class MainPage : Page
     {
         var fileUrl = NSUrl.FromFilename(filePath);
 
-        Photos.PHPhotoLibrary.RequestAuthorization(status =>
+        Photos.PHPhotoLibrary.RequestAuthorization(Photos.PHAccessLevel.AddOnly, status =>
         {
             if (status == Photos.PHAuthorizationStatus.Authorized)
             {
@@ -522,13 +522,6 @@ public sealed partial class MainPage : Page
         }
 
         _core.Video_Source = videoSourceSettings;
-
-#if __IOS__ && !__MACCATALYST__
-        if (videoSourceSettings != null)
-        {
-            videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
-        }
-#endif
 
         if (videoSourceSettings == null)
         {

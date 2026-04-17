@@ -470,7 +470,7 @@ public sealed partial class MainPage : Page
     {
         var fileUrl = Foundation.NSUrl.FromFilename(filePath);
 
-        Photos.PHPhotoLibrary.RequestAuthorization(status =>
+        Photos.PHPhotoLibrary.RequestAuthorization(Photos.PHAccessLevel.AddOnly, status =>
         {
             if (status == Photos.PHAuthorizationStatus.Authorized)
             {
@@ -636,10 +636,6 @@ public sealed partial class MainPage : Page
             await ShowMessageAsync("Error", "Unable to configure camera settings");
             return;
         }
-
-#if __IOS__ && !__MACCATALYST__
-        videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
-#endif
 
         _videoSource = new SystemVideoSourceBlock(videoSourceSettings);
 

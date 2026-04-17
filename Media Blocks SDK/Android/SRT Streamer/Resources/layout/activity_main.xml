@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!-- SRT settings at the top -->
+    <LinearLayout
+        android:id="@+id/layoutSettings"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/edSrtUri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="SRT URI"
+            android:text="srt://192.168.1.44:8890?streamid=publish:mobile"
+            android:inputType="textUri"
+            android:singleLine="true" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp">
+
+            <Spinner
+                android:id="@+id/spSrtMode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:id="@+id/edLatency"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="Latency ms"
+                android:text="750"
+                android:inputType="number"
+                android:singleLine="true" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Video preview -->
+    <VisioForge.Core.UI.Android.VideoViewGL
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layoutSettings"
+        android:layout_above="@id/tvErrors"
+        android:minWidth="25dp"
+        android:minHeight="25dp"
+        android:id="@+id/videoView" />
+
+    <!-- Error log -->
+    <TextView
+        android:id="@+id/tvErrors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layoutControls"
+        android:maxLines="3"
+        android:scrollbars="vertical"
+        android:textSize="12sp"
+        android:textColor="#FFFF4444"
+        android:padding="4dp"
+        android:visibility="gone" />
+
+    <!-- Buttons at the bottom -->
+    <LinearLayout
+        android:id="@+id/layoutControls"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:minWidth="25dp"
+        android:minHeight="25dp">
+
+        <Button
+            android:id="@+id/btStartStream"
+            android:text="Start SRT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5dp"/>
+
+        <Button
+            android:id="@+id/btSwitchCam"
+            android:text="Switch cam"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5dp"/>
+    </LinearLayout>
+
+</RelativeLayout>

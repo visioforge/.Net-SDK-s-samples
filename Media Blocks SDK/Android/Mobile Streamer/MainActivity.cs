@@ -223,11 +223,19 @@ namespace Mobile_Streamer
 
             // audio renderer
             var audioSinks = await DeviceEnumerator.Shared.AudioOutputsAsync();
-            _audioRenderer = new AudioRendererBlock(audioSinks[0]) { IsSync = false };
+            if (audioSinks.Length > 0)
+            {
+                _audioRenderer = new AudioRendererBlock(audioSinks[0]) { IsSync = false };
 
-            // connect audio pads
-            _pipeline.Connect(_audioSource.Output, _audioTee.Input);
-            _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
+                // connect audio pads
+                _pipeline.Connect(_audioSource.Output, _audioTee.Input);
+                _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input);
+            }
+            else
+            {
+                Log.Warn("MainActivity", "No audio output devices found, skipping audio renderer.");
+                _pipeline.Connect(_audioSource.Output, _audioTee.Input);
+            }
         }
 
         /// <summary>
