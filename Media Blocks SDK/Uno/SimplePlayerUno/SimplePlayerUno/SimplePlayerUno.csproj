@@ -8,7 +8,7 @@
     <UseCurrentXcodeSDKVersion>true</UseCurrentXcodeSDKVersion>
     <RunAOTCompilation>false</RunAOTCompilation>
     <ApplicationTitle>SimplePlayerUno</ApplicationTitle>
-    <ApplicationId>com.companyname.simpleplayeruno</ApplicationId>
+    <ApplicationId>com.visioforge.simpleplayeruno</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationPublisher>SimplePlayerUno</ApplicationPublisher>

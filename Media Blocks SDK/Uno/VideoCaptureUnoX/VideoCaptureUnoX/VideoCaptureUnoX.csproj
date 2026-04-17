@@ -8,7 +8,7 @@
     <UseCurrentXcodeSDKVersion>true</UseCurrentXcodeSDKVersion>
     <RunAOTCompilation>false</RunAOTCompilation>
     <ApplicationTitle>VideoCaptureUnoX</ApplicationTitle>
-    <ApplicationId>com.companyname.videocaptureunox</ApplicationId>
+    <ApplicationId>com.visioforge.videocaptureunox</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationPublisher>VideoCaptureUnoX</ApplicationPublisher>

@@ -11,7 +11,7 @@
     <!-- Display name -->
     <ApplicationTitle>RTSPViewer</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.rtspviewer</ApplicationId>
+    <ApplicationId>com.visioforge.rtspviewer</ApplicationId>
     <ApplicationIdGuid>e7f079f0-5512-45fc-a3ca-49a028b42808</ApplicationIdGuid>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

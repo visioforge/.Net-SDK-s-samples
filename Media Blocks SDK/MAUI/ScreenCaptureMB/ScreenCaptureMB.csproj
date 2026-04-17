@@ -11,7 +11,7 @@
     <!-- Display name -->
     <ApplicationTitle>ScreenCaptureMB</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.screencapturemb</ApplicationId>
+    <ApplicationId>com.visioforge.screencapturemb</ApplicationId>
     <ApplicationIdGuid>06360d2b-4329-426b-8f87-684e2b110904</ApplicationIdGuid>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

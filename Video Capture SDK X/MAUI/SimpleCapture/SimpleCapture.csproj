@@ -13,7 +13,7 @@
     <!-- Display name -->
     <ApplicationTitle>SimpleCapture</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.simplecapture</ApplicationId>
+    <ApplicationId>com.visioforge.simplecapture</ApplicationId>
     <ApplicationIdGuid>eabc0532-9948-4ca0-8214-803b91fb3b4d</ApplicationIdGuid>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

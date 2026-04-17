@@ -9,9 +9,9 @@
     <SingleProject>true</SingleProject>
     <ImplicitUsings>enable</ImplicitUsings>
     <!-- Display name -->
-    <ApplicationTitle>MobileStreamer</ApplicationTitle>
+    <ApplicationTitle>MobileStreamerMB</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.mobilestreamer</ApplicationId>
+    <ApplicationId>com.visioforge.mobilestreamermb</ApplicationId>
     <ApplicationIdGuid>f140acad-f3d3-44bc-a865-d7bcb277c7e4</ApplicationIdGuid>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

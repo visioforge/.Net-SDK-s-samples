@@ -12,7 +12,7 @@
     <Win2DWarnNoPlatform>true</Win2DWarnNoPlatform>
     <NeutralResourcesLanguage>en</NeutralResourcesLanguage>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <ApplicationId>com.companyname.rtspvieweruno</ApplicationId>
+    <ApplicationId>com.visioforge.rtspvieweruno</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationPublisher>RTSPViewerUno</ApplicationPublisher>

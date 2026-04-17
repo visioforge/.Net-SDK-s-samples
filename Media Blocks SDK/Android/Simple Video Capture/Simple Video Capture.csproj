@@ -1,21 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0-android</TargetFramework>
-    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>28.0</SupportedOSPlatformVersion>
     <RootNamespace>Simple_Video_Capture</RootNamespace>
     <OutputType>Exe</OutputType>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationId>com.visioforge.simplevidcapmbx</ApplicationId>
+    <ApplicationId>com.visioforge.simplevidcapmb</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.33" />
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.3.12" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="2026.3.0.0" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.3.19" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X9.csproj" />
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
   </ItemGroup>
 </Project>

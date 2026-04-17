@@ -11,7 +11,7 @@
     <!-- Display name -->
     <ApplicationTitle>SkinnedPlayer_MAUI</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.skinned_player_maui</ApplicationId>
+    <ApplicationId>com.visioforge.skinnedplayermaui</ApplicationId>
     <ApplicationIdGuid>121C1A4C-06F2-480A-8102-59C9604FF0F1</ApplicationIdGuid>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

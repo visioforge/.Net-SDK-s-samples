@@ -20,7 +20,7 @@
     <!-- Display name -->
     <ApplicationTitle>PhotoCapture</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.photocapture</ApplicationId>
+    <ApplicationId>com.visioforge.photocapture</ApplicationId>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>

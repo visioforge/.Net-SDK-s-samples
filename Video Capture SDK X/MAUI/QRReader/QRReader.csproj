@@ -11,7 +11,7 @@
     <!-- Display name -->
     <ApplicationTitle>QRReader</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.qrreader</ApplicationId>
+    <ApplicationId>com.visioforge.qrreader</ApplicationId>
     <ApplicationIdGuid>4b1c3a6e-72cb-46d2-84e5-dd4b3bbaa761</ApplicationIdGuid>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

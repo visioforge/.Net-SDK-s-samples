@@ -11,7 +11,7 @@
     <!-- Display name -->
     <ApplicationTitle>Simple Player MAUI</ApplicationTitle>
     <!-- App Identifier -->
-    <ApplicationId>com.companyname.simple_player_maui</ApplicationId>
+    <ApplicationId>com.visioforge.simpleplayermaui</ApplicationId>
     <ApplicationIdGuid>B1D6D36C-95EA-47C5-8FA2-6B0A1B031632</ApplicationIdGuid>
     <!-- Versions -->
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
