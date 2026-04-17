@@ -253,6 +253,8 @@ namespace Simple_Player_Demo_X
                 cbVideoStream.Items.Clear();
                 cbAudioStream.Items.Clear();
 
+                _player.Loop = cbLoop.IsChecked == true;
+
                 var source = await UniversalSourceSettingsV2.CreateAsync(new Uri(edFilename.Text));
                 await _player.OpenAsync(source);
 

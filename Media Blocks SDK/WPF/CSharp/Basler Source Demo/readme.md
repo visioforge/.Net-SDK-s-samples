@@ -1,10 +1,18 @@
 # Media Blocks SDK .Net - Basler Source Demo (C#/WPF)
 
-This application demonstrates the SDK capabilities.
+This application captures and displays video from Basler industrial cameras using the Pylon SDK.
 
 ## Used media blocks
 
+* `BaslerSourceBlock` - Basler camera capture
 * `VideoRendererBlock` - Real-time video display
+
+## Pipeline
+
+```mermaid
+graph LR
+    BaslerSourceBlock -- video --> VideoRendererBlock
+```
 
 ## Supported frameworks
 
@@ -15,6 +23,7 @@ This application demonstrates the SDK capabilities.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

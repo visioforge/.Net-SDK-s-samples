@@ -14,6 +14,18 @@ This application captures video from a camera or screen, captures audio from a m
 * `OPUSEncoderBlock` - Opus audio encoding
 * `WHIPSinkBlock` - WebRTC WHIP streaming output
 
+## Pipeline
+
+```mermaid
+graph LR
+    VideoSource -- video --> TeeBlock_Video[TeeBlock]
+    TeeBlock_Video -- video --> VideoRendererBlock
+    TeeBlock_Video -- video --> H264EncoderBlock --> WHIPSinkBlock
+    SystemAudioSourceBlock -- audio --> TeeBlock_Audio[TeeBlock]
+    TeeBlock_Audio -- audio --> AudioRendererBlock
+    TeeBlock_Audio -- audio --> OPUSEncoderBlock --> WHIPSinkBlock
+```
+
 ## Supported frameworks
 
 * .Net 10

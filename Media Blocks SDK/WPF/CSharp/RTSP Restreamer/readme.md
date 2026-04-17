@@ -5,9 +5,20 @@ This application connects to RTSP/IP cameras for live video streaming, splits vi
 ## Used media blocks
 
 * `RTSPSourceBlock` - RTSP stream input
-* `H264EncoderBlock` - H.264/AVC video encoding
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
+* `TextOverlayBlock` - Text overlay
+* `RTSPServerBlock` - RTSP server output
+
+## Pipeline
+
+```mermaid
+graph LR
+    RTSPSourceBlock -- video --> TeeBlock
+    TeeBlock -- video --> VideoRendererBlock
+    TeeBlock -- video --> TextOverlayBlock --> RTSPServerBlock
+    RTSPSourceBlock -- audio --> RTSPServerBlock
+```
 
 ## Supported frameworks
 
@@ -18,6 +29,7 @@ This application connects to RTSP/IP cameras for live video streaming, splits vi
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

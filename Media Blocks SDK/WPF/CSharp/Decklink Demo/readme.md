@@ -1,17 +1,37 @@
 # Media Blocks SDK .Net - Decklink Demo (C#/WPF)
 
-This application plays media files using the universal source decoder, saves output to MP4 format, saves output to WebM format, splits video stream for multiple outputs.
+This application captures video and audio from Decklink hardware with preview, optional file recording, video effects, and Decklink output.
 
 ## Used media blocks
 
-* `UniversalSourceBlock` - Universal media file playback
+* `DecklinkVideoSourceBlock` - Decklink video capture
+* `DecklinkAudioSourceBlock` - Decklink audio capture
+* `UniversalSourceBlock` - Universal media file playback (alternative source)
+* `VideoEffectsWinBlock` - Video effects processing
+* `TeeBlock` - Stream splitting (video and audio)
+* `VideoRendererBlock` - Real-time video display
+* `AudioRendererBlock` - Real-time audio playback
+* `VideoResizeBlock` - Video resize
 * `H264EncoderBlock` - H.264/AVC video encoding
 * `AACEncoderBlock` - AAC audio encoding
 * `MP4SinkBlock` - MP4 file output
-* `WebMSinkBlock` - WebM file output
-* `TeeBlock` - Stream splitting
-* `VideoRendererBlock` - Real-time video display
-* `AudioRendererBlock` - Real-time audio playback
+* `DecklinkVideoSinkBlock` - Decklink video output
+* `DecklinkAudioSinkBlock` - Decklink audio output
+
+## Pipeline
+
+```mermaid
+graph LR
+    DecklinkVideoSourceBlock -- video --> VideoEffectsWinBlock
+    VideoEffectsWinBlock -- video --> TeeBlock_Video
+    TeeBlock_Video -- video --> VideoRendererBlock
+    TeeBlock_Video -- video --> H264EncoderBlock
+    H264EncoderBlock -- video --> MP4SinkBlock
+    DecklinkAudioSourceBlock -- audio --> TeeBlock_Audio
+    TeeBlock_Audio -- audio --> AudioRendererBlock
+    TeeBlock_Audio -- audio --> AACEncoderBlock
+    AACEncoderBlock -- audio --> MP4SinkBlock
+```
 
 ## Supported frameworks
 
@@ -22,6 +42,7 @@ This application plays media files using the universal source decoder, saves out
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

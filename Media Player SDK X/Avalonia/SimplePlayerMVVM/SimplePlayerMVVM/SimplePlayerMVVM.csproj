@@ -8,13 +8,13 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <TargetFrameworks>net9.0-android35.0;net10.0-ios;net10.0-windows</TargetFrameworks>
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-windows</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
-    <TargetFrameworks>net9.0-android35.0;net10.0-ios;net10.0-macos</TargetFrameworks>
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-macos</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
-    <TargetFrameworks>net9.0-android35.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net10.0-android;net10.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
@@ -27,11 +27,11 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.3.8" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android35.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
     <PackageReference Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.3.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2026.3.12" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.4.11" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2026.4.11" />
   </ItemGroup>
 </Project>

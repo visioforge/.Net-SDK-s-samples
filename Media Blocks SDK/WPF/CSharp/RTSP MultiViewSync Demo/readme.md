@@ -8,6 +8,15 @@ This application connects to RTSP/IP cameras for live video streaming.
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    RTSPSourceBlock1[RTSPSourceBlock 1] -- video --> VideoRendererBlock1[VideoRendererBlock 1]
+    RTSPSourceBlock2[RTSPSourceBlock 2] -- video --> VideoRendererBlock2[VideoRendererBlock 2]
+    RTSPSourceBlock3[RTSPSourceBlock 3] -- video --> VideoRendererBlock3[VideoRendererBlock 3]
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -17,6 +26,7 @@ This application connects to RTSP/IP cameras for live video streaming.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

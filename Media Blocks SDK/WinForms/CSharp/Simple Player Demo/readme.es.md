@@ -4,9 +4,17 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 
 ## Bloques de medios utilizados
 
-* `UniversalSourceBlock` - Universal media file playback
-* `VideoRendererBlock` - Real-time video display
-* `AudioRendererBlock` - Real-time audio playback
+* `UniversalSourceBlock` - Reproducción universal de archivos multimedia
+* `VideoRendererBlock` - Visualización de video en tiempo real
+* `AudioRendererBlock` - Reproducción de audio en tiempo real
+
+## Pipeline
+
+```mermaid
+graph LR
+    UniversalSourceBlock -- video --> VideoRendererBlock
+    UniversalSourceBlock -- audio --> AudioRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -17,6 +25,7 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

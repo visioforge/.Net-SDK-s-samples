@@ -5,7 +5,18 @@ Esta aplicación captura contenido de escritorio/pantalla.
 ## Bloques de medios utilizados
 
 * `ScreenSourceBlock` - Desktop screen capture
+* `SystemVideoSourceBlock` - Webcam video capture
+* `SourceSwitchBlock` - Live source switching
 * `VideoRendererBlock` - Real-time video display
+
+## Pipeline
+
+```mermaid
+graph LR
+    ScreenSourceBlock -- video --> SourceSwitchBlock
+    SystemVideoSourceBlock -- video --> SourceSwitchBlock
+    SourceSwitchBlock -- video --> VideoRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -16,6 +27,7 @@ Esta aplicación captura contenido de escritorio/pantalla.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

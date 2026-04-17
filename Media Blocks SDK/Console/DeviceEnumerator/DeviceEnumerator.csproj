@@ -10,7 +10,7 @@
     <ApplicationId>com.visioforge.deviceenumerator</ApplicationId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.3.12" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.4.11" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.3.12" />

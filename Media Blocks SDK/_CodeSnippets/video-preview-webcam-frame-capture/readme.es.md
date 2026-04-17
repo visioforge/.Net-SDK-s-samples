@@ -9,6 +9,14 @@ Esta aplicación captura la salida de audio del sistema, captura fotogramas indi
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -->|Video| VideoSampleGrabberBlock -->|Video| VideoRendererBlock
+    SystemAudioSourceBlock -->|Audio| AudioRendererBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -18,6 +26,7 @@ Esta aplicación captura la salida de audio del sistema, captura fotogramas indi
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

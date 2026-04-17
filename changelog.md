@@ -9,6 +9,34 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.4.11
+
+* [Media Player SDK X] Added `Play_PauseAtFirstFrame` property to MediaPlayerCoreX — pauses at the first rendered frame for preview/thumbnail scenarios, matching the existing MediaPlayerCore API
+* [Core] Migrated SkiaSharp from 2.88.9 to 3.119.2 — updated text rendering to SKFont API, replaced SKFilterQuality with SKSamplingOptions, switched SVG library from SkiaSharp.Svg to Svg.Skia
+* [UI] Updated SkiaSharp.Views.WPF and SkiaSharp.Views.Maui.Controls to 3.119.2; WPF skins now use DrawImage with high-quality Mitchell resampling
+
+## 2026.4.8
+
+* [Android] Added live camera switching (SwitchCamera) to SystemVideoSourceBlock — switches between front/back cameras without recreating the GStreamer pipeline, preserving resolution and frame rate
+* [Video Capture SDK X] Added Video_Source_SwitchCamera for live camera switching on Android without pipeline restart
+* [Video Capture SDK X] Added Video_Renderer_IsSync and Audio_Renderer_IsSync properties (default false) for lower-latency live preview
+* [Android] New NuGet native version v2026.4.1
+
+## 2026.3.27
+
+* [Core] Fixed UNC path media info reading failure: `MediaInfoReaderAlt` now correctly handles SDK initialization guard, null caps in `OnPadAdded`, and falls through to `MediaInfoReaderX` on failure. `IsSambaURL()` extended to detect `file://host/path` UNC URIs. `OpenAsync` uses `uri.LocalPath` for correct Windows UNC path.
+
+## 2026.3.18
+
+* [Media Blocks SDK .Net] Fixed missed context menu issue in WPF VideoView
+
+## 2026.3.17
+
+* [Media Blocks SDK .Net] Added UDPSinkBlock and MultiUDPSinkBlock for raw UDP streaming output with single and multi-destination support
+* [Media Blocks SDK .Net] Added UDPMPEGTSSinkBlock and MultiUDPMPEGTSSinkBlock for MPEG-TS multiplexed UDP streaming with single and multi-destination support
+* [Media Blocks SDK .Net] Added UDPSinkSettings, MultiUDPSinkSettings, and UDPSinkSettingsBase for UDP sink configuration with IPv6 support and URL parsing
+* [Media Blocks SDK .Net] Added UDP MPEG-TS streamer demo (screen capture to UDP output)
+
 ## 2026.3.11
 
 * [Core] Device enumeration: Blackmagic ATEM and Web Presenter devices now appear in regular video/audio device lists instead of being filtered as Decklink hardware. These devices use standard USB/UVC drivers, not the Decklink SDK. Applies to both DirectShow and GStreamer enumeration paths.
@@ -78,7 +106,7 @@ Changes and updates for all .Net SDKs.
 * [Media Blocks SDK .Net] RTSPSourceBlock: Fixed video freeze when audio capture is disabled for cameras with multiple audio streams
 * [Media Blocks SDK .Net] RTSPRAWSourceBlock: Added fakesink handling for disabled audio streams to prevent pipeline stalls
 * [Core] MediaInfoReaderCore: Added logging for discovered audio, video, and RTP streams
-* [Core] MediaInfoReaderCore: Fixed excessive blocksize (5MB) being set for RTSP sources, improving discovery speed
+* [Core] MediaInfoReaderCore: Fixed excessive block size (5MB) being set for RTSP sources, improving discovery speed
 
 ## 2026.1.10
 

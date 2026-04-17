@@ -2,6 +2,18 @@
 
 Esta aplicación incluye detección facial con IA.
 
+## Bloques de medios utilizados
+
+* `FaceRecognitionCore` - AI face recognition engine
+* `VideoFrameSource` - Video frame extraction
+
+## Pipeline
+
+```mermaid
+graph LR
+    ImageFiles/VideoFile/Webcam --> FaceRecognitionCore --> DetectionResults
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -11,6 +23,7 @@ Esta aplicación incluye detección facial con IA.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

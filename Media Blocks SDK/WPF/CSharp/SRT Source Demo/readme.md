@@ -8,6 +8,14 @@ This application receives video via SRT secure streaming protocol.
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    SRTSourceBlock -- video --> VideoRendererBlock
+    SRTSourceBlock -- audio --> AudioRendererBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -17,6 +25,7 @@ This application receives video via SRT secure streaming protocol.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

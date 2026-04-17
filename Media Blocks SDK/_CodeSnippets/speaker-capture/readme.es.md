@@ -6,6 +6,13 @@ Esta aplicación captura la salida de audio del sistema.
 
 * `SystemAudioSourceBlock` - System audio capture
 
+## Pipeline
+
+```mermaid
+graph LR
+    SystemAudioSourceBlock -->|Audio| M4AOutputBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -15,6 +22,7 @@ Esta aplicación captura la salida de audio del sistema.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

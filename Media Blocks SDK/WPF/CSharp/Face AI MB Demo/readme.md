@@ -2,6 +2,18 @@
 
 This application includes AI-powered face detection.
 
+## Used media blocks
+
+* `FaceRecognitionCore` - AI face recognition engine
+* `VideoFrameSource` - Video frame extraction
+
+## Pipeline
+
+```mermaid
+graph LR
+    ImageFiles/VideoFile/Webcam --> FaceRecognitionCore --> DetectionResults
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -11,6 +23,7 @@ This application includes AI-powered face detection.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

@@ -8,6 +8,13 @@ This application generates synthetic video frames for testing and benchmarking, 
 * `H264EncoderBlock` - H.264/AVC video encoding
 * `MP4SinkBlock` - MP4 file output
 
+## Pipeline
+
+```mermaid
+graph LR
+    VirtualVideoSourceBlock -- video --> DataProcessorBlock --> H264EncoderBlock --> MP4SinkBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -17,6 +24,7 @@ This application generates synthetic video frames for testing and benchmarking, 
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

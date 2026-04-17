@@ -29,16 +29,13 @@ jobs:
     - name: Install workloads
       run: dotnet workload install android
 
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v2
-        
     ## Media Blocks
 
     - name: Restore dependencies $env:Solution_Name_MB
       run: dotnet restore $env:Solution_Name_MB
 
     - name: Build app for release $env:Solution_Name_MB
-      run: msbuild $env:Solution_Name_MB -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_MB --configuration Release --no-restore
 
     ## Media Player
 
@@ -46,7 +43,7 @@ jobs:
       run: dotnet restore $env:Solution_Name_MP
 
     - name: Build app for release $env:Solution_Name_MP
-      run: msbuild $env:Solution_Name_MP -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_MP --configuration Release --no-restore
 
     ## Video Capture
 
@@ -54,4 +51,4 @@ jobs:
       run: dotnet restore $env:Solution_Name_VC
 
     - name: Build app for release $env:Solution_Name_VC
-      run: msbuild $env:Solution_Name_VC -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_VC --configuration Release --no-restore

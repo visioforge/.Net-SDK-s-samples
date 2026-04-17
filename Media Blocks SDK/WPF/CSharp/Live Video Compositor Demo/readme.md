@@ -11,6 +11,16 @@ This application plays media files using the universal source decoder, generates
 * `NDISourceBlock` - NDI network input
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    Sources["Multiple Sources"] -- video/audio --> LiveVideoCompositor
+    LiveVideoCompositor -- video --> VideoView
+    LiveVideoCompositor -- audio --> AudioOutput
+    LiveVideoCompositor -- video/audio --> StreamOutput["Stream/File Output"]
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -20,6 +30,7 @@ This application plays media files using the universal source decoder, generates
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

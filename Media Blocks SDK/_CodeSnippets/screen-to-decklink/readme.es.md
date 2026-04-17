@@ -8,6 +8,15 @@ Esta aplicación captura contenido de escritorio/pantalla, divide el flujo de vi
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
 
+## Pipeline
+
+```mermaid
+graph LR
+    ScreenSourceBlock -->|Video| TeeBlock
+    TeeBlock -->|Video| VideoRendererBlock
+    TeeBlock -->|Video| DecklinkVideoSinkBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -17,6 +26,7 @@ Esta aplicación captura contenido de escritorio/pantalla, divide el flujo de vi
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

@@ -1,13 +1,26 @@
 # Media Blocks SDK .Net - ChromaKey (C#/WPF)
 
-Esta aplicación reproduce archivos multimedia usando el decodificador universal, captura la salida de audio del sistema, aplica composición de croma (pantalla verde).
+Esta aplicacion aplica composicion de croma (pantalla verde) en tiempo real, combinando una fuente de camara o archivo de video con una imagen de fondo.
 
 ## Bloques de medios utilizados
 
-* `UniversalSourceBlock` - Universal media file playback
-* `SystemAudioSourceBlock` - System audio capture
-* `VideoRendererBlock` - Real-time video display
-* `AudioRendererBlock` - Real-time audio playback
+* `SystemVideoSourceBlock` - Captura de camara del sistema
+* `UniversalSourceBlock` - Reproduccion universal de archivos multimedia (fuente alternativa)
+* `ImageVideoSourceBlock` - Fuente de imagen de fondo
+* `ChromaKeyBlock` - Composicion de croma
+* `SystemAudioSourceBlock` - Captura de audio del sistema
+* `VideoRendererBlock` - Visualizacion de video en tiempo real
+* `AudioRendererBlock` - Reproduccion de audio en tiempo real
+
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> ChromaKeyBlock
+    ImageVideoSourceBlock -- background --> ChromaKeyBlock
+    ChromaKeyBlock -- video --> VideoRendererBlock
+    SystemAudioSourceBlock -- audio --> AudioRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -18,6 +31,7 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

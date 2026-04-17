@@ -6,6 +6,14 @@ This application saves output to MP4 format.
 
 * `MP4SinkBlock` - MP4 file output
 
+## Pipeline
+
+```mermaid
+graph LR
+    BasicFileSourceBlock1[BasicFileSourceBlock - Video] -->|Data| ParseBinBlock -->|Video| MP4SinkBlock
+    BasicFileSourceBlock2[BasicFileSourceBlock - Audio] -->|Data| AudioParseBlock[MPEGAudioParseBlock] -->|Audio| MP4SinkBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -15,6 +23,7 @@ This application saves output to MP4 format.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

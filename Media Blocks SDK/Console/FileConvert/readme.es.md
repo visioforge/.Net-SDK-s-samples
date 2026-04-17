@@ -9,6 +9,14 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * `AACEncoderBlock` - AAC audio encoding
 * `MP4SinkBlock` - MP4 file output
 
+## Pipeline
+
+```mermaid
+graph LR
+    UniversalSourceBlock -- video --> H264EncoderBlock --> MP4SinkBlock
+    UniversalSourceBlock -- audio --> AACEncoderBlock --> MP4SinkBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -18,6 +26,7 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

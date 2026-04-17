@@ -9,6 +9,16 @@ Esta aplicación captura contenido de escritorio/pantalla, transmite vía protoc
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
 
+## Pipeline
+
+```mermaid
+graph LR
+    ScreenSourceBlock -->|Video| TeeBlock
+    TeeBlock -->|Video| VideoRendererBlock
+    TeeBlock -->|Video| NDISinkBlock
+    VirtualAudioSourceBlock -->|Audio| NDISinkBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -18,6 +28,7 @@ Esta aplicación captura contenido de escritorio/pantalla, transmite vía protoc
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

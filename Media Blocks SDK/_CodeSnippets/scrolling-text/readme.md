@@ -47,8 +47,26 @@ pipeline.Connect(fileSource.VideoOutput, overlayManager.Input);
 pipeline.Connect(overlayManager.Output, videoRenderer.Input);
 ```
 
+## Pipeline
+
+```mermaid
+graph LR
+    UniversalSourceBlock -->|Video| OverlayManagerBlock -->|Video| VideoRendererBlock
+    UniversalSourceBlock -->|Audio| AudioRendererBlock
+```
+
+## Supported frameworks
+
+* .Net 4.7.2
+* .Net Core 3.1
+* .Net 5
+* .Net 6
+* .Net 7
+* .Net 8
+* .Net 9
+* .Net 10
+
 ## Requirements
 
-- .NET v4.7.2 or later
 - Windows with WPF support
 - VisioForge Media Blocks SDK

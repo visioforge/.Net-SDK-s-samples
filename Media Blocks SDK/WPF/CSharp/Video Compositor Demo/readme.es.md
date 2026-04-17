@@ -11,6 +11,18 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
 
+## Pipeline
+
+```mermaid
+graph LR
+    Source1["Source 1"] -- video --> VideoMixerBlock
+    Source2["Source 2"] -- video --> VideoMixerBlock
+    SourceN["Source N"] -- video --> VideoMixerBlock
+    VideoMixerBlock -- video --> TeeBlock
+    TeeBlock -- video --> VideoRendererBlock
+    TeeBlock -- video --> OutputSink["MP4/YouTube/NDI Output"]
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -20,6 +32,7 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

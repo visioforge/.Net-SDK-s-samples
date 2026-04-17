@@ -1,13 +1,23 @@
-# Media Blocks SDK .Net - gaussian-blur (C#/Console)
+# Media Blocks SDK .Net - gaussian-blur (C#/WinForms)
 
-Esta aplicación reproduce archivos multimedia usando el decodificador universal, aplica efectos de shader OpenGL personalizados para procesamiento de video en tiempo real.
+Esta aplicación reproduce archivos multimedia usando el decodificador universal y aplica efectos de desenfoque gaussiano configurables usando shaders OpenGL para procesamiento de video en tiempo real.
 
 ## Bloques de medios utilizados
 
-* `UniversalSourceBlock` - Universal media file playback
-* `GLShaderBlock` - OpenGL shader processing
-* `VideoRendererBlock` - Real-time video display
-* `AudioRendererBlock` - Real-time audio playback
+* `UniversalSourceBlock` - Reproducción universal de archivos multimedia
+* `GLUploadBlock` - Subir fotogramas de video a la GPU
+* `GLShaderBlock` - Procesamiento de shaders OpenGL (pasadas de desenfoque horizontal y vertical)
+* `GLDownloadBlock` - Descargar fotogramas de video de la GPU
+* `VideoRendererBlock` - Visualización de video en tiempo real
+* `AudioRendererBlock` - Reproducción de audio en tiempo real
+
+## Pipeline
+
+```mermaid
+graph LR
+    UniversalSourceBlock -- video --> GLUploadBlock --> GLShaderBlock_H["GLShaderBlock (H-Blur)"] --> GLShaderBlock_V["GLShaderBlock (V-Blur)"] --> GLDownloadBlock --> VideoRendererBlock
+    UniversalSourceBlock -- audio --> AudioRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -18,6 +28,7 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

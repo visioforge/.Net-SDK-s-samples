@@ -1,10 +1,18 @@
 # Media Blocks SDK .Net - AlliedVision Source Demo (C#/WPF)
 
-Esta aplicación demuestra las capacidades del SDK.
+Esta aplicacion captura y muestra video de camaras AlliedVision usando el SDK de Vimba.
 
 ## Bloques de medios utilizados
 
-* `VideoRendererBlock` - Real-time video display
+* `AlliedVisionSourceBlock` - Captura de camara AlliedVision
+* `VideoRendererBlock` - Visualizacion de video en tiempo real
+
+## Pipeline
+
+```mermaid
+graph LR
+    AlliedVisionSourceBlock -- video --> VideoRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -15,6 +23,7 @@ Esta aplicación demuestra las capacidades del SDK.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

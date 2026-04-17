@@ -1,12 +1,22 @@
 # Media Blocks SDK .Net - Audio Capture Demo (C#/WPF)
 
-Esta aplicación captura la salida de audio del sistema, divide el flujo de video para múltiples salidas.
+Esta aplicacion captura audio de dispositivos del sistema o fuentes de loopback, con grabacion opcional a MP3.
 
 ## Bloques de medios utilizados
 
-* `SystemAudioSourceBlock` - System audio capture
-* `TeeBlock` - Stream splitting
-* `AudioRendererBlock` - Real-time audio playback
+* `SystemAudioSourceBlock` - Captura de audio del sistema
+* `TeeBlock` - Division de flujo de audio
+* `AudioRendererBlock` - Reproduccion de audio en tiempo real
+* `MP3OutputBlock` - Grabacion de archivo MP3
+
+## Pipeline
+
+```mermaid
+graph LR
+    SystemAudioSourceBlock -- audio --> TeeBlock
+    TeeBlock -- audio --> AudioRendererBlock
+    TeeBlock -- audio --> MP3OutputBlock
+```
 
 ## Frameworks soportados
 
@@ -17,6 +27,7 @@ Esta aplicación captura la salida de audio del sistema, divide el flujo de vide
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

@@ -13,6 +13,18 @@ Esta aplicación se conecta a flujos RTSP de cámaras IP, muestra una vista prev
 * `MP4SinkBlock` - MP4 file output
 * `MPEGTSSinkBlock` - MPEG-TS file output
 
+## Pipeline
+
+```mermaid
+graph LR
+    RTSPSourceBlock -- video --> TeeBlock_Video[TeeBlock]
+    TeeBlock_Video -- video --> VideoRendererBlock
+    TeeBlock_Video -- video --> H264EncoderBlock --> MP4SinkBlock
+    RTSPSourceBlock -- audio --> TeeBlock_Audio[TeeBlock]
+    TeeBlock_Audio -- audio --> AudioRendererBlock
+    TeeBlock_Audio -- audio --> AACEncoderBlock --> MP4SinkBlock
+```
+
 ## Frameworks soportados
 
 * .Net 10

@@ -2,6 +2,13 @@
 
 Esta aplicación demuestra las capacidades del SDK.
 
+## Pipeline
+
+```mermaid
+graph LR
+    MediaInfoReaderX -->|File Info| Application
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -11,6 +18,7 @@ Esta aplicación demuestra las capacidades del SDK.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

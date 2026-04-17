@@ -8,6 +8,13 @@ Esta aplicación genera fotogramas de video sintéticos para pruebas y benchmark
 * `H264EncoderBlock` - H.264/AVC video encoding
 * `MP4SinkBlock` - MP4 file output
 
+## Pipeline
+
+```mermaid
+graph LR
+    VirtualVideoSourceBlock -- video --> DataProcessorBlock --> H264EncoderBlock --> MP4SinkBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -17,6 +24,7 @@ Esta aplicación genera fotogramas de video sintéticos para pruebas y benchmark
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

@@ -1,10 +1,20 @@
 # Media Blocks SDK .Net - DataMatrix Detection Demo (C#/WPF)
 
-Esta aplicación detecta códigos DataMatrix.
+Esta aplicación realiza detección de códigos DataMatrix en tiempo real desde una fuente de cámara con visualización en pantalla.
 
 ## Bloques de medios utilizados
 
-* `VideoRendererBlock` - Real-time video display
+* `SystemVideoSourceBlock` - Captura de cámara del sistema
+* `DataMatrixDecoderBlock` - Detección y decodificación de códigos DataMatrix
+* `VideoRendererBlock` - Visualización de video en tiempo real
+
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> DataMatrixDecoderBlock
+    DataMatrixDecoderBlock -- video --> VideoRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -15,6 +25,7 @@ Esta aplicación detecta códigos DataMatrix.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

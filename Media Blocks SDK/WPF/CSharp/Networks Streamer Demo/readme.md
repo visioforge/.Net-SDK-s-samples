@@ -17,6 +17,20 @@ This application captures system audio output, captures desktop/screen content, 
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    VideoSource -- video --> TeeBlock_Video[TeeBlock]
+    TeeBlock_Video -- video --> VideoRendererBlock
+    TeeBlock_Video -- video --> H264EncoderBlock
+    H264EncoderBlock --> StreamSink["Stream/File Sink"]
+    SystemAudioSourceBlock -- audio --> TeeBlock_Audio[TeeBlock]
+    TeeBlock_Audio -- audio --> AudioRendererBlock
+    TeeBlock_Audio -- audio --> AACEncoderBlock
+    AACEncoderBlock --> StreamSink
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -26,6 +40,7 @@ This application captures system audio output, captures desktop/screen content, 
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

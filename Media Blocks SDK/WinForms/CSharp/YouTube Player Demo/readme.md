@@ -8,6 +8,15 @@ This application plays media files using the universal source decoder.
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    UniversalSourceBlock_Video -- video --> VideoRendererBlock
+    UniversalSourceBlock_Video -- audio --> AudioRendererBlock
+    UniversalSourceBlock_Audio -- audio --> AudioRendererBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -17,6 +26,7 @@ This application plays media files using the universal source decoder.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

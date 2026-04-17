@@ -36,6 +36,14 @@ Puede modificar la configuración de HLS en `Program.cs`:
 * `PlaylistLength` - Número de segmentos en la lista de reproducción (predeterminado: 5)
 * `Custom_HTTP_Server_Port` - Puerto del servidor HTTP (predeterminado: 8088)
 
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> H264EncoderBlock --> HLSSinkBlock
+    SystemAudioSourceBlock -- audio --> AACEncoderBlock --> HLSSinkBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2

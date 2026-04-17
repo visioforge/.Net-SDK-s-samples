@@ -1,17 +1,37 @@
 # Media Blocks SDK .Net - Decklink Demo (C#/WPF)
 
-Esta aplicación reproduce archivos multimedia usando el decodificador universal, guarda la salida en formato MP4, guarda la salida en formato WebM, divide el flujo de video para múltiples salidas.
+Esta aplicacion captura video y audio de hardware Decklink con vista previa, grabacion opcional a archivo, efectos de video y salida Decklink.
 
 ## Bloques de medios utilizados
 
-* `UniversalSourceBlock` - Universal media file playback
-* `H264EncoderBlock` - H.264/AVC video encoding
-* `AACEncoderBlock` - AAC audio encoding
-* `MP4SinkBlock` - MP4 file output
-* `WebMSinkBlock` - WebM file output
-* `TeeBlock` - Stream splitting
-* `VideoRendererBlock` - Real-time video display
-* `AudioRendererBlock` - Real-time audio playback
+* `DecklinkVideoSourceBlock` - Captura de video Decklink
+* `DecklinkAudioSourceBlock` - Captura de audio Decklink
+* `UniversalSourceBlock` - Reproduccion universal de archivos multimedia (fuente alternativa)
+* `VideoEffectsWinBlock` - Procesamiento de efectos de video
+* `TeeBlock` - Division de flujo (video y audio)
+* `VideoRendererBlock` - Visualizacion de video en tiempo real
+* `AudioRendererBlock` - Reproduccion de audio en tiempo real
+* `VideoResizeBlock` - Redimensionamiento de video
+* `H264EncoderBlock` - Codificacion de video H.264/AVC
+* `AACEncoderBlock` - Codificacion de audio AAC
+* `MP4SinkBlock` - Salida de archivo MP4
+* `DecklinkVideoSinkBlock` - Salida de video Decklink
+* `DecklinkAudioSinkBlock` - Salida de audio Decklink
+
+## Pipeline
+
+```mermaid
+graph LR
+    DecklinkVideoSourceBlock -- video --> VideoEffectsWinBlock
+    VideoEffectsWinBlock -- video --> TeeBlock_Video
+    TeeBlock_Video -- video --> VideoRendererBlock
+    TeeBlock_Video -- video --> H264EncoderBlock
+    H264EncoderBlock -- video --> MP4SinkBlock
+    DecklinkAudioSourceBlock -- audio --> TeeBlock_Audio
+    TeeBlock_Audio -- audio --> AudioRendererBlock
+    TeeBlock_Audio -- audio --> AACEncoderBlock
+    AACEncoderBlock -- audio --> MP4SinkBlock
+```
 
 ## Frameworks soportados
 
@@ -22,6 +42,7 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

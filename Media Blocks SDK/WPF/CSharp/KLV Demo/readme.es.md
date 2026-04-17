@@ -2,6 +2,19 @@
 
 Esta aplicación maneja metadatos KLV para streaming.
 
+## Bloques de medios utilizados
+
+* `BasicFileSourceBlock` - MPEG-TS file source
+* `MPEGTSDemuxBlock` - MPEG-TS demuxer
+* `KLVFileSinkBlock` - KLV metadata file output
+
+## Pipeline
+
+```mermaid
+graph LR
+    BasicFileSourceBlock --> MPEGTSDemuxBlock -- metadata --> KLVFileSinkBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -11,6 +24,7 @@ Esta aplicación maneja metadatos KLV para streaming.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

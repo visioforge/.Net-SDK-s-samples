@@ -46,6 +46,27 @@ namespace udp_mpegts_streamer_mb
         }
 
         /// <summary>
+        /// Updates the playback info text to reflect the current port value.
+        /// </summary>
+        private void UpdatePlaybackInfo()
+        {
+            if (tbPlaybackInfo == null)
+            {
+                return;
+            }
+
+            tbPlaybackInfo.Text = $"Play with: ffplay udp://@:{edPort.Text} | gst-launch-1.0 udpsrc port={edPort.Text} ! tsdemux ! decodebin ! autovideosink | vlc udp://@:{edPort.Text}";
+        }
+
+        /// <summary>
+        /// Handles the port text changed event.
+        /// </summary>
+        private void edPort_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            UpdatePlaybackInfo();
+        }
+
+        /// <summary>
         /// Window loaded.
         /// </summary>
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -100,7 +121,7 @@ namespace udp_mpegts_streamer_mb
                 var videoEncoder = new H264EncoderBlock(new OpenH264EncoderSettings());
 
                 // AAC audio encoder
-                var audioEncoder = new AACEncoderBlock(new AACEncoderSettings() { Bitrate = 192 });
+                var audioEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings() { Bitrate = 192 });
 
                 // Audio fake audio source
                 var audioSource = new VirtualAudioSourceBlock(VirtualAudioSourceSettingsWave.Silence);

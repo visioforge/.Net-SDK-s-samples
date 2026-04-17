@@ -27,8 +27,8 @@
     <_RequireCodeSigning>false</_RequireCodeSigning>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.3.12" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2026.3.12" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.4.11" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2026.4.11" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="$(NuGetPackageRoot)visioforge.dotnet.core.ui.uno\2026.1.1\lib\net10.0-windows10.0.19041\VisioForge.Core.UI.Uno\nuget.png" />
@@ -39,7 +39,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2026.3.12" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="15.10.33" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="2026.4.0.0" />
     <ProjectReference Include="..\..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">

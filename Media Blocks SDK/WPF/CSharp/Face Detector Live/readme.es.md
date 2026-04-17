@@ -4,7 +4,16 @@ Esta aplicación incluye detección facial con IA.
 
 ## Bloques de medios utilizados
 
+* `SystemVideoSourceBlock` - Webcam video capture
+* `DNNFaceDetectorBlock` - DNN-based face detection/blur
 * `VideoRendererBlock` - Real-time video display
+
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> DNNFaceDetectorBlock -- video --> VideoRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -15,6 +24,7 @@ Esta aplicación incluye detección facial con IA.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

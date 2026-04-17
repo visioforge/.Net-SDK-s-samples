@@ -9,6 +9,18 @@ This application captures system audio output, splits video stream for multiple 
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -->|Video| VideoTeeBlock[TeeBlock]
+    SystemAudioSourceBlock -->|Audio| AudioTeeBlock[TeeBlock]
+    VideoTeeBlock -->|Video| VideoRendererBlock
+    AudioTeeBlock -->|Audio| AudioRendererBlock
+    VideoTeeBlock -->|Video| AVIOutputBlock
+    AudioTeeBlock -->|Audio| AVIOutputBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -18,6 +30,7 @@ This application captures system audio output, splits video stream for multiple 
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

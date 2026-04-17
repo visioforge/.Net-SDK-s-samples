@@ -6,6 +6,13 @@ This application demonstrates the SDK capabilities.
 
 * `H264EncoderBlock` - H.264/AVC video encoding
 
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> RTSPServerBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -15,6 +22,7 @@ This application demonstrates the SDK capabilities.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

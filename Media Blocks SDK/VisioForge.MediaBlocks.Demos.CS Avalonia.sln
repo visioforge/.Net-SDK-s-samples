@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplePlayerMVVMMB.Desktop"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplePlayerMVVMMB.iOS", "Avalonia\SimplePlayerMVVM\SimplePlayerMVVM.iOS\SimplePlayerMVVMMB.iOS.csproj", "{EA59AEBF-A327-C717-5D97-68B27E912B30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X9", "..\AndroidDependency\VisioForge.Core.Android.X9.csproj", "{6CEB9299-675D-8FAB-0423-1A0209F60B14}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X10", "..\AndroidDependency\VisioForge.Core.Android.X10.csproj", "{6CEB9299-675D-8FAB-0423-1A0209F60B14}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreEventRecordingDemoAMB", "Avalonia\PreEventRecording Demo\PreEventRecordingDemoAMB.csproj", "{DE7ED354-C58B-4A37-A39B-9B0C39C6A27D}"
 EndProject

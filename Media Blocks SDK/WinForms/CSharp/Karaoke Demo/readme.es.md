@@ -1,11 +1,25 @@
 # Media Blocks SDK .Net - Karaoke Demo (C#/WinForms)
 
-Esta aplicación demuestra las capacidades del SDK.
+Esta aplicación reproduce archivos de karaoke CDG (o archivos ZIP que contienen CDG y audio) con salida de video de doble pantalla y cambio de tono en tiempo real.
 
 ## Bloques de medios utilizados
 
-* `VideoRendererBlock` - Real-time video display
-* `AudioRendererBlock` - Real-time audio playback
+* `CDGSourceBlock` - Fuente de archivos de karaoke CDG/ZIP
+* `TeeBlock` - División de flujo para salida de video dual
+* `VideoRendererBlock` - Visualización de video en tiempo real (ventanas primaria y secundaria)
+* `PitchBlock` - Cambio de tono de audio en tiempo real
+* `AudioRendererBlock` - Reproducción de audio en tiempo real
+
+## Pipeline
+
+```mermaid
+graph LR
+    CDGSourceBlock -- video --> TeeBlock
+    TeeBlock -- video --> VideoRendererBlock_Primary
+    TeeBlock -- video --> VideoRendererBlock_Secondary
+    CDGSourceBlock -- audio --> PitchBlock
+    PitchBlock -- audio --> AudioRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -16,6 +30,7 @@ Esta aplicación demuestra las capacidades del SDK.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

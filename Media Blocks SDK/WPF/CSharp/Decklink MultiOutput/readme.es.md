@@ -9,6 +9,16 @@ Esta aplicación genera fotogramas de video sintéticos para pruebas y benchmark
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
 
+## Pipeline
+
+```mermaid
+graph LR
+    VideoSource[VirtualVideoSourceBlock or ScreenSourceBlock] -- video --> TeeBlock
+    TeeBlock -- video --> VideoRendererBlock
+    TeeBlock -- video --> DecklinkVideoSinkBlock1[DecklinkVideoSinkBlock 1]
+    TeeBlock -- video --> DecklinkVideoSinkBlock2[DecklinkVideoSinkBlock 2]
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -18,6 +28,7 @@ Esta aplicación genera fotogramas de video sintéticos para pruebas y benchmark
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

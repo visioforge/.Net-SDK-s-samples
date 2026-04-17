@@ -1,10 +1,20 @@
-# Media Blocks SDK .Net - h264-data-player (C#/Console)
+# Media Blocks SDK .Net - h264-data-player (C#/WinForms)
 
-Esta aplicación demuestra las capacidades del SDK.
+Esta aplicación reproduce datos de video H264 empujando bytes H264 sin procesar a través del pipeline, analizando, decodificando y renderizando el video.
 
 ## Bloques de medios utilizados
 
-* `VideoRendererBlock` - Real-time video display
+* `PushSourceBlock` - Fuente de datos basada en push
+* `H264ParseBlock` - Análisis de flujo H.264
+* `H264DecoderBlock` - Decodificación de video H.264/AVC
+* `VideoRendererBlock` - Visualización de video en tiempo real
+
+## Pipeline
+
+```mermaid
+graph LR
+    PushSourceBlock --> H264ParseBlock --> H264DecoderBlock --> VideoRendererBlock
+```
 
 ## Frameworks soportados
 
@@ -15,6 +25,7 @@ Esta aplicación demuestra las capacidades del SDK.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

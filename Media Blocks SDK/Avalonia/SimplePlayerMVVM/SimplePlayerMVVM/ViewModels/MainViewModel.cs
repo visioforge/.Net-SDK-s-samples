@@ -10,6 +10,8 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Reactive;
+using System.Reactive.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using VisioForge.Core;
@@ -44,22 +46,34 @@ namespace Simple_Player_MVVM.ViewModels
         public MainViewModel()
         {
             OpenFileCommand = ReactiveCommand.Create(OpenFileAsync);
-
             PlayPauseCommand = ReactiveCommand.CreateFromTask(PlayPauseAsync);
-
             StopCommand = ReactiveCommand.CreateFromTask(StopAsync);
-
             SpeedCommand = ReactiveCommand.CreateFromTask(SpeedAsync);
-
-            VolumeValueChangedCommand = ReactiveCommand.Create(OnVolumeValueChanged);
-
-            this.WhenAnyValue(x => x.VolumeValue).Subscribe(_ => VolumeValueChangedCommand.Execute().Subscribe());
-
-            SeekingValueChangedCommand = ReactiveCommand.CreateFromTask(OnSeekingValueChanged);
-
-            this.WhenAnyValue(x => x.SeekingValue).Subscribe(_ => SeekingValueChangedCommand.Execute().Subscribe());
-
             WindowClosingCommand = ReactiveCommand.Create(OnWindowClosing);
+
+            // Throttled volume update — avoids flooding audio renderer during drag
+            this.WhenAnyValue(x => x.VolumeValue)
+                .Throttle(TimeSpan.FromMilliseconds(50))
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(v =>
+                {
+                    if (_audioRenderer != null)
+                    {
+                        _audioRenderer.Volume = v / 100.0;
+                    }
+                });
+
+            // Throttled seeking — avoids flooding pipeline with seek commands during drag
+            this.WhenAnyValue(x => x.SeekingValue)
+                .Throttle(TimeSpan.FromMilliseconds(100))
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(v =>
+                {
+                    if (!_isTimerUpdate && _pipeline != null)
+                    {
+                        _ = _pipeline.Position_SetAsync(TimeSpan.FromMilliseconds(v));
+                    }
+                });
 
             _tmPosition = new System.Timers.Timer(1000);
             _tmPosition.Elapsed += tmPosition_Elapsed;
@@ -67,21 +81,17 @@ namespace Simple_Player_MVVM.ViewModels
             VisioForgeX.InitSDK();
         }
 
-        public ReactiveCommand<Unit, Unit> VolumeValueChangedCommand { get; }
-
-        public ReactiveCommand<Unit, Unit> SeekingValueChangedCommand { get; }
-
         public IVideoView VideoViewIntf { get; set; }
 
 #if __ANDROID__
         public static IAndroidHelper AndroidHelper { get; set; }
-#endif 
+#endif
 
         public TopLevel TopLevel { get; set; }
 
-        private string? _Position = "00:00:00";
+        private string _Position = "00:00:00";
 
-        public string? Position
+        public string Position
         {
             get => _Position;
             set => this.RaiseAndSetIfChanged(ref _Position, value);
@@ -90,52 +100,36 @@ namespace Simple_Player_MVVM.ViewModels
         #if __IOS__ && !__MACCATALYST__
 
         private Foundation.NSUrl? _Filename;
-        
+
         public Foundation.NSUrl? Filename
         {
             get => _Filename;
             set => this.RaiseAndSetIfChanged(ref _Filename, value);
         }
-        
+
         #else
-        
-        private string? _Filename = "File name";
+
+        private string? _Filename;
 
         public string? Filename
         {
             get => _Filename;
             set => this.RaiseAndSetIfChanged(ref _Filename, value);
         }
-        
+
         #endif
 
-        private string? _SampleText = "SAMPLE";
+        private string _Duration = "00:00:00";
 
-        public string? SampleText
-        {
-            get => _SampleText;
-            set => this.RaiseAndSetIfChanged(ref _SampleText, value);
-        }
-
-        private string? _Duration = "00:00:00";
-
-        public string? Duration
+        public string Duration
         {
             get => _Duration;
             set => this.RaiseAndSetIfChanged(ref _Duration, value);
         }
 
-        private string? _Volume;
+        private double _VolumeValue = 25;
 
-        public string? Volume
-        {
-            get => _Volume;
-            set => this.RaiseAndSetIfChanged(ref _Volume, value);
-        }
-
-        private double? _VolumeValue = 0;
-
-        public double? VolumeValue
+        public double VolumeValue
         {
             get => _VolumeValue;
             set => this.RaiseAndSetIfChanged(ref _VolumeValue, value);
@@ -145,17 +139,17 @@ namespace Simple_Player_MVVM.ViewModels
 
         public ICommand PlayPauseCommand { get; }
 
-        private string? _PlayPauseText = "PLAY";
+        private string _PlayPauseText = "PLAY";
 
-        public string? PlayPauseText
+        public string PlayPauseText
         {
             get => _PlayPauseText;
             set => this.RaiseAndSetIfChanged(ref _PlayPauseText, value);
         }
 
-        private string? _SpeedText = "SPEED: 1X";
+        private string _SpeedText = "SPEED: 1X";
 
-        public string? SpeedText
+        public string SpeedText
         {
             get => _SpeedText;
             set => this.RaiseAndSetIfChanged(ref _SpeedText, value);
@@ -165,17 +159,17 @@ namespace Simple_Player_MVVM.ViewModels
 
         public ICommand SpeedCommand { get; }
 
-        public double? _SeekingValue = 0;
+        private double _SeekingValue;
 
-        public double? SeekingValue
+        public double SeekingValue
         {
             get => _SeekingValue;
             set => this.RaiseAndSetIfChanged(ref _SeekingValue, value);
         }
 
-        public double? _SeekingMaximum = null;
+        private double _SeekingMaximum = 1;
 
-        public double? SeekingMaximum
+        public double SeekingMaximum
         {
             get => _SeekingMaximum;
             set => this.RaiseAndSetIfChanged(ref _SeekingMaximum, value);
@@ -191,19 +185,12 @@ namespace Simple_Player_MVVM.ViewModels
 
         private AudioRendererBlock _audioRenderer;
 
-        /// <summary>
-        /// The seeking flag.
-        /// </summary>
         private volatile bool _isTimerUpdate;
 
-        /// <summary>
-        /// The position timer.
-        /// </summary>
-        private System.Timers.Timer _tmPosition = new System.Timers.Timer(500);
+        private int _timerBusy;
 
-        /// <summary>
-        /// Create engine async.
-        /// </summary>
+        private System.Timers.Timer _tmPosition;
+
         private async Task CreateEngineAsync()
         {
             if (_pipeline != null)
@@ -219,7 +206,7 @@ namespace Simple_Player_MVVM.ViewModels
 
             _audioRenderer = new AudioRendererBlock();
 
-            var sourceSettings = await UniversalSourceSettings.CreateAsync(_Filename);           
+            var sourceSettings = await UniversalSourceSettings.CreateAsync(_Filename);
             _source = new UniversalSourceBlock(sourceSettings);
 
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoViewIntf);
@@ -230,14 +217,11 @@ namespace Simple_Player_MVVM.ViewModels
             _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
         }
 
-        /// <summary>
-        /// Handles the player on start event.
-        /// </summary>
         private void _player_OnStart(object sender, EventArgs e)
         {
             try
             {
-                Dispatcher.UIThread.InvokeAsync(async () =>
+                Dispatcher.UIThread.Post(async () =>
                 {
                     if (_pipeline == null)
                     {
@@ -253,9 +237,6 @@ namespace Simple_Player_MVVM.ViewModels
             }
         }
 
-        /// <summary>
-        /// On window closing.
-        /// </summary>
         private void OnWindowClosing()
         {
             if (_pipeline != null)
@@ -270,15 +251,12 @@ namespace Simple_Player_MVVM.ViewModels
             VisioForgeX.DestroySDK();
         }
 
-        /// <summary>
-        /// Open file async.
-        /// </summary>
     private async Task OpenFileAsync()
         {
             await StopAllAsync();
 
             PlayPauseText = "PLAY";
-            
+
 #if __IOS__ && !__MACCATALYST__
 
             // get the file name using the document picker
@@ -321,9 +299,6 @@ namespace Simple_Player_MVVM.ViewModels
 #endif
         }
 
-        /// <summary>
-        /// Play pause async.
-        /// </summary>
         private async Task PlayPauseAsync()
         {
 #if !__IOS__ && !__MACCATALYST__
@@ -332,7 +307,7 @@ namespace Simple_Player_MVVM.ViewModels
             {
                 return;
             }
-            
+
 #endif
 
             // START
@@ -360,55 +335,38 @@ namespace Simple_Player_MVVM.ViewModels
             }
         }
 
-        /// <summary>
-        /// Stop async.
-        /// </summary>
         private async Task StopAsync()
         {
-            var pipeline = _pipeline.Debug_GetPipeline();
-
             await StopAllAsync();
 
             SpeedText = "SPEED: 1X";
             PlayPauseText = "PLAY";
         }
 
-        /// <summary>
-        /// Speed async.
-        /// </summary>
         private async Task SpeedAsync()
         {
             if (SpeedText == "SPEED: 1X")
             {
-                // set 2x
                 SpeedText = "SPEED: 2X";
                 await _pipeline.Rate_SetAsync(2.0);
             }
             else if (SpeedText == "SPEED: 2X")
             {
-                // set 0.5x
                 SpeedText = "SPEED: 0.5X";
                 await _pipeline.Rate_SetAsync(0.5);
             }
             else if (SpeedText == "SPEED: 0.5X")
             {
-                // set 1x
                 SpeedText = "SPEED: 1X";
                 await _pipeline.Rate_SetAsync(1.0);
             }
         }
 
-        /// <summary>
-        /// Player on error.
-        /// </summary>
         private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
         }
 
-        /// <summary>
-        /// Stop all async.
-        /// </summary>
         private async Task StopAllAsync()
         {
             if (_pipeline == null)
@@ -425,19 +383,13 @@ namespace Simple_Player_MVVM.ViewModels
 
             await Task.Delay(300);
 
-            SeekingMaximum = null;
+            SeekingValue = 0;
+            SeekingMaximum = 1;
         }
 
-        /// <summary>
-        /// Handles the Elapsed event of the tmPosition control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
-        /// <summary>
-        /// Tm position elapsed.
-        /// </summary>
         private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+            if (Interlocked.CompareExchange(ref _timerBusy, 1, 0) != 0) return;
             try
             {
                 if (_pipeline == null)
@@ -446,71 +398,41 @@ namespace Simple_Player_MVVM.ViewModels
                 }
 
                 var pos = await _pipeline.Position_GetAsync();
-                var progress = (int)pos.TotalMilliseconds;
+                var duration = await _pipeline.DurationAsync();
+                var progress = pos.TotalMilliseconds;
+                var durationMs = duration.TotalMilliseconds;
 
-                try
+                Dispatcher.UIThread.Post(() =>
                 {
-                    await Dispatcher.UIThread.InvokeAsync(async () =>
+                    if (_pipeline == null)
                     {
-                        if (_pipeline == null)
-                        {
-                            return;
-                        }
+                        return;
+                    }
 
-                        if (SeekingMaximum == null)
-                        {
-                            SeekingMaximum = (await _pipeline.DurationAsync()).TotalMilliseconds;
-                        }
+                    _isTimerUpdate = true;
 
-                        _isTimerUpdate = true;
+                    if (durationMs > 0)
+                    {
+                        SeekingMaximum = durationMs;
+                    }
 
-                        if (progress > SeekingMaximum)
-                        {
-                            SeekingValue = SeekingMaximum;
-                        }
-                        else
-                        {
-                            SeekingValue = progress;
-                        }
+                    SeekingValue = progress > SeekingMaximum ? SeekingMaximum : progress;
 
-                        // This is where the received data is passed
-                        Position = $"{pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
-                        Duration = $"{(await _pipeline.DurationAsync()).ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture)}";
+                    Position = pos.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
+                    Duration = duration.ToString(@"hh\:mm\:ss", CultureInfo.InvariantCulture);
 
-                        _isTimerUpdate = false;
-                    });
-                }
-                catch (Exception exception)
-                {
-                    System.Diagnostics.Debug.WriteLine(exception);
-                }
+                    _isTimerUpdate = false;
+                });
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
-        }
-
-        /// <summary>
-        /// On seeking value changed.
-        /// </summary>
-        private async Task OnSeekingValueChanged()
-        {
-            if (!_isTimerUpdate && _pipeline != null && SeekingValue.HasValue)
+            finally
             {
-                await _pipeline.Position_SetAsync(TimeSpan.FromMilliseconds(SeekingValue.Value));
+                Interlocked.Exchange(ref _timerBusy, 0);
             }
         }
 
-        /// <summary>
-        /// On volume value changed.
-        /// </summary>
-        private void OnVolumeValueChanged()
-        {
-            if (_pipeline != null && VolumeValue.HasValue)
-            {
-                _audioRenderer.Volume = VolumeValue.Value / 100.0;
-            }
-        }
     }
 }

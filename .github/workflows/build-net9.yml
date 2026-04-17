@@ -31,23 +31,16 @@ jobs:
       with:
         dotnet-version: '9.0.200'
           
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v2
-      with:
-        vs-version: '17.9'
-
     - name: Verify environment
-      run: |
-        dotnet --info
-        msbuild -version
-        
+      run: dotnet --info
+
     ## Media Blocks
 
     - name: Restore dependencies $env:Solution_Name_MB1
       run: dotnet restore $env:Solution_Name_MB1
 
     - name: Build app for release $env:Solution_Name_MB1
-      run: msbuild $env:Solution_Name_MB1 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_MB1 --configuration Release --no-restore
             
     ## Media Player
 
@@ -55,13 +48,13 @@ jobs:
       run: dotnet restore $env:Solution_Name_MP1
 
     - name: Build app for release $env:Solution_Name_MP1
-      run: msbuild $env:Solution_Name_MP1 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_MP1 --configuration Release --no-restore
 
     - name: Restore dependencies $env:Solution_Name_MP2
       run: dotnet restore $env:Solution_Name_MP2
 
     - name: Build app for release $env:Solution_Name_MP2
-      run: msbuild $env:Solution_Name_MP2 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_MP2 --configuration Release --no-restore
 
     ## Video Capture
 
@@ -69,19 +62,19 @@ jobs:
       run: dotnet restore $env:Solution_Name_VC1
 
     - name: Build app for release $env:Solution_Name_VC1
-      run: msbuild $env:Solution_Name_VC1 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_VC1 --configuration Release --no-restore
 
     - name: Restore dependencies $env:Solution_Name_VC2
       run: dotnet restore $env:Solution_Name_VC2
 
     - name: Build app for release $env:Solution_Name_VC2
-      run: msbuild $env:Solution_Name_VC2 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_VC2 --configuration Release --no-restore
 
     - name: Restore dependencies $env:Solution_Name_VC3
       run: dotnet restore $env:Solution_Name_VC3
 
     - name: Build app for release $env:Solution_Name_VC3
-      run: msbuild $env:Solution_Name_VC3 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_VC3 --configuration Release --no-restore
 
     ## Video Edit
 
@@ -89,17 +82,17 @@ jobs:
       run: dotnet restore $env:Solution_Name_VE1
 
     - name: Build app for release $env:Solution_Name_VE1
-      run: msbuild $env:Solution_Name_VE1 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_VE1 --configuration Release --no-restore
 
     - name: Restore dependencies $env:Solution_Name_VE2
       run: dotnet restore $env:Solution_Name_VE2
 
     - name: Build app for release $env:Solution_Name_VE2
-      run: msbuild $env:Solution_Name_VE2 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_VE2 --configuration Release --no-restore
 
     - name: Restore dependencies $env:Solution_Name_VE3
       run: dotnet restore $env:Solution_Name_VE3
 
     - name: Build app for release $env:Solution_Name_VE3
-      run: msbuild $env:Solution_Name_VE3 -t:rebuild -verbosity:diag -property:Configuration=Release
+      run: dotnet build $env:Solution_Name_VE3 --configuration Release --no-restore
       

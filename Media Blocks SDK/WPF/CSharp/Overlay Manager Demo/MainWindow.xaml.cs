@@ -69,6 +69,9 @@ namespace Overlay_Manager_Demo
 
         private List<OverlayManagerWPFControl> _wpfOverlays = new List<OverlayManagerWPFControl>();
 
+        // Track SKia disposable resources (cached fonts/paints for overlay callbacks)
+        private List<IDisposable> _skiaResources = new List<IDisposable>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -351,6 +354,13 @@ namespace Overlay_Manager_Demo
                 wpfOverlay?.Dispose();
             }
             _wpfOverlays.Clear();
+
+            // Dispose cached SkiaSharp resources (fonts, paints for overlay callbacks)
+            foreach (var resource in _skiaResources)
+            {
+                resource?.Dispose();
+            }
+            _skiaResources.Clear();
 
             // Clear zoom/pan/fade overlays
             _currentZoom = null;
@@ -693,6 +703,14 @@ namespace Overlay_Manager_Demo
                 ZIndex = 100 // On top
             };
 
+            // Create font resources once outside the lambda to avoid per-frame allocation
+            var frameTypeface = SKTypeface.FromFamilyName("Arial");
+            var frameFont = new SKFont(frameTypeface, 24);
+            var framePaint = new SKPaint { Color = SKColors.White, IsAntialias = true };
+            _skiaResources.Add(frameTypeface);
+            _skiaResources.Add(frameFont);
+            _skiaResources.Add(framePaint);
+
             // Subscribe to the OnDraw event
             frameCounterCallback.OnDraw += (senderx, ex) =>
             {
@@ -707,17 +725,9 @@ namespace Overlay_Manager_Demo
                         // Clear with semi-transparent background
                         canvas.Clear(new SKColor(0, 0, 0, 128));
 
-                        // Draw frame counter text
-                        using (var paint = new SKPaint())
-                        {
-                            paint.Color = SKColors.White;
-                            paint.TextSize = 24;
-                            paint.IsAntialias = true;
-                            paint.Typeface = SKTypeface.FromFamilyName("Arial");
-
-                            string text = $"Frame: {_frameCounter}";
-                            canvas.DrawText(text, 10, 30, paint);
-                        }
+                        // Draw frame counter text (reuse cached font resources)
+                        string text = $"Frame: {_frameCounter}";
+                        canvas.DrawText(text, 10, 30, frameFont, framePaint);
                     }
 
                     // Draw the bitmap at position (10, 10)
@@ -744,6 +754,22 @@ namespace Overlay_Manager_Demo
                 Opacity = 0.9
             };
 
+            // Create font resources once outside the lambda to avoid per-frame allocation
+            var timeTypeface = SKTypeface.FromFamilyName("Arial", SKFontStyle.Bold);
+            var timeFont = new SKFont(timeTypeface, 20);
+            var timePaint = new SKPaint { Color = SKColors.Yellow, IsAntialias = true };
+            var timeBorderPaint = new SKPaint
+            {
+                Color = SKColors.LightGray,
+                Style = SKPaintStyle.Stroke,
+                StrokeWidth = 2,
+                IsAntialias = true
+            };
+            _skiaResources.Add(timeTypeface);
+            _skiaResources.Add(timeFont);
+            _skiaResources.Add(timePaint);
+            _skiaResources.Add(timeBorderPaint);
+
             // Subscribe to the OnDraw event
             timeOverlay.OnDraw += (senderx, ex) =>
             {
@@ -755,27 +781,12 @@ namespace Overlay_Manager_Demo
                         // Clear with semi-transparent dark background
                         canvas.Clear(new SKColor(0, 0, 0, 200));
 
-                        // Draw border
-                        using (var borderPaint = new SKPaint())
-                        {
-                            borderPaint.Color = SKColors.LightGray;
-                            borderPaint.Style = SKPaintStyle.Stroke;
-                            borderPaint.StrokeWidth = 2;
-                            borderPaint.IsAntialias = true;
-                            canvas.DrawRect(1, 1, bitmap.Width - 2, bitmap.Height - 2, borderPaint);
-                        }
+                        // Draw border (reuse cached paint)
+                        canvas.DrawRect(1, 1, bitmap.Width - 2, bitmap.Height - 2, timeBorderPaint);
 
-                        // Draw current time text
-                        using (var paint = new SKPaint())
-                        {
-                            paint.Color = SKColors.Yellow;
-                            paint.TextSize = 20;
-                            paint.IsAntialias = true;
-                            paint.Typeface = SKTypeface.FromFamilyName("Arial", SKFontStyle.Bold);
-
-                            string timeText = $"Time: {ex.Timestamp:mm\\:ss\\.ff}";
-                            canvas.DrawText(timeText, 10, 25, paint);
-                        }
+                        // Draw current time text (reuse cached font resources)
+                        string timeText = $"Time: {ex.Timestamp:mm\\:ss\\.ff}";
+                        canvas.DrawText(timeText, 10, 25, timeFont, timePaint);
                     }
 
                     // Draw the bitmap at bottom right corner

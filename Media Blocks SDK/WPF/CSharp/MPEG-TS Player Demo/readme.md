@@ -4,8 +4,21 @@ This application demonstrates the SDK capabilities.
 
 ## Used media blocks
 
+* `BasicFileSourceBlock` - File source
+* `MPEGTSDemuxBlock` - MPEG-TS demuxer
+* `DecodeBinBlock` - Media decoder
+* `SourceSwitchBlock` - Stream switching
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
+
+## Pipeline
+
+```mermaid
+graph LR
+    BasicFileSourceBlock --> MPEGTSDemuxBlock
+    MPEGTSDemuxBlock -- video --> DecodeBinBlock_Video[DecodeBinBlock] -- video --> VideoRendererBlock
+    MPEGTSDemuxBlock -- audio --> DecodeBinBlock_Audio[DecodeBinBlock] -- audio --> AudioRendererBlock
+```
 
 ## Supported frameworks
 
@@ -16,6 +29,7 @@ This application demonstrates the SDK capabilities.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

@@ -14,6 +14,23 @@ Esta aplicación captura la salida de audio del sistema, guarda la salida en for
 * `VideoRendererBlock` - Real-time video display
 * `AudioRendererBlock` - Real-time audio playback
 
+## Pipeline
+
+```mermaid
+graph LR
+    SystemVideoSourceBlock -- video --> VideoSampleGrabberBlock
+    VideoSampleGrabberBlock -- video --> TeeBlock-Video
+    TeeBlock-Video -- video --> VideoRendererBlock
+    TeeBlock-Video -- video --> H264EncoderBlock
+    H264EncoderBlock -- h264 --> MP4SinkBlock
+
+    SystemAudioSourceBlock -- audio --> AudioSampleGrabberBlock
+    AudioSampleGrabberBlock -- audio --> TeeBlock-Audio
+    TeeBlock-Audio -- audio --> AudioRendererBlock
+    TeeBlock-Audio -- audio --> AACEncoderBlock
+    AACEncoderBlock -- aac --> MP4SinkBlock
+```
+
 ## Frameworks soportados
 
 * .Net 4.7.2
@@ -23,6 +40,7 @@ Esta aplicación captura la salida de audio del sistema, guarda la salida en for
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

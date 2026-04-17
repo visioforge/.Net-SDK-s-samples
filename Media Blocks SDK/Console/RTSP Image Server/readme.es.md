@@ -58,10 +58,18 @@ gst-launch-1.0 rtspsrc location=rtsp://localhost:8554/stream ! decodebin ! autov
 3. Ejecute la aplicación - transmitirá sus imágenes en secuencia
 4. Los archivos de imagen vacíos o no válidos se reemplazarán con marcadores de posición negros
 
+## Pipeline
+
+```mermaid
+graph LR
+    VirtualVideoSourceBlock -- video --> VideoSampleGrabberBlock --> RTSPServerBlock
+```
+
 ## Frameworks compatibles
 
 * .Net Framework 4.7.2
 * .Net 5 and later
+* .Net 10
 
 ## Plataformas compatibles
 

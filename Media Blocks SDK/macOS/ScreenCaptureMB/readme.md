@@ -10,6 +10,17 @@ This application captures desktop/screen content, saves output to MP4 format, sp
 * `TeeBlock` - Stream splitting
 * `VideoRendererBlock` - Real-time video display
 
+## Pipeline
+
+```mermaid
+graph LR
+    ScreenSourceBlock -- video --> VideoResizeBlock
+    VideoResizeBlock -- video --> TeeBlock
+    TeeBlock -- video --> VideoRendererBlock
+    TeeBlock -- video --> H264EncoderBlock
+    H264EncoderBlock -- h264 --> MP4SinkBlock
+```
+
 ## Supported frameworks
 
 * .Net 4.7.2
@@ -19,6 +30,7 @@ This application captures desktop/screen content, saves output to MP4 format, sp
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 
