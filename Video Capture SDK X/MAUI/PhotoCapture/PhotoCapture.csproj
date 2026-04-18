@@ -27,6 +27,15 @@
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+    <!-- Enable the Mono interpreter on iOS / MacCatalyst. Without it, MAUI XAML runtime
+         hits 'System.ExecutionEngineException: Attempting to JIT compile method
+         (wrapper dynamic-method) object object:InvokeStub_Brush.op_Implicit ... while
+         running in aot-only mode' during App.InitializeComponent() → Styles.xaml load,
+         because TypeConversionExtensions uses DynamicMethod to invoke implicit operators
+         and DynamicMethod requires JIT. The interpreter fills that gap with a tiny size
+         and startup cost. -->
+    <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">true</UseInterpreter>
+    <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">true</UseInterpreter>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
     <ProvisioningType>manual</ProvisioningType>

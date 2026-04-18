@@ -26,6 +26,15 @@
     <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">true</PublishTrimmed>
     <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">false</PublishTrimmed>
     <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">false</PublishTrimmed>
+    <!-- Enable the Mono interpreter on iOS / MacCatalyst. Without it, MAUI XAML runtime
+         hits 'System.ExecutionEngineException: Attempting to JIT compile method
+         (wrapper dynamic-method) object object:InvokeStub_Brush.op_Implicit ... while
+         running in aot-only mode' during App.InitializeComponent() → Styles.xaml load,
+         because TypeConversionExtensions uses DynamicMethod to invoke implicit operators
+         and DynamicMethod requires JIT. The interpreter fills that gap with a tiny size
+         and startup cost. -->
+    <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">true</UseInterpreter>
+    <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">true</UseInterpreter>
   </PropertyGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">
     <RuntimeIdentifier>maccatalyst-x64</RuntimeIdentifier>
