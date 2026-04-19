@@ -1,0 +1,123 @@
+<Window x:Class="RTSP_RAW_Camera_Sample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        Title="RTSP RAW Camera Sample - Two Pipeline Architecture"
+        Height="700" Width="1200"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        Icon="visioforge_main_icon.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Panel - Controls -->
+        <Grid Grid.Column="0" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- RTSP Settings -->
+            <GroupBox Grid.Row="0" Header="RTSP Settings" Margin="0,0,0,10">
+                <StackPanel Margin="10">
+                    <Label Content="RTSP URL" FontWeight="Bold"/>
+                    <TextBox x:Name="edURL" Height="23" Text="rtsp://" Margin="0,0,0,10"/>
+
+                    <Label Content="Login"/>
+                    <TextBox x:Name="edLogin" Height="23" Margin="0,0,0,10"/>
+
+                    <Label Content="Password"/>
+                    <PasswordBox x:Name="edPassword" Height="23" Margin="0,0,0,10"/>
+
+                    <Separator Margin="0,5"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                        <Button x:Name="btStart" Content="Start" Width="100" Height="30" Margin="0,0,10,0"
+                                Click="btStart_Click" FontWeight="Bold" Background="#FF4CAF50" Foreground="White"/>
+                        <Button x:Name="btStop" Content="Stop" Width="100" Height="30"
+                                Click="btStop_Click" FontWeight="Bold" Background="#FFF44336" Foreground="White" IsEnabled="False"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <!-- Architecture Info -->
+            <GroupBox Grid.Row="1" Header="Two-Pipeline Architecture" Margin="0,0,0,10">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Pipeline 1: Grabber" FontWeight="Bold" Foreground="#FF2196F3"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,10" FontSize="11">
+                            RTSPRAWSourceBlock → BufferSinkBlock
+                            <LineBreak/>
+                            Captures raw H264 data via OnDataFrame event
+                        </TextBlock>
+
+                        <TextBlock Text="↓ H264 Data ↓" HorizontalAlignment="Center" Foreground="Gray" Margin="0,5"/>
+
+                        <TextBlock Text="Pipeline 2: Player" FontWeight="Bold" Foreground="#FF4CAF50"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,10" FontSize="11">
+                            PushSourceBlock → H264DecoderBlock → VideoRenderer
+                            <LineBreak/>
+                            Receives H264 data via PushData() and decodes
+                        </TextBlock>
+
+                        <Separator Margin="0,10"/>
+
+                        <TextBlock Text="Statistics" FontWeight="Bold"/>
+                        <Grid Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Frames:" Margin="0,2"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="lbFrameCount" Text="0" Margin="10,2,0,2"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Bytes:" Margin="0,2"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="lbTotalBytes" Text="0" Margin="10,2,0,2"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="FPS:" Margin="0,2"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="lbFPS" Text="0" Margin="10,2,0,2"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Bitrate:" Margin="0,2"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="lbBitrate" Text="0 kbps" Margin="10,2,0,2"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
+
+            <!-- Log -->
+            <GroupBox Grid.Row="2" Header="Log" Height="150">
+                <TextBox x:Name="mmLog" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                         IsReadOnly="True" FontFamily="Consolas" FontSize="10" Margin="5"/>
+            </GroupBox>
+        </Grid>
+
+        <!-- Right Panel - Video View -->
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="2" Background="Black">
+                <my:VideoView x:Name="VideoView1" Background="Black"/>
+            </Border>
+
+            <StackPanel Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Center">
+                <TextBlock x:Name="lbStatus" Text="Status: Ready" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock Text="This demo uses two separate pipelines to demonstrate H264 data flow"
+                           Foreground="Gray" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="11"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

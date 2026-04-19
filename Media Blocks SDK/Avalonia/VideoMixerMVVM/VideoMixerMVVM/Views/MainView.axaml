@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:VideoMixerMVVM.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
+             x:Class="VideoMixerMVVM.Views.MainView"
+             xmlns:avalonia="clr-namespace:VisioForge.Core.UI.Avalonia;assembly=VisioForge.Core.UI.Avalonia"
+             xmlns:local="clr-namespace:VideoMixerMVVM"
+             x:DataType="vm:MainViewModel">
+    <Design.DataContext>
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <UserControl.Resources>
+        <local:PlatformInfo x:Key="PlatformInfo" />
+    </UserControl.Resources>
+
+    <Grid RowDefinitions="*,Auto" ColumnDefinitions="*">
+        <!-- Video View -->
+        <Border x:Name="brMain" Grid.Row="0" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <avalonia:VideoView x:Name="videoView1" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#0C0C0C" />
+        </Border>
+
+        <!-- Controls -->
+        <StackPanel Grid.Row="1" Background="#1e1e1e" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Command="{Binding StartStopCommand}" VerticalAlignment="Center" Content="{Binding StartStopText}" Margin="5" IsEnabled="{Binding StartStopEnabled}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

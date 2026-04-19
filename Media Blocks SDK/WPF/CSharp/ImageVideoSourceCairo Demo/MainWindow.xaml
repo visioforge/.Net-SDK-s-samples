@@ -1,0 +1,46 @@
+<Window x:Class="ImageVideoSourceCairo_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageVideoSourceCairo_Demo"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="ImageVideoSourceCairo Demo - Dynamic Image Switching" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Video Display Area -->
+        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" Margin="10">
+            <wpf:VideoView x:Name="VideoView" Background="Black" />
+        </Border>
+
+        <!-- Image Selection Buttons -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button x:Name="btnImage1" Content="Image 1 (PNG)" Width="120" Height="30" Margin="5" Click="btnImage1_Click"/>
+            <Button x:Name="btnImage2" Content="Image 2 (JPG)" Width="120" Height="30" Margin="5" Click="btnImage2_Click"/>
+            <Button x:Name="btnImage3" Content="Image 3 (GIF)" Width="120" Height="30" Margin="5" Click="btnImage3_Click"/>
+            <Button x:Name="btnImage4" Content="Image 4 (BMP)" Width="120" Height="30" Margin="5" Click="btnImage4_Click"/>
+        </StackPanel>
+
+        <!-- Controls -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Label Content="Display Mode:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="cbDisplayMode" Width="150" Height="25" Margin="5" SelectionChanged="cbDisplayMode_SelectionChanged">
+                <ComboBoxItem>Stretch</ComboBoxItem>
+                <ComboBoxItem>Letterbox</ComboBoxItem>
+                <ComboBoxItem>Original Size</ComboBoxItem>
+            </ComboBox>
+            
+            <Button x:Name="btnStart" Content="Start" Width="80" Height="30" Margin="20,5,5,5" Click="btnStart_Click"/>
+            <Button x:Name="btnStop" Content="Stop" Width="80" Height="30" Margin="5" Click="btnStop_Click" IsEnabled="False"/>
+            
+            <Label x:Name="lblStatus" Content="Ready" Margin="20,0,0,0" VerticalAlignment="Center" FontWeight="Bold"/>
+        </StackPanel>
+    </Grid>
+</Window>

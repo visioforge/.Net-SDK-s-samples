@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:SimpleVideoCaptureMVVM.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="700"
+             x:Class="SimpleVideoCaptureMVVM.Views.MainView"
+			 xmlns:avalonia="clr-namespace:VisioForge.Core.UI.Avalonia;assembly=VisioForge.Core.UI.Avalonia"
+			 xmlns:local="clr-namespace:SimpleVideoCaptureMVVM"
+			 x:DataType="vm:MainViewModel">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainViewModel />
+	</Design.DataContext>
+
+	<UserControl.Resources>
+		<local:PlatformInfo x:Key="PlatformInfo" />
+	</UserControl.Resources>
+
+	<Grid RowDefinitions="*,Auto" ColumnDefinitions="*">
+		<!-- Video View Placeholder -->
+		<Border x:Name="brMain" Grid.Row="0" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+			<avalonia:VideoView x:Name="videoView1" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#0C0C0C"  />
+		</Border>
+
+		<!-- Controls Desktop -->
+		<StackPanel Grid.Row="1" Background="#1e1e1e" Orientation="Horizontal" IsVisible="{Binding IsDesktop, Source={StaticResource PlatformInfo}}">
+			<ComboBox Grid.Column="0" Foreground="White" ItemsSource="{Binding VideoInputDevices}" SelectedItem="{Binding VideoInputDevice, Mode=TwoWay}"  VerticalAlignment="Center" Margin="5,0,5,0" Width="200" />
+			<ComboBox Grid.Column="1" Foreground="White" ItemsSource="{Binding AudioInputDevices}" SelectedItem="{Binding AudioInputDevice, Mode=TwoWay}" VerticalAlignment="Center" Margin="5,0,5,0" Width="200"/>
+			<ComboBox Grid.Column="2" Foreground="White" ItemsSource="{Binding AudioOutputDevices}" SelectedItem="{Binding AudioOutputDevice, Mode=TwoWay}" VerticalAlignment="Center" Margin="5,0,5,0" Width="200" />
+			<Button Grid.Column="3" Command="{Binding PreviewCommand}" VerticalAlignment="Center" Content="{Binding PreviewText}" Margin="5" IsEnabled="{Binding PreviewEnabled}" />
+			<Button Grid.Column="4" Command="{Binding RecordCommand}" VerticalAlignment="Center" Content="{Binding RecordText}" Margin="5" IsEnabled="{Binding RecordEnabled}" />
+			<Label Grid.Column="5" Content="{Binding Duration}" VerticalAlignment="Center" />
+		</StackPanel>
+
+		<!--Controls Mobile-->
+		<StackPanel Grid.Row="1" Background="#1e1e1e" Orientation="Vertical" IsVisible="{Binding IsMobile, Source={StaticResource PlatformInfo}}">
+
+			<Grid Margin="10,10,10,10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+				<Button Grid.Column="0" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Command="{Binding SwitchCameraCommand}" Content="SWITCH CAM" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5,0,5,0" />
+				<Button Grid.Column="1" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Command="{Binding RecordCommand}" HorizontalAlignment="Stretch" Content="{Binding RecordText}" Margin="5"/>
+				<Label Grid.Column="2" Foreground="White" Content="{Binding Duration}" HorizontalAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+			</Grid>
+		</StackPanel>
+
+	</Grid>
+</UserControl>
