@@ -87,6 +87,14 @@ namespace Live_Video_Compositor_Demo
             }));
         }
 
+        private void Compositor_OnRenderStatistics(object sender, RenderStatisticsEventArgs e)
+        {
+            Dispatcher.BeginInvoke((Action)(() =>
+            {
+                lbRenderFps.Content = $"{e.ActualFps:F1} / {e.ConfiguredFps:F1}";
+            }));
+        }
+
         /// <summary>
         /// Create engine.
         /// </summary>
@@ -100,6 +108,7 @@ namespace Live_Video_Compositor_Demo
             _compositor = new LiveVideoCompositor(settings);
             _compositor.OnError += Compositor_OnError;
             _compositor.OnAudioVUMeter += Compositor_OnAudioVUMeter;
+            _compositor.OnRenderStatistics += Compositor_OnRenderStatistics;
         }
 
         /// <summary>
@@ -111,6 +120,7 @@ namespace Live_Video_Compositor_Demo
             {
                 _compositor.OnError -= Compositor_OnError;
                 _compositor.OnAudioVUMeter -= Compositor_OnAudioVUMeter;
+                _compositor.OnRenderStatistics -= Compositor_OnRenderStatistics;
 
                 _compositor.Dispose();
                 _compositor = null;
@@ -1073,14 +1083,58 @@ namespace Live_Video_Compositor_Demo
                     tbSeeking.IsEnabled = true;
                     tbSeeking.Maximum = duration.TotalSeconds;
                     tbSeeking.Value = position.TotalSeconds;
+
+                    btPauseResume.IsEnabled = true;
+                    icPauseResume.Kind = inputSource.Pipeline.State == PlaybackState.Pause
+                        ? MaterialDesignThemes.Wpf.PackIconKind.Play
+                        : MaterialDesignThemes.Wpf.PackIconKind.Pause;
                 }
                 else
                 {
                     tbSeeking.IsEnabled = false;
                     tbSeeking.Value = 0;
+
+                    btPauseResume.IsEnabled = false;
+                    icPauseResume.Kind = MaterialDesignThemes.Wpf.PackIconKind.Pause;
                 }
 
                 _timelineSeeking = true;
+            }
+        }
+
+        /// <summary>
+        /// Bt pause/resume click.
+        /// </summary>
+        private async void btPauseResume_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int index = lbSources.SelectedIndex;
+                if (index == -1)
+                {
+                    return;
+                }
+
+                var inputSource = _compositor.Input_Get(index);
+                if (inputSource == null || !inputSource.IsSeekable)
+                {
+                    return;
+                }
+
+                if (inputSource.Pipeline.State == PlaybackState.Pause)
+                {
+                    await inputSource.ResumeAsync();
+                    icPauseResume.Kind = MaterialDesignThemes.Wpf.PackIconKind.Pause;
+                }
+                else
+                {
+                    await inputSource.PauseAsync();
+                    icPauseResume.Kind = MaterialDesignThemes.Wpf.PackIconKind.Play;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
 
