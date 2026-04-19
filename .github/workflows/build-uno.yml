@@ -58,7 +58,7 @@ jobs:
         run: dotnet restore "${{ env.Solution_Name_MB }}"
       - name: Build (Media Blocks)
         if: runner.os == 'Windows'
-        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore
+        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore /p:BuildInParallel=false --disable-parallel
 
       # Media Blocks (macOS)
       - name: Build (Media Blocks - macOS)
@@ -71,7 +71,7 @@ jobs:
         run: dotnet restore "${{ env.Solution_Name_MP }}"
       - name: Build (Media Player)
         if: runner.os == 'Windows'
-        run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore
+        run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore /p:BuildInParallel=false --disable-parallel
 
       # Media Player (macOS)
       - name: Build (Media Player - macOS)
@@ -84,7 +84,7 @@ jobs:
         run: dotnet restore "${{ env.Solution_Name_VC }}"
       - name: Build (Video Capture)
         if: runner.os == 'Windows'
-        run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore
+        run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore /p:BuildInParallel=false --disable-parallel
 
       # Video Capture (macOS)
       - name: Build (Video Capture - macOS)
