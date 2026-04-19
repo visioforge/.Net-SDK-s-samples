@@ -85,6 +85,8 @@ namespace udp_mpegts_streamer_mb
                 this.IsEnabled = true;
                 Title = originalTitle;
             }
+
+            UpdatePlaybackInfo();
         }
 
         /// <summary>
@@ -92,6 +94,8 @@ namespace udp_mpegts_streamer_mb
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            UpdatePlaybackInfo();
+
             if (_pipeline != null)
             {
                 return;

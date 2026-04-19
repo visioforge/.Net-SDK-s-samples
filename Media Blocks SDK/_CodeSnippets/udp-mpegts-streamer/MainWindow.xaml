@@ -12,11 +12,11 @@
         <Label Content="Host:" Target="{Binding ElementName=edHost}" HorizontalAlignment="Left" Margin="16,0,0,60" VerticalAlignment="Bottom"/>
         <TextBox x:Name="edHost" Text="localhost" HorizontalAlignment="Left" Margin="55,0,0,63" VerticalAlignment="Bottom" Width="120"/>
         <Label Content="Port:" Target="{Binding ElementName=edPort}" HorizontalAlignment="Left" Margin="185,0,0,60" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="edPort" Text="5004" HorizontalAlignment="Left" Margin="222,0,0,63" VerticalAlignment="Bottom" Width="60"/>
+        <TextBox x:Name="edPort" Text="5004" HorizontalAlignment="Left" Margin="222,0,0,63" VerticalAlignment="Bottom" Width="60" TextChanged="edPort_TextChanged"/>
         <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="300,0,0,62" VerticalAlignment="Bottom" Width="50" Click="btStart_Click"/>
         <Button x:Name="btStop" Content="Stop" HorizontalAlignment="Left" Margin="355,0,0,62" VerticalAlignment="Bottom" Width="50" Click="btStop_Click"/>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Margin="16,0,0,8" VerticalAlignment="Bottom" FontSize="11">
-            <Run Text="Play with: ffplay udp://@:5004 | gst-launch-1.0 udpsrc port=5004 ! tsdemux ! decodebin ! autovideosink | vlc udp://@:5004"/>
-        </TextBlock>
+        <TextBox x:Name="tbPlaybackInfo"
+                 IsReadOnly="True" IsTabStop="False" BorderThickness="0" Background="Transparent"
+                 TextWrapping="Wrap" HorizontalAlignment="Left" Margin="16,0,0,8" VerticalAlignment="Bottom" FontSize="11"/>
     </Grid>
 </Window>

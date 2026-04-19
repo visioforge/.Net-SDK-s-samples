@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -279,7 +280,6 @@ namespace MediaBlocks_ImageSequence_Demo_WPF
         private void btBrowseFolder_Click(object sender, RoutedEventArgs e)
         {
             using var dialog = new FolderBrowserDialog();
-using System.Diagnostics;
             dialog.Description = "Select folder containing image sequence";
 
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
