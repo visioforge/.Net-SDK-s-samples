@@ -131,7 +131,10 @@ public class AppDelegate : UIApplicationDelegate
 
             if (_cameras.Length == 0)
             {
-                Toast.Show("No video sources found", Window.RootViewController);
+                // Await continuations from DeviceEnumerator run on whichever thread the SDK
+                // completed on, not necessarily the main thread. UIWindow / UIKit access
+                // off-main is undefined behaviour on iOS, so marshal the Toast back.
+                ShowToastOnMain("No video sources found");
                 return;
             }
 
@@ -159,7 +162,7 @@ public class AppDelegate : UIApplicationDelegate
 
             if (videoSourceSettings == null)
             {
-                Toast.Show("Unable to configure camera settings", Window.RootViewController);
+                ShowToastOnMain("Unable to configure camera settings");
                 return;
             }
 
@@ -316,18 +319,41 @@ public class AppDelegate : UIApplicationDelegate
         _btSelectCamera.SetImage(flipImage, UIControlState.Normal);
         _btSelectCamera.TouchUpInside += async (sender, e) =>
         {
-            if (_pipeline != null)
+            // Rapid double-taps used to race: each tap's StopCamera/StartPreview would
+            // interleave on _pipeline / _cameraIndex. Disable the button for the duration
+            // of the transition and wrap the whole thing so a StartPreview exception
+            // (e.g. requested HD format missing on the front camera) doesn't leave the UI
+            // showing 'idle' while there's no active preview.
+            _btSelectCamera.Enabled = false;
+            try
             {
-                await StopCamera();
+                if (_pipeline != null)
+                {
+                    await StopCamera();
+                }
+
+                // AVCaptureDevice enumeration order isn't guaranteed — on some devices the
+                // back camera lands at index 1 and the front at 0, so the legacy `_isFrontCamera
+                // ? 1 : 0` mapping flipped the wrong camera. Search by IsFrontFacing and fall
+                // back to the other camera when the target isn't present (iPads without a back
+                // cam, external-camera-only setups, etc.).
+                _isFrontCamera = !_isFrontCamera;
+                _cameraIndex = FindCameraIndex(_cameras, preferFront: _isFrontCamera);
+
+                _isCapturing = false;
+                UpdateCaptureButtonAppearance();
+
+                await StartPreview();
             }
-
-            _isFrontCamera = !_isFrontCamera;
-            _cameraIndex = _isFrontCamera ? 1 : 0;
-
-            _isCapturing = false;
-            UpdateCaptureButtonAppearance();
-
-            await StartPreview();
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Camera flip failed: {ex.Message}");
+                ShowToastOnMain($"Camera flip failed: {ex.Message}");
+            }
+            finally
+            {
+                _btSelectCamera.Enabled = true;
+            }
         };
 
         controlBar.AddSubview(_btSelectCamera);
@@ -346,11 +372,17 @@ public class AppDelegate : UIApplicationDelegate
         /// </summary>
     private void UpdateCaptureButtonAppearance()
     {
-        foreach (var sub in _btStartCapture.Subviews)
+        // RemoveFromSuperview detaches the UIView from its parent but the managed peer
+        // still retains the native CALayer and constraints; without Dispose they'd
+        // accumulate every time this method fires (once per capture toggle and once per
+        // camera flip). Snapshot into an array first because RemoveFromSuperview mutates
+        // the live Subviews collection we'd otherwise be iterating.
+        foreach (var sub in _btStartCapture.Subviews.ToArray())
         {
             if (sub.Tag == 99)
             {
                 sub.RemoveFromSuperview();
+                sub.Dispose();
             }
         }
 
@@ -381,6 +413,23 @@ public class AppDelegate : UIApplicationDelegate
             inner.WidthAnchor.ConstraintEqualTo(_isCapturing ? 28f : 52f),
             inner.HeightAnchor.ConstraintEqualTo(_isCapturing ? 28f : 52f)
         });
+    }
+
+    /// <summary>
+    /// Show a toast, marshalling to the main thread first. UIWindow / UIKit access is
+    /// undefined behaviour off the main thread, and SDK async continuations don't have
+    /// the synchronization context set on this non-MAUI iOS demo — every Toast call site
+    /// that runs after an <c>await</c> has to hop back explicitly.
+    /// </summary>
+    private void ShowToastOnMain(string message)
+    {
+        if (NSThread.IsMain)
+        {
+            Toast.Show(message, Window?.RootViewController);
+            return;
+        }
+
+        InvokeOnMainThread(() => Toast.Show(message, Window?.RootViewController));
     }
 
         /// <summary>
@@ -422,7 +471,10 @@ public class AppDelegate : UIApplicationDelegate
         // we need to share video to Photos library
         if (!string.IsNullOrEmpty(_filename))
         {
-            Thread.Sleep(1000);
+            // Async delay instead of Thread.Sleep — SDK rule forbids Thread.Sleep and, more
+            // importantly, this method is usually called on a captured UI sync context, so
+            // the blocking sleep froze the UI for a full second. Task.Delay yields.
+            await Task.Delay(1000);
 
             InvokeOnMainThread(() =>
             {
@@ -504,13 +556,59 @@ public class AppDelegate : UIApplicationDelegate
         Window.MakeKeyAndVisible();
 
         VisioForgeX.InitSDK();
-        
-        // start preview in UI thread
+
+        // start preview in UI thread — wrap the await in try/catch so a permission denial
+        // or missing HD format surfaces as a toast instead of terminating the app. Passing
+        // an async lambda to InvokeOnMainThread gives it async-void semantics; without the
+        // catch, any throw from StartPreview would propagate into UIKit's runloop.
         InvokeOnMainThread(async () =>
         {
-            await StartPreview();
+            try
+            {
+                await StartPreview();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Initial preview start failed: {ex}");
+                ShowToastOnMain("Initial preview failed: " + ex.Message);
+            }
         });
 
         return true;
+    }
+
+    /// <summary>
+    /// Resolve a front/back camera to its index in <paramref name="cameras"/> by querying
+    /// <see cref="VideoCaptureDeviceInfo.IsFrontFacing"/> rather than hard-coded 0/1 slot
+    /// assumptions. Falls back to the opposite-facing camera when the preferred one isn't
+    /// available (iPad models without a back cam, external-only setups), and finally to the
+    /// first device in the list.
+    /// </summary>
+    private static int FindCameraIndex(VideoCaptureDeviceInfo[] cameras, bool preferFront)
+    {
+        if (cameras == null || cameras.Length == 0)
+        {
+            return 0;
+        }
+
+        var preferred = preferFront ? VideoCaptureDeviceFacing.Front : VideoCaptureDeviceFacing.Back;
+        for (int i = 0; i < cameras.Length; i++)
+        {
+            if (cameras[i]?.Facing == preferred)
+            {
+                return i;
+            }
+        }
+
+        var fallback = preferFront ? VideoCaptureDeviceFacing.Back : VideoCaptureDeviceFacing.Front;
+        for (int i = 0; i < cameras.Length; i++)
+        {
+            if (cameras[i]?.Facing == fallback)
+            {
+                return i;
+            }
+        }
+
+        return 0;
     }
 }

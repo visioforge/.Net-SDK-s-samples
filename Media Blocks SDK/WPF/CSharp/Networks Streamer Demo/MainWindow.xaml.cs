@@ -300,7 +300,7 @@ namespace Networks_Streamer_Demo
                     IAudioEncoder audioEncoder = null;
                     if (audioEnabled)
                     {
-                        audioEncoder = new VOAACEncoderSettings();
+                        audioEncoder = new AVENCAACEncoderSettings();
                     }
 
                     _rtspSink = new RTSPServerBlock(new RTSPServerSettings(new Uri("rtsp://127.0.0.1/live"), videoEncoder, audioEncoder));

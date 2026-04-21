@@ -245,13 +245,9 @@ public class CustomWindowDelegate : NSWindowDelegate
         /// </summary>
     public override bool WindowShouldClose(NSObject sender)
     {
-        if (_pipeline != null)
-        {
-            _pipeline.StopAsync().GetAwaiter().GetResult();
-            _pipeline.DisposeAsync().GetAwaiter().GetResult();
-            _pipeline = null;
-        }
-
+        // Pipeline teardown happens in ViewController.StopAllAsync/Dispose — this
+        // delegate only tears down the SDK itself because it has no reference to
+        // the owning ViewController.
         VisioForgeX.DestroySDK();
 
         // Return true to allow the window to close, false to cancel.

@@ -271,7 +271,7 @@ namespace Networks_Streamer_Demo
             // RTSP server
             else if (cbPlatform.SelectedIndex == 3)
             {
-                var rtspSettings = new RTSPServerSettings(new Uri(edStreamingKey.Text), new OpenH264EncoderSettings(), new VOAACEncoderSettings());
+                var rtspSettings = new RTSPServerSettings(new Uri(edStreamingKey.Text), new OpenH264EncoderSettings(), new AVENCAACEncoderSettings());
                 var rtspOutput = new RTSPServerOutput(rtspSettings);
                 _videoCapture.Outputs_Add(rtspOutput, true);
             }

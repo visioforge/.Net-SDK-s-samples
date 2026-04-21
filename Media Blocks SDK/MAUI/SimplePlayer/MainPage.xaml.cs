@@ -50,7 +50,13 @@ namespace Simple_Player_MB_MAUI
         /// <summary>
         /// The position timer.
         /// </summary>
-        private System.Timers.Timer _tmPosition = new System.Timers.Timer(500);        
+        private System.Timers.Timer _tmPosition = new System.Timers.Timer(500);
+
+        /// <summary>
+        /// Set when Window_Destroying starts the teardown sequence so async-void handlers
+        /// suspended on awaits can bail out before touching the about-to-be-disposed pipeline.
+        /// </summary>
+        private volatile bool _isTearingDown;
 
         public MainPage()
         {
@@ -64,13 +70,33 @@ namespace Simple_Player_MB_MAUI
         /// <summary>
         /// Create engine async.
         /// </summary>
-        private async Task CreateEngineAsync()
+        /// <param name="iosScopedUrl">iOS only: security-scoped NSUrl from UIDocumentPicker.
+        /// When provided, the SDK uses it directly so the sandbox grant (held open by the caller
+        /// via StartAccessingSecurityScopedResource) reaches GStreamer's filesrc. When null
+        /// (e.g. gallery path — file already in app sandbox cache), we fall back to
+        /// NSUrl.FromFilename(_filename).</param>
+        private async Task CreateEngineAsync(
+#if IOS && !MACCATALYST
+            Foundation.NSUrl? iosScopedUrl = null
+#endif
+        )
         {
             if (_pipeline != null)
             {
                 await _pipeline.StopAsync(true);
                 await _pipeline.DisposeAsync();
+                _pipeline = null;
             }
+
+            // Dispose leftover blocks from a previous playback before overwriting the fields
+            // below — gallery→open sequences call CreateEngineAsync twice and each MediaBlock
+            // owns an unmanaged GStreamer element that isn't finalized automatically.
+            _videoRenderer?.Dispose();
+            _videoRenderer = null;
+            _audioRenderer?.Dispose();
+            _audioRenderer = null;
+            _source?.Dispose();
+            _source = null;
 
             _pipeline = new MediaBlocksPipeline();
 
@@ -78,29 +104,53 @@ namespace Simple_Player_MB_MAUI
             _pipeline.OnStart += _player_OnStart;
             _pipeline.OnStop += _player_OnStop;
 
-            _audioRenderer = new AudioRendererBlock();
-
-            var vv = videoView.GetVideoView();
-            _videoRenderer = new VideoRendererBlock(_pipeline, vv);
-            _audioRenderer = new AudioRendererBlock();
-
-            var settings = await UniversalSourceSettings.CreateAsync(new Uri(_filename!));
+            // Use the string overload so the SDK's FilenameHelper.SafeCreateFileUri normalizes
+            // the path (platform-native absolute paths -> file:// URIs, existence check, etc.)
+            // rather than relying on the default new Uri(string) constructor behaviour.
+            // On iOS the SDK only exposes the NSUrl overload (string overload is gated out by
+            // #if __IOS__ && !__MACCATALYST__), so wrap the path in NSUrl explicitly using
+            // FromFilename — `new NSUrl(absPath)` doesn't set the file:// scheme and the SDK's
+            // URI.Scheme.Equals check then throws NRE.
+#if IOS && !MACCATALYST
+            var settings = iosScopedUrl != null
+                ? await UniversalSourceSettings.CreateAsync(iosScopedUrl)
+                : await UniversalSourceSettings.CreateAsync(Foundation.NSUrl.FromFilename(_filename!));
+#else
+            var settings = await UniversalSourceSettings.CreateAsync(_filename!);
+#endif
             // Auto-rotate portrait phone recordings via videoflip inside the source block;
             // no FlipRotateBlock needed in the pipeline.
             settings.VideoFlipRotate = VideoFlipRotateMethod.Automatic;
             var info = settings.GetInfo();
             _source = new UniversalSourceBlock(settings);
 
-            // Only connect pads for streams that actually exist — gallery videos can be
-            // muted (no audio track) and connecting an unused audio pad leaves the
-            // pipeline stuck in PAUSED waiting for data that never arrives.
-            if (info.VideoStreams.Count > 0)
+            // If we couldn't read the media info (unsupported container, damaged file),
+            // we can't trust VideoStreams/AudioStreams to decide what to wire up — degrade
+            // to connecting both pads (the original behaviour) so the pipeline at least
+            // surfaces the demuxer's own error, and alert the user that we're going to try
+            // anyway rather than silently spinning forever on an un-wired pipeline.
+            var hasVideo = info?.VideoStreams?.Count > 0;
+            var hasAudio = info?.AudioStreams?.Count > 0;
+            var unknown = info == null;
+
+            if (unknown)
             {
+                Console.WriteLine("[SimplePlayer] CreateEngineAsync: GetInfo() returned null — connecting both pads defensively");
+            }
+
+            // Construct each renderer only if we're going to connect it, so an audio-only or
+            // video-only file doesn't allocate an unused block (and when GetInfo returned
+            // null we build both, matching the fallback above).
+            var vv = videoView.GetVideoView();
+            if (hasVideo || unknown)
+            {
+                _videoRenderer = new VideoRendererBlock(_pipeline, vv);
                 _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
             }
 
-            if (info.AudioStreams.Count > 0)
+            if (hasAudio || unknown)
             {
+                _audioRenderer = new AudioRendererBlock();
                 _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
             }
         }
@@ -113,21 +163,34 @@ namespace Simple_Player_MB_MAUI
             try
             {
                 await StopAllAsync();
-                
+
                 // update UI controls using invoke
                 await MainThread.InvokeOnMainThreadAsync(() =>
                 {
                     btSpeed.Text = "1X";
-                    btPlayPause.Text = "PLAY";
                     slSeeking.Value = 0;
                     lbDuration.Text = "00:00:00";
                     lbPosition.Text = "00:00:00";
+                    SetPlayingUIState(false);
                 });
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error in OnStop: {ex.Message}");
             }
+        }
+
+        /// <summary>
+        /// Toggles the Open/Gallery vs Stop button group so only the currently valid actions
+        /// remain tappable: while a file is playing, Open and Gallery are disabled (picking a
+        /// new file would race against the live pipeline); while nothing is playing, Stop is
+        /// disabled because there's nothing to stop.
+        /// </summary>
+        private void SetPlayingUIState(bool playing)
+        {
+            btOpen.IsEnabled = !playing;
+            btGallery.IsEnabled = !playing;
+            btStop.IsEnabled = playing;
         }
 
         /// <summary>
@@ -168,13 +231,24 @@ namespace Simple_Player_MB_MAUI
         {
             try
             {
+                // Mark teardown in progress so btGallery_Clicked / btOpen_Clicked bail
+                // out instead of touching a pipeline we're about to dispose. Without this,
+                // an in-flight Start that was suspended on an await can resume after Dispose
+                // and throw ObjectDisposedException.
+                _isTearingDown = true;
+
                 if (_pipeline != null)
                 {
+                    // Unhook ALL three handlers before StopAsync — OnStop / OnStart can fire
+                    // synchronously during StopAsync and then call StopAllAsync / touch UI on
+                    // a pipeline that's about to be disposed.
                     _pipeline.OnError -= _player_OnError;
+                    _pipeline.OnStart -= _player_OnStart;
+                    _pipeline.OnStop -= _player_OnStop;
                     await _pipeline.StopAsync(true);
 
                     _pipeline.Dispose();
-                    _pipeline = null!;
+                    _pipeline = null;
                 }
 
                 VisioForgeX.DestroySDK();
@@ -307,6 +381,29 @@ namespace Simple_Player_MB_MAUI
         {
             try
             {
+#if IOS && !MACCATALYST
+                // Native UIDocumentPickerViewController in asCopy:true mode — iOS hardlinks
+                // the picked file into our sandbox Inbox and hands back a plain file URL.
+                // No security-scoped bookmark to juggle, and the Xamarin NSUrl wrapper stays
+                // valid after picker dismissal (that was the problem with asCopy:false — the
+                // handle got released by ObjC before AVAsset.FromUrl ran).
+                var nsUrl = await Platforms.iOS.DocumentPickerHelper.PickVideoAsync();
+                if (nsUrl == null)
+                {
+                    return;
+                }
+
+                await StopAllAsync();
+                _filename = nsUrl.Path;
+
+                if (_isTearingDown)
+                {
+                    return;
+                }
+
+                await CreateEngineAsync(nsUrl);
+                await _pipeline!.StartAsync();
+#else
                 var result = await FilePicker.Default.PickAsync();
                 if (result == null)
                 {
@@ -317,15 +414,26 @@ namespace Simple_Player_MB_MAUI
 
                 _filename = result.FullPath;
 
+                if (_isTearingDown)
+                {
+                    return;
+                }
+
                 await CreateEngineAsync();
                 await _pipeline!.StartAsync();
+#endif
 
                 _tmPosition.Start();
-                btPlayPause.Text = "PAUSE";
+                SetPlayingUIState(true);
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error opening file: {ex.Message}");
+                Console.WriteLine($"[SimplePlayer] EXC btOpen: {ex.GetType().Name}: {ex.Message}");
+                Console.WriteLine(ex.StackTrace ?? "(no stack)");
+                if (!_isTearingDown)
+                {
+                    await DisplayAlertAsync("Open", $"{ex.GetType().Name}: {ex.Message}", "OK");
+                }
             }
         }
 
@@ -336,16 +444,11 @@ namespace Simple_Player_MB_MAUI
         {
             try
             {
-                Console.WriteLine("[SimplePlayer] btGallery_Clicked: enter");
-
                 var result = await MediaPicker.Default.PickVideoAsync();
                 if (result == null)
                 {
-                    Console.WriteLine("[SimplePlayer] PickVideoAsync: cancelled");
                     return;
                 }
-
-                Console.WriteLine($"[SimplePlayer] picked: FileName='{result.FileName}', FullPath='{result.FullPath}'");
 
                 await StopAllAsync();
 
@@ -359,7 +462,41 @@ namespace Simple_Player_MB_MAUI
                 }
                 else
                 {
-                    var cachePath = Path.Combine(FileSystem.Current.CacheDirectory, result.FileName);
+                    // Sanitize the picker-supplied name: strip any path separators (iOS/macOS
+                    // PHPicker occasionally returns names containing "/" from source asset paths,
+                    // which would escape the cache directory with Path.Combine), then prefix a
+                    // GUID so repeated picks of the same video don't collide and overwrite a
+                    // file we may still be streaming from.
+                    var rawName = result.FileName ?? "video";
+                    var leaf = Path.GetFileName(rawName);
+                    if (string.IsNullOrEmpty(leaf))
+                    {
+                        leaf = "video";
+                    }
+
+                    // Replace any character any of our target hosts would reject. We can't
+                    // rely on Path.GetInvalidFileNameChars() alone — on iOS it only flags
+                    // '/' and '\0', so a filename like "12:34 clip.mov" coming from
+                    // PHPicker would pass through unchanged and then fail when that same
+                    // file name is later touched on a macOS HFS+ volume, a Windows MAUI
+                    // share, or any sync target that disallows colons. Use an explicit
+                    // union that covers POSIX + HFS + NTFS in one pass.
+                    var invalid = new[] { '/', '\\', ':', '*', '?', '"', '<', '>', '|', '\0' };
+                    if (leaf.IndexOfAny(invalid) >= 0)
+                    {
+                        var sb = new System.Text.StringBuilder(leaf.Length);
+                        foreach (var ch in leaf)
+                        {
+                            sb.Append(Array.IndexOf(invalid, ch) >= 0 ? '_' : ch);
+                        }
+                        leaf = sb.ToString();
+                    }
+
+                    var ext = Path.GetExtension(leaf);
+                    var stem = Path.GetFileNameWithoutExtension(leaf);
+                    var safeName = $"{stem}_{Guid.NewGuid():N}{ext}";
+                    var cachePath = Path.Combine(FileSystem.Current.CacheDirectory, safeName);
+
                     using (var src = await result.OpenReadAsync())
                     using (var dst = File.Create(cachePath))
                     {
@@ -369,63 +506,53 @@ namespace Simple_Player_MB_MAUI
                     _filename = cachePath;
                 }
 
+                if (_isTearingDown)
+                {
+                    return;
+                }
+
                 await CreateEngineAsync();
-                await _pipeline!.StartAsync();
+
+                // Snapshot the pipeline reference and re-check the teardown gate: if
+                // Window_Destroying fired while CreateEngineAsync was suspended on its
+                // own awaits, _pipeline may have been disposed under us. The snapshot
+                // alone is not enough — pipeline.StartAsync on a disposed pipeline throws
+                // ObjectDisposedException — so we also bail on _isTearingDown and catch ODE
+                // as a last line of defence for the narrow window between the check and
+                // StartAsync's first native call.
+                var pipeline = _pipeline;
+                if (pipeline == null || _isTearingDown)
+                {
+                    Console.WriteLine("[SimplePlayer] btGallery: pipeline disposed/tearing down before start, bailing");
+                    return;
+                }
+
+                try
+                {
+                    await pipeline.StartAsync();
+                }
+                catch (ObjectDisposedException)
+                {
+                    Console.WriteLine("[SimplePlayer] btGallery: pipeline disposed during StartAsync, bailing");
+                    return;
+                }
+
+                if (_isTearingDown)
+                {
+                    return;
+                }
 
                 _tmPosition.Start();
-                btPlayPause.Text = "PAUSE";
+                SetPlayingUIState(true);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[SimplePlayer] EXC btGallery: {ex.GetType().Name}: {ex.Message}");
                 Console.WriteLine(ex.StackTrace ?? "(no stack)");
-                await DisplayAlertAsync("Gallery", $"{ex.GetType().Name}: {ex.Message}", "OK");
-            }
-        }
-
-        /// <summary>
-        /// Handles the bt play pause clicked event.
-        /// </summary>
-        private async void btPlayPause_Clicked(object? sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(_filename))
+                if (!_isTearingDown)
                 {
-                    return;
+                    await DisplayAlertAsync("Gallery", $"{ex.GetType().Name}: {ex.Message}", "OK");
                 }
-
-                // START
-                if (_pipeline == null || _pipeline.State == PlaybackState.Free)
-                {
-                    await CreateEngineAsync();
-
-                    await _pipeline!.StartAsync();
-
-                    _tmPosition.Start();
-
-                    btPlayPause.Text = "PAUSE";
-                }
-                else if (_pipeline.State == PlaybackState.Play)
-                {
-                    await _pipeline.PauseAsync();
-
-                    btPlayPause.Text = "PLAY";
-                }
-                else if (_pipeline.State == PlaybackState.Pause)
-                {
-                    await _pipeline.ResumeAsync();
-
-                    btPlayPause.Text = "PAUSE";
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Error in play/pause: {ex.Message}");
-                await MainThread.InvokeOnMainThreadAsync(async () =>
-                {
-                    await DisplayAlertAsync("Error", $"Playback error: {ex.Message}", "OK");
-                });
             }
         }
 
@@ -471,10 +598,10 @@ namespace Simple_Player_MB_MAUI
                 await StopAllAsync();
 
                 btSpeed.Text = "1X";
-                btPlayPause.Text = "PLAY";
                 slSeeking.Value = 0;
                 lbDuration.Text = "00:00:00";
                 lbPosition.Text = "00:00:00";
+                SetPlayingUIState(false);
             }
             catch (Exception ex)
             {

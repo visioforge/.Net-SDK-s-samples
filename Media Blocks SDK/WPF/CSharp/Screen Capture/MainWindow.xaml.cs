@@ -326,7 +326,7 @@ namespace Screen_Capture_MB_WPF
 
                         _pipeline.Connect(_audioInput.Output, _audioTee.Input);
 
-                        _audioEncoder = new AACEncoderBlock(new VOAACEncoderSettings());
+                        _audioEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings());
                         _pipeline.Connect(_audioTee.Outputs[0], _audioEncoder.Input);
                         _pipeline.Connect(_audioEncoder.Output, _sink.CreateNewInput(MediaBlockPadMediaType.Audio));
 

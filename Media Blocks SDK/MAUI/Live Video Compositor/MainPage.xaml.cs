@@ -28,6 +28,12 @@ namespace Live_Video_Compositor_MB_MAUI
     public partial class MainPage : ContentPage
     {
         private LiveVideoCompositor _compositor;
+
+        // Set while DestroyEngine tears down the compositor so late OnRenderStatistics
+        // callbacks that were already queued to the UI thread skip the lbRenderFps update
+        // instead of racing with the page going away.
+        private volatile bool _isDestroyed;
+
         private int _videoWidth = 1280;
         private int _videoHeight = 720;
         private VideoFrameRate _videoFrameRate = new VideoFrameRate(30);
@@ -165,18 +171,40 @@ namespace Live_Video_Compositor_MB_MAUI
         /// <summary>
         /// Compositor on error.
         /// </summary>
-        private async void Compositor_OnError(object? sender, ErrorsEventArgs e)
+        private void Compositor_OnError(object? sender, ErrorsEventArgs e)
         {
+            // Mirror Compositor_OnRenderStatistics: non-async-void so a throw in the synchronous
+            // prologue can't tear down the process, and gated on _isDestroyed so a callback
+            // already in flight when DestroyEngine ran can't post a stale update onto a UI that
+            // has already been torn down. Re-check inside the BeginInvokeOnMainThread callback
+            // because _isDestroyed may flip between the post and the run.
+            if (_isDestroyed)
+            {
+                return;
+            }
+
             try
             {
-                await MainThread.InvokeOnMainThreadAsync(() =>
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
+                    try
+                    {
+                        if (_isDestroyed || mmLog == null)
+                        {
+                            return;
+                        }
+
+                        mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
+                    }
+                    catch (Exception inner)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Error appending to log: {inner.Message}");
+                    }
                 });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error handling compositor error: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Error dispatching compositor error: {ex.Message}");
             }
         }
 
@@ -185,6 +213,10 @@ namespace Live_Video_Compositor_MB_MAUI
         /// </summary>
         private void CreateEngine()
         {
+            // Clear the teardown gate so statistics callbacks from this new compositor are
+            // accepted. DestroyEngine sets it to block late callbacks from the previous one.
+            _isDestroyed = false;
+
             var settings = new LiveVideoCompositorSettings(_videoWidth, _videoHeight, _videoFrameRate);
             settings.MixerType = _mixerType;
             settings.AudioEnabled = true;
@@ -199,6 +231,12 @@ namespace Live_Video_Compositor_MB_MAUI
         /// </summary>
         private void DestroyEngine()
         {
+            // Flip the gate BEFORE unhooking/disposing — the event handlers read this flag
+            // to decide whether to touch UI. Setting it first closes the window where a
+            // callback that fired on an SDK thread a moment ago can still slip through and
+            // post a stale update onto the UI queue.
+            _isDestroyed = true;
+
             if (_compositor != null)
             {
                 _compositor.OnError -= Compositor_OnError;
@@ -208,18 +246,41 @@ namespace Live_Video_Compositor_MB_MAUI
             }
         }
 
-        private async void Compositor_OnRenderStatistics(object? sender, RenderStatisticsEventArgs e)
+        private void Compositor_OnRenderStatistics(object? sender, RenderStatisticsEventArgs e)
         {
+            // SDK event fires off the UI thread; fire-and-forget onto the UI thread instead of
+            // async void so exceptions from the synchronous prologue can't tear down the process.
+            // Gate on _isDestroyed so a callback that arrived between DestroyEngine's handler
+            // unhook and its Dispose doesn't post a stale update onto a teardown-in-progress UI.
+            if (_isDestroyed)
+            {
+                return;
+            }
+
             try
             {
-                await MainThread.InvokeOnMainThreadAsync(() =>
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    lbRenderFps.Text = $"{e.ActualFps:F1} / {e.ConfiguredFps:F1}";
+                    try
+                    {
+                        // Re-check under the UI queue: between posting and running, DestroyEngine
+                        // may have flipped _isDestroyed and disposed the compositor.
+                        if (_isDestroyed || lbRenderFps == null)
+                        {
+                            return;
+                        }
+
+                        lbRenderFps.Text = $"{e.ActualFps:F1} / {e.ConfiguredFps:F1}";
+                    }
+                    catch (Exception inner)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Error updating render stats: {inner.Message}");
+                    }
                 });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Error updating render stats: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Error dispatching render stats: {ex.Message}");
             }
         }
 
@@ -253,27 +314,49 @@ namespace Live_Video_Compositor_MB_MAUI
         /// </summary>
         private async void btStart_Clicked(object? sender, EventArgs e)
         {
+            // Snapshot _compositor before the first await so a Window_Destroying → DestroyEngine
+            // racing with this handler can't null the field out from under us mid-method. Bail
+            // out if teardown has already started.
+            var compositor = _compositor;
+            if (compositor == null || _isDestroyed)
+            {
+                return;
+            }
+
             try
             {
-                _compositor.Settings.VideoView = videoView.GetVideoView();
-                
+                compositor.Settings.VideoView = videoView.GetVideoView();
+
                 if (cbAudioRenderer.SelectedIndex >= 0)
                 {
                     var audioOutputs = await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.Default);
-                    var selectedOutput = audioOutputs.FirstOrDefault(x => x.Name == cbAudioRenderer.SelectedItem.ToString());
+                    if (_isDestroyed)
+                    {
+                        return;
+                    }
+
+                    var selectedOutput = audioOutputs.FirstOrDefault(x => x.Name == cbAudioRenderer.SelectedItem?.ToString());
                     if (selectedOutput != null)
                     {
-                        _compositor.Settings.AudioOutput = new AudioRendererBlock(selectedOutput);
+                        compositor.Settings.AudioOutput = new AudioRendererBlock(selectedOutput);
                     }
                 }
 
-                await _compositor.StartAsync();
+                await compositor.StartAsync();
+                if (_isDestroyed)
+                {
+                    return;
+                }
+
                 tmRecording.Start();
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error starting compositor: {ex.Message}");
-                await DisplayAlertAsync("Error", $"Failed to start compositor: {ex.Message}", "OK");
+                if (!_isDestroyed)
+                {
+                    await DisplayAlertAsync("Error", $"Failed to start compositor: {ex.Message}", "OK");
+                }
             }
         }
 
@@ -282,11 +365,22 @@ namespace Live_Video_Compositor_MB_MAUI
         /// </summary>
         private async void btStop_Clicked(object? sender, EventArgs e)
         {
+            var compositor = _compositor;
+            if (compositor == null || _isDestroyed)
+            {
+                return;
+            }
+
             try
             {
                 tmRecording.Stop();
-                await _compositor.StopAsync();
-                
+                await compositor.StopAsync();
+
+                if (_isDestroyed)
+                {
+                    return;
+                }
+
                 DestroyEngine();
                 CreateEngine();
 
@@ -296,7 +390,10 @@ namespace Live_Video_Compositor_MB_MAUI
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Error stopping compositor: {ex.Message}");
-                await DisplayAlertAsync("Error", $"Failed to stop compositor: {ex.Message}", "OK");
+                if (!_isDestroyed)
+                {
+                    await DisplayAlertAsync("Error", $"Failed to stop compositor: {ex.Message}", "OK");
+                }
             }
         }
 
@@ -346,32 +443,56 @@ namespace Live_Video_Compositor_MB_MAUI
 
             var sourceNames = videoSources.Select(x => x.DisplayName).ToArray();
             var selectedSource = await DisplayActionSheetAsync("Select Camera", "Cancel", null, sourceNames);
-            
+
             if (selectedSource != null && selectedSource != "Cancel")
             {
                 var device = videoSources.FirstOrDefault(x => x.DisplayName == selectedSource);
                 if (device != null && device.VideoFormats.Count > 0)
                 {
-                    var format = device.VideoFormats[0];
+                    // VideoFormats[0] is string-sorted by "{W}x{H} {Format}", which picks
+                    // a deterministic but often wrong format (e.g. Razer Kiyo Pro lands on
+                    // "1280x720 BGRA", a UVC-simulated BGRA stream that avfvideosrc can
+                    // enumerate but never actually start). Use the HD helper which prefers
+                    // a real 1280x720@30 format and falls back to the first acceptable one.
+                    var format = device.GetHDVideoFormatAndFrameRate(out var frameRate);
+                    if (format == null)
+                    {
+                        format = device.VideoFormats[0];
+                        frameRate = format.FrameRateList.Count > 0 ? format.FrameRateList[0] : VisioForge.Core.Types.VideoFrameRate.FPS_30;
+                    }
+
                     var settings = new VideoCaptureDeviceSourceSettings(device)
                     {
                         Format = format.ToFormat()
                     };
+                    settings.Format.FrameRate = frameRate;
 
                     var name = $"Camera [{device.DisplayName}]";
                     var rect = GetRectFromUI();
                     var videoInfo = new VideoFrameInfoX(settings.Format.Width, settings.Format.Height, settings.Format.FrameRate);
-                    var src = new LVCVideoInput(name, _compositor, new SystemVideoSourceBlock(settings), videoInfo, rect, true);
-                    src.ZOrder = (uint)_compositor.Input_Count();
 
-                    if (await _compositor.Input_AddAsync(src))
+                    // Mirror AddScreenSourceAsync: own block + wrapper through try/finally so a
+                    // throw from the LVCVideoInput ctor or Input_AddAsync doesn't leak either.
+                    SystemVideoSourceBlock? block = null;
+                    LVCVideoInput? src = null;
+                    try
                     {
-                        _sources.Add(name);
-                        lbSources.SelectedItem = name;
+                        block = new SystemVideoSourceBlock(settings);
+                        src = new LVCVideoInput(name, _compositor, block, videoInfo, rect, true);
+                        block = null; // ownership transferred to LVCVideoInput
+                        src.ZOrder = (uint)_compositor.Input_Count();
+
+                        if (await _compositor.Input_AddAsync(src))
+                        {
+                            _sources.Add(name);
+                            lbSources.SelectedItem = name;
+                            src = null; // ownership transferred to the compositor
+                        }
                     }
-                    else
+                    finally
                     {
-                        src.Dispose();
+                        src?.Dispose();
+                        block?.Dispose();
                     }
                 }
             }
@@ -401,19 +522,39 @@ namespace Live_Video_Compositor_MB_MAUI
 #else
                     var settings = await UniversalSourceSettings.CreateAsync(filename);
 #endif
-                    var src = new LVCVideoAudioInput(name, _compositor, new UniversalSourceBlock(settings), 
-                        settings.GetInfo().GetVideoInfo(), settings.GetInfo().GetAudioInfo(), rect, 
-                        autostart: true, live: false);
-                    src.ZOrder = (uint)_compositor.Input_Count();
 
-                    if (await _compositor.Input_AddAsync(src))
+                    // GetInfo() can return null for unsupported containers — calling
+                    // .GetVideoInfo() / .GetAudioInfo() on null would NRE and leak the
+                    // already-allocated UniversalSourceBlock + LVCVideoAudioInput wrapper.
+                    var info = settings.GetInfo();
+                    if (info == null)
                     {
-                        _sources.Add(name);
-                        lbSources.SelectedItem = name;
+                        await DisplayAlertAsync("Error", $"Could not read media info from {Path.GetFileName(filename)}.", "OK");
+                        return;
                     }
-                    else
+
+                    UniversalSourceBlock? block = null;
+                    LVCVideoAudioInput? src = null;
+                    try
                     {
-                        src.Dispose();
+                        block = new UniversalSourceBlock(settings);
+                        src = new LVCVideoAudioInput(name, _compositor, block,
+                            info.GetVideoInfo(), info.GetAudioInfo(), rect,
+                            autostart: true, live: false);
+                        block = null; // ownership transferred to LVCVideoAudioInput
+                        src.ZOrder = (uint)_compositor.Input_Count();
+
+                        if (await _compositor.Input_AddAsync(src))
+                        {
+                            _sources.Add(name);
+                            lbSources.SelectedItem = name;
+                            src = null; // ownership transferred to the compositor
+                        }
+                    }
+                    finally
+                    {
+                        src?.Dispose();
+                        block?.Dispose();
                     }
                 }
             }
@@ -468,26 +609,53 @@ namespace Live_Video_Compositor_MB_MAUI
 #if __MACCATALYST__ || __MACOS__
                 if (screenSettings is ScreenCaptureMacOSSourceSettings macSettings)
                 {
-                    width = (int)macSettings.Rectangle.Width;
-                    height = (int)macSettings.Rectangle.Height;
-                    frameRate = macSettings.FrameRate;
+                    // ScreenCaptureMacOSSourceSettings may be constructed with a default (empty)
+                    // Rectangle / FrameRate if DisplayHelper failed upstream — fall back to a
+                    // safe 1280x720@30 instead of feeding width=0,height=0 into VideoFrameInfoX,
+                    // which would assert or produce a zero-sized Metal drawable downstream.
+                    if (macSettings.Rectangle != null
+                        && macSettings.Rectangle.Width > 0
+                        && macSettings.Rectangle.Height > 0)
+                    {
+                        width = (int)macSettings.Rectangle.Width;
+                        height = (int)macSettings.Rectangle.Height;
+                    }
+
+                    if (!macSettings.FrameRate.IsEmpty && macSettings.FrameRate.Value > 0)
+                    {
+                        frameRate = macSettings.FrameRate;
+                    }
                 }
 #endif
 
                 var name = $"Screen [{width}x{height}]";
                 var rect = GetRectFromUI();
                 var videoInfo = new VideoFrameInfoX(width, height, frameRate);
-                var src = new LVCVideoInput(name, _compositor, block, videoInfo, rect, true);
-                src.ZOrder = (uint)_compositor.Input_Count();
 
-                if (await _compositor.Input_AddAsync(src))
+                // Own src through try/finally so a throw from Input_AddAsync (or anywhere
+                // before it) doesn't leak the input wrapper and its underlying block.
+                //
+                // LVC Input_AddAsync contract: it only takes ownership of the wrapper on a
+                // true return — on false, the caller keeps ownership and must Dispose. That
+                // matches the only code path in LiveVideoCompositor that returns false (the
+                // "input already exists" early-out, which never stored the wrapper). So
+                // Dispose()'ing src in the failure path is safe, not a double-dispose.
+                LVCVideoInput? src = null;
+                try
                 {
-                    _sources.Add(name);
-                    lbSources.SelectedItem = name;
+                    src = new LVCVideoInput(name, _compositor, block, videoInfo, rect, true);
+                    src.ZOrder = (uint)_compositor.Input_Count();
+
+                    if (await _compositor.Input_AddAsync(src))
+                    {
+                        _sources.Add(name);
+                        lbSources.SelectedItem = name;
+                        src = null; // ownership transferred to the compositor
+                    }
                 }
-                else
+                finally
                 {
-                    src.Dispose();
+                    src?.Dispose();
                 }
             }
             catch (Exception ex)
@@ -527,17 +695,27 @@ namespace Live_Video_Compositor_MB_MAUI
                     var settings = new AudioCaptureDeviceSourceSettings(AudioCaptureDeviceAPI.DirectSound, device, new AudioCaptureDeviceFormat() { SampleRate = 44100, Channels = 2 });
 #endif
                     var name = $"Audio [{device.Name}]";
-                    var src = new LVCAudioInput(name, _compositor, new SystemAudioSourceBlock(settings), 
-                        new AudioInfoX() { SampleRate = 44100, Channels = 2 }, true);
 
-                    if (await _compositor.Input_AddAsync(src))
+                    SystemAudioSourceBlock? block = null;
+                    LVCAudioInput? src = null;
+                    try
                     {
-                        _sources.Add(name);
-                        lbSources.SelectedItem = name;
+                        block = new SystemAudioSourceBlock(settings);
+                        src = new LVCAudioInput(name, _compositor, block,
+                            new AudioInfoX() { SampleRate = 44100, Channels = 2 }, true);
+                        block = null; // ownership transferred to LVCAudioInput
+
+                        if (await _compositor.Input_AddAsync(src))
+                        {
+                            _sources.Add(name);
+                            lbSources.SelectedItem = name;
+                            src = null; // ownership transferred to the compositor
+                        }
                     }
-                    else
+                    finally
                     {
-                        src.Dispose();
+                        src?.Dispose();
+                        block?.Dispose();
                     }
                 }
             }
@@ -706,26 +884,90 @@ namespace Live_Video_Compositor_MB_MAUI
         }
 
         /// <summary>
+        /// Resolve a platform-appropriate directory for LVC output recordings. Private
+        /// AppDataDirectory is invisible to end users on iOS and Android, so:
+        ///   • iOS / MacCatalyst:  per-app Documents dir — surfaces in the Files app when
+        ///     the app's Info.plist has <c>UIFileSharingEnabled=YES</c> and
+        ///     <c>LSSupportsOpeningDocumentsInPlace=YES</c>.
+        ///   • Android:  SpecialFolder.MyVideos (maps to the app-scoped Movies dir);
+        ///     falls back to AppDataDirectory if empty (pre-scoped-storage devices).
+        ///   • Desktop:  SpecialFolder.MyVideos (Videos library on Windows / ~/Movies on
+        ///     macOS) with an AppDataDirectory fallback.
+        /// Creates the directory if it doesn't exist.
+        /// </summary>
+        private static string GetRecordingsDirectory()
+        {
+#if __IOS__ || __MACCATALYST__
+            var dir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+#else
+            var dir = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+            if (string.IsNullOrEmpty(dir))
+            {
+                dir = FileSystem.AppDataDirectory;
+            }
+#endif
+
+            try
+            {
+                Directory.CreateDirectory(dir);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"GetRecordingsDirectory: could not create '{dir}': {ex.Message}");
+                // AppDataDirectory isn't guaranteed to exist either on first launch — ensure
+                // it before handing it back, otherwise the output file open will fail with a
+                // DirectoryNotFoundException and the user sees a spurious error after we've
+                // already warned about the primary path failure.
+                var fallback = FileSystem.AppDataDirectory;
+                try
+                {
+                    Directory.CreateDirectory(fallback);
+                }
+                catch (Exception fallbackEx)
+                {
+                    Debug.WriteLine($"GetRecordingsDirectory: fallback '{fallback}' also failed: {fallbackEx.Message}");
+                }
+                return fallback;
+            }
+
+            return dir;
+        }
+
+        /// <summary>
         /// Add mp 4 output async.
         /// </summary>
         private async Task AddMP4OutputAsync()
         {
             var now = DateTime.Now;
             var name = $"output_{now:yyyy_MM_dd_HH_mm_ss}.mp4";
-            var outputFile = Path.Combine(FileSystem.AppDataDirectory, name);
-            var mp4Output = new MP4OutputBlock(new MP4SinkSettings(outputFile), 
-                new OpenH264EncoderSettings(), new AVENCAACEncoderSettings());
+            var outputFile = Path.Combine(GetRecordingsDirectory(), name);
 
-            var output = new LVCVideoAudioOutput(outputFile, _compositor, mp4Output, autostart: true);
+            // avenc_aac ships via gst-libav and isn't always present on mobile — probe first
+            // and fall back to the portable VO-AAC encoder so the demo doesn't fail to start.
+            IAACEncoderSettings aacSettings = AVENCAACEncoderSettings.IsAvailable()
+                ? (IAACEncoderSettings)new AVENCAACEncoderSettings()
+                : new VOAACEncoderSettings();
 
-            if (await _compositor.Output_AddAsync(output))
+            MP4OutputBlock? mp4Output = null;
+            LVCVideoAudioOutput? output = null;
+            try
             {
-                _outputs.Add(name);
-                lbOutputs.SelectedItem = name;
+                mp4Output = new MP4OutputBlock(new MP4SinkSettings(outputFile),
+                    new OpenH264EncoderSettings(), aacSettings);
+                output = new LVCVideoAudioOutput(outputFile, _compositor, mp4Output, autostart: true);
+                mp4Output = null; // ownership transferred to LVCVideoAudioOutput
+
+                if (await _compositor.Output_AddAsync(output))
+                {
+                    _outputs.Add(name);
+                    lbOutputs.SelectedItem = name;
+                    output = null; // ownership transferred to the compositor
+                }
             }
-            else
+            finally
             {
-                output.Dispose();
+                output?.Dispose();
+                mp4Output?.Dispose();
             }
         }
 
@@ -736,19 +978,28 @@ namespace Live_Video_Compositor_MB_MAUI
         {
             var now = DateTime.Now;
             var name = $"output_{now:yyyy_MM_dd_HH_mm_ss}.webm";
-            var outputFile = Path.Combine(FileSystem.AppDataDirectory, name);
-            var webmOutput = new WebMOutputBlock(new WebMSinkSettings(outputFile), 
-                new VP8EncoderSettings(), new VorbisEncoderSettings());
-            var output = new LVCVideoAudioOutput(outputFile, _compositor, webmOutput, false);
+            var outputFile = Path.Combine(GetRecordingsDirectory(), name);
 
-            if (await _compositor.Output_AddAsync(output))
+            WebMOutputBlock? webmOutput = null;
+            LVCVideoAudioOutput? output = null;
+            try
             {
-                _outputs.Add(name);
-                lbOutputs.SelectedItem = name;
+                webmOutput = new WebMOutputBlock(new WebMSinkSettings(outputFile),
+                    new VP8EncoderSettings(), new VorbisEncoderSettings());
+                output = new LVCVideoAudioOutput(outputFile, _compositor, webmOutput, false);
+                webmOutput = null;
+
+                if (await _compositor.Output_AddAsync(output))
+                {
+                    _outputs.Add(name);
+                    lbOutputs.SelectedItem = name;
+                    output = null;
+                }
             }
-            else
+            finally
             {
-                output.Dispose();
+                output?.Dispose();
+                webmOutput?.Dispose();
             }
         }
 
@@ -759,18 +1010,27 @@ namespace Live_Video_Compositor_MB_MAUI
         {
             var now = DateTime.Now;
             var name = $"output_{now:yyyy_MM_dd_HH_mm_ss}.mp3";
-            var outputFile = Path.Combine(FileSystem.AppDataDirectory, name);
-            var mp3Output = new MP3OutputBlock(outputFile, new MP3EncoderSettings());
-            var output = new LVCAudioOutput(outputFile, _compositor, mp3Output, false);
+            var outputFile = Path.Combine(GetRecordingsDirectory(), name);
 
-            if (await _compositor.Output_AddAsync(output))
+            MP3OutputBlock? mp3Output = null;
+            LVCAudioOutput? output = null;
+            try
             {
-                _outputs.Add(name);
-                lbOutputs.SelectedItem = name;
+                mp3Output = new MP3OutputBlock(outputFile, new MP3EncoderSettings());
+                output = new LVCAudioOutput(outputFile, _compositor, mp3Output, false);
+                mp3Output = null;
+
+                if (await _compositor.Output_AddAsync(output))
+                {
+                    _outputs.Add(name);
+                    lbOutputs.SelectedItem = name;
+                    output = null;
+                }
             }
-            else
+            finally
             {
-                output.Dispose();
+                output?.Dispose();
+                mp3Output?.Dispose();
             }
         }
 
@@ -854,15 +1114,46 @@ namespace Live_Video_Compositor_MB_MAUI
         }
 
         /// <summary>
-        /// Get rect from ui.
+        /// Get rect from ui. Non-numeric Entry text falls back to 0 so bad input
+        /// can't raise FormatException on the click handler. Bad fields are logged to
+        /// Debug — the earlier design was to show a non-blocking alert, but fire-and-
+        /// forget DisplayAlertAsync from a synchronous helper racing against the caller's
+        /// own dialogs hung/crashed some MAUI+iOS versions, so the alert was intentionally
+        /// dropped. See the in-body comment for the rationale.
         /// </summary>
         private Rect GetRectFromUI()
         {
-            return new Rect(
-                Convert.ToInt32(edRectLeft.Text),
-                Convert.ToInt32(edRectTop.Text),
-                Convert.ToInt32(edRectRight.Text),
-                Convert.ToInt32(edRectBottom.Text));
+            var invalid = new List<string>();
+
+            int Parse(string text, string fieldName)
+            {
+                if (int.TryParse(text, out var value))
+                {
+                    return value;
+                }
+
+                invalid.Add(fieldName);
+                Debug.WriteLine($"GetRectFromUI: '{fieldName}' = '{text}' is not a valid integer; using 0.");
+                return 0;
+            }
+
+            var left = Parse(edRectLeft.Text, "Left");
+            var top = Parse(edRectTop.Text, "Top");
+            var right = Parse(edRectRight.Text, "Right");
+            var bottom = Parse(edRectBottom.Text, "Bottom");
+            var rect = new Rect(left, top, right - left, bottom - top);
+
+            if (invalid.Count > 0)
+            {
+                // Log only. A fire-and-forget DisplayAlertAsync from a synchronous helper racing
+                // against the caller's own dialogs has hung/crashed on some MAUI+iOS versions
+                // when two modals are presented back-to-back, and swallowed-task exceptions made
+                // the failure mode invisible. Per-field Debug.WriteLine above already flags bad
+                // input to the developer; the user will see the resulting rectangle misbehave.
+                Debug.WriteLine($"GetRectFromUI: invalid integer field(s) treated as 0: {string.Join(", ", invalid)}");
+            }
+
+            return rect;
         }
 
         /// <summary>

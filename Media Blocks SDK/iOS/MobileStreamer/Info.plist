@@ -39,10 +39,18 @@
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
     <key>NSPhotoLibraryUsageDescription</key>
-	<string>Required</string>
+	<string>Required to save recorded video.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Required to save recorded video to the photo library.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>We need access to your camera to take photos.</string>
+	<string>Required to capture video from the camera.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Required to get audio</string>
+	<string>Required to capture audio from the microphone.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Required to stream video/audio over SRT, RTMP, or other protocols to devices on the local network.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_visioforge-streamer._tcp</string>
+	</array>
 </dict>
 </plist>

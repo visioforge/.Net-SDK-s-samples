@@ -59,6 +59,15 @@ namespace Tempo_Pitch_Demo_X
         private volatile bool _seekDragging;
         private volatile bool _seekTimerWriting;
 
+        // Guard flag for the two-phase Window_Closing pattern. Because DisposeAsync is async, we
+        // cancel the first close, await disposal, then re-invoke Close() which fires Window_Closing
+        // again; the flag lets the second invocation fall through without cancelling.
+        private bool _isClosing;
+
+        // True between a successful PlayAsync and the next Stop/Destroy. Gates
+        // sliderVolume_ValueChanged from writing to _player before the audio renderer exists.
+        private bool _isPlaying;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -137,6 +146,18 @@ namespace Tempo_Pitch_Demo_X
                 return;
             }
 
+            // Silently skip duplicates — adding the same audio path twice would waste pipeline
+            // resources and double the gain of that track in the AudioMixerBlock.
+            if (_pendingAudioStreams.Any(existing => string.Equals(existing, entry, StringComparison.OrdinalIgnoreCase)))
+            {
+                lblStatus.Text = "Duplicate audio stream ignored: " + entry;
+                // Clear the textbox here too so the duplicate path matches the success path —
+                // otherwise users keep hitting Add on the same stale entry without realising why
+                // nothing changes.
+                textBoxAudioFile.Text = string.Empty;
+                return;
+            }
+
             _pendingAudioStreams.Add(entry);
             listAudioStreams.Items.Add(entry);
             textBoxAudioFile.Text = string.Empty;
@@ -162,11 +183,12 @@ namespace Tempo_Pitch_Demo_X
 
         private void Player_OnError(object sender, ErrorsEventArgs e)
         {
-            Dispatcher.Invoke(() => lblStatus.Text = e.Message);
+            Dispatcher.BeginInvoke(new Action(() => lblStatus.Text = e.Message));
         }
 
         private async Task DestroyPlayerAsync()
         {
+            _isPlaying = false;
             StopSeekTimer();
 
             if (_player != null)
@@ -181,10 +203,16 @@ namespace Tempo_Pitch_Demo_X
 
         private async void buttonPlay_Click(object sender, RoutedEventArgs e)
         {
+            // Disable Play/Stop on entry to block re-entrant clicks. async void handlers don't
+            // await one another, so a rapid double-click would race concurrent DestroyPlayerAsync
+            // and `new MediaPlayerCoreX` calls on _player.
+            buttonPlay.IsEnabled = false;
+            buttonStop.IsEnabled = false;
+
             try
             {
                 string videoPath = textBoxVideoFile.Text?.Trim();
-                if (string.IsNullOrEmpty(videoPath) || !File.Exists(videoPath))
+                if (string.IsNullOrEmpty(videoPath) || (!IsSupportedUri(videoPath) && !File.Exists(videoPath)))
                 {
                     lblStatus.Text = "Video file not found: " + videoPath;
                     return;
@@ -227,13 +255,25 @@ namespace Tempo_Pitch_Demo_X
                     return;
                 }
 
-                _player.Audio_OutputDevice_Volume = sliderVolume.Value / 100.0;
+                var mainUri = ToUri(videoPath);
+                if (mainUri == null)
+                {
+                    lblStatus.Text = "Invalid video path/URL: " + videoPath;
+                    return;
+                }
 
-                var mainSource = await UniversalSourceSettings.CreateAsync(ToUri(videoPath));
+                var mainSource = await UniversalSourceSettings.CreateAsync(mainUri);
                 _player.Audio_AdditionalStreams_Clear();
                 foreach (var path in _pendingAudioStreams)
                 {
-                    var extra = await UniversalSourceSettings.CreateAsync(ToUri(path));
+                    var extraUri = ToUri(path);
+                    if (extraUri == null)
+                    {
+                        lblStatus.Text = "Invalid additional audio path/URL: " + path;
+                        continue;
+                    }
+
+                    var extra = await UniversalSourceSettings.CreateAsync(extraUri);
                     if (extra != null)
                     {
                         _player.Audio_AdditionalStreams_Add(extra);
@@ -242,18 +282,37 @@ namespace Tempo_Pitch_Demo_X
 
                 await _player.OpenAsync(mainSource);
 
-                _currentTempo = DEFAULT_TEMPO;
-                _currentPitch = DEFAULT_PITCH;
+                // Preserve the user's chosen tempo/pitch across Stop/Play cycles. The ratios
+                // match the math used in UpdateTempo / UpdatePitch (value / DEFAULT_*) so the
+                // new effect boots with the currently-displayed values rather than resetting
+                // the pipeline to defaults and silently discarding the user's choice.
                 UpdateLabels();
 
                 // One shared effect drives both sliders, sitting downstream of AudioMixerBlock
                 // so it acts on every input (main + additional) at once.
-                _pitchEffect = new PitchAudioEffect { Name = PITCH_EFFECT_NAME, Pitch = 1.0f, Tempo = 1.0f, Rate = 1.0f };
+                _pitchEffect = new PitchAudioEffect
+                {
+                    Name = PITCH_EFFECT_NAME,
+                    Pitch = _currentPitch / (float)DEFAULT_PITCH,
+                    Tempo = _currentTempo / (float)DEFAULT_TEMPO,
+                    Rate = 1.0f
+                };
                 _player.Audio_Effects_AddOrUpdate(_pitchEffect);
 
+                // Set volume BEFORE PlayAsync — MediaPlayerCoreX caches the value and applies it
+                // to the AudioRendererBlock at build time, so there's no 100%-volume burst
+                // between renderer creation and a post-Play assignment. Also removes the need to
+                // re-assign after every Play.
+                _player.Audio_OutputDevice_Volume = sliderVolume.Value / 100.0;
+
                 await _player.PlayAsync();
+                _isPlaying = true;
 
                 StartSeekTimer();
+
+                // Playback is now live — editing the additional-audio list has no effect on the
+                // running pipeline, so disable the relevant buttons until Stop/Close.
+                SetAudioListEditable(false);
 
                 lblStatus.Text = _pendingAudioStreams.Count > 0
                     ? $"Playing on '{selectedDevice.Name}'. {_pendingAudioStreams.Count} additional audio stream(s) mixed in."
@@ -262,13 +321,31 @@ namespace Tempo_Pitch_Demo_X
             catch (Exception ex)
             {
                 lblStatus.Text = ex.Message;
+                // Play failed — tear down the half-built _player so we don't leak the OnError
+                // subscription and the native pipeline. Without this, a retried Play leaves the
+                // old instance wired up (via OnError) for the remaining window lifetime.
+                try { await DestroyPlayerAsync(); } catch { /* best-effort */ }
+                _isPlaying = false;
+                // Keep audio editing available so the user can fix the list.
+                SetAudioListEditable(true);
+            }
+            finally
+            {
+                buttonPlay.IsEnabled = true;
+                buttonStop.IsEnabled = true;
             }
         }
 
         private async void buttonStop_Click(object sender, RoutedEventArgs e)
         {
+            // Disable Play/Stop on entry to block re-entrant clicks. See buttonPlay_Click for
+            // the re-entrancy rationale.
+            buttonPlay.IsEnabled = false;
+            buttonStop.IsEnabled = false;
+
             try
             {
+                _isPlaying = false;
                 StopSeekTimer();
 
                 if (_player != null)
@@ -283,6 +360,25 @@ namespace Tempo_Pitch_Demo_X
             {
                 lblStatus.Text = ex.Message;
             }
+            finally
+            {
+                // Pipeline is stopped — re-enable audio list editing regardless of outcome.
+                SetAudioListEditable(true);
+                buttonPlay.IsEnabled = true;
+                buttonStop.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Toggle the Add / Remove / Clear buttons for the additional-audio list. The list is only
+        /// consumed once, at Play time (Audio_AdditionalStreams_Add is called before OpenAsync),
+        /// so mutating it during playback is a no-op — disabling the buttons makes this obvious.
+        /// </summary>
+        private void SetAudioListEditable(bool editable)
+        {
+            buttonAudioAdd.IsEnabled = editable;
+            buttonAudioRemove.IsEnabled = editable;
+            buttonAudioClear.IsEnabled = editable;
         }
 
         private void buttonTempoMin_Click(object sender, RoutedEventArgs e) => UpdateTempo(_currentTempo - TEMPO_STEP);
@@ -297,28 +393,44 @@ namespace Tempo_Pitch_Demo_X
         {
             if (value < MIN_TEMPO) value = MIN_TEMPO;
             if (value > MAX_TEMPO) value = MAX_TEMPO;
-            if (value == _currentTempo || _pitchEffect == null)
+
+            bool valueChanged = value != _currentTempo;
+            if (valueChanged)
             {
-                return;
+                // Always record the user's choice and refresh the label, even before playback
+                // has created the effect. Otherwise pre-Play +/- clicks are silently dropped and
+                // the next Play boots the effect at defaults, ignoring what the user asked for.
+                _currentTempo = value;
+                UpdateLabels();
             }
 
-            _pitchEffect.Tempo = value / (float)DEFAULT_TEMPO;
-            _currentTempo = value;
-            UpdateLabels();
+            // Always re-assert the pipeline value when the effect exists — even if _currentTempo
+            // didn't change. This resyncs any hypothetical drift between the cached int and the
+            // live float on the effect (and makes re-click of Normal/+/- after the first click a
+            // no-op instead of a silently-skipped write that would hide a drift bug).
+            if (_pitchEffect != null)
+            {
+                _pitchEffect.Tempo = _currentTempo / (float)DEFAULT_TEMPO;
+            }
         }
 
         private void UpdatePitch(int value)
         {
             if (value < MIN_PITCH) value = MIN_PITCH;
             if (value > MAX_PITCH) value = MAX_PITCH;
-            if (value == _currentPitch || _pitchEffect == null)
+
+            bool valueChanged = value != _currentPitch;
+            if (valueChanged)
             {
-                return;
+                _currentPitch = value;
+                UpdateLabels();
             }
 
-            _pitchEffect.Pitch = value / (float)DEFAULT_PITCH;
-            _currentPitch = value;
-            UpdateLabels();
+            // See UpdateTempo: always re-assert so cache/pipeline drift can't linger invisibly.
+            if (_pitchEffect != null)
+            {
+                _pitchEffect.Pitch = _currentPitch / (float)DEFAULT_PITCH;
+            }
         }
 
         private void UpdateLabels()
@@ -329,12 +441,38 @@ namespace Tempo_Pitch_Demo_X
 
         private static Uri ToUri(string pathOrUrl)
         {
-            if (IsSupportedUri(pathOrUrl))
+            if (string.IsNullOrEmpty(pathOrUrl))
             {
-                return new Uri(pathOrUrl);
+                return null;
             }
 
-            return new Uri(Path.GetFullPath(pathOrUrl));
+            if (IsSupportedUri(pathOrUrl) && Uri.TryCreate(pathOrUrl, UriKind.Absolute, out var u))
+            {
+                return u;
+            }
+
+            // Only treat the input as a path-like if it actually resembles a path. Otherwise
+            // `Path.GetFullPath("some weird string")` succeeds by prepending the current working
+            // directory, and we'd hand back a bogus file:// URI for input the caller never meant
+            // as a file — the error message downstream ends up confusing ("file not found at
+            // C:\Cwd\some weird string") instead of honest ("input not a path or URL").
+            bool looksLikePath = pathOrUrl.Contains('\\')
+                || pathOrUrl.Contains('/')
+                || (pathOrUrl.Length >= 2 && pathOrUrl[1] == ':');
+            if (!looksLikePath)
+            {
+                return null;
+            }
+
+            try
+            {
+                var full = Path.GetFullPath(pathOrUrl);
+                return Uri.TryCreate(full, UriKind.Absolute, out var fileUri) ? fileUri : null;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private static bool IsSupportedUri(string s)
@@ -344,11 +482,17 @@ namespace Tempo_Pitch_Demo_X
                 return false;
             }
 
-            return s.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
-                || s.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
-                || s.StartsWith("rtsp://", StringComparison.OrdinalIgnoreCase)
-                || s.StartsWith("rtmp://", StringComparison.OrdinalIgnoreCase)
-                || s.StartsWith("file:///", StringComparison.OrdinalIgnoreCase);
+            if (!Uri.TryCreate(s, UriKind.Absolute, out var u))
+            {
+                return false;
+            }
+
+            return u.IsFile
+                || u.Scheme == Uri.UriSchemeHttp
+                || u.Scheme == Uri.UriSchemeHttps
+                || u.Scheme == "rtsp"
+                || u.Scheme == "rtmp"
+                || u.Scheme == "file";
         }
 
         private void StartSeekTimer()
@@ -372,17 +516,21 @@ namespace Tempo_Pitch_Demo_X
 
         private async void SeekTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (_player == null || _seekDragging)
+            // Capture the current player reference locally so a concurrent DestroyPlayerAsync
+            // nulling _player on the UI thread during the awaits below can't null-deref us or
+            // cause ObjectDisposedException on the second call.
+            var p = _player;
+            if (p == null || _seekDragging)
             {
                 return;
             }
 
             try
             {
-                var position = await _player.Position_GetAsync();
-                var duration = await _player.DurationAsync();
+                var position = await p.Position_GetAsync();
+                var duration = await p.DurationAsync();
 
-                Dispatcher.Invoke(() =>
+                Dispatcher.BeginInvoke(new Action(() =>
                 {
                     if (_seekDragging)
                     {
@@ -411,11 +559,26 @@ namespace Tempo_Pitch_Demo_X
                     }
 
                     lblTime.Text = $"{FormatTime(position)} / {FormatTime(duration)}";
-                });
+                }));
             }
-            catch
+            catch (ObjectDisposedException)
             {
-                // Timer may race with Stop/Dispose — swallow.
+                // Expected race: Player was disposed between the null-check and the await.
+            }
+            catch (InvalidOperationException)
+            {
+                // SDK reported the pipeline isn't in a state that allows querying — benign during
+                // Stop/Dispose transitions.
+            }
+            catch (Exception ex)
+            {
+                // Collapsing every exception into a bare catch hides real bugs (null deref, bad
+                // state) that are worth surfacing. Post to lblStatus via the dispatcher if it's
+                // still alive — otherwise just drop the message so we don't crash on shutdown.
+                if (!Dispatcher.HasShutdownStarted && !Dispatcher.HasShutdownFinished)
+                {
+                    Dispatcher.BeginInvoke(new Action(() => lblStatus.Text = "Seek timer: " + ex.Message));
+                }
             }
         }
 
@@ -431,16 +594,46 @@ namespace Tempo_Pitch_Demo_X
 
         private void sliderSeek_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            // PreviewMouseDown fires for every mouse button; a right- or middle-click on the track
+            // would otherwise set _seekDragging=true and a matching PreviewMouseUp would then issue
+            // Position_SetAsync even though the user never intended to seek.
+            if (e.ChangedButton != System.Windows.Input.MouseButton.Left)
+            {
+                return;
+            }
+
+            // Don't arm the flag before there's something to seek. Pre-Play clicks on the
+            // disabled slider would otherwise leave _seekDragging true if the user drags off the
+            // slider, silently suppressing later timer updates.
+            if (_player == null || sliderSeek.Maximum <= 0)
+            {
+                return;
+            }
+
             _seekDragging = true;
+        }
+
+        private void sliderSeek_LostMouseCapture(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            // Guarantee _seekDragging can't stick true if WPF swallows MouseUp (focus stolen by
+            // Alt-Tab, popup, etc.). Without this the seek-timer path is silently suppressed for
+            // the rest of the window's life.
+            _seekDragging = false;
         }
 
         private async void sliderSeek_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             try
             {
+                double value = sliderSeek.Value;
+                if (!double.IsFinite(value) || value < 0)
+                {
+                    return;
+                }
+
                 if (_player != null)
                 {
-                    await _player.Position_SetAsync(TimeSpan.FromSeconds(sliderSeek.Value));
+                    await _player.Position_SetAsync(TimeSpan.FromSeconds(value));
                 }
             }
             catch (Exception ex)
@@ -455,6 +648,11 @@ namespace Tempo_Pitch_Demo_X
 
         private void sliderSeek_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            if (sliderSeek.Maximum <= 0)
+            {
+                return;
+            }
+
             if (_seekTimerWriting)
             {
                 return;
@@ -462,7 +660,14 @@ namespace Tempo_Pitch_Demo_X
 
             if (_seekDragging)
             {
-                lblTime.Text = $"{FormatTime(TimeSpan.FromSeconds(e.NewValue))} / {FormatTime(TimeSpan.FromSeconds(sliderSeek.Maximum))}";
+                double newValue = e.NewValue;
+                double max = sliderSeek.Maximum;
+                if (!double.IsFinite(newValue) || newValue < 0 || !double.IsFinite(max) || max < 0)
+                {
+                    return;
+                }
+
+                lblTime.Text = $"{FormatTime(TimeSpan.FromSeconds(newValue))} / {FormatTime(TimeSpan.FromSeconds(max))}";
             }
         }
 
@@ -473,15 +678,71 @@ namespace Tempo_Pitch_Demo_X
                 lblVolume.Text = ((int)e.NewValue).ToString() + "%";
             }
 
-            if (_player != null)
+            // Only write to the player when it's actually playing — between `new MediaPlayerCoreX`
+            // and PlayAsync the audio renderer doesn't exist yet, and the assignment either
+            // silently no-ops or (worse) throws into the WPF unhandled-exception handler because
+            // this handler has no try/catch.
+            if (_player == null || !_isPlaying)
+            {
+                return;
+            }
+
+            try
             {
                 _player.Audio_OutputDevice_Volume = e.NewValue / 100.0;
+            }
+            catch (Exception ex)
+            {
+                lblStatus.Text = "Volume: " + ex.Message;
             }
         }
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            await DestroyPlayerAsync();
+            // async void + Close() race: the WPF Close() path doesn't await us, so the player
+            // could outlive the window. Cancel the initial close, dispose asynchronously, then
+            // re-invoke Close() on the dispatcher. The second invocation sees _isClosing=true
+            // and falls through so the window actually closes.
+            if (_isClosing)
+            {
+                return;
+            }
+
+            e.Cancel = true;
+            _isClosing = true;
+            // Proactively stop the seek timer + clear the drag flag so neither can interact with
+            // the player during DisposeAsync. This closes two fragile couplings at once: (a)
+            // StopSeekTimer previously only ran inside DestroyPlayerAsync, so future code paths
+            // that start the timer pre-Play would leak it, and (b) _seekDragging could still be
+            // true if the user force-closed mid-drag (no MouseUp ever fires).
+            StopSeekTimer();
+            _seekDragging = false;
+
+            try
+            {
+                await DestroyPlayerAsync();
+            }
+            catch (Exception ex)
+            {
+                // Never block shutdown on a dispose failure — the user wants out. DisposeAsync
+                // may complete on a thread-pool continuation; writing lblStatus.Text from a
+                // non-UI thread would throw InvalidOperationException. The user can't see
+                // lblStatus anyway while the window is closing, so log-and-drop is safer.
+                System.Diagnostics.Debug.WriteLine($"Dispose error: {ex.Message}");
+            }
+
+            // DestroySDK must run even when _player was never created (e.g. user closes before
+            // Play), otherwise InitSDKAsync state leaks across window lifetimes.
+            try
+            {
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"DestroySDK error: {ex.Message}");
+            }
+
+            Dispatcher.BeginInvoke(new Action(() => Close()));
         }
     }
 }

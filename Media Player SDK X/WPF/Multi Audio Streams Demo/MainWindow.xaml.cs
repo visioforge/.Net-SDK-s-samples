@@ -36,6 +36,11 @@ namespace Multi_Audio_Streams_Demo_X
         private volatile bool _seekDragging;
         private volatile bool _seekTimerWriting;
 
+        // Guard flag for the two-phase Window_Closing pattern. Because DisposeAsync is async, we
+        // cancel the first close, await disposal, then re-invoke Close() which fires Window_Closing
+        // again; the flag lets the second invocation fall through without cancelling.
+        private bool _isClosing;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -51,8 +56,11 @@ namespace Multi_Audio_Streams_Demo_X
 
                 Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
 
-                // Enumerate audio output devices on the DirectSound API.
-                using (var probe = new MediaPlayerCoreX())
+                // Enumerate audio output devices on the DirectSound API. `await using` invokes
+                // IAsyncDisposable.DisposeAsync (StopAsync + CloseAsync) instead of the sync
+                // Dispose path (CloseX), which can deadlock or drop cleanup on GStreamer pads
+                // that are still finalizing.
+                await using (var probe = new MediaPlayerCoreX())
                 {
                     var devices = await probe.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound);
                     _audioDevices = devices?.ToList() ?? new List<AudioOutputDeviceInfo>();
@@ -115,6 +123,18 @@ namespace Multi_Audio_Streams_Demo_X
                 return;
             }
 
+            // Silently skip duplicates — adding the same audio path twice would waste pipeline
+            // resources and double the gain of that track in the AudioMixerBlock. URIs are
+            // case-sensitive (signed query strings, RTSP auth tokens) while local file paths on
+            // NTFS are case-insensitive; pick the comparer accordingly to avoid rejecting two
+            // genuinely different signed URLs that happen to share a case-insensitive match.
+            var comparer = IsSupportedUri(entry) ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
+            if (_pendingAudioStreams.Any(existing => string.Equals(existing, entry, comparer)))
+            {
+                lblStatus.Text = "Duplicate audio stream ignored: " + entry;
+                return;
+            }
+
             _pendingAudioStreams.Add(entry);
             listAudioStreams.Items.Add(entry);
             textBoxAudioFile.Text = string.Empty;
@@ -140,7 +160,15 @@ namespace Multi_Audio_Streams_Demo_X
 
         private void Player_OnError(object sender, ErrorsEventArgs e)
         {
-            Dispatcher.Invoke(() => lblStatus.Text = e.Message);
+            // A late error signal firing during window teardown (between Window_Closing and
+            // DestroyPlayerAsync's OnError unsubscribe) would post into a shutting-down
+            // dispatcher; WPF usually discards the action, but logs the warning. Skip upfront.
+            if (Dispatcher.HasShutdownStarted || Dispatcher.HasShutdownFinished)
+            {
+                return;
+            }
+
+            Dispatcher.BeginInvoke(new Action(() => lblStatus.Text = e.Message));
         }
 
         private async Task DestroyPlayerAsync()
@@ -155,12 +183,25 @@ namespace Multi_Audio_Streams_Demo_X
             }
         }
 
+        // Re-entrancy guard shared by Play and Stop. Without this, a rapid double-click on Play
+        // kicks off two concurrent DestroyPlayerAsync / new MediaPlayerCoreX sequences on the
+        // same VideoView — the second call double-disposes or leaks the first instance.
+        private bool _playOrStopInFlight;
+
         private async void buttonPlay_Click(object sender, RoutedEventArgs e)
         {
+            if (_playOrStopInFlight)
+            {
+                return;
+            }
+
+            _playOrStopInFlight = true;
+            buttonPlay.IsEnabled = false;
+            buttonStop.IsEnabled = false;
             try
             {
                 string videoPath = textBoxVideoFile.Text?.Trim();
-                if (string.IsNullOrEmpty(videoPath) || !File.Exists(videoPath))
+                if (string.IsNullOrEmpty(videoPath) || (!IsSupportedUri(videoPath) && !File.Exists(videoPath)))
                 {
                     lblStatus.Text = "Video file not found: " + videoPath;
                     return;
@@ -205,37 +246,99 @@ namespace Multi_Audio_Streams_Demo_X
                     return;
                 }
 
-                _player.Audio_OutputDevice_Volume = sliderVolume.Value / 100.0;
-
                 // Register the main source and all queued additional audio streams.
-                var mainSource = await UniversalSourceSettings.CreateAsync(ToUri(videoPath));
+                var mainUri = ToUri(videoPath);
+                if (mainUri == null)
+                {
+                    lblStatus.Text = "Invalid video path/URL: " + videoPath;
+                    return;
+                }
+
+                var mainSource = await UniversalSourceSettings.CreateAsync(mainUri);
                 _player.Audio_AdditionalStreams_Clear();
+
+                // Per-stream error handling: an individual stream failure (TOCTOU: file deleted
+                // between validation and CreateAsync, unsupported codec, transient network error)
+                // shouldn't abort the whole Play. Collect failures and surface them in lblStatus
+                // after the loop so the user can see which streams were skipped.
+                var skipped = new List<string>();
                 foreach (var path in _pendingAudioStreams)
                 {
-                    var extra = await UniversalSourceSettings.CreateAsync(ToUri(path));
-                    if (extra != null)
+                    try
                     {
+                        var extraUri = ToUri(path);
+                        if (extraUri == null)
+                        {
+                            skipped.Add(path + " (invalid path/URL)");
+                            continue;
+                        }
+
+                        // renderVideo:false forces the extra to expose only its audio pad,
+                        // matching what Audio_AdditionalStreams_AddAsync does internally — without
+                        // this an unconnected video pad upstream stalls uridecodebin.
+                        var extra = await UniversalSourceSettings.CreateAsync(
+                            extraUri,
+                            renderVideo: false,
+                            renderAudio: true,
+                            renderSubtitle: false);
                         _player.Audio_AdditionalStreams_Add(extra);
                     }
+                    catch (Exception ex)
+                    {
+                        skipped.Add($"{path} ({ex.Message})");
+                    }
                 }
+
+                // Set volume BEFORE OpenAsync — MediaPlayerCoreX caches the value and applies it
+                // to the AudioRendererBlock at pipeline build time, so there's no 100%-volume
+                // burst between renderer creation and a post-Play assignment.
+                _player.Audio_OutputDevice_Volume = sliderVolume.Value / 100.0;
 
                 await _player.OpenAsync(mainSource);
                 await _player.PlayAsync();
 
                 StartSeekTimer();
 
-                lblStatus.Text = _pendingAudioStreams.Count > 0
-                    ? $"Playing on '{selectedDevice.Name}'. {_pendingAudioStreams.Count} additional audio stream(s) mixed in."
-                    : $"Playing on '{selectedDevice.Name}'.";
+                // Playback is now live — editing the additional-audio list has no effect on the
+                // running pipeline (the SDK actually throws InvalidOperationException on mutation),
+                // so disable all list-editing controls including Browse / TextBox until Stop.
+                SetAudioListEditable(false);
+
+                if (skipped.Count > 0)
+                {
+                    lblStatus.Text = $"Playing on '{selectedDevice.Name}' with {_pendingAudioStreams.Count - skipped.Count} extras; skipped: {string.Join("; ", skipped)}";
+                }
+                else
+                {
+                    lblStatus.Text = _pendingAudioStreams.Count > 0
+                        ? $"Playing on '{selectedDevice.Name}'. {_pendingAudioStreams.Count} additional audio stream(s) mixed in."
+                        : $"Playing on '{selectedDevice.Name}'.";
+                }
             }
             catch (Exception ex)
             {
                 lblStatus.Text = ex.Message;
+                // Play failed — keep audio editing available so the user can fix the list.
+                SetAudioListEditable(true);
+            }
+            finally
+            {
+                _playOrStopInFlight = false;
+                buttonPlay.IsEnabled = true;
+                buttonStop.IsEnabled = true;
             }
         }
 
         private async void buttonStop_Click(object sender, RoutedEventArgs e)
         {
+            if (_playOrStopInFlight)
+            {
+                return;
+            }
+
+            _playOrStopInFlight = true;
+            buttonPlay.IsEnabled = false;
+            buttonStop.IsEnabled = false;
             try
             {
                 StopSeekTimer();
@@ -252,16 +355,53 @@ namespace Multi_Audio_Streams_Demo_X
             {
                 lblStatus.Text = ex.Message;
             }
+            finally
+            {
+                // Pipeline is stopped — re-enable audio list editing regardless of outcome.
+                SetAudioListEditable(true);
+                _playOrStopInFlight = false;
+                buttonPlay.IsEnabled = true;
+                buttonStop.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Toggle every control that mutates the additional-audio list. The list is captured
+        /// once, during Play (Audio_AdditionalStreams_Add before OpenAsync); attempting to
+        /// mutate it during playback actually throws InvalidOperationException on the SDK side,
+        /// so we must disable Browse and the path TextBox too — leaving them live would let a
+        /// user type a path that goes nowhere.
+        /// </summary>
+        private void SetAudioListEditable(bool editable)
+        {
+            buttonAudioAdd.IsEnabled = editable;
+            buttonAudioRemove.IsEnabled = editable;
+            buttonAudioClear.IsEnabled = editable;
+            buttonBrowseAudio.IsEnabled = editable;
+            textBoxAudioFile.IsEnabled = editable;
         }
 
         private static Uri ToUri(string pathOrUrl)
         {
-            if (IsSupportedUri(pathOrUrl))
+            if (string.IsNullOrEmpty(pathOrUrl))
             {
-                return new Uri(pathOrUrl);
+                return null;
             }
 
-            return new Uri(Path.GetFullPath(pathOrUrl));
+            if (IsSupportedUri(pathOrUrl) && Uri.TryCreate(pathOrUrl, UriKind.Absolute, out var u))
+            {
+                return u;
+            }
+
+            try
+            {
+                var full = Path.GetFullPath(pathOrUrl);
+                return Uri.TryCreate(full, UriKind.Absolute, out var fileUri) ? fileUri : null;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private static bool IsSupportedUri(string s)
@@ -271,11 +411,17 @@ namespace Multi_Audio_Streams_Demo_X
                 return false;
             }
 
-            return s.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
-                || s.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
-                || s.StartsWith("rtsp://", StringComparison.OrdinalIgnoreCase)
-                || s.StartsWith("rtmp://", StringComparison.OrdinalIgnoreCase)
-                || s.StartsWith("file:///", StringComparison.OrdinalIgnoreCase);
+            if (!Uri.TryCreate(s, UriKind.Absolute, out var u))
+            {
+                return false;
+            }
+
+            return u.IsFile
+                || u.Scheme == Uri.UriSchemeHttp
+                || u.Scheme == Uri.UriSchemeHttps
+                || u.Scheme == "rtsp"
+                || u.Scheme == "rtmp"
+                || u.Scheme == "file";
         }
 
         private void StartSeekTimer()
@@ -299,17 +445,21 @@ namespace Multi_Audio_Streams_Demo_X
 
         private async void SeekTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (_player == null || _seekDragging)
+            // Capture the current player reference locally so a concurrent DestroyPlayerAsync
+            // nulling _player on the UI thread during the awaits below can't null-deref us or
+            // cause ObjectDisposedException on the second call.
+            var p = _player;
+            if (p == null || _seekDragging)
             {
                 return;
             }
 
             try
             {
-                var position = await _player.Position_GetAsync();
-                var duration = await _player.DurationAsync();
+                var position = await p.Position_GetAsync();
+                var duration = await p.DurationAsync();
 
-                Dispatcher.Invoke(() =>
+                Dispatcher.BeginInvoke(new Action(() =>
                 {
                     if (_seekDragging)
                     {
@@ -338,7 +488,12 @@ namespace Multi_Audio_Streams_Demo_X
                     }
 
                     lblTime.Text = $"{FormatTime(position)} / {FormatTime(duration)}";
-                });
+                }));
+            }
+            catch (ObjectDisposedException)
+            {
+                // _player was disposed by DestroyPlayerAsync after our local capture but
+                // before the SDK finished the in-flight call. Safe to ignore.
             }
             catch
             {
@@ -358,16 +513,47 @@ namespace Multi_Audio_Streams_Demo_X
 
         private void sliderSeek_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            // Only respond to the left button — PreviewMouseDown fires for every button, so a
+            // middle/right-click on the track would otherwise flip _seekDragging=true and
+            // suppress the seek timer without any release ever clearing it.
+            if (e.ChangedButton != System.Windows.Input.MouseButton.Left)
+            {
+                return;
+            }
+
+            // Don't arm the flag if there's nothing to seek yet (pre-Play click on an empty
+            // slider). Without this, a click on the disabled slider before Play would leave
+            // _seekDragging=true permanently because no MouseUp path clears it while the slider
+            // has no meaningful range.
+            if (_player == null || sliderSeek.Maximum <= 0)
+            {
+                return;
+            }
+
             _seekDragging = true;
+        }
+
+        private void sliderSeek_LostMouseCapture(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            // WPF occasionally swallows MouseUp if focus is stolen (Alt-Tab, a popup); clearing
+            // here guarantees _seekDragging never sticks true and silently blocks the seek timer
+            // for the rest of the window's life.
+            _seekDragging = false;
         }
 
         private async void sliderSeek_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             try
             {
+                double value = sliderSeek.Value;
+                if (!double.IsFinite(value) || value < 0)
+                {
+                    return;
+                }
+
                 if (_player != null)
                 {
-                    await _player.Position_SetAsync(TimeSpan.FromSeconds(sliderSeek.Value));
+                    await _player.Position_SetAsync(TimeSpan.FromSeconds(value));
                 }
             }
             catch (Exception ex)
@@ -382,6 +568,11 @@ namespace Multi_Audio_Streams_Demo_X
 
         private void sliderSeek_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            if (sliderSeek.Maximum <= 0)
+            {
+                return;
+            }
+
             if (_seekTimerWriting)
             {
                 return;
@@ -389,7 +580,14 @@ namespace Multi_Audio_Streams_Demo_X
 
             if (_seekDragging)
             {
-                lblTime.Text = $"{FormatTime(TimeSpan.FromSeconds(e.NewValue))} / {FormatTime(TimeSpan.FromSeconds(sliderSeek.Maximum))}";
+                double newValue = e.NewValue;
+                double max = sliderSeek.Maximum;
+                if (!double.IsFinite(newValue) || newValue < 0 || !double.IsFinite(max) || max < 0)
+                {
+                    return;
+                }
+
+                lblTime.Text = $"{FormatTime(TimeSpan.FromSeconds(newValue))} / {FormatTime(TimeSpan.FromSeconds(max))}";
             }
         }
 
@@ -408,7 +606,43 @@ namespace Multi_Audio_Streams_Demo_X
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            await DestroyPlayerAsync();
+            // async void + Close() race: the WPF Close() path doesn't await us, so the player
+            // could outlive the window. Cancel the initial close, dispose asynchronously, then
+            // re-invoke Close() on the dispatcher. The second invocation sees _isClosing=true
+            // and falls through so the window actually closes.
+            if (_isClosing)
+            {
+                return;
+            }
+
+            e.Cancel = true;
+            _isClosing = true;
+
+            try
+            {
+                await DestroyPlayerAsync();
+            }
+            catch (Exception ex)
+            {
+                // Never block shutdown on a dispose failure — the user wants out. DisposeAsync
+                // may resume on a thread-pool continuation; writing lblStatus.Text from a
+                // non-UI thread throws InvalidOperationException, and the user can't see the
+                // label anyway while the window is closing. Log-and-drop is the right tradeoff.
+                System.Diagnostics.Debug.WriteLine($"Dispose error: {ex.Message}");
+            }
+
+            // DestroySDK must run even when _player was never created (e.g. user closes before
+            // Play), otherwise InitSDKAsync state leaks across window lifetimes.
+            try
+            {
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"DestroySDK error: {ex.Message}");
+            }
+
+            Dispatcher.BeginInvoke(new Action(() => Close()));
         }
     }
 }

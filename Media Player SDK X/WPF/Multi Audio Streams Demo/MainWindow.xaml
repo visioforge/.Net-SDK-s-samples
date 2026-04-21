@@ -76,6 +76,7 @@
             <Slider x:Name="sliderSeek" Minimum="0" Maximum="0" Value="0" VerticalAlignment="Center"
                     PreviewMouseDown="sliderSeek_PreviewMouseDown"
                     PreviewMouseUp="sliderSeek_PreviewMouseUp"
+                    LostMouseCapture="sliderSeek_LostMouseCapture"
                     ValueChanged="sliderSeek_ValueChanged" />
         </DockPanel>
 

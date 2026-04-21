@@ -298,7 +298,7 @@ namespace PreEventRecordingDemoVCX
                 var preEventOutput = new PreEventRecordingOutput(
                     settings: preEventSettings,
                     videoEnc: new OpenH264EncoderSettings(),
-                    audioEnc: new VOAACEncoderSettings()
+                    audioEnc: new AVENCAACEncoderSettings()
                 );
 
                 VideoCapture1.Outputs_Add(preEventOutput);

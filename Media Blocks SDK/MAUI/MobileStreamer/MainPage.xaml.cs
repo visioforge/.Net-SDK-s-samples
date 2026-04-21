@@ -43,7 +43,22 @@ namespace MobileStreamer
 
         private MediaBlock _sink;
 
-        private bool _isSRT;
+        // Re-entrancy guard for start handlers. async void handlers can be triggered
+        // again before the previous invocation's await completes, which otherwise races
+        // on _pipeline / _sink. Interlocked flip so the check is safe even if the MAUI
+        // dispatcher marshals clicks across threads.
+        private int _operationInProgress;
+
+        // Separate re-entrancy guard for the stop handler. Stop must be able to preempt
+        // a hung Start (the whole point of a stop button), so it can't share the start
+        // guard — but two simultaneous stop taps would still race on _pipeline disposal.
+        private int _stopInProgress;
+
+        // Guards against rapid-taps on btCamera/btMic: both handlers await a device
+        // enumeration; without the guard the second tap would re-enumerate and reset
+        // the selected-index in parallel, producing IndexOutOfRange after the await.
+        private int _cameraPickerBusy;
+        private int _micPickerBusy;
 
         public MainPage()
         {
@@ -64,6 +79,27 @@ namespace MobileStreamer
         {
             _pipeline?.Dispose();
             _pipeline = null;
+
+#if __IOS__ && !__MACCATALYST__
+            // Release the shared AVAudioSession we claimed in MainPage_Loaded — otherwise the
+            // PlayAndRecord category stays latched for the rest of the app lifetime, routing
+            // audio through the earpiece on phones and permanently ducking other apps.
+            try
+            {
+                AVFoundation.AVAudioSession.SharedInstance().SetActive(
+                    false,
+                    AVFoundation.AVAudioSessionSetActiveOptions.NotifyOthersOnDeactivation,
+                    out var deactivateErr);
+                if (deactivateErr != null)
+                {
+                    Log($"AVAudioSession.SetActive(false) error: {deactivateErr.LocalizedDescription}");
+                }
+            }
+            catch (Exception ax)
+            {
+                Log($"AVAudioSession deactivate failed: {ax.Message}");
+            }
+#endif
 
             VisioForgeX.DestroySDK();
         }
@@ -93,6 +129,56 @@ namespace MobileStreamer
             Debug.WriteLine("[MobileStreamer] " + line);
         }
 
+        /// <summary>
+        /// Acquires the start/stop re-entrancy guard and disables start buttons.
+        /// Returns false if another operation is already running (caller should bail out).
+        /// </summary>
+        private async Task<bool> BeginOperationAsync()
+        {
+            if (System.Threading.Interlocked.CompareExchange(ref _operationInProgress, 1, 0) != 0)
+            {
+                return false;
+            }
+
+            await SetStartButtonsEnabledAsync(false);
+            return true;
+        }
+
+        /// <summary>
+        /// Releases the start/stop re-entrancy guard and re-enables start buttons.
+        /// </summary>
+        private async Task EndOperationAsync()
+        {
+            await SetStartButtonsEnabledAsync(true);
+            System.Threading.Interlocked.Exchange(ref _operationInProgress, 0);
+        }
+
+        /// <summary>
+        /// Applies the start-buttons enabled state on the main thread, returning only after
+        /// the state has actually flipped. Previously this used BeginInvokeOnMainThread,
+        /// which queued the update and returned immediately — so BeginOperation flipped
+        /// _operationInProgress to busy while the buttons still showed enabled, letting the
+        /// user fire a second tap before the dispatcher round-tripped.
+        /// </summary>
+        private Task SetStartButtonsEnabledAsync(bool enabled)
+        {
+            if (MainThread.IsMainThread)
+            {
+                ApplyStartButtonsEnabled(enabled);
+                return Task.CompletedTask;
+            }
+
+            return MainThread.InvokeOnMainThreadAsync(() => ApplyStartButtonsEnabled(enabled));
+        }
+
+        private void ApplyStartButtonsEnabled(bool enabled)
+        {
+            btStartYouTube.IsEnabled = enabled;
+            btStartFacebook.IsEnabled = enabled;
+            btStartRTMP.IsEnabled = enabled;
+            btStartSRT.IsEnabled = enabled;
+        }
+
         private async void MainPage_Loaded(object? sender, EventArgs e)
         {
             try
@@ -115,18 +201,49 @@ namespace MobileStreamer
                 // iOS requires an active AVAudioSession in PlayAndRecord for the AVF audio
                 // queue to deliver samples; without SetActive(true) the input queue starves
                 // and the audio source errors with "Internal data stream error".
+                //
+                // Options: DefaultToSpeaker so playback routes to the main speaker (not the
+                // earpiece) on phones even while PlayAndRecord is active; AllowBluetooth to
+                // allow BT headsets as mic/output; MixWithOthers so we don't permanently
+                // duck other apps just by opening the MobileStreamer page.
                 try
                 {
+                    // DefaultToSpeaker + MixWithOthers is Apple-undefined — with the mix
+                    // flag set, the route override is ignored on recent iOS and audio
+                    // actually comes out of the earpiece. Drop DefaultToSpeaker from the
+                    // options and instead call OverrideOutputAudioPort after activation,
+                    // which is the documented way to force the main speaker while staying
+                    // non-disruptive to other audio sessions.
+                    //
+                    // We also capture the SetCategory error explicitly: the void overload
+                    // silently swallowed the real failure and let SetActive fail with a
+                    // misleading "activation" error instead.
                     AVFoundation.AVAudioSession.SharedInstance().SetCategory(
-                        AVFoundation.AVAudioSessionCategory.PlayAndRecord);
-                    AVFoundation.AVAudioSession.SharedInstance().SetActive(true, out var audioErr);
-                    if (audioErr != null)
+                        AVFoundation.AVAudioSessionCategory.PlayAndRecord,
+                        AVFoundation.AVAudioSessionCategoryOptions.AllowBluetooth |
+                        AVFoundation.AVAudioSessionCategoryOptions.MixWithOthers,
+                        out var categoryErr);
+                    if (categoryErr != null)
                     {
-                        Log($"AVAudioSession.SetActive error: {audioErr.LocalizedDescription}");
+                        Log($"AVAudioSession.SetCategory error: {categoryErr.LocalizedDescription}");
                     }
                     else
                     {
-                        Log("AVAudioSession activated (PlayAndRecord)");
+                        AVFoundation.AVAudioSession.SharedInstance().SetActive(true, out var audioErr);
+                        if (audioErr != null)
+                        {
+                            Log($"AVAudioSession.SetActive error: {audioErr.LocalizedDescription}");
+                        }
+                        else
+                        {
+                            // Route to the main speaker (PlayAndRecord defaults to the
+                            // earpiece on phones). Safe to ignore the return value —
+                            // failure here only affects routing, not capture.
+                            AVFoundation.AVAudioSession.SharedInstance().OverrideOutputAudioPort(
+                                AVFoundation.AVAudioSessionPortOverride.Speaker,
+                                out _);
+                            Log("AVAudioSession activated (PlayAndRecord)");
+                        }
                     }
                 }
                 catch (Exception ax)
@@ -241,6 +358,20 @@ namespace MobileStreamer
         /// </summary>
         private async void Window_Destroying(object? sender, EventArgs e)
         {
+            // Wait for any in-flight start/stop handler to finish before tearing the pipeline
+            // down — otherwise CreateEngine/StartAsync races with Dispose here.
+            var waitStarted = DateTime.UtcNow;
+            while (System.Threading.Interlocked.CompareExchange(ref _operationInProgress, 1, 0) != 0)
+            {
+                if (DateTime.UtcNow - waitStarted > TimeSpan.FromSeconds(10))
+                {
+                    Log("Window_Destroying: timeout waiting for in-flight operation; proceeding anyway");
+                    break;
+                }
+
+                await Task.Delay(50);
+            }
+
             try
             {
                 if (_pipeline != null)
@@ -257,6 +388,10 @@ namespace MobileStreamer
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+            finally
+            {
+                System.Threading.Interlocked.Exchange(ref _operationInProgress, 0);
             }
         }
 
@@ -278,12 +413,9 @@ namespace MobileStreamer
                 return;
             }
 
-            if (_pipeline != null)
-            {
-                await _pipeline.StopAsync();
-                await _pipeline.DisposeAsync();
-                _pipeline = null;
-            }
+            await _pipeline.StopAsync();
+            await _pipeline.DisposeAsync();
+            _pipeline = null;
 
             _videoEncoder?.Dispose();
             _videoEncoder = null;
@@ -305,8 +437,6 @@ namespace MobileStreamer
 
             _videoRenderer?.Dispose();
             _videoRenderer = null;
-
-            _isSRT = false;
         }
 
         /// <summary>
@@ -314,6 +444,15 @@ namespace MobileStreamer
         /// </summary>
         private async void btStop_Clicked(object? sender, EventArgs e)
         {
+            // Do NOT gate Stop on BeginOperation — that's the start-side guard. If a Start
+            // handler is hanging (SRT connect, blocked encoder), the user must still be able to
+            // Stop, which is exactly what unblocks Start. Re-entrancy on Stop itself is
+            // serialised by a dedicated flag so two simultaneous taps don't double-dispose.
+            if (System.Threading.Interlocked.CompareExchange(ref _stopInProgress, 1, 0) != 0)
+            {
+                return;
+            }
+
             try
             {
                 await StopAllAsync();
@@ -322,6 +461,15 @@ namespace MobileStreamer
             {
                 Debug.WriteLine(ex);
             }
+            finally
+            {
+                // Force-release the start guard too: Stop is the recovery path for a hung Start
+                // and must hand the UI back to the user even if BeginOperation never reached
+                // its EndOperation. Re-enable the start buttons unconditionally.
+                System.Threading.Interlocked.Exchange(ref _operationInProgress, 0);
+                await SetStartButtonsEnabledAsync(true);
+                System.Threading.Interlocked.Exchange(ref _stopInProgress, 0);
+            }
         }
 
         /// <summary>
@@ -329,6 +477,11 @@ namespace MobileStreamer
         /// </summary>
         private async void btCamera_Clicked(object? sender, System.EventArgs e)
         {
+            if (System.Threading.Interlocked.CompareExchange(ref _cameraPickerBusy, 1, 0) != 0)
+            {
+                return;
+            }
+
             try
             {
                 if (_cameras == null || _cameras.Length == 0)
@@ -357,6 +510,10 @@ namespace MobileStreamer
             {
                 Debug.WriteLine(ex);
             }
+            finally
+            {
+                System.Threading.Interlocked.Exchange(ref _cameraPickerBusy, 0);
+            }
         }
 
         /// <summary>
@@ -364,6 +521,11 @@ namespace MobileStreamer
         /// </summary>
         private async void btMic_Clicked(object? sender, System.EventArgs e)
         {
+            if (System.Threading.Interlocked.CompareExchange(ref _micPickerBusy, 1, 0) != 0)
+            {
+                return;
+            }
+
             try
             {
                 if (_mics == null || _mics.Length == 0)
@@ -391,6 +553,10 @@ namespace MobileStreamer
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+            finally
+            {
+                System.Threading.Interlocked.Exchange(ref _micPickerBusy, 0);
             }
         }
 
@@ -478,6 +644,18 @@ namespace MobileStreamer
         /// </summary>
         private async void btStartYouTube_Clicked(object? sender, EventArgs e)
         {
+            var url = edUrl.Text;
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                await DisplayAlertAsync("YouTube", "Please set the YouTube ingest URL", "OK");
+                return;
+            }
+
+            if (!await BeginOperationAsync())
+            {
+                return;
+            }
+
             try
             {
                 await StopAllAsync();
@@ -486,7 +664,7 @@ namespace MobileStreamer
 
                 await ConfigurePreviewAsync();
 
-                _sink = new YouTubeSinkBlock(new YouTubeSinkSettings(edUrl.Text));
+                _sink = new YouTubeSinkBlock(new YouTubeSinkSettings(url));
 
                 ConfigureCapture();
 
@@ -495,6 +673,10 @@ namespace MobileStreamer
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+            finally
+            {
+                await EndOperationAsync();
             }
         }
 
@@ -503,6 +685,18 @@ namespace MobileStreamer
         /// </summary>
         private async void btStartFacebook_Clicked(object? sender, EventArgs e)
         {
+            var url = edUrl.Text;
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                await DisplayAlertAsync("Facebook Live", "Please set the Facebook Live ingest URL", "OK");
+                return;
+            }
+
+            if (!await BeginOperationAsync())
+            {
+                return;
+            }
+
             try
             {
                 await StopAllAsync();
@@ -511,7 +705,7 @@ namespace MobileStreamer
 
                 await ConfigurePreviewAsync();
 
-                _sink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(edUrl.Text));
+                _sink = new FacebookLiveSinkBlock(new FacebookLiveSinkSettings(url));
 
                 ConfigureCapture();
 
@@ -521,6 +715,10 @@ namespace MobileStreamer
             {
                 Debug.WriteLine(ex);
             }
+            finally
+            {
+                await EndOperationAsync();
+            }
         }
 
         /// <summary>
@@ -528,6 +726,18 @@ namespace MobileStreamer
         /// </summary>
         private async void btStartRTMP_Clicked(object? sender, EventArgs e)
         {
+            var url = edUrl.Text;
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                await DisplayAlertAsync("RTMP", "Please set the RTMP ingest URL", "OK");
+                return;
+            }
+
+            if (!await BeginOperationAsync())
+            {
+                return;
+            }
+
             try
             {
                 await StopAllAsync();
@@ -537,7 +747,7 @@ namespace MobileStreamer
                 await ConfigurePreviewAsync();
 
                 // streaming to RTMP server
-                _sink = new RTMPSinkBlock(new RTMPSinkSettings() { Location = edUrl.Text });
+                _sink = new RTMPSinkBlock(new RTMPSinkSettings() { Location = url });
 
                 ConfigureCapture();
 
@@ -547,6 +757,10 @@ namespace MobileStreamer
             {
                 Debug.WriteLine(ex);
             }
+            finally
+            {
+                await EndOperationAsync();
+            }
         }
 
         /// <summary>
@@ -554,51 +768,59 @@ namespace MobileStreamer
         /// </summary>
         private async void btStartSRT_Clicked(object? sender, EventArgs e)
         {
+            // Gather URL + dialog input BEFORE BeginOperation: otherwise the guard is held
+            // while DisplayPromptAsync/DisplayActionSheet waits on user input, and the Stop
+            // button's BeginOperation call is rejected until dialogs close — UI appears
+            // deadlocked.
+            Log("btStartSRT_Clicked: enter");
+
+            var uri = edUrl.Text;
+            Log($"SRT URI: '{uri}'");
+            if (string.IsNullOrWhiteSpace(uri))
+            {
+                await DisplayAlertAsync("SRT", "Please set the SRT URI", "OK");
+                return;
+            }
+
+            var srtAvailable = SRTMPEGTSSinkBlock.IsAvailable();
+            Log($"IsAvailable: SRTMPEGTS={srtAvailable}");
+
+            if (!srtAvailable)
+            {
+                Log("srtsink GStreamer element missing — cannot start SRT stream");
+                await DisplayAlertAsync("SRT", "srtsink GStreamer plugin is not available on this platform. SRT streaming cannot start.", "OK");
+                return;
+            }
+
+            var latencyStr = await DisplayPromptAsync("SRT Settings", "Latency (ms):", initialValue: "750", keyboard: Keyboard.Numeric);
+            if (latencyStr == null)
+                return;
+
+            var latencyMs = int.TryParse(latencyStr, out var lat) ? lat : 750;
+
+            var modeStr = await DisplayActionSheet("SRT Connection Mode", "Cancel", null, "Caller", "Listener", "Rendezvous");
+            if (modeStr == null || modeStr == "Cancel")
+                return;
+
+            var mode = modeStr switch
+            {
+                "Listener" => SRTConnectionMode.Listener,
+                "Rendezvous" => SRTConnectionMode.Rendezvous,
+                _ => SRTConnectionMode.Caller
+            };
+
+            Log($"latencyMs={latencyMs}, mode={mode}");
+
+            if (!await BeginOperationAsync())
+            {
+                Log("btStartSRT_Clicked: another operation in progress, ignoring");
+                return;
+            }
+
             try
             {
-                Log("btStartSRT_Clicked: enter");
-
-                var uri = edUrl.Text;
-                Log($"SRT URI: '{uri}'");
-                if (string.IsNullOrWhiteSpace(uri))
-                {
-                    await DisplayAlertAsync("SRT", "Please set the SRT URI", "OK");
-                    return;
-                }
-
-                var srtAvailable = SRTMPEGTSSinkBlock.IsAvailable();
-                Log($"IsAvailable: SRTMPEGTS={srtAvailable}");
-
-                if (!srtAvailable)
-                {
-                    Log("srtsink GStreamer element missing — cannot start SRT stream");
-                    await DisplayAlertAsync("SRT", "srtsink GStreamer plugin is not available on this platform. SRT streaming cannot start.", "OK");
-                    return;
-                }
-
-                var latencyStr = await DisplayPromptAsync("SRT Settings", "Latency (ms):", initialValue: "750", keyboard: Keyboard.Numeric);
-                if (latencyStr == null)
-                    return;
-
-                var latencyMs = int.TryParse(latencyStr, out var lat) ? lat : 750;
-
-                var modeStr = await DisplayActionSheet("SRT Connection Mode", "Cancel", null, "Caller", "Listener", "Rendezvous");
-                if (modeStr == null || modeStr == "Cancel")
-                    return;
-
-                var mode = modeStr switch
-                {
-                    "Listener" => SRTConnectionMode.Listener,
-                    "Rendezvous" => SRTConnectionMode.Rendezvous,
-                    _ => SRTConnectionMode.Caller
-                };
-
-                Log($"latencyMs={latencyMs}, mode={mode}");
-
                 Log("StopAllAsync...");
                 await StopAllAsync();
-
-                _isSRT = true;
 
                 Log("CreateEngine...");
                 CreateEngine();
@@ -629,6 +851,10 @@ namespace MobileStreamer
             {
                 Log($"EXC btStartSRT: {ex.GetType().Name}: {ex.Message}");
                 Log(ex.StackTrace ?? "(no stack)");
+            }
+            finally
+            {
+                await EndOperationAsync();
             }
         }
     }

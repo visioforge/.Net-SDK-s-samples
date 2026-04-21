@@ -3,100 +3,93 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:background="#FF000000">
 
-    <!-- SRT settings at the top -->
-    <LinearLayout
-        android:id="@+id/layoutSettings"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:padding="8dp">
-
-        <EditText
-            android:id="@+id/edSrtUri"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="SRT URI"
-            android:text="srt://192.168.1.44:8890?streamid=publish:mobile"
-            android:inputType="textUri"
-            android:singleLine="true" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp">
-
-            <Spinner
-                android:id="@+id/spSrtMode"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp" />
-
-            <EditText
-                android:id="@+id/edLatency"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:hint="Latency ms"
-                android:text="750"
-                android:inputType="number"
-                android:singleLine="true" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- Video preview -->
+    <!-- Edge-to-edge video preview -->
     <VisioForge.Core.UI.Android.VideoViewGL
+        android:id="@+id/videoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/layoutSettings"
-        android:layout_above="@id/tvErrors"
         android:minWidth="25dp"
-        android:minHeight="25dp"
-        android:id="@+id/videoView" />
+        android:minHeight="25dp" />
 
-    <!-- Error log -->
+    <!-- Status badge ("Streaming") at top -->
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="LIVE"
+        android:textColor="#FFFFFFFF"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="4dp"
+        android:background="@drawable/panel_background"
+        android:visibility="gone" />
+
+    <!-- Error text -->
     <TextView
         android:id="@+id/tvErrors"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/layoutControls"
+        android:layout_above="@+id/controlBar"
         android:maxLines="3"
         android:scrollbars="vertical"
         android:textSize="12sp"
         android:textColor="#FFFF4444"
-        android:padding="4dp"
+        android:background="#88000000"
+        android:padding="8dp"
         android:visibility="gone" />
 
-    <!-- Buttons at the bottom -->
-    <LinearLayout
-        android:id="@+id/layoutControls"
-        android:orientation="horizontal"
+    <!-- Bottom translucent control bar. Height + paddingBottom get extended at runtime by the
+         system navigation inset (see MainActivity.ApplyWindowInsets) so the buttons never hide
+         under the gesture pill or 3-button nav bar. -->
+    <FrameLayout
+        android:id="@+id/controlBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:minWidth="25dp"
-        android:minHeight="25dp">
+        android:background="#59000000"
+        android:clipToPadding="false">
 
-        <Button
+        <!-- Center: big record button. Background = red circle (always); foreground icon toggles
+             between ic_record (filled white circle — idle) and ic_stop (white square — streaming)
+             so the shape change communicates state the way iOS/Android camera apps do. -->
+        <ImageButton
             android:id="@+id/btStartStream"
-            android:text="Start SRT"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="5dp"/>
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_record"
+            android:src="@drawable/ic_record"
+            android:scaleType="centerInside"
+            android:contentDescription="Start / stop SRT stream" />
 
-        <Button
+        <!-- Left: settings -->
+        <ImageButton
+            android:id="@+id/btSettings"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="40dp"
+            android:src="@drawable/ic_settings"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="SRT settings" />
+
+        <!-- Right: camera flip -->
+        <ImageButton
             android:id="@+id/btSwitchCam"
-            android:text="Switch cam"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="5dp"/>
-    </LinearLayout>
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="40dp"
+            android:src="@drawable/ic_switch_camera"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Switch camera" />
+
+    </FrameLayout>
 
 </RelativeLayout>

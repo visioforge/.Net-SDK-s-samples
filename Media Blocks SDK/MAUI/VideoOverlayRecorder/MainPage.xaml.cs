@@ -200,7 +200,9 @@ namespace VideoOverlayRecorderMB
             _audioTee?.Dispose();
             _mp4Output?.Dispose();
             
-            // Clear overlay elements list
+            // Clear overlay elements from the block and the UI list so state doesn't
+            // leak into the next pipeline lifecycle.
+            _overlayManager?.Video_Overlay_Clear();
             _overlayElements?.Clear();
             
             _fileSource = null;
@@ -540,12 +542,12 @@ namespace VideoOverlayRecorderMB
                 // RateControl is not a property of OpenH264EncoderSettings
                 Profile = OpenH264Profile.Main
             };
-            var aacSettings = new AVENCAACEncoderSettings
-            {
-                Bitrate = 128
-                // OutputFormat is not a property of AVENCAACEncoderSettings
-            };
-            
+            // avenc_aac ships via gst-libav and isn't always present on mobile — probe first
+            // and fall back to the portable VO-AAC encoder so the demo doesn't fail to start.
+            IAACEncoderSettings aacSettings = AVENCAACEncoderSettings.IsAvailable()
+                ? (IAACEncoderSettings)new AVENCAACEncoderSettings { Bitrate = 128 }
+                : new VOAACEncoderSettings { Bitrate = 128 };
+
             _mp4Output = new MP4OutputBlock(mp4Settings, h264Settings, aacSettings);
             
             // Connect to MP4 output using dynamic inputs
@@ -592,7 +594,13 @@ namespace VideoOverlayRecorderMB
                 path = Path.Combine(appDir.AbsolutePath, filename);
             }
 #elif __IOS__ && !__MACCATALYST__
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..", "Library", filename);
+            // Resolve ~/Library directly instead of hopping through MyDocuments + "..".
+            // The traversal path worked when opening the file via NSURL, but it's a literal
+            // string as far as .NET APIs are concerned — Directory.CreateDirectory and
+            // Path.GetDirectoryName handle it inconsistently across iOS versions, and some
+            // sandboxed paths reject the "/.." segment outright.
+            var libraryDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var path = Path.Combine(libraryDir, filename);
 #else
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), filename);
 #endif
@@ -765,7 +773,11 @@ namespace VideoOverlayRecorderMB
                 ZIndex = 100
             };
             
-            // Create font resources once outside the lambda to avoid per-frame allocation
+            // Cache only immutable/thread-safe Skia objects (typeface/font/paint) across frames.
+            // The SKBitmap/SKCanvas MUST be per-frame: SKCanvas is not thread-safe, and
+            // args.DrawImage may retain the bitmap reference past the lambda — sharing one
+            // would let frame N+1's Clear mutate the pixels while frame N is still being
+            // consumed. Per-frame scope with `using` keeps allocation cost bounded and correct.
             var tsTypeface = SKTypeface.FromFamilyName("Arial", SKFontStyle.Bold);
             var tsFont = new SKFont(tsTypeface, 20);
             var tsPaint = new SKPaint { Color = SKColors.Yellow, IsAntialias = true };
@@ -775,19 +787,12 @@ namespace VideoOverlayRecorderMB
 
             timestampCallback.OnDraw += (sender, args) =>
             {
-                using (var bitmap = new SKBitmap(250, 40))
-                {
-                    using (var canvas = new SKCanvas(bitmap))
-                    {
-                        canvas.Clear(new SKColor(0, 0, 0, 200));
-
-                        // Draw current time text (reuse cached font resources)
-                        var timeText = $"Time: {args.Timestamp:mm\\:ss\\.ff}";
-                        canvas.DrawText(timeText, 10, 25, tsFont, tsPaint);
-                    }
-                    
-                    args.DrawImage(bitmap, 10, 10);
-                }
+                using var tsBitmap = new SKBitmap(250, 40);
+                using var tsCanvas = new SKCanvas(tsBitmap);
+                tsCanvas.Clear(new SKColor(0, 0, 0, 200));
+                var timeText = $"Time: {args.Timestamp:mm\\:ss\\.ff}";
+                tsCanvas.DrawText(timeText, 10, 25, tsFont, tsPaint);
+                args.DrawImage(tsBitmap, 10, 10);
             };
             
             _overlayManager.Video_Overlay_Add(timestampCallback);
@@ -812,7 +817,8 @@ namespace VideoOverlayRecorderMB
                 ZIndex = 99
             };
             
-            // Create font resources once outside the lambda to avoid per-frame allocation
+            // Cache only immutable/thread-safe Skia objects (typeface/font/paint) across frames.
+            // See timestamp overlay above for the rationale — SKBitmap/SKCanvas are per-frame.
             var fcTypeface = SKTypeface.FromFamilyName("Arial");
             var fcFont = new SKFont(fcTypeface, 18);
             var fcPaint = new SKPaint { Color = SKColors.White, IsAntialias = true };
@@ -822,21 +828,19 @@ namespace VideoOverlayRecorderMB
 
             frameCounterCallback.OnDraw += (sender, args) =>
             {
-                _frameCounter++;
-                
-                using (var bitmap = new SKBitmap(200, 40))
-                {
-                    using (var canvas = new SKCanvas(bitmap))
-                    {
-                        canvas.Clear(new SKColor(0, 0, 0, 128));
-
-                        // Draw frame counter text (reuse cached font resources)
-                        var text = $"Frame: {_frameCounter}";
-                        canvas.DrawText(text, 10, 25, fcFont, fcPaint);
-                    }
-                    
-                    args.DrawImage(bitmap, 10, 60);
-                }
+                // OnDraw fires on a GStreamer streaming thread; if the overlay ever fans out
+                // to multiple frame pads, two threads could run this concurrently. Bare ++
+                // on a long isn't atomic (torn read on 32-bit ARM, read-modify-write race
+                // anywhere), so use Interlocked.Increment and reuse its return value for the
+                // text too — reading _frameCounter a second time would race with a sibling
+                // increment and show the wrong number.
+                var n = System.Threading.Interlocked.Increment(ref _frameCounter);
+                using var fcBitmap = new SKBitmap(200, 40);
+                using var fcCanvas = new SKCanvas(fcBitmap);
+                fcCanvas.Clear(new SKColor(0, 0, 0, 128));
+                var text = $"Frame: {n}";
+                fcCanvas.DrawText(text, 10, 25, fcFont, fcPaint);
+                args.DrawImage(fcBitmap, 10, 60);
             };
             
             _overlayManager.Video_Overlay_Add(frameCounterCallback);

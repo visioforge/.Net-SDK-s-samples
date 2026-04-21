@@ -22,10 +22,22 @@ namespace BarcodeReaderMB
         private VideoCaptureDeviceInfo[] _cameras;
         private int _cameraSelectedIndex = 0;
         private int _detectionCount = 0;
-        private ConcurrentDictionary<string, DateTime> _recentDetections = new();
-        private TimeSpan _deduplicationWindow = TimeSpan.FromSeconds(2);
+        private ConcurrentDictionary<string, long> _recentDetections = new();
+        private const long DeduplicationWindowMs = 2000;
+        // Prune stale _recentDetections entries once the dictionary crosses this threshold.
+        // Without the prune a long scanning session with many unique codes would accumulate
+        // entries forever — the dedup check above only keeps entries 'warm' within
+        // DeduplicationWindowMs, older ones are dead weight.
+        private const int PruneThreshold = 256;
         private bool _isRunning = false;
         private bool _isCleanedUp = false;
+
+        // Interlocked re-entrancy guard for btStartStop_Clicked. async void handlers can be
+        // tapped again before the previous invocation's first await completes — and because
+        // _isRunning only flips true after StartAsync returns (line ~164), the second tap
+        // would see false and re-enter StartScanningAsync, overwriting _pipeline and leaking
+        // the first attempt's blocks. 0 = free, 1 = busy; cleared in a finally.
+        private int _startStopBusy;
 
         public MainPage()
         {
@@ -89,6 +101,11 @@ namespace BarcodeReaderMB
 
         private async void btStartStop_Clicked(object sender, EventArgs e)
         {
+            if (Interlocked.CompareExchange(ref _startStopBusy, 1, 0) != 0)
+            {
+                return;
+            }
+
             try
             {
                 if (_isRunning)
@@ -103,6 +120,10 @@ namespace BarcodeReaderMB
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+            finally
+            {
+                Interlocked.Exchange(ref _startStopBusy, 0);
             }
         }
 
@@ -195,7 +216,7 @@ namespace BarcodeReaderMB
             {
                 if (_pipeline != null)
                 {
-                    await _pipeline.StopAsync().ConfigureAwait(false);
+                    await _pipeline.StopAsync();
 
                     if (_barcodeDetector != null)
                     {
@@ -230,15 +251,46 @@ namespace BarcodeReaderMB
             // Implement duplicate detection
             string key = $"{e.BarcodeType}:{e.Value}";
 
-            if (_recentDetections.TryGetValue(key, out var lastTime))
-            {
-                if (DateTime.Now - lastTime < _deduplicationWindow)
+            var now = Environment.TickCount64;
+
+            // AddOrUpdate atomically resolves read+update in one step. The separate
+            // TryGetValue→indexer pattern let two concurrent detections for the same key
+            // both observe an older timestamp, both pass the dedup check, and both fire the
+            // UI update — the ConcurrentDictionary's internal bucket lock closes that window.
+            bool isDuplicate = false;
+            _recentDetections.AddOrUpdate(
+                key,
+                _ => now,
+                (_, existing) =>
                 {
-                    return; // Skip duplicate
-                }
+                    if (now - existing < DeduplicationWindowMs)
+                    {
+                        isDuplicate = true;
+                        return existing; // keep the older timestamp; suppress this detection
+                    }
+                    return now;
+                });
+
+            if (isDuplicate)
+            {
+                return;
             }
 
-            _recentDetections[key] = DateTime.Now;
+            // Lazy prune: once the dictionary grows past the threshold, drop every entry that
+            // couldn't possibly still dedupe a future detection (older than the dedup window).
+            // ConcurrentDictionary iteration is snapshot-safe; TryRemove ignores entries that
+            // were already updated by another thread between the read and the remove.
+            if (_recentDetections.Count > PruneThreshold)
+            {
+                var cutoff = now - DeduplicationWindowMs;
+                foreach (var kvp in _recentDetections)
+                {
+                    if (kvp.Value < cutoff)
+                    {
+                        _recentDetections.TryRemove(kvp);
+                    }
+                }
+            }
 
             Debug.WriteLine($"Detected barcode: {e.BarcodeType} = {e.Value}");
 
@@ -246,9 +298,26 @@ namespace BarcodeReaderMB
 
             Dispatcher.Dispatch(() =>
             {
-                lbBarcodeType.Text = $"Type: {e.BarcodeType}";
-                lbBarcodeValue.Text = $"Value: {e.Value}";
-                lbDetectionCount.Text = $"Detected: {count}";
+                // Detection events can arrive after Stop unhooks the handler if GStreamer
+                // fired the event between StopAsync and the unhook (or between the unhook
+                // and the Dispatcher callback). Bail out if we've torn down — touching the
+                // labels after Unloaded throws on MAUI iOS. try/catch as belt-and-braces
+                // for any other transient UI-state edge cases.
+                if (_isCleanedUp || !_isRunning)
+                {
+                    return;
+                }
+
+                try
+                {
+                    lbBarcodeType.Text = $"Type: {e.BarcodeType}";
+                    lbBarcodeValue.Text = $"Value: {e.Value}";
+                    lbDetectionCount.Text = $"Detected: {count}";
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"BarcodeDetector UI update failed: {ex.Message}");
+                }
             });
         }
 
@@ -297,7 +366,7 @@ namespace BarcodeReaderMB
 
             if (_isRunning)
             {
-                await StopScanningAsync(updateUI: false).ConfigureAwait(false);
+                await StopScanningAsync(updateUI: false);
             }
 
             _pipeline?.Dispose();

@@ -47,20 +47,45 @@ public class CustomViewController : UIViewController, IUIDocumentPickerDelegate
     /// </summary>
     public UISlider PositionSlider { get; private set; }
 
+    // Cached play/stop glyphs so SetPlaying doesn't allocate a fresh
+    // UIImageSymbolConfiguration + UIImage on every toggle — otherwise quickly flipping
+    // between states leaks managed peers backed by CoreFoundation objects.
+    private UIImage _playIcon;
+    private UIImage _stopIcon;
+
     /// <summary>
     /// Gets the window.
     /// </summary>
     public UIWindow Window => _window;
 
     /// <summary>
+    /// Gets the video view. Created in <see cref="ViewDidLoad"/> once UIKit has installed
+    /// the VC's view, so callers must read this after <c>Window.MakeKeyAndVisible()</c>.
+    /// </summary>
+    public UIView VideoView { get; private set; }
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="CustomViewController"/> class.
+    /// Defers view-hierarchy construction until <see cref="ViewDidLoad"/> — touching
+    /// <c>View</c> here would force LoadView before the VC is attached to a window, and
+    /// the initial Bounds of an orphan view is <c>CGRect.Zero</c>, which produces a
+    /// 0x0 Metal drawable and can crash some drivers.
     /// </summary>
     /// <param name="window">The window.</param>
-    /// <param name="videoView">The video view.</param>
-    public CustomViewController(UIWindow window, out UIView videoView)
+    public CustomViewController(UIWindow window)
     {
         _window = window;
-        videoView = AddVideoView();
+    }
+
+    /// <summary>
+    /// Build the video view and controls here — by the time UIKit calls ViewDidLoad the
+    /// VC's <see cref="UIViewController.View"/> has a real (non-zero) bounds rect derived
+    /// from the hosting window, so VideoView / Metal layers initialise with valid size.
+    /// </summary>
+    public override void ViewDidLoad()
+    {
+        base.ViewDidLoad();
+        VideoView = AddVideoView();
         AddButtons();
     }
 
@@ -162,12 +187,16 @@ public class CustomViewController : UIViewController, IUIDocumentPickerDelegate
         };
         View!.AddSubview(controlBar);
 
+        // 150pt is the *minimum*: the label + slider + 44pt buttons + inter-row gaps plus
+        // bottom safe-area padding (home indicator / Dynamic Island) can exceed 150 on larger
+        // devices and would otherwise clip the play button. ConstraintGreaterThanOrEqualTo
+        // together with the explicit bottom-of-content constraint below lets the bar grow.
         NSLayoutConstraint.ActivateConstraints(new[]
         {
             controlBar.LeadingAnchor.ConstraintEqualTo(View!.LeadingAnchor),
             controlBar.TrailingAnchor.ConstraintEqualTo(View!.TrailingAnchor),
             controlBar.BottomAnchor.ConstraintEqualTo(View!.BottomAnchor),
-            controlBar.HeightAnchor.ConstraintEqualTo(150f)
+            controlBar.HeightAnchor.ConstraintGreaterThanOrEqualTo(150f)
         });
 
         _fileLabel = new UILabel
@@ -177,7 +206,10 @@ public class CustomViewController : UIViewController, IUIDocumentPickerDelegate
             Font = UIFont.SystemFontOfSize(13f, UIFontWeight.Medium),
             TextAlignment = UITextAlignment.Center,
             Text = "No file selected",
-            Lines = 1,
+            // Allow a second line so long filenames wrap once instead of squeezing
+            // the extension out of view — middle truncation on the last line still
+            // keeps .mp4/.mov/etc visible when the name exceeds the two-line budget.
+            Lines = 2,
             LineBreakMode = UILineBreakMode.MiddleTruncation
         };
         controlBar.AddSubview(_fileLabel);
@@ -190,6 +222,12 @@ public class CustomViewController : UIViewController, IUIDocumentPickerDelegate
             MaxValue = 100
         };
         controlBar.AddSubview(PositionSlider);
+
+        // Build and retain the two symbol images once; SetPlaying swaps between them
+        // without allocating fresh UIImageSymbolConfiguration / UIImage peers every tap.
+        var playConfig = UIImageSymbolConfiguration.Create(24f, UIImageSymbolWeight.Regular);
+        _playIcon = UIImage.GetSystemImage("play.fill", playConfig);
+        _stopIcon = UIImage.GetSystemImage("stop.fill", playConfig);
 
         SelectButton = MakeIconButton("folder.fill");
         PlayButton = MakeIconButton("play.fill");
@@ -219,7 +257,12 @@ public class CustomViewController : UIViewController, IUIDocumentPickerDelegate
             PlayButton.LeadingAnchor.ConstraintEqualTo(controlBar.CenterXAnchor, 20f),
             PlayButton.TopAnchor.ConstraintEqualTo(PositionSlider.BottomAnchor, 12f),
             PlayButton.WidthAnchor.ConstraintEqualTo(44f),
-            PlayButton.HeightAnchor.ConstraintEqualTo(44f)
+            PlayButton.HeightAnchor.ConstraintEqualTo(44f),
+
+            // Anchor the button row to the bottom of the safe area so the bar expands
+            // (via the ≥150 height constraint above) when the device's bottom inset is large.
+            PlayButton.BottomAnchor.ConstraintLessThanOrEqualTo(controlBar.SafeAreaLayoutGuide.BottomAnchor, -16f),
+            SelectButton.BottomAnchor.ConstraintLessThanOrEqualTo(controlBar.SafeAreaLayoutGuide.BottomAnchor, -16f)
         });
     }
 
@@ -228,8 +271,7 @@ public class CustomViewController : UIViewController, IUIDocumentPickerDelegate
     /// </summary>
     public void SetPlaying(bool playing)
     {
-        var config = UIImageSymbolConfiguration.Create(24f, UIImageSymbolWeight.Regular);
-        PlayButton.SetImage(UIImage.GetSystemImage(playing ? "stop.fill" : "play.fill", config), UIControlState.Normal);
+        PlayButton.SetImage(playing ? _stopIcon : _playIcon, UIControlState.Normal);
     }
 
     /// <summary>

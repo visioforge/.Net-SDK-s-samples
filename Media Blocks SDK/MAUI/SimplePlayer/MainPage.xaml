@@ -30,12 +30,11 @@
                     TextColor="#B0FFFFFF" FontSize="12" VerticalOptions="Center" />
             </Grid>
 
-            <!-- Playback controls -->
-            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="8" Margin="0,4,0,0">
+            <!-- Playback controls (Open/Gallery auto-start playback, Stop to end) -->
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8" Margin="0,4,0,0">
                 <Button Grid.Column="0" x:Name="btOpen" Text="OPEN" Clicked="btOpen_Clicked" />
                 <Button Grid.Column="1" x:Name="btGallery" Text="GALLERY" Clicked="btGallery_Clicked" />
-                <Button Grid.Column="2" x:Name="btPlayPause" Text="PLAY" Clicked="btPlayPause_Clicked" />
-                <Button Grid.Column="3" x:Name="btStop" Text="STOP" Clicked="btStop_Clicked" />
+                <Button Grid.Column="2" x:Name="btStop" Text="STOP" Clicked="btStop_Clicked" IsEnabled="False" />
             </Grid>
 
             <!-- Volume + Speed -->

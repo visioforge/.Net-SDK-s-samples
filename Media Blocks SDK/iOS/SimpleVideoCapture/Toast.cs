@@ -1,14 +1,14 @@
-namespace SimpleVideoCaptureMB;
-
 using System;
 using UIKit;
 using CoreGraphics;
 
-public class Toast
+namespace SimpleVideoCaptureMB;
+
+public static class Toast
 {
-        /// <summary>
-        /// Show.
-        /// </summary>
+    /// <summary>
+    /// Show.
+    /// </summary>
     public static void Show(string message, UIViewController controller, double seconds = 2.0)
     {
         var toastLabel = new UILabel(new CGRect(10, controller.View.Frame.Size.Height - 100, controller.View.Frame.Size.Width - 20, 35))

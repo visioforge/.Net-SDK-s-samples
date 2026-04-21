@@ -7,8 +7,10 @@ using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core;
 using VisioForge.Core.Types.Events;
 using Android;
+using Android.App;
 using Android.Util;
 using Android.Runtime;
+using Android.Views;
 using Android.Widget;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.Sinks;
@@ -25,17 +27,15 @@ namespace SRT_Streamer
     {
         private VisioForge.Core.UI.Android.VideoViewGL videoView;
 
-        private EditText edSrtUri;
+        private ImageButton btStartStream;
 
-        private Spinner spSrtMode;
+        private ImageButton btSwitchCam;
 
-        private EditText edLatency;
-
-        private Button btStartStream;
-
-        private Button btSwitchCam;
+        private ImageButton btSettings;
 
         private TextView tvErrors;
+
+        private TextView tvStatus;
 
         private readonly System.Timers.Timer tmPosition = new System.Timers.Timer(500);
 
@@ -45,7 +45,7 @@ namespace SRT_Streamer
 
         private AudioRendererBlock _audioRenderer;
 
-        private MediaBlock _videoSource;
+        private SystemVideoSourceBlock _videoSource;
 
         private MediaBlock _audioSource;
 
@@ -67,9 +67,14 @@ namespace SRT_Streamer
 
         private bool _isStreaming;
 
-        private string _lastSrtUri;
-        private int _lastLatencyMs;
-        private int _lastModeIndex;
+        // SRT settings — persisted across dialog invocations.
+        private string _srtUri = "srt://192.168.1.44:8890?streamid=publish:mobile";
+        private int _srtLatencyMs = 750;
+        private int _srtModeIndex; // 0 caller, 1 listener, 2 rendezvous
+
+        // Re-entrancy gate for record / camera-flip taps. Both handlers mutate _pipeline and
+        // SystemVideoSourceBlock; overlapping calls race on _videoSource / _pipeline fields.
+        private int _busy;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -86,23 +91,54 @@ namespace SRT_Streamer
                }, 1004);
 
             videoView = FindViewById<VisioForge.Core.UI.Android.VideoViewGL>(Resource.Id.videoView);
-            edSrtUri = FindViewById<EditText>(Resource.Id.edSrtUri);
-            spSrtMode = FindViewById<Spinner>(Resource.Id.spSrtMode);
-            edLatency = FindViewById<EditText>(Resource.Id.edLatency);
 
-            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.srt_modes, Android.Resource.Layout.SimpleSpinnerItem);
-            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
-            spSrtMode.Adapter = adapter;
-
-            btStartStream = FindViewById<Button>(Resource.Id.btStartStream);
+            btStartStream = FindViewById<ImageButton>(Resource.Id.btStartStream);
             btStartStream.Click += btStartStream_Click;
 
-            tvErrors = FindViewById<TextView>(Resource.Id.tvErrors);
-
-            btSwitchCam = FindViewById<Button>(Resource.Id.btSwitchCam);
+            btSwitchCam = FindViewById<ImageButton>(Resource.Id.btSwitchCam);
             btSwitchCam.Click += btSwitchCam_Click;
 
+            btSettings = FindViewById<ImageButton>(Resource.Id.btSettings);
+            btSettings.Click += btSettings_Click;
+
+            tvErrors = FindViewById<TextView>(Resource.Id.tvErrors);
+            tvStatus = FindViewById<TextView>(Resource.Id.tvStatus);
+
+            // Fullscreen theme puts the app under the nav bar so video runs edge-to-edge.
+            // Without a bottom inset the gesture pill / 3-button nav bar overlaps the Record /
+            // Settings / Flip icons. Pad only the control bar by the system window inset so the
+            // video surface stays edge-to-edge but the icons remain tappable.
+            var controlBar = FindViewById<FrameLayout>(Resource.Id.controlBar);
+            controlBar.SetOnApplyWindowInsetsListener(new NavBarInsetListener(controlBar));
+
             CheckPermissionsAndStartPreview();
+        }
+
+        /// <summary>
+        /// Pads the control bar's bottom padding with the system navigation-bar inset so the
+        /// icons don't collide with the gesture pill. Works on both gesture and 3-button nav:
+        /// SystemWindowInsetBottom reports the correct reserved region in either mode.
+        /// </summary>
+        private sealed class NavBarInsetListener : Java.Lang.Object, View.IOnApplyWindowInsetsListener
+        {
+            private readonly View _target;
+            private readonly int _basePaddingBottom;
+
+            public NavBarInsetListener(View target)
+            {
+                _target = target;
+                _basePaddingBottom = target.PaddingBottom;
+            }
+
+            public WindowInsets OnApplyWindowInsets(View v, WindowInsets insets)
+            {
+                _target.SetPadding(
+                    _target.PaddingLeft,
+                    _target.PaddingTop,
+                    _target.PaddingRight,
+                    _basePaddingBottom + insets.SystemWindowInsetBottom);
+                return insets;
+            }
         }
 
         protected override async void OnDestroy()
@@ -169,33 +205,12 @@ namespace SRT_Streamer
                 return;
             }
 
-            VideoCaptureDeviceSourceSettings videoSourceSettings = null;
-
             if (_cameraIndex >= _cameras.Length)
             {
                 _cameraIndex = 0;
             }
 
-            var device = _cameras[_cameraIndex];
-            if (device != null)
-            {
-                // Use 1080p format
-                var formatItem = device.GetVideoFormatAndFrameRate(1920, 1080, out var frameRate);
-
-                // Fallback to HD or any available format
-                formatItem ??= device.GetHDOrAnyVideoFormatAndFrameRate(out frameRate);
-
-                if (formatItem != null)
-                {
-                    videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
-                    {
-                        Format = formatItem.ToFormat()
-                    };
-
-                    videoSourceSettings.Format.FrameRate = frameRate;
-                }
-            }
-
+            var videoSourceSettings = BuildVideoSourceSettings(_cameras[_cameraIndex]);
             if (videoSourceSettings == null)
             {
                 RunOnUiThread(() => Toast.MakeText(this, "Unable to configure camera settings", ToastLength.Long).Show());
@@ -246,6 +261,33 @@ namespace SRT_Streamer
             }
         }
 
+        /// <summary>
+        /// Picks the camera's 1080p@30 (or HD fallback) format and wraps it in
+        /// VideoCaptureDeviceSourceSettings. Shared by CreateEngineAsync and the live-switch
+        /// path so both sides pick identical format negotiation.
+        /// </summary>
+        private static VideoCaptureDeviceSourceSettings BuildVideoSourceSettings(VideoCaptureDeviceInfo device)
+        {
+            if (device == null)
+            {
+                return null;
+            }
+
+            var formatItem = device.GetVideoFormatAndFrameRate(1920, 1080, out var frameRate);
+            formatItem ??= device.GetHDOrAnyVideoFormatAndFrameRate(out frameRate);
+            if (formatItem == null)
+            {
+                return null;
+            }
+
+            var settings = new VideoCaptureDeviceSourceSettings(device)
+            {
+                Format = formatItem.ToFormat()
+            };
+            settings.Format.FrameRate = frameRate;
+            return settings;
+        }
+
         private async Task DestroyEngineAsync()
         {
             if (_pipeline != null)
@@ -270,24 +312,54 @@ namespace SRT_Streamer
 
         private async void btSwitchCam_Click(object sender, EventArgs e)
         {
+            // Rapid flips pre-fix stacked StopAsync/StartPreview calls that raced on _pipeline;
+            // Interlocked gate collapses repeated taps into a single transition.
+            if (System.Threading.Interlocked.CompareExchange(ref _busy, 1, 0) != 0)
+            {
+                return;
+            }
+
+            btSwitchCam.Enabled = false;
             try
             {
+                if (_cameras == null || _cameras.Length < 2)
+                {
+                    RunOnUiThread(() => Toast.MakeText(this, "Only one camera available", ToastLength.Short).Show());
+                    return;
+                }
+
+                var newIndex = (_cameraIndex == 0) ? 1 : 0;
+                if (newIndex >= _cameras.Length)
+                {
+                    return;
+                }
+
+                // Fast path: swap the capture device in-place on the live SystemVideoSourceBlock
+                // so the rest of the pipeline (tee, encoder, SRT sink) keeps running without a
+                // stop/rebuild. Matches the VCX SimpleVideoCapture flow: if the new device can
+                // negotiate the current resolution/fps, the swap is nearly instant.
+                if (_videoSource != null)
+                {
+                    var newSettings = BuildVideoSourceSettings(_cameras[newIndex]);
+                    if (newSettings != null)
+                    {
+                        var switched = await Task.Run(() => _videoSource.SwitchCamera(newSettings));
+                        if (switched)
+                        {
+                            _cameraIndex = newIndex;
+                            return;
+                        }
+                        Log.Warn("MainActivity", "Fast camera switch failed; falling back to full restart.");
+                    }
+                }
+
+                // Slow path: tear down and rebuild. Preserves streaming state.
                 var wasStreaming = _isStreaming;
-
                 await StopAsync();
-
-                if (_cameraIndex == 0)
-                {
-                    _cameraIndex = 1;
-                }
-                else
-                {
-                    _cameraIndex = 0;
-                }
-
+                _cameraIndex = newIndex;
                 if (wasStreaming)
                 {
-                    await StartStreamAsync(_lastSrtUri, _lastLatencyMs, _lastModeIndex);
+                    await StartStreamAsync(_srtUri, _srtLatencyMs, _srtModeIndex);
                 }
                 else
                 {
@@ -298,6 +370,40 @@ namespace SRT_Streamer
             {
                 Debug.WriteLine(ex);
             }
+            finally
+            {
+                System.Threading.Interlocked.Exchange(ref _busy, 0);
+                RunOnUiThread(() => btSwitchCam.Enabled = true);
+            }
+        }
+
+        private void btSettings_Click(object sender, EventArgs e)
+        {
+            var view = LayoutInflater.Inflate(Resource.Layout.dialog_srt_settings, null);
+
+            var dlgUri = view.FindViewById<EditText>(Resource.Id.dlgSrtUri);
+            var dlgMode = view.FindViewById<Spinner>(Resource.Id.dlgSrtMode);
+            var dlgLatency = view.FindViewById<EditText>(Resource.Id.dlgLatency);
+
+            dlgUri.Text = _srtUri;
+            dlgLatency.Text = _srtLatencyMs.ToString();
+
+            var adapter = ArrayAdapter.CreateFromResource(this, Resource.Array.srt_modes, Android.Resource.Layout.SimpleSpinnerItem);
+            adapter.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
+            dlgMode.Adapter = adapter;
+            dlgMode.SetSelection(_srtModeIndex);
+
+            new AlertDialog.Builder(this)
+                .SetTitle("SRT Settings")
+                .SetView(view)
+                .SetPositiveButton("Save", (_, _) =>
+                {
+                    _srtUri = dlgUri.Text?.Trim() ?? string.Empty;
+                    _srtModeIndex = dlgMode.SelectedItemPosition;
+                    _srtLatencyMs = int.TryParse(dlgLatency.Text, out var lat) ? lat : 750;
+                })
+                .SetNegativeButton("Cancel", (_, _) => { })
+                .Show();
         }
 
         private async Task StopAsync()
@@ -313,7 +419,9 @@ namespace SRT_Streamer
 
             await DestroyEngineAsync();
 
-            videoView.Invalidate();
+            // PostInvalidate (not Invalidate) — the bus/streaming thread may call Stop off the UI
+            // thread, and Android view invalidation from a non-UI thread throws. Fix #75.
+            videoView.PostInvalidate();
         }
 
         private async Task StartPreviewAsync()
@@ -322,22 +430,29 @@ namespace SRT_Streamer
 
             await CreateEngineAsync(forStreaming: false);
 
+            if (_pipeline == null)
+            {
+                return;
+            }
+
             await _pipeline.StartAsync();
 
             tmPosition.Start();
+
+            RunOnUiThread(() =>
+            {
+                tvStatus.Visibility = Android.Views.ViewStates.Gone;
+                tvErrors.Visibility = Android.Views.ViewStates.Gone;
+            });
         }
 
         private async Task StartStreamAsync(string uri, int latencyMs, int modeIndex)
         {
             if (string.IsNullOrEmpty(uri))
             {
-                Toast.MakeText(this, "Please set the SRT URI", ToastLength.Long).Show();
+                Toast.MakeText(this, "Open Settings and set the SRT URI", ToastLength.Long).Show();
                 return;
             }
-
-            _lastSrtUri = uri;
-            _lastLatencyMs = latencyMs;
-            _lastModeIndex = modeIndex;
 
             Log.Info("MainActivity", "StartStreamAsync: stopping preview...");
 
@@ -349,11 +464,15 @@ namespace SRT_Streamer
             // create engine
             await CreateEngineAsync(forStreaming: true);
 
+            if (_pipeline == null)
+            {
+                return;
+            }
+
             Log.Info("MainActivity", "StartStreamAsync: creating H264 encoder (auto-detect)...");
 
             // video encoder — auto-detect best encoder for platform
             _videoEncoder = new H264EncoderBlock();
-            Log.Info("MainActivity", $"StartStreamAsync: H264 encoder settings type = {_videoEncoder.Settings.GetType().Name}");
 
             var srtSettings = new SRTSinkSettings
             {
@@ -375,18 +494,12 @@ namespace SRT_Streamer
             // create SRT sink
             _srtSink = new SRTMPEGTSSinkBlock(srtSettings);
 
-            Log.Info("MainActivity", $"StartStreamAsync: SRT MPEG-TS available = {SRTMPEGTSSinkBlock.IsAvailable()}");
-
             // connect video encoding path
             _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
             _pipeline.Connect(_videoEncoder.Output, _srtSink.CreateNewInput(MediaBlockPadMediaType.Video));
 
-            Log.Info("MainActivity", "StartStreamAsync: video path connected");
-
             // audio encoder
             _audioEncoder = new AACEncoderBlock();
-            Log.Info("MainActivity", $"StartStreamAsync: AAC encoder settings type = {_audioEncoder.Settings.GetType().Name}");
-            Log.Info("MainActivity", $"StartStreamAsync: AAC encoder available = {AACEncoderBlock.IsAvailable(_audioEncoder.Settings)}");
 
             // connect audio encoding path
             _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
@@ -401,7 +514,15 @@ namespace SRT_Streamer
 
             _isStreaming = true;
 
-            btStartStream.Text = "Stop SRT";
+            RunOnUiThread(() =>
+            {
+                // Swap the icon, not the background — the red circle stays, and ic_stop (white
+                // square) overlays it so the button reads as a classic "stop" control.
+                btStartStream.SetImageResource(Resource.Drawable.ic_stop);
+                tvStatus.Text = "LIVE";
+                tvStatus.Visibility = Android.Views.ViewStates.Visible;
+                tvErrors.Visibility = Android.Views.ViewStates.Gone;
+            });
         }
 
         private async Task StopStreamAsync()
@@ -410,13 +531,24 @@ namespace SRT_Streamer
 
             _isStreaming = false;
 
-            btStartStream.Text = "Start SRT";
+            RunOnUiThread(() =>
+            {
+                btStartStream.SetImageResource(Resource.Drawable.ic_record);
+                tvStatus.Visibility = Android.Views.ViewStates.Gone;
+            });
 
             await StartPreviewAsync();
         }
 
         private async void btStartStream_Click(object sender, EventArgs e)
         {
+            // Same re-entrancy gate as the flip handler — Start/Stop both mutate _pipeline.
+            if (System.Threading.Interlocked.CompareExchange(ref _busy, 1, 0) != 0)
+            {
+                return;
+            }
+
+            btStartStream.Enabled = false;
             try
             {
                 if (_isStreaming)
@@ -425,19 +557,23 @@ namespace SRT_Streamer
                 }
                 else
                 {
-                    var uri = edSrtUri.Text;
-                    var latencyMs = int.TryParse(edLatency.Text, out var lat) ? lat : 750;
-                    var modeIndex = spSrtMode.SelectedItemPosition;
-
-                    await StartStreamAsync(uri, latencyMs, modeIndex);
+                    await StartStreamAsync(_srtUri, _srtLatencyMs, _srtModeIndex);
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
 
-                tvErrors.Visibility = Android.Views.ViewStates.Visible;
-                tvErrors.Text = ex.Message;
+                RunOnUiThread(() =>
+                {
+                    tvErrors.Visibility = Android.Views.ViewStates.Visible;
+                    tvErrors.Text = ex.Message;
+                });
+            }
+            finally
+            {
+                System.Threading.Interlocked.Exchange(ref _busy, 0);
+                RunOnUiThread(() => btStartStream.Enabled = true);
             }
         }
 

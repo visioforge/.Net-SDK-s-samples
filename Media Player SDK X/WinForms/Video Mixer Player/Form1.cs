@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VisioForge.Core.LiveVideoCompositor;
+using VisioForge.Core.LiveVideoCompositorV2;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types;
+using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X;
 using VisioForge.Core.Types.X.Sources;
 
@@ -187,6 +188,11 @@ namespace Video_Mixer_Player
             {
                 Debug.WriteLine(args.Message);
                 BeginInvoke(new Action(() => MessageBox.Show(args.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)));
+            };
+
+            _compositor.OnRenderStatistics += (senderX, args) =>
+            {
+                Debug.WriteLine($"Compositor FPS: actual {args.ActualFps:F1} / configured {args.ConfiguredFps:F1} (frames delivered: {args.FramesDelivered})");
             };
 
             await AddFileSourceAsync(lbSourceFiles.Items[0].ToString(), new Rect(0, 0, 1920, 1080));

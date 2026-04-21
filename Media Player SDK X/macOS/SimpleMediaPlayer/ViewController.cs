@@ -193,7 +193,7 @@ public partial class ViewController : NSViewController
             UTTypes.QuickTimeMovie,
             UTTypes.Movie,
             UTTypes.Audio,
-            UTTypes.Mp3,
+            UTTypes.MP3,
             UTTypes.Wav
         };
 

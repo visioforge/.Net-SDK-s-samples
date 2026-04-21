@@ -9,6 +9,21 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.4.18
+
+* [Media Blocks SDK] UniversalSourceBlock: added `VideoFlipRotate` option for automatic video orientation correction using image-orientation metadata
+* [Core] VOAACEncoderSettings deprecated in favor of `AVENCAACEncoderSettings`
+* [Core] RTSPXOutput: now accepts any `IAACEncoderSettings`, not just VOAAC
+* [Core] MediaInfoReaderCore: preserves image-orientation flip metadata during media info reading
+* [Core] H264Encoder: fixed thread-safety issue in KeyFrameDetected callback
+* [iOS] PhotoGalleryHelper: requests `PHAccessLevel.AddOnly` for iOS 26 compatibility
+* [Android] GStreamer Android NuGet rebuilt with zbar barcode plugin, bumped to 2026.4.18
+* [Platform] macOS demos migrated from net9.0-macos to net10.0-macos
+* [Dependencies] Uno.Sdk bumped 6.4.24 → 6.5.31
+* [Media Blocks SDK] LiveVideoCompositor V2: added `OnRenderStatistics` event with `ActualFps`, `ConfiguredFps`, `FramesDelivered`, and `LastFrameTimestamp` payload for detecting when the compositor falls behind the configured frame rate under heavy load
+* [Media Blocks SDK] LiveVideoCompositor V1 (`VisioForge.Core.LiveVideoCompositor`) marked `[Obsolete]` — migrate to `VisioForge.Core.LiveVideoCompositorV2` (identical class names, single-line `using` swap); V1 will be removed in a future release
+* [Demos] WPF LVC Demo and MAUI LVC Demo show the real vs configured output FPS in the UI; WinForms Video Mixer Player migrated from V1 to V2
+
 ## 2026.4.11
 
 * [Media Player SDK X] Added `Play_PauseAtFirstFrame` property to MediaPlayerCoreX — pauses at the first rendered frame for preview/thumbnail scenarios, matching the existing MediaPlayerCore API

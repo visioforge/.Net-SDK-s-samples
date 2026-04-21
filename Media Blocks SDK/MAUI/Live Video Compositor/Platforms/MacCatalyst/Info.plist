@@ -30,10 +30,12 @@
 	<string>Camera access is required to add camera sources to the compositor.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone access is required to add audio sources to the compositor.</string>
-	<key>NSHomeDirectoryUsageDescription</key>
-	<string>Home directory access is required to read media files.</string>
-	<key>NSVideoUsageDescription</key>
-	<string>Videos folder access is required to save recordings.</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>Documents folder access is required to read media files.</string>
+	<key>NSMoviesFolderUsageDescription</key>
+	<string>Movies folder access is required to save recordings.</string>
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>Downloads folder access is required to read media files.</string>
 	<key>NSScreenCaptureUsageDescription</key>
 	<string>Screen capture access is required to add the screen as a source in the compositor.</string>
 </dict>

@@ -87,12 +87,16 @@ public class AppDelegate : UIApplicationDelegate
         Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
         // create a UIViewController with a single UILabel
-        _vc = new CustomViewController(Window, out _videoView);
-        
-        _vc.SelectButton.TouchUpInside += async (sender, args) => 
-        {
-            _vc.OpenFilePicker();
-        };
+        _vc = new CustomViewController(Window);
+
+        // Force the VC's view hierarchy to load BEFORE we wire up button handlers.
+        // SelectButton / PlayButton / PositionSlider are created in ViewDidLoad, so
+        // touching _vc.SelectButton before LoadViewIfNeeded returns null on iOS 26
+        // (UIKit no longer triggers ViewDidLoad implicitly when a property is set on
+        // the VC) and the event-subscription lines below NRE in FinishedLaunching.
+        _vc.LoadViewIfNeeded();
+
+        _vc.SelectButton.TouchUpInside += (sender, args) => _vc.OpenFilePicker();
 
         _vc.PlayButton.TouchUpInside += async (sender, args) =>
         {
@@ -151,6 +155,10 @@ public class AppDelegate : UIApplicationDelegate
         Window.RootViewController = _vc;
 
         Window.MakeKeyAndVisible();
+
+        // ViewDidLoad already fired above via LoadViewIfNeeded, so VideoView is set.
+        _videoView = _vc.VideoView ?? throw new InvalidOperationException(
+            "CustomViewController.VideoView is null after LoadViewIfNeeded — video view not configured in ViewDidLoad.");
 
         VisioForgeX.InitSDK();
 
@@ -251,7 +259,7 @@ public class AppDelegate : UIApplicationDelegate
             await StopAllAsync();
 
             // run in UI thread
-            UIApplication.SharedApplication.InvokeOnMainThread(async () =>
+            UIApplication.SharedApplication.InvokeOnMainThread(() =>
             {
                 _vc.PositionSlider.Value = 0;
                 _vc.SetPlaying(false);
@@ -274,21 +282,35 @@ public class AppDelegate : UIApplicationDelegate
         /// <summary>
         /// Handles the pipeline on start event.
         /// </summary>
-    private void pipeline_OnStart(object sender, EventArgs e)
+    private async void pipeline_OnStart(object sender, EventArgs e)
     {
+        // Snapshot _pipeline so a concurrent teardown that nulls the field after our
+        // check doesn't NRE at the await. We deliberately await DurationAsync OUTSIDE
+        // InvokeOnMainThread: passing an async lambda there was async-void — if the
+        // pipeline was disposed between the null-check and the await, the resulting
+        // ObjectDisposedException escaped the outer try/catch (which only wrapped
+        // scheduling) and crashed the app. Here the try/catch around the await catches
+        // ODE, and only the synchronous UI assignment is marshalled to the main thread.
+        var pipeline = _pipeline;
+        if (pipeline == null)
+        {
+            return;
+        }
+
         try
         {
-            // run in UI thread
-            UIApplication.SharedApplication.InvokeOnMainThread(async () =>
+            var duration = (float)(await pipeline.DurationAsync()).TotalSeconds;
+            UIApplication.SharedApplication.InvokeOnMainThread(() =>
             {
-                if (_pipeline == null)
+                if (_vc != null && _vc.PositionSlider != null)
                 {
-                    return;
+                    _vc.PositionSlider.MaxValue = duration;
                 }
-
-                var duration = (float)(await _pipeline.DurationAsync()).TotalSeconds;
-                _vc.PositionSlider.MaxValue = duration;
             });
+        }
+        catch (ObjectDisposedException)
+        {
+            // Pipeline was disposed between the snapshot and DurationAsync — nothing to do.
         }
         catch (Exception exception)
         {

@@ -58,19 +58,33 @@ public class AppDelegate : UIApplicationDelegate
         try
         {
             _player = new VideoCaptureCoreX(_videoView as IVideoView);
+            // VideoCaptureCoreX defaults Video_Play to false — without this the pipeline
+            // runs (capture session is up, camera LED lights) but the video tee is never
+            // connected to the renderer bound to _videoView, so preview stays black.
+            _player.Video_Play = true;
             _player.OnError += PlayerOnError;
-            _player.OnOutputStopped += (sender, e) =>
+            _player.OnOutputStopped += async (sender, e) =>
             {
-                // we need to share video to Photos library
-                if (!string.IsNullOrEmpty(_filename))
+                // Async delay instead of Thread.Sleep — SDK rule forbids Thread.Sleep, and
+                // the event may fire on either the main thread (freezing UI for 500 ms) or
+                // on a GStreamer bus worker (blocking the bus and risking missed messages).
+                // Wrap in try/catch because this handler is async void.
+                try
                 {
-                    Thread.Sleep(500);
-
-                    InvokeOnMainThread(() =>
+                    if (!string.IsNullOrEmpty(_filename))
                     {
-                        SaveVideoToPhotoLibrary(_filename);
-                        _filename = null;
-                    });
+                        await Task.Delay(500);
+
+                        InvokeOnMainThread(() =>
+                        {
+                            SaveVideoToPhotoLibrary(_filename);
+                            _filename = null;
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"OnOutputStopped handler failed: {ex.Message}");
                 }
             };
 
@@ -123,7 +137,9 @@ public class AppDelegate : UIApplicationDelegate
 
             // configure encoders
             var videoEncoder = new AppleMediaH264EncoderSettings();
-           // var audioEncoder = new AVENCAACEncoderSettings();
+            // AVENCAAC is gst-libav-backed and isn't bundled on iOS — uncommenting would break
+            // the build. Use VOAACEncoderSettings (portable) instead:
+            //   var audioEncoder = new VOAACEncoderSettings();
             
             GenerateFilename();
             var mp4Output = new MP4Output(_filename, videoEncoder, null);//audioEncoder);
@@ -204,18 +220,37 @@ public class AppDelegate : UIApplicationDelegate
                 return;
             }
 
-            if (_isCapturing)
+            // Previously: on a StopCaptureAsync/StartCaptureAsync throw, _isCapturing
+            // stayed at its old value and UpdateCaptureButtonAppearance never fired, so
+            // the big red button showed the wrong state. Assume success optimistically,
+            // update the UI, and roll the flag + glyph back if the SDK call threw.
+            _btStartCapture.Enabled = false;
+            var wasCapturing = _isCapturing;
+            try
             {
-                await _player.StopCaptureAsync(0);
-                _isCapturing = false;
+                if (wasCapturing)
+                {
+                    _isCapturing = false;
+                    UpdateCaptureButtonAppearance();
+                    await _player.StopCaptureAsync(0);
+                }
+                else
+                {
+                    GenerateFilename();
+                    _isCapturing = true;
+                    UpdateCaptureButtonAppearance();
+                    await _player.StartCaptureAsync(0, _filename);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Capture toggle failed: {ex.Message}");
+                _isCapturing = wasCapturing;
                 UpdateCaptureButtonAppearance();
             }
-            else
+            finally
             {
-                GenerateFilename();
-                await _player.StartCaptureAsync(0, _filename);
-                _isCapturing = true;
-                UpdateCaptureButtonAppearance();
+                _btStartCapture.Enabled = true;
             }
         };
 
@@ -240,18 +275,44 @@ public class AppDelegate : UIApplicationDelegate
         _btSelectCamera.SetImage(flipImage, UIControlState.Normal);
         _btSelectCamera.TouchUpInside += async (sender, e) =>
         {
-            if (_player != null)
+            // Disable the button while the flip is in flight so rapid double-taps can't
+            // interleave two Stop/Start sequences against the same _player / _cameraIndex.
+            // try/catch is mandatory because this delegate is async void — an uncaught throw
+            // from StopCamera/StartAsync would escape to the thread-pool and terminate the
+            // process on the very next unhandled exception.
+            _btSelectCamera.Enabled = false;
+            try
             {
-                await StopCamera();
+                if (_player != null)
+                {
+                    await StopCamera();
+                }
+
+                _isFrontCamera = !_isFrontCamera;
+
+                // Map front/back preference to the device's actual index rather than hard-
+                // coded 0/1 — iPads without a rear camera, external-cam rigs, and some
+                // Multi-Cam setups enumerate in a different order and would otherwise open
+                // the wrong camera (or throw IndexOutOfRange for an empty back slot).
+                if (_cameras == null || _cameras.Length == 0)
+                {
+                    _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
+                }
+                _cameraIndex = FindCameraIndex(_cameras, preferFront: _isFrontCamera);
+
+                _isCapturing = false;
+                UpdateCaptureButtonAppearance();
+
+                await StartAsync();
             }
-
-            _isFrontCamera = !_isFrontCamera;
-            _cameraIndex = _isFrontCamera ? 1 : 0;
-
-            _isCapturing = false;
-            UpdateCaptureButtonAppearance();
-
-            await StartAsync();
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Camera flip failed: {ex.Message}");
+            }
+            finally
+            {
+                _btSelectCamera.Enabled = true;
+            }
         };
 
         controlBar.AddSubview(_btSelectCamera);
@@ -266,15 +327,55 @@ public class AppDelegate : UIApplicationDelegate
     }
 
         /// <summary>
+        /// Resolve a front/back camera to its index in <paramref name="cameras"/> by querying
+        /// <see cref="VideoCaptureDeviceInfo.IsFrontFacing"/> rather than hard-coded 0/1 slot
+        /// assumptions. Falls back to the opposite-facing camera when the preferred one isn't
+        /// available, and finally to the first device in the list.
+        /// </summary>
+    private static int FindCameraIndex(VideoCaptureDeviceInfo[] cameras, bool preferFront)
+    {
+        if (cameras == null || cameras.Length == 0)
+        {
+            return 0;
+        }
+
+        var preferred = preferFront ? VideoCaptureDeviceFacing.Front : VideoCaptureDeviceFacing.Back;
+        for (var i = 0; i < cameras.Length; i++)
+        {
+            if (cameras[i].Facing == preferred)
+            {
+                return i;
+            }
+        }
+
+        var fallback = preferFront ? VideoCaptureDeviceFacing.Back : VideoCaptureDeviceFacing.Front;
+        for (var i = 0; i < cameras.Length; i++)
+        {
+            if (cameras[i].Facing == fallback)
+            {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+        /// <summary>
         /// Update the capture button's inner shape — red dot when idle, red square when recording.
         /// </summary>
     private void UpdateCaptureButtonAppearance()
     {
-        foreach (var sub in _btStartCapture.Subviews)
+        // ToArray() snapshot — iterating _btStartCapture.Subviews directly while calling
+        // RemoveFromSuperview mutates the underlying NSArray during enumeration (the next
+        // element is skipped, or UIKit throws on some versions). Also Dispose the removed
+        // subview so the managed UIView peer releases its CALayer + auto-layout constraints
+        // right away instead of waiting for GC.
+        foreach (var sub in _btStartCapture.Subviews.ToArray())
         {
             if (sub.Tag == 99)
             {
                 sub.RemoveFromSuperview();
+                sub.Dispose();
             }
         }
 
@@ -404,6 +505,17 @@ public class AppDelegate : UIApplicationDelegate
         // create a UIViewController with a single UILabel
         var vc = new UIViewController();
 
+        // Install the VC into the window BEFORE building the subview hierarchy so
+        // `vc.View.Bounds` is non-zero when VideoView/Metal initialises. Previously we
+        // touched `vc.View` right after `new UIViewController()`, which fires loadView
+        // on an orphan VC whose view has Bounds = CGRect.Empty. Metal drawables created
+        // against a zero-sized layer don't gain a surface even after AutoresizingMask
+        // later resizes the UIView — the camera records fine (LED on) but preview stays
+        // black.
+        Window.RootViewController = vc;
+        Window.MakeKeyAndVisible();
+        vc.View.LayoutIfNeeded();
+
         CreateVideoView(vc.View);
 
         AddButtons(vc.View);
@@ -421,14 +533,28 @@ public class AppDelegate : UIApplicationDelegate
             }
         });
 
-        Window.RootViewController = vc;
-
-        Window.MakeKeyAndVisible();
-
         VisioForgeX.InitSDK();
 
-        // start preview in UI thread
-        InvokeOnMainThread(async () => { await StartAsync(); });
+        // start preview in UI thread — wrap the body in try/catch so permission denial, a
+        // missing HD format, or a StartAsync throw surfaces as a log/toast instead of
+        // terminating the app. Passing an async lambda to InvokeOnMainThread gives it
+        // async-void semantics; without the catch, any throw escapes to UIKit's runloop.
+        InvokeOnMainThread(async () =>
+        {
+            try
+            {
+                await StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Initial capture start failed: {ex}");
+                var root = Window?.RootViewController;
+                if (root != null)
+                {
+                    Toast.Show("Initial capture failed: " + ex.Message, root);
+                }
+            }
+        });
 
         return true;
     }
