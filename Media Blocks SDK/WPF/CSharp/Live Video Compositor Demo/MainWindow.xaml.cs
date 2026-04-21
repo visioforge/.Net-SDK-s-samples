@@ -1421,7 +1421,12 @@ namespace Live_Video_Compositor_Demo
                 return;
             }
 
-            var ctx = _addSourceContextMenu ??= BuildAddSourceContextMenu();
+            if (_addSourceContextMenu == null)
+            {
+                _addSourceContextMenu = BuildAddSourceContextMenu();
+            }
+
+            var ctx = _addSourceContextMenu;
             ctx.PlacementTarget = sender as Button;
             ctx.IsOpen = true;
         }
@@ -1570,9 +1575,9 @@ namespace Live_Video_Compositor_Demo
                         // Position slips through identically. Clamp both to [0, Maximum].
                         double durationSec = duration.TotalSeconds;
                         double positionSec = position.TotalSeconds;
-                        double max = double.IsFinite(durationSec) && durationSec > 0 ? durationSec : 0;
+                        double max = !double.IsNaN(durationSec) && !double.IsInfinity(durationSec) && durationSec > 0 ? durationSec : 0;
                         tbSeeking.Maximum = max;
-                        tbSeeking.Value = double.IsFinite(positionSec) && positionSec >= 0
+                        tbSeeking.Value = !double.IsNaN(positionSec) && !double.IsInfinity(positionSec) && positionSec >= 0
                             ? Math.Min(positionSec, max)
                             : 0;
                     }
@@ -1790,7 +1795,12 @@ namespace Live_Video_Compositor_Demo
                 return;
             }
 
-            var ctx = _addOutputContextMenu ??= BuildAddOutputContextMenu();
+            if (_addOutputContextMenu == null)
+            {
+                _addOutputContextMenu = BuildAddOutputContextMenu();
+            }
+
+            var ctx = _addOutputContextMenu;
             ctx.PlacementTarget = sender as Button;
             ctx.IsOpen = true;
         }
@@ -1981,7 +1991,7 @@ namespace Live_Video_Compositor_Demo
                     // OverflowException from TimeSpan.FromSeconds; a negative value would seek
                     // backwards past zero and some demuxers interpret that as "seek to end".
                     double newValue = e.NewValue;
-                    if (!double.IsFinite(newValue) || newValue < 0)
+                    if (double.IsNaN(newValue) || double.IsInfinity(newValue) || newValue < 0)
                     {
                         return;
                     }
@@ -2058,7 +2068,7 @@ namespace Live_Video_Compositor_Demo
                 // final value comes from the Slider's current Value, which can be NaN if
                 // Maximum was NaN from a prior live-source interaction.
                 double seekSec = tbSeeking.Value;
-                if (!double.IsFinite(seekSec) || seekSec < 0)
+                if (double.IsNaN(seekSec) || double.IsInfinity(seekSec) || seekSec < 0)
                 {
                     return;
                 }
