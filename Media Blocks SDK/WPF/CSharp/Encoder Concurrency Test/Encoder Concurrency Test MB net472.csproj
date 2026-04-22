@@ -5,6 +5,7 @@
     <RootNamespace>EncoderConcurrencyTest</RootNamespace>
     <UseWPF>true</UseWPF>
     <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="visioforge_main_icon.ico" />
