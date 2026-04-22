@@ -626,7 +626,7 @@ namespace Tempo_Pitch_Demo_X
             try
             {
                 double value = sliderSeek.Value;
-                if (double.IsNaN(value) || double.IsInfinity(value) || value < 0)
+                if (!double.IsFinite(value) || value < 0)
                 {
                     return;
                 }
@@ -662,7 +662,7 @@ namespace Tempo_Pitch_Demo_X
             {
                 double newValue = e.NewValue;
                 double max = sliderSeek.Maximum;
-                if (double.IsNaN(newValue) || double.IsInfinity(newValue) || newValue < 0 || double.IsNaN(max) || double.IsInfinity(max) || max < 0)
+                if (!double.IsFinite(newValue) || newValue < 0 || !double.IsFinite(max) || max < 0)
                 {
                     return;
                 }

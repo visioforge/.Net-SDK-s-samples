@@ -56,20 +56,14 @@ namespace Multi_Audio_Streams_Demo_X
 
                 Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
 
-                // Enumerate audio output devices on the DirectSound API. DisposeAsync invokes
-                // IAsyncDisposable (StopAsync + CloseAsync) instead of the sync Dispose path
-                // (CloseX), which can deadlock or drop cleanup on GStreamer pads that are still
-                // finalizing. try/finally is used instead of `await using` for net472 compatibility
-                // (C# 7.3 in legacy multi-targets does not support asynchronous using).
-                var probe = new MediaPlayerCoreX();
-                try
+                // Enumerate audio output devices on the DirectSound API. `await using` invokes
+                // IAsyncDisposable.DisposeAsync (StopAsync + CloseAsync) instead of the sync
+                // Dispose path (CloseX), which can deadlock or drop cleanup on GStreamer pads
+                // that are still finalizing.
+                await using (var probe = new MediaPlayerCoreX())
                 {
                     var devices = await probe.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound);
                     _audioDevices = devices?.ToList() ?? new List<AudioOutputDeviceInfo>();
-                }
-                finally
-                {
-                    await probe.DisposeAsync();
                 }
 
                 cbAudioOutput.Items.Clear();
@@ -552,7 +546,7 @@ namespace Multi_Audio_Streams_Demo_X
             try
             {
                 double value = sliderSeek.Value;
-                if (double.IsNaN(value) || double.IsInfinity(value) || value < 0)
+                if (!double.IsFinite(value) || value < 0)
                 {
                     return;
                 }
@@ -588,7 +582,7 @@ namespace Multi_Audio_Streams_Demo_X
             {
                 double newValue = e.NewValue;
                 double max = sliderSeek.Maximum;
-                if (double.IsNaN(newValue) || double.IsInfinity(newValue) || newValue < 0 || double.IsNaN(max) || double.IsInfinity(max) || max < 0)
+                if (!double.IsFinite(newValue) || newValue < 0 || !double.IsFinite(max) || max < 0)
                 {
                     return;
                 }

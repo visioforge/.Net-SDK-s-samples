@@ -1,0 +1,76 @@
+<Window x:Class="EncoderConcurrencyTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:EncoderConcurrencyTest"
+        Title="Encoder Concurrency Test (H264 / HEVC / AV1)" Width="1400" Height="800"
+        Icon="visioforge_main_icon.ico"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    <DockPanel>
+        <Border DockPanel.Dock="Top" BorderBrush="#DDD" BorderThickness="0,0,0,1" Padding="8">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="0,0,12,0">
+                    <TextBlock Text="Codec" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="cbCodec" Width="80" SelectionChanged="CbCodec_SelectionChanged">
+                        <ComboBoxItem Content="H264" IsSelected="True"/>
+                        <ComboBoxItem Content="HEVC"/>
+                        <ComboBoxItem Content="AV1"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="0,0,12,0">
+                    <TextBlock Text="Resolution" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="cbResolution" Width="140">
+                        <ComboBoxItem Content="3840 x 2160 (4K)"/>
+                        <ComboBoxItem Content="1920 x 1080" IsSelected="True"/>
+                        <ComboBoxItem Content="1280 x 720"/>
+                        <ComboBoxItem Content="854 x 480"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="0,0,12,0">
+                    <TextBlock Text="Frame rate" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="cbFrameRate" Width="80">
+                        <ComboBoxItem Content="60" IsSelected="True"/>
+                        <ComboBoxItem Content="30"/>
+                        <ComboBoxItem Content="25"/>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="0,0,12,0">
+                    <TextBlock Text="Encoder" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="cbEncoder" Width="180"/>
+                </StackPanel>
+                <StackPanel Margin="0,0,12,0">
+                    <TextBlock Text="Decoder" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="cbDecoder" Width="190"/>
+                </StackPanel>
+                <StackPanel Margin="0,0,12,0">
+                    <TextBlock Text="Adapter" FontWeight="SemiBold"/>
+                    <ComboBox x:Name="cbAdapter" Width="260"/>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Bottom" Margin="12,0,0,0">
+                    <Button x:Name="btAdd" Content="Add pipeline" Click="BtAdd_Click"
+                            Padding="14,6" FontWeight="SemiBold"/>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Bottom" Margin="6,0,0,0">
+                    <Button x:Name="btFillToLimit" Content="Fill to limit"
+                            Click="BtFillToLimit_Click" Padding="10,6"
+                            ToolTip="Add pipelines until one fails to start. Useful for NVENC (cap ~8) and multi-runtime Auto."/>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Bottom" Margin="6,0,0,0">
+                    <Button x:Name="btRemoveLast" Content="Remove last"
+                            Click="BtRemoveLast_Click" Padding="10,6"/>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Bottom" Margin="6,0,0,0">
+                    <Button x:Name="btStopAll" Content="Stop all"
+                            Click="BtStopAll_Click" Padding="10,6"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Border DockPanel.Dock="Bottom" BorderBrush="#DDD" BorderThickness="0,1,0,0" Padding="8">
+            <TextBlock x:Name="lbStatus" Text="Ready."/>
+        </Border>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <WrapPanel x:Name="tilesPanel" Orientation="Horizontal" Margin="8"/>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

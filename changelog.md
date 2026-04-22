@@ -9,6 +9,14 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.4.21
+
+* [Core] Added `AutoAV1EncoderSettings`: auto-selecting AV1 encoder that walks AMF → NVENC → QSV → SVT-AV1 via `EncoderRuntimeTracker`, mirroring `AutoH264EncoderSettings` / `AutoHEVCEncoderSettings`; AV1 sessions now participate in per-runtime slot accounting
+* [Core] Added typed `AV1Encoder.CanCreateSession(IAV1EncoderSettings, out string)` probe so AV1 runtime selection can detect driver rejections before wiring a pipeline
+* [Core] Added `MFH264EncoderSettings`, `D3D12H264EncoderSettings`, `D3D12HEVCEncoderSettings` — alternative Windows runtimes (`mfh264enc`, `d3d12h264enc`, `d3d12h265enc`) with independent per-adapter session counters for bypassing per-runtime caps (e.g., AMD iGPU 2-session ceiling)
+* [Core] Added `AutoH264EncoderSettings` / `AutoHEVCEncoderSettings`: auto-selecting encoder that probes runtimes in order (AMF → NVENC → QSV → MF → D3D12 → software), tracks in-flight sessions via `EncoderRuntimeTracker`, and falls back when a runtime's cap is reached
+* [Demo] Added `Encoder Concurrency Test` WPF demo (Media Blocks SDK): spawn multiple source→encoder→decoder→renderer pipelines with configurable resolution, frame rate, encoder runtime, and adapter to exercise concurrent-session limits end-to-end
+
 ## 2026.4.18
 
 * [Media Blocks SDK] UniversalSourceBlock: added `VideoFlipRotate` option for automatic video orientation correction using image-orientation metadata

@@ -1,0 +1,19 @@
+<UserControl x:Class="EncoderConcurrencyTest.PipelineTile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+             Width="400" Height="260" Margin="4">
+    <Border BorderBrush="#AAA" BorderThickness="1" Background="#111" CornerRadius="2">
+        <Grid>
+            <vf:VideoView x:Name="VideoView1"/>
+            <Border VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                    Background="#AA000000" Padding="6,2">
+                <TextBlock x:Name="lbHeader" Text="#--" Foreground="White" FontWeight="SemiBold"/>
+            </Border>
+            <Border VerticalAlignment="Bottom" HorizontalAlignment="Stretch"
+                    Background="#AA000000" Padding="6,2">
+                <TextBlock x:Name="lbStatus" Text="Idle" Foreground="White" TextWrapping="Wrap"/>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>
