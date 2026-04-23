@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sync Playback X WPF net7", "WPF\Sync Playback\Sync Playback X WPF net7.csproj", "{8818CE59-C4CB-ECFC-AAEC-961329F7FB34}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multi Audio Streams Demo X WPF net7", "WPF\Multi Audio Streams Demo\Multi Audio Streams Demo X WPF net7.csproj", "{7901CB2D-B09D-44DA-B37D-B6F860BD2AFF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTube Player Demo X WPF net7", "WPF\YouTube Player Demo\YouTube Player Demo X WPF net7.csproj", "{40C6F9DE-B23D-4887-B317-D813AA4F1836}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tempo Pitch Demo X WPF net7", "WPF\Tempo Pitch Demo\Tempo Pitch Demo X WPF net7.csproj", "{33E34BD4-1F8F-41E5-B971-8DA46C42B509}"
 EndProject
@@ -157,6 +159,18 @@ Global
 		{33E34BD4-1F8F-41E5-B971-8DA46C42B509}.Release|x64.Build.0 = Release|Any CPU
 		{33E34BD4-1F8F-41E5-B971-8DA46C42B509}.Release|x86.ActiveCfg = Release|Any CPU
 		{33E34BD4-1F8F-41E5-B971-8DA46C42B509}.Release|x86.Build.0 = Release|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Debug|x64.ActiveCfg = Debug|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Debug|x64.Build.0 = Debug|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Debug|x86.ActiveCfg = Debug|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Debug|x86.Build.0 = Debug|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Release|Any CPU.Build.0 = Release|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Release|x64.ActiveCfg = Release|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Release|x64.Build.0 = Release|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Release|x86.ActiveCfg = Release|Any CPU
+{40C6F9DE-B23D-4887-B317-D813AA4F1836}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -172,6 +186,7 @@ Global
 		{8818CE59-C4CB-ECFC-AAEC-961329F7FB34} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
 		{7901CB2D-B09D-44DA-B37D-B6F860BD2AFF} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
 		{33E34BD4-1F8F-41E5-B971-8DA46C42B509} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
+{40C6F9DE-B23D-4887-B317-D813AA4F1836} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}

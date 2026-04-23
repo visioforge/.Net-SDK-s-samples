@@ -1,0 +1,94 @@
+<Window x:Class="youtube_player_x.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:youtube_player_x"
+        xmlns:vf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="Media Player SDK X .Net - YouTube Player Demo (WPF)"
+        Width="960" Height="680"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="285" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Video view -->
+        <vf:VideoView x:Name="VideoView1" Grid.Row="0" Grid.Column="0" Margin="8,8,4,4" />
+
+        <!-- Controls panel -->
+        <StackPanel Grid.Row="0" Grid.Column="1" Margin="4,8,8,4">
+            <TextBlock Text="YouTube URL" FontWeight="SemiBold" />
+            <TextBox x:Name="edURL"
+                     Text="https://www.youtube.com/watch?v=d2smz_1L2_0"
+                     Margin="0,3,0,0"
+                     TextWrapping="Wrap" />
+            <Button x:Name="btReadFormats"
+                    Content="Read Formats"
+                    Height="26"
+                    Margin="0,4,0,0"
+                    Click="btReadFormats_Click" />
+
+            <TextBlock Text="Video stream" FontWeight="SemiBold" Margin="0,10,0,0" />
+            <ComboBox x:Name="cbVideoStream" Margin="0,3,0,0" />
+
+            <TextBlock Text="Audio stream" FontWeight="SemiBold" Margin="0,6,0,0" />
+            <ComboBox x:Name="cbAudioStream" Margin="0,3,0,0" />
+
+            <TextBlock Text="Audio output device" FontWeight="SemiBold" Margin="0,10,0,0" />
+            <ComboBox x:Name="cbAudioOutput" Margin="0,3,0,0" />
+
+            <TextBlock Text="Volume" FontWeight="SemiBold" Margin="0,6,0,0" />
+            <Slider x:Name="sliderVolume"
+                    Minimum="0" Maximum="100" Value="80"
+                    Margin="0,3,0,0"
+                    ValueChanged="sliderVolume_ValueChanged" />
+
+            <CheckBox x:Name="cbDebugMode" Content="Debug mode" Margin="0,10,0,0" />
+
+            <TextBlock Text="Log" FontWeight="SemiBold" Margin="0,10,0,0" />
+            <TextBox x:Name="edLog"
+                     Height="140"
+                     Margin="0,3,0,0"
+                     IsReadOnly="True"
+                     TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto"
+                     AcceptsReturn="True" />
+        </StackPanel>
+
+        <!-- Timeline row -->
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="8,4,8,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Slider x:Name="sliderTimeline"
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    ValueChanged="sliderTimeline_ValueChanged" />
+            <TextBlock x:Name="lblTime"
+                       Grid.Column="1"
+                       Text="00:00:00 / 00:00:00"
+                       VerticalAlignment="Center"
+                       Margin="8,0,0,0"
+                       MinWidth="140" />
+        </Grid>
+
+        <!-- Buttons row -->
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="8,4,8,8">
+            <Button x:Name="btStart"   Content="Start"   Width="80" Height="26" Click="btStart_Click" />
+            <Button x:Name="btStop"    Content="Stop"    Width="80" Height="26" Margin="4,0,0,0" Click="btStop_Click" />
+            <Button x:Name="btPause"   Content="Pause"   Width="80" Height="26" Margin="4,0,0,0" Click="btPause_Click" />
+            <Button x:Name="btResume"  Content="Resume"  Width="80" Height="26" Margin="4,0,0,0" Click="btResume_Click" />
+            <TextBlock x:Name="lblStatus" VerticalAlignment="Center" Margin="12,0,0,0" Foreground="Gray" />
+        </StackPanel>
+    </Grid>
+</Window>
