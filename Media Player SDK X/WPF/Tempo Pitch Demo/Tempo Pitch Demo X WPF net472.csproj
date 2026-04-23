@@ -9,6 +9,7 @@
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisLevel>latest</AnalysisLevel>
     <NoWarn>S2325</NoWarn>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="visioforge_main_icon.ico" />
