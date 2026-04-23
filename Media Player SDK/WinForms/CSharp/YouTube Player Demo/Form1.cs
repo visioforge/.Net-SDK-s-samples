@@ -3,14 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.Types;
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.MediaPlayer;
-    using YoutubeExplode;
-    using YoutubeExplode.Videos.Streams;
+    using ManuHub.Ytdlp.NET;
 using System.Diagnostics;
 
     /// <summary>
@@ -21,12 +21,12 @@ using System.Diagnostics;
         /// <summary>
         /// The video info list.
         /// </summary>
-        private readonly List<IVideoStreamInfo> _videoInfoList = new List<IVideoStreamInfo>();
+        private readonly List<FormatMetadata> _videoInfoList = new List<FormatMetadata>();
 
         /// <summary>
         /// The audio info list.
         /// </summary>
-        private readonly List<IAudioStreamInfo> _audioInfoList = new List<IAudioStreamInfo>();
+        private readonly List<FormatMetadata> _audioInfoList = new List<FormatMetadata>();
 
         /// <summary>
         /// The time tag.
@@ -92,9 +92,12 @@ using System.Diagnostics;
                 MediaPlayer1.Audio_AdditionalStreams_Clear();
 
                 MediaPlayer1.Playlist_Clear();
-                MediaPlayer1.Playlist_Add(_videoInfoList[cbVideoStream.SelectedIndex].Url);
+                var selectedVideoFormat = _videoInfoList[cbVideoStream.SelectedIndex];
+                var audioMuxed = !string.IsNullOrEmpty(selectedVideoFormat.Acodec) && selectedVideoFormat.Acodec != "none";
 
-                if (_videoInfoList[cbVideoStream.SelectedIndex].ToString().Contains("Muxed"))
+                MediaPlayer1.Playlist_Add(selectedVideoFormat.Url!);
+
+                if (audioMuxed)
                 {
                     MediaPlayer1.Audio_PlayAudio = true;
                 }
@@ -102,7 +105,7 @@ using System.Diagnostics;
                 if (cbAudioStream.SelectedIndex > 0)
                 {
                     MediaPlayer1.Audio_PlayAudio = true;
-                    MediaPlayer1.Audio_AdditionalStreams_Add(_audioInfoList[cbAudioStream.SelectedIndex].Url);
+                    MediaPlayer1.Audio_AdditionalStreams_Add(_audioInfoList[cbAudioStream.SelectedIndex - 1].Url!);
                 }
 
                 if (MediaPlayer1.Audio_PlayAudio)
@@ -162,23 +165,40 @@ using System.Diagnostics;
                 cbAudioStream.Items.Clear();
                 cbAudioStream.Items.Add("None");
 
-                var youtube = new YoutubeClient();
+                var ytdlpPath = Path.Combine(AppContext.BaseDirectory, "tools", "yt-dlp.exe");
+                var denoPath = Path.Combine(AppContext.BaseDirectory, "tools", "deno.exe");
 
-                // You can specify video ID or URL
-                var video = await youtube.Videos.GetAsync(edURL.Text);
-                var streamManifest = await youtube.Videos.Streams.GetManifestAsync(video.Id.Value);
+                await using var ytdlp = new Ytdlp(ytdlpPath)
+                    .WithJsRuntime(Runtime.Deno, denoPath);
 
-                var videos = streamManifest.GetVideoOnlyStreams();
+                var metadata = await ytdlp.GetMetadataAsync(edURL.Text);
+                var formats = metadata?.Formats;
+
+                if (formats == null)
+                {
+                    MessageBox.Show(this, "Could not retrieve formats.");
+                    return;
+                }
+
+                var videos = formats.Where(f =>
+                    !string.IsNullOrEmpty(f.Vcodec) && f.Vcodec != "none" &&
+                    (string.IsNullOrEmpty(f.Acodec) || f.Acodec == "none") &&
+                    !string.IsNullOrEmpty(f.Url));
+
                 foreach (var stream in videos)
                 {
-                    cbVideoStream.Items.Add(stream.ToString());
+                    cbVideoStream.Items.Add($"{stream.Format ?? stream.FormatId} [{stream.Ext}]");
                     _videoInfoList.Add(stream);
                 }
 
-                var audios = streamManifest.GetAudioOnlyStreams();
+                var audios = formats.Where(f =>
+                    !string.IsNullOrEmpty(f.Acodec) && f.Acodec != "none" &&
+                    (string.IsNullOrEmpty(f.Vcodec) || f.Vcodec == "none") &&
+                    !string.IsNullOrEmpty(f.Url));
+
                 foreach (var stream in audios)
                 {
-                    cbAudioStream.Items.Add($"{stream.ToString()} [{stream.Bitrate.ToString()}]");
+                    cbAudioStream.Items.Add($"{stream.Format ?? stream.FormatId} [{stream.Abr?.ToString("F0") ?? "?"} kbps]");
                     _audioInfoList.Add(stream);
                 }
 

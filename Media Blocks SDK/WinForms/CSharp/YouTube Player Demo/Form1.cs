@@ -4,6 +4,7 @@ namespace youtube_player
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using VisioForge.Core;
@@ -14,8 +15,7 @@ namespace youtube_player
     using VisioForge.Core.Types.Events;
     using VisioForge.Core.Types.X.Sources;
 
-    using YoutubeExplode;
-    using YoutubeExplode.Videos.Streams;
+    using ManuHub.Ytdlp.NET;
 using System.Diagnostics;
 
     /// <summary>
@@ -26,12 +26,12 @@ using System.Diagnostics;
         /// <summary>
         /// The video info list.
         /// </summary>
-        private readonly List<IVideoStreamInfo> _videoInfoList = new List<IVideoStreamInfo>();
+        private readonly List<FormatMetadata> _videoInfoList = new List<FormatMetadata>();
 
         /// <summary>
         /// The audio info list.
         /// </summary>
-        private readonly List<IAudioStreamInfo> _audioInfoList = new List<IAudioStreamInfo>();
+        private readonly List<FormatMetadata> _audioInfoList = new List<FormatMetadata>();
 
         /// <summary>
         /// The pipeline.
@@ -74,6 +74,9 @@ using System.Diagnostics;
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Form1"/> class.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -100,8 +103,9 @@ using System.Diagnostics;
                 }
 
                 // video stream
-                var videoSourceSettings = await UniversalSourceSettings.CreateAsync(_videoInfoList[cbVideoStream.SelectedIndex].Url);
-                var audioMuxed = videoSourceSettings.GetInfo().AudioStreams.Count > 0;
+                var selectedVideoFormat = _videoInfoList[cbVideoStream.SelectedIndex];
+                var audioMuxed = !string.IsNullOrEmpty(selectedVideoFormat.Acodec) && selectedVideoFormat.Acodec != "none";
+                var videoSourceSettings = await UniversalSourceSettings.CreateAsync(new Uri(selectedVideoFormat.Url!), ignoreMediaInfoReader: true);
                 _videoSource = new UniversalSourceBlock(videoSourceSettings);
 
                 _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
@@ -120,7 +124,7 @@ using System.Diagnostics;
                 {
                     if (cbAudioStream.SelectedIndex > 0)
                     {
-                        var audioSourceSettings = await UniversalSourceSettings.CreateAsync(_audioInfoList[cbAudioStream.SelectedIndex].Url);
+                        var audioSourceSettings = await UniversalSourceSettings.CreateAsync(new Uri(_audioInfoList[cbAudioStream.SelectedIndex - 1].Url!), ignoreMediaInfoReader: true);
                         _audioSource = new UniversalSourceBlock(audioSourceSettings);
 
                         _pipeline.Connect(_audioSource, _audioRenderer);
@@ -182,23 +186,42 @@ using System.Diagnostics;
                 cbAudioStream.Items.Clear();
                 cbAudioStream.Items.Add("None");
 
-                var youtube = new YoutubeClient();
+                var ytdlpPath = Path.Combine(AppContext.BaseDirectory, "tools", "yt-dlp.exe");
+                var denoPath = Path.Combine(AppContext.BaseDirectory, "tools", "deno.exe");
 
-                // You can specify video ID or URL
-                var video = await youtube.Videos.GetAsync(edURL.Text);
-                var streamManifest = await youtube.Videos.Streams.GetManifestAsync(video.Id.Value);
+                await using var ytdlp = new Ytdlp(ytdlpPath)
+                    .WithJsRuntime(Runtime.Deno, denoPath);
 
-                var videos = streamManifest.GetVideoOnlyStreams();
+                var metadata = await ytdlp.GetMetadataAsync(edURL.Text);
+                var formats = metadata?.Formats;
+
+                if (formats == null)
+                {
+                    MessageBox.Show(this, "Could not retrieve formats.");
+                    return;
+                }
+
+                // Video-only streams
+                var videos = formats.Where(f =>
+                    !string.IsNullOrEmpty(f.Vcodec) && f.Vcodec != "none" &&
+                    (string.IsNullOrEmpty(f.Acodec) || f.Acodec == "none") &&
+                    !string.IsNullOrEmpty(f.Url));
+
                 foreach (var stream in videos)
                 {
-                    cbVideoStream.Items.Add(stream.ToString());
+                    cbVideoStream.Items.Add($"{stream.Format ?? stream.FormatId} [{stream.Ext}]");
                     _videoInfoList.Add(stream);
                 }
 
-                var audios = streamManifest.GetAudioOnlyStreams();
+                // Audio-only streams
+                var audios = formats.Where(f =>
+                    !string.IsNullOrEmpty(f.Acodec) && f.Acodec != "none" &&
+                    (string.IsNullOrEmpty(f.Vcodec) || f.Vcodec == "none") &&
+                    !string.IsNullOrEmpty(f.Url));
+
                 foreach (var stream in audios)
                 {
-                    cbAudioStream.Items.Add($"{stream.ToString()} [{stream.Bitrate.ToString()}]");
+                    cbAudioStream.Items.Add($"{stream.Format ?? stream.FormatId} [{stream.Abr?.ToString("F0") ?? "?"} kbps]");
                     _audioInfoList.Add(stream);
                 }
 

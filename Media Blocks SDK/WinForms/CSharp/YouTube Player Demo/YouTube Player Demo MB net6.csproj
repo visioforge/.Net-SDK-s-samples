@@ -71,7 +71,8 @@
     <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.4.22" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="YoutubeExplode" Version="6.4.3" />
+    <PackageReference Include="Ytdlp.NET" Version="3.0.3" />
+    <PackageReference Include="ManuHub.Ytdlp" Version="6.3.17" />
+    <PackageReference Include="ManuHub.Deno" Version="2.7.1" />
   </ItemGroup>
 </Project>
