@@ -162,7 +162,7 @@ namespace youtube_player_x
 
                 // Ensure yt-dlp can find deno.exe (needed for YouTube JS challenge).
                 var envPath = Environment.GetEnvironmentVariable("PATH") ?? string.Empty;
-                if (!envPath.Contains(toolsDir, StringComparison.OrdinalIgnoreCase))
+                if (envPath.IndexOf(toolsDir, StringComparison.OrdinalIgnoreCase) < 0)
                 {
                     Environment.SetEnvironmentVariable("PATH", toolsDir + Path.PathSeparator + envPath);
                 }

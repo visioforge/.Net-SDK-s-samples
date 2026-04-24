@@ -64,7 +64,7 @@
     <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.4.24" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Ytdlp.NET" Version="3.0.3" />
+    <PackageReference Include="YoutubeDLSharp" Version="1.2.0" />
     <PackageReference Include="ManuHub.Ytdlp" Version="6.3.17" />
     <PackageReference Include="ManuHub.Deno" Version="2.7.1" />
   </ItemGroup>

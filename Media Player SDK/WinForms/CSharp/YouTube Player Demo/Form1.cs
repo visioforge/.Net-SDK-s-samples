@@ -217,7 +217,7 @@
                 var ytdlpPath = Path.Combine(toolsDir, "yt-dlp.exe");
 
                 var envPath = Environment.GetEnvironmentVariable("PATH") ?? string.Empty;
-                if (!envPath.Contains(toolsDir, StringComparison.OrdinalIgnoreCase))
+                if (envPath.IndexOf(toolsDir, StringComparison.OrdinalIgnoreCase) < 0)
                 {
                     Environment.SetEnvironmentVariable("PATH", toolsDir + Path.PathSeparator + envPath);
                 }
