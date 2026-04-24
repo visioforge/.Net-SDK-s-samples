@@ -32,23 +32,23 @@ jobs:
     ## Media Blocks
 
     - name: Restore dependencies $env:Solution_Name_MB
-      run: dotnet restore $env:Solution_Name_MB
+      run: dotnet restore $env:Solution_Name_MB --disable-parallel
 
     - name: Build app for release $env:Solution_Name_MB
-      run: dotnet build $env:Solution_Name_MB --configuration Release --no-restore
+      run: dotnet build $env:Solution_Name_MB --configuration Release --no-restore --disable-parallel /p:BuildInParallel=false
 
     ## Media Player
 
     - name: Restore dependencies $env:Solution_Name_MP
-      run: dotnet restore $env:Solution_Name_MP
+      run: dotnet restore $env:Solution_Name_MP --disable-parallel
 
     - name: Build app for release $env:Solution_Name_MP
-      run: dotnet build $env:Solution_Name_MP --configuration Release --no-restore
+      run: dotnet build $env:Solution_Name_MP --configuration Release --no-restore --disable-parallel /p:BuildInParallel=false
 
     ## Video Capture
 
     - name: Restore dependencies $env:Solution_Name_VC
-      run: dotnet restore $env:Solution_Name_VC
+      run: dotnet restore $env:Solution_Name_VC --disable-parallel
 
     - name: Build app for release $env:Solution_Name_VC
-      run: dotnet build $env:Solution_Name_VC --configuration Release --no-restore
+      run: dotnet build $env:Solution_Name_VC --configuration Release --no-restore --disable-parallel /p:BuildInParallel=false
