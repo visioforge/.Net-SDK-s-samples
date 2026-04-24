@@ -146,6 +146,9 @@
             try
             {
                 timer1.Stop();
+                // Clear the drag guard so a Stop while the user was mid-drag
+                // doesn't leave _seekDragging stuck true for the next Start.
+                _seekDragging = false;
 
                 await MediaPlayer1.StopAsync();
             }
@@ -348,12 +351,17 @@
         }
 
         /// <summary>
-        /// Performs the actual seek on mouse release. Logs the attempted position to
-        /// <c>mmLog</c> on both success and failure so the user can see which value was
-        /// sent even when the pipeline rejects it.
+        /// Performs the actual seek on mouse release. Gated on <see cref="_seekDragging"/>
+        /// so a synthetic MouseUp without a matching MouseDown (touch, popup-steal, Alt-Tab
+        /// returning focus) can't fire an unwanted seek.
         /// </summary>
         private async void tbTimeline_MouseUp(object sender, MouseEventArgs e)
         {
+            if (!_seekDragging)
+            {
+                return;
+            }
+
             await PerformTimelineSeekAsync();
         }
 
@@ -365,6 +373,11 @@
         /// </summary>
         private async void tbTimeline_KeyUp(object sender, KeyEventArgs e)
         {
+            if (MediaPlayer1 == null || tbTimeline.Maximum <= 0)
+            {
+                return;
+            }
+
             await PerformTimelineSeekAsync();
         }
 

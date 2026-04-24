@@ -73,6 +73,17 @@ namespace youtube_player
         private double _videoDurationSeconds;
 
         /// <summary>
+        /// Set while the user is dragging or holding a key on the timeline TrackBar.
+        /// Tells the timer tick to skip its slider-write so the thumb isn't yanked away.
+        /// </summary>
+        private volatile bool _seekDragging;
+
+        /// <summary>
+        /// Set while <see cref="timer1_Tick"/> is writing to the slider.
+        /// </summary>
+        private volatile bool _seekTimerWriting;
+
+        /// <summary>
         /// Destroy engine async. Also deletes every temp MPD wrapper synthesized for
         /// DASH formats — the URLs inside expire after a few hours and the files are
         /// no longer useful after the pipeline is gone.
@@ -93,26 +104,52 @@ namespace youtube_player
         }
 
         /// <summary>
-        /// Deletes every temp MPD file tracked in <see cref="_tempMpdFiles"/>.
+        /// Deletes every temp MPD file tracked in <see cref="_tempMpdFiles"/>. First
+        /// attempt is synchronous; if the file is still locked (dashdemux2 may not have
+        /// fully released it), a background task retries a few times with short delays.
         /// </summary>
         private void DeleteTempMpdFiles()
         {
             foreach (var path in _tempMpdFiles)
             {
-                try
+                if (TryDeleteFile(path))
                 {
-                    if (File.Exists(path))
-                    {
-                        File.Delete(path);
-                    }
+                    continue;
                 }
-                catch
-                {
-                    // best-effort — temp dir gets cleared by the OS eventually
-                }
+
+                _ = DeleteWithRetriesAsync(path);
             }
 
             _tempMpdFiles.Clear();
+        }
+
+        private static bool TryDeleteFile(string path)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static async Task DeleteWithRetriesAsync(string path)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                await Task.Delay(200);
+                if (TryDeleteFile(path))
+                {
+                    return;
+                }
+            }
         }
 
         /// <summary>
@@ -237,19 +274,26 @@ namespace youtube_player
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                AppendLog($"Start error: {ex.Message}");
+
+                // Tear down whatever was partially built so a failed Start doesn't
+                // leak a half-opened pipeline or the freshly-synthesized temp MPD.
+                await DestroyEngineAsync();
             }
         }
 
         /// <summary>
-        /// Handles the bt stop click event.
+        /// Handles the bt stop click event. <see cref="DestroyEngineAsync"/> already stops
+        /// and disposes the pipeline with a null-guard, so calling Stop directly here
+        /// would NRE when the user clicks Stop without having started, or clicks Stop
+        /// twice in a row.
         /// </summary>
         private async void BtStop_Click(object sender, EventArgs e)
         {
             try
             {
                 timer1.Stop();
-
-                await _pipeline.StopAsync(true);
+                _seekDragging = false;
 
                 await DestroyEngineAsync();
             }
@@ -377,20 +421,164 @@ namespace youtube_player
         }
 
         /// <summary>
-        /// Handles the timer 1 tick event.
+        /// Handles the timer 1 tick event. Updates the time label and advances the
+        /// timeline thumb, but only when the user isn't currently scrubbing — so the
+        /// tick never yanks the thumb out from under the mouse. Captures <c>_pipeline</c>
+        /// into a local to survive a concurrent Stop that nulls the field between awaits.
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
             try
             {
-                var duration = await _pipeline.DurationAsync();
-                var position = await _pipeline.Position_GetAsync();
+                var p = _pipeline;
+                if (p == null || _seekDragging)
+                {
+                    return;
+                }
+
+                var duration = await p.DurationAsync();
+                var position = await p.Position_GetAsync();
+
+                if (_seekDragging)
+                {
+                    return;
+                }
+
+                int max = (int)duration.TotalSeconds;
+                int value = (int)position.TotalSeconds;
+
+                _seekTimerWriting = true;
+                try
+                {
+                    if (max > 0 && tbTimeline.Maximum != max)
+                    {
+                        tbTimeline.Maximum = max;
+                    }
+
+                    if (value >= tbTimeline.Minimum && value <= tbTimeline.Maximum)
+                    {
+                        tbTimeline.Value = value;
+                    }
+                }
+                finally
+                {
+                    _seekTimerWriting = false;
+                }
 
                 lbTime.Text = position.ToString("hh\\:mm\\:ss", CultureInfo.InvariantCulture) + " | " + duration.ToString("hh\\:mm\\:ss", CultureInfo.InvariantCulture);
+            }
+            catch (ObjectDisposedException)
+            {
+                // _pipeline was disposed by DestroyEngineAsync between awaits — safe to ignore.
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+        }
+
+        /// <summary>
+        /// Timeline scroll — doesn't seek per tick. Just refreshes the preview label so
+        /// the user sees the position they are scrubbing to. Seek is deferred to MouseUp
+        /// / KeyUp.
+        /// </summary>
+        private void tbTimeline_Scroll(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_seekTimerWriting)
+                {
+                    return;
+                }
+
+                var preview = TimeSpan.FromSeconds(tbTimeline.Value);
+                var max = TimeSpan.FromSeconds(tbTimeline.Maximum);
+                lbTime.Text = preview.ToString("hh\\:mm\\:ss", CultureInfo.InvariantCulture) + " | " + max.ToString("hh\\:mm\\:ss", CultureInfo.InvariantCulture);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        /// <summary>
+        /// Arms the drag flag on left-button press so the timer doesn't fight the drag.
+        /// </summary>
+        private void tbTimeline_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            {
+                return;
+            }
+
+            if (_pipeline == null || tbTimeline.Maximum <= 0)
+            {
+                return;
+            }
+
+            _seekDragging = true;
+        }
+
+        /// <summary>
+        /// Performs the actual seek on mouse release. Gated on <see cref="_seekDragging"/>
+        /// so a synthetic MouseUp without a matching MouseDown (touch, popup-steal, Alt-Tab
+        /// returning focus) can't fire an unwanted seek to the current thumb position.
+        /// </summary>
+        private async void tbTimeline_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!_seekDragging)
+            {
+                return;
+            }
+
+            await PerformTimelineSeekAsync();
+        }
+
+        /// <summary>
+        /// Keyboard scrubbing (arrow / PageUp / PageDown / Home / End) also commits the seek
+        /// on key release. There is no KeyDown counterpart because TrackBar's default handler
+        /// already fires <see cref="tbTimeline_Scroll"/> for the preview during the press.
+        /// </summary>
+        private async void tbTimeline_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (_pipeline == null || tbTimeline.Maximum <= 0)
+            {
+                return;
+            }
+
+            await PerformTimelineSeekAsync();
+        }
+
+        /// <summary>
+        /// Shared body for MouseUp / KeyUp: reads the final slider value, logs the
+        /// attempt, seeks via <see cref="MediaBlocksPipeline.Position_SetAsync"/>, and
+        /// logs the failure message if the SDK throws. Always clears
+        /// <see cref="_seekDragging"/> so a dragged-then-failed seek doesn't leave the
+        /// timer stuck.
+        /// </summary>
+        private async Task PerformTimelineSeekAsync()
+        {
+            var target = TimeSpan.Zero;
+            try
+            {
+                var p = _pipeline;
+                if (p == null)
+                {
+                    return;
+                }
+
+                target = TimeSpan.FromSeconds(tbTimeline.Value);
+                AppendLog($"Seeking to {target:hh\\:mm\\:ss}...");
+                await p.Position_SetAsync(target);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                AppendLog($"Seek to {target:hh\\:mm\\:ss} failed: {ex.Message}");
+            }
+            finally
+            {
+                _seekDragging = false;
             }
         }
 
@@ -595,19 +783,30 @@ namespace youtube_player
         }
 
         /// <summary>
-        /// Form 1 form closing.
+        /// Form 1 form closing. <see cref="VisioForgeX.DestroySDK"/> is in a
+        /// <c>finally</c> so native SDK resources still get released when
+        /// <see cref="DestroyEngineAsync"/> throws.
         /// </summary>
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
                 await DestroyEngineAsync();
-
-                VisioForgeX.DestroySDK();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+            finally
+            {
+                try
+                {
+                    VisioForgeX.DestroySDK();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
             }
         }
     }

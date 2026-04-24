@@ -377,6 +377,11 @@ namespace youtube_player_x
                 Debug.WriteLine(ex);
                 edLog.Text += $"Start error: {ex.Message}{Environment.NewLine}";
                 lblStatus.Text = "Playback error.";
+
+                // Tear down whatever was partially built — a half-opened player leaks
+                // native resources, and a freshly-added temp MPD wrapper leaks to
+                // the temp dir if we don't cover the failure path here.
+                await DestroyPlayerAsync();
             }
             finally
             {
@@ -526,6 +531,15 @@ namespace youtube_player_x
         /// </summary>
         private async void sliderTimeline_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            // Ignore MouseUp events that weren't paired with our own MouseDown —
+            // synthetic MouseUps from Alt-Tab returning focus, popups closing, or touch
+            // events without a matching Down would otherwise seek to the current thumb
+            // position (often 0 before Play) every time they fire.
+            if (!_seekDragging)
+            {
+                return;
+            }
+
             var target = TimeSpan.Zero;
             try
             {
@@ -855,6 +869,9 @@ namespace youtube_player_x
         private async Task DestroyPlayerAsync()
         {
             StopTimer();
+            // Clear the drag guard so a session ended mid-drag (user hit Stop while
+            // holding the thumb) doesn't leave the next session with a locked-out timer.
+            _seekDragging = false;
 
             if (_player != null)
             {
@@ -867,29 +884,58 @@ namespace youtube_player_x
         }
 
         /// <summary>
-        /// Deletes every temp MPD file tracked in <see cref="_tempMpdFiles"/>, swallowing
-        /// per-file failures so a locked/already-deleted file doesn't stop the rest of
-        /// the cleanup.
+        /// Deletes every temp MPD file tracked in <see cref="_tempMpdFiles"/>. First
+        /// attempt is synchronous; if the file is still locked (dashdemux2 may not have
+        /// fully released it), we fire-and-forget a background task that retries a few
+        /// times with short delays before giving up.
         /// </summary>
         private void DeleteTempMpdFiles()
         {
             foreach (var path in _tempMpdFiles)
             {
-                try
+                if (TryDeleteFile(path))
                 {
-                    if (File.Exists(path))
-                    {
-                        File.Delete(path);
-                    }
+                    continue;
                 }
-                catch
-                {
-                    // File may still be held by dashdemux2 on a dirty shutdown path.
-                    // Best-effort cleanup — temp dir gets cleared by the OS eventually.
-                }
+
+                // File still locked — retry in the background without blocking the UI
+                // thread. async void fire-and-forget is fine for a private best-effort
+                // helper; exceptions inside are swallowed by TryDeleteFile.
+                _ = DeleteWithRetriesAsync(path);
             }
 
             _tempMpdFiles.Clear();
+        }
+
+        private static bool TryDeleteFile(string path)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static async Task DeleteWithRetriesAsync(string path)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                await Task.Delay(200);
+                if (TryDeleteFile(path))
+                {
+                    return;
+                }
+            }
+
+            // Final give-up: %TEMP% gets cleaned by Windows Disk Cleanup eventually.
         }
 
         /// <summary>
@@ -921,20 +967,30 @@ namespace youtube_player_x
 
         /// <summary>
         /// Window closing — stops the timer, destroys the player, and shuts down the SDK.
+        /// <see cref="VisioForgeX.DestroySDK"/> is in a <c>finally</c> so native SDK
+        /// resources still get released when <see cref="DestroyPlayerAsync"/> throws.
         /// </summary>
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
             {
                 StopTimer();
-
                 await DestroyPlayerAsync();
-
-                VisioForgeX.DestroySDK();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+            finally
+            {
+                try
+                {
+                    VisioForgeX.DestroySDK();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
             }
         }
     }

@@ -201,7 +201,11 @@
             tbTimeline.Name = "tbTimeline";
             tbTimeline.Size = new System.Drawing.Size(260, 69);
             tbTimeline.TabIndex = 18;
-            // 
+            tbTimeline.Scroll += tbTimeline_Scroll;
+            tbTimeline.MouseDown += tbTimeline_MouseDown;
+            tbTimeline.MouseUp += tbTimeline_MouseUp;
+            tbTimeline.KeyUp += tbTimeline_KeyUp;
+            //
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
