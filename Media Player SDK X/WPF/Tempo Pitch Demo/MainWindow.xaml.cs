@@ -83,7 +83,11 @@ namespace Tempo_Pitch_Demo_X
 
                 Title += $" (SDK v{MediaPlayerCoreX.SDK_Version})";
 
-                using (var probe = new MediaPlayerCoreX())
+                // Use await using / DisposeAsync: MediaPlayerCoreX tears down a native GStreamer
+                // pipeline, and the async dispose path lets that teardown happen without blocking
+                // the UI thread or risking partial-teardown issues that synchronous Dispose has
+                // been observed to cause elsewhere in this demo.
+                await using (var probe = new MediaPlayerCoreX())
                 {
                     var devices = await probe.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound);
                     _audioDevices = devices?.ToList() ?? new List<AudioOutputDeviceInfo>();

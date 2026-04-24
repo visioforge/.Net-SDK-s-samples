@@ -17,13 +17,13 @@
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.3.12" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2026.3.12" />
-    <PackageReference Include="VisioForge.CrossPlatform.AWS.Windows.x64" Version="2026.3.12" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="2026.3.12" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.4.23" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2026.4.23" />
+    <PackageReference Include="VisioForge.CrossPlatform.AWS.Windows.x64" Version="2026.4.23" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="2026.4.23" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.4.22" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.4.24" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />

@@ -327,7 +327,7 @@ namespace youtube_player_x
                     {
                         _tempMpdFiles.Add(mpdPath);
                         sourceUri = new Uri(mpdPath);
-                        sourceRendersAudio = extraAudio != null; // audio is now inside the MPD
+                        sourceRendersAudio = audioMuxed || extraAudio != null; // audio is now inside the MPD
                         mpdCombinesAudio = extraAudio != null;
                         AppendLog($"MPD ready: {mpdPath}");
                     }
@@ -777,7 +777,7 @@ namespace youtube_player_x
 
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                edLog.Text += text + Environment.NewLine;
+                edLog.AppendText(text + Environment.NewLine);
             }));
         }
 

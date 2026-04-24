@@ -9,6 +9,11 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.4.23
+
+* [NuGet] Extracted Intel Quick Sync Video (QSV) plugin (`gstqsv.dll`) from `VisioForge.CrossPlatform.Core.Windows.x64/x86` into new optional packages `VisioForge.CrossPlatform.Core.Windows.Intel.x64` and `VisioForge.CrossPlatform.Core.Windows.Intel.x86`; each depends on the corresponding base Core package
+* [Video Capture SDK .Net] Fixed FFMPEG.exe pipe output argument ordering so resize/aspect options are emitted after all inputs, including KLV metadata pipe input
+
 ## 2026.4.21
 
 * [Core] Added `AutoAV1EncoderSettings`: auto-selecting AV1 encoder that walks AMF → NVENC → QSV → SVT-AV1 via `EncoderRuntimeTracker`, mirroring `AutoH264EncoderSettings` / `AutoHEVCEncoderSettings`; AV1 sessions now participate in per-runtime slot accounting

@@ -177,6 +177,27 @@ namespace Multi_Audio_Streams_Demo_X
             Dispatcher.BeginInvoke(new Action(() => lblStatus.Text = e.Message));
         }
 
+        private void Player_OnStop(object sender, VisioForge.Core.Types.Events.StopEventArgs e)
+        {
+            // Fired from the GStreamer bus thread when playback ends naturally (EOS) or is
+            // stopped explicitly. Update the UI on the dispatcher thread.
+            if (Dispatcher.HasShutdownStarted || Dispatcher.HasShutdownFinished)
+            {
+                return;
+            }
+
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                StopSeekTimer();
+                sliderSeek.Value = 0;
+                lblTime.Text = "00:00:00 / 00:00:00";
+                lblStatus.Text = "Playback stopped.";
+
+                // Re-enable the audio list so the user can modify streams before playing again.
+                SetAudioListEditable(true);
+            }));
+        }
+
         private async Task DestroyPlayerAsync()
         {
             StopSeekTimer();
@@ -184,6 +205,7 @@ namespace Multi_Audio_Streams_Demo_X
             if (_player != null)
             {
                 _player.OnError -= Player_OnError;
+                _player.OnStop -= Player_OnStop;
                 await _player.DisposeAsync();
                 _player = null;
             }
@@ -227,6 +249,7 @@ namespace Multi_Audio_Streams_Demo_X
 
                 _player = new MediaPlayerCoreX(VideoView1);
                 _player.OnError += Player_OnError;
+                _player.OnStop += Player_OnStop;
                 _player.Audio_Play = true;
 
                 // Pick the selected output device (fallback to first available).
@@ -606,7 +629,17 @@ namespace Multi_Audio_Streams_Demo_X
 
             if (_player != null)
             {
-                _player.Audio_OutputDevice_Volume = e.NewValue / 100.0;
+                // Writing Audio_OutputDevice_Volume can throw depending on pipeline
+                // state (e.g., before the audio sink is wired up, or mid-teardown).
+                // Swallow and log so a slider nudge never takes down the UI.
+                try
+                {
+                    _player.Audio_OutputDevice_Volume = e.NewValue / 100.0;
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex);
+                }
             }
         }
 

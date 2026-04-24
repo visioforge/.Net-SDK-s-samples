@@ -84,6 +84,14 @@ namespace youtube_player
         private volatile bool _seekTimerWriting;
 
         /// <summary>
+        /// Re-entrancy guard for Start/Stop clicks. Prevents a second handler invocation
+        /// from running while the first one is still awaiting an async SDK call — async
+        /// void click handlers don't block the UI thread, so the user can click again
+        /// before the first click returns.
+        /// </summary>
+        private bool _actionInFlight;
+
+        /// <summary>
         /// Destroy engine async. Also deletes every temp MPD wrapper synthesized for
         /// DASH formats — the URLs inside expire after a few hours and the files are
         /// no longer useful after the pipeline is gone.
@@ -165,6 +173,13 @@ namespace youtube_player
         /// </summary>
         private async void BtStart_Click(object sender, EventArgs e)
         {
+            if (_actionInFlight)
+            {
+                return;
+            }
+
+            _actionInFlight = true;
+
             try
             {
                 mmLog.Text = string.Empty;
@@ -219,7 +234,7 @@ namespace youtube_player
                     {
                         _tempMpdFiles.Add(mpdPath);
                         sourceUri = new Uri(mpdPath);
-                        sourceRendersAudio = extraAudio != null; // audio is inside the MPD now
+                        sourceRendersAudio = audioMuxed || extraAudio != null; // audio is inside the MPD now
                         mpdCombinesAudio = extraAudio != null;
                         AppendLog($"MPD ready: {mpdPath}");
                     }
@@ -280,6 +295,10 @@ namespace youtube_player
                 // leak a half-opened pipeline or the freshly-synthesized temp MPD.
                 await DestroyEngineAsync();
             }
+            finally
+            {
+                _actionInFlight = false;
+            }
         }
 
         /// <summary>
@@ -290,6 +309,13 @@ namespace youtube_player
         /// </summary>
         private async void BtStop_Click(object sender, EventArgs e)
         {
+            if (_actionInFlight)
+            {
+                return;
+            }
+
+            _actionInFlight = true;
+
             try
             {
                 timer1.Stop();
@@ -300,6 +326,10 @@ namespace youtube_player
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+            finally
+            {
+                _actionInFlight = false;
             }
         }
 
@@ -779,7 +809,7 @@ namespace youtube_player
                 return;
             }
 
-            mmLog.Text = mmLog.Text + text + Environment.NewLine;
+            mmLog.AppendText(text + Environment.NewLine);
         }
 
         /// <summary>

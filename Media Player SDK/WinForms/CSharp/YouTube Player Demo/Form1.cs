@@ -42,6 +42,14 @@
         private MediaPlayerCore MediaPlayer1;
 
         /// <summary>
+        /// Re-entrancy guard for Start/Stop clicks. Prevents a second handler invocation
+        /// from running while the first one is still awaiting an async SDK call — async
+        /// void click handlers don't block the UI thread, so the user can click again
+        /// before the first click returns.
+        /// </summary>
+        private bool _actionInFlight;
+
+        /// <summary>
         /// Create engine.
         /// </summary>
         private void CreateEngine()
@@ -77,6 +85,13 @@
         /// </summary>
         private async void BtStart_Click(object sender, EventArgs e)
         {
+            if (_actionInFlight)
+            {
+                return;
+            }
+
+            _actionInFlight = true;
+
             try
             {
                 mmLog.Text = string.Empty;
@@ -136,6 +151,10 @@
             {
                 Debug.WriteLine(ex);
             }
+            finally
+            {
+                _actionInFlight = false;
+            }
         }
 
         /// <summary>
@@ -143,6 +162,13 @@
         /// </summary>
         private async void BtStop_Click(object sender, EventArgs e)
         {
+            if (_actionInFlight)
+            {
+                return;
+            }
+
+            _actionInFlight = true;
+
             try
             {
                 timer1.Stop();
@@ -155,6 +181,10 @@
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+            finally
+            {
+                _actionInFlight = false;
             }
         }
 
@@ -618,7 +648,7 @@
                 return;
             }
 
-            mmLog.Text = mmLog.Text + text + Environment.NewLine;
+            mmLog.AppendText(text + Environment.NewLine);
         }
 
         /// <summary>
