@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using ManuHub.Ytdlp.NET;
+using System.Windows.Threading;
+using YoutubeDLSharp;
+using YoutubeDLSharp.Metadata;
 using VisioForge.Core;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
@@ -23,12 +26,12 @@ namespace youtube_player_x
         /// <summary>
         /// Video-only format list populated by Read Formats.
         /// </summary>
-        private readonly List<FormatMetadata> _videoInfoList = new List<FormatMetadata>();
+        private readonly List<FormatData> _videoInfoList = new List<FormatData>();
 
         /// <summary>
         /// Audio-only format list populated by Read Formats.
         /// </summary>
-        private readonly List<FormatMetadata> _audioInfoList = new List<FormatMetadata>();
+        private readonly List<FormatData> _audioInfoList = new List<FormatData>();
 
         /// <summary>
         /// Cached audio output devices, populated once on window load.
@@ -43,17 +46,38 @@ namespace youtube_player_x
         /// <summary>
         /// Seek timer — fires every 500 ms to update the timeline and time label.
         /// </summary>
-        private System.Timers.Timer _timer;
+        private DispatcherTimer _timer;
 
         /// <summary>
-        /// Flag to prevent the timer from fighting the user's seek drag.
+        /// Set while the user is dragging the timeline thumb. Suppresses timer writes to the
+        /// slider so the tick doesn't yank the thumb out from under the user's finger.
         /// </summary>
-        private volatile bool _timerFlag;
+        private volatile bool _seekDragging;
+
+        /// <summary>
+        /// Set while <see cref="Timer_Tick"/> is writing to the slider. Suppresses the
+        /// ValueChanged-driven label refresh that would otherwise fire on every tick
+        /// and undo the user's scrub preview.
+        /// </summary>
+        private volatile bool _seekTimerWriting;
 
         /// <summary>
         /// Re-entrancy guard for Start/Stop clicks.
         /// </summary>
         private bool _actionInFlight;
+
+        /// <summary>
+        /// Temp MPD files synthesized by <see cref="YouTubeDashMpdBuilder"/> for DASH
+        /// formats. Deleted on Stop / Close / Dispose.
+        /// </summary>
+        private readonly List<string> _tempMpdFiles = new List<string>();
+
+        /// <summary>
+        /// Total media duration in seconds reported by yt-dlp for the current video.
+        /// Used as the <c>mediaPresentationDuration</c> for generated MPDs; 0 means
+        /// unknown and the builder will fall back to parsing <c>&amp;dur=…</c> from the URL.
+        /// </summary>
+        private double _videoDurationSeconds;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -100,8 +124,8 @@ namespace youtube_player_x
                     cbAudioOutput.SelectedIndex = 0;
                 }
 
-                _timer = new System.Timers.Timer(500);
-                _timer.Elapsed += Timer_Elapsed;
+                _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+                _timer.Tick += Timer_Tick;
 
                 lblStatus.Text = string.Empty;
             }
@@ -133,42 +157,59 @@ namespace youtube_player_x
                 cbAudioStream.Items.Clear();
                 cbAudioStream.Items.Add("None");
 
-                var ytdlpPath = Path.Combine(AppContext.BaseDirectory, "tools", "yt-dlp.exe");
-                var denoPath = Path.Combine(AppContext.BaseDirectory, "tools", "deno.exe");
+                var toolsDir = Path.Combine(AppContext.BaseDirectory, "tools");
+                var ytdlpPath = Path.Combine(toolsDir, "yt-dlp.exe");
 
-                await using var ytdlp = new Ytdlp(ytdlpPath)
-                    .WithJsRuntime(Runtime.Deno, denoPath);
+                // Ensure yt-dlp can find deno.exe (needed for YouTube JS challenge).
+                var envPath = Environment.GetEnvironmentVariable("PATH") ?? string.Empty;
+                if (!envPath.Contains(toolsDir, StringComparison.OrdinalIgnoreCase))
+                {
+                    Environment.SetEnvironmentVariable("PATH", toolsDir + Path.PathSeparator + envPath);
+                }
 
-                var metadata = await ytdlp.GetMetadataAsync(edURL.Text);
-                var formats = metadata?.Formats;
+                var ytdl = new YoutubeDL { YoutubeDLPath = ytdlpPath };
+                var result = await ytdl.RunVideoDataFetch(edURL.Text);
+                var formats = result.Data?.Formats;
 
-                if (formats == null)
+                if (formats == null || !result.Success)
                 {
                     lblStatus.Text = "Could not retrieve formats.";
                     return;
                 }
 
-                // Video-only streams (have video codec, no audio codec).
+                _videoDurationSeconds = result.Data?.Duration ?? 0;
+
+                // All streams carrying video (both video-only and muxed video+audio).
+                // Muxed formats are useful to select when debugging seek: they use a single
+                // uridecodebin3 instead of two independent HTTP sources.
+                // Sort progressive (plain https/http) ahead of fragmented DASH/HLS — GStreamer's
+                // qtdemux seek on fragmented MP4 without sidx is unreliable, so listing
+                // progressive first gives the user a seekable default.
                 var videos = formats.Where(f =>
-                    !string.IsNullOrEmpty(f.Vcodec) && f.Vcodec != "none" &&
-                    (string.IsNullOrEmpty(f.Acodec) || f.Acodec == "none") &&
-                    !string.IsNullOrEmpty(f.Url));
+                    !string.IsNullOrEmpty(f.VideoCodec) && f.VideoCodec != "none" &&
+                    !string.IsNullOrEmpty(f.Url))
+                    .OrderByDescending(IsProgressiveFormat)
+                    .ThenByDescending(f => f.Height ?? 0)
+                    .ToList();
 
                 foreach (var stream in videos)
                 {
-                    cbVideoStream.Items.Add($"{stream.Format ?? stream.FormatId} [{stream.Ext}]");
+                    cbVideoStream.Items.Add(FormatVideoLabel(stream));
                     _videoInfoList.Add(stream);
                 }
 
-                // Audio-only streams.
+                // Audio-only streams — same progressive-first sort.
                 var audios = formats.Where(f =>
-                    !string.IsNullOrEmpty(f.Acodec) && f.Acodec != "none" &&
-                    (string.IsNullOrEmpty(f.Vcodec) || f.Vcodec == "none") &&
-                    !string.IsNullOrEmpty(f.Url));
+                    !string.IsNullOrEmpty(f.AudioCodec) && f.AudioCodec != "none" &&
+                    (string.IsNullOrEmpty(f.VideoCodec) || f.VideoCodec == "none") &&
+                    !string.IsNullOrEmpty(f.Url))
+                    .OrderByDescending(IsProgressiveFormat)
+                    .ThenByDescending(f => f.AudioBitrate ?? 0)
+                    .ToList();
 
                 foreach (var stream in audios)
                 {
-                    cbAudioStream.Items.Add($"{stream.Format ?? stream.FormatId} [{stream.Abr?.ToString("F0") ?? "?"} kbps]");
+                    cbAudioStream.Items.Add(FormatAudioLabel(stream));
                     _audioInfoList.Add(stream);
                 }
 
@@ -218,7 +259,13 @@ namespace youtube_player_x
                 await DestroyPlayerAsync();
 
                 var selectedVideoFormat = _videoInfoList[cbVideoStream.SelectedIndex];
-                var audioMuxed = !string.IsNullOrEmpty(selectedVideoFormat.Acodec) && selectedVideoFormat.Acodec != "none";
+                var audioMuxed = !string.IsNullOrEmpty(selectedVideoFormat.AudioCodec) && selectedVideoFormat.AudioCodec != "none";
+
+                LogSeekabilityFor("Video", selectedVideoFormat);
+                if (!audioMuxed && cbAudioStream.SelectedIndex > 0)
+                {
+                    LogSeekabilityFor("Audio", _audioInfoList[cbAudioStream.SelectedIndex - 1]);
+                }
 
                 // Resolve selected audio output device.
                 AudioOutputDeviceInfo selectedDevice = null;
@@ -229,16 +276,7 @@ namespace youtube_player_x
 
                 if (selectedDevice == null)
                 {
-                    var probe = new MediaPlayerCoreX();
-                    try
-                    {
-                        var devices = await probe.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound);
-                        selectedDevice = devices?.FirstOrDefault();
-                    }
-                    finally
-                    {
-                        await probe.DisposeAsync();
-                    }
+                    selectedDevice = _audioDevices.FirstOrDefault();
                 }
 
                 _player = new MediaPlayerCoreX(VideoView1);
@@ -256,22 +294,65 @@ namespace youtube_player_x
 
                 // Build the main video source. For video-only streams disable audio rendering
                 // so the decoder doesn't stall waiting for a non-existent audio track.
+                if (string.IsNullOrEmpty(selectedVideoFormat.Url))
+                {
+                    MessageBox.Show(this, "Selected stream has no URL.", "YouTube Player", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                // Decide how to feed the SDK:
+                //  - progressive video (itag 18/22) → direct URL, seek works through qtdemux;
+                //  - DASH video → synthesize an MPD wrapping the video (and, if the user picked
+                //    one, the extra audio stream) so uridecodebin3 routes through dashdemux2
+                //    and seek works via DASH OnDemand SegmentBase+indexRange.
+                Uri sourceUri = new Uri(selectedVideoFormat.Url!);
+                bool sourceRendersAudio = audioMuxed;
+                bool mpdCombinesAudio = false;
+                FormatData extraAudio = null;
+                if (!audioMuxed && cbAudioStream.SelectedIndex > 0)
+                {
+                    extraAudio = _audioInfoList[cbAudioStream.SelectedIndex - 1];
+                }
+
+                if (!IsProgressiveFormat(selectedVideoFormat))
+                {
+                    AppendLog("Building DASH MPD wrapper for seek support...");
+                    var mpdPath = await YouTubeDashMpdBuilder.BuildMpdAsync(
+                        selectedVideoFormat,
+                        extraAudio,
+                        TimeSpan.FromSeconds(_videoDurationSeconds),
+                        CancellationToken.None);
+                    if (!string.IsNullOrEmpty(mpdPath))
+                    {
+                        _tempMpdFiles.Add(mpdPath);
+                        sourceUri = new Uri(mpdPath);
+                        sourceRendersAudio = extraAudio != null; // audio is now inside the MPD
+                        mpdCombinesAudio = extraAudio != null;
+                        AppendLog($"MPD ready: {mpdPath}");
+                    }
+                    else
+                    {
+                        AppendLog("MPD probe failed, falling back to direct URL (seek will not work).");
+                    }
+                }
+
                 var mainSource = await UniversalSourceSettings.CreateAsync(
-                    new Uri(selectedVideoFormat.Url!),
+                    sourceUri,
                     renderVideo: true,
-                    renderAudio: audioMuxed,
+                    renderAudio: sourceRendersAudio,
                     renderSubtitle: false,
                     ignoreMediaInfoReader: true);
 
                 _player.Audio_AdditionalStreams_Clear();
 
                 // Add a separate audio-only stream when the user selected one and the video
-                // stream doesn't already carry audio.
-                if (!audioMuxed && cbAudioStream.SelectedIndex > 0)
+                // stream doesn't already carry audio. Skip when the MPD already bundles the
+                // audio track — adding it a second time would spawn a second source bin and
+                // drag audiomixer back into the pipeline.
+                if (!audioMuxed && extraAudio != null && !mpdCombinesAudio)
                 {
-                    var audioFormat = _audioInfoList[cbAudioStream.SelectedIndex - 1];
                     var audioSource = await UniversalSourceSettings.CreateAsync(
-                        new Uri(audioFormat.Url!),
+                        new Uri(extraAudio.Url!),
                         renderVideo: false,
                         renderAudio: true,
                         renderSubtitle: false,
@@ -384,21 +465,305 @@ namespace youtube_player_x
         }
 
         /// <summary>
-        /// Handles timeline seek drag.
+        /// Timeline slider value changed — only refreshes the scrub preview label while the
+        /// user is dragging. Seeking happens on mouse-up, not per value change, because the
+        /// old per-tick seek spammed the HTTP-backed YouTube streams with back-to-back seek
+        /// requests that the pipeline rejected.
         /// </summary>
-        private async void sliderTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void sliderTimeline_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            if (_seekTimerWriting || !_seekDragging || sliderTimeline.Maximum <= 0)
+            {
+                return;
+            }
+
+            double newValue = e.NewValue;
+            double max = sliderTimeline.Maximum;
+            if (double.IsNaN(newValue) || double.IsInfinity(newValue) || newValue < 0
+                || double.IsNaN(max) || double.IsInfinity(max) || max < 0)
+            {
+                return;
+            }
+
+            lblTime.Text = TimeSpan.FromSeconds(newValue).ToString("hh\\:mm\\:ss")
+                + " / " + TimeSpan.FromSeconds(max).ToString("hh\\:mm\\:ss");
+        }
+
+        /// <summary>
+        /// Arms the drag flag when the user presses the left mouse button on the slider.
+        /// Mirrors the guard used in Multi Audio Streams Demo so a middle/right-click or a
+        /// click on an empty/pre-playback slider can't leave the flag stuck true.
+        /// </summary>
+        private void sliderTimeline_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton != System.Windows.Input.MouseButton.Left)
+            {
+                return;
+            }
+
+            if (_player == null || sliderTimeline.Maximum <= 0)
+            {
+                return;
+            }
+
+            _seekDragging = true;
+        }
+
+        /// <summary>
+        /// Safety net for swallowed MouseUp (Alt-Tab, focus-stealing popup): clears the
+        /// drag flag so the seek timer isn't silently blocked for the rest of the session.
+        /// </summary>
+        private void sliderTimeline_LostMouseCapture(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            _seekDragging = false;
+        }
+
+        /// <summary>
+        /// Performs the actual seek on mouse release. Logs the attempted position to
+        /// <c>edLog</c> on both success and failure so the user can see which value was
+        /// sent even when the pipeline rejects it (HTTP-backed YouTube streams sometimes
+        /// refuse mid-playback seeks).
+        /// </summary>
+        private async void sliderTimeline_PreviewMouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var target = TimeSpan.Zero;
             try
             {
-                if (!_timerFlag && _player != null)
+                double value = sliderTimeline.Value;
+                if (double.IsNaN(value) || double.IsInfinity(value) || value < 0)
                 {
-                    await _player.Position_SetAsync(TimeSpan.FromSeconds(sliderTimeline.Value));
+                    return;
                 }
+
+                if (_player == null)
+                {
+                    return;
+                }
+
+                target = TimeSpan.FromSeconds(value);
+                AppendLog($"Seeking to {target:hh\\:mm\\:ss}...");
+                await _player.Position_SetAsync(target);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                AppendLog($"Seek to {target:hh\\:mm\\:ss} failed: {ex.Message}");
             }
+            finally
+            {
+                _seekDragging = false;
+            }
+        }
+
+        /// <summary>
+        /// YouTube itags that are served as genuine progressive MP4 with a full moov
+        /// at the start of the file (byte-range seekable through qtdemux). Everything
+        /// NOT in this set is a DASH fragment even when yt-dlp reports
+        /// <c>protocol=https</c> — because YouTube's fragmented MP4 responses are
+        /// delivered as ordinary https byte-range downloads, the transport protocol
+        /// is a useless signal here.
+        /// </summary>
+        private static readonly HashSet<string> ProgressiveYouTubeItags = new HashSet<string>(StringComparer.Ordinal)
+        {
+            "18", // 360p mp4 (avc1 + aac, muxed)
+            "22", // 720p mp4 (avc1 + aac, muxed)
+            "36", // 240p 3gp (legacy, rarely served now)
+            "43", // 360p webm (legacy, rarely served now)
+        };
+
+        /// <summary>
+        /// Returns <c>true</c> when the format is very likely to be seekable through
+        /// GStreamer's qtdemux path. YouTube URLs are decided by itag (the only
+        /// structural signal the format metadata carries); for other sources we fall
+        /// back to protocol + container heuristics.
+        /// </summary>
+        private static bool IsProgressiveFormat(FormatData f)
+        {
+            if (f == null)
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(f.FormatId) && ProgressiveYouTubeItags.Contains(f.FormatId))
+            {
+                return true;
+            }
+
+            var container = f.ContainerFormat?.ToLowerInvariant() ?? string.Empty;
+            if (container.Contains("dash") || container.Contains("hls") || container.Contains("m3u8"))
+            {
+                return false;
+            }
+
+            var protocol = f.Protocol?.ToLowerInvariant() ?? string.Empty;
+            if (protocol.Contains("dash") || protocol.Contains("m3u8") || protocol.Contains("hls"))
+            {
+                return false;
+            }
+
+            // For YouTube URLs that fell through the itag check, the format is DASH
+            // even if the protocol is plain https. Detect by host — googlevideo.com
+            // DASH responses look identical to progressive at the protocol level.
+            if (!string.IsNullOrEmpty(f.Url) && f.Url.IndexOf("googlevideo.com", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                return false;
+            }
+
+            return protocol == "https" || protocol == "http" || string.IsNullOrEmpty(protocol);
+        }
+
+        /// <summary>
+        /// Short human tag highlighting whether seeking is expected to work for this format.
+        /// </summary>
+        private static string SeekabilityTag(FormatData f)
+        {
+            return IsProgressiveFormat(f) ? "[progressive]" : "[DASH]";
+        }
+
+        /// <summary>
+        /// Builds a descriptive label for a video-bearing format. Shows codec, resolution,
+        /// frame rate, muxed-audio presence (and its codec), container extension, transport
+        /// protocol (with a progressive/DASH tag — DASH typically can't seek through our
+        /// GStreamer qtdemux path), and an approximate download size.
+        /// </summary>
+        private static string FormatVideoLabel(FormatData f)
+        {
+            var parts = new List<string>(7);
+            parts.Add(f.FormatId ?? "?");
+            parts.Add(SeekabilityTag(f));
+
+            string res;
+            if (f.Width.HasValue && f.Height.HasValue)
+            {
+                res = $"{f.Width}x{f.Height}";
+            }
+            else
+            {
+                res = !string.IsNullOrEmpty(f.Resolution) ? f.Resolution : "?";
+            }
+
+            if (f.FrameRate.HasValue && f.FrameRate.Value > 0)
+            {
+                res += $"@{f.FrameRate.Value:0.#}fps";
+            }
+
+            var videoCodec = !string.IsNullOrEmpty(f.VideoCodec) && f.VideoCodec != "none" ? f.VideoCodec : "?";
+            parts.Add($"{res} {videoCodec}");
+
+            if (f.VideoBitrate.HasValue && f.VideoBitrate.Value > 0)
+            {
+                parts.Add($"{f.VideoBitrate.Value:0}kbps");
+            }
+
+            var audioCodec = !string.IsNullOrEmpty(f.AudioCodec) && f.AudioCodec != "none" ? f.AudioCodec : null;
+            parts.Add(audioCodec != null ? $"audio: {audioCodec}" : "audio: NONE");
+
+            if (!string.IsNullOrEmpty(f.Extension))
+            {
+                parts.Add(f.Extension);
+            }
+
+            var size = f.FileSize ?? f.ApproximateFileSize;
+            if (size.HasValue && size.Value > 0)
+            {
+                parts.Add($"~{size.Value / (1024.0 * 1024.0):0.#}MB");
+            }
+
+            return string.Join(" | ", parts);
+        }
+
+        /// <summary>
+        /// Builds a descriptive label for an audio-only format. Shows codec, bitrate,
+        /// sampling rate, channel count, container extension, transport protocol tag,
+        /// and approximate size.
+        /// </summary>
+        private static string FormatAudioLabel(FormatData f)
+        {
+            var parts = new List<string>(6);
+            parts.Add(f.FormatId ?? "?");
+            parts.Add(SeekabilityTag(f));
+
+            var audioCodec = !string.IsNullOrEmpty(f.AudioCodec) && f.AudioCodec != "none" ? f.AudioCodec : "?";
+            string codecLine = audioCodec;
+            if (f.AudioBitrate.HasValue && f.AudioBitrate.Value > 0)
+            {
+                codecLine += $" @{f.AudioBitrate.Value:0}kbps";
+            }
+
+            parts.Add(codecLine);
+
+            var extras = new List<string>(2);
+            if (f.AudioSamplingRate.HasValue && f.AudioSamplingRate.Value > 0)
+            {
+                extras.Add($"{f.AudioSamplingRate.Value:0}Hz");
+            }
+
+            if (f.AudioChannels.HasValue && f.AudioChannels.Value > 0)
+            {
+                extras.Add($"{f.AudioChannels.Value}ch");
+            }
+
+            if (extras.Count > 0)
+            {
+                parts.Add(string.Join(" ", extras));
+            }
+
+            if (!string.IsNullOrEmpty(f.Extension))
+            {
+                parts.Add(f.Extension);
+            }
+
+            var size = f.FileSize ?? f.ApproximateFileSize;
+            if (size.HasValue && size.Value > 0)
+            {
+                parts.Add($"~{size.Value / (1024.0 * 1024.0):0.#}MB");
+            }
+
+            return string.Join(" | ", parts);
+        }
+
+        /// <summary>
+        /// Writes a short seekability hint for the selected format to <c>edLog</c> so the
+        /// user knows up front whether seek is expected to work. For YouTube the decision
+        /// is driven by itag (only 18 / 22 / 36 / 43 are progressive MP4 with a full moov
+        /// — every other itag is a DASH fragment, even when yt-dlp reports
+        /// <c>protocol=https</c>, because YouTube serves DASH over plain https byte
+        /// ranges and the transport protocol therefore can't be trusted as a signal).
+        /// </summary>
+        private void LogSeekabilityFor(string kind, FormatData f)
+        {
+            if (f == null)
+            {
+                return;
+            }
+
+            var itag = string.IsNullOrEmpty(f.FormatId) ? "(unknown)" : f.FormatId;
+            var protocol = string.IsNullOrEmpty(f.Protocol) ? "(unknown)" : f.Protocol;
+            var container = string.IsNullOrEmpty(f.ContainerFormat) ? (f.Extension ?? "(unknown)") : f.ContainerFormat;
+            if (IsProgressiveFormat(f))
+            {
+                AppendLog($"{kind} stream: itag={itag}, protocol={protocol}, container={container} — progressive, seek should work.");
+            }
+            else
+            {
+                AppendLog($"{kind} stream: itag={itag}, protocol={protocol}, container={container} — DASH fragments. Wrapping in a synthetic MPD so dashdemux2 can handle seek.");
+            }
+        }
+
+        /// <summary>
+        /// Appends a line to the on-screen log on the UI thread.
+        /// </summary>
+        private void AppendLog(string text)
+        {
+            if (Dispatcher.HasShutdownStarted || Dispatcher.HasShutdownFinished)
+            {
+                return;
+            }
+
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                edLog.Text += text + Environment.NewLine;
+            }));
         }
 
         /// <summary>
@@ -429,45 +794,63 @@ namespace youtube_player_x
         }
 
         /// <summary>
-        /// Timer tick — updates the timeline slider and time label.
+        /// Timer tick — refreshes the timeline slider and time label. Bails while the user
+        /// is dragging so the tick never yanks the thumb away from the scrub position.
+        /// Writes to the slider are bracketed by <see cref="_seekTimerWriting"/> so the
+        /// ValueChanged handler knows to ignore them.
         /// </summary>
-        private async void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        private async void Timer_Tick(object sender, EventArgs e)
         {
             try
             {
-                _timerFlag = true;
-
-                if (_player == null)
+                var p = _player;
+                if (p == null || _seekDragging)
                 {
                     return;
                 }
 
-                var position = await _player.Position_GetAsync();
-                var duration = await _player.DurationAsync();
+                var position = await p.Position_GetAsync();
+                var duration = await p.DurationAsync();
 
-                Dispatcher.Invoke(() =>
+                if (_seekDragging)
                 {
-                    sliderTimeline.Maximum = duration.TotalSeconds;
-                    lblTime.Text = position.ToString("hh\\:mm\\:ss") + " / " + duration.ToString("hh\\:mm\\:ss");
+                    return;
+                }
 
-                    if (sliderTimeline.Maximum >= position.TotalSeconds)
+                double total = duration.TotalSeconds;
+                double pos = position.TotalSeconds;
+
+                _seekTimerWriting = true;
+                try
+                {
+                    if (total > 0 && Math.Abs(sliderTimeline.Maximum - total) > 0.5)
                     {
-                        sliderTimeline.Value = position.TotalSeconds;
+                        sliderTimeline.Maximum = total;
                     }
-                });
+
+                    if (!double.IsNaN(pos) && pos >= sliderTimeline.Minimum && pos <= sliderTimeline.Maximum)
+                    {
+                        sliderTimeline.Value = pos;
+                    }
+                }
+                finally
+                {
+                    _seekTimerWriting = false;
+                }
+
+                lblTime.Text = position.ToString("hh\\:mm\\:ss") + " / " + duration.ToString("hh\\:mm\\:ss");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
-            finally
-            {
-                _timerFlag = false;
-            }
         }
 
         /// <summary>
-        /// Destroys the player, unsubscribing events and awaiting disposal.
+        /// Destroys the player, unsubscribing events and awaiting disposal. Also deletes
+        /// every temp MPD wrapper we synthesized for DASH formats — they are only valid
+        /// as long as the player session that was built from them, and YouTube URLs
+        /// inside them expire after a few hours anyway.
         /// </summary>
         private async Task DestroyPlayerAsync()
         {
@@ -479,6 +862,34 @@ namespace youtube_player_x
                 await _player.DisposeAsync();
                 _player = null;
             }
+
+            DeleteTempMpdFiles();
+        }
+
+        /// <summary>
+        /// Deletes every temp MPD file tracked in <see cref="_tempMpdFiles"/>, swallowing
+        /// per-file failures so a locked/already-deleted file doesn't stop the rest of
+        /// the cleanup.
+        /// </summary>
+        private void DeleteTempMpdFiles()
+        {
+            foreach (var path in _tempMpdFiles)
+            {
+                try
+                {
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
+                }
+                catch
+                {
+                    // File may still be held by dashdemux2 on a dirty shutdown path.
+                    // Best-effort cleanup — temp dir gets cleared by the OS eventually.
+                }
+            }
+
+            _tempMpdFiles.Clear();
         }
 
         /// <summary>

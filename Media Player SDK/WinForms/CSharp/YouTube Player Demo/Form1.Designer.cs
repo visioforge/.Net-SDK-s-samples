@@ -112,6 +112,9 @@
             tbTimeline.Size = new System.Drawing.Size(260, 69);
             tbTimeline.TabIndex = 5;
             tbTimeline.Scroll += tbTimeline_Scroll;
+            tbTimeline.MouseDown += tbTimeline_MouseDown;
+            tbTimeline.MouseUp += tbTimeline_MouseUp;
+            tbTimeline.KeyUp += tbTimeline_KeyUp;
             // 
             // mmLog
             // 

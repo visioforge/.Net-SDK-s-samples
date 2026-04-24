@@ -45,6 +45,8 @@
             VideoView1 = new VisioForge.Core.UI.WinForms.VideoView();
             label4 = new System.Windows.Forms.Label();
             cbAudioOutput = new System.Windows.Forms.ComboBox();
+            tbTimeline = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)tbTimeline).BeginInit();
             SuspendLayout();
             // 
             // btStart
@@ -100,7 +102,7 @@
             // 
             // mmLog
             // 
-            mmLog.Location = new System.Drawing.Point(20, 917);
+            mmLog.Location = new System.Drawing.Point(20, 979);
             mmLog.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             mmLog.Multiline = true;
             mmLog.Name = "mmLog";
@@ -111,7 +113,7 @@
             // cbDebugMode
             // 
             cbDebugMode.AutoSize = true;
-            cbDebugMode.Location = new System.Drawing.Point(20, 878);
+            cbDebugMode.Location = new System.Drawing.Point(20, 930);
             cbDebugMode.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             cbDebugMode.Name = "cbDebugMode";
             cbDebugMode.Size = new System.Drawing.Size(144, 29);
@@ -167,11 +169,10 @@
             // VideoView1
             // 
             VideoView1.BackColor = System.Drawing.Color.Black;
-            VideoView1.Location = new System.Drawing.Point(20, 268);
+            VideoView1.Location = new System.Drawing.Point(20, 274);
             VideoView1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             VideoView1.Name = "VideoView1";
-            VideoView1.Size = new System.Drawing.Size(915, 588);
-            VideoView1.StatusOverlay = null;
+            VideoView1.Size = new System.Drawing.Size(915, 646);
             VideoView1.TabIndex = 14;
             // 
             // label4
@@ -192,16 +193,25 @@
             cbAudioOutput.Size = new System.Drawing.Size(737, 33);
             cbAudioOutput.TabIndex = 17;
             // 
+            // tbTimeline
+            // 
+            tbTimeline.Location = new System.Drawing.Point(488, 98);
+            tbTimeline.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tbTimeline.Maximum = 100;
+            tbTimeline.Name = "tbTimeline";
+            tbTimeline.Size = new System.Drawing.Size(260, 69);
+            tbTimeline.TabIndex = 18;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(959, 1057);
+            ClientSize = new System.Drawing.Size(959, 1107);
+            Controls.Add(cbAudioStream);
+            Controls.Add(cbVideoStream);
             Controls.Add(cbAudioOutput);
             Controls.Add(label4);
             Controls.Add(VideoView1);
-            Controls.Add(cbAudioStream);
-            Controls.Add(cbVideoStream);
             Controls.Add(btReadFormats);
             Controls.Add(label2);
             Controls.Add(mmLog);
@@ -211,11 +221,13 @@
             Controls.Add(edURL);
             Controls.Add(btStop);
             Controls.Add(btStart);
+            Controls.Add(tbTimeline);
             Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             Name = "Form1";
             Text = "Media Blocks SDK .Net - YouTube Player Demo";
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)tbTimeline).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -237,6 +249,7 @@
         private VisioForge.Core.UI.WinForms.VideoView VideoView1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbAudioOutput;
+        private System.Windows.Forms.TrackBar tbTimeline;
     }
 }
 

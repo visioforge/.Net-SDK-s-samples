@@ -73,6 +73,9 @@
             <Slider x:Name="sliderTimeline"
                     Grid.Column="0"
                     VerticalAlignment="Center"
+                    PreviewMouseDown="sliderTimeline_PreviewMouseDown"
+                    PreviewMouseUp="sliderTimeline_PreviewMouseUp"
+                    LostMouseCapture="sliderTimeline_LostMouseCapture"
                     ValueChanged="sliderTimeline_ValueChanged" />
             <TextBlock x:Name="lblTime"
                        Grid.Column="1"
