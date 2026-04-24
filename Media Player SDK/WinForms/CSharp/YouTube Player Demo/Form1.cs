@@ -198,7 +198,7 @@
 
                 if (formats == null || !result.Success)
                 {
-                    MessageBox.Show($"Unable to read video formats.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Unable to read video formats.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 

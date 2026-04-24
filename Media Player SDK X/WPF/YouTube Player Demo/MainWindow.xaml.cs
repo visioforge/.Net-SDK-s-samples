@@ -281,6 +281,7 @@ namespace youtube_player_x
 
                 _player = new MediaPlayerCoreX(VideoView1);
                 _player.OnError += Player_OnError;
+                _player.OnStop += Player_OnStop;
                 _player.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
                 _player.Debug_Mode = cbDebugMode.IsChecked == true;
 
@@ -808,6 +809,28 @@ namespace youtube_player_x
         }
 
         /// <summary>
+        /// Player stop event — fires on natural EOS or explicit StopAsync. Resets the
+        /// UI (timer, slider, status label) so it matches the stopped state, consistent
+        /// with the other demos in the SDK that subscribe to OnStop.
+        /// </summary>
+        private void Player_OnStop(object sender, VisioForge.Core.Types.Events.StopEventArgs e)
+        {
+            if (Dispatcher.HasShutdownStarted || Dispatcher.HasShutdownFinished)
+            {
+                return;
+            }
+
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                StopTimer();
+                _seekDragging = false;
+                sliderTimeline.Value = 0;
+                lblTime.Text = "00:00:00 / 00:00:00";
+                lblStatus.Text = "Stopped.";
+            }));
+        }
+
+        /// <summary>
         /// Timer tick — refreshes the timeline slider and time label. Bails while the user
         /// is dragging so the tick never yanks the thumb away from the scrub position.
         /// Writes to the slider are bracketed by <see cref="_seekTimerWriting"/> so the
@@ -876,6 +899,7 @@ namespace youtube_player_x
             if (_player != null)
             {
                 _player.OnError -= Player_OnError;
+                _player.OnStop -= Player_OnStop;
                 await _player.DisposeAsync();
                 _player = null;
             }
