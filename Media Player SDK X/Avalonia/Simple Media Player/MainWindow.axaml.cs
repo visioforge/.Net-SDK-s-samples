@@ -83,10 +83,6 @@ namespace Simple_Media_Player
         {
             InitializeComponent();
 
-#if DEBUG
-            this.AttachDevTools();
-#endif
-
             // We have to initialize the engine on start
             Activated += MainWindow_Activated;
             Closing += MainWindow_Closing;

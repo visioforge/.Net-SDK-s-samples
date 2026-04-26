@@ -1,11 +1,13 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 using VisioForge.Core;
@@ -37,9 +39,6 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
-#if DEBUG
-        this.AttachDevTools();
-#endif
 
         Activated += MainWindow_Activated;
         Closing += MainWindow_Closing;
@@ -164,11 +163,13 @@ public partial class MainWindow : Window
     /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btAddFile_Click(object sender, RoutedEventArgs e)
     {
-        var ofd = new OpenFileDialog();
-        string[] files = await ofd.ShowAsync(this);
-        if (files?.Length > 0)
+        var topLevel = TopLevel.GetTopLevel(this);
+        if (topLevel == null) return;
+
+        var pickedFiles = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());
+        if (pickedFiles?.Count > 0)
         {
-            string filename = files[0];
+            string filename = pickedFiles[0].Path.LocalPath;
 
             // if resolution and output format not set we should set it the same as in added file
             if (cbResize.IsChecked == true)
@@ -246,9 +247,12 @@ public partial class MainWindow : Window
     /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
     private async void btSelectFile_Click(object sender, RoutedEventArgs e)
     {
-        var ofd = new SaveFileDialog();
-        string file = await ofd.ShowAsync(this);
-        if (string.IsNullOrEmpty(file))
+        var topLevel = TopLevel.GetTopLevel(this);
+        if (topLevel == null) return;
+
+        var savedFile = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions());
+        var file = savedFile?.Path?.LocalPath;
+        if (!string.IsNullOrEmpty(file))
         {
             edOutput.Text = file;
         }

@@ -1,5 +1,5 @@
-﻿using Avalonia;
-using Avalonia.ReactiveUI;
+using Avalonia;
+using ReactiveUI.Avalonia;
 using System;
 
 namespace SimpleVideoCaptureMVVM.Desktop
@@ -27,7 +27,7 @@ namespace SimpleVideoCaptureMVVM.Desktop
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .WithInterFont()
-                .UseReactiveUI()
+                .UseReactiveUI(_ => { })
                 .LogToTrace();
     }
 }

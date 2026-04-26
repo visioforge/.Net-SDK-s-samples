@@ -1,6 +1,6 @@
 using Avalonia;
 using Avalonia.iOS;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 using Foundation;
 
 namespace VideoMixerMVVM.iOS
@@ -14,7 +14,7 @@ namespace VideoMixerMVVM.iOS
         {
             return base.CustomizeAppBuilder(builder)
                 .WithInterFont()
-                .UseReactiveUI();
+                .UseReactiveUI(_ => { });
         }
     }
 }

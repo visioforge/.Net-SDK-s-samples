@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using System;
 using System.Collections.ObjectModel;
@@ -61,9 +62,6 @@ namespace SimpleVideoCaptureA
         public MainWindow()
         {
             InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
 
             // We have to initialize the engine on start
             VisioForgeX.InitSDK();
@@ -347,20 +345,23 @@ namespace SimpleVideoCaptureA
         /// <returns>The confirmed filename, or null if cancelled.</returns>
         private async Task<string> SaveVideoFileDialogAsync()
         {
-            var sfd = new SaveFileDialog();
-            sfd.InitialFileName = "video.mp4";
-            sfd.DefaultExtension = ".mp4";
+            var topLevel = TopLevel.GetTopLevel(this);
+            if (topLevel == null) return null;
 
             var exts = new string[] { "mp4", "avi", "wmv", "wma", "mp3", "ogg" };
-            foreach (var extension in exts)
+            var fileTypes = exts.Select(ext => new FilePickerFileType(ext.ToUpperInvariant())
             {
-                var filter = new FileDialogFilter();
-                filter.Name = extension.ToUpperInvariant();
-                filter.Extensions.Add(extension);
-                sfd.Filters.Add(filter);
-            }
+                Patterns = new[] { "*." + ext }
+            }).ToList();
 
-            return await sfd.ShowAsync(this);
+            var file = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+            {
+                SuggestedFileName = "video.mp4",
+                DefaultExtension = "mp4",
+                FileTypeChoices = fileTypes
+            });
+
+            return file?.Path?.LocalPath;
         }
 
         /// <summary>
@@ -654,21 +655,32 @@ namespace SimpleVideoCaptureA
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btSaveSnapshot_Click(object sender, RoutedEventArgs e)
         {
-            var sfd = new SaveFileDialog();
-            sfd.InitialFileName = "image.jpg";
-            sfd.DefaultExtension = ".jpg";
-            sfd.Directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "VisioForge");
+            var topLevel = TopLevel.GetTopLevel(this);
+            if (topLevel == null) return;
 
             var exts = new string[] { "jpg", "bmp", "png", "gif" };
-            foreach (var extension in exts)
+            var fileTypes = exts.Select(ext => new FilePickerFileType(ext.ToUpperInvariant())
             {
-                var filter = new FileDialogFilter();
-                filter.Name = extension.ToUpperInvariant();
-                filter.Extensions.Add(extension);
-                sfd.Filters.Add(filter);
-            }
+                Patterns = new[] { "*." + ext }
+            }).ToList();
 
-            var filename = await sfd.ShowAsync(this);
+            IStorageFolder startFolder = null;
+            try
+            {
+                startFolder = await topLevel.StorageProvider.TryGetFolderFromPathAsync(
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "VisioForge"));
+            }
+            catch { }
+
+            var savedFile = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+            {
+                SuggestedFileName = "image.jpg",
+                DefaultExtension = "jpg",
+                FileTypeChoices = fileTypes,
+                SuggestedStartLocation = startFolder
+            });
+
+            var filename = savedFile?.Path?.LocalPath;
 
             if (!string.IsNullOrEmpty(filename))
             {

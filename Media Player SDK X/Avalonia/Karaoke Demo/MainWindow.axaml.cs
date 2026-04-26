@@ -77,10 +77,6 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-#if DEBUG
-        this.AttachDevTools();
-#endif
-
         Activated += MainWindow_Activated;
         Closing += MainWindow_Closing;
 

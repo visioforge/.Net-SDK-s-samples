@@ -6,7 +6,7 @@ using Android.OS;
 
 using Avalonia;
 using Avalonia.Android;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 using Simple_Player_MVVM.ViewModels;
 using SimplePlayerMVVM;
 using System;
@@ -20,21 +20,11 @@ namespace Simple_Player_MVVM.Android
         Icon = "@drawable/icon",
         MainLauncher = true,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
-    public class MainActivity : AvaloniaMainActivity<App>, IAndroidHelper
+    public class MainActivity : AvaloniaMainActivity, IAndroidHelper
     {
         public static MainActivity Instance { get; private set; }
 
         public event EventHandler<string> FilePicked;
-
-        /// <summary>
-        /// Customize app builder.
-        /// </summary>
-        protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
-        {
-            return base.CustomizeAppBuilder(builder)
-                .WithInterFont()
-                .UseReactiveUI();
-        }
 
         /// <summary>
         /// On request permissions result.

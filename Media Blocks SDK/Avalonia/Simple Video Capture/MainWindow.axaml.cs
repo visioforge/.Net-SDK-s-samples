@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 
 using System;
@@ -112,9 +113,6 @@ namespace SimpleVideoCaptureAMB
         public MainWindow()
         {
             InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
 
             // We have to initialize the engine on start
             VisioForgeX.InitSDK();
@@ -310,20 +308,23 @@ namespace SimpleVideoCaptureAMB
         /// </summary>
         private async Task<string> SaveVideoFileDialogAsync()
         {
-            var sfd = new SaveFileDialog();
-            sfd.InitialFileName = "video.mp4";
-            sfd.DefaultExtension = ".mp4";
+            var topLevel = TopLevel.GetTopLevel(this);
+            if (topLevel == null) return null;
 
             var exts = new string[] { "mp4", "avi", "wmv", "wma", "mp3", "ogg" };
-            foreach (var extension in exts)
+            var fileTypes = exts.Select(ext => new FilePickerFileType(ext.ToUpperInvariant())
             {
-                var filter = new FileDialogFilter();
-                filter.Name = extension.ToUpperInvariant();
-                filter.Extensions.Add(extension);
-                sfd.Filters.Add(filter);
-            }
+                Patterns = new[] { "*." + ext }
+            }).ToList();
 
-            return await sfd.ShowAsync(this);
+            var file = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+            {
+                SuggestedFileName = "video.mp4",
+                DefaultExtension = "mp4",
+                FileTypeChoices = fileTypes
+            });
+
+            return file?.Path?.LocalPath;
         }
 
         /// <summary>

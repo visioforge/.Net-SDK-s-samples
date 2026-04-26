@@ -1,10 +1,10 @@
-﻿using Android;
+using Android;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Avalonia;
 using Avalonia.Android;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 using SimpleVideoCaptureMVVM.ViewModels;
 using System;
 
@@ -19,17 +19,8 @@ namespace SimpleVideoCaptureMVVM.Android
     /// <summary>
     /// Represents the main activity.
     /// </summary>
-    public class MainActivity : AvaloniaMainActivity<App>
+    public class MainActivity : AvaloniaMainActivity
     {
-        /// <summary>
-        /// Customize app builder.
-        /// </summary>
-        protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
-        {
-            return base.CustomizeAppBuilder(builder)
-                .WithInterFont()
-                .UseReactiveUI();
-        }
 
         /// <summary>
         /// On create.

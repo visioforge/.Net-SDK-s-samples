@@ -47,9 +47,6 @@ namespace PreEventRecordingDemoVCXA
         public MainWindow()
         {
             InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
 
             VisioForgeX.InitSDK();
 

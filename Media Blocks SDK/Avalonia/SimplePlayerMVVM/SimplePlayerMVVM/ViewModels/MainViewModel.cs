@@ -54,7 +54,7 @@ namespace Simple_Player_MVVM.ViewModels
             // Throttled volume update — avoids flooding audio renderer during drag
             this.WhenAnyValue(x => x.VolumeValue)
                 .Throttle(TimeSpan.FromMilliseconds(50))
-                .ObserveOn(RxApp.MainThreadScheduler)
+                .ObserveOn(RxSchedulers.MainThreadScheduler)
                 .Subscribe(v =>
                 {
                     if (_audioRenderer != null)
@@ -66,7 +66,7 @@ namespace Simple_Player_MVVM.ViewModels
             // Throttled seeking — avoids flooding pipeline with seek commands during drag
             this.WhenAnyValue(x => x.SeekingValue)
                 .Throttle(TimeSpan.FromMilliseconds(100))
-                .ObserveOn(RxApp.MainThreadScheduler)
+                .ObserveOn(RxSchedulers.MainThreadScheduler)
                 .Subscribe(v =>
                 {
                     if (!_isTimerUpdate && _pipeline != null)
@@ -280,7 +280,7 @@ namespace Simple_Player_MVVM.ViewModels
                 if (files.Count >= 1)
                 {
                     var file = files[0];
-                    Filename = file.Path.AbsoluteUri;
+                    Filename = file.Path.LocalPath;
 
 #if __ANDROID__
                     if (!Filename.StartsWith('/'))

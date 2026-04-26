@@ -1,5 +1,5 @@
-﻿using Avalonia;
-using Avalonia.ReactiveUI;
+using Avalonia;
+using ReactiveUI.Avalonia;
 using System;
 
 namespace Simple_Player_MVVM.Desktop
@@ -24,7 +24,7 @@ namespace Simple_Player_MVVM.Desktop
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .WithInterFont()
-                .UseReactiveUI()
+                .UseReactiveUI(_ => { })
                 .LogToTrace();
     }
 }

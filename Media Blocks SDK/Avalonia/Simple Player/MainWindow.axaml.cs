@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using System;
 using System.Collections.ObjectModel;
@@ -80,9 +81,6 @@ namespace SimplePlayerAMB
         public MainWindow()
         {
             InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
 
             VisioForgeX.InitSDK();
 
@@ -257,11 +255,13 @@ namespace SimplePlayerAMB
         {
             try
             {
-                var ofd = new OpenFileDialog();
-                string[] files = await ofd.ShowAsync(this);
-                if (files != null && files.Length > 0)
+                var topLevel = TopLevel.GetTopLevel(this);
+                if (topLevel == null) return;
+
+                var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());
+                if (files?.Count > 0)
                 {
-                    edFilenameOrURL.Text = files[0];
+                    edFilenameOrURL.Text = files[0].Path.LocalPath;
                 }
             }
             catch (Exception ex)

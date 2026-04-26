@@ -1,5 +1,5 @@
 using Avalonia;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 using System;
 
 namespace VideoMixerMVVM.Desktop
@@ -14,7 +14,7 @@ namespace VideoMixerMVVM.Desktop
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .WithInterFont()
-                .UseReactiveUI()
+                .UseReactiveUI(_ => { })
                 .LogToTrace();
     }
 }
