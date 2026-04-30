@@ -298,7 +298,7 @@ namespace SRT_Streamer_Demo
                 // AAC encoder
                 if (audioEnabled)
                 {
-                    _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
+                    _aacEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings());
                     _pipeline.Connect(_audioTee.Outputs[1], _aacEncoder.Input);
                 }
 

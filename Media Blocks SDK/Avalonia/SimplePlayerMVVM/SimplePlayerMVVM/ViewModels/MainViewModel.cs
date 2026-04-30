@@ -45,7 +45,7 @@ namespace Simple_Player_MVVM.ViewModels
         /// </summary>
         public MainViewModel()
         {
-            OpenFileCommand = ReactiveCommand.Create(OpenFileAsync);
+            OpenFileCommand = ReactiveCommand.CreateFromTask(OpenFileAsync);
             PlayPauseCommand = ReactiveCommand.CreateFromTask(PlayPauseAsync);
             StopCommand = ReactiveCommand.CreateFromTask(StopAsync);
             SpeedCommand = ReactiveCommand.CreateFromTask(SpeedAsync);
@@ -274,26 +274,31 @@ namespace Simple_Player_MVVM.ViewModels
                 var files = await TopLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
                 {
                     Title = "Open video file",
-                    AllowMultiple = false
+                    AllowMultiple = false,
+                    FileTypeFilter = new[]
+                    {
+                        new FilePickerFileType("Media Files") { Patterns = new[] { "*.mp4", "*.mkv", "*.avi", "*.mov", "*.webm", "*.wmv", "*.mp3", "*.wav", "*.aac", "*.ogg", "*.flac" } },
+                        FilePickerFileTypes.All
+                    }
                 });
 
                 if (files.Count >= 1)
                 {
-                    var file = files[0];
-                    Filename = file.Path.LocalPath;
-
+                    using var file = files[0];
 #if __ANDROID__
-                    if (!Filename.StartsWith('/'))
-                    {
-                        Filename =
- global::VisioForge.Core.UI.Android.FileDialogHelper.GetFilePathFromUri(AndroidHelper.GetContext(), file.Path);
-                    }
+                    // On Android, content:// URIs map to LocalPath like "/document/123" which
+                    // already starts with '/', so a StartsWith('/') guard would skip the URI-to-path
+                    // conversion and hand the SDK a non-existent path. Always run the converter on Android.
+                    Filename = global::VisioForge.Core.UI.Android.FileDialogHelper.GetFilePathFromUri(AndroidHelper.GetContext(), file.Path);
+#else
+                    Filename = file.Path.LocalPath;
 #endif
                 }
             }
             catch (Exception ex)
             {
-                // The user canceled or something went wrong
+                // User cancelled or platform error — log but do not propagate.
+                System.Diagnostics.Debug.WriteLine($"OpenFile error: {ex}");
             }
 
 #endif

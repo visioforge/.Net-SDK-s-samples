@@ -33,6 +33,7 @@ namespace SimpleVideoCaptureA
 
     public partial class MainWindow : Window, IDisposable
     {
+        private bool _closingHandled;
         private bool _initialized;
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
@@ -69,6 +70,7 @@ namespace SimpleVideoCaptureA
             InitControls();
 
             Activated += MainWindow_Activated;
+            Closing += Window_Closing;
 
             DataContext = this;
         }
@@ -184,8 +186,6 @@ namespace SimpleVideoCaptureA
         //        throw new ArgumentOutOfRangeException();
         //}
 #endif
-
-            Closing += Window_Closing;
 
             CreateEngine();
 
@@ -328,13 +328,13 @@ namespace SimpleVideoCaptureA
         /// <summary>
         /// Disposes of the video capture engine and releases resources.
         /// </summary>
-        private void DestroyEngine()
+        private async Task DestroyEngineAsync()
         {
             if (VideoCapture1 != null)
             {
                 VideoCapture1.OnError -= VideoCapture1_OnError;
 
-                VideoCapture1.Dispose();
+                await VideoCapture1.DisposeAsync();
                 VideoCapture1 = null;
             }
         }
@@ -342,11 +342,19 @@ namespace SimpleVideoCaptureA
         /// <summary>
         /// Opens a save file dialog for selecting a video output file.
         /// </summary>
-        /// <returns>The confirmed filename, or null if cancelled.</returns>
+        /// <returns>The confirmed filename, or <c>null</c> if the user cancelled the dialog.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when no top-level window is available to host the dialog.</exception>
+        /// <remarks>
+        /// Returning <c>null</c> exclusively means user cancellation. The "no top-level" case is now an
+        /// exception, so callers can distinguish "no UI host" from "user cancelled".
+        /// </remarks>
         private async Task<string> SaveVideoFileDialogAsync()
         {
             var topLevel = TopLevel.GetTopLevel(this);
-            if (topLevel == null) return null;
+            if (topLevel == null)
+            {
+                throw new InvalidOperationException("No top-level window available for file dialog.");
+            }
 
             var exts = new string[] { "mp4", "avi", "wmv", "wma", "mp3", "ogg" };
             var fileTypes = exts.Select(ext => new FilePickerFileType(ext.ToUpperInvariant())
@@ -728,29 +736,77 @@ namespace SimpleVideoCaptureA
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DestroyEngine();
+            // Avalonia's Closing event does not await async-void handlers, so cleanup would otherwise
+            // race with Avalonia tearing down the visual tree. Cancel the first close, run cleanup,
+            // then close manually. Re-entry from the manual Close() must be a no-op.
+            if (_closingHandled)
+            {
+                return;
+            }
 
-            VisioForgeX.DestroySDK();
+            e.Cancel = true;
+            _closingHandled = true;
+
+            try
+            {
+                tmRecording?.Stop();
+                tmRecording?.Dispose();
+                tmRecording = null;
+
+                if (VideoCapture1 != null)
+                {
+                    await VideoCapture1.StopAsync();
+                    await DestroyEngineAsync();
+                }
+
+                VideoView1?.Dispose();
+                VideoView1 = null;
+
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Window closing error: {ex.Message}");
+            }
+
+            Close();
         }
 
         /// <summary>
         /// Disposes of the managed resources used by the window.
         /// </summary>
         /// <param name="disposing">True if called from the <see cref="Dispose()"/> method; false if called from the finalizer.</param>
+        /// <remarks>
+        /// Normal close path goes through <see cref="Window_Closing"/>, which awaits
+        /// <see cref="DestroyEngineAsync"/>. If <see cref="Dispose(bool)"/> runs first
+        /// (external IDisposable call), block on the same helper with a bounded timeout —
+        /// calling synchronous <c>Dispose()</c> on the engine is not supported by the SDK.
+        /// </remarks>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects)
                     tmRecording?.Dispose();
                     tmRecording = null;
 
-                    VideoCapture1?.Dispose();
-                    VideoCapture1 = null;
+                    if (VideoCapture1 != null)
+                    {
+                        try
+                        {
+                            // SDK requires async dispose; bounded wait is the only
+                            // option in a synchronous Dispose path.
+                            DestroyEngineAsync().Wait(TimeSpan.FromSeconds(5));
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine($"Dispose(true) DestroyEngineAsync error: {ex.Message}");
+                        }
+                        VideoCapture1 = null;
+                    }
 
                     VideoView1?.Dispose();
                     VideoView1 = null;

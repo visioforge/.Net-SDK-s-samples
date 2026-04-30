@@ -276,7 +276,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 if (capture)
                 {
                     _h264Encoder = new H264EncoderBlock();
-                    _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
+                    _aacEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings());
                     _mp4Muxer = new MP4SinkBlock(new MP4SinkSettings(edFilename.Text));
                 }
 

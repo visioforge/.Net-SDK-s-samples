@@ -28,5 +28,12 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>This app scans the local network to discover ONVIF cameras.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_http._tcp</string>
+		<string>_onvif._tcp</string>
+	</array>
 </dict>
 </plist>

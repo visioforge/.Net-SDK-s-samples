@@ -280,12 +280,18 @@ namespace Simple_Media_Player
                 var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
                 {
                     Title = "Select media file",
-                    AllowMultiple = false
+                    AllowMultiple = false,
+                    FileTypeFilter = new[]
+                    {
+                        new FilePickerFileType("Media Files") { Patterns = new[] { "*.mp4", "*.mkv", "*.avi", "*.mov", "*.webm", "*.wmv", "*.mp3", "*.wav", "*.aac", "*.ogg", "*.flac" } },
+                        FilePickerFileTypes.All
+                    }
                 });
 
                 if (files != null && files.Count > 0)
                 {
-                    edFilenameOrURL.Text = files[0].Path.LocalPath;
+                    using var file = files[0];
+                    edFilenameOrURL.Text = file.Path.LocalPath;
                 }
             }
             catch (Exception ex)

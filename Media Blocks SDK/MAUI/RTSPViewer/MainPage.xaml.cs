@@ -1,9 +1,12 @@
 using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.ONVIFDiscovery;
 using VisioForge.Core.ONVIFX;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
@@ -33,12 +36,48 @@ namespace RTSPViewer
         /// </summary>
         private AudioRendererBlock _audioRenderer;
 
+        /// <summary>
+        /// The ONVIF discovery instance.
+        /// </summary>
+        private readonly Discovery _onvifDiscovery = new Discovery();
+
+        /// <summary>
+        /// The ONVIF discovery cancellation token source.
+        /// </summary>
+        private CancellationTokenSource _onvifCts;
+
         public MainPage()
         {
             InitializeComponent();
 
             // We have to initialize the engine on start
             VisioForgeX.InitSDK();
+
+            Loaded += MainPage_Loaded;
+        }
+
+        /// <summary>
+        /// Main page loaded.
+        /// </summary>
+        private void MainPage_Loaded(object? sender, EventArgs e)
+        {
+            Window.Destroying += Window_Destroying;
+        }
+
+        /// <summary>
+        /// Window destroying.
+        /// </summary>
+        private async void Window_Destroying(object? sender, EventArgs e)
+        {
+            try
+            {
+                await StopAsync();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error during cleanup: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -197,6 +236,83 @@ namespace RTSPViewer
         private void VideoCapture1_OnError(object? sender, ErrorsEventArgs e)
         {
             Debug.WriteLine(e.Message);
+        }
+
+        /// <summary>
+        /// Handles the scan button click. Discovers ONVIF devices on the local network
+        /// and populates the picker with their service URLs.
+        /// </summary>
+        private async void btScan_Clicked(object? sender, EventArgs e)
+        {
+            try
+            {
+                _onvifCts?.Cancel();
+                _onvifCts = new CancellationTokenSource();
+
+                cbONVIFDevices.Items.Clear();
+                btScan.IsEnabled = false;
+                btScan.Text = "...";
+
+                try
+                {
+                    await _onvifDiscovery.Discover(5, (device) =>
+                    {
+                        if (device.XAdresses?.Any() == true)
+                        {
+                            var address = device.XAdresses.FirstOrDefault();
+                            if (string.IsNullOrEmpty(address))
+                            {
+                                return;
+                            }
+
+                            MainThread.BeginInvokeOnMainThread(() =>
+                            {
+                                if (!cbONVIFDevices.Items.Contains(address))
+                                {
+                                    cbONVIFDevices.Items.Add(address);
+
+                                    if (cbONVIFDevices.Items.Count == 1)
+                                    {
+                                        cbONVIFDevices.SelectedIndex = 0;
+                                    }
+                                }
+                            });
+                        }
+                    }, _onvifCts.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                    // Discovery cancelled
+                }
+
+                if (cbONVIFDevices.Items.Count == 0)
+                {
+                    await DisplayAlertAsync("ONVIF scan", "No ONVIF devices found on the local network.", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"ONVIF scan error: {ex.Message}");
+                await DisplayAlertAsync("ONVIF scan", $"Discovery failed: {ex.Message}", "OK");
+            }
+            finally
+            {
+                btScan.Text = "SCAN";
+                btScan.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// Copies the selected ONVIF device URL into the URL entry field.
+        /// </summary>
+        private void cbONVIFDevices_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            if (cbONVIFDevices.SelectedIndex < 0)
+            {
+                return;
+            }
+
+            edURL.Text = cbONVIFDevices.SelectedItem?.ToString() ?? string.Empty;
         }
     }
 

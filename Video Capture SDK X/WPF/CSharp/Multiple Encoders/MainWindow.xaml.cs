@@ -1,318 +1,490 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using VisioForge.Core;
+using VisioForge.Core.Types;
+using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.Output;
+using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.VideoCapture;
 using VisioForge.Core.Types.X.VideoEncoders;
+using VisioForge.Core.UI;
 using VisioForge.Core.UI.WPF;
+using VisioForge.Core.VideoCaptureX;
 
 namespace Multiple_Encoders
 {
     /// <summary>
-    /// Interaction logic for the Multiple Encoders WPF demo's MainWindow.
-    /// Demonstrates how to run multiple independent capture/encode pipelines simultaneously.
+    /// Multiple Encoders WPF demo — runs four independent VideoCaptureCoreX pipelines in parallel,
+    /// each with its own device, format, encoder and output file. Demonstrates that several hardware /
+    /// software encoders can run side by side from a single application.
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static Dictionary<string, IVideoEncoder> _encoders = new Dictionary<string, IVideoEncoder>();
+        private const int PipelineCount = 4;
 
-        private EncodeEngine[] _encodeEngines = new EncodeEngine[4];
+        private readonly VideoCaptureCoreX[] _cores = new VideoCaptureCoreX[PipelineCount];
+
+        private VideoView[] _videoViews;
+        private ComboBox[] _cbVideoDevice;
+        private ComboBox[] _cbVideoFormat;
+        private ComboBox[] _cbVideoFrameRate;
+        private ComboBox[] _cbAudioDevice;
+        private ComboBox[] _cbAudioFormat;
+        private ComboBox[] _cbVideoEncoder;
+        private CheckBox[] _cbRecordAudio;
+        private TextBlock[] _lbStatus;
+
+        private static readonly Dictionary<string, Func<IVideoEncoder>> _encoderFactories =
+            new Dictionary<string, Func<IVideoEncoder>>();
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private static string[] GetVideoEncoders()
+        private void BuildSlotArrays()
         {
-            _encoders.Clear();
-
-            var encoders = new List<string>();
-            encoders.Add("OpenH264");
-            _encoders.Add("OpenH264", new OpenH264EncoderSettings());
-
-            if (NVENCH264EncoderSettings.IsAvailable())
-            {
-                encoders.Add("NVIDIA H.264");
-                _encoders.Add("NVIDIA H.264", new NVENCH264EncoderSettings(VideoQuality.High));
-            }
-
-            if (NVENCHEVCEncoderSettings.IsAvailable())
-            {
-                encoders.Add("NVIDIA H.265");
-                _encoders.Add("NVIDIA H.265", new NVENCHEVCEncoderSettings(VideoQuality.High));
-            }
-
-            if (QSVH264EncoderSettings.IsAvailable())
-            {
-                encoders.Add("Intel Quick Sync H.264");
-                _encoders.Add("Intel Quick Sync H.264", new QSVH264EncoderSettings(VideoQuality.High));
-            }
-
-            if (QSVHEVCEncoderSettings.IsAvailable())
-            {
-                encoders.Add("Intel Quick Sync H.265");
-                _encoders.Add("Intel Quick Sync H.265", new QSVHEVCEncoderSettings(VideoQuality.High));
-            }
-
-            if (AMFH264EncoderSettings.IsAvailable())
-            {
-                encoders.Add("AMD H.264");
-                _encoders.Add("AMD H.264", new AMFH264EncoderSettings(VideoQuality.High));
-            }
-
-            if (AMFHEVCEncoderSettings.IsAvailable())
-            {
-                encoders.Add("AMD H.265");
-                _encoders.Add("AMD H.265", new AMFHEVCEncoderSettings(VideoQuality.High));
-            }
-
-            return encoders.ToArray();
+            _videoViews = new[] { videoView1, videoView2, videoView3, videoView4 };
+            _cbVideoDevice = new[] { cbVideoDevice1, cbVideoDevice2, cbVideoDevice3, cbVideoDevice4 };
+            _cbVideoFormat = new[] { cbVideoFormat1, cbVideoFormat2, cbVideoFormat3, cbVideoFormat4 };
+            _cbVideoFrameRate = new[] { cbVideoFrameRate1, cbVideoFrameRate2, cbVideoFrameRate3, cbVideoFrameRate4 };
+            _cbAudioDevice = new[] { cbAudioDevice1, cbAudioDevice2, cbAudioDevice3, cbAudioDevice4 };
+            _cbAudioFormat = new[] { cbAudioFormat1, cbAudioFormat2, cbAudioFormat3, cbAudioFormat4 };
+            _cbVideoEncoder = new[] { cbVideoEncoder1, cbVideoEncoder2, cbVideoEncoder3, cbVideoEncoder4 };
+            _cbRecordAudio = new[] { cbRecordAudio1, cbRecordAudio2, cbRecordAudio3, cbRecordAudio4 };
+            _lbStatus = new[] { lbStatus1, lbStatus2, lbStatus3, lbStatus4 };
         }
 
-        /// <summary>
-        /// Asynchronously retrieves the display names of all available video capture devices.
-        /// </summary>
-        /// <returns>An array of video source display names.</returns>
-        private async Task<string[]> GetVideoSourcesAsync()
-        {
-            var sources = new List<string>();
+        private static int SlotFromTag(object tag) => Convert.ToInt32(tag);
 
-            var sourcesX = await DeviceEnumerator.Shared.VideoSourcesAsync();
-            foreach (var source in sourcesX)
+        private static string[] BuildEncoderList()
+        {
+            _encoderFactories.Clear();
+
+            var names = new List<string>();
+
+            void Add(string name, Func<IVideoEncoder> factory)
             {
-                sources.Add(source.DisplayName);
+                names.Add(name);
+                _encoderFactories[name] = factory;
             }
 
-            return sources.ToArray();
+            Add("OpenH264", () => new OpenH264EncoderSettings());
+            Add("NVIDIA H.264", () => new NVENCH264EncoderSettings(VideoQuality.High));
+            Add("NVIDIA H.265", () => new NVENCHEVCEncoderSettings(VideoQuality.High));
+            Add("Intel Quick Sync H.264", () => new QSVH264EncoderSettings(VideoQuality.High));
+            Add("Intel Quick Sync H.265", () => new QSVHEVCEncoderSettings(VideoQuality.High));
+            Add("AMD H.264", () => new AMFH264EncoderSettings(VideoQuality.High));
+            Add("AMD H.265", () => new AMFHEVCEncoderSettings(VideoQuality.High));
+            Add("Media Foundation H.264", () => new MFH264EncoderSettings());
+            Add("Media Foundation H.265", () => new MFHEVCEncoderSettings());
+            Add("D3D12 H.264", () => new D3D12H264EncoderSettings());
+            Add("D3D12 H.265", () => new D3D12HEVCEncoderSettings());
+
+            return names.ToArray();
         }
 
-        /// <summary>
-        /// Asynchronously retrieves the display names of all available audio capture devices.
-        /// </summary>
-        /// <returns>An array of audio source display names.</returns>
-        private async Task<string[]> GetAudioSourcesAsync()
+        private void CreateCore(int index)
         {
-            var sources = new List<string>();
+            var core = new VideoCaptureCoreX(_videoViews[index] as IVideoView);
+            core.OnError += (s, e) => Log($"[Pipeline {index + 1}] {e.Message}");
+            _cores[index] = core;
+        }
 
-            var sourcesX = await DeviceEnumerator.Shared.AudioSourcesAsync();
-            foreach (var source in sourcesX)
+        private async Task DestroyCoreAsync(int index)
+        {
+            if (_cores[index] == null)
             {
-                sources.Add(source.DisplayName);
+                return;
             }
 
-            return sources.ToArray();
+            try
+            {
+                await _cores[index].StopAsync();
+            }
+            catch (Exception ex)
+            {
+                Log($"[Pipeline {index + 1}] Stop error: {ex.Message}");
+            }
+
+            try
+            {
+                await _cores[index].DisposeAsync();
+            }
+            catch (Exception ex)
+            {
+                Log($"[Pipeline {index + 1}] Dispose error: {ex.Message}");
+            }
+
+            _cores[index] = null;
         }
 
-        /// <summary>
-        /// Handles the Loaded event of the Window control.
-        /// Initializes the SDK, populates device and encoder lists, and sets default values.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void Log(string text)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                mmLog.AppendText(text + Environment.NewLine);
+                mmLog.ScrollToEnd();
+            });
+        }
+
+        private void SetStatus(int index, string text, System.Windows.Media.Brush brush)
+        {
+            _lbStatus[index].Text = text;
+            _lbStatus[index].Foreground = brush;
+        }
+
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // init SDK
-            await VisioForgeX.InitSDKAsync();
+            BuildSlotArrays();
 
-            // fill encoders
-            var videoEncoders = GetVideoEncoders();
-
-            cbVideoEncoder1.ItemsSource = videoEncoders;
-            cbVideoEncoder1.SelectedIndex = 0;
-
-            cbVideoEncoder2.ItemsSource = videoEncoders;
-            cbVideoEncoder2.SelectedIndex = 0;
-
-            cbVideoEncoder3.ItemsSource = videoEncoders;
-            cbVideoEncoder3.SelectedIndex = 0;
-
-            cbVideoEncoder4.ItemsSource = videoEncoders;
-            cbVideoEncoder4.SelectedIndex = 0;
-
-            // fill video sources
-            var videoSources = await GetVideoSourcesAsync();
-
-            cbVideoSource1.ItemsSource = videoSources;
-            cbVideoSource1.SelectedIndex = 0;
-
-            cbVideoSource2.ItemsSource = videoSources;
-            cbVideoSource2.SelectedIndex = 0;
-
-            cbVideoSource3.ItemsSource = videoSources;
-            cbVideoSource3.SelectedIndex = 0;
-
-            cbVideoSource4.ItemsSource = videoSources;
-            cbVideoSource4.SelectedIndex = 0;
-
-            // fill audio sources
-            var audioSources = await GetAudioSourcesAsync();
-
-            cbAudioSource1.ItemsSource = audioSources;
-            cbAudioSource1.SelectedIndex = 0;
-
-            cbAudioSource2.ItemsSource = audioSources;
-            cbAudioSource2.SelectedIndex = 0;
-
-            cbAudioSource3.ItemsSource = audioSources;
-            cbAudioSource3.SelectedIndex = 0;
-
-            cbAudioSource4.ItemsSource = audioSources;
-            cbAudioSource4.SelectedIndex = 0;
-
-            // other settings
             edOutputFolder.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            IsEnabled = false;
+            await VisioForgeX.InitSDKAsync();
+            IsEnabled = true;
+            Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+            Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
+
+            // Eagerly create one VideoCaptureCoreX per slot, bound to its VideoView.
+            // Step 2(c) experiment: only slot 0 is constructed; slots 1..3 stay null
+            // so we can rule out cross-instance interference from the other 3 cores
+            // running their preview pipelines on the same process.
+            CreateCore(0);
+            // CreateCore(1);
+            // CreateCore(2);
+            // CreateCore(3);
+
+            var encoders = BuildEncoderList();
+            var videoSources = (await DeviceEnumerator.Shared.VideoSourcesAsync()).Select(d => d.DisplayName).ToArray();
+            var audioSources = (await DeviceEnumerator.Shared.AudioSourcesAsync()).Select(d => d.DisplayName).ToArray();
+
+            for (int i = 0; i < PipelineCount; i++)
+            {
+                _cbVideoEncoder[i].ItemsSource = encoders;
+                if (encoders.Length > 0)
+                {
+                    _cbVideoEncoder[i].SelectedIndex = 0;
+                }
+
+                _cbVideoDevice[i].ItemsSource = videoSources;
+                if (videoSources.Length > 0)
+                {
+                    _cbVideoDevice[i].SelectedIndex = 0;
+                }
+
+                _cbAudioDevice[i].ItemsSource = audioSources;
+                if (audioSources.Length > 0)
+                {
+                    _cbAudioDevice[i].SelectedIndex = 0;
+                }
+            }
         }
 
-        /// <summary>
-        /// Handles the Closing event of the Window control.
-        /// Destroys the SDK resources.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // destroy SDK
+            for (int i = 0; i < PipelineCount; i++)
+            {
+                await DestroyCoreAsync(i);
+            }
+
             VisioForgeX.DestroySDK();
         }
 
-        /// <summary>
-        /// Asynchronously starts a capture pipeline for a specific engine instance.
-        /// </summary>
-        /// <param name="index">The index of the engine instance (0-3).</param>
-        /// <param name="videoView">The video view to render the stream on.</param>
-        /// <param name="videoCaptureSource">The display name of the selected video source.</param>
-        /// <param name="audioCaptureSource">The display name of the selected audio source.</param>
-        /// <param name="videoEncoder">The name of the selected video encoder.</param>
-        /// <returns>A task representing the asynchronous operation.</returns>
-        private async Task StartCaptureAsync(int index, VideoView videoView, string videoCaptureSource, string audioCaptureSource, string videoEncoder)
+        private async void cbVideoDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_encodeEngines[index] != null)
+            if (_cbVideoFormat == null || sender is not ComboBox combo || e.AddedItems.Count == 0)
             {
-                await _encodeEngines[index].StopAsync();
+                return;
             }
 
-            _encodeEngines[index] = new EncodeEngine(videoView);
-            var videoSource = (await DeviceEnumerator.Shared.VideoSourcesAsync()).First(x => x.DisplayName == videoCaptureSource);
-            var audioSource = (await DeviceEnumerator.Shared.AudioSourcesAsync()).First(x => x.DisplayName == audioCaptureSource);
-            await _encodeEngines[index].StartAsync(
-                videoSource,
-                audioSource,
-                _encoders[videoEncoder],
-                System.IO.Path.Combine(edOutputFolder.Text, $"output {index}.mp4"));
-        }
-
-        /// <summary>
-        /// Asynchronously stops the capture pipeline for a specific engine instance.
-        /// </summary>
-        /// <param name="index">The index of the engine instance to stop.</param>
-        /// <returns>A task representing the asynchronous operation.</returns>
-        private async Task StopCaptureAsync(int index)
-        {
-            if (_encodeEngines[index] != null)
+            int slot = SlotFromTag(combo.Tag);
+            var deviceName = e.AddedItems[0]?.ToString();
+            if (string.IsNullOrEmpty(deviceName))
             {
-                await _encodeEngines[index].StopAsync();
-                _encodeEngines[index] = null;
+                return;
+            }
+
+            var device = (await DeviceEnumerator.Shared.VideoSourcesAsync())
+                .FirstOrDefault(d => d.DisplayName == deviceName);
+            if (device == null)
+            {
+                return;
+            }
+
+            _cbVideoFormat[slot].Items.Clear();
+            foreach (var format in device.VideoFormats)
+            {
+                _cbVideoFormat[slot].Items.Add(format.Name);
+            }
+
+            if (_cbVideoFormat[slot].Items.Count > 0)
+            {
+                _cbVideoFormat[slot].SelectedIndex = 0;
             }
         }
 
-        /// <summary>
-        /// Handles the Click event of the btStart1 control.
-        /// Starts capture for the first engine instance.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private async void btStart1_Click(object sender, RoutedEventArgs e)
+        private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            await StartCaptureAsync(0, videoView1, cbVideoSource1.Text, cbAudioSource1.Text, cbVideoEncoder1.Text);
+            if (_cbVideoFrameRate == null || sender is not ComboBox combo)
+            {
+                return;
+            }
+
+            int slot = SlotFromTag(combo.Tag);
+            _cbVideoFrameRate[slot].Items.Clear();
+
+            var deviceName = _cbVideoDevice[slot].SelectedItem?.ToString();
+            var formatName = combo.SelectedItem?.ToString();
+            if (string.IsNullOrEmpty(deviceName) || string.IsNullOrEmpty(formatName))
+            {
+                return;
+            }
+
+            var device = (await DeviceEnumerator.Shared.VideoSourcesAsync())
+                .FirstOrDefault(d => d.DisplayName == deviceName);
+            if (device == null)
+            {
+                return;
+            }
+
+            var videoFormat = device.VideoFormats.FirstOrDefault(f => f.Name == formatName);
+            if (videoFormat == null)
+            {
+                return;
+            }
+
+            foreach (var rate in videoFormat.GetFrameRateRangeAsStringList())
+            {
+                _cbVideoFrameRate[slot].Items.Add(rate);
+            }
+
+            if (_cbVideoFrameRate[slot].Items.Count > 0)
+            {
+                _cbVideoFrameRate[slot].SelectedIndex = 0;
+            }
         }
 
-        /// <summary>
-        /// Handles the Click event of the btStop1 control.
-        /// Stops capture for the first engine instance.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private async void btStop1_Click(object sender, RoutedEventArgs e)
+        private async void cbAudioDevice_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            await StopCaptureAsync(0);
+            if (_cbAudioFormat == null || sender is not ComboBox combo || e.AddedItems.Count == 0)
+            {
+                return;
+            }
+
+            int slot = SlotFromTag(combo.Tag);
+            var deviceName = e.AddedItems[0]?.ToString();
+            if (string.IsNullOrEmpty(deviceName))
+            {
+                return;
+            }
+
+            var device = (await DeviceEnumerator.Shared.AudioSourcesAsync())
+                .FirstOrDefault(d => d.DisplayName == deviceName);
+            if (device == null)
+            {
+                return;
+            }
+
+            _cbAudioFormat[slot].Items.Clear();
+            const string defaultValue = "S16LE 44100 Hz 2 ch.";
+            bool defaultExists = false;
+            foreach (var format in device.Formats)
+            {
+                _cbAudioFormat[slot].Items.Add(format.Name);
+                if (format.Name == defaultValue)
+                {
+                    defaultExists = true;
+                }
+            }
+
+            if (_cbAudioFormat[slot].Items.Count > 0)
+            {
+                _cbAudioFormat[slot].SelectedIndex = 0;
+                if (defaultExists)
+                {
+                    _cbAudioFormat[slot].Text = defaultValue;
+                }
+            }
         }
 
-        /// <summary>
-        /// Handles the Click event of the btStart2 control.
-        /// Starts capture for the second engine instance.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private async void btStart2_Click(object sender, RoutedEventArgs e)
+        private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            await StartCaptureAsync(1, videoView2, cbVideoSource2.Text, cbAudioSource2.Text, cbVideoEncoder2.Text);
+            if (sender is not Button btn)
+            {
+                return;
+            }
+
+            int slot = SlotFromTag(btn.Tag);
+            try
+            {
+                await StartPipelineAsync(slot);
+                SetStatus(slot, "Recording", System.Windows.Media.Brushes.Green);
+            }
+            catch (Exception ex)
+            {
+                Log($"[Pipeline {slot + 1}] Start failed: {ex.Message}");
+                SetStatus(slot, "Error", System.Windows.Media.Brushes.Red);
+            }
         }
 
-        /// <summary>
-        /// Handles the Click event of the btStop2 control.
-        /// Stops capture for the second engine instance.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private async void btStop2_Click(object sender, RoutedEventArgs e)
+        private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            await StopCaptureAsync(1);
+            if (sender is not Button btn)
+            {
+                return;
+            }
+
+            int slot = SlotFromTag(btn.Tag);
+            await StopPipelineAsync(slot);
+            SetStatus(slot, "Idle", System.Windows.Media.Brushes.Gray);
         }
 
-        /// <summary>
-        /// Handles the Click event of the btStart3 control.
-        /// Starts capture for the third engine instance.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private async void btStart3_Click(object sender, RoutedEventArgs e)
+        private async void btStartAll_Click(object sender, RoutedEventArgs e)
         {
-            await StartCaptureAsync(2, videoView3, cbVideoSource3.Text, cbAudioSource3.Text, cbVideoEncoder3.Text);
+            for (int i = 0; i < PipelineCount; i++)
+            {
+                try
+                {
+                    await StartPipelineAsync(i);
+                    SetStatus(i, "Recording", System.Windows.Media.Brushes.Green);
+                }
+                catch (Exception ex)
+                {
+                    Log($"[Pipeline {i + 1}] Start failed: {ex.Message}");
+                    SetStatus(i, "Error", System.Windows.Media.Brushes.Red);
+                }
+            }
         }
 
-        /// <summary>
-        /// Handles the Click event of the btStop3 control.
-        /// Stops capture for the third engine instance.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private async void btStop3_Click(object sender, RoutedEventArgs e)
+        private async void btStopAll_Click(object sender, RoutedEventArgs e)
         {
-            await StopCaptureAsync(2);
+            for (int i = 0; i < PipelineCount; i++)
+            {
+                await StopPipelineAsync(i);
+                SetStatus(i, "Idle", System.Windows.Media.Brushes.Gray);
+            }
         }
 
-        /// <summary>
-        /// Handles the Click event of the btStart4 control.
-        /// Starts capture for the fourth engine instance.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private async void btStart4_Click(object sender, RoutedEventArgs e)
+        private async Task StartPipelineAsync(int slot)
         {
-            await StartCaptureAsync(3, videoView4, cbVideoSource4.Text, cbAudioSource4.Text, cbVideoEncoder4.Text);
+            // Recreate the core if it was disposed (e.g. after a previous StopAsync) or never created.
+            if (_cores[slot] == null)
+            {
+                CreateCore(slot);
+            }
+
+            var core = _cores[slot];
+
+            var videoDeviceName = _cbVideoDevice[slot].Text;
+            var videoFormatName = _cbVideoFormat[slot].Text;
+            var frameRateText = _cbVideoFrameRate[slot].Text;
+            var audioDeviceName = _cbAudioDevice[slot].Text;
+            var audioFormatName = _cbAudioFormat[slot].Text;
+            var encoderName = _cbVideoEncoder[slot].Text;
+
+            // Video source
+            VideoCaptureDeviceSourceSettings videoSourceSettings = null;
+            if (!string.IsNullOrEmpty(videoDeviceName))
+            {
+                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync())
+                    .FirstOrDefault(d => d.DisplayName == videoDeviceName);
+                if (device != null)
+                {
+                    var formatItem = device.VideoFormats.FirstOrDefault(f => f.Name == videoFormatName);
+                    if (formatItem != null)
+                    {
+                        videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                        {
+                            Format = formatItem.ToFormat()
+                        };
+
+                        if (!string.IsNullOrEmpty(frameRateText))
+                        {
+                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(frameRateText));
+                        }
+                    }
+                }
+            }
+
+            core.Video_Source = videoSourceSettings;
+
+            // Audio source
+            bool recordAudio = _cbRecordAudio[slot].IsChecked == true;
+            core.Audio_Record = recordAudio;
+            core.Audio_Play = false;
+
+            IVideoCaptureBaseAudioSourceSettings audioSourceSettings = null;
+            if (recordAudio && !string.IsNullOrEmpty(audioDeviceName))
+            {
+                var device = (await DeviceEnumerator.Shared.AudioSourcesAsync())
+                    .FirstOrDefault(d => d.DisplayName == audioDeviceName);
+                if (device != null)
+                {
+                    var formatItem = device.Formats.FirstOrDefault(f => f.Name == audioFormatName);
+                    audioSourceSettings = formatItem != null
+                        ? device.CreateSourceSettingsVC(formatItem.ToFormat())
+                        : device.CreateSourceSettingsVC();
+                }
+            }
+
+            core.Audio_Source = audioSourceSettings;
+
+            // Encoder + output
+            if (!_encoderFactories.TryGetValue(encoderName, out var encoderFactory))
+            {
+                throw new InvalidOperationException($"Unknown encoder: {encoderName}");
+            }
+
+            var filename = Path.Combine(edOutputFolder.Text, $"output_{slot + 1}.mp4");
+            var mp4Output = recordAudio
+                ? new MP4Output(filename, new NVENCH264EncoderSettings(), new AVENCAACEncoderSettings())
+                : new MP4Output(filename, new NVENCH264EncoderSettings());
+
+            core.Outputs_Clear();
+            core.Outputs_Add(mp4Output, autostart: true);
+
+            await core.StartAsync();
         }
 
-        /// <summary>
-        /// Handles the Click event of the btStop4 control.
-        /// Stops capture for the fourth engine instance.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private async void btStop4_Click(object sender, RoutedEventArgs e)
+        private async Task StopPipelineAsync(int slot)
         {
-            await StopCaptureAsync(3);
+            var core = _cores[slot];
+            if (core == null)
+            {
+                return;
+            }
+
+            try
+            {
+                await core.StopAsync();
+            }
+            catch (Exception ex)
+            {
+                Log($"[Pipeline {slot + 1}] Stop error: {ex.Message}");
+            }
+        }
+
+        private void btSelectOutputFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.OpenFolderDialog
+            {
+                InitialDirectory = Directory.Exists(edOutputFolder.Text)
+                    ? edOutputFolder.Text
+                    : Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                edOutputFolder.Text = dlg.FolderName;
+            }
         }
     }
 }

@@ -329,7 +329,7 @@ namespace YouTube_Streamer_with_Bridge
                 _audioBridgeSource = new BridgeAudioSourceBlock(new BridgeAudioSourceSettings(AUDIO_BRIDGE_ID, audioInfo));
 
                 // AAC encoder
-                _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
+                _aacEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings());
 
                 _pipelineStreaming.Connect(_audioBridgeSource.Output, _aacEncoder.Input);
                 _pipelineStreaming.Connect(_aacEncoder.Output, _youtubeSink.CreateNewInput(MediaBlockPadMediaType.Audio));

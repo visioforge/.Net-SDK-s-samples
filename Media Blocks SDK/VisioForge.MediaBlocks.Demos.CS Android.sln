@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Screen Capture", "Android\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioForge.Core.Android.X10", "..\AndroidDependency\VisioForge.Core.Android.X10.csproj", "{85C283F1-52A0-4633-8904-A3922463B35D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDIPlayer", "Android\NDIPlayer\NDIPlayer.csproj", "{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SRT Streamer", "Android\SRT Streamer\SRT Streamer.csproj", "{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,12 +111,38 @@ Global
 		{85C283F1-52A0-4633-8904-A3922463B35D}.Release|x64.Build.0 = Release|Any CPU
 		{85C283F1-52A0-4633-8904-A3922463B35D}.Release|x86.ActiveCfg = Release|Any CPU
 		{85C283F1-52A0-4633-8904-A3922463B35D}.Release|x86.Build.0 = Release|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Debug|x64.Build.0 = Debug|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Debug|x86.Build.0 = Debug|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Release|x64.ActiveCfg = Release|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Release|x64.Build.0 = Release|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Release|x86.ActiveCfg = Release|Any CPU
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C}.Release|x86.Build.0 = Release|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Debug|x64.Build.0 = Debug|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Debug|x86.Build.0 = Debug|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Release|x64.ActiveCfg = Release|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Release|x64.Build.0 = Release|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Release|x86.ActiveCfg = Release|Any CPU
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{12027E8D-5AEA-4420-84A7-86AD651D89EF} = {BF99073B-E2A2-3B6C-DD7F-8271E9BF10B9}
+		{170EA2D2-6EFF-4F51-8FE6-0E71B828051C} = {BF99073B-E2A2-3B6C-DD7F-8271E9BF10B9}
+		{EE9D834B-7A6F-4FAC-9F34-DFA6C719081D} = {BF99073B-E2A2-3B6C-DD7F-8271E9BF10B9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

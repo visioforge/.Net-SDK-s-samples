@@ -27,9 +27,29 @@
 
             <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
 
-                <Entry 
+                <Grid Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Picker
+                        Grid.Column="0"
+                        x:Name="cbONVIFDevices"
+                        Title="Discovered ONVIF devices"
+                        SelectedIndexChanged="cbONVIFDevices_SelectedIndexChanged" />
+
+                    <Button
+                        Grid.Column="1"
+                        x:Name="btScan"
+                        Text="SCAN"
+                        VerticalOptions="Center"
+                        Clicked="btScan_Clicked" />
+                </Grid>
+
+                <Entry
                     x:Name="edURL"
-                    Placeholder="RTSP URL (not HTTP or ONVIF)"
+                    Placeholder="RTSP URL or ONVIF HTTP URL"
                     HorizontalOptions="FillAndExpand" />
 
                 <Grid Margin="0">

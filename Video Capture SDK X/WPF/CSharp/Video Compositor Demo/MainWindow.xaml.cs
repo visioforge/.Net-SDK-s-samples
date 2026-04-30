@@ -406,7 +406,7 @@ namespace Video_Compositor_Demo
                         var youTubeOutput = new YouTubeOutput(edOutputYouTubeKey.Text)
                         {
                             Video = new OpenH264EncoderSettings(),
-                            Audio = new MFAACEncoderSettings()
+                            Audio = new AVENCAACEncoderSettings()
                         };
                         _videoCapture.Outputs_Add(youTubeOutput);
                     }
@@ -420,7 +420,7 @@ namespace Video_Compositor_Demo
                         var facebookOutput = new FacebookLiveOutput(edOutputFacebookKey.Text)
                         {
                             Video = new OpenH264EncoderSettings(),
-                            Audio = new MFAACEncoderSettings()
+                            Audio = new AVENCAACEncoderSettings()
                         };
                         _videoCapture.Outputs_Add(facebookOutput);
                     }

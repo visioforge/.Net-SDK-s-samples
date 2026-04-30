@@ -363,7 +363,7 @@ namespace Networks_Streamer_Demo_with_Bridge
                     _audioBridgeSource = new BridgeAudioSourceBlock(new BridgeAudioSourceSettings(AUDIO_BRIDGE_ID, audioInfo));
 
                     // Create AAC encoder
-                    _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
+                    _aacEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings());
                     _pipelineStreaming.Connect(_audioBridgeSource.Output, _aacEncoder.Input);
                 }
 

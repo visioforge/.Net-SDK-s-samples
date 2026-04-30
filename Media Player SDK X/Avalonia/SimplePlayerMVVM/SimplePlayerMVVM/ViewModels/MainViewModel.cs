@@ -42,11 +42,17 @@ namespace Simple_Player_MVVM.ViewModels
         /// </summary>
         public MainViewModel()
         {
-            OpenFileCommand = ReactiveCommand.Create(OpenFileAsync);
+            OpenFileCommand = ReactiveCommand.CreateFromTask(OpenFileAsync);
             PlayPauseCommand = ReactiveCommand.CreateFromTask(PlayPauseAsync);
             StopCommand = ReactiveCommand.CreateFromTask(StopAsync);
             SpeedCommand = ReactiveCommand.CreateFromTask(SpeedAsync);
             WindowClosingCommand = ReactiveCommand.Create(OnWindowClosing);
+
+            // Surface any ReactiveCommand failures to VS Output via Debug.WriteLine.
+            ((ReactiveCommand<Unit, Unit>)OpenFileCommand).ThrownExceptions.Subscribe(ex => LogError("Open file failed", ex));
+            ((ReactiveCommand<Unit, Unit>)PlayPauseCommand).ThrownExceptions.Subscribe(ex => LogError("Play / Pause failed", ex));
+            ((ReactiveCommand<Unit, Unit>)StopCommand).ThrownExceptions.Subscribe(ex => LogError("Stop failed", ex));
+            ((ReactiveCommand<Unit, Unit>)SpeedCommand).ThrownExceptions.Subscribe(ex => LogError("Speed change failed", ex));
 
             // Throttled volume update
             this.WhenAnyValue(x => x.VolumeValue)
@@ -212,9 +218,7 @@ namespace Simple_Player_MVVM.ViewModels
 #endif
 
             _player = new MediaPlayerCoreX(VideoViewIntf);
-
             _player.OnError += _player_OnError;
-
             _player.Audio_Play = true;
 
             var sourceSettings = await UniversalSourceSettings.CreateAsync(_Filename);
@@ -259,30 +263,28 @@ namespace Simple_Player_MVVM.ViewModels
 
 #else
 
-            try
+            var files = await TopLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
             {
-                var files = await TopLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                Title = "Open video file",
+                AllowMultiple = false,
+                FileTypeFilter = new[]
                 {
-                    Title = "Open video file",
-                    AllowMultiple = false
-                });
-
-                if (files.Count >= 1)
-                {
-                    var file = files[0];
-                    Filename = file.Path.LocalPath;
-
-#if __ANDROID__
-                    if (!Filename.StartsWith('/'))
-                    {
-                        Filename = global::VisioForge.Core.UI.Android.FileDialogHelper.GetFilePathFromUri(AndroidHelper.GetContext(), file.Path);
-                    }
-#endif
+                    new FilePickerFileType("Media Files") { Patterns = new[] { "*.mp4", "*.mkv", "*.avi", "*.mov", "*.webm", "*.wmv", "*.mp3", "*.wav", "*.aac", "*.ogg", "*.flac" } },
+                    FilePickerFileTypes.All
                 }
-            }
-            catch (Exception ex)
+            });
+
+            if (files.Count >= 1)
             {
-                Debug.WriteLine($"Error opening file: {ex.Message}");
+                using var file = files[0];
+#if __ANDROID__
+                // On Android, content:// URIs map to LocalPath like "/document/123" which
+                // already starts with '/', so a StartsWith('/') guard would skip the URI-to-path
+                // conversion and hand the SDK a non-existent path. Always run the converter on Android.
+                Filename = global::VisioForge.Core.UI.Android.FileDialogHelper.GetFilePathFromUri(AndroidHelper.GetContext(), file.Path);
+#else
+                Filename = file.Path.LocalPath;
+#endif
             }
 
 #endif
@@ -351,8 +353,14 @@ namespace Simple_Player_MVVM.ViewModels
 
         private void _player_OnError(object sender, VisioForge.Core.Types.Events.ErrorsEventArgs e)
         {
-            Debug.WriteLine(e.Message);
+            LogError("Player error", e.Message);
         }
+
+        private static void LogError(string title, Exception ex) =>
+            Debug.WriteLine($"[ERROR] {title}: {ex}");
+
+        private static void LogError(string title, string message) =>
+            Debug.WriteLine($"[ERROR] {title}: {message}");
 
         private async Task StopAllAsync()
         {
@@ -413,7 +421,7 @@ namespace Simple_Player_MVVM.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                LogError("Position timer error", ex);
             }
             finally
             {

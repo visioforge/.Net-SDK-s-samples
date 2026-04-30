@@ -1,15 +1,13 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using VisioForge.Core.MediaBlocks;
-using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoDecoders;
 using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.MediaBlocks.VideoRendering;
-using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
-using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoDecoders;
 using VisioForge.Core.Types.X.VideoEncoders;
 
@@ -23,7 +21,7 @@ namespace EncoderConcurrencyTest
     public partial class PipelineTile : UserControl, IDisposable
     {
         private MediaBlocksPipeline _pipeline;
-        private VirtualVideoSourceBlock _source;
+        private MediaBlock _source;
         private MediaBlock _encoder;
         private object _encoderSettings;
         private MediaBlock _decoder;
@@ -62,22 +60,31 @@ namespace EncoderConcurrencyTest
             InitializeComponent();
         }
 
-        public async Task StartAsync(int pipelineIndex, int width, int height, int fps,
+        public async Task StartAsync(int pipelineIndex,
+                                     MediaBlock sourceBlock,
+                                     MediaBlockPad sourceOutput,
+                                     string sourceLabel,
+                                     int width, int height, int fps,
                                      CodecChoice codec, EncoderChoice encoder,
-                                     DecoderChoice decoder, long? adapterLuid)
+                                     DecoderChoice decoder)
         {
             try
             {
-                lbHeader.Text = $"#{pipelineIndex}  {codec}  {width}x{height}@{fps}  enc={encoder}  dec={decoder}";
+                lbHeader.Text = $"#{pipelineIndex}  [{sourceLabel}]  {codec}  {width}x{height}@{fps}  enc={encoder}  dec={decoder}";
 
-                _pipeline = new MediaBlocksPipeline();
+                Directory.CreateDirectory(@"C:\vf");
+
+                _pipeline = new MediaBlocksPipeline
+                {
+                    Debug_Mode = true,
+                    Debug_Dir = @"C:\vf",
+                };
                 _pipeline.OnError += Pipeline_OnError;
 
-                var srcSettings = new VirtualVideoSourceSettings(width, height, new VideoFrameRate(fps, 1));
-                _source = new VirtualVideoSourceBlock(srcSettings);
+                _source = sourceBlock;
 
                 var (encBlock, encIn, encOut, encSettings) =
-                    BuildEncoder(codec, encoder, width, height, fps, adapterLuid);
+                    BuildEncoder(codec, encoder, width, height, fps);
                 _encoder = encBlock;
                 _encoderSettings = encSettings;
 
@@ -86,7 +93,7 @@ namespace EncoderConcurrencyTest
 
                 _renderer = new VideoRendererBlock(_pipeline, VideoView1);
 
-                _pipeline.Connect(_source.Output, encIn);
+                _pipeline.Connect(sourceOutput, encIn);
                 _pipeline.Connect(encOut, decIn);
                 _pipeline.Connect(decOut, _renderer.Input);
 
@@ -144,7 +151,7 @@ namespace EncoderConcurrencyTest
         // ================================================================
 
         private static (MediaBlock block, MediaBlockPad input, MediaBlockPad output, object settings) BuildEncoder(
-            CodecChoice codec, EncoderChoice choice, int width, int height, int fps, long? adapterLuid)
+            CodecChoice codec, EncoderChoice choice, int width, int height, int fps)
         {
             uint bitrate = ComputeBitrate(width, height, fps);
 
@@ -152,14 +159,14 @@ namespace EncoderConcurrencyTest
             {
                 case CodecChoice.HEVC:
                 {
-                    var settings = BuildHEVCEncoderSettings(choice, bitrate, adapterLuid);
+                    var settings = BuildHEVCEncoderSettings(choice, bitrate);
                     var block = new HEVCEncoderBlock(settings);
                     return (block, block.Input, block.Output, settings);
                 }
 
                 case CodecChoice.AV1:
                 {
-                    var settings = BuildAV1EncoderSettings(choice, bitrate, adapterLuid);
+                    var settings = BuildAV1EncoderSettings(choice, bitrate);
                     var block = new AV1EncoderBlock(settings);
                     return (block, block.Input, block.Output, settings);
                 }
@@ -167,66 +174,66 @@ namespace EncoderConcurrencyTest
                 case CodecChoice.H264:
                 default:
                 {
-                    var settings = BuildH264EncoderSettings(choice, bitrate, adapterLuid);
+                    var settings = BuildH264EncoderSettings(choice, bitrate);
                     var block = new H264EncoderBlock(settings);
                     return (block, block.Input, block.Output, settings);
                 }
             }
         }
 
-        private static IH264EncoderSettings BuildH264EncoderSettings(EncoderChoice choice, uint bitrate, long? adapterLuid)
+        private static IH264EncoderSettings BuildH264EncoderSettings(EncoderChoice choice, uint bitrate)
         {
             switch (choice)
             {
                 case EncoderChoice.NVENC:
-                    return new NVENCH264EncoderSettings { Bitrate = bitrate, AdapterLuid = adapterLuid };
+                    return new NVENCH264EncoderSettings(); // { Bitrate = bitrate };
 
                 case EncoderChoice.QSV:
-                    return new QSVH264EncoderSettings { Bitrate = bitrate, AdapterLuid = adapterLuid };
+                    return new QSVH264EncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.MediaFoundation:
                     return new MFH264EncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.D3D12:
-                    return new D3D12H264EncoderSettings { Bitrate = bitrate, AdapterLuid = adapterLuid };
+                    return new D3D12H264EncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.OpenH264:
                     return new OpenH264EncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.AMF:
                 default:
-                    return new AMFH264EncoderSettings { Bitrate = bitrate, AdapterLuid = adapterLuid };
+                    return new AMFH264EncoderSettings { Bitrate = bitrate };
             }
         }
 
-        private static IHEVCEncoderSettings BuildHEVCEncoderSettings(EncoderChoice choice, uint bitrate, long? adapterLuid)
+        private static IHEVCEncoderSettings BuildHEVCEncoderSettings(EncoderChoice choice, uint bitrate)
         {
             switch (choice)
             {
                 case EncoderChoice.NVENC:
-                    return new NVENCHEVCEncoderSettings { Bitrate = bitrate, AdapterLuid = adapterLuid };
+                    return new NVENCHEVCEncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.QSV:
-                    return new QSVHEVCEncoderSettings { Bitrate = bitrate, AdapterLuid = adapterLuid };
+                    return new QSVHEVCEncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.MediaFoundation:
                     return new MFHEVCEncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.D3D12:
-                    return new D3D12HEVCEncoderSettings { Bitrate = bitrate, AdapterLuid = adapterLuid };
+                    return new D3D12HEVCEncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.AMF:
                 default:
-                    return new AMFHEVCEncoderSettings { Bitrate = bitrate, AdapterLuid = adapterLuid };
+                    return new AMFHEVCEncoderSettings { Bitrate = bitrate };
             }
         }
 
-        private static IAV1EncoderSettings BuildAV1EncoderSettings(EncoderChoice choice, uint bitrate, long? adapterLuid)
+        private static IAV1EncoderSettings BuildAV1EncoderSettings(EncoderChoice choice, uint bitrate)
         {
             switch (choice)
             {
                 case EncoderChoice.NVENC:
-                    return new NVENCAV1EncoderSettings { Bitrate = bitrate, AdapterLuid = adapterLuid };
+                    return new NVENCAV1EncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.QSV:
                     return new QSVAV1EncoderSettings { Bitrate = bitrate };
@@ -242,8 +249,6 @@ namespace EncoderConcurrencyTest
 
                 case EncoderChoice.AMF:
                 default:
-                    // AMFAV1EncoderSettings has no AdapterLuid property today; the pipeline
-                    // will use the system-default AMD GPU.
                     return new AMFAV1EncoderSettings { Bitrate = bitrate };
             }
         }

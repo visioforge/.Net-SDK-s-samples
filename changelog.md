@@ -9,6 +9,12 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.4.25
+
+* [Core] Fixed WinForms designer exception on `VideoView` in net472 demos — SkiaSharp 3 migration regression
+* [Core] Added transitive `SkiaSharp.NativeAssets.Linux` dependency for bare cross-platform TFMs (`netcoreapp3.1`, `net5.0`–`net10.0`) so consumers publishing to `linux-x64`/`arm64` no longer need to add the package manually; main `SkiaSharp` already covers Win32/macOS/iOS/Android/MacCatalyst/tvOS via per-TFM nuspec groups
+* [Avalonia] Migrated SDK and all 28 demos from Avalonia 11.3.8 to **12.0.1**: replaced `Avalonia.Diagnostics` with `AvaloniaUI.DiagnosticsSupport 2.2.1`, switched to `ReactiveUI.Avalonia 12.0.1`, updated `RxApp.MainThreadScheduler` → `RxSchedulers.MainThreadScheduler` (ReactiveUI 23.x), new `UseReactiveUI(_ => { })` signature, moved Android `CustomizeAppBuilder` from `MainActivity` to new `MainApplication : AvaloniaAndroidApplication<App>`, migrated `SaveFileDialog`/`OpenFileDialog`/`FileDialogFilter` to `IStorageProvider.SaveFilePickerAsync`/`OpenFilePickerAsync` in 4 demos. SkiaSharp pinned to 3.119.3-preview.1.1 (required by Avalonia.Skia 12). `update-packages-version-avalonia.ps1` rewritten cross-platform (pwsh 7+, walks the whole repo from `$PSScriptRoot/..`, handles `Directory.Build.props` / `Directory.Packages.props` / `*.csproj`, performs deprecated-package renames).
+
 ## 2026.4.23
 
 * [NuGet] Extracted Intel Quick Sync Video (QSV) plugin (`gstqsv.dll`) from `VisioForge.CrossPlatform.Core.Windows.x64/x86` into new optional packages `VisioForge.CrossPlatform.Core.Windows.Intel.x64` and `VisioForge.CrossPlatform.Core.Windows.Intel.x86`; each depends on the corresponding base Core package

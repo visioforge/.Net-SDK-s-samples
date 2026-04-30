@@ -81,6 +81,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RIST Streamer Demo net7", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreEventRecording Demo VCX net7", "WPF\CSharp\PreEventRecording Demo\PreEventRecording Demo VCX net7.csproj", "{87654886-BC6F-406A-99DC-E40790FFACB3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encoder Concurrency Test net7", "WPF\CSharp\Encoder Concurrency Test\Encoder Concurrency Test net7.csproj", "{7CB7278B-B69E-4A15-872E-7829435FFEFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -535,6 +537,18 @@ Global
 		{87654886-BC6F-406A-99DC-E40790FFACB3}.Release|x64.Build.0 = Release|Any CPU
 		{87654886-BC6F-406A-99DC-E40790FFACB3}.Release|x86.ActiveCfg = Release|Any CPU
 		{87654886-BC6F-406A-99DC-E40790FFACB3}.Release|x86.Build.0 = Release|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Debug|x64.Build.0 = Debug|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Debug|x86.Build.0 = Debug|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Release|x64.ActiveCfg = Release|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Release|x64.Build.0 = Release|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Release|x86.ActiveCfg = Release|Any CPU
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -577,6 +591,7 @@ Global
 		{1B8B7822-DE85-7D58-2C62-23DF7FF5888B} = {BACB12F1-8D25-42ED-8CF6-65136D16CC9B}
 		{F3DF1B1E-7E3F-48C7-839C-E2CC089FC7C2} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{87654886-BC6F-406A-99DC-E40790FFACB3} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{7CB7278B-B69E-4A15-872E-7829435FFEFC} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}

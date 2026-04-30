@@ -274,7 +274,8 @@ public partial class MainWindow : Window
 
             if (files != null && files.Count > 0)
             {
-                edFilename.Text = files[0].Path.LocalPath;
+                using var file = files[0];
+                edFilename.Text = file.Path.LocalPath;
             }
         }
         catch (Exception ex)
@@ -305,7 +306,8 @@ public partial class MainWindow : Window
 
             if (files != null && files.Count > 0)
             {
-                edAudioFilename.Text = files[0].Path.LocalPath;
+                using var file = files[0];
+                edAudioFilename.Text = file.Path.LocalPath;
             }
         }
         catch (Exception ex)

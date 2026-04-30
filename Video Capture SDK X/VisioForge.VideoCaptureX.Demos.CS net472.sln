@@ -81,6 +81,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RIST Streamer Demo net472",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreEventRecording Demo VCX net472", "WPF\CSharp\PreEventRecording Demo\PreEventRecording Demo VCX net472.csproj", "{BC11DDAC-6FF3-499D-9041-9C5F9BD26F01}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encoder Concurrency Test net472", "WPF\CSharp\Encoder Concurrency Test\Encoder Concurrency Test net472.csproj", "{D4F2F212-A6A3-4264-B766-8C722BB54694}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -535,6 +537,18 @@ Global
 		{BC11DDAC-6FF3-499D-9041-9C5F9BD26F01}.Release|x64.Build.0 = Release|Any CPU
 		{BC11DDAC-6FF3-499D-9041-9C5F9BD26F01}.Release|x86.ActiveCfg = Release|Any CPU
 		{BC11DDAC-6FF3-499D-9041-9C5F9BD26F01}.Release|x86.Build.0 = Release|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Debug|x64.Build.0 = Debug|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Debug|x86.Build.0 = Debug|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Release|x64.ActiveCfg = Release|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Release|x64.Build.0 = Release|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Release|x86.ActiveCfg = Release|Any CPU
+		{D4F2F212-A6A3-4264-B766-8C722BB54694}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -577,6 +591,7 @@ Global
 		{9A5C8069-C370-A741-F043-6F1CB8648071} = {7896E2F8-DC20-4CF4-9225-7AC899A30AB5}
 		{7921D45A-4661-4876-A8FF-8E7378D44195} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{BC11DDAC-6FF3-499D-9041-9C5F9BD26F01} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{D4F2F212-A6A3-4264-B766-8C722BB54694} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}

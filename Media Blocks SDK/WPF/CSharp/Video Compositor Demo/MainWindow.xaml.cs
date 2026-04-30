@@ -454,7 +454,7 @@ namespace Video_Compositor_Demo
                         _fakeAudioSource = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings());
 
                         // create and connect YouTube output
-                        _youTubeOutput = new YouTubeOutputBlock(new YouTubeSinkSettings(edOutputYouTubeKey.Text), new OpenH264EncoderSettings(), new MFAACEncoderSettings());
+                        _youTubeOutput = new YouTubeOutputBlock(new YouTubeSinkSettings(edOutputYouTubeKey.Text), new OpenH264EncoderSettings(), new AVENCAACEncoderSettings());
                         _pipeline.Connect(_videoTee.Outputs[1], _youTubeOutput.CreateNewInput(MediaBlockPadMediaType.Video));
                         _pipeline.Connect(_fakeAudioSource.Output, _youTubeOutput.CreateNewInput(MediaBlockPadMediaType.Audio));
                     }
@@ -464,7 +464,7 @@ namespace Video_Compositor_Demo
                         _fakeAudioSource = new VirtualAudioSourceBlock(new VirtualAudioSourceSettings());
 
                         // create and connect Facebook Live output
-                        _facebookOutput = new FacebookLiveOutputBlock(new FacebookLiveSinkSettings(edOutputFacebookKey.Text), new OpenH264EncoderSettings(), new MFAACEncoderSettings());
+                        _facebookOutput = new FacebookLiveOutputBlock(new FacebookLiveSinkSettings(edOutputFacebookKey.Text), new OpenH264EncoderSettings(), new AVENCAACEncoderSettings());
                         _pipeline.Connect(_videoTee.Outputs[1], _facebookOutput.CreateNewInput(MediaBlockPadMediaType.Video));
                         _pipeline.Connect(_fakeAudioSource.Output, _facebookOutput.CreateNewInput(MediaBlockPadMediaType.Audio));
                     }

@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video From Images X WPF net
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Video Join Demo X WPF net10", "WPF\CSharp\Video Join Demo X\Video Join Demo X WPF net10.csproj", "{A7B8C9D0-7007-4007-8007-700000000004}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "replace_audio_edit net10", "_CodeSnippets\replace-audio\replace_audio_edit net10.csproj", "{A7B8C9D0-7007-4007-8007-700000000005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "output_gif_edit net10", "_CodeSnippets\output-gif\output_gif_edit net10.csproj", "{A7B8C9D0-7007-4007-8007-700000000006}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{A7B8C9D0-7007-4007-8007-700000000004}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7B8C9D0-7007-4007-8007-700000000004}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7B8C9D0-7007-4007-8007-700000000004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7B8C9D0-7007-4007-8007-700000000005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7B8C9D0-7007-4007-8007-700000000005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7B8C9D0-7007-4007-8007-700000000005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7B8C9D0-7007-4007-8007-700000000005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7B8C9D0-7007-4007-8007-700000000006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7B8C9D0-7007-4007-8007-700000000006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7B8C9D0-7007-4007-8007-700000000006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7B8C9D0-7007-4007-8007-700000000006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -741,7 +741,7 @@ namespace Live_Video_Compositor_Demo
             var now = System.DateTime.Now;
             var name = $"output_{now.Year}_{now.Month}_{now.Day}_{now.Hour}_{now.Minute}_{now.Second}.mp4";
             var outputFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), name);
-            var mp4Output = new MP4OutputBlock(new MP4SinkSettings(outputFile), new OpenH264EncoderSettings(), new MFAACEncoderSettings());
+            var mp4Output = new MP4OutputBlock(new MP4SinkSettings(outputFile), new OpenH264EncoderSettings(), new AVENCAACEncoderSettings());
 
             var output = new LVCVideoAudioOutput(outputFile, _compositor, mp4Output, autostart: true);
 
@@ -852,7 +852,7 @@ namespace Live_Video_Compositor_Demo
                 var outputBlock = new YouTubeOutputBlock(
                     new YouTubeSinkSettings(dlg.Key),
                     new OpenH264EncoderSettings(),
-                    new MFAACEncoderSettings());
+                    new AVENCAACEncoderSettings());
                 var output = new LVCVideoAudioOutput(name, _compositor, outputBlock, autostart: true);
 
                 if (await _compositor.Output_AddAsync(output))
@@ -882,7 +882,7 @@ namespace Live_Video_Compositor_Demo
                 var outputBlock = new FacebookLiveOutputBlock(
                     new FacebookLiveSinkSettings(dlg.Key),
                     new OpenH264EncoderSettings(),
-                    new MFAACEncoderSettings());
+                    new AVENCAACEncoderSettings());
                 var output = new LVCVideoAudioOutput(name, _compositor, outputBlock, autostart: true);
 
                 if (await _compositor.Output_AddAsync(output))

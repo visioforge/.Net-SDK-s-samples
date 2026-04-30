@@ -258,10 +258,20 @@ namespace SimplePlayerAMB
                 var topLevel = TopLevel.GetTopLevel(this);
                 if (topLevel == null) return;
 
-                var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());
+                var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                {
+                    Title = "Open media file",
+                    AllowMultiple = false,
+                    FileTypeFilter = new[]
+                    {
+                        new FilePickerFileType("Media Files") { Patterns = new[] { "*.mp4", "*.mkv", "*.avi", "*.mov", "*.webm", "*.wmv", "*.mp3", "*.wav", "*.aac", "*.ogg", "*.flac" } },
+                        FilePickerFileTypes.All
+                    }
+                });
                 if (files?.Count > 0)
                 {
-                    edFilenameOrURL.Text = files[0].Path.LocalPath;
+                    using var file = files[0];
+                    edFilenameOrURL.Text = file.Path.LocalPath;
                 }
             }
             catch (Exception ex)

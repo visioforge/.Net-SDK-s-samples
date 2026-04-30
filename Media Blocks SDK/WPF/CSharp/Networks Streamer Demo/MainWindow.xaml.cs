@@ -343,7 +343,7 @@ namespace Networks_Streamer_Demo
                     if (audioEnabled)
                     {
                         // Create AAC encoder
-                        _aacEncoder = new AACEncoderBlock(new MFAACEncoderSettings());
+                        _aacEncoder = new AACEncoderBlock(new AVENCAACEncoderSettings());
                     }
 
                     _pipeline.Connect(_videoTee.Outputs[1], _h264Encoder.Input);

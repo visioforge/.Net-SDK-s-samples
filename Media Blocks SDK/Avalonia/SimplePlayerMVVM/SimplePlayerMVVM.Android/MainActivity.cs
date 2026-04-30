@@ -40,6 +40,7 @@ namespace Simple_Player_MVVM.Android
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            Instance = this;
 
             MainViewModel.AndroidHelper = this;
 

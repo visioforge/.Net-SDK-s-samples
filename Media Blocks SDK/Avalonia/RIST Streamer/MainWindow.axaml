@@ -1,0 +1,58 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:avalonia="clr-namespace:VisioForge.Core.UI.Avalonia;assembly=VisioForge.Core.UI.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
+        x:Class="RISTStreamerAMB.MainWindow"
+        Icon="/Assets/visioforge_main_icon.ico"
+        Title="RIST Streamer Demo - Media Blocks SDK .Net"  Height="600" Width="900">
+
+	<Grid ColumnDefinitions="350,*" RowDefinitions="*,Auto">
+
+		<!-- Left panel: settings -->
+		<StackPanel Grid.Column="0" Grid.Row="0" Margin="10">
+
+			<TextBlock Text="Video source" FontWeight="Bold" Margin="0,0,0,5"/>
+			<ComboBox x:Name="cbVideoInputDevice" HorizontalAlignment="Stretch" Margin="0,0,0,5"/>
+			<StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+				<ComboBox x:Name="cbVideoInputFormat" Width="200"/>
+				<ComboBox x:Name="cbVideoInputFrameRate" Width="60" Margin="5,0,0,0"/>
+				<TextBlock Text="fps" VerticalAlignment="Center" Margin="5,0,0,0"/>
+			</StackPanel>
+
+			<TextBlock Text="Audio source" FontWeight="Bold" Margin="0,15,0,5"/>
+			<ComboBox x:Name="cbAudioInputDevice" HorizontalAlignment="Stretch" Margin="0,0,0,5"/>
+			<ComboBox x:Name="cbAudioInputFormat" HorizontalAlignment="Stretch" Margin="0,0,0,5"/>
+
+			<Separator Margin="0,15,0,15"/>
+
+			<TextBlock Text="RIST Settings" FontWeight="Bold" Margin="0,0,0,5"/>
+
+			<TextBlock Text="Address" Margin="0,5,0,2"/>
+			<TextBox x:Name="edAddress" Text="localhost" HorizontalAlignment="Stretch"/>
+
+			<TextBlock Text="Port" Margin="0,10,0,2"/>
+			<TextBox x:Name="edPort" Text="5004" HorizontalAlignment="Stretch"/>
+
+			<TextBlock Text="Sender buffer (ms)" Margin="0,10,0,2"/>
+			<TextBox x:Name="edSenderBuffer" Text="1200" HorizontalAlignment="Stretch"/>
+
+		</StackPanel>
+
+		<!-- Right panel: video preview -->
+		<Panel Grid.Column="1" Grid.Row="0" Margin="5,10,10,10" Background="#0C0C0C">
+			<avalonia:VideoView x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#0C0C0C" />
+		</Panel>
+
+		<!-- Bottom bar -->
+		<Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="10,0,10,10" ColumnDefinitions="Auto,Auto,Auto,*,Auto">
+			<Button x:Name="btStart" Grid.Column="0" Content="Start" FontWeight="Bold" Margin="0,0,10,0"/>
+			<Button x:Name="btStop" Grid.Column="1" Content="Stop" FontWeight="Bold" Margin="0,0,10,0"/>
+			<TextBlock x:Name="lbTime" Grid.Column="2" Text="00:00:00" VerticalAlignment="Center"/>
+			<TextBox x:Name="edLog" Grid.Column="4" Width="400" Height="60" IsReadOnly="True" TextWrapping="Wrap" />
+		</Grid>
+
+	</Grid>
+
+</Window>

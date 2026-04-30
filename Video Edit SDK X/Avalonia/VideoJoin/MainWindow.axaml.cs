@@ -166,10 +166,21 @@ public partial class MainWindow : Window
         var topLevel = TopLevel.GetTopLevel(this);
         if (topLevel == null) return;
 
-        var pickedFiles = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());
+        var pickedFiles = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            Title = "Add media file",
+            AllowMultiple = false,
+            FileTypeFilter = new[]
+            {
+                new FilePickerFileType("Media Files") { Patterns = new[] { "*.mp4", "*.mkv", "*.avi", "*.mov", "*.webm", "*.wmv", "*.mp3", "*.wav", "*.aac", "*.ogg", "*.flac" } },
+                new FilePickerFileType("Image Files") { Patterns = new[] { "*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif" } },
+                FilePickerFileTypes.All
+            }
+        });
         if (pickedFiles?.Count > 0)
         {
-            string filename = pickedFiles[0].Path.LocalPath;
+            using var pickedFile = pickedFiles[0];
+            string filename = pickedFile.Path.LocalPath;
 
             // if resolution and output format not set we should set it the same as in added file
             if (cbResize.IsChecked == true)

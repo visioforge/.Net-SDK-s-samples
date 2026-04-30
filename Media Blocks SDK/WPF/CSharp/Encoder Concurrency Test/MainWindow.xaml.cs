@@ -9,8 +9,10 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
+using VisioForge.Core.MediaBlocks.Sources;
+using VisioForge.Core.Types;
+using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoEncoders;
-using VisioForge.Core.Windows;
 
 namespace EncoderConcurrencyTest
 {
@@ -34,6 +36,13 @@ namespace EncoderConcurrencyTest
         /// </summary>
         private bool _shuttingDown;
 
+        /// <summary>
+        /// Result of the most recent webcam-config dialog. Null until the user picks a
+        /// camera. Reused for every "Add pipeline" / "Fill to limit" while Source mode
+        /// is "Webcam"; cleared when the user reconfigures.
+        /// </summary>
+        private WebcamSelection _webcam;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -50,8 +59,8 @@ namespace EncoderConcurrencyTest
                 await VisioForgeX.InitSDKAsync();
                 Title = originalTitle + $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
-                PopulateAdapters();
                 PopulateEncoderDecoderCombos();
+                ApplySourceMode();
                 _statusTimer.Start();
                 RefreshStatus();
             }
@@ -73,58 +82,101 @@ namespace EncoderConcurrencyTest
             }
         }
 
-        private void PopulateAdapters()
+        // ================================================================
+        //  Source-type selection
+        // ================================================================
+
+        private SourceMode SelectedSourceMode() => cbSourceMode.SelectedIndex switch
         {
-            cbAdapter.Items.Clear();
-            cbAdapter.Items.Add("Any");
+            1 => SourceMode.Webcam,
+            _ => SourceMode.Virtual,
+        };
 
-            foreach (var a in EncoderAdapters())
+        private void CbSourceMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!IsLoaded) return;
+            ApplySourceMode();
+        }
+
+        private void ApplySourceMode()
+        {
+            var mode = SelectedSourceMode();
+            pnVirtualSource.Visibility = mode == SourceMode.Virtual ? Visibility.Visible : Visibility.Collapsed;
+            pnWebcamSource.Visibility  = mode == SourceMode.Webcam  ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void BtConfigureWebcam_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new WebcamConfigDialog(_webcam) { Owner = this };
+            if (dlg.ShowDialog() == true && dlg.Result != null)
             {
-                cbAdapter.Items.Add(FormatAdapterLabel(a));
+                _webcam = dlg.Result;
+                lbWebcamSummary.Text = _webcam.Summary;
+                lbWebcamSummary.Foreground = System.Windows.Media.Brushes.Black;
             }
-
-            cbAdapter.SelectedIndex = 0;
         }
 
         /// <summary>
-        /// Filters DXGI adapters down to the ones worth pinning an encoder to.
-        /// Drops WARP / Microsoft Basic Render Driver / IDD virtual display shims —
-        /// none of those carry a hardware encoder. Real GPUs (NVIDIA, AMD, Intel) are
-        /// always passed through regardless of the reported VRAM because DXGI can
-        /// report 0 DedicatedVideoMemory on WDDM 3.0 systems and in VMs.
+        /// Builds a fresh source block for the next tile. Each tile gets its own block
+        /// instance — sharing source blocks across pipelines is not supported.
+        /// Returns the block, its output pad and the (W, H, FPS) triple used by the tile
+        /// for header text and bitrate computation.
         /// </summary>
-        private static IEnumerable<EncoderAdapterInfo> EncoderAdapters()
+        private async Task<(MediaBlock block, MediaBlockPad output, int width, int height, int fps)>
+            BuildSourceAsync()
         {
-            foreach (var a in DXGIAdapterEnumerator.Enumerate())
+            switch (SelectedSourceMode())
             {
-                if (a.IsSoftware) continue;
+                case SourceMode.Webcam:
+                    if (_webcam == null)
+                    {
+                        throw new InvalidOperationException("No webcam configured. Click \"Configure webcam...\" first.");
+                    }
 
-                // VendorId 0x1414 = Microsoft (WARP, Basic Render Driver, IDD shims).
-                // These show up even on single-GPU boxes and should not be offered as
-                // encoder targets.
-                if (a.VendorId == 0x1414) continue;
+                    var device = (await DeviceEnumerator.Shared.VideoSourcesAsync())
+                        .FirstOrDefault(d => d.DisplayName == _webcam.DeviceName);
+                    if (device == null)
+                    {
+                        throw new InvalidOperationException(
+                            $"Camera \"{_webcam.DeviceName}\" is no longer available. Reconfigure.");
+                    }
 
-                yield return a;
+                    var formatItem = device.VideoFormats.FirstOrDefault(f => f.Name == _webcam.FormatName);
+                    if (formatItem == null)
+                    {
+                        throw new InvalidOperationException(
+                            $"Format \"{_webcam.FormatName}\" is no longer available. Reconfigure.");
+                    }
+
+                    var camSettings = new VideoCaptureDeviceSourceSettings(device)
+                    {
+                        Format = formatItem.ToFormat()
+                    };
+                    if (!string.IsNullOrEmpty(_webcam.FrameRateText))
+                    {
+                        camSettings.Format.FrameRate = new VideoFrameRate(_webcam.FrameRate);
+                    }
+
+                    var camBlock = new SystemVideoSourceBlock(camSettings);
+                    return (camBlock, camBlock.Output,
+                            _webcam.Width, _webcam.Height,
+                            (int)Math.Round(_webcam.FrameRate <= 0 ? 30 : _webcam.FrameRate));
+
+                case SourceMode.Virtual:
+                default:
+                    var (w, h) = SelectedVirtualResolution();
+                    var fps = SelectedVirtualFrameRate();
+                    var virtSettings = new VirtualVideoSourceSettings(w, h, new VideoFrameRate(fps, 1));
+                    var virtBlock = new VirtualVideoSourceBlock(virtSettings);
+                    return (virtBlock, virtBlock.Output, w, h, fps);
             }
         }
 
-        private static string FormatAdapterLabel(EncoderAdapterInfo a)
+        private string SourceLabel() => SelectedSourceMode() switch
         {
-            var vendor = a.VendorId switch
-            {
-                0x10DE => "NVIDIA",
-                0x1002 => "AMD",
-                0x8086 => "Intel",
-                0x1414 => "Microsoft",
-                _ => $"0x{a.VendorId:X4}",
-            };
-
-            var vram = a.DedicatedVideoMemory > 0
-                ? $"{a.DedicatedVideoMemory / (1024 * 1024)} MB"
-                : "UMA";
-
-            return $"{vendor}: {a.Description} ({vram}, LUID {a.Luid})";
-        }
+            SourceMode.Webcam => $"cam:{_webcam?.DeviceName ?? "?"}",
+            _ => "virtual",
+        };
 
         /// <summary>
         /// Rebuilds the encoder and decoder combos for the currently selected codec.
@@ -232,7 +284,7 @@ namespace EncoderConcurrencyTest
             }
         }
 
-        private (int width, int height) SelectedResolution()
+        private (int width, int height) SelectedVirtualResolution()
         {
             return cbResolution.SelectedIndex switch
             {
@@ -243,7 +295,7 @@ namespace EncoderConcurrencyTest
             };
         }
 
-        private int SelectedFrameRate() => cbFrameRate.SelectedIndex switch
+        private int SelectedVirtualFrameRate() => cbFrameRate.SelectedIndex switch
         {
             1 => 30,
             2 => 25,
@@ -345,15 +397,6 @@ namespace EncoderConcurrencyTest
             }
         }
 
-        private long? SelectedAdapterLuid()
-        {
-            if (cbAdapter.SelectedIndex <= 0) return null;
-            var adapters = EncoderAdapters().ToList();
-            var idx = cbAdapter.SelectedIndex - 1;
-            if (idx < 0 || idx >= adapters.Count) return null;
-            return adapters[idx].Luid;
-        }
-
         private async void BtAdd_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -369,7 +412,10 @@ namespace EncoderConcurrencyTest
 
         private async Task<PipelineTile> AddTileAsync()
         {
-            var (w, h) = SelectedResolution();
+            // BuildSourceAsync may throw (e.g. webcam not configured) — do that BEFORE
+            // creating the tile so we don't leave a half-initialised UserControl behind.
+            var (sourceBlock, sourceOutput, w, h, fps) = await BuildSourceAsync();
+
             var tile = new PipelineTile();
             _tiles.Add(tile);
             tilesPanel.Children.Add(tile);
@@ -379,13 +425,15 @@ namespace EncoderConcurrencyTest
             {
                 await tile.StartAsync(
                     pipelineIndex: _tiles.Count,
+                    sourceBlock: sourceBlock,
+                    sourceOutput: sourceOutput,
+                    sourceLabel: SourceLabel(),
                     width: w,
                     height: h,
-                    fps: SelectedFrameRate(),
+                    fps: fps,
                     codec: SelectedCodec(),
                     encoder: SelectedEncoder(),
-                    decoder: SelectedDecoder(),
-                    adapterLuid: SelectedAdapterLuid());
+                    decoder: SelectedDecoder());
             }
             catch
             {
@@ -452,6 +500,7 @@ namespace EncoderConcurrencyTest
             btFillToLimit.IsEnabled = enabled;
             btRemoveLast.IsEnabled = enabled;
             btStopAll.IsEnabled = enabled;
+            btConfigureWebcam.IsEnabled = enabled;
         }
 
         private async void BtRemoveLast_Click(object sender, RoutedEventArgs e)
@@ -551,6 +600,16 @@ namespace EncoderConcurrencyTest
                 Close();
             }
         }
+    }
+
+    /// <summary>
+    /// Source kind the tile is built around — drives which source block the main
+    /// window passes to the tile.
+    /// </summary>
+    public enum SourceMode
+    {
+        Virtual,
+        Webcam,
     }
 
     /// <summary>
