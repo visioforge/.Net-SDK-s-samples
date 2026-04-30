@@ -474,17 +474,41 @@ namespace Multiple_Encoders
 
         private void btSelectOutputFolder_Click(object sender, RoutedEventArgs e)
         {
+            var initialDir = Directory.Exists(edOutputFolder.Text)
+                ? edOutputFolder.Text
+                : Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+
+#if NET8_0_OR_GREATER
             var dlg = new Microsoft.Win32.OpenFolderDialog
             {
-                InitialDirectory = Directory.Exists(edOutputFolder.Text)
-                    ? edOutputFolder.Text
-                    : Environment.GetFolderPath(Environment.SpecialFolder.MyVideos)
+                InitialDirectory = initialDir
             };
 
             if (dlg.ShowDialog() == true)
             {
                 edOutputFolder.Text = dlg.FolderName;
             }
+#else
+            // Microsoft.Win32.OpenFolderDialog requires WPF .NET 8+.
+            // For older TFMs use OpenFileDialog with a placeholder name and take its directory.
+            var dlg = new Microsoft.Win32.OpenFileDialog
+            {
+                InitialDirectory = initialDir,
+                CheckFileExists = false,
+                CheckPathExists = true,
+                ValidateNames = false,
+                FileName = "Select this folder"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                var dir = Path.GetDirectoryName(dlg.FileName);
+                if (!string.IsNullOrEmpty(dir))
+                {
+                    edOutputFolder.Text = dir;
+                }
+            }
+#endif
         }
     }
 }

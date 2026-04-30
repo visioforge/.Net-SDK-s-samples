@@ -139,7 +139,7 @@ namespace EncoderConcurrencyTestX
                     return new MFH264EncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.D3D12:
-                    return new D3D12H264EncoderSettings { Bitrate = bitrate, AdapterLuid = adapterLuid };
+                    return new D3D12H264EncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.OpenH264:
                     return new OpenH264EncoderSettings { Bitrate = bitrate };
@@ -164,7 +164,7 @@ namespace EncoderConcurrencyTestX
                     return new MFHEVCEncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.D3D12:
-                    return new D3D12HEVCEncoderSettings { Bitrate = bitrate, AdapterLuid = adapterLuid };
+                    return new D3D12HEVCEncoderSettings { Bitrate = bitrate };
 
                 case EncoderChoice.AMF:
                 default:
