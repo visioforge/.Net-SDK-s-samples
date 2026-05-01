@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.5.2
+
+* [Core] Breaking change: licensing APIs now accept only raw certificate bytes. Removed file-path and stream-based certificate setters across shared licensing, public SDK wrappers, legacy Windows wrappers, tests, and licensing docs. Applications must load `.vflicense` files into memory and call `SetLicenseCertificateAsync(byte[])`.
+
 ## 2026.4.25
 
 * [Core] Fixed WinForms designer exception on `VideoView` in net472 demos — SkiaSharp 3 migration regression

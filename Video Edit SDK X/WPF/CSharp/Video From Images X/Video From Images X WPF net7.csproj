@@ -14,7 +14,7 @@
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.5.1" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.5.2" />
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.4.29" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.4.29" />
   </ItemGroup>
