@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>28.0</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationId>com.VisioForge.VCXNDIPlayer</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <RootNamespace>NDIPlayer</RootNamespace>
+    <AssemblyName>NDIPlayer</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NdiAndroidSdkLib Condition="'$(NdiAndroidSdkLib)' == '' and '$(NDI_ANDROID_SDK_LIB)' != ''">$(NDI_ANDROID_SDK_LIB)</NdiAndroidSdkLib>
+    <NdiAndroidSdkLib Condition="'$(NdiAndroidSdkLib)' == ''">C:\Program Files\NDI\NDI 6 SDK (Android)\Lib</NdiAndroidSdkLib>
+  </PropertyGroup>
+  <ItemGroup Condition="Exists('$(NdiAndroidSdkLib)\arm64-v8a\libndi.so')">
+    <AndroidNativeLibrary Include="$(NdiAndroidSdkLib)\arm64-v8a\libndi.so">
+      <Abi>arm64-v8a</Abi>
+      <Link>native\arm64-v8a\libndi.so</Link>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+  <ItemGroup Condition="Exists('$(NdiAndroidSdkLib)\armeabi-v7a\libndi.so')">
+    <AndroidNativeLibrary Include="$(NdiAndroidSdkLib)\armeabi-v7a\libndi.so">
+      <Abi>armeabi-v7a</Abi>
+      <Link>native\armeabi-v7a\libndi.so</Link>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+  <ItemGroup Condition="Exists('$(NdiAndroidSdkLib)\x86_64\libndi.so')">
+    <AndroidNativeLibrary Include="$(NdiAndroidSdkLib)\x86_64\libndi.so">
+      <Abi>x86_64</Abi>
+      <Link>native\x86_64\libndi.so</Link>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+  <ItemGroup Condition="Exists('$(NdiAndroidSdkLib)\x86\libndi.so')">
+    <AndroidNativeLibrary Include="$(NdiAndroidSdkLib)\x86\libndi.so">
+      <Abi>x86</Abi>
+      <Link>native\x86\libndi.so</Link>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+  <Target Name="WarnMissingNDI" BeforeTargets="Build">
+    <Warning Condition="!Exists('$(NdiAndroidSdkLib)\arm64-v8a\libndi.so')" Text="NDI Android SDK libndi.so not found for arm64-v8a at '$(NdiAndroidSdkLib)\arm64-v8a\libndi.so'. The APK will build without it and NDI calls will throw DllNotFoundException at runtime on this ABI. Set NdiAndroidSdkLib (MSBuild property) or NDI_ANDROID_SDK_LIB (env var) to the NDI 6 Android SDK Lib directory to fix." />
+    <Warning Condition="!Exists('$(NdiAndroidSdkLib)\armeabi-v7a\libndi.so')" Text="NDI Android SDK libndi.so not found for armeabi-v7a at '$(NdiAndroidSdkLib)\armeabi-v7a\libndi.so'. The APK will build without it and NDI calls will throw DllNotFoundException at runtime on this ABI. Set NdiAndroidSdkLib (MSBuild property) or NDI_ANDROID_SDK_LIB (env var) to the NDI 6 Android SDK Lib directory to fix." />
+    <Warning Condition="!Exists('$(NdiAndroidSdkLib)\x86_64\libndi.so')" Text="NDI Android SDK libndi.so not found for x86_64 at '$(NdiAndroidSdkLib)\x86_64\libndi.so'. The APK will build without it and NDI calls will throw DllNotFoundException at runtime on this ABI. Set NdiAndroidSdkLib (MSBuild property) or NDI_ANDROID_SDK_LIB (env var) to the NDI 6 Android SDK Lib directory to fix." />
+    <Warning Condition="!Exists('$(NdiAndroidSdkLib)\x86\libndi.so')" Text="NDI Android SDK libndi.so not found for x86 at '$(NdiAndroidSdkLib)\x86\libndi.so'. The APK will build without it and NDI calls will throw DllNotFoundException at runtime on this ABI. Set NdiAndroidSdkLib (MSBuild property) or NDI_ANDROID_SDK_LIB (env var) to the NDI 6 Android SDK Lib directory to fix." />
+  </Target>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="2026.4.18.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.5.4" />
+  </ItemGroup>
+</Project>

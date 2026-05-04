@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NDIPlayer.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <Grid>
+        <Grid RowSpacing="0" RowDefinitions="*,Auto">
+            <Grid x:Name="videoViewHost"
+                  Grid.Row="0"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  Background="Black">
+                <my:VideoView
+                    x:Name="videoView"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+            </Grid>
+
+            <StackLayout Grid.Row="1"
+                         x:Name="pnMain"
+                         Orientation="Vertical"
+                         HorizontalOptions="Fill"
+                         Background="#1e1e1e"
+                         Padding="8">
+
+                <Grid Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Picker
+                        Grid.Column="0"
+                        x:Name="cbNDISources"
+                        Title="Discovered NDI sources" />
+
+                    <Button
+                        Grid.Column="1"
+                        x:Name="btRefresh"
+                        Text="REFRESH"
+                        VerticalOptions="Center"
+                        Clicked="btRefresh_Clicked" />
+                </Grid>
+
+                <Label
+                    x:Name="lbStatus"
+                    Text="Tap REFRESH to discover NDI sources"
+                    TextColor="#B0FFFFFF"
+                    FontSize="12"
+                    HorizontalTextAlignment="Center"
+                    Margin="0,6,0,6" />
+
+                <Button
+                    x:Name="btPlay"
+                    Text="PLAY"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    Clicked="btPlay_Clicked" />
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

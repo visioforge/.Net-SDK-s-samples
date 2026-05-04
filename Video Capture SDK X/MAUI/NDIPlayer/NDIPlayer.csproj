@@ -1,0 +1,122 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NDIPlayer</RootNamespace>
+    <AssemblyName>NDIPlayer</AssemblyName>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <!-- Display name -->
+    <ApplicationTitle>NDI Player</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.visioforge.ndiplayer</ApplicationId>
+    <ApplicationIdGuid>5c8cda37-0af9-479e-99a2-4cc93a76005f</ApplicationIdGuid>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+    <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">true</UseInterpreter>
+    <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">true</UseInterpreter>
+  </PropertyGroup>
+  <!-- NDI Android SDK -->
+  <PropertyGroup>
+    <NdiAndroidSdkLib Condition="'$(NdiAndroidSdkLib)' == '' and '$(NDI_ANDROID_SDK_LIB)' != ''">$(NDI_ANDROID_SDK_LIB)</NdiAndroidSdkLib>
+    <NdiAndroidSdkLib Condition="'$(NdiAndroidSdkLib)' == ''">C:\Program Files\NDI\NDI 6 SDK (Android)\Lib</NdiAndroidSdkLib>
+  </PropertyGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-android')) and Exists('$(NdiAndroidSdkLib)\arm64-v8a\libndi.so')">
+    <AndroidNativeLibrary Include="$(NdiAndroidSdkLib)\arm64-v8a\libndi.so">
+      <Abi>arm64-v8a</Abi>
+      <Link>native\arm64-v8a\libndi.so</Link>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-android')) and Exists('$(NdiAndroidSdkLib)\armeabi-v7a\libndi.so')">
+    <AndroidNativeLibrary Include="$(NdiAndroidSdkLib)\armeabi-v7a\libndi.so">
+      <Abi>armeabi-v7a</Abi>
+      <Link>native\armeabi-v7a\libndi.so</Link>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-android')) and Exists('$(NdiAndroidSdkLib)\x86_64\libndi.so')">
+    <AndroidNativeLibrary Include="$(NdiAndroidSdkLib)\x86_64\libndi.so">
+      <Abi>x86_64</Abi>
+      <Link>native\x86_64\libndi.so</Link>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-android')) and Exists('$(NdiAndroidSdkLib)\x86\libndi.so')">
+    <AndroidNativeLibrary Include="$(NdiAndroidSdkLib)\x86\libndi.so">
+      <Abi>x86</Abi>
+      <Link>native\x86\libndi.so</Link>
+    </AndroidNativeLibrary>
+  </ItemGroup>
+  <Target Name="WarnMissingNDI" BeforeTargets="Build" Condition="$(TargetFramework.Contains('-android'))">
+    <Warning Condition="!Exists('$(NdiAndroidSdkLib)\arm64-v8a\libndi.so')" Text="NDI Android SDK libndi.so not found for arm64-v8a at '$(NdiAndroidSdkLib)\arm64-v8a\libndi.so'. The APK will build without it and NDI calls will throw DllNotFoundException at runtime on this ABI. Set NdiAndroidSdkLib (MSBuild property) or NDI_ANDROID_SDK_LIB (env var) to the NDI 6 Android SDK Lib directory to fix." />
+    <Warning Condition="!Exists('$(NdiAndroidSdkLib)\armeabi-v7a\libndi.so')" Text="NDI Android SDK libndi.so not found for armeabi-v7a at '$(NdiAndroidSdkLib)\armeabi-v7a\libndi.so'. The APK will build without it and NDI calls will throw DllNotFoundException at runtime on this ABI. Set NdiAndroidSdkLib (MSBuild property) or NDI_ANDROID_SDK_LIB (env var) to the NDI 6 Android SDK Lib directory to fix." />
+    <Warning Condition="!Exists('$(NdiAndroidSdkLib)\x86_64\libndi.so')" Text="NDI Android SDK libndi.so not found for x86_64 at '$(NdiAndroidSdkLib)\x86_64\libndi.so'. The APK will build without it and NDI calls will throw DllNotFoundException at runtime on this ABI. Set NdiAndroidSdkLib (MSBuild property) or NDI_ANDROID_SDK_LIB (env var) to the NDI 6 Android SDK Lib directory to fix." />
+    <Warning Condition="!Exists('$(NdiAndroidSdkLib)\x86\libndi.so')" Text="NDI Android SDK libndi.so not found for x86 at '$(NdiAndroidSdkLib)\x86\libndi.so'. The APK will build without it and NDI calls will throw DllNotFoundException at runtime on this ABI. Set NdiAndroidSdkLib (MSBuild property) or NDI_ANDROID_SDK_LIB (env var) to the NDI 6 Android SDK Lib directory to fix." />
+  </Target>
+  <ItemGroup>
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+    <MauiImage Include="Resources\Images\*" />
+    <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+    <MauiFont Include="Resources\Fonts\*" />
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">
+    <RuntimeIdentifier>maccatalyst-x64</RuntimeIdentifier>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64'">
+    <RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.5.4" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.5.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.4.29" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2026.4.29" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="2026.4.18.0" />
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
+    <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.3.2" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macCatalyst" Version="2025.9.1" />
+  </ItemGroup>
+  <Target Name="CopyNativeLibrariesToMonoBundle" AfterTargets="Build" Condition="$(TargetFramework.Contains('-maccatalyst'))">
+    <Message Text="Starting CopyNativeLibrariesToMonoBundle target..." Importance="High" />
+    <PropertyGroup>
+      <AppBundleDir>$(OutputPath)$(AssemblyName).app</AppBundleDir>
+      <MonoBundleDir>$(AppBundleDir)/Contents/MonoBundle</MonoBundleDir>
+    </PropertyGroup>
+    <Message Text="AppBundleDir: $(AppBundleDir)" Importance="High" />
+    <Message Text="MonoBundleDir: $(MonoBundleDir)" Importance="High" />
+    <MakeDir Directories="$(MonoBundleDir)" Condition="!Exists('$(MonoBundleDir)')" />
+    <Copy SourceFiles="@(None-&gt;'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
+      <Output TaskParameter="CopiedFiles" ItemName="CopiedNativeFiles" />
+    </Copy>
+    <Message Text="Copied native files:" Importance="High" Condition="@(CopiedNativeFiles) != ''" />
+    <Message Text=" - %(CopiedNativeFiles.Identity)" Importance="High" Condition="@(CopiedNativeFiles) != ''" />
+    <Message Text="Finished CopyNativeLibrariesToMonoBundle target." Importance="High" />
+  </Target>
+</Project>

@@ -12,6 +12,7 @@ Changes and updates for all .Net SDKs.
 ## 2026.5.2
 
 * [Core] Breaking change: licensing APIs now accept only raw certificate bytes. Removed file-path and stream-based certificate setters across shared licensing, public SDK wrappers, legacy Windows wrappers, tests, and licensing docs. Applications must load `.vflicense` files into memory and call `SetLicenseCertificateAsync(byte[])`.
+* [Core] `AudioMixerBlock`: `audiomixer.ignore-inactive-pads` is now opt-in via `AudioMixerSettings.IgnoreInactivePads` (default `false`, matching the GStreamer default and the long-standing pre-2026.4.30 SDK behaviour). The 2026.4.30 release briefly set the property unconditionally to `true` to fix a `MediaPlayerCoreX` multi-stream EOS-stall, but on a single-input mixer that flag causes the only sink to be marked inactive during preroll, the aggregator emits EOS, and sticky-EOS silently discards every downstream buffer (silent live audio, empty MP4 `stsd[]`/`mdhd timescale=0`). `MediaPlayerCoreX` (additional audio streams), `LiveVideoCompositor` v1/v2, and `AudioMixerSourceSettings`-based multi-source pipelines (`VideoCaptureCoreX.AddAudioMixerSource`) now opt in to `true` explicitly. Single-input consumers get the historical default back. Custom code that wired `AudioMixerBlock` between 2026.4.30 and 2026.5.1 with multi-stream inputs and relied on the implicit `true` should set `AudioMixerSettings.IgnoreInactivePads = true` (or `AudioMixerSourceSettings.IgnoreInactivePads = true`) explicitly.
 
 ## 2026.4.25
 

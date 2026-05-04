@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NDIPlayer</string>
+    <string name="app_text">Select an NDI source</string>
+    <string name="cd_refresh_sources">Refresh NDI sources</string>
+    <string name="status_tap_refresh">Tap refresh to discover NDI sources</string>
+    <string name="cd_connect">Connect</string>
+    <string name="cd_disconnect">Disconnect</string>
+</resources>
