@@ -32,4 +32,10 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
   </ItemGroup>
+  <!-- Override SkiaSharp.NativeAssets.iOS preview (3.119.3-preview.1.1) with stable 3.119.2:
+       preview libSkiaSharp.framework lacks simulator slices, causing linker error:
+       "building for 'iOS-simulator', but linking in dylib built for 'iOS'" -->
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp.NativeAssets.iOS" Version="3.119.2" />
+  </ItemGroup>
 </Project>
