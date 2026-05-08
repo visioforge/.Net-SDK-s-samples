@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.5.8
+
+* [Dependencies] Upgraded MongoDB.Driver.GridFS 2.30.0 to MongoDB.Driver 3.8.0; pinned Snappier 1.3.1 to resolve NU1903 high-severity vulnerability (GHSA-pggp-6c3x-2xmx)
+
 ## 2026.5.2
 
 * [Core] Breaking change: licensing APIs now accept only raw certificate bytes. Removed file-path and stream-based certificate setters across shared licensing, public SDK wrappers, legacy Windows wrappers, tests, and licensing docs. Applications must load `.vflicense` files into memory and call `SetLicenseCertificateAsync(byte[])`.

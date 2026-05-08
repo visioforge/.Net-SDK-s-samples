@@ -3,10 +3,12 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
+using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
 
 using Android;
+using Android.Content;
 using Android.Content.PM;
 using Android.Content.Res;
 using Android.OS;
@@ -841,6 +843,12 @@ namespace NDIPlayer
                     return;
                 }
 
+                // This sample should show the source at its native cadence.
+                // NDISourceSettings defaults to a 30 fps Android pull cap for
+                // phone-friendly playback; opt out here while profiling renderer
+                // throughput.
+                settings.MaxPullFps = 0;
+
                 // Build the pipeline + blocks into LOCAL variables first; only
                 // publish to instance fields after Connect succeeds. Previously
                 // we assigned _pipeline / _ndiSource / _videoRenderer / _audioRenderer
@@ -854,6 +862,10 @@ namespace NDIPlayer
                 pipelineLocal = new MediaBlocksPipeline();
 
                 ndiLocal = new NDISourceBlock(settings);
+
+                // No explicit resize / rate-limiter blocks here. The sample keeps
+                // the NDI receiver uncapped and does not opt into VideoRendererBlock's
+                // optional Android resize or frame-rate limiter path.
                 videoRendererLocal = new VideoRendererBlock(pipelineLocal, videoView)
                 {
                     // NDI on Android pushes frames from a live capture thread via appsrc.
@@ -861,11 +873,33 @@ namespace NDIPlayer
                     // can transition PAUSED → PLAYING without waiting for a buffer that a
                     // live source will never deliver.
                     IsLive = true,
+
+                    // This demo is a live preview, so prefer newest-frame rendering over
+                    // clock-synchronized playback pacing on the managed Android view path.
+                    IsSync = false,
                 };
                 audioRendererLocal = new AudioRendererBlock();
 
                 pipelineLocal.Connect(ndiLocal.VideoOutput, videoRendererLocal.Input);
-                pipelineLocal.Connect(ndiLocal.AudioOutput, audioRendererLocal.Input);
+
+                // NDI sources can be video-only. ndiLocal.AudioOutput is a
+                // wrapper pad created unconditionally in NDISourceBlock's
+                // constructor (so it's always non-null), but its internal
+                // GstPad is only wired when the source actually has an audio
+                // stream — checked here via the probed MediaFileInfo. Calling
+                // Connect on a wrapper whose internal pad never gets wired
+                // raises PadConnector errors and blocks the PAUSED → PLAYING
+                // state transition for an otherwise-fine video-only source.
+                var probedInfo = settings.GetInfo();
+                bool hasAudio = probedInfo?.AudioStreams != null && probedInfo.AudioStreams.Count > 0;
+                if (hasAudio)
+                {
+                    pipelineLocal.Connect(ndiLocal.AudioOutput, audioRendererLocal.Input);
+                }
+                else
+                {
+                    Log.Info(TAG, "BtStart_Click: NDI source has no audio stream — audio renderer left disconnected");
+                }
                 pipelineLocal.OnError += Pipeline_OnError;
 
                 // Publish atomically under the lifecycle lock so BtStop_Click cannot
@@ -1738,5 +1772,6 @@ namespace NDIPlayer
                 return view.OnApplyWindowInsets(insets);
             }
         }
+
     }
 }
