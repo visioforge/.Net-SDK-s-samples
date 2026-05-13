@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.5.10
+
+* [Core] `CustomMixerSourceBlock` reliability hardening: atomic-snapshot caps-validation cache (eliminates a torn-write race that let mismatched samples through under load), two-level handle-cache fast-path (native pointer compare → text fallback) to skip per-frame `caps.ToString()`, atomic peak-counter updates on `ManagedQueueMaxBytes`, and push-attempt accounting on the non-threaded direct path so diagnostics don't undercount.
+
 ## 2026.5.8
 
 * [Dependencies] Upgraded MongoDB.Driver.GridFS 2.30.0 to MongoDB.Driver 3.8.0; pinned Snappier 1.3.1 to resolve NU1903 high-severity vulnerability (GHSA-pggp-6c3x-2xmx)
