@@ -6,6 +6,16 @@
     <ImplicitUsings>true</ImplicitUsings>
     <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
     <ProvisioningType>automatic</ProvisioningType>
+    <!-- Force device-only build (ios-arm64). ScreenCapture uses a Broadcast Upload
+         Extension (IsAppExtension=true on the .appex ProjectReference in _SOURCE),
+         which is a real-device-only feature — the iOS Simulator does not run system
+         broadcast extensions. Building for iossimulator-arm64 also hits a .NET iOS
+         workload RID-resolution bug with SkiaSharp.NativeAssets.iOS 3.119.4-preview.1.1
+         where the linker pulls runtimes/ios/native/libSkiaSharp.framework (device
+         slice) when targeting iossimulator-arm64 even though runtimes/iossimulator/native/
+         exists in the package and contains a correctly-marked arm64-simulator slice.
+         The simpler/correct answer for this sample is "device only". -->
+    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CodesignKey>iPhone Developer</CodesignKey>
