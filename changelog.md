@@ -9,6 +9,14 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.5.13
+
+* [Avalonia] Bumped Avalonia, Avalonia.Desktop, Avalonia.Fonts.Inter, Avalonia.Themes.Fluent from 12.0.1 to 12.0.3 across all customer-facing sample csprojs and `Directory.Build.props` files.
+* [Dependencies] Bumped SkiaSharp, SkiaSharp.Views, SkiaSharp.Views.Desktop.Common, SkiaSharp.Views.WPF, SkiaSharp.Views.Maui.Controls, SkiaSharp.NativeAssets.Linux, SkiaSharp.NativeAssets.iOS from 3.119.3-preview.1.1 to 3.119.4-preview.1.1 to match the transitive floor of Avalonia.Skia 12.0.3.
+* [iOS] Media Blocks SDK `ScreenCapture` sample now forces `RuntimeIdentifier=ios-arm64` (device-only). The sample bundles a Broadcast Upload Extension which is a real-device-only iOS feature and the Simulator does not run system broadcast extensions. This also sidesteps a .NET iOS 10 workload RID-resolution bug with SkiaSharp.NativeAssets.iOS that previously broke `iossimulator-arm64` builds.
+* [Form1.vb] Restored `dlg.Dispose()` calls in `btImageLogoAdd_Click` and `btTextLogoAdd_Click` to match the existing pattern in the sibling Edit handlers (Media Player SDK WinForms VB demo).
+* [CI] `build-maui.yml`: removed `continue-on-error: true` from every `dotnet build` step (the workflow could not fail regardless of regressions), upgraded the matrix to .NET 10.0.x / Xcode 26.4 / `net10.0-{android,maccatalyst,ios,windows10.0.19041.0}` targets to match the actual TFMs of all MAUI sample csprojs.
+
 ## 2026.5.10
 
 * [Core] `CustomMixerSourceBlock` reliability hardening: atomic-snapshot caps-validation cache (eliminates a torn-write race that let mismatched samples through under load), two-level handle-cache fast-path (native pointer compare → text fallback) to skip per-frame `caps.ToString()`, atomic peak-counter updates on `ManagedQueueMaxBytes`, and push-attempt accounting on the non-threaded direct path so diagnostics don't undercount.

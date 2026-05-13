@@ -20,25 +20,22 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Select Xcode 26.3
+    - name: Select Xcode 26.4
       if: runner.os == 'macOS'
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '26.3'
+        xcode-version: '26.4'
 
     - name: Setup .NET
       if: runner.os != 'macOS'
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: |
-          8.0.x
-          9.0.x
+        dotnet-version: '10.0.x'
 
     - name: Setup .NET (macOS ARM64)
       if: runner.os == 'macOS'
       run: |
-        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 8.0 --architecture arm64
-        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 9.0 --architecture arm64
+        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0 --architecture arm64
         echo "$HOME/.dotnet" >> $GITHUB_PATH
         echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
 
@@ -62,14 +59,18 @@ jobs:
 
     - name: Build Media Blocks (Windows)
       if: runner.os == 'Windows'
-      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net8.0-windows10.0.19041.0
+      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-windows10.0.19041.0
 
-    - name: Build Media Blocks (macOS)
+    - name: Build Media Blocks (macCatalyst)
       if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net8.0-maccatalyst
+      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-maccatalyst
+
+    - name: Build Media Blocks (iOS)
+      if: runner.os == 'macOS'
+      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
 
     - name: Build Media Blocks (Android)
-      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net8.0-android
+      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-android
 
     # Media Player SDK X
     - name: Restore (Media Player)
@@ -77,14 +78,18 @@ jobs:
 
     - name: Build Media Player (Windows)
       if: runner.os == 'Windows'
-      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net8.0-windows10.0.19041.0
+      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-windows10.0.19041.0
 
-    - name: Build Media Player (macOS)
+    - name: Build Media Player (macCatalyst)
       if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net8.0-maccatalyst
+      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-maccatalyst
+
+    - name: Build Media Player (iOS)
+      if: runner.os == 'macOS'
+      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
 
     - name: Build Media Player (Android)
-      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net8.0-android
+      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-android
 
     # Video Capture SDK X
     - name: Restore (Video Capture)
@@ -92,11 +97,15 @@ jobs:
 
     - name: Build Video Capture (Windows)
       if: runner.os == 'Windows'
-      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net8.0-windows10.0.19041.0
+      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-windows10.0.19041.0
 
-    - name: Build Video Capture (macOS)
+    - name: Build Video Capture (macCatalyst)
       if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net8.0-maccatalyst
+      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-maccatalyst
+
+    - name: Build Video Capture (iOS)
+      if: runner.os == 'macOS'
+      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
 
     - name: Build Video Capture (Android)
-      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net8.0-android
+      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-android
