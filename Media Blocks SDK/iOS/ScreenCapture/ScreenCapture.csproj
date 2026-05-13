@@ -32,13 +32,15 @@
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
   </ItemGroup>
-  <!-- Pin SkiaSharp.NativeAssets.iOS to the version required transitively by
-       VisioForge.DotNet.MediaBlocks -> SkiaSharp 3.119.3-preview.1.1.
-       No stable >= 3.119.3 has shipped yet; using the older stable 3.119.2
-       triggers NU1605 (package downgrade). Customers building for the iOS
-       simulator with this preview may still hit the missing-simulator-slices
-       linker error — ScreenCapture is intended for real devices. -->
+  <!-- Pin SkiaSharp.NativeAssets.iOS to 3.119.4-preview.1.1: it satisfies the
+       transitive '>= 3.119.3-preview.1.1' floor from MediaBlocks 2026.5.13 ->
+       SkiaSharp 3.119.3-preview.1.1, and unlike 3.119.3-preview.1.1 it ships
+       a buildTransitive/net10.0-ios26.2 targets file. Without that, RID
+       resolution for net10.0-ios falls back to runtimes/ios/native/ even when
+       building for iossimulator-arm64, producing the
+         "building for 'iOS-simulator', but linking in dylib built for 'iOS'"
+       linker error. -->
   <ItemGroup>
-    <PackageReference Include="SkiaSharp.NativeAssets.iOS" Version="3.119.3-preview.1.1" />
+    <PackageReference Include="SkiaSharp.NativeAssets.iOS" Version="3.119.4-preview.1.1" />
   </ItemGroup>
 </Project>
