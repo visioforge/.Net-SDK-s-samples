@@ -63,16 +63,13 @@ jobs:
     - name: Build Media Blocks (Windows)
       if: runner.os == 'Windows'
       run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net8.0-windows10.0.19041.0
-      continue-on-error: true
 
     - name: Build Media Blocks (macOS)
       if: runner.os == 'macOS'
       run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net8.0-maccatalyst
-      continue-on-error: true
 
     - name: Build Media Blocks (Android)
       run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net8.0-android
-      continue-on-error: true
 
     # Media Player SDK X
     - name: Restore (Media Player)
@@ -81,16 +78,13 @@ jobs:
     - name: Build Media Player (Windows)
       if: runner.os == 'Windows'
       run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net8.0-windows10.0.19041.0
-      continue-on-error: true
 
     - name: Build Media Player (macOS)
       if: runner.os == 'macOS'
       run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net8.0-maccatalyst
-      continue-on-error: true
 
     - name: Build Media Player (Android)
       run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net8.0-android
-      continue-on-error: true
 
     # Video Capture SDK X
     - name: Restore (Video Capture)
@@ -99,13 +93,10 @@ jobs:
     - name: Build Video Capture (Windows)
       if: runner.os == 'Windows'
       run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net8.0-windows10.0.19041.0
-      continue-on-error: true
 
     - name: Build Video Capture (macOS)
       if: runner.os == 'macOS'
       run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net8.0-maccatalyst
-      continue-on-error: true
 
     - name: Build Video Capture (Android)
       run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net8.0-android
-      continue-on-error: true
