@@ -9,14 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
-## 2026.5.13
+## 2026.5.14
 
-* [Avalonia] Bumped Avalonia, Avalonia.Desktop, Avalonia.Fonts.Inter, Avalonia.Themes.Fluent from 12.0.1 to 12.0.3 across all customer-facing sample csprojs and `Directory.Build.props` files.
-* [Dependencies] Bumped SkiaSharp, SkiaSharp.Views, SkiaSharp.Views.Desktop.Common, SkiaSharp.Views.WPF, SkiaSharp.Views.Maui.Controls, SkiaSharp.NativeAssets.Linux, SkiaSharp.NativeAssets.iOS from 3.119.3-preview.1.1 to 3.119.4-preview.1.1 to match the transitive floor of Avalonia.Skia 12.0.3.
-* [iOS] Media Blocks SDK `ScreenCapture` sample and its companion `ScreenCaptureExtension` (Broadcast Upload Extension `.appex`) both now force `RuntimeIdentifier=ios-arm64` (device-only). Broadcast Upload Extensions only run on real iOS devices — the Simulator does not host system broadcast extensions, so building either project for `iossimulator-*` produces an unloadable bundle. The RID pin also sidesteps a .NET iOS 10 workload RID-resolution bug with SkiaSharp.NativeAssets.iOS that previously broke `iossimulator-arm64` builds.
-* [Demo] Media Player SDK WinForms VB demos (Main Demo and 5 siblings — Audio Player, DVD Player, Memory Stream, Two Windows, Video Player): dropped dead `Microsoft.Bcl.AsyncInterfaces 8.0.0` and `System.Resources.Extensions 8.0.0` `PackageReference` entries. Both are runtime BCL on net10.0-windows so the explicit polyfills were IDE auto-restore artifacts pinning an older version.
-* [Form1.vb] Restored `dlg.Dispose()` calls in `btImageLogoAdd_Click` and `btTextLogoAdd_Click` to match the existing pattern in the sibling Edit handlers (Media Player SDK WinForms VB demo).
-* [CI] `build-maui.yml`: removed `continue-on-error: true` from every `dotnet build` step (the workflow could not fail regardless of regressions), upgraded the matrix to .NET 10.0.x / Xcode 26.4 / `net10.0-{android,maccatalyst,ios,windows10.0.19041.0}` targets to match the actual TFMs of all MAUI sample csprojs.
+* [Avalonia] Updated Avalonia, Avalonia.Desktop, Avalonia.Fonts.Inter, Avalonia.Themes.Fluent from 12.0.1 to 12.0.3.
+* [WinForms] Resolve issue with WinForms designer when using `VideoView` in .Net Framework 4.x projects
 
 ## 2026.5.10
 
