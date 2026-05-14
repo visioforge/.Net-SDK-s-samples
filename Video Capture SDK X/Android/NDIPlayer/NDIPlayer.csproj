@@ -51,6 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.5.13" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.5.14" />
   </ItemGroup>
 </Project>

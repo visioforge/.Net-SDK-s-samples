@@ -27,7 +27,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="2026.4.29" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.13" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.14" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="visioforge_main_icon.ico" />
