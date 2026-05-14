@@ -37,6 +37,12 @@
     <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">true</UseInterpreter>
     <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">true</UseInterpreter>
   </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64' AND $(TargetFramework.Contains('-maccatalyst'))">
+    <RuntimeIdentifier>maccatalyst-x64</RuntimeIdentifier>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64' AND $(TargetFramework.Contains('-maccatalyst'))">
+    <RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
     <ProvisioningType>manual</ProvisioningType>
   </PropertyGroup>
