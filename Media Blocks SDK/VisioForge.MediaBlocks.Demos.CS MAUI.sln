@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
@@ -16,6 +16,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLSPlayerMB", "MAUI\HLS Player\HLSPlayerMB.csproj", "{D741B173-2E52-49CA-AA60-0678BE196F8A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NDIPlayerMB", "MAUI\NDIPlayer\NDIPlayerMB.csproj", "{AA75E520-55A3-43B6-BE91-99B4759B3CD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VR360PlayerMB", "MAUI\VR360 Player\VR360PlayerMB.csproj", "{BA61DB2F-7CCE-4820-AEF0-A2AA420356BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoOverlayRecorderMB", "MAUI\VideoOverlayRecorder\VideoOverlayRecorderMB.csproj", "{9D196BC1-ED3F-48A1-8ED9-8F7A1B2B71D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveVideoCompositorMB", "MAUI\Live Video Compositor\LiveVideoCompositorMB.csproj", "{15CF233E-AB66-4D38-A63A-FB04A1BF5360}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +69,24 @@ Global
 		{AA75E520-55A3-43B6-BE91-99B4759B3CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA75E520-55A3-43B6-BE91-99B4759B3CD7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AA75E520-55A3-43B6-BE91-99B4759B3CD7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BA61DB2F-7CCE-4820-AEF0-A2AA420356BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA61DB2F-7CCE-4820-AEF0-A2AA420356BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA61DB2F-7CCE-4820-AEF0-A2AA420356BA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BA61DB2F-7CCE-4820-AEF0-A2AA420356BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA61DB2F-7CCE-4820-AEF0-A2AA420356BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA61DB2F-7CCE-4820-AEF0-A2AA420356BA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9D196BC1-ED3F-48A1-8ED9-8F7A1B2B71D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D196BC1-ED3F-48A1-8ED9-8F7A1B2B71D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D196BC1-ED3F-48A1-8ED9-8F7A1B2B71D6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9D196BC1-ED3F-48A1-8ED9-8F7A1B2B71D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D196BC1-ED3F-48A1-8ED9-8F7A1B2B71D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D196BC1-ED3F-48A1-8ED9-8F7A1B2B71D6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{15CF233E-AB66-4D38-A63A-FB04A1BF5360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CF233E-AB66-4D38-A63A-FB04A1BF5360}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15CF233E-AB66-4D38-A63A-FB04A1BF5360}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{15CF233E-AB66-4D38-A63A-FB04A1BF5360}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15CF233E-AB66-4D38-A63A-FB04A1BF5360}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15CF233E-AB66-4D38-A63A-FB04A1BF5360}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
