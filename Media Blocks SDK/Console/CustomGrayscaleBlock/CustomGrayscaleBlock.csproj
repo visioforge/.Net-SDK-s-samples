@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework Condition="$([MSBuild]::IsOsPlatform('MacOS'))">net10.0-macos</TargetFramework>
+    <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net10.0-windows</TargetFrameworks>
+    <TargetFramework Condition="$([MSBuild]::IsOsPlatform('Linux'))">net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <ApplicationId>com.visioforge.customgrayscaleblock</ApplicationId>
+    <RootNamespace>CustomGrayscaleBlockSample</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.14" />
+  </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.4.29" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.4.29" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.9.1" />
+  </ItemGroup>
+</Project>
