@@ -9,10 +9,18 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.5.15
+
+* [Core] Added `D3D11Composable` WPF renderer mode: a pure FrameworkElement video panel built on a D3D11 shared texture + `D3DImage` bridge that composes natively with the WPF visual tree (transforms, opacity, z-order, rounded clips) and keeps frames GPU-resident end-to-end. New types: `D3D11ComposablePanel.
+* [Core] Added true-peak (dBTP) metering per ITU-R BS.1770-4: new `TruePeakComputer` (4× polyphase FIR oversampling, per-channel running peak, NaN/Inf-safe) and `VUMeterXData.TruePeak[]` channel array fired alongside the existing sample-peak/RMS data.
+* [Core] Added `VolumeMeterLED` WPF control: segmented LED-bar VU meter with broadcast-style green/yellow/red zones, optional peak-hold marker (configurable fall time), optional dB scale labels, optional RMS overlay bar, horizontal/vertical orientation.гитхаб репо 
+
 ## 2026.5.14
 
 * [Avalonia] Updated Avalonia, Avalonia.Desktop, Avalonia.Fonts.Inter, Avalonia.Themes.Fluent from 12.0.1 to 12.0.3.
 * [WinForms] Resolve issue with WinForms designer when using `VideoView` in .Net Framework 4.x projects
+* [Dependencies] Closed two transitive security advisories: pinned `System.Drawing.Common` per-TFM on bare/cross-platform `netN.0` (was 5.0.1 via DlibDotNet — GHSA-rxg9-xrhp-64gj, critical) and added explicit `SharpCompress 0.48.1` CPM pin to lift the transitive floor from MongoDB.Driver (was 0.30.1 — GHSA-6c8g-7p36-r338, moderate); bumped MongoDB.Driver 3.8.0 → 3.8.1.
+* [Breaking] `VisioForge.Core.CVD` and `VisioForge.Core.FaceAI` assemblies are no longer strong-named. The underlying `DlibDotNet` dependency is unsigned, so the strong-name chain was already broken at runtime; the `<SignAssembly>` flag was dropped to silence CS8002. Consumers that referenced these assemblies by fully-qualified strong name (`PublicKeyToken=...`) or used `[InternalsVisibleTo("VisioForge.Core.CVD, PublicKey=...")]` must remove the strong-name assertion when upgrading.
 
 ## 2026.5.10
 
