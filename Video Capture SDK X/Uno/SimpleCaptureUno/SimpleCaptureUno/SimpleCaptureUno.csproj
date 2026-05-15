@@ -13,6 +13,7 @@
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationPublisher>SimpleCaptureUno</ApplicationPublisher>
     <Description>SimpleCaptureUno powered by Uno Platform.</Description>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">23.0</SupportedOSPlatformVersion>
     <UnoFeatures>
     </UnoFeatures>
   </PropertyGroup>
