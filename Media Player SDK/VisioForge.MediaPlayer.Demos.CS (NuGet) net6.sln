@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple Player Demo WPF (NuG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Custom Source Player WPF net6", "WPF\CSharp\Custom Source Player\Custom Source Player WPF net6.csproj", "{8885058C-F250-486D-AD89-141235403D1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple Player Demo D3D11 WPF net6", "WPF\CSharp\Simple Player Demo D3D11\Simple Player Demo D3D11 WPF net6.csproj", "{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -299,6 +301,18 @@ Global
 		{8885058C-F250-486D-AD89-141235403D1F}.Release|x86.Build.0 = Release|Any CPU
 		{8885058C-F250-486D-AD89-141235403D1F}.Release|x64.ActiveCfg = Release|Any CPU
 		{8885058C-F250-486D-AD89-141235403D1F}.Release|x64.Build.0 = Release|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Debug|x86.Build.0 = Debug|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Debug|x64.Build.0 = Debug|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Release|x86.ActiveCfg = Release|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Release|x86.Build.0 = Release|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Release|x64.ActiveCfg = Release|Any CPU
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -324,6 +338,7 @@ Global
 		{800B94A3-17C0-49F3-AE15-E365D1FEA404} = {6E4DFE4D-F6E3-4D76-9143-0C408F773B65}
 		{A42E1734-8621-4B74-963E-81211282C88C} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
 		{8885058C-F250-486D-AD89-141235403D1F} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
+		{3A06DE21-D2CB-4F1A-8705-2579CFCD032E} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
