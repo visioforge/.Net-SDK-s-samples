@@ -1,0 +1,25 @@
+<Project>
+  <!--
+    Root Directory.Build.props for the samples repo.
+
+    Workaround for the .NET 10 SDK MSBuild targets enforcing
+    MSB3822 / MSB3823 ("Non-string resources require the property
+    GenerateResourceUsePreserializedResources to be set to true" and
+    "Non-string resources require the System.Resources.Extensions
+    assembly at runtime") on net472 WinForms / WPF csprojs that embed
+    images / icons in .resx. The VS Build Tools msbuild used by the
+    GitHub Actions matrix relaxes this check, so CI passes without
+    these properties. Local `dotnet build` / `dotnet msbuild` enforces
+    them strictly and breaks every net472 demo.
+
+    The property is set unconditionally — it is a no-op on TFMs whose
+    targets don't read it. System.Resources.Extensions is only added
+    on net472 because newer TFMs already ship the type in their BCL.
+  -->
+  <PropertyGroup>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472' or $(TargetFrameworks.Contains('net472'))">
+    <PackageReference Include="System.Resources.Extensions" Version="9.0.0" />
+  </ItemGroup>
+</Project>
