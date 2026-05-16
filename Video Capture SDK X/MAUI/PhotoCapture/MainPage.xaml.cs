@@ -1,5 +1,7 @@
 using System.Diagnostics;
+#if !MACCATALYST
 using VisioForge.Core.UI.MAUI;
+#endif
 
 
 namespace PhotoCapture
@@ -8,7 +10,10 @@ namespace PhotoCapture
     {
         private bool _isPreview = false;
 
+#if !MACCATALYST
         private VisioForge.Core.PhotoCapture.PhotoCaptureView _photoCaptureCore;
+        private VisioForge.Core.UI.MAUI.PhotoCaptureView photoCaptureView;
+#endif
 
         /// <summary>
         /// Interaction logic for the MAUI Photo Capture demo's MainPage.
@@ -17,6 +22,26 @@ namespace PhotoCapture
         public MainPage()
         {
             InitializeComponent();
+
+#if !MACCATALYST
+            photoCaptureView = new VisioForge.Core.UI.MAUI.PhotoCaptureView
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+            rootGrid.Add(photoCaptureView, 0, 0);
+#else
+            var notice = new Label
+            {
+                Text = "PhotoCapture is not supported on Mac Catalyst.",
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                Margin = new Thickness(16)
+            };
+            rootGrid.Add(notice, 0, 0);
+            btCamera.IsEnabled = false;
+            btPhoto.IsEnabled = false;
+#endif
 
             Loaded += MainPage_Loaded;
         }
@@ -32,7 +57,7 @@ namespace PhotoCapture
             try
             {
                 // Ask for permissions
-#if __ANDROID__ || __MACOS__ || __MACCATALYST__ || __IOS__
+#if __ANDROID__ || __MACOS__ || __IOS__
                 await RequestCameraPermissionAsync();
 #endif
 
@@ -69,6 +94,7 @@ namespace PhotoCapture
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void ContentPage_Loaded(object? sender, EventArgs e)
         {
+#if !MACCATALYST
             try
             {
                 this.SizeChanged += MainPage_LayoutChanged;
@@ -80,7 +106,7 @@ namespace PhotoCapture
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     _photoCaptureCore = (photoCaptureView.Handler as PhotoCaptureViewHandler).Core;
-                    
+
                     if (_photoCaptureCore != null && _photoCaptureCore.Cameras != null && _photoCaptureCore.Cameras.Count > 0)
                     {
                         _photoCaptureCore.Camera = _photoCaptureCore.Cameras[PhotoConfig.CurrentCamera];
@@ -92,6 +118,9 @@ namespace PhotoCapture
             {
                 System.Diagnostics.Debug.WriteLine($"Error in content page loaded: {ex.Message}");
             }
+#else
+            await Task.CompletedTask;
+#endif
         }
 
         /// <summary>
@@ -125,8 +154,10 @@ namespace PhotoCapture
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ContentPage_Unloaded(object? sender, EventArgs e)
         {
+#if !MACCATALYST
             _photoCaptureCore?.Dispose();
             _photoCaptureCore = null;
+#endif
         }
 
         /// <summary>
@@ -137,6 +168,7 @@ namespace PhotoCapture
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btCamera_Clicked(object? sender, EventArgs e)
         {
+#if !MACCATALYST
             try
             {
                 if (_photoCaptureCore.Cameras.Count < 2)
@@ -165,6 +197,9 @@ namespace PhotoCapture
             {
                 System.Diagnostics.Debug.WriteLine($"Error switching camera: {ex.Message}");
             }
+#else
+            await Task.CompletedTask;
+#endif
         }
 
         /// <summary>
@@ -175,6 +210,7 @@ namespace PhotoCapture
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btPhoto_Clicked(object? sender, EventArgs e)
         {
+#if !MACCATALYST
             try
             {
 #if WINDOWS
@@ -199,6 +235,9 @@ namespace PhotoCapture
                 System.Diagnostics.Debug.WriteLine($"Error taking photo: {ex.Message}");
                 await DisplayAlertAsync("Error", $"Failed to take photo: {ex.Message}", "OK");
             }
+#else
+            await Task.CompletedTask;
+#endif
         }
     }
 
