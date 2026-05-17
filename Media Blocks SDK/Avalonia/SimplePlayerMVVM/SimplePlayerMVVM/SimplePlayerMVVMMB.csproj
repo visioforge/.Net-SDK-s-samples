@@ -29,7 +29,7 @@
     <PackageReference Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2026.5.15" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.17" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2026.5.17" />
   </ItemGroup>
 </Project>

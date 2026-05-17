@@ -294,9 +294,15 @@ namespace Simple_Player_Demo_D3D11_X
                 Log("closing: " + ex.Message);
             }
 
-            // Re-issue the close now that teardown is complete. _isClosing
-            // is already set, so this nested invocation short-circuits above.
-            Close();
+            // Defer the re-close to a fresh dispatcher tick so WPF's
+            // closing pipeline (which produced this event) has fully
+            // unwound before we re-enter InternalClose. Calling Close()
+            // directly from the async-continuation hit VerifyNotClosing's
+            // "Window is closing" guard on .NET 10 WPF and threw
+            // InvalidOperationException. _isClosing is already set, so
+            // the re-entered Window_Closing short-circuits above and the
+            // close proceeds normally.
+            Dispatcher.BeginInvoke(new Action(Close));
         }
 
         private void Log(string msg)

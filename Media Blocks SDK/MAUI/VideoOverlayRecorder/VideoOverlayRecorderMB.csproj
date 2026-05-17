@@ -63,8 +63,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.15" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.5.15" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.17" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.5.17" />
   </ItemGroup>
   <!-- VisioForge SDK Deployment -->
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">

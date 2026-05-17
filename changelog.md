@@ -9,11 +9,16 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.5.16
+
+* [Build] Extended the XML-doc forcing function from CS1591/CS1573 to the entire C# doc-warning family: CS1570 (malformed XML), CS1571 (duplicate `<param>`), CS1572 (`<param>` for nonexistent parameter), CS1574 (unresolvable `<see cref>`), CS1584 (incorrect cref attribute), CS1587 (doc on invalid language element), CS1658 (cref parse error), CS1734 (`<paramref>` to nonexistent parameter) are now all `<WarningsAsErrors>` in `_SOURCE/warns.props`. Roughly 500 latent syntax-error sites surfaced in 5 onion-peeling waves (the compiler stops parsing inside a malformed doc block, so each cleanup wave exposed the next layer) and were fixed at source — escaped `&` / `<` / `<<` in `<summary>` / `<code>` / `<remarks>`, dropped invalid generic crefs like `cref="Foo{Bar[]}"`, removed orphan `///` blocks above commented-out fields and methods, corrected stale `<see cref>` references (typos, cross-project references, renamed types), removed `<param>` tags for parameters that no longer exist, and fixed `<paramref>` typos. Customer XML doc files now ship valid syntax in addition to non-empty content.
+
 ## 2026.5.15
 
 * [Core] Added `D3D11Composable` WPF renderer mode: a pure FrameworkElement video panel built on a D3D11 shared texture + `D3DImage` bridge that composes natively with the WPF visual tree (transforms, opacity, z-order, rounded clips) and keeps frames GPU-resident end-to-end. New types: `D3D11ComposablePanel.
 * [Core] Added true-peak (dBTP) metering per ITU-R BS.1770-4: new `TruePeakComputer` (4× polyphase FIR oversampling, per-channel running peak, NaN/Inf-safe) and `VUMeterXData.TruePeak[]` channel array fired alongside the existing sample-peak/RMS data.
-* [Core] Added `VolumeMeterLED` WPF control: segmented LED-bar VU meter with broadcast-style green/yellow/red zones, optional peak-hold marker (configurable fall time), optional dB scale labels, optional RMS overlay bar, horizontal/vertical orientation.гитхаб репо 
+* [Core] Added `VolumeMeterLED` WPF control: segmented LED-bar VU meter with broadcast-style green/yellow/red zones, optional peak-hold marker (configurable fall time), optional dB scale labels, optional RMS overlay bar, horizontal/vertical orientation.гитхаб репо
+* [Build] CS1591/CS1573 are now hard build errors for the entire PreSetup solution (every project except `VisioForge.Libs`, `VisioForge.Libs.External`, and the auto-generated ONVIF WSDL stubs in `VisioForge.Core/ONVIFX/Connected Services/`). Lifted the global `<NoWarn>` suppression in `_SOURCE/warns.props` and per-project NoWarn in 9 csprojs, then documented every previously-missing public-API member across `VisioForge.Core` (1,258 sites) and `VisioForge.Server` (341 sites) — including the MISB-0601 KLV parsers, libdmtx P/Invoke layer, ONVIF facade, GStreamer plugin wrappers, Apple/iOS GStreamer sources, NVIDIA Maxine API, Basler / Aravis GenICam wrappers, and the MediaMTX HTTP API DTOs. NuGet packages now ship XML doc files generated from real summaries instead of being silently empty.
 
 ## 2026.5.14
 
