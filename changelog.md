@@ -9,6 +9,10 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.5.18
+
+* [Media Blocks SDK .Net] **New API:** `SRTSinkSettings.PreResolveHostname` and `SRTSourceSettings.PreResolveHostname` (`bool`, default `false`). When set to `true`, the SDK resolves any DNS hostname in the SRT URI to a literal IPv4 on the managed side (via `System.Net.Dns`) before handing the URI to the native code.
+
 ## 2026.5.16
 
 * [Build] Extended the XML-doc forcing function from CS1591/CS1573 to the entire C# doc-warning family: CS1570 (malformed XML), CS1571 (duplicate `<param>`), CS1572 (`<param>` for nonexistent parameter), CS1574 (unresolvable `<see cref>`), CS1584 (incorrect cref attribute), CS1587 (doc on invalid language element), CS1658 (cref parse error), CS1734 (`<paramref>` to nonexistent parameter) are now all `<WarningsAsErrors>` in `_SOURCE/warns.props`. Roughly 500 latent syntax-error sites surfaced in 5 onion-peeling waves (the compiler stops parsing inside a malformed doc block, so each cleanup wave exposed the next layer) and were fixed at source — escaped `&` / `<` / `<<` in `<summary>` / `<code>` / `<remarks>`, dropped invalid generic crefs like `cref="Foo{Bar[]}"`, removed orphan `///` blocks above commented-out fields and methods, corrected stale `<see cref>` references (typos, cross-project references, renamed types), removed `<param>` tags for parameters that no longer exist, and fixed `<paramref>` typos. Customer XML doc files now ship valid syntax in addition to non-empty content.
