@@ -20,11 +20,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Select Xcode 26.5
+    - name: Select Xcode 26.4
       if: runner.os == 'macOS'
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '26.5'
+        xcode-version: '26.4'
 
     - name: Setup .NET
       if: runner.os != 'macOS'
@@ -35,7 +35,7 @@ jobs:
     - name: Setup .NET (macOS ARM64)
       if: runner.os == 'macOS'
       run: |
-        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 10.0 --architecture arm64
+        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --version 10.0.203 --architecture arm64
         echo "$HOME/.dotnet" >> $GITHUB_PATH
         echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
 
@@ -43,9 +43,11 @@ jobs:
       if: runner.os == 'Windows'
       run: dotnet workload install maui maui-android maui-windows maui-desktop maui-mobile android
 
+    # Pin to the .NET 10 workload set targeting Xcode 26.4 (stable on macos-26).
+    # The latest workload set requires Xcode 26.5 (beta), which is not reliably selectable.
     - name: Install MAUI workloads (macOS)
       if: runner.os == 'macOS'
-      run: dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-desktop maui-mobile android ios maccatalyst
+      run: dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-desktop maui-mobile android ios maccatalyst --version 10.0.203.1
 
     - name: Setup Java JDK
       uses: actions/setup-java@v4
