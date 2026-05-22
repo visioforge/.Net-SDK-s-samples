@@ -69,7 +69,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.4.29" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.18" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.22" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="YoutubeDLSharp" Version="1.2.0" />

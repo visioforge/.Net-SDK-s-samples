@@ -7,9 +7,9 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.5.18" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.5.22" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.5.18" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.5.22" />
   </ItemGroup>
 </Project>

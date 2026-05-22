@@ -9,6 +9,29 @@ hide_table_of_contents: true
 
 Changes and updates for all .Net SDKs.
 
+## 2026.5.22
+
+* [Demos] **Unity `.unitypackage` distribution:** the Unity 6 (net48) integration now ships as a single self-contained `.unitypackage` (managed SDK + native GStreamer/FFmpeg runtime + the two sample scenes), built by `build-unity-package.ps1` and published to `https://files.visioforge.com/unity/` by `build-and-upload-unity.ps1`. New step-by-step install/uninstall/upgrade guide (`install/unity.md`, en + es + fr) plus the in-package `CLIENT_GUIDE.md`. Managed-plugin `.meta` GUIDs are now deterministic (derived from the file name), so re-importing an upgraded package preserves Unity asset references instead of orphaning them.
+* [Demos] **Fix (Unity players):** hardened the `MediaBlocksPlayer` / `RTSPViewerPlayer` lifecycle — `PlayAsync`/`StopAsync` are serialized with a `SemaphoreSlim`, the play re-entry guard is keyed on the live pipeline (so replaying after a natural end-of-stream no longer orphans the previous pipeline and its handlers), and the post-`await` guard bails on a destroyed `GameObject`. `VisioForgeEnvironment` is now a deliberate no-op on non-Windows targets instead of throwing `DllNotFoundException` from the auto-invoked startup hook.
+
+## 2026.5.21
+
+* [Build] **New `UNITY` build flavor (net48):** `switch-to-unity.ps1` + `Directory.Build.UNITY.props` + `VisioForge.MediaFramework.Solution.Unity.sln`, plus a `NANO48` flavor (`switch-to-nano48.ps1` / `Directory.Build.NANO48.props`) and `net48` added as a buildable target framework. Host-UI code (WPF / WinForms) is now decoupled by **capability**, not TFM: new `HAVE_WPF` / `HAVE_WINFORMS` compile constants (driven by SDK-style `UseWPF` / `UseWindowsForms`) replace the `NET_WINDOWS` guards on `System.Windows.Application` / `System.Windows.Forms` interop, so the SDK builds for Unity Mono (Api Compatibility Level = .NET Framework) without pulling `PresentationFramework` / `PresentationCore` / `WindowsFormsIntegration` / `SkiaSharp.Views.WPF`. Cross-platform behaviour for the existing flavors is unchanged.
+* [Core] **New API:** `VisioForgeX.StopMainLoop()` — stops the GLib main-loop background thread **without** `gst_deinit` (unlike `DestroySDK`), so the GStreamer registry stays usable. Intended for in-process AppDomain-reload hosts (e.g. the Unity Editor with "Disable Domain Reload"); the loop is recreated when init state is reset by the domain reload.
+* [Core] `DeviceEnumerator` now degrades gracefully when WMI is unavailable (Unity Mono / locked-down hosts): a `NotImplementedException` from `ManagementEventWatcher` disables USB hot-plug notifications instead of breaking device enumeration, and the partially-constructed watcher is disposed on failure.
+* [Demos] **New Unity 6 (net48) samples:** `SimplePlayer` (file playback) and `RTSPViewer` (live RTSP camera), rendering `MediaBlocksPipeline` → `BufferSinkBlock(RGBA)` into a Unity `RawImage`/`Texture2D` (zero-alloc double-buffered upload, vertical flip) through a reusable `VisioForgeVideoView` component with Stretch / Letterbox / Crop aspect modes. Native + managed runtime is staged from the CrossPlatform NuGet package via `deploy-unity-natives.ps1` / `deploy-unity-managed.ps1`; full step-by-step `CLIENT_GUIDE.md` included.
+
+## 2026.5.20
+
+* [Media Blocks SDK .Net] **Fix:** `OverlayManagerFilter` and `PanZoomFilter` leaked the native `draw` signal-name string on every signal connect — the `Marshaller.Free` call sat after the `return` and never executed (affected iOS/AOT builds).
+* [Core] **Cleanup:** Eliminated all remaining C# compiler warnings (CS0414, CS0419, CS0114, CS0108, CS0162, CS0109) across platform targets without suppressions — removed dead private fields and unreachable code, disambiguated an XML-doc `cref`, and stopped `SkiaVideoView` shadowing inherited `BindableObject` notification members.
+
+## 2026.5.19
+
+* [Media Blocks SDK .Net] **Fix:** `CVMotionCellsBlock`, `CVFaceDetectBlock`, `CVHandDetectBlock`, `CVTemplateMatchBlock` — event subscriptions added after `StartAsync` sometimes were silently dropped.
+* [Media Blocks SDK .Net] **Fix:** `CVMotionCellsSettings.Gap` and `PostNoMotion` are now rounded and clamped to the ranges accepted by the underlying `motioncells` element (`Gap` → `[1, 60]` s, `PostNoMotion` → `[0, 180]` s). Previously sub-second values truncated to `0` and were silently rejected.
+* [Media Blocks SDK .Net] **Docs:** `CVMotionCellsSettings.GridSize` XML-doc clarified that the minimum is 8x8 (constraint of the underlying `motioncells` element); smaller values are silently rejected.
+
 ## 2026.5.18
 
 * [Media Blocks SDK .Net] **New API:** `SRTSinkSettings.PreResolveHostname` and `SRTSourceSettings.PreResolveHostname` (`bool`, default `false`). When set to `true`, the SDK resolves any DNS hostname in the SRT URI to a literal IPv4 on the managed side (via `System.Net.Dns`) before handing the URI to the native code.
