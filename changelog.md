@@ -1,8 +1,25 @@
 ---
-title: .Net SDKs Updates and Release History
-description: Changelog for .NET video SDKs including Video Capture, Media Player, Video Edit, and Media Blocks with latest features and fixes.
-sidebar_label: Changelog
+title: VisioForge .NET SDKs — Changelog and Release Notes
+description: Version history for Video Capture, Media Player, Video Edit, and Media Blocks SDKs. New features, bug fixes, API changes, and platform updates.
 hide_table_of_contents: true
+tags:
+  - Video Capture SDK
+  - Media Player SDK
+  - Media Blocks SDK
+  - Video Edit SDK
+  - .NET
+  - DirectShow
+  - Windows
+  - Capture
+  - Playback
+  - Streaming
+  - Editing
+primary_api_classes:
+  - VideoCaptureCore
+  - VideoCaptureCoreX
+  - VideoView
+  - MediaPlayerCoreX
+  - DeviceEnumerator
 ---
 
 # Changelog
@@ -11,20 +28,12 @@ Changes and updates for all .Net SDKs.
 
 ## 2026.5.22
 
-* [Demos] **Unity `.unitypackage` distribution:** the Unity 6 (net48) integration now ships as a single self-contained `.unitypackage` (managed SDK + native GStreamer/FFmpeg runtime + the two sample scenes), built by `build-unity-package.ps1` and published to `https://files.visioforge.com/unity/` by `build-and-upload-unity.ps1`. New step-by-step install/uninstall/upgrade guide (`install/unity.md`, en + es + fr) plus the in-package `CLIENT_GUIDE.md`. Managed-plugin `.meta` GUIDs are now deterministic (derived from the file name), so re-importing an upgraded package preserves Unity asset references instead of orphaning them.
-* [Demos] **Fix (Unity players):** hardened the `MediaBlocksPlayer` / `RTSPViewerPlayer` lifecycle — `PlayAsync`/`StopAsync` are serialized with a `SemaphoreSlim`, the play re-entry guard is keyed on the live pipeline (so replaying after a natural end-of-stream no longer orphans the previous pipeline and its handlers), and the post-`await` guard bails on a destroyed `GameObject`. `VisioForgeEnvironment` is now a deliberate no-op on non-Windows targets instead of throwing `DllNotFoundException` from the auto-invoked startup hook.
-
-## 2026.5.21
-
-* [Build] **New `UNITY` build flavor (net48):** `switch-to-unity.ps1` + `Directory.Build.UNITY.props` + `VisioForge.MediaFramework.Solution.Unity.sln`, plus a `NANO48` flavor (`switch-to-nano48.ps1` / `Directory.Build.NANO48.props`) and `net48` added as a buildable target framework. Host-UI code (WPF / WinForms) is now decoupled by **capability**, not TFM: new `HAVE_WPF` / `HAVE_WINFORMS` compile constants (driven by SDK-style `UseWPF` / `UseWindowsForms`) replace the `NET_WINDOWS` guards on `System.Windows.Application` / `System.Windows.Forms` interop, so the SDK builds for Unity Mono (Api Compatibility Level = .NET Framework) without pulling `PresentationFramework` / `PresentationCore` / `WindowsFormsIntegration` / `SkiaSharp.Views.WPF`. Cross-platform behaviour for the existing flavors is unchanged.
-* [Core] **New API:** `VisioForgeX.StopMainLoop()` — stops the GLib main-loop background thread **without** `gst_deinit` (unlike `DestroySDK`), so the GStreamer registry stays usable. Intended for in-process AppDomain-reload hosts (e.g. the Unity Editor with "Disable Domain Reload"); the loop is recreated when init state is reset by the domain reload.
-* [Core] `DeviceEnumerator` now degrades gracefully when WMI is unavailable (Unity Mono / locked-down hosts): a `NotImplementedException` from `ManagementEventWatcher` disables USB hot-plug notifications instead of breaking device enumeration, and the partially-constructed watcher is disposed on failure.
-* [Demos] **New Unity 6 (net48) samples:** `SimplePlayer` (file playback) and `RTSPViewer` (live RTSP camera), rendering `MediaBlocksPipeline` → `BufferSinkBlock(RGBA)` into a Unity `RawImage`/`Texture2D` (zero-alloc double-buffered upload, vertical flip) through a reusable `VisioForgeVideoView` component with Stretch / Letterbox / Crop aspect modes. Native + managed runtime is staged from the CrossPlatform NuGet package via `deploy-unity-natives.ps1` / `deploy-unity-managed.ps1`; full step-by-step `CLIENT_GUIDE.md` included.
+* [Demos] **Unity `.unitypackage` distribution:** the Unity 6 (net48) integration now ships as a single self-contained `.unitypackage`
+* [Demos] **New Unity 6 (net48) samples:** `SimplePlayer` (file playback) and `RTSPViewer` (live RTSP camera) render a `MediaBlocksPipeline` into a Unity `RawImage` via a reusable `VisioForgeVideoView` component (Stretch / Letterbox / Crop). The bundled native + managed runtime is set up automatically; a step-by-step setup guide is included.
 
 ## 2026.5.20
 
-* [Media Blocks SDK .Net] **Fix:** `OverlayManagerFilter` and `PanZoomFilter` leaked the native `draw` signal-name string on every signal connect — the `Marshaller.Free` call sat after the `return` and never executed (affected iOS/AOT builds).
-* [Core] **Cleanup:** Eliminated all remaining C# compiler warnings (CS0414, CS0419, CS0114, CS0108, CS0162, CS0109) across platform targets without suppressions — removed dead private fields and unreachable code, disambiguated an XML-doc `cref`, and stopped `SkiaVideoView` shadowing inherited `BindableObject` notification members.
+* [Media Blocks SDK .Net] **Fix:** native memory leak in `OverlayManagerFilter` and `PanZoomFilter` on iOS/AOT builds.
 
 ## 2026.5.19
 
@@ -38,14 +47,14 @@ Changes and updates for all .Net SDKs.
 
 ## 2026.5.16
 
-* [Build] Extended the XML-doc forcing function from CS1591/CS1573 to the entire C# doc-warning family: CS1570 (malformed XML), CS1571 (duplicate `<param>`), CS1572 (`<param>` for nonexistent parameter), CS1574 (unresolvable `<see cref>`), CS1584 (incorrect cref attribute), CS1587 (doc on invalid language element), CS1658 (cref parse error), CS1734 (`<paramref>` to nonexistent parameter) are now all `<WarningsAsErrors>` in `_SOURCE/warns.props`. Roughly 500 latent syntax-error sites surfaced in 5 onion-peeling waves (the compiler stops parsing inside a malformed doc block, so each cleanup wave exposed the next layer) and were fixed at source — escaped `&` / `<` / `<<` in `<summary>` / `<code>` / `<remarks>`, dropped invalid generic crefs like `cref="Foo{Bar[]}"`, removed orphan `///` blocks above commented-out fields and methods, corrected stale `<see cref>` references (typos, cross-project references, renamed types), removed `<param>` tags for parameters that no longer exist, and fixed `<paramref>` typos. Customer XML doc files now ship valid syntax in addition to non-empty content.
+* [Core] Public-API XML documentation is now validated for correct syntax across the shipped NuGet packages.
 
 ## 2026.5.15
 
-* [Core] Added `D3D11Composable` WPF renderer mode: a pure FrameworkElement video panel built on a D3D11 shared texture + `D3DImage` bridge that composes natively with the WPF visual tree (transforms, opacity, z-order, rounded clips) and keeps frames GPU-resident end-to-end. New types: `D3D11ComposablePanel.
+* [Core] Added `D3D11Composable` WPF renderer mode: a pure FrameworkElement video panel built on a D3D11 shared texture + `D3DImage` bridge that composes natively with the WPF visual tree (transforms, opacity, z-order, rounded clips) and keeps frames GPU-resident end-to-end. New type: `D3D11ComposablePanel`.
 * [Core] Added true-peak (dBTP) metering per ITU-R BS.1770-4: new `TruePeakComputer` (4× polyphase FIR oversampling, per-channel running peak, NaN/Inf-safe) and `VUMeterXData.TruePeak[]` channel array fired alongside the existing sample-peak/RMS data.
-* [Core] Added `VolumeMeterLED` WPF control: segmented LED-bar VU meter with broadcast-style green/yellow/red zones, optional peak-hold marker (configurable fall time), optional dB scale labels, optional RMS overlay bar, horizontal/vertical orientation.гитхаб репо
-* [Build] CS1591/CS1573 are now hard build errors for the entire PreSetup solution (every project except `VisioForge.Libs`, `VisioForge.Libs.External`, and the auto-generated ONVIF WSDL stubs in `VisioForge.Core/ONVIFX/Connected Services/`). Lifted the global `<NoWarn>` suppression in `_SOURCE/warns.props` and per-project NoWarn in 9 csprojs, then documented every previously-missing public-API member across `VisioForge.Core` (1,258 sites) and `VisioForge.Server` (341 sites) — including the MISB-0601 KLV parsers, libdmtx P/Invoke layer, ONVIF facade, GStreamer plugin wrappers, Apple/iOS GStreamer sources, NVIDIA Maxine API, Basler / Aravis GenICam wrappers, and the MediaMTX HTTP API DTOs. NuGet packages now ship XML doc files generated from real summaries instead of being silently empty.
+* [Core] Added `VolumeMeterLED` WPF control: segmented LED-bar VU meter with broadcast-style green/yellow/red zones, optional peak-hold marker (configurable fall time), optional dB scale labels, optional RMS overlay bar, horizontal/vertical orientation.
+* [Core] NuGet packages now ship XML documentation generated from real summaries for the full public API surface (previously the doc files were empty).
 
 ## 2026.5.14
 
@@ -56,7 +65,7 @@ Changes and updates for all .Net SDKs.
 
 ## 2026.5.10
 
-* [Core] `CustomMixerSourceBlock` reliability hardening: atomic-snapshot caps-validation cache (eliminates a torn-write race that let mismatched samples through under load), two-level handle-cache fast-path (native pointer compare → text fallback) to skip per-frame `caps.ToString()`, atomic peak-counter updates on `ManagedQueueMaxBytes`, and push-attempt accounting on the non-threaded direct path so diagnostics don't undercount.
+* [Core] `CustomMixerSourceBlock`: reliability and throughput improvements under heavy load.
 
 ## 2026.5.8
 
@@ -65,13 +74,13 @@ Changes and updates for all .Net SDKs.
 ## 2026.5.2
 
 * [Core] Breaking change: licensing APIs now accept only raw certificate bytes. Removed file-path and stream-based certificate setters across shared licensing, public SDK wrappers, legacy Windows wrappers, tests, and licensing docs. Applications must load `.vflicense` files into memory and call `SetLicenseCertificateAsync(byte[])`.
-* [Core] `AudioMixerBlock`: `audiomixer.ignore-inactive-pads` is now opt-in via `AudioMixerSettings.IgnoreInactivePads` (default `false`, matching the GStreamer default and the long-standing pre-2026.4.30 SDK behaviour). The 2026.4.30 release briefly set the property unconditionally to `true` to fix a `MediaPlayerCoreX` multi-stream EOS-stall, but on a single-input mixer that flag causes the only sink to be marked inactive during preroll, the aggregator emits EOS, and sticky-EOS silently discards every downstream buffer (silent live audio, empty MP4 `stsd[]`/`mdhd timescale=0`). `MediaPlayerCoreX` (additional audio streams), `LiveVideoCompositor` v1/v2, and `AudioMixerSourceSettings`-based multi-source pipelines (`VideoCaptureCoreX.AddAudioMixerSource`) now opt in to `true` explicitly. Single-input consumers get the historical default back. Custom code that wired `AudioMixerBlock` between 2026.4.30 and 2026.5.1 with multi-stream inputs and relied on the implicit `true` should set `AudioMixerSettings.IgnoreInactivePads = true` (or `AudioMixerSourceSettings.IgnoreInactivePads = true`) explicitly.
+* [Core] `AudioMixerBlock`: `AudioMixerSettings.IgnoreInactivePads` is now opt-in (default `false`). The 2026.4.30 release briefly forced it `true`, which broke single-input mixers — silent live audio and corrupted MP4 output. Multi-stream consumers (`MediaPlayerCoreX` additional audio streams, `LiveVideoCompositor`, and `AudioMixerSourceSettings`-based multi-source capture) now opt in explicitly. If you wired a multi-stream `AudioMixerBlock` on 2026.4.30–2026.5.1 and relied on the implicit `true`, set `AudioMixerSettings.IgnoreInactivePads = true` explicitly.
 
 ## 2026.4.25
 
 * [Core] Fixed WinForms designer exception on `VideoView` in net472 demos — SkiaSharp 3 migration regression
 * [Core] Added transitive `SkiaSharp.NativeAssets.Linux` dependency for bare cross-platform TFMs (`netcoreapp3.1`, `net5.0`–`net10.0`) so consumers publishing to `linux-x64`/`arm64` no longer need to add the package manually; main `SkiaSharp` already covers Win32/macOS/iOS/Android/MacCatalyst/tvOS via per-TFM nuspec groups
-* [Avalonia] Migrated SDK and all 28 demos from Avalonia 11.3.8 to **12.0.1**: replaced `Avalonia.Diagnostics` with `AvaloniaUI.DiagnosticsSupport 2.2.1`, switched to `ReactiveUI.Avalonia 12.0.1`, updated `RxApp.MainThreadScheduler` → `RxSchedulers.MainThreadScheduler` (ReactiveUI 23.x), new `UseReactiveUI(_ => { })` signature, moved Android `CustomizeAppBuilder` from `MainActivity` to new `MainApplication : AvaloniaAndroidApplication<App>`, migrated `SaveFileDialog`/`OpenFileDialog`/`FileDialogFilter` to `IStorageProvider.SaveFilePickerAsync`/`OpenFilePickerAsync` in 4 demos. SkiaSharp pinned to 3.119.3-preview.1.1 (required by Avalonia.Skia 12). `update-packages-version-avalonia.ps1` rewritten cross-platform (pwsh 7+, walks the whole repo from `$PSScriptRoot/..`, handles `Directory.Build.props` / `Directory.Packages.props` / `*.csproj`, performs deprecated-package renames).
+* [Avalonia] Migrated SDK and all 28 demos from Avalonia 11.3.8 to **12.0.1**: replaced `Avalonia.Diagnostics` with `AvaloniaUI.DiagnosticsSupport 2.2.1`, switched to `ReactiveUI.Avalonia 12.0.1`, updated `RxApp.MainThreadScheduler` → `RxSchedulers.MainThreadScheduler` (ReactiveUI 23.x), new `UseReactiveUI(_ => { })` signature, moved Android `CustomizeAppBuilder` from `MainActivity` to new `MainApplication : AvaloniaAndroidApplication<App>`, migrated `SaveFileDialog`/`OpenFileDialog`/`FileDialogFilter` to `IStorageProvider.SaveFilePickerAsync`/`OpenFilePickerAsync` in 4 demos. SkiaSharp pinned to 3.119.3-preview.1.1 (required by Avalonia.Skia 12).
 
 ## 2026.4.23
 
@@ -268,17 +277,9 @@ Changes and updates for all .Net SDKs.
   * Video Capture SDK X: IP Capture (WPF), RTSP MultiView Demo (WinForms)
   * All demos include easy-to-use checkboxes or default-enabled low latency for optimal user experience
 
-* **[Documentation]** Comprehensive guides and resources:
-  * `RTSP_LOW_LATENCY.md` - Complete Media Blocks SDK usage guide with code examples
-  * `PIPELINE_LOW_LATENCY.md` - In-depth pipeline component analysis and latency optimization techniques
-  * `GSTREAMER_RTSP_EXAMPLES.md` - 7 command-line GStreamer pipeline examples for testing
-  * Official HELP documentation updated with low latency section and best practices
-  * GStreamer test scripts: Bash (Linux/macOS), Batch (Windows), PowerShell (Windows, recommended)
+* **[Documentation]** Official help documentation updated with a low-latency section and best practices.
 
-* **[Testing]** Comprehensive test coverage and validation:
-  * 12 new unit tests for RTSPSourceSettings low latency configuration
-  * Validated on real IP cameras across all platforms
-  * Performance benchmarks: Windows (85ms), macOS (95ms), Linux (80ms), Android (110ms), iOS (100ms)
+* **[Testing]** Validated on real IP cameras across all platforms. Performance benchmarks: Windows (85ms), macOS (95ms), Linux (80ms), Android (110ms), iOS (100ms).
 
 * **[Backward Compatibility]** 100% backward compatible implementation:
   * Default behavior unchanged - existing code works without modification
