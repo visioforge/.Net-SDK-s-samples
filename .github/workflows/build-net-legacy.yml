@@ -1,9 +1,6 @@
 name: Build .Net Legacy (4.7.2 - 8.0)
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   build:
