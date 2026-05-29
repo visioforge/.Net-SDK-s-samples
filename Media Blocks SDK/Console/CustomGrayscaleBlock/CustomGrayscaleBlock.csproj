@@ -10,7 +10,7 @@
     <RootNamespace>CustomGrayscaleBlockSample</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.22" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.29" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.4.29" />

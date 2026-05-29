@@ -26,6 +26,12 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.5.29
+
+* [Media Blocks SDK .Net] **Unity 6 (.NET Standard 2.1) build flavor:** the managed SDK now ships as a single `netstandard2.1` assembly compatible with Unity's IL2CPP backend (Api Compatibility Level = .NET Standard 2.1). This lets Unity projects target the SDK without requiring the .NET Framework 4.x compatibility surface. The existing net48 Unity package remains supported.
+* [Media Blocks SDK .Net] **Unity macOS Standalone player support (Universal arm64 + x86_64):** the Unity 6 ns2.1 `.unitypackage` now ships a third platform flavor for macOS Standalone (in addition to Windows and Android). Includes pre-built P/Invoke for macOS `.dylib` names, the bundled CrossPlatform.Core.macOS native runtime (GStreamer dylibs + `libgioopenssl` TLS backend + `ca-certificates.crt`), and a one-time `Configure()` bootstrap that prunes any system / homebrew GStreamer from `DYLD_LIBRARY_PATH` before the loader runs.
+* [Core] **New API:** `VisioForgeX.StopMainLoop()` — explicit teardown of the internal GLib main loop independent of `DestroySDK()`, for scenarios that need to release the loop without tearing the SDK down.
+
 ## 2026.5.22
 
 * [Demos] **Unity `.unitypackage` distribution:** the Unity 6 (net48) integration now ships as a single self-contained `.unitypackage`
