@@ -187,6 +187,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "opengl-shader-mb net10", "_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encoder Concurrency Test MB net10", "WPF\CSharp\Encoder Concurrency Test\Encoder Concurrency Test MB net10.csproj", "{D08E3108-A6C6-4ABC-A516-27FD99C8445C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDP RAW Capture Demo net10", "WPF\CSharp\UDP RAW Capture Demo\UDP RAW Capture Demo net10.csproj", "{10CBB66C-BC8B-44D6-910F-7E72091F8E78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1265,6 +1267,18 @@ Global
 		{D08E3108-A6C6-4ABC-A516-27FD99C8445C}.Release|x64.Build.0 = Release|Any CPU
 		{D08E3108-A6C6-4ABC-A516-27FD99C8445C}.Release|x86.ActiveCfg = Release|Any CPU
 		{D08E3108-A6C6-4ABC-A516-27FD99C8445C}.Release|x86.Build.0 = Release|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Debug|x64.Build.0 = Debug|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Debug|x86.Build.0 = Debug|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Release|x64.ActiveCfg = Release|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Release|x64.Build.0 = Release|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Release|x86.ActiveCfg = Release|Any CPU
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1359,6 +1373,7 @@ Global
 		{021EA94F-805A-4DC4-A20C-86937D6DC970} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{E95892DF-C7DA-4C9B-B742-8EB99956F4A3} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
 		{D08E3108-A6C6-4ABC-A516-27FD99C8445C} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{10CBB66C-BC8B-44D6-910F-7E72091F8E78} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

@@ -16,7 +16,7 @@
     <PackageReference Include="VisioForge.CrossPlatform.OpenCV.Windows.x64" Version="2026.4.29" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.29" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.31" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />

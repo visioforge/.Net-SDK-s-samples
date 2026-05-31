@@ -185,6 +185,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "opengl-shader-mb net472", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encoder Concurrency Test MB net472", "WPF\CSharp\Encoder Concurrency Test\Encoder Concurrency Test MB net472.csproj", "{6786927B-09FC-41C0-82AF-6C2AA5001A0E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDP RAW Capture Demo net472", "WPF\CSharp\UDP RAW Capture Demo\UDP RAW Capture Demo net472.csproj", "{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1251,6 +1253,18 @@ Global
 		{6786927B-09FC-41C0-82AF-6C2AA5001A0E}.Release|x64.Build.0 = Release|Any CPU
 		{6786927B-09FC-41C0-82AF-6C2AA5001A0E}.Release|x86.ActiveCfg = Release|Any CPU
 		{6786927B-09FC-41C0-82AF-6C2AA5001A0E}.Release|x86.Build.0 = Release|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Debug|x64.Build.0 = Debug|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Debug|x86.Build.0 = Debug|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Release|x64.ActiveCfg = Release|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Release|x64.Build.0 = Release|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Release|x86.ActiveCfg = Release|Any CPU
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1344,6 +1358,7 @@ Global
 		{0AFBF9F4-A7FA-46E6-B15F-79FED21E7B52} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 		{C3326300-C40E-4029-B154-8DB8589604D4} = {BCDF099C-8B67-4630-9A0E-030764B8A068}
 		{6786927B-09FC-41C0-82AF-6C2AA5001A0E} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
+		{0F72FEC3-716B-4F2E-AAA2-3F959047EBAD} = {55F4FC43-4A41-4609-BDC5-724EF02F9F73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

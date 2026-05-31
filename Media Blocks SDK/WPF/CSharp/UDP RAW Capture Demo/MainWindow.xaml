@@ -1,0 +1,107 @@
+<Window x:Class="UDP_RAW_Capture_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        Title="UDP RAW Capture Demo - Media Blocks SDK .Net"
+        Height="720" Width="1200"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
+        Icon="visioforge_main_icon.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="420"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Panel - Controls -->
+        <Grid Grid.Column="0" Margin="10">
+            <TabControl>
+                <TabItem Header="UDP Source">
+                    <StackPanel Margin="10">
+                        <Label Content="UDP URL" FontWeight="Bold"/>
+                        <TextBox x:Name="edUrl" Height="23" Text="udp://0.0.0.0:1234" Margin="0,0,0,10"
+                                 ToolTip="udp://0.0.0.0:port to listen for unicast on all interfaces; udp://239.x.x.x:port to join a multicast group; udp://&lt;local-ip&gt;:port to bind a specific interface."/>
+
+                        <Label Content="Transport mode"/>
+                        <ComboBox x:Name="cbMode" Height="23" Margin="0,0,0,10" SelectedIndex="0">
+                            <ComboBoxItem Content="Auto (detect container)"/>
+                            <ComboBoxItem Content="MPEG-TS over UDP"/>
+                            <ComboBoxItem Content="RTP over UDP"/>
+                            <ComboBoxItem Content="Raw elementary (H264/H265)"/>
+                        </ComboBox>
+
+                        <Label Content="Video codec (RTP / Raw modes only)"/>
+                        <ComboBox x:Name="cbCodec" Height="23" Margin="0,0,0,10" SelectedIndex="0">
+                            <ComboBoxItem Content="H264"/>
+                            <ComboBoxItem Content="H265"/>
+                        </ComboBox>
+
+                        <Label Content="RTP payload type (RTP mode only)"/>
+                        <TextBox x:Name="edPayload" Height="23" Text="96" Margin="0,0,0,10"/>
+
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,0" Foreground="Gray">
+                            <Run Text="The video is recorded WITHOUT re-encoding (the original H264/H265 is muxed as-is)."/>
+                        </TextBlock>
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem Header="Recording">
+                    <StackPanel Margin="10">
+                        <Label Content="Output Settings" FontWeight="Bold"/>
+
+                        <Label Content="Output folder"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="edFolder" Grid.Column="0" Height="23" Text="c:\vf" Margin="0,0,5,0"/>
+                            <Button x:Name="btBrowse" Grid.Column="1" Content="..." Width="30" Height="23" Click="btBrowse_Click"/>
+                        </Grid>
+
+                        <Label Content="File name pattern" Margin="0,10,0,0"/>
+                        <TextBox x:Name="edPattern" Height="23" Text="capture_%05d.mp4" Margin="0,0,0,10"
+                                 ToolTip="Use a printf-style index, e.g. capture_%05d.mp4 -> capture_00000.mp4, capture_00001.mp4 ..."/>
+
+                        <Label Content="New file every (seconds)"/>
+                        <TextBox x:Name="edSplitSeconds" Height="23" Text="10" Margin="0,0,0,10"/>
+
+                        <Label Content="Max files kept (0 = unlimited)"/>
+                        <TextBox x:Name="edMaxFiles" Height="23" Text="0" Margin="0,0,0,10"/>
+
+                        <TextBlock TextWrapping="Wrap" Margin="0,5,0,10" Foreground="Gray">
+                            <Run Text="Files are split on key-frame boundaries, so no data is lost between files."/>
+                        </TextBlock>
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem Header="Log">
+                    <Grid Margin="10">
+                        <TextBox x:Name="mmLog" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                                 IsReadOnly="True" FontFamily="Consolas" FontSize="11"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        <!-- Right Panel - Video View -->
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="2" Background="Black">
+                <my:VideoView x:Name="VideoView1" Background="Black"/>
+            </Border>
+
+            <StackPanel Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,5">
+                    <Button x:Name="btStart" Content="Start" Width="120" Height="32" Margin="0,0,10,0" Click="btStart_Click" FontWeight="Bold"/>
+                    <Button x:Name="btStop" Content="Stop" Width="120" Height="32" Click="btStop_Click" FontWeight="Bold"/>
+                </StackPanel>
+                <TextBlock x:Name="lbStatus" Text="Status: Ready" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

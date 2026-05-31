@@ -26,6 +26,20 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.5.31
+
+* [Media Blocks SDK .Net] **New `UDPRAWSourceBlock`:** receives a live UDP stream (MPEG-TS, RTP, or raw elementary) and exposes the parsed, still-encoded media without decoding — ideal for recording or remuxing without re-encoding. MPEG-TS feeds are auto-detected; RTP and raw modes let you set the codec, RTP payload type, and a multicast address. It exposes all common video and audio codecs (video: H264, H265, VP8, VP9, AV1, MPEG-2, MJPEG; audio: AAC, MP3/MPEG audio, AC-3, Opus, FLAC); RTP can also carry audio on a separate port (`AudioPort` / `AudioCodec`). A codec without a dedicated parser is passed through unchanged rather than dropped, so a connected recorder/muxer is never starved.
+* [Demos] **New WPF "UDP RAW Capture Demo" (Media Blocks SDK .Net):** records a live UDP H264/H265 feed to MP4 files **without re-encoding**, with selectable transport (Auto / MPEG-TS / RTP / raw), starting a new file on a configurable interval and splitting on key-frames so no data is lost between files, while previewing the stream.
+
+## 2026.5.30
+
+* [Demos] **Unity RTSP sample — auto-reconnect:** the RTSP viewer sample now reconnects automatically after a connection error instead of giving up. On iOS this means the stream comes up on its own once the user grants the Local Network permission, with no app relaunch; it also recovers transparently from camera reboots / Wi-Fi drops.
+* [Media Blocks SDK .Net] **Unity iOS — fixed BufferSink / appsink pipelines:** video-to-texture playback (`BufferSinkBlock`) and any pipeline using `appsink` / `appsrc` now work on iOS. Previously building such a pipeline failed with *"Failed to build block 'BufferSink'"* because the GStreamer `app` plugin was not registered on the Unity iOS runtime; it is now registered during SDK init.
+* [Media Blocks SDK .Net] **Unity iOS — local-network access:** iOS builds now declare `NSLocalNetworkUsageDescription` in the generated Xcode project, so the app shows the one-time "allow local network access" prompt and can reach LAN cameras / media servers (RTSP, ONVIF, RTMP). Previously an iOS build connecting to a `192.168.x.x` source would silently hang in preroll (iOS blocks local-network access without this key); the prompt never appeared and no error was reported.
+* [Media Blocks SDK .Net] **Unity iOS — Xcode build fix:** the iOS `.unitypackage` flavor now embeds a flat-layout `GStreamerX.framework`, so building the generated Xcode project to a device no longer fails validation with *"Framework GStreamerX.framework/Frameworks/GStreamer.framework did not contain an Info.plist."* The redundant nested framework that triggered the error is no longer shipped.
+* [Media Blocks SDK .Net] **Unity iOS — automatic project setup:** the one-time setup prompt now also sets the iOS target's Api Compatibility Level to .NET Standard 2.1 (previously only Standalone and Android were configured), so an iOS-targeted project loads the SDK without a manual Player Settings change.
+* [Media Blocks SDK .Net] **Unity macOS Standalone — runtime fixes:** macOS Standalone players now reliably locate the bundled native runtime and initialize the SDK under **both** the Mono and IL2CPP scripting backends (Universal arm64 + x86_64), and RTSPS / HTTPS streams verify TLS in standalone builds. Resolves a set of issues that previously prevented a built macOS player from starting.
+
 ## 2026.5.29
 
 * [Media Blocks SDK .Net] **Unity 6 (.NET Standard 2.1) build flavor:** the managed SDK now ships as a single `netstandard2.1` assembly compatible with Unity's IL2CPP backend (Api Compatibility Level = .NET Standard 2.1). This lets Unity projects target the SDK without requiring the .NET Framework 4.x compatibility surface. The existing net48 Unity package remains supported.
