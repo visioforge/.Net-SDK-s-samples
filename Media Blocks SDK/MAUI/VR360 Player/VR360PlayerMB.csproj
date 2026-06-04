@@ -66,8 +66,8 @@
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.3.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.5.31" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.5.31" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.4" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.6.4" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

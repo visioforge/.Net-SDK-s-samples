@@ -26,19 +26,23 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.6.3
+
+* [Media Blocks SDK .Net] **Split-recording segment events:** `MP4SinkBlock`, `MPEGTSSinkBlock`, and `MP4OutputBlock` now raise `OnSegmentCreated` and `OnSegmentClosed` when configured for split recording (`MP4SplitSinkSettings` / `MPEGTSSplitSinkSettings`). The arguments carry the segment file path, fragment index, and timing (running time, plus start offset and duration on close) — so you can be notified when a segment file is finished and, for example, rename it to include its start/end time.
+* [Media Blocks SDK .Net] **Custom split-segment file names:** the same blocks add an `OnSegmentFileNameRequested` event, raised just before each new segment file is created, letting you supply a custom file name (for example one that embeds the segment start date/time). Leave it unset to keep the default name from the location pattern.
+* [Media Blocks SDK .Net] **New AI inference blocks:** `OnnxInferenceBlock` runs any ONNX Runtime model over the live video frames and raises an event with the raw model outputs, while `YOLOObjectDetectorBlock` performs YOLOv8/v11 object detection, draws bounding boxes and labels directly on the video (label text auto-scales to the frame resolution so it stays readable on 720p/1080p/4K, or pin a fixed size via `YoloDetectorSettings.LabelFontSize`), and raises a detections event (with class, confidence, and box for each object). Both support frame skipping to tune throughput. On Windows the package uses the DirectML ONNX Runtime build, so inference runs on any DirectX 12 GPU (NVIDIA, AMD, or Intel) out of the box; the execution provider defaults to `Auto`, which picks the fastest available backend (DirectML/CUDA/CoreML) and transparently falls back to the CPU. Use `OnnxInferenceEngine.GetAvailableProviders()` to detect what is available and the new `ActiveProvider` property on either block to see which provider engaged. The `VisioForge.DotNet.Core.ONNX` package targets the full SDK framework matrix (.NET Framework 4.6.1 through .NET 10); inference requires a 64-bit (x64 or ARM64) ONNX Runtime native build.
+
+## 2026.6.2
+
+* [Video Capture SDK .Net] Fixed KLV metadata progressively drifting out of sync with the video (about 2 seconds per source loop) on the receiving side when restreaming a looping KLV-bearing MPEG-TS via `UDP_FFMPEG_EXE`. KLV and video now stay aligned across source loop boundaries.
+* [Video Capture SDK .Net] Unity: new VideoCaptureCoreX samples — local webcam preview + MP4 recording (Windows, macOS) and IP/RTSP camera viewing (Windows, Android, macOS, iOS).
+* [Video Edit SDK .Net] Unity: new VideoEditCoreX sample — combine clips, apply effects, preview the timeline in Unity, and render to MP4.
+
 ## 2026.5.31
 
 * [Media Blocks SDK .Net] **New `UDPRAWSourceBlock`:** receives a live UDP stream (MPEG-TS, RTP, or raw elementary) and exposes the parsed, still-encoded media without decoding — ideal for recording or remuxing without re-encoding. MPEG-TS feeds are auto-detected; RTP and raw modes let you set the codec, RTP payload type, and a multicast address. It exposes all common video and audio codecs (video: H264, H265, VP8, VP9, AV1, MPEG-2, MJPEG; audio: AAC, MP3/MPEG audio, AC-3, Opus, FLAC); RTP can also carry audio on a separate port (`AudioPort` / `AudioCodec`). A codec without a dedicated parser is passed through unchanged rather than dropped, so a connected recorder/muxer is never starved.
 * [Demos] **New WPF "UDP RAW Capture Demo" (Media Blocks SDK .Net):** records a live UDP H264/H265 feed to MP4 files **without re-encoding**, with selectable transport (Auto / MPEG-TS / RTP / raw), starting a new file on a configurable interval and splitting on key-frames so no data is lost between files, while previewing the stream.
-
-## 2026.5.30
-
-* [Demos] **Unity RTSP sample — auto-reconnect:** the RTSP viewer sample now reconnects automatically after a connection error instead of giving up. On iOS this means the stream comes up on its own once the user grants the Local Network permission, with no app relaunch; it also recovers transparently from camera reboots / Wi-Fi drops.
-* [Media Blocks SDK .Net] **Unity iOS — fixed BufferSink / appsink pipelines:** video-to-texture playback (`BufferSinkBlock`) and any pipeline using `appsink` / `appsrc` now work on iOS. Previously building such a pipeline failed with *"Failed to build block 'BufferSink'"* because the GStreamer `app` plugin was not registered on the Unity iOS runtime; it is now registered during SDK init.
-* [Media Blocks SDK .Net] **Unity iOS — local-network access:** iOS builds now declare `NSLocalNetworkUsageDescription` in the generated Xcode project, so the app shows the one-time "allow local network access" prompt and can reach LAN cameras / media servers (RTSP, ONVIF, RTMP). Previously an iOS build connecting to a `192.168.x.x` source would silently hang in preroll (iOS blocks local-network access without this key); the prompt never appeared and no error was reported.
-* [Media Blocks SDK .Net] **Unity iOS — Xcode build fix:** the iOS `.unitypackage` flavor now embeds a flat-layout `GStreamerX.framework`, so building the generated Xcode project to a device no longer fails validation with *"Framework GStreamerX.framework/Frameworks/GStreamer.framework did not contain an Info.plist."* The redundant nested framework that triggered the error is no longer shipped.
-* [Media Blocks SDK .Net] **Unity iOS — automatic project setup:** the one-time setup prompt now also sets the iOS target's Api Compatibility Level to .NET Standard 2.1 (previously only Standalone and Android were configured), so an iOS-targeted project loads the SDK without a manual Player Settings change.
-* [Media Blocks SDK .Net] **Unity macOS Standalone — runtime fixes:** macOS Standalone players now reliably locate the bundled native runtime and initialize the SDK under **both** the Mono and IL2CPP scripting backends (Universal arm64 + x86_64), and RTSPS / HTTPS streams verify TLS in standalone builds. Resolves a set of issues that previously prevented a built macOS player from starting.
+* [Media Player SDK .Net] Unity: new MediaPlayerCoreX sample — play files and network URLs with seek, pause and volume, rendered into a Unity `Texture2D`.
 
 ## 2026.5.29
 
