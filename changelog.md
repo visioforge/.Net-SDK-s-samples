@@ -26,11 +26,60 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.6.20
+
+* [Media Blocks SDK .Net] `VideoSampleGrabberBlock` now works as a terminal block: if you leave its output unconnected (e.g. you only poll `GetLastFrameAsSKBitmap()` or handle `OnVideoFrameBuffer`), the block self-terminates so frames keep flowing. Previously a grabber with an unconnected output stalled after the first frame, so every snapshot returned the same initial image.
+* [Media Blocks SDK .Net] `VideoSampleGrabberBlock.GetLastFrameAsSKBitmap()` and `GetLastFrameAsBitmap()` now return `null` when no frame has been captured yet, instead of throwing a `NullReferenceException`.
+* [Media Blocks SDK .Net] Setting `VideoSampleGrabberBlock.SaveLastFrame = false` now discards the cached frame, so toggling it back on later never hands back a stale frame captured during an earlier session.
+* [Media Blocks SDK .Net] `KLVParser` now reads MISB KLV packets larger than 127 bytes. Standard MISB ST 0601 metadata uses BER long-form lengths, and the parser previously threw on the common 1- and 2-byte long-form lengths — so real-world packets failed to parse. All BER length forms are now decoded correctly.
+
+## 2026.6.19
+
+* [Video Edit SDK .Net] Fixed a long-standing intermittent hang on stop in `VideoEditCore` (DirectShow engine): when a conversion started with `StartAsync` finished, the graph teardown could deadlock, so `OnStop` never fired and the operation appeared to hang until the process was killed — most visible with Matroska (`.mkv`) output, but possible for any async conversion. Async conversions now stop reliably and `OnStop` is always raised.
+* [Media Blocks SDK .Net] Speech-to-text (`SpeechToTextBlock`) gains a lossless file-transcription mode: set `SpeechToTextSettings.BackpressureWhenBusy = true` to pace a file source to the transcription engine so no audio is dropped and the pipeline position tracks the transcription frontier — ideal for transcribing a file as fast as the engine allows without losing speech. The new `SpeechToTextBlock.RequestStop()` lets you stop promptly mid-file, and an `OnEndOfStream` event fires when transcription finishes.
+* [Media Blocks SDK .Net] NDI source enumeration on the desktop is now time-bounded: if NDI network discovery stalls, the enumeration call returns within a few seconds instead of blocking the caller indefinitely.
+
+## 2026.6.18
+
+* [Media Blocks SDK .Net] Fixed WMV/ASF output where the video stream was written with a roughly 1000-hour timestamp offset while audio started at zero — players saw a broken duration and the video and audio never shared a timeline. WMV/ASF files now have correctly aligned, overlapping video and audio timestamps.
+* [Media Blocks SDK .Net] Graceful stop now waits for end-of-stream to actually finalize the output file before tearing the pipeline down. Recordings made with slow software encoders or GPU-based pipelines (and any pipeline that needs a moment to drain) are now written completely instead of being left unreadable with a missing `moov` atom/index. Normal pipelines also stop a little faster.
+* [Media Blocks SDK .Net] Fixed MP4 recordings produced from a still/image source (`ImageVideoSourceBlock`, live mode) ending up unreadable ("moov atom not found") — a live image source now finalizes its file correctly on stop.
+* [Media Blocks SDK .Net] VP9 WebM output now uses a real-time-capable speed/quality default: `VP9EncoderSettings.CPUUsed` defaults to `4` instead of `0`. The previous slowest/highest-quality default could not keep up with a live source, so the recorded video track could be truncated to about a second while audio ran the full length. Set `CPUUsed = 0` to restore maximum quality for offline encoding.
+* [Media Blocks SDK .Net] The rav1e AV1 encoder (`RAV1EEncoderSettings`) now defaults to the fastest speed preset (`SpeedPreset = 10`) instead of `6`. rav1e is a quality-oriented, very slow software encoder; the previous default could encode well under real time (~1 fps at 720p), stalling live and short captures. Lower `SpeedPreset` for higher quality in offline encoding where throughput does not matter.
+
+## 2026.6.14
+
+* [Media Blocks SDK .Net] The AI blocks — `YOLOObjectDetectorBlock`, `OcrBlock`, object analytics, ANPR, `BackgroundRemovalBlock` (`VisioForge.DotNet.Core.AI`) and `SpeechToTextBlock` (`VisioForge.DotNet.Core.AI.Whisper`) — now build and run cross-platform on Linux, macOS, iOS, and Android, including .NET MAUI, in addition to Windows.
+* [Media Blocks SDK .Net] On-device speech-to-text (`SpeechToTextBlock`, Whisper + Silero VAD) now runs on iOS and Android.
+* [Demos] Added three .NET MAUI sample apps: **YOLO Object Detection**, **OCR Text Recognition**, and **Live Subtitles** (on-device Whisper speech-to-text). The existing Live Subtitles console sample is now cross-platform (Windows, Linux, macOS).
+* [Media Blocks SDK .Net] Fixed a crash that could occur when stopping live speech-to-text with `SpeechToTextBlock` configured with `EnableVad = false` (fixed-window mode) — stopping the pipeline at end-of-stream while a transcription was in progress could terminate the process. Transcription of the in-progress window now completes cleanly during shutdown.
+* [Media Blocks SDK .Net] `SpeechToTextSettings.FixedWindowSeconds` is now clamped to 1–30 s and `SileroVadSettings.MaxSpeechMs` no longer accepts "0 = unlimited" (a non-positive value falls back to the 15 s cap), so a single transcription window — and the time a stop waits for it to finish — stays bounded.
+
+## 2026.6.13
+
+* [Media Blocks SDK .Net] Added **live speech-to-text / subtitles** — the new `SpeechToTextBlock` (in the new `VisioForge.DotNet.Core.AI.Whisper` package) transcribes the audio stream in real time with Whisper (Whisper.net / GGML) on a background worker, gated by Silero VAD so silence is skipped and not mis-transcribed. Audio passes through unchanged. It raises `OnSpeechRecognized`, can auto-render captions onto video via `SubtitleRenderer` + `OverlayManagerBlock`, and can write `.srt` / `.vtt` side-car files. Runs fully on-device (CPU or NVIDIA CUDA); Whisper and Silero models are downloaded at runtime. Includes a new WPF Live Subtitles demo.
+* [Media Blocks SDK .Net] Added **AI background removal (matting)** — the new `BackgroundRemovalBlock` runs an ONNX segmentation model (for example MODNet) to estimate a per-pixel foreground mask and replaces the background in real time with a blur of the original, a solid color, a static image, or transparency. Includes a new WPF Background Removal demo. The background is composited on every frame, so running the model less often (frame skipping) lowers CPU/GPU load without flicker.
+
+## 2026.6.11
+
+* [Media Blocks SDK .Net] Added **Object Analytics** — multi-object tracking with stable IDs, directed tripwire line crossing (In/Out counts), and polygon zone occupancy on top of ONNX object detection. Includes a turnkey `ObjectAnalyticsBlock`, a pure C# analytics API (`ByteTracker`, `LineZone`, `PolygonZone`), overlay rendering with traces and counters, a new analytics mode in the YOLO Object Detection demo, and separate Tripwire and Polygon Zone demo applications.
+
+## 2026.6.8
+
+* [Video Capture SDK .Net] Updated the bundled FFmpeg DirectShow source and encoder filters to **FFmpeg 8.1.1**, with refreshed codec libraries (VP8/VP9, Opus, Vorbis, Speex, SRT) and current OpenSSL — bringing newer format support and upstream security and stability fixes to FFmpeg-based capture and output.
+
 ## 2026.6.7
 
 * [Media Blocks SDK .Net] Fixed a crash when reusing a `TSAnalyzerBlock` across runs: after the block is stopped, analyzing a second transport stream with the same instance in a new pipeline now works instead of failing during rebuild.
 * [Media Blocks SDK .Net] Fixed MPEG-TS output with KLV metadata aborting (no valid file produced) when a video frame arrived with an out-of-order/duplicate timestamp — the muxer now keeps the stream writable, so KLV-bearing transport streams record reliably.
 * [Core] Fixed native memory steadily growing while reading media information for many different files in sequence with `MediaInfoReaderX`; per-file discovery resources are now released after each read.
+
+## 2026.6.6
+
+* [Media Player SDK .Net] **New "Modern Player" MAUI demo.** A from-scratch cross-platform sample (Android, iOS, macCatalyst, Windows) built on `MediaPlayerCoreX` with a dark glassmorphism UI, a YouTube-style seek preview (a thumbnail popup follows the scrub bar — generated in the background from the opened file), a live video + audio effects drawer (brightness/contrast/saturation/hue, gamma, blur/sharpen, grayscale, edge, deinterlace, color presets, flip/rotate, 3D-LUT; plus gain, pitch, 10-band equalizer, reverb, echo, true-bass, and karaoke), frame snapshot, playback-speed control, and volume/mute.
+* [Media Player SDK .Net] [Media Blocks SDK .Net] Fixed opening local media files by absolute file path on Android, iOS, macOS, and Linux. A path starting with `/` (the form returned by the native file pickers) previously failed with a URI-format error; `MediaPlayerCoreX.OpenAsync(string)`, `MediaInfoReaderX`, and `UniversalSourceSettings.CreateAsync(string)` now open such files correctly. Windows paths were unaffected.
+* [Media Blocks SDK .Net] **OCR — text recognition:** new `OcrBlock` recognizes text in any video or image source using a multi-stage PaddleOCR (PP-OCRv5) ONNX pipeline — text detection, automatic 180° orientation handling, and text-line recognition. Runs on CPU or GPU (DirectML on Windows, CoreML on Apple, CUDA) and is fully cross-platform (Windows/Linux/macOS/Android). It raises the recognized regions per frame (text, confidence, and the text polygon) and can optionally draw the boxes and recognized text directly into the video. Works with the permissive Apache-2.0 PP-OCRv5 mobile models (100+ languages available); the models ship with the sample, not the package.
+* [Media Blocks SDK .Net] **ANPR — license plate recognition:** new `LicensePlateRecognizerBlock` reads vehicle number plates from a live stream or file using a specialized two-stage pipeline — a dedicated license-plate detector locates each plate, then a plate-specific OCR model (a global head covering the USA and 90+ countries, or a European head) reads its characters. Recognition runs on a background thread so live video never stalls; recognized plates (text, confidence, bounding box) are raised per frame and optionally drawn over the video. Cross-platform and GPU-accelerated (DirectML / CUDA / CoreML). The MIT-licensed models ship with the sample, not the package.
 
 ## 2026.6.4
 

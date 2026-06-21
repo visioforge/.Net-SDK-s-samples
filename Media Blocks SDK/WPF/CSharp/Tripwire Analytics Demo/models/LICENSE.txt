@@ -1,0 +1,20 @@
+ONNX Models — License Information
+==================================
+
+All models in this release are Apache-2.0 licensed.
+
+1. YOLOX Nano (yolox_nano.onnx)
+   Source:  Megvii / onnx-community
+   License: Apache-2.0
+   URL:     https://huggingface.co/onnx-community/YOLOX-Nano
+
+2. RT-DETR R18vd (rtdetr_r18vd_fp16.onnx)
+   Source:  Baidu / onnx-community
+   License: Apache-2.0
+   URL:     https://huggingface.co/onnx-community/RT-DETR-R18vd
+
+These models are NOT from Ultralytics (AGPL). They can be used in
+closed-source commercial products without copyleft obligations.
+
+Apache License 2.0 summary:
+https://www.apache.org/licenses/LICENSE-2.0

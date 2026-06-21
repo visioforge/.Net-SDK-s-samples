@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework Condition="$([MSBuild]::IsOSPlatform('Windows'))">net10.0-windows</TargetFramework>
+    <TargetFramework Condition="$([MSBuild]::IsOSPlatform('OSX'))">net10.0-macos</TargetFramework>
+    <TargetFramework Condition="$([MSBuild]::IsOSPlatform('Linux'))">net8.0</TargetFramework>
+    <RootNamespace>LiveSubtitlesConsole</RootNamespace>
+    <!-- ONNX/Whisper natives ship win-x64/linux-x64 but osx-arm64 only (no Intel macOS), so x64 is pinned off macOS. -->
+    <PlatformTarget Condition="!$([MSBuild]::IsOSPlatform('OSX'))">x64</PlatformTarget>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.21" />
+    <PackageReference Include="VisioForge.DotNet.Core.AI.Whisper" Version="2026.6.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Whisper.net is referenced for the optional GGML model downloader (WhisperGgmlDownloader). -->
+    <PackageReference Include="Whisper.net" Version="1.9.1" />
+  </ItemGroup>
+  <!-- Platform native runtimes (GStreamer Core + libav), selected by build host. -->
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.4.29" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.4.29" />
+  </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.9.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.macOS" Version="2025.11.0" />
+  </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Linux'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Linux.x64" Version="2025.9.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Linux.x64" Version="2025.11.0" />
+  </ItemGroup>
+</Project>

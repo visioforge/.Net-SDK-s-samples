@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OcrTextRecognitionMB.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <!-- Video on top, controls below — separate Grid rows so the panel never overlaps the video. -->
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <my:VideoView
+                Grid.Row="0"
+                x:Name="videoView"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill" />
+
+        <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e" Padding="8" Spacing="6">
+
+            <Label x:Name="lbStatus" Text="Text: -" FontSize="14" FontAttributes="Bold" TextColor="#4CAF50" LineBreakMode="TailTruncation" />
+
+            <!-- Region count + controls row -->
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="lbCount" Grid.Column="0" Text="Regions: 0" VerticalOptions="Center" FontSize="12" TextColor="#888" />
+                <Button x:Name="btCamera" Grid.Column="1" Text="SELECT CAMERA" Clicked="btCamera_Clicked" />
+                <Button x:Name="btStartStop" Grid.Column="2" Text="START" Clicked="btStartStop_Clicked" BackgroundColor="#4CAF50" />
+            </Grid>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>
