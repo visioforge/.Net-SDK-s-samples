@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>29.0</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationId>com.visioforge.audioplaybackcapturevcx</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <RootNamespace>Audio_Playback_Capture_VCX</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="2026.4.18.0" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.6.21" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
+  </ItemGroup>
+</Project>
