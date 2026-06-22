@@ -37,7 +37,7 @@
     <MtouchInterpreter>VisioForge.Core.dll</MtouchInterpreter>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.8" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.22" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />

@@ -1,0 +1,174 @@
+<Window x:Class="Polygon_Zone_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net — Polygon Zone Demo" Height="560" Width="920"
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="440" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <wpf:VideoView Grid.Column="1" x:Name="VideoView1" HorizontalAlignment="Stretch"
+                       VerticalAlignment="Top" Height="380" Margin="10,10,10,0" Width="460"/>
+
+        <TabControl Grid.Column="0" Margin="10,10,0,10" VerticalAlignment="Stretch">
+            <TabItem Header="Source">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <RadioButton Content="Webcam" x:Name="rbWebcam" IsChecked="True" Checked="rbSource_Checked"/>
+                    <RadioButton Content="Video file" x:Name="rbFile" Margin="0,5,0,0" Checked="rbSource_Checked"/>
+                    <RadioButton Content="RTSP / IP camera" x:Name="rbRTSP" Margin="0,5,0,0" Checked="rbSource_Checked"/>
+
+                    <StackPanel x:Name="pnlWebcam" Orientation="Vertical" Margin="0,10,0,0">
+                        <Label Content="Video input device"/>
+                        <ComboBox x:Name="cbVideoInput" Width="400" SelectionChanged="cbVideoInput_SelectionChanged"/>
+                        <Label Content="Video format and frame rate"/>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox x:Name="cbVideoFormat" Width="310" SelectionChanged="cbVideoFormat_SelectionChanged"/>
+                            <ComboBox x:Name="cbVideoFrameRate" Margin="10,0,0,0" Width="55"/>
+                            <Label Content="fps"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="pnlFile" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
+                        <Label Content="Video file"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="edVideoFile" Width="340" VerticalContentAlignment="Center"/>
+                            <Button x:Name="btSelectVideoFile" Content="..." Width="40" Margin="10,0,0,0" Click="btSelectVideoFile_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="pnlRTSP" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
+                        <Label Content="RTSP URL"/>
+                        <TextBox x:Name="edRTSPURL" Width="400" VerticalContentAlignment="Center" Text="rtsp://"/>
+                        <Label Content="Login" Margin="0,5,0,0"/>
+                        <TextBox x:Name="edRTSPLogin" Width="400"/>
+                        <Label Content="Password" Margin="0,5,0,0"/>
+                        <PasswordBox x:Name="edRTSPPassword" Width="400"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Detector">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Model"/>
+                    <ComboBox x:Name="cbModel" Width="400" SelectionChanged="cbModel_SelectionChanged"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Button x:Name="btDownloadModel" Content="Download" Width="80" Click="btDownloadModel_Click" Visibility="Collapsed"/>
+                        <Button x:Name="btSelectModel" Content="Browse..." Width="80" Click="btSelectModel_Click" Visibility="Collapsed"/>
+                        <TextBox x:Name="edModelFile" Width="310" VerticalContentAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label Content="Confidence" Width="80"/>
+                        <TextBox x:Name="edConfidence" Text="0.15" Width="60" VerticalContentAlignment="Center"/>
+                        <Label Content="Frames skip" Width="70"/>
+                        <TextBox x:Name="edFramesToSkip" Text="0" Width="50" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <GroupBox Header="Filter by class" Margin="0,8,0,0">
+                        <WrapPanel Orientation="Horizontal">
+                            <CheckBox x:Name="cbClassPerson" Content="Person" IsChecked="True" Margin="0,0,10,3"/>
+                            <CheckBox x:Name="cbClassBicycle" Content="Bicycle" Margin="0,0,10,3"/>
+                            <CheckBox x:Name="cbClassCar" Content="Car" IsChecked="True" Margin="0,0,10,3"/>
+                            <CheckBox x:Name="cbClassMotorcycle" Content="Motorcycle" Margin="0,0,10,3"/>
+                            <CheckBox x:Name="cbClassBus" Content="Bus" Margin="0,0,10,3"/>
+                            <CheckBox x:Name="cbClassTruck" Content="Truck" Margin="0,0,10,3"/>
+                            <CheckBox x:Name="cbClassDog" Content="Dog" Margin="0,0,10,3"/>
+                            <CheckBox x:Name="cbClassCat" Content="Cat" Margin="0,0,10,3"/>
+                        </WrapPanel>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Polygon Zones">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+
+                        <!-- Zone 1: central rectangle -->
+                        <GroupBox Header="Zone 1 — central area">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="ID" Width="30"/>
+                                    <TextBox x:Name="edZone1Id" Text="zone1" Width="80"/>
+                                    <Label Content="Enabled" Width="50"/>
+                                    <CheckBox x:Name="cbZone1Enabled" IsChecked="True"/>
+                                </StackPanel>
+                                <Label Content="Points (X,Y  —  0..1 per line):" Margin="0,5,0,0"/>
+                                <TextBox x:Name="edZone1Points" Height="60" Width="400" AcceptsReturn="True"
+                                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                                         Text="0.2,0.2&#x0a;0.8,0.2&#x0a;0.8,0.8&#x0a;0.2,0.8"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <Label Content="Current:" Width="55"/>
+                                    <TextBlock x:Name="lbZone1Current" Text="0" Width="40" FontWeight="Bold" Foreground="Blue"/>
+                                    <Label Content="Entered:" Width="55"/>
+                                    <TextBlock x:Name="lbZone1Entered" Text="0" Width="40" FontWeight="Bold" Foreground="Green"/>
+                                    <Label Content="Exited:" Width="45"/>
+                                    <TextBlock x:Name="lbZone1Exited" Text="0" Width="40" FontWeight="Bold" Foreground="Red"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- Zone 2: upper-right triangle -->
+                        <GroupBox Header="Zone 2 — upper-right triangle" Margin="0,10,0,0">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="ID" Width="30"/>
+                                    <TextBox x:Name="edZone2Id" Text="zone2" Width="80"/>
+                                    <Label Content="Enabled" Width="50"/>
+                                    <CheckBox x:Name="cbZone2Enabled" IsChecked="True"/>
+                                </StackPanel>
+                                <Label Content="Points (X,Y  —  0..1 per line):" Margin="0,5,0,0"/>
+                                <TextBox x:Name="edZone2Points" Height="60" Width="400" AcceptsReturn="True"
+                                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                                         Text="0.5,0.0&#x0a;0.95,0.1&#x0a;0.6,0.5"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <Label Content="Current:" Width="55"/>
+                                    <TextBlock x:Name="lbZone2Current" Text="0" Width="40" FontWeight="Bold" Foreground="Blue"/>
+                                    <Label Content="Entered:" Width="55"/>
+                                    <TextBlock x:Name="lbZone2Entered" Text="0" Width="40" FontWeight="Bold" Foreground="Green"/>
+                                    <Label Content="Exited:" Width="45"/>
+                                    <TextBlock x:Name="lbZone2Exited" Text="0" Width="40" FontWeight="Bold" Foreground="Red"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <!-- Overlay toggles -->
+                        <GroupBox Header="Overlay" Margin="0,10,0,0">
+                            <StackPanel Orientation="Vertical">
+                                <CheckBox x:Name="cbDrawBoxes" Content="Draw boxes" IsChecked="True"/>
+                                <CheckBox x:Name="cbDrawLabels" Content="Draw labels + confidence" IsChecked="True"/>
+                                <CheckBox x:Name="cbDrawTrackIds" Content="Draw track IDs" IsChecked="True"/>
+                                <CheckBox x:Name="cbDrawTraces" Content="Draw traces" IsChecked="True"/>
+                                <CheckBox x:Name="cbDrawZones" Content="Draw polygon zones" IsChecked="True"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Zone Events">
+                <ListBox x:Name="lbZoneEvents" Margin="10"/>
+            </TabItem>
+
+            <TabItem Header="Log">
+                <TextBox x:Name="mmLog" Margin="10" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                         AcceptsReturn="True" IsReadOnly="True"/>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left"
+                    VerticalAlignment="Top" Margin="10,400,0,0">
+            <Button x:Name="btStart" Content="Start" Width="60" Click="btStart_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="60" Margin="10,0,0,0" Click="btStop_Click" IsEnabled="False"/>
+        </StackPanel>
+
+        <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top"
+                   Margin="0,400,10,0" Text="00:00:00" x:Name="lbTime"/>
+    </Grid>
+</Window>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LiveSubtitlesMB.MainPage"
+             BackgroundColor="#1e1e1e">
+
+    <Grid Margin="16" RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <Label Grid.Row="0"
+               Text="LIVE SUBTITLES"
+               HorizontalOptions="Center"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="White" />
+
+        <!-- Status + busy indicator -->
+        <StackLayout Grid.Row="1" HorizontalOptions="Center" Spacing="6">
+            <Label x:Name="lbStatus"
+                   Text="Pick a media file to transcribe on-device with Whisper."
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   FontSize="13"
+                   TextColor="#888" />
+            <ActivityIndicator x:Name="aiBusy"
+                               IsRunning="False"
+                               IsVisible="False"
+                               Color="#4CAF50"
+                               HorizontalOptions="Center" />
+            <ProgressBar x:Name="pbProgress"
+                         Progress="0"
+                         ProgressColor="#4CAF50"
+                         IsVisible="False"
+                         WidthRequest="320"
+                         HorizontalOptions="Center" />
+            <Label x:Name="lbTime"
+                   Text=""
+                   FontSize="11"
+                   TextColor="#888"
+                   HorizontalOptions="Center"
+                   IsVisible="False" />
+        </StackLayout>
+
+        <!-- Control -->
+        <Button Grid.Row="2"
+                x:Name="btTranscribe"
+                Text="PICK FILE &amp; TRANSCRIBE"
+                Clicked="btTranscribe_Clicked"
+                BackgroundColor="#4CAF50" />
+
+        <!-- Recognized subtitle lines -->
+        <ScrollView Grid.Row="3" x:Name="svSubtitles" Background="#2d2d2d" Padding="12">
+            <Label x:Name="lbSubtitles"
+                   Text=""
+                   FontSize="15"
+                   LineHeight="1.4"
+                   TextColor="White" />
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

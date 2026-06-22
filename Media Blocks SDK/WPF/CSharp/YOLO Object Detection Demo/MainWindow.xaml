@@ -1,0 +1,199 @@
+<Window x:Class="YOLO_Object_Detection_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YOLO_Object_Detection_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - YOLO Object Detection Demo" Height="520" Width="900" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="420" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <wpf:VideoView Grid.Column="1" x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="360" Margin="10,10,10,0" Width="450"/>
+
+        <TabControl Grid.Column="0" Margin="10,10,0,10" VerticalAlignment="Stretch">
+            <TabItem Header="Source">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <RadioButton Content="Webcam" x:Name="rbWebcam" IsChecked="True" Checked="rbSource_Checked" />
+                    <RadioButton Content="Video file" x:Name="rbFile" Margin="0,5,0,0" Checked="rbSource_Checked" />
+                    <RadioButton Content="RTSP / IP camera" x:Name="rbRTSP" Margin="0,5,0,0" Checked="rbSource_Checked" />
+
+                    <StackPanel x:Name="pnlWebcam" Orientation="Vertical" Margin="0,10,0,0">
+                        <Label Content="Video input device" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="cbVideoInput" HorizontalAlignment="Left" VerticalAlignment="Top" Width="380" SelectionChanged="cbVideoInput_SelectionChanged"/>
+                        <Label Content="Video format and frame rate" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox x:Name="cbVideoFormat" Width="290" SelectionChanged="cbVideoFormat_SelectionChanged"/>
+                            <ComboBox x:Name="cbVideoFrameRate" Margin="10,0,0,0" Width="55"/>
+                            <Label Content="fps" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="pnlFile" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
+                        <Label Content="Video file" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="edVideoFile" Width="320" VerticalContentAlignment="Center"/>
+                            <Button x:Name="btSelectVideoFile" Content="..." Width="40" Margin="10,0,0,0" Click="btSelectVideoFile_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="pnlRTSP" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
+                        <Label Content="RTSP URL" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="edRTSPURL" Width="380" VerticalContentAlignment="Center" Text="rtsp://"/>
+                        <Label Content="Login" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                        <TextBox x:Name="edRTSPLogin" Width="380" VerticalContentAlignment="Center"/>
+                        <Label Content="Password" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                        <PasswordBox x:Name="edRTSPPassword" Width="380"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Detector">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Model" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbModel" Width="380" HorizontalAlignment="Left" SelectionChanged="cbModel_SelectionChanged"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Button x:Name="btDownloadModel" Content="Download" Width="80" Click="btDownloadModel_Click" Visibility="Collapsed"/>
+                        <Button x:Name="btSelectModel" Content="Browse..." Width="80" Click="btSelectModel_Click" Visibility="Collapsed"/>
+                        <TextBox x:Name="edModelFile" Width="290" VerticalContentAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+
+                    <CheckBox x:Name="cbDrawDetections" Content="Draw detections on video" IsChecked="True" Margin="0,10,0,0"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label Content="Confidence threshold" Width="160"/>
+                        <TextBox x:Name="edConfidence" Text="0.15" Width="60" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Analytics">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical" Margin="10,10,0,10">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <Label Content="Mode" Width="80"/>
+                            <ComboBox x:Name="cbAnalyticsMode" Width="200" SelectedIndex="0" SelectionChanged="cbAnalyticsMode_SelectionChanged">
+                                <ComboBoxItem Content="Object detection" Tag="detection"/>
+                                <ComboBoxItem Content="Object analytics" Tag="analytics"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <Separator Margin="0,5"/>
+
+                        <!-- Analytics-specific controls (hidden in detection mode) -->
+                        <StackPanel x:Name="pnlAnalytics" Visibility="Collapsed">
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                <Label Content="Frames to skip" Width="120"/>
+                                <TextBox x:Name="edFramesToSkip" Text="0" Width="60" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                <Label Content="Included class IDs" Width="120"/>
+                                <TextBox x:Name="edIncludedClassIds" Text="0" Width="200" VerticalContentAlignment="Center" ToolTip="Comma-separated COCO class IDs, e.g. 0 for person. Empty = all classes."/>
+                            </StackPanel>
+
+                            <Separator Margin="0,8"/>
+
+                            <!-- Line settings -->
+                            <CheckBox x:Name="cbLineEnabled" Content="Line (tripwire)" Margin="0,5,0,2"/>
+                            <Grid Margin="20,2,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Label Content="ID" Grid.Row="0" Grid.Column="0"/>
+                                <TextBox x:Name="edLineId" Text="door" Grid.Row="0" Grid.Column="1" Width="120" HorizontalAlignment="Left"/>
+
+                                <Label Content="X1, Y1" Grid.Row="1" Grid.Column="0"/>
+                                <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                                    <TextBox x:Name="edLineX1" Text="100" Width="60" VerticalContentAlignment="Center"/>
+                                    <TextBox x:Name="edLineY1" Text="240" Width="60" VerticalContentAlignment="Center" Margin="5,0,0,0"/>
+                                </StackPanel>
+
+                                <Label Content="X2, Y2" Grid.Row="2" Grid.Column="0"/>
+                                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+                                    <TextBox x:Name="edLineX2" Text="540" Width="60" VerticalContentAlignment="Center"/>
+                                    <TextBox x:Name="edLineY2" Text="240" Width="60" VerticalContentAlignment="Center" Margin="5,0,0,0"/>
+                                </StackPanel>
+
+                                <Label Content="Deadband" Grid.Row="3" Grid.Column="0"/>
+                                <TextBox x:Name="edLineDeadband" Text="2" Grid.Row="3" Grid.Column="1" Width="60" HorizontalAlignment="Left"/>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1" Margin="0,5,0,0">
+                                    <Label Content="In:" Padding="0,5"/>
+                                    <Label x:Name="lbLineIn" Content="0" Padding="5,5" FontWeight="Bold"/>
+                                    <Label Content="Out:" Padding="10,5,0,5"/>
+                                    <Label x:Name="lbLineOut" Content="0" Padding="5,5" FontWeight="Bold"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <Separator Margin="0,8"/>
+
+                            <!-- Polygon zone settings -->
+                            <CheckBox x:Name="cbZoneEnabled" Content="Polygon zone" Margin="0,5,0,2"/>
+                            <Grid Margin="20,2,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Label Content="ID" Grid.Row="0" Grid.Column="0"/>
+                                <TextBox x:Name="edZoneId" Text="area" Grid.Row="0" Grid.Column="1" Width="120" HorizontalAlignment="Left"/>
+
+                                <Label Content="Points" Grid.Row="1" Grid.Column="0"/>
+                                <TextBox x:Name="edZonePoints" Text="100,100; 540,100; 320,400" Grid.Row="1" Grid.Column="1" Width="300" HorizontalAlignment="Left" ToolTip="x,y pairs separated by semicolons. At least 3 points."/>
+                            </Grid>
+                            <StackPanel Orientation="Horizontal" Margin="80,5,0,0">
+                                <Label Content="Current:" Padding="0,5"/>
+                                <Label x:Name="lbZoneCount" Content="0" Padding="5,5" FontWeight="Bold"/>
+                            </StackPanel>
+
+                            <Separator Margin="0,8"/>
+
+                            <!-- Overlay toggles -->
+                            <Label Content="Overlay" FontWeight="Bold" Margin="0,5,0,2"/>
+                            <CheckBox x:Name="cbDrawBoxesA" Content="Draw boxes" IsChecked="True" Margin="20,2,0,0"/>
+                            <CheckBox x:Name="cbDrawLabelsA" Content="Draw labels" IsChecked="True" Margin="20,2,0,0"/>
+                            <CheckBox x:Name="cbDrawTrackIds" Content="Draw track IDs" IsChecked="True" Margin="20,2,0,0"/>
+                            <CheckBox x:Name="cbDrawTracesA" Content="Draw traces" IsChecked="True" Margin="20,2,0,0"/>
+                            <CheckBox x:Name="cbDrawLines" Content="Draw line" IsChecked="True" Margin="20,2,0,0"/>
+                            <CheckBox x:Name="cbDrawZones" Content="Draw polygon" IsChecked="True" Margin="20,2,0,0"/>
+                            <CheckBox x:Name="cbDrawCounters" Content="Draw counters" IsChecked="True" Margin="20,2,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Detections">
+                <ListBox x:Name="lbDetections" Margin="10"/>
+            </TabItem>
+
+            <TabItem Header="Log">
+                <TextBox x:Name="mmLog" Margin="10" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" IsReadOnly="True"/>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,380,0,0">
+            <Button x:Name="btStart" Content="Start" Width="60" Click="btStart_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="60" Margin="10,0,0,0" Click="btStop_Click" IsEnabled="False"/>
+        </StackPanel>
+
+        <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,380,10,0" Text="00:00:00" x:Name="lbTime"/>
+    </Grid>
+</Window>
