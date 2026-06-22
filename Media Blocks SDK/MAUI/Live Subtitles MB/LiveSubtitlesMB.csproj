@@ -88,8 +88,8 @@
     <PackageReference Include="Whisper.net" Version="1.9.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.6.21" />
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.21" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.6.22" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.22" />
     <PackageReference Include="VisioForge.DotNet.Core.AI.Whisper" Version="2026.6.8" />
   </ItemGroup>
   <ProjectExtensions>
