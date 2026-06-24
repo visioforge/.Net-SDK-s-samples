@@ -65,64 +65,47 @@
                         Margin="5, 0, 5, 0" />
                 </Grid>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                <!-- Playback buttons fill the full width so nothing overflows on a narrow phone -->
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8" Margin="16,4,16,0">
+                    <Button
+                        Grid.Column="0"
+                        x:Name="btOpen"
+                        Text="OPEN FILE"
+                        HorizontalOptions="Fill"
+                        Clicked="btOpen_Clicked" />
 
-                    <StackLayout
+                    <Button
                         Grid.Column="1"
-                        Orientation="Horizontal"
-                        HorizontalOptions="Center"
-                        Margin="16, 0, 5, 0"
-                        VerticalOptions="Center">
+                        x:Name="btPlayPause"
+                        Text="PLAY"
+                        HorizontalOptions="Fill"
+                        Clicked="btPlayPause_Clicked" />
 
-                        <Button
-                            x:Name="btOpen"
-                            Text="OPEN FILE"
-                            Margin="5"
-                            VerticalOptions="Center"
-                            Clicked="btOpen_Clicked" />
-
-                        <Button
-                            x:Name="btPlayPause"
-                            Text="PLAY"
-                            Margin="5"
-                            Clicked="btPlayPause_Clicked" />
-
-                        <Button
-                            x:Name="btStop"
-                            Text="STOP"
-                            Margin="5"
-                            Clicked="btStop_Clicked" />
-
-                    </StackLayout>
-
-                    <StackLayout
+                    <Button
                         Grid.Column="2"
-                        Orientation="Horizontal"
-                        HorizontalOptions="Start"
-                        Margin="16, 0, 5, 5"
-                        VerticalOptions="Center">
+                        x:Name="btStop"
+                        Text="STOP"
+                        HorizontalOptions="Fill"
+                        Clicked="btStop_Clicked" />
+                </Grid>
 
-                        <Label
-                            Text="Volume"
-                            TextColor="White"
-                            VerticalOptions="Center" />
+                <!-- Volume label + slider on their own full-width row -->
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10" Margin="16,4,16,12">
+                    <Label
+                        Grid.Column="0"
+                        Text="Volume"
+                        TextColor="White"
+                        VerticalOptions="Center" />
 
-                        <Slider
-                            x:Name="slVolume"
-                            HorizontalOptions="Fill"
-                            Margin="15, 0, 5, 0"
-                            Minimum="0"
-                            Maximum="100"
-                            Value="25"
-                            WidthRequest="150"
-                            VerticalOptions="Center"
-                            ValueChanged="slVolume_ValueChanged" />
-                    </StackLayout>
+                    <Slider
+                        Grid.Column="1"
+                        x:Name="slVolume"
+                        HorizontalOptions="Fill"
+                        Minimum="0"
+                        Maximum="100"
+                        Value="25"
+                        VerticalOptions="Center"
+                        ValueChanged="slVolume_ValueChanged" />
                 </Grid>
             </StackLayout>
         </Grid>

@@ -238,6 +238,8 @@ namespace NDIPlayer
                     return;
                 }
 
+                settings.MaxPullFps = 30;
+
                 _pipeline = new MediaBlocksPipeline();
                 _pipeline.OnError += Pipeline_OnError;
 
@@ -247,8 +249,13 @@ namespace NDIPlayer
                 _videoRenderer = new VideoRendererBlock(_pipeline, vv)
                 {
                     IsLive = true,
-                    IsSync = false,
+                    IsSync = false
                 };
+
+#if ANDROID
+
+                _videoRenderer.ResizeToScreen = true;
+#endif
 
                 _pipeline.Connect(_ndiSource.VideoOutput, _videoRenderer.Input);
 

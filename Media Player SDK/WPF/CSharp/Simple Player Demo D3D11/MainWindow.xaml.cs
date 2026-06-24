@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
 using VisioForge.Core.MediaPlayer;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
@@ -234,31 +235,40 @@ namespace Simple_Player_Demo_D3D11
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // async void Window_Closing returns to the WPF Close pump at the
-            // first await, so the window tears down BEFORE DestroyEngineAsync
-            // finishes — leaving the engine alive and racing the dispatcher
-            // shutdown. Pattern: short-circuit the second close, cancel the
-            // first close, drive teardown to completion, then call Close()
-            // synchronously. The synchronous Close re-enters this handler with
-            // _isClosing == true and falls through.
+            // first await, so the window would tear down BEFORE
+            // DestroyEngineAsync finishes — leaving the engine alive and
+            // racing the dispatcher shutdown. Pattern: short-circuit the
+            // second close, cancel the first close, drive teardown to
+            // completion, then re-issue Close() on a fresh dispatcher tick
+            // (see the BeginInvoke at the end of this method). The
+            // re-issued Close re-enters this handler with _isClosing == true
+            // and falls through. The dispatcher tick is required because
+            // calling Close() directly from the async continuation re-enters
+            // WPF's InternalClose while its own closing pipeline is still
+            // unwinding, tripping the VerifyNotClosing guard and throwing
+            // InvalidOperationException.
             if (_isClosing) return;
 
             e.Cancel = true;
             _isClosing = true;
 
-            // _timer is created in Window_Loaded; null-conditional matches the
-            // sibling X demo and tolerates a window closing before Loaded fired.
-            _timer?.Stop();
-            await DestroyEngineAsync();
+            try
+            {
+                // _timer is created in Window_Loaded; null-conditional matches
+                // the sibling X demo and tolerates a window closing before
+                // Loaded fired.
+                _timer?.Stop();
+                await DestroyEngineAsync();
+            }
+            catch (Exception ex)
+            {
+                Log("closing: " + ex.Message);
+            }
 
-            // Defer the re-close to a fresh dispatcher tick so WPF's
-            // closing pipeline (which produced this event) has fully
-            // unwound before we re-enter InternalClose. Calling Close()
-            // directly from the async-continuation hit VerifyNotClosing's
-            // "Window is closing" guard on .NET 10 WPF and threw
-            // InvalidOperationException. _isClosing is already set, so
-            // the re-entered Window_Closing short-circuits above and the
-            // close proceeds normally.
-            Dispatcher.BeginInvoke(new Action(Close));
+            // BeginInvoke is OUTSIDE the try so a teardown exception still
+            // re-issues the close — otherwise e.Cancel = true + _isClosing =
+            // true would orphan the window (the close button stops working).
+            Dispatcher.BeginInvoke((Action)Close, DispatcherPriority.Background);
         }
 
         private void Log(string msg)

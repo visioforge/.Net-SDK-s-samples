@@ -2,6 +2,7 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:vf="using:VisioForge.Core.UI.Uno"
+      xmlns:toolkit="using:Uno.UI.Toolkit"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
   <Grid>
@@ -20,7 +21,8 @@
     <!-- Controls Panel -->
     <StackPanel Grid.Row="1"
                 Background="#1e1e1e"
-                Padding="16">
+                Padding="16"
+                toolkit:VisibleBoundsPadding.PaddingMask="Bottom">
 
       <!-- Seeking Slider -->
       <Slider x:Name="slSeeking"
@@ -79,7 +81,7 @@
         <TextBox x:Name="txtMediaUrl"
                  Grid.Column="1"
                  PlaceholderText="Enter media URL or file path..."
-                 Text="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                 Text="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
                  VerticalAlignment="Center"
                  Margin="0,0,8,0" />
 

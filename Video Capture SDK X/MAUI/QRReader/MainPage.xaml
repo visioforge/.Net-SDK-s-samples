@@ -4,11 +4,11 @@
              x:Class="QRReader.MainPage"
              xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
 
-    <ScrollView>
-        <!--WidthRequest="1280" HeightRequest="720"-->
-        <Grid RowDefinitions="Auto,*">
+    <!-- No ScrollView: a camera page should fill the viewport so the preview takes the star row.
+         A ScrollView gives the star row infinite height and breaks the live-preview sizing. -->
+    <Grid RowDefinitions="Auto,*">
 
-            <StackLayout Grid.Row="0" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
+        <StackLayout Grid.Row="0" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -50,8 +50,6 @@
                 x:Name="videoView"
                 Margin="0" 
                 Background="Black"/>
-        </Grid>
-    </ScrollView>
-
+    </Grid>
 
 </ContentPage>

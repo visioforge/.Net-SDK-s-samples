@@ -39,6 +39,11 @@ namespace BarcodeReaderMB
         // the first attempt's blocks. 0 = free, 1 = busy; cleared in a finally.
         private int _startStopBusy;
 
+        // Serializes teardown: a user STOP tap and page-close CleanupAsync can both reach StopScanningAsync
+        // (CleanupAsync is not gated by _startStopBusy), so the gate + the _pipeline-null first-caller guard
+        // prevent a double StopAsync/DisposeAsync on the same pipeline. Mirrors the other MAUI AI demos.
+        private readonly SemaphoreSlim _teardownGate = new SemaphoreSlim(1, 1);
+
         public MainPage()
         {
             InitializeComponent();
@@ -212,9 +217,18 @@ namespace BarcodeReaderMB
 
         private async Task StopScanningAsync(bool updateUI = true)
         {
+            // Serialize teardown so a user STOP tap and page-close CleanupAsync (which is not gated by
+            // _startStopBusy) never double-stop/dispose the same pipeline. The first caller nulls _pipeline;
+            // every later caller returns as a no-op while still serializing behind the gate.
+            await _teardownGate.WaitAsync();
             try
             {
-                if (_pipeline != null)
+                if (_pipeline == null)
+                {
+                    return;
+                }
+
+                try
                 {
                     await _pipeline.StopAsync();
 
@@ -223,10 +237,15 @@ namespace BarcodeReaderMB
                         _barcodeDetector.OnBarcodeDetected -= BarcodeDetector_OnBarcodeDetected;
                     }
 
-                    _pipeline.ClearBlocks();
+                    // DisposeAsync disposes every connected block (camera source, detector, renderer);
+                    // do NOT ClearBlocks first or the block list is emptied before disposal.
                     _pipeline.OnError -= Pipeline_OnError;
-                    _pipeline.Dispose();
+                    await _pipeline.DisposeAsync();
                     _pipeline = null;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error stopping: {ex.Message}");
                 }
 
                 _isRunning = false;
@@ -240,9 +259,9 @@ namespace BarcodeReaderMB
                     });
                 }
             }
-            catch (Exception ex)
+            finally
             {
-                Debug.WriteLine($"Error stopping: {ex.Message}");
+                _teardownGate.Release();
             }
         }
 

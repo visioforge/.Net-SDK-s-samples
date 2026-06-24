@@ -24,10 +24,6 @@ namespace CustomGrayscaleBlockSample
         /// MediaBlockType.Custom is the catch-all type used by user-authored
         /// blocks; the SDK does not require a dedicated enum value per block.
         /// </summary>
-        /// <summary>
-        /// MediaBlockType.Custom is the catch-all type used by user-authored
-        /// blocks; the SDK does not require a dedicated enum value per block.
-        /// </summary>
         public override MediaBlockType Type => MediaBlockType.Custom;
 
         /// <inheritdoc/>
@@ -86,8 +82,6 @@ namespace CustomGrayscaleBlockSample
                 return true;
             }
 
-            _isBuilt = true;
-
             _element = ElementFactory.Make("videobalance", $"videobalance_{Guid.NewGuid():N}");
             if (_element == null)
             {
@@ -106,12 +100,16 @@ namespace CustomGrayscaleBlockSample
             if (sink == null || src == null)
             {
                 Context?.Error(TAG, "Build", "Unable to retrieve videobalance static pads.");
+                _pipelineCtx.Pipeline.Remove(_element);
+                _element.Dispose();
+                _element = null;
                 return false;
             }
 
             _inputPad.SetInternalPad(sink);
             _outputPad.SetInternalPad(src);
 
+            _isBuilt = true;
             return true;
         }
 

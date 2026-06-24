@@ -849,6 +849,11 @@ namespace NDIPlayer
                 // throughput.
                 settings.MaxPullFps = 0;
 
+                // Request software (full-bandwidth NDI / SpeedHQ) encoding to avoid
+                // "Video decoder not found" on devices without H.264/HEVC hardware decoder.
+                // Change to NDIVideoCodecHint.Hardware for HX2/HX3 (lower bandwidth).
+                settings.VideoCodecHint = NDIVideoCodecHint.Software;
+
                 // Build the pipeline + blocks into LOCAL variables first; only
                 // publish to instance fields after Connect succeeds. Previously
                 // we assigned _pipeline / _ndiSource / _videoRenderer / _audioRenderer

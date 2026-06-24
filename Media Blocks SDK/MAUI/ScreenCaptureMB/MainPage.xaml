@@ -16,6 +16,7 @@
              Grid.Row="1"
              Orientation="Horizontal"
              HorizontalOptions="Center"
+             BackgroundColor="#1e1e1e"
              Padding="16,8">
 
             <Button

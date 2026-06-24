@@ -12,6 +12,7 @@ using YoutubeDLSharp.Metadata;
 using VisioForge.Core;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
+using VisioForge.Core.Types.X.AudioEffects;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
@@ -73,6 +74,21 @@ namespace youtube_player_x
         private readonly List<string> _tempMpdFiles = new List<string>();
 
         /// <summary>
+        /// Shared pitch filter used for pitch-preserving tempo changes. This mirrors the
+        /// same runtime path as Tempo Pitch Demo so the sample can reproduce the client's
+        /// repeated YouTube DASH tempo adjustments.
+        /// </summary>
+        private PitchAudioEffect _tempoEffect;
+
+        private const string TEMPO_EFFECT_NAME = "youtube_tempo_effect";
+        private const int DEFAULT_TEMPO = 1000;
+        private const int MIN_TEMPO = 500;
+        private const int MAX_TEMPO = 2000;
+        private const int TEMPO_STEP = 20;
+
+        private int _currentTempo = DEFAULT_TEMPO;
+
+        /// <summary>
         /// Total media duration in seconds reported by yt-dlp for the current video.
         /// Used as the <c>mediaPresentationDuration</c> for generated MPDs; 0 means
         /// unknown and the builder will fall back to parsing <c>&amp;dur=…</c> from the URL.
@@ -126,6 +142,8 @@ namespace youtube_player_x
 
                 _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
                 _timer.Tick += Timer_Tick;
+
+                UpdateTempoLabel();
 
                 lblStatus.Text = string.Empty;
             }
@@ -310,9 +328,27 @@ namespace youtube_player_x
                 bool sourceRendersAudio = audioMuxed;
                 bool mpdCombinesAudio = false;
                 FormatData extraAudio = null;
+                string audioPathDescription;
                 if (!audioMuxed && cbAudioStream.SelectedIndex > 0)
                 {
                     extraAudio = _audioInfoList[cbAudioStream.SelectedIndex - 1];
+                }
+
+                if (!needAudio)
+                {
+                    audioPathDescription = "video only (audio disabled)";
+                }
+                else if (audioMuxed)
+                {
+                    audioPathDescription = "single source with audio inside the selected video stream";
+                }
+                else if (extraAudio != null)
+                {
+                    audioPathDescription = "separate YouTube audio stream selected";
+                }
+                else
+                {
+                    audioPathDescription = "audio requested but no explicit audio stream metadata is available";
                 }
 
                 if (!IsProgressiveFormat(selectedVideoFormat))
@@ -329,6 +365,11 @@ namespace youtube_player_x
                         sourceUri = new Uri(mpdPath);
                         sourceRendersAudio = audioMuxed || extraAudio != null; // audio is now inside the MPD
                         mpdCombinesAudio = extraAudio != null;
+                        audioPathDescription = mpdCombinesAudio
+                            ? "DASH MPD combining separate YouTube video/audio streams into one playback source"
+                            : sourceRendersAudio
+                                ? "DASH MPD source with audio inside the selected stream"
+                                : "DASH MPD source without audio";
                         AppendLog($"MPD ready: {mpdPath}");
                     }
                     else
@@ -360,11 +401,33 @@ namespace youtube_player_x
                         ignoreMediaInfoReader: true);
 
                     _player.Audio_AdditionalStreams_Add(audioSource);
+                    audioPathDescription = "video source + separate additional audio branch via Audio_AdditionalStreams_Add";
                 }
+
+                AppendLog($"Audio playback path: {audioPathDescription}.");
 
                 _player.Audio_OutputDevice_Volume = sliderVolume.Value / 100.0;
 
                 await _player.OpenAsync(mainSource);
+
+                if (needAudio)
+                {
+                    _tempoEffect = new PitchAudioEffect
+                    {
+                        Name = TEMPO_EFFECT_NAME,
+                        Pitch = 1.0f,
+                        Tempo = _currentTempo / (float)DEFAULT_TEMPO,
+                        Rate = 1.0f
+                    };
+                    _player.Audio_Effects_AddOrUpdate(_tempoEffect);
+                    AppendLog($"Tempo effect armed at {_currentTempo / 1000.0:0.000}x ({_currentTempo}/1000).");
+                }
+                else
+                {
+                    _tempoEffect = null;
+                    AppendLog("Tempo effect skipped because audio playback is disabled.");
+                }
+
                 await _player.PlayAsync();
 
                 StartTimer();
@@ -468,6 +531,42 @@ namespace youtube_player_x
             {
                 Debug.WriteLine(ex);
             }
+        }
+
+        private void btTempoMinus_Click(object sender, RoutedEventArgs e) => UpdateTempo(_currentTempo - TEMPO_STEP);
+
+        private void btTempoNormal_Click(object sender, RoutedEventArgs e) => UpdateTempo(DEFAULT_TEMPO);
+
+        private void btTempoPlus_Click(object sender, RoutedEventArgs e) => UpdateTempo(_currentTempo + TEMPO_STEP);
+
+        private void UpdateTempo(int value)
+        {
+            if (value < MIN_TEMPO)
+            {
+                value = MIN_TEMPO;
+            }
+            else if (value > MAX_TEMPO)
+            {
+                value = MAX_TEMPO;
+            }
+
+            _currentTempo = value;
+            UpdateTempoLabel();
+
+            if (_tempoEffect != null)
+            {
+                _tempoEffect.Tempo = _currentTempo / (float)DEFAULT_TEMPO;
+                AppendLog($"Tempo set to {_currentTempo / 1000.0:0.000}x ({_currentTempo}/1000).");
+            }
+            else
+            {
+                AppendLog($"Tempo cached at {_currentTempo / 1000.0:0.000}x ({_currentTempo}/1000) for the next playback start.");
+            }
+        }
+
+        private void UpdateTempoLabel()
+        {
+            lblTempo.Text = _currentTempo.ToString();
         }
 
         /// <summary>
@@ -895,6 +994,7 @@ namespace youtube_player_x
             // Clear the drag guard so a session ended mid-drag (user hit Stop while
             // holding the thumb) doesn't leave the next session with a locked-out timer.
             _seekDragging = false;
+            _tempoEffect = null;
 
             if (_player != null)
             {

@@ -63,6 +63,12 @@
                         <TextBox x:Name="edPattern" Height="23" Text="capture_%05d.mp4" Margin="0,0,0,10"
                                  ToolTip="Use a printf-style index, e.g. capture_%05d.mp4 -> capture_00000.mp4, capture_00001.mp4 ..."/>
 
+                        <CheckBox x:Name="cbTimestampNames" Content="Name files with start date/time" Margin="0,0,0,5"
+                                  ToolTip="When checked, each new segment is named from its start time via the OnSegmentFileNameRequested event instead of the index pattern."/>
+
+                        <CheckBox x:Name="cbRenameOnClose" Content="Append end time on close (rename)" Margin="0,0,0,10"
+                                  ToolTip="When checked, each finished segment is renamed in the OnSegmentClosed event to append the segment end time."/>
+
                         <Label Content="New file every (seconds)"/>
                         <TextBox x:Name="edSplitSeconds" Height="23" Text="10" Margin="0,0,0,10"/>
 

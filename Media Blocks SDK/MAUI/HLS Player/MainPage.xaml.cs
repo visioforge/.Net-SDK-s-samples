@@ -204,14 +204,14 @@ namespace HLS_Player_MB_MAUI
         {
             if (connected)
             {
-                connectionIndicator.BackgroundColor = Colors.Green;
+                connectionIndicator.Color = Colors.Green;
                 lblConnectionStatus.Text = "Connected";
                 lblStreamInfo.Text = "Stream Status: Connected";
                 lblStreamInfo.TextColor = Colors.Green;
             }
             else
             {
-                connectionIndicator.BackgroundColor = Colors.Red;
+                connectionIndicator.Color = Colors.Red;
                 lblConnectionStatus.Text = "Disconnected";
                 lblStreamInfo.Text = "Stream Status: Not Connected";
                 lblStreamInfo.TextColor = Colors.White;

@@ -30,6 +30,12 @@ namespace UDP_RAW_Capture_Demo
 
         private bool _isStarted;
 
+        // Recording-segment settings captured from the UI before Start so the splitmuxsink
+        // event handlers (which fire on a streaming thread) never touch UI controls.
+        private string _recordFolder;
+        private bool _useTimestampNames;
+        private bool _renameOnClose;
+
         // Guard for the two-phase Window_Closing pattern. Because CleanupAsync/DestroySDK are
         // async, the first close is cancelled, teardown is awaited, then Close() is re-invoked;
         // this flag lets the second invocation fall through without cancelling again.
@@ -164,6 +170,12 @@ namespace UDP_RAW_Capture_Demo
                 var seconds = double.TryParse(edSplitSeconds.Text, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out var s) && s > 0 ? s : 10;
                 var maxFiles = uint.TryParse(edMaxFiles.Text, out var mf) ? mf : 0;
 
+                // Snapshot the segment-naming options on the UI thread; the segment events fire
+                // on a streaming thread where the UI controls cannot be read.
+                _recordFolder = folder;
+                _useTimestampNames = cbTimestampNames.IsChecked == true;
+                _renameOnClose = cbRenameOnClose.IsChecked == true;
+
                 _pipeline = new MediaBlocksPipeline();
                 _pipeline.OnError += Pipeline_OnError;
 
@@ -180,6 +192,13 @@ namespace UDP_RAW_Capture_Demo
                     SplitMaxFiles = maxFiles
                 };
                 _recorder = new MP4SinkBlock(splitSettings);
+
+                // Split-recording segment events: custom per-segment file name, plus notifications
+                // when each segment file is opened and finished/closed.
+                _recorder.OnSegmentFileNameRequested += Recorder_OnSegmentFileNameRequested;
+                _recorder.OnSegmentCreated += Recorder_OnSegmentCreated;
+                _recorder.OnSegmentClosed += Recorder_OnSegmentClosed;
+
                 var recVideoInput = (_recorder as IMediaBlockDynamicInputs).CreateNewInput(MediaBlockPadMediaType.Video);
 
                 // 4. Preview branch: decode for display only.
@@ -262,8 +281,14 @@ namespace UDP_RAW_Capture_Demo
             _previewDecoder?.Dispose();
             _previewDecoder = null;
 
-            (_recorder as IDisposable)?.Dispose();
-            _recorder = null;
+            if (_recorder != null)
+            {
+                _recorder.OnSegmentFileNameRequested -= Recorder_OnSegmentFileNameRequested;
+                _recorder.OnSegmentCreated -= Recorder_OnSegmentCreated;
+                _recorder.OnSegmentClosed -= Recorder_OnSegmentClosed;
+                (_recorder as IDisposable)?.Dispose();
+                _recorder = null;
+            }
 
             _videoTee?.Dispose();
             _videoTee = null;
@@ -272,6 +297,60 @@ namespace UDP_RAW_Capture_Demo
             _source = null;
 
             _isStarted = false;
+        }
+
+        /// <summary>
+        /// Raised just before a new segment file is created. Supplies a custom file name built from
+        /// the segment start time when the option is enabled. Runs on a streaming thread, so it must
+        /// not touch the UI — it uses the values snapshotted in btStart_Click.
+        /// </summary>
+        private void Recorder_OnSegmentFileNameRequested(object sender, SegmentSinkFileNameEventArgs e)
+        {
+            if (_useTimestampNames)
+            {
+                e.FileName = Path.Combine(_recordFolder, $"capture_{DateTime.Now:yyyyMMdd_HHmmss}_{e.FragmentIndex:D5}.mp4");
+            }
+
+            // Leaving e.FileName unset keeps the default name from the location pattern.
+        }
+
+        /// <summary>
+        /// Raised when a new segment file has been opened. Fires on a streaming thread, so the log
+        /// update is marshalled to the UI thread.
+        /// </summary>
+        private void Recorder_OnSegmentCreated(object sender, SegmentSinkFileEventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() => LogMessage($"Segment started: {Path.GetFileName(e.FileName)}")));
+        }
+
+        /// <summary>
+        /// Raised when a segment file has been finished and closed. Optionally renames the file to
+        /// append its end time, then logs the result. Fires on a streaming thread, so the log update
+        /// is marshalled to the UI thread (the file rename itself is plain file I/O and is safe here).
+        /// </summary>
+        private void Recorder_OnSegmentClosed(object sender, SegmentSinkFileEventArgs e)
+        {
+            var path = e.FileName;
+
+            if (_renameOnClose && File.Exists(path))
+            {
+                try
+                {
+                    var dir = Path.GetDirectoryName(path);
+                    var name = Path.GetFileNameWithoutExtension(path);
+                    var ext = Path.GetExtension(path);
+                    var newPath = Path.Combine(dir, $"{name}__end_{DateTime.Now:HHmmss}{ext}");
+                    File.Move(path, newPath);
+                    path = newPath;
+                }
+                catch (Exception ex)
+                {
+                    Dispatcher.BeginInvoke(new Action(() => LogMessage($"Rename failed: {ex.Message}")));
+                }
+            }
+
+            var durText = e.FragmentDuration.HasValue ? $" (duration {e.FragmentDuration.Value.TotalSeconds:F1}s)" : string.Empty;
+            Dispatcher.BeginInvoke(new Action(() => LogMessage($"Segment finished: {Path.GetFileName(path)}{durText}")));
         }
 
         /// <summary>
@@ -287,15 +366,15 @@ namespace UDP_RAW_Capture_Demo
         /// </summary>
         private void btBrowse_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new OpenFolderDialog();
+            var dlg = new System.Windows.Forms.FolderBrowserDialog();
             if (Directory.Exists(edFolder.Text))
             {
-                dlg.InitialDirectory = edFolder.Text;
+                dlg.SelectedPath = edFolder.Text;
             }
 
-            if (dlg.ShowDialog() == true)
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                edFolder.Text = dlg.FolderName;
+                edFolder.Text = dlg.SelectedPath;
             }
         }
 

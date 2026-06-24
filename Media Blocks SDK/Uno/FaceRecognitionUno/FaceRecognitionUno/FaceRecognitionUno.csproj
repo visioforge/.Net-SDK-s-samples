@@ -37,8 +37,8 @@
     <_UseClassicLinker>false</_UseClassicLinker>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2026.6.24" />
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.24" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2026.6.25" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.25" />
     <PackageReference Include="VisioForge.DotNet.Core.AI" Version="2026.6.8" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">

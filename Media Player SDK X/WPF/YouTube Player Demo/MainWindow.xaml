@@ -52,6 +52,32 @@
                     Margin="0,3,0,0"
                     ValueChanged="sliderVolume_ValueChanged" />
 
+                <TextBlock Text="Tempo (1000 = normal)" FontWeight="SemiBold" Margin="0,10,0,0" />
+                <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                <Button x:Name="btTempoMinus"
+                    Content="-"
+                    Width="40"
+                    Height="24"
+                    Click="btTempoMinus_Click" />
+                <Button x:Name="btTempoNormal"
+                    Content="Normal"
+                    Width="80"
+                    Height="24"
+                    Margin="4,0,0,0"
+                    Click="btTempoNormal_Click" />
+                <Button x:Name="btTempoPlus"
+                    Content="+"
+                    Width="40"
+                    Height="24"
+                    Margin="4,0,0,0"
+                    Click="btTempoPlus_Click" />
+                <TextBlock x:Name="lblTempo"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"
+                       Text="1000"
+                       Width="60" />
+                </StackPanel>
+
             <CheckBox x:Name="cbDebugMode" Content="Debug mode" Margin="0,10,0,0" />
 
             <TextBlock Text="Log" FontWeight="SemiBold" Margin="0,10,0,0" />

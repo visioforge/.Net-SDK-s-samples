@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PhotoCapture.MainPage" Loaded="ContentPage_Loaded" Unloaded="ContentPage_Unloaded">
+             x:Class="PhotoCapture.MainPage" Loaded="ContentPage_Loaded" Unloaded="ContentPage_Unloaded"
+             Shell.NavBarIsVisible="False">
 
-    <ScrollView>
-        <!--WidthRequest="1280" HeightRequest="720"-->
-        <Grid x:Name="rootGrid" RowDefinitions="*,Auto" >
+    <!-- Single-cell grid: the camera preview fills it and the control bar is overlaid at the
+         bottom. The preview is added in code-behind AFTER the XAML controls, so it sits above them
+         in z-order; ZIndex on the control bar keeps the buttons tappable on top of the preview. -->
+    <Grid x:Name="rootGrid">
 
-            <!-- PhotoCaptureView is added programmatically in code-behind, not in XAML.
-                 The SDK type VisioForge.Core.UI.MAUI.PhotoCaptureView does not exist on
-                 net10.0-maccatalyst (#if (__IOS__ && !__MACCATALYST__) || __ANDROID__ || WINDOWS),
-                 so a static XAML reference would break XAML codegen on macCatalyst. -->
+        <!-- PhotoCaptureView is added programmatically in code-behind, not in XAML.
+             The SDK type VisioForge.Core.UI.MAUI.PhotoCaptureView does not exist on
+             net10.0-maccatalyst (#if (__IOS__ && !__MACCATALYST__) || __ANDROID__ || WINDOWS),
+             so a static XAML reference would break XAML codegen on macCatalyst. -->
 
-            <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e">
-                <StackLayout
-                    Orientation="Horizontal"
-                    HorizontalOptions="Center"
-                    Margin="5, 0, 5, 0">
+        <StackLayout x:Name="pnMain" ZIndex="1" Orientation="Vertical"
+                     HorizontalOptions="Fill" VerticalOptions="End" Background="#CC1e1e1e" Padding="0,8">
+            <StackLayout
+                Orientation="Horizontal"
+                HorizontalOptions="Center"
+                Margin="5, 0, 5, 0">
 
-                    <Button
-                        x:Name="btCamera"
-                        Text="SWITCH CAMERA"
-                        Margin="5"
-                        Clicked="btCamera_Clicked"
-                        MinimumWidthRequest="100" />
+                <Button
+                    x:Name="btCamera"
+                    Text="SWITCH CAMERA"
+                    Margin="5"
+                    Clicked="btCamera_Clicked"
+                    MinimumWidthRequest="100" />
 
-                    <Button
-                        x:Name="btPhoto"
-                        Text="SAVE PHOTO"
-                        Margin="5"
-                        Clicked="btPhoto_Clicked"
-                        MinimumWidthRequest="100" />
-                </StackLayout>
+                <Button
+                    x:Name="btPhoto"
+                    Text="SAVE PHOTO"
+                    Margin="5"
+                    Clicked="btPhoto_Clicked"
+                    MinimumWidthRequest="100" />
             </StackLayout>
-        </Grid>
-    </ScrollView>
+        </StackLayout>
+    </Grid>
 
 </ContentPage>

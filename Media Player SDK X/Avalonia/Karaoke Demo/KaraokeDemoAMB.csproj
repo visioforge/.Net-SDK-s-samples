@@ -40,7 +40,7 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.1" />
     <PackageReference Include="System.Reactive" Version="6.0.1" />
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.24" />
-    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2026.6.24" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.25" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Avalonia" Version="2026.6.25" />
   </ItemGroup>
 </Project>
