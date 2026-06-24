@@ -8,7 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.25" />
-    <PackageReference Include="VisioForge.DotNet.Core.AI" Version="2026.6.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.AI" Version="2026.6.25" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.4.29" />

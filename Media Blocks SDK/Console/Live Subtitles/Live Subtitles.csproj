@@ -11,7 +11,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.25" />
-    <PackageReference Include="VisioForge.DotNet.Core.AI.Whisper" Version="2026.6.8" />
+    <PackageReference Include="VisioForge.DotNet.Core.AI.Whisper" Version="2026.6.25" />
   </ItemGroup>
   <ItemGroup>
     <!-- Whisper.net is referenced for the optional GGML model downloader (WhisperGgmlDownloader). -->
