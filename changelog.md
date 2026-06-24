@@ -26,6 +26,13 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.6.24
+* [Media Blocks SDK .Net] `FaceRecognitionBlock` — enrolling a face from a photo that carries an EXIF orientation tag (typical of phone camera shots) now works; the image is rotated upright before detection instead of reporting "no face found".
+* [Demos] Added a **Face Recognition Uno** demo (Uno Platform): live camera 1:N face recognition with on-frame name/box overlay, photo enrollment, and switchable SFace / AuraFace embedding models. Android-focused.
+* [Demos] The Face Recognition demos (WPF and CLI) now let you pick the embedding model: **SFace (128-D)** or **AuraFace (512-D, ArcFace family, Apache-2.0)** — a higher-accuracy, commercially licensed 512-D embedder downloaded on demand. The CLI adds an `--embedding sface|auraface` switch.
+* [Demos] Face Recognition WPF demo: switching the embedding model now automatically rebuilds the gallery from the enrolled photos, so changing models no longer makes every face read as **Unknown** (embeddings from different models are not comparable).
+* [Demos] Face Recognition MAUI demo: added the same SFace/AuraFace embedder selection and automatic gallery rebuild, plus a **video-file source** with a seek bar and a real-time / max-speed playback toggle (in addition to the live camera).
+
 ## 2026.6.21
 
 * [Video Capture SDK X .Net] Added **Android audio playback capture** support to `VideoCaptureCoreX` — assign `AndroidAudioPlaybackCaptureSourceSettings` to `Audio_Source` to record the audio played by **other apps** (system AudioPlaybackCapture API, Android 10 / API 29+, on top of a `MediaProjection` token) straight to a file. Includes a new native Android "Audio Playback Capture" demo built on `VideoCaptureCoreX` that records another app's audio to an `.m4a` file. Only apps that allow playback capture (usage MEDIA/GAME/UNKNOWN and not opted out) can be captured.
@@ -40,14 +47,11 @@ Changes and updates for all .Net SDKs.
 ## 2026.6.19
 
 * [Media Blocks SDK .Net] Added **Android audio playback capture** — the new `AndroidAudioPlaybackCaptureSourceBlock` records the audio played by **other apps** using the system AudioPlaybackCapture API (Android 10 / API 29+) on top of a `MediaProjection` token, with a configurable format and usage filter (`AndroidAudioPlaybackCaptureSourceSettings`). Includes a new native Android "Audio Playback Capture" demo that records another app's audio to an `.m4a` file. Only apps that allow playback capture (usage MEDIA/GAME/UNKNOWN and not opted out) can be captured.
-* [Video Edit SDK .Net] Fixed a long-standing intermittent hang on stop in `VideoEditCore` (DirectShow engine): when a conversion started with `StartAsync` finished, the graph teardown could deadlock, so `OnStop` never fired and the operation appeared to hang until the process was killed — most visible with Matroska (`.mkv`) output, but possible for any async conversion. Async conversions now stop reliably and `OnStop` is always raised.
 * [Media Blocks SDK .Net] Speech-to-text (`SpeechToTextBlock`) gains a lossless file-transcription mode: set `SpeechToTextSettings.BackpressureWhenBusy = true` to pace a file source to the transcription engine so no audio is dropped and the pipeline position tracks the transcription frontier — ideal for transcribing a file as fast as the engine allows without losing speech. The new `SpeechToTextBlock.RequestStop()` lets you stop promptly mid-file, and an `OnEndOfStream` event fires when transcription finishes.
-* [Media Blocks SDK .Net] NDI source enumeration on the desktop is now time-bounded: if NDI network discovery stalls, the enumeration call returns within a few seconds instead of blocking the caller indefinitely.
 
 ## 2026.6.18
 
 * [Media Blocks SDK .Net] Fixed WMV/ASF output where the video stream was written with a roughly 1000-hour timestamp offset while audio started at zero — players saw a broken duration and the video and audio never shared a timeline. WMV/ASF files now have correctly aligned, overlapping video and audio timestamps.
-* [Media Blocks SDK .Net] Graceful stop now waits for end-of-stream to actually finalize the output file before tearing the pipeline down. Recordings made with slow software encoders or GPU-based pipelines (and any pipeline that needs a moment to drain) are now written completely instead of being left unreadable with a missing `moov` atom/index. Normal pipelines also stop a little faster.
 * [Media Blocks SDK .Net] Fixed MP4 recordings produced from a still/image source (`ImageVideoSourceBlock`, live mode) ending up unreadable ("moov atom not found") — a live image source now finalizes its file correctly on stop.
 * [Media Blocks SDK .Net] VP9 WebM output now uses a real-time-capable speed/quality default: `VP9EncoderSettings.CPUUsed` defaults to `4` instead of `0`. The previous slowest/highest-quality default could not keep up with a live source, so the recorded video track could be truncated to about a second while audio ran the full length. Set `CPUUsed = 0` to restore maximum quality for offline encoding.
 * [Media Blocks SDK .Net] The rav1e AV1 encoder (`RAV1EEncoderSettings`) now defaults to the fastest speed preset (`SpeedPreset = 10`) instead of `6`. rav1e is a quality-oriented, very slow software encoder; the previous default could encode well under real time (~1 fps at 720p), stalling live and short captures. Lower `SpeedPreset` for higher quality in offline encoding where throughput does not matter.

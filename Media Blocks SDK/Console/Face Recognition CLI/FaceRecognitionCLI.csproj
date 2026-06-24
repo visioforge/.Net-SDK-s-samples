@@ -7,7 +7,7 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.22" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.24" />
     <PackageReference Include="VisioForge.DotNet.Core.AI" Version="2026.6.8" />
   </ItemGroup>
   <ItemGroup>
