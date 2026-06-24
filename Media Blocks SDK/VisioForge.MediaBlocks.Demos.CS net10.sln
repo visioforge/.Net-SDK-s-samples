@@ -205,6 +205,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tripwire Analytics Demo net
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YOLO Object Detection Demo net10", "WPF\CSharp\YOLO Object Detection Demo\YOLO Object Detection Demo net10.csproj", "{706481FC-4907-440E-8080-C404AC533690}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Face Recognition Demo net10", "WPF\CSharp\Face Recognition Demo\Face Recognition Demo net10.csproj", "{C4303917-33D6-4FB1-B41E-69E9FBB991F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1391,6 +1393,18 @@ Global
 		{706481FC-4907-440E-8080-C404AC533690}.Release|x64.Build.0 = Release|Any CPU
 		{706481FC-4907-440E-8080-C404AC533690}.Release|x86.ActiveCfg = Release|Any CPU
 		{706481FC-4907-440E-8080-C404AC533690}.Release|x86.Build.0 = Release|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Debug|x64.Build.0 = Debug|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Debug|x86.Build.0 = Debug|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Release|x64.ActiveCfg = Release|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Release|x64.Build.0 = Release|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Release|x86.ActiveCfg = Release|Any CPU
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1494,6 +1508,7 @@ Global
 		{7F8D675D-EEFB-4015-BEA8-EAB4F88AD2C3} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{53F32CC7-D0B4-4E0E-8C0F-D49D0B7533F4} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{706481FC-4907-440E-8080-C404AC533690} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
+		{C4303917-33D6-4FB1-B41E-69E9FBB991F2} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}

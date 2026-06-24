@@ -1,0 +1,23 @@
+using UIKit;
+using Uno.UI.Hosting;
+
+namespace FaceRecognitionUno.iOS;
+
+public class EntryPoint
+{
+    // This is the main entry point of the application.
+        /// <summary>
+        /// Main.
+        /// </summary>
+    public static void Main(string[] args)
+    {
+        App.InitializeLogging();
+
+        var host = UnoPlatformHostBuilder.Create()
+            .App(() => new App())
+            .UseAppleUIKit()
+            .Build();
+
+        host.Run();
+    }
+}

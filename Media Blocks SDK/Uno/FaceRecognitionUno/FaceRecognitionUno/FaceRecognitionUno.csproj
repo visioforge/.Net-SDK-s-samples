@@ -1,0 +1,95 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">net10.0-windows10.0.19041;net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">net10.0-maccatalyst;net10.0-ios;net10.0-android</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+    <UseCurrentXcodeSDKVersion>true</UseCurrentXcodeSDKVersion>
+    <!-- Display name -->
+    <ApplicationTitle>FaceRecognitionUno</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.visioforge.facerecognitionuno</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!-- Package Publisher -->
+    <ApplicationPublisher>FaceRecognitionUno</ApplicationPublisher>
+    <!-- Package Description -->
+    <Description>FaceRecognitionUno powered by Uno Platform.</Description>
+    <!-- ONNX Runtime's Android library (ai.onnxruntime) requires minSdk 24. -->
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
+    <!--
+      UnoFeatures are used to quickly add and manage features enabled for your app.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <UnoFeatures></UnoFeatures>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CodesignKey>Apple Development</CodesignKey>
+  </PropertyGroup>
+  <!-- ONNX Runtime is not AOT-compatible on Android; disable AOT for Release. -->
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <RunAOTCompilation>false</RunAOTCompilation>
+  </PropertyGroup>
+  <!-- Apple-only linker workaround. Scoped so it doesn't leak onto Android/Windows. -->
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' OR $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+    <_UseClassicLinker>false</_UseClassicLinker>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.Core.UI.Uno" Version="2026.6.22" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.6.22" />
+    <PackageReference Include="VisioForge.DotNet.Core.AI" Version="2026.6.8" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.4.29" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2026.4.29" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="2026.4.18.0" />
+    <ProjectReference Include="..\..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
+  </ItemGroup>
+  <!-- Microsoft.ML.OnnxRuntime declares a RegisterCustomOps P/Invoke (onnxruntime-extensions).
+       We don't use extensions, but Apple static (AOT) linking needs the symbol defined. The
+       official Dummy package provides a no-op RegisterCustomOps. It auto-wires iOS but ships an
+       empty (_._) target for Mac Catalyst, so wire its bundled xcframework manually there. -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios')) OR $(TargetFramework.Contains('-maccatalyst'))">
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Extensions.Dummy" Version="0.13.0" GeneratePathProperty="true" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macCatalyst" Version="2025.9.1" />
+    <NativeReference Include="$(PkgMicrosoft_ML_OnnxRuntime_Extensions_Dummy)\runtimes\ios\native\onnxruntime_extensions.xcframework.zip">
+      <Kind>Static</Kind>
+      <IsCxx>True</IsCxx>
+      <SmartLink>True</SmartLink>
+      <ForceLoad>True</ForceLoad>
+      <LinkerFlags>-lc++</LinkerFlags>
+      <WeakFrameworks>CoreML</WeakFrameworks>
+    </NativeReference>
+  </ItemGroup>
+  <!-- Microsoft.ML.OnnxRuntime exposes Android only through its AAR (correct bionic .so, added as
+       AndroidNativeLibrary). It has no runtimes/android-* folder, so the .NET RID-fallback graph resolves
+       android-arm64 down to the glibc linux-arm64 build and packs that desktop .so into the APK, shadowing
+       the AAR build (it needs libdl.so.2 and fails to dlopen at runtime -> ONNX Runtime init throws).
+       Drop the desktop-runtime onnxruntime natives so only the AAR's Android build ships. -->
+  <Target Name="_RemoveDesktopOnnxRuntimeFromAndroid" BeforeTargets="_BuildApkEmbed" Condition="$(TargetFramework.Contains('-android'))">
+    <ItemGroup>
+      <!-- linux-bionic-* IS Android, so keep it; only strip glibc linux / win / osx desktop onnxruntime natives. -->
+      <FrameworkNativeLibrary Remove="@(FrameworkNativeLibrary)" Condition="$([System.String]::Copy('%(Identity)').Replace('\','/').Contains('onnxruntime')) And ((($([System.String]::Copy('%(Identity)').Replace('\','/').Contains('/runtimes/linux-')) And !$([System.String]::Copy('%(Identity)').Replace('\','/').Contains('/runtimes/linux-bionic'))) Or $([System.String]::Copy('%(Identity)').Replace('\','/').Contains('/runtimes/win-')) Or $([System.String]::Copy('%(Identity)').Replace('\','/').Contains('/runtimes/osx-'))))" />
+    </ItemGroup>
+  </Target>
+  <Target Name="CopyNativeLibrariesToMonoBundle" AfterTargets="Build" Condition="$(TargetFramework.Contains('-maccatalyst'))">
+    <Message Text="Starting CopyNativeLibrariesToMonoBundle target..." Importance="High" />
+    <PropertyGroup>
+      <AppBundleDir>$(OutputPath)$(AssemblyName).app</AppBundleDir>
+      <MonoBundleDir>$(AppBundleDir)/Contents/MonoBundle</MonoBundleDir>
+    </PropertyGroup>
+    <MakeDir Directories="$(MonoBundleDir)" Condition="!Exists('$(MonoBundleDir)')" />
+    <Copy SourceFiles="@(None-&gt;'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
+      <Output TaskParameter="CopiedFiles" ItemName="CopiedNativeFiles" />
+    </Copy>
+  </Target>
+</Project>

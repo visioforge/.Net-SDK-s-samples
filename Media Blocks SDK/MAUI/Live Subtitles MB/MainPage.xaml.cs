@@ -178,7 +178,13 @@ namespace LiveSubtitlesMB
                 };
                 settings.Vad.ModelPath = _sileroModelPath;
 
+                // On iOS the SDK exposes only the NSUrl overload (the string overload is gated out by
+                // #if __IOS__ && !__MACCATALYST__), so wrap the picked path with NSUrl.FromFilename.
+#if IOS && !MACCATALYST
+                var sourceSettings = await UniversalSourceSettings.CreateAsync(Foundation.NSUrl.FromFilename(pick.FullPath), renderVideo: false, renderAudio: true);
+#else
                 var sourceSettings = await UniversalSourceSettings.CreateAsync(pick.FullPath, renderVideo: false, renderAudio: true);
+#endif
 
                 // The page may be torn down during the await; bail before touching the pipeline.
                 if (_isCleanedUp)

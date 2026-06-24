@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FaceRecognitionMB.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <!-- Video on top, controls below — separate Grid rows so the panel never overlaps the video. -->
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <my:VideoView
+                Grid.Row="0"
+                x:Name="videoView"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill" />
+
+        <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e" Padding="8" Spacing="6">
+
+            <!-- Models row: YuNet detector + SFace/AuraFace embedding, downloaded on first use -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Label x:Name="lbModels" Text="Models: not downloaded" VerticalOptions="Center" HorizontalOptions="FillAndExpand" FontSize="11" TextColor="#aaa" LineBreakMode="TailTruncation" />
+                <Button x:Name="btDownloadModels" Text="DOWNLOAD MODELS" Clicked="btDownloadModels_Clicked" />
+            </StackLayout>
+            <ProgressBar x:Name="pbDownload" Progress="0" ProgressColor="#4CAF50" IsVisible="False" />
+
+            <!-- Embedding model family: SFace (128-D) or AuraFace (512-D, ArcFace family) -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Label Text="Embedder:" VerticalOptions="Center" FontSize="11" TextColor="#aaa" />
+                <Button x:Name="btEmbModel" Text="SFace (128-D)" Clicked="btEmbModel_Clicked" />
+                <Label x:Name="lbEmbHint" Text="" VerticalOptions="Center" HorizontalOptions="FillAndExpand" FontSize="10" TextColor="#888" LineBreakMode="WordWrap" />
+            </StackLayout>
+
+            <!-- Enrollment row -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Entry x:Name="edName" Placeholder="Person name" TextColor="White" PlaceholderColor="#888" HorizontalOptions="FillAndExpand" />
+                <Button x:Name="btEnroll" Text="ENROLL PHOTO" Clicked="btEnroll_Clicked" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Label x:Name="lbGallery" Text="Gallery: 0 identities" VerticalOptions="Center" HorizontalOptions="FillAndExpand" FontSize="11" TextColor="#aaa" />
+                <Button x:Name="btSaveGallery" Text="SAVE" Clicked="btSaveGallery_Clicked" />
+                <Button x:Name="btLoadGallery" Text="LOAD" Clicked="btLoadGallery_Clicked" />
+            </StackLayout>
+
+            <!-- Source: live camera or a video file -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Button x:Name="btSource" Text="Source: Camera" Clicked="btSource_Clicked" />
+                <Button x:Name="btCamera" Text="SELECT CAMERA" Clicked="btCamera_Clicked" HorizontalOptions="FillAndExpand" />
+                <Button x:Name="btOpenFile" Text="OPEN FILE" Clicked="btOpenFile_Clicked" IsVisible="False" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <!-- File transport: real-time vs max-speed playback + picked file name -->
+            <StackLayout x:Name="pnFile" Orientation="Horizontal" Spacing="8" IsVisible="False">
+                <Label Text="Real time" VerticalOptions="Center" FontSize="11" TextColor="#aaa" />
+                <Switch x:Name="swRealTime" IsToggled="True" VerticalOptions="Center" />
+                <Label x:Name="lbFile" Text="No file selected" VerticalOptions="Center" HorizontalOptions="FillAndExpand" FontSize="11" TextColor="#aaa" LineBreakMode="TailTruncation" />
+            </StackLayout>
+
+            <!-- Seek bar (file mode only) -->
+            <StackLayout x:Name="pnSeek" IsVisible="False" Spacing="0">
+                <Slider x:Name="slSeek" HorizontalOptions="Fill" ValueChanged="slSeek_ValueChanged" />
+                <Grid ColumnDefinitions="Auto,*,Auto">
+                    <Label Grid.Column="0" x:Name="lbPosition" Text="00:00:00" FontSize="11" TextColor="#aaa" />
+                    <Label Grid.Column="2" x:Name="lbDuration" Text="00:00:00" FontSize="11" TextColor="#aaa" />
+                </Grid>
+            </StackLayout>
+
+            <!-- Status + controls row -->
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="lbStatus" Grid.Column="0" Text="Faces: -" VerticalOptions="Center" FontSize="14" FontAttributes="Bold" TextColor="#4CAF50" />
+                <Button x:Name="btStartStop" Grid.Column="1" Text="START" Clicked="btStartStop_Clicked" BackgroundColor="#4CAF50" />
+            </Grid>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>
