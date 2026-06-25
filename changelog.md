@@ -27,11 +27,16 @@ primary_api_classes:
 Changes and updates for all .Net SDKs.
 
 ## 2026.6.24
+* [Media Blocks SDK .Net] Fixed a rare crash during pipeline shutdown or garbage collection in applications with many active GStreamer objects, such as multi-camera RTSP capture with sample grabbers, bridges, and file outputs.
 * [Media Blocks SDK .Net] `FaceRecognitionBlock` — enrolling a face from a photo that carries an EXIF orientation tag (typical of phone camera shots) now works; the image is rotated upright before detection instead of reporting "no face found".
 * [Demos] Added a **Face Recognition Uno** demo (Uno Platform): live camera 1:N face recognition with on-frame name/box overlay, photo enrollment, and switchable SFace / AuraFace embedding models. Android-focused.
 * [Demos] The Face Recognition demos (WPF and CLI) now let you pick the embedding model: **SFace (128-D)** or **AuraFace (512-D, ArcFace family, Apache-2.0)** — a higher-accuracy, commercially licensed 512-D embedder downloaded on demand. The CLI adds an `--embedding sface|auraface` switch.
 * [Demos] Face Recognition WPF demo: switching the embedding model now automatically rebuilds the gallery from the enrolled photos, so changing models no longer makes every face read as **Unknown** (embeddings from different models are not comparable).
 * [Demos] Face Recognition MAUI demo: added the same SFace/AuraFace embedder selection and automatic gallery rebuild, plus a **video-file source** with a seek bar and a real-time / max-speed playback toggle (in addition to the live camera).
+
+## 2026.6.23
+
+* [Media Blocks SDK .Net] Unity samples now use Unity's default Enter Play Mode behavior (Domain + Scene Reload); disabling Domain Reload is no longer required. The SDK survives the Editor's Play/Stop and script-recompile domain reloads via a built-in reload guard.
 
 ## 2026.6.21
 

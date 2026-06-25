@@ -220,7 +220,7 @@ namespace RTSP_Capture
                 if (lowLatencyMode)
                 {
                     rtsp.LowLatencyMode = true;
-                    mmLog.Text += "Low latency mode enabled (latency=80ms, no buffering)" + Environment.NewLine;
+                    mmLog.Text += "Low latency mode enabled (latency=250ms, no buffering)" + Environment.NewLine;
                 }
 
                 var info = rtsp.GetInfo();

@@ -97,7 +97,7 @@ namespace TS_Analyzer_Demo
             lblSummary.Text = "Starting...";
 
             _pipeline = new MediaBlocksPipeline();
-            _pipeline.OnError += (s, ev) => Dispatcher.BeginInvoke(() => lblSummary.Text = "Error: " + ev.Message);
+            _pipeline.OnError += (s, ev) => Dispatcher.BeginInvoke((Action)(() => lblSummary.Text = "Error: " + ev.Message));
             _pipeline.OnStop += Pipeline_OnStop;
 
             MediaBlockPad sourcePad;
@@ -173,7 +173,7 @@ namespace TS_Analyzer_Demo
         private void Analyzer_OnAnalysisUpdated(object sender, TSAnalyzerEventArgs e)
         {
             var report = e.Report;
-            Dispatcher.BeginInvoke(() => UpdateUI(report));
+            Dispatcher.BeginInvoke((Action)(() => UpdateUI(report)));
         }
 
         private void UpdateUI(TSAnalyzerReport report)
