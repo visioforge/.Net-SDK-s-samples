@@ -26,6 +26,10 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.6.27
+* [Media Blocks SDK .Net] Fixed an `AccessViolationException` ("Attempted to read or write protected memory") that could crash the application when using text overlays (`OverlayManagerBlock` / `OverlayManagerText`) — most reliably reproduced by adding a text overlay right after `StartAsync` and then stopping. The font-enumeration path freed Pango-owned font objects it did not own, corrupting memory during a later garbage collection or pipeline shutdown.
+* [Media Blocks SDK .Net] Fixed a related intermittent fatal crash ("Attempt to execute managed code after the .NET runtime thread state has been destroyed") that could abort the process during text overlay or font enumeration when a background media thread was recycled, or at application exit. The available-fonts / monospace-detection path no longer attaches a managed callback to Pango's internal font map.
+
 ## 2026.6.24
 * [Media Blocks SDK .Net] Fixed a rare crash during pipeline shutdown or garbage collection in applications with many active GStreamer objects, such as multi-camera RTSP capture with sample grabbers, bridges, and file outputs.
 * [Media Blocks SDK .Net] `FaceRecognitionBlock` — enrolling a face from a photo that carries an EXIF orientation tag (typical of phone camera shots) now works; the image is rotated upright before detection instead of reporting "no face found".
