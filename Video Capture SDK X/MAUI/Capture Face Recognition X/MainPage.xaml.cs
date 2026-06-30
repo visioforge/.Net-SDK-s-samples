@@ -448,6 +448,12 @@ namespace Capture_Face_Recognition_X
                     return;
                 }
 
+                // Page torn down while the picker was open: don't touch controls.
+                if (_isCleanedUp)
+                {
+                    return;
+                }
+
                 int family = pkEmbFamily.SelectedIndex;
 
                 // Loaded gallery built with a different family and no source photos to rebuild from: stop and tell the user.

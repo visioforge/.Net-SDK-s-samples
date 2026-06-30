@@ -89,6 +89,12 @@ namespace Capture_OCR_X
                 var dictTask = EnsureAssetAsync("ppocrv5_latin_dict.txt");
                 await Task.WhenAll(detTask, recTask, clsTask, dictTask);
 
+                // Page torn down while assets copied: don't touch Window/controls.
+                if (_isCleanedUp)
+                {
+                    return;
+                }
+
                 _detModelPath = await detTask;
                 _recModelPath = await recTask;
                 _clsModelPath = await clsTask;

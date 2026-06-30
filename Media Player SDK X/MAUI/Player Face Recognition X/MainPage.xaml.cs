@@ -392,6 +392,13 @@ namespace Player_Face_Recognition_X
 
                 // Multiselect: enroll several photos of the same person under one name for more robust matching.
                 var picks = await FilePicker.Default.PickMultipleAsync();
+
+                // Page torn down while the picker was open: don't touch controls.
+                if (_isCleanedUp)
+                {
+                    return;
+                }
+
                 var files = picks?.ToList();
                 if (files == null || files.Count == 0)
                 {
