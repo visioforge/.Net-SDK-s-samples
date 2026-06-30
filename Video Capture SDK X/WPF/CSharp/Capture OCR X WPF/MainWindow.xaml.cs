@@ -72,8 +72,6 @@ namespace Capture_OCR_X_WPF
                     cbCamera.SelectedIndex = 0;
                 }
 
-                IsEnabled = true;
-
                 // The engine is created fresh per session in btStart_Click (RecreateEngineAsync).
 
                 Log($"SDK v{VideoCaptureCoreX.SDK_Version} ready.");
@@ -87,6 +85,10 @@ namespace Capture_OCR_X_WPF
             catch (Exception ex)
             {
                 Log("load error: " + ex.Message);
+            }
+            finally
+            {
+                IsEnabled = true;
             }
         }
 

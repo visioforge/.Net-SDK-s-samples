@@ -110,8 +110,6 @@ namespace Capture_Face_Recognition_X_WPF
                     cbCamera.SelectedIndex = 0;
                 }
 
-                IsEnabled = true;
-
                 // The engine is created fresh per session in btStart_Click (RecreateEngineAsync).
 
                 cbEmbFamily.Items.Add("SFace (128-D)");
@@ -130,6 +128,10 @@ namespace Capture_Face_Recognition_X_WPF
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsEnabled = true;
             }
         }
 

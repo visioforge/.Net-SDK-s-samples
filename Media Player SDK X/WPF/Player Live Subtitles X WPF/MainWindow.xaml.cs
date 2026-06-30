@@ -214,7 +214,6 @@ namespace Player_Live_Subtitles_X_WPF
             {
                 IsEnabled = false;
                 await VisioForgeX.InitSDKAsync();
-                IsEnabled = true;
 
                 // The engine is built fresh per session in btStart_Click (RecreatePlayerAsync) — nothing to construct here.
 
@@ -234,6 +233,10 @@ namespace Player_Live_Subtitles_X_WPF
             catch (Exception ex)
             {
                 Log("load error: " + ex.Message);
+            }
+            finally
+            {
+                IsEnabled = true;
             }
         }
 

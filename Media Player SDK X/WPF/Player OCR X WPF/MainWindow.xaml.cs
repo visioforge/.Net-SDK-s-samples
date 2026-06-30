@@ -60,7 +60,6 @@ namespace Player_OCR_X_WPF
             {
                 IsEnabled = false;
                 await VisioForgeX.InitSDKAsync();
-                IsEnabled = true;
 
                 // The engine is created fresh per session in RecreatePlayerAsync.
 
@@ -75,6 +74,10 @@ namespace Player_OCR_X_WPF
             catch (Exception ex)
             {
                 Log("load error: " + ex.Message);
+            }
+            finally
+            {
+                IsEnabled = true;
             }
         }
 

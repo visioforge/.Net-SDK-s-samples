@@ -96,7 +96,6 @@ namespace Player_Face_Recognition_X_WPF
             {
                 IsEnabled = false;
                 await VisioForgeX.InitSDKAsync();
-                IsEnabled = true;
 
                 // The engine is created fresh per session in btStart_Click (RecreatePlayerAsync).
 
@@ -116,6 +115,10 @@ namespace Player_Face_Recognition_X_WPF
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsEnabled = true;
             }
         }
 
