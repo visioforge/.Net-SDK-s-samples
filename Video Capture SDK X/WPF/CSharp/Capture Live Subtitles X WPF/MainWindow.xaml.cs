@@ -12,33 +12,35 @@ using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AI;
 using VisioForge.Core.MediaBlocks.Special;
-using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AI;
-using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.VideoCaptureX;
 
-namespace Player_Live_Subtitles_X_WPF
+namespace Capture_Live_Subtitles_X_WPF
 {
     /// <summary>
-    /// Inserts a Whisper speech-to-text block into MediaPlayerCoreX through the Audio_Processing_AddBlock API:
-    /// the block taps the decoded audio (passing it through to the speakers unchanged) and raises
-    /// OnSpeechRecognized, shown as a live subtitle while the engine plays a normal file.
+    /// Inserts a Whisper speech-to-text block into VideoCaptureCoreX through the Audio_Processing_AddBlock API:
+    /// the block taps the live microphone audio (passing it through unchanged) and raises OnSpeechRecognized,
+    /// shown as a live subtitle over the camera preview. Audio_Record builds the audio chain without needing
+    /// speaker output or a recording file.
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MediaPlayerCoreX _player;
+        private VideoCaptureCoreX _core;
         private SpeechToTextBlock _speechToText;
+        private VideoCaptureDeviceInfo[] _cameras;
+        private AudioCaptureDeviceInfo[] _mics;
         private bool _isClosing;
 
         // Re-entrancy guard for Start/Stop (0 = free, 1 = busy); also suppresses a stale OnStop from a prior session.
         private int _startStopBusy;
 
-        // Whisper GGML weights on the samples GitHub release; cached under %USERPROFILE%/VisioForge/models.
+        // Whisper GGML weights, hosted on the samples GitHub release; cached under %USERPROFILE%/VisioForge/models.
         private const string ModelsBaseUrl = "https://github.com/visioforge/.Net-SDK-s-samples/releases/download/onnx-models-v1";
 
-        // Silero VAD ONNX model on the same samples release.
+        // Silero VAD ONNX model on the samples GitHub release.
         private const string SileroVadUrl = "https://github.com/visioforge/.Net-SDK-s-samples/releases/download/onnx-models-v1/silero_vad.onnx";
 
         private static readonly string ModelsCacheDir = Path.Combine(
@@ -152,7 +154,7 @@ namespace Player_Live_Subtitles_X_WPF
             {
                 var url = _selectedPreset.DownloadUrl;
 
-                // Download off the UI thread to a .part temp, then move into place so a failure leaves no corrupt cache.
+                // Download off the UI thread; stream to a .part temp, then move into place so a failed download leaves no corrupt cache.
                 await System.Threading.Tasks.Task.Run(async () =>
                 {
                     using (var response = await _http.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
@@ -214,13 +216,34 @@ namespace Player_Live_Subtitles_X_WPF
             {
                 IsEnabled = false;
                 await VisioForgeX.InitSDKAsync();
-                IsEnabled = true;
 
-                // The engine is built fresh per session in btStart_Click (RecreatePlayerAsync) — nothing to construct here.
+                // The engine is created fresh per session in btStart_Click (RecreateEngineAsync) — nothing to construct here.
+
+                _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
+                foreach (var camera in _cameras)
+                {
+                    cbCamera.Items.Add(camera.DisplayName);
+                }
+
+                if (cbCamera.Items.Count > 0)
+                {
+                    cbCamera.SelectedIndex = 0;
+                }
+
+                _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
+                foreach (var mic in _mics)
+                {
+                    cbMic.Items.Add(mic.DisplayName);
+                }
+
+                if (cbMic.Items.Count > 0)
+                {
+                    cbMic.SelectedIndex = 0;
+                }
 
                 RefreshModelList();
 
-                // Pre-fill the Silero VAD path if it was downloaded earlier, and hide the download button when present.
+                // Pre-fill the cached Silero VAD path if it was downloaded previously.
                 var cachedVad = Path.Combine(ModelsCacheDir, "silero_vad.onnx");
                 if (File.Exists(cachedVad))
                 {
@@ -229,20 +252,15 @@ namespace Player_Live_Subtitles_X_WPF
 
                 RefreshVadDownloadButton();
 
-                Log($"SDK v{MediaPlayerCoreX.SDK_Version} ready.");
+                Log($"SDK v{VideoCaptureCoreX.SDK_Version} ready.");
             }
             catch (Exception ex)
             {
                 Log("load error: " + ex.Message);
             }
-        }
-
-        private void btSelectFile_Click(object sender, RoutedEventArgs e)
-        {
-            var dialog = new OpenFileDialog { Filter = "Media files|*.mp4;*.mkv;*.avi;*.mov;*.webm;*.ts;*.m4a;*.wav;*.mp3|All files|*.*" };
-            if (dialog.ShowDialog() == true)
+            finally
             {
-                edFile.Text = dialog.FileName;
+                IsEnabled = true;
             }
         }
 
@@ -269,14 +287,12 @@ namespace Player_Live_Subtitles_X_WPF
             Directory.CreateDirectory(ModelsCacheDir);
             var destPath = Path.Combine(ModelsCacheDir, "silero_vad.onnx");
             var tempPath = destPath + ".part";
-
             btDownloadVad.IsEnabled = false;
             btDownloadVad.Content = "...";
             Log("Downloading Silero VAD model...");
-
             try
             {
-                // Download off the UI thread to a .part temp, then move into place so a failure leaves no corrupt cache.
+                // Download off the UI thread; stream to a .part temp, then move into place so a failed download leaves no corrupt cache.
                 await System.Threading.Tasks.Task.Run(async () =>
                 {
                     using (var response = await _http.GetAsync(SileroVadUrl, HttpCompletionOption.ResponseHeadersRead))
@@ -337,16 +353,16 @@ namespace Player_Live_Subtitles_X_WPF
             }
         }
 
-        // Disposes any existing engine and builds a fresh MediaPlayerCoreX bound to the same VideoView.
-        private async System.Threading.Tasks.Task RecreatePlayerAsync()
+        // Disposes any existing engine and builds a fresh VideoCaptureCoreX bound to the same VideoView.
+        private async System.Threading.Tasks.Task RecreateEngineAsync()
         {
-            if (_player != null)
+            if (_core != null)
             {
-                _player.OnError -= Player_OnError;
-                _player.OnStop -= Player_OnStop;
-                try { await _player.StopAsync(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex); }
-                await _player.DisposeAsync();
-                _player = null;
+                _core.OnError -= Core_OnError;
+                _core.OnStop -= Core_OnStop;
+                try { await _core.StopAsync(); } catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex); }
+                await _core.DisposeAsync();
+                _core = null;
             }
 
             if (_isClosing)
@@ -354,16 +370,22 @@ namespace Player_Live_Subtitles_X_WPF
                 return;
             }
 
-            _player = new MediaPlayerCoreX(VideoView1);
-            _player.OnError += Player_OnError;
-            _player.OnStop += Player_OnStop;
+            _core = new VideoCaptureCoreX(VideoView1);
+            _core.OnError += Core_OnError;
+            _core.OnStop += Core_OnStop;
         }
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(edFile.Text))
+            if (_cameras == null || _cameras.Length == 0 || cbCamera.SelectedIndex < 0)
             {
-                MessageBox.Show(this, "Select a media file.");
+                MessageBox.Show(this, "No camera devices were found.");
+                return;
+            }
+
+            if (_mics == null || _mics.Length == 0 || cbMic.SelectedIndex < 0)
+            {
+                MessageBox.Show(this, "No microphone devices were found.");
                 return;
             }
 
@@ -391,21 +413,46 @@ namespace Player_Live_Subtitles_X_WPF
                 mmLog.Clear();
                 lbSubtitle.Text = string.Empty;
 
-                // Build the engine from scratch for every session.
-                await RecreatePlayerAsync();
-                if (_player == null || _isClosing)
+                // Build a fresh engine for this session.
+                await RecreateEngineAsync();
+                if (_core == null || _isClosing)
                 {
                     btStart.IsEnabled = true;
                     return;
                 }
 
-                // Build the source before registering the block (a CreateAsync failure must not strand a block).
-                var source = await UniversalSourceSettings.CreateAsync(edFile.Text, renderVideo: true, renderAudio: true);
+                // Camera source (for the preview the subtitle is drawn over).
+                var device = _cameras[cbCamera.SelectedIndex];
+                var formatItem = device.GetHDOrAnyVideoFormatAndFrameRate(out var frameRate);
+                if (formatItem == null)
+                {
+                    MessageBox.Show(this, "Unable to read a camera format.");
+                    btStart.IsEnabled = true;
+                    return;
+                }
 
-                // Route audio to a non-synced null renderer so the speech-to-text block runs at full speed, not real time.
-                _player.Audio_OutputBlock = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false };
+                var videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
+                {
+                    Format = formatItem.ToFormat()
+                };
+                videoSourceSettings.Format.FrameRate = frameRate;
+                _core.Video_Source = videoSourceSettings;
 
-                // VAD runs on CUDA only when Whisper does, otherwise CPU.
+                // Microphone source. A non-synced null renderer via Audio_OutputBlock terminates the audio chain with no audible output.
+                var mic = _mics[cbMic.SelectedIndex];
+                var micFormat = mic.GetDefaultFormat();
+                if (micFormat == null)
+                {
+                    MessageBox.Show(this, "Unable to read a microphone format.");
+                    btStart.IsEnabled = true;
+                    return;
+                }
+
+                _core.Audio_Source = mic.CreateSourceSettingsVC(micFormat);
+                _core.Audio_Play = false;
+                _core.Audio_OutputBlock = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false };
+
+                // The block taps audio and passes it through unchanged. Silero VAD (when enabled) trims silence so Whisper only runs on speech.
                 var provider = SelectedProvider();
                 var settings = new SpeechToTextSettings(edModel.Text)
                 {
@@ -419,14 +466,11 @@ namespace Player_Live_Subtitles_X_WPF
 
                 _speechToText = new SpeechToTextBlock(settings);
                 _speechToText.OnSpeechRecognized += SpeechToText_OnSpeechRecognized;
-                _player.Audio_Processing_AddBlock(_speechToText);
+                _core.Audio_Processing_AddBlock(_speechToText);
 
-                _player.Video_Play = true;
-                _player.Audio_Play = true;
-
-                if (!await _player.OpenAsync(source) || !await _player.PlayAsync())
+                if (!await _core.StartAsync())
                 {
-                    Log("start error: failed to open or play the source.");
+                    Log("start error: failed to start capture.");
                     await CleanupAfterStopAsync();
                     btStart.IsEnabled = true;
                     return;
@@ -436,7 +480,6 @@ namespace Player_Live_Subtitles_X_WPF
             }
             catch (Exception ex)
             {
-                // StopAsync tears down the pipeline and disposes any wired block; a pre-build throw registered none.
                 Log("start error: " + ex.Message);
                 await CleanupAfterStopAsync();
                 btStart.IsEnabled = true;
@@ -461,7 +504,7 @@ namespace Player_Live_Subtitles_X_WPF
                 if (!string.IsNullOrEmpty(text))
                 {
                     line = text;
-                    Log($"[{segment.StartTime:hh\\:mm\\:ss} -> {segment.EndTime:hh\\:mm\\:ss}] {text}");
+                    Log(text);
                 }
             }
 
@@ -479,9 +522,9 @@ namespace Player_Live_Subtitles_X_WPF
             }));
         }
 
-        private void Player_OnError(object sender, ErrorsEventArgs e) => Log(e.Message);
+        private void Core_OnError(object sender, ErrorsEventArgs e) => Log(e.Message);
 
-        private void Player_OnStop(object sender, StopEventArgs e)
+        private void Core_OnStop(object sender, StopEventArgs e)
         {
             // The engine disposes the inserted block on stop; drop our reference so the next Start re-creates one.
             _ = Dispatcher.BeginInvoke(new Action(() =>
@@ -497,7 +540,7 @@ namespace Player_Live_Subtitles_X_WPF
                     return;
                 }
 
-                if (_player != null && _player.State != PlaybackState.Free)
+                if (_core != null && _core.State != PlaybackState.Free)
                 {
                     return;
                 }
@@ -535,9 +578,9 @@ namespace Player_Live_Subtitles_X_WPF
 
         private async System.Threading.Tasks.Task CleanupAfterStopAsync()
         {
-            if (_player != null)
+            if (_core != null)
             {
-                await _player.StopAsync();
+                await _core.StopAsync();
             }
 
             DetachBlock();
@@ -575,13 +618,13 @@ namespace Player_Live_Subtitles_X_WPF
 
             try
             {
-                if (_player != null)
+                if (_core != null)
                 {
-                    _player.OnError -= Player_OnError;
-                    _player.OnStop -= Player_OnStop;
-                    await _player.StopAsync();
-                    await _player.DisposeAsync();
-                    _player = null;
+                    _core.OnError -= Core_OnError;
+                    _core.OnStop -= Core_OnStop;
+                    await _core.StopAsync();
+                    await _core.DisposeAsync();
+                    _core = null;
                 }
 
                 VideoView1.CallRefresh();

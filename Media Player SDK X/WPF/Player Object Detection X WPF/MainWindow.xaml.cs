@@ -193,7 +193,8 @@ namespace Player_Object_Detection_X_WPF
                         }
                     }
 
-                    File.Move(tempPath, destPath, overwrite: true);
+                    if (File.Exists(destPath)) { File.Delete(destPath); }
+                    File.Move(tempPath, destPath);
                 });
 
                 edModel.Text = destPath;
@@ -466,6 +467,12 @@ namespace Player_Object_Detection_X_WPF
             e.Cancel = true;
             _isClosing = true;
             IsEnabled = false;
+
+            // Wait for an in-flight Start/Stop to finish before tearing the engine down.
+            while (Interlocked.CompareExchange(ref _startStopBusy, 1, 0) != 0)
+            {
+                await Task.Delay(50);
+            }
 
             try
             {

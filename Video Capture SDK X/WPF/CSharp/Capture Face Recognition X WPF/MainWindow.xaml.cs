@@ -291,7 +291,8 @@ namespace Capture_Face_Recognition_X_WPF
                         }
                     }
 
-                    File.Move(tmpPath, destPath, true);
+                    if (File.Exists(destPath)) { File.Delete(destPath); }
+                    File.Move(tmpPath, destPath);
                 });
 
                 target.Text = destPath;
