@@ -147,8 +147,12 @@ namespace Capture_Face_Recognition_X
                 PrefillFromCache(ref _detModelPath, DetectorModelFile);
                 PrefillFromCache(ref _embModelPath, SelectedEmbeddingFile);
 
-                // Restore a previously saved gallery, if present.
-                LoadGalleryFromAppData();
+                // Restore a previously saved gallery only on a fresh page — a re-Loaded (MAUI reuses the
+                // page instance on navigation) must not clobber unsaved in-memory enrollments.
+                if (_gallery.Count == 0 && _enrolledPhotos.Count == 0)
+                {
+                    LoadGalleryFromAppData();
+                }
 
                 RefreshModelStatus();
 

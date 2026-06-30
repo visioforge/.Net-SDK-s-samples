@@ -130,8 +130,12 @@ namespace Player_Face_Recognition_X
 
                 Directory.CreateDirectory(ModelsCacheDir);
 
-                // Restore a previously saved gallery, if present (re-selects its embedding family).
-                LoadGalleryFromAppData();
+                // Restore a previously saved gallery only on a fresh page — a re-Loaded (MAUI reuses the
+                // page instance on navigation) must not clobber unsaved in-memory enrollments.
+                if (_gallery.Count == 0 && _enrolledPhotos.Count == 0)
+                {
+                    LoadGalleryFromAppData();
+                }
 
                 RefreshModelStatus();
 
@@ -779,7 +783,12 @@ namespace Player_Face_Recognition_X
             }
 
             // Build the source first (a CreateAsync failure must not strand a registered block).
+            // iOS exposes only the NSUrl overload; other platforms use the string overload.
+#if IOS && !MACCATALYST
+            var source = await UniversalSourceSettings.CreateAsync(Foundation.NSUrl.FromFilename(_filePath), renderVideo: true, renderAudio: false);
+#else
             var source = await UniversalSourceSettings.CreateAsync(_filePath, renderVideo: true, renderAudio: false);
+#endif
 
             // Build the recognizer and insert it as a video processing block (DrawResults draws boxes into the frame).
             _face = new FaceRecognitionBlock(BuildSettings());

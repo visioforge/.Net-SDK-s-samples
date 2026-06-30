@@ -247,7 +247,12 @@ namespace Player_OCR_X
             }
 
             // Build the source first (a CreateAsync failure must not strand a registered block).
+            // iOS exposes only the NSUrl overload; other platforms use the string overload.
+#if IOS && !MACCATALYST
+            var source = await UniversalSourceSettings.CreateAsync(Foundation.NSUrl.FromFilename(_filePath), renderVideo: true, renderAudio: false);
+#else
             var source = await UniversalSourceSettings.CreateAsync(_filePath, renderVideo: true, renderAudio: false);
+#endif
 
             // Build the OCR block; DrawResults renders recognized text regions into the displayed frame.
             var settings = new OcrSettings(_detModelPath, _recModelPath, _dictPath, _clsModelPath)
