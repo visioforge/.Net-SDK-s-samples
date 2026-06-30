@@ -99,6 +99,8 @@ namespace YoloObjectDetectionMB
                 _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
                 if (_cameras.Length > 0)
                 {
+                    // Reset selection so a reused page can't keep a stale device.
+                    _cameraSelectedIndex = 0;
                     btCamera.Text = _cameras[0].DisplayName;
                 }
 
@@ -125,7 +127,7 @@ namespace YoloObjectDetectionMB
             {
                 Directory.CreateDirectory(FileSystem.AppDataDirectory);
 
-                // Copy to a temp file, then move into place (overwrite-safe against a concurrent first run).
+                // Copy to a temp file, then move into place (overwrite-safe).
                 var temp = dest + ".part";
                 using (var src = await FileSystem.OpenAppPackageFileAsync(fileName))
                 using (var dst = File.Create(temp))
@@ -138,14 +140,13 @@ namespace YoloObjectDetectionMB
             return dest;
         }
 
-        // Builds the model list: bundled YOLOX (extracted from the app package), a downloadable
-        // RT-DETR, and a "Custom model..." entry that lets the user browse for any .onnx file.
+        // Builds the model list: bundled YOLOX, downloadable RT-DETR, and a "Custom model..." browse entry.
         private async Task<List<ModelPreset>> BuildModelListAsync()
         {
             Directory.CreateDirectory(ModelsCacheDir);
             var list = new List<ModelPreset>();
 
-            // Bundled YOLOX Nano — best-effort extraction from the app package to a real path.
+            // Bundled YOLOX Nano — best-effort extraction from the app package.
             string bundledPath = null;
             try
             {
@@ -214,11 +215,17 @@ namespace YoloObjectDetectionMB
                 }
             }
 
-            // Setting SelectedIndex raises SelectedIndexChanged, which updates the buttons/label.
             pkModel.SelectedIndex = selIdx;
+
+            // SelectedIndexChanged does NOT fire when the index is unchanged (e.g. re-selecting the
+            // same preset right after its download completes), so refresh the selection explicitly —
+            // otherwise _selectedPreset keeps its stale LocalPath = null and Start can't find the model.
+            UpdateModelSelection();
         }
 
-        private void pkModel_SelectedIndexChanged(object sender, EventArgs e)
+        private void pkModel_SelectedIndexChanged(object sender, EventArgs e) => UpdateModelSelection();
+
+        private void UpdateModelSelection()
         {
             if (_modelPresets == null || pkModel.SelectedIndex < 0 || pkModel.SelectedIndex >= _modelPresets.Count)
             {
@@ -267,44 +274,60 @@ namespace YoloObjectDetectionMB
             var temp = dest + ".part";
             try
             {
-                using (var response = await _http.GetAsync(_selectedPreset.DownloadUrl, HttpCompletionOption.ResponseHeadersRead))
+                // Run the download off the UI thread; progress is marshalled back via the Dispatcher.
+                await Task.Run(async () =>
                 {
-                    response.EnsureSuccessStatusCode();
-
-                    var total = response.Content.Headers.ContentLength ?? -1L;
-                    using (var src = await response.Content.ReadAsStreamAsync())
-                    using (var fileStream = File.Create(temp))
+                    using (var response = await _http.GetAsync(_selectedPreset.DownloadUrl, HttpCompletionOption.ResponseHeadersRead))
                     {
-                        var buffer = new byte[81920];
-                        long readTotal = 0;
-                        int lastPercent = -1;
-                        int read;
-                        while ((read = await src.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                        {
-                            await fileStream.WriteAsync(buffer, 0, read);
-                            readTotal += read;
+                        response.EnsureSuccessStatusCode();
 
-                            // The async handler resumes on the UI thread, so updating the UI here is safe.
-                            // Throttle to whole-percent changes to avoid flooding the layout.
-                            if (total > 0)
+                        var total = response.Content.Headers.ContentLength ?? -1L;
+                        using (var src = await response.Content.ReadAsStreamAsync())
+                        using (var fileStream = File.Create(temp))
+                        {
+                            var buffer = new byte[81920];
+                            long readTotal = 0;
+                            int lastPercent = -1;
+                            int read;
+                            while ((read = await src.ReadAsync(buffer, 0, buffer.Length)) > 0)
                             {
-                                var percent = (int)(readTotal * 100 / total);
-                                if (percent != lastPercent)
+                                await fileStream.WriteAsync(buffer, 0, read);
+                                readTotal += read;
+
+                                // Throttle UI updates to whole-percent steps.
+                                if (total > 0)
                                 {
-                                    lastPercent = percent;
-                                    pbDownload.Progress = percent / 100.0;
-                                    lbModelPath.Text = $"Downloading... {percent}%  ({readTotal / 1024 / 1024} / {total / 1024 / 1024} MB)";
+                                    var percent = (int)(readTotal * 100 / total);
+                                    if (percent != lastPercent)
+                                    {
+                                        lastPercent = percent;
+                                        var readMB = readTotal / 1024 / 1024;
+                                        var totalMB = total / 1024 / 1024;
+                                        Dispatcher?.Dispatch(() =>
+                                        {
+                                            pbDownload.Progress = percent / 100.0;
+                                            lbModelPath.Text = $"Downloading... {percent}%  ({readMB} / {totalMB} MB)";
+                                        });
+                                    }
+                                }
+                                else
+                                {
+                                    var readMB = readTotal / 1024 / 1024;
+                                    Dispatcher?.Dispatch(() => lbModelPath.Text = $"Downloading... {readMB} MB");
                                 }
                             }
-                            else
+
+                            // Reject a truncated download so a partial .onnx is never cached as complete.
+                            if (total > 0 && readTotal != total)
                             {
-                                lbModelPath.Text = $"Downloading... {readTotal / 1024 / 1024} MB";
+                                throw new IOException($"Incomplete download: received {readTotal} of {total} bytes.");
                             }
                         }
                     }
-                }
 
-                File.Move(temp, dest, overwrite: true);
+                    File.Move(temp, dest, overwrite: true);
+                });
+
                 pbDownload.Progress = 1;
                 await RefreshModelListAsync();
             }
@@ -501,13 +524,11 @@ namespace YoloObjectDetectionMB
 
         private async Task StopAsync(bool updateUI = true)
         {
-            // Serialize teardown: a user STOP tap and CleanupAsync (page unload / window close) can both
-            // reach here. The gate lets the first fully tear down while the second awaits, so the
-            // pipeline is disposed exactly once.
+            // Serialize teardown so a user STOP and page-close cleanup dispose the pipeline exactly once.
             await _teardownGate.WaitAsync();
             try
             {
-                // A prior caller (user STOP or page-close cleanup) already tore down — nothing to do.
+                // A prior caller already tore down — nothing to do.
                 if (_pipeline == null)
                 {
                     return;
@@ -529,8 +550,7 @@ namespace YoloObjectDetectionMB
                         _detector.OnObjectsDetected -= Detector_OnObjectsDetected;
                     }
 
-                    // DisposeAsync disposes every connected block (camera source, detector, renderer);
-                    // do NOT ClearBlocks first or the block list is emptied before disposal.
+                    // DisposeAsync disposes every connected block; do NOT ClearBlocks first.
                     _pipeline.OnError -= Pipeline_OnError;
                     await _pipeline.DisposeAsync();
                     _pipeline = null;

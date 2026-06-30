@@ -155,11 +155,17 @@ namespace Player_Object_Detection_X
                 }
             }
 
-            // Setting SelectedIndex raises SelectedIndexChanged, which updates the buttons/label.
             pkModel.SelectedIndex = selIdx;
+
+            // SelectedIndexChanged does NOT fire when the index is unchanged (e.g. re-selecting the
+            // same preset right after its download completes), so refresh the selection explicitly —
+            // otherwise _selectedPreset keeps its stale LocalPath = null and Start can't find the model.
+            UpdateModelSelection();
         }
 
-        private void pkModel_SelectedIndexChanged(object sender, EventArgs e)
+        private void pkModel_SelectedIndexChanged(object sender, EventArgs e) => UpdateModelSelection();
+
+        private void UpdateModelSelection()
         {
             if (_modelPresets == null || pkModel.SelectedIndex < 0 || pkModel.SelectedIndex >= _modelPresets.Count)
             {
