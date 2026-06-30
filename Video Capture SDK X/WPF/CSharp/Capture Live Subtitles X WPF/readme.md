@@ -15,7 +15,7 @@ stt.OnSpeechRecognized += (s, e) => { /* e.Segments[].Text */ };
 
 core.Video_Source = new VideoCaptureDeviceSourceSettings(camera) { Format = format };
 core.Audio_Source = mic.CreateSourceSettingsVC(mic.GetDefaultFormat());
-core.Audio_Record = true;                     // builds the audio chain (no speaker / file needed)
+core.Audio_OutputBlock = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false }; // builds the audio chain, no speaker output
 core.Audio_Processing_AddBlock(stt);          // add BEFORE StartAsync
 await core.StartAsync();
 ```

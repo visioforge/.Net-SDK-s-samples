@@ -23,8 +23,8 @@ namespace Capture_Live_Subtitles_X_WPF
     /// <summary>
     /// Inserts a Whisper speech-to-text block into VideoCaptureCoreX through the Audio_Processing_AddBlock API:
     /// the block taps the live microphone audio (passing it through unchanged) and raises OnSpeechRecognized,
-    /// shown as a live subtitle over the camera preview. Audio_Record builds the audio chain without needing
-    /// speaker output or a recording file.
+    /// shown as a live subtitle over the camera preview. A non-synced null renderer set as Audio_OutputBlock
+    /// builds the audio chain without needing speaker output or a recording file.
     /// </summary>
     public partial class MainWindow : Window
     {

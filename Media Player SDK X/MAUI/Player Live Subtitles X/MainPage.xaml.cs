@@ -16,8 +16,8 @@ namespace Player_Live_Subtitles_X
 {
     /// <summary>
     /// Inserts a Whisper speech-to-text block into MediaPlayerCoreX through the X-engine
-    /// Audio_Processing_AddBlock API. The block taps the decoded audio (passing it through to the
-    /// speakers unchanged) and raises OnSpeechRecognized, which is shown as a live subtitle while
+    /// Audio_Processing_AddBlock API. The block taps the decoded audio (audio output goes to a null
+    /// renderer, so the file plays without speaker sound) and raises OnSpeechRecognized, shown as a live subtitle while
     /// the engine plays a normal file.
     /// </summary>
     public partial class MainPage : ContentPage

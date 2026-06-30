@@ -15,13 +15,13 @@ stt.OnSpeechRecognized += (s, e) => { /* e.Segments[].Text */ };
 
 core.Video_Source = videoSourceSettings;
 core.Audio_Source = micSourceSettings;
-core.Audio_Record = true;                 // builds the audio chain (no speaker output / file needed)
+core.Audio_OutputBlock = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false }; // builds the audio chain, no speaker output
 core.Audio_Processing_AddBlock(stt);      // add BEFORE StartAsync
 await core.StartAsync();
 ```
 
-`Audio_Record = true` is what makes the engine build the audio chain the block is inserted into — it
-does **not** require a recording file or a speaker renderer. The block passes audio through unchanged.
+A non-synced null renderer set as `Audio_OutputBlock` builds the audio chain the block is inserted into —
+no speaker output and no recording file are needed. The block passes audio through unchanged.
 The engine owns and disposes the block when capture stops; the app only detaches its handler.
 
 ## Running

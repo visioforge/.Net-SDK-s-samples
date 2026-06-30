@@ -24,7 +24,7 @@ await player.OpenAsync(source);
 await player.PlayAsync();
 ```
 
-The block taps the audio and passes it through unchanged, so playback still goes to the speakers.
+The block taps the audio for transcription; this demo sends audio output to a null renderer, so the file plays without speaker sound (set `Audio_OutputDevice` as shown above to also hear it).
 The engine owns and disposes the block when playback stops; the app only detaches its handler.
 
 ## Running

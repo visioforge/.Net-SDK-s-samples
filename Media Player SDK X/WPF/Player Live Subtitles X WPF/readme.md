@@ -1,8 +1,8 @@
 # Media Player SDK X .Net — Player Live Subtitles X (C#/WPF)
 
 Plays a media file with **MediaPlayerCoreX** and inserts a **Whisper speech-to-text block** into the
-audio pipeline through the X-engine processing-block API. The block taps the decoded audio (passing it
-through to the speakers unchanged) and raises `OnSpeechRecognized`, shown as a live subtitle:
+audio pipeline through the X-engine processing-block API. The block taps the decoded audio (audio output
+goes to a null renderer, so it plays without speaker sound) and raises `OnSpeechRecognized`, shown as a live subtitle:
 
 ```csharp
 var stt = new SpeechToTextBlock(new SpeechToTextSettings(modelPath)

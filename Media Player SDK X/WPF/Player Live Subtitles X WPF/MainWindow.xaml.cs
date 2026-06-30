@@ -23,7 +23,7 @@ namespace Player_Live_Subtitles_X_WPF
 {
     /// <summary>
     /// Inserts a Whisper speech-to-text block into MediaPlayerCoreX through the Audio_Processing_AddBlock API:
-    /// the block taps the decoded audio (passing it through to the speakers unchanged) and raises
+    /// the block taps the decoded audio (audio output goes to a null renderer, so it plays without speaker sound) and raises
     /// OnSpeechRecognized, shown as a live subtitle while the engine plays a normal file.
     /// </summary>
     public partial class MainWindow : Window
