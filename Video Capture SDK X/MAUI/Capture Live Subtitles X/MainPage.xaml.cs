@@ -296,9 +296,18 @@ namespace Capture_Live_Subtitles_X
             try
             {
                 var pick = await FilePicker.Default.PickAsync();
-                if (pick?.FullPath != null)
+                if (pick != null)
                 {
-                    _modelPath = pick.FullPath;
+                    // iOS/Mac picker paths are security-scoped — copy the model into the writable cache.
+                    Directory.CreateDirectory(ModelsDir);
+                    var local = Path.Combine(ModelsDir, $"{Guid.NewGuid():N}{Path.GetExtension(pick.FileName)}");
+                    using (var src = await pick.OpenReadAsync())
+                    using (var dst = File.Create(local))
+                    {
+                        await src.CopyToAsync(dst);
+                    }
+
+                    _modelPath = local;
                     SetStatus("Model: " + pick.FileName);
                 }
             }
@@ -614,7 +623,7 @@ namespace Capture_Live_Subtitles_X
                 _core.OnError -= Core_OnError;
                 _core.OnStop -= Core_OnStop;
                 await _core.StopAsync();
-                _core.Dispose();
+                await _core.DisposeAsync();
                 _core = null;
             }
 

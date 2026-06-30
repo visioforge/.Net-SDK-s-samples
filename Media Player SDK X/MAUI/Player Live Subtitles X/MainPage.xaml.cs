@@ -30,6 +30,9 @@ namespace Player_Live_Subtitles_X
 
         // Whisper GGML model presets, downloaded with a progress bar and cached under ModelsDir.
         private static readonly string ModelsDir = Path.Combine(FileSystem.AppDataDirectory, "models");
+
+        // Picked media is copied here; AppDataDirectory is writable and accessible by the native engine on every platform.
+        private static readonly string OpenedMediaDir = Path.Combine(FileSystem.AppDataDirectory, "opened_media");
         private static readonly HttpClient _http = new HttpClient { Timeout = TimeSpan.FromMinutes(10) };
         private List<ModelPreset> _modelPresets;
 
@@ -246,9 +249,18 @@ namespace Player_Live_Subtitles_X
             try
             {
                 var pick = await FilePicker.Default.PickAsync();
-                if (pick?.FullPath != null)
+                if (pick != null)
                 {
-                    _modelPath = pick.FullPath;
+                    // iOS/Mac picker paths are security-scoped — copy the model into the writable cache.
+                    Directory.CreateDirectory(ModelsDir);
+                    var local = Path.Combine(ModelsDir, $"{Guid.NewGuid():N}{Path.GetExtension(pick.FileName)}");
+                    using (var src = await pick.OpenReadAsync())
+                    using (var dst = File.Create(local))
+                    {
+                        await src.CopyToAsync(dst);
+                    }
+
+                    _modelPath = local;
                     SetStatus("Model: " + pick.FileName);
                 }
             }
@@ -263,9 +275,23 @@ namespace Player_Live_Subtitles_X
             try
             {
                 var pick = await FilePicker.Default.PickAsync();
-                if (pick?.FullPath != null)
+                if (pick != null)
                 {
-                    _filePath = pick.FullPath;
+                    // iOS/Mac picker paths are security-scoped — copy the stream to app-data and play from there.
+                    Directory.CreateDirectory(OpenedMediaDir);
+                    if (!string.IsNullOrEmpty(_filePath))
+                    {
+                        try { File.Delete(_filePath); } catch (Exception delEx) { Debug.WriteLine(delEx); }
+                    }
+
+                    var local = Path.Combine(OpenedMediaDir, $"{Guid.NewGuid():N}{Path.GetExtension(pick.FileName)}");
+                    using (var src = await pick.OpenReadAsync())
+                    using (var dst = File.Create(local))
+                    {
+                        await src.CopyToAsync(dst);
+                    }
+
+                    _filePath = local;
                     SetStatus("File: " + pick.FileName);
                 }
             }
