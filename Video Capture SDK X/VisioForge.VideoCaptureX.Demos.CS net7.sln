@@ -87,6 +87,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Capture Face Recognition X 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Capture OCR X WPF net7", "WPF\CSharp\Capture OCR X WPF\Capture OCR X WPF net7.csproj", "{50FF60C0-78D1-441E-90E7-F099237FA1DA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Capture Object Detection X WPF net7", "WPF\CSharp\Capture Object Detection X WPF\Capture Object Detection X WPF net7.csproj", "{129C3973-592C-4127-A500-D240AC2ED223}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -577,6 +579,18 @@ Global
 		{50FF60C0-78D1-441E-90E7-F099237FA1DA}.Release|x64.Build.0 = Release|Any CPU
 		{50FF60C0-78D1-441E-90E7-F099237FA1DA}.Release|x86.ActiveCfg = Release|Any CPU
 		{50FF60C0-78D1-441E-90E7-F099237FA1DA}.Release|x86.Build.0 = Release|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Debug|x64.Build.0 = Debug|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Debug|x86.Build.0 = Debug|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Release|x64.ActiveCfg = Release|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Release|x64.Build.0 = Release|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Release|x86.ActiveCfg = Release|Any CPU
+		{129C3973-592C-4127-A500-D240AC2ED223}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -622,6 +636,7 @@ Global
 		{7CB7278B-B69E-4A15-872E-7829435FFEFC} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{06480431-47C3-4D26-861F-CC428890B700} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{50FF60C0-78D1-441E-90E7-F099237FA1DA} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
+		{129C3973-592C-4127-A500-D240AC2ED223} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
