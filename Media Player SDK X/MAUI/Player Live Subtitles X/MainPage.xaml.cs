@@ -38,6 +38,10 @@ namespace Player_Live_Subtitles_X
 
         private bool _isRunning;
         private bool _isCleanedUp;
+
+        // Single-shot atomic claim so concurrent Unloaded + Window.Destroying can't both run teardown.
+        private int _cleanupClaimed;
+
         private Window _window;
 
         // Re-entrancy guard for START/STOP (0 = free, 1 = busy).
@@ -53,8 +57,11 @@ namespace Player_Live_Subtitles_X
 
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
-            // Re-arm the cleanup flag: MAUI reuses the page instance after an Unloaded teardown.
+            // Re-arm cleanup/guard flags: MAUI reuses the page instance after an Unloaded teardown.
             _isCleanedUp = false;
+            _isRunning = false;
+            Interlocked.Exchange(ref _cleanupClaimed, 0);
+            Interlocked.Exchange(ref _startStopBusy, 0);
 
             try
             {
@@ -554,12 +561,19 @@ namespace Player_Live_Subtitles_X
 
         private async Task CleanupAsync()
         {
-            if (_isCleanedUp)
+            // Atomically claim teardown so Unloaded and Window.Destroying can't both run it.
+            if (Interlocked.Exchange(ref _cleanupClaimed, 1) == 1)
             {
                 return;
             }
 
             _isCleanedUp = true;
+
+            // Drain and claim the Start/Stop guard before disposing the engine, so teardown can't race a live StartAsync.
+            while (Interlocked.CompareExchange(ref _startStopBusy, 1, 0) != 0)
+            {
+                await Task.Delay(50);
+            }
 
             if (_window != null)
             {
