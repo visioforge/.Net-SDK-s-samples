@@ -1,0 +1,74 @@
+<Window x:Class="Player_Live_Subtitles_X_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        Title="Player Live Subtitles (MediaPlayerCoreX)" Height="640" Width="1040"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid Margin="8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="360" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Margin="0,0,8,0">
+            <WPF:VideoView x:Name="VideoView1" />
+            <Border VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,24"
+                    Background="#99000000" CornerRadius="4" Padding="12,6">
+                <TextBlock x:Name="lbSubtitle" Foreground="White" FontSize="20" TextWrapping="Wrap"
+                           TextAlignment="Center" MaxWidth="760" />
+            </Border>
+        </Grid>
+
+        <DockPanel Grid.Column="1">
+            <StackPanel DockPanel.Dock="Top">
+                <TextBlock Text="Media file" FontWeight="Bold" />
+                <DockPanel Margin="0,2,0,8">
+                    <Button x:Name="btSelectFile" DockPanel.Dock="Right" Content="..." Width="32" Click="btSelectFile_Click" />
+                    <TextBox x:Name="edFile" />
+                </DockPanel>
+
+                <TextBlock Text="Whisper model" FontWeight="Bold" />
+                <ComboBox x:Name="cbModel" Margin="0,2,0,4" SelectionChanged="cbModel_SelectionChanged" />
+                <DockPanel Margin="0,0,0,8">
+                    <Button x:Name="btDownloadModel" DockPanel.Dock="Right" Content="Download" Width="84" Margin="6,0,0,0" Click="btDownloadModel_Click" Visibility="Collapsed" />
+                    <Button x:Name="btSelectModel" DockPanel.Dock="Right" Content="..." Width="32" Click="btSelectModel_Click" Visibility="Collapsed" />
+                    <TextBox x:Name="edModel" IsReadOnly="True" />
+                </DockPanel>
+
+                <CheckBox x:Name="cbEnableVad" Content="Enable Silero VAD (recommended)" IsChecked="True" Margin="0,0,0,4" />
+                <TextBlock Text="Silero VAD model" FontWeight="Bold" />
+                <DockPanel Margin="0,2,0,8">
+                    <Button x:Name="btDownloadVad" DockPanel.Dock="Right" Content="Download" Width="84" Margin="6,0,0,0" Click="btDownloadVad_Click" />
+                    <Button x:Name="btSelectVad" DockPanel.Dock="Right" Content="..." Width="32" Click="btSelectVad_Click" />
+                    <TextBox x:Name="edVadFile" IsReadOnly="True" />
+                </DockPanel>
+
+                <TextBlock Text="Language (ISO code or 'auto')" FontWeight="Bold" />
+                <TextBox x:Name="edLanguage" Text="auto" Margin="0,2,0,8" />
+
+                <TextBlock Text="Task" FontWeight="Bold" />
+                <ComboBox x:Name="cbTask" Margin="0,2,0,8" SelectedIndex="0">
+                    <ComboBoxItem Content="Transcribe" Tag="transcribe" />
+                    <ComboBoxItem Content="Translate to English" Tag="translate" />
+                </ComboBox>
+
+                <TextBlock Text="Execution provider" FontWeight="Bold" />
+                <ComboBox x:Name="cbProvider" Margin="0,2,0,8" SelectedIndex="0">
+                    <ComboBoxItem Content="Auto" Tag="auto" />
+                    <ComboBoxItem Content="CPU" Tag="cpu" />
+                    <ComboBoxItem Content="CUDA (NVIDIA)" Tag="cuda" />
+                </ComboBox>
+
+                <StackPanel Orientation="Horizontal" Margin="0,4,0,8">
+                    <Button x:Name="btStart" Content="Start" Width="90" Click="btStart_Click" />
+                    <Button x:Name="btStop" Content="Stop" Width="90" Margin="8,0,0,0" IsEnabled="False" Click="btStop_Click" />
+                </StackPanel>
+
+                <TextBlock Text="Transcript" FontWeight="Bold" />
+            </StackPanel>
+
+            <TextBox x:Name="mmLog" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
+                     TextWrapping="Wrap" FontFamily="Consolas" FontSize="11" />
+        </DockPanel>
+    </Grid>
+</Window>

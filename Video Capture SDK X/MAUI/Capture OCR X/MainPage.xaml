@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Capture_OCR_X.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <!-- Video on top, controls below — separate Grid rows so the panel never overlaps the video. -->
+    <Grid RowSpacing="0" RowDefinitions="*,Auto">
+
+        <my:VideoView Grid.Row="0"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            x:Name="videoView"
+            Background="Black"/>
+
+        <StackLayout Grid.Row="1" Orientation="Vertical" HorizontalOptions="Fill"
+            Background="#1e1e1e" Padding="8" Spacing="6">
+
+            <!-- First non-empty recognized line for the current frame. -->
+            <Label x:Name="lbStatus" Text="Choose a camera, then START."
+                FontSize="14" FontAttributes="Bold" TextColor="#4CAF50" LineBreakMode="TailTruncation" />
+
+            <!-- Recognized-region count + controls row -->
+            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                <Label x:Name="lbCount" Grid.Column="0" Text="Regions: 0"
+                    VerticalOptions="Center" FontSize="12" TextColor="#888" />
+                <Button x:Name="btCamera" Grid.Column="1" Text="SELECT CAMERA" Clicked="btCamera_Clicked" />
+                <Button x:Name="btStartStop" Grid.Column="2" Text="START" Clicked="btStartStop_Clicked"
+                    BackgroundColor="#4CAF50" />
+            </Grid>
+
+        </StackLayout>
+    </Grid>
+</ContentPage>

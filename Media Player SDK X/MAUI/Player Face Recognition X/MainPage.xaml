@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Player_Face_Recognition_X.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <Grid RowSpacing="0" RowDefinitions="*,Auto">
+
+        <my:VideoView Grid.Row="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            x:Name="videoView"
+            Background="Black"/>
+
+        <!-- Live recognition summary, overlaid on the video. -->
+        <Label Grid.Row="0" x:Name="lbStatus"
+            Text="Enroll a face, pick a file, then START."
+            Margin="12" Padding="8,4" BackgroundColor="#90000000" TextColor="White"
+            FontSize="13" HorizontalOptions="Start" VerticalOptions="Start" />
+
+        <ScrollView Grid.Row="1" MaximumHeightRequest="320" Background="#1e1e1e">
+            <VerticalStackLayout Spacing="6" Padding="12,8,12,12">
+
+                <!-- Embedding model family. SFace (128-D) is the default; AuraFace is ArcFace-family (512-D). -->
+                <Picker x:Name="pkEmbFamily" Title="Embedding model" TitleColor="#B0FFFFFF" TextColor="White"
+                    SelectedIndexChanged="pkEmbFamily_SelectedIndexChanged" />
+
+                <Label x:Name="lbModelStatus" Text=""
+                    TextColor="#B0FFFFFF" FontSize="12" LineBreakMode="WordWrap" />
+
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <ProgressBar Grid.Column="0" x:Name="pbDownload" Progress="0" ProgressColor="#4CAF50"
+                        IsVisible="False" VerticalOptions="Center" />
+                    <Button Grid.Column="1" x:Name="btDownloadModels" Text="Download models"
+                        Clicked="btDownloadModels_Clicked" />
+                </Grid>
+
+                <!-- Enrollment: person name + one or more reference photos. -->
+                <Entry x:Name="edPersonName" Placeholder="Person name" TextColor="White"
+                    PlaceholderColor="#80FFFFFF" />
+
+                <Button x:Name="btEnroll" Text="Enroll photo(s)" Clicked="btEnroll_Clicked" />
+
+                <!-- Enrolled gallery. -->
+                <Label Text="Gallery" TextColor="#B0FFFFFF" FontSize="12" />
+                <CollectionView x:Name="lvGallery" SelectionMode="Single" HeightRequest="90">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}" TextColor="White" FontSize="13" Padding="4,2" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                    <Button Grid.Column="0" x:Name="btRemove" Text="Remove" Clicked="btRemove_Clicked" />
+                    <Button Grid.Column="1" x:Name="btSaveGallery" Text="Save" Clicked="btSaveGallery_Clicked" />
+                    <Button Grid.Column="2" x:Name="btLoadGallery" Text="Load" Clicked="btLoadGallery_Clicked" />
+                </Grid>
+
+                <Button x:Name="btFile" Text="OPEN FILE" Clicked="btFile_Clicked" />
+
+                <Button x:Name="btStartStop" Text="START" Clicked="btStartStop_Clicked"
+                    BackgroundColor="#4CAF50" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

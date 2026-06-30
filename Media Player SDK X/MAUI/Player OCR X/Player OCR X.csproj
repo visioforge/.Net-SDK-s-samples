@@ -1,0 +1,162 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net10.0-windows10.0.19041.0</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Player_OCR_X</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Display name -->
+    <ApplicationTitle>PlayerOCRX</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.visioforge.playerocrx</ApplicationId>
+    <ApplicationIdGuid>8a2d5e10-3c47-4b91-a6f2-1d9e7b4c0a35</ApplicationIdGuid>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
+    <!-- ONNX Runtime's Android library (ai.onnxruntime) requires minSdk 24. -->
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
+    <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">true</PublishTrimmed>
+    <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">true</PublishTrimmed>
+    <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">false</PublishTrimmed>
+    <PublishTrimmed Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">false</PublishTrimmed>
+    <!-- Enable the Mono interpreter on iOS / MacCatalyst. Without it, MAUI XAML runtime
+         hits 'System.ExecutionEngineException: Attempting to JIT compile method
+         (wrapper dynamic-method) object object:InvokeStub_Brush.op_Implicit ... while
+         running in aot-only mode' during App.InitializeComponent() -> Styles.xaml load,
+         because TypeConversionExtensions uses DynamicMethod to invoke implicit operators
+         and DynamicMethod requires JIT. The interpreter fills that gap with a tiny size
+         and startup cost. -->
+    <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">true</UseInterpreter>
+    <UseInterpreter Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">true</UseInterpreter>
+  </PropertyGroup>
+  <!-- Apple-only linker workaround. Scoped so it doesn't leak onto Android/Windows. -->
+  <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios' OR $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
+    <_UseClassicLinker>false</_UseClassicLinker>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">
+    <RuntimeIdentifier>maccatalyst-x64</RuntimeIdentifier>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('osx')) AND $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst' AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64'">
+    <RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
+    <RunAOTCompilation>False</RunAOTCompilation>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-maccatalyst|AnyCPU'">
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-ios|AnyCPU'">
+    <CreatePackage>false</CreatePackage>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
+    <ProvisioningType>manual</ProvisioningType>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- App Icon -->
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+    <!-- Splash Screen -->
+    <!-- Images -->
+    <MauiImage Include="Resources\Images\*" />
+    <MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+    <!-- Custom Fonts -->
+    <MauiFont Include="Resources\Fonts\*" />
+    <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+    <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+  <!-- On Windows a plain 'dotnet build' packages MauiAssets into the MSIX but does not copy them
+       into the loose layout next to the exe, where OpenAppPackageFileAsync reads them. Copy the
+       raw assets to the output so the models resolve at runtime. -->
+  <ItemGroup>
+    <MauiAsset Update="Resources\Raw\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <!-- Required - WinUI does not yet have buildTransitive for everything -->
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.251106002" />
+    <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.3.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\Splash\splash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+  </ItemGroup>
+  <!-- Microsoft.ML.OnnxRuntime declares a RegisterCustomOps P/Invoke (onnxruntime-extensions).
+       We don't use extensions, but Apple static (AOT) linking needs the symbol defined. The
+       official Dummy package provides a no-op RegisterCustomOps. It auto-wires iOS but ships an
+       empty (_._) target for Mac Catalyst, so wire its bundled xcframework manually there. -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios')) OR $(TargetFramework.Contains('-maccatalyst'))">
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Extensions.Dummy" Version="0.13.0" GeneratePathProperty="true" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
+    <NativeReference Include="$(PkgMicrosoft_ML_OnnxRuntime_Extensions_Dummy)\runtimes\ios\native\onnxruntime_extensions.xcframework.zip">
+      <Kind>Static</Kind>
+      <IsCxx>True</IsCxx>
+      <SmartLink>True</SmartLink>
+      <ForceLoad>True</ForceLoad>
+      <LinkerFlags>-lc++</LinkerFlags>
+      <WeakFrameworks>CoreML</WeakFrameworks>
+    </NativeReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.6.30" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.6.30" />
+    <PackageReference Include="VisioForge.DotNet.Core.AI" Version="2026.6.30" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionPlayerOCRXHideInfoBar="True" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- VisioForge SDK Deployment -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.4.29" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="2026.4.29" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="2026.4.18.0" />
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
+  </ItemGroup>
+  <!-- Custom NuGet package and target code for maccatalyst to copy NuGet redist files to app file -->
+  <ItemGroup Condition="$(TargetFramework.Contains('-maccatalyst'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macCatalyst" Version="2025.9.1" />
+  </ItemGroup>
+  <Target Name="CopyNativeLibrariesToMonoBundle" AfterTargets="Build" Condition="$(TargetFramework.Contains('-maccatalyst'))">
+    <Message Text="Starting CopyNativeLibrariesToMonoBundle target..." Importance="High" />
+    <PropertyGroup>
+      <AppBundleDir>$(OutputPath)$(AssemblyName).app</AppBundleDir>
+      <MonoBundleDir>$(AppBundleDir)/Contents/MonoBundle</MonoBundleDir>
+    </PropertyGroup>
+    <Message Text="AppBundleDir: $(AppBundleDir)" Importance="High" />
+    <Message Text="MonoBundleDir: $(MonoBundleDir)" Importance="High" />
+    <MakeDir Directories="$(MonoBundleDir)" Condition="!Exists('$(MonoBundleDir)')" />
+    <Copy SourceFiles="@(None-&gt;'%(FullPath)')" DestinationFolder="$(MonoBundleDir)" Condition="'%(Extension)' == '.dylib' Or '%(Extension)' == '.so'">
+      <Output TaskParameter="CopiedFiles" ItemName="CopiedNativeFiles" />
+    </Copy>
+    <Message Text="Copied native files:" Importance="High" Condition="@(CopiedNativeFiles) != ''" />
+    <Message Text=" - %(CopiedNativeFiles.Identity)" Importance="High" Condition="@(CopiedNativeFiles) != ''" />
+    <Message Text="Finished CopyNativeLibrariesToMonoBundle target." Importance="High" />
+  </Target>
+  <!-- Microsoft.ML.OnnxRuntime exposes Android only via its AAR; the .NET RID-fallback graph otherwise packs
+       the glibc linux-arm64 libonnxruntime.so into the APK (needs libdl.so.2, fails to dlopen -> ONNX init
+       throws). Strip the desktop-runtime onnxruntime natives on Android so only the AAR build ships. -->
+  <Target Name="_RemoveDesktopOnnxRuntimeFromAndroid" BeforeTargets="_BuildApkEmbed" Condition="$(TargetFramework.Contains('-android'))">
+    <ItemGroup>
+      <FrameworkNativeLibrary Remove="@(FrameworkNativeLibrary)" Condition="$([System.String]::Copy('%(Identity)').Replace('\','/').Contains('onnxruntime')) And ((($([System.String]::Copy('%(Identity)').Replace('\','/').Contains('/runtimes/linux-')) And !$([System.String]::Copy('%(Identity)').Replace('\','/').Contains('/runtimes/linux-bionic'))) Or $([System.String]::Copy('%(Identity)').Replace('\','/').Contains('/runtimes/win-')) Or $([System.String]::Copy('%(Identity)').Replace('\','/').Contains('/runtimes/osx-'))))" />
+    </ItemGroup>
+  </Target>
+</Project>

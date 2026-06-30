@@ -1,0 +1,110 @@
+<Window x:Class="Player_Face_Recognition_X_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        Title="Player Face Recognition (MediaPlayerCoreX)" Height="640" Width="980"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="460" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <wpf:VideoView Grid.Column="1" x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="440" Margin="10,10,10,0" />
+
+        <TabControl Grid.Column="0" Margin="10,10,0,10" VerticalAlignment="Stretch">
+            <TabItem Header="Source">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Media file" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edFile" Width="360" VerticalContentAlignment="Center"/>
+                        <Button x:Name="btSelectFile" Content="..." Width="40" Margin="10,0,0,0" Click="btSelectFile_Click"/>
+                    </StackPanel>
+                    <Label Content="Enroll the people you want to recognize on the Enrollment tab, then play a video containing them."
+                           Width="420" Margin="0,10,0,0"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Models">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Face detector model (YuNet, MIT)" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edDetModel" Width="300" VerticalContentAlignment="Center"/>
+                        <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectDet_Click"/>
+                        <Button x:Name="btDownloadDet" Content="Download" Width="74" Margin="6,0,0,0" Click="btDownloadDet_Click"/>
+                    </StackPanel>
+
+                    <Label Content="Face embedding model (SFace / ArcFace, Apache-2.0)" HorizontalAlignment="Left" Margin="0,8,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edEmbModel" Width="300" VerticalContentAlignment="Center"/>
+                        <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectEmb_Click"/>
+                        <Button x:Name="btDownloadEmb" Content="Download" Width="74" Margin="6,0,0,0" Click="btDownloadEmb_Click"/>
+                    </StackPanel>
+
+                    <Label Content="Embedding model family" HorizontalAlignment="Left" Margin="0,8,0,0"/>
+                    <ComboBox x:Name="cbEmbFamily" Width="200" HorizontalAlignment="Left" SelectionChanged="cbEmbFamily_SelectionChanged"/>
+
+                    <TextBlock x:Name="lbEmbHint" Width="420" Margin="0,6,0,0" TextWrapping="Wrap" Foreground="Gray" Visibility="Collapsed"/>
+
+                    <StackPanel x:Name="pnlDownload" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
+                        <TextBlock x:Name="lbDownloadStatus" Text="" HorizontalAlignment="Left" Width="420" TextTrimming="CharacterEllipsis"/>
+                        <ProgressBar x:Name="pbDownload" Width="420" Height="18" HorizontalAlignment="Left" Margin="0,4,0,0" Minimum="0" Maximum="100"/>
+                    </StackPanel>
+
+                    <CheckBox x:Name="cbDrawResults" Content="Draw recognized faces on video" IsChecked="True" Margin="0,12,0,0"/>
+                    <CheckBox x:Name="cbDrawLandmarks" Content="Draw facial landmarks" IsChecked="False" Margin="0,6,0,0"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Enrollment">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Person name" HorizontalAlignment="Left"/>
+                    <TextBox x:Name="edPersonName" Width="420" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                    <Button x:Name="btEnroll" Content="Pick photo and enroll..." Width="200" HorizontalAlignment="Left" Margin="0,8,0,0" Click="btEnroll_Click"/>
+
+                    <Label Content="Enrolled identities" HorizontalAlignment="Left" Margin="0,12,0,0"/>
+                    <ListBox x:Name="lbGallery" Height="180" Width="420" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Button x:Name="btRemove" Content="Remove selected" Width="120" Click="btRemove_Click"/>
+                        <Button x:Name="btSaveGallery" Content="Save gallery..." Width="110" Margin="8,0,0,0" Click="btSaveGallery_Click"/>
+                        <Button x:Name="btLoadGallery" Content="Load gallery..." Width="110" Margin="8,0,0,0" Click="btLoadGallery_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Settings">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Label Content="Detection confidence" Width="220"/>
+                        <TextBox x:Name="edDetConfidence" Text="0.6" Width="50" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Label Content="Recognition threshold (cosine)" Width="220"/>
+                        <TextBox x:Name="edRecThreshold" Text="0.36" Width="50" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Label Content="Run every N+1 frames (skip)" Width="220"/>
+                        <TextBox x:Name="edFramesToSkip" Text="2" Width="50" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <Label Content="Two-stage pipeline: YuNet detector + SFace/ArcFace embedding, matched 1:N against the gallery." Margin="0,10,0,0"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Faces">
+                <ListBox x:Name="lbResults" Margin="10"/>
+            </TabItem>
+
+            <TabItem Header="Log">
+                <TextBox x:Name="mmLog" Margin="10" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" IsReadOnly="True"/>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,460,0,0">
+            <Button x:Name="btStart" Content="Start" Width="60" Click="btStart_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="60" Margin="10,0,0,0" Click="btStop_Click" IsEnabled="False"/>
+        </StackPanel>
+    </Grid>
+</Window>

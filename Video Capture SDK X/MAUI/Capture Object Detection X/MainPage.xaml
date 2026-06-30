@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Capture_Object_Detection_X.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <Grid RowSpacing="0" RowDefinitions="*,Auto">
+
+        <my:VideoView Grid.Row="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            x:Name="videoView"
+            Background="Black"/>
+
+        <!-- Live detection summary, overlaid on the camera preview. -->
+        <Label Grid.Row="0" x:Name="lbStatus"
+            Text="Pick a model, choose a camera, then START."
+            Margin="12" Padding="8,4" BackgroundColor="#90000000" TextColor="White"
+            FontSize="13" HorizontalOptions="Start" VerticalOptions="Start" />
+
+        <VerticalStackLayout Grid.Row="1" Spacing="6" Background="#1e1e1e" Padding="12,8,12,12">
+
+            <!-- Model: pick a preset to download, or "Custom model..." to browse for a local .onnx. -->
+            <Picker x:Name="pkModel" Title="Detection model" TitleColor="#B0FFFFFF" TextColor="White"
+                SelectedIndexChanged="pkModel_SelectedIndexChanged" />
+
+            <Label x:Name="lbModelPath" Text=""
+                TextColor="#B0FFFFFF" FontSize="12" LineBreakMode="MiddleTruncation" />
+
+            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                <ProgressBar Grid.Column="0" x:Name="pbDownload" Progress="0" ProgressColor="#4CAF50"
+                    IsVisible="False" VerticalOptions="Center" />
+                <Button Grid.Column="1" x:Name="btDownloadModel" Text="Download"
+                    Clicked="btDownloadModel_Clicked" IsVisible="False" />
+                <Button Grid.Column="2" x:Name="btBrowseModel" Text="Browse..."
+                    Clicked="btBrowseModel_Clicked" IsVisible="False" />
+            </Grid>
+
+            <Button x:Name="btCamera" Text="CAMERA" Clicked="btCamera_Clicked" />
+
+            <Button x:Name="btStartStop" Text="START" Clicked="btStartStop_Clicked"
+                BackgroundColor="#4CAF50" />
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
