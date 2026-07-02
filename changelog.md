@@ -26,7 +26,21 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.6.30
+
+* [Demos] Added **Face Recognition** and **OCR** demos for the X engines, in both WPF and MAUI: **Player Face Recognition X** and **Player OCR X** (`MediaPlayerCoreX`), plus **Capture Face Recognition X** and **Capture OCR X** (`VideoCaptureCoreX`). Each inserts the AI block through the `Video_Processing_AddBlock` API — the face demos enroll people from photos and label them on the video; the OCR demos draw and log recognized text.
+* [Demos] Added a **Capture Live Subtitles X** WPF sample (`VideoCaptureCoreX` with on-device Whisper speech-to-text subtitles).
+
+## 2026.6.29
+
+* [Media Blocks SDK .Net] Speech-to-text (`SpeechToTextBlock`) now always transcribes the full input losslessly — the source is paced to Whisper so no audio is ever dropped. The previous live drop-buffer mode and the `SpeechToTextSettings.BackpressureWhenBusy` option were removed (the lossless behavior is now the only mode).
+
 ## 2026.6.27
+
+* [Video Capture SDK .Net] `VideoCaptureCoreX` can now insert AI processing blocks — object detection, OCR, face recognition, license-plate recognition, object analytics, background removal, generic ONNX inference, and Whisper speech-to-text — directly into the capture pipeline through `Video_Processing_AddBlock` / `Audio_Processing_AddBlock`, with on-frame overlays and detection events.
+* [Media Player SDK .Net] `MediaPlayerCoreX` gains the same `Video_Processing_AddBlock` / `Audio_Processing_AddBlock` API to run AI processing (object detection, OCR, speech-to-text, and more) on played files and streams.
+* [Demos] Added a **Player AI Processing** demo (WPF): plays a file in `MediaPlayerCoreX` with a YOLO object detector or a Whisper speech-to-text block inserted through the new processing-block API.
+* [Demos] Added four **MAUI** AI demos (Android/iOS/Mac Catalyst/Windows) for the new X-engine processing-block API: **Player Object Detection X** and **Player Live Subtitles X** (`MediaPlayerCoreX`), plus **Capture Object Detection X** and **Capture Live Subtitles X** (`VideoCaptureCoreX`).
 * [Media Blocks SDK .Net] Fixed an `AccessViolationException` ("Attempted to read or write protected memory") that could crash the application when using text overlays (`OverlayManagerBlock` / `OverlayManagerText`) — most reliably reproduced by adding a text overlay right after `StartAsync` and then stopping. The font-enumeration path freed Pango-owned font objects it did not own, corrupting memory during a later garbage collection or pipeline shutdown.
 * [Media Blocks SDK .Net] Fixed a related intermittent fatal crash ("Attempt to execute managed code after the .NET runtime thread state has been destroyed") that could abort the process during text overlay or font enumeration when a background media thread was recycled, or at application exit. The available-fonts / monospace-detection path no longer attaches a managed callback to Pango's internal font map.
 
