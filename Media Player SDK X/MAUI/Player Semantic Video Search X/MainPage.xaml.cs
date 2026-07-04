@@ -261,45 +261,49 @@ namespace Player_Semantic_Video_Search_X
 
             try
             {
-                // I/O runs off the UI thread; progress updates marshal back via Dispatcher.Dispatch.
-                using (var response = await _http.GetAsync(ModelsReleaseUrl + "/" + fileName, HttpCompletionOption.ResponseHeadersRead))
+                // Run the download off the UI thread; progress is marshalled back via the Dispatcher.
+                await Task.Run(async () =>
                 {
-                    response.EnsureSuccessStatusCode();
-
-                    var total = response.Content.Headers.ContentLength ?? -1L;
-                    using (var src = await response.Content.ReadAsStreamAsync())
-                    using (var fileStream = File.Create(temp))
+                    using (var response = await _http.GetAsync(ModelsReleaseUrl + "/" + fileName, HttpCompletionOption.ResponseHeadersRead))
                     {
-                        var buffer = new byte[81920];
-                        long readTotal = 0;
-                        int lastPercent = -1;
-                        int read;
-                        while ((read = await src.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                        {
-                            await fileStream.WriteAsync(buffer, 0, read);
-                            readTotal += read;
+                        response.EnsureSuccessStatusCode();
 
-                            if (total > 0)
+                        var total = response.Content.Headers.ContentLength ?? -1L;
+                        using (var src = await response.Content.ReadAsStreamAsync())
+                        using (var fileStream = File.Create(temp))
+                        {
+                            var buffer = new byte[81920];
+                            long readTotal = 0;
+                            int lastPercent = -1;
+                            int read;
+                            while ((read = await src.ReadAsync(buffer, 0, buffer.Length)) > 0)
                             {
-                                var percent = (int)(readTotal * 100 / total);
-                                if (percent != lastPercent)
+                                await fileStream.WriteAsync(buffer, 0, read);
+                                readTotal += read;
+
+                                if (total > 0)
                                 {
-                                    lastPercent = percent;
-                                    var progress = percent / 100.0;
-                                    Dispatcher?.Dispatch(() => { if (_isCleanedUp) return; pbDownload.Progress = progress; });
+                                    var percent = (int)(readTotal * 100 / total);
+                                    if (percent != lastPercent)
+                                    {
+                                        lastPercent = percent;
+                                        var progress = percent / 100.0;
+                                        Dispatcher?.Dispatch(() => { if (_isCleanedUp) return; pbDownload.Progress = progress; });
+                                    }
                                 }
                             }
-                        }
 
-                        // Reject a truncated download so a partial file is never cached as complete.
-                        if (total > 0 && readTotal != total)
-                        {
-                            throw new IOException($"Incomplete download: received {readTotal} of {total} bytes.");
+                            // Reject a truncated download so a partial file is never cached as complete.
+                            if (total > 0 && readTotal != total)
+                            {
+                                throw new IOException($"Incomplete download: received {readTotal} of {total} bytes.");
+                            }
                         }
                     }
-                }
 
-                File.Move(temp, dest, overwrite: true);
+                    File.Move(temp, dest, overwrite: true);
+                });
+
                 return dest;
             }
             catch

@@ -93,6 +93,16 @@ namespace Player_VLM_Captioning_X
                     return;
                 }
 
+                // Drop any copied source videos left in the cache by a previous run.
+                try
+                {
+                    foreach (var stale in Directory.EnumerateFiles(FileSystem.CacheDirectory, "source_*"))
+                    {
+                        try { File.Delete(stale); } catch (Exception delEx) { Debug.WriteLine(delEx); }
+                    }
+                }
+                catch (Exception ex) { Debug.WriteLine(ex); }
+
                 // Populate the task picker with every Florence-2 task.
                 pkTask.ItemsSource = Enum.GetNames(typeof(VLMTask));
                 pkTask.SelectedIndex = (int)_selectedTask;
@@ -303,10 +313,25 @@ namespace Player_VLM_Captioning_X
             try
             {
                 var pick = await FilePicker.Default.PickAsync();
-                if (pick?.FullPath != null)
+                if (pick != null)
                 {
-                    _filePath = pick.FullPath;
+                    // Copy to a stable local path (Android content URIs aren't openable by the demuxer); GUID name avoids collisions.
+                    Directory.CreateDirectory(FileSystem.CacheDirectory);
+                    var dest = Path.Combine(FileSystem.CacheDirectory, $"source_{Guid.NewGuid():N}{Path.GetExtension(pick.FileName)}");
+                    using (var src = await pick.OpenReadAsync())
+                    using (var dst = File.Create(dest))
+                    {
+                        await src.CopyToAsync(dst);
+                    }
+
+                    // Switch to the new copy only after it succeeds, then drop the previous one so caches don't accumulate.
+                    var previous = _filePath;
+                    _filePath = dest;
                     SetStatus("File: " + pick.FileName);
+                    if (!string.IsNullOrEmpty(previous))
+                    {
+                        try { if (File.Exists(previous)) File.Delete(previous); } catch (Exception delEx) { Debug.WriteLine(delEx); }
+                    }
                 }
             }
             catch (Exception ex)
@@ -397,7 +422,7 @@ namespace Player_VLM_Captioning_X
             try
             {
                 var outputs = await _player.Audio_OutputDevicesAsync();
-                if (outputs.Length > 0)
+                if (outputs != null && outputs.Length > 0)
                 {
                     _player.Audio_OutputDevice = new AudioRendererSettings(outputs[0]);
                 }

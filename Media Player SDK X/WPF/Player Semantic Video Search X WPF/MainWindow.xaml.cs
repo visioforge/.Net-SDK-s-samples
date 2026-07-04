@@ -686,16 +686,20 @@ namespace Player_Semantic_Video_Search_X_WPF
 
                     using (var image = SKImage.FromBitmap(bmp))
                     using (var data = image.Encode(SKEncodedImageFormat.Png, 85))
-                    using (var ms = new MemoryStream(data.ToArray()))
                     {
-                        var bi = new BitmapImage();
-                        bi.BeginInit();
-                        bi.CacheOption = BitmapCacheOption.OnLoad;
-                        bi.DecodePixelWidth = 180;
-                        bi.StreamSource = ms;
-                        bi.EndInit();
-                        bi.Freeze();
-                        return bi;
+                        if (data == null) return null;
+
+                        using (var ms = new MemoryStream(data.ToArray()))
+                        {
+                            var bi = new BitmapImage();
+                            bi.BeginInit();
+                            bi.CacheOption = BitmapCacheOption.OnLoad;
+                            bi.DecodePixelWidth = 180;
+                            bi.StreamSource = ms;
+                            bi.EndInit();
+                            bi.Freeze();
+                            return bi;
+                        }
                     }
                 }
             }
