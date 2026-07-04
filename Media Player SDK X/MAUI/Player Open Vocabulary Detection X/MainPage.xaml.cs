@@ -323,6 +323,8 @@ namespace Player_Open_Vocabulary_Detection_X
                             int read;
                             while ((read = await src.ReadAsync(buffer, 0, buffer.Length)) > 0)
                             {
+                                if (_isCleanedUp) { break; }
+
                                 await fileStream.WriteAsync(buffer, 0, read);
                                 readTotal += read;
 
@@ -351,6 +353,8 @@ namespace Player_Open_Vocabulary_Detection_X
                             }
 
                             // Reject a truncated download so a partial file is never cached as complete.
+                            if (_isCleanedUp) { return; }
+
                             if (total > 0 && readTotal != total)
                             {
                                 throw new IOException($"Incomplete download: received {readTotal} of {total} bytes.");
