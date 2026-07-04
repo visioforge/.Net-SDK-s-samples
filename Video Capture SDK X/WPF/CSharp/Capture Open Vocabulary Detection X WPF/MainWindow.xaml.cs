@@ -660,6 +660,8 @@ namespace Capture_Open_Vocabulary_Detection_X_WPF
                     _core = null;
                 }
 
+                DetachBlock();
+
                 VideoView1.CallRefresh();
                 VisioForgeX.DestroySDK();
             }

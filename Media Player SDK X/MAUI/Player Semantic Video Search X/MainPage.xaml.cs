@@ -839,6 +839,13 @@ namespace Player_Semantic_Video_Search_X
             _clipEngine?.Dispose();
             _clipEngine = null;
 
+            // Drop the copied source video from the cache so large files don't linger after teardown.
+            if (!string.IsNullOrEmpty(_filename))
+            {
+                try { if (File.Exists(_filename)) File.Delete(_filename); } catch (Exception ex) { Debug.WriteLine(ex); }
+                _filename = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
     }

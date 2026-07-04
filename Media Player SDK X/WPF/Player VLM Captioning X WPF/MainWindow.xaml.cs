@@ -535,6 +535,8 @@ namespace Player_VLM_Captioning_X_WPF
                     _player = null;
                 }
 
+                DetachBlock();
+
                 VideoView1.CallRefresh();
                 VisioForgeX.DestroySDK();
             }
