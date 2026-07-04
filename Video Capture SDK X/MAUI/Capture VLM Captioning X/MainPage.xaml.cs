@@ -104,7 +104,7 @@ namespace Capture_VLM_Captioning_X
                 pkTask.SelectedIndex = (int)_selectedTask;
 
                 _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
-                if (_cameras.Length > 0)
+                if (_cameras != null && _cameras.Length > 0)
                 {
                     // Reset the index alongside the button text (MAUI reuses the page instance).
                     _cameraSelectedIndex = 0;

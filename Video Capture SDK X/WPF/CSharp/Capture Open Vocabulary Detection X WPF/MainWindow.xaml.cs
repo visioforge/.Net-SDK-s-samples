@@ -79,9 +79,12 @@ namespace Capture_Open_Vocabulary_Detection_X_WPF
                 // The engine is created fresh per session in RecreateEngineAsync, so nothing to construct here.
 
                 _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
-                foreach (var camera in _cameras)
+                if (_cameras != null)
                 {
-                    cbCamera.Items.Add(camera.DisplayName);
+                    foreach (var camera in _cameras)
+                    {
+                        cbCamera.Items.Add(camera.DisplayName);
+                    }
                 }
 
                 if (cbCamera.Items.Count > 0)
