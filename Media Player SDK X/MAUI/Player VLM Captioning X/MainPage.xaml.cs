@@ -622,6 +622,13 @@ namespace Player_VLM_Captioning_X
 
             DetachVlm();
 
+            // Drop the copied source video from the cache so large files don't linger after teardown.
+            if (!string.IsNullOrEmpty(_filePath))
+            {
+                try { if (File.Exists(_filePath)) File.Delete(_filePath); } catch (Exception ex) { Debug.WriteLine(ex); }
+                _filePath = null;
+            }
+
             VisioForgeX.DestroySDK();
         }
     }

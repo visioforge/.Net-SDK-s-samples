@@ -715,7 +715,23 @@ namespace Player_Semantic_Video_Search_X
                     return;
                 }
 
-                await Task.Run(() => _index.Load(pick.FullPath));
+                // Copy to a stable local path (Android content URIs aren't openable by _index.Load); removed once loaded into memory.
+                Directory.CreateDirectory(FileSystem.CacheDirectory);
+                var localIndex = Path.Combine(FileSystem.CacheDirectory, $"index_{Guid.NewGuid():N}{Path.GetExtension(pick.FileName)}");
+                using (var src = await pick.OpenReadAsync())
+                using (var dst = File.Create(localIndex))
+                {
+                    await src.CopyToAsync(dst);
+                }
+
+                try
+                {
+                    await Task.Run(() => _index.Load(localIndex));
+                }
+                finally
+                {
+                    try { if (File.Exists(localIndex)) File.Delete(localIndex); } catch (Exception delEx) { Debug.WriteLine(delEx); }
+                }
                 cvResults.ItemsSource = null;
                 lbIndex.Text = $"Loaded index: {_index.Count} frames";
                 await DisplayAlert("Loaded", $"Loaded {_index.Count} embeddings.", "OK");
