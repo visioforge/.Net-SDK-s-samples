@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Player_VLM_Captioning_X.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <Grid RowSpacing="0" RowDefinitions="*,Auto">
+
+        <my:VideoView Grid.Row="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            x:Name="videoView"
+            Background="Black"/>
+
+        <!-- Live status, overlaid on the video. -->
+        <Label Grid.Row="0" x:Name="lbStatus"
+            Text="Download the Florence-2 models, open a file, then START."
+            Margin="12" Padding="8,4" BackgroundColor="#90000000" TextColor="White"
+            FontSize="13" HorizontalOptions="Start" VerticalOptions="Start" />
+
+        <VerticalStackLayout Grid.Row="1" Spacing="6" Background="#1e1e1e" Padding="12,8,12,12">
+
+            <!-- Florence-2 task selection + model download row -->
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <Picker Grid.Column="0" x:Name="pkTask" Title="VLM task" TitleColor="#B0FFFFFF" TextColor="White"
+                    SelectedIndexChanged="pkTask_SelectedIndexChanged" />
+                <Button Grid.Column="1" x:Name="btDownloadModel" Text="DOWNLOAD"
+                    Clicked="btDownloadModel_Clicked" />
+            </Grid>
+
+            <Label x:Name="lbModelPath" Text=""
+                TextColor="#B0FFFFFF" FontSize="12" LineBreakMode="MiddleTruncation" />
+
+            <ProgressBar x:Name="pbDownload" Progress="0" ProgressColor="#4CAF50" IsVisible="False" />
+
+            <!-- Auxiliary text input — only used by the Phrase Grounding task. -->
+            <Entry x:Name="enTextInput" Placeholder="Caption to ground (Phrase Grounding only)"
+                TextColor="White" PlaceholderColor="#888" IsEnabled="False"
+                TextChanged="enTextInput_TextChanged" />
+
+            <!-- Latest caption / recognized text (scrollable so long captions don't push out the controls). -->
+            <ScrollView x:Name="svCaption" HeightRequest="70">
+                <Label x:Name="lbCaption" Text="Caption: -" FontSize="14" FontAttributes="Bold"
+                    TextColor="#4CAF50" LineBreakMode="WordWrap" />
+            </ScrollView>
+
+            <Button x:Name="btFile" Text="OPEN FILE" Clicked="btFile_Clicked" />
+
+            <Button x:Name="btStartStop" Text="START" Clicked="btStartStop_Clicked"
+                BackgroundColor="#4CAF50" />
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

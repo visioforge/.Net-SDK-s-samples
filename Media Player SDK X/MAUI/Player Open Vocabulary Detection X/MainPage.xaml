@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Player_Open_Vocabulary_Detection_X.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <!-- Video on top, controls below — separate Grid rows so the panel never overlaps the video. -->
+    <Grid RowSpacing="0" RowDefinitions="*,Auto">
+
+        <my:VideoView Grid.Row="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            x:Name="videoView"
+            Background="Black"/>
+
+        <!-- Live detection summary, overlaid on the video. -->
+        <Label Grid.Row="0" x:Name="lbStatus"
+            Text="Pick a model, add prompts, open a file, then START."
+            Margin="12" Padding="8,4" BackgroundColor="#90000000" TextColor="White"
+            FontSize="13" HorizontalOptions="Start" VerticalOptions="Start" />
+
+        <VerticalStackLayout Grid.Row="1" Spacing="6" Background="#1e1e1e" Padding="12,8,12,12">
+
+            <!-- Model selection (OWLv2 / Grounding DINO) + download of its file set. -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Picker x:Name="pkModel" Title="Detection model" TitleColor="#B0FFFFFF" TextColor="White"
+                    HorizontalOptions="FillAndExpand" SelectedIndexChanged="pkModel_SelectedIndexChanged" />
+                <Button x:Name="btDownloadModel" Text="DOWNLOAD" Clicked="btDownloadModel_Clicked" IsVisible="False" />
+            </StackLayout>
+            <Label x:Name="lbModelPath" Text="" TextColor="#B0FFFFFF" FontSize="12" LineBreakMode="TailTruncation" />
+            <ProgressBar x:Name="pbDownload" Progress="0" ProgressColor="#4CAF50" IsVisible="False" />
+
+            <!-- Prompt row: comma-separated free-text classes, applied live via SetPrompts. -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Entry x:Name="enPrompts" Text="a person, a car" Placeholder="a person, a car, a dog"
+                    TextColor="White" PlaceholderColor="#888" HorizontalOptions="FillAndExpand" />
+                <Button x:Name="btApplyPrompts" Text="APPLY" Clicked="btApplyPrompts_Clicked" />
+            </StackLayout>
+
+            <!-- Confidence / IoU thresholds — applied to the running detector live, no Start/Stop needed. -->
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8" RowDefinitions="Auto,Auto" RowSpacing="2">
+                <Label Grid.Row="0" Grid.Column="0" Text="Confidence" TextColor="#B0FFFFFF" FontSize="12" VerticalOptions="Center" />
+                <Slider Grid.Row="0" Grid.Column="1" x:Name="slConfidence" Minimum="0.01" Maximum="1.0" Value="0.7" ValueChanged="slConfidence_ValueChanged" />
+                <Label Grid.Row="0" Grid.Column="2" x:Name="lbConfidence" Text="0.70" TextColor="White" FontSize="12" WidthRequest="34" VerticalOptions="Center" />
+
+                <Label Grid.Row="1" Grid.Column="0" Text="IoU" TextColor="#B0FFFFFF" FontSize="12" VerticalOptions="Center" />
+                <Slider Grid.Row="1" Grid.Column="1" x:Name="slIoU" Minimum="0.05" Maximum="1.0" Value="0.5" ValueChanged="slIoU_ValueChanged" />
+                <Label Grid.Row="1" Grid.Column="2" x:Name="lbIoU" Text="0.50" TextColor="White" FontSize="12" WidthRequest="34" VerticalOptions="Center" />
+            </Grid>
+
+            <Button x:Name="btFile" Text="OPEN FILE" Clicked="btFile_Clicked" />
+
+            <Button x:Name="btStartStop" Text="START" Clicked="btStartStop_Clicked"
+                BackgroundColor="#4CAF50" />
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

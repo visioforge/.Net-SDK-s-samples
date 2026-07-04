@@ -1,0 +1,150 @@
+<Window x:Class="Player_Semantic_Video_Search_X_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Player_Semantic_Video_Search_X_WPF" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="Media Player SDK X .Net - Player Semantic Video Search X" Height="760" Width="1180" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Background="#F0F4F8" Padding="12,8">
+            <TextBlock TextWrapping="Wrap" Foreground="#333"
+                       Text="Semantic video search with CLIP, powered by MediaPlayerCoreX. A VideoEmbeddingBlock is inserted into the player via Video_Processing_AddBlock; with Video_Renderer_IsSync = false the file is indexed at full decode speed (not real time). Then find the matching moments with a plain-text query (e.g. &quot;a photo of a person&quot;). Indexes can be saved and reloaded."/>
+        </Border>
+        <TabControl Margin="10">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Padding" Value="8,2"/>
+                    <Setter Property="FontSize" Value="11"/>
+                </Style>
+            </TabControl.Resources>
+        <TabItem Header="Models">
+            <StackPanel Orientation="Vertical" Margin="12,12,0,0">
+                <Label Content="CLIP vision-tower model (.onnx)"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="edVisionModel" Width="440" VerticalContentAlignment="Center"/>
+                    <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectVision_Click"/>
+                </StackPanel>
+
+                <Label Content="CLIP text-tower model (.onnx)" Margin="0,8,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="edTextModel" Width="440" VerticalContentAlignment="Center"/>
+                    <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectText_Click"/>
+                </StackPanel>
+
+                <Label Content="CLIP vocab.json" Margin="0,8,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="edVocab" Width="440" VerticalContentAlignment="Center"/>
+                    <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectVocab_Click"/>
+                </StackPanel>
+
+                <Label Content="CLIP merges.txt" Margin="0,8,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="edMerges" Width="440" VerticalContentAlignment="Center"/>
+                    <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectMerges_Click"/>
+                </StackPanel>
+
+                <Label Content="Execution provider" Margin="0,8,0,0"/>
+                <ComboBox x:Name="cbProvider" Width="220" HorizontalAlignment="Left"/>
+
+                <Button x:Name="btDownloadModels" Content="Download model files" Width="200" HorizontalAlignment="Left" Margin="0,12,0,0" Click="btDownloadModels_Click"/>
+
+                <StackPanel x:Name="pnlDownload" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
+                    <TextBlock x:Name="lbDownloadStatus" Width="480" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis"/>
+                    <ProgressBar x:Name="pbDownload" Width="480" Height="18" HorizontalAlignment="Left" Margin="0,4,0,0" Minimum="0" Maximum="100"/>
+                </StackPanel>
+
+                <TextBlock Width="520" Margin="0,10,0,0" TextWrapping="Wrap" Foreground="Gray"
+                           Text="CLIP ViT-B/32 dual towers (with projection). Weights are NOT shipped with the SDK. They are cached under %USERPROFILE%\VisioForge\models\clip."/>
+            </StackPanel>
+        </TabItem>
+
+        <TabItem Header="Index">
+            <Grid Margin="12,12,12,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Vertical">
+                    <Label Content="Video file to index"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edVideoFile" Width="500" VerticalContentAlignment="Center"/>
+                        <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectVideoFile_Click"/>
+                        <Button x:Name="btIndex" Content="Index" Width="80" Margin="10,0,0,0" Click="btIndex_Click"/>
+                        <Button x:Name="btIndexStop" Content="Stop" Width="60" Margin="6,0,0,0" Click="btIndexStop_Click" IsEnabled="False"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Label Content="Frames/sec to index" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="cbIndexFps" Width="80" Margin="6,0,0,0" VerticalContentAlignment="Center"/>
+                        <TextBlock Text="Higher = denser index (more moments found), but slower indexing." VerticalAlignment="Center" Margin="10,0,0,0" Foreground="Gray"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0">
+                    <ProgressBar x:Name="pbIndex" Width="500" Height="18" Minimum="0" Maximum="100"/>
+                    <TextBlock x:Name="lbIndexStatus" Margin="12,0,0,0" VerticalAlignment="Center" Text="Indexed frames: 0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button x:Name="btSaveIndex" Content="Save index..." Width="110" Click="btSaveIndex_Click"/>
+                    <Button x:Name="btLoadIndex" Content="Load index..." Width="110" Margin="8,0,0,0" Click="btLoadIndex_Click"/>
+                    <Button x:Name="btClearIndex" Content="Clear index" Width="110" Margin="8,0,0,0" Click="btClearIndex_Click"/>
+                </StackPanel>
+
+                <Grid Grid.Row="3" Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="360"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Full-speed indexing preview (the file races by while it is embedded). -->
+                    <wpf:VideoView x:Name="VideoView1" Grid.Column="0" Background="Black"/>
+
+                    <TextBox Grid.Column="1" x:Name="mmLog" Margin="8,0,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" IsReadOnly="True" FontFamily="Consolas" FontSize="11"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Search">
+            <Grid Margin="12,12,12,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <TextBox x:Name="edQuery" Width="360" VerticalContentAlignment="Center" Text="a photo of a person"/>
+                    <Button x:Name="btSearch" Content="Search" Width="90" Margin="10,0,0,0" Click="btSearch_Click"/>
+                    <TextBlock Text="Min margin" VerticalAlignment="Center" Margin="14,0,4,0"/>
+                    <Slider x:Name="slThreshold" Width="120" Minimum="-0.02" Maximum="0.08" Value="0" TickFrequency="0.005" IsSnapToTickEnabled="True" VerticalAlignment="Center" ValueChanged="slThreshold_ValueChanged"/>
+                    <TextBlock x:Name="lbThreshold" Text="0.000" Width="44" VerticalAlignment="Center" Margin="4,0,0,0"/>
+                    <TextBlock x:Name="lbSearchStatus" Margin="14,0,0,0" VerticalAlignment="Center" Foreground="DarkSlateGray"/>
+                </StackPanel>
+
+                <ScrollViewer Grid.Row="1" Margin="0,10,0,0" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl x:Name="icResults">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Margin="6" Padding="4" BorderBrush="#DDD" BorderThickness="1">
+                                    <StackPanel Orientation="Vertical" Width="180">
+                                        <Image Source="{Binding Thumb}" Height="101" Stretch="Uniform"/>
+                                        <TextBlock Text="{Binding Caption}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
