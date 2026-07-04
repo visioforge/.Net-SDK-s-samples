@@ -1,0 +1,158 @@
+<Window x:Class="Open_Vocabulary_Detection_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Open_Vocabulary_Detection_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="Media Blocks SDK .Net - Open Vocabulary Detection Demo" Height="720" Width="1120" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Background="#F0F4F8" Padding="12,8">
+            <TextBlock TextWrapping="Wrap" Foreground="#333"
+                       Text="Open-vocabulary object detection — detect anything you can name. Type free-text prompts (e.g. &quot;a person&quot;, &quot;a red car&quot;) and the OWLv2 or Grounding DINO model finds matching objects in a webcam, video file, or RTSP stream in real time. Prompts can be edited while running."/>
+        </Border>
+        <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="480" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <wpf:VideoView Grid.Column="1" x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,160"/>
+
+        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Bottom" Margin="10,0,10,10">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btStart" Content="Start" Width="70" Click="btStart_Click"/>
+                <Button x:Name="btStop" Content="Stop" Width="70" Margin="10,0,0,0" Click="btStop_Click" IsEnabled="False"/>
+                <TextBlock Text="00:00:00" x:Name="lbTime" VerticalAlignment="Center" Margin="15,0,0,0"/>
+            </StackPanel>
+            <TextBlock x:Name="lbStatus" Margin="0,6,0,0"
+                       Text="Provider: -   |   Inference: - ms   |   Dropped frames: 0" Foreground="DarkSlateGray"/>
+            <ListBox x:Name="lbDetections" Height="90" Margin="0,6,0,0"/>
+        </StackPanel>
+
+        <TabControl Grid.Column="0" Margin="10,10,0,10" VerticalAlignment="Stretch">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Padding" Value="8,2"/>
+                    <Setter Property="FontSize" Value="11"/>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Source">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <RadioButton Content="Webcam" x:Name="rbWebcam" IsChecked="True" Checked="rbSource_Checked" />
+                    <RadioButton Content="Video file" x:Name="rbFile" Margin="0,5,0,0" Checked="rbSource_Checked" />
+                    <RadioButton Content="RTSP / IP camera" x:Name="rbRTSP" Margin="0,5,0,0" Checked="rbSource_Checked" />
+
+                    <StackPanel x:Name="pnlWebcam" Orientation="Vertical" Margin="0,10,0,0">
+                        <Label Content="Video input device"/>
+                        <ComboBox x:Name="cbVideoInput" Width="440" HorizontalAlignment="Left" SelectionChanged="cbVideoInput_SelectionChanged"/>
+                        <Label Content="Video format and frame rate"/>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox x:Name="cbVideoFormat" Width="350" SelectionChanged="cbVideoFormat_SelectionChanged"/>
+                            <ComboBox x:Name="cbVideoFrameRate" Margin="10,0,0,0" Width="55"/>
+                            <Label Content="fps" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="pnlFile" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
+                        <Label Content="Video file"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="edVideoFile" Width="390" VerticalContentAlignment="Center"/>
+                            <Button x:Name="btSelectVideoFile" Content="..." Width="40" Margin="10,0,0,0" Click="btSelectVideoFile_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="pnlRTSP" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
+                        <Label Content="RTSP URL"/>
+                        <TextBox x:Name="edRTSPURL" Width="440" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="rtsp://"/>
+                        <Label Content="Login" Margin="0,5,0,0"/>
+                        <TextBox x:Name="edRTSPLogin" Width="440" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                        <Label Content="Password" Margin="0,5,0,0"/>
+                        <PasswordBox x:Name="edRTSPPassword" Width="440" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Model">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Open-vocabulary model"/>
+                    <ComboBox x:Name="cbModel" Width="220" HorizontalAlignment="Left" SelectionChanged="cbModel_SelectionChanged"/>
+
+                    <Label Content="Execution provider" Margin="0,8,0,0"/>
+                    <ComboBox x:Name="cbProvider" Width="220" HorizontalAlignment="Left"/>
+
+                    <Label Content="Model file (.onnx)" Margin="0,8,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edModelFile" Width="360" VerticalContentAlignment="Center"/>
+                        <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectModel_Click"/>
+                    </StackPanel>
+
+                    <Label Content="Vocabulary file" Margin="0,8,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edVocabFile" Width="360" VerticalContentAlignment="Center"/>
+                        <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectVocab_Click"/>
+                    </StackPanel>
+
+                    <Label x:Name="lbMerges" Content="Merges file (OWLv2 only)" Margin="0,8,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edMergesFile" Width="360" VerticalContentAlignment="Center"/>
+                        <Button x:Name="btSelectMerges" Content="..." Width="40" Margin="6,0,0,0" Click="btSelectMerges_Click"/>
+                    </StackPanel>
+
+                    <Button x:Name="btDownloadModels" Content="Download model files" Width="200" HorizontalAlignment="Left" Margin="0,12,0,0" Click="btDownloadModels_Click"/>
+
+                    <StackPanel x:Name="pnlDownload" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
+                        <TextBlock x:Name="lbDownloadStatus" Width="440" HorizontalAlignment="Left" TextTrimming="CharacterEllipsis"/>
+                        <ProgressBar x:Name="pbDownload" Width="440" Height="18" HorizontalAlignment="Left" Margin="0,4,0,0" Minimum="0" Maximum="100"/>
+                    </StackPanel>
+
+                    <TextBlock Width="440" Margin="0,10,0,0" TextWrapping="Wrap" Foreground="Gray"
+                               Text="Weights are NOT shipped with the SDK. They are cached under %USERPROFILE%\VisioForge\models\openvocab."/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Prompts">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Detection prompts (each becomes a detectable class)"/>
+                    <ListBox x:Name="lbPrompts" Height="200" Width="440" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBox x:Name="edPrompt" Width="320" VerticalContentAlignment="Center"/>
+                        <Button x:Name="btAddPrompt" Content="Add" Width="50" Margin="8,0,0,0" Click="btAddPrompt_Click"/>
+                        <Button x:Name="btRemovePrompt" Content="Remove" Width="60" Margin="8,0,0,0" Click="btRemovePrompt_Click"/>
+                    </StackPanel>
+                    <Button x:Name="btApplyPrompts" Content="Apply prompts (live)" Width="200" HorizontalAlignment="Left" Margin="0,10,0,0" Click="btApplyPrompts_Click"/>
+                    <TextBlock Width="440" Margin="0,8,0,0" TextWrapping="Wrap" Foreground="Gray"
+                               Text="Prompts can be edited and applied while the pipeline runs. They take effect on the next processed frame."/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Settings">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Label Content="Confidence threshold" Width="180"/>
+                        <Slider x:Name="slConfidence" Width="180" Minimum="0.01" Maximum="1.0" Value="0.25" VerticalAlignment="Center" ValueChanged="slThreshold_ValueChanged"/>
+                        <TextBlock x:Name="lbConfidence" Text="0.25" Width="40" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Label Content="IoU (NMS) threshold" Width="180"/>
+                        <Slider x:Name="slIoU" Width="180" Minimum="0.05" Maximum="1.0" Value="0.5" VerticalAlignment="Center" ValueChanged="slThreshold_ValueChanged"/>
+                        <TextBlock x:Name="lbIoU" Text="0.50" Width="40" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Label Content="Run every N+1 frames (skip)" Width="180"/>
+                        <TextBox x:Name="edFramesToSkip" Text="0" Width="50" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <CheckBox x:Name="cbDrawDetections" Content="Draw detections on video" IsChecked="True" Margin="0,10,0,0"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Log">
+                <TextBox x:Name="mmLog" Margin="10" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" IsReadOnly="True"/>
+            </TabItem>
+        </TabControl>
+        </Grid>
+    </DockPanel>
+</Window>

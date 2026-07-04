@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SemanticVideoSearchMB.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <!-- Video on top, controls in the middle, results list at the bottom — separate Grid rows so nothing overlaps. -->
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1.4*" />
+        </Grid.RowDefinitions>
+
+        <my:VideoView
+                Grid.Row="0"
+                x:Name="videoView"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill" />
+
+        <StackLayout Grid.Row="1" x:Name="pnMain" Orientation="Vertical" HorizontalOptions="Fill" Background="#1e1e1e" Padding="8" Spacing="6">
+
+            <!-- Models row -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Label x:Name="lbModels" Text="Models: not downloaded" VerticalOptions="Center" HorizontalOptions="FillAndExpand" FontSize="12" TextColor="#aaa" LineBreakMode="TailTruncation" />
+                <Button x:Name="btDownloadModels" Text="DOWNLOAD MODELS" Clicked="btDownloadModels_Clicked" />
+            </StackLayout>
+            <ProgressBar x:Name="pbDownload" Progress="0" ProgressColor="#4CAF50" IsVisible="False" />
+
+            <!-- Source row -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Button x:Name="btSource" Text="Source: Camera" Clicked="btSource_Clicked" />
+                <Button x:Name="btCamera" Text="SELECT CAMERA" Clicked="btCamera_Clicked" HorizontalOptions="FillAndExpand" />
+                <Button x:Name="btOpenFile" Text="OPEN FILE" Clicked="btOpenFile_Clicked" IsVisible="False" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+            <Label x:Name="lbFile" Text="" FontSize="10" TextColor="#aaa" LineBreakMode="TailTruncation" IsVisible="False" />
+
+            <!-- Index sample rate: higher = denser index (more moments found), slower indexing -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Label Text="Frames/sec to index" VerticalOptions="Center" FontSize="12" TextColor="#aaa" HorizontalOptions="FillAndExpand" />
+                <Picker x:Name="pkIndexFps" WidthRequest="90" />
+            </StackLayout>
+
+            <!-- Index status + Start/Stop -->
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="lbIndex" Grid.Column="0" Text="Indexed frames: 0" VerticalOptions="Center" FontSize="14" FontAttributes="Bold" TextColor="#4CAF50" />
+                <Button x:Name="btStartStop" Grid.Column="1" Text="START" Clicked="btStartStop_Clicked" BackgroundColor="#4CAF50" />
+            </Grid>
+
+            <!-- Query row -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Entry x:Name="edQuery" Placeholder="Search query, e.g. a red car" TextColor="White" PlaceholderColor="#888" HorizontalOptions="FillAndExpand" />
+                <Button x:Name="btSearch" Text="SEARCH" Clicked="btSearch_Clicked" />
+            </StackLayout>
+
+            <!-- Min margin: contrastive threshold. Raise it to reject weak matches; a query for an absent concept then returns nothing. -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Label Text="Min margin" VerticalOptions="Center" FontSize="12" TextColor="#aaa" />
+                <Slider x:Name="slThreshold" Minimum="-0.02" Maximum="0.08" Value="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center" ValueChanged="slThreshold_ValueChanged" />
+                <Label x:Name="lbThreshold" Text="0.000" WidthRequest="44" VerticalOptions="Center" FontSize="12" TextColor="#aaa" />
+            </StackLayout>
+
+            <!-- Index persistence row -->
+            <StackLayout Orientation="Horizontal" Spacing="8">
+                <Button x:Name="btSaveIndex" Text="SAVE" Clicked="btSaveIndex_Clicked" HorizontalOptions="FillAndExpand" />
+                <Button x:Name="btLoadIndex" Text="LOAD" Clicked="btLoadIndex_Clicked" HorizontalOptions="FillAndExpand" />
+                <Button x:Name="btClearIndex" Text="CLEAR" Clicked="btClearIndex_Clicked" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+        </StackLayout>
+
+        <!-- Results list -->
+        <CollectionView Grid.Row="2" x:Name="cvResults" Background="#141414" Margin="0">
+            <CollectionView.Header>
+                <Grid ColumnSpacing="8" Padding="10,6" BackgroundColor="#222">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Time" FontAttributes="Bold" TextColor="#ddd" WidthRequest="80" />
+                    <Label Grid.Column="1" Text="Margin" FontAttributes="Bold" TextColor="#ddd" WidthRequest="70" />
+                    <Label Grid.Column="2" Text="Source" FontAttributes="Bold" TextColor="#ddd" />
+                </Grid>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnSpacing="8" Padding="10,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding Time}" TextColor="White" WidthRequest="80" />
+                        <Label Grid.Column="1" Text="{Binding Score}" TextColor="#4CAF50" WidthRequest="70" />
+                        <Label Grid.Column="2" Text="{Binding Source}" TextColor="#aaa" LineBreakMode="TailTruncation" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
