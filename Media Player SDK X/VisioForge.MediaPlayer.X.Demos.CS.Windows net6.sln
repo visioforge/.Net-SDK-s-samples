@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player OCR X WPF net6", "WP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player Object Detection X WPF net6", "WPF\Player Object Detection X WPF\Player Object Detection X WPF net6.csproj", "{BFB99EDC-C696-4CDF-A931-EA6F38752B8C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player PII Redaction X WPF net6", "WPF\Player PII Redaction X WPF\Player PII Redaction X WPF net6.csproj", "{98C1984A-6427-4C9E-BFF6-669401AD2517}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -227,6 +229,18 @@ Global
 		{BFB99EDC-C696-4CDF-A931-EA6F38752B8C}.Release|x64.Build.0 = Release|Any CPU
 		{BFB99EDC-C696-4CDF-A931-EA6F38752B8C}.Release|x86.ActiveCfg = Release|Any CPU
 		{BFB99EDC-C696-4CDF-A931-EA6F38752B8C}.Release|x86.Build.0 = Release|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Debug|x64.Build.0 = Debug|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Debug|x86.Build.0 = Debug|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Release|x64.ActiveCfg = Release|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Release|x64.Build.0 = Release|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Release|x86.ActiveCfg = Release|Any CPU
+		{98C1984A-6427-4C9E-BFF6-669401AD2517}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -247,6 +261,7 @@ Global
 		{2579B7FB-8AD3-4493-B737-D7711656227D} = {8F208A79-5140-4844-A5D8-5D7DA3C2A59C}
 		{E497F60D-02B6-4674-93B4-6A3861133724} = {8F208A79-5140-4844-A5D8-5D7DA3C2A59C}
 		{BFB99EDC-C696-4CDF-A931-EA6F38752B8C} = {8F208A79-5140-4844-A5D8-5D7DA3C2A59C}
+		{98C1984A-6427-4C9E-BFF6-669401AD2517} = {8F208A79-5140-4844-A5D8-5D7DA3C2A59C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}

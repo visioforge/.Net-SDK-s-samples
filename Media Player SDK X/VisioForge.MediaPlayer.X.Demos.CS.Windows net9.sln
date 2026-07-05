@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player VLM Captioning X WPF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player Semantic Video Search X WPF net9", "WPF\Player Semantic Video Search X WPF\Player Semantic Video Search X WPF net9.csproj", "{9628F75E-5E45-4DE4-8497-D2982F8860BA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player PII Redaction X WPF net9", "WPF\Player PII Redaction X WPF\Player PII Redaction X WPF net9.csproj", "{FB96E97C-8E96-43F2-A0C8-83AB536F2815}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -297,6 +299,18 @@ Global
 		{9628F75E-5E45-4DE4-8497-D2982F8860BA}.Release|x64.Build.0 = Release|Any CPU
 		{9628F75E-5E45-4DE4-8497-D2982F8860BA}.Release|x86.ActiveCfg = Release|Any CPU
 		{9628F75E-5E45-4DE4-8497-D2982F8860BA}.Release|x86.Build.0 = Release|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Debug|x64.Build.0 = Debug|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Debug|x86.Build.0 = Debug|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Release|x64.ActiveCfg = Release|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Release|x64.Build.0 = Release|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -322,6 +336,7 @@ Global
 		{A7E3E1D7-05D4-40DD-98D0-70199EEABFE0} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
 		{5E4E1E18-ABA1-4E36-A764-B913D804B8F8} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
 		{9628F75E-5E45-4DE4-8497-D2982F8860BA} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
+		{FB96E97C-8E96-43F2-A0C8-83AB536F2815} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}

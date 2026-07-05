@@ -1,0 +1,145 @@
+<Window x:Class="Player_PII_Redaction_X_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Player_PII_Redaction_X_WPF" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        mc:Ignorable="d"
+        Title="Media Player SDK X - PII Redaction Demo" Height="640" Width="960" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="460" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <wpf:VideoView Grid.Column="1" x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="420" Margin="10,10,10,0" Width="460"/>
+
+        <TabControl Grid.Column="0" Margin="10,10,0,10" VerticalAlignment="Stretch">
+            <TabItem Header="Source">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <TextBlock Text="Redacts PII while MediaPlayerCoreX plays a file, using Video_Processing_AddBlock." TextWrapping="Wrap" Foreground="Gray" Width="420" HorizontalAlignment="Left"/>
+                    <Label Content="Video file" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edVideoFile" Width="360" VerticalContentAlignment="Center"/>
+                        <Button x:Name="btSelectVideoFile" Content="..." Width="40" Margin="10,0,0,0" Click="btSelectVideoFile_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Redaction">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Label Content="Categories (can be toggled while running)" HorizontalAlignment="Left"/>
+                    <CheckBox x:Name="cbFaces" Content="Faces" IsChecked="True" Checked="cbCategory_Changed" Unchecked="cbCategory_Changed"/>
+                    <CheckBox x:Name="cbPlates" Content="License plates" IsChecked="True" Margin="0,5,0,0" Checked="cbCategory_Changed" Unchecked="cbCategory_Changed"/>
+                    <CheckBox x:Name="cbText" Content="On-screen text" IsChecked="True" Margin="0,5,0,0" Checked="cbCategory_Changed" Unchecked="cbCategory_Changed"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label Content="Style" Width="120"/>
+                        <ComboBox x:Name="cbStyle" Width="160" SelectionChanged="cbStyle_SelectionChanged"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Label Content="Blur radius" Width="120"/>
+                        <Slider x:Name="slBlurRadius" Width="220" Minimum="1" Maximum="60" Value="20" ValueChanged="slBlurRadius_ValueChanged"/>
+                        <TextBlock x:Name="lbBlurRadius" Text="20" Margin="8,4,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Label Content="Pixelate block" Width="120"/>
+                        <Slider x:Name="slPixelate" Width="220" Minimum="2" Maximum="64" Value="16" ValueChanged="slPixelate_ValueChanged"/>
+                        <TextBlock x:Name="lbPixelate" Text="16" Margin="8,4,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Label Content="Fill color" Width="120"/>
+                        <ComboBox x:Name="cbFillColor" Width="160" SelectionChanged="cbFillColor_SelectionChanged"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label Content="Text filter regex (empty = redact ALL text)" Width="280"/>
+                    </StackPanel>
+                    <TextBox x:Name="edTextRegex" Width="420" HorizontalAlignment="Left" VerticalContentAlignment="Center"
+                             ToolTip="Empty = redact ALL recognized text. Example [\w.+-]+@[\w-]+\.[\w.]+ redacts only e-mail addresses. Recognition always runs (it filters out non-text detections)."/>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label Content="Region padding %" Width="150"/>
+                        <TextBox x:Name="edPadding" Text="15" Width="50" VerticalContentAlignment="Center"/>
+                        <Label Content="Hold time, ms" Width="110" Margin="10,0,0,0"/>
+                        <TextBox x:Name="edHoldMs" Text="700" Width="50" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <Label Content="Run every N+1 frames (skip)" Width="150"/>
+                        <TextBox x:Name="edFramesToSkip" Text="1" Width="50" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Models">
+                <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                    <Button x:Name="btDownloadModels" Content="Download all models" Width="160" HorizontalAlignment="Left" Margin="0,0,0,10" Click="btDownloadModels_Click"/>
+
+                    <Label Content="Face detector model (YuNet, MIT)" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edFaceModel" Width="300" VerticalContentAlignment="Center"/>
+                        <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectFaceModel_Click"/>
+                    </StackPanel>
+
+                    <Label Content="License plate detector (FastALPR YOLOv9-T, MIT)" HorizontalAlignment="Left" Margin="0,8,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edPlateModel" Width="300" VerticalContentAlignment="Center"/>
+                        <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectPlateModel_Click"/>
+                    </StackPanel>
+
+                    <Label Content="Text detection model (PP-OCRv5 DBNet, Apache-2.0)" HorizontalAlignment="Left" Margin="0,8,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edTextDetModel" Width="300" VerticalContentAlignment="Center"/>
+                        <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectTextDetModel_Click"/>
+                    </StackPanel>
+
+                    <Label Content="Text recognition model + dictionary" HorizontalAlignment="Left" Margin="0,8,0,0"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="edTextRecModel" Width="300" VerticalContentAlignment="Center"/>
+                        <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectTextRecModel_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                        <TextBox x:Name="edTextDict" Width="300" VerticalContentAlignment="Center"/>
+                        <Button Content="..." Width="40" Margin="6,0,0,0" Click="btSelectTextDict_Click"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="pnlDownload" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
+                        <TextBlock x:Name="lbDownloadStatus" Text="" HorizontalAlignment="Left" Width="420" TextTrimming="CharacterEllipsis"/>
+                        <ProgressBar x:Name="pbDownload" Width="420" Height="18" HorizontalAlignment="Left" Margin="0,4,0,0" Minimum="0" Maximum="100"/>
+                    </StackPanel>
+
+                    <TextBlock Width="420" Margin="0,10,0,0" TextWrapping="Wrap" Foreground="Gray"
+                               Text="Tap 'Download all models' to fetch the face, plate, and text models on demand into %USERPROFILE%/VisioForge/models, or use the ... buttons to browse to your own. Weights are NOT shipped with the SDK."/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Events">
+                <TextBox x:Name="txtResults" Margin="10" IsReadOnly="True" IsReadOnlyCaretVisible="True"
+                         FontFamily="Consolas" AcceptsReturn="True" TextWrapping="NoWrap"
+                         VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                         ToolTip="Read-only. Select text and Ctrl+C to copy."/>
+            </TabItem>
+
+            <TabItem Header="Log">
+                <TextBox x:Name="mmLog" Margin="10" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" IsReadOnly="True"/>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,440,0,0">
+            <Button x:Name="btStart" Content="Start" Width="60" Click="btStart_Click"/>
+            <Button x:Name="btStop" Content="Stop" Width="60" Margin="10,0,0,0" Click="btStop_Click" IsEnabled="False"/>
+            <Button x:Name="btPause" Content="Pause" Width="60" Margin="10,0,0,0" Click="btPause_Click" IsEnabled="False"/>
+            <Button x:Name="btResume" Content="Resume" Width="60" Margin="10,0,0,0" Click="btResume_Click" IsEnabled="False"/>
+        </StackPanel>
+
+        <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,440,10,0" Text="00:00:00" x:Name="lbTime"/>
+
+        <Slider Grid.Column="1" x:Name="slSeek" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,470,10,0"
+                Minimum="0" Maximum="1000" IsEnabled="False" IsMoveToPointEnabled="True"
+                Thumb.DragStarted="slSeek_DragStarted" Thumb.DragCompleted="slSeek_DragCompleted" ValueChanged="slSeek_ValueChanged"/>
+    </Grid>
+</Window>

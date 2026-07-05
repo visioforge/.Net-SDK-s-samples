@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Capture_PII_Redaction_X.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <Grid RowSpacing="0" RowDefinitions="*,Auto">
+
+        <my:VideoView Grid.Row="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            x:Name="videoView"
+            Background="Black"/>
+
+        <!-- Live redaction summary, overlaid on the camera preview. -->
+        <Label Grid.Row="0" x:Name="lbStatus"
+            Text="Choose categories, pick a camera, then START."
+            Margin="12" Padding="8,4" BackgroundColor="#90000000" TextColor="White"
+            FontSize="13" HorizontalOptions="Start" VerticalOptions="Start" />
+
+        <ScrollView Grid.Row="1" MaximumHeightRequest="320" Background="#1e1e1e">
+            <VerticalStackLayout Spacing="6" Padding="12,8,12,12">
+
+                <!-- Categories (toggle before Start; enabled categories can be toggled live). -->
+                <Label Text="Redact" TextColor="#B0FFFFFF" FontSize="12" />
+                <HorizontalStackLayout Spacing="6">
+                    <Switch x:Name="swFaces" IsToggled="True" Toggled="Category_Toggled" />
+                    <Label Text="Faces" TextColor="White" VerticalOptions="Center" />
+                    <Switch x:Name="swPlates" IsToggled="True" Toggled="Category_Toggled" Margin="12,0,0,0" />
+                    <Label Text="Plates" TextColor="White" VerticalOptions="Center" />
+                    <Switch x:Name="swText" IsToggled="True" Toggled="Category_Toggled" Margin="12,0,0,0" />
+                    <Label Text="Text" TextColor="White" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <!-- Style + strength. -->
+                <Picker x:Name="pkStyle" Title="Style" TitleColor="#B0FFFFFF" TextColor="White"
+                    SelectedIndexChanged="pkStyle_SelectedIndexChanged">
+                    <Picker.Items>
+                        <x:String>Gaussian blur</x:String>
+                        <x:String>Pixelate</x:String>
+                        <x:String>Solid fill</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                    <Label Grid.Column="0" Text="Blur" TextColor="White" VerticalOptions="Center" />
+                    <Slider Grid.Column="1" x:Name="slBlur" Minimum="1" Maximum="60" Value="20"
+                        ValueChanged="slBlur_ValueChanged" />
+                    <Label Grid.Column="2" x:Name="lbBlur" Text="20" TextColor="White" VerticalOptions="Center" WidthRequest="28" />
+                </Grid>
+
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                    <Label Grid.Column="0" Text="Pixel" TextColor="White" VerticalOptions="Center" />
+                    <Slider Grid.Column="1" x:Name="slPixelate" Minimum="2" Maximum="64" Value="16"
+                        ValueChanged="slPixelate_ValueChanged" />
+                    <Label Grid.Column="2" x:Name="lbPixelate" Text="16" TextColor="White" VerticalOptions="Center" WidthRequest="28" />
+                </Grid>
+
+                <Picker x:Name="pkFillColor" Title="Fill color" TitleColor="#B0FFFFFF" TextColor="White">
+                    <Picker.Items>
+                        <x:String>Black</x:String>
+                        <x:String>White</x:String>
+                        <x:String>Gray</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Entry x:Name="edRegex" Placeholder="Text filter regex (empty = redact ALL text)"
+                    PlaceholderColor="#80FFFFFF" TextColor="White" />
+
+                <!-- Models download from the samples GitHub release into the app-data cache. -->
+                <Label x:Name="lbFaceModel" Text="" TextColor="#B0FFFFFF" FontSize="12" LineBreakMode="MiddleTruncation" />
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <ProgressBar Grid.Column="0" x:Name="pbDownload" Progress="0" ProgressColor="#4CAF50"
+                        IsVisible="False" VerticalOptions="Center" />
+                    <Button Grid.Column="1" x:Name="btDownloadModels" Text="Download models"
+                        Clicked="btDownloadModels_Clicked" IsVisible="False" />
+                </Grid>
+
+                <Button x:Name="btCamera" Text="CAMERA" Clicked="btCamera_Clicked" />
+
+                <Button x:Name="btStartStop" Text="START" Clicked="btStartStop_Clicked"
+                    BackgroundColor="#4CAF50" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

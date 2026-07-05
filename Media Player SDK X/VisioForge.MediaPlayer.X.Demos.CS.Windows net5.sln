@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player OCR X WPF net5", "WP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player Object Detection X WPF net5", "WPF\Player Object Detection X WPF\Player Object Detection X WPF net5.csproj", "{9593C51C-3574-44F7-AA92-45B17839DD9B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player PII Redaction X WPF net5", "WPF\Player PII Redaction X WPF\Player PII Redaction X WPF net5.csproj", "{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -227,6 +229,18 @@ Global
 		{9593C51C-3574-44F7-AA92-45B17839DD9B}.Release|x64.Build.0 = Release|Any CPU
 		{9593C51C-3574-44F7-AA92-45B17839DD9B}.Release|x86.ActiveCfg = Release|Any CPU
 		{9593C51C-3574-44F7-AA92-45B17839DD9B}.Release|x86.Build.0 = Release|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Debug|x64.Build.0 = Debug|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Debug|x86.Build.0 = Debug|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Release|x64.ActiveCfg = Release|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Release|x64.Build.0 = Release|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Release|x86.ActiveCfg = Release|Any CPU
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -247,6 +261,7 @@ Global
 		{FA6970CA-DFC4-4D1B-825E-D95133867423} = {B53B444C-3DDE-4525-91CD-56008E36F77F}
 		{6DEDC63E-6F4F-43AC-917E-B84E0B3722EA} = {B53B444C-3DDE-4525-91CD-56008E36F77F}
 		{9593C51C-3574-44F7-AA92-45B17839DD9B} = {B53B444C-3DDE-4525-91CD-56008E36F77F}
+		{57EDE239-E890-41E6-B62A-6CB3AA3AB1D6} = {B53B444C-3DDE-4525-91CD-56008E36F77F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}

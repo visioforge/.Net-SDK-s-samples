@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Capture Open Vocabulary Det
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Capture VLM Captioning X", "MAUI\Capture VLM Captioning X\Capture VLM Captioning X.csproj", "{1CBC476A-897B-4DC6-B73D-005D77D6FB61}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Capture PII Redaction X", "MAUI\Capture PII Redaction X\Capture PII Redaction X.csproj", "{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +161,18 @@ Global
 		{1CBC476A-897B-4DC6-B73D-005D77D6FB61}.Release|x64.Build.0 = Release|Any CPU
 		{1CBC476A-897B-4DC6-B73D-005D77D6FB61}.Release|x86.ActiveCfg = Release|Any CPU
 		{1CBC476A-897B-4DC6-B73D-005D77D6FB61}.Release|x86.Build.0 = Release|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Debug|x64.Build.0 = Debug|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Debug|x86.Build.0 = Debug|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Release|x64.ActiveCfg = Release|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Release|x64.Build.0 = Release|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Release|x86.ActiveCfg = Release|Any CPU
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -171,6 +185,7 @@ Global
 		{888DCC37-2B27-41BB-B7E6-29D78D17443E} = {5358A8DD-221C-A68E-DDFB-CD91B98A505E}
 		{89D538C0-D936-4928-B1B4-D7E6377D3F4E} = {5358A8DD-221C-A68E-DDFB-CD91B98A505E}
 		{1CBC476A-897B-4DC6-B73D-005D77D6FB61} = {5358A8DD-221C-A68E-DDFB-CD91B98A505E}
+		{B81FEC61-F2BC-4316-A7AB-D93520CB87DF} = {5358A8DD-221C-A68E-DDFB-CD91B98A505E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}
