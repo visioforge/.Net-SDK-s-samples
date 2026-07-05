@@ -26,6 +26,23 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.7.3
+
+* [Media Blocks SDK .Net] Added **`PIIRedactionBlock`** — automatic on-video redaction of personally identifiable information: faces (YuNet), vehicle license plates (FastALPR detector), and on-screen text (PP-OCRv5 detection + recognition — recognition filters out the detector's non-text false positives — with an optional regex filter that redacts only matching text such as e-mails or phone numbers). Redaction styles: Gaussian blur, pixelate, and solid fill. Each category can be toggled live; regions are padded and held between detection cycles so PII stays covered through motion and detector flicker. Works in `VideoCaptureCoreX`/`MediaPlayerCoreX` via `Video_Processing_AddBlock`.
+* [Demos] Added a **PII Redaction** WPF sample (Media Blocks SDK): webcam, file, or RTSP source with live category/style switching.
+* [Demos] Added **Player PII Redaction X** and **Capture PII Redaction X** samples (WPF and MAUI) — live face/plate/text redaction on `MediaPlayerCoreX` (file playback) and `VideoCaptureCoreX` (camera) via `Video_Processing_AddBlock`.
+
+## 2026.7.2
+
+* [Media Blocks SDK .Net] Added an **open-vocabulary object-detection** block (`OpenVocabularyDetectorBlock`) that detects objects from free-text prompts (OWLv2 / Grounding DINO) instead of a fixed class list, with prompts swappable at runtime. It can also drive `ObjectAnalyticsBlock` as a detector for tripwire / zone analytics.
+* [Media Blocks SDK .Net] Added a **Florence-2 vision-language** block (`VLMBlock`) for frame captioning, OCR, phrase grounding, and object detection.
+* [Media Blocks SDK .Net] Added a **CLIP video-embedding** block (`VideoEmbeddingBlock`) with a semantic frame-search index, for natural-language search over indexed video.
+* [Media Blocks SDK .Net] `VideoEmbeddingBlock` can index a file at full decode speed with no dropped samples via `VideoEmbeddingSettings.BackpressureNoDrop` (backpressures the pipeline instead of dropping frames when the encoder is busy).
+* [Media Blocks SDK .Net] `OpenVocabularyDetectorBlock` confidence and IoU thresholds can now be adjusted at runtime (`SetConfidenceThreshold` / `SetIoUThreshold`); the new value takes effect on the next frame without rebuilding the pipeline.
+* [Demos] Added three WPF samples: **Open Vocabulary Detection**, **VLM Captioning**, and **Semantic Video Search**.
+* [Media Player SDK .Net] Added `MediaPlayerCoreX.Video_Renderer_IsSync` — set it to `false` to run the video renderer without clock synchronization so a file is processed at full decode speed (for offline AI indexing / analysis) instead of in real time; `null` (default) keeps the automatic behavior.
+* [Demos] Added **X-engine** versions of the new AI samples (WPF and MAUI): **Open Vocabulary Detection** and **VLM Captioning** for both `VideoCaptureCoreX` (camera) and `MediaPlayerCoreX` (file), plus **Semantic Video Search** for `MediaPlayerCoreX`. Each inserts the AI block through the `Video_Processing_AddBlock` API.
+
 ## 2026.6.30
 
 * [Demos] Added **Face Recognition** and **OCR** demos for the X engines, in both WPF and MAUI: **Player Face Recognition X** and **Player OCR X** (`MediaPlayerCoreX`), plus **Capture Face Recognition X** and **Capture OCR X** (`VideoCaptureCoreX`). Each inserts the AI block through the `Video_Processing_AddBlock` API — the face demos enroll people from photos and label them on the video; the OCR demos draw and log recognized text.
