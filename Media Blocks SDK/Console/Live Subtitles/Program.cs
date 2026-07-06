@@ -20,9 +20,10 @@ using Whisper.net.Ggml;
 namespace LiveSubtitlesConsole
 {
     /// <summary>
-    /// Console speech-to-text test harness: transcribes a media file with Whisper using BACKPRESSURE
-    /// (lossless, paced to Whisper, max speed), and prints recognized text, live position/duration progress,
-    /// and the SDK's own diagnostic log lines. Usage: LiveSubtitles &lt;media-file&gt; [language].
+    /// Console speech-to-text test harness: transcribes a media file with Whisper losslessly (the
+    /// synchronous block paces the source to Whisper, so it runs at max speed without dropping audio), and
+    /// prints recognized text, live position/duration progress, and the SDK's own diagnostic log lines.
+    /// Usage: LiveSubtitles &lt;media-file&gt; [language].
     /// </summary>
     internal static class Program
     {
@@ -30,18 +31,17 @@ namespace LiveSubtitlesConsole
         private static readonly string ModelsDir = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "VisioForge", "models");
 
-        // Official Silero VAD v5 ONNX model (MIT).
+        // Silero VAD v5 ONNX model (MIT), hosted on the samples GitHub release alongside the other models.
         private const string SileroVadUrl =
-            "https://github.com/snakers4/silero-vad/raw/master/src/silero_vad/data/silero_vad.onnx";
+            "https://github.com/visioforge/.Net-SDK-s-samples/releases/download/onnx-models-v1/silero_vad.onnx";
 
         private static async Task<int> Main(string[] args)
         {
-            // Route the SDK's internal Debug.WriteLine diagnostics (Context.Info/Debug/Error) to the console
-            // so the [SpeechToTextBlock]/[AudioRing] log lines are visible when running headless.
+            // Route the SDK's internal diagnostics to the console so block log lines are visible when headless.
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
             Trace.AutoFlush = true;
 
-            Console.WriteLine("VisioForge - speech-to-text console TEST harness (backpressure)");
+            Console.WriteLine("VisioForge - speech-to-text console TEST harness (lossless)");
             Console.WriteLine("Usage: LiveSubtitles <media-file> [language]   (language defaults to 'auto')");
             Console.WriteLine();
 
@@ -90,7 +90,6 @@ namespace LiveSubtitlesConsole
                     Language = language,
                     Provider = OnnxExecutionProvider.Auto, // CUDA when available, else CPU
                     EnableVad = true,
-                    BackpressureWhenBusy = true, // lossless: pace the source to Whisper, never drop
                 };
                 settings.Vad.ModelPath = sileroModel;
 
@@ -125,8 +124,7 @@ namespace LiveSubtitlesConsole
                     }
                 };
 
-                // Non-synced null sink: no real-time clock caps the speed; combined with backpressure the
-                // pipeline runs as fast as Whisper can transcribe.
+                // Non-synced null sink: no real-time clock caps the speed, so the pipeline runs as fast as Whisper can transcribe.
                 var sink = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false };
 
                 if (!pipeline.Connect(audioPad, stt.Input) || !pipeline.Connect(stt.Output, sink.Input))
@@ -142,8 +140,7 @@ namespace LiveSubtitlesConsole
                 var wall = Stopwatch.StartNew();
                 await pipeline.StartAsync();
 
-                // Progress reporter: pipeline position vs duration. Duration is resolved (polled) inside the
-                // reporter because it is not known the instant the pipeline starts playing.
+                // Progress reporter: pipeline position vs duration (duration is polled lazily inside it).
                 var durationBox = new TimeSpan[1];
                 using var progressCts = new CancellationTokenSource();
                 var progressTask = ReportProgressAsync(pipeline, () => lastSegmentEnd, wall, durationBox, progressCts.Token);
@@ -152,9 +149,7 @@ namespace LiveSubtitlesConsole
                 progressCts.Cancel();
                 var stoppedByUser = finished != done.Task;
 
-                // If the pipeline (not the user) ended the run, inspect its result: OnError completes done
-                // with false. Await the already-completed task (no blocking .Result) to surface the failure
-                // as a nonzero exit code for CI/scripts.
+                // Pipeline-ended run: OnError completed done with false — surface that as a nonzero exit code.
                 if (!stoppedByUser)
                 {
                     pipelineFailed = !await done.Task;
@@ -188,7 +183,7 @@ namespace LiveSubtitlesConsole
                 {
                     await Task.Delay(1000, token);
 
-                    // Resolve the duration lazily — it is not known the instant the pipeline starts playing.
+                    // Resolve duration lazily — it isn't known the instant the pipeline starts.
                     if (durationBox[0] <= TimeSpan.Zero)
                     {
                         durationBox[0] = await SafeDurationAsync(pipeline);

@@ -8,29 +8,31 @@ using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AI;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
+using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AI;
 using VisioForge.Core.Types.X.Sources;
-
-using Whisper.net.Ggml;
 
 namespace LiveSubtitlesMB
 {
     public partial class MainPage : ContentPage
     {
-        // Official Silero VAD v5 ONNX model (MIT).
+        // Silero VAD v5 ONNX model (MIT), hosted on the samples GitHub release alongside the other models.
         private const string SileroVadUrl =
-            "https://github.com/snakers4/silero-vad/raw/master/src/silero_vad/data/silero_vad.onnx";
+            "https://github.com/visioforge/.Net-SDK-s-samples/releases/download/onnx-models-v1/silero_vad.onnx";
 
         // Shared client for the one-shot model downloads — avoids per-call socket churn.
-        private static readonly HttpClient _http = new HttpClient { Timeout = TimeSpan.FromMinutes(5) };
+        private static readonly HttpClient _http = new HttpClient { Timeout = TimeSpan.FromMinutes(10) };
+
+        // Whisper GGML model cache + presets (downloaded with a progress bar, or a custom .bin via Browse).
+        private static readonly string ModelsDir = Path.Combine(FileSystem.AppDataDirectory, "models");
+        private List<ModelPreset> _modelPresets;
 
         private MediaBlocksPipeline _pipeline;
         private UniversalSourceBlock _source;
         private SpeechToTextBlock _stt;
 
-        // A non-synced null sink: transcription runs as fast as Whisper allows instead of
-        // playing the audio in real time (an AudioRendererBlock would clock the pipeline to 1x).
+        // Non-synced null sink: transcription runs as fast as Whisper allows, not at 1x playback speed.
         private NullRendererBlock _audioSink;
 
         private string _whisperModelPath;
@@ -47,8 +49,7 @@ namespace LiveSubtitlesMB
         // Re-entrancy guard for the transcribe button (0 = free, 1 = busy).
         private int _busy;
 
-        // Serializes teardown: the EOS handler, a user STOP, and page-close cleanup can all land here;
-        // the gate lets the first fully tear down while the others await, so DestroySDK never races it.
+        // Serializes teardown so EOS, user STOP, and page-close cleanup don't race each other.
         private readonly SemaphoreSlim _teardownGate = new SemaphoreSlim(1, 1);
 
         // Polls the pipeline position/duration to drive the transcription progress bar.
@@ -74,10 +75,192 @@ namespace LiveSubtitlesMB
                 {
                     _window.Destroying += Window_Destroying;
                 }
+
+                BuildModelPresets();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+            }
+        }
+
+        private sealed class ModelPreset
+        {
+            public string Name;
+            public string FileName;   // cache file name (e.g. ggml-base.bin); null for the custom-file entry
+            public string Url;        // download URL; null for the custom-file entry
+            public bool IsCustom;
+        }
+
+        // Builds the model dropdown: a few downloadable Whisper sizes plus a "Custom file…" entry.
+        private void BuildModelPresets()
+        {
+            _modelPresets = new List<ModelPreset>
+            {
+                new ModelPreset { Name = "Whisper Tiny (~74 MB)", FileName = "ggml-tiny.bin", Url = "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin" },
+                new ModelPreset { Name = "Whisper Base (~141 MB)", FileName = "ggml-base.bin", Url = "https://github.com/visioforge/.Net-SDK-s-samples/releases/download/onnx-models-v1/ggml-base.bin" },
+                new ModelPreset { Name = "Whisper Small (~465 MB)", FileName = "ggml-small.bin", Url = "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin" },
+                new ModelPreset { Name = "Custom file…", IsCustom = true },
+            };
+
+            pkModel.Items.Clear();
+            foreach (var p in _modelPresets)
+            {
+                pkModel.Items.Add(p.Name);
+            }
+
+            pkModel.SelectedIndex = 1; // default to Base
+        }
+
+        private ModelPreset SelectedPreset()
+            => (_modelPresets != null && pkModel.SelectedIndex >= 0 && pkModel.SelectedIndex < _modelPresets.Count)
+                ? _modelPresets[pkModel.SelectedIndex]
+                : null;
+
+        // Reflects the picked preset in the UI: cached preset -> ready; downloadable -> show Download; custom -> Browse.
+        private void pkModel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var p = SelectedPreset();
+            if (p == null)
+            {
+                return;
+            }
+
+            pbDownload.IsVisible = false;
+            pbDownload.Progress = 0;
+
+            if (p.IsCustom)
+            {
+                btDownloadModel.IsVisible = false;
+                btBrowseModel.IsVisible = true;
+                _whisperModelPath = null;
+                SetStatus("Tap Browse… and pick a Whisper GGML .bin file.");
+                return;
+            }
+
+            btBrowseModel.IsVisible = false;
+            var cache = Path.Combine(ModelsDir, p.FileName);
+            if (File.Exists(cache))
+            {
+                _whisperModelPath = cache;
+                btDownloadModel.IsVisible = false;
+                SetStatus($"Model ready: {p.Name}. Pick a file to transcribe.");
+            }
+            else
+            {
+                _whisperModelPath = null;
+                btDownloadModel.IsVisible = true;
+                SetStatus($"Tap Download to fetch {p.Name}.");
+            }
+        }
+
+        private async void btDownloadModel_Clicked(object sender, EventArgs e)
+        {
+            var p = SelectedPreset();
+            if (p == null || p.IsCustom)
+            {
+                return;
+            }
+
+            var dest = Path.Combine(ModelsDir, p.FileName);
+            btDownloadModel.IsEnabled = false;
+            pbDownload.Progress = 0;
+            pbDownload.IsVisible = true;
+            SetStatus($"Downloading {p.Name}...");
+
+            try
+            {
+                await DownloadModelWithProgressAsync(p.Url, dest);
+                _whisperModelPath = dest;
+                btDownloadModel.IsVisible = false;
+                SetStatus($"Model ready: {p.Name}. Pick a file to transcribe.");
+            }
+            catch (Exception ex)
+            {
+                _whisperModelPath = null;
+                SetStatus("Model download failed.");
+                await DisplayAlert("Download failed", ex.Message, "OK");
+            }
+            finally
+            {
+                pbDownload.IsVisible = false;
+                btDownloadModel.IsEnabled = true;
+            }
+        }
+
+        // Streams the model to a .part file, reporting progress via the bar, then moves it into place.
+        private async Task DownloadModelWithProgressAsync(string url, string dest)
+        {
+            Directory.CreateDirectory(ModelsDir);
+            var temp = dest + ".part";
+
+            try
+            {
+                // Run the download off the UI thread; progress is marshalled back via the Dispatcher.
+                await Task.Run(async () =>
+                {
+                    using (var response = await _http.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
+                    {
+                        response.EnsureSuccessStatusCode();
+                        var total = response.Content.Headers.ContentLength ?? -1L;
+
+                        using (var source = await response.Content.ReadAsStreamAsync())
+                        using (var file = File.Create(temp))
+                        {
+                            var buffer = new byte[81920];
+                            long readTotal = 0;
+                            int read;
+                            int lastPercent = -1;
+                            while ((read = await source.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                            {
+                                await file.WriteAsync(buffer, 0, read);
+                                readTotal += read;
+                                if (total > 0)
+                                {
+                                    // Throttle progress updates to whole-percent steps.
+                                    var percent = (int)(readTotal * 100 / total);
+                                    if (percent != lastPercent)
+                                    {
+                                        lastPercent = percent;
+                                        var fraction = (double)readTotal / total;
+                                        Dispatcher?.Dispatch(() => pbDownload.Progress = fraction);
+                                    }
+                                }
+                            }
+
+                            // Reject a truncated download so a partial file is never cached as complete.
+                            if (total > 0 && readTotal != total)
+                            {
+                                throw new IOException($"Incomplete download: received {readTotal} of {total} bytes.");
+                            }
+                        }
+                    }
+
+                    File.Move(temp, dest, overwrite: true);
+                });
+            }
+            catch
+            {
+                // Best-effort cleanup of the partial file so a failed/cancelled download doesn't orphan it.
+                try { if (File.Exists(temp)) File.Delete(temp); } catch { }
+                throw;
+            }
+        }
+
+        private async void btBrowseModel_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var pick = await FilePicker.Default.PickAsync();
+                if (pick?.FullPath != null)
+                {
+                    _whisperModelPath = pick.FullPath;
+                    SetStatus("Model: " + Path.GetFileName(pick.FullPath) + ". Pick a file to transcribe.");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", "Could not open the file picker: " + ex.Message, "OK");
             }
         }
 
@@ -123,12 +306,18 @@ namespace LiveSubtitlesMB
 
         private async Task StartAsync()
         {
-            // Download the models on first run (Whisper base is ~150 MB).
+            // A Whisper model must be selected (downloaded from the list or browsed) before transcribing.
+            if (string.IsNullOrEmpty(_whisperModelPath) || !File.Exists(_whisperModelPath))
+            {
+                await DisplayAlert("Model required", "Choose a Whisper model from the list and download it, or pick a custom .bin file first.", "OK");
+                return;
+            }
+
+            // Silero VAD (small) is fetched automatically on first run.
             ShowBusy(true);
             try
             {
-                SetStatus("Downloading model (first run, ~150 MB)...");
-                _whisperModelPath ??= await EnsureWhisperModelAsync(GgmlType.Base);
+                SetStatus("Preparing VAD model...");
                 _sileroModelPath ??= await EnsureSileroModelAsync();
             }
             catch (Exception ex)
@@ -172,14 +361,10 @@ namespace LiveSubtitlesMB
                     Language = "auto",
                     Provider = OnnxExecutionProvider.Auto, // GPU when available, else CPU
                     EnableVad = true,
-                    // File transcription: never drop audio. Backpressure paces the source to Whisper, so
-                    // the whole file is transcribed losslessly and as fast as the CPU allows.
-                    BackpressureWhenBusy = true,
                 };
                 settings.Vad.ModelPath = _sileroModelPath;
 
-                // On iOS the SDK exposes only the NSUrl overload (the string overload is gated out by
-                // #if __IOS__ && !__MACCATALYST__), so wrap the picked path with NSUrl.FromFilename.
+                // On iOS the SDK exposes only the NSUrl overload, so wrap the picked path.
 #if IOS && !MACCATALYST
                 var sourceSettings = await UniversalSourceSettings.CreateAsync(Foundation.NSUrl.FromFilename(pick.FullPath), renderVideo: false, renderAudio: true);
 #else
@@ -217,7 +402,7 @@ namespace LiveSubtitlesMB
                 }
 
                 _subtitles.Clear();
-                Dispatcher.Dispatch(() => lbSubtitles.Text = string.Empty);
+                Dispatcher?.Dispatch(() => lbSubtitles.Text = string.Empty);
 
                 if (_isCleanedUp)
                 {
@@ -225,13 +410,11 @@ namespace LiveSubtitlesMB
                     return;
                 }
 
-                // Mark running BEFORE starting: for a very short/empty file EOS (OnStop) can fire as soon as
-                // the pipeline reaches PLAYING, and Pipeline_OnStop only tears down when _isRunning is set.
+                // Mark running BEFORE starting: a short/empty file can fire EOS before StartAsync returns.
                 _isRunning = true;
                 await _pipeline.StartAsync();
 
-                // Bail if the page was torn down, or EOS already stopped+disposed the pipeline during startup
-                // (StopAsync from OnStop has already reset the UI in that case).
+                // Bail if the page was torn down or EOS already stopped+disposed the pipeline during startup.
                 if (_isCleanedUp || _pipeline == null)
                 {
                     return;
@@ -254,8 +437,7 @@ namespace LiveSubtitlesMB
 
         private async Task StopAsync(bool updateUI = true)
         {
-            // Serialize teardown so DestroySDK (from CleanupAsync) never races an in-flight EOS/STOP
-            // teardown: the first caller tears the pipeline down while the others await the gate.
+            // Serialize teardown so DestroySDK never races an in-flight EOS/STOP teardown.
             await _teardownGate.WaitAsync();
             try
             {
@@ -282,7 +464,7 @@ namespace LiveSubtitlesMB
 
                 if (updateUI)
                 {
-                    Dispatcher.Dispatch(() =>
+                    Dispatcher?.Dispatch(() =>
                     {
                         btTranscribe.Text = "PICK FILE & TRANSCRIBE";
                         btTranscribe.BackgroundColor = Color.FromRgb(76, 175, 80);
@@ -311,8 +493,7 @@ namespace LiveSubtitlesMB
 
             if (_pipeline != null)
             {
-                // DisposeAsync disposes every connected block; do NOT ClearBlocks first
-                // or the block list is emptied before disposal.
+                // DisposeAsync disposes every connected block; do NOT ClearBlocks first.
                 _pipeline.OnError -= Pipeline_OnError;
                 _pipeline.OnStop -= Pipeline_OnStop;
                 await _pipeline.DisposeAsync();
@@ -353,7 +534,7 @@ namespace LiveSubtitlesMB
                 return;
             }
 
-            Dispatcher.Dispatch(async () =>
+            Dispatcher?.Dispatch(async () =>
             {
                 if (_isCleanedUp)
                 {
@@ -382,6 +563,18 @@ namespace LiveSubtitlesMB
             // The file finished (EOS) — tear down and reset the UI.
             try
             {
+                // Ignore a stale Stop from a previous session while a start/stop is in flight.
+                if (Volatile.Read(ref _busy) != 0)
+                {
+                    return;
+                }
+
+                var pipeline = _pipeline;
+                if (pipeline != null && pipeline.State != PlaybackState.Free)
+                {
+                    return;
+                }
+
                 if (_isRunning)
                 {
                     await StopAsync();
@@ -400,12 +593,12 @@ namespace LiveSubtitlesMB
 
         private void SetStatus(string text)
         {
-            Dispatcher.Dispatch(() => lbStatus.Text = text);
+            Dispatcher?.Dispatch(() => lbStatus.Text = text);
         }
 
         private void ShowBusy(bool busy)
         {
-            Dispatcher.Dispatch(() =>
+            Dispatcher?.Dispatch(() =>
             {
                 aiBusy.IsRunning = busy;
                 aiBusy.IsVisible = busy;
@@ -429,15 +622,17 @@ namespace LiveSubtitlesMB
 
         private void StopProgressTimer()
         {
-            Dispatcher.Dispatch(() =>
+            // Stop/unsubscribe the timer outside the dispatch so it runs even when Dispatcher is null.
+            var timer = _progressTimer;
+            if (timer != null)
             {
-                if (_progressTimer != null)
-                {
-                    _progressTimer.Stop();
-                    _progressTimer.Tick -= ProgressTimer_Tick;
-                    _progressTimer = null;
-                }
+                timer.Stop();
+                timer.Tick -= ProgressTimer_Tick;
+                _progressTimer = null;
+            }
 
+            Dispatcher?.Dispatch(() =>
+            {
                 pbProgress.IsVisible = false;
                 lbTime.IsVisible = false;
             });
@@ -515,27 +710,6 @@ namespace LiveSubtitlesMB
             VisioForgeX.DestroySDK();
         }
 
-        /// <summary>Downloads the Whisper GGML model into AppDataDirectory if it is not already present.</summary>
-        private static async Task<string> EnsureWhisperModelAsync(GgmlType type)
-        {
-            var dest = Path.Combine(FileSystem.AppDataDirectory, $"ggml-{type.ToString().ToLowerInvariant()}.bin");
-            if (File.Exists(dest))
-            {
-                return dest;
-            }
-
-            Directory.CreateDirectory(FileSystem.AppDataDirectory);
-            var temp = dest + ".part";
-            using (var modelStream = await WhisperGgmlDownloader.Default.GetGgmlModelAsync(type))
-            using (var fileStream = File.Create(temp))
-            {
-                await modelStream.CopyToAsync(fileStream);
-            }
-
-            File.Move(temp, dest, overwrite: true);
-            return dest;
-        }
-
         /// <summary>Downloads the Silero VAD ONNX model into AppDataDirectory if it is not already present.</summary>
         private static async Task<string> EnsureSileroModelAsync()
         {
@@ -547,16 +721,35 @@ namespace LiveSubtitlesMB
 
             Directory.CreateDirectory(FileSystem.AppDataDirectory);
             var temp = dest + ".part";
-            using (var response = await _http.GetAsync(SileroVadUrl, HttpCompletionOption.ResponseHeadersRead))
+            try
             {
-                response.EnsureSuccessStatusCode();
-                using (var fileStream = File.Create(temp))
+                using (var response = await _http.GetAsync(SileroVadUrl, HttpCompletionOption.ResponseHeadersRead))
                 {
-                    await response.Content.CopyToAsync(fileStream);
+                    response.EnsureSuccessStatusCode();
+                    var total = response.Content.Headers.ContentLength ?? -1L;
+
+                    using (var fileStream = File.Create(temp))
+                    {
+                        await response.Content.CopyToAsync(fileStream);
+                        await fileStream.FlushAsync();
+
+                        // Reject a truncated download so a partial .onnx is never cached as complete.
+                        if (total > 0 && fileStream.Length != total)
+                        {
+                            throw new IOException($"Incomplete download: received {fileStream.Length} of {total} bytes.");
+                        }
+                    }
                 }
+
+                File.Move(temp, dest, overwrite: true);
+            }
+            catch
+            {
+                // Best-effort cleanup of the partial file so a failed/cancelled download doesn't orphan it.
+                try { if (File.Exists(temp)) File.Delete(temp); } catch { }
+                throw;
             }
 
-            File.Move(temp, dest, overwrite: true);
             return dest;
         }
     }

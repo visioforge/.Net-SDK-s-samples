@@ -623,7 +623,7 @@ namespace Player_PII_Redaction_X_WPF
                         var totalBytes = response.Content.Headers.ContentLength ?? -1L;
                         _ = Dispatcher.BeginInvoke(new Action(() => pbDownload.IsIndeterminate = totalBytes <= 0));
 
-                        using (var src = await response.Content.ReadAsStreamAsync(cancellationToken))
+                        using (var src = await response.Content.ReadAsStreamAsync())
                         using (var fileStream = File.Create(tmpPath))
                         using (var idleCts = new CancellationTokenSource())
                         using (var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(idleCts.Token, cancellationToken))
@@ -666,7 +666,8 @@ namespace Player_PII_Redaction_X_WPF
                     }
                 });
 
-                File.Move(tmpPath, destPath, true);
+                if (File.Exists(destPath)) File.Delete(destPath);
+                File.Move(tmpPath, destPath);
             }
             catch (OperationCanceledException) when (!cancellationToken.IsCancellationRequested)
             {

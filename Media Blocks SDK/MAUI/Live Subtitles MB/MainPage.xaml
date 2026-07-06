@@ -9,6 +9,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -47,15 +48,29 @@
                    IsVisible="False" />
         </StackLayout>
 
+        <!-- Model selection: pick a preset to download, or "Custom file…" to browse for a .bin. -->
+        <VerticalStackLayout Grid.Row="2" Spacing="6" HorizontalOptions="Center" WidthRequest="360">
+            <Picker x:Name="pkModel" Title="Whisper model" TitleColor="#888" TextColor="White"
+                    SelectedIndexChanged="pkModel_SelectedIndexChanged" />
+            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                <ProgressBar Grid.Column="0" x:Name="pbDownload" Progress="0" ProgressColor="#4CAF50"
+                             IsVisible="False" VerticalOptions="Center" />
+                <Button Grid.Column="1" x:Name="btDownloadModel" Text="Download" Clicked="btDownloadModel_Clicked"
+                        IsVisible="False" />
+                <Button Grid.Column="2" x:Name="btBrowseModel" Text="Browse…" Clicked="btBrowseModel_Clicked"
+                        IsVisible="False" />
+            </Grid>
+        </VerticalStackLayout>
+
         <!-- Control -->
-        <Button Grid.Row="2"
+        <Button Grid.Row="3"
                 x:Name="btTranscribe"
                 Text="PICK FILE &amp; TRANSCRIBE"
                 Clicked="btTranscribe_Clicked"
                 BackgroundColor="#4CAF50" />
 
         <!-- Recognized subtitle lines -->
-        <ScrollView Grid.Row="3" x:Name="svSubtitles" Background="#2d2d2d" Padding="12">
+        <ScrollView Grid.Row="4" x:Name="svSubtitles" Background="#2d2d2d" Padding="12">
             <Label x:Name="lbSubtitles"
                    Text=""
                    FontSize="15"
