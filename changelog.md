@@ -26,6 +26,11 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.7.6
+
+* [Media Blocks SDK .Net] Fixed an intermittent "Unable to create sample grabber element" failure that could occur when starting several camera pipelines (e.g. multiple RTSP cameras) at the same time. Managed element construction is now thread-safe.
+* [Media Blocks SDK .Net] Fixed a NullReferenceException crash in the video sample grabber (and related processing elements) that could occur on the streaming thread when a frame buffer was momentarily unavailable.
+
 ## 2026.7.3
 
 * [Media Blocks SDK .Net] Added **`PIIRedactionBlock`** — automatic on-video redaction of personally identifiable information: faces (YuNet), vehicle license plates (FastALPR detector), and on-screen text (PP-OCRv5 detection + recognition — recognition filters out the detector's non-text false positives — with an optional regex filter that redacts only matching text such as e-mails or phone numbers). Redaction styles: Gaussian blur, pixelate, and solid fill. Each category can be toggled live; regions are padded and held between detection cycles so PII stays covered through motion and detector flicker. Works in `VideoCaptureCoreX`/`MediaPlayerCoreX` via `Video_Processing_AddBlock`.
