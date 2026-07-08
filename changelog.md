@@ -26,6 +26,10 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.7.8
+
+* [Core][Video Capture SDK .Net][Media Blocks SDK .Net] Fixed a **32-bit (x86)** ABI bug that mis-sized the native `GMutex` field (as a pointer) in the GStreamer object layout, shifting every element's field offsets by 8 bytes on x86. This made the element pad list read as empty and caused a NullReferenceException crash whenever the video/audio sample grabber, snapshots, or a frame-processing block was used on 32-bit. Frame grabbing, snapshots, and per-frame processing now work correctly on x86 (x64 unaffected).
+
 ## 2026.7.6
 
 * [Media Blocks SDK .Net] Fixed an intermittent "Unable to create sample grabber element" failure that could occur when starting several camera pipelines (e.g. multiple RTSP cameras) at the same time. Managed element construction is now thread-safe.
