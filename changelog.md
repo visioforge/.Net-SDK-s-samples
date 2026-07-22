@@ -26,6 +26,10 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.7.22
+
+* [Core] MAUI apps now build cleanly for Android 16: the bundled HarfBuzzSharp native library is updated to a 16 KB page-size-aligned build, removing the `XA0141` ("Android 16 will require 16 KB page sizes") warning on Android app builds.
+
 ## 2026.7.21
 
 * [Media Blocks SDK .Net] Added **AMD Alveo MA35D** hardware acceleration (via the AMD AMA Video SDK) on Linux: H.264, HEVC and AV1 encoders (`AMAH264EncoderSettings` / `AMAHEVCEncoderSettings` / `AMAAV1EncoderSettings`), matching decoders, and an `AMAScalerBlock`. A specific MA35D card is selected with the `Device` property (`-1` auto-selects), so you can pin encoding/decoding to the accelerator rather than the host GPU. Requires the AMD AMA Video SDK (kernel driver + GStreamer plugins) to be installed.
