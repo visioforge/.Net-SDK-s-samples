@@ -28,6 +28,7 @@ Changes and updates for all .Net SDKs.
 
 ## 2026.7.22
 
+* [Video Capture SDK .Net] Fixed RTSP / IP camera **login and password being URL-encoded**, which broke authentication for credentials containing special characters such as `&`, `@`, `%`, `?` or spaces (e.g. a password `password&@%!?End` was sent to the camera as `password%26%40%25!%3fEnd`). Credentials are now used verbatim. Applies to both the `RTSPSourceSettings` (X engine) and `IPCameraSourceSettings` (VideoCaptureCore) sources. If you previously worked around this by storing the pre-encoded value on the device, revert it to the real password after upgrading.
 * [Core] MAUI apps now build cleanly for Android 16: the bundled HarfBuzzSharp native library is updated to a 16 KB page-size-aligned build, removing the `XA0141` ("Android 16 will require 16 KB page sizes") warning on Android app builds.
 
 ## 2026.7.21

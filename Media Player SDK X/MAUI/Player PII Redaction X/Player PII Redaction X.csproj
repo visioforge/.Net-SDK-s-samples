@@ -104,9 +104,9 @@
     </NativeReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.7.23" />
-    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.7.23" />
-    <PackageReference Include="VisioForge.DotNet.Core.AI" Version="2026.7.23" />
+    <PackageReference Include="VisioForge.DotNet.Core.UI.MAUI" Version="2026.7.24" />
+    <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="2026.7.24" />
+    <PackageReference Include="VisioForge.DotNet.Core.AI" Version="2026.7.24" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
