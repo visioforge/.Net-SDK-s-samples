@@ -26,6 +26,15 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.7.24
+
+* [Video Capture SDK .Net] Fixed **Picture-in-Picture crashing on .NET 9 and .NET 10** — `VideoCaptureCore` terminated with an unrecoverable `ExecutionEngineException` at `Start`/`StartAsync` as soon as a PiP source was added (the same code worked on .NET 8). Adding a PiP overlay now works on all supported .NET versions.
+* [Video Edit SDK .Net] Fixed the legacy FFMPEG output crashing at start on .NET 9 and .NET 10 with the same `ExecutionEngineException`; it now works as it did on .NET 8.
+* [Media Blocks SDK .Net] [Video Capture SDK .Net] Fixed **video missing or corrupted when streaming MPEG-TS over SRT** (`SRTMPEGTSSinkBlock`, `SRTOutput`). The MPEG-TS muxer now emits a full 1316-byte payload per buffer instead of one transport packet at a time, so SRT sends whole datagrams rather than seven times as many undersized ones. Receivers such as MediaMTX, ffmpeg or OBS no longer see an audio-only or truncated stream. The UDP, multi-UDP and RIST MPEG-TS outputs get the same alignment.
+* [Media Blocks SDK .Net] [Video Capture SDK .Net] Fixed **corrupted video from the Apple (iOS / macOS / Mac Catalyst) H.264 hardware encoder**. `AppleMediaH264EncoderSettings.AllowFrameReordering` was enabled by default; the resulting B-frames left a large share of the encoded frames with a presentation timestamp earlier than their own decode timestamp, so MPEG-TS outputs (SRT, UDP, RIST) and MP4/MOV recordings played back torn or undecodable in MediaMTX, ffmpeg and VLC. RTMP/FLV happened to tolerate it, which is why streaming from iOS looked broken over SRT but fine over RTMP. The property now defaults to `false`; set it back to `true` only for offline encoding where you can verify the resulting timestamps.
+* [Media Blocks SDK .Net] [Video Capture SDK .Net] Fixed **SRT and RIST output failing to start on macOS and Mac Catalyst** when the Apple hardware H.264 encoder was used: the stream parser those outputs need to feed the MPEG-TS muxer was omitted on those platforms.
+* [Media Blocks SDK .Net] Fixed **text overlays rendering as empty boxes (▯▯▯) on iOS, Android and macOS** — the SDK now sets up font resolution at startup, so `TextOverlayBlock`, subtitle overlays and the trial watermark draw real glyphs instead of tofu. Fonts your app bundles are picked up automatically, and on iOS the SDK carries a fallback font so text renders even in an app that bundles none.
+
 ## 2026.7.22
 
 * [Video Capture SDK .Net] Fixed RTSP / IP camera **login and password being URL-encoded**, which broke authentication for credentials containing special characters such as `&`, `@`, `%`, `?` or spaces (e.g. a password `password&@%!?End` was sent to the camera as `password%26%40%25!%3fEnd`). Credentials are now used verbatim. Applies to both the `RTSPSourceSettings` (X engine) and `IPCameraSourceSettings` (VideoCaptureCore) sources. If you previously worked around this by storing the pre-encoded value on the device, revert it to the real password after upgrading.
