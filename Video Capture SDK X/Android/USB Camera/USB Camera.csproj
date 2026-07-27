@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>28.0</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationId>com.visioforge.usbcameravcx</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <RootNamespace>USB_Camera</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="2026.7.27" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.7.27" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\AndroidDependency\VisioForge.Core.Android.X10.csproj" />
+  </ItemGroup>
+</Project>

@@ -26,7 +26,7 @@
     <MtouchInterpreter>VisioForge.Core.dll</MtouchInterpreter>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.7.25" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.7.27" />
   </ItemGroup>
   <!--  <ItemGroup>
     <NativeReference Include="..\..\..\..\..\_SETUP\NuGet\ios\GStreamerX.framework">
@@ -35,6 +35,6 @@
     </NativeReference>
   </ItemGroup>-->
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.12.0" />
   </ItemGroup>
 </Project>

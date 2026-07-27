@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The video view is a SurfaceView drawn on top of the window, so the status line is
+     placed beside it rather than over it, where it would be hidden. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:fitsSystemWindows="true">
+
+    <VisioForge.Core.UI.Android.VideoViewGL
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/videoView" />
+
+    <TextView
+        android:id="@+id/tbStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textColor="#FFFFFF"
+        android:text="Connect a USB camera" />
+
+</LinearLayout>

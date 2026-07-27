@@ -37,10 +37,10 @@
     <MtouchInterpreter>VisioForge.Core.dll</MtouchInterpreter>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.7.25" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.7.27" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.0.16" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.12.0" />
   </ItemGroup>
   <!-- Pin SkiaSharp.NativeAssets.iOS to 3.119.4-preview.1.1: it satisfies the
        transitive '>= 3.119.3-preview.1.1' floor from MediaBlocks 2026.5.13 ->
