@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -32,8 +32,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.4.29" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.4.29" />
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.7.27" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.8.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.8.1" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.8.6" />
   </ItemGroup>
 </Project>

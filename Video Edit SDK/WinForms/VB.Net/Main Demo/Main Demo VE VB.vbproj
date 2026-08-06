@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -33,12 +33,12 @@
     <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x64" Version="15.5.36" />
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.7.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="2026.7.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2026.7.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2026.7.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2026.7.27" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="2026.7.27" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.WebM.x64" Version="2026.8.6" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="2026.8.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoEdit.x64" Version="2026.8.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.MP4.x64" Version="2026.8.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.LAV.x64" Version="2026.8.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="2026.8.6" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.XIPH.x64" Version="2026.8.6" />
   </ItemGroup>
 </Project>
