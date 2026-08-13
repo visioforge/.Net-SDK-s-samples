@@ -97,6 +97,7 @@ namespace RTSP_Preview
             _pipeline = new MediaBlocksPipeline();
 
             _pipeline.OnError += VideoCapture1_OnError;
+            _pipeline.OnStop += Pipeline_OnStop;
         }
 
         /// <summary>
@@ -107,8 +108,9 @@ namespace RTSP_Preview
             if (_pipeline != null)
             {
                 _pipeline.OnError -= VideoCapture1_OnError;
+                _pipeline.OnStop -= Pipeline_OnStop;
 
-                _pipeline.Stop();
+                await _pipeline.StopAsync();
 
                 await _pipeline.DisposeAsync();
                 _pipeline = null;
@@ -147,8 +149,15 @@ namespace RTSP_Preview
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            // Starting takes a few seconds, so block the button - a second click would build
+            // a second pipeline over the same VideoView and open a second session to the camera.
+            btStart.IsEnabled = false;
+
             try
             {
+                // Release the previous pipeline, if any - the stream may have ended on its own.
+                await DestroyEngineAsync();
+
                 CreateEngine();
 
                 if (onvifClient != null)
@@ -180,6 +189,8 @@ namespace RTSP_Preview
                 if (info == null)
                 {
                     MessageBox.Show(this, "Unable to get RTSP source info. Please, use the direct RTSP URL, not HTTP ONVIF");
+                    await DestroyEngineAsync();
+                    btStart.IsEnabled = true;
                     return;
                 }
 
@@ -202,12 +213,20 @@ namespace RTSP_Preview
                     _pipeline.Connect(_rtspSource.AudioOutput, _audioRenderer.Input);
                 }
 
-                await _pipeline.StartAsync();
+                if (!await _pipeline.StartAsync())
+                {
+                    await DestroyEngineAsync();
+                    btStart.IsEnabled = true;
+                    return;
+                }
 
                 tmRecording.Start();
             }
             catch (Exception ex)
             {
+                await DestroyEngineAsync();
+                btStart.IsEnabled = true;
+
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Debug.WriteLine(ex);
             }
@@ -222,13 +241,28 @@ namespace RTSP_Preview
             {
                 tmRecording.Stop();
 
-                await _pipeline.StopAsync();
-                await _pipeline.DisposeAsync();
+                await DestroyEngineAsync();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
+
+            btStart.IsEnabled = true;
+        }
+
+        /// <summary>
+        /// Handles the pipeline stop event, including the stream being interrupted by the camera.
+        /// </summary>
+        private void Pipeline_OnStop(object sender, StopEventArgs e)
+        {
+            Log(e.Successful ? "Playback stopped." : "Playback stopped: the stream was interrupted.");
+
+            Dispatcher.Invoke(() =>
+            {
+                tmRecording.Stop();
+                btStart.IsEnabled = true;
+            });
         }
 
         /// <summary>
@@ -378,6 +412,11 @@ namespace RTSP_Preview
         /// </summary>
         private async Task UpdateRecordingTime()
         {
+            if (_pipeline == null)
+            {
+                return;
+            }
+
             var ts = await _pipeline.Position_GetAsync();
 
             if (Math.Abs(ts.TotalMilliseconds) < 0.01)
