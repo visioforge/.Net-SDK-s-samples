@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net10.0-windows</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Linux'))">net8.0</TargetFrameworks>
+    <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('OSX'))">net10.0-macos</TargetFrameworks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseWindowsForms Condition="$([MSBuild]::IsOsPlatform('Windows'))">false</UseWindowsForms>
+    <UseWPF Condition="$([MSBuild]::IsOsPlatform('Windows'))">false</UseWPF>
+    <RuntimeIdentifier Condition="$([MSBuild]::IsOsPlatform('OSX'))">osx-arm64</RuntimeIdentifier>
+    <ApplicationId>com.visioforge.dynamictextoverlay</ApplicationId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.8.12" />
+  </ItemGroup>
+  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.8.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.8.1" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2026.8.5" />
+  </ItemGroup>
+</Project>

@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.1.11304.174
@@ -34,6 +34,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Face Recognition CLI", "Face Recognition CLI", "{9971A95E-413A-53E4-3FFB-B8BF6CD86974}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaceRecognitionCLI", "Console\Face Recognition CLI\FaceRecognitionCLI.csproj", "{2F561F01-8D2E-41E3-A7B3-9A76FE137D07}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicTextOverlay", "Console\DynamicTextOverlay\DynamicTextOverlay.csproj", "{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -213,6 +215,18 @@ Global
 		{2F561F01-8D2E-41E3-A7B3-9A76FE137D07}.Release|x64.Build.0 = Release|Any CPU
 		{2F561F01-8D2E-41E3-A7B3-9A76FE137D07}.Release|x86.ActiveCfg = Release|Any CPU
 		{2F561F01-8D2E-41E3-A7B3-9A76FE137D07}.Release|x86.Build.0 = Release|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Debug|x64.Build.0 = Debug|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Debug|x86.Build.0 = Debug|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Release|x64.ActiveCfg = Release|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Release|x64.Build.0 = Release|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Release|x86.ActiveCfg = Release|Any CPU
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -223,6 +237,7 @@ Global
 		{574EA558-E29C-43FA-8E86-45EC660C6EF8} = {09D8FB36-4898-7C8E-B3F7-02AC6C3AAC25}
 		{9971A95E-413A-53E4-3FFB-B8BF6CD86974} = {09D8FB36-4898-7C8E-B3F7-02AC6C3AAC25}
 		{2F561F01-8D2E-41E3-A7B3-9A76FE137D07} = {9971A95E-413A-53E4-3FFB-B8BF6CD86974}
+		{45500C86-FEEC-42A0-B101-4ADD9C9AACB5} = {09D8FB36-4898-7C8E-B3F7-02AC6C3AAC25}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
