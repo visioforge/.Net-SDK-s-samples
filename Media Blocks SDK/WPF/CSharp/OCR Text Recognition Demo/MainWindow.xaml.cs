@@ -32,6 +32,12 @@ namespace OCR_Text_Recognition_Demo
 
         private OcrBlock _ocr;
 
+        // Bundled Apache-2.0 PP-OCRv5 mobile models, copied next to the executable by the project.
+        private static readonly string DetModelPath = System.IO.Path.Combine(AppContext.BaseDirectory, "ch_PP-OCRv5_mobile_det.onnx");
+        private static readonly string ClsModelPath = System.IO.Path.Combine(AppContext.BaseDirectory, "ch_ppocr_mobile_v2.0_cls_infer.onnx");
+        private static readonly string RecModelPath = System.IO.Path.Combine(AppContext.BaseDirectory, "latin_PP-OCRv5_rec_mobile_infer.onnx");
+        private static readonly string DictPath = System.IO.Path.Combine(AppContext.BaseDirectory, "ppocrv5_latin_dict.txt");
+
         private System.Windows.Threading.DispatcherTimer _timer;
 
         private bool _timerBusy;
@@ -109,27 +115,18 @@ namespace OCR_Text_Recognition_Demo
                     cbVideoInput.SelectedIndex = 0;
                 }
 
-                // Default to the bundled Apache-2.0 PP-OCRv5 mobile models shipped next to the executable.
-                PrefillModelPath(edDetModel, "ch_PP-OCRv5_mobile_det.onnx");
-                PrefillModelPath(edClsModel, "ch_ppocr_mobile_v2.0_cls_infer.onnx");
-                PrefillModelPath(edRecModel, "latin_PP-OCRv5_rec_mobile_infer.onnx");
-                PrefillModelPath(edDict, "ppocrv5_latin_dict.txt");
-
                 var providers = OnnxInferenceEngine.GetAvailableProviders();
                 mmLog.Text += "ONNX Runtime providers: " + string.Join(", ", providers) + Environment.NewLine;
+
+                // The Apache-2.0 PP-OCRv5 mobile models ship next to the executable; warn if they are missing.
+                if (!System.IO.File.Exists(DetModelPath) || !System.IO.File.Exists(RecModelPath) || !System.IO.File.Exists(DictPath))
+                {
+                    mmLog.Text += "WARNING: bundled PP-OCRv5 models were not found next to the application." + Environment.NewLine;
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-            }
-        }
-
-        private static void PrefillModelPath(TextBox box, string fileName)
-        {
-            var path = System.IO.Path.Combine(AppContext.BaseDirectory, fileName);
-            if (System.IO.File.Exists(path))
-            {
-                box.Text = path;
             }
         }
 
@@ -228,30 +225,6 @@ namespace OCR_Text_Recognition_Demo
             if (dlg.ShowDialog() == true)
             {
                 edVideoFile.Text = dlg.FileName;
-            }
-        }
-
-        private void btSelectDet_Click(object sender, RoutedEventArgs e) => PickOnnx(edDetModel);
-
-        private void btSelectCls_Click(object sender, RoutedEventArgs e) => PickOnnx(edClsModel);
-
-        private void btSelectRec_Click(object sender, RoutedEventArgs e) => PickOnnx(edRecModel);
-
-        private void btSelectDict_Click(object sender, RoutedEventArgs e)
-        {
-            var dlg = new OpenFileDialog { Filter = "Dictionary|*.txt|All files|*.*" };
-            if (dlg.ShowDialog() == true)
-            {
-                edDict.Text = dlg.FileName;
-            }
-        }
-
-        private static void PickOnnx(TextBox box)
-        {
-            var dlg = new OpenFileDialog { Filter = "ONNX models|*.onnx|All files|*.*" };
-            if (dlg.ShowDialog() == true)
-            {
-                box.Text = dlg.FileName;
             }
         }
 
@@ -413,9 +386,9 @@ namespace OCR_Text_Recognition_Demo
 
                 CleanupBlocks();
 
-                if (string.IsNullOrWhiteSpace(edDetModel.Text) || string.IsNullOrWhiteSpace(edRecModel.Text) || string.IsNullOrWhiteSpace(edDict.Text))
+                if (!System.IO.File.Exists(DetModelPath) || !System.IO.File.Exists(RecModelPath) || !System.IO.File.Exists(DictPath))
                 {
-                    MessageBox.Show(this, "Select the detection model, recognition model, and character dictionary.");
+                    MessageBox.Show(this, "The bundled PP-OCRv5 models were not found next to the application.");
                     btStart.IsEnabled = true;
                     return;
                 }
@@ -429,7 +402,15 @@ namespace OCR_Text_Recognition_Demo
                 _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
 
                 var useAngle = cbUseAngle.IsChecked == true;
-                var ocrSettings = new OcrSettings(edDetModel.Text, edRecModel.Text, edDict.Text, useAngle ? edClsModel.Text : null)
+
+                // Enable angle classification only when its model is present.
+                var clsPath = (useAngle && System.IO.File.Exists(ClsModelPath)) ? ClsModelPath : null;
+                if (useAngle && clsPath == null)
+                {
+                    mmLog.Text += "Angle classification disabled: the classifier model was not found next to the application." + Environment.NewLine;
+                }
+
+                var ocrSettings = new OcrSettings(DetModelPath, RecModelPath, DictPath, clsPath)
                 {
                     DrawResults = cbDrawResults.IsChecked == true,
                 };
@@ -484,7 +465,7 @@ namespace OCR_Text_Recognition_Demo
             {
                 foreach (var region in e.Regions)
                 {
-                    if (!string.IsNullOrWhiteSpace(region.Text))
+                    if (region != null && !string.IsNullOrWhiteSpace(region.Text))
                     {
                         lbResults.Items.Insert(0, $"[{e.Timestamp:hh\\:mm\\:ss}] {region.Text}  ({region.Confidence:P0})");
                     }

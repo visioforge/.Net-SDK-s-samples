@@ -72,6 +72,10 @@ namespace Audio_Playback_Capture
 
         protected override async void OnDestroy()
         {
+            // Before any await: Android requires the base call to have run by the time
+            // OnDestroy returns, and awaiting first throws SuperNotCalledException.
+            base.OnDestroy();
+
             // Wait for any in-flight start before tearing down.
             var startTask = _startTask;
             if (startTask != null)
@@ -90,8 +94,6 @@ namespace Audio_Playback_Capture
             }
 
             VisioForgeX.DestroySDK();
-
-            base.OnDestroy();
         }
 
         private async void btStartRecord_Click(object sender, EventArgs e)

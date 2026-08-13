@@ -1368,6 +1368,10 @@ namespace NDIPlayer
         // the process during activity destruction.
         protected override async void OnDestroy()
         {
+            // Before any await: Android requires the base call to have run by the time
+            // OnDestroy returns, and awaiting first throws SuperNotCalledException.
+            base.OnDestroy();
+
             // Mark destroyed FIRST so every callback that checks _destroyed bails before
             // touching the lifecycle lock or UI. Subsequent disposal of _lifecycleLock at
             // the end of this method depends on this gate to avoid ObjectDisposedException
@@ -1519,14 +1523,6 @@ namespace NDIPlayer
                     Log.Warn(TAG, $"OnDestroy: destroy-pipeline lock dispose failed: {ex.Message}");
                 }
 
-                try
-                {
-                    base.OnDestroy();
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(TAG, $"base.OnDestroy failed: {ex}");
-                }
             }
             finally
             {

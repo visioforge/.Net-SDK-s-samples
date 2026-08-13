@@ -532,6 +532,10 @@ namespace NDIPlayer
 
         protected override async void OnDestroy()
         {
+            // Before any await: Android requires the base call to have run by the time
+            // OnDestroy returns, and awaiting first throws SuperNotCalledException.
+            base.OnDestroy();
+
             _destroyed = true;
 
             try { btRefresh.Click -= BtRefresh_Click; } catch (Exception ex) { Log.Warn(TAG, $"OnDestroy: refresh click detach failed: {ex.Message}"); }
@@ -579,14 +583,6 @@ namespace NDIPlayer
                 Log.Warn(TAG, $"OnDestroy: lock dispose failed: {ex.Message}");
             }
 
-            try
-            {
-                base.OnDestroy();
-            }
-            catch (Exception ex)
-            {
-                Log.Error(TAG, $"base.OnDestroy failed: {ex}");
-            }
         }
 
         private System.Threading.CancellationToken EnsureRefreshToken()

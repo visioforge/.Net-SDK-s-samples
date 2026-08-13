@@ -30,5 +30,8 @@
 	<string>This app needs access to the camera for video streaming.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app needs access to the microphone for audio streaming.</string>
+	<!-- Required to reach a server on the same network: macOS 15+ blocks LAN traffic without it. -->
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Required to stream to a media server on your local network</string>
 </dict>
 </plist>

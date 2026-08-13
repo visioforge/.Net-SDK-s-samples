@@ -163,6 +163,8 @@ public sealed partial class MainPage : Page
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
             if (_cameras != null && _cameras.Length > 0)
             {
+                // Reset the indices with the labels so a reused page can't keep a stale device selection.
+                _cameraSelectedIndex = 0;
                 btCamera.Content = _cameras[0].DisplayName;
                 DebugLogger.WriteLine($"Found {_cameras.Length} cameras via DeviceEnumerator");
             }
@@ -175,6 +177,7 @@ public sealed partial class MainPage : Page
             _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
             if (_mics != null && _mics.Length > 0)
             {
+                _micSelectedIndex = 0;
                 btMic.Content = _mics[0].DisplayName;
             }
 
@@ -182,6 +185,7 @@ public sealed partial class MainPage : Page
             _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync(null);
             if (_speakers != null && _speakers.Length > 0)
             {
+                _speakerSelectedIndex = 0;
                 btSpeakers.Content = _speakers[0].DisplayName;
             }
 #else
@@ -189,6 +193,8 @@ public sealed partial class MainPage : Page
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
             if (_cameras.Length > 0)
             {
+                // Reset the indices with the labels so a reused page can't keep a stale device selection.
+                _cameraSelectedIndex = 0;
                 btCamera.Content = _cameras[0].DisplayName;
             }
 
@@ -196,6 +202,7 @@ public sealed partial class MainPage : Page
             _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
             if (_mics.Length > 0)
             {
+                _micSelectedIndex = 0;
                 btMic.Content = _mics[0].DisplayName;
             }
 
@@ -203,6 +210,7 @@ public sealed partial class MainPage : Page
             _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync(null);
             if (_speakers.Length > 0)
             {
+                _speakerSelectedIndex = 0;
                 btSpeakers.Content = _speakers[0].DisplayName;
             }
 #endif

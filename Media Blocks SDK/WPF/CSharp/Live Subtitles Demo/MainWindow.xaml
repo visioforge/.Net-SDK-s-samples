@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Live_Subtitles_Demo" xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
         mc:Ignorable="d"
-        Title="Media Blocks SDK .Net - Live Subtitles Demo" Height="640" Width="960" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Media Blocks SDK .Net - Live Subtitles Demo" Height="640" Width="960" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="430" />
@@ -31,7 +31,7 @@
             <TabItem Header="Source">
                 <StackPanel Orientation="Vertical" Margin="10,10,0,0">
                     <RadioButton Content="Webcam + Microphone" x:Name="rbWebcam" IsChecked="True" Checked="rbSource_Checked" />
-                    <RadioButton Content="Media file (video + audio)" x:Name="rbFile" Margin="0,5,0,0" Checked="rbSource_Checked" />
+                    <RadioButton Content="Video/audio file" x:Name="rbFile" Margin="0,5,0,0" Checked="rbSource_Checked" />
 
                     <StackPanel x:Name="pnlWebcam" Orientation="Vertical" Margin="0,10,0,0">
                         <Label Content="Video input device" />
@@ -47,7 +47,7 @@
                     </StackPanel>
 
                     <StackPanel x:Name="pnlFile" Orientation="Vertical" Margin="0,10,0,0" Visibility="Collapsed">
-                        <Label Content="Media file" />
+                        <Label Content="File" />
                         <StackPanel Orientation="Horizontal">
                             <TextBox x:Name="edVideoFile" Width="300" />
                             <Button x:Name="btSelectVideoFile" Content="Browse" Margin="10,0,0,0" Width="60" Click="btSelectVideoFile_Click"/>

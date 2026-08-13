@@ -145,6 +145,10 @@ namespace Simple_Video_Capture
 
         protected override async void OnDestroy()
         {
+            // Before any await: Android requires the base call to have run by the time
+            // OnDestroy returns, and awaiting first throws SuperNotCalledException.
+            base.OnDestroy();
+
             try
             {
                 tmPosition.Stop();
@@ -156,8 +160,6 @@ namespace Simple_Video_Capture
             }
 
             VisioForgeX.DestroySDK();
-
-            base.OnDestroy();
         }
 
         private async void btSwitchCam_Click(object sender, EventArgs e)

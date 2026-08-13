@@ -79,6 +79,10 @@ namespace RTSP_Client
         /// </summary>
         protected override async void OnDestroy()
         {
+            // Before any await: Android requires the base call to have run by the time
+            // OnDestroy returns, and awaiting first throws SuperNotCalledException.
+            base.OnDestroy();
+
             try
             {
                 if (_pipeline != null)
@@ -94,8 +98,6 @@ namespace RTSP_Client
             }
 
             VisioForgeX.DestroySDK();
-
-            base.OnDestroy();
         }
 
         /// <summary>

@@ -132,6 +132,8 @@ public sealed partial class MainPage : Page
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
             if (_cameras != null && _cameras.Length > 0)
             {
+                // Reset the index with the label so a reused page can't keep a stale device selection.
+                _cameraSelectedIndex = 0;
                 btCamera.Content = _cameras[0].DisplayName;
             }
             else
@@ -233,8 +235,7 @@ public sealed partial class MainPage : Page
             return;
         }
 
-        // Serialize against the background enroll/rebuild: holding the gate keeps the model from changing
-        // (which the background GetEnroller reads) while that work is in flight.
+        // Serialize against the background enroll/rebuild that reads the model family.
         await _teardownGate.WaitAsync();
         try
         {
@@ -266,7 +267,6 @@ public sealed partial class MainPage : Page
     }
 
     // Lazily creates (and reuses) the enroller block, rebuilding it when the embedding family changes.
-    // drawResults is captured on the UI thread by the caller so this can run on a background thread.
     private FaceRecognitionBlock GetEnroller(bool drawResults)
     {
         if (_enroller != null && _enrollerFamily == _embeddingFamily)
@@ -280,11 +280,8 @@ public sealed partial class MainPage : Page
         return _enroller;
     }
 
-    // Re-embeds the persisted photos with the selected model when the gallery was built with a different one.
-    // The re-embed loop is CPU-heavy, so it runs on a background thread; UI-bound values are captured first.
-    // Returns false when the gallery is incompatible with the selected model and cannot be rebuilt (a .vfg
-    // loaded after restart has no source photos) — the caller must abort rather than mix embedding dimensions.
-    // Callers run this while holding _teardownGate so the background rebuild can't race CleanupAsync.
+    // Re-embeds persisted photos with the selected model on a background thread; returns false when a loaded
+    // .vfg has no source photos to rebuild (caller must abort rather than mix embedding dimensions).
     private async Task<bool> EnsureGalleryMatchesModelAsync()
     {
         if (_gallery.Count == 0 || _galleryFamily == _embeddingFamily)
@@ -455,8 +452,7 @@ public sealed partial class MainPage : Page
             return;
         }
 
-        // Prevent re-entrancy: this handler is async void and awaits the picker + background enroll, so a
-        // second tap could open a second picker and run a concurrent enroll against the shared gallery.
+        // Prevent re-entrancy: a second tap would open another picker and enroll concurrently into the gallery.
         btEnroll.IsEnabled = false;
         string persisted = null;
         bool recorded = false;
@@ -483,8 +479,7 @@ public sealed partial class MainPage : Page
 
             bool ok = false;
             bool mismatch = false;
-            // Hold the teardown gate across the rebuild + enroll so CleanupAsync (page unload) can't dispose
-            // the enroller / destroy the SDK while this background work runs.
+            // Hold the gate across rebuild + enroll so CleanupAsync can't dispose the enroller mid-flight.
             await _teardownGate.WaitAsync();
             try
             {
@@ -495,7 +490,7 @@ public sealed partial class MainPage : Page
 
                 if (await EnsureGalleryMatchesModelAsync())
                 {
-                    // Detection + embedding is CPU-heavy (seconds with AuraFace on mobile); keep it off the UI thread.
+                    // Detection + embedding is CPU-heavy; keep it off the UI thread.
                     ok = await Task.Run(() => GetEnroller(drawResults).Enroll(name, persisted));
                 }
                 else
@@ -602,8 +597,7 @@ public sealed partial class MainPage : Page
             return;
         }
 
-        // Serialize against the background enroll/rebuild: loading clears _enrolledPhotos and replaces
-        // _gallery, which RebuildGallery iterates/mutates on a background thread.
+        // Serialize against the background rebuild — loading clears _enrolledPhotos and replaces _gallery.
         await _teardownGate.WaitAsync();
         try
         {
@@ -690,8 +684,7 @@ public sealed partial class MainPage : Page
             return;
         }
 
-        // Serialize against teardown: holding the gate keeps CleanupAsync (page unload) from disposing the
-        // pipeline (or the enroller, during the gallery rebuild below) while it is still in use here.
+        // Serialize against teardown so CleanupAsync can't dispose the pipeline/enroller while it's in use here.
         await _teardownGate.WaitAsync();
         try
         {
@@ -700,8 +693,7 @@ public sealed partial class MainPage : Page
                 return;
             }
 
-            // Make sure the gallery embeddings match the model we're about to run (inside the gate so the
-            // background rebuild can't race CleanupAsync disposing the enroller / destroying the SDK).
+            // Make sure the gallery embeddings match the model we're about to run.
             if (!await EnsureGalleryMatchesModelAsync())
             {
                 await ShowMessageAsync("Gallery mismatch", "The loaded gallery was built with a different model and has no source photos to re-embed. Re-enroll or switch the model back.");
@@ -855,7 +847,7 @@ public sealed partial class MainPage : Page
         float bestScore = -1f;
         foreach (var f in faces)
         {
-            if (!string.IsNullOrEmpty(f.Identity) && f.Similarity > bestScore)
+            if (f != null && !string.IsNullOrEmpty(f.Identity) && f.Similarity > bestScore)
             {
                 bestScore = f.Similarity;
                 headline = $"{f.Identity} ({f.Similarity:P0})";
@@ -897,8 +889,7 @@ public sealed partial class MainPage : Page
         // Set before waiting so a StartAsync currently holding the gate bails out when it re-checks.
         _isCleanedUp = true;
 
-        // Same gate as StartAsync/StopAsync. Inline the stop here (don't call StopAsync) because
-        // SemaphoreSlim is not re-entrant.
+        // Inline the stop here (don't call StopAsync) — SemaphoreSlim is not re-entrant.
         await _teardownGate.WaitAsync();
         try
         {

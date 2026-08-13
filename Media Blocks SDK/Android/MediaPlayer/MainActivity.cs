@@ -367,6 +367,10 @@ namespace MediaPlayer
         /// </summary>
         protected override async void OnDestroy()
         {
+            // Before any await: Android requires the base call to have run by the time
+            // OnDestroy returns, and awaiting first throws SuperNotCalledException.
+            base.OnDestroy();
+
             try
             {
                 tmPosition.Stop();
@@ -378,8 +382,6 @@ namespace MediaPlayer
             }
 
             VisioForgeX.DestroySDK();
-
-            base.OnDestroy();
         }
 
         /// <summary>

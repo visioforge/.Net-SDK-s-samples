@@ -45,8 +45,7 @@ namespace Face_Recognition_Demo
         private readonly System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> _enrolledPhotos
             = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>>(StringComparer.Ordinal);
 
-        // The embedding family (cbEmbFamily index) the current gallery embeddings were built with; null when the
-        // gallery is empty or was loaded from a .vfg (origin unknown, so it can't be re-embedded).
+        // The embedding family the current gallery embeddings were built with; null when empty or loaded from a .vfg.
         private int? _galleryFamily;
 
         private System.Windows.Threading.DispatcherTimer _timer;
@@ -60,6 +59,12 @@ namespace Face_Recognition_Demo
         private bool _cleanupFinished;
 
         private bool _uiBusy;
+
+        // Set while a background enroll loop runs, so teardown drains it before disposing the enroller / SDK.
+        private volatile bool _enrollInProgress;
+
+        // Set while RebuildGalleryAsync re-embeds on a background thread; teardown drains it too (runs from Start).
+        private volatile bool _rebuildInProgress;
 
         // File-playback transport state (seek bar + real-time/max-speed toggle).
         private bool _isFile;
@@ -96,8 +101,7 @@ namespace Face_Recognition_Demo
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
         {
-            // BeginInvoke (non-blocking): OnError fires on a background worker, and teardown joins that worker
-            // on the UI thread - a blocking Invoke would deadlock.
+            // BeginInvoke (non-blocking): OnError fires on a worker; a blocking Invoke would deadlock teardown.
             Dispatcher.BeginInvoke(new Action(() => { mmLog.Text += e.Message + Environment.NewLine; }));
         }
 
@@ -188,14 +192,12 @@ namespace Face_Recognition_Demo
             }
         }
 
-        // Show a Download button only when the selected model is missing from the cache. YuNet, SFace and AuraFace
-        // are all SDK-hosted, so each button appears whenever its file is not yet cached.
+        // Show each model's Download button only when its file is missing from the cache.
         private void RefreshModelButtons()
         {
             btDownloadDet.Visibility = File.Exists(Path.Combine(ModelsCacheDir, DetectorModelFile))
                 ? Visibility.Collapsed : Visibility.Visible;
 
-            // Both embedders (SFace 128-D, AuraFace 512-D) are SDK-hosted: show Download only when missing from cache.
             var embCached = File.Exists(Path.Combine(ModelsCacheDir, SelectedEmbeddingFile));
             btDownloadEmb.Visibility = embCached ? Visibility.Collapsed : Visibility.Visible;
 
@@ -224,7 +226,7 @@ namespace Face_Recognition_Demo
 
                 if (_isFile)
                 {
-                    // Duration usually becomes available only once playback has prerolled - keep trying until known.
+                    // Duration is known only after preroll - keep trying until it resolves.
                     if (_duration <= TimeSpan.Zero)
                     {
                         try { _duration = await _pipeline.DurationAsync(); } catch (Exception durEx) { Debug.WriteLine(durEx); }
@@ -271,8 +273,7 @@ namespace Face_Recognition_Demo
 
         private async void slSeek_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // Ignore programmatic updates from the timer and the continuous changes while dragging
-            // (the drag is committed once in DragCompleted). A track click lands here directly.
+            // Ignore timer-driven updates and per-tick drag changes (committed once in DragCompleted); a track click lands here.
             if (_suppressSeek || _seeking)
             {
                 return;
@@ -345,6 +346,12 @@ namespace Face_Recognition_Demo
 
                 CleanupBlocks();
 
+                // Drain an in-flight background enroll/rebuild before disposing the enroller (both use native code).
+                while (_enrollInProgress || _rebuildInProgress)
+                {
+                    await System.Threading.Tasks.Task.Delay(50);
+                }
+
                 _enroller?.Dispose();
                 _enroller = null;
 
@@ -410,10 +417,7 @@ namespace Face_Recognition_Demo
 
         private async void btDownloadEmb_Click(object sender, RoutedEventArgs e)
         {
-            // Both hosted embedders are downloadable: SFace (128-D) and AuraFace (512-D, ArcFace family).
-            // Lock the family selector only around the embedder download (the detector is family-independent), so a
-            // mid-download switch can't pair the just-downloaded weights with the other family's preprocessing - and
-            // a concurrent detector download can't re-enable it early.
+            // Lock the family selector during the embedder download so the weights can't be paired with another family.
             cbEmbFamily.IsEnabled = false;
             try
             {
@@ -432,8 +436,7 @@ namespace Face_Recognition_Demo
                 return;
             }
 
-            // Keep the embedding model path consistent with the selected family so SFace (128-D) and AuraFace
-            // (512-D, ArcFace family) weights are never paired with the wrong preprocessing.
+            // Keep the embedding model path consistent with the selected family.
             var selectedPath = Path.Combine(ModelsCacheDir, SelectedEmbeddingFile);
 
             if (File.Exists(selectedPath))
@@ -442,9 +445,7 @@ namespace Face_Recognition_Demo
             }
             else if (!string.Equals(edEmbModel.Text, selectedPath, StringComparison.OrdinalIgnoreCase))
             {
-                // The new family's model isn't cached: clear any leftover path (the other family's cache OR a
-                // previously Browsed custom .onnx) so it can't be paired with this family's preprocessing. The user
-                // downloads or re-Browses for the selected family.
+                // New family not cached: clear any leftover path so the user downloads or re-Browses for it.
                 edEmbModel.Text = string.Empty;
             }
 
@@ -483,44 +484,56 @@ namespace Face_Recognition_Demo
             {
                 Directory.CreateDirectory(ModelsCacheDir);
 
-                // Stream to a temp file so progress can be reported and an interrupted download never leaves a
-                // corrupt .onnx at the final path; rename into place only after the full download succeeds.
-                using (var response = await _http.GetAsync(ModelsReleaseUrl + "/" + fileName, HttpCompletionOption.ResponseHeadersRead))
+                // Stream to a .part temp file on a background thread, then rename in - an interrupted download never
+                // leaves a corrupt .onnx at the final path. Progress marshals back via Dispatcher.BeginInvoke.
+                await System.Threading.Tasks.Task.Run(async () =>
                 {
-                    response.EnsureSuccessStatusCode();
-
-                    var total = response.Content.Headers.ContentLength ?? -1L;
-                    pbDownload.IsIndeterminate = total <= 0;
-
-                    using (var src = await response.Content.ReadAsStreamAsync())
-                    using (var fileStream = File.Create(tmpPath))
+                    using (var response = await _http.GetAsync(ModelsReleaseUrl + "/" + fileName, HttpCompletionOption.ResponseHeadersRead))
                     {
-                        var buffer = new byte[81920];
-                        long readTotal = 0;
-                        int lastPercent = -1;
-                        int read;
-                        while ((read = await src.ReadAsync(buffer, 0, buffer.Length)) > 0)
-                        {
-                            await fileStream.WriteAsync(buffer, 0, read);
-                            readTotal += read;
+                        response.EnsureSuccessStatusCode();
 
-                            if (total > 0)
+                        var total = response.Content.Headers.ContentLength ?? -1L;
+                        Dispatcher.BeginInvoke(new Action(() => pbDownload.IsIndeterminate = total <= 0));
+
+                        using (var src = await response.Content.ReadAsStreamAsync())
+                        using (var fileStream = File.Create(tmpPath))
+                        {
+                            var buffer = new byte[81920];
+                            long readTotal = 0;
+                            int lastPercent = -1;
+                            long lastReportedBytes = 0;
+                            int read;
+                            while ((read = await src.ReadAsync(buffer, 0, buffer.Length)) > 0)
                             {
-                                var percent = (int)(readTotal * 100 / total);
-                                if (percent != lastPercent)
+                                await fileStream.WriteAsync(buffer, 0, read);
+                                readTotal += read;
+
+                                if (total > 0)
                                 {
-                                    lastPercent = percent;
-                                    pbDownload.Value = percent;
-                                    lbDownloadStatus.Text = $"Downloading {fileName}... {percent}% ({readTotal / 1024} / {total / 1024} KB)";
+                                    var percent = (int)(readTotal * 100 / total);
+                                    if (percent != lastPercent)
+                                    {
+                                        lastPercent = percent;
+                                        var done = readTotal;
+                                        Dispatcher.BeginInvoke(new Action(() =>
+                                        {
+                                            pbDownload.Value = percent;
+                                            lbDownloadStatus.Text = $"Downloading {fileName}... {percent}% ({done / 1024} / {total / 1024} KB)";
+                                        }));
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                lbDownloadStatus.Text = $"Downloading {fileName}... {readTotal / 1024} KB";
+                                else if (readTotal - lastReportedBytes >= 1024 * 1024)
+                                {
+                                    // No Content-Length: throttle to ~once per MB so the dispatcher isn't flooded.
+                                    lastReportedBytes = readTotal;
+                                    var done = readTotal;
+                                    Dispatcher.BeginInvoke(new Action(() =>
+                                        lbDownloadStatus.Text = $"Downloading {fileName}... {done / 1024} KB"));
+                                }
                             }
                         }
                     }
-                }
+                });
 
                 File.Move(tmpPath, destPath, true);
 
@@ -654,8 +667,13 @@ namespace Face_Recognition_Demo
             return true;
         }
 
-        private void btEnroll_Click(object sender, RoutedEventArgs e)
+        private async void btEnroll_Click(object sender, RoutedEventArgs e)
         {
+            if (_isClosing)
+            {
+                return;
+            }
+
             var name = edPersonName.Text?.Trim();
             if (string.IsNullOrEmpty(name))
             {
@@ -675,18 +693,29 @@ namespace Face_Recognition_Demo
                 return;
             }
 
+            // Claim the Start/Stop interlock and mark the enroll in progress for the whole CPU-heavy loop.
+            btEnroll.IsEnabled = false;
+            _uiBusy = true;
+            _enrollInProgress = true;
             try
             {
-                // If the embedding model changed since the gallery was built, re-embed the existing photos with the
-                // current model first; otherwise Add would reject the new (different-dimension) embeddings.
+                // Re-embed the gallery first if the model changed, so new and existing embeddings share dimensions.
                 int family = cbEmbFamily.SelectedIndex;
-                EnsureGalleryMatchesModel();
+                await EnsureGalleryMatchesModelAsync();
 
                 var enroller = GetEnroller();
+                var files = dlg.FileNames;
                 int ok = 0;
-                foreach (var file in dlg.FileNames)
+                foreach (var file in files)
                 {
-                    if (enroller.Enroll(name, file))
+                    // Stop the batch if the window is closing so teardown drains promptly.
+                    if (_isClosing)
+                    {
+                        break;
+                    }
+
+                    var enrolled = await System.Threading.Tasks.Task.Run(() => enroller.Enroll(name, file));
+                    if (enrolled)
                     {
                         ok++;
                         RecordPhoto(name, file);
@@ -702,7 +731,7 @@ namespace Face_Recognition_Demo
                 {
                     _galleryFamily = family;
                     RefreshGalleryList();
-                    mmLog.Text += $"Enrolled '{name}' from {ok} of {dlg.FileNames.Length} photo(s)." + Environment.NewLine;
+                    mmLog.Text += $"Enrolled '{name}' from {ok} of {files.Length} photo(s)." + Environment.NewLine;
                 }
                 else
                 {
@@ -714,13 +743,18 @@ namespace Face_Recognition_Demo
                 mmLog.Text += "Enrollment failed: " + ex.Message + Environment.NewLine;
                 Debug.WriteLine(ex);
             }
+            finally
+            {
+                _enrollInProgress = false;
+                _uiBusy = false;
+                btEnroll.IsEnabled = true;
+            }
         }
 
         // Lazily creates (and reuses) the enroller block, rebuilding it when the model selection changes.
         private FaceRecognitionBlock GetEnroller()
         {
-            // Include the detection confidence: it affects whether a face is found during enrollment, so a change
-            // must rebuild the enroller rather than silently reuse the old threshold.
+            // Detection confidence is part of the signature: changing it rebuilds the enroller (affects enrollment).
             var signature = string.Join("|", edDetModel.Text, edEmbModel.Text, cbEmbFamily.SelectedIndex, edDetConfidence.Text);
             if (_enroller != null && _enrollerSignature == signature)
             {
@@ -755,10 +789,8 @@ namespace Face_Recognition_Demo
             list.Add(file);
         }
 
-        // Ensures the gallery's embeddings match the currently selected embedding model. Embeddings from different
-        // models have different dimensions and are not comparable (every face would read as Unknown), so when the
-        // model changed since enrollment we re-embed the original photos with the new model.
-        private void EnsureGalleryMatchesModel()
+        // Re-embed the gallery from the original photos when the embedding model changed (embeddings aren't comparable across models).
+        private async System.Threading.Tasks.Task EnsureGalleryMatchesModelAsync()
         {
             int family = cbEmbFamily.SelectedIndex;
             if (_gallery.Count == 0 || _galleryFamily == family)
@@ -768,8 +800,7 @@ namespace Face_Recognition_Demo
 
             if (_enrolledPhotos.Count > 0)
             {
-                // Don't clear the gallery unless the selected model is actually present - otherwise the rebuild
-                // re-embeds nothing and we'd wipe the existing (still-usable) gallery.
+                // Don't clear the gallery unless the model file is present, or the rebuild would wipe it for nothing.
                 if (!File.Exists(edEmbModel.Text))
                 {
                     mmLog.Text += "Embedding model changed but the model file was not found - keeping the existing gallery." + Environment.NewLine;
@@ -777,7 +808,7 @@ namespace Face_Recognition_Demo
                 }
 
                 mmLog.Text += "Embedding model changed - rebuilding the gallery from the enrolled photos..." + Environment.NewLine;
-                RebuildGallery(family);
+                await RebuildGalleryAsync(family);
                 mmLog.Text += $"Rebuilt gallery: {_gallery.Count} identities." + Environment.NewLine;
             }
             else
@@ -788,45 +819,61 @@ namespace Face_Recognition_Demo
             }
         }
 
-        // Clears and re-embeds every enrolled photo with the current model so the gallery matches the selected family.
-        private void RebuildGallery(int family)
+        // Clears and re-embeds every enrolled photo with the current model (CPU-heavy loop runs on a background thread).
+        private async System.Threading.Tasks.Task RebuildGalleryAsync(int family)
         {
-            // Identities loaded from a .vfg have no tracked source photos, so the re-embed below cannot recreate them.
-            var loadedOnly = _gallery.GetNames().Where(n => !_enrolledPhotos.ContainsKey(n)).ToList();
-
-            _gallery.Clear();
-
-            var enroller = GetEnroller();
-            foreach (var kv in _enrolledPhotos)
+            // Mark the rebuild so teardown drains it before disposing the enroller.
+            _rebuildInProgress = true;
+            try
             {
-                foreach (var file in kv.Value)
+                // Identities loaded from a .vfg have no tracked source photos, so the re-embed below cannot recreate them.
+                var loadedOnly = _gallery.GetNames().Where(n => !_enrolledPhotos.ContainsKey(n)).ToList();
+
+                _gallery.Clear();
+
+                var enroller = GetEnroller();
+                var photos = _enrolledPhotos.SelectMany(kv => kv.Value.Select(file => (kv.Key, file))).ToList();
+                await System.Threading.Tasks.Task.Run(() =>
                 {
-                    try
+                    foreach (var (name, file) in photos)
                     {
-                        enroller.Enroll(kv.Key, file);
+                        // Stop re-embedding if the window is closing so the loop drains promptly.
+                        if (_isClosing)
+                        {
+                            break;
+                        }
+
+                        try
+                        {
+                            enroller.Enroll(name, file);
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine(ex);
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine(ex);
-                    }
+                });
+
+                // Warn if any enrolled identity could not be re-embedded (e.g. a source photo was moved/deleted), so the
+                // shrink isn't silent.
+                var lost = _enrolledPhotos.Keys.Where(n => !_gallery.GetNames().Contains(n)).ToList();
+                if (lost.Count > 0)
+                {
+                    mmLog.Text += $"Warning: {lost.Count} identity(ies) could not be re-embedded and were dropped: {string.Join(", ", lost)}." + Environment.NewLine;
                 }
-            }
 
-            // Warn if any enrolled identity could not be re-embedded (e.g. a source photo was moved/deleted), so the
-            // shrink isn't silent.
-            var lost = _enrolledPhotos.Keys.Where(n => !_gallery.GetNames().Contains(n)).ToList();
-            if (lost.Count > 0)
+                if (loadedOnly.Count > 0)
+                {
+                    mmLog.Text += $"Warning: {loadedOnly.Count} loaded identity(ies) without source photos were dropped by the model switch: {string.Join(", ", loadedOnly)}." + Environment.NewLine;
+                }
+
+                _galleryFamily = family;
+                RefreshGalleryList();
+            }
+            finally
             {
-                mmLog.Text += $"Warning: {lost.Count} identity(ies) could not be re-embedded and were dropped: {string.Join(", ", lost)}." + Environment.NewLine;
+                _rebuildInProgress = false;
             }
-
-            if (loadedOnly.Count > 0)
-            {
-                mmLog.Text += $"Warning: {loadedOnly.Count} loaded identity(ies) without source photos were dropped by the model switch: {string.Join(", ", loadedOnly)}." + Environment.NewLine;
-            }
-
-            _galleryFamily = family;
-            RefreshGalleryList();
         }
 
         private void btRemove_Click(object sender, RoutedEventArgs e)
@@ -853,8 +900,7 @@ namespace Face_Recognition_Demo
                 {
                     _gallery.Save(dlg.FileName);
 
-                    // Persist which embedding family produced these embeddings so a later Load can re-select the
-                    // matching model (otherwise the gallery reads as Unknown after a relaunch with a different model).
+                    // Persist the embedding family in a sidecar so a later Load can re-select the matching model.
                     var famPath = dlg.FileName + ".family";
                     if (_galleryFamily != null)
                     {
@@ -886,8 +932,7 @@ namespace Face_Recognition_Demo
                     // A loaded gallery has no source photos to re-embed.
                     _enrolledPhotos.Clear();
 
-                    // Restore the embedding family from the sidecar (written on Save) and re-select the matching model,
-                    // so recognition runs the correct embedder; without it the loaded gallery reads as Unknown.
+                    // Restore the embedding family from the sidecar and re-select the matching model.
                     var famPath = dlg.FileName + ".family";
                     if (File.Exists(famPath) && int.TryParse(File.ReadAllText(famPath).Trim(), out var savedFamily)
                         && savedFamily >= 0 && savedFamily < cbEmbFamily.Items.Count)
@@ -1006,9 +1051,8 @@ namespace Face_Recognition_Demo
                     return;
                 }
 
-                // Make sure the gallery embeddings match the model we're about to run, re-embedding the enrolled
-                // photos if the family changed since enrollment (otherwise every face reads as Unknown).
-                EnsureGalleryMatchesModel();
+                // Make sure the gallery embeddings match the model we're about to run.
+                await EnsureGalleryMatchesModelAsync();
 
                 if (!await BuildSourceAsync())
                 {
@@ -1018,8 +1062,7 @@ namespace Face_Recognition_Demo
 
                 _isFile = rbFile.IsChecked == true;
 
-                // Live sources run unsynchronized (latest frame wins). A file plays in real time when requested,
-                // or as fast as the pipeline can go (max speed) when "Play in real time" is unchecked.
+                // Sync the renderer only for real-time file playback; live sources and max-speed files run unsynchronized.
                 var realTime = _isFile && cbRealTime.IsChecked == true;
                 _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = realTime };
 
@@ -1041,8 +1084,7 @@ namespace Face_Recognition_Demo
                 mmLog.Text += $"Face recognition running on: {_face.ActiveProvider}" + Environment.NewLine;
                 mmLog.Text += $"Gallery: {_gallery.Count} identities." + Environment.NewLine;
 
-                // Enable the seek bar for file playback. Duration is often not ready right after Start (the
-                // demuxer reports it once playback prerolls), so it is resolved lazily in the timer.
+                // Enable the seek bar for file playback; duration resolves lazily in the timer once playback prerolls.
                 _duration = TimeSpan.Zero;
                 _suppressSeek = true;
                 slSeek.Value = 0;
@@ -1085,6 +1127,11 @@ namespace Face_Recognition_Demo
             {
                 foreach (var face in e.Faces)
                 {
+                    if (face == null)
+                    {
+                        continue;
+                    }
+
                     var label = string.IsNullOrEmpty(face.Identity)
                         ? "Unknown"
                         : $"{face.Identity} ({face.Similarity:P0})";

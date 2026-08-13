@@ -79,6 +79,8 @@ namespace BarcodeReaderMB
                 _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
                 if (_cameras.Length > 0)
                 {
+                    // Reset the index with the label so a reused page can't keep a stale device selection.
+                    _cameraSelectedIndex = 0;
                     btCamera.Text = _cameras[0].DisplayName;
                 }
 

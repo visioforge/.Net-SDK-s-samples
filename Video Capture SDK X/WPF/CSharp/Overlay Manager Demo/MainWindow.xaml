@@ -24,6 +24,7 @@
         <Button x:Name="btAddRectangle" Content="Add rectangle" HorizontalAlignment="Left" Margin="536,167,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddRectangle_Click"/>
         <Button x:Name="btAddCircle" Content="Add circle" HorizontalAlignment="Left" Margin="630,167,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btAddCircle_Click"/>
         <Button x:Name="btRemove" Content="Remove" HorizontalAlignment="Left" Margin="724,167,0,0" VerticalAlignment="Top" Width="82" Height="25" Click="btRemove_Click"/>
+        <Button x:Name="btAddDynamicText" Content="Add dynamic text" HorizontalAlignment="Left" Margin="536,197,0,0" VerticalAlignment="Top" Width="176" Height="25" Click="btAddDynamicText_Click"/>
         <Label Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" VerticalAlignment="Top" Width="120" Content="Video input device"/>
         <ComboBox Height="23" Margin="12,29,321,0" x:Name="cbVideoInputDevice" VerticalAlignment="Top" SelectionChanged="cbVideoInputDevice_SelectionChanged" />
         <Label Height="28" HorizontalAlignment="Left" Margin="6,59,0,0" VerticalAlignment="Top" Width="120" Content="Video input format"/>

@@ -272,6 +272,8 @@ public sealed partial class MainPage : Page
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
             if (_cameras.Length > 0)
             {
+                // Reset the indices with the labels so a reused page can't keep a stale device selection.
+                _cameraSelectedIndex = 0;
                 btCamera.Content = _cameras[0].DisplayName;
             }
 
@@ -279,6 +281,7 @@ public sealed partial class MainPage : Page
             _mics = await DeviceEnumerator.Shared.AudioSourcesAsync(null);
             if (_mics.Length > 0)
             {
+                _micSelectedIndex = 0;
                 btMic.Content = _mics[0].DisplayName;
             }
 
@@ -286,6 +289,7 @@ public sealed partial class MainPage : Page
             _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync(null);
             if (_speakers.Length > 0)
             {
+                _speakerSelectedIndex = 0;
                 btSpeakers.Content = _speakers[0].DisplayName;
             }
 
@@ -539,7 +543,10 @@ public sealed partial class MainPage : Page
             if (device != null)
             {
                 var formatItem = device.GetDefaultFormat();
-                audioSourceSettings = device.CreateSourceSettingsVC(formatItem);
+                if (formatItem != null)
+                {
+                    audioSourceSettings = device.CreateSourceSettingsVC(formatItem);
+                }
             }
         }
 

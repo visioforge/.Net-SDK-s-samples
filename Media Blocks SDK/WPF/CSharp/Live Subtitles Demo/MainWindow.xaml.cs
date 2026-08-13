@@ -14,8 +14,8 @@ using VisioForge.Core;
 using VisioForge.Core.AI.Whisper.Subtitles;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AI;
-using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
+using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
@@ -33,9 +33,9 @@ namespace Live_Subtitles_Demo
         private static readonly string ModelsCacheDir = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "VisioForge", "models");
 
-        // Official Silero VAD v5 ONNX model (MIT).
+        // Silero VAD v5 ONNX model (MIT), hosted on the samples GitHub release alongside the other models.
         private const string SileroVadUrl =
-            "https://github.com/snakers4/silero-vad/raw/master/src/silero_vad/data/silero_vad.onnx";
+            "https://github.com/visioforge/.Net-SDK-s-samples/releases/download/onnx-models-v1/silero_vad.onnx";
 
         private static readonly HttpClient _http = new HttpClient { Timeout = TimeSpan.FromMinutes(10) };
 
@@ -53,12 +53,12 @@ namespace Live_Subtitles_Demo
         // ---- pipeline fields ----
         private MediaBlocksPipeline _pipeline;
         private VideoRendererBlock _videoRenderer;
-        private AudioRendererBlock _audioRenderer;
         private OverlayManagerBlock _overlay;
         private MediaBlock _videoSource;
         private MediaBlock _audioSource;
         private SpeechToTextBlock _sttBlock;
         private SubtitleRenderer _subtitleRenderer;
+        private NullRendererBlock _nullAudio;
 
         private VideoCaptureDeviceInfo[] _videoDevices;
         private AudioCaptureDeviceInfo[] _audioDevices;
@@ -66,6 +66,10 @@ namespace Live_Subtitles_Demo
         private CancellationTokenSource _vadDlCts;
         private bool _isClosing;
         private bool _running;
+        private bool _sdkReady;
+
+        // Serializes Start/Stop (0 = free, 1 = in flight) so a stale OnStop can't tear down a new session.
+        private int _busy;
 
         public MainWindow()
         {
@@ -101,8 +105,8 @@ namespace Live_Subtitles_Demo
                 try { await VisioForgeX.InitSDKAsync(); }
                 finally { IsEnabled = true; }
 
-                _pipeline = new MediaBlocksPipeline();
-                _pipeline.OnError += (s, ev) => Log(ev.Message);
+                // Pipeline is created fresh per Start and disposed on Stop, not built here.
+                _sdkReady = true;
                 Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
                 _videoDevices = await SystemVideoSourceBlock.GetDevicesAsync() ?? Array.Empty<VideoCaptureDeviceInfo>();
@@ -132,14 +136,7 @@ namespace Live_Subtitles_Demo
             {
                 _whisperDlCts?.Cancel();
                 _vadDlCts?.Cancel();
-                if (_pipeline != null)
-                {
-                    await _pipeline.StopAsync();
-                    await _pipeline.DisposeAsync();
-                    _pipeline = null;
-                }
-
-                CleanupBlocks();
+                await TeardownPipelineAsync();
                 VideoView1.CallRefresh();
                 VisioForgeX.DestroySDK();
             }
@@ -158,7 +155,7 @@ namespace Live_Subtitles_Demo
 
         private void btSelectVideoFile_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new OpenFileDialog { Filter = "Media files|*.mp4;*.mkv;*.avi;*.mov;*.webm;*.ts;*.wav;*.mp3|All files|*.*" };
+            var dlg = new OpenFileDialog { Filter = "Media files|*.mp4;*.m4a;*.mkv;*.avi;*.mov;*.webm;*.ts;*.wav;*.mp3|All files|*.*" };
             if (dlg.ShowDialog() == true) edVideoFile.Text = dlg.FileName;
         }
 
@@ -245,14 +242,18 @@ namespace Live_Subtitles_Demo
 
             try
             {
-                using (var modelStream = await WhisperGgmlDownloader.Default.GetGgmlModelAsync(preset.Ggml, cancellationToken: token))
-                using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None, 81920, true))
+                // Download + disk copy off the UI thread so the large model fetch can't freeze the window.
+                await System.Threading.Tasks.Task.Run(async () =>
                 {
-                    await modelStream.CopyToAsync(fileStream, token);
-                }
+                    using (var modelStream = await WhisperGgmlDownloader.Default.GetGgmlModelAsync(preset.Ggml, cancellationToken: token))
+                    using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None, 81920, true))
+                    {
+                        await modelStream.CopyToAsync(fileStream, token);
+                    }
 
-                if (File.Exists(destPath)) File.Delete(destPath);
-                File.Move(tempPath, destPath);
+                    File.Move(tempPath, destPath, overwrite: true);
+                });
+
                 edModelFile.Text = destPath;
                 Log($"Saved Whisper model ({new FileInfo(destPath).Length / 1024 / 1024} MB).");
             }
@@ -278,17 +279,30 @@ namespace Live_Subtitles_Demo
 
             try
             {
-                using (var response = await _http.GetAsync(SileroVadUrl, HttpCompletionOption.ResponseHeadersRead, token))
+                // Run the network + disk copy off the UI thread so the download can't freeze the window.
+                await System.Threading.Tasks.Task.Run(async () =>
                 {
-                    response.EnsureSuccessStatusCode();
-                    using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None, 81920, true))
+                    using (var response = await _http.GetAsync(SileroVadUrl, HttpCompletionOption.ResponseHeadersRead, token))
                     {
-                        await response.Content.CopyToAsync(fileStream, token);
-                    }
-                }
+                        response.EnsureSuccessStatusCode();
+                        var total = response.Content.Headers.ContentLength ?? -1L;
 
-                if (File.Exists(destPath)) File.Delete(destPath);
-                File.Move(tempPath, destPath);
+                        using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None, 81920, true))
+                        {
+                            await response.Content.CopyToAsync(fileStream, token);
+                            await fileStream.FlushAsync(token);
+
+                            // Reject a truncated download so a partial .onnx is never promoted to the cache.
+                            if (total > 0 && fileStream.Length != total)
+                            {
+                                throw new IOException($"Incomplete download: received {fileStream.Length} of {total} bytes.");
+                            }
+                        }
+                    }
+
+                    File.Move(tempPath, destPath, overwrite: true);
+                });
+
                 edVadFile.Text = destPath;
                 Log($"Saved Silero VAD model ({new FileInfo(destPath).Length / 1024} KB).");
             }
@@ -362,17 +376,19 @@ namespace Live_Subtitles_Demo
         // ---- start / stop ----
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            // Serialize Start/Stop; a stale OnStop checks this flag and skips while one is in flight.
+            if (Interlocked.CompareExchange(ref _busy, 1, 0) != 0) return;
+
             try
             {
                 btStart.IsEnabled = false;
-                if (_pipeline == null) { MessageBox.Show(this, "SDK failed to initialize."); btStart.IsEnabled = true; return; }
+                if (!_sdkReady) { MessageBox.Show(this, "SDK failed to initialize."); btStart.IsEnabled = true; return; }
 
                 mmLog.Clear();
                 lbTranscript.Items.Clear();
 
-                try { await _pipeline.StopAsync(); _pipeline.ClearBlocks(); }
-                catch (Exception ex) { Debug.WriteLine(ex); }
-                CleanupBlocks();
+                // Tear down any leftover pipeline/blocks from a previous run before building fresh ones.
+                await TeardownPipelineAsync();
 
                 if (string.IsNullOrWhiteSpace(edModelFile.Text) || !File.Exists(edModelFile.Text))
                 {
@@ -390,7 +406,12 @@ namespace Live_Subtitles_Demo
                     MessageBox.Show(this, "Choose an .srt output path or uncheck 'Write .srt'."); btStart.IsEnabled = true; return;
                 }
 
-                if (!await BuildSourcesAsync()) { CleanupBlocks(); btStart.IsEnabled = true; return; }
+                if (!await BuildSourcesAsync()) { btStart.IsEnabled = true; return; }
+
+                // Fresh pipeline per Start; fully disposed on Stop / OnStop / close.
+                _pipeline = new MediaBlocksPipeline();
+                _pipeline.OnError += Pipeline_OnError;
+                _pipeline.OnStop += Pipeline_OnStop;
 
                 var provider = SelectedProvider();
                 var settings = new SpeechToTextSettings(edModelFile.Text)
@@ -409,31 +430,33 @@ namespace Live_Subtitles_Demo
                 }
 
                 var audioPad = AudioOutputPad();
-                if (audioPad == null) { MessageBox.Show(this, "The selected source has no audio track to transcribe."); CleanupBlocks(); btStart.IsEnabled = true; return; }
+                if (audioPad == null) { MessageBox.Show(this, "The selected source has no audio track to transcribe."); await TeardownPipelineAsync(); btStart.IsEnabled = true; return; }
 
                 var videoPad = VideoOutputPad();
-                var isFile = rbFile.IsChecked == true;
 
                 _sttBlock = new SpeechToTextBlock(settings);
                 _sttBlock.OnSpeechRecognized += SttBlock_OnSpeechRecognized;
-                _audioRenderer = new AudioRendererBlock();
 
-                // Audio branch: source -> speech-to-text (passthrough) -> audio renderer.
-                if (!_pipeline.Connect(audioPad, _sttBlock.Input) || !_pipeline.Connect(_sttBlock.Output, _audioRenderer.Input))
+                // Audio -> speech-to-text -> unsynced null sink so the pipeline runs as fast as the transcriber allows.
+                _nullAudio = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false };
+                var audioWired =
+                    _pipeline.Connect(audioPad, _sttBlock.Input) &&
+                    _pipeline.Connect(_sttBlock.Output, _nullAudio.Input);
+
+                if (!audioWired)
                 {
-                    MessageBox.Show(this, "Failed to wire the audio branch."); CleanupBlocks(); btStart.IsEnabled = true; return;
+                    MessageBox.Show(this, "Failed to wire the audio branch."); await TeardownPipelineAsync(); btStart.IsEnabled = true; return;
                 }
 
-                // Video branch (only when the source has video): source -> overlay -> renderer.
+                // Video branch (only when the source has video): source -> overlay -> renderer (unsynced preview).
                 if (videoPad != null)
                 {
                     _overlay = new OverlayManagerBlock();
                     _subtitleRenderer = new SubtitleRenderer(_overlay, new SubtitleStyle { X = 40, Y = 380, FontSize = 30 });
-                    // Live capture renders unsynced (low latency); a file plays at its real rate (synced).
-                    _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = isFile };
+                    _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
                     if (!_pipeline.Connect(videoPad, _overlay.Input) || !_pipeline.Connect(_overlay.Output, _videoRenderer.Input))
                     {
-                        MessageBox.Show(this, "Failed to wire the video branch."); CleanupBlocks(); btStart.IsEnabled = true; return;
+                        MessageBox.Show(this, "Failed to wire the video branch."); await TeardownPipelineAsync(); btStart.IsEnabled = true; return;
                     }
                 }
                 else
@@ -441,17 +464,22 @@ namespace Live_Subtitles_Demo
                     Log("Source has no video; transcribing audio only (subtitles overlay disabled).");
                 }
 
-                await _pipeline.StartAsync();
+                // Mark running before StartAsync: a short file can EOS the moment it reaches PLAYING.
                 _running = true;
+                await _pipeline.StartAsync();
 
                 Log($"Started. VAD provider: {_sttBlock.ActiveProvider}. Whisper runtime auto-selected.");
                 btStop.IsEnabled = true;
             }
             catch (Exception ex)
             {
-                try { await _pipeline.StopAsync(); _pipeline.ClearBlocks(); } catch { }
-                CleanupBlocks(); btStart.IsEnabled = true; btStop.IsEnabled = false;
+                _running = false;
+                await TeardownPipelineAsync(); btStart.IsEnabled = true; btStop.IsEnabled = false;
                 Log(ex.Message);
+            }
+            finally
+            {
+                Interlocked.Exchange(ref _busy, 0);
             }
         }
 
@@ -478,13 +506,60 @@ namespace Live_Subtitles_Demo
             }));
         }
 
+        private void Pipeline_OnError(object sender, ErrorsEventArgs e) => Log(e.Message);
+
+        /// <summary>
+        /// Raised once the pipeline has fully stopped — including a natural end-of-stream, where the bus EOS
+        /// drives the same teardown as an explicit Stop. Drops the demo-owned blocks and resets the buttons so the
+        /// next Start works, mirroring the player demos.
+        /// </summary>
+        private void Pipeline_OnStop(object sender, StopEventArgs e)
+        {
+            // Ignore a stale Stop from a previous session: a Start/Stop in flight or a non-Free pipeline.
+            if (Volatile.Read(ref _busy) != 0) return;
+            var pipeline = _pipeline;
+            if (pipeline != null && pipeline.State != PlaybackState.Free) return;
+
+            Log("Pipeline OnStop fired (EOS or explicit stop).");
+            Dispatcher.BeginInvoke(new Action(async () =>
+            {
+                if (_isClosing) return;
+                if (Volatile.Read(ref _busy) != 0) return;
+
+                try { await TeardownPipelineAsync(); }
+                catch (Exception ex) { Debug.WriteLine(ex); Log("Cleanup error: " + ex.Message); }
+                btStart.IsEnabled = true;
+                btStop.IsEnabled = false;
+            }));
+        }
+
+        /// <summary>Stops, unsubscribes, disposes the pipeline and the demo-owned blocks, leaving everything null.</summary>
+        private async System.Threading.Tasks.Task TeardownPipelineAsync()
+        {
+            _running = false;
+
+            if (_sttBlock != null) { _sttBlock.OnSpeechRecognized -= SttBlock_OnSpeechRecognized; }
+
+            if (_pipeline != null)
+            {
+                try { await _pipeline.StopAsync(); } catch (Exception ex) { Debug.WriteLine(ex); }
+                _pipeline.OnError -= Pipeline_OnError;
+                _pipeline.OnStop -= Pipeline_OnStop;
+                // DisposeAsync disposes every connected block; do NOT ClearBlocks first.
+                await _pipeline.DisposeAsync();
+                _pipeline = null;
+            }
+
+            CleanupBlocks();
+        }
+
         private void CleanupBlocks()
         {
             _running = false;
             if (_sttBlock != null) { _sttBlock.OnSpeechRecognized -= SttBlock_OnSpeechRecognized; _sttBlock.Dispose(); _sttBlock = null; }
             _subtitleRenderer?.Dispose(); _subtitleRenderer = null;
             _overlay?.Dispose(); _overlay = null;
-            _audioRenderer?.Dispose(); _audioRenderer = null;
+            _nullAudio?.Dispose(); _nullAudio = null;
             _videoRenderer?.Dispose(); _videoRenderer = null;
 
             // For a file source the same block is both video and audio; dispose once.
@@ -504,15 +579,15 @@ namespace Live_Subtitles_Demo
 
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
+            if (Interlocked.CompareExchange(ref _busy, 1, 0) != 0) return;
             try
             {
                 btStop.IsEnabled = false;
-                if (_pipeline != null) { await _pipeline.StopAsync(); _pipeline.ClearBlocks(); }
-                CleanupBlocks();
+                await TeardownPipelineAsync();
                 VideoView1.CallRefresh();
             }
             catch (Exception ex) { Debug.WriteLine(ex); }
-            finally { btStart.IsEnabled = true; }
+            finally { btStart.IsEnabled = true; Interlocked.Exchange(ref _busy, 0); }
         }
     }
 }

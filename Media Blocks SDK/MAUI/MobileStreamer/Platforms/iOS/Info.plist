@@ -34,5 +34,8 @@
 	<string>We need access to your camera to take photos.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Required to get audio</string>
+	<!-- Required to reach a server on the same network: iOS 14+ blocks LAN traffic without it. -->
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Required to stream to a media server on your local network</string>
 </dict>
 </plist>

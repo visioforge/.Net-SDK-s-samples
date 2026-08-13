@@ -25,10 +25,7 @@ using VisioForge.Core.Types.X.Sources;
 
 namespace FaceRecognitionCLI
 {
-    // Console version of the Face Recognition demo. It can auto-discover the most frequent faces in a
-    // video (1:N enrollment), then recognize them across the file and burn the names/boxes into an
-    // annotated MP4. Models (YuNet detector + SFace or AuraFace embedder, --embedding) are downloaded
-    // on first use.
+    // Console Face Recognition demo: auto-discover frequent faces (1:N enroll), recognize them, and burn names/boxes into an annotated MP4.
     internal static class Program
     {
         private const string ModelsReleaseUrl =
@@ -68,8 +65,7 @@ namespace FaceRecognitionCLI
                 return 1;
             }
 
-            // SFace (128-D) or AuraFace (512-D, ArcFace family). The family selects both the weights file and the
-            // crop preprocessing; a gallery is only comparable to embeddings from the same family.
+            // Pick the weights file for the chosen embedding family (galleries are only comparable within one family).
             var embeddingFile = opts.Embedding == FaceEmbeddingModel.ArcFace ? AuraFaceModelFile : EmbeddingModelFile;
 
             string detModel, embModel;
@@ -125,8 +121,7 @@ namespace FaceRecognitionCLI
             }
         }
 
-        // Pass 1: run the recognizer over the video with an EMPTY gallery to collect every face embedding,
-        // greedily cluster them by cosine similarity, and enroll the N most frequent, mutually-distinct people.
+        // Pass 1: collect every face embedding, cluster by cosine similarity, and enroll the N most frequent distinct people.
         private static async Task DiscoverAndEnrollAsync(Options opts, string detModel, string embModel, FaceGallery gallery)
         {
             Console.WriteLine($"== Discovery pass: scanning '{Path.GetFileName(opts.VideoPath)}' for {opts.EnrollCount} distinct faces ==");
@@ -154,7 +149,7 @@ namespace FaceRecognitionCLI
             {
                 foreach (var f in e.Faces)
                 {
-                    if (f.Embedding == null || f.Embedding.Length == 0)
+                    if (f == null || f.Embedding == null || f.Embedding.Length == 0)
                     {
                         continue;
                     }
@@ -169,7 +164,7 @@ namespace FaceRecognitionCLI
 
             await RunToCompletionAsync(pipeline, opts.TimeoutSeconds, showProgress: true);
 
-            // OnFacesIdentified fires on a background worker, so read 'clusters' only after face.Dispose() joins it.
+            // Read 'clusters' only after face.Dispose() below joins the OnFacesIdentified worker.
             var provider = face.ActiveProvider;
 
             await pipeline.StopAsync();
@@ -180,8 +175,7 @@ namespace FaceRecognitionCLI
             Console.WriteLine($"  Collected {sampleCount} face samples in {clusters.Count} raw clusters " +
                               $"(provider: {provider}, dropped frames: {face.DroppedFrameCount}).");
 
-            // Keep only clusters seen often enough to be a real recurring person, then pick the N largest that
-            // are mutually distinct so we never enroll the same person twice.
+            // Keep clusters seen often enough to be recurring, ordered by frequency.
             var candidates = clusters
                 .Where(c => c.Count >= opts.MinClusterSize)
                 .OrderByDescending(c => c.Count)
@@ -233,8 +227,7 @@ namespace FaceRecognitionCLI
             }
         }
 
-        // Pass 2: recognize faces against the gallery, burn boxes + names into an annotated MP4, and report
-        // per-identity hit counts.
+        // Pass 2: recognize against the gallery, burn boxes + names into an annotated MP4, and report per-identity hits.
         private static async Task RecognizeAsync(Options opts, string detModel, string embModel, FaceGallery gallery)
         {
             var outPath = opts.OutputPath ?? Path.Combine(
@@ -271,6 +264,11 @@ namespace FaceRecognitionCLI
             {
                 foreach (var f in e.Faces)
                 {
+                    if (f == null)
+                    {
+                        continue;
+                    }
+
                     System.Threading.Interlocked.Increment(ref totalFaces);
                     if (string.IsNullOrEmpty(f.Identity))
                     {
@@ -292,8 +290,7 @@ namespace FaceRecognitionCLI
             pipeline.Connect(converter.Output, h264.Input);
             pipeline.Connect(h264.Output, mp4.CreateNewInput(MediaBlockPadMediaType.Video));
 
-            // Optional audio passthrough (off by default). The converter normalizes the decoded audio (sample
-            // format + channel layout) so the AAC encoder gets a complete caps set.
+            // Optional audio passthrough; the converter normalizes caps so the AAC encoder gets a complete set.
             if (opts.Audio && source.AudioOutput != null)
             {
                 var audioConvert = new AudioConverterBlock();
@@ -386,8 +383,7 @@ namespace FaceRecognitionCLI
         {
             var tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             void OnStop(object s, StopEventArgs e) => tcs.TrySetResult(true);
-            // A fatal pipeline error never reaches end-of-stream, so complete the wait on error too; otherwise the
-            // loop would spin until the timeout.
+            // Complete on error too: a fatal error never reaches end-of-stream.
             void OnError(object s, ErrorsEventArgs e) => tcs.TrySetResult(true);
             pipeline.OnStop += OnStop;
             pipeline.OnError += OnError;
@@ -445,8 +441,7 @@ namespace FaceRecognitionCLI
             Directory.CreateDirectory(ModelsCacheDir);
             var bytes = await _http.GetByteArrayAsync(ModelsReleaseUrl + "/" + fileName);
 
-            // Write to a temp file then move into place so an interrupted download never leaves a corrupt
-            // .onnx at the final path (which the File.Exists guard above would otherwise reuse forever).
+            // Write to a temp file then move into place so an interrupted download never leaves a corrupt .onnx.
             var tmpPath = path + ".part";
             try
             {

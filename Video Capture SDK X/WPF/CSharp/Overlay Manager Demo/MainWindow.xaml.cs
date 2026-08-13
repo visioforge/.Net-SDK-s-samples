@@ -26,6 +26,10 @@ namespace Overlay_Manager_Demo
 
         private volatile bool _timerFlag;
 
+        // Stands in for a real sensor reading. Written by the timer, read by the overlay's
+        // TextProvider on the streaming thread - float so the read is atomic without a lock.
+        private volatile float _sensorValue;
+
         private VideoCaptureCoreX _videoCapture;
 
         public MainWindow()
@@ -126,6 +130,8 @@ namespace Overlay_Manager_Demo
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _timerFlag = true;
+
+            _sensorValue = 20f + (Environment.TickCount % 1000) / 100f;
 
             var duration = await _videoCapture.DurationAsync();
 
@@ -346,6 +352,28 @@ namespace Overlay_Manager_Demo
             text.Font.Size = 32;
             _videoCapture.Video_Overlay_Add(text);
             lbOverlays.Items.Add($"[Text] {text.Text}");
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btAddDynamicText control.
+        /// Adds a text overlay whose content is rebuilt on every frame, the way a live readout of
+        /// sensor values, the clock and the frame number is usually needed.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void btAddDynamicText_Click(object sender, RoutedEventArgs e)
+        {
+            var text = new OverlayManagerText(string.Empty, 40, 40);
+            text.Color = SkiaSharp.SKColors.Yellow;
+            text.Font.Size = 28;
+
+            // Called once per frame on the streaming thread, so keep it short and non-blocking.
+            // Returning an unchanged string is cheap - the text layout is only re-measured when it differs.
+            text.TextProvider = ts => "Camera 1\nOperator: demo\nREC\n"
+                + $"Sensor {_sensorValue:F1}   {DateTime.Now:HH:mm:ss}   {ts:hh\\:mm\\:ss}";
+
+            _videoCapture.Video_Overlay_Add(text);
+            lbOverlays.Items.Add("[Text] dynamic");
         }
 
         /// <summary>

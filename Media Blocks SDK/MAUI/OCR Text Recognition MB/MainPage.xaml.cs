@@ -74,14 +74,21 @@ namespace OcrTextRecognitionMB
                 _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
                 if (_cameras.Length > 0)
                 {
+                    // Reset the index with the label so a reused page can't keep a stale device selection.
+                    _cameraSelectedIndex = 0;
                     btCamera.Text = _cameras[0].DisplayName;
                 }
 
-                // Copy the bundled OCR models out of the app package so ONNX can open them by path.
-                _detModelPath = await EnsureAssetAsync("ch_PP-OCRv5_mobile_det.onnx");
-                _recModelPath = await EnsureAssetAsync("latin_PP-OCRv5_rec_mobile_infer.onnx");
-                _clsModelPath = await EnsureAssetAsync("ch_ppocr_mobile_v2.0_cls_infer.onnx");
-                _dictPath = await EnsureAssetAsync("ppocrv5_latin_dict.txt");
+                // Copy bundled OCR models to app-data (ONNX needs a real path); run concurrently.
+                var detTask = EnsureAssetAsync("ch_PP-OCRv5_mobile_det.onnx");
+                var recTask = EnsureAssetAsync("latin_PP-OCRv5_rec_mobile_infer.onnx");
+                var clsTask = EnsureAssetAsync("ch_ppocr_mobile_v2.0_cls_infer.onnx");
+                var dictTask = EnsureAssetAsync("ppocrv5_latin_dict.txt");
+                await Task.WhenAll(detTask, recTask, clsTask, dictTask);
+                _detModelPath = await detTask;
+                _recModelPath = await recTask;
+                _clsModelPath = await clsTask;
+                _dictPath = await dictTask;
 
                 _window = Window;
                 if (_window != null)
@@ -103,15 +110,30 @@ namespace OcrTextRecognitionMB
             {
                 Directory.CreateDirectory(FileSystem.AppDataDirectory);
 
-                // Copy to a temp file, then move into place (overwrite-safe against a concurrent first run).
-                var temp = dest + ".part";
-                using (var src = await FileSystem.OpenAppPackageFileAsync(fileName))
-                using (var dst = File.Create(temp))
+                // Copy to a unique temp file, then move into place (GUID name avoids concurrent-copy collisions).
+                var temp = Path.Combine(FileSystem.AppDataDirectory, $"{Guid.NewGuid():N}.part");
+                try
                 {
-                    await src.CopyToAsync(dst);
-                }
+                    using (var src = await FileSystem.OpenAppPackageFileAsync(fileName))
+                    using (var dst = File.Create(temp))
+                    {
+                        await src.CopyToAsync(dst);
+                    }
 
-                File.Move(temp, dest, overwrite: true);
+                    File.Move(temp, dest, overwrite: true);
+                }
+                catch
+                {
+                    try { if (File.Exists(temp)) File.Delete(temp); } catch { }
+
+                    // Another instance won the copy race and produced dest — treat as success.
+                    if (File.Exists(dest))
+                    {
+                        return dest;
+                    }
+
+                    throw;
+                }
             }
             return dest;
         }
@@ -266,9 +288,7 @@ namespace OcrTextRecognitionMB
 
         private async Task StopRecognitionAsync(bool updateUI = true)
         {
-            // Serialize teardown: a user STOP tap and CleanupAsync (page unload / window close) can both
-            // reach here. The gate lets the first fully tear down while the second awaits, so the
-            // pipeline is disposed exactly once.
+            // Serialize teardown so a user STOP and page-close cleanup dispose the pipeline exactly once.
             await _teardownGate.WaitAsync();
             try
             {
@@ -294,8 +314,7 @@ namespace OcrTextRecognitionMB
                         _ocr.OnTextDetected -= Ocr_OnTextDetected;
                     }
 
-                    // DisposeAsync disposes every connected block (camera source, OCR, renderer);
-                    // do NOT ClearBlocks first or the block list is emptied before disposal.
+                    // DisposeAsync disposes every connected block (source, OCR, renderer) — don't ClearBlocks first.
                     _pipeline.OnError -= Pipeline_OnError;
                     await _pipeline.DisposeAsync();
                     _pipeline = null;

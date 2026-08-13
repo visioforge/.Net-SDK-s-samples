@@ -44,8 +44,7 @@ namespace FaceRecognitionMB
         // Shared gallery: enrollment writes into it and the live pipeline matches against it.
         private readonly FaceGallery _gallery = new FaceGallery();
 
-        // Source photos per identity (persisted under EnrolledPhotosDir), so the gallery can be re-embedded when the
-        // embedding model changes - embeddings from different models have different dimensions and aren't comparable.
+        // Source photos per identity (persisted), so the gallery can be re-embedded when the embedding model changes.
         private readonly Dictionary<string, List<string>> _enrolledPhotos = new Dictionary<string, List<string>>(StringComparer.Ordinal);
 
         // The embedding family (0 = SFace, 1 = AuraFace) the current gallery was built with; null when empty or loaded.
@@ -130,11 +129,10 @@ namespace FaceRecognitionMB
 
                 await VisioForgeX.InitSDKAsync();
 
-                // The in-memory photo->identity map resets each launch, so drop any persisted photos left from a
-                // previous run to avoid them accumulating (a loaded gallery can't be rebuilt without them anyway).
+                // Drop persisted photos from a previous run; the in-memory photo->identity map resets each launch.
                 try { if (Directory.Exists(EnrolledPhotosDir)) Directory.Delete(EnrolledPhotosDir, true); } catch (Exception ex) { Debug.WriteLine(ex); }
 
-                // Same for any copied source videos left in the cache by a previous run (e.g. after a crash).
+                // Same for any copied source videos left in the cache by a previous run.
                 try
                 {
                     foreach (var stale in Directory.EnumerateFiles(FileSystem.CacheDirectory, "source_*"))
@@ -147,6 +145,8 @@ namespace FaceRecognitionMB
                 _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
                 if (_cameras.Length > 0)
                 {
+                    // Reset the selection so a reused page can't keep a stale device.
+                    _cameraSelectedIndex = 0;
                     btCamera.Text = _cameras[0].DisplayName;
                 }
 
@@ -203,8 +203,7 @@ namespace FaceRecognitionMB
         {
             lbModels.Text = ModelsReady ? $"Models: ready (YuNet + {EmbedderName})" : $"Models: {EmbedderName} not downloaded";
 
-            // Hide the Download button once the models for the selected embedder are cached; show it again when a
-            // different (not-yet-downloaded) embedder is selected.
+            // Hide the Download button once the selected embedder's models are cached.
             btDownloadModels.IsVisible = !ModelsReady;
         }
 
@@ -225,8 +224,7 @@ namespace FaceRecognitionMB
             RefreshModelStatus();
         }
 
-        // Restores the embedding family a loaded gallery was saved with (sidecar), so recognition runs the matching
-        // model; without it a saved AuraFace gallery reads as all-Unknown after a relaunch.
+        // Restores the embedding family a loaded gallery was saved with (sidecar), so recognition runs the matching model.
         private void RestoreGalleryFamily()
         {
             if (File.Exists(GalleryFamilyPath)
@@ -243,8 +241,7 @@ namespace FaceRecognitionMB
             }
         }
 
-        // Cycles the embedding family (SFace 128-D <-> AuraFace 512-D). The gallery is re-embedded on the next
-        // enroll/Start; switching only changes which weights are used and downloaded.
+        // Cycles the embedding family (SFace 128-D <-> AuraFace 512-D); the gallery is re-embedded on the next enroll/Start.
         private void btEmbModel_Clicked(object sender, EventArgs e)
         {
             _embeddingFamily = _embeddingFamily == 0 ? 1 : 0;
@@ -284,22 +281,22 @@ namespace FaceRecognitionMB
         }
 
         // Re-embeds the persisted photos with the selected model when the gallery was built with a different one.
-        private void EnsureGalleryMatchesModel()
+        private async Task EnsureGalleryMatchesModelAsync()
         {
             if (_gallery.Count == 0 || _galleryFamily == _embeddingFamily)
             {
                 return;
             }
 
-            // Only rebuild when we both have source photos and the selected model is available; otherwise leave the
-            // gallery as-is (clearing it without being able to re-embed would lose every identity).
+            // Only rebuild when we have source photos and the selected model is available, else we'd lose every identity.
             if (_enrolledPhotos.Count > 0 && ModelsReady)
             {
-                RebuildGallery(_embeddingFamily);
+                await RebuildGalleryAsync(_embeddingFamily);
             }
         }
 
-        private void RebuildGallery(int family)
+        // Re-embeds the persisted photos for the given family on a background thread (CPU-heavy).
+        private async Task RebuildGalleryAsync(int family)
         {
             // Identities loaded from a .vfg have no tracked source photos, so the re-embed below cannot recreate them.
             var loadedOnly = _gallery.GetNames().Where(n => !_enrolledPhotos.ContainsKey(n)).ToList();
@@ -307,23 +304,23 @@ namespace FaceRecognitionMB
             _gallery.Clear();
 
             var enroller = GetEnroller();
-            foreach (var kv in _enrolledPhotos)
+            var photos = _enrolledPhotos.SelectMany(kv => kv.Value.Select(file => (kv.Key, file))).ToList();
+            await Task.Run(() =>
             {
-                foreach (var file in kv.Value)
+                foreach (var (name, file) in photos)
                 {
                     try
                     {
-                        enroller.Enroll(kv.Key, file);
+                        enroller.Enroll(name, file);
                     }
                     catch (Exception ex)
                     {
                         Debug.WriteLine(ex);
                     }
                 }
-            }
+            });
 
-            // Warn (don't silently shrink) if an identity couldn't be re-embedded, or if loaded-only identities
-            // (no tracked source photo) were dropped by the model switch.
+            // Warn if any identity couldn't be re-embedded or was dropped by the model switch.
             var rebuilt = _gallery.GetNames();
             var dropped = _enrolledPhotos.Keys.Where(n => !rebuilt.Contains(n)).Concat(loadedOnly).ToList();
             if (dropped.Count > 0)
@@ -339,8 +336,7 @@ namespace FaceRecognitionMB
         {
             btDownloadModels.IsEnabled = false;
 
-            // Lock the embedder selector during the download so a mid-download switch can't leave the just-downloaded
-            // weights paired with the other family's preprocessing.
+            // Lock the embedder selector during the download so a mid-download switch can't mismatch weights and family.
             btEmbModel.IsEnabled = false;
             var original = btDownloadModels.Text;
             btDownloadModels.Text = "Downloading...";
@@ -381,8 +377,7 @@ namespace FaceRecognitionMB
 
             try
             {
-                // ConfigureAwait(false) keeps the network/file I/O off the UI thread; progress updates are
-                // marshalled back explicitly via Dispatcher.Dispatch.
+                // I/O runs off the UI thread; progress updates marshal back via Dispatcher.Dispatch.
                 using (var response = await _http.GetAsync(ModelsReleaseUrl + "/" + fileName, HttpCompletionOption.ResponseHeadersRead).ConfigureAwait(false))
                 {
                     response.EnsureSuccessStatusCode();
@@ -452,6 +447,8 @@ namespace FaceRecognitionMB
                 return;
             }
 
+            // Prevent re-entrancy: a second tap could open another picker and enroll concurrently against the shared gallery.
+            btEnroll.IsEnabled = false;
             string persisted = null;
             bool recorded = false;
             try
@@ -462,8 +459,7 @@ namespace FaceRecognitionMB
                     return;
                 }
 
-                // Persist the picked photo (a content URI is not directly decodable) so the gallery can be re-embedded
-                // if the embedding model changes later.
+                // Persist the picked photo (content URIs aren't directly decodable) so it can be re-embedded later.
                 Directory.CreateDirectory(EnrolledPhotosDir);
                 var ext = Path.GetExtension(photo.FileName);
                 persisted = Path.Combine(EnrolledPhotosDir, $"{Guid.NewGuid():N}{ext}");
@@ -473,12 +469,29 @@ namespace FaceRecognitionMB
                     await src.CopyToAsync(dst);
                 }
 
-                // If the model changed since the gallery was built, re-embed the existing photos first so Add won't
-                // reject the new (different-dimension) embedding.
                 int family = _embeddingFamily;
-                EnsureGalleryMatchesModel();
+                bool ok = false;
 
-                var ok = GetEnroller().Enroll(name, persisted);
+                // Hold the teardown gate across the rebuild + enroll so CleanupAsync can't dispose the enroller mid-work.
+                await _teardownGate.WaitAsync();
+                try
+                {
+                    if (_isCleanedUp)
+                    {
+                        return;
+                    }
+
+                    // Re-embed existing photos first if the model changed, so Add won't reject a different-dimension embedding.
+                    await EnsureGalleryMatchesModelAsync();
+
+                    // Detection + embedding is CPU-heavy; keep it off the UI thread.
+                    var enroller = GetEnroller();
+                    ok = await Task.Run(() => enroller.Enroll(name, persisted));
+                }
+                finally
+                {
+                    _teardownGate.Release();
+                }
 
                 if (ok)
                 {
@@ -496,13 +509,17 @@ namespace FaceRecognitionMB
             }
             catch (Exception ex)
             {
-                // Don't leave the persisted copy behind if enroll threw before it was recorded.
+                // Drop the persisted copy if enroll threw before it was recorded.
                 if (persisted != null && !recorded)
                 {
                     try { File.Delete(persisted); } catch { /* best effort */ }
                 }
 
                 await DisplayAlert("Enrollment failed", ex.Message, "OK");
+            }
+            finally
+            {
+                btEnroll.IsEnabled = true;
             }
         }
 
@@ -512,8 +529,7 @@ namespace FaceRecognitionMB
             {
                 _gallery.Save(GalleryPath);
 
-                // Persist the embedding family so a later load re-selects the matching model (else the gallery reads
-                // as Unknown after relaunch). Drop a stale sidecar when the family is unknown (loaded gallery).
+                // Persist the embedding family so a later load re-selects the matching model; drop a stale sidecar otherwise.
                 if (_galleryFamily != null)
                 {
                     File.WriteAllText(GalleryFamilyPath, _galleryFamily.Value.ToString());
@@ -543,8 +559,7 @@ namespace FaceRecognitionMB
 
                 _gallery.Load(GalleryPath);
 
-                // A loaded gallery has no source photos to re-embed; restore its embedding family from the sidecar
-                // so recognition runs the matching model.
+                // A loaded gallery has no source photos; restore its embedding family from the sidecar to match the model.
                 _enrolledPhotos.Clear();
                 RestoreGalleryFamily();
 
@@ -621,9 +636,22 @@ namespace FaceRecognitionMB
                 return;
             }
 
-            // Make sure the gallery embeddings match the model we're about to run (re-embed enrolled photos if the
-            // family changed since enrollment), otherwise every face would read as Unknown.
-            EnsureGalleryMatchesModel();
+            // Re-embed enrolled photos if the family changed, so the gallery matches the model and faces aren't all Unknown.
+            // Hold the teardown gate so CleanupAsync can't dispose the enroller mid-rebuild.
+            await _teardownGate.WaitAsync();
+            try
+            {
+                if (_isCleanedUp)
+                {
+                    return;
+                }
+
+                await EnsureGalleryMatchesModelAsync();
+            }
+            finally
+            {
+                _teardownGate.Release();
+            }
 
             try
             {
@@ -635,8 +663,7 @@ namespace FaceRecognitionMB
                 if (_isFile)
                 {
 #if IOS && !MACCATALYST
-                    // On iOS the string overload of CreateAsync is gated out; wrap the path in an NSUrl explicitly.
-                    // Disable audio (only the video pad is connected) to match the non-iOS branch.
+                    // On iOS the string overload is gated out; wrap the path in an NSUrl. Video-only (audio not connected).
                     var srcSettings = await UniversalSourceSettings.CreateAsync(Foundation.NSUrl.FromFilename(_filename), renderVideo: true, renderAudio: false);
 #else
                     var srcSettings = await UniversalSourceSettings.CreateAsync(_filename, renderVideo: true, renderAudio: false);
@@ -671,8 +698,7 @@ namespace FaceRecognitionMB
 
                 IVideoView vv = videoView.GetVideoView();
 
-                // A file plays in real time when the switch is on, or as fast as the pipeline can go (max speed) when
-                // off. A live camera always runs unsynced (latest frame wins).
+                // File: real time when the switch is on, else max speed. A live camera always runs unsynced.
                 var realTime = _isFile && swRealTime.IsToggled;
                 _videoRenderer = new VideoRendererBlock(_pipeline, vv) { IsSync = realTime };
 
@@ -702,8 +728,7 @@ namespace FaceRecognitionMB
                 btStartStop.Text = "STOP";
                 btStartStop.BackgroundColor = Colors.Red;
 
-                // Enable the seek bar for file playback. Duration is often not ready right after Start (the demuxer
-                // reports it once playback prerolls), so it is resolved lazily in the timer.
+                // Enable the seek bar for file playback; duration is resolved lazily in the timer (not ready at Start).
                 if (_isFile)
                 {
                     _duration = TimeSpan.Zero;
@@ -742,8 +767,7 @@ namespace FaceRecognitionMB
             _fileSource = null;
         }
 
-        // Tears down a partially/fully built pipeline and its blocks (error / early-return paths). Pipeline first,
-        // then the blocks.
+        // Tears down a partially/fully built pipeline and its blocks (error / early-return paths).
         private async Task DiscardPipelineAsync()
         {
             if (_pipeline != null)
@@ -816,26 +840,32 @@ namespace FaceRecognitionMB
 
         private void Face_OnFacesIdentified(object sender, FacesIdentifiedEventArgs e)
         {
+            // A frame with no faces resets the status to idle so the last "Faces: ..." line doesn't linger.
             var faces = e.Faces;
-            if (faces == null || faces.Length == 0)
-            {
-                return;
-            }
+            var count = faces?.Length ?? 0;
 
-            // Pick a representative label: the best match, else "Unknown".
-            var count = faces.Length;
-            string headline = null;
-            float bestScore = -1f;
-            foreach (var f in faces)
+            string status;
+            if (count == 0)
             {
-                if (!string.IsNullOrEmpty(f.Identity) && f.Similarity > bestScore)
+                status = "Faces: none";
+            }
+            else
+            {
+                // Pick a representative label: the best match, else "Unknown".
+                string headline = null;
+                float bestScore = -1f;
+                foreach (var f in faces)
                 {
-                    bestScore = f.Similarity;
-                    headline = $"{f.Identity} ({f.Similarity:P0})";
+                    if (f != null && !string.IsNullOrEmpty(f.Identity) && f.Similarity > bestScore)
+                    {
+                        bestScore = f.Similarity;
+                        headline = $"{f.Identity} ({f.Similarity:P0})";
+                    }
                 }
-            }
 
-            headline ??= "Unknown";
+                headline ??= "Unknown";
+                status = $"Faces: {count}  |  {headline}";
+            }
 
             Dispatcher.Dispatch(() =>
             {
@@ -846,7 +876,7 @@ namespace FaceRecognitionMB
 
                 try
                 {
-                    lbStatus.Text = $"Faces: {count}  |  {headline}";
+                    lbStatus.Text = status;
                 }
                 catch (Exception ex)
                 {
@@ -860,8 +890,7 @@ namespace FaceRecognitionMB
             Debug.WriteLine($"Pipeline error: {e.Message}");
         }
 
-        // File playback reached end-of-stream: the pipeline self-stopped, so tear down and reset the UI to idle
-        // (otherwise the timer, seek panel and STOP button stay active around an already-stopped pipeline).
+        // End-of-stream: the pipeline self-stopped, so tear down and reset the UI to idle.
         private void Pipeline_OnStop(object sender, StopEventArgs e)
         {
             Dispatcher.Dispatch(async () =>
@@ -922,8 +951,7 @@ namespace FaceRecognitionMB
                     return;
                 }
 
-                // Copy to a stable local path (a content URI is not directly openable by the demuxer); a GUID name
-                // keeps distinct picks with the same display name from colliding.
+                // Copy to a stable local path (content URIs aren't openable by the demuxer); GUID name avoids collisions.
                 Directory.CreateDirectory(FileSystem.CacheDirectory);
                 dest = Path.Combine(FileSystem.CacheDirectory, $"source_{Guid.NewGuid():N}{Path.GetExtension(result.FileName)}");
                 using (var src = await result.OpenReadAsync())
@@ -932,8 +960,7 @@ namespace FaceRecognitionMB
                     await src.CopyToAsync(dst);
                 }
 
-                // Only after the new copy succeeds, switch to it and drop the previous one so a failed pick
-                // keeps the old selection and cached source videos don't accumulate.
+                // Switch to the new copy only after it succeeds, then drop the previous one so caches don't accumulate.
                 var previous = _filename;
                 _filename = dest;
                 lbFile.Text = result.FileName;
@@ -968,7 +995,7 @@ namespace FaceRecognitionMB
             {
                 var pos = await _pipeline.Position_GetAsync();
 
-                // Duration usually becomes available only once playback has prerolled - keep trying until known.
+                // Duration becomes available only once playback prerolls - keep trying until known.
                 if (_duration <= TimeSpan.Zero)
                 {
                     try { _duration = await _pipeline.DurationAsync(); } catch (Exception durEx) { Debug.WriteLine(durEx); }
@@ -1059,10 +1086,19 @@ namespace FaceRecognitionMB
                 _pipeline = null;
             }
 
-            _enroller?.Dispose();
-            _enroller = null;
+            // Drain an in-flight background enroll/rebuild before disposing the enroller / destroying the SDK (both native).
+            await _teardownGate.WaitAsync();
+            try
+            {
+                _enroller?.Dispose();
+                _enroller = null;
 
-            VisioForgeX.DestroySDK();
+                VisioForgeX.DestroySDK();
+            }
+            finally
+            {
+                _teardownGate.Release();
+            }
         }
     }
 }
