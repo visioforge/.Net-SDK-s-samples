@@ -18,9 +18,9 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.8.14" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.8.14" />
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VirtualCamera.x64" Version="2026.8.14" />
+    <PackageReference Include="VisioForge.DotNet.VideoCapture" Version="2026.8.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="2026.8.15" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VirtualCamera.x64" Version="2026.8.15" />
   </ItemGroup>
   <ItemGroup>
     <NativeLibs Remove="app.manifest" />
