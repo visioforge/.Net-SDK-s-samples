@@ -20,6 +20,13 @@
                                 <TextBox Height="23" HorizontalAlignment="Left" Margin="186,98,0,0" Name="edIPPassword" VerticalAlignment="Top" Width="150" Text="" />
                                 <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" Text="rtsp://" IsEditable="True"/>
                                 <Button x:Name="btListONVIFSources" Content="List ONVIF sources" HorizontalAlignment="Left" Margin="351,98,0,0" VerticalAlignment="Top" Width="147" Click="btListONVIFSources_Click" Height="23" />
+                                <Label Content="Transport" Height="28" HorizontalAlignment="Left" Margin="20,128,0,0" VerticalAlignment="Top" />
+                                <ComboBox x:Name="cbTransport" HorizontalAlignment="Left" Margin="90,130,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+                                    <ComboBoxItem Content="Auto"/>
+                                    <ComboBoxItem Content="TCP"/>
+                                    <ComboBoxItem Content="UDP"/>
+                                </ComboBox>
+                                <CheckBox Content="Force custom keep-alive" Height="16" HorizontalAlignment="Left" Margin="220,134,0,0" Name="cbForceCustomKeepAlive" VerticalAlignment="Top" ToolTip="Send GET_PARAMETER every 30s instead of the default RTSP keep-alive"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="ONVIF">

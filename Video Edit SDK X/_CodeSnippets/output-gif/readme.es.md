@@ -11,6 +11,7 @@ Este fragmento demuestra cómo renderizar un archivo de video a un GIF animado u
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

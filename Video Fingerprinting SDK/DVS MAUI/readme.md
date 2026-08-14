@@ -11,6 +11,7 @@ This application generates and analyzes video fingerprints.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

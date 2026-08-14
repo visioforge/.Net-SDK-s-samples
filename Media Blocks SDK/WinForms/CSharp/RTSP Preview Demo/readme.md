@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - RTSP Preview Demo (C#/WinForms)
 
-This application connects to RTSP/IP cameras for live video streaming, supports ONVIF camera discovery and control, supports ultra-low latency streaming.
+This application connects to RTSP/IP cameras for live video streaming, supports ONVIF camera discovery and control, supports ultra-low latency streaming. Use **Transport** (Auto / TCP / UDP) and **Force custom keep-alive** if a camera works in VLC but the preview ends after about a minute.
 
 ## Used media blocks
 

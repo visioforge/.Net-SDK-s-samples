@@ -173,6 +173,23 @@ namespace RTSP_Preview_WinForms
                     mmLog.Text += "Low latency mode enabled (latency=250ms, no buffering)" + Environment.NewLine;
                 }
 
+                if (cbTransport.SelectedIndex == 1)
+                {
+                    rtsp.AllowedProtocols = RTSPSourceProtocol.TCP;
+                    mmLog.Text += "Transport: TCP" + Environment.NewLine;
+                }
+                else if (cbTransport.SelectedIndex == 2)
+                {
+                    rtsp.AllowedProtocols = RTSPSourceProtocol.UDP;
+                    mmLog.Text += "Transport: UDP" + Environment.NewLine;
+                }
+
+                rtsp.ForceCustomKeepAlive = cbForceCustomKeepAlive.Checked;
+                if (rtsp.ForceCustomKeepAlive)
+                {
+                    mmLog.Text += "Force custom keep-alive enabled" + Environment.NewLine;
+                }
+
                 var info = rtsp.GetInfo();
 
                 if (info == null)

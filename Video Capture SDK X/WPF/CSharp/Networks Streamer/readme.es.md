@@ -16,6 +16,7 @@ Esta aplicación demuestra las capacidades del SDK.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

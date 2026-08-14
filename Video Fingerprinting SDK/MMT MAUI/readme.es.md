@@ -17,6 +17,7 @@ Esta aplicación reproduce archivos multimedia usando el decodificador universal
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

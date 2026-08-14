@@ -28,6 +28,9 @@ Changes and updates for all .Net SDKs.
 
 ## 2026.8.14
 
+* [Media Blocks SDK .Net] **RTSP sources can send their own GET_PARAMETER keep-alive.** Set `RTSPSourceSettings.ForceCustomKeepAlive` (or the same flag on `RTSPRAWSourceSettings`) to replace the default RTSP keep-alive with a GET_PARAMETER every 30 seconds. Off by default — use it if a camera drops the session under the built-in keep-alive.
+* [Demos] The RTSP Preview demos now have a **transport selector (Auto / TCP / UDP)** and a **Force custom keep-alive** checkbox, so a camera that works in VLC but dies after a minute can be tried the same way without rebuilding.
+
 * [Media Blocks SDK .Net] Fixed **the first line of an `OverlayManagerText` (and `OverlayManagerDateTime`) disappearing when `Y` was 0 or close to the top of the frame.** `X` and `Y` are the top-left corner of the text in pixels; `(0, 0)` is a valid position and the first line of a multiline string is fully visible there. Previously the coordinates were treated as the Cairo baseline, so a block placed at the origin had its first line clipped off the top of the picture.
 * [Media Player SDK .Net] **`MediaPlayerCoreX` now has the same overlay manager as capture.** Set `Video_Overlay_Enabled` before `OpenAsync`/`PlayAsync` and use `Video_Overlay_Add` with `OverlayManagerText` (including `TextProvider`). The overlay is drawn on the preview only — after the sample grabber and after any custom video outputs — so the file on disk, snapshots and exports are not modified. Overlays added once stay across `Stop` and opening another file.
 

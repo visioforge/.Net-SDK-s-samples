@@ -11,6 +11,7 @@ This application supports ONVIF camera discovery and control, supports ultra-low
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

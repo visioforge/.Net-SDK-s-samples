@@ -26,6 +26,7 @@ El ejemplo usa `VideoCaptureCore` con las siguientes configuraciones principales
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

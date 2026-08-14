@@ -11,6 +11,7 @@ Esta aplicación soporta descubrimiento y control de cámaras ONVIF.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

@@ -15,6 +15,7 @@ Esta aplicación aplica composición de croma (pantalla verde).
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

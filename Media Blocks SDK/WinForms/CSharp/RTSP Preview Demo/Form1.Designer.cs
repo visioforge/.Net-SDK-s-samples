@@ -21,6 +21,9 @@ namespace RTSP_Preview_WinForms
             tcInput = new System.Windows.Forms.TabControl();
             tabMain = new System.Windows.Forms.TabPage();
             btListONVIFSources = new System.Windows.Forms.Button();
+            cbForceCustomKeepAlive = new System.Windows.Forms.CheckBox();
+            cbTransport = new System.Windows.Forms.ComboBox();
+            lbTransport = new System.Windows.Forms.Label();
             cbLowLatencyMode = new System.Windows.Forms.CheckBox();
             cbIPAudioCapture = new System.Windows.Forms.CheckBox();
             edIPPassword = new System.Windows.Forms.TextBox();
@@ -94,6 +97,9 @@ namespace RTSP_Preview_WinForms
             // tabMain
             // 
             tabMain.Controls.Add(btListONVIFSources);
+            tabMain.Controls.Add(cbForceCustomKeepAlive);
+            tabMain.Controls.Add(cbTransport);
+            tabMain.Controls.Add(lbTransport);
             tabMain.Controls.Add(cbLowLatencyMode);
             tabMain.Controls.Add(cbIPAudioCapture);
             tabMain.Controls.Add(edIPPassword);
@@ -119,6 +125,36 @@ namespace RTSP_Preview_WinForms
             btListONVIFSources.Text = "List ONVIF sources";
             btListONVIFSources.UseVisualStyleBackColor = true;
             btListONVIFSources.Click += btListONVIFSources_Click;
+            // 
+            // cbForceCustomKeepAlive
+            // 
+            cbForceCustomKeepAlive.AutoSize = true;
+            cbForceCustomKeepAlive.Location = new System.Drawing.Point(220, 134);
+            cbForceCustomKeepAlive.Name = "cbForceCustomKeepAlive";
+            cbForceCustomKeepAlive.Size = new System.Drawing.Size(190, 24);
+            cbForceCustomKeepAlive.TabIndex = 11;
+            cbForceCustomKeepAlive.Text = "Force custom keep-alive";
+            cbForceCustomKeepAlive.UseVisualStyleBackColor = true;
+            // 
+            // cbTransport
+            // 
+            cbTransport.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cbTransport.FormattingEnabled = true;
+            cbTransport.Items.AddRange(new object[] { "Auto", "TCP", "UDP" });
+            cbTransport.Location = new System.Drawing.Point(90, 130);
+            cbTransport.Name = "cbTransport";
+            cbTransport.Size = new System.Drawing.Size(120, 28);
+            cbTransport.TabIndex = 10;
+            cbTransport.SelectedIndex = 0;
+            // 
+            // lbTransport
+            // 
+            lbTransport.AutoSize = true;
+            lbTransport.Location = new System.Drawing.Point(20, 134);
+            lbTransport.Name = "lbTransport";
+            lbTransport.Size = new System.Drawing.Size(70, 20);
+            lbTransport.TabIndex = 9;
+            lbTransport.Text = "Transport";
             // 
             // cbLowLatencyMode
             // 
@@ -474,6 +510,9 @@ namespace RTSP_Preview_WinForms
         private System.Windows.Forms.CheckBox cbIPAudioCapture;
         private System.Windows.Forms.CheckBox cbLowLatencyMode;
         private System.Windows.Forms.Button btListONVIFSources;
+        private System.Windows.Forms.Label lbTransport;
+        private System.Windows.Forms.ComboBox cbTransport;
+        private System.Windows.Forms.CheckBox cbForceCustomKeepAlive;
         private System.Windows.Forms.Button btONVIFConnect;
         private System.Windows.Forms.Label lbONVIFCameraInfo;
         private System.Windows.Forms.Label labelProfile;

@@ -11,6 +11,7 @@ Esta aplicación realiza reconocimiento de códigos de barras.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

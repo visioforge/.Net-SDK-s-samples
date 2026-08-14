@@ -11,6 +11,7 @@ Esta aplicación incluye detección facial con IA.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

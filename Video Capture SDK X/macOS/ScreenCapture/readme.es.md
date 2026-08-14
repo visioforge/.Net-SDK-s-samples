@@ -19,6 +19,7 @@ Esta aplicación captura contenido de escritorio/pantalla, guarda la salida en f
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

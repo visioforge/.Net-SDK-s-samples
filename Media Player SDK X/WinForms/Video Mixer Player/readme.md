@@ -15,6 +15,7 @@ This application plays media files using the universal source decoder.
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 

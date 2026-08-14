@@ -11,6 +11,7 @@ This snippet demonstrates how to render a video file to an animated GIF using `V
 * .Net 7
 * .Net 8
 * .Net 9
+* .Net 10
 
 ---
 
