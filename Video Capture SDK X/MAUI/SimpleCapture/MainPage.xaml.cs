@@ -8,9 +8,7 @@ using System.Diagnostics;
 
 using VisioForge.Core;
 using VisioForge.Core.Helpers;
-using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.Types;
-using VisioForge.Core.Types.X.AudioEncoders;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
@@ -199,6 +197,10 @@ namespace SimpleCapture
 #if __IOS__ && !__MACCATALYST__
             RequestPhotoPermission();
 #endif
+
+            // Load the native GStreamer stack before touching any X-engine type.
+            // Without it the first VideoCaptureCoreX call throws DllNotFoundException.
+            await VisioForgeX.InitSDKAsync();
 
             // Get IVideoView interface
             IVideoView vv = videoView.GetVideoView();
@@ -508,7 +510,10 @@ namespace SimpleCapture
             _core.Audio_Record = true;
 
             _core.Outputs_Clear();
-            _core.Outputs_Add(new MP4Output(GenerateFilename(), H264EncoderBlock.GetDefaultSettings(), new MP3EncoderSettings()), false);
+            // MP4Output picks the encoders that fit the running platform - VideoToolbox on
+            // Apple, MediaCodec on Android, OpenH264 elsewhere. Passing them explicitly here
+            // would pin one platform's choice on all of them.
+            _core.Outputs_Add(new MP4Output(GenerateFilename()), false);
 
             // start
             await _core.StartAsync();
