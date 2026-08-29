@@ -3,5 +3,8 @@
 	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<!-- Reading clips the user picks. API 32 and below. -->
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+	<!-- API 33+ replaces the blanket storage permission with a per-type one. -->
+	<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
 </manifest>
