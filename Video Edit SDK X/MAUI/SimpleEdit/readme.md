@@ -5,8 +5,10 @@ The same code runs on Android, iOS, MacCatalyst and Windows.
 
 * `ADD CLIP` appends a gallery video to the timeline (`Input_AddAudioVideoFile`).
 * `PREVIEW` plays the timeline into the `VideoView` - preview mode is a null `Output_Format`.
-* `RENDER MP4` writes the result to the app data directory. `MP4Output` picks the encoders
-  that fit the running platform, so no encoder is named in the sample.
+* `RENDER MP4` writes the result to the app data directory, using
+  `H264EncoderBlock.GetDefaultSettings()` - the SDK's platform selector, which prefers a
+  hardware encoder (VideoToolbox, MediaCodec, NVENC/AMF/QSV) and falls back to software.
+  `MP4Output`'s own default only consults it on Android.
 
 `VisioForgeX.InitSDKAsync()` must run before the first `VideoEditCoreX` call, otherwise the
 native GStreamer stack is not loaded and the constructor throws `DllNotFoundException`.

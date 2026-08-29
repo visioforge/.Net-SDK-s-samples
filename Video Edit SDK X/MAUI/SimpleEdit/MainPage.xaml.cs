@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using VisioForge.Core;
+using VisioForge.Core.MediaBlocks.VideoEncoders;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Output;
@@ -135,10 +136,12 @@ namespace Simple_Edit_MAUI
 
             var output = Path.Combine(FileSystem.Current.AppDataDirectory, $"joined_{DateTime.Now:yyyyMMdd_HHmmss}.mp4");
 
-            // MP4Output picks the encoders that fit the running platform - VideoToolbox on
-            // Apple, MediaCodec on Android, OpenH264 elsewhere. Naming them explicitly here
-            // would pin one platform's choice on all of them.
-            _core.Output_Format = new MP4Output(output);
+            // H264EncoderBlock.GetDefaultSettings() prefers a hardware encoder and falls back
+            // to software: VideoToolbox on Apple, MediaCodec on Android, NVENC/AMF/QSV on
+            // Windows. MP4Output's own default only consults it on Android and hands every
+            // other platform OpenH264, so passing it here is what keeps iOS and Windows on
+            // hardware. Audio is left to MP4Output: AAC on Windows, MP3 elsewhere.
+            _core.Output_Format = new MP4Output(output, H264EncoderBlock.GetDefaultSettings());
             _core.Start();
 
             lbStatus.Text = $"Rendering to {output}";
