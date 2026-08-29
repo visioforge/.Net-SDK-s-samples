@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Simple_Edit_MAUI.MainPage"
+             xmlns:my="clr-namespace:VisioForge.Core.UI.MAUI;assembly=VisioForge.Core.UI.MAUI">
+
+    <Grid RowSpacing="0" RowDefinitions="*,Auto">
+
+        <my:VideoView Grid.Row="0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            x:Name="videoView"
+            Background="Black"/>
+
+        <VerticalStackLayout Grid.Row="1" x:Name="pnMain" Spacing="4" Background="#1e1e1e" Padding="12,8,12,12">
+
+            <!-- Timeline contents -->
+            <Label x:Name="lbFiles" Text="No clips added." TextColor="#B0FFFFFF" FontSize="12" />
+
+            <!-- Render progress -->
+            <ProgressBar x:Name="pbProgress" Progress="0" Margin="0,4,0,0" />
+
+            <!-- Timeline controls -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="8" Margin="0,4,0,0">
+                <Button Grid.Column="0" x:Name="btAdd" Text="ADD CLIP" Clicked="btAdd_Clicked" />
+                <Button Grid.Column="1" x:Name="btClear" Text="CLEAR" Clicked="btClear_Clicked" />
+            </Grid>
+
+            <!-- Job controls -->
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8" Margin="0,4,0,0">
+                <Button Grid.Column="0" x:Name="btPreview" Text="PREVIEW" Clicked="btPreview_Clicked" />
+                <Button Grid.Column="1" x:Name="btRender" Text="RENDER MP4" Clicked="btRender_Clicked" />
+                <Button Grid.Column="2" x:Name="btStop" Text="STOP" Clicked="btStop_Clicked" />
+            </Grid>
+
+            <Label x:Name="lbStatus" Text="" TextColor="#B0FFFFFF" FontSize="12" Margin="0,4,0,0" />
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
