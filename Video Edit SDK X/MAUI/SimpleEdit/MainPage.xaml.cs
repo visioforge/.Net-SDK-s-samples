@@ -30,6 +30,11 @@ namespace Simple_Edit_MAUI
 
             Loaded += MainPage_Loaded;
             Unloaded += MainPage_Unloaded;
+
+            // The engine only exists once MainPage_Loaded has awaited InitSDKAsync, which on a
+            // cold start spends hundreds of milliseconds building the GStreamer registry. Keep
+            // the controls dead until then so a tap in that window cannot reach a null _core.
+            pnMain.IsEnabled = false;
         }
 
         /// <summary>
@@ -37,19 +42,28 @@ namespace Simple_Edit_MAUI
         /// </summary>
         private async void MainPage_Loaded(object sender, EventArgs e)
         {
-            // Load the native GStreamer stack before touching any X-engine type.
-            // Without it the first VideoEditCoreX call throws DllNotFoundException.
-            await VisioForgeX.InitSDKAsync();
+            try
+            {
+                // Load the native GStreamer stack before touching any X-engine type.
+                // Without it the first VideoEditCoreX call throws DllNotFoundException.
+                await VisioForgeX.InitSDKAsync();
 
-            IVideoView vv = videoView.GetVideoView();
+                IVideoView vv = videoView.GetVideoView();
 
-            _core = new VideoEditCoreX(vv);
+                _core = new VideoEditCoreX(vv);
 
-            _core.OnError += Core_OnError;
-            _core.OnProgress += Core_OnProgress;
-            _core.OnStop += Core_OnStop;
+                _core.OnError += Core_OnError;
+                _core.OnProgress += Core_OnProgress;
+                _core.OnStop += Core_OnStop;
 
-            lbStatus.Text = $"SDK v{VideoEditCoreX.SDK_Version}";
+                lbStatus.Text = $"SDK v{VideoEditCoreX.SDK_Version}";
+                pnMain.IsEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                // Leave the controls disabled - without an engine none of them can do anything.
+                lbStatus.Text = $"SDK init failed: {ex.Message}";
+            }
         }
 
         /// <summary>
@@ -76,19 +90,28 @@ namespace Simple_Edit_MAUI
         /// </summary>
         private async void btAdd_Clicked(object sender, EventArgs e)
         {
-            var picked = await MediaPicker.Default.PickVideoAsync();
-            if (picked == null)
+            try
             {
-                return;
+                var picked = await MediaPicker.Default.PickVideoAsync();
+                if (picked == null)
+                {
+                    return;
+                }
+
+                var filename = await ResolveLocalPathAsync(picked);
+
+                // Append to the end of the timeline - no insert time means "after the last clip".
+                _core.Input_AddAudioVideoFile(filename);
+
+                _clips.Add(filename);
+                lbFiles.Text = $"{_clips.Count} clip(s): " + string.Join(", ", _clips.ConvertAll(Path.GetFileName));
             }
-
-            var filename = await ResolveLocalPathAsync(picked);
-
-            // Append to the end of the timeline - no insert time means "after the last clip".
-            _core.Input_AddAudioVideoFile(filename);
-
-            _clips.Add(filename);
-            lbFiles.Text = $"{_clips.Count} clip(s): " + string.Join(", ", _clips.ConvertAll(Path.GetFileName));
+            catch (Exception ex)
+            {
+                // PickVideoAsync throws when the media permission is denied or no gallery app
+                // is present, and the cache copy can fail on a full disk.
+                lbStatus.Text = $"Could not add the clip: {ex.Message}";
+            }
         }
 
         /// <summary>
