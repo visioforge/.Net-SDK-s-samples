@@ -2,21 +2,33 @@
 
 This repository contains sample projects demonstrating the capabilities of VisioForge .Net SDKs for video/audio capture, editing, playback, and processing.
 
+## Start Here - New to VisioForge?
+
+If you are evaluating a SKU on Windows for the first time, open the matching start-here solution in Visual Studio and press Run. Each one is a single working sample (WPF, .NET 8), scoped to its own product, so you can evaluate before diving into the full demo sets.
+
+| Product | Start-here solution | What it shows |
+|---------|--------------------|---------------|
+| Video Capture SDK X | [`Start Here - Capture.sln`](./Start%20Here%20-%20Capture.sln) | Capture from a webcam to preview and record |
+| Media Player SDK X | [`Start Here - Player.sln`](./Start%20Here%20-%20Player.sln) | Play a local video file, seek and pause |
+| Video Edit SDK X | [`Start Here - Edit.sln`](./Start%20Here%20-%20Edit.sln) | Join (concat) two video files into one |
+
+> **X vs classic.** The `X` SDKs are cross-platform (Windows, Linux, macOS, Android, iOS) and are the recommended starting point for a new Windows evaluation. The non-`X` variants are the legacy DirectShow cores — Windows-only, kept for existing integrations.
+
 ## Repository Structure
 
-- **Media Blocks SDK** - Modular pipeline-based video processing framework
-- **Video Capture SDK** - Video and audio capture with encoding
 - **Video Capture SDK X** - Cross-platform video capture (Windows, Linux, macOS, Android, iOS)
-- **Media Player SDK** - Advanced media playback
 - **Media Player SDK X** - Cross-platform media player
-- **Video Edit SDK** - Video editing and conversion
 - **Video Edit SDK X** - Cross-platform video editing
+- **Video Capture SDK** - Video and audio capture with encoding (Windows, DirectShow)
+- **Media Player SDK** - Advanced media playback (Windows, DirectShow)
+- **Video Edit SDK** - Video editing and conversion (Windows, DirectShow)
+- **Media Blocks SDK** - Modular pipeline-based video processing framework
 - **Video Fingerprinting SDK** - Video content recognition and fingerprinting
 
 ## Quick Start
 
 1. Clone this repository
-2. Open a project solution (.sln) in Visual Studio or your preferred IDE
+2. Open a start-here solution (`Start Here - Capture.sln`, `Start Here - Player.sln`, or `Start Here - Edit.sln`) in Visual Studio for a single simple demo, or a per-SDK solution folder for the full demo set
 3. Build the solution to restore NuGet packages automatically
 4. Run the demo application
 
@@ -28,10 +40,10 @@ Most demo applications contain unmanaged NuGet redist packages specific to the S
 
 | Package | Description | NuGet Link |
 |---------|-------------|------------|
-| VisioForge.DotNet.MediaBlocks | Media Blocks SDK - modular video processing | [![NuGet](https://img.shields.io/nuget/v/VisioForge.DotNet.MediaBlocks.svg)](https://www.nuget.org/packages/VisioForge.DotNet.MediaBlocks/) |
 | VisioForge.DotNet.VideoCapture | Video Capture SDK - capture and encode | [![NuGet](https://img.shields.io/nuget/v/VisioForge.DotNet.VideoCapture.svg)](https://www.nuget.org/packages/VisioForge.DotNet.VideoCapture/) |
 | VisioForge.DotNet.MediaPlayer | Media Player SDK - advanced playback | [![NuGet](https://img.shields.io/nuget/v/VisioForge.DotNet.MediaPlayer.svg)](https://www.nuget.org/packages/VisioForge.DotNet.MediaPlayer/) |
 | VisioForge.DotNet.VideoEdit | Video Edit SDK - editing and conversion | [![NuGet](https://img.shields.io/nuget/v/VisioForge.DotNet.VideoEdit.svg)](https://www.nuget.org/packages/VisioForge.DotNet.VideoEdit/) |
+| VisioForge.DotNet.MediaBlocks | Media Blocks SDK - modular video processing | [![NuGet](https://img.shields.io/nuget/v/VisioForge.DotNet.MediaBlocks.svg)](https://www.nuget.org/packages/VisioForge.DotNet.MediaBlocks/) |
 | VisioForge.DotNet.Core | Core shared functionality | [![NuGet](https://img.shields.io/nuget/v/VisioForge.DotNet.Core.svg)](https://www.nuget.org/packages/VisioForge.DotNet.Core/) |
 
 ### Cross-Platform Core Packages
@@ -111,8 +123,8 @@ Most demo applications contain unmanaged NuGet redist packages specific to the S
 ## Product Pages
 
 - [Video Capture SDK .Net](https://www.visioforge.com/video-capture-sdk-net)
-- [Video Edit SDK .Net](https://www.visioforge.com/video-edit-sdk-net)
 - [Media Player SDK .Net](https://www.visioforge.com/media-player-sdk-net)
+- [Video Edit SDK .Net](https://www.visioforge.com/video-edit-sdk-net)
 - [Media Blocks SDK .Net](https://www.visioforge.com/media-blocks-sdk-net)
 
 ## Documentation & Support

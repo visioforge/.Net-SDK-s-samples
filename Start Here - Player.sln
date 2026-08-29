@@ -1,0 +1,22 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo X WPF net8", "Media Player SDK X\WPF\Simple Player Demo\Simple Player Demo X WPF net8.csproj", "{05A46E4C-2194-4627-8709-5B694D4FB6AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05A46E4C-2194-4627-8709-5B694D4FB6AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A46E4C-2194-4627-8709-5B694D4FB6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A46E4C-2194-4627-8709-5B694D4FB6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A46E4C-2194-4627-8709-5B694D4FB6AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
