@@ -35,6 +35,6 @@
     </NativeReference>
   </ItemGroup>-->
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2025.12.0" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2026.9.11" />
   </ItemGroup>
 </Project>

@@ -47,8 +47,8 @@
     <PackageReference Include="VisioForge.DotNet.Core.UI.WinUI" Version="2026.8.16" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.4.29" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.4.29" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.9.11" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.9.11" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="Assets\LogoOverlay.png">
