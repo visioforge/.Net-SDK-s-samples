@@ -81,10 +81,6 @@ namespace Simple_Player_MB_MAUI
 #endif
         )
         {
-            // Load the native GStreamer stack before building the pipeline. InitSDKAsync is
-            // idempotent, so repeated CreateEngineAsync calls cost nothing after the first.
-            await VisioForgeX.InitSDKAsync();
-
             if (_pipeline != null)
             {
                 await _pipeline.StopAsync(true);

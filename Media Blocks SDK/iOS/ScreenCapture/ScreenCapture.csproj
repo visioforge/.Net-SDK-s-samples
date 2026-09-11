@@ -1,12 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net10.0-ios</TargetFramework>
-    <OutputType>Exe</OutputType>
-    <Nullable>disable</Nullable>
-    <ImplicitUsings>true</ImplicitUsings>
-    <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
-    <ProvisioningType>automatic</ProvisioningType>
-    <!-- Force device-only build (ios-arm64). ScreenCapture uses a Broadcast Upload
+<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><TargetFramework>net10.0-ios</TargetFramework><OutputType>Exe</OutputType><Nullable>disable</Nullable><ImplicitUsings>true</ImplicitUsings><SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion><ProvisioningType>automatic</ProvisioningType><!-- Force device-only build (ios-arm64). ScreenCapture uses a Broadcast Upload
          Extension (IsAppExtension=true on the .appex ProjectReference in _SOURCE),
          which is a real-device-only feature — the iOS Simulator does not run system
          broadcast extensions. Building for iossimulator-arm64 also hits a .NET iOS
@@ -14,43 +6,11 @@
          where the linker pulls runtimes/ios/native/libSkiaSharp.framework (device
          slice) when targeting iossimulator-arm64 even though runtimes/iossimulator/native/
          exists in the package and contains a correctly-marked arm64-simulator slice.
-         The simpler/correct answer for this sample is "device only". -->
-    <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <CodesignKey>iPhone Developer</CodesignKey>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <CreatePackage>false</CreatePackage>
-    <WarningLevel>4</WarningLevel>
-    <MtouchLink>SdkOnly</MtouchLink>
-    <MtouchInterpreter>VisioForge.Core.dll</MtouchInterpreter>
-    <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
-    <MtouchDebug>True</MtouchDebug>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <CreatePackage>false</CreatePackage>
-    <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
-    <MtouchDebug>True</MtouchDebug>
-    <MtouchInterpreter>VisioForge.Core.dll</MtouchInterpreter>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.8.16" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2026.9.11" />
-  </ItemGroup>
-  <!-- Pin SkiaSharp.NativeAssets.iOS to 3.119.4-preview.1.1: it satisfies the
+         The simpler/correct answer for this sample is "device only". --><RuntimeIdentifier>ios-arm64</RuntimeIdentifier></PropertyGroup><PropertyGroup Condition=" '$(Configuration)' == 'Debug' "><CodesignKey>iPhone Developer</CodesignKey></PropertyGroup><PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' "><CreatePackage>false</CreatePackage><WarningLevel>4</WarningLevel><MtouchLink>SdkOnly</MtouchLink><MtouchInterpreter>VisioForge.Core.dll</MtouchInterpreter><MtouchNoSymbolStrip>True</MtouchNoSymbolStrip><MtouchDebug>True</MtouchDebug><CodesignKey>iPhone Developer</CodesignKey><DeviceSpecificBuild>true</DeviceSpecificBuild></PropertyGroup><PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "><CreatePackage>false</CreatePackage><MtouchNoSymbolStrip>True</MtouchNoSymbolStrip><MtouchDebug>True</MtouchDebug><MtouchInterpreter>VisioForge.Core.dll</MtouchInterpreter></PropertyGroup><ItemGroup><PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.9.11" /></ItemGroup><ItemGroup><PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="2026.9.11" /></ItemGroup><!-- Pin SkiaSharp.NativeAssets.iOS to 3.119.4-preview.1.1: it satisfies the
        transitive '>= 3.119.3-preview.1.1' floor from MediaBlocks 2026.5.13 ->
        SkiaSharp 3.119.3-preview.1.1, and unlike 3.119.3-preview.1.1 it ships
        a buildTransitive/net10.0-ios26.2 targets file. Without that, RID
        resolution for net10.0-ios falls back to runtimes/ios/native/ even when
        building for iossimulator-arm64, producing the
          "building for 'iOS-simulator', but linking in dylib built for 'iOS'"
-       linker error. -->
-  <ItemGroup>
-    <PackageReference Include="SkiaSharp.NativeAssets.iOS" Version="3.119.4" />
-  </ItemGroup>
-</Project>
+       linker error. --><ItemGroup><PackageReference Include="SkiaSharp.NativeAssets.iOS" Version="3.119.4" /></ItemGroup></Project>
