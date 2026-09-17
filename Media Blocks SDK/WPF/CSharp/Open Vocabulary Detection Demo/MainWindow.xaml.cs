@@ -207,7 +207,7 @@ namespace Open_Vocabulary_Detection_Demo
                 VisioForgeX.DestroySDK();
             }
             catch (Exception ex) { Debug.WriteLine(ex); }
-            try { _cleanupFinished = true; Dispatcher.BeginInvoke(new Action(() => Close())); }
+            try { _cleanupFinished = true; _ = Dispatcher.BeginInvoke(new Action(() => Close())); }
             catch (Exception ex) { Debug.WriteLine(ex); _isClosing = false; _cleanupFinished = false; IsEnabled = true; }
         }
 
@@ -325,7 +325,7 @@ namespace Open_Vocabulary_Detection_Demo
                     {
                         response.EnsureSuccessStatusCode();
                         var total = response.Content.Headers.ContentLength ?? -1L;
-                        Dispatcher.BeginInvoke(new Action(() => pbDownload.IsIndeterminate = total <= 0));
+                        _ = Dispatcher.BeginInvoke(new Action(() => pbDownload.IsIndeterminate = total <= 0));
 
                         using (var src = await response.Content.ReadAsStreamAsync())
                         using (var fileStream = File.Create(tmpPath))
@@ -345,7 +345,7 @@ namespace Open_Vocabulary_Detection_Demo
                                     {
                                         lastPercent = percent;
                                         var done = readTotal;
-                                        Dispatcher.BeginInvoke(new Action(() =>
+                                        _ = Dispatcher.BeginInvoke(new Action(() =>
                                         {
                                             pbDownload.Value = percent;
                                             lbDownloadStatus.Text = $"Downloading {fileName}... {percent}% ({done / 1024 / 1024} / {total / 1024 / 1024} MB)";

@@ -6,14 +6,17 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using VisioForge.Core;
+using VisioForge.Core.AI.Whisper.Subtitles;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AI;
+using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AI;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.Special;
 
 using Whisper.net.Ggml;
 
@@ -23,7 +26,9 @@ namespace LiveSubtitlesConsole
     /// Console speech-to-text test harness: transcribes a media file with Whisper losslessly (the
     /// synchronous block paces the source to Whisper, so it runs at max speed without dropping audio), and
     /// prints recognized text, live position/duration progress, and the SDK's own diagnostic log lines.
-    /// Usage: LiveSubtitles &lt;media-file&gt; [language].
+    /// With --realtime the file plays at 1x through the speakers instead and captions are printed when
+    /// playback reaches them.
+    /// Usage: LiveSubtitles &lt;media-file&gt; [language] [--realtime].
     /// </summary>
     internal static class Program
     {
@@ -41,24 +46,29 @@ namespace LiveSubtitlesConsole
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
             Trace.AutoFlush = true;
 
-            Console.WriteLine("VisioForge - speech-to-text console TEST harness (lossless)");
-            Console.WriteLine("Usage: LiveSubtitles <media-file> [language]   (language defaults to 'auto')");
+            var realtime = Array.IndexOf(args, "--realtime") >= 0;
+            var positional = Array.FindAll(args, a => !a.StartsWith("--", StringComparison.Ordinal));
+
+            Console.WriteLine("VisioForge - speech-to-text console TEST harness " + (realtime ? "(real-time playback)" : "(lossless, max speed)"));
+            Console.WriteLine("Usage: LiveSubtitles <media-file> [language] [--realtime]   (language defaults to 'auto')");
+            Console.WriteLine("  --realtime: play the file at 1x through the speakers and print each caption when playback");
+            Console.WriteLine("              reaches it. Off by default - this harness measures transcription speed.");
             Console.WriteLine();
 
-            if (args.Length == 0)
+            if (positional.Length == 0)
             {
                 Console.WriteLine("Please pass a media file (mp4/mkv/wav/mp3/m4a/...) as the first argument.");
                 return 1;
             }
 
-            var mediaFile = args[0];
+            var mediaFile = positional[0];
             if (!File.Exists(mediaFile))
             {
                 Console.WriteLine($"File not found: {mediaFile}");
                 return 1;
             }
 
-            var language = args.Length > 1 ? args[1] : "auto";
+            var language = positional.Length > 1 ? positional[1] : "auto";
 
             string whisperModel, sileroModel;
             try
@@ -102,6 +112,9 @@ namespace LiveSubtitlesConsole
                     return 1;
                 }
 
+                // Real-time mode buffers the captions and prints them from the position poll instead of on arrival.
+                var timeline = realtime ? new CaptionTimeline() : null;
+
                 stt = new SpeechToTextBlock(settings);
                 stt.OnSpeechRecognized += (s, e) =>
                 {
@@ -119,21 +132,58 @@ namespace LiveSubtitlesConsole
                                 lastSegmentEnd = seg.EndTime;
                             }
 
-                            Console.WriteLine($"[{seg.StartTime:hh\\:mm\\:ss}] {seg.Text.Trim()}");
+                            if (timeline == null)
+                            {
+                                Console.WriteLine($"[{seg.StartTime:hh\\:mm\\:ss}] {seg.Text.Trim()}");
+                            }
                         }
                     }
+
+                    timeline?.Add(e);
                 };
 
-                // Non-synced null sink: no real-time clock caps the speed, so the pipeline runs as fast as Whisper can transcribe.
-                var sink = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false };
+                // In max-speed mode nothing clocks the transcriber's leg, so the pipeline runs as fast as Whisper
+                // can transcribe. In real-time mode this sink is on the clock too: a pipeline position query
+                // answers with the furthest-advanced sink, so an unsynced one here would report the
+                // transcriber's front - seconds ahead of the audio - and every caption would appear early.
+                var sink = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = realtime };
 
-                if (!pipeline.Connect(audioPad, stt.Input) || !pipeline.Connect(stt.Output, sink.Input))
+                bool connected;
+                if (realtime)
+                {
+                    // A 10-second buffer on the transcriber's leg absorbs a Whisper inference burst so it does not stall
+                    // the speakers. The queue must NOT be leaky: segment times come from a sample counter, not from buffer
+                    // timestamps, so a dropped buffer would shift every later caption and SRT line earlier.
+                    // ponytail: a machine that cannot keep up with real time stutters the playback instead - visible,
+                    // rather than a transcript that silently drifts out of step.
+                    var queueSettings = new TeeQueueSettings
+                    {
+                        MaxSizeBuffers = 0,
+                        MaxSizeBytes = 0,
+                        MaxSizeTime = (ulong)TimeSpan.FromSeconds(10).TotalMilliseconds * 1000000,
+                        Leaky = TeeQueueLeaky.No,
+                    };
+
+                    var tee = new TeeBlock(2, MediaBlockPadMediaType.Audio, queueSettings);
+                    var audioRenderer = new AudioRendererBlock();
+
+                    connected = pipeline.Connect(audioPad, tee.Input)
+                        && pipeline.Connect(tee.Outputs[0], audioRenderer.Input)
+                        && pipeline.Connect(tee.Outputs[1], stt.Input)
+                        && pipeline.Connect(stt.Output, sink.Input);
+                }
+                else
+                {
+                    connected = pipeline.Connect(audioPad, stt.Input) && pipeline.Connect(stt.Output, sink.Input);
+                }
+
+                if (!connected)
                 {
                     Console.WriteLine("Failed to build the audio pipeline.");
                     return 1;
                 }
 
-                Console.WriteLine($"Transcribing '{Path.GetFileName(mediaFile)}' (language: {language})...");
+                Console.WriteLine($"Transcribing '{Path.GetFileName(mediaFile)}' (language: {language}, mode: {(realtime ? "real-time playback" : "max speed")})...");
                 Console.WriteLine("Press Enter to stop early.");
                 Console.WriteLine();
 
@@ -143,7 +193,7 @@ namespace LiveSubtitlesConsole
                 // Progress reporter: pipeline position vs duration (duration is polled lazily inside it).
                 var durationBox = new TimeSpan[1];
                 using var progressCts = new CancellationTokenSource();
-                var progressTask = ReportProgressAsync(pipeline, () => lastSegmentEnd, wall, durationBox, progressCts.Token);
+                var progressTask = ReportProgressAsync(pipeline, () => lastSegmentEnd, wall, durationBox, timeline, progressCts.Token);
 
                 var finished = await Task.WhenAny(done.Task, Task.Run(() => Console.ReadLine()));
                 progressCts.Cancel();
@@ -160,6 +210,9 @@ namespace LiveSubtitlesConsole
 
                 var finalDuration = durationBox[0] > TimeSpan.Zero ? durationBox[0] : await SafeDurationAsync(pipeline);
                 Console.WriteLine();
+
+                // speed is file duration over wall time: how much faster than real time Whisper ran. In --realtime
+                // mode the audio renderer's clock paces the run, so ~1.0x is the expected reading, not a slow one.
                 Console.WriteLine($"[summary] stoppedByUser={stoppedByUser} fileDuration={finalDuration:hh\\:mm\\:ss} " +
                     $"lastSegmentEnd={lastSegmentEnd:hh\\:mm\\:ss} wallTime={wall.Elapsed:hh\\:mm\\:ss} " +
                     $"speed={(finalDuration.TotalSeconds > 0 && wall.Elapsed.TotalSeconds > 0 ? finalDuration.TotalSeconds / wall.Elapsed.TotalSeconds : 0):F1}x");
@@ -175,8 +228,10 @@ namespace LiveSubtitlesConsole
             return pipelineFailed ? 1 : 0;
         }
 
-        private static async Task ReportProgressAsync(MediaBlocksPipeline pipeline, Func<TimeSpan> lastSegmentEnd, Stopwatch wall, TimeSpan[] durationBox, CancellationToken token)
+        private static async Task ReportProgressAsync(MediaBlocksPipeline pipeline, Func<TimeSpan> lastSegmentEnd, Stopwatch wall, TimeSpan[] durationBox, CaptionTimeline timeline, CancellationToken token)
         {
+            var lastCaption = string.Empty;
+
             try
             {
                 while (!token.IsCancellationRequested)
@@ -190,6 +245,21 @@ namespace LiveSubtitlesConsole
                     }
 
                     var pos = await pipeline.Position_GetAsync();
+
+                    // Real-time mode: the caption for the current position, printed once when it changes.
+                    if (timeline != null)
+                    {
+                        var caption = timeline.TextAt(pos);
+                        if (caption != lastCaption)
+                        {
+                            lastCaption = caption;
+                            if (caption.Length > 0)
+                            {
+                                Console.WriteLine($"[{pos:hh\\:mm\\:ss}] {caption}");
+                            }
+                        }
+                    }
+
                     Console.WriteLine($"[progress] pos={pos:hh\\:mm\\:ss} lastSeg={lastSegmentEnd():hh\\:mm\\:ss} dur={durationBox[0]:hh\\:mm\\:ss} wall={wall.Elapsed:hh\\:mm\\:ss}");
                 }
             }

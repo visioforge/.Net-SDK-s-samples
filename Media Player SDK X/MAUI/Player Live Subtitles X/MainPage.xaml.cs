@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Threading;
 
 using VisioForge.Core;
+using VisioForge.Core.AI.Whisper.Subtitles;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AI;
 using VisioForge.Core.MediaBlocks.Special;
@@ -18,12 +19,18 @@ namespace Player_Live_Subtitles_X
     /// Inserts a Whisper speech-to-text block into MediaPlayerCoreX through the X-engine
     /// Audio_Processing_AddBlock API. The block taps the decoded audio (audio output goes to a null
     /// renderer, so the file plays without speaker sound) and raises OnSpeechRecognized, shown as a live subtitle while
-    /// the engine plays a normal file.
+    /// the engine plays a normal file. The Real-time playback switch decides whether the null renderer paces
+    /// the pipeline at 1x or lets it run as fast as Whisper can transcribe.
     /// </summary>
     public partial class MainPage : ContentPage
     {
         private MediaPlayerCoreX _player;
         private SpeechToTextBlock _speechToText;
+
+        // Whisper does not finish a segment at the moment playback reaches it, so recognized text is buffered
+        // here and the label is filled from the playback position instead of from the event.
+        private readonly CaptionTimeline _captions = new CaptionTimeline();
+        private IDispatcherTimer _captionTimer;
 
         private string _modelPath;
         private string _filePath;
@@ -385,8 +392,11 @@ namespace Player_Live_Subtitles_X
                 return;
             }
 
-            // Route audio to a non-synced null renderer so the speech-to-text block runs at full speed, not real time.
-            _player.Audio_OutputBlock = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false };
+            // The speech-to-text block sits serially in the engine's audio chain, so a speaker output would
+            // underrun on a long inference: audio always ends in a null renderer here. Synced paces the
+            // pipeline at 1x for real-time playback; unsynced lets Whisper transcribe as fast as it can.
+            var realTime = swRealTime.IsToggled;
+            _player.Audio_OutputBlock = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = realTime };
 
             // Build the source before registering the block so a CreateAsync failure can't strand one.
             // On iOS the SDK exposes only the NSUrl overload; other platforms use the string overload.
@@ -408,6 +418,8 @@ namespace Player_Live_Subtitles_X
             _speechToText.OnSpeechRecognized += SpeechToText_OnSpeechRecognized;
             _player.Audio_Processing_AddBlock(_speechToText);
 
+            _captions.Clear();
+
             _player.Video_Play = true;
             _player.Audio_Play = true;
 
@@ -428,14 +440,18 @@ namespace Player_Live_Subtitles_X
                 throw;
             }
 
+            StartCaptionTimer();
+
             _isRunning = true;
             btStartStop.Text = "STOP";
             btStartStop.BackgroundColor = Colors.Red;
-            SetStatus("Transcribing...");
+            SetStatus(realTime ? "Playing with live subtitles..." : "Transcribing...");
         }
 
         private async Task StopAsync()
         {
+            _captionTimer?.Stop();
+
             if (_player != null)
             {
                 await _player.StopAsync();
@@ -448,38 +464,46 @@ namespace Player_Live_Subtitles_X
             Dispatcher?.Dispatch(() => lbSubtitle.Text = string.Empty);
         }
 
-        private void SpeechToText_OnSpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        // Raised on the streaming thread; the timeline is thread-safe, and the timer below shows the text.
+        private void SpeechToText_OnSpeechRecognized(object sender, SpeechRecognizedEventArgs e) => _captions.Add(e);
+
+        // Fills the subtitle label from the playback position, so a caption is shown when playback reaches it.
+        private void StartCaptionTimer()
         {
-            if (e.Segments == null || e.Segments.Length == 0)
+            if (_captionTimer == null)
+            {
+                _captionTimer = Dispatcher.CreateTimer();
+                _captionTimer.Interval = TimeSpan.FromMilliseconds(200);
+                _captionTimer.Tick += CaptionTimer_Tick;
+            }
+
+            _captionTimer.Start();
+        }
+
+        private async void CaptionTimer_Tick(object sender, EventArgs e)
+        {
+            var player = _player;
+            if (player == null || _isCleanedUp)
             {
                 return;
             }
 
-            // Show the most recent non-empty segment as the current subtitle line.
-            string line = null;
-            foreach (var segment in e.Segments)
+            try
             {
-                var text = segment?.Text?.Trim();
-                if (!string.IsNullOrEmpty(text))
+                // Async so the position query never runs on the UI thread.
+                var position = await player.Position_GetAsync();
+
+                // The timer is stopped on Stop and on cleanup; a tick already past its await must not repaint
+                // the label the stop handler just cleared.
+                if (_captionTimer.IsRunning && !_isCleanedUp)
                 {
-                    line = text;
+                    lbSubtitle.Text = _captions.TextAt(position);
                 }
             }
-
-            if (line == null)
+            catch (Exception ex)
             {
-                return;
+                System.Diagnostics.Debug.WriteLine(ex);
             }
-
-            Dispatcher?.Dispatch(() =>
-            {
-                if (_isCleanedUp || !_isRunning)
-                {
-                    return;
-                }
-
-                lbSubtitle.Text = line;
-            });
         }
 
         /// <summary>
@@ -515,6 +539,7 @@ namespace Player_Live_Subtitles_X
                     return;
                 }
 
+                _captionTimer?.Stop();
                 DetachBlock();
                 _isRunning = false;
                 btStartStop.Text = "START";
@@ -568,6 +593,7 @@ namespace Player_Live_Subtitles_X
             }
 
             _isCleanedUp = true;
+            _captionTimer?.Stop();
 
             // Drain and claim the Start/Stop guard before disposing the engine, so teardown can't race a live StartAsync.
             while (Interlocked.CompareExchange(ref _startStopBusy, 1, 0) != 0)

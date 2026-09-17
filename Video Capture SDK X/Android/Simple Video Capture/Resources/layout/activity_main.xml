@@ -9,7 +9,11 @@
         android:layout_height="match_parent"
         android:id="@+id/videoView" />
 
+    <!-- Bottom control bar. Its bottom padding is extended at runtime by the system navigation
+         inset (see MainActivity.NavBarInsetListener) so the buttons never hide under the gesture
+         pill or 3-button nav bar. -->
     <LinearLayout
+        android:id="@+id/controlBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -18,8 +22,7 @@
         android:background="@drawable/panel_background"
         android:paddingTop="20dp"
         android:paddingBottom="24dp"
-        android:paddingHorizontal="16dp"
-        android:layout_marginBottom="53dp">
+        android:paddingHorizontal="16dp">
 
         <ImageButton
             android:id="@+id/btStartRecord"

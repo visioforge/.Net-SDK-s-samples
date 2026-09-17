@@ -6,7 +6,7 @@ This sample demonstrates how to use the VisioForge Media Blocks SDK with Uno Pla
 
 - RTSP stream playback
 - ONVIF support
-- Low latency mode (60-120ms)
+- Low latency mode (150ms jitter buffer vs 500ms default)
 - Username/Password authentication
 - Cross-platform support (Windows, Android, iOS, macOS)
 

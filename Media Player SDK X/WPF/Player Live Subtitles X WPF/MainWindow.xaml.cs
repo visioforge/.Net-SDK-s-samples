@@ -5,10 +5,12 @@ using System.Net.Http;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 using Microsoft.Win32;
 
 using VisioForge.Core;
+using VisioForge.Core.AI.Whisper.Subtitles;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AI;
 using VisioForge.Core.MediaBlocks.Special;
@@ -25,12 +27,19 @@ namespace Player_Live_Subtitles_X_WPF
     /// Inserts a Whisper speech-to-text block into MediaPlayerCoreX through the Audio_Processing_AddBlock API:
     /// the block taps the decoded audio (audio output goes to a null renderer, so it plays without speaker sound) and raises
     /// OnSpeechRecognized, shown as a live subtitle while the engine plays a normal file.
+    /// "Real-time playback" paces that null renderer at 1x; unchecked, the file is transcribed as fast as Whisper allows.
     /// </summary>
     public partial class MainWindow : Window
     {
         private MediaPlayerCoreX _player;
         private SpeechToTextBlock _speechToText;
         private bool _isClosing;
+
+        // Recognized speech is buffered here and the label is polled from the playback position, so a caption
+        // shows when playback reaches it instead of the moment Whisper returned it.
+        private readonly CaptionTimeline _captions = new CaptionTimeline();
+
+        private readonly DispatcherTimer _captionTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(200) };
 
         // Re-entrancy guard for Start/Stop (0 = free, 1 = busy); also suppresses a stale OnStop from a prior session.
         private int _startStopBusy;
@@ -57,6 +66,35 @@ namespace Player_Live_Subtitles_X_WPF
         public MainWindow()
         {
             InitializeComponent();
+
+            _captionTimer.Tick += CaptionTimer_Tick;
+        }
+
+        // One code path for both modes: in the max-speed mode the position races ahead, so every caption is due at once.
+        private async void CaptionTimer_Tick(object sender, EventArgs e)
+        {
+            var player = _player;
+            if (player == null || _isClosing)
+            {
+                return;
+            }
+
+            try
+            {
+                // Async so the position query never runs on the UI thread.
+                var position = await player.Position_GetAsync();
+
+                // The timer is stopped on Stop and on close; a tick already past its await must not repaint
+                // the label the stop handler just cleared.
+                if (_captionTimer.IsEnabled && !_isClosing)
+                {
+                    lbSubtitle.Text = _captions.TextAt(position);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
         }
 
         private sealed class ModelPreset
@@ -393,6 +431,7 @@ namespace Player_Live_Subtitles_X_WPF
                 btStart.IsEnabled = false;
                 mmLog.Clear();
                 lbSubtitle.Text = string.Empty;
+                _captions.Clear();
 
                 // Build the engine from scratch for every session.
                 await RecreatePlayerAsync();
@@ -405,8 +444,10 @@ namespace Player_Live_Subtitles_X_WPF
                 // Build the source before registering the block (a CreateAsync failure must not strand a block).
                 var source = await UniversalSourceSettings.CreateAsync(edFile.Text, renderVideo: true, renderAudio: true);
 
-                // Route audio to a non-synced null renderer so the speech-to-text block runs at full speed, not real time.
-                _player.Audio_OutputBlock = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false };
+                // The speech-to-text block sits serially in the engine's audio chain, so a real speaker output would
+                // underrun on a long inference: a synced null renderer paces playback at 1x silently, unsynced runs full speed.
+                var realTime = cbRealTimePlayback.IsChecked == true;
+                _player.Audio_OutputBlock = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = realTime };
 
                 // VAD runs on CUDA only when Whisper does, otherwise CPU.
                 var provider = SelectedProvider();
@@ -435,6 +476,7 @@ namespace Player_Live_Subtitles_X_WPF
                     return;
                 }
 
+                _captionTimer.Start();
                 btStop.IsEnabled = true;
             }
             catch (Exception ex)
@@ -457,29 +499,17 @@ namespace Player_Live_Subtitles_X_WPF
                 return;
             }
 
-            string line = null;
+            // Thread-safe and non-blocking; the caption timer picks each segment up at its own start time.
+            _captions.Add(e);
+
             foreach (var segment in e.Segments)
             {
                 var text = segment?.Text?.Trim();
                 if (!string.IsNullOrEmpty(text))
                 {
-                    line = text;
                     Log($"[{segment.StartTime:hh\\:mm\\:ss} -> {segment.EndTime:hh\\:mm\\:ss}] {text}");
                 }
             }
-
-            if (line == null)
-            {
-                return;
-            }
-
-            _ = Dispatcher.BeginInvoke(new Action(() =>
-            {
-                if (!_isClosing)
-                {
-                    lbSubtitle.Text = line;
-                }
-            }));
         }
 
         private void Player_OnError(object sender, ErrorsEventArgs e) => Log(e.Message);
@@ -506,6 +536,7 @@ namespace Player_Live_Subtitles_X_WPF
                 }
 
                 DetachBlock();
+                _captionTimer.Stop();
                 lbSubtitle.Text = string.Empty;
                 btStart.IsEnabled = true;
                 btStop.IsEnabled = false;
@@ -538,6 +569,8 @@ namespace Player_Live_Subtitles_X_WPF
 
         private async System.Threading.Tasks.Task CleanupAfterStopAsync()
         {
+            _captionTimer.Stop();
+
             if (_player != null)
             {
                 await _player.StopAsync();
@@ -569,6 +602,7 @@ namespace Player_Live_Subtitles_X_WPF
             e.Cancel = true;
             _isClosing = true;
             IsEnabled = false;
+            _captionTimer.Stop();
 
             // Wait for an in-flight Start/Stop to finish before tearing the engine down.
             while (Interlocked.CompareExchange(ref _startStopBusy, 1, 0) != 0)

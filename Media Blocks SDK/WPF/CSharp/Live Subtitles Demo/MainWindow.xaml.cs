@@ -14,6 +14,7 @@ using VisioForge.Core;
 using VisioForge.Core.AI.Whisper.Subtitles;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AI;
+using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
@@ -22,6 +23,7 @@ using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AI;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.Special;
 
 using Whisper.net.Ggml;
 
@@ -59,6 +61,8 @@ namespace Live_Subtitles_Demo
         private SpeechToTextBlock _sttBlock;
         private SubtitleRenderer _subtitleRenderer;
         private NullRendererBlock _nullAudio;
+        private TeeBlock _audioTee;
+        private AudioRendererBlock _audioRenderer;
 
         private VideoCaptureDeviceInfo[] _videoDevices;
         private AudioCaptureDeviceInfo[] _audioDevices;
@@ -437,23 +441,60 @@ namespace Live_Subtitles_Demo
                 _sttBlock = new SpeechToTextBlock(settings);
                 _sttBlock.OnSpeechRecognized += SttBlock_OnSpeechRecognized;
 
-                // Audio -> speech-to-text -> unsynced null sink so the pipeline runs as fast as the transcriber allows.
-                _nullAudio = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false };
-                var audioWired =
-                    _pipeline.Connect(audioPad, _sttBlock.Input) &&
-                    _pipeline.Connect(_sttBlock.Output, _nullAudio.Input);
+                // Real-time playback is a file notion: a camera and microphone already pace the pipeline, and
+                // playing the microphone back through the speakers would only produce feedback.
+                var realTime = cbRealTime.IsChecked == true && rbFile.IsChecked == true;
+
+                // In real-time mode every sink is on the clock, the transcriber's included: a pipeline position
+                // query answers with the furthest-advanced sink, so one unsynced sink would report the
+                // transcriber's front instead of the playback position. Fast mode wants exactly that race.
+                _nullAudio = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = realTime };
+
+                bool audioWired;
+                if (realTime)
+                {
+                    // A 10-second buffer on the transcriber's leg absorbs a Whisper inference burst so it does not stall
+                    // the renderer. The queue must NOT be leaky: segment times come from a sample counter, not from buffer
+                    // timestamps, so a dropped buffer would shift every later caption and SRT line earlier.
+                    // ponytail: a machine that cannot keep up with real time stutters the playback instead - visible,
+                    // rather than a transcript that silently drifts out of step.
+                    var queueSettings = new TeeQueueSettings
+                    {
+                        MaxSizeBuffers = 0,
+                        MaxSizeBytes = 0,
+                        MaxSizeTime = (ulong)TimeSpan.FromSeconds(10).TotalMilliseconds * 1000000,
+                        Leaky = TeeQueueLeaky.No,
+                    };
+
+                    // Audio -> tee: output 0 plays through the speakers, output 1 feeds the transcriber.
+                    _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio, queueSettings);
+                    _audioRenderer = new AudioRendererBlock();
+                    audioWired =
+                        _pipeline.Connect(audioPad, _audioTee.Input) &&
+                        _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input) &&
+                        _pipeline.Connect(_audioTee.Outputs[1], _sttBlock.Input) &&
+                        _pipeline.Connect(_sttBlock.Output, _nullAudio.Input);
+                }
+                else
+                {
+                    // Audio -> speech-to-text -> unsynced null sink so the pipeline runs as fast as the transcriber allows.
+                    audioWired =
+                        _pipeline.Connect(audioPad, _sttBlock.Input) &&
+                        _pipeline.Connect(_sttBlock.Output, _nullAudio.Input);
+                }
 
                 if (!audioWired)
                 {
                     MessageBox.Show(this, "Failed to wire the audio branch."); await TeardownPipelineAsync(); btStart.IsEnabled = true; return;
                 }
 
-                // Video branch (only when the source has video): source -> overlay -> renderer (unsynced preview).
+                // Video branch (only when the source has video): source -> overlay -> renderer.
+                // Real-time mode paces the renderer at 1x; fast mode renders as quickly as frames arrive.
                 if (videoPad != null)
                 {
                     _overlay = new OverlayManagerBlock();
                     _subtitleRenderer = new SubtitleRenderer(_overlay, new SubtitleStyle { X = 40, Y = 380, FontSize = 30 });
-                    _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+                    _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = realTime };
                     if (!_pipeline.Connect(videoPad, _overlay.Input) || !_pipeline.Connect(_overlay.Output, _videoRenderer.Input))
                     {
                         MessageBox.Show(this, "Failed to wire the video branch."); await TeardownPipelineAsync(); btStart.IsEnabled = true; return;
@@ -468,6 +509,11 @@ namespace Live_Subtitles_Demo
                 _running = true;
                 await _pipeline.StartAsync();
 
+                Log(realTime
+                    ? "Mode: real-time playback (1x, audible audio)."
+                    : rbFile.IsChecked == true
+                        ? "Mode: maximum-speed transcription (no playback)."
+                        : "Mode: live capture — the devices already pace the pipeline.");
                 Log($"Started. VAD provider: {_sttBlock.ActiveProvider}. Whisper runtime auto-selected.");
                 btStop.IsEnabled = true;
             }
@@ -485,12 +531,15 @@ namespace Live_Subtitles_Demo
 
         private void SttBlock_OnSpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            // Raised on the worker thread; marshal to the UI thread for the overlay and the list.
+            // Raised on the GStreamer streaming thread. The caption timeline is thread-safe, so feed it here —
+            // a dispatch dropped after Stop would otherwise lose the caption.
+            _subtitleRenderer?.OnSpeechRecognized(sender, e);
+
+            // The transcript ListBox does need the UI thread.
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 // A queued callback can arrive after Stop; drop it so it doesn't append to a cleared transcript.
                 if (_isClosing || !_running) return;
-                _subtitleRenderer?.OnSpeechRecognized(sender, e);
                 foreach (var seg in e.Segments)
                 {
                     if (!string.IsNullOrWhiteSpace(seg?.Text))
@@ -560,6 +609,8 @@ namespace Live_Subtitles_Demo
             _subtitleRenderer?.Dispose(); _subtitleRenderer = null;
             _overlay?.Dispose(); _overlay = null;
             _nullAudio?.Dispose(); _nullAudio = null;
+            _audioRenderer?.Dispose(); _audioRenderer = null;
+            _audioTee?.Dispose(); _audioTee = null;
             _videoRenderer?.Dispose(); _videoRenderer = null;
 
             // For a file source the same block is both video and audio; dispose once.

@@ -15,6 +15,7 @@ stt.OnSpeechRecognized += (s, e) => { /* e.Segments[].Text */ };
 
 core.Video_Source = new VideoCaptureDeviceSourceSettings(camera) { Format = format };
 core.Audio_Source = mic.CreateSourceSettingsVC(mic.GetDefaultFormat());
+core.Audio_Play = false;
 core.Audio_OutputBlock = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false }; // builds the audio chain, no speaker output
 core.Audio_Processing_AddBlock(stt);          // add BEFORE StartAsync
 await core.StartAsync();
@@ -22,6 +23,9 @@ await core.StartAsync();
 
 The engine owns and disposes the inserted block when capture stops, so the app only detaches its
 event handler and drops the reference; a fresh block is created for the next run.
+
+There is no real-time playback toggle here, unlike the file-playback subtitle demos: a live camera and
+microphone already pace the pipeline, so a caption can only lag the speech, never lead it.
 
 ## Running
 

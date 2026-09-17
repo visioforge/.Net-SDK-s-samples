@@ -3466,7 +3466,7 @@ namespace Main_Demo
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void btStartJoin_Click(object sender, RoutedEventArgs e)
+        private async void btStartJoin_Click(object sender, RoutedEventArgs e)
         {
             List<string> files = new List<string>();
             foreach (var item in lbFiles2.Items)
@@ -3474,7 +3474,7 @@ namespace Main_Demo
                 files.Add(item.ToString());
             }
 
-            VideoEdit1.FastEdit_JoinFilesAsync(
+            await VideoEdit1.FastEdit_JoinFilesAsync(
                 files.ToArray(),
                 edOutputFileCut.Text);
         }

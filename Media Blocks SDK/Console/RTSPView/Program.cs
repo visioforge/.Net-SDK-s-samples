@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -18,7 +19,7 @@ namespace RTSPView
         /// Defines the entry point of the application.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             if (args.Length != 3)
             {
@@ -44,7 +45,7 @@ namespace RTSPView
 
             try
             {
-                var rtspSettings = RTSPSourceSettings.CreateAsync(new Uri(url), username, password, audioEnabled).Result;
+                var rtspSettings = await RTSPSourceSettings.CreateAsync(new Uri(url), username, password, audioEnabled);
                 audioEnabled = rtspSettings.GetInfo().AudioStreams.Count > 0;
 
                 _source = new RTSPSourceBlock(rtspSettings);

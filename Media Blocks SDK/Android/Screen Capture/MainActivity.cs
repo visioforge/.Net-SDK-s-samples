@@ -3,6 +3,7 @@ using Android.Media.Projection;
 using Android.OS;
 using Android.Provider;
 using Android.Util;
+using Android.Views;
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sinks;
@@ -61,6 +62,9 @@ namespace Screen_Capture
             btStartRecord = FindViewById<Button>(Resource.Id.btStartRecord);
             btStartRecord.Click += btStartRecord_Click;
 
+            var controlBar = FindViewById<LinearLayout>(Resource.Id.controlBar);
+            controlBar.SetOnApplyWindowInsetsListener(new NavBarInsetListener(controlBar));
+
             _projectionManager = (MediaProjectionManager)GetSystemService(MediaProjectionService);
 
             // Detect real screen dimensions
@@ -69,6 +73,58 @@ namespace Screen_Capture
             _screenHeight = dm.HeightPixels;
             _screenDpi = (int)dm.DensityDpi;
             Log.Info("ScreenCapture", $"Screen: {_screenWidth}x{_screenHeight} @ {_screenDpi}dpi");
+        }
+
+        /// <summary>
+        /// Pads the control bar with the system-bar and display-cutout insets so the buttons
+        /// don't collide with the navigation bar. Works in both navigation modes and in both
+        /// orientations: on a phone in landscape, or a large screen where Android 16 ignores the
+        /// orientation lock, the bar moves to a side and the inset is horizontal rather than
+        /// vertical - and on that side there may be a notch instead.
+        /// </summary>
+        private sealed class NavBarInsetListener : Java.Lang.Object, View.IOnApplyWindowInsetsListener
+        {
+            private readonly View _target;
+            private readonly int _basePaddingLeft;
+            private readonly int _basePaddingRight;
+            private readonly int _basePaddingBottom;
+
+            public NavBarInsetListener(View target)
+            {
+                _target = target;
+                _basePaddingLeft = target.PaddingLeft;
+                _basePaddingRight = target.PaddingRight;
+                _basePaddingBottom = target.PaddingBottom;
+            }
+
+            public WindowInsets OnApplyWindowInsets(View v, WindowInsets insets)
+            {
+                int left, right, bottom;
+
+                // OperatingSystem.IsAndroidVersionAtLeast is the guard the platform-compatibility
+                // analyzer understands, so neither branch needs a warning suppression.
+                if (OperatingSystem.IsAndroidVersionAtLeast(30))
+                {
+                    var bars = insets.GetInsets(
+                        WindowInsets.Type.SystemBars() | WindowInsets.Type.DisplayCutout());
+                    left = bars.Left;
+                    right = bars.Right;
+                    bottom = bars.Bottom;
+                }
+                else
+                {
+                    left = insets.SystemWindowInsetLeft;
+                    right = insets.SystemWindowInsetRight;
+                    bottom = insets.SystemWindowInsetBottom;
+                }
+
+                _target.SetPadding(
+                    _basePaddingLeft + left,
+                    _target.PaddingTop,
+                    _basePaddingRight + right,
+                    _basePaddingBottom + bottom);
+                return v.OnApplyWindowInsets(insets);
+            }
         }
 
         protected override async void OnDestroy()

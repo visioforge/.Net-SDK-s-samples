@@ -301,7 +301,7 @@ namespace Simple_Player_Demo_D3D11_X
                 Log("closing: " + ex.Message);
             }
 
-            Dispatcher.BeginInvoke((Action)Close, DispatcherPriority.Background);
+            _ = Dispatcher.BeginInvoke((Action)Close, DispatcherPriority.Background);
         }
 
         private void Log(string msg)

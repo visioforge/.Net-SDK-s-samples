@@ -457,6 +457,7 @@ namespace Capture_Live_Subtitles_X
 
             _core.Audio_Source = mic.CreateSourceSettingsVC(micFormat);
             _core.Audio_Play = false;
+            // No real-time toggle here: the live camera and mic already pace the pipeline at 1x, so captions can only lag, never run ahead.
             _core.Audio_OutputBlock = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false };
 
             // VAD disabled needs only the Whisper model (no Silero); CPU provider keeps it GPU-independent.

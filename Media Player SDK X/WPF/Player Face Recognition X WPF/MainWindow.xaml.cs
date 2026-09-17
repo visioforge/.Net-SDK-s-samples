@@ -244,7 +244,7 @@ namespace Player_Face_Recognition_X_WPF
                         response.EnsureSuccessStatusCode();
 
                         var total = response.Content.Headers.ContentLength ?? -1L;
-                        Dispatcher.BeginInvoke(new Action(() => pbDownload.IsIndeterminate = total <= 0));
+                        _ = Dispatcher.BeginInvoke(new Action(() => pbDownload.IsIndeterminate = total <= 0));
 
                         using (var src = await response.Content.ReadAsStreamAsync())
                         using (var fileStream = File.Create(tmpPath))
@@ -267,7 +267,7 @@ namespace Player_Face_Recognition_X_WPF
                                         lastPercent = percent;
                                         var doneKb = readTotal / 1024;
                                         var totalKb = total / 1024;
-                                        Dispatcher.BeginInvoke(new Action(() =>
+                                        _ = Dispatcher.BeginInvoke(new Action(() =>
                                         {
                                             pbDownload.Value = percent;
                                             lbDownloadStatus.Text = $"Downloading {fileName}... {percent}% ({doneKb} / {totalKb} KB)";
@@ -282,7 +282,7 @@ namespace Player_Face_Recognition_X_WPF
                                     {
                                         lastReportedMb = doneMb;
                                         var doneKb = readTotal / 1024;
-                                        Dispatcher.BeginInvoke(new Action(() => lbDownloadStatus.Text = $"Downloading {fileName}... {doneKb} KB"));
+                                        _ = Dispatcher.BeginInvoke(new Action(() => lbDownloadStatus.Text = $"Downloading {fileName}... {doneKb} KB"));
                                     }
                                 }
                             }

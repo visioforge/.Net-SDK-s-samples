@@ -554,7 +554,7 @@ namespace Live_Video_Compositor_Demo
                     return;
                 }
 
-                Dispatcher.BeginInvoke((Action)(() =>
+                _ = Dispatcher.BeginInvoke((Action)(() =>
                 {
                     lbTimestamp.Content = ts.ToString(@"hh\:mm\:ss");
                 }));
@@ -1889,7 +1889,7 @@ namespace Live_Video_Compositor_Demo
                 // external signal (process termination, parent app unloading). A thrown exception
                 // here would bubble out of async void into the WPF unhandled-exception handler —
                 // better to log and let the window die naturally.
-                Dispatcher.BeginInvoke(new Action(() => Close()));
+                _ = Dispatcher.BeginInvoke(new Action(() => Close()));
             }
             catch (Exception ex)
             {

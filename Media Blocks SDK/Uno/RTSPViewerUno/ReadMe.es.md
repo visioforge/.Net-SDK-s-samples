@@ -6,7 +6,7 @@ Este ejemplo demuestra cómo utilizar VisioForge Media Blocks SDK con Uno Platfo
 
 - Reproducción de transmisiones RTSP
 - Soporte ONVIF
-- Modo de baja latencia (60-120ms)
+- Modo de baja latencia (búfer de jitter de 150 ms frente a 500 ms por defecto)
 - Autenticación con Usuario/Contraseña
 - Soporte multiplataforma (Windows, Android, iOS, macOS)
 

@@ -180,8 +180,13 @@ namespace ImageVideoSourceCairo_Demo
 
             try
             {
-                // Update the image dynamically
-                _imageSource.UpdateFilename(imagePath);
+                // Update the image dynamically. The file exists, but it can still fail to decode.
+                if (!_imageSource.TryUpdateFilename(imagePath))
+                {
+                    lblStatus.Content = $"Could not load: {_imageFiles[index]}";
+                    return;
+                }
+
                 _currentImageIndex = index;
                 lblStatus.Content = $"Playing: {_imageFiles[index]}";
                 UpdateButtonStates();

@@ -269,7 +269,8 @@ public class AppDelegate : UIApplicationDelegate
         _btStartCapture = new UIButton(UIButtonType.Custom)
         {
             TranslatesAutoresizingMaskIntoConstraints = false,
-            BackgroundColor = UIColor.Clear
+            BackgroundColor = UIColor.Clear,
+            AccessibilityIdentifier = "start capture"
         };
         _btStartCapture.Layer.CornerRadius = 34f;
         _btStartCapture.Layer.BorderWidth = 4f;

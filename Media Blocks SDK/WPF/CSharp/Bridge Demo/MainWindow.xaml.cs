@@ -27,6 +27,10 @@ namespace Bridge_Demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool _closingHandled;
+
+        private bool _teardownDone;
+
         /// <summary>
         /// The video ID.
         /// </summary>
@@ -200,24 +204,41 @@ namespace Bridge_Demo
         }
 
         /// <summary>
+        /// Destroy file output engine async. EOS does not cross the bridge, so stop the recorder
+        /// gracefully before disposing it to write the MP4's moov atom.
+        /// </summary>
+        private async Task DestroyFileOutputEngineAsync()
+        {
+            if (_pipelineFileOutput != null)
+            {
+                // A failed stop must not skip the disposals that follow it.
+                try
+                {
+                    await _pipelineFileOutput.StopAsync();
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex);
+                }
+
+                _pipelineFileOutput.OnError -= Pipeline_OnError;
+                await _pipelineFileOutput.DisposeAsync();
+                _pipelineFileOutput = null;
+            }
+        }
+
+        /// <summary>
         /// Destroy engines async.
         /// </summary>
         private async Task DestroyEnginesAsync()
         {
+            await DestroyFileOutputEngineAsync();
+
             if (_pipelineSource != null)
             {
-                await _pipelineSource.StopAsync();
-                
                 _pipelineSource.OnError -= Pipeline_OnError;
                 await _pipelineSource.DisposeAsync();
                 _pipelineSource = null;
-            }
-
-            if (_pipelineFileOutput != null)
-            {
-                _pipelineFileOutput.OnError -= Pipeline_OnError;
-                await _pipelineFileOutput.DisposeAsync();
-                _pipelineFileOutput = null;
             }
         }
 
@@ -238,6 +259,7 @@ namespace Bridge_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            await DestroyFileOutputEngineAsync();
             CreateFileOutputEngine();
 
             await _pipelineFileOutput.StartAsync();
@@ -248,20 +270,53 @@ namespace Bridge_Demo
         /// </summary>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            if (_pipelineFileOutput != null)
-            {
-                await _pipelineFileOutput.StopAsync();
-            }
+            await DestroyFileOutputEngineAsync();
         }
 
         /// <summary>
         /// Window closing.
         /// </summary>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DestroyEnginesAsync().ConfigureAwait(false);
+            // The Closing event does not await an async-void handler, so teardown would race with the
+            // window tearing down. Cancel every close until teardown is done, then close for real.
+            if (_teardownDone)
+            {
+                return;
+            }
 
-            VisioForgeX.DestroySDK();
+            e.Cancel = true;
+
+            if (_closingHandled)
+            {
+                return;
+            }
+
+            _closingHandled = true;
+
+            try
+            {
+                await DestroyEnginesAsync();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                try
+                {
+                    VisioForgeX.DestroySDK();
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex);
+                }
+
+                _teardownDone = true;
+
+                _ = Dispatcher.BeginInvoke(new Action(() => Close()));
+            }
         }
     }
 }

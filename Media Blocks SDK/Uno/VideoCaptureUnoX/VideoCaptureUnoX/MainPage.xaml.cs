@@ -614,7 +614,7 @@ public sealed partial class MainPage : Page
             return;
         }
 
-        _audioOutput = new AudioRendererBlock(_speakers.First(device => device.DisplayName == (string)btSpeakers.Content)) { IsSync = false };
+        _audioOutput = new AudioRendererBlock(_speakers[_speakerSelectedIndex]) { IsSync = false };
 #endif
 
         // video source

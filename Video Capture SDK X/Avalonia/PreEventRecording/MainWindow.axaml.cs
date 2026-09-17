@@ -1,4 +1,4 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -29,6 +29,10 @@ namespace PreEventRecordingDemoVCXA
     {
         private bool _initialized;
         private bool _disposedValue;
+
+        private bool _closingHandled;
+
+        private bool _teardownDone;
 
         private VideoCaptureCoreX VideoCapture1;
 
@@ -346,13 +350,13 @@ namespace PreEventRecordingDemoVCXA
             Log($"[Error] {e.Message}");
         }
 
-        private void VideoCapture1_OnMotionDetection(object sender, MotionDetectionExEventArgs e)
+        private async void VideoCapture1_OnMotionDetection(object sender, MotionDetectionExEventArgs e)
         {
             if (VideoCapture1 == null) return;
 
             bool isMotion = e.LevelPercent >= 5;
 
-            Dispatcher.UIThread.InvokeAsync(() =>
+            _ = Dispatcher.UIThread.InvokeAsync(() =>
             {
                 lbMotion.Text = isMotion ? $"Motion: detected ({e.LevelPercent}%)" : $"Motion: idle ({e.LevelPercent}%)";
             });
@@ -362,29 +366,43 @@ namespace PreEventRecordingDemoVCXA
                 return;
             }
 
-            bool motionTriggerEnabled = false;
-            Dispatcher.UIThread.InvokeAsync(() =>
-            {
-                motionTriggerEnabled = cbMotionTrigger.IsChecked == true;
-            }).GetAwaiter().GetResult();
+            var motionTriggerEnabled = await Dispatcher.UIThread.InvokeAsync(() => cbMotionTrigger.IsChecked == true);
 
             if (!motionTriggerEnabled)
             {
                 return;
             }
 
-            var state = VideoCapture1.GetPreEventRecordingState(0);
-            if (state == PreEventRecordingState.Buffering)
+            // Window_Closing nulls the engine on the UI thread while this handler, which runs on an
+            // SDK callback thread, sits at the await above. Take it once.
+            var capture = VideoCapture1;
+            if (capture == null)
             {
-                var filename = Path.Combine(_outputFolder,
-                    $"motion_{DateTime.Now:yyyyMMdd_HHmmss}.mp4");
-                VideoCapture1.TriggerPreEventRecording(0, filename);
-                Log($"Motion triggered recording: {filename}");
+                return;
             }
-            else if (state == PreEventRecordingState.Recording ||
-                     state == PreEventRecordingState.PostEventRecording)
+
+            // The engine can be torn down between the snapshot above and these calls. This runs on
+            // an SDK callback thread, where an escaping exception would take the process down.
+            try
             {
-                VideoCapture1.ExtendPreEventRecording(0);
+                var state = capture.GetPreEventRecordingState(0);
+                if (state == PreEventRecordingState.Buffering)
+                {
+                    var filename = Path.Combine(_outputFolder,
+                        $"motion_{DateTime.Now:yyyyMMdd_HHmmss}.mp4");
+                    capture.TriggerPreEventRecording(0, filename);
+                    Log($"Motion triggered recording: {filename}");
+                }
+                else if (state == PreEventRecordingState.Recording ||
+                         state == PreEventRecordingState.PostEventRecording)
+                {
+                    capture.ExtendPreEventRecording(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log($"Error: {ex.Message}");
+                Debug.WriteLine(ex);
             }
         }
 
@@ -496,22 +514,59 @@ namespace PreEventRecordingDemoVCXA
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DeviceEnumerator.Shared.OnVideoSourceAdded -= DeviceEnumerator_OnVideoSourceAdded;
-
-            _statusTimer?.Stop();
-            _statusTimer?.Dispose();
-
-            if (VideoCapture1 != null)
+            // Avalonia's Closing event does not await an async-void handler, so teardown would race with the
+            // window tearing down. Cancel every close until teardown is done, then close for real.
+            if (_teardownDone)
             {
-                VideoCapture1.OnMotionDetection -= VideoCapture1_OnMotionDetection;
-                VideoCapture1.OnError -= VideoCapture1_OnError;
-                VideoCapture1.DisposeAsync().GetAwaiter().GetResult();
-                VideoCapture1 = null;
+                return;
             }
 
-            VisioForgeX.DestroySDK();
+            e.Cancel = true;
+
+            if (_closingHandled)
+            {
+                return;
+            }
+
+            _closingHandled = true;
+
+            try
+            {
+                DeviceEnumerator.Shared.OnVideoSourceAdded -= DeviceEnumerator_OnVideoSourceAdded;
+
+                _statusTimer?.Stop();
+                _statusTimer?.Dispose();
+
+                if (VideoCapture1 != null)
+                {
+                    VideoCapture1.OnMotionDetection -= VideoCapture1_OnMotionDetection;
+                    VideoCapture1.OnError -= VideoCapture1_OnError;
+                    await VideoCapture1.DisposeAsync();
+                    VideoCapture1 = null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                try
+                {
+                    VisioForgeX.DestroySDK();
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex);
+                }
+
+                _teardownDone = true;
+
+                _ = Dispatcher.UIThread.InvokeAsync(() => Close());
+            }
         }
 
         protected virtual void Dispose(bool disposing)

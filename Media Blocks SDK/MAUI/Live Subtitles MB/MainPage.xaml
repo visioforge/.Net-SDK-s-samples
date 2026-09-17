@@ -10,6 +10,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -60,6 +61,15 @@
                 <Button Grid.Column="2" x:Name="btBrowseModel" Text="Browse…" Clicked="btBrowseModel_Clicked"
                         IsVisible="False" />
             </Grid>
+
+            <!-- On: the file plays at 1x and captions follow the audio. Off: transcribe as fast as Whisper allows. -->
+            <HorizontalStackLayout Spacing="8" HorizontalOptions="Center">
+                <Switch x:Name="swRealTime" IsToggled="True" OnColor="#4CAF50" ThumbColor="White" />
+                <Label Text="Real-time playback"
+                       FontSize="13"
+                       TextColor="White"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
         </VerticalStackLayout>
 
         <!-- Control -->
@@ -69,8 +79,18 @@
                 Clicked="btTranscribe_Clicked"
                 BackgroundColor="#4CAF50" />
 
+        <!-- Caption for the current playback position, picked from the CaptionTimeline by the position poll -->
+        <Label Grid.Row="4"
+               x:Name="lbCaption"
+               Text=""
+               FontSize="18"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"
+               MinimumHeightRequest="48"
+               TextColor="#FFEB3B" />
+
         <!-- Recognized subtitle lines -->
-        <ScrollView Grid.Row="4" x:Name="svSubtitles" Background="#2d2d2d" Padding="12">
+        <ScrollView Grid.Row="5" x:Name="svSubtitles" Background="#2d2d2d" Padding="12">
             <Label x:Name="lbSubtitles"
                    Text=""
                    FontSize="15"

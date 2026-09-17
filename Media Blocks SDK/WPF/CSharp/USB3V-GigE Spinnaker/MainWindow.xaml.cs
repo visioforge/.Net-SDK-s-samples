@@ -87,6 +87,12 @@ namespace USB3V_GigE_Spinnaker
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cbCamera.Text))
+            {
+                MessageBox.Show("Select a camera first.");
+                return;
+            }
+
             try
             {
                 CreateEngine();

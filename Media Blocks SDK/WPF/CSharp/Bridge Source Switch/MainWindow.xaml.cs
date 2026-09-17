@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -32,6 +33,10 @@ namespace Bridge_Source_Switch
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool _closingHandled;
+
+        private bool _teardownDone;
+
         /// <summary>
         /// The video ID.
         /// </summary>
@@ -255,8 +260,6 @@ namespace Bridge_Source_Switch
         {
             if (_pipelineSource1 != null)
             {
-                await _pipelineSource1.StopAsync();
-
                 _pipelineSource1.OnError -= Pipeline_OnError;
                 await _pipelineSource1.DisposeAsync();
                 _pipelineSource1 = null;
@@ -264,8 +267,6 @@ namespace Bridge_Source_Switch
 
             if (_pipelineSource2 != null)
             {
-                await _pipelineSource2.StopAsync();
-
                 _pipelineSource2.OnError -= Pipeline_OnError;
                 await _pipelineSource2.DisposeAsync();
                 _pipelineSource2 = null;
@@ -273,8 +274,6 @@ namespace Bridge_Source_Switch
 
             if (_pipelineMain != null)
             {
-                await _pipelineMain.StopAsync();
-
                 _pipelineMain.OnError -= Pipeline_OnError;
                 await _pipelineMain.DisposeAsync();
                 _pipelineMain = null;
@@ -284,11 +283,48 @@ namespace Bridge_Source_Switch
         /// <summary>
         /// Window closing.
         /// </summary>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DestroyEnginesAsync().ConfigureAwait(false);
+            // The Closing event does not await an async-void handler, so teardown would race with the
+            // window tearing down. Cancel every close until teardown is done, then close for real.
+            if (_teardownDone)
+            {
+                return;
+            }
 
-            VisioForgeX.DestroySDK();
+            e.Cancel = true;
+
+            if (_closingHandled)
+            {
+                return;
+            }
+
+            _closingHandled = true;
+
+            try
+            {
+                await DestroyEnginesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                try
+                {
+                    VisioForgeX.DestroySDK();
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex);
+                }
+
+                _teardownDone = true;
+
+                _ = Dispatcher.BeginInvoke(new Action(() => Close()));
+            }
         }
 
         /// <summary>

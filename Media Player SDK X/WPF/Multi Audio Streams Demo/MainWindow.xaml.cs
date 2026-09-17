@@ -488,7 +488,7 @@ namespace Multi_Audio_Streams_Demo_X
                 var position = await p.Position_GetAsync();
                 var duration = await p.DurationAsync();
 
-                Dispatcher.BeginInvoke(new Action(() =>
+                _ = Dispatcher.BeginInvoke(new Action(() =>
                 {
                     if (_seekDragging)
                     {
@@ -681,7 +681,7 @@ namespace Multi_Audio_Streams_Demo_X
                 System.Diagnostics.Debug.WriteLine($"DestroySDK error: {ex.Message}");
             }
 
-            Dispatcher.BeginInvoke(new Action(() => Close()));
+            _ = Dispatcher.BeginInvoke(new Action(() => Close()));
         }
     }
 }

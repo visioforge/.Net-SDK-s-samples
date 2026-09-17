@@ -199,7 +199,7 @@ namespace Polygon_Zone_Demo
                 CleanupBlocks(); VideoView1.CallRefresh(); VisioForgeX.DestroySDK();
             }
             catch (Exception ex) { Debug.WriteLine(ex); }
-            try { Dispatcher.BeginInvoke(new Action(() => Close())); }
+            try { _ = Dispatcher.BeginInvoke(new Action(() => Close())); }
             catch (Exception ex) { Debug.WriteLine(ex); _isClosing = false; IsEnabled = true; }
         }
 

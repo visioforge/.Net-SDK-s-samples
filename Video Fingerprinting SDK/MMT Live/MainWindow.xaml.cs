@@ -162,6 +162,9 @@ namespace VisioForge_MMT_Live
 
                 _videoCapture?.Stop();
 
+                // Stops the network-source session; a no-op when the camera path was used.
+                await _videoPlayer.StopAsync();
+
                 await Task.Delay(500);
 
                 ProcessVideoDelegateMethod();
@@ -273,11 +276,26 @@ namespace VisioForge_MMT_Live
                 if (cbSource.SelectedIndex == 0)
                 {
                     var device = (await _videoCapture.Video_SourcesAsync()).Where(s => s.Name == cbVideoSource.Text).FirstOrDefault();
+
+                    if (device == null)
+                    {
+                        MessageBox.Show("Camera not found.");
+
+                        btStart.IsEnabled = true;
+                        lbStatus.Content = string.Empty;
+
+                        return;
+                    }
+
                     var format = device.VideoFormats.Where(f => f.Name == cbVideoFormat.Text).FirstOrDefault();
 
                     if (format == null)
                     {
                         MessageBox.Show("Camera format not found.");
+
+                        btStart.IsEnabled = true;
+                        lbStatus.Content = string.Empty;
+
                         return;
                     }
 
@@ -304,7 +322,15 @@ namespace VisioForge_MMT_Live
                     //             };
 
                     var sourceSettings = await UniversalSourceSettings.CreateAsync(url);
-                    await _videoPlayer.PlayAsync(sourceSettings);
+                    if (!await _videoPlayer.PlayAsync(sourceSettings))
+                    {
+                        lbStatus.Content = string.Empty;
+                        btStart.IsEnabled = true;
+
+                        MessageBox.Show("Unable to start the video preview.");
+
+                        return;
+                    }
                 }
 
                 lbStatus.Content = "Step 4: Getting data";

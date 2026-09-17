@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using VisioForge.Core.CV;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sources;
@@ -26,7 +27,7 @@ namespace RTSPViewCV
         /// Defines the entry point of the application.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             if (args.Length != 3)
             {
@@ -50,7 +51,7 @@ namespace RTSPViewCV
 
             try
             {
-                var rtspSettings = RTSPSourceSettings.CreateAsync(new Uri(url), username, password, audioEnabled).Result;
+                var rtspSettings = await RTSPSourceSettings.CreateAsync(new Uri(url), username, password, audioEnabled);
 
                 _source = new RTSPSourceBlock(rtspSettings);
                 //_source = new FileSourceBlock(@"c:\samples\!video.avi");

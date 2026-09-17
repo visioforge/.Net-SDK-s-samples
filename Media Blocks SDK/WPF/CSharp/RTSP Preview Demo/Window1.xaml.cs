@@ -181,7 +181,7 @@ namespace RTSP_Preview
                 if (lowLatencyMode)
                 {
                     rtsp.LowLatencyMode = true;
-                    mmLog.Text += "Low latency mode enabled (latency=250ms, no buffering)" + Environment.NewLine;
+                    mmLog.Text += "Low latency mode enabled (latency=150ms, no buffering)" + Environment.NewLine;
                 }
 
                 if (cbTransport.SelectedIndex == 1)

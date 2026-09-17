@@ -534,7 +534,7 @@ namespace Tempo_Pitch_Demo_X
                 var position = await p.Position_GetAsync();
                 var duration = await p.DurationAsync();
 
-                Dispatcher.BeginInvoke(new Action(() =>
+                _ = Dispatcher.BeginInvoke(new Action(() =>
                 {
                     if (_seekDragging)
                     {
@@ -581,7 +581,7 @@ namespace Tempo_Pitch_Demo_X
                 // still alive — otherwise just drop the message so we don't crash on shutdown.
                 if (!Dispatcher.HasShutdownStarted && !Dispatcher.HasShutdownFinished)
                 {
-                    Dispatcher.BeginInvoke(new Action(() => lblStatus.Text = "Seek timer: " + ex.Message));
+                    _ = Dispatcher.BeginInvoke(new Action(() => lblStatus.Text = "Seek timer: " + ex.Message));
                 }
             }
         }
@@ -746,7 +746,7 @@ namespace Tempo_Pitch_Demo_X
                 System.Diagnostics.Debug.WriteLine($"DestroySDK error: {ex.Message}");
             }
 
-            Dispatcher.BeginInvoke(new Action(() => Close()));
+            _ = Dispatcher.BeginInvoke(new Action(() => Close()));
         }
     }
 }

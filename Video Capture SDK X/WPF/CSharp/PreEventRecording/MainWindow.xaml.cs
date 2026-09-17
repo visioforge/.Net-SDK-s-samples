@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -23,6 +23,9 @@ namespace PreEventRecordingDemoVCX
     {
         private bool _initialized;
         private bool _disposedValue;
+        private bool _closingHandled;
+
+        private bool _teardownDone;
 
         private VideoCaptureCoreX VideoCapture1;
 
@@ -478,22 +481,59 @@ namespace PreEventRecordingDemoVCX
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DeviceEnumerator.Shared.OnVideoSourceAdded -= DeviceEnumerator_OnVideoSourceAdded;
-
-            _statusTimer?.Stop();
-            _statusTimer?.Dispose();
-
-            if (VideoCapture1 != null)
+            // The Closing event does not await an async-void handler, so teardown would race with the
+            // window tearing down. Cancel every close until teardown is done, then close for real.
+            if (_teardownDone)
             {
-                VideoCapture1.OnMotionDetection -= VideoCapture1_OnMotionDetection;
-                VideoCapture1.OnError -= VideoCapture1_OnError;
-                VideoCapture1.DisposeAsync().GetAwaiter().GetResult();
-                VideoCapture1 = null;
+                return;
             }
 
-            VisioForgeX.DestroySDK();
+            e.Cancel = true;
+
+            if (_closingHandled)
+            {
+                return;
+            }
+
+            _closingHandled = true;
+
+            try
+            {
+                DeviceEnumerator.Shared.OnVideoSourceAdded -= DeviceEnumerator_OnVideoSourceAdded;
+
+                _statusTimer?.Stop();
+                _statusTimer?.Dispose();
+
+                if (VideoCapture1 != null)
+                {
+                    VideoCapture1.OnMotionDetection -= VideoCapture1_OnMotionDetection;
+                    VideoCapture1.OnError -= VideoCapture1_OnError;
+                    await VideoCapture1.DisposeAsync();
+                    VideoCapture1 = null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                try
+                {
+                    VisioForgeX.DestroySDK();
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex);
+                }
+
+                _teardownDone = true;
+
+                _ = Dispatcher.BeginInvoke(new Action(() => Close()));
+            }
         }
 
         protected virtual void Dispose(bool disposing)

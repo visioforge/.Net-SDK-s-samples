@@ -59,6 +59,9 @@
                     <ComboBoxItem Content="CUDA (NVIDIA)" Tag="cuda" />
                 </ComboBox>
 
+                <CheckBox x:Name="cbRealTimePlayback" Content="Real-time playback" IsChecked="True" Margin="0,0,0,4"
+                          ToolTip="Checked: play at 1x, captions appear with the words. Unchecked: transcribe as fast as Whisper allows." />
+
                 <StackPanel Orientation="Horizontal" Margin="0,4,0,8">
                     <Button x:Name="btStart" Content="Start" Width="90" Click="btStart_Click" />
                     <Button x:Name="btStop" Content="Stop" Width="90" Margin="8,0,0,0" IsEnabled="False" Click="btStop_Click" />

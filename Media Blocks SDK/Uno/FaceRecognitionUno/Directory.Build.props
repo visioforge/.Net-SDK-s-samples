@@ -1,4 +1,12 @@
 <Project>
+  <!-- MSBuild stops at the nearest Directory.Build.props, so the one above is imported
+       explicitly. Guarded because a shipped copy can sit in a tree with none above it,
+       and an Import that resolves to nothing is MSB4020. -->
+  <PropertyGroup>
+    <_ParentDirectoryBuildProps>$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))</_ParentDirectoryBuildProps>
+  </PropertyGroup>
+  <Import Project="$(_ParentDirectoryBuildProps)" Condition="'$(_ParentDirectoryBuildProps)' != ''" />
+
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>

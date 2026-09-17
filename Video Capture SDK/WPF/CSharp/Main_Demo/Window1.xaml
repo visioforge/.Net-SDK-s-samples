@@ -30,7 +30,7 @@
                         <ComboBoxItem Content="DirectCapture MKV (IP cameras / H264 devices)" />
                         <ComboBoxItem Content="DirectCapture MP4 GDCL Mux (IP cameras / H264 devices)" />
                         <ComboBoxItem Content="DirectCapture MP4 Monogram Mux (IP cameras / H264 devices)" />
-                        <ComboBoxItem Content="DirectCapture Custom (IP Cameras / H264 devices)" />
+                        <ComboBoxItem Content="DirectCapture Custom (H264 devices only)" />
                         <ComboBoxItem Content="WebM" />
                         <ComboBoxItem Content="FFMPEG" />
                         <ComboBoxItem Content="FFMPEG (EXE)" />

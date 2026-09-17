@@ -162,6 +162,17 @@ namespace SimpleCaptureMB
                 RequestPhotoPermission();
 #endif
 
+                // Unloaded destroys the SDK, so a re-attach starts from an uninitialized one.
+                // InitSDK has an idempotent fast path, so calling it on every load is free.
+                VisioForgeX.InitSDK();
+
+                // Every list below is re-enumerated and every label goes back to entry 0, so the
+                // indexes go back with them: Loaded fires again when the page is re-attached, and a
+                // stale index would open a device the button does not name.
+                _cameraSelectedIndex = 0;
+                _micSelectedIndex = 0;
+                _speakerSelectedIndex = 0;
+
                 // cameras
                 _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
                 if (_cameras.Length > 0)
@@ -183,6 +194,9 @@ namespace SimpleCaptureMB
                     btSpeakers.Text = _speakers[0].DisplayName;
                 }
 
+                // Loaded fires again when the page is re-attached; without the -= the teardown,
+                // and DestroySDK with it, would run once per attach.
+                Window.Destroying -= Window_Destroying;
                 Window.Destroying += Window_Destroying;
             }
             catch (Exception ex)
@@ -463,8 +477,11 @@ namespace SimpleCaptureMB
         private async Task ConfigurePreviewAsync(bool connect)
         {
 #if !MOBILE
-            // audio output
-            _audioOutput = new AudioRendererBlock(_speakers.First(device => device.DisplayName == btSpeakers.Text)) { IsSync = false };
+            // audio output - absent when the machine enumerates none, so every use below is optional
+            if (_speakers != null && _speakerSelectedIndex < _speakers.Length)
+            {
+                _audioOutput = new AudioRendererBlock(_speakers[_speakerSelectedIndex]) { IsSync = false };
+            }
 #endif
 
             // video source
@@ -521,7 +538,10 @@ namespace SimpleCaptureMB
                 _pipeline.Connect(_videoSource.Output, _videoRenderer.Input);
 
 #if !MOBILE
-                _pipeline.Connect(_audioSource.Output, _audioOutput.Input);
+                if (_audioOutput != null)
+                {
+                    _pipeline.Connect(_audioSource.Output, _audioOutput.Input);
+                }
 #endif
             }
         }
@@ -585,7 +605,14 @@ namespace SimpleCaptureMB
         {
             // add tee and connect
             _videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
-            _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio);
+            // One pad per consumer: TeeBlock builds a queue for every declared output, linked or
+            // not, and the renderer is absent on mobile and on a machine with no audio output.
+#if MOBILE
+            var audioTeeOutputs = 1;
+#else
+            var audioTeeOutputs = _audioOutput != null ? 2 : 1;
+#endif
+            _audioTee = new TeeBlock(audioTeeOutputs, MediaBlockPadMediaType.Audio);
 
             _pipeline.Connect(_videoSource.Output, _videoTee.Input);
             _pipeline.Connect(_audioSource.Output, _audioTee.Input);
@@ -594,17 +621,19 @@ namespace SimpleCaptureMB
             _pipeline.Connect(_videoTee.Outputs[0], _videoRenderer.Input);
 
 #if !MOBILE
-            _pipeline.Connect(_audioTee.Outputs[0], _audioOutput.Input);
+            if (_audioOutput != null)
+            {
+                _pipeline.Connect(_audioTee.Outputs[0], _audioOutput.Input);
+            }
 #endif
 
             // add video encoder
             _videoEncoder = new H264EncoderBlock(H264EncoderBlock.GetDefaultSettings());
-            _pipeline.Connect(_videoSource.Output, _videoEncoder.Input);
             _pipeline.Connect(_videoTee.Outputs[1], _videoEncoder.Input);
 
             // add audio encoder
             _audioEncoder = new AACEncoderBlock(AACEncoderBlock.GetDefaultSettings());
-            _pipeline.Connect(_audioTee.Outputs[1], _audioEncoder.Input);
+            _pipeline.Connect(_audioTee.Outputs[audioTeeOutputs - 1], _audioEncoder.Input);
 
             // add sink
             var filename = GenerateFilename();

@@ -450,6 +450,8 @@ namespace Capture_Live_Subtitles_X_WPF
 
                 _core.Audio_Source = mic.CreateSourceSettingsVC(micFormat);
                 _core.Audio_Play = false;
+
+                // No real-time toggle in a live-capture demo: the microphone paces the pipeline, so a caption can only lag the speech, never lead it.
                 _core.Audio_OutputBlock = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false };
 
                 // The block taps audio and passes it through unchanged. Silero VAD (when enabled) trims silence so Whisper only runs on speech.

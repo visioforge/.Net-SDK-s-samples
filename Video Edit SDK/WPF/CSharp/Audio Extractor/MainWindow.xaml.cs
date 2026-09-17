@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -23,6 +23,9 @@ namespace Audio_Extractor
         /// Indicates whether the current operation is a fast edit extract (not a full engine start).
         /// </summary>
         private bool _extractMode;
+        private bool _closingHandled;
+
+        private bool _teardownDone;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
@@ -87,25 +90,61 @@ namespace Audio_Extractor
         /// Handles the Closing event of the Window.
         /// Disposes the video editing engine to release resources.
         /// </summary>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_core != null)
+            // The Closing event does not await an async-void handler, so teardown would race with the
+            // window tearing down. Cancel every close until teardown is done, then close for real.
+            if (_teardownDone)
             {
-                _core.OnProgress -= _core_OnProgress;
-                _core.OnError -= _core_OnError;
-                _core.OnStop -= _core_OnStop;
+                return;
+            }
 
-                if (_extractMode)
-                {
-                    _core.FastEdit_StopAsync().GetAwaiter().GetResult();
-                }
-                else
-                {
-                    _core.Stop();
-                }
+            e.Cancel = true;
 
-                _core.Dispose();
-                _core = null;
+            if (_closingHandled)
+            {
+                return;
+            }
+
+            _closingHandled = true;
+
+            try
+            {
+                if (_core != null)
+                {
+                    _core.OnProgress -= _core_OnProgress;
+                    _core.OnError -= _core_OnError;
+                    _core.OnStop -= _core_OnStop;
+
+                    // A failed stop must not skip the dispose that follows it.
+                    try
+                    {
+                        if (_extractMode)
+                        {
+                            await _core.FastEdit_StopAsync();
+                        }
+                        else
+                        {
+                            _core.Stop();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.WriteLine(ex);
+                    }
+
+                    _core.Dispose();
+                    _core = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                _teardownDone = true;
+                _ = Dispatcher.BeginInvoke(new Action(() => Close()));
             }
         }
 

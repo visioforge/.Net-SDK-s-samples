@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using Microsoft.Maui.Controls;
 using VisioForge.Core.MediaBlocks.Sinks;
@@ -632,14 +632,10 @@ namespace Live_Video_Compositor_MB_MAUI
                 var rect = GetRectFromUI();
                 var videoInfo = new VideoFrameInfoX(width, height, frameRate);
 
-                // Own src through try/finally so a throw from Input_AddAsync (or anywhere
-                // before it) doesn't leak the input wrapper and its underlying block.
-                //
-                // LVC Input_AddAsync contract: it only takes ownership of the wrapper on a
-                // true return — on false, the caller keeps ownership and must Dispose. That
-                // matches the only code path in LiveVideoCompositor that returns false (the
-                // "input already exists" early-out, which never stored the wrapper). So
-                // Dispose()'ing src in the failure path is safe, not a double-dispose.
+                // Own src through try/finally so a false return from Input_AddAsync, or a
+                // throw before it, doesn't leak the input wrapper and its underlying block.
+                // LVC takes ownership only on a true return, and LVCInput.Dispose is
+                // idempotent, so disposing one the rollback already disposed is a no-op.
                 LVCVideoInput? src = null;
                 try
                 {

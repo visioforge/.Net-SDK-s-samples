@@ -491,15 +491,10 @@ public sealed partial class MainPage : Page
 #if MOBILE
         _core.Audio_Play = false;
 #else
-        var speakerName = btSpeakers.Content?.ToString();
-        if (!string.IsNullOrEmpty(speakerName))
+        if (_speakers != null && _speakers.Length > 0)
         {
-            var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).FirstOrDefault(device => device.DisplayName == speakerName);
-            if (audioOutputDevice != null)
-            {
-                _core.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
-                _core.Audio_Play = true;
-            }
+            _core.Audio_OutputDevice = new AudioRendererSettings(_speakers[_speakerSelectedIndex]);
+            _core.Audio_Play = true;
         }
 #endif
 

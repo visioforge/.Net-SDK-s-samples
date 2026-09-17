@@ -93,6 +93,12 @@ namespace USB3V_GigE_Spinnaker
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cbCamera.Text))
+            {
+                MessageBox.Show("Select a camera first.");
+                return;
+            }
+
             CreateEngine();
 
             var sources = await DeviceEnumerator.Shared.SpinnakerSourcesAsync();

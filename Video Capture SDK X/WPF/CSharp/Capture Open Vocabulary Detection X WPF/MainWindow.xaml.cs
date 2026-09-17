@@ -316,7 +316,7 @@ namespace Capture_Open_Vocabulary_Detection_X_WPF
                     {
                         response.EnsureSuccessStatusCode();
                         var total = response.Content.Headers.ContentLength ?? -1L;
-                        Dispatcher.BeginInvoke(new Action(() => pbDownload.IsIndeterminate = total <= 0));
+                        _ = Dispatcher.BeginInvoke(new Action(() => pbDownload.IsIndeterminate = total <= 0));
 
                         using (var src = await response.Content.ReadAsStreamAsync())
                         using (var fileStream = File.Create(tmpPath))
@@ -336,7 +336,7 @@ namespace Capture_Open_Vocabulary_Detection_X_WPF
                                     {
                                         lastPercent = percent;
                                         var done = readTotal;
-                                        Dispatcher.BeginInvoke(new Action(() =>
+                                        _ = Dispatcher.BeginInvoke(new Action(() =>
                                         {
                                             pbDownload.Value = percent;
                                             lbDownloadStatus.Text = $"Downloading {fileName}... {percent}% ({done / 1024 / 1024} / {total / 1024 / 1024} MB)";

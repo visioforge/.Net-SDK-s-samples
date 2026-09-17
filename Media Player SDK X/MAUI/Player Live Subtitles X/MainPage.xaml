@@ -37,6 +37,12 @@
                     IsVisible="False" />
             </Grid>
 
+            <!-- ON: the file plays at 1x and captions appear with the words. OFF: transcribe as fast as Whisper allows. -->
+            <HorizontalStackLayout Spacing="8">
+                <Switch x:Name="swRealTime" IsToggled="True" />
+                <Label Text="Real-time playback" TextColor="White" FontSize="14" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
             <Button x:Name="btFile" Text="OPEN FILE" Clicked="btFile_Clicked" />
 
             <Button x:Name="btStartStop" Text="START" Clicked="btStartStop_Clicked"

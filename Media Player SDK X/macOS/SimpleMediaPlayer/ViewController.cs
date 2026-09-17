@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using ObjCRuntime;
 using UniformTypeIdentifiers;
 using VisioForge.Core;
@@ -245,17 +246,52 @@ public class CustomWindowDelegate : NSWindowDelegate
         _viewController = viewController;
     }
 
+    private bool _closing;
+
         /// <summary>
         /// Window should close.
         /// </summary>
     public override bool WindowShouldClose(NSObject sender)
     {
-        // Stop the player before destroying the SDK
-        _viewController.StopAsync().GetAwaiter().GetResult();
+        // Teardown is async, so cancel this close, finish it, then close for real.
+        if (!_closing)
+        {
+            _closing = true;
+            _ = StopAndCloseAsync((NSWindow)sender);
+        }
 
-        VisioForgeX.DestroySDK();
+        return false;
+    }
 
-        // Return true to allow the window to close, false to cancel.
-        return true;
+    private async Task StopAndCloseAsync(NSWindow window)
+    {
+        try
+        {
+            await _viewController.StopAsync();
+        }
+        catch (Exception ex)
+        {
+            Trace.WriteLine(ex);
+        }
+        finally
+        {
+            try
+            {
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+
+            // Drop the delegate so Close() does not come back through WindowShouldClose, and
+            // post it, so a teardown that completed synchronously does not close the window from
+            // inside windowShouldClose:. In finally, so a failed teardown still closes.
+            window.BeginInvokeOnMainThread(() =>
+            {
+                window.Delegate = null;
+                window.Close();
+            });
+        }
     }
 }

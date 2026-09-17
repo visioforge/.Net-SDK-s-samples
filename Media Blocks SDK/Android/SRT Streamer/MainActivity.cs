@@ -111,33 +111,97 @@ namespace SRT_Streamer
             var controlBar = FindViewById<FrameLayout>(Resource.Id.controlBar);
             controlBar.SetOnApplyWindowInsetsListener(new NavBarInsetListener(controlBar));
 
+            // Same problem at the top edge: the theme's fullscreen flag is ignored at SDK 35+,
+            // so the status bar is drawn over the badge unless it is moved down.
+            tvStatus.SetOnApplyWindowInsetsListener(new TopInsetListener(tvStatus));
+
             CheckPermissionsAndStartPreview();
         }
 
         /// <summary>
-        /// Pads the control bar's bottom padding with the system navigation-bar inset so the
-        /// icons don't collide with the gesture pill. Works on both gesture and 3-button nav:
-        /// SystemWindowInsetBottom reports the correct reserved region in either mode.
+        /// Pads the control bar with the system-bar and display-cutout insets so the buttons
+        /// don't collide with the navigation bar. Works in both navigation modes and in both
+        /// orientations: on a phone in landscape, or a large screen where Android 16 ignores the
+        /// orientation lock, the bar moves to a side and the inset is horizontal rather than
+        /// vertical - and on that side there may be a notch instead.
         /// </summary>
         private sealed class NavBarInsetListener : Java.Lang.Object, View.IOnApplyWindowInsetsListener
         {
             private readonly View _target;
+            private readonly int _basePaddingLeft;
+            private readonly int _basePaddingRight;
             private readonly int _basePaddingBottom;
 
             public NavBarInsetListener(View target)
             {
                 _target = target;
+                _basePaddingLeft = target.PaddingLeft;
+                _basePaddingRight = target.PaddingRight;
                 _basePaddingBottom = target.PaddingBottom;
             }
 
             public WindowInsets OnApplyWindowInsets(View v, WindowInsets insets)
             {
+                int left, right, bottom;
+
+                // OperatingSystem.IsAndroidVersionAtLeast is the guard the platform-compatibility
+                // analyzer understands, so neither branch needs a warning suppression.
+                if (OperatingSystem.IsAndroidVersionAtLeast(30))
+                {
+                    var bars = insets.GetInsets(
+                        WindowInsets.Type.SystemBars() | WindowInsets.Type.DisplayCutout());
+                    left = bars.Left;
+                    right = bars.Right;
+                    bottom = bars.Bottom;
+                }
+                else
+                {
+                    left = insets.SystemWindowInsetLeft;
+                    right = insets.SystemWindowInsetRight;
+                    bottom = insets.SystemWindowInsetBottom;
+                }
+
                 _target.SetPadding(
-                    _target.PaddingLeft,
+                    _basePaddingLeft + left,
                     _target.PaddingTop,
-                    _target.PaddingRight,
-                    _basePaddingBottom + insets.SystemWindowInsetBottom);
-                return insets;
+                    _basePaddingRight + right,
+                    _basePaddingBottom + bottom);
+                return v.OnApplyWindowInsets(insets);
+            }
+        }
+
+        /// <summary>
+        /// Moves the status badge below the status bar by adding the top inset to its margin.
+        /// Margin rather than padding: the badge has a background, and padding would stretch it.
+        /// </summary>
+        private sealed class TopInsetListener : Java.Lang.Object, View.IOnApplyWindowInsetsListener
+        {
+            private readonly View _target;
+            private readonly int _baseMarginTop;
+
+            public TopInsetListener(View target)
+            {
+                _target = target;
+                _baseMarginTop = ((ViewGroup.MarginLayoutParams)target.LayoutParameters).TopMargin;
+            }
+
+            public WindowInsets OnApplyWindowInsets(View v, WindowInsets insets)
+            {
+                var top = OperatingSystem.IsAndroidVersionAtLeast(30)
+                    ? insets.GetInsets(
+                        WindowInsets.Type.SystemBars() | WindowInsets.Type.DisplayCutout()).Top
+                    : insets.SystemWindowInsetTop;
+
+                // SetPadding no-ops on an unchanged value, SetLayoutParams always requests a
+                // layout pass - so only assign when the margin actually moved.
+                var lp = (ViewGroup.MarginLayoutParams)_target.LayoutParameters;
+                if (lp.TopMargin != _baseMarginTop + top)
+                {
+                    lp.TopMargin = _baseMarginTop + top;
+                    _target.LayoutParameters = lp;
+                }
+
+                return v.OnApplyWindowInsets(insets);
             }
         }
 

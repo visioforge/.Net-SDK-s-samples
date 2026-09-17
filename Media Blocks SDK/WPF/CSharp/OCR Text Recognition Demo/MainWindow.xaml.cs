@@ -197,7 +197,7 @@ namespace OCR_Text_Recognition_Demo
 
             try
             {
-                Dispatcher.BeginInvoke(new Action(() => Close()));
+                _ = Dispatcher.BeginInvoke(new Action(() => Close()));
             }
             catch (Exception ex)
             {

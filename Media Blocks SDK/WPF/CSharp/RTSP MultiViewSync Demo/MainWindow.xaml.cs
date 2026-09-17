@@ -94,11 +94,11 @@ namespace RTSP_MultiViewSync_Demo
         /// <summary>
         /// Handles the bt stop click event.
         /// </summary>
-        private void btStop_Click(object sender, RoutedEventArgs e)
+        private async void btStop_Click(object sender, RoutedEventArgs e)
         {
-            _engines[0].StopAsync();
-            _engines[1].StopAsync();
-            _engines[2].StopAsync();
+            await _engines[0].StopAsync();
+            await _engines[1].StopAsync();
+            await _engines[2].StopAsync();
         }
 
         /// <summary>

@@ -209,7 +209,7 @@ namespace SimpleVideoCaptureAMB
 
                 Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
-                tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTimeAsync(); };
+                tmRecording.Elapsed += async (senderx, args) => { await UpdateRecordingTimeAsync(); };
 
                 edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
             }

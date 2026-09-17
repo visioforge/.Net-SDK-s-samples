@@ -91,8 +91,8 @@ public partial class ViewController : NSViewController
     {
         if (_pipeline != null)
         {
-            _pipeline.StopAsync().GetAwaiter().GetResult();
-            _pipeline.DisposeAsync().GetAwaiter().GetResult();
+            await _pipeline.StopAsync();
+            await _pipeline.DisposeAsync();
         }
 
         _pipeline = new MediaBlocksPipeline();
@@ -136,7 +136,7 @@ public partial class ViewController : NSViewController
             if (_pipeline != null)
             {
                 _pipeline.OnError -= _pipeline_OnError;
-                _pipeline.StopAsync().GetAwaiter().GetResult();
+                await _pipeline.StopAsync();
             }
         }
         catch (Exception ex)

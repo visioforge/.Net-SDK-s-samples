@@ -155,7 +155,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
                     rtspSettings.EnableRAWVideoAudioEvents = cbRAWEvents.Checked;
 
                     // Enable low latency mode - optimized for real-time surveillance
-                    // This sets latency=250ms, buffer-mode=0, optimized queues for low-latency playback
+                    // This sets latency=150ms, buffer-mode=0, optimized queues for low-latency playback
                     rtspSettings.LowLatencyMode = true;
 
                     if (cbGPUDecoder.SelectedIndex > 0)

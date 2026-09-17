@@ -4,14 +4,17 @@ using System.Text;
 using System.Threading;
 
 using VisioForge.Core;
+using VisioForge.Core.AI.Whisper.Subtitles;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AI;
+using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AI;
 using VisioForge.Core.Types.X.Sources;
+using VisioForge.Core.Types.X.Special;
 
 namespace LiveSubtitlesMB
 {
@@ -32,13 +35,21 @@ namespace LiveSubtitlesMB
         private UniversalSourceBlock _source;
         private SpeechToTextBlock _stt;
 
-        // Non-synced null sink: transcription runs as fast as Whisper allows, not at 1x playback speed.
+        // Terminates the transcriber leg. On the clock in real-time mode, so the pipeline's position is the
+        // playback position; free-running in fast mode, so Whisper sets the pace.
         private NullRendererBlock _audioSink;
+
+        // Real-time mode only: splits the audio into an audible renderer and the transcriber leg.
+        private TeeBlock _audioTee;
+        private AudioRendererBlock _audioRenderer;
 
         private string _whisperModelPath;
         private string _sileroModelPath;
 
         private readonly StringBuilder _subtitles = new();
+
+        // Holds recognized segments until playback reaches them, so the caption matches what is being heard.
+        private readonly CaptionTimeline _captions = new();
 
         private bool _isRunning = false;
         private bool _isCleanedUp = false;
@@ -391,9 +402,41 @@ namespace LiveSubtitlesMB
                 _stt = new SpeechToTextBlock(settings);
                 _stt.OnSpeechRecognized += Stt_OnSpeechRecognized;
 
-                _audioSink = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = false };
+                // In real-time mode this sink is on the clock too: a pipeline position query answers with the
+                // furthest-advanced sink, so an unsynced one here would report the transcriber's front - seconds
+                // ahead of the audio - and every caption would appear early. Fast mode wants that race.
+                _audioSink = new NullRendererBlock(MediaBlockPadMediaType.Audio) { IsSync = swRealTime.IsToggled };
 
-                if (!_pipeline.Connect(audioPad, _stt.Input) || !_pipeline.Connect(_stt.Output, _audioSink.Input))
+                bool connected;
+                if (swRealTime.IsToggled)
+                {
+                    // A 10-second buffer on the transcriber's leg absorbs a Whisper inference burst so it does not stall
+                    // the renderer. The queue must NOT be leaky: segment times come from a sample counter, not from buffer
+                    // timestamps, so a dropped buffer would shift every later caption and SRT line earlier.
+                    // ponytail: a machine that cannot keep up with real time stutters the playback instead - visible,
+                    // rather than a transcript that silently drifts out of step.
+                    var queueSettings = new TeeQueueSettings
+                    {
+                        MaxSizeBuffers = 0,
+                        MaxSizeBytes = 0,
+                        MaxSizeTime = (ulong)TimeSpan.FromSeconds(10).TotalMilliseconds * 1000000,
+                        Leaky = TeeQueueLeaky.No,
+                    };
+
+                    _audioTee = new TeeBlock(2, MediaBlockPadMediaType.Audio, queueSettings);
+                    _audioRenderer = new AudioRendererBlock();
+
+                    connected = _pipeline.Connect(audioPad, _audioTee.Input)
+                        && _pipeline.Connect(_audioTee.Outputs[0], _audioRenderer.Input)
+                        && _pipeline.Connect(_audioTee.Outputs[1], _stt.Input)
+                        && _pipeline.Connect(_stt.Output, _audioSink.Input);
+                }
+                else
+                {
+                    connected = _pipeline.Connect(audioPad, _stt.Input) && _pipeline.Connect(_stt.Output, _audioSink.Input);
+                }
+
+                if (!connected)
                 {
                     await TeardownPipelineAsync();
                     SetStatus("Pick a media file to transcribe on-device with Whisper.");
@@ -402,7 +445,12 @@ namespace LiveSubtitlesMB
                 }
 
                 _subtitles.Clear();
-                Dispatcher?.Dispatch(() => lbSubtitles.Text = string.Empty);
+                _captions.Clear();
+                Dispatcher?.Dispatch(() =>
+                {
+                    lbSubtitles.Text = string.Empty;
+                    lbCaption.Text = string.Empty;
+                });
 
                 if (_isCleanedUp)
                 {
@@ -423,6 +471,7 @@ namespace LiveSubtitlesMB
                 SetStatus($"Transcribing {Path.GetFileName(pick.FullPath)}...");
                 btTranscribe.Text = "STOP";
                 btTranscribe.BackgroundColor = Colors.Red;
+                swRealTime.IsEnabled = false;
                 StartProgressTimer();
             }
             catch (Exception ex)
@@ -468,6 +517,7 @@ namespace LiveSubtitlesMB
                     {
                         btTranscribe.Text = "PICK FILE & TRANSCRIBE";
                         btTranscribe.BackgroundColor = Color.FromRgb(76, 175, 80);
+                        swRealTime.IsEnabled = true;
                         SetStatus("Done. Pick another file to transcribe.");
                     });
                 }
@@ -508,15 +558,25 @@ namespace LiveSubtitlesMB
 
             _audioSink?.Dispose();
             _audioSink = null;
+
+            _audioRenderer?.Dispose();
+            _audioRenderer = null;
+
+            _audioTee?.Dispose();
+            _audioTee = null;
         }
 
         private void Stt_OnSpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            // Raised off the UI thread — accumulate this event's lines, then marshal a single UI update.
+            // Raised on the streaming thread — accumulate this event's lines, then marshal a single UI update.
             if (e?.Segments == null)
             {
                 return;
             }
+
+            // The caption itself is not shown here: the position poll takes it from the timeline when
+            // playback reaches it, so it stays in step with the audio in both modes.
+            _captions.Add(e);
 
             var newLines = new List<string>();
             foreach (var seg in e.Segments)
@@ -635,6 +695,7 @@ namespace LiveSubtitlesMB
             {
                 pbProgress.IsVisible = false;
                 lbTime.IsVisible = false;
+                lbCaption.Text = string.Empty;
             });
         }
 
@@ -655,6 +716,15 @@ namespace LiveSubtitlesMB
                 }
 
                 var pos = await pipeline.Position_GetAsync();
+
+                // StopProgressTimer stops the timer, nulls it and clears the label; a tick already past its
+                // await must not repaint it.
+                if (_progressTimer?.IsRunning != true)
+                {
+                    return;
+                }
+
+                lbCaption.Text = _captions.TextAt(pos);
 
                 if (_mediaDuration > TimeSpan.Zero)
                 {

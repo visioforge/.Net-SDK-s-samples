@@ -209,6 +209,13 @@ namespace SimpleCapture
             // Add event handlers
             _core.OnError += Core_OnError;
 
+            // Every list below is re-enumerated and every label goes back to entry 0, so the
+            // indexes go back with them: Loaded fires again when the page is re-attached, and a
+            // stale index would open a device the button does not name.
+            _cameraSelectedIndex = 0;
+            _micSelectedIndex = 0;
+            _speakerSelectedIndex = 0;
+
             // Enumerate cameras
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
             if (_cameras.Length > 0)
@@ -222,7 +229,6 @@ namespace SimpleCapture
             {      
                 btMic.Text = _mics[0].DisplayName;
             }
-            Window.Destroying += Window_Destroying;
 
             // Enumerate audio outputs
             _speakers = await DeviceEnumerator.Shared.AudioOutputsAsync(null);
@@ -232,6 +238,9 @@ namespace SimpleCapture
             }
 
             // Add Destroying event handler
+            // Loaded fires again when the page is re-attached; without the -= the teardown, and
+            // DestroySDK with it, would run once per attach.
+            Window.Destroying -= Window_Destroying;
             Window.Destroying += Window_Destroying;
 
 #if __ANDROID__ || (__IOS__ && !__MACCATALYST__)
@@ -352,6 +361,9 @@ namespace SimpleCapture
         {
             System.Diagnostics.Debug.WriteLine("Stop capture");
             await _core.StopCaptureAsync(0);
+#if __ANDROID__
+            _core.Video_Source_AutoUpdateOrientation = true;
+#endif
             btStartCapture.BackgroundColor = _defaultButtonColor;
             btStartCapture.Text = "CAPTURE";
 
@@ -454,9 +466,17 @@ namespace SimpleCapture
             _core.Audio_Play = false;
 #else
             
-            var audioOutputDevice = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == btSpeakers.Text).First();
-            _core.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
-            _core.Audio_Play = true;
+            if (_speakers != null && _speakers.Length > 0)
+            {
+                _core.Audio_OutputDevice = new AudioRendererSettings(_speakers[_speakerSelectedIndex]);
+                _core.Audio_Play = true;
+            }
+            else
+            {
+                // Audio_Play defaults to true, and leaving it there with no output device builds an
+                // audio chain the renderer never consumes.
+                _core.Audio_Play = false;
+            }
 #endif
 
             // video source
@@ -477,6 +497,12 @@ namespace SimpleCapture
                         };
 
                         videoSourceSettings.Format.FrameRate = frameRate;
+
+#if __ANDROID__
+                        // This page rotates with the device, so let the camera follow it. Switched
+                        // off around a recording below - a quarter turn changes the frame size.
+                        videoSourceSettings.AutoUpdateOrientation = true;
+#endif
                     }
                 }
             }
@@ -626,7 +652,18 @@ namespace SimpleCapture
             if (btStartCapture.BackgroundColor != Colors.Red)
             {               
                 System.Diagnostics.Debug.WriteLine("Start capture");
-                await _core.StartCaptureAsync(0, GenerateFilename());
+#if __ANDROID__
+                // A turn while recording would swap the frame size under the encoder.
+                _core.Video_Source_AutoUpdateOrientation = false;
+#endif
+                if (!await _core.StartCaptureAsync(0, GenerateFilename()))
+                {
+#if __ANDROID__
+                    _core.Video_Source_AutoUpdateOrientation = true;
+#endif
+                    return;
+                }
+
                 btStartCapture.BackgroundColor = Colors.Red;
                 btStartCapture.Text = "STOP";
             }

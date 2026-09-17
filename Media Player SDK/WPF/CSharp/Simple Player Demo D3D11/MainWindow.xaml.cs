@@ -268,7 +268,7 @@ namespace Simple_Player_Demo_D3D11
             // BeginInvoke is OUTSIDE the try so a teardown exception still
             // re-issues the close — otherwise e.Cancel = true + _isClosing =
             // true would orphan the window (the close button stops working).
-            Dispatcher.BeginInvoke((Action)Close, DispatcherPriority.Background);
+            _ = Dispatcher.BeginInvoke((Action)Close, DispatcherPriority.Background);
         }
 
         private void Log(string msg)

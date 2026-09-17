@@ -367,7 +367,7 @@ namespace Face_Recognition_Demo
             try
             {
                 _cleanupFinished = true;
-                Dispatcher.BeginInvoke(new Action(() => Close()));
+                _ = Dispatcher.BeginInvoke(new Action(() => Close()));
             }
             catch (Exception ex)
             {
@@ -493,7 +493,7 @@ namespace Face_Recognition_Demo
                         response.EnsureSuccessStatusCode();
 
                         var total = response.Content.Headers.ContentLength ?? -1L;
-                        Dispatcher.BeginInvoke(new Action(() => pbDownload.IsIndeterminate = total <= 0));
+                        _ = Dispatcher.BeginInvoke(new Action(() => pbDownload.IsIndeterminate = total <= 0));
 
                         using (var src = await response.Content.ReadAsStreamAsync())
                         using (var fileStream = File.Create(tmpPath))
@@ -515,7 +515,7 @@ namespace Face_Recognition_Demo
                                     {
                                         lastPercent = percent;
                                         var done = readTotal;
-                                        Dispatcher.BeginInvoke(new Action(() =>
+                                        _ = Dispatcher.BeginInvoke(new Action(() =>
                                         {
                                             pbDownload.Value = percent;
                                             lbDownloadStatus.Text = $"Downloading {fileName}... {percent}% ({done / 1024} / {total / 1024} KB)";
@@ -527,7 +527,7 @@ namespace Face_Recognition_Demo
                                     // No Content-Length: throttle to ~once per MB so the dispatcher isn't flooded.
                                     lastReportedBytes = readTotal;
                                     var done = readTotal;
-                                    Dispatcher.BeginInvoke(new Action(() =>
+                                    _ = Dispatcher.BeginInvoke(new Action(() =>
                                         lbDownloadStatus.Text = $"Downloading {fileName}... {done / 1024} KB"));
                                 }
                             }

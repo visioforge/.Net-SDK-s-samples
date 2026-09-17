@@ -13,7 +13,9 @@
         android:minWidth="25dp"
         android:minHeight="25dp" />
 
-    <!-- Status badge ("Streaming") at top -->
+    <!-- Status badge ("Streaming") at top. Its top margin is extended at runtime by the status-bar
+         inset (see MainActivity.TopInsetListener): FLAG_FULLSCREEN, which this activity's theme
+         relies on, is ignored for apps targeting SDK 35+, so the status bar is drawn over it. -->
     <TextView
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
@@ -44,16 +46,18 @@
         android:padding="8dp"
         android:visibility="gone" />
 
-    <!-- Bottom translucent control bar. Height + paddingBottom get extended at runtime by the
-         system navigation inset (see MainActivity.ApplyWindowInsets) so the buttons never hide
-         under the gesture pill or 3-button nav bar. -->
+    <!-- Bottom translucent control bar. Its padding is extended at runtime by the system-bar
+         insets (see MainActivity.NavBarInsetListener) so the icons never hide under the gesture
+         pill, the 3-button nav bar or a large-screen taskbar. The height follows the padding
+         (26 + 68 + 26 = the 120dp this bar used to be fixed at), so the inset grows the bar
+         instead of squeezing the record button inside it. -->
     <FrameLayout
         android:id="@+id/controlBar"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="26dp"
         android:layout_alignParentBottom="true"
-        android:background="#59000000"
-        android:clipToPadding="false">
+        android:background="#59000000">
 
         <!-- Center: big record button. Background = red circle (always); foreground icon toggles
              between ic_record (filled white circle — idle) and ic_stop (white square — streaming)

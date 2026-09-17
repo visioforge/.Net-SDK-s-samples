@@ -219,7 +219,7 @@ namespace RTSP_Client
 
                 var rtspSource = await RTSPSourceSettings.CreateAsync(new System.Uri(edURL.Text), edLogin.Text, edPassword.Text, audioEnabled: true);
 
-                // Enable low latency mode by default for Android real-time surveillance (60-120ms latency)
+                // Enable low latency mode by default for Android real-time surveillance (150ms jitter buffer)
                 rtspSource.LowLatencyMode = true;
 
                 _source = new RTSPSourceBlock(rtspSource);

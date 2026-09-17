@@ -1,4 +1,4 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -34,6 +34,8 @@ namespace SimpleVideoCaptureA
     public partial class MainWindow : Window, IDisposable
     {
         private bool _closingHandled;
+
+        private bool _teardownDone;
         private bool _initialized;
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
@@ -192,7 +194,7 @@ namespace SimpleVideoCaptureA
             Title += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTimeAsync(); };
+            tmRecording.Elapsed += async (senderx, args) => { await UpdateRecordingTimeAsync(); };
 
             // video inputs
             var videoInputs = await DeviceEnumerator.Shared.VideoSourcesAsync();
@@ -739,14 +741,20 @@ namespace SimpleVideoCaptureA
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Avalonia's Closing event does not await async-void handlers, so cleanup would otherwise
-            // race with Avalonia tearing down the visual tree. Cancel the first close, run cleanup,
-            // then close manually. Re-entry from the manual Close() must be a no-op.
-            if (_closingHandled)
+            // race with Avalonia tearing down the visual tree. Cancel every close until teardown is
+            // done, then close for real.
+            if (_teardownDone)
             {
                 return;
             }
 
             e.Cancel = true;
+
+            if (_closingHandled)
+            {
+                return;
+            }
+
             _closingHandled = true;
 
             try
@@ -757,21 +765,41 @@ namespace SimpleVideoCaptureA
 
                 if (VideoCapture1 != null)
                 {
-                    await VideoCapture1.StopAsync();
+                    // A failed stop must not skip the destroy that follows it.
+                    try
+                    {
+                        await VideoCapture1.StopAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.WriteLine(ex);
+                    }
+
                     await DestroyEngineAsync();
                 }
 
                 VideoView1?.Dispose();
                 VideoView1 = null;
-
-                VisioForgeX.DestroySDK();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Window closing error: {ex.Message}");
+                Trace.WriteLine(ex);
             }
+            finally
+            {
+                try
+                {
+                    VisioForgeX.DestroySDK();
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex);
+                }
 
-            Close();
+                _teardownDone = true;
+
+                _ = Dispatcher.UIThread.InvokeAsync(() => Close());
+            }
         }
 
         /// <summary>

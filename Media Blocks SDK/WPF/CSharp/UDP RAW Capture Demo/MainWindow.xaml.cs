@@ -409,7 +409,7 @@ namespace UDP_RAW_Capture_Demo
 
             try
             {
-                Dispatcher.BeginInvoke(new Action(() => Close()));
+                _ = Dispatcher.BeginInvoke(new Action(() => Close()));
             }
             catch (Exception ex)
             {
