@@ -2,4 +2,4 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Linux.x64" Version="2025.9.0" />
   </ItemGroup> --><ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))"><PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.9.11" /><PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.9.11" /></ItemGroup><!-- <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="2025.9.1" />
-  </ItemGroup> --><ItemGroup><None Update="BW.cube"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None></ItemGroup><ItemGroup><PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.9.17" /></ItemGroup></Project>
+  </ItemGroup> --><ItemGroup><None Update="BW.cube"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None></ItemGroup><ItemGroup><PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="2026.9.22" /></ItemGroup></Project>
