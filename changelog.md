@@ -26,6 +26,17 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.10.2
+
+* [Video Capture SDK .Net] **Fixed: a Stop or a window close during separate-capture start, file switch or resume could report a short empty file, or leave a recorded file with no stopped event and no tags.** A file that is already being recorded is reported and closed by that stop. A file that is not recording yet is not started and not reported. (#1932)
+* [Video Capture SDK .Net] **Fixed: `SeparateCapture_Start` or `SeparateCapture_StartAsync` called while `Start` was still running returned false with no error and deleted the previous recording.** The call now reports that the capture is still starting and leaves the previous file untouched. Call it again after `Start` returns. (#2018)
+* [Video Capture SDK .Net] **Fixed: on x64, capture with the video sample grabber did not start when the camera delivered NV12** — the grabber asks for RGB24, and the YUV to RGB converter was no longer inserted into the graph, so capture failed to connect. (#2015)
+* [Media Blocks SDK .Net] **Fixed: calling `MediaBlocksPipeline.Stop()` from an `OnError` handler crashed the process when the error was logged from a GStreamer thread, and a handler that waits synchronously for the UI thread could deadlock when that error was logged while the SDK held a lock.** `OnError` is now raised on a thread-pool thread, in the order the messages were logged, so a handler may call `Stop()` there. Code that updates UI controls from the handler has to marshal to the UI thread. (#1991, #1993)
+* [Media Player SDK .Net] **Fixed: `MediaPlayerCoreX` in trial mode showed no trial mark on Android** — the TV-matrix overlay was not inserted into the preview there, so an unlicensed playback looked identical to a licensed one; the trial overlay is now drawn on Android as on the other platforms. (#2004)
+* [Video Capture SDK .Net] **Fixed: legacy DirectShow capture to Ogg Vorbis or Speex wrote a truncated .ogg/.spx that could contain only the codec headers** — such a file does not parse (ffprobe reports "End of file"), and in the rest of the runs the buffered tail of audio was silently lost; the Ogg stream is now finalized on stop with a proper end-of-stream page. (#1997)
+* [Video Edit SDK .Net] **Fixed: `VideoEditCore` conversion failed with `InvalidCastException` (`E_NOINTERFACE`) when a clip was added on the UI thread and started with `StartAsync`, or added in the background and started with `Start`.** The same exception was raised while reporting convert progress and when the editor was disposed off the thread that added the clip. (#1995)
+* [Core] **Fixed: the `VisioForge.DotNet.Core.Redist.MP4.*` NuGet packages of 2026.10.1 carried older builds of the `VisioForge_MFT*.dll` and `VisioForge_MF_Mux*.ax` filters than the installer — without the KLV and separate-capture native fixes that release announced.** The corrected builds (2026.9.30) ship in this release's packages. (#2014)
+
 ## 2026.10.1
 
 * [Video Capture SDK .Net] **Fixed: `VideoCaptureCore` reported a bare LINQ error ("Sequence contains no matching element") when started with a `Video_CaptureDevice` name matching no installed device;** the start now fails with an error naming the device as not found, and `Video_CaptureDevice_CrossBar_Init` returns `false` for an unknown name instead of throwing. (#1996)
