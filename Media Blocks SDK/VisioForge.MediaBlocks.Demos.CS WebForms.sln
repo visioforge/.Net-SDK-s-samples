@@ -1,0 +1,30 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLS Media Web Forms", "WebForms\HLS Media Web Forms\HLS Media Web Forms.csproj", "{A8C483A0-9013-41C3-882D-E2EC6B545AB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HLS Webcam Web Forms", "WebForms\HLS Webcam Web Forms\HLS Webcam Web Forms.csproj", "{2EE20F90-B613-4432-AE91-FF40D8DFCA7A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8C483A0-9013-41C3-882D-E2EC6B545AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8C483A0-9013-41C3-882D-E2EC6B545AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8C483A0-9013-41C3-882D-E2EC6B545AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8C483A0-9013-41C3-882D-E2EC6B545AB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EE20F90-B613-4432-AE91-FF40D8DFCA7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE20F90-B613-4432-AE91-FF40D8DFCA7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE20F90-B613-4432-AE91-FF40D8DFCA7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE20F90-B613-4432-AE91-FF40D8DFCA7A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {553593CF-EDB3-48A9-B457-72E76D47A70D}
+	EndGlobalSection
+EndGlobal
