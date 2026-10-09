@@ -9,6 +9,7 @@ using VisioForge.Core.VideoCapture;
 using VisioForge.Core.Types.Output;
 using VisioForge.Core.Types.VideoCapture;
 using MessageBox = System.Windows.Forms.MessageBox;
+using System.Linq;
 
 // ReSharper disable InconsistentNaming
 
@@ -366,7 +367,6 @@ namespace VisioForge.Core.UI.WinForms.Dialogs.OutputFormats
                 case VideoCaptureOutputFormat.DirectCaptureMKV:
                 case VideoCaptureOutputFormat.DirectCaptureMP4_GDCL:
                 case VideoCaptureOutputFormat.DirectCaptureMP4_Monogram:
-                case VideoCaptureOutputFormat.VLC_EXE:
                     {
                         MessageBox.Show("No settings available for selected output format.");
 
@@ -1064,13 +1064,6 @@ namespace VisioForge.Core.UI.WinForms.Dialogs.OutputFormats
                         var gifOutput = new AnimatedGIFOutput();
                         SetGIFOutput(ref gifOutput);
                         core.Output_Format = gifOutput;
-                        break;
-                    }
-
-                case VideoCaptureOutputFormat.VLC_EXE:
-                    {
-                        var vlcOutput = new VLCEXEOutput();
-                        core.Output_Format = vlcOutput;
                         break;
                     }
 
