@@ -11,9 +11,23 @@ public class SceneDelegate : UIResponder, IUIWindowSceneDelegate
     [Export("scene:willConnectToSession:options:")]
     public void WillConnect(UIScene scene, UISceneSession session, UISceneConnectionOptions connectionOptions)
     {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see UIApplicationDelegate `GetConfiguration` instead).
+        if (scene is not UIWindowScene windowScene)
+        {
+            return;
+        }
+
+        var app = (AppDelegate)UIApplication.SharedApplication.Delegate;
+        Window = app.Window ?? new UIWindow(windowScene);
+        if (app.Window is null)
+        {
+            app.SetupWindow(Window);
+        }
+        else
+        {
+            // A scene that reconnects after a disconnect gets the existing window back.
+            Window.WindowScene = windowScene;
+            Window.MakeKeyAndVisible();
+        }
     }
 
     /// <summary>

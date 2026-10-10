@@ -60,9 +60,13 @@ namespace ScreenCapture
 
         public override UIWindow Window { get; set; }
 
-        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+        /// <summary>
+        /// Builds the UI into the window of the connecting scene. Called from <c>SceneDelegate.WillConnect</c>.
+        /// </summary>
+        /// <param name="window">The window created for the scene.</param>
+        public void SetupWindow(UIWindow window)
         {
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            Window = window;
 
             var vc = new UIViewController();
             vc.View!.BackgroundColor = UIColor.Black;
@@ -78,8 +82,8 @@ namespace ScreenCapture
             PHPhotoLibrary.RequestAuthorization(PHAccessLevel.AddOnly, _ => { });
 
             Window.RootViewController = vc;
-            Window.MakeKeyAndVisible();
 
+            Window.MakeKeyAndVisible();
             VisioForgeX.InitSDK();
 
             // Set the helpful prompt BEFORE we kick off the pipeline. StartPipelineAsync blocks
@@ -107,8 +111,6 @@ namespace ScreenCapture
                     UIApplication.SharedApplication.InvokeOnMainThread(() => _lbStatus.Text = "Pipeline error: " + ex.Message);
                 }
             });
-
-            return true;
         }
 
         /// <summary>

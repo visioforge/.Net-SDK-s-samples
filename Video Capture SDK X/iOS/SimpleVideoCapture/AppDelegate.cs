@@ -494,13 +494,13 @@ public class AppDelegate : UIApplicationDelegate
         _filename = Path.Combine(libraryPath, fileName);
     }
 
-        /// <summary>
-        /// Finished launching.
-        /// </summary>
-    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    /// <summary>
+    /// Builds the UI into the window of the connecting scene. Called from <c>SceneDelegate.WillConnect</c>.
+    /// </summary>
+    /// <param name="window">The window created for the scene.</param>
+    public void SetupWindow(UIWindow window)
     {
-        // create a new window instance based on the screen size
-        Window = new UIWindow(UIScreen.MainScreen.Bounds);
+        Window = window;
 
         // create a UIViewController with a single UILabel
         var vc = new UIViewController();
@@ -555,7 +555,5 @@ public class AppDelegate : UIApplicationDelegate
                 }
             }
         });
-
-        return true;
     }
 }

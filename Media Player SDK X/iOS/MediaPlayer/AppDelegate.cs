@@ -68,13 +68,13 @@ public class AppDelegate : UIApplicationDelegate
         rootViewController?.PresentViewController(alert, true, null);
     }
 
-        /// <summary>
-        /// Finished launching.
-        /// </summary>
-    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    /// <summary>
+    /// Builds the UI into the window of the connecting scene. Called from <c>SceneDelegate.WillConnect</c>.
+    /// </summary>
+    /// <param name="window">The window created for the scene.</param>
+    public void SetupWindow(UIWindow window)
     {
-        // create a new window instance based on the screen size
-        Window = new UIWindow(UIScreen.MainScreen.Bounds);
+        Window = window;
 
         // create a UIViewController with a single UILabel
         _vc = new CustomViewController(Window, out _videoView);
@@ -150,8 +150,6 @@ public class AppDelegate : UIApplicationDelegate
         VisioForgeX.InitSDK();
 
         _tmPosition.Elapsed += async (sender, e) => await UpdatePositionAsync();
-
-        return true;
     }
 
         /// <summary>

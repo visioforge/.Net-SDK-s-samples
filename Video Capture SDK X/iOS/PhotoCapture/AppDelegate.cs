@@ -32,12 +32,12 @@ namespace PhotoCapture
         }
 
         /// <summary>
-        /// Finished launching.
+        /// Builds the UI into the window of the connecting scene. Called from <c>SceneDelegate.WillConnect</c>.
         /// </summary>
-        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+        /// <param name="window">The window created for the scene.</param>
+        public void SetupWindow(UIWindow window)
         {
-            // create a new window instance based on the screen size
-            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            Window = window;
 
             // create a UIViewController with a single UILabel
             var vc = new UIViewController();
@@ -68,8 +68,6 @@ namespace PhotoCapture
                 _photoView.Camera = _photoView.Cameras[0];
                 await _photoView.StartCameraAsync();
             });
-
-            return true;
         }
 
         /// <summary>
@@ -119,7 +117,8 @@ namespace PhotoCapture
             btSavePhoto.SetTitle("SAVE PHOTO", UIControlState.Normal);
             btSavePhoto.TouchUpInside += async (sender, e) =>
             {
-                var image = await _photoView.TakePhotoAsync();
+                // TakePhotoAsync hands the bitmap to the caller; dispose it after saving.
+                using var image = await _photoView.TakePhotoAsync();
 
                 if (image != null)
                 {
@@ -132,7 +131,7 @@ namespace PhotoCapture
                     var filename = $"image_{DateTime.Now.Ticks}.jpg";
                     filename = Path.Combine(libraryPath, filename);
 
-                    SkiaHelper.SaveToFile(image, filename);
+                    SkiaHelper.SaveToFile(image, filename, SkiaSharp.SKEncodedImageFormat.Jpeg);
 
                     InvokeOnMainThread(() =>
                     {

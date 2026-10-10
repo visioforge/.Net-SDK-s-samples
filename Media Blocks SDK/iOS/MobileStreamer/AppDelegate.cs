@@ -558,15 +558,6 @@ public class AppDelegate : UIApplicationDelegate
     }
 
     /// <summary>
-    /// Resolve the root view controller to use for alerts/toasts.
-    ///
-    /// On scene-managed apps (UIApplicationSceneManifest in Info.plist), <see cref="Window"/>
-    /// on AppDelegate is a distinct object from the scene's window and is frequently null —
-    /// so a bare <c>Window.RootViewController</c> call NREs. We walk UIApplication's
-    /// connected scenes, pick the foreground-active UIWindowScene, grab its key window, and
-    /// fall back to the AppDelegate's own window only if no scene has one yet.
-    /// </summary>
-    /// <summary>
     /// Show a toast, null-checking the presenting root and marshalling to the main thread.
     ///
     /// Toast.Show dereferences controller.View.Frame.Size.Height without a null-check, so a
@@ -604,46 +595,19 @@ public class AppDelegate : UIApplicationDelegate
         });
     }
 
+    /// <summary>
+    /// Resolve the root view controller to use for alerts/toasts. <see cref="Window"/> is the
+    /// scene's window (SetupWindow received it from SceneDelegate.WillConnect). UIWindow is
+    /// main-thread only, and async continuations here resume on GStreamer bus workers or
+    /// thread-pool slots, so hop to the main thread first.
+    /// </summary>
     private UIViewController? ResolvePresentingRoot()
     {
-        // UIApplication.ConnectedScenes and UIScene / UIWindow are documented main-thread
-        // only. Async continuations here resume on GStreamer bus workers / thread-pool
-        // slots, so the unguarded call could SIGTRAP under Thread Sanitizer, deadlock, or
-        // return stale state. Hop to the main thread synchronously if we aren't there.
         if (!NSThread.IsMain)
         {
             UIViewController? result = null;
             InvokeOnMainThread(() => result = ResolvePresentingRoot());
             return result;
-        }
-
-        try
-        {
-            foreach (var scene in UIApplication.SharedApplication.ConnectedScenes)
-            {
-                if (scene is UIWindowScene ws && ws.ActivationState == UISceneActivationState.ForegroundActive)
-                {
-                    foreach (var w in ws.Windows)
-                    {
-                        if (w.IsKeyWindow && w.RootViewController != null)
-                        {
-                            return w.RootViewController;
-                        }
-                    }
-
-                    foreach (var w in ws.Windows)
-                    {
-                        if (w.RootViewController != null)
-                        {
-                            return w.RootViewController;
-                        }
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"ResolvePresentingRoot: scene enumeration failed: {ex.Message}");
         }
 
         return Window?.RootViewController;
@@ -964,26 +928,25 @@ public class AppDelegate : UIApplicationDelegate
         view!.AddSubview(_videoView);
     }
 
-        /// <summary>
-        /// Finished launching.
-        ///
-        /// Preview startup is deferred to <see cref="RootVC.ViewDidAppear"/> rather than
-        /// kicked off inline here: at FinishedLaunching the UIWindow has been made key but
-        /// the view has not yet laid out, so <c>view.Bounds</c> is frequently empty. Starting
-        /// the VideoView / Metal drawable against a zero-sized bounds has been observed to
-        /// drop the first frames and, on some drivers, trigger layer-size assertions.
-        /// </summary>
-    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    /// <summary>
+    /// Builds the UI into the window of the connecting scene. Called from <c>SceneDelegate.WillConnect</c>.
+    ///
+    /// Preview startup is deferred to <see cref="RootVC.ViewDidAppear"/> rather than
+    /// kicked off inline here: when SetupWindow runs the UIWindow has been made key but
+    /// the view has not yet laid out, so <c>view.Bounds</c> is frequently empty. Starting
+    /// the VideoView / Metal drawable against a zero-sized bounds has been observed to
+    /// drop the first frames and, on some drivers, trigger layer-size assertions.
+    /// </summary>
+    /// <param name="window">The window created for the scene.</param>
+    public void SetupWindow(UIWindow window)
     {
-        Window = new UIWindow(UIScreen.MainScreen.Bounds);
+        Window = window;
 
         var vc = new RootVC(this);
         Window.RootViewController = vc;
+
         Window.MakeKeyAndVisible();
-
         VisioForgeX.InitSDK();
-
-        return true;
     }
 
     /// <summary>

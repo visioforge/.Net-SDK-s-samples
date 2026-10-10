@@ -14,8 +14,6 @@
     <string>1.0</string>
     <key>CFBundlePackageType</key>
     <string>XPC!</string>
-    <key>MinimumOSVersion</key>
-    <string>14.0</string>
     <key>NSExtension</key>
     <dict>
         <key>NSExtensionPointIdentifier</key>

@@ -75,16 +75,16 @@ public class AppDelegate : UIApplicationDelegate
             Message = message
         };
         alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-        UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
+        Window?.RootViewController?.PresentViewController(alert, true, null);
     }
 
-        /// <summary>
-        /// Finished launching.
-        /// </summary>
-    public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+    /// <summary>
+    /// Builds the UI into the window of the connecting scene. Called from <c>SceneDelegate.WillConnect</c>.
+    /// </summary>
+    /// <param name="window">The window created for the scene.</param>
+    public void SetupWindow(UIWindow window)
     {
-        // create a new window instance based on the screen size
-        Window = new UIWindow(UIScreen.MainScreen.Bounds);
+        Window = window;
 
         // create a UIViewController with a single UILabel
         _vc = new CustomViewController(Window);
@@ -93,7 +93,7 @@ public class AppDelegate : UIApplicationDelegate
         // SelectButton / PlayButton / PositionSlider are created in ViewDidLoad, so
         // touching _vc.SelectButton before LoadViewIfNeeded returns null on iOS 26
         // (UIKit no longer triggers ViewDidLoad implicitly when a property is set on
-        // the VC) and the event-subscription lines below NRE in FinishedLaunching.
+        // the VC) and the event-subscription lines below NRE in SetupWindow.
         _vc.LoadViewIfNeeded();
 
         _vc.SelectButton.TouchUpInside += (sender, args) => _vc.OpenFilePicker();
@@ -163,8 +163,6 @@ public class AppDelegate : UIApplicationDelegate
         VisioForgeX.InitSDK();
 
         _tmPosition.Elapsed += async (sender, e) => await UpdatePositionAsync();
-
-        return true;
     }
 
         /// <summary>
