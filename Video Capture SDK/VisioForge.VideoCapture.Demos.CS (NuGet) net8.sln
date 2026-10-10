@@ -115,6 +115,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ip-camera-klv-mpegts-record
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ip-camera-klv-mpegts-recorder (NuGet) net8", "_CodeSnippets\ip-camera-klv-mpegts-recorder\ip-camera-klv-mpegts-recorder (NuGet) net8.csproj", "{2BAF34F2-675D-4D0B-8038-5A7C41C7DD71}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Video Capture Demo WPF MF (NuGet) net8", "WPF\CSharp\Simple Video Capture MF\Simple Video Capture Demo WPF MF (NuGet) net8.csproj", "{74451F82-888F-4A04-855A-72A593CA25BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -725,6 +727,18 @@ Global
 		{2BAF34F2-675D-4D0B-8038-5A7C41C7DD71}.Release|x86.Build.0 = Release|Any CPU
 		{2BAF34F2-675D-4D0B-8038-5A7C41C7DD71}.Release|x64.ActiveCfg = Release|Any CPU
 		{2BAF34F2-675D-4D0B-8038-5A7C41C7DD71}.Release|x64.Build.0 = Release|Any CPU
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Debug|x86.ActiveCfg = Debug|x86
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Debug|x86.Build.0 = Debug|x86
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Debug|x64.Build.0 = Debug|Any CPU
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Release|x86.ActiveCfg = Release|x86
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Release|x86.Build.0 = Release|x86
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Release|x64.ActiveCfg = Release|Any CPU
+		{74451F82-888F-4A04-855A-72A593CA25BF}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -781,6 +795,7 @@ Global
 		{2018D85E-0E58-4EC5-83D5-73405797243A} = {7251110F-2127-4FF3-89B5-9A1F3165B3C2}
 		{F591673E-B7E7-BC2E-02CE-A71F1D6EEB43} = {ED4A5D66-D6E7-BF1E-7082-90E19595FF6F}
 		{2BAF34F2-675D-4D0B-8038-5A7C41C7DD71} = {F591673E-B7E7-BC2E-02CE-A71F1D6EEB43}
+		{74451F82-888F-4A04-855A-72A593CA25BF} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F46B964-BC4D-4675-AF4A-17347CF13390}
