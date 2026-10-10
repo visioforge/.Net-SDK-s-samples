@@ -26,8 +26,17 @@ primary_api_classes:
 
 Changes and updates for all .Net SDKs.
 
+## 2026.10.10
+
+* [Media Blocks SDK .Net] [Media Player SDK .Net] [Video Capture SDK .Net] [Video Edit SDK .Net] Fixed: on Android, every MPEG-TS source - HLS included - failed to open with "Unable to read file info"; the runtime now ships the MPEG-TS demuxer, and AAC in these sources is decoded in software. Needs `VisioForge.CrossPlatform.Core.Android` 2026.10.9.
+
 ## 2026.10.9
 
+* [Video Capture SDK .Net] Fixed: on a webcam exposed through the Windows camera frame server, every `VideoCaptureCore` Stop/Start kept one capture-buffer pool (about ten frames, tens of megabytes per cycle, following the camera format). That pool is now released on Stop. A few megabytes and some handles per cycle can still remain. (#2017)
+* [Video Capture SDK .Net] Added: `VideoCaptureSource.UseMediaFoundation` (off unless the app sets it) reads the camera through Media Foundation and sends RGB24 into the graph. In this mode the DirectShow camera-bridge capture-buffer growth on Stop/Start does not happen. `VideoCaptureSource.IsMediaFoundationCaptureAvailable` reports whether this Windows version has the camera frame server switched on. Audio capture, crossbar, tuner and direct capture are not available together with the flag. (#2017)
+* [Video Capture SDK .Net] Added: `VideoCaptureCore.Video_MediaFoundationCaptureDevices` lists the cameras Media Foundation can open, with the resolutions and frame rates each camera reports. Sizes that exist only in the DirectShow device list are not included. A `VideoCaptureSource` created from one of these devices reads that camera through Media Foundation. (#2017)
+* [Demos] Added: WPF Simple Video Capture (Media Foundation), a separate sample that lists those cameras and previews or records the selected size.
+* [Video Capture SDK .Net] Fixed: a Media Foundation camera recording played faster than real time. Each frame is stored at the time it arrived. (#2017)
 * [ALL] Added: with a debugger attached and `Debug_Telemetry` on, the SDK also reports the names of the features in use - the engine, the types of its blocks, the output format and mode - once per process. No setting values and none of your own classes are reported, and a shipped application still sends nothing. Set `Debug_Telemetry = false` to switch it off.
 * [Core] Added: `Discovery(BaseContext context)` logs ONVIF discovery problems to that context as warnings; `DeviceEnumerator.ONVIF_ListSourcesAsync` and both `VideoCaptureCore.IP_Camera_ONVIF_ListSourcesAsyncEx` overloads now pass their own context. (#1777)
 * [Core] Changed: GIF frame delays of 10 ms or less now play for 100 ms, as in web browsers, so a GIF with no frame delays animates at 10 fps instead of showing only its first frame. (#2389)
