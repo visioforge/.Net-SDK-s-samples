@@ -8,6 +8,8 @@ using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.MediaPlayerX;
+using VisioForge.Core.Types.X.AudioRenderers;
+using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI.Apple;
 
@@ -37,6 +39,21 @@ public partial class ViewController : NSViewController
     /// The video view.
     /// </summary>
     private VideoView _videoView;
+
+    /// <summary>
+    /// The audio output devices listed in the speakers list.
+    /// </summary>
+    private AudioOutputDeviceInfo[] _audioOutputs = Array.Empty<AudioOutputDeviceInfo>();
+
+    /// <summary>
+    /// The Start button, which also pauses and resumes.
+    /// </summary>
+    private NSButton _startButton;
+
+    /// <summary>
+    /// Flag to indicate if playback is paused.
+    /// </summary>
+    private bool _isPaused;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewController"/> class.
@@ -70,9 +87,32 @@ public partial class ViewController : NSViewController
 
         VisioForgeX.InitSDK();
 
-        edFilename.StringValue = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "video.mp4");
+        edFilename.StringValue = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
+        edFilename.PlaceholderString = "File path, or an HLS / HTTP / RTSP URL";
 
         _timer = new Timer(OnTimer);
+
+        InvokeOnMainThread(async () => await FillSpeakersAsync());
+    }
+
+    /// <summary>
+    /// Lists the audio output devices and selects the system default one.
+    /// </summary>
+    private async Task FillSpeakersAsync()
+    {
+        _audioOutputs = await DeviceEnumerator.Shared.AudioOutputsAsync();
+
+        cbSpeakers.RemoveAllItems();
+        foreach (var device in _audioOutputs)
+        {
+            cbSpeakers.AddItem(device.Name);
+        }
+
+        var defaultIndex = Array.FindIndex(_audioOutputs, d => d.IsDefault);
+        if (_audioOutputs.Length > 0)
+        {
+            cbSpeakers.SelectItem(defaultIndex >= 0 ? defaultIndex : 0);
+        }
     }
 
         /// <summary>
@@ -124,24 +164,42 @@ public partial class ViewController : NSViewController
             View.Window.Delegate = new CustomWindowDelegate(this);
         }
 
-        if (!File.Exists(edFilename.StringValue))
+        // A network URL (HLS, HTTP, RTSP) or a local file.
+        var source = edFilename.StringValue.Trim();
+        var isUrl = Uri.TryCreate(source, UriKind.Absolute, out var uri) && !uri.IsFile;
+        if (!isUrl && !File.Exists(source))
         {
-            Debug.WriteLine("Input file is not found!");
+            ShowMessage("File not found: " + source);
             return;
         }
 
-        var sourceSettings = await UniversalSourceSettings.CreateAsync(edFilename.StringValue);
+        var sourceSettings = isUrl
+            ? await UniversalSourceSettings.CreateAsync(uri)
+            : await UniversalSourceSettings.CreateAsync(source);
         if (sourceSettings == null)
         {
-            Debug.WriteLine("Unable to create source!");
+            ShowMessage("Unable to open " + source);
             return;
         }
 
         _player = new MediaPlayerCoreX(_videoView);
-        await _player.OpenAsync(sourceSettings);
 
-        await _player.PlayAsync();
+        // Play the audio through the speakers selected in the list.
+        var speakers = (int)cbSpeakers.IndexOfSelectedItem;
+        if (speakers >= 0 && speakers < _audioOutputs.Length)
+        {
+            _player.Audio_OutputDevice = new AudioRendererSettings(_audioOutputs[speakers]);
+        }
 
+        if (!await _player.OpenAsync(sourceSettings) || !await _player.PlayAsync())
+        {
+            await StopAsync();
+            ShowMessage("Unable to play " + source);
+            return;
+        }
+
+        _isPaused = false;
+        _startButton.Title = "Pause";
         _timer.Change(0, 1000);
     }
 
@@ -151,6 +209,12 @@ public partial class ViewController : NSViewController
     public async Task StopAsync()
     {
         _timer.Change(Timeout.Infinite, Timeout.Infinite);
+
+        _isPaused = false;
+        if (_startButton != null)
+        {
+            _startButton.Title = "Start";
+        }
 
         if (_player == null) return;
 
@@ -166,7 +230,27 @@ public partial class ViewController : NSViewController
     /// <param name="sender">The sender.</param>
     partial void btStart_Click(NSObject sender)
     {
-        InvokeOnMainThread(async () => { await StartAsync(); });
+        _startButton = (NSButton)sender;
+
+        InvokeOnMainThread(async () =>
+        {
+            if (_player == null)
+            {
+                await StartAsync();
+            }
+            else if (!_isPaused)
+            {
+                await _player.PauseAsync();
+                _isPaused = true;
+                _startButton.Title = "Resume";
+            }
+            else
+            {
+                await _player.ResumeAsync();
+                _isPaused = false;
+                _startButton.Title = "Pause";
+            }
+        });
     }
 
     /// <summary>

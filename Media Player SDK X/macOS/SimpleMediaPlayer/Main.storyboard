@@ -721,7 +721,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f7L-A6-7Qb">
-                                <rect key="frame" x="75" y="276" width="63" height="32"/>
+                                <rect key="frame" x="85" y="276" width="63" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="GXT-c6-azH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -731,6 +731,15 @@
                                     <action selector="btStop_Click:" target="XfG-lQ-9wD" id="Aep-Dz-7Z2"/>
                                 </connections>
                             </button>
+                            <popUpButton toolTip="Speakers" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Spk-P1-a01">
+                                <rect key="frame" x="153" y="279" width="180" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="Spk-C1-a01">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="Spk-M1-a01"/>
+                                </popUpButtonCell>
+                            </popUpButton>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ChP-ha-u5m">
                                 <rect key="frame" x="20" y="20" width="440" height="249"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -738,7 +747,7 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3jN-eK-lE2">
                                 <rect key="frame" x="18" y="321" width="62" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="File name" id="Xjx-XY-ebY">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="File or URL" id="Xjx-XY-ebY">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -765,7 +774,7 @@
                                 </connections>
                             </button>
                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZo-Tf-0yU">
-                                <rect key="frame" x="149" y="277" width="313" height="28"/>
+                                <rect key="frame" x="338" y="277" width="124" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="Vf0-Ht-dcq">
                                     <font key="font" size="12" name="Helvetica"/>
@@ -777,6 +786,7 @@
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="cbSpeakers" destination="Spk-P1-a01" id="Spk-O1-a01"/>
                         <outlet property="edFilename" destination="qUl-L3-OBA" id="wqR-Nz-GLI"/>
                         <outlet property="slPosition" destination="jZo-Tf-0yU" id="OFf-UB-Gzl"/>
                         <outlet property="videoViewHost" destination="ChP-ha-u5m" id="vQe-eh-LNl"/>

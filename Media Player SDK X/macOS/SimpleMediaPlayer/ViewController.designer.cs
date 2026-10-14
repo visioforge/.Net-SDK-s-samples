@@ -13,6 +13,9 @@ namespace SimpleMediaPlayerMBMac
 	partial class ViewController
 	{
 		[Outlet]
+		AppKit.NSPopUpButton cbSpeakers { get; set; }
+
+		[Outlet]
 		AppKit.NSTextField edFilename { get; set; }
 
 		[Outlet]
@@ -35,6 +38,11 @@ namespace SimpleMediaPlayerMBMac
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (cbSpeakers != null) {
+				cbSpeakers.Dispose ();
+				cbSpeakers = null;
+			}
+
 			if (edFilename != null) {
 				edFilename.Dispose ();
 				edFilename = null;

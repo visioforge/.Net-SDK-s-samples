@@ -44,6 +44,11 @@ public class AppDelegate : UIApplicationDelegate
     private volatile bool _isSeeking;
 
     /// <summary>
+    /// Flag to indicate if playback is paused.
+    /// </summary>
+    private bool _isPaused;
+
+    /// <summary>
     /// The position timer.
     /// </summary>
     private System.Timers.Timer _tmPosition = new Timer(1000);
@@ -78,7 +83,7 @@ public class AppDelegate : UIApplicationDelegate
 
         // create a UIViewController with a single UILabel
         _vc = new CustomViewController(Window, out _videoView);
-        
+
         _vc.SelectButton.TouchUpInside += (sender, args) =>
         {
             _vc.OpenFilePicker();
@@ -86,33 +91,48 @@ public class AppDelegate : UIApplicationDelegate
 
         _vc.PlayButton.TouchUpInside += async (sender, args) =>
         {
-            if (_player != null)
-            {
-                await StopAllAsync();
-
-                _vc.PlayButton.SetTitle("PLAY", UIControlState.Normal);
-            }
-            else
+            if (_player == null)
             {
                 var uri = _vc.GetURL();
                 if (uri == null)
                 {
-                    ShowMessage("Please select a file first.");
+                    ShowMessage("Enter a URL or select a file first.");
                     return;
                 }
 
-                await StopAllAsync();
+                _vc.SourceField.ResignFirstResponder();
 
-                await CreateEngineAsync();
+                if (!await CreateEngineAsync(uri) || !await _player.PlayAsync())
+                {
+                    await StopAllAsync();
+                    ShowMessage($"Unable to play {uri}.");
+                    return;
+                }
 
-                await _player.PlayAsync();
-                
+                _isPaused = false;
                 _tmPosition.Start();
-
-                _vc.PlayButton.SetTitle("STOP", UIControlState.Normal);
+                _vc.PlayButton.SetTitle("PAUSE", UIControlState.Normal);
+            }
+            else if (!_isPaused)
+            {
+                await _player.PauseAsync();
+                _isPaused = true;
+                _vc.PlayButton.SetTitle("RESUME", UIControlState.Normal);
+            }
+            else
+            {
+                await _player.ResumeAsync();
+                _isPaused = false;
+                _vc.PlayButton.SetTitle("PAUSE", UIControlState.Normal);
             }
         };
-        
+
+        _vc.StopButton.TouchUpInside += async (sender, args) =>
+        {
+            await StopAllAsync();
+            ResetControls();
+        };
+
         _vc.PositionSlider.ValueChanged += async (sender, args) =>
         {
             if (_player == null)
@@ -163,9 +183,11 @@ public class AppDelegate : UIApplicationDelegate
         }
 
         var position = await _player.Position_GetAsync();
+        var duration = await _player.DurationAsync();
         UIApplication.SharedApplication.InvokeOnMainThread(() =>
         {
             _vc.PositionSlider.Value = (float)position.TotalSeconds;
+            _vc.PositionLabel.Text = $"{position:hh\\:mm\\:ss} / {duration:hh\\:mm\\:ss}";
         });
     }
 
@@ -182,31 +204,37 @@ public class AppDelegate : UIApplicationDelegate
         /// </summary>
     private async Task StopAllAsync()
     {
-        if (_player == null || _player.State == PlaybackState.Free)
+        _tmPosition.Stop();
+
+        if (_player == null)
         {
             return;
         }
 
-        _tmPosition.Stop();
+        var player = _player;
+        _player = null;
 
-        if (_player != null)
-        {
-            await _player.StopAsync();
-            await _player.DisposeAsync();
-            _player = null;
-        }
+        await player.StopAsync();
+        await player.DisposeAsync();
+    }
+
+        /// <summary>
+        /// Reset the controls to the stopped state.
+        /// </summary>
+    private void ResetControls()
+    {
+        _isPaused = false;
+        _vc.PositionSlider.Value = 0;
+        _vc.PositionLabel.Text = "00:00:00 / 00:00:00";
+        _vc.PlayButton.SetTitle("PLAY", UIControlState.Normal);
     }
 
         /// <summary>
         /// Create engine async.
         /// </summary>
-    private async Task CreateEngineAsync()
+    private async Task<bool> CreateEngineAsync(NSUrl uri)
     {
-        if (_player != null)
-        {
-            await _player.StopAsync();
-            await _player.DisposeAsync();
-        }
+        await StopAllAsync();
 
         _player = new MediaPlayerCoreX(_videoView as IVideoView);
 
@@ -214,12 +242,9 @@ public class AppDelegate : UIApplicationDelegate
         _player.OnStart += PlayerOnStart;
         _player.OnStop += PlayerOnStop;
 
-        var sourceSettings = await UniversalSourceSettings.CreateAsync(_vc.GetURL());
-        
-        _player.Video_Play = sourceSettings.GetInfo().VideoStreams.Count > 0;
-        _player.Audio_Play = sourceSettings.GetInfo().AudioStreams.Count > 0;
-
-        await _player.OpenAsync(sourceSettings);
+        // A file or an HLS / HTTP / RTSP URL; audio plays through the default output.
+        var sourceSettings = await UniversalSourceSettings.CreateAsync(uri);
+        return sourceSettings != null && await _player.OpenAsync(sourceSettings);
     }
 
         /// <summary>
@@ -229,12 +254,7 @@ public class AppDelegate : UIApplicationDelegate
     {
         await StopAllAsync();
 
-        // run in UI thread
-        UIApplication.SharedApplication.InvokeOnMainThread(() =>
-        {
-            _vc.PositionSlider.Value = 0;
-            _vc.PlayButton.SetTitle("PLAY", UIControlState.Normal);
-        });
+        UIApplication.SharedApplication.InvokeOnMainThread(ResetControls);
     }
 
         /// <summary>
