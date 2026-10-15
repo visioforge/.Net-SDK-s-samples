@@ -102,10 +102,20 @@ public class AppDelegate : UIApplicationDelegate
 
                 _vc.SourceField.ResignFirstResponder();
 
-                if (!await CreateEngineAsync(uri) || !await _player.PlayAsync())
+                try
                 {
+                    if (!await CreateEngineAsync(uri) || !await _player.PlayAsync())
+                    {
+                        await StopAllAsync();
+                        ShowMessage($"Unable to play {uri}.");
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // E.g. "Unable to read file info: <reason>" when the source cannot be read.
                     await StopAllAsync();
-                    ShowMessage($"Unable to play {uri}.");
+                    ShowMessage(ex.Message);
                     return;
                 }
 
