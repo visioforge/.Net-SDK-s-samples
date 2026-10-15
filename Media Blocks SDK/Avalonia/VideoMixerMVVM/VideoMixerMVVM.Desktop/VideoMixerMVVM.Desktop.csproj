@@ -20,7 +20,7 @@
     <OutputType>WinExe</OutputType>
   </PropertyGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.10.12.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="2026.10.12.2" />
     <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="2026.9.11" />
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
