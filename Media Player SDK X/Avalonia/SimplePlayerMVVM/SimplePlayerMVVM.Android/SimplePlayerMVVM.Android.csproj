@@ -24,6 +24,6 @@
     <ProjectReference Include="..\SimplePlayerMVVM\SimplePlayerMVVM.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="2026.10.13.1" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Android" Version="[2026.10.20]" />
   </ItemGroup>
 </Project>
