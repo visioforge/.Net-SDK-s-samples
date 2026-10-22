@@ -14,12 +14,14 @@
 
     The property is set unconditionally — it is a no-op on TFMs whose
     targets don't read it. System.Resources.Extensions is only added
-    on net472 because newer TFMs already ship the type in their BCL.
+    on .NET Framework (net472, and the legacy-format net461 VB projects
+    that set TargetFrameworkVersion instead of TargetFramework) because
+    newer TFMs already ship the type in their BCL.
   -->
   <PropertyGroup>
     <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net472' or $(TargetFrameworks.Contains('net472'))">
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472' or $(TargetFrameworks.Contains('net472')) or '$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.Resources.Extensions" Version="9.0.0" />
   </ItemGroup>
 </Project>

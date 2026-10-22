@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
@@ -314,6 +315,11 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            await StartAsync();
+        }
+
+        private async Task StartAsync()
+        {
             edLog.Text = "";
 
             await StopEngineAsync();
@@ -361,11 +367,11 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
             await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
         }
 
-        private async void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_audioRenderer != null)
             {
-                await _audioRenderer.Volume_SetAsync(tbVolume.Value / 100.0);
+                _audioRenderer.Volume = tbVolume.Value / 100.0;
             }
         }
 
@@ -447,11 +453,10 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
 
         private async Task RestartIfPlaying()
         {
+            // StartAsync stops the running pipeline first.
             if (_isPlaying)
             {
-                await btStop_Click(null, null);
-                await Task.Delay(500); // Give time for stop to complete
-                await btStart_Click(null, null);
+                await StartAsync();
             }
         }
     }

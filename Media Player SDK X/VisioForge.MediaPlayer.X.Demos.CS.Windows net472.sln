@@ -39,6 +39,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player Object Detection X W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Player PII Redaction X WPF net472", "WPF\Player PII Redaction X WPF\Player PII Redaction X WPF net472.csproj", "{45BFCC7A-ECF9-4E17-8049-A15D32E25F4C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simple Player Demo X VB net472", "WinForms\Simple Player Demo X VB\Simple Player Demo X VB net472.vbproj", "{9D401A17-3619-4D3D-9A31-39B118073A20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -241,6 +243,18 @@ Global
 		{45BFCC7A-ECF9-4E17-8049-A15D32E25F4C}.Release|x64.Build.0 = Release|Any CPU
 		{45BFCC7A-ECF9-4E17-8049-A15D32E25F4C}.Release|x86.ActiveCfg = Release|Any CPU
 		{45BFCC7A-ECF9-4E17-8049-A15D32E25F4C}.Release|x86.Build.0 = Release|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Debug|x64.Build.0 = Debug|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Debug|x86.Build.0 = Debug|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Release|x64.ActiveCfg = Release|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Release|x64.Build.0 = Release|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Release|x86.ActiveCfg = Release|Any CPU
+		{9D401A17-3619-4D3D-9A31-39B118073A20}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -262,6 +276,7 @@ Global
 		{28C5678C-D7B3-4A50-9323-F2E5A7810C50} = {22F3B0A1-AA83-4A41-A9B3-01DB4B0A005A}
 		{14B990DD-2F2F-427C-9180-B26F5F3DAA52} = {22F3B0A1-AA83-4A41-A9B3-01DB4B0A005A}
 		{45BFCC7A-ECF9-4E17-8049-A15D32E25F4C} = {22F3B0A1-AA83-4A41-A9B3-01DB4B0A005A}
+		{9D401A17-3619-4D3D-9A31-39B118073A20} = {61B10DAA-194E-4450-877B-B39D7120E963}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}

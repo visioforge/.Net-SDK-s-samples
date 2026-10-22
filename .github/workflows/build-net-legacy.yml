@@ -1,15 +1,22 @@
 name: Build .Net Legacy (4.7.2 - 8.0)
 on:
   workflow_dispatch:
+  push:
+    branches: [master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: vf-win
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Setup .NET
+      if: runner.environment == 'github-hosted'
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
@@ -27,6 +34,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Clear NuGet cache
+      if: runner.environment == 'github-hosted'
       run: nuget locals all -clear
 
     # ==================== .NET Framework 4.7.2 ====================
@@ -75,6 +83,21 @@ jobs:
       run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net472.sln" -t:rebuild -property:Configuration=Release
     - name: Clean (Video Capture X net472)
       run: msbuild "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS net472.sln" -t:clean -property:Configuration=Release
+
+    - name: Restore (Video Capture SDK VB net461)
+      run: nuget restore "Video Capture SDK/VisioForge.VideoCapture.Demos.VB (NuGet) net461.sln"
+    - name: Build (Video Capture SDK VB net461)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.VB (NuGet) net461.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Video Capture SDK VB net461)
+      run: msbuild "Video Capture SDK/VisioForge.VideoCapture.Demos.VB (NuGet) net461.sln" -t:clean -property:Configuration=Release
+
+    # Media Blocks (WebForms, net472)
+    - name: Restore (Media Blocks WebForms)
+      run: nuget restore "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS WebForms.sln"
+    - name: Build (Media Blocks WebForms)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS WebForms.sln" -t:rebuild -property:Configuration=Release
+    - name: Clean (Media Blocks WebForms)
+      run: msbuild "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS WebForms.sln" -t:clean -property:Configuration=Release
 
     # Video Edit (net472)
     - name: Restore (Video Edit SDK net472)
@@ -420,3 +443,19 @@ jobs:
       run: dotnet build "Video Capture SDK/VisioForge.VideoCapture.Demos.CS WinUI.sln" --configuration Release --no-restore
     - name: Clean (Video Capture WinUI)
       run: dotnet clean "Video Capture SDK/VisioForge.VideoCapture.Demos.CS WinUI.sln" --configuration Release
+
+    # Media Player X (WinUI)
+    - name: Restore (Media Player X WinUI)
+      run: dotnet restore "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.WinUI.sln"
+    - name: Build (Media Player X WinUI)
+      run: dotnet build "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.WinUI.sln" --configuration Release --no-restore
+    - name: Clean (Media Player X WinUI)
+      run: dotnet clean "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.WinUI.sln" --configuration Release
+
+    # Video Capture X (WinUI)
+    - name: Restore (Video Capture X WinUI)
+      run: dotnet restore "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS WinUI.sln"
+    - name: Build (Video Capture X WinUI)
+      run: dotnet build "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS WinUI.sln" --configuration Release --no-restore
+    - name: Clean (Video Capture X WinUI)
+      run: dotnet clean "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS WinUI.sln" --configuration Release

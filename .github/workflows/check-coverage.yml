@@ -1,0 +1,15 @@
+name: Check every sample is built
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+
+jobs:
+  coverage:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Every project is in a solution a build workflow builds
+      shell: pwsh
+      run: ./.github/scripts/Check-SolutionCoverage.ps1
