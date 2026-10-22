@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MediaBlocks_SMPTE_Effects_Demo_WPF"
         xmlns:WPF="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core" x:Class="MediaBlocks_SMPTE_Effects_Demo_WPF.MainWindow"
         mc:Ignorable="d"
-        Title="Media Blocks SDK .Net - SMPTE Effects Demo" Height="550" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Media Blocks SDK .Net - SMPTE Effects Demo" Height="650" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <!-- File Selection -->
         <Label x:Name="label" Content="File name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -17,24 +17,36 @@
         <WPF:VideoView x:Name="VideoView1" Margin="10,70,150,200"/>
         
         <!-- SMPTE Effect Controls -->
-        <GroupBox Header="SMPTE Effect Settings" Margin="0,70,10,200" HorizontalAlignment="Right" Width="135">
-            <StackPanel Margin="5">
-                <CheckBox x:Name="cbEnableSMPTE" Content="Enable SMPTE" Checked="cbEnableSMPTE_Changed" Unchecked="cbEnableSMPTE_Changed"/>
-                <CheckBox x:Name="cbUseSMPTEAlpha" Content="Use SMPTE Alpha" Checked="cbUseSMPTEAlpha_Changed" Unchecked="cbUseSMPTEAlpha_Changed"/>
-                
-                <Label Content="Transition Type:" Margin="0,5,0,0"/>
-                <ComboBox x:Name="comboTransitionType" SelectionChanged="comboTransitionType_SelectionChanged"/>
-                
-                <Label Content="Border:" Margin="0,5,0,0"/>
-                <Slider x:Name="sliderBorder" Minimum="0" Maximum="50" Value="0" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="sliderBorder_ValueChanged"/>
-                <TextBlock x:Name="lblBorderValue" Text="0" HorizontalAlignment="Center"/>
-                
-                <Label Content="Depth/Position:" Margin="0,5,0,0"/>
-                <Slider x:Name="sliderDepth" Minimum="0" Maximum="1" Value="0" TickFrequency="0.01" ValueChanged="sliderDepth_ValueChanged"/>
-                <TextBlock x:Name="lblDepthValue" Text="0.00" HorizontalAlignment="Center"/>
-                
-                <CheckBox x:Name="cbInvert" Content="Invert" Checked="cbInvert_Changed" Unchecked="cbInvert_Changed" Margin="0,5,0,0"/>
-            </StackPanel>
+        <GroupBox x:Name="gbSettings" Header="SMPTE Effect Settings" Margin="0,70,10,200" HorizontalAlignment="Right" Width="135">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="5">
+                    <CheckBox x:Name="cbEnableSMPTE" Content="Enable SMPTE" IsChecked="True"/>
+                    <CheckBox x:Name="cbUseSMPTEAlpha" Content="Use SMPTE Alpha"/>
+
+                    <Label Content="Transition Type:" Margin="0,5,0,0"/>
+                    <ComboBox x:Name="comboTransitionType"/>
+
+                    <Label Content="Border:" Margin="0,5,0,0"/>
+                    <Slider x:Name="sliderBorder" Minimum="0" Maximum="50" Value="0" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                    <TextBlock Text="{Binding Value, ElementName=sliderBorder}" HorizontalAlignment="Center"/>
+
+                    <!-- SMPTE: mask precision in bits and wipe length -->
+                    <Label Content="Depth (bits):" Margin="0,5,0,0"/>
+                    <Slider x:Name="sliderDepth" Minimum="1" Maximum="24" Value="16" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                    <TextBlock Text="{Binding Value, ElementName=sliderDepth}" HorizontalAlignment="Center"/>
+
+                    <Label Content="Duration (s):" Margin="0,5,0,0"/>
+                    <Slider x:Name="sliderDuration" Minimum="1" Maximum="10" Value="3" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                    <TextBlock Text="{Binding Value, ElementName=sliderDuration}" HorizontalAlignment="Center"/>
+
+                    <!-- SMPTE Alpha: transition position -->
+                    <Label Content="Alpha position:" Margin="0,5,0,0"/>
+                    <Slider x:Name="sliderPosition" Minimum="0" Maximum="1" Value="0.5"/>
+                    <TextBlock Text="{Binding Value, ElementName=sliderPosition, StringFormat=F2}" HorizontalAlignment="Center"/>
+
+                    <CheckBox x:Name="cbInvert" Content="Invert" Margin="0,5,0,0"/>
+                </StackPanel>
+            </ScrollViewer>
         </GroupBox>
         
         <!-- Debug and Log -->
