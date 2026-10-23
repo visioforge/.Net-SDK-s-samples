@@ -19,6 +19,7 @@ namespace Video_Join_Demo
     public partial class MainWindow : Window
     {
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
+        private HWEncodersOutputSettingsDialog mkvSettingsDialog;
         private MP4SettingsDialog mp4SettingsDialog;
         private AVISettingsDialog aviSettingsDialog;
         private WMVSettingsDialog wmvSettingsDialog;
@@ -142,13 +143,21 @@ namespace Video_Join_Demo
             switch (cbOutputVideoFormat.SelectedIndex)
             {
                 case 0:
-                case 1:
                     {
                         if (aviSettingsDialog == null)
                         {
                             aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
                         }
                         aviSettingsDialog.ShowDialog();
+                        break;
+                    }
+                case 1:
+                    {
+                        if (mkvSettingsDialog == null)
+                        {
+                            mkvSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV);
+                        }
+                        mkvSettingsDialog.ShowDialog();
                         break;
                     }
                 case 2:
@@ -394,6 +403,12 @@ namespace Video_Join_Demo
             mp4HWSettingsDialog.SaveSettings(ref mp4Output);
         }
 
+        private void SetMKVOutput(ref MKVv2Output mkvOutput)
+        {
+            if (mkvSettingsDialog == null) { mkvSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV); }
+            mkvSettingsDialog.SaveSettings(ref mkvOutput);
+        }
+
         private void SetSpeexOutput(ref SpeexOutput speexOutput)
         {
             if (speexSettingsDialog == null) { speexSettingsDialog = new SpeexSettingsDialog(); }
@@ -433,18 +448,6 @@ namespace Video_Join_Demo
                 var mp3Output = new MP3Output();
                 SetMP3Output(ref mp3Output);
                 aviOutput.MP3 = mp3Output;
-            }
-        }
-
-        private void SetMKVOutput(ref MKVv1Output mkvOutput)
-        {
-            if (aviSettingsDialog == null) { aviSettingsDialog = new AVISettingsDialog(VideoEdit1); }
-            aviSettingsDialog.SaveSettings(ref mkvOutput);
-            if (mkvOutput.Audio_UseMP3Encoder)
-            {
-                var mp3Output = new MP3Output();
-                SetMP3Output(ref mp3Output);
-                mkvOutput.MP3 = mp3Output;
             }
         }
 
@@ -505,7 +508,7 @@ namespace Video_Join_Demo
             switch (cbOutputVideoFormat.SelectedIndex)
             {
                 case 0: { var o = new AVIOutput(); SetAVIOutput(ref o); VideoEdit1.Output_Format = o; break; }
-                case 1: { var o = new MKVv1Output(); SetMKVOutput(ref o); VideoEdit1.Output_Format = o; break; }
+                case 1: { var o = new MKVv2Output(); SetMKVOutput(ref o); VideoEdit1.Output_Format = o; break; }
                 case 2: { var o = new WMVOutput(); SetWMVOutput(ref o); VideoEdit1.Output_Format = o; break; }
                 case 3: { var o = new DVOutput(); SetDVOutput(ref o); VideoEdit1.Output_Format = o; break; }
                 case 4: { var o = new ACMOutput(); SetACMOutput(ref o); VideoEdit1.Output_Format = o; break; }

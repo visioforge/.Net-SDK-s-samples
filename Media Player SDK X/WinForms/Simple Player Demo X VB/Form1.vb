@@ -34,8 +34,8 @@ Public Class Form1
 
         CreateEngine()
 
-        For Each device In Await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)
-            cbAudioOutput.Items.Add(device.Name)
+        For Each outputDevice In Await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)
+            cbAudioOutput.Items.Add(outputDevice.Name)
         Next
 
         If cbAudioOutput.Items.Count > 0 Then

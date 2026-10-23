@@ -1,6 +1,12 @@
 name: Build Android
 on:
   workflow_dispatch:
+  push:
+    branches: [master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -11,12 +17,13 @@ jobs:
 
       Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS Android.sln"
 
-    runs-on: windows-2022
+    runs-on: vf-win
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Setup .NET
+      if: runner.environment == 'github-hosted'
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
@@ -24,6 +31,7 @@ jobs:
           10.0.x
 
     - name: Install workloads
+      if: runner.environment == 'github-hosted'
       run: dotnet workload install android
 
     ## Media Blocks

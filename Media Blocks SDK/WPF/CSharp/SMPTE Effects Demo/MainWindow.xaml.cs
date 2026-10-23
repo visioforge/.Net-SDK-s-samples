@@ -1,8 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -10,6 +8,7 @@ using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
+using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.MediaBlocks.VideoProcessing;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
@@ -37,10 +36,6 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
 
         private UniversalSourceBlock _fileSource;
 
-        private SMPTEBlock _smpteBlock;
-
-        private SMPTEAlphaBlock _smpteAlphaBlock;
-
         private bool _isPlaying = false;
 
         public MainWindow()
@@ -59,8 +54,6 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
 
             _timer = new System.Timers.Timer(500);
             _timer.Elapsed += _timer_Elapsed;
-
-            cbDebugMode.IsChecked = true;
 
             // Populate transition type combo box
             PopulateTransitionTypes();
@@ -154,6 +147,9 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
             btStop.IsEnabled = _isPlaying;
             btPause.IsEnabled = _isPlaying;
             btResume.IsEnabled = _isPlaying;
+
+            // Effect settings apply on Start.
+            gbSettings.IsEnabled = !_isPlaying;
         }
 
         private void AddToLog(string txt)
@@ -183,68 +179,76 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
             }));
         }
 
-        private async Task CreateEngineAsync()
+        private async Task<bool> CreateEngineAsync()
         {
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
             _pipeline.OnStop += Pipeline_OnStop;
+            _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
             _pipeline.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-            _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text), ignoreMediaInfoReader: true));
+            // The media info reader leaves out the output pads of streams the file does not have.
+            _fileSource = new UniversalSourceBlock(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
+            if (_fileSource.VideoOutput == null)
+            {
+                AddToLog("The file has no video stream.");
+                return false;
+            }
 
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoView1);
 
-            // Create SMPTE effects
-            var selectedTransitionType = (SMPTETransitionType)(comboTransitionType.SelectedValue ?? SMPTETransitionType.BarWipeLeftToRight);
-            
-            var smpteSettings = new SMPTEVideoEffect()
-            {
-                Type = selectedTransitionType,
-                Border = (int)sliderBorder.Value,
-                Depth = sliderDepth.Value,
-                Invert = cbInvert.IsChecked ?? false
-            };
+            var transitionType = (SMPTETransitionType)comboTransitionType.SelectedValue;
 
-            var smpteAlphaSettings = new SMPTEAlphaVideoEffect()
+            if (cbEnableSMPTE.IsChecked == true && cbUseSMPTEAlpha.IsChecked == true)
             {
-                Type = selectedTransitionType,
-                Border = (int)sliderBorder.Value,
-                Position = sliderDepth.Value,
-                Invert = cbInvert.IsChecked ?? false
-            };
-
-            _smpteBlock = new SMPTEBlock(smpteSettings);
-            _smpteAlphaBlock = new SMPTEAlphaBlock(smpteAlphaSettings);
-
-            // Connect pipeline based on SMPTE settings
-            if (cbEnableSMPTE.IsChecked == true)
-            {
-                if (cbUseSMPTEAlpha.IsChecked == true)
+                // SMPTE Alpha writes the transition mask at a fixed position into the alpha channel of one stream.
+                var smpteAlpha = new SMPTEAlphaBlock(new SMPTEAlphaVideoEffect()
                 {
-                    // Use SMPTE Alpha
-                    _pipeline.Connect(_fileSource.VideoOutput, _smpteAlphaBlock.Input);
-                    _pipeline.Connect(_smpteAlphaBlock.Output, _videoRenderer.Input);
-                }
-                else
+                    Type = transitionType,
+                    Border = (int)sliderBorder.Value,
+                    Position = sliderPosition.Value,
+                    Invert = cbInvert.IsChecked == true
+                });
+
+                _pipeline.Connect(_fileSource.VideoOutput, smpteAlpha.Input);
+                _pipeline.Connect(smpteAlpha.Output, _videoRenderer.Input);
+            }
+            else if (cbEnableSMPTE.IsChecked == true)
+            {
+                // SMPTE wipes from its first input to its second over Duration. Both inputs need the same
+                // video format, so the second one is the same video in grayscale, split off with a tee.
+                var smpte = new SMPTEBlock(new SMPTEVideoEffect()
                 {
-                    // Use regular SMPTE
-                    _pipeline.Connect(_fileSource.VideoOutput, _smpteBlock.Input);
-                    _pipeline.Connect(_smpteBlock.Output, _videoRenderer.Input);
-                }
+                    Type = transitionType,
+                    Border = (int)sliderBorder.Value,
+                    Depth = sliderDepth.Value,
+                    Duration = TimeSpan.FromSeconds(sliderDuration.Value),
+                    Invert = cbInvert.IsChecked == true
+                });
+
+                var tee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+                var grayscale = new GrayscaleBlock();
+
+                _pipeline.Connect(_fileSource.VideoOutput, tee.Input);
+                _pipeline.Connect(tee.Outputs[0], smpte.Input);
+                _pipeline.Connect(tee.Outputs[1], grayscale.Input);
+                _pipeline.Connect(grayscale.Output, smpte.Input2);
+                _pipeline.Connect(smpte.Output, _videoRenderer.Input);
             }
             else
             {
-                // Direct connection (no SMPTE effect)
                 _pipeline.Connect(_fileSource.VideoOutput, _videoRenderer.Input);
             }
 
-            // Audio connection (always direct)
-            var audioDevices = await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound);
-            if (audioDevices.Any())
+            if (_fileSource.AudioOutput != null)
             {
+                var audioDevices = await DeviceEnumerator.Shared.AudioOutputsAsync(AudioOutputDeviceAPI.DirectSound);
                 _audioRenderer = new AudioRendererBlock(audioDevices.First());
+                _audioRenderer.Volume = tbVolume.Value / 100.0;
                 _pipeline.Connect(_fileSource.AudioOutput, _audioRenderer.Input);
             }
+
+            return true;
         }
 
         private async void _timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -288,11 +292,6 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
                 await _pipeline.DisposeAsync();
                 _pipeline = null;
             }
-
-            _smpteBlock?.Dispose();
-            _smpteAlphaBlock?.Dispose();
-            _smpteBlock = null;
-            _smpteAlphaBlock = null;
         }
 
         private void DestroyEngine()
@@ -305,11 +304,6 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
                 _pipeline.Dispose();
                 _pipeline = null;
             }
-
-            _smpteBlock?.Dispose();
-            _smpteAlphaBlock?.Dispose();
-            _smpteBlock = null;
-            _smpteAlphaBlock = null;
         }
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
@@ -318,7 +312,10 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
 
             await StopEngineAsync();
 
-            await CreateEngineAsync();
+            if (!await CreateEngineAsync())
+            {
+                return;
+            }
 
             await _pipeline.StartAsync();
 
@@ -361,18 +358,18 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
             await _pipeline.Position_SetAsync(TimeSpan.FromSeconds(tbTimeline.Value));
         }
 
-        private async void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void tbVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (_audioRenderer != null)
             {
-                await _audioRenderer.Volume_SetAsync(tbVolume.Value / 100.0);
+                _audioRenderer.Volume = tbVolume.Value / 100.0;
             }
         }
 
         private void btSelectFile_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog();
-            dlg.Filter = "Media files|*.avi;*.mp4;*.wmv;*.mov;*.mkv;*.webm;*.mp3;*.wav;*.wma;*.ogg;*.flac|All files|*.*";
+            dlg.Filter = "Video files|*.avi;*.mp4;*.wmv;*.mov;*.mkv;*.webm|All files|*.*";
 
             if (dlg.ShowDialog() == true)
             {
@@ -380,79 +377,13 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
             }
         }
 
-        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             _timer?.Stop();
-            _timer?.Dispose();
 
-            await StopEngineAsync();
-        }
+            DestroyEngine();
 
-        private async void cbEnableSMPTE_Changed(object sender, RoutedEventArgs e)
-        {
-            await RestartIfPlaying();
-        }
-
-        private async void cbUseSMPTEAlpha_Changed(object sender, RoutedEventArgs e)
-        {
-            await RestartIfPlaying();
-        }
-
-        private async void comboTransitionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            await UpdateSMPTESettings();
-        }
-
-        private async void sliderBorder_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (lblBorderValue != null)
-            {
-                lblBorderValue.Text = ((int)sliderBorder.Value).ToString();
-                await UpdateSMPTESettings();
-            }
-        }
-
-        private async void sliderDepth_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (lblDepthValue != null)
-            {
-                lblDepthValue.Text = sliderDepth.Value.ToString("F2");
-                await UpdateSMPTESettings();
-            }
-        }
-
-        private async void cbInvert_Changed(object sender, RoutedEventArgs e)
-        {
-            await UpdateSMPTESettings();
-        }
-
-        private async Task UpdateSMPTESettings()
-        {
-            if (_smpteBlock != null && comboTransitionType.SelectedValue != null)
-            {
-                _smpteBlock.Settings.Type = (SMPTETransitionType)comboTransitionType.SelectedValue;
-                _smpteBlock.Settings.Border = (int)sliderBorder.Value;
-                _smpteBlock.Settings.Depth = sliderDepth.Value;
-                _smpteBlock.Settings.Invert = cbInvert.IsChecked ?? false;
-            }
-
-            if (_smpteAlphaBlock != null && comboTransitionType.SelectedValue != null)
-            {
-                _smpteAlphaBlock.Settings.Type = (SMPTETransitionType)comboTransitionType.SelectedValue;
-                _smpteAlphaBlock.Settings.Border = (int)sliderBorder.Value;
-                _smpteAlphaBlock.Settings.Position = sliderDepth.Value;
-                _smpteAlphaBlock.Settings.Invert = cbInvert.IsChecked ?? false;
-            }
-        }
-
-        private async Task RestartIfPlaying()
-        {
-            if (_isPlaying)
-            {
-                await btStop_Click(null, null);
-                await Task.Delay(500); // Give time for stop to complete
-                await btStart_Click(null, null);
-            }
+            VisioForgeX.DestroySDK();
         }
     }
 }

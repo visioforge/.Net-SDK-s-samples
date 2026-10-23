@@ -1,6 +1,12 @@
 name: Build ALL (.Net 9)
 on:
   workflow_dispatch:
+  push:
+    branches: [master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -18,12 +24,13 @@ jobs:
       Solution_Name_VE2: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net9.sln"
       Solution_Name_VE3: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net9.sln"
 
-    runs-on: windows-2022
+    runs-on: vf-win
 
     steps:
     - uses: actions/checkout@v4
     
     - name: Setup .NET 
+      if: runner.environment == 'github-hosted'
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '9.0.200'

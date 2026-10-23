@@ -23,6 +23,7 @@ namespace Video_From_Images
     public partial class MainWindow : Window
     {
         private HWEncodersOutputSettingsDialog _mp4HWSettingsDialog;
+        private HWEncodersOutputSettingsDialog _mkvSettingsDialog;
         private MP4SettingsDialog _mp4SettingsDialog;
         private AVISettingsDialog _aviSettingsDialog;
         private MP3SettingsDialog _mp3SettingsDialog;
@@ -102,6 +103,7 @@ namespace Video_From_Images
         private void SetWebMOutput(ref WebMOutput o) { if (_webmSettingsDialog == null) _webmSettingsDialog = new WebMSettingsDialog(); _webmSettingsDialog.SaveSettings(ref o); }
         private void SetFFMPEGOutput(ref FFMPEGOutput o) { if (_ffmpegSettingsDialog == null) _ffmpegSettingsDialog = new FFMPEGSettingsDialog(); _ffmpegSettingsDialog.SaveSettings(ref o); }
         private void SetMP4HWOutput(ref MP4HWOutput o) { if (_mp4HWSettingsDialog == null) _mp4HWSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4); _mp4HWSettingsDialog.SaveSettings(ref o); }
+        private void SetMKVOutput(ref MKVv2Output o) { if (_mkvSettingsDialog == null) _mkvSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV); _mkvSettingsDialog.SaveSettings(ref o); }
         private void SetGIFOutput(ref AnimatedGIFOutput o) { if (_gifSettingsDialog == null) _gifSettingsDialog = new GIFSettingsDialog(); _gifSettingsDialog.SaveSettings(ref o); }
         private void SetDVOutput(ref DVOutput o) { if (_dvSettingsDialog == null) _dvSettingsDialog = new DVSettingsDialog(); _dvSettingsDialog.SaveSettings(ref o); }
         private void SetAVIOutput(ref AVIOutput o)
@@ -111,13 +113,6 @@ namespace Video_From_Images
             if (o.Audio_UseMP3Encoder) { var mp3 = new MP3Output(); SetMP3Output(ref mp3); o.MP3 = mp3; }
         }
         private void SetMP3Output(ref MP3Output o) { if (_mp3SettingsDialog == null) _mp3SettingsDialog = new MP3SettingsDialog(); _mp3SettingsDialog.SaveSettings(ref o); }
-        private void SetMKVOutput(ref MKVv1Output o)
-        {
-            if (_aviSettingsDialog == null) _aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
-            _aviSettingsDialog.SaveSettings(ref o);
-            if (o.Audio_UseMP3Encoder) { var mp3 = new MP3Output(); SetMP3Output(ref mp3); o.MP3 = mp3; }
-        }
-
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             btStart.IsEnabled = false;
@@ -150,7 +145,7 @@ namespace Video_From_Images
                 switch (cbOutputFormat.SelectedIndex)
                 {
                     case 0: { var o = new AVIOutput(); SetAVIOutput(ref o); VideoEdit1.Output_Format = o; break; }
-                    case 1: { var o = new MKVv1Output(); SetMKVOutput(ref o); VideoEdit1.Output_Format = o; break; }
+                    case 1: { var o = new MKVv2Output(); SetMKVOutput(ref o); VideoEdit1.Output_Format = o; break; }
                     case 2: { var o = new WMVOutput(); SetWMVOutput(ref o); VideoEdit1.Output_Format = o; break; }
                     case 3: { var o = new DVOutput(); SetDVOutput(ref o); VideoEdit1.Output_Format = o; break; }
                     case 4: { var o = new WebMOutput(); SetWebMOutput(ref o); VideoEdit1.Output_Format = o; break; }
@@ -376,7 +371,8 @@ namespace Video_From_Images
         {
             switch (cbOutputFormat.SelectedIndex)
             {
-                case 0: case 1: if (_aviSettingsDialog == null) _aviSettingsDialog = new AVISettingsDialog(VideoEdit1); _aviSettingsDialog.ShowDialog(); break;
+                case 0: if (_aviSettingsDialog == null) _aviSettingsDialog = new AVISettingsDialog(VideoEdit1); _aviSettingsDialog.ShowDialog(); break;
+                case 1: if (_mkvSettingsDialog == null) _mkvSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV); _mkvSettingsDialog.ShowDialog(); break;
                 case 2: if (_wmvSettingsDialog == null) _wmvSettingsDialog = new WMVSettingsDialog(VideoEdit1); _wmvSettingsDialog.WMA = false; _wmvSettingsDialog.ShowDialog(); break;
                 case 3: if (_dvSettingsDialog == null) _dvSettingsDialog = new DVSettingsDialog(); _dvSettingsDialog.ShowDialog(); break;
                 case 4: if (_webmSettingsDialog == null) _webmSettingsDialog = new WebMSettingsDialog(); _webmSettingsDialog.ShowDialog(); break;

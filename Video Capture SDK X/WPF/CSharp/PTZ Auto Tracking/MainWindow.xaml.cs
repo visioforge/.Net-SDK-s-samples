@@ -188,7 +188,7 @@ namespace PTZ_Auto_Tracking
                         response.EnsureSuccessStatusCode();
                         var total = response.Content.Headers.ContentLength ?? -1L;
 
-                        using (var source = await response.Content.ReadAsStreamAsync(token))
+                        using (var source = await response.Content.ReadAsStreamAsync())
                         using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None, 81920, true))
                         {
                             var buffer = new byte[81920];
