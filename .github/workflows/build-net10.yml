@@ -139,9 +139,8 @@ jobs:
 
     ## Video Fingerprinting
 
-    - name: Restore (Video Fingerprinting)
-      run: dotnet restore "Video Fingerprinting SDK/VideoFingerprinting.sln"
+    # Apple heads pick their RuntimeIdentifier per configuration, so restore runs inside the Release build.
     - name: Build (Video Fingerprinting)
-      run: dotnet build "Video Fingerprinting SDK/VideoFingerprinting.sln" --configuration Release --no-restore
+      run: dotnet build "Video Fingerprinting SDK/VideoFingerprinting.sln" --configuration Release
     - name: Clean (Video Fingerprinting)
       run: dotnet clean "Video Fingerprinting SDK/VideoFingerprinting.sln" --configuration Release
