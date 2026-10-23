@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,10 +58,7 @@ namespace PTZ_Auto_Tracking_MB
         private static readonly string ModelsCacheDir = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "VisioForge", "models");
 
-        private static readonly HttpClient _http = new HttpClient(new SocketsHttpHandler
-        {
-            PooledConnectionLifetime = TimeSpan.FromMinutes(2), // honour DNS changes despite the static client
-        })
+        private static readonly HttpClient _http = new HttpClient()
         {
             Timeout = TimeSpan.FromMinutes(5),
         };
@@ -222,7 +220,7 @@ namespace PTZ_Auto_Tracking_MB
                         response.EnsureSuccessStatusCode();
                         var total = response.Content.Headers.ContentLength ?? -1L;
 
-                        using (var source = await response.Content.ReadAsStreamAsync(token))
+                        using (var source = await response.Content.ReadAsStreamAsync())
                         using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None, 81920, true))
                         {
                             var buffer = new byte[81920];
@@ -241,8 +239,8 @@ namespace PTZ_Auto_Tracking_MB
                         }
                     }
 
-                    // overwrite:true is more robust on Windows than Delete+Move (no pending-deletion race).
-                    File.Move(tempPath, destPath, overwrite: true);
+                    File.Delete(destPath);
+                    File.Move(tempPath, destPath);
                 }, token);
 
                 // The window may have been closed while the download ran; don't touch disposed controls.
@@ -403,7 +401,7 @@ namespace PTZ_Auto_Tracking_MB
                 return Array.Empty<string>();
             }
 
-            return text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            return text.Split(',').Select(t => t.Trim()).Where(t => t.Length > 0).ToArray();
         }
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
