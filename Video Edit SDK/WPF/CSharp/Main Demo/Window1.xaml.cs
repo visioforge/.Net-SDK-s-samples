@@ -85,11 +85,6 @@ namespace Main_Demo
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
         /// <summary>
-        /// The MKV settings dialog.
-        /// </summary>
-        private HWEncodersOutputSettingsDialog mkvSettingsDialog;
-
-        /// <summary>
         /// MP4 settings dialog.
         /// </summary>
         private MP4SettingsDialog mp4SettingsDialog;
@@ -290,7 +285,6 @@ namespace Main_Demo
 
             // Dispose settings dialogs
             mp4HWSettingsDialog?.Dispose();
-            mkvSettingsDialog?.Dispose();
             mp4SettingsDialog?.Dispose();
             aviSettingsDialog?.Dispose();
             wmvSettingsDialog?.Dispose();
@@ -534,20 +528,6 @@ namespace Main_Demo
         }
 
         /// <summary>
-        /// Configures the MKV output settings.
-        /// </summary>
-        /// <param name="mkvOutput">The MKV output settings.</param>
-        private void SetMKVOutput(ref MKVv2Output mkvOutput)
-        {
-            if (mkvSettingsDialog == null)
-            {
-                mkvSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV);
-            }
-
-            mkvSettingsDialog.SaveSettings(ref mkvOutput);
-        }
-
-        /// <summary>
         /// Configures the Speex output settings.
         /// </summary>
         /// <param name="speexOutput">The Speex output settings.</param>
@@ -635,6 +615,27 @@ namespace Main_Demo
                 var mp3Output = new MP3Output();
                 SetMP3Output(ref mp3Output);
                 aviOutput.MP3 = mp3Output;
+            }
+        }
+
+        /// <summary>
+        /// Configures the MKV output settings.
+        /// </summary>
+        /// <param name="mkvOutput">The MKV output settings.</param>
+        private void SetMKVOutput(ref MKVv1Output mkvOutput)
+        {
+            if (aviSettingsDialog == null)
+            {
+                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
+            }
+
+            aviSettingsDialog.SaveSettings(ref mkvOutput);
+
+            if (mkvOutput.Audio_UseMP3Encoder)
+            {
+                var mp3Output = new MP3Output();
+                SetMP3Output(ref mp3Output);
+                mkvOutput.MP3 = mp3Output;
             }
         }
 
@@ -921,9 +922,9 @@ namespace Main_Demo
                     }
                 case 1:
                     {
-                        outputFormat = VideoEditOutputFormat.MKVv2;
+                        outputFormat = VideoEditOutputFormat.MKVv1;
 
-                        var mkvOutput = new MKVv2Output();
+                        var mkvOutput = new MKVv1Output();
                         SetMKVOutput(ref mkvOutput);
                         VideoEdit1.Output_Format = mkvOutput;
 
@@ -3433,24 +3434,11 @@ namespace Main_Demo
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStartCut_Click(object sender, RoutedEventArgs e)
         {
-            var seekMode = IsTransportStreamFile(edSourceFileToCut.Text)
-                ? FastEditSeekMode.Input
-                : FastEditSeekMode.Output;
-
             await VideoEdit1.FastEdit_CutFileAsync(
                 edSourceFileToCut.Text,
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTimeCut.Text)),
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTimeCut.Text)),
-                edOutputFileCut.Text,
-                seekMode);
-        }
-
-        private static bool IsTransportStreamFile(string fileName)
-        {
-            var extension = Path.GetExtension(fileName);
-            return string.Equals(extension, ".ts", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(extension, ".m2ts", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(extension, ".mts", StringComparison.OrdinalIgnoreCase);
+                edOutputFileCut.Text);
         }
 
         /// <summary>
@@ -4094,6 +4082,7 @@ namespace Main_Demo
             switch (cbOutputVideoFormat.SelectedIndex)
             {
                 case 0:
+                case 1:
                     {
                         if (aviSettingsDialog == null)
                         {
@@ -4101,17 +4090,6 @@ namespace Main_Demo
                         }
 
                         aviSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 1:
-                    {
-                        if (mkvSettingsDialog == null)
-                        {
-                            mkvSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV);
-                        }
-
-                        mkvSettingsDialog.ShowDialog(this);
 
                         break;
                     }

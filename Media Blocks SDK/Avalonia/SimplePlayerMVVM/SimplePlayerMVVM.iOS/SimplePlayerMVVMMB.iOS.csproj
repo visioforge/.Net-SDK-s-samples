@@ -11,7 +11,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia.iOS" Version="$(AvaloniaVersion)" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="[2026.10.20]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.iOS" Version="[2026.10.26]" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimplePlayerMVVM\SimplePlayerMVVMMB.csproj" />

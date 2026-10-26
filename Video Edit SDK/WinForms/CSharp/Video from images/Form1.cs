@@ -31,11 +31,6 @@ namespace Video_From_Images
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
 
         /// <summary>
-        /// The MKV settings dialog.
-        /// </summary>
-        private HWEncodersOutputSettingsDialog mkvSettingsDialog;
-
-        /// <summary>
         /// The MP4 settings dialog.
         /// </summary>
         private MP4SettingsDialog mp4SettingsDialog;
@@ -333,20 +328,6 @@ namespace Video_From_Images
         }
 
         /// <summary>
-        /// Configures the MKV output settings.
-        /// </summary>
-        /// <param name="mkvOutput">The MKV output settings.</param>
-        private void SetMKVOutput(ref MKVv2Output mkvOutput)
-        {
-            if (mkvSettingsDialog == null)
-            {
-                mkvSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV);
-            }
-
-            mkvSettingsDialog.SaveSettings(ref mkvOutput);
-        }
-
-        /// <summary>
         /// Configures the Animated GIF output settings.
         /// </summary>
         /// <param name="gifOutput">The GIF output settings.</param>
@@ -410,6 +391,27 @@ namespace Video_From_Images
         }
 
         /// <summary>
+        /// Configures the MKV output settings.
+        /// </summary>
+        /// <param name="mkvOutput">The MKV output settings.</param>
+        private void SetMKVOutput(ref MKVv1Output mkvOutput)
+        {
+            if (aviSettingsDialog == null)
+            {
+                aviSettingsDialog = new AVISettingsDialog(VideoEdit1);
+            }
+
+            aviSettingsDialog.SaveSettings(ref mkvOutput);
+
+            if (mkvOutput.Audio_UseMP3Encoder)
+            {
+                var mp3Output = new MP3Output();
+                SetMP3Output(ref mp3Output);
+                mkvOutput.MP3 = mp3Output;
+            }
+        }
+
+        /// <summary>
         /// Handles the Click event of the btStart control.
         /// Configures the output format and video effects, then starts the video creation process.
         /// </summary>
@@ -457,7 +459,7 @@ namespace Video_From_Images
                         }
                     case 1:
                         {
-                            var mkvOutput = new MKVv2Output();
+                            var mkvOutput = new MKVv1Output();
                             SetMKVOutput(ref mkvOutput);
                             VideoEdit1.Output_Format = mkvOutput;
 
@@ -679,6 +681,7 @@ namespace Video_From_Images
             switch (cbOutputFormat.SelectedIndex)
             {
                 case 0:
+                case 1:
                     {
                         if (aviSettingsDialog == null)
                         {
@@ -686,17 +689,6 @@ namespace Video_From_Images
                         }
 
                         aviSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 1:
-                    {
-                        if (mkvSettingsDialog == null)
-                        {
-                            mkvSettingsDialog = new HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV);
-                        }
-
-                        mkvSettingsDialog.ShowDialog(this);
 
                         break;
                     }
