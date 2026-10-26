@@ -15,6 +15,9 @@ Partial Class Form1
             mp4HWSettingsDialog?.Dispose()
             mp4HWSettingsDialog = Nothing
 
+            mkvSettingsDialog?.Dispose()
+            mkvSettingsDialog = Nothing
+
             mp4SettingsDialog?.Dispose()
             mp4SettingsDialog = Nothing
 

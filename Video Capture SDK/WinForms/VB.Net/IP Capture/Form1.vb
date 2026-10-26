@@ -191,7 +191,6 @@ Public Class Form1
 
         If (onvifClient IsNot Nothing) Then
             onvifClient.Dispose()
-            onvifClient.Dispose()
             onvifClient = Nothing
 
             btONVIFConnect.Text = "Connect"
@@ -318,7 +317,12 @@ Public Class Form1
 
         VideoView1.StatusOverlay = New TextStatusOverlay()
 
-        Await VideoCapture1.StartAsync()
+        ' Read before Start: the SDK replaces an ONVIF camera's address with the stream it plays.
+        Dim isOnvif = VideoCapture1.IP_Camera_Source IsNot Nothing AndAlso VideoCapture1.IP_Camera_Source.ONVIF_Source
+
+        Dim started = Await VideoCapture1.StartAsync()
+
+        edONVIFLiveVideoURL.Text = If(started AndAlso isOnvif, VideoCapture1.IP_Camera_Source.URL?.ToString(), String.Empty)
 
         tcMain.SelectedIndex = 3
         tmRecording.Start()
@@ -369,7 +373,6 @@ Public Class Form1
 
                 If (onvifClient IsNot Nothing) Then
                     onvifClient.Dispose()
-                    onvifClient.Dispose()
                     onvifClient = Nothing
                 End If
 
@@ -382,28 +385,24 @@ Public Class Form1
                 Dim result = Await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text, OnvifAuthentication.WsUsernameToken)
 
                 If (Not result) Then
+                    onvifClient.Dispose()
                     onvifClient = Nothing
                     MessageBox.Show(Me, "Unable to connect to ONVIF camera.")
                     Exit Sub
                 End If
 
-                Dim deviceInfo = Await onvifClient.GetDeviceInformationAsync()
-                lbONVIFCameraInfo.Text = $"Model {deviceInfo.Model}, Firmware {deviceInfo.FirmwareVersion}"
+                lbONVIFCameraInfo.Text = $"Model {onvifClient.DeviceInformation.Model}, Firmware {onvifClient.DeviceInformation.FirmwareVersion}"
 
                 cbONVIFProfile.Items.Clear()
 
-                onvifProfiles = Await onvifClient.GetProfilesAsync()
+                onvifProfiles = If(Await onvifClient.GetProfilesAsync(), Array.Empty(Of VisioForge.Core.ONVIFX.Media.Profile)())
                 For Each profile As VisioForge.Core.ONVIFX.Media.Profile In onvifProfiles
                     cbONVIFProfile.Items.Add($"{profile.Name}")
                 Next
 
-                If (cbONVIFProfile.Items.Count > 0) Then
-                    cbONVIFProfile.SelectedIndex = 0
-                End If
-
-                Dim streamUri = Await onvifClient.GetStreamUriAsync(onvifProfiles(0).token)
-                edONVIFLiveVideoURL.Text = streamUri.Uri
-                cbIPURL.Text = edONVIFLiveVideoURL.Text
+                ' Play the ONVIF URL itself: the SDK picks the best profile, or the one selected in the list.
+                cbIPURL.Text = edONVIFURL.Text
+                cbIPCameraONVIF.Checked = True
 
                 edIPLogin.Text = edONVIFLogin.Text
                 edIPPassword.Text = edONVIFPassword.Text
@@ -417,16 +416,19 @@ Public Class Form1
                 onvifPtzMaxZoom = 1.0
 
                 If onvifProfiles IsNot Nothing AndAlso onvifProfiles.Length > 0 Then
-                    Await onvifClient.AbsoluteMoveAsync(onvifProfiles(0).token, 0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 0.5F)
+                    Await onvifClient.AbsoluteMoveAsync(PtzProfileToken(), 0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 0.5F)
                 End If
 
                 onvifPtzX = 0
                 onvifPtzY = 0
                 onvifPtzZoom = 0
 
+                connected = True
                 btONVIFConnect.Text = "Disconnect"
             Catch ex As Exception
-
+                onvifClient?.Dispose()
+                onvifClient = Nothing
+                Log($"ONVIF connection error: {ex.Message}")
             Finally
                 btONVIFConnect.Enabled = True
 
@@ -438,7 +440,6 @@ Public Class Form1
             btONVIFConnect.Text = "Connect"
 
             If (onvifClient IsNot Nothing) Then
-                onvifClient.Dispose()
                 onvifClient.Dispose()
                 onvifClient = Nothing
             End If
@@ -461,19 +462,26 @@ Public Class Form1
             onvifPtzX = onvifPtzMinX
         End If
 
-        If cbONVIFProfile.SelectedItem IsNot Nothing Then
-            onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
+        If cbONVIFProfile.Items.Count > 0 Then
+            onvifClient?.AbsoluteMoveAsync(PtzProfileToken(), CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
         End If
 
     End Sub
+
+        ''' <summary>
+        ''' The token of the profile PTZ goes through: the selected one, or the first when none is selected.
+        ''' </summary>
+    Private Function PtzProfileToken() As String
+        Return onvifProfiles(Math.Max(cbONVIFProfile.SelectedIndex, 0)).token
+    End Function
 
         ''' <summary>
         ''' Bt onvifptz set default click.
         ''' </summary>
     Private Sub btONVIFPTZSetDefault_Click(sender As Object, e As EventArgs) Handles btONVIFPTZSetDefault.Click
 
-        If cbONVIFProfile.SelectedItem IsNot Nothing Then
-            onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, 0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 0.5F)
+        If cbONVIFProfile.Items.Count > 0 Then
+            onvifClient?.AbsoluteMoveAsync(PtzProfileToken(), 0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 0.5F)
         End If
 
     End Sub
@@ -494,8 +502,8 @@ Public Class Form1
             onvifPtzX = onvifPtzMaxX
         End If
 
-        If cbONVIFProfile.SelectedItem IsNot Nothing Then
-            onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
+        If cbONVIFProfile.Items.Count > 0 Then
+            onvifClient?.AbsoluteMoveAsync(PtzProfileToken(), CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
         End If
 
     End Sub
@@ -516,8 +524,8 @@ Public Class Form1
             onvifPtzY = onvifPtzMinY
         End If
 
-        If cbONVIFProfile.SelectedItem IsNot Nothing Then
-            onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
+        If cbONVIFProfile.Items.Count > 0 Then
+            onvifClient?.AbsoluteMoveAsync(PtzProfileToken(), CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
         End If
 
     End Sub
@@ -538,8 +546,8 @@ Public Class Form1
             onvifPtzY = onvifPtzMaxY
         End If
 
-        If cbONVIFProfile.SelectedItem IsNot Nothing Then
-            onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
+        If cbONVIFProfile.Items.Count > 0 Then
+            onvifClient?.AbsoluteMoveAsync(PtzProfileToken(), CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
         End If
 
     End Sub
@@ -560,8 +568,8 @@ Public Class Form1
             onvifPtzZoom = onvifPtzMaxZoom
         End If
 
-        If cbONVIFProfile.SelectedItem IsNot Nothing Then
-            onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
+        If cbONVIFProfile.Items.Count > 0 Then
+            onvifClient?.AbsoluteMoveAsync(PtzProfileToken(), CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
         End If
 
     End Sub
@@ -582,8 +590,8 @@ Public Class Form1
             onvifPtzZoom = onvifPtzMinZoom
         End If
 
-        If cbONVIFProfile.SelectedItem IsNot Nothing Then
-            onvifClient?.AbsoluteMoveAsync(cbONVIFProfile.Text, CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
+        If cbONVIFProfile.Items.Count > 0 Then
+            onvifClient?.AbsoluteMoveAsync(PtzProfileToken(), CSng(onvifPtzX), CSng(onvifPtzY), CSng(onvifPtzZoom), 0.5F, 0.5F, 0.5F)
         End If
 
     End Sub

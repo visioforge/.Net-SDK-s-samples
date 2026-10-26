@@ -293,8 +293,11 @@ namespace MediaPlayer
 
                     _isSeeking = false;
 
-                    await _player.OpenAsync(new Uri(edURL.Text));
-                    await _player.PlayAsync();
+                    if (!await _player.OpenAsync(new Uri(edURL.Text)) || !await _player.PlayAsync())
+                    {
+                        Android.Util.Log.Error("MainActivity", $"Unable to open or play {edURL.Text}.");
+                        return;
+                    }
 
                     tmPosition.Start();
 

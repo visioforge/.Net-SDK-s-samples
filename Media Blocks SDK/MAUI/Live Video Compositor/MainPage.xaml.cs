@@ -469,7 +469,16 @@ namespace Live_Video_Compositor_MB_MAUI
 
                     var name = $"Camera [{device.DisplayName}]";
                     var rect = GetRectFromUI();
-                    var videoInfo = new VideoFrameInfoX(settings.Format.Width, settings.Format.Height, settings.Format.FrameRate);
+
+                    // The camera delivers upright frames: rotated on Android, portrait for the default iOS orientation.
+                    var rotation = device.CalculateVideoRotation();
+                    var portrait = rotation == 90 || rotation == 270;
+#if __IOS__ && !__MACCATALYST__
+                    portrait = settings.Orientation == IOSVideoSourceOrientation.Portrait || settings.Orientation == IOSVideoSourceOrientation.PortratUpsideDown;
+#endif
+                    var videoInfo = portrait
+                        ? new VideoFrameInfoX(settings.Format.Height, settings.Format.Width, settings.Format.FrameRate)
+                        : new VideoFrameInfoX(settings.Format.Width, settings.Format.Height, settings.Format.FrameRate);
 
                     // Mirror AddScreenSourceAsync: own block + wrapper through try/finally so a
                     // throw from the LVCVideoInput ctor or Input_AddAsync doesn't leak either.

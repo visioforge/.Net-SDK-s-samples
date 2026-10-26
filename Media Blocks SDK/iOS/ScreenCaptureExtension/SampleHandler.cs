@@ -24,8 +24,12 @@ namespace ScreenCaptureExtension
     ///
     /// Frame wire format (little-endian, 52-byte header):
     ///   uint32 magic       = 0x5646524D  ('VFRM')
-    ///   uint8  version     = 1          (protocol version; receiver rejects unknown)
-    ///   uint8  reserved[3] = 0          (padding; keeps subsequent fields 4-byte aligned)
+    ///   uint8  version     = 2          (protocol version; v1 hosts reject v2 frames)
+    ///   uint8  colorMatrix = 0 unknown, 1 ITU_R_601_4, 2 ITU_R_709_2, 3 SMPTE_240M_1995
+    ///                        (from the pixel buffer's kCVImageBufferYCbCrMatrixKey attachment)
+    ///   uint8  colorRange  = 0 unknown, 1 limited, 2 full
+    ///                        (from the pixel buffer's pixel format)
+    ///   uint8  reserved    = 0          (padding; keeps subsequent fields 4-byte aligned)
     ///   uint32 width
     ///   uint32 height
     ///   uint32 format      = 1 for NV12
@@ -51,9 +55,20 @@ namespace ScreenCaptureExtension
         private const uint FrameMagic = 0x5646524D; // 'VFRM'
         // Bump whenever any field is added/removed/renumbered or its semantics change. The
         // receiver rejects frames with an unknown version instead of mis-parsing them.
-        private const byte ProtocolVersion = 1;
+        // v2 repurposes reserved[0]/reserved[1] as the colorimetry bytes (#2605).
+        private const byte ProtocolVersion = 2;
         private const int HeaderSize = 52;
         private const uint FormatNV12 = 1;
+
+        // Wire values of the v2 colorimetry bytes (header offsets 5 and 6). Kept in sync by
+        // hand with the receiver at IOSBroadcastSourceX.cs.
+        private const byte WireMatrixUnknown = 0;
+        private const byte WireMatrixBt601 = 1;
+        private const byte WireMatrixBt709 = 2;
+        private const byte WireMatrixSmpte240m = 3;
+        private const byte WireRangeUnknown = 0;
+        private const byte WireRangeLimited = 1;
+        private const byte WireRangeFull = 2;
 
         // POSIX constants for macOS / iOS.
         private const int AF_UNIX = 1;
@@ -96,6 +111,13 @@ namespace ScreenCaptureExtension
         // the broadcast picker in the host app, so we let the host override without recompiling
         // the extension.
         private string _activeAppGroupId = AppGroupId;
+
+        // Colorimetry of the ReplayKit frames (#2605), read once from the first pixel buffer and
+        // stamped into every v2 header. Concurrent first callbacks would write identical values,
+        // so no lock is needed.
+        private byte _wireMatrix = WireMatrixUnknown;
+        private byte _wireRange = WireRangeUnknown;
+        private bool _colorimetryKnown;
 
         public override void BroadcastStarted(NSDictionary<NSString, NSObject> setupInfo)
         {
@@ -188,6 +210,34 @@ namespace ScreenCaptureExtension
                         return;
                     }
 
+                    // First frame: capture the colorimetry for the v2 header (#2605). The range
+                    // comes from the pixel format, the matrix from the buffer attachment. The
+                    // flag goes last so a concurrent callback never reads still-Unknown bytes.
+                    if (!_colorimetryKnown)
+                    {
+                        _wireRange = pixelFormat == CVPixelFormatType.CV420YpCbCr8BiPlanarFullRange
+                            ? WireRangeFull
+                            : WireRangeLimited;
+                        var matrixAttachment = pixelBuffer.GetAttachment<NSString>(CVImageBuffer.YCbCrMatrixKey, out _);
+                        if (matrixAttachment != null)
+                        {
+                            if (matrixAttachment.Equals(CVImageBuffer.YCbCrMatrix_ITU_R_601_4))
+                            {
+                                _wireMatrix = WireMatrixBt601;
+                            }
+                            else if (matrixAttachment.Equals(CVImageBuffer.YCbCrMatrix_ITU_R_709_2))
+                            {
+                                _wireMatrix = WireMatrixBt709;
+                            }
+                            else if (matrixAttachment.Equals(CVImageBuffer.YCbCrMatrix_SMPTE_240M_1995))
+                            {
+                                _wireMatrix = WireMatrixSmpte240m;
+                            }
+                        }
+
+                        _colorimetryKnown = true;
+                    }
+
                     // Check Lock's CVReturn before entering the try — if Lock fails, Unlock
                     // in finally would underflow the refcount and crash.
                     var lockResult = pixelBuffer.Lock(CVPixelBufferLock.ReadOnly);
@@ -225,11 +275,13 @@ namespace ScreenCaptureExtension
                         var durationNs = CMTimeToNanoseconds(sampleBuffer.Duration, fallbackNs: 1_000_000_000L / 60);
 
                         // Build the 52-byte header on the stack. Layout matches the protocol
-                        // docblock above; stackalloc is zero-initialised so the reserved[3]
-                        // padding at offsets 5-7 is already 0 without an explicit write.
+                        // docblock above.
                         Span<byte> header = stackalloc byte[HeaderSize];
                         WriteUInt32LE(header.Slice(0, 4), FrameMagic);
-                        header[4] = ProtocolVersion; // reserved[3] at 5-7 stays zero
+                        header[4] = ProtocolVersion;
+                        header[5] = _wireMatrix;
+                        header[6] = _wireRange;
+                        header[7] = 0; // padding
                         WriteUInt32LE(header.Slice(8, 4), width);
                         WriteUInt32LE(header.Slice(12, 4), height);
                         WriteUInt32LE(header.Slice(16, 4), FormatNV12);

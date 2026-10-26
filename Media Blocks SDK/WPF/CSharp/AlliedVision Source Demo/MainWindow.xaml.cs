@@ -181,6 +181,8 @@ namespace AlliedVision_Source_Demo
             {
                 Debug.WriteLine(ex);
             }
+
+            btStart.IsEnabled = cbCamera.Items.Count > 0;
         }
 
         /// <summary>

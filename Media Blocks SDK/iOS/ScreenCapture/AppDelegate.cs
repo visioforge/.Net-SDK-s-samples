@@ -69,7 +69,12 @@ namespace ScreenCapture
             Window = window;
 
             var vc = new UIViewController();
-            vc.View!.BackgroundColor = UIColor.Black;
+
+            // Install the VC into the window first, then build the view hierarchy on it.
+            Window.RootViewController = vc;
+            Window.MakeKeyAndVisible();
+            vc.View.LayoutIfNeeded();
+            vc.View.BackgroundColor = UIColor.Black;
 
             AddVideoView(vc.View);
             AddControls(vc.View);
@@ -81,9 +86,6 @@ namespace ScreenCapture
             // in some app configurations the OS aborts with SIGABRT if the key is missing.
             PHPhotoLibrary.RequestAuthorization(PHAccessLevel.AddOnly, _ => { });
 
-            Window.RootViewController = vc;
-
-            Window.MakeKeyAndVisible();
             VisioForgeX.InitSDK();
 
             // Set the helpful prompt BEFORE we kick off the pipeline. StartPipelineAsync blocks

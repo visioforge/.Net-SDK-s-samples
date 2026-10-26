@@ -84,9 +84,10 @@ namespace Live_Video_Compositor_Demo
         /// </summary>
         private void Compositor_OnError(object sender, ErrorsEventArgs e)
         {
-            Dispatcher.Invoke((Action)(() =>
+            Dispatcher.BeginInvoke((Action)(() =>
             {
-                mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
+                mmLog.AppendText($"[{DateTime.Now:HH:mm:ss}] {e.Message}{Environment.NewLine}");
+                mmLog.ScrollToEnd();
             }));
         }
 
@@ -1146,14 +1147,20 @@ namespace Live_Video_Compositor_Demo
                         return;
                     }
 
+                    // The URL actually opened (an ONVIF address resolves to an RTSP URL), without the user:password@ part.
+                    var url = rtspSettings.Uri.GetComponents(UriComponents.HttpRequestUrl, UriFormat.Unescaped);
+
                     var info = rtspSettings.GetInfo();
                     if (info == null || info.VideoStreams.Count == 0)
                     {
-                        MessageBox.Show(this, "RTSP source does not contain video streams.", "RTSP Source Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        var error = info == null ? $"Unable to read the stream at {url}. Please check the URL and credentials." : "RTSP source does not contain video streams.";
+                        MessageBox.Show(this, error, "RTSP Source Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
-                    var name = $"RTSP [{dlg.URL}]";
+                    var video = info.VideoStreams[0];
+                    var fps = video.FrameRate.Value > 0 ? $"{video.FrameRate} fps" : "fps unknown";
+                    var name = $"RTSP [{url}] {video.Codec} {video.Width}x{video.Height} {fps}";
                     var sourceBlock = new RTSPSourceBlock(rtspSettings);
                     var videoInfo = info.GetVideoInfo();
 

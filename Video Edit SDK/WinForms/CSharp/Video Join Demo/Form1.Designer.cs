@@ -24,6 +24,9 @@
             mp4HWSettingsDialog?.Dispose();
             mp4HWSettingsDialog = null;
 
+            mkvSettingsDialog?.Dispose();
+            mkvSettingsDialog = null;
+
             mp3SettingsDialog?.Dispose();
             mp3SettingsDialog = null;
 

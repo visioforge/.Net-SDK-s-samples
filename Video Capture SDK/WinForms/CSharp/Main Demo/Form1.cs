@@ -853,8 +853,6 @@ namespace VideoCapture_CSharp_Demo
             VideoCapture1.Video_Renderer.Zoom_ShiftX = 0;
             VideoCapture1.Video_Renderer.Zoom_ShiftY = 0;
 
-            //VideoCapture1.VLC_Path = Environment.GetEnvironmentVariable("VFVLC64");
-
             VideoCapture1.Video_Effects_Clear();
             lbTextLogos.Items.Clear();
             lbImageLogos.Items.Clear();
@@ -1342,7 +1340,12 @@ namespace VideoCapture_CSharp_Demo
             }
 
             // start
-            await VideoCapture1.StartAsync();
+            // Read before Start: the SDK replaces an ONVIF camera's address with the stream it plays.
+            var isOnvif = (VideoCapture1.Mode == VideoCaptureMode.IPPreview || VideoCapture1.Mode == VideoCaptureMode.IPCapture) && VideoCapture1.IP_Camera_Source?.ONVIF_Source == true;
+
+            var started = await VideoCapture1.StartAsync();
+
+            edONVIFLiveVideoURL.Text = started && isOnvif ? VideoCapture1.IP_Camera_Source.URL?.ToString() : string.Empty;
 
             edNetworkURL.Text = VideoCapture1.Network_Streaming_URL;
 
@@ -4943,8 +4946,14 @@ namespace VideoCapture_CSharp_Demo
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btPIPDevicesClear_Click(object sender, EventArgs e)
         {
+            // The SDK declines while a capture runs - the PiP filters are in the graph - so ask it
+            // what is left instead of assuming the list is now empty.
             VideoCapture1.PIP_Sources_Clear();
-            cbPIPDevices.Items.Clear();
+
+            if (VideoCapture1.PIP_Sources_Count() == 0)
+            {
+                cbPIPDevices.Items.Clear();
+            }
         }
 
         /// <summary>
@@ -6410,6 +6419,7 @@ namespace VideoCapture_CSharp_Demo
                     var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
                     {
+                        onvifClient.Dispose();
                         onvifClient = null;
                         btONVIFConnect.Text = "Connect";
                         MessageBox.Show(this, "Unable to connect to ONVIF camera.");
@@ -6428,17 +6438,9 @@ namespace VideoCapture_CSharp_Demo
                         }
                     }
 
-                    if (cbONVIFProfile.Items.Count > 0)
-                    {
-                        cbONVIFProfile.SelectedIndex = 0;
-
-                        // Get the stream URI for the first profile
-                        var mediaUri = await onvifClient.GetStreamUriAsync(profiles[0]);
-                        if (mediaUri != null)
-                        {
-                            edONVIFLiveVideoURL.Text = cbIPURL.Text = mediaUri.Uri;
-                        }
-                    }
+                    // Play the ONVIF URL itself: the SDK picks the best profile, or the one selected in the list.
+                    cbIPURL.Text = edONVIFURL.Text;
+                    cbIPCameraONVIF.Checked = true;
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
@@ -6447,6 +6449,8 @@ namespace VideoCapture_CSharp_Demo
                 }
                 catch
                 {
+                    onvifClient?.Dispose();
+                    onvifClient = null;
                     MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                     btONVIFConnect.Text = "Connect";
                 }

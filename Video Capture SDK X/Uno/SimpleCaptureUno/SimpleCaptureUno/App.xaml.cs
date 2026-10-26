@@ -15,7 +15,7 @@ public partial class App : Application
         this.InitializeComponent();
     }
 
-    public new static Window? MainWindow { get; private set; }
+    public static Window? MainWindow { get; private set; }
 
         /// <summary>
         /// On launched.

@@ -1319,7 +1319,6 @@ namespace Main_Demo
             }
 
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            //VideoCapture1.VLC_Path = Environment.GetEnvironmentVariable("VFVLCPATH");
 
             VideoCapture1.Video_Renderer.Zoom_Ratio = 0;
             VideoCapture1.Video_Renderer.Zoom_ShiftX = 0;
@@ -2389,7 +2388,12 @@ namespace Main_Demo
             }
 
             // Start
-            await VideoCapture1.StartAsync();
+            // Read before Start: the SDK replaces an ONVIF camera's address with the stream it plays.
+            var isOnvif = (VideoCapture1.Mode == VideoCaptureMode.IPPreview || VideoCapture1.Mode == VideoCaptureMode.IPCapture) && VideoCapture1.IP_Camera_Source?.ONVIF_Source == true;
+
+            var started = await VideoCapture1.StartAsync();
+
+            edONVIFLiveVideoURL.Text = started && isOnvif ? VideoCapture1.IP_Camera_Source.URL?.ToString() : string.Empty;
 
             edNetworkURL.Text = VideoCapture1.Network_Streaming_URL;
                  
@@ -4349,8 +4353,14 @@ namespace Main_Demo
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btPIPDevicesClear_Click(object sender, RoutedEventArgs e)
         {
+            // The SDK declines while a capture runs - the PiP filters are in the graph - so ask it
+            // what is left instead of assuming the list is now empty.
             VideoCapture1.PIP_Sources_Clear();
-            cbPIPDevices.Items.Clear();
+
+            if (VideoCapture1.PIP_Sources_Count() == 0)
+            {
+                cbPIPDevices.Items.Clear();
+            }
         }
 
         /// <summary>
@@ -6016,6 +6026,7 @@ namespace Main_Demo
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
                     {
                         MessageBox.Show(this, "Please specify IP camera user name and password.");
+                        btONVIFConnect.Content = "Connect";
                         return;
                     }
 
@@ -6023,7 +6034,9 @@ namespace Main_Demo
                     var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
                     {
+                        onvifClient.Dispose();
                         onvifClient = null;
+                        btONVIFConnect.Content = "Connect";
                         MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
@@ -6040,20 +6053,9 @@ namespace Main_Demo
                         }
                     }
 
-                    if (cbONVIFProfile.Items.Count > 0)
-                    {
-                        cbONVIFProfile.SelectedIndex = 0;
-
-                        // Get the stream URI for the first profile
-                        if (profiles != null && profiles.Length > 0)
-                        {
-                            var mediaUri = await onvifClient.GetStreamUriAsync(profiles[0]);
-                            if (mediaUri != null)
-                            {
-                                edONVIFLiveVideoURL.Text = cbIPURL.Text = mediaUri.Uri;
-                            }
-                        }
-                    }
+                    // Play the ONVIF URL itself: the SDK picks the best profile, or the one selected in the list.
+                    cbIPURL.Text = edONVIFURL.Text;
+                    cbIPCameraONVIF.IsChecked = true;
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
@@ -6062,11 +6064,15 @@ namespace Main_Demo
                 }
                 catch
                 {
+                    onvifClient?.Dispose();
+                    onvifClient = null;
                     MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                     btONVIFConnect.Content = "Connect";
                 }
-
-                btONVIFConnect.IsEnabled = true;
+                finally
+                {
+                    btONVIFConnect.IsEnabled = true;
+                }
             }
             else
             {

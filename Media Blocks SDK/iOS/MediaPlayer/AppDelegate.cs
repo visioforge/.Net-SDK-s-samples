@@ -86,14 +86,13 @@ public class AppDelegate : UIApplicationDelegate
     {
         Window = window;
 
-        // create a UIViewController with a single UILabel
         _vc = new CustomViewController(Window);
 
-        // Force the VC's view hierarchy to load BEFORE we wire up button handlers.
-        // SelectButton / PlayButton / PositionSlider are created in ViewDidLoad, so
-        // touching _vc.SelectButton before LoadViewIfNeeded returns null on iOS 26
-        // (UIKit no longer triggers ViewDidLoad implicitly when a property is set on
-        // the VC) and the event-subscription lines below NRE in SetupWindow.
+        // Install the VC into the window first; its view hierarchy (and VideoView) is built in ViewDidLoad.
+        Window.RootViewController = _vc;
+        Window.MakeKeyAndVisible();
+
+        // Make sure ViewDidLoad has run: it creates the buttons and the VideoView used below.
         _vc.LoadViewIfNeeded();
 
         _vc.SelectButton.TouchUpInside += (sender, args) => _vc.OpenFilePicker();
@@ -152,11 +151,7 @@ public class AppDelegate : UIApplicationDelegate
             }
         });
 
-        Window.RootViewController = _vc;
-
-        Window.MakeKeyAndVisible();
-
-        // ViewDidLoad already fired above via LoadViewIfNeeded, so VideoView is set.
+        // ViewDidLoad has already run (see above), so VideoView is set.
         _videoView = _vc.VideoView ?? throw new InvalidOperationException(
             "CustomViewController.VideoView is null after LoadViewIfNeeded — video view not configured in ViewDidLoad.");
 

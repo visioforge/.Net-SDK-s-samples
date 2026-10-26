@@ -226,7 +226,12 @@ namespace IP_MJPEG_Restreamer
 
             VideoView1.StatusOverlay = new TextStatusOverlay();
 
-            await VideoCapture1.StartAsync();
+            // Read before Start: the SDK replaces an ONVIF camera's address with the stream it plays.
+            var isOnvif = VideoCapture1.IP_Camera_Source?.ONVIF_Source == true;
+
+            var started = await VideoCapture1.StartAsync();
+
+            edONVIFLiveVideoURL.Text = started && isOnvif ? VideoCapture1.IP_Camera_Source.URL?.ToString() : string.Empty;
 
             tcMain.SelectedIndex = 2;
             tmRecording.Start();
@@ -297,6 +302,7 @@ namespace IP_MJPEG_Restreamer
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
                     {
                         MessageBox.Show(this, "Please specify IP camera user name and password.");
+                        btONVIFConnect.Content = "Connect";
                         return;
                     }
 
@@ -304,7 +310,9 @@ namespace IP_MJPEG_Restreamer
                     var result = await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text, OnvifAuthentication.WsUsernameToken);
                     if (!result)
                     {
+                        onvifControl.Dispose();
                         onvifControl = null;
+                        btONVIFConnect.Content = "Connect";
                         MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
@@ -317,32 +325,33 @@ namespace IP_MJPEG_Restreamer
 
                     cbONVIFProfile.Items.Clear();
                     var profiles = await onvifControl.GetProfilesAsync();
-                    foreach (var profile in profiles)
+                    if (profiles != null)
                     {
-                        cbONVIFProfile.Items.Add($"{profile.Name}");
+                        foreach (var profile in profiles)
+                        {
+                            cbONVIFProfile.Items.Add($"{profile.Name}");
+                        }
                     }
 
-                    if (cbONVIFProfile.Items.Count > 0)
-                    {
-                        cbONVIFProfile.SelectedIndex = 0;
-                    }
-
-                    // Get stream URI from first profile
-                    if (profiles != null && profiles.Length > 0)
-                    {
-                        var streamUri = await onvifControl.GetStreamUriAsync(profiles[0].token);
-                        edONVIFLiveVideoURL.Text = cbIPURL.Text = streamUri.Uri;
-                    }
+                    // Play the ONVIF URL itself: the SDK picks the best profile, or the one selected in the list.
+                    cbIPURL.Text = edONVIFURL.Text;
+                    cbIPCameraONVIF.IsChecked = true;
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
 
                     btONVIFConnect.Content = "Disconnect";
                 }
+                catch
+                {
+                    onvifControl?.Dispose();
+                    onvifControl = null;
+                    MessageBox.Show(this, "Unable to connect to ONVIF camera.");
+                    btONVIFConnect.Content = "Connect";
+                }
                 finally
                 {
                     btONVIFConnect.IsEnabled = true;
-                    btONVIFConnect.Content = "Connect";
                 }
             }
             else

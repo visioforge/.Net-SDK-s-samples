@@ -35,6 +35,8 @@ Public Class Form1
 
     Private mp4HWSettingsDialog As HWEncodersOutputSettingsDialog
 
+    Private mkvSettingsDialog As HWEncodersOutputSettingsDialog
+
     Private mp4SettingsDialog As MP4SettingsDialog
 
     Private aviSettingsDialog As AVISettingsDialog
@@ -419,6 +421,17 @@ Public Class Form1
     End Sub
 
         ''' <summary>
+        ''' Set mkv output.
+        ''' </summary>
+    Private Sub SetMKVOutput(ByRef mkvOutput As MKVv2Output)
+        If (mkvSettingsDialog Is Nothing) Then
+            mkvSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV)
+        End If
+
+        mkvSettingsDialog.SaveSettings(mkvOutput)
+    End Sub
+
+        ''' <summary>
         ''' Set mp 4 output.
         ''' </summary>
     Private Sub SetMP4Output(ByRef mp4Output As MP4Output)
@@ -607,25 +620,6 @@ Public Class Form1
         End If
     End Sub
 
-        ''' <summary>
-        ''' Set mkv output.
-        ''' </summary>
-    Private Sub SetMKVOutput(ByRef mkvOutput As MKVv1Output)
-        If (aviSettingsDialog Is Nothing) Then
-            aviSettingsDialog = New AVISettingsDialog(
-                VideoEdit1.Video_Codecs.ToArray(),
-                    VideoEdit1.Audio_Codecs.ToArray())
-        End If
-
-        aviSettingsDialog.SaveSettings(mkvOutput)
-
-        If (mkvOutput.Audio_UseMP3Encoder) Then
-            Dim mp3Output = New MP3Output()
-            SetMP3Output(mp3Output)
-            mkvOutput.MP3 = mp3Output
-        End If
-    End Sub
-
 
     Private Async Sub btStart_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btStart.Click
 
@@ -797,9 +791,9 @@ Public Class Form1
                 SetAVIOutput(aviOutput)
                 VideoEdit1.Output_Format = aviOutput
             Case 1
-                outputFormat = VideoEditOutputFormat.MKVv1
+                outputFormat = VideoEditOutputFormat.MKVv2
 
-                Dim mkvOutput = New MKVv1Output()
+                Dim mkvOutput = New MKVv2Output()
                 SetMKVOutput(mkvOutput)
                 VideoEdit1.Output_Format = mkvOutput
             Case 2
@@ -2491,11 +2485,19 @@ Public Class Form1
 
     Private Async Sub btStartCut_Click(sender As Object, e As EventArgs) Handles btStartCut.Click
 
+        Dim sourceExtension = Path.GetExtension(edSourceFileToCut.Text)
+        Dim seekMode = If(String.Equals(sourceExtension, ".ts", StringComparison.OrdinalIgnoreCase) OrElse
+                          String.Equals(sourceExtension, ".m2ts", StringComparison.OrdinalIgnoreCase) OrElse
+                          String.Equals(sourceExtension, ".mts", StringComparison.OrdinalIgnoreCase),
+                          FastEditSeekMode.Input,
+                          FastEditSeekMode.Output)
+
         Await VideoEdit1.FastEdit_CutFileAsync(
                 edSourceFileToCut.Text,
                  TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTimeCut.Text)),
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTimeCut.Text)),
-                edOutputFileCut.Text)
+                edOutputFileCut.Text,
+                seekMode)
 
     End Sub
 
@@ -2958,11 +2960,11 @@ Public Class Form1
 
                 aviSettingsDialog.ShowDialog(Me)
             Case 1
-                If (aviSettingsDialog Is Nothing) Then
-                    aviSettingsDialog = New AVISettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray())
+                If (mkvSettingsDialog Is Nothing) Then
+                    mkvSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MKV)
                 End If
 
-                aviSettingsDialog.ShowDialog(Me)
+                mkvSettingsDialog.ShowDialog(Me)
             Case 2
                 If (wmvSettingsDialog Is Nothing) Then
                     wmvSettingsDialog = New WMVSettingsDialog(VideoEdit1)

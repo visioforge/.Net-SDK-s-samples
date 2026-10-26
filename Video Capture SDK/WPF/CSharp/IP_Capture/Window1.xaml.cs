@@ -507,7 +507,12 @@ namespace IP_Capture
 
             VideoView1.StatusOverlay = new TextStatusOverlay();
 
-            await VideoCapture1.StartAsync();
+            // Read before Start: the SDK replaces an ONVIF camera's address with the stream it plays.
+            var isOnvif = VideoCapture1.IP_Camera_Source?.ONVIF_Source == true;
+
+            var started = await VideoCapture1.StartAsync();
+
+            edONVIFLiveVideoURL.Text = started && isOnvif ? VideoCapture1.IP_Camera_Source.URL?.ToString() : string.Empty;
 
             tcMain.SelectedIndex = 3;
             tmRecording.Start();
@@ -639,6 +644,7 @@ namespace IP_Capture
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
                     {
                         MessageBox.Show(this, "Please specify IP camera user name and password.");
+                        btONVIFConnect.Content = "Connect";
                         return;
                     }
 
@@ -646,7 +652,9 @@ namespace IP_Capture
                     var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
                     {
+                        onvifClient.Dispose();
                         onvifClient = null;
+                        btONVIFConnect.Content = "Connect";
                         MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
@@ -664,18 +672,11 @@ namespace IP_Capture
                         {
                             cbONVIFProfile.Items.Add($"{profile.Name}");
                         }
-
-                        if (cbONVIFProfile.Items.Count > 0)
-                        {
-                            cbONVIFProfile.SelectedIndex = 0;
-                        }
-
-                        var mediaUri = await onvifClient.GetStreamUriAsync(profiles[0]);
-                        if (mediaUri != null)
-                        {
-                            edONVIFLiveVideoURL.Text = cbIPURL.Text = mediaUri.Uri;
-                        }
                     }
+
+                    // Play the ONVIF URL itself: the SDK picks the best profile, or the one selected in the list.
+                    cbIPURL.Text = edONVIFURL.Text;
+                    cbIPCameraONVIF.IsChecked = true;
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
@@ -688,10 +689,16 @@ namespace IP_Capture
 
                     btONVIFConnect.Content = "Disconnect";
                 }
+                catch
+                {
+                    onvifClient?.Dispose();
+                    onvifClient = null;
+                    MessageBox.Show(this, "Unable to connect to ONVIF camera.");
+                    btONVIFConnect.Content = "Connect";
+                }
                 finally
                 {
                     btONVIFConnect.IsEnabled = true;
-                    btONVIFConnect.Content = "Connect";
                 }
             }
             else

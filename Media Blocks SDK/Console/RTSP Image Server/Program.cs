@@ -222,6 +222,7 @@ namespace RTSP_Image_Server
 
             // Create video sample grabber to intercept and modify frames
             _sampleGrabber = new VideoSampleGrabberBlock(VideoFormatX.BGRA);
+            _sampleGrabber.AllowFrameModification = true; // the handler writes into the frame
             _sampleGrabber.OnVideoFrameBuffer += SampleGrabber_OnVideoFrameBuffer;
 
             // Create RTSP server block
@@ -265,11 +266,14 @@ namespace RTSP_Image_Server
             var frame = e.Frame;
             var currentImage = _imageData[_currentImageIndex];
 
+            // Skip frames smaller than the prepared image, so the copy never overruns the buffer
+            if (frame.DataSize < currentImage.Length)
+            {
+                return;
+            }
+
             // Copy the image data to the frame buffer
             Marshal.Copy(currentImage, 0, frame.Data, currentImage.Length);
-
-            // Set UpdateData to true to indicate the frame has been modified
-            e.UpdateData = true;
         }
     }
 }

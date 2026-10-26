@@ -81,7 +81,7 @@
         <TextBox x:Name="txtMediaUrl"
                  Grid.Column="1"
                  PlaceholderText="Enter media URL or file path..."
-                 Text="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
+                 Text="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4"
                  VerticalAlignment="Center"
                  Margin="0,0,8,0" />
 
@@ -102,6 +102,12 @@
                 ValueChanged="slVolume_ValueChanged" />
 
       </Grid>
+
+      <!-- Error message -->
+      <TextBlock x:Name="lbError"
+                 Foreground="OrangeRed"
+                 TextWrapping="Wrap"
+                 Visibility="Collapsed" />
 
     </StackPanel>
   </Grid>

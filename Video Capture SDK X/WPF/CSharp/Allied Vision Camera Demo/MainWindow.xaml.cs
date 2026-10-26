@@ -152,6 +152,8 @@ namespace AlliedVision_Camera_Demo
             {
                 cbCamera.SelectedIndex = 0;
             }
+
+            btStart.IsEnabled = cbCamera.Items.Count > 0;
         }
 
         /// <summary>

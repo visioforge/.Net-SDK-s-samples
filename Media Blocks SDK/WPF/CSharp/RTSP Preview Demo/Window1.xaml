@@ -12,8 +12,8 @@
                         <TabItem Header="Main">
                             <Grid>
                                 <Label Content="URL" Height="23" HorizontalAlignment="Left" Margin="16,10,0,0" Name="label220" VerticalAlignment="Top" Width="55" />
-                                <CheckBox Content="Capture audio" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="20,0,0,0" Name="cbIPAudioCapture" VerticalAlignment="Center" Width="107" />
-                                <CheckBox Content="Low latency mode" Height="16" HorizontalAlignment="Left" IsChecked="False" Margin="143,0,0,0" Name="cbLowLatencyMode" VerticalAlignment="Center" Width="120" ToolTip="Enable for real-time streaming with minimal delay (60-120ms latency)" />
+                                <CheckBox Content="Capture audio" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="20,170,0,0" Name="cbIPAudioCapture" VerticalAlignment="Top" Width="107" />
+                                <CheckBox Content="Low latency mode" Height="16" HorizontalAlignment="Left" IsChecked="False" Margin="143,170,0,0" Name="cbLowLatencyMode" VerticalAlignment="Top" Width="120" ToolTip="Enable for real-time streaming with minimal delay (60-120ms latency)" />
                                 <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="20,74,0,0" Name="label221" VerticalAlignment="Top" />
                                 <TextBox Height="23" HorizontalAlignment="Left" Margin="20,98,0,0" Name="edIPLogin" VerticalAlignment="Top" Width="150" Text="" />
                                 <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="186,74,0,0" Name="label222" VerticalAlignment="Top" />
@@ -39,7 +39,7 @@
                                 <Label Content="Profile" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"/>
                                 <ComboBox x:Name="cbONVIFProfile" HorizontalAlignment="Left" Margin="80,104,0,0" VerticalAlignment="Top" Width="418" IsReadOnly="True"/>
                                 <Label Content="Video URL" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="edONVIFLiveVideoURL" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="418" Margin="80,135,0,0"/>
+                                <TextBox x:Name="edONVIFLiveVideoURL" HorizontalAlignment="Left" Height="23" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="418" Margin="80,135,0,0"/>
                                 <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="http://192.168.1.22/onvif/device_service" VerticalAlignment="Top" Width="408"/>
                                 <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="label221_Copy" VerticalAlignment="Top" />
                                 <TextBox Height="23" HorizontalAlignment="Left" Margin="80,43,0,0" x:Name="edONVIFLogin" VerticalAlignment="Top" Width="150" Text="" />

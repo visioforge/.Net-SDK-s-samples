@@ -51,7 +51,7 @@ namespace IP_Capture
         private readonly SaveFileDialog screenshotSaveDialog = new SaveFileDialog
         {
             FileName = "image.jpg",
-            Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png|GIF|*.gif",
+            Filter = "JPEG|*.jpg|BMP|*.bmp|PNG|*.png",
             InitialDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
         };
 
@@ -176,9 +176,6 @@ namespace IP_Capture
                     case ".jpg":
                         await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Jpeg, 85);
                         break;
-                    case ".gif":
-                        await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Gif);
-                        break;
                     case ".png":
                         await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Png);
                         break;
@@ -254,7 +251,9 @@ namespace IP_Capture
                     case 1:
                         {
                             // RTSP
-                            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, cbIPAudioCapture.IsChecked == true);
+                            // An ONVIF device-service URL is resolved to the profile selected for that camera, or to its best stream.
+                            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, cbIPAudioCapture.IsChecked == true, cbIPURL.Text == edONVIFURL.Text ? cbONVIFProfile.SelectedItem as string : null);
+                            edONVIFLiveVideoURL.Text = rtsp.Uri.ToString();
 
                             // Enable low latency mode if checkbox is checked
                             if (cbLowLatencyMode.IsChecked == true)
@@ -477,6 +476,7 @@ namespace IP_Capture
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
                     {
                         MessageBox.Show(this, "Please specify IP camera user name and password.");
+                        btONVIFConnect.Content = "Connect";
                         return;
                     }
 
@@ -484,7 +484,9 @@ namespace IP_Capture
                     var result = await onvifDevice.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
                     {
+                        onvifDevice.Dispose();
                         onvifDevice = null;
+                        btONVIFConnect.Content = "Connect";
                         MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
@@ -506,31 +508,26 @@ namespace IP_Capture
                         cbONVIFProfile.Items.Add($"{profile.Name}");
                     }
 
-                    if (cbONVIFProfile.Items.Count > 0)
-                    {
-                        cbONVIFProfile.SelectedIndex = 0;
-                    }
-
-                    if (profiles.Length > 0)
-                    {
-                        var streamUri = await onvifDevice.GetStreamUriAsync(profiles[0]);
-                        if (streamUri != null)
-                        {
-                            edONVIFLiveVideoURL.Text = cbIPURL.Text = streamUri.Uri;
-                        }
-                    }
+                    // Play the ONVIF URL itself as RTSP: the SDK picks the best profile, or the one selected in the list.
+                    cbIPURL.Text = edONVIFURL.Text;
+                    cbIPCameraType.SelectedIndex = 1;
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
 
                     btONVIFConnect.Content = "Disconnect";
                 }
-                catch
+                catch (Exception ex)
                 {
+                    onvifDevice?.Dispose();
+                    onvifDevice = null;
+                    Log($"ONVIF connection error: {ex.Message}");
                     btONVIFConnect.Content = "Connect";
                 }
-
-                btONVIFConnect.IsEnabled = true;
+                finally
+                {
+                    btONVIFConnect.IsEnabled = true;
+                }
             }
             else
             {
@@ -549,15 +546,17 @@ namespace IP_Capture
         /// </summary>
         private async Task<string> GetCurrentProfileTokenAsync()
         {
-            if (onvifDevice == null || cbONVIFProfile.SelectedIndex < 0)
+            if (onvifDevice == null)
             {
                 return null;
             }
 
+            // With no profile selected, PTZ goes through the first one.
+            var index = Math.Max(cbONVIFProfile.SelectedIndex, 0);
             var profiles = await onvifDevice.GetProfilesAsync();
-            if (profiles != null && cbONVIFProfile.SelectedIndex < profiles.Length)
+            if (profiles != null && index < profiles.Length)
             {
-                return profiles[cbONVIFProfile.SelectedIndex].token;
+                return profiles[index].token;
             }
 
             return null;

@@ -532,8 +532,12 @@ public class AppDelegate : UIApplicationDelegate
     {
         Window = window;
 
-        // create a UIViewController with a single UILabel
         var vc = new UIViewController();
+
+        // Install the VC into the window first, then build the view hierarchy on it.
+        Window.RootViewController = vc;
+        Window.MakeKeyAndVisible();
+        vc.View.LayoutIfNeeded();
 
         CreateVideoView(vc.View);
 
@@ -551,10 +555,6 @@ public class AppDelegate : UIApplicationDelegate
                 // Handle the case where permission is denied
             }
         });
-
-        Window.RootViewController = vc;
-
-        Window.MakeKeyAndVisible();
 
         VisioForgeX.InitSDK();
 

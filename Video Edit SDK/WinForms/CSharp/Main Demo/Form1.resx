@@ -121,7 +121,7 @@
     <value>128, 17</value>
   </metadata>
   <data name="OpenDialog1.Filter" xml:space="preserve">
-    <value>All Files (*.*)|*.*|QuickTime (*.mov) | *.mov|MP4 (*.mp4) | *.mp4|3GP (*.3gp) | *.3gp|mpg (*.mpg) | *.mpg|avi (*.avi) | *.avi|wmv (*.wmv)| *.wmv|asf (*.asf) | *.asf|JPEG (*.jpg)|*.jpg|Bitmap (*.bmp)|*.bmp|Gif (*.gif)|*.gif</value>
+    <value>All Files (*.*)|*.*|QuickTime (*.mov) | *.mov|MP4 (*.mp4) | *.mp4|MPEG transport stream (*.ts;*.m2ts;*.mts) | *.ts;*.m2ts;*.mts|3GP (*.3gp) | *.3gp|mpg (*.mpg) | *.mpg|avi (*.avi) | *.avi|wmv (*.wmv)| *.wmv|asf (*.asf) | *.asf|JPEG (*.jpg)|*.jpg|Bitmap (*.bmp)|*.bmp|Gif (*.gif)|*.gif</value>
   </data>
   <metadata name="SaveDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>252, 17</value>

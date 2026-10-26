@@ -10,7 +10,6 @@ using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
-using VisioForge.Core.ONVIFX;
 
 namespace RTSPViewerUno;
 
@@ -89,7 +88,6 @@ public sealed partial class MainPage : Page
         _pipeline.OnError += Pipeline_OnError;
         _pipeline.OnStop += Pipeline_OnStop;
 
-        // Resolve ONVIF -> RTSP if needed
         Uri uri;
         try
         {
@@ -101,41 +99,13 @@ public sealed partial class MainPage : Page
             return false;
         }
 
-        if (uri.Scheme == "http" || uri.Scheme == "https")
-        {
-            using var onvifClient = new ONVIFClientX();
-            var result = await onvifClient.ConnectAsync(edURL.Text, edUsername.Text, edPassword.Password);
-            if (result)
-            {
-                var profiles = await onvifClient.GetProfilesAsync();
-                if (profiles != null && profiles.Length > 0)
-                {
-                    var mediaUri = await onvifClient.GetStreamUriAsync(profiles[0]);
-                    if (mediaUri != null)
-                    {
-                        uri = new Uri(mediaUri.Uri);
-                    }
-                }
-                
-                // Verify URI was successfully converted to RTSP
-                if (uri.Scheme != "rtsp")
-                {
-                    ShowToast("Unable to get RTSP source info from ONVIF URL.");
-                    return false;
-                }
-            }
-            else
-            {
-                ShowToast("Unable to get RTSP source info from ONVIF URL.");
-                return false;
-            }
-        }
-        else if (uri.Scheme != "rtsp")
+        if (uri.Scheme != "rtsp" && uri.Scheme != "http" && uri.Scheme != "https")
         {
             ShowToast("Unsupported URL scheme. Must be RTSP or ONVIF HTTP(s).");
             return false;
         }
 
+        // An ONVIF device-service URL (http://<camera>/onvif/device_service) is resolved to the camera's best stream.
         var rtsp = await RTSPSourceSettings.CreateAsync(uri, edUsername.Text, edPassword.Password, true);
 
         if (cbLowLatencyMode.IsChecked == true)
@@ -147,7 +117,7 @@ public sealed partial class MainPage : Page
 
         if (info == null)
         {
-            ShowToast("Unable to get RTSP source info.");
+            ShowToast("Unable to get RTSP source info. Check the URL (an ONVIF camera: http://<camera>/onvif/device_service), the login and the password.");
             return false;
         }
 

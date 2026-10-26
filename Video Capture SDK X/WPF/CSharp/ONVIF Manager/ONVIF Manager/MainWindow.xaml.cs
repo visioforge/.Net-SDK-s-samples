@@ -132,8 +132,8 @@ namespace ONVIF_Manager
                 // Get network interfaces to retrieve IP, MAC address and DHCP info
                 await UpdateNetworkInformation();
 
-                // Update profiles asynchronously
-                UpdateProfiles();
+                // Update profiles
+                await UpdateProfiles();
             }
             catch (Exception ex)
             {
@@ -215,7 +215,7 @@ namespace ONVIF_Manager
         /// <summary>
         /// Asynchronously retrieves and updates available video and audio profiles from the ONVIF device.
         /// </summary>
-        private async void UpdateProfiles()
+        private async Task UpdateProfiles()
         {
             if (onvifClient == null)
                 return;
@@ -235,21 +235,23 @@ namespace ONVIF_Manager
                     
                     if (profileList.Any())
                     {
-                        // Get RTSP URL
-                        var firstProfile = profileList.First();
+                        // Get RTSP URL of the first video profile
+                        var firstProfile = profileList.FirstOrDefault(p => p.VideoEncoderConfiguration != null) ?? profileList.First();
                         var streamUri = await onvifClient.GetStreamUriAsync(firstProfile);
                         txtRTSPUrl.Text = streamUri?.Uri ?? "-";
 
                         // Add profiles to grid
                         foreach (var profile in profileList)
                         {
+                            // Audio-only and metadata profiles have no video encoder
+                            var video = profile.VideoEncoderConfiguration;
                             var profileInfo = new ProfileInfo
                             {
                                 Name = profile.Name ?? "-",
-                                Resolution = $"{profile.VideoEncoderConfiguration.Resolution.Width}x{profile.VideoEncoderConfiguration.Resolution.Height}",
-                                Encoding = profile.VideoEncoderConfiguration.Encoding.ToString() ?? "-",
-                                Framerate = profile.VideoEncoderConfiguration.RateControl.FrameRateLimit.ToString(),
-                                Bitrate = profile.VideoEncoderConfiguration.RateControl.BitrateLimit.ToString() + " Kbps"
+                                Resolution = video?.Resolution != null ? $"{video.Resolution.Width}x{video.Resolution.Height}" : "-",
+                                Encoding = video?.Encoding.ToString() ?? "-",
+                                Framerate = video?.RateControl?.FrameRateLimit.ToString() ?? "-",
+                                Bitrate = video?.RateControl != null ? $"{video.RateControl.BitrateLimit} Kbps" : "-"
                             };
 
                             // Add audio encoder information if available
@@ -257,7 +259,7 @@ namespace ONVIF_Manager
                             {
                                 profileInfo.AudioEncoding = profile.AudioEncoderConfiguration.Encoding.ToString() ?? "-";
                                 profileInfo.AudioBitrate = profile.AudioEncoderConfiguration.Bitrate.ToString() + " Kbps";
-                                profileInfo.AudioSampleRate = profile.AudioEncoderConfiguration.SampleRate.ToString() + " Hz";
+                                profileInfo.AudioSampleRate = profile.AudioEncoderConfiguration.SampleRate.ToString() + " kHz";
                             }
                             else
                             {

@@ -567,7 +567,6 @@ namespace Computer_Vision_Demo
             // select source
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-            //VideoCapture1.VLC_Path = Environment.GetEnvironmentVariable("VFVLCPATH");
 
             if (rbVideoCaptureDevice.Checked)
             {

@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
@@ -114,9 +115,12 @@ namespace MediaBlocks_Virtual_Camera_Demo_WPF
             }
         }
 
-        private void btRegister_Click(object sender, RoutedEventArgs e)
+        private async void btRegister_Click(object sender, RoutedEventArgs e)
         {
-            bool result = VirtualCameraSinkBlock.COMRegisterAsAdmin();
+            // Off the UI thread: the call waits for the UAC prompt and regsvr32.
+            btRegister.IsEnabled = false;
+            bool result = await Task.Run(VirtualCameraSinkBlock.COMRegisterAsAdmin);
+            btRegister.IsEnabled = true;
 
             if (result)
             {

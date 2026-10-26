@@ -396,6 +396,7 @@ namespace Player_PII_Redaction_X
             }
 
             // Best-effort audio output on desktop.
+#if !__IOS__ || __MACCATALYST__
             try
             {
                 var outputs = await _player.Audio_OutputDevicesAsync();
@@ -408,6 +409,7 @@ namespace Player_PII_Redaction_X
             {
                 Debug.WriteLine(ex);
             }
+#endif
 
             // Build the source before registering the block. iOS exposes only the NSUrl overload.
 #if IOS && !MACCATALYST

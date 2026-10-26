@@ -22,7 +22,7 @@
             <Label>Camera name</Label>
             <ComboBox x:Name="cbCamera" HorizontalAlignment="Stretch" Margin="10,5,10,0" Text="Aravis-Fake-GV01" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10,15,10,0">
-                <Button x:Name="btStart" Content="Start" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Click="btStart_Click" />
+                <Button x:Name="btStart" Content="Start" IsEnabled="False" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Click="btStart_Click" />
                 <Button x:Name="btStop" Content="Stop" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,5,0" Click="btStop_Click" />
                 <TextBlock x:Name="lbTimestamp" Text="00:00:00" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0" />
             </StackPanel>

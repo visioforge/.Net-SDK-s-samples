@@ -377,17 +377,18 @@ namespace MediaBlocks_DataMatrix_Detection_Demo_WPF
                     Cols = e.SymbolInfo?.Cols ?? 0
                 };
 
-                // Set corner positions if available
+                // Corners go counter-clockwise from the symbol's bottom-left: Corner0 bottom-left,
+                // Corner1 bottom-right, Corner2 top-right, Corner3 top-left.
                 if (e.Corners != null)
                 {
-                    if (e.Corners.Corner0 != null)
-                        dataMatrixInfo.TopLeft = $"{e.Corners.Corner0.X:F0},{e.Corners.Corner0.Y:F0}";
-                    if (e.Corners.Corner1 != null)
-                        dataMatrixInfo.TopRight = $"{e.Corners.Corner1.X:F0},{e.Corners.Corner1.Y:F0}";
-                    if (e.Corners.Corner2 != null)
-                        dataMatrixInfo.BottomLeft = $"{e.Corners.Corner2.X:F0},{e.Corners.Corner2.Y:F0}";
                     if (e.Corners.Corner3 != null)
-                        dataMatrixInfo.BottomRight = $"{e.Corners.Corner3.X:F0},{e.Corners.Corner3.Y:F0}";
+                        dataMatrixInfo.TopLeft = $"{e.Corners.Corner3.X:F0},{e.Corners.Corner3.Y:F0}";
+                    if (e.Corners.Corner2 != null)
+                        dataMatrixInfo.TopRight = $"{e.Corners.Corner2.X:F0},{e.Corners.Corner2.Y:F0}";
+                    if (e.Corners.Corner0 != null)
+                        dataMatrixInfo.BottomLeft = $"{e.Corners.Corner0.X:F0},{e.Corners.Corner0.Y:F0}";
+                    if (e.Corners.Corner1 != null)
+                        dataMatrixInfo.BottomRight = $"{e.Corners.Corner1.X:F0},{e.Corners.Corner1.Y:F0}";
                 }
 
                 _dataMatrixCodes.Insert(0, dataMatrixInfo);

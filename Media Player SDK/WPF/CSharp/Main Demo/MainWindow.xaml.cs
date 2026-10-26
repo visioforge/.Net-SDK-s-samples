@@ -1950,13 +1950,10 @@ namespace Main_Demo
             volumeMeter2.Stop();
             volumeMeter2.Clear();
 
-            if (!MediaPlayer1.Loop)
+            if (memoryFileStream != null)
             {
-                if (memoryFileStream != null)
-                {
-                    memoryFileStream.Dispose();
-                    memoryFileStream = null;
-                }
+                memoryFileStream.Dispose();
+                memoryFileStream = null;
             }
         }
 

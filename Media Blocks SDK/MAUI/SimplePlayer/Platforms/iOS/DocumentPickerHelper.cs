@@ -14,8 +14,8 @@ namespace Simple_Player_MB_MAUI.Platforms.iOS
     /// the scoped bookmark and only exposes a raw path string, so a fresh
     /// NSUrl.FromFilename(path) has no sandbox grant — reads work once through
     /// the picker's short "discretionary" window and then fail on subsequent
-    /// Open of the same file (IOSHelper.CheckFileAccess throws "Unable to
-    /// access file"). Returning the original NSUrl lets the caller hold
+    /// Open of the same file (CreateAsync throws UnauthorizedAccessException).
+    /// Returning the original NSUrl lets the caller hold
     /// StartAccessingSecurityScopedResource open for the whole playback session.
     /// </summary>
     public sealed class DocumentPickerHelper : NSObject, IUIDocumentPickerDelegate

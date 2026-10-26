@@ -505,13 +505,7 @@ public class AppDelegate : UIApplicationDelegate
         // create a UIViewController with a single UILabel
         var vc = new UIViewController();
 
-        // Install the VC into the window BEFORE building the subview hierarchy so
-        // `vc.View.Bounds` is non-zero when VideoView/Metal initialises. Previously we
-        // touched `vc.View` right after `new UIViewController()`, which fires loadView
-        // on an orphan VC whose view has Bounds = CGRect.Empty. Metal drawables created
-        // against a zero-sized layer don't gain a surface even after AutoresizingMask
-        // later resizes the UIView — the camera records fine (LED on) but preview stays
-        // black.
+        // Install the VC into the window first, then build the view hierarchy on it.
         Window.RootViewController = vc;
         Window.MakeKeyAndVisible();
         vc.View.LayoutIfNeeded();

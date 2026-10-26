@@ -90,7 +90,8 @@ using System.Diagnostics;
                 MediaPlayer1.Multiple_Video_Streams_Mappings_Clear();
                 if (info.VideoStreams.Count > 1)
                 {
-                    int count = Math.Min(info.VideoStreams.Count, 4);
+                    // The main view shows stream 0; the four panels show streams 1 to 4.
+                    int count = Math.Min(info.VideoStreams.Count - 1, 4);
                     for (int i = 0; i < count; i++)
                     {
                         Panel panel = null;
@@ -112,7 +113,7 @@ using System.Diagnostics;
 
                         if (panel != null)
                         {
-                            MediaPlayer1.Multiple_Video_Streams_Mappings_Add(i, panel.Handle, panel.Width, panel.Height);
+                            MediaPlayer1.Multiple_Video_Streams_Mappings_Add(i + 1, panel.Handle, panel.Width, panel.Height);
                         }
                     }
                 }

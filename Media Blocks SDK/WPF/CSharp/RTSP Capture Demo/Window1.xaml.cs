@@ -214,7 +214,9 @@ namespace RTSP_Capture
                 _pipeline.Debug_Mode = cbDebugMode.IsChecked == true;
                 _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
-                var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, audioEnabled);
+                // An ONVIF device-service URL is resolved to the profile selected for that camera, or to its best stream.
+                var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, audioEnabled, cbIPURL.Text == edONVIFURL.Text ? cbONVIFProfile.SelectedItem as string : null);
+                edONVIFLiveVideoURL.Text = rtsp.Uri.ToString();
 
                 // Enable low latency mode if checkbox is checked
                 if (lowLatencyMode)
@@ -227,7 +229,7 @@ namespace RTSP_Capture
 
                 if (info == null)
                 {
-                    MessageBox.Show(this, "Unable to get RTSP source info. Please, use the direct RTSP URL, not HTTP ONVIF");
+                    MessageBox.Show(this, "Unable to get RTSP source info. Check the URL, the login and the password.");
                     return;
                 }
 
@@ -367,6 +369,7 @@ namespace RTSP_Capture
                         if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
                         {
                             MessageBox.Show(this, "Please specify IP camera user name and password.");
+                            btONVIFConnect.Content = "Connect";
                             return;
                         }
 
@@ -374,7 +377,9 @@ namespace RTSP_Capture
                         var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                         if (!result)
                         {
+                            onvifClient.Dispose();
                             onvifClient = null;
+                            btONVIFConnect.Content = "Connect";
                             MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                             return;
                         }
@@ -389,30 +394,27 @@ namespace RTSP_Capture
                             {
                                 cbONVIFProfile.Items.Add($"{profile.Name}");
                             }
-
-                            if (cbONVIFProfile.Items.Count > 0)
-                            {
-                                cbONVIFProfile.SelectedIndex = 0;
-                            }
-
-                            var mediaUri = await onvifClient.GetStreamUriAsync(profiles[0]);
-                            if (mediaUri != null)
-                            {
-                                edONVIFLiveVideoURL.Text = cbIPURL.Text = mediaUri.Uri;
-                            }
                         }
+
+                        // Play the ONVIF URL itself: the SDK picks the best profile, or the one selected in the list.
+                        cbIPURL.Text = edONVIFURL.Text;
 
                         edIPLogin.Text = edONVIFLogin.Text;
                         edIPPassword.Text = edONVIFPassword.Text;
 
                         btONVIFConnect.Content = "Disconnect";
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        onvifClient?.Dispose();
+                        onvifClient = null;
+                        Log($"ONVIF connection error: {ex.Message}");
                         btONVIFConnect.Content = "Connect";
                     }
-
-                    btONVIFConnect.IsEnabled = true;
+                    finally
+                    {
+                        btONVIFConnect.IsEnabled = true;
+                    }
                 }
                 else
                 {

@@ -132,6 +132,9 @@ public sealed partial class MainPage : Page
         /// </summary>
     private async void BtnPlayStop_Click(object sender, RoutedEventArgs e)
     {
+        // Disabled until the action finishes, so a second tap cannot overlap it.
+        btnPlayStop.IsEnabled = false;
+
         try
         {
             if (_isPlaying)
@@ -153,6 +156,10 @@ public sealed partial class MainPage : Page
         catch (Exception ex)
         {
             DebugLogger.WriteLine(ex);
+        }
+        finally
+        {
+            btnPlayStop.IsEnabled = true;
         }
     }
 
@@ -199,7 +206,11 @@ public sealed partial class MainPage : Page
             ResetTimeline();
 
             // Start playback immediately
-            await _pipeline.StartAsync();
+            if (!await _pipeline.StartAsync())
+            {
+                await CleanupPipelineAsync();
+                return;
+            }
             
             _mediaPrepared = true;
             _positionTimer.Start();

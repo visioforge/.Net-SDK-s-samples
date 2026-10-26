@@ -58,7 +58,7 @@
       <TextBox x:Name="txtMediaUrl"
                Grid.Column="0"
                PlaceholderText="Enter media URL or file path..."
-               Text="https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
+               Text="https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4"
                VerticalAlignment="Center" />
 
       <Button x:Name="btnPlayStop"

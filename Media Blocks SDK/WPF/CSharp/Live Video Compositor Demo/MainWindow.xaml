@@ -172,7 +172,7 @@
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="LOGS" Height="30" VerticalAlignment="Top" HorizontalAlignment="Stretch" Padding="0,8,0,0" TextAlignment="Center" Background="#673ab7" Foreground="White" />
 
-                    <TextBox x:Name="mmLog" TextWrapping="Wrap" Margin="10,10,10,10" Height="200" />
+                    <TextBox x:Name="mmLog" TextWrapping="Wrap" Margin="10,10,10,10" Height="200" IsReadOnly="True" VerticalScrollBarVisibility="Auto" />
                 </StackPanel>
             </Border>
 

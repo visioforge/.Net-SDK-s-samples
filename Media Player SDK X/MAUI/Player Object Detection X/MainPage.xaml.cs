@@ -412,6 +412,7 @@ namespace Player_Object_Detection_X
             }
 
             // Best-effort audio output on desktop; the detector itself only needs the video stream.
+#if !__IOS__ || __MACCATALYST__
             try
             {
                 var outputs = await _player.Audio_OutputDevicesAsync();
@@ -424,6 +425,7 @@ namespace Player_Object_Detection_X
             {
                 Debug.WriteLine(ex);
             }
+#endif
 
             // Build the source before registering the detector. iOS exposes only the NSUrl overload.
 #if IOS && !MACCATALYST

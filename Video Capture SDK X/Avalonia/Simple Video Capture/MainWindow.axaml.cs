@@ -668,7 +668,7 @@ namespace SimpleVideoCaptureA
             var topLevel = TopLevel.GetTopLevel(this);
             if (topLevel == null) return;
 
-            var exts = new string[] { "jpg", "bmp", "png", "gif" };
+            var exts = new string[] { "jpg", "bmp", "png" };
             var fileTypes = exts.Select(ext => new FilePickerFileType(ext.ToUpperInvariant())
             {
                 Patterns = new[] { "*." + ext }
@@ -702,9 +702,6 @@ namespace SimpleVideoCaptureA
                         break;
                     case ".jpg":
                         await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Jpeg);
-                        break;
-                    case ".gif":
-                        await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Gif);
                         break;
                     case ".png":
                         await VideoCapture1.Snapshot_SaveAsync(filename, SkiaSharp.SKEncodedImageFormat.Png);

@@ -26,6 +26,9 @@
             _mp4HWSettingsDialog?.Dispose();
             _mp4HWSettingsDialog = null;
 
+            _mkvSettingsDialog?.Dispose();
+            _mkvSettingsDialog = null;
+
             _webmSettingsDialog?.Dispose();
             _webmSettingsDialog = null;
 

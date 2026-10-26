@@ -19,7 +19,7 @@ public partial class App : Application
     /// <summary>
     /// Gets the main window.
     /// </summary>
-    protected Window? MainWindow { get; private set; }
+    public static Window? MainWindow { get; private set; }
 
         /// <summary>
         /// On launched.

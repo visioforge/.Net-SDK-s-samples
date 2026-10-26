@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,6 +23,8 @@ namespace USB3V_GigE_Spinnaker
         private VideoCaptureCoreX _core;
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+
+        private bool _closing;
 
         public MainWindow()
         {
@@ -99,10 +100,12 @@ namespace USB3V_GigE_Spinnaker
                 return;
             }
 
-            CreateEngine();
+            // Window_Loaded created the first engine; Stop disposes it.
+            if (_core == null)
+            {
+                CreateEngine();
+            }
 
-            var sources = await DeviceEnumerator.Shared.SpinnakerSourcesAsync();
-            var sourceInfo = sources.ToList().Find(x => x.Name == cbCamera.Text);
             var sourceSettings = new SpinnakerSourceSettings(cbCamera.Text, new VisioForge.Core.Types.Rect(0, 0, Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text)), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text))); 
             _core.Video_Source = sourceSettings;
 
@@ -147,7 +150,17 @@ namespace USB3V_GigE_Spinnaker
 
             tmRecording.Elapsed += (senderx, args) => { UpdateRecordingTime(); };
 
-            var sources = await DeviceEnumerator.Shared.SpinnakerSourcesAsync();
+            SpinnakerCameraInfo[] sources;
+            try
+            {
+                sources = await DeviceEnumerator.Shared.SpinnakerSourcesAsync();
+            }
+            catch (Exception ex)
+            {
+                // For example, the Spinnaker SDK is not installed.
+                MessageBox.Show(this, ex.Message);
+                return;
+            }
 
             foreach (var device in sources)
             {
@@ -166,9 +179,24 @@ namespace USB3V_GigE_Spinnaker
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (_closing)
+            {
+                return;
+            }
+
+            // Closing does not await an async handler: keep the window open until teardown is done.
+            _closing = true;
+            e.Cancel = true;
+
+            tmRecording.Stop();
+
+            await DestroyEngineAsync();
+
             VisioForgeX.DestroySDK();
+
+            Close();
         }
     }
 }

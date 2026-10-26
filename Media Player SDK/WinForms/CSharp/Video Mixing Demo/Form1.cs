@@ -78,7 +78,15 @@
             // first file should be added as usual, other files using PIP API
             if (MediaPlayer1.Playlist_GetCount() == 0)
             {
-                MediaPlayer1.Playlist_Add(filename);
+                // Playlist_Add declines an empty or missing path. Without this check the demo list
+                // gains an entry the playlist does not have, the next file takes this branch again,
+                // and every later index addresses the wrong stream.
+                if (!MediaPlayer1.Playlist_Add(filename))
+                {
+                    MessageBox.Show(this, "Unable to add the file to the playlist: " + filename);
+                    return;
+                }
+
                 lbSourceFiles.Items.Add($@"{filename} (entire screen)");
                 info.Rect = new Rectangle(0, 0, 0, 0);
                 info.Alpha = 1.0f;
@@ -90,7 +98,15 @@
                 int width = Convert.ToInt32(edPIPFileWidth.Text);
                 int height = Convert.ToInt32(edPIPFileHeight.Text);
 
-                MediaPlayer1.PIP_Sources_Add(filename, left, top, width, height);
+                // The SDK declines while a playback runs - those filters are in the graph - so the
+                // demo list must not gain an entry the engine does not have, or every later index
+                // addresses the wrong PiP stream.
+                if (!MediaPlayer1.PIP_Sources_Add(filename, left, top, width, height))
+                {
+                    MessageBox.Show(this, "Stop the playback before adding a PiP source.");
+                    return;
+                }
+
                 lbSourceFiles.Items.Add($@"{filename} ({left}.{top}px, width: {width}px, height: {height}px)");
                 info.Rect = new Rectangle(left, top, width, height);
 
@@ -137,6 +153,13 @@
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
+            // A declined add appends nothing, so the list can be empty here.
+            if (_pipInfos.Count == 0)
+            {
+                MessageBox.Show(this, "Add a file first.");
+                return;
+            }
+
             try
             {
                 MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
@@ -202,7 +225,14 @@
 
                 _pipInfos.Clear();
                 MediaPlayer1.PIP_Sources_Clear();
+
+                // The playlist has to go with them: AddFile routes the first file to the main stream
+                // only while Playlist_GetCount() is zero, so leaving it behind makes the next file a
+                // PiP source and every _pipInfos index one off.
+                MediaPlayer1.Playlist_Clear();
+
                 lbSourceFiles.Items.Clear();
+                _lastZOrder = 8;
             }
             catch (Exception ex)
             {

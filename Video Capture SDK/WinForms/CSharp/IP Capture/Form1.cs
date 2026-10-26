@@ -348,7 +348,12 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
 
             VideoView1.StatusOverlay = new TextStatusOverlay();
 
-            await VideoCapture1.StartAsync();
+            // Read before Start: the SDK replaces an ONVIF camera's address with the stream it plays.
+            var isOnvif = VideoCapture1.IP_Camera_Source?.ONVIF_Source == true;
+
+            var started = await VideoCapture1.StartAsync();
+
+            edONVIFLiveVideoURL.Text = started && isOnvif ? VideoCapture1.IP_Camera_Source.URL?.ToString() : string.Empty;
 
             tcMain.SelectedIndex = 3;
             tmRecording.Start();
@@ -422,6 +427,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
                     {
                         MessageBox.Show(this, "Please specify IP camera user name and password.");
+                        btONVIFConnect.Text = "Connect";
                         return;
                     }
 
@@ -429,7 +435,9 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                     var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
                     {
+                        onvifClient.Dispose();
                         onvifClient = null;
+                        btONVIFConnect.Text = "Connect";
                         MessageBox.Show(this, "Unable to connect to ONVIF camera.");
                         return;
                     }
@@ -444,28 +452,27 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                         {
                             cbONVIFProfile.Items.Add($"{profile.Name}");
                         }
-
-                        if (cbONVIFProfile.Items.Count > 0)
-                        {
-                            cbONVIFProfile.SelectedIndex = 0;
-                        }
-
-                        var mediaUri = await onvifClient.GetStreamUriAsync(profiles[0]);
-                        if (mediaUri != null)
-                        {
-                            edONVIFLiveVideoURL.Text = cbIPURL.Text = mediaUri.Uri;
-                        }
                     }
+
+                    // Play the ONVIF URL itself: the SDK picks the best profile, or the one selected in the list.
+                    cbIPURL.Text = edONVIFURL.Text;
+                    cbIPCameraONVIF.Checked = true;
 
                     edIPLogin.Text = edONVIFLogin.Text;
                     edIPPassword.Text = edONVIFPassword.Text;
 
                     btONVIFConnect.Text = "Disconnect";
                 }
+                catch
+                {
+                    onvifClient?.Dispose();
+                    onvifClient = null;
+                    MessageBox.Show(this, "Unable to connect to ONVIF camera.");
+                    btONVIFConnect.Text = "Connect";
+                }
                 finally
                 {
                     btONVIFConnect.Enabled = true;
-                    btONVIFConnect.Text = "Connect";
                 }
             }
             else
@@ -476,29 +483,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
                 {
                     onvifClient.Dispose();
                     onvifClient = null;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Handles the cb onvif profile selected index changed event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void cbONVIFProfile_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (onvifClient == null)
-            {
-                return;
-            }
-
-            var profiles = await onvifClient.GetProfilesAsync();
-            if (profiles != null && cbONVIFProfile.SelectedIndex < profiles.Length)
-            {
-                var mediaUri = await onvifClient.GetStreamUriAsync(profiles[cbONVIFProfile.SelectedIndex]);
-                if (mediaUri != null)
-                {
-                    edONVIFLiveVideoURL.Text = cbIPURL.Text = mediaUri.Uri;
                 }
             }
         }

@@ -668,7 +668,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             cbONVIFProfile.Name = "cbONVIFProfile";
             cbONVIFProfile.Size = new System.Drawing.Size(574, 33);
             cbONVIFProfile.TabIndex = 4;
-            cbONVIFProfile.SelectedIndexChanged += cbONVIFProfile_SelectedIndexChanged;
             // 
             // label510
             // 

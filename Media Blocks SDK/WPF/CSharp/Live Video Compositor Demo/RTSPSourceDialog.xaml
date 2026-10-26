@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="RTSP Source"
-        Height="220"
+        SizeToContent="Height"
         Width="450"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
@@ -24,8 +24,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="URL:" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Name="edURL" Text="rtsp://localhost:554/stream" Margin="0,0,0,5" VerticalContentAlignment="Center" Height="26"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="URL:" VerticalAlignment="Top"/>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBox Name="edURL" Text="rtsp://localhost:554/stream" Margin="0,0,0,2" VerticalContentAlignment="Center" Height="26"/>
+            <TextBlock TextWrapping="Wrap" Foreground="Gray" FontSize="11" Margin="0,0,0,5"
+                       Text="RTSP stream URL (rtsp://...). An ONVIF device address (http://camera/onvif/device_service) also works; the SDK picks the profile with the best video."/>
+        </StackPanel>
 
         <Label Grid.Row="1" Grid.Column="0" Content="Login:" VerticalAlignment="Center"/>
         <TextBox Grid.Row="1" Grid.Column="1" Name="edLogin" Margin="0,0,0,5" VerticalContentAlignment="Center" Height="26"/>
@@ -35,7 +39,7 @@
 
         <CheckBox Grid.Row="3" Grid.Column="1" Name="cbAudioEnabled" Content="Audio enabled" IsChecked="True" Margin="0,5,0,5"/>
 
-        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
             <Button Name="btOK" Content="OK" Width="75" Margin="0,0,10,0" Click="btOK_Click" IsDefault="True"/>
             <Button Name="btCancel" Content="Cancel" Width="75" Click="btCancel_Click" IsCancel="True"/>
         </StackPanel>

@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,6 +26,8 @@ namespace USB3V_GigE_Spinnaker
         private SpinnakerSourceBlock _source;
 
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
+
+        private bool _closing;
 
         public MainWindow()
         {
@@ -95,12 +96,13 @@ namespace USB3V_GigE_Spinnaker
 
             try
             {
-                CreateEngine();
+                // Window_Loaded created the first pipeline; Stop disposes it.
+                if (_pipeline == null)
+                {
+                    CreateEngine();
+                }
 
                 _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
-
-                var sources = await DeviceEnumerator.Shared.SpinnakerSourcesAsync();
-                var sourceInfo = sources.ToList().Find(x => x.Name == cbCamera.Text);
 
                 var settings = new SpinnakerSourceSettings(cbCamera.Text, new VisioForge.Core.Types.Rect(0, 0, Convert.ToInt32(edWidth.Text), Convert.ToInt32(edHeight.Text)), new VideoFrameRate(Convert.ToInt32(edFrameRate.Text)));
                 _source = new SpinnakerSourceBlock(settings);
@@ -170,16 +172,32 @@ namespace USB3V_GigE_Spinnaker
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                // For example, the Spinnaker SDK is not installed.
+                MessageBox.Show(this, ex.Message);
             }
         }
 
         /// <summary>
         /// Window closing.
         /// </summary>
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (_closing)
+            {
+                return;
+            }
+
+            // Closing does not await an async handler: keep the window open until teardown is done.
+            _closing = true;
+            e.Cancel = true;
+
+            tmRecording.Stop();
+
+            await DestroyEngineAsync();
+
             VisioForgeX.DestroySDK();
+
+            Close();
         }
     }
 }
