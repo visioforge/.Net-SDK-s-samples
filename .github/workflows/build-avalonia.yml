@@ -1,8 +1,6 @@
 name: Build ALL (Avalonia)
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
 
 # The self-hosted Mac runs a newer Xcode than its .NET Apple workload names; the SDK repo builds the same way.
 env:

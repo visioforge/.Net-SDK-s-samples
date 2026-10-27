@@ -1,8 +1,6 @@
 name: Build .Net Legacy (4.7.2 - 8.0)
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
