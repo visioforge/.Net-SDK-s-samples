@@ -4,6 +4,10 @@ on:
   push:
     branches: [master]
 
+# The self-hosted Mac runs a newer Xcode than its .NET Apple workload names; the SDK repo builds the same way.
+env:
+  ValidateXcodeVersion: "false"
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
