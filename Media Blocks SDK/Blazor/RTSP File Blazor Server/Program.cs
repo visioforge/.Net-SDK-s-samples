@@ -1,6 +1,11 @@
 ﻿using RTSP_File_Server.Services;
 using VisioForge.Core;
 
+#if __MACOS__
+// A macOS exe has an AppKit context with no run loop; continuations posted to it never run.
+System.Threading.SynchronizationContext.SetSynchronizationContext(null);
+#endif
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

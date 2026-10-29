@@ -34,6 +34,14 @@ namespace DynamicTextOverlaySample
 
         static async Task Main(string[] args)
         {
+#if __MACOS__
+            // A macOS exe has an AppKit context with no run loop; continuations posted to it never run.
+            SynchronizationContext.SetSynchronizationContext(null);
+            // The process starts inside the .app bundle; resolve relative paths against the shell's folder.
+            var shellDir = Environment.GetEnvironmentVariable("PWD");
+            if (Directory.Exists(shellDir)) Environment.CurrentDirectory = shellDir;
+#endif
+
             Console.WriteLine("DynamicTextOverlay - per-frame text in OverlayManagerBlock");
             Console.WriteLine("=========================================================");
             Console.WriteLine();

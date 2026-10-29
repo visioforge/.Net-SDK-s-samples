@@ -27,6 +27,14 @@ namespace FileConvert
         /// <returns>A task that represents the asynchronous operation.</returns>
         static async Task Main(string[] args)
         {
+#if __MACOS__
+            // A macOS exe has an AppKit context with no run loop; continuations posted to it never run.
+            SynchronizationContext.SetSynchronizationContext(null);
+            // The process starts inside the .app bundle; resolve relative paths against the shell's folder.
+            var shellDir = Environment.GetEnvironmentVariable("PWD");
+            if (Directory.Exists(shellDir)) Environment.CurrentDirectory = shellDir;
+#endif
+
             Console.WriteLine("The application can convert any source video file to an MP4 file. Use the source file name as the first parameter.");
 
             if (args.Length == 0) {

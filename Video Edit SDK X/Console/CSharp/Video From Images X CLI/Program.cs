@@ -37,6 +37,12 @@ namespace Video_From_Images_CLI
         /// <param name="args">The command-line arguments.</param>
         static void Main(string[] args)
         {
+#if __MACOS__
+            // The process starts inside the .app bundle; resolve relative paths against the shell's folder.
+            var shellDir = Environment.GetEnvironmentVariable("PWD");
+            if (Directory.Exists(shellDir)) Environment.CurrentDirectory = shellDir;
+#endif
+
             var res = CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args);
             if (res == null || res.Value == null || string.IsNullOrEmpty(res.Value.InputFolder))
             {
@@ -48,7 +54,9 @@ namespace Video_From_Images_CLI
 
             var options = res.Value;
 
-            options.InputFolder = options.InputFolder.Trim();
+            // GStreamer takes file URIs, which need absolute paths.
+            options.InputFolder = Path.GetFullPath(options.InputFolder.Trim());
+            options.OutputFile = Path.GetFullPath(options.OutputFile);
 
             if (!Directory.Exists(options.InputFolder))
             {
