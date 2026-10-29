@@ -5,6 +5,7 @@ Esta aplicación genera y analiza huellas digitales de video.
 ## Frameworks soportados
 
 * .Net 10 (Windows, macOS)
+* .Net 8 (Linux)
 
 ---
 
