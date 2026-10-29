@@ -15,7 +15,7 @@ jobs:
 
       Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS Android.sln"
 
-    runs-on: vf-win
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v4

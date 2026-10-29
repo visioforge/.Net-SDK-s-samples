@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: vf-mac
+    runs-on: macos-26
 
     env:
       Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS iOS.sln"

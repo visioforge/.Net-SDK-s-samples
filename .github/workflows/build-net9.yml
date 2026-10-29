@@ -22,7 +22,7 @@ jobs:
       Solution_Name_VE2: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WinForms net9.sln"
       Solution_Name_VE3: "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.WPF net9.sln"
 
-    runs-on: vf-win
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v4
