@@ -16,6 +16,12 @@ namespace vfp_search
         /// </summary>
         static void Main(string[] args)
         {
+#if __MACOS__
+            // The process starts inside the .app bundle; resolve relative paths against the shell's folder.
+            var shellDir = Environment.GetEnvironmentVariable("PWD");
+            if (Directory.Exists(shellDir)) Environment.CurrentDirectory = shellDir;
+#endif
+
             Console.WriteLine(new CommandLineOptions().GetUsage());
 
             var options = CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args).Value;
@@ -51,7 +57,8 @@ namespace vfp_search
             var elapsed = DateTime.Now - time;
             Console.WriteLine("Analyze finished. Elapsed time: " + elapsed.ToString("g"));
 
-            if (res > 0)
+            // Search returns int.MaxValue when the fragment is not found; 0 is a match at the start.
+            if (res != int.MaxValue)
             {
                 TimeSpan ts = new TimeSpan(res * TimeSpan.TicksPerSecond);
                 Console.WriteLine($"Detected fragment file at {ts:g}, difference level is {difference}");

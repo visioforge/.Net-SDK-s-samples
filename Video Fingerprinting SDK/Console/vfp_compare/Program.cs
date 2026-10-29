@@ -16,6 +16,12 @@ namespace vfp_compare
         /// </summary>
         static void Main(string[] args)
         {
+#if __MACOS__
+            // The process starts inside the .app bundle; resolve relative paths against the shell's folder.
+            var shellDir = Environment.GetEnvironmentVariable("PWD");
+            if (Directory.Exists(shellDir)) Environment.CurrentDirectory = shellDir;
+#endif
+
             Console.WriteLine(new CommandLineOptions().GetUsage());
 
             var options = CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args).Value;
@@ -45,12 +51,14 @@ namespace vfp_compare
             var fragment = VFPFingerPrint.Load(options.Input1);
             var main = VFPFingerPrint.Load(options.Input2);
 
-            var res = VFPCompare.Compare(fragment, main, options.MaxDifference);
+            // The third argument is the maximal time shift searched, not a difference limit.
+            var res = VFPCompare.Compare(fragment, main, options.MaxShift);
 
             var elapsed = DateTime.Now - time;
             Console.WriteLine("Analyze finished. Elapsed time: " + elapsed.ToString("g"));
+            Console.WriteLine("Difference: " + res);
 
-            if (res < 300)
+            if (res < options.Threshold)
             {
                 Console.WriteLine("Input files are similar.");
             }

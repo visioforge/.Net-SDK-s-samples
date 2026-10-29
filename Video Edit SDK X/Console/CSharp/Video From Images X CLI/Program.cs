@@ -54,6 +54,12 @@ namespace Video_From_Images_CLI
 
             var options = res.Value;
 
+            if (string.IsNullOrWhiteSpace(options.InputFolder) || string.IsNullOrWhiteSpace(options.OutputFile))
+            {
+                Console.WriteLine(@"Input folder and output file must not be empty.");
+                return;
+            }
+
             // GStreamer takes file URIs, which need absolute paths.
             options.InputFolder = Path.GetFullPath(options.InputFolder.Trim());
             options.OutputFile = Path.GetFullPath(options.OutputFile);
