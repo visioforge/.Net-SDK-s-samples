@@ -1,0 +1,17 @@
+{
+  "solution": {
+    "path": "VisioForge.VideoCaptureX.Demos.CS MAUI.sln",
+    "projects": [
+      "MAUI\\QRReader\\QRReader.csproj",
+      "MAUI\\SimpleCapture\\SimpleCapture.csproj",
+      "MAUI\\PhotoCapture\\PhotoCapture.csproj",
+      "MAUI\\Capture Face Recognition X\\Capture Face Recognition X.csproj",
+      "MAUI\\Capture OCR X\\Capture OCR X.csproj",
+      "MAUI\\Capture Live Subtitles X\\Capture Live Subtitles X.csproj",
+      "MAUI\\Capture Object Detection X\\Capture Object Detection X.csproj",
+      "MAUI\\Capture Open Vocabulary Detection X\\Capture Open Vocabulary Detection X.csproj",
+      "MAUI\\Capture VLM Captioning X\\Capture VLM Captioning X.csproj",
+      "MAUI\\Capture PII Redaction X\\Capture PII Redaction X.csproj"
+    ]
+  }
+}

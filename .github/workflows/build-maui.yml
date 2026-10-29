@@ -21,6 +21,9 @@ jobs:
       Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS MAUI.sln"
       Solution_Name_MP: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.MAUI.sln"
       Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS MAUI.sln"
+      # iOS builds skip the NDI Player samples: NDI is not available on iOS.
+      Solution_Filter_MB_iOS: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS MAUI.iOS.slnf"
+      Solution_Filter_VC_iOS: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS MAUI.iOS.slnf"
 
     steps:
     - uses: actions/checkout@v4
@@ -75,7 +78,7 @@ jobs:
 
     - name: Build Media Blocks (iOS)
       if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+      run: dotnet build "${{ env.Solution_Filter_MB_iOS }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
 
     - name: Build Media Blocks (Android)
       run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-android
@@ -113,7 +116,7 @@ jobs:
 
     - name: Build Video Capture (iOS)
       if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+      run: dotnet build "${{ env.Solution_Filter_VC_iOS }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
 
     - name: Build Video Capture (Android)
       run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-android
