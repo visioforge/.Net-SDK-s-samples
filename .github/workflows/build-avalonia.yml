@@ -14,7 +14,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest, macos-26, ubuntu-24.04]
+        os: [windows-latest, xcode-27, ubuntu-24.04]
     runs-on: ${{ matrix.os }}
 
     env:
@@ -28,11 +28,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Select Xcode 26.4
+      - name: Select Xcode (image default)
         if: runner.environment == 'github-hosted' && runner.os == 'macOS'
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: "26.4"
+          xcode-version: "latest-stable"
 
       - name: Setup .NET
         if: runner.environment == 'github-hosted' && runner.os != 'macOS'

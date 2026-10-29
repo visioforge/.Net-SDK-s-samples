@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: macos-26
+    runs-on: xcode-27
 
     env:
       Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS iOS.sln"
@@ -21,11 +21,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Select Xcode 26.4
+      - name: Select Xcode (image default)
         if: runner.environment == 'github-hosted'
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: "26.4"
+          xcode-version: "latest-stable"
 
       - name: Setup .NET (ARM64)
         if: runner.environment == 'github-hosted'
@@ -35,8 +35,8 @@ jobs:
           echo "$HOME/.dotnet" >> $GITHUB_PATH
           echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
 
-      # Pin to the .NET 10 workload set targeting Xcode 26.4 (stable on macos-26).
-      # The latest workload set requires Xcode 26.5 (beta), which is not reliably selectable.
+      # Pinned .NET 10 workload set. ValidateXcodeVersion is off (repo root env), so it builds under
+# the xcode-27 image's newer Xcode instead of refusing the mismatch.
       - name: Install workloads
         if: runner.environment == 'github-hosted'
         run: dotnet workload install ios macos --version 10.0.203.1
