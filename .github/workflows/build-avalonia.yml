@@ -77,7 +77,9 @@ jobs:
       # Media Blocks (macOS)
       - name: Build (Media Blocks - macOS)
         if: runner.os == 'macOS'
-        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release
+        env:
+          MSBUILDDISABLENODEREUSE: "1"
+        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release -m:1 --disable-build-servers
 
       # Media Blocks (Linux - uses solution without iOS)
       - name: Restore dependencies (Media Blocks - Linux)
@@ -98,7 +100,9 @@ jobs:
       # Media Player (macOS)
       - name: Build (Media Player - macOS)
         if: runner.os == 'macOS'
-        run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release
+        env:
+          MSBUILDDISABLENODEREUSE: "1"
+        run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release -m:1 --disable-build-servers
 
       # Media Player (Linux - uses solution without iOS)
       - name: Restore dependencies (Media Player - Linux)
@@ -119,7 +123,9 @@ jobs:
       # Video Capture (macOS)
       - name: Build (Video Capture - macOS)
         if: runner.os == 'macOS'
-        run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release
+        env:
+          MSBUILDDISABLENODEREUSE: "1"
+        run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release -m:1 --disable-build-servers
 
       # Video Edit (Windows/Linux)
       - name: Restore dependencies (Video Edit)
@@ -132,4 +138,6 @@ jobs:
       # Video Edit (macOS)
       - name: Build (Video Edit - macOS)
         if: runner.os == 'macOS'
-        run: dotnet build "${{ env.Solution_Name_VE }}" --configuration Release
+        env:
+          MSBUILDDISABLENODEREUSE: "1"
+        run: dotnet build "${{ env.Solution_Name_VE }}" --configuration Release -m:1 --disable-build-servers
