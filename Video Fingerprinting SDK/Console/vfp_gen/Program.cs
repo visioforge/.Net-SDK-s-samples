@@ -20,9 +20,9 @@ namespace vfpgen
         /// </summary>
         static async Task Main(string[] args)
         {
+#if __MACOS__
             // On macOS async Main blocks the main thread, so don't post continuations back to it.
             SynchronizationContext.SetSynchronizationContext(null);
-#if __MACOS__
             // The process starts inside the .app bundle; resolve relative paths against the shell's folder.
             var shellDir = Environment.GetEnvironmentVariable("PWD");
             if (Directory.Exists(shellDir)) Environment.CurrentDirectory = shellDir;

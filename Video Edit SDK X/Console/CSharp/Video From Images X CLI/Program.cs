@@ -44,7 +44,7 @@ namespace Video_From_Images_CLI
 #endif
 
             var res = CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args);
-            if (res == null || res.Value == null || string.IsNullOrEmpty(res.Value.InputFolder))
+            if (res == null || res.Value == null || string.IsNullOrWhiteSpace(res.Value.InputFolder) || string.IsNullOrWhiteSpace(res.Value.OutputFile))
             {
                 Console.WriteLine(CommandLineOptions.GetUsage(res));
                 Console.WriteLine("Press any key to exit...");
@@ -53,12 +53,6 @@ namespace Video_From_Images_CLI
             }
 
             var options = res.Value;
-
-            if (string.IsNullOrWhiteSpace(options.InputFolder) || string.IsNullOrWhiteSpace(options.OutputFile))
-            {
-                Console.WriteLine(@"Input folder and output file must not be empty.");
-                return;
-            }
 
             // GStreamer takes file URIs, which need absolute paths.
             options.InputFolder = Path.GetFullPath(options.InputFolder.Trim());
