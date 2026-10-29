@@ -7,6 +7,7 @@ namespace vfpgen
 {
     using CommandLine;
     using System.IO;
+    using System.Threading;
     using System.Threading.Tasks;
     using VisioForge.Core;
     using VisioForge.Core.Types;
@@ -19,6 +20,14 @@ namespace vfpgen
         /// </summary>
         static async Task Main(string[] args)
         {
+#if __MACOS__
+            // On macOS async Main blocks the main thread, so don't post continuations back to it.
+            SynchronizationContext.SetSynchronizationContext(null);
+            // The process starts inside the .app bundle; resolve relative paths against the shell's folder.
+            var shellDir = Environment.GetEnvironmentVariable("PWD");
+            if (Directory.Exists(shellDir)) Environment.CurrentDirectory = shellDir;
+#endif
+
             CommandLineOptions options = null;
             var parseResult = CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args);
             parseResult.WithParsed(opts => options = opts)

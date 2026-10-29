@@ -18,10 +18,16 @@
         public string Input2 { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximal difference between fingerprints.
+        /// Gets or sets the maximal time shift in seconds between the videos searched for the best alignment.
         /// </summary>
-        [Option('d', "md", Required = false, HelpText = "Maximal difference between fingerprints.", Default = 500)]
-        public int MaxDifference { get; set; }
+        [Option('d', "md", Required = false, HelpText = "Maximal time shift in seconds between the videos searched for the best alignment.", Default = 500)]
+        public int MaxShift { get; set; }
+
+        /// <summary>
+        /// Gets or sets the difference below which the files are reported as similar.
+        /// </summary>
+        [Option("threshold", Required = false, HelpText = "Difference below which the files are reported as similar.", Default = 300)]
+        public int Threshold { get; set; }
 
         /// <summary>
         /// Gets or sets the license key.
@@ -42,7 +48,7 @@
                 AddDashesToOption = true
             };
 
-            help.AddPreOptionsLine("Usage: app -f1 \"first input file\" -f2 \"second input file\" options");
+            help.AddPreOptionsLine("Usage: app -f \"first fingerprint file\" -s \"second fingerprint file\" options");
 
             return help;
         }

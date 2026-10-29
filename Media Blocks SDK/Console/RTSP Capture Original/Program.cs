@@ -65,6 +65,14 @@ namespace RTSP_Capture_Original
         /// <returns>A task that represents the asynchronous operation.</returns>
         public static async Task Main(string[] args)
         {
+#if __MACOS__
+            // A macOS exe has an AppKit context with no run loop; continuations posted to it never run.
+            SynchronizationContext.SetSynchronizationContext(null);
+            // The process starts inside the .app bundle; resolve relative paths against the shell's folder.
+            var shellDir = Environment.GetEnvironmentVariable("PWD");
+            if (Directory.Exists(shellDir)) Environment.CurrentDirectory = shellDir;
+#endif
+
             Console.WriteLine("RTSP Camera Capture Utility (MP4/MPEG-TS)");
             Console.WriteLine("------------------------------------------");
             Console.WriteLine();

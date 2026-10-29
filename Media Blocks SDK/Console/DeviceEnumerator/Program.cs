@@ -11,6 +11,11 @@ namespace DeviceEnumeratorDiag
     {
         static async Task Main(string[] args)
         {
+#if __MACOS__
+            // A macOS exe has an AppKit context with no run loop; continuations posted to it never run.
+            System.Threading.SynchronizationContext.SetSynchronizationContext(null);
+#endif
+
             Console.WriteLine("=== GStreamer Device Enumeration Diagnostic ===");
             Console.WriteLine("=== Event-based monitoring (WPF-style) ===");
             Console.WriteLine();

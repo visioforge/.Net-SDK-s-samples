@@ -35,6 +35,14 @@ namespace CustomGrayscaleBlockSample
 
         private static async Task Main(string[] args)
         {
+#if __MACOS__
+            // A macOS exe has an AppKit context with no run loop; continuations posted to it never run.
+            System.Threading.SynchronizationContext.SetSynchronizationContext(null);
+            // The process starts inside the .app bundle; resolve relative paths against the shell's folder.
+            var shellDir = Environment.GetEnvironmentVariable("PWD");
+            if (Directory.Exists(shellDir)) Environment.CurrentDirectory = shellDir;
+#endif
+
             Console.WriteLine("Custom Grayscale MediaBlock — sample");
             Console.WriteLine("====================================");
             Console.WriteLine();
