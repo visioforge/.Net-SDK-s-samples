@@ -56,7 +56,7 @@ namespace Video_From_Images_CLI
 
             // GStreamer takes file URIs, which need absolute paths.
             options.InputFolder = Path.GetFullPath(options.InputFolder.Trim());
-            options.OutputFile = Path.GetFullPath(options.OutputFile);
+            options.OutputFile = Path.GetFullPath(options.OutputFile.Trim());
 
             if (!Directory.Exists(options.InputFolder))
             {

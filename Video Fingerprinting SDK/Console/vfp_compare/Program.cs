@@ -42,6 +42,12 @@ namespace vfp_compare
                 return;
             }
 
+            if (options.MaxShift < 0)
+            {
+                Console.WriteLine("Max shift must not be negative.");
+                return;
+            }
+
             VFPAnalyzer.SetLicenseKey(options.LicenseKey);
 
             Console.WriteLine("Starting analyze.");
