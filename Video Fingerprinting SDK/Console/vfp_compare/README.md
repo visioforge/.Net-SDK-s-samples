@@ -4,14 +4,8 @@ This application generates and analyzes video fingerprints.
 
 ## Supported frameworks
 
-* .Net 4.7.2
-* .Net Core 3.1
-* .Net 5
-* .Net 6
-* .Net 7
-* .Net 8
-* .Net 9
-* .Net 10
+* .Net 10 (Windows, macOS)
+* .Net 8 (Linux) - needs the system GStreamer packages, see the [Ubuntu deployment guide](https://www.visioforge.com/help/docs/dotnet/deployment-x/Ubuntu/)
 
 ---
 
