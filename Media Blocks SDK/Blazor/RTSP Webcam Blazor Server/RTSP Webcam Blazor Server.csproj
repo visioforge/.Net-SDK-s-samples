@@ -2,6 +2,8 @@
   <PropertyGroup>
     <TargetFramework Condition="$([MSBuild]::IsOsPlatform('MacOS'))">net10.0-macos</TargetFramework>
     <ApplicationId Condition="$([MSBuild]::IsOsPlatform('MacOS'))">com.visioforge.rtspwebcamblazorserver</ApplicationId>
+    <ServerGarbageCollection Condition="$([MSBuild]::IsOsPlatform('MacOS'))">false</ServerGarbageCollection>
+    <RunWithOpen Condition="$([MSBuild]::IsOsPlatform('MacOS'))">false</RunWithOpen>
     <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net10.0-windows</TargetFrameworks>
     <TargetFramework Condition="$([MSBuild]::IsOsPlatform('Linux'))">net8.0</TargetFramework>
     <RootNamespace>RTSP_Webcam_Server</RootNamespace>

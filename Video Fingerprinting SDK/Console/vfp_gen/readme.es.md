@@ -4,14 +4,8 @@ Esta aplicación genera y analiza huellas digitales de video.
 
 ## Frameworks soportados
 
-* .Net 4.7.2
-* .Net Core 3.1
-* .Net 5
-* .Net 6
-* .Net 7
-* .Net 8
-* .Net 9
-* .Net 10
+* .Net 10 (Windows, macOS)
+* .Net 8 (Linux) - requiere los paquetes de GStreamer del sistema, consulte la [guía de implementación en Ubuntu](https://www.visioforge.com/help/es/docs/dotnet/deployment-x/Ubuntu/)
 
 ---
 
