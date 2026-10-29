@@ -38,5 +38,24 @@
 	<string>Downloads folder access is required to read media files.</string>
 	<key>NSScreenCaptureUsageDescription</key>
 	<string>Screen capture access is required to add the screen as a source in the compositor.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Required to connect to media servers and devices on your local network</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>__MAUI_DEFAULT_SCENE_CONFIGURATION__</string>
+					<key>UISceneDelegateClassName</key>
+					<string>SceneDelegate</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
 </dict>
 </plist>

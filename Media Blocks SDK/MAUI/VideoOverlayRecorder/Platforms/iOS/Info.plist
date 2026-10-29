@@ -36,5 +36,24 @@
     <string>This app needs access to the photo library to save recordings.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
     <string>This app needs access to save videos to your photo library.</string>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>Required to connect to media servers and devices on your local network</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>__MAUI_DEFAULT_SCENE_CONFIGURATION__</string>
+					<key>UISceneDelegateClassName</key>
+					<string>SceneDelegate</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
 </dict>
 </plist>

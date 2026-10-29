@@ -1,11 +1,11 @@
 # Media Blocks SDK .Net - HLS Streamer (C#/Console)
 
-This application generates synthetic video and audio and streams it using the HLS (HTTP Live Streaming) protocol. The demo includes a built-in HTTP server for easy testing.
+This application captures video and audio from the system camera and microphone and streams them using the HLS (HTTP Live Streaming) protocol. The demo includes a built-in HTTP server for easy testing.
 
 ## Features
 
-* Generates synthetic video (1280x720 @ 25fps)
-* Generates synthetic audio (stereo, 44.1kHz)
+* Captures video from a webcam
+* Captures audio from a microphone
 * Encodes using H.264 and AAC
 * Creates HLS segments with .m3u8 playlist
 * Includes built-in HTTP server on port 8088
@@ -13,8 +13,8 @@ This application generates synthetic video and audio and streams it using the HL
 
 ## Used media blocks
 
-* `VirtualVideoSourceBlock` - Synthetic video generation
-* `VirtualAudioSourceBlock` - Synthetic audio generation
+* `SystemVideoSourceBlock` - Webcam capture
+* `SystemAudioSourceBlock` - Microphone capture
 * `H264EncoderBlock` - H.264/AVC video encoding
 * `AACEncoderBlock` - AAC audio encoding
 * `HLSSinkBlock` - HLS streaming output

@@ -1,4 +1,4 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -33,6 +33,10 @@ namespace PreEventRecordingDemoAMB
     {
         private bool _initialized;
         private bool _disposedValue;
+
+        private bool _closingHandled;
+
+        private bool _teardownDone;
 
         // Pipeline blocks
         private MediaBlocksPipeline _pipeline;
@@ -411,7 +415,7 @@ namespace PreEventRecordingDemoAMB
             });
         }
 
-        private void OnMotionDetected(object sender, MotionDetectionEventArgs e)
+        private async void OnMotionDetected(object sender, MotionDetectionEventArgs e)
         {
             if (_preEventBlock == null)
             {
@@ -420,7 +424,7 @@ namespace PreEventRecordingDemoAMB
 
             bool isMotion = e.Level >= _motionSettings.MotionThreshold;
 
-            Dispatcher.UIThread.InvokeAsync(() =>
+            _ = Dispatcher.UIThread.InvokeAsync(() =>
             {
                 lbMotion.Text = isMotion ? $"Motion: detected ({e.Level})" : $"Motion: idle ({e.Level})";
             });
@@ -430,29 +434,43 @@ namespace PreEventRecordingDemoAMB
                 return;
             }
 
-            bool motionTriggerEnabled = false;
-            Dispatcher.UIThread.InvokeAsync(() =>
-            {
-                motionTriggerEnabled = cbMotionTrigger.IsChecked == true;
-            }).GetAwaiter().GetResult();
+            var motionTriggerEnabled = await Dispatcher.UIThread.InvokeAsync(() => cbMotionTrigger.IsChecked == true);
 
             if (!motionTriggerEnabled)
             {
                 return;
             }
 
-            var state = _preEventBlock.State;
-            if (state == PreEventRecordingState.Buffering)
+            // Stopping or closing nulls the block on the UI thread while this handler, which runs on
+            // an SDK callback thread, sits at the await above. Take it once.
+            var block = _preEventBlock;
+            if (block == null)
             {
-                var filename = Path.Combine(_outputFolder,
-                    $"motion_{DateTime.Now:yyyyMMdd_HHmmss}.mp4");
-                _preEventBlock.TriggerRecording(filename);
-                Log($"Motion triggered recording: {filename}");
+                return;
             }
-            else if (state == PreEventRecordingState.Recording ||
-                     state == PreEventRecordingState.PostEventRecording)
+
+            // The block can be torn down between the snapshot above and these calls. This runs on
+            // an SDK callback thread, where an escaping exception would take the process down.
+            try
             {
-                _preEventBlock.ExtendRecording();
+                var state = block.State;
+                if (state == PreEventRecordingState.Buffering)
+                {
+                    var filename = Path.Combine(_outputFolder,
+                        $"motion_{DateTime.Now:yyyyMMdd_HHmmss}.mp4");
+                    block.TriggerRecording(filename);
+                    Log($"Motion triggered recording: {filename}");
+                }
+                else if (state == PreEventRecordingState.Recording ||
+                         state == PreEventRecordingState.PostEventRecording)
+                {
+                    block.ExtendRecording();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log($"Error: {ex.Message}");
+                Debug.WriteLine(ex);
             }
         }
 
@@ -525,7 +543,16 @@ namespace PreEventRecordingDemoAMB
 
                 if (_pipeline != null)
                 {
-                    await _pipeline.StopAsync();
+                    // A failed stop must not skip the dispose that follows it.
+                    try
+                    {
+                        await _pipeline.StopAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.WriteLine(ex);
+                    }
+
                     _pipeline.OnError -= Pipeline_OnError;
                     _pipeline.Dispose();
                     _pipeline = null;
@@ -561,21 +588,76 @@ namespace PreEventRecordingDemoAMB
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DeviceEnumerator.Shared.OnVideoSourceAdded -= DeviceEnumerator_OnVideoSourceAdded;
-
-            _statusTimer?.Stop();
-            _statusTimer?.Dispose();
-
-            if (_pipeline != null)
+            // Avalonia's Closing event does not await an async-void handler, so teardown would race
+            // with the window tearing down. Cancel every close until teardown is done, then close
+            // for real.
+            if (_teardownDone)
             {
-                _pipeline.OnError -= Pipeline_OnError;
-                _pipeline.Dispose();
-                _pipeline = null;
+                return;
             }
 
-            VisioForgeX.DestroySDK();
+            e.Cancel = true;
+
+            if (_closingHandled)
+            {
+                return;
+            }
+
+            _closingHandled = true;
+
+            try
+            {
+                DeviceEnumerator.Shared.OnVideoSourceAdded -= DeviceEnumerator_OnVideoSourceAdded;
+
+                _statusTimer?.Stop();
+                _statusTimer?.Dispose();
+
+                if (_motionDetector != null)
+                {
+                    _motionDetector.OnMotionDetected -= OnMotionDetected;
+                    _motionDetector = null;
+                }
+
+                _preEventBlock = null;
+
+                if (_pipeline != null)
+                {
+                    // A failed stop must not skip the dispose that follows it.
+                    try
+                    {
+                        await _pipeline.StopAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.WriteLine(ex);
+                    }
+
+                    _pipeline.OnError -= Pipeline_OnError;
+                    _pipeline.Dispose();
+                    _pipeline = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            finally
+            {
+                try
+                {
+                    VisioForgeX.DestroySDK();
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex);
+                }
+
+                _teardownDone = true;
+
+                _ = Dispatcher.UIThread.InvokeAsync(() => Close());
+            }
         }
 
         protected virtual void Dispose(bool disposing)
