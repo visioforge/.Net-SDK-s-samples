@@ -1,0 +1,23 @@
+{
+  "solution": {
+    "path": "VisioForge.MediaBlocks.Demos.CS MAUI.sln",
+    "projects": [
+      "MAUI\\SimpleCapture\\SimpleCaptureMB.csproj",
+      "MAUI\\SimplePlayer\\SimplePlayerMB.csproj",
+      "MAUI\\RTSPViewer\\RTSPViewerMB.csproj",
+      "MAUI\\MobileStreamer\\MobileStreamerMB.csproj",
+      "MAUI\\ScreenCaptureMB\\ScreenCaptureMB.csproj",
+      "MAUI\\HLS Player\\HLSPlayerMB.csproj",
+      "MAUI\\VR360 Player\\VR360PlayerMB.csproj",
+      "MAUI\\VideoOverlayRecorder\\VideoOverlayRecorderMB.csproj",
+      "MAUI\\Live Video Compositor\\LiveVideoCompositorMB.csproj",
+      "MAUI\\Live Subtitles MB\\LiveSubtitlesMB.csproj",
+      "MAUI\\OCR Text Recognition MB\\OcrTextRecognitionMB.csproj",
+      "MAUI\\YOLO Object Detection MB\\YoloObjectDetectionMB.csproj",
+      "MAUI\\Face Recognition MB\\FaceRecognitionMB.csproj",
+      "MAUI\\Open Vocabulary Detection MB\\OpenVocabularyDetectionMB.csproj",
+      "MAUI\\Semantic Video Search MB\\SemanticVideoSearchMB.csproj",
+      "MAUI\\VLM Captioning MB\\VlmCaptioningMB.csproj"
+    ]
+  }
+}
