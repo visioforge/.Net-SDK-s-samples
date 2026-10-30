@@ -52,15 +52,17 @@ jobs:
 
       - name: Install .NET workloads (Windows)
         if: runner.environment == 'github-hosted' && runner.os == 'Windows'
-        run: |
-          dotnet workload install ios android macos
-          dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-windows maui-desktop
+        run: dotnet workload install ios android macos
+      - name: Install MAUI workloads (Windows)
+        if: runner.environment == 'github-hosted' && runner.os == 'Windows'
+        run: dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-windows maui-desktop
 
       - name: Install .NET workloads (macOS)
         if: runner.environment == 'github-hosted' && runner.os == 'macOS'
-        run: |
-          dotnet workload install ios android macos maccatalyst
-          dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-desktop
+        run: dotnet workload install ios android macos maccatalyst
+      - name: Install MAUI workloads (macOS)
+        if: runner.environment == 'github-hosted' && runner.os == 'macOS'
+        run: dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-desktop
 
       - name: Install .NET workloads (Linux)
         if: runner.environment == 'github-hosted' && runner.os == 'Linux'
