@@ -182,3 +182,28 @@ jobs:
     - name: Clean (Video Fingerprinting)
       if: matrix.sdk == 'video-fingerprinting'
       run: dotnet clean "Video Fingerprinting SDK/VideoFingerprinting.sln" --configuration Release
+
+  # The console samples target net8.0 on Linux, but the desktop and MAUI heads in
+  # VideoFingerprinting.sln are Windows/macOS only, so the console set gets its own solution and runner.
+  build-vfp-console-linux:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      if: runner.environment == 'github-hosted'
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          8.0.x
+          10.0.x
+
+    - name: Verify environment
+      run: dotnet --info
+
+    - name: Build (Video Fingerprinting console)
+      run: dotnet build "Video Fingerprinting SDK/Console/VideoFingerprintingConsole.sln" --configuration Release
+
+    - name: Clean (Video Fingerprinting console)
+      run: dotnet clean "Video Fingerprinting SDK/Console/VideoFingerprintingConsole.sln" --configuration Release
