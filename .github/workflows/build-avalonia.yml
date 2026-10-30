@@ -13,8 +13,23 @@ concurrency:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
-        os: [windows-latest, xcode-27, ubuntu-24.04]
+        include:
+          - os: windows-latest
+          - os: ubuntu-24.04
+          # One runner per solution: the whole macOS set on a single runner ran
+          # out of resources part-way through the second solution, and the job
+          # died without ever uploading a log.
+          - os: xcode-27
+            sdk: media-blocks
+          - os: xcode-27
+            sdk: media-player
+          - os: xcode-27
+            sdk: video-capture
+          - os: xcode-27
+            sdk: video-edit
+    name: build (${{ matrix.os }}${{ matrix.sdk && format(' / {0}', matrix.sdk) || '' }})
     runs-on: ${{ matrix.os }}
 
     env:
@@ -76,9 +91,14 @@ jobs:
         if: runner.os == 'Windows'
         run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore
 
+      - name: Free space and memory (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          df -h /
+          vm_stat | head -5
       # Media Blocks (macOS)
       - name: Build (Media Blocks - macOS)
-        if: runner.os == 'macOS'
+        if: matrix.sdk == 'media-blocks'
         timeout-minutes: 120
         env:
           MSBUILDDISABLENODEREUSE: "1"
@@ -102,7 +122,7 @@ jobs:
 
       # Media Player (macOS)
       - name: Build (Media Player - macOS)
-        if: runner.os == 'macOS'
+        if: matrix.sdk == 'media-player'
         timeout-minutes: 120
         env:
           MSBUILDDISABLENODEREUSE: "1"
@@ -126,7 +146,7 @@ jobs:
 
       # Video Capture (macOS)
       - name: Build (Video Capture - macOS)
-        if: runner.os == 'macOS'
+        if: matrix.sdk == 'video-capture'
         timeout-minutes: 120
         env:
           MSBUILDDISABLENODEREUSE: "1"
@@ -142,7 +162,7 @@ jobs:
 
       # Video Edit (macOS)
       - name: Build (Video Edit - macOS)
-        if: runner.os == 'macOS'
+        if: matrix.sdk == 'video-edit'
         timeout-minutes: 120
         env:
           MSBUILDDISABLENODEREUSE: "1"
