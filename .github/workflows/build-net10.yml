@@ -29,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [media-blocks, media-player, video-capture, video-edit]
+        sdk: [media-blocks, media-player, video-capture, video-edit, video-fingerprinting]
 
     runs-on: windows-latest
 
@@ -169,7 +169,13 @@ jobs:
     ## Video Fingerprinting
 
     # Apple heads pick their RuntimeIdentifier per configuration, so restore runs inside the Release build.
+    # The solution carries net9.0-macos projects, so this leg needs the macos workload on a hosted runner.
+    - name: Install macos workload (Video Fingerprinting)
+      if: matrix.sdk == 'video-fingerprinting' && runner.environment == 'github-hosted'
+      run: dotnet workload install macos
     - name: Build (Video Fingerprinting)
+      if: matrix.sdk == 'video-fingerprinting'
       run: dotnet build "Video Fingerprinting SDK/VideoFingerprinting.sln" --configuration Release
     - name: Clean (Video Fingerprinting)
+      if: matrix.sdk == 'video-fingerprinting'
       run: dotnet clean "Video Fingerprinting SDK/VideoFingerprinting.sln" --configuration Release
