@@ -8,13 +8,17 @@ concurrency:
 
 jobs:
   build:
-    env:
-      Solution_Name_MB: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Android.sln"
-
-      Solution_Name_MP: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Android.sln"
-
-      Solution_Name_VC: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS Android.sln"
-
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - sdk: media-blocks
+            solution: "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Android.sln"
+          - sdk: media-player
+            solution: "Media Player SDK X/VisioForge.MediaPlayer.X.Demos.CS.Android.sln"
+          - sdk: video-capture
+            solution: "Video Capture SDK X/VisioForge.VideoCaptureX.Demos.CS Android.sln"
+    name: build (${{ matrix.sdk }})
     runs-on: windows-latest
 
     steps:
@@ -32,26 +36,8 @@ jobs:
       if: runner.environment == 'github-hosted'
       run: dotnet workload install android
 
-    ## Media Blocks
+    - name: Restore dependencies
+      run: dotnet restore "${{ matrix.solution }}" --disable-parallel
 
-    - name: Restore dependencies $env:Solution_Name_MB
-      run: dotnet restore $env:Solution_Name_MB --disable-parallel
-
-    - name: Build app for release $env:Solution_Name_MB
-      run: dotnet build $env:Solution_Name_MB --configuration Release --no-restore --disable-parallel /p:BuildInParallel=false
-
-    ## Media Player
-
-    - name: Restore dependencies $env:Solution_Name_MP
-      run: dotnet restore $env:Solution_Name_MP --disable-parallel
-
-    - name: Build app for release $env:Solution_Name_MP
-      run: dotnet build $env:Solution_Name_MP --configuration Release --no-restore --disable-parallel /p:BuildInParallel=false
-
-    ## Video Capture
-
-    - name: Restore dependencies $env:Solution_Name_VC
-      run: dotnet restore $env:Solution_Name_VC --disable-parallel
-
-    - name: Build app for release $env:Solution_Name_VC
-      run: dotnet build $env:Solution_Name_VC --configuration Release --no-restore --disable-parallel /p:BuildInParallel=false
+    - name: Build app for release
+      run: dotnet build "${{ matrix.solution }}" --configuration Release --no-restore --disable-parallel /p:BuildInParallel=false
