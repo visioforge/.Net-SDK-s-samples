@@ -40,6 +40,11 @@ jobs:
       if: runner.environment == 'github-hosted'
       run: nuget locals all -clear
 
+    # windows-latest carries the 4.5.2 - 4.8.1 targeting packs but not 4.6.1, which the VB demos need.
+    - name: Install .NET Framework 4.6.1 Developer Pack
+      if: matrix.sdk == 'video-capture' && runner.environment == 'github-hosted'
+      run: choco install netfx-4.6.1-devpack -y --no-progress
+
     # ==================== .NET Framework 4.7.2 ====================
 
     # Media Blocks (net472)

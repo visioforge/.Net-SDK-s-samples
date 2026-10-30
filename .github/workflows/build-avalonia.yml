@@ -53,7 +53,7 @@ jobs:
       - name: Install .NET workloads (Windows)
         if: runner.environment == 'github-hosted' && runner.os == 'Windows'
         run: |
-          dotnet workload install ios android macos windows
+          dotnet workload install ios android macos
           dotnet workload install maui maui-android maui-ios maui-maccatalyst maui-windows maui-desktop
 
       - name: Install .NET workloads (macOS)

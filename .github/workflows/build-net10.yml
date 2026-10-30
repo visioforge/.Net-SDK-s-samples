@@ -160,10 +160,13 @@ jobs:
     ## Media Blocks Blazor
 
     - name: Restore (Media Blocks Blazor)
+      if: matrix.sdk == 'media-blocks'
       run: dotnet restore "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Blazor.sln"
     - name: Build (Media Blocks Blazor)
+      if: matrix.sdk == 'media-blocks'
       run: dotnet build "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Blazor.sln" --configuration Release --no-restore
     - name: Clean (Media Blocks Blazor)
+      if: matrix.sdk == 'media-blocks'
       run: dotnet clean "Media Blocks SDK/VisioForge.MediaBlocks.Demos.CS Blazor.sln" --configuration Release
 
     ## Video Fingerprinting
