@@ -30,7 +30,12 @@ public class VisioForgeService : IAsyncDisposable
     public VisioForgeService()
     {
         // Set default media folder path - you can change this to your preferred location
+#if __MACOS__
+        // The process starts inside the .app bundle, which must stay sealed; keep media outside it.
+        _mediaFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "RTSP File Blazor Server", "Media");
+#else
         _mediaFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Media");
+#endif
 
         // Create media folder if it doesn't exist
         if (!Directory.Exists(_mediaFolderPath))

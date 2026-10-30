@@ -21,4 +21,15 @@
   <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="[2026.10.26]" />
   </ItemGroup>
+  <!-- A macOS .app bundle is the ASP.NET content root, and no web files are copied into it by default. -->
+  <Target Name="CopyWebAssetsToBundle" AfterTargets="_CreateAppBundle" BeforeTargets="_CodesignAppBundle" Condition="$([MSBuild]::IsOsPlatform('MacOS'))">
+    <ItemGroup>
+      <_BundledWebAsset Include="@(StaticWebAsset)" Condition="'%(StaticWebAsset.AssetRole)' == 'Primary' and !$([System.String]::Copy('%(StaticWebAsset.Identity)').Contains('{0}'))">
+        <AssetRelPath>%(StaticWebAsset.RelativePath)</AssetRelPath>
+      </_BundledWebAsset>
+    </ItemGroup>
+    <Error Condition="'@(_BundledWebAsset)' == ''" Text="No static web assets found for the macOS app bundle." />
+    <!-- Copy only, never prune: a removed asset does not trigger a re-sign, so the seal goes stale and codesign verify fails. -->
+    <Copy SourceFiles="@(_BundledWebAsset)" DestinationFiles="@(_BundledWebAsset->'$(AppBundleDir)/Contents/Resources/wwwroot/$([System.String]::Copy('%(AssetRelPath)').Replace('#[.{fingerprint}]?', ''))')" SkipUnchangedFiles="true" />
+  </Target>
 </Project>
