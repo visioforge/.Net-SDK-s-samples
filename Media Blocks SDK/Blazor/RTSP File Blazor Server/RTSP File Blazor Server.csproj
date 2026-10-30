@@ -4,6 +4,8 @@
     <ApplicationId Condition="$([MSBuild]::IsOsPlatform('MacOS'))">com.visioforge.rtspfileblazorserver</ApplicationId>
     <ServerGarbageCollection Condition="$([MSBuild]::IsOsPlatform('MacOS'))">false</ServerGarbageCollection>
     <RunWithOpen Condition="$([MSBuild]::IsOsPlatform('MacOS'))">false</RunWithOpen>
+    <!-- Release builds osx-x64 and osx-arm64, and a Web project's static web assets manifest then only lands in a per-RID folder, so build and publish fail. (#3585) -->
+    <RuntimeIdentifier Condition="$([MSBuild]::IsOsPlatform('MacOS')) and '$(RuntimeIdentifier)' == ''">$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
     <TargetFrameworks Condition="$([MSBuild]::IsOsPlatform('Windows'))">net10.0-windows</TargetFrameworks>
     <TargetFramework Condition="$([MSBuild]::IsOsPlatform('Linux'))">net8.0</TargetFramework>
     <RootNamespace>RTSP_File_Server</RootNamespace>
