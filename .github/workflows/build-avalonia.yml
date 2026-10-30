@@ -75,11 +75,16 @@ jobs:
         run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore
 
       # Media Blocks (macOS)
+      - name: Restore dependencies (Media Blocks - macOS)
+        if: runner.os == 'macOS'
+        timeout-minutes: 45
+        run: dotnet restore "${{ env.Solution_Name_MB }}" -v n
       - name: Build (Media Blocks - macOS)
         if: runner.os == 'macOS'
+        timeout-minutes: 60
         env:
           MSBUILDDISABLENODEREUSE: "1"
-        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release -m:1 --disable-build-servers
+        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -m:1 --disable-build-servers
 
       # Media Blocks (Linux - uses solution without iOS)
       - name: Restore dependencies (Media Blocks - Linux)
@@ -98,11 +103,16 @@ jobs:
         run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore
 
       # Media Player (macOS)
+      - name: Restore dependencies (Media Player - macOS)
+        if: runner.os == 'macOS'
+        timeout-minutes: 45
+        run: dotnet restore "${{ env.Solution_Name_MP }}" -v n
       - name: Build (Media Player - macOS)
         if: runner.os == 'macOS'
+        timeout-minutes: 60
         env:
           MSBUILDDISABLENODEREUSE: "1"
-        run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release -m:1 --disable-build-servers
+        run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -m:1 --disable-build-servers
 
       # Media Player (Linux - uses solution without iOS)
       - name: Restore dependencies (Media Player - Linux)
@@ -121,11 +131,16 @@ jobs:
         run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore
 
       # Video Capture (macOS)
+      - name: Restore dependencies (Video Capture - macOS)
+        if: runner.os == 'macOS'
+        timeout-minutes: 45
+        run: dotnet restore "${{ env.Solution_Name_VC }}" -v n
       - name: Build (Video Capture - macOS)
         if: runner.os == 'macOS'
+        timeout-minutes: 60
         env:
           MSBUILDDISABLENODEREUSE: "1"
-        run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release -m:1 --disable-build-servers
+        run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -m:1 --disable-build-servers
 
       # Video Edit (Windows/Linux)
       - name: Restore dependencies (Video Edit)
@@ -136,8 +151,13 @@ jobs:
         run: dotnet build "${{ env.Solution_Name_VE }}" --configuration Release --no-restore
 
       # Video Edit (macOS)
+      - name: Restore dependencies (Video Edit - macOS)
+        if: runner.os == 'macOS'
+        timeout-minutes: 45
+        run: dotnet restore "${{ env.Solution_Name_VE }}" -v n
       - name: Build (Video Edit - macOS)
         if: runner.os == 'macOS'
+        timeout-minutes: 60
         env:
           MSBUILDDISABLENODEREUSE: "1"
-        run: dotnet build "${{ env.Solution_Name_VE }}" --configuration Release -m:1 --disable-build-servers
+        run: dotnet build "${{ env.Solution_Name_VE }}" --configuration Release --no-restore -m:1 --disable-build-servers
