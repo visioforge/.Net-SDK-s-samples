@@ -13,8 +13,19 @@ concurrency:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
-        os: [windows-latest, xcode-27]
+        include:
+          - os: windows-latest
+          # One runner per solution: the same single-macOS-runner shape that
+          # exhausted the Avalonia leg part-way through its second solution.
+          - os: xcode-27
+            sdk: media-blocks
+          - os: xcode-27
+            sdk: media-player
+          - os: xcode-27
+            sdk: video-capture
+    name: build (${{ matrix.os }}${{ matrix.sdk && format(' / {0}', matrix.sdk) || '' }})
     runs-on: ${{ matrix.os }}
 
     env:
@@ -67,9 +78,14 @@ jobs:
         if: runner.os == 'Windows'
         run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore /p:BuildInParallel=false --disable-parallel
 
+      - name: Free space and memory (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          df -h /
+          vm_stat | head -5
       # Media Blocks (macOS)
       - name: Build (Media Blocks - macOS)
-        if: runner.os == 'macOS'
+        if: matrix.sdk == 'media-blocks'
         run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release /p:BuildInParallel=false --disable-parallel
 
       # Media Player (Windows)
@@ -82,7 +98,7 @@ jobs:
 
       # Media Player (macOS)
       - name: Build (Media Player - macOS)
-        if: runner.os == 'macOS'
+        if: matrix.sdk == 'media-player'
         run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release /p:BuildInParallel=false --disable-parallel
 
       # Video Capture (Windows)
@@ -95,5 +111,5 @@ jobs:
 
       # Video Capture (macOS)
       - name: Build (Video Capture - macOS)
-        if: runner.os == 'macOS'
+        if: matrix.sdk == 'video-capture'
         run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release /p:BuildInParallel=false --disable-parallel
