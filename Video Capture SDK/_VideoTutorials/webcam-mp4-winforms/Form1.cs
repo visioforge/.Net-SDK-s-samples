@@ -59,11 +59,8 @@ public partial class Form1 : Form
 
     private async void btStart_Click(object sender, EventArgs e)
     {
-        if (cbFrameRate.SelectedItem is null)
-        {
-            Text = "No camera or format to record from";
-            return;
-        }
+        Text = cbFrameRate.SelectedItem is null ? "No camera, format or frame rate" : "Webcam to MP4";
+        if (cbFrameRate.SelectedItem is null) return;
 
         videoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbCamera.Text);
         var camera = videoCapture1.Video_CaptureDevice;
@@ -72,6 +69,7 @@ public partial class Form1 : Form
         camera.FrameRate = (VideoFrameRate)cbFrameRate.SelectedItem;
 
         videoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbMicrophone.Text);
+        videoCapture1.Audio_PlayAudio = false; // record the microphone without playing it back
 
         var mp4 = new MP4HWOutput();
 
@@ -106,7 +104,6 @@ public partial class Form1 : Form
             Left = 50, Top = 110
         });
 
-        Text = "Webcam to MP4";
         btStart.Enabled = false;
         var started = await videoCapture1.StartAsync();
         btStop.Enabled = started;
