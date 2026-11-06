@@ -473,13 +473,6 @@ namespace IP_Capture
                         onvifDevice = null;
                     }
 
-                    if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
-                    {
-                        MessageBox.Show(this, "Please specify IP camera user name and password.");
-                        btONVIFConnect.Content = "Connect";
-                        return;
-                    }
-
                     onvifDevice = new ONVIFClientX();
                     var result = await onvifDevice.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
@@ -487,7 +480,7 @@ namespace IP_Capture
                         onvifDevice.Dispose();
                         onvifDevice = null;
                         btONVIFConnect.Content = "Connect";
-                        MessageBox.Show(this, "Unable to connect to ONVIF camera.");
+                        MessageBox.Show(this, "Unable to connect to ONVIF camera. Please check credentials and URL.");
                         return;
                     }
 

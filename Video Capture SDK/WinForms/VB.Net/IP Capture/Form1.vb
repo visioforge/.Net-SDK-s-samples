@@ -317,12 +317,9 @@ Public Class Form1
 
         VideoView1.StatusOverlay = New TextStatusOverlay()
 
-        ' Read before Start: the SDK replaces an ONVIF camera's address with the stream it plays.
-        Dim isOnvif = VideoCapture1.IP_Camera_Source IsNot Nothing AndAlso VideoCapture1.IP_Camera_Source.ONVIF_Source
-
         Dim started = Await VideoCapture1.StartAsync()
 
-        edONVIFLiveVideoURL.Text = If(started AndAlso isOnvif, VideoCapture1.IP_Camera_Source.URL?.ToString(), String.Empty)
+        edONVIFLiveVideoURL.Text = If(started, VideoCapture1.IP_Camera_ONVIF_StreamURL?.ToString(), String.Empty)
 
         tcMain.SelectedIndex = 3
         tmRecording.Start()
@@ -376,18 +373,13 @@ Public Class Form1
                     onvifClient = Nothing
                 End If
 
-                If (String.IsNullOrEmpty(edONVIFLogin.Text) Or String.IsNullOrEmpty(edONVIFPassword.Text)) Then
-                    MessageBox.Show(Me, "Please specify IP camera user name and password.")
-                    Exit Sub
-                End If
-
                 onvifClient = New ONVIFClientX()
-                Dim result = Await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text, OnvifAuthentication.WsUsernameToken)
+                Dim result = Await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text)
 
                 If (Not result) Then
                     onvifClient.Dispose()
                     onvifClient = Nothing
-                    MessageBox.Show(Me, "Unable to connect to ONVIF camera.")
+                    MessageBox.Show(Me, "Unable to connect to ONVIF camera. Please check credentials and URL.")
                     Exit Sub
                 End If
 

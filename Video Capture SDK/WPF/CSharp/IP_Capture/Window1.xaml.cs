@@ -507,12 +507,9 @@ namespace IP_Capture
 
             VideoView1.StatusOverlay = new TextStatusOverlay();
 
-            // Read before Start: the SDK replaces an ONVIF camera's address with the stream it plays.
-            var isOnvif = VideoCapture1.IP_Camera_Source?.ONVIF_Source == true;
-
             var started = await VideoCapture1.StartAsync();
 
-            edONVIFLiveVideoURL.Text = started && isOnvif ? VideoCapture1.IP_Camera_Source.URL?.ToString() : string.Empty;
+            edONVIFLiveVideoURL.Text = started ? VideoCapture1.IP_Camera_ONVIF_StreamURL?.ToString() : string.Empty;
 
             tcMain.SelectedIndex = 3;
             tmRecording.Start();
@@ -641,13 +638,6 @@ namespace IP_Capture
                         onvifClient = null;
                     }
 
-                    if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
-                    {
-                        MessageBox.Show(this, "Please specify IP camera user name and password.");
-                        btONVIFConnect.Content = "Connect";
-                        return;
-                    }
-
                     onvifClient = new ONVIFClientX();
                     var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                     if (!result)
@@ -655,7 +645,7 @@ namespace IP_Capture
                         onvifClient.Dispose();
                         onvifClient = null;
                         btONVIFConnect.Content = "Connect";
-                        MessageBox.Show(this, "Unable to connect to ONVIF camera.");
+                        MessageBox.Show(this, "Unable to connect to ONVIF camera. Please check credentials and URL.");
                         return;
                     }
 

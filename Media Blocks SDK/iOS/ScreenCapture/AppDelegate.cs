@@ -351,8 +351,7 @@ namespace ScreenCapture
             _videoView = new VideoView(parent.Bounds)
             {
                 TranslatesAutoresizingMaskIntoConstraints = false,
-                BackgroundColor = UIColor.Black,
-                DisableAspectRatioResize = true
+                BackgroundColor = UIColor.Black
             };
             parent.AddSubview(_videoView);
 

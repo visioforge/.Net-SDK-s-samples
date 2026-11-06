@@ -14,6 +14,10 @@ graph LR
     UniversalSourceBlock -- video --> RTSPServerBlock
 ```
 
+## Compilación en macOS
+
+La compilación Release y `dotnet publish -c Release` generan el app bundle para la CPU del equipo; publicar escribe además un instalador `.pkg` en su carpeta de publicación. Para la otra arquitectura, publique con `-r osx-x64` o `-r osx-arm64`, por ejemplo `dotnet publish -c Release -r osx-x64`.
+
 ## Frameworks soportados
 
 * .Net 4.7.2

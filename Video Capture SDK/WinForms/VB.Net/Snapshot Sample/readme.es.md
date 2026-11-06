@@ -13,7 +13,6 @@ Esta aplicación demuestra cómo capturar instantáneas de una cámara usando el
 
 El ejemplo usa `VideoCaptureCore` con las siguientes configuraciones principales:
 
-- `Video_Still_Frames_Grabber_Enabled = True` - Habilita la captura de fotogramas
 - `Frame_GetCurrent()` - Captura el fotograma actual como Bitmap
 - El audio está deshabilitado para este ejemplo de solo vista previa
 

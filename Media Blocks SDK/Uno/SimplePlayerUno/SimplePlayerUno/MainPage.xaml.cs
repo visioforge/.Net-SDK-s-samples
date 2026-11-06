@@ -5,8 +5,10 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using VisioForge.Core.MediaBlocks;
+using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
@@ -39,6 +41,10 @@ public sealed partial class MainPage : Page
     /// The renderer.
     /// </summary>
     private VideoRendererBlock? _renderer;
+    /// <summary>
+    /// The audio renderer.
+    /// </summary>
+    private AudioRendererBlock? _audioRenderer;
 
     /// <summary>
     /// The position timer.
@@ -65,6 +71,14 @@ public sealed partial class MainPage : Page
     /// Indicates whether the media is playing.
     /// </summary>
     private bool _isPlaying;
+
+#if __IOS__ && !__MACCATALYST__
+    // The message alert on screen, if any.
+    private UIKit.UIAlertController? _alert;
+#elif !__ANDROID__
+    // The message dialog on screen, if any.
+    private ContentDialog? _dialog;
+#endif
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MainPage"/> class.
@@ -199,15 +213,31 @@ public sealed partial class MainPage : Page
             }
 
             _source = new UniversalSourceBlock(sourceSettings);
-            _renderer = new VideoRendererBlock(_pipeline, videoView);
+            var info = sourceSettings.GetInfo();
 
-            _pipeline.Connect(_source.VideoOutput, _renderer.Input);
+            // Connect only the streams the file has, so audio-only and video-only files both play.
+            if (info?.VideoStreams.Count > 0)
+            {
+                _renderer = new VideoRendererBlock(_pipeline, videoView);
+                _pipeline.Connect(_source.VideoOutput, _renderer.Input);
+            }
+
+            if (info?.AudioStreams.Count > 0)
+            {
+#if __IOS__ && !__MACCATALYST__
+                // Play sound even when the ring/silent switch is on.
+                AVFoundation.AVAudioSession.SharedInstance().SetCategory(AVFoundation.AVAudioSessionCategory.Playback);
+#endif
+                _audioRenderer = new AudioRendererBlock();
+                _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);
+            }
 
             ResetTimeline();
 
             // Start playback immediately
             if (!await _pipeline.StartAsync())
             {
+                ShowToast("Unable to start playback.");
                 await CleanupPipelineAsync();
                 return;
             }
@@ -316,6 +346,8 @@ public sealed partial class MainPage : Page
             _source = null;
             _renderer?.Dispose();
             _renderer = null;
+            _audioRenderer?.Dispose();
+            _audioRenderer = null;
             _mediaPrepared = false;
             ResetTimeline();
         }
@@ -357,6 +389,13 @@ public sealed partial class MainPage : Page
 
         // It's a file path - check if file exists
         var filePath = input;
+
+        // "~/" is a shell shortcut, not part of a path: expand it to the home folder.
+        if (filePath.StartsWith("~/", StringComparison.Ordinal))
+        {
+            filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), filePath.Substring(2));
+        }
+
         if (!Path.IsPathRooted(filePath))
         {
             filePath = Path.GetFullPath(filePath);
@@ -547,45 +586,58 @@ public sealed partial class MainPage : Page
 #elif __IOS__ && !__MACCATALYST__
         _dispatcherQueue.TryEnqueue(() =>
         {
-            // Use a simple alert for iOS
-            var alert = UIKit.UIAlertController.Create("", message, UIKit.UIAlertControllerStyle.Alert);
-            alert.AddAction(UIKit.UIAlertAction.Create("OK", UIKit.UIAlertActionStyle.Default, null));
-            
-            var rootViewController = UIKit.UIApplication.SharedApplication?.KeyWindow?.RootViewController;
-            if (rootViewController != null)
+            // One alert at a time: a second one would not be presented, so later messages join the one on screen.
+            if (_alert?.PresentingViewController != null && !_alert.IsBeingDismissed)
             {
-                // Auto-dismiss after 1.5 seconds
-                _ = Task.Delay(1500).ContinueWith(_ =>
-                {
-                    _dispatcherQueue.TryEnqueue(() => alert.DismissViewController(true, null));
-                });
-                rootViewController.PresentViewController(alert, true, null);
+                _alert.Message += "\n" + message;
+                return;
             }
+
+            _alert = UIKit.UIAlertController.Create("", message, UIKit.UIAlertControllerStyle.Alert);
+            _alert.AddAction(UIKit.UIAlertAction.Create("OK", UIKit.UIAlertActionStyle.Default, null));
+
+            // Present from the top-most controller that is staying: one already presenting, or going away, refuses another.
+            var top = UIKit.UIApplication.SharedApplication.ConnectedScenes
+                .OfType<UIKit.UIWindowScene>()
+                .SelectMany(s => s.Windows)
+                .OrderByDescending(w => w.IsKeyWindow) // the key window, else any: an inactive scene has none
+                .FirstOrDefault()?.RootViewController;
+            while (top?.PresentedViewController is { IsBeingDismissed: false } next)
+            {
+                top = next;
+            }
+
+            top?.PresentViewController(_alert, true, null);
         });
 #else
-        // For Windows/other platforms, use a simple flyout or debug output
+        // Windows and Mac Catalyst: a dialog that stays until OK
         _dispatcherQueue.TryEnqueue(async () =>
         {
+            // Only one ContentDialog can be open, so later messages join the open one.
+            if (_dialog != null)
+            {
+                _dialog.Content += "\n" + message;
+                return;
+            }
+
             try
             {
-                var dialog = new ContentDialog
+                _dialog = new ContentDialog
                 {
                     Content = message,
                     CloseButtonText = "OK",
                     XamlRoot = this.XamlRoot
                 };
-                
-                // Auto-close after 2 seconds
-                _ = Task.Delay(2000).ContinueWith(_ =>
-                {
-                    _dispatcherQueue.TryEnqueue(() => dialog.Hide());
-                });
-                
-                await dialog.ShowAsync();
+
+                await _dialog.ShowAsync();
             }
             catch
             {
                 // Ignore if dialog fails
+            }
+            finally
+            {
+                _dialog = null;
             }
         });
 #endif

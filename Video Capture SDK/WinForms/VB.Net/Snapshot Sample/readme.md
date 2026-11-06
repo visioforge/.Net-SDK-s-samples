@@ -13,7 +13,6 @@ This application demonstrates how to capture snapshots from a camera using the V
 
 The sample uses `VideoCaptureCore` with the following key settings:
 
-- `Video_Still_Frames_Grabber_Enabled = True` - Enables frame grabbing
 - `Frame_GetCurrent()` - Captures the current frame as a Bitmap
 - Audio is disabled for this preview-only sample
 

@@ -212,7 +212,7 @@
                                         
                                         <Label Grid.Row="1" Grid.Column="0" Content="Sensitivity:" VerticalAlignment="Center"/>
                                         <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="5,2">
-                                            <Slider x:Name="slSensitivity" Width="120" Minimum="0" Maximum="180" Value="20" 
+                                            <Slider x:Name="slSensitivity" Width="120" Minimum="0" Maximum="90" Value="20" 
                                                     ValueChanged="slSensitivity_ValueChanged" VerticalAlignment="Center"/>
                                             <Label x:Name="lblSensitivity" Content="20" Width="30" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                         </StackPanel>

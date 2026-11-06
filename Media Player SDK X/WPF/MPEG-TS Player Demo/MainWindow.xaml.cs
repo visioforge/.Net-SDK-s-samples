@@ -410,7 +410,11 @@ namespace MPEG_TS_Player_Demo
         {
             if (cbVideoStream.SelectedIndex != -1 && !(bool)cbVideoStream.Tag)
             {
-                _player.Video_Stream_Select(_player.Video_Streams[cbVideoStream.SelectedIndex]);
+                // MPEG-TS files play on the classic engine, which cannot switch tracks.
+                if (!_player.Video_Stream_Select(_player.Video_Streams[cbVideoStream.SelectedIndex]))
+                {
+                    edLog.Text += $"This source cannot switch video tracks.{Environment.NewLine}";
+                }
             }
         }
 
@@ -421,7 +425,10 @@ namespace MPEG_TS_Player_Demo
         {
             if (cbAudioStream.SelectedIndex != -1 && !(bool)cbAudioStream.Tag)
             {
-                _player.Audio_Stream_Select(_player.Audio_Streams[cbAudioStream.SelectedIndex]);
+                if (!_player.Audio_Stream_Select(_player.Audio_Streams[cbAudioStream.SelectedIndex]))
+                {
+                    edLog.Text += $"This source cannot switch audio tracks.{Environment.NewLine}";
+                }
             }
         }
 

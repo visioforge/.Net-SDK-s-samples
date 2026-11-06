@@ -12,14 +12,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.10.28]" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.6]" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.10.28]" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="[2026.10.28]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.3]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64.UPX" Version="[2026.11.3]" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="[2026.10.26]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="[2026.11.5]" />
   </ItemGroup>
   <!-- A macOS .app bundle is the ASP.NET content root, and no web files are copied into it by default. -->
   <Target Name="CopyWebAssetsToBundle" AfterTargets="_CreateAppBundle" BeforeTargets="_CodesignAppBundle" Condition="$([MSBuild]::IsOsPlatform('MacOS'))">

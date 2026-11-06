@@ -366,13 +366,6 @@ namespace RTSP_Capture
                             onvifClient = null;
                         }
 
-                        if (string.IsNullOrEmpty(edONVIFLogin.Text) || string.IsNullOrEmpty(edONVIFPassword.Text))
-                        {
-                            MessageBox.Show(this, "Please specify IP camera user name and password.");
-                            btONVIFConnect.Content = "Connect";
-                            return;
-                        }
-
                         onvifClient = new ONVIFClientX();
                         var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
                         if (!result)
@@ -380,7 +373,7 @@ namespace RTSP_Capture
                             onvifClient.Dispose();
                             onvifClient = null;
                             btONVIFConnect.Content = "Connect";
-                            MessageBox.Show(this, "Unable to connect to ONVIF camera.");
+                            MessageBox.Show(this, "Unable to connect to ONVIF camera. Please check credentials and URL.");
                             return;
                         }
 

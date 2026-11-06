@@ -470,8 +470,7 @@ public class AppDelegate : UIApplicationDelegate
         _videoView = new VideoView(view.Bounds)
         {
             AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight,
-            BackgroundColor = UIColor.Black,
-            DisableAspectRatioResize = true
+            BackgroundColor = UIColor.Black
         };
 
         view!.AddSubview(_videoView);

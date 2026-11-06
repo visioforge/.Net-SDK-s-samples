@@ -149,8 +149,7 @@ public class CustomViewController : UIViewController, IUIDocumentPickerDelegate
         var videoView = new VideoView(View!.Bounds)
         {
             AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight,
-            BackgroundColor = UIColor.Black,
-            DisableAspectRatioResize = true
+            BackgroundColor = UIColor.Black
         };
         View!.AddSubview(videoView);
         return videoView;

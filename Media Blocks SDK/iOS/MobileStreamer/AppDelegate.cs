@@ -916,9 +916,7 @@ public class AppDelegate : UIApplicationDelegate
         /// </summary>
     private void AddVideoView(UIView view)
     {
-        // Pinned back to VideoViewGL (see the field declaration comment). VideoViewGL doesn't
-        // expose DisableAspectRatioResize — the GL renderer already preserves the source aspect
-        // ratio without extra suppression, so dropping that flag is a no-op here.
+        // Pinned back to VideoViewGL (see the field declaration comment).
         _videoView = new VideoViewGL(view.Bounds)
         {
             AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight,

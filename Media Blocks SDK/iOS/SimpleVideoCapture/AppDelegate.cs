@@ -153,7 +153,10 @@ public class AppDelegate : UIApplicationDelegate
                 {
                     videoSourceSettings = new VideoCaptureDeviceSourceSettings(device)
                     {
-                        Format = formatItem.ToFormat()
+                        Format = formatItem.ToFormat(),
+
+                        // Preview follows the device rotation; a recording keeps the orientation it started in.
+                        AutoUpdateOrientation = !capture
                     };
 
                     videoSourceSettings.Format.FrameRate = frameRate;
@@ -517,8 +520,7 @@ public class AppDelegate : UIApplicationDelegate
         _videoView = new VideoView(view.Bounds)
         {
             AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight,
-            BackgroundColor = UIColor.Black,
-            DisableAspectRatioResize = true
+            BackgroundColor = UIColor.Black
         };
 
         view!.AddSubview(_videoView);

@@ -76,7 +76,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             var result = await onvifClient.ConnectAsync(cbSources.Text, edUsername.Text, edPassword.Text);
             if (!result)
             {
-                MessageBox.Show(this, "Unable to connect to ONVIF camera.");
+                MessageBox.Show(this, "Unable to connect to ONVIF camera. Please check credentials and URL.");
                 return;
             }
 

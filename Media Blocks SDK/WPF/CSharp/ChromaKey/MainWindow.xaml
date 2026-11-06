@@ -90,7 +90,7 @@
 
                         <Label Content="Sensitivity (Angle)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
                         <StackPanel Orientation="Horizontal">
-                            <Slider x:Name="slSensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Minimum="0" Maximum="180" Value="20" ValueChanged="slSensitivity_ValueChanged" />
+                            <Slider x:Name="slSensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Minimum="0" Maximum="90" Value="20" ValueChanged="slSensitivity_ValueChanged" />
                             <Label x:Name="lbSensitivity" Content="20.0" Width="50"/>
                         </StackPanel>
 
@@ -102,13 +102,13 @@
 
                         <Label Content="Black Sensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
                         <StackPanel Orientation="Horizontal">
-                            <Slider x:Name="slBlackSensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Minimum="0" Maximum="255" Value="100" ValueChanged="slBlackSensitivity_ValueChanged" />
+                            <Slider x:Name="slBlackSensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Minimum="0" Maximum="128" Value="100" ValueChanged="slBlackSensitivity_ValueChanged" />
                             <Label x:Name="lbBlackSensitivity" Content="100" Width="50"/>
                         </StackPanel>
 
                         <Label Content="White Sensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,10,0,0"/>
                         <StackPanel Orientation="Horizontal">
-                            <Slider x:Name="slWhiteSensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Minimum="0" Maximum="255" Value="100" ValueChanged="slWhiteSensitivity_ValueChanged" />
+                            <Slider x:Name="slWhiteSensitivity" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Minimum="0" Maximum="128" Value="100" ValueChanged="slWhiteSensitivity_ValueChanged" />
                             <Label x:Name="lbWhiteSensitivity" Content="100" Width="50"/>
                         </StackPanel>
 

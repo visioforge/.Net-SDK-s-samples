@@ -2,7 +2,6 @@ using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -38,6 +37,12 @@ namespace DecklinkFillKeyDemo
     {
         private MediaBlocksPipeline _pipeline;
         private PushVideoSourceBlock _graphicsSource;
+        private int _debugFrameCount;
+
+        // One render target, converter and frame for all ticks: a new 1080p bitmap per frame forces constant full GCs
+        private readonly RenderTargetBitmap _renderBitmap = new RenderTargetBitmap(1920, 1080, 96, 96, PixelFormats.Pbgra32);
+        private readonly FormatConvertedBitmap _straightBitmap;
+        private readonly VideoFrameX _frame = VideoFrameX.Alloc(1920, 1080, 1920 * 4, VideoFormatX.BGRA);
         private DecklinkVideoSinkBlock _decklinkFillSink;
         private DecklinkVideoSinkBlock _decklinkKeySink;
         private UniversalSourceBlock _backgroundSource;
@@ -57,6 +62,7 @@ namespace DecklinkFillKeyDemo
         public MainWindow()
         {
             InitializeComponent();
+            _straightBitmap = new FormatConvertedBitmap(_renderBitmap, PixelFormats.Bgra32, null, 0);
         }
 
         /// <summary>
@@ -73,7 +79,6 @@ namespace DecklinkFillKeyDemo
 
             // Setup timers
             _captureTimer = new DispatcherTimer();
-            _captureTimer.Interval = TimeSpan.FromMilliseconds(40); // 25fps
             _captureTimer.Tick += CaptureTimer_Tick;
 
             _clockTimer = new DispatcherTimer();
@@ -433,6 +438,7 @@ namespace DecklinkFillKeyDemo
                 }
 
                 btStart.IsEnabled = false;
+                cbVideoMode.IsEnabled = false;
                 lbStatus.Text = "Initializing...";
                 lbStatus.Foreground = Brushes.Orange;
 
@@ -463,6 +469,7 @@ namespace DecklinkFillKeyDemo
                 MessageBox.Show($"Failed to start broadcast: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 btStart.IsEnabled = true;
                 btStop.IsEnabled = false;
+                cbVideoMode.IsEnabled = true;
                 lbStatus.Text = "Error";
                 lbStatus.Foreground = Brushes.Red;
             }
@@ -688,7 +695,9 @@ namespace DecklinkFillKeyDemo
             await _pipeline.StartAsync();
             _isRunning = true;
 
-            // Start capture timer
+            // Start capture timer at the selected frame rate
+            ClockTimer_Tick(this, EventArgs.Empty);
+            _captureTimer.Interval = GetFrameDuration();
             _captureTimer.Start();
             _clockTimer.Start();
             _positionTimer.Start();
@@ -720,6 +729,7 @@ namespace DecklinkFillKeyDemo
 
                 btStart.IsEnabled = true;
                 btStop.IsEnabled = false;
+                cbVideoMode.IsEnabled = true;
                 lbStatus.Text = "Stopped";
                 lbStatus.Foreground = Brushes.Green;
                 lbTime.Text = "00:00:00";
@@ -742,25 +752,14 @@ namespace DecklinkFillKeyDemo
 
             try
             {
-                // Update clock if enabled
-                if (cbShowClock.IsChecked == true)
-                {
-                    UpdateClock();
-                }
-
                 // Capture UserControl to frame
-                var frame = CaptureUserControlToFrame(_graphicsOverlay);
-                if (frame != null)
+                CaptureUserControlToFrame(_graphicsOverlay);
+                _graphicsSource.PushFrame(_frame);
+
+                // Save frame for debugging if enabled
+                if (cbSaveFrames.IsChecked == true)
                 {
-                    _graphicsSource.PushFrame(frame);
-
-                    // Save frame for debugging if enabled
-                    if (cbSaveFrames.IsChecked == true)
-                    {
-                        SaveDebugFrame(frame);
-                    }
-
-                    frame.Free();
+                    SaveDebugFrame(_frame);
                 }
             }
             catch (Exception ex)
@@ -772,71 +771,31 @@ namespace DecklinkFillKeyDemo
         /// <summary>
         /// Capture user control to frame.
         /// </summary>
-        private VideoFrameX CaptureUserControlToFrame(UserControl control)
+        private void CaptureUserControlToFrame(UserControl control)
         {
-            if (!control.Dispatcher.CheckAccess())
-            {
-                return control.Dispatcher.Invoke(() => CaptureUserControlToFrame(control));
-            }
-
             // Ensure proper layout
             control.Measure(new WinSize(1920, 1080));
             control.Arrange(new WinRect(0, 0, 1920, 1080));
             control.UpdateLayout();
 
-            // Create render target with alpha
-            var renderBitmap = new RenderTargetBitmap(1920, 1080, 96, 96, PixelFormats.Pbgra32);
-
             // Clear with transparent background
-            var drawingVisual = new DrawingVisual();
-            using (var drawingContext = drawingVisual.RenderOpen())
-            {
-                drawingContext.DrawRectangle(Brushes.Transparent, null, new WinRect(0, 0, 1920, 1080));
-            }
-            renderBitmap.Render(drawingVisual);
+            _renderBitmap.Clear();
 
             // Render the control
             if (_graphicsVisible)
             {
-                renderBitmap.Render(control);
+                _renderBitmap.Render(control);
             }
 
-            // Get pixel data
-            int stride = renderBitmap.PixelWidth * 4;
-            int size = stride * renderBitmap.PixelHeight;
-            byte[] pixels = new byte[size];
-            renderBitmap.CopyPixels(pixels, stride, 0);
-
-            // Convert alpha if needed
+            // Convert alpha if needed: WPF converts pre-multiplied to straight natively
+            BitmapSource source = _renderBitmap;
             if (cbStraightAlpha.IsChecked == true && !cbPremultipliedAlpha.IsChecked == true)
             {
-                ConvertPreMultipliedToStraightAlpha(pixels);
+                source = _straightBitmap;
             }
 
-            // Create frame
-            var frame = new VideoFrameX(pixels, 1920, 1080, stride, VideoFormatX.BGRA);
-            frame.Timestamp = TimeSpan.FromMilliseconds(Environment.TickCount);
-            frame.Duration = GetFrameDuration();
-
-            return frame;
-        }
-
-        /// <summary>
-        /// Convert pre multiplied to straight alpha.
-        /// </summary>
-        private void ConvertPreMultipliedToStraightAlpha(byte[] pixels)
-        {
-            for (int i = 0; i < pixels.Length; i += 4)
-            {
-                byte alpha = pixels[i + 3];
-                if (alpha != 0 && alpha != 255)
-                {
-                    float alphaFloat = alpha / 255.0f;
-                    pixels[i] = (byte)Math.Min(255, pixels[i] / alphaFloat);     // B
-                    pixels[i + 1] = (byte)Math.Min(255, pixels[i + 1] / alphaFloat); // G
-                    pixels[i + 2] = (byte)Math.Min(255, pixels[i + 2] / alphaFloat); // R
-                }
-            }
+            // Copy the pixels straight into the frame's buffer; PushFrame takes its own copy
+            source.CopyPixels(new Int32Rect(0, 0, 1920, 1080), _frame.Data, _frame.DataSize, _frame.Stride);
         }
 
         /// <summary>
@@ -845,18 +804,16 @@ namespace DecklinkFillKeyDemo
         private void SaveDebugFrame(VideoFrameX frame)
         {
             // Save frames for debugging (limited to avoid disk space issues)
-            int frameCount = 0;
-            if (frameCount++ % 100 == 0) // Save every 100th frame
+            int index = _debugFrameCount++;
+            if (index % 100 == 0) // Save every 100th frame; after 100 files the oldest is overwritten
             {
                 string debugDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                     "VisioForge", "DecklinkFillKey", "Frames");
                 Directory.CreateDirectory(debugDir);
 
-                string filename = Path.Combine(debugDir, $"frame_{frameCount:D6}.raw");
+                string filename = Path.Combine(debugDir, $"frame_{index / 100 % 100:D2}.raw");
 
-                byte[] data = new byte[frame.DataSize];
-                Marshal.Copy(frame.Data, data, 0, frame.DataSize);
-                File.WriteAllBytes(filename, data);
+                File.WriteAllBytes(filename, frame.ToArray());
             }
         }
 
@@ -914,13 +871,15 @@ namespace DecklinkFillKeyDemo
         /// </summary>
         private VideoFrameRate GetSelectedFrameRate()
         {
-            return cbFrameRate.SelectedIndex switch
+            // The output mode sets the rate; an interlaced mode's frame rate is half its field rate
+            var mode = GetSelectedDecklinkMode();
+            return mode switch
             {
-                0 => new VideoFrameRate(25, 1),    // 25 fps
-                1 => new VideoFrameRate(30, 1),    // 30 fps
-                2 => new VideoFrameRate(50, 1),    // 50 fps
-                3 => new VideoFrameRate(60, 1),    // 60 fps
-                _ => new VideoFrameRate(25, 1)
+                DecklinkMode.HD1080p25 or DecklinkMode.HD1080i50 => new VideoFrameRate(25, 1),
+                DecklinkMode.HD1080p30 or DecklinkMode.HD1080i60 => new VideoFrameRate(30, 1),
+                DecklinkMode.HD1080p50 => new VideoFrameRate(50, 1),
+                DecklinkMode.HD1080p60 => new VideoFrameRate(60, 1),
+                _ => throw new NotSupportedException($"Unsupported Decklink mode: {mode}")
             };
         }
 
@@ -929,14 +888,7 @@ namespace DecklinkFillKeyDemo
         /// </summary>
         private TimeSpan GetFrameDuration()
         {
-            return cbFrameRate.SelectedIndex switch
-            {
-                0 => TimeSpan.FromMilliseconds(40),    // 25 fps
-                1 => TimeSpan.FromMilliseconds(33.33), // 30 fps
-                2 => TimeSpan.FromMilliseconds(20),    // 50 fps
-                3 => TimeSpan.FromMilliseconds(16.67), // 60 fps
-                _ => TimeSpan.FromMilliseconds(40)
-            };
+            return TimeSpan.FromSeconds(1.0 / GetSelectedFrameRate().Value);
         }
 
         /// <summary>
@@ -1105,6 +1057,7 @@ namespace DecklinkFillKeyDemo
             _clockTimer?.Stop();
             _positionTimer?.Stop();
             _positionTimer?.Dispose();
+            _frame.Free();
         }
     }
 }

@@ -118,9 +118,6 @@ Public Class Form1
             Return
         End If
 
-        ' Enable still frames grabber
-        VideoCapture1.Video_Still_Frames_Grabber_Enabled = True
-
         ' Disable audio
         VideoCapture1.Audio_RecordAudio = False
         VideoCapture1.Audio_PlayAudio = False

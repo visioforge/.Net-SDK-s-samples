@@ -60,14 +60,7 @@ namespace CustomGrayscaleBlockSample
         /// </summary>
         public static bool IsAvailable()
         {
-            var factory = ElementFactory.Find("videobalance");
-            if (factory == null)
-            {
-                return false;
-            }
-
-            factory.Dispose();
-            return true;
+            return ElementFactory.Find("videobalance") != null;
         }
 
         /// <summary>
