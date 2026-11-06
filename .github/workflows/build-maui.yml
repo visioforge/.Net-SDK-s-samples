@@ -83,6 +83,8 @@ jobs:
         df -h /
         vm_stat | head -5
 
+    # macCatalyst and iOS build with one MSBuild node: in parallel, the install_name_tool
+    # pass over the GStreamer dylibs exhausted the runner's process limit (xcrun EAGAIN).
     # Media Blocks SDK
     - name: Restore (Media Blocks)
       if: runner.os == 'Windows' || matrix.sdk == 'media-blocks'
@@ -94,16 +96,20 @@ jobs:
 
     - name: Build Media Blocks (macCatalyst)
       if: matrix.sdk == 'media-blocks'
+      env:
+        MSBUILDDISABLENODEREUSE: "1"
       run: |
-        dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-maccatalyst
+        dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-maccatalyst -m:1 --disable-build-servers
         # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
         find "Media Blocks SDK" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
         df -h /
 
     - name: Build Media Blocks (iOS)
       if: matrix.sdk == 'media-blocks'
+      env:
+        MSBUILDDISABLENODEREUSE: "1"
       run: |
-        dotnet build "${{ env.Solution_Filter_MB_iOS }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+        dotnet build "${{ env.Solution_Filter_MB_iOS }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-" -m:1 --disable-build-servers
         # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
         find "Media Blocks SDK" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
         df -h /
@@ -123,16 +129,20 @@ jobs:
 
     - name: Build Media Player (macCatalyst)
       if: matrix.sdk == 'media-player'
+      env:
+        MSBUILDDISABLENODEREUSE: "1"
       run: |
-        dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-maccatalyst
+        dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-maccatalyst -m:1 --disable-build-servers
         # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
         find "Media Player SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
         df -h /
 
     - name: Build Media Player (iOS)
       if: matrix.sdk == 'media-player'
+      env:
+        MSBUILDDISABLENODEREUSE: "1"
       run: |
-        dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+        dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-" -m:1 --disable-build-servers
         # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
         find "Media Player SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
         df -h /
@@ -152,16 +162,20 @@ jobs:
 
     - name: Build Video Capture (macCatalyst)
       if: matrix.sdk == 'video-capture'
+      env:
+        MSBUILDDISABLENODEREUSE: "1"
       run: |
-        dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-maccatalyst
+        dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-maccatalyst -m:1 --disable-build-servers
         # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
         find "Video Capture SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
         df -h /
 
     - name: Build Video Capture (iOS)
       if: matrix.sdk == 'video-capture'
+      env:
+        MSBUILDDISABLENODEREUSE: "1"
       run: |
-        dotnet build "${{ env.Solution_Filter_VC_iOS }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+        dotnet build "${{ env.Solution_Filter_VC_iOS }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-" -m:1 --disable-build-servers
         # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
         find "Video Capture SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
         df -h /
@@ -181,16 +195,20 @@ jobs:
 
     - name: Build Video Edit (macCatalyst)
       if: matrix.sdk == 'video-edit'
+      env:
+        MSBUILDDISABLENODEREUSE: "1"
       run: |
-        dotnet build "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.MAUI.sln" --configuration Release --no-restore -f net10.0-maccatalyst
+        dotnet build "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.MAUI.sln" --configuration Release --no-restore -f net10.0-maccatalyst -m:1 --disable-build-servers
         # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
         find "Video Edit SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
         df -h /
 
     - name: Build Video Edit (iOS)
       if: matrix.sdk == 'video-edit'
+      env:
+        MSBUILDDISABLENODEREUSE: "1"
       run: |
-        dotnet build "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.MAUI.sln" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+        dotnet build "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.MAUI.sln" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-" -m:1 --disable-build-servers
         # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
         find "Video Edit SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
         df -h /
