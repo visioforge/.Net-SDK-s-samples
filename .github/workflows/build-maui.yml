@@ -13,8 +13,21 @@ concurrency:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
-        os: [windows-latest, xcode-27]
+        include:
+          - os: windows-latest
+          # One runner per SDK: all four on one hosted runner ran out of disk
+          # part-way through the first SDK's Android build (#4125).
+          - os: xcode-27
+            sdk: media-blocks
+          - os: xcode-27
+            sdk: media-player
+          - os: xcode-27
+            sdk: video-capture
+          - os: xcode-27
+            sdk: video-edit
+    name: build (${{ matrix.os }}${{ matrix.sdk && format(' / {0}', matrix.sdk) || '' }})
     runs-on: ${{ matrix.os }}
 
     env:
@@ -64,8 +77,15 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
+    - name: Free space and memory (macOS)
+      if: runner.os == 'macOS'
+      run: |
+        df -h /
+        vm_stat | head -5
+
     # Media Blocks SDK
     - name: Restore (Media Blocks)
+      if: runner.os == 'Windows' || matrix.sdk == 'media-blocks'
       run: dotnet restore "${{ env.Solution_Name_MB }}"
 
     - name: Build Media Blocks (Windows)
@@ -73,18 +93,28 @@ jobs:
       run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-windows10.0.19041.0
 
     - name: Build Media Blocks (macCatalyst)
-      if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-maccatalyst
+      if: matrix.sdk == 'media-blocks'
+      run: |
+        dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-maccatalyst
+        # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
+        find "Media Blocks SDK" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
+        df -h /
 
     - name: Build Media Blocks (iOS)
-      if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Filter_MB_iOS }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+      if: matrix.sdk == 'media-blocks'
+      run: |
+        dotnet build "${{ env.Solution_Filter_MB_iOS }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+        # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
+        find "Media Blocks SDK" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
+        df -h /
 
     - name: Build Media Blocks (Android)
+      if: runner.os == 'Windows' || matrix.sdk == 'media-blocks'
       run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release --no-restore -f net10.0-android
 
     # Media Player SDK X
     - name: Restore (Media Player)
+      if: runner.os == 'Windows' || matrix.sdk == 'media-player'
       run: dotnet restore "${{ env.Solution_Name_MP }}"
 
     - name: Build Media Player (Windows)
@@ -92,18 +122,28 @@ jobs:
       run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-windows10.0.19041.0
 
     - name: Build Media Player (macCatalyst)
-      if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-maccatalyst
+      if: matrix.sdk == 'media-player'
+      run: |
+        dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-maccatalyst
+        # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
+        find "Media Player SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
+        df -h /
 
     - name: Build Media Player (iOS)
-      if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+      if: matrix.sdk == 'media-player'
+      run: |
+        dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+        # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
+        find "Media Player SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
+        df -h /
 
     - name: Build Media Player (Android)
+      if: runner.os == 'Windows' || matrix.sdk == 'media-player'
       run: dotnet build "${{ env.Solution_Name_MP }}" --configuration Release --no-restore -f net10.0-android
 
     # Video Capture SDK X
     - name: Restore (Video Capture)
+      if: runner.os == 'Windows' || matrix.sdk == 'video-capture'
       run: dotnet restore "${{ env.Solution_Name_VC }}"
 
     - name: Build Video Capture (Windows)
@@ -111,18 +151,28 @@ jobs:
       run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-windows10.0.19041.0
 
     - name: Build Video Capture (macCatalyst)
-      if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-maccatalyst
+      if: matrix.sdk == 'video-capture'
+      run: |
+        dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-maccatalyst
+        # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
+        find "Video Capture SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
+        df -h /
 
     - name: Build Video Capture (iOS)
-      if: runner.os == 'macOS'
-      run: dotnet build "${{ env.Solution_Filter_VC_iOS }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+      if: matrix.sdk == 'video-capture'
+      run: |
+        dotnet build "${{ env.Solution_Filter_VC_iOS }}" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+        # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
+        find "Video Capture SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
+        df -h /
 
     - name: Build Video Capture (Android)
+      if: runner.os == 'Windows' || matrix.sdk == 'video-capture'
       run: dotnet build "${{ env.Solution_Name_VC }}" --configuration Release --no-restore -f net10.0-android
 
     # Video Edit SDK X
     - name: Restore (Video Edit)
+      if: runner.os == 'Windows' || matrix.sdk == 'video-edit'
       run: dotnet restore "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.MAUI.sln"
 
     - name: Build Video Edit (Windows)
@@ -130,12 +180,21 @@ jobs:
       run: dotnet build "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.MAUI.sln" --configuration Release --no-restore -f net10.0-windows10.0.19041.0
 
     - name: Build Video Edit (macCatalyst)
-      if: runner.os == 'macOS'
-      run: dotnet build "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.MAUI.sln" --configuration Release --no-restore -f net10.0-maccatalyst
+      if: matrix.sdk == 'video-edit'
+      run: |
+        dotnet build "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.MAUI.sln" --configuration Release --no-restore -f net10.0-maccatalyst
+        # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
+        find "Video Edit SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
+        df -h /
 
     - name: Build Video Edit (iOS)
-      if: runner.os == 'macOS'
-      run: dotnet build "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.MAUI.sln" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+      if: matrix.sdk == 'video-edit'
+      run: |
+        dotnet build "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.MAUI.sln" --configuration Release --no-restore -f net10.0-ios /p:_RequireCodeSigning=false /p:CodesignKey="-"
+        # Drop this platform's output before the next build; obj/project.assets.json stays for --no-restore.
+        find "Video Edit SDK X" -type d \( -name bin -o -path '*/obj/Release' \) -prune -exec rm -rf {} +
+        df -h /
 
     - name: Build Video Edit (Android)
+      if: runner.os == 'Windows' || matrix.sdk == 'video-edit'
       run: dotnet build "Video Edit SDK X/VisioForge.VideoEdit.X.Demos.MAUI.sln" --configuration Release --no-restore -f net10.0-android
