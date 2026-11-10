@@ -74,7 +74,9 @@ public partial class MainWindow : Window
         camera.Format = (string)cbFormat.SelectedItem;
         camera.FrameRate = (VideoFrameRate)cbFrameRate.SelectedItem;
 
-        videoCapture1.Audio_CaptureDevice = new AudioCaptureSource((string)cbMicrophone.SelectedItem);
+        var mic = (string)cbMicrophone.SelectedItem;
+        videoCapture1.Audio_RecordAudio = mic is not null; // no microphone: record video only
+        if (mic is not null) videoCapture1.Audio_CaptureDevice = new AudioCaptureSource(mic);
         videoCapture1.Audio_PlayAudio = false; // record the microphone without playing it back
 
         var mp4 = new MP4HWOutput();
@@ -132,6 +134,6 @@ public partial class MainWindow : Window
         btStop.IsEnabled = false;
         await videoCapture1.StopAsync();
         btStart.IsEnabled = true;
-        Close();
+        await Dispatcher.InvokeAsync(Close); // not Close(): WPF throws inside Closing
     }
 }
