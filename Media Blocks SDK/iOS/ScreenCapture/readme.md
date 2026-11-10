@@ -27,6 +27,8 @@ The demo runs on a real iPhone or iPad only: the screen is captured by the `Scre
 * the bundle IDs `com.visioforge.screencapture` (`ScreenCapture/Info.plist`) and `com.visioforge.screencapture.extension` (`ScreenCaptureExtension/Info.plist`, `ExtensionBundleId` in `AppDelegate.cs`); the extension ID must start with the app ID;
 * the App Group `group.com.visioforge.screencapture` in both `Entitlements.plist` files and `AppGroupId` in `AppDelegate.cs` and `SampleHandler.cs`. The app and the extension exchange frames through this group, so all four must match.
 
+Register both App IDs with the App Groups capability and the group itself in your Apple Developer account, then create a provisioning profile for each ID (or let Xcode manage signing).
+
 ## Supported frameworks
 
 * .Net 4.7.2

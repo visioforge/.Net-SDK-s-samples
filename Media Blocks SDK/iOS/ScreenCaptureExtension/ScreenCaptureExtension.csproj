@@ -8,12 +8,12 @@
     <ImplicitUsings>true</ImplicitUsings>
     <SupportedOSPlatformVersion>16.4</SupportedOSPlatformVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <!-- Device only: the simulator does not run broadcast extensions. -->
+    <!-- Device only (the simulator does not run broadcast extensions); ScreenCapture's embed step expects this RID's output folder. -->
     <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
     <!-- Build an app extension bundle (.appex); ScreenCapture copies it into its PlugIns folder. -->
     <IsAppExtension>true</IsAppExtension>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <!-- Static registrar: iOS creates SampleHandler before any managed code of the extension runs. -->
+    <!-- Static registrar: with the default one the extension crashes in -[SampleHandler init], which iOS calls before any managed code of the extension has run. -->
     <Registrar>static</Registrar>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
