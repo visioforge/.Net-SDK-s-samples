@@ -130,7 +130,7 @@ public partial class Form1 : Form
             btStop.Enabled = false;
             await videoCapture1.StopAsync();
             btStart.Enabled = true;
-            BeginInvoke(Close); // not Close(): that re-enters FormClosing
+            BeginInvoke(Close); // deferred: StopAsync may complete at once, and Close() would nest inside FormClosing
             return;
         }
 
