@@ -27,7 +27,7 @@ La demo solo funciona en un iPhone o iPad real: la pantalla se captura con la ex
 * los bundle ID `com.visioforge.screencapture` (`ScreenCapture/Info.plist`) y `com.visioforge.screencapture.extension` (`ScreenCaptureExtension/Info.plist`, `ExtensionBundleId` en `AppDelegate.cs`); el ID de la extensión debe empezar por el ID de la aplicación;
 * el App Group `group.com.visioforge.screencapture` en los dos archivos `Entitlements.plist` y `AppGroupId` en `AppDelegate.cs` y `SampleHandler.cs`. La aplicación y la extensión intercambian los fotogramas a través de este grupo, por lo que los cuatro deben coincidir.
 
-Registre ambos App ID con la capacidad App Groups y el propio grupo en su cuenta de Apple Developer, y cree un perfil de aprovisionamiento para cada ID (o deje que Xcode gestione la firma).
+En su cuenta de Apple Developer, cree el App Group y ambos App ID con la capacidad App Groups, asigne el grupo a cada App ID y cree un perfil de aprovisionamiento para cada uno.
 
 ## Frameworks soportados
 
