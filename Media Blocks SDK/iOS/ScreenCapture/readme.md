@@ -24,7 +24,7 @@ graph LR
 
 The demo runs on a real iPhone or iPad only: the screen is captured by the `ScreenCaptureExtension` broadcast extension, which the simulator does not run. To sign it with your own team, change these identifiers together:
 
-* the bundle IDs `com.visioforge.screencapture` (`ScreenCapture/Info.plist`) and `com.visioforge.screencapture.extension` (`ScreenCaptureExtension/Info.plist`, `ExtensionBundleId` in `AppDelegate.cs`); the extension ID must start with the app ID;
+* the bundle IDs `com.visioforge.screencapture` (`ScreenCapture/Info.plist`) and `com.visioforge.screencapture.extension` (`ScreenCaptureExtension/Info.plist`, `ExtensionBundleId` in `AppDelegate.cs`); the extension ID must be the app ID followed by a dot and a suffix (`<app ID>.extension`);
 * the App Group `group.com.visioforge.screencapture` in both `Entitlements.plist` files and `AppGroupId` in `AppDelegate.cs` and `SampleHandler.cs`. The app and the extension exchange frames through this group, so all four must match.
 
 In your Apple Developer account, create the App Group and both App IDs with the App Groups capability, assign the group to each App ID, and create a provisioning profile for each of them.
