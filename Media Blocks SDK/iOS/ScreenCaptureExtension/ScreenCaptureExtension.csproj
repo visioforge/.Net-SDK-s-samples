@@ -8,22 +8,12 @@
     <ImplicitUsings>true</ImplicitUsings>
     <SupportedOSPlatformVersion>16.4</SupportedOSPlatformVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <!-- Device-only: Broadcast Upload Extensions only run on real iOS devices; the
-         simulator does not host system broadcast extensions, so building this project
-         for iossimulator-* would produce an unloadable .appex. Pinning the RID also
-         matches the parent ScreenCapture.csproj device-only pin (the parent's
-         EmbedBroadcastExtension target expects the .appex under the same RID subfolder).
-         See the parent project comment for the .NET iOS 10 / SkiaSharp.NativeAssets.iOS
-         RID-resolution background. -->
+    <!-- Device only: the simulator does not run broadcast extensions. -->
     <RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
-    <!-- Tell the .NET iOS tooling to build this project as an app extension bundle (.appex)
-         instead of a standalone .app. The main app's csproj references this one and the
-         tooling embeds the resulting .appex inside the main bundle's Plugins/ directory. -->
+    <!-- Build an app extension bundle (.appex); ScreenCapture copies it into its PlugIns folder. -->
     <IsAppExtension>true</IsAppExtension>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <!-- The managed static registrar crashes an extension on its first callback: iOS calls
-         -[SampleHandler init] before any managed code of this assembly has run, so its AOT
-         module is not initialized yet (#4015). The static registrar initializes it on the call. -->
+    <!-- Static registrar: iOS creates SampleHandler before any managed code of the extension runs. -->
     <Registrar>static</Registrar>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

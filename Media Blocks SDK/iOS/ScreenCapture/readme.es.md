@@ -20,6 +20,13 @@ graph LR
     H264EncoderBlock --> MP4SinkBlock
 ```
 
+## Ejecución en su dispositivo
+
+La demo solo funciona en un iPhone o iPad real: la pantalla se captura con la extensión de difusión `ScreenCaptureExtension`, que el simulador no ejecuta. Para firmarla con su propio equipo, cambie estos identificadores a la vez:
+
+* los bundle ID `com.visioforge.screencapture` (`ScreenCapture/Info.plist`) y `com.visioforge.screencapture.extension` (`ScreenCaptureExtension/Info.plist`, `ExtensionBundleId` en `AppDelegate.cs`); el ID de la extensión debe empezar por el ID de la aplicación;
+* el App Group `group.com.visioforge.screencapture` en los dos archivos `Entitlements.plist` y `AppGroupId` en `AppDelegate.cs` y `SampleHandler.cs`. La aplicación y la extensión intercambian los fotogramas a través de este grupo, por lo que los cuatro deben coincidir.
+
 ## Frameworks soportados
 
 * .Net 4.7.2
