@@ -13,6 +13,7 @@
     <!-- Build an app extension bundle (.appex); ScreenCapture embeds it in its PlugIns folder. -->
     <IsAppExtension>true</IsAppExtension>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <ProvisioningType>automatic</ProvisioningType>
     <!-- Static registrar: with the default one the extension crashes in -[SampleHandler init], which iOS calls before any managed code of the extension has run. -->
     <Registrar>static</Registrar>
   </PropertyGroup>
