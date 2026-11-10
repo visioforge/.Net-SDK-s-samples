@@ -68,7 +68,9 @@ public partial class Form1 : Form
         camera.Format = cbFormat.Text;
         camera.FrameRate = (VideoFrameRate)cbFrameRate.SelectedItem;
 
-        videoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbMicrophone.Text);
+        var mic = (string)cbMicrophone.SelectedItem;
+        videoCapture1.Audio_RecordAudio = mic is not null; // no microphone: record video only
+        if (mic is not null) videoCapture1.Audio_CaptureDevice = new AudioCaptureSource(mic);
         videoCapture1.Audio_PlayAudio = false; // record the microphone without playing it back
 
         var mp4 = new MP4HWOutput();
@@ -128,7 +130,7 @@ public partial class Form1 : Form
             btStop.Enabled = false;
             await videoCapture1.StopAsync();
             btStart.Enabled = true;
-            Close();
+            BeginInvoke(Close); // not Close(): that re-enters FormClosing
             return;
         }
 
