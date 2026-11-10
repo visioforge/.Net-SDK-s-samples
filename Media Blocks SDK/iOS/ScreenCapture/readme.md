@@ -31,14 +31,7 @@ In your Apple Developer account, create the App Group and both App IDs with the 
 
 ## Supported frameworks
 
-* .Net 4.7.2
-* .Net Core 3.1
-* .Net 5
-* .Net 6
-* .Net 7
-* .Net 8
-* .Net 9
-* .Net 10
+* .Net 10 (net10.0-ios)
 
 ---
 
