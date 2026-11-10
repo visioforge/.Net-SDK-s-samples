@@ -2,7 +2,21 @@
 # Usage: embed-extension.sh <path-to-extension.appex> <output-path-of-main-app> <codesign-identity> <entitlements-plist>
 # Copies the broadcast extension into the main app's PlugIns directory, then codesigns both
 # the extension and the main .app so iOS installd accepts the bundle.
+#
+# Missing inputs (extension not built, main .app not found) fail by default so CI/publish
+# don't silently produce a broken bundle without the extension signed in. Set
+# EMBED_EXTENSION_OPTIONAL=1 to preserve the previous best-effort behavior (exit 0 on
+# missing inputs) — useful for IDE builds where the extension may not have been built yet.
 set -e
+
+fail_or_skip() {
+    echo "$1"
+    if [ "${EMBED_EXTENSION_OPTIONAL:-0}" = "1" ]; then
+        echo "[embed-extension] EMBED_EXTENSION_OPTIONAL=1; skipping without failing the build"
+        exit 0
+    fi
+    exit 1
+}
 
 APPEX="$1"
 OUTDIR="$2"
@@ -10,14 +24,12 @@ IDENTITY="$3"
 EXT_ENTITLEMENTS="$4"
 
 if [ ! -d "$APPEX" ]; then
-    echo "[embed-extension] extension not built: $APPEX"
-    exit 0
+    fail_or_skip "[embed-extension] extension not built: $APPEX"
 fi
 
 APP=$(find "$OUTDIR" -name "ScreenCapture.app" -type d | head -1)
 if [ -z "$APP" ]; then
-    echo "[embed-extension] main .app not found under $OUTDIR"
-    exit 0
+    fail_or_skip "[embed-extension] main .app not found under $OUTDIR"
 fi
 
 rm -rf "$APP/PlugIns/ScreenCaptureExtension.appex"
@@ -42,8 +54,12 @@ fi
 
 if [ -n "$IDENTITY" ] && [ -f "$EXT_ENTITLEMENTS" ]; then
     echo "[embed-extension] signing $EMBEDDED with identity '$IDENTITY' and entitlements $EXT_ENTITLEMENTS"
-    # Sign nested frameworks/dylibs first (deep) then the bundle.
-    codesign --force --sign "$IDENTITY" --preserve-metadata=identifier,entitlements --timestamp=none --deep "$EMBEDDED" 2>/dev/null || true
+    # Sign nested frameworks/dylibs first (deep), then the bundle with entitlements.
+    # Surface deep-sign failures instead of silently swallowing them — otherwise a
+    # distribution install can later fail with an opaque signature error.
+    if ! codesign --force --sign "$IDENTITY" --preserve-metadata=identifier,entitlements --timestamp=none --deep "$EMBEDDED"; then
+        echo "[embed-extension] warning: deep codesign pass failed; nested frameworks/dylibs may be unsigned" >&2
+    fi
     codesign --force --sign "$IDENTITY" --entitlements "$EXT_ENTITLEMENTS" --timestamp=none --generate-entitlement-der "$EMBEDDED"
 
     # Re-sign the main .app so its code directory hashes cover the new PlugIns entry.
