@@ -1,0 +1,37 @@
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="Virtual_Camera_Push_Demo.MainWindow"
+    Title="Virtual Camera SDK .Net - Push Demo" Height="420" Width="900" Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <GroupBox Header="Virtual Camera Registration">
+                <StackPanel Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse x:Name="statusIndicator" Width="12" Height="12" Fill="Gray" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="lbRegistrationStatus" Text="Checking..." VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button x:Name="btRegister" Content="Register Virtual Camera (Admin)" Margin="0,8,0,0" Height="28" Click="btRegister_Click"/>
+                </StackPanel>
+            </GroupBox>
+
+            <Label Content="License key (empty: TRIAL banner)" Margin="0,8,0,0"/>
+            <TextBox x:Name="edLicenseKey"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                <Button x:Name="btStart" Content="Start" Width="80" Height="28" Click="btStart_Click"/>
+                <Button x:Name="btStop" Content="Stop" Width="80" Height="28" Margin="10,0,0,0" Click="btStop_Click" IsEnabled="False"/>
+            </StackPanel>
+
+            <TextBlock x:Name="lbStatus" Margin="0,12,0,0" TextWrapping="Wrap"
+                       Text="Start, then pick &quot;VisioForge Virtual Camera&quot; in Zoom, OBS or a browser, and &quot;VisioForge Virtual Audio Card&quot; in a DirectShow application, such as the custom audio device of an OBS Video Capture Device source."/>
+        </StackPanel>
+
+        <Image Grid.Column="1" x:Name="imgPreview" Margin="10,0,0,0" VerticalAlignment="Top" Stretch="Uniform"/>
+    </Grid>
+</Window>

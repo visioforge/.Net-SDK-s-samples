@@ -29,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sdk: [media-blocks, media-player, video-capture, video-edit, video-fingerprinting]
+        sdk: [media-blocks, media-player, video-capture, video-edit, video-fingerprinting, virtual-camera]
 
     runs-on: windows-latest
 
@@ -182,6 +182,15 @@ jobs:
     - name: Clean (Video Fingerprinting)
       if: matrix.sdk == 'video-fingerprinting'
       run: dotnet clean "Video Fingerprinting SDK/VideoFingerprinting.sln" --configuration Release
+
+    ## Virtual Camera
+
+    - name: Build (Virtual Camera)
+      if: matrix.sdk == 'virtual-camera'
+      run: dotnet build "Virtual Camera SDK/VirtualCamera.sln" --configuration Release
+    - name: Clean (Virtual Camera)
+      if: matrix.sdk == 'virtual-camera'
+      run: dotnet clean "Virtual Camera SDK/VirtualCamera.sln" --configuration Release
 
   # The console samples target net8.0 on Linux, but the desktop and MAUI heads in
   # VideoFingerprinting.sln are Windows/macOS only, so the console set gets its own solution and runner.
