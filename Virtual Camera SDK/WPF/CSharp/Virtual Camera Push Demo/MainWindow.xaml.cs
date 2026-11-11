@@ -203,7 +203,7 @@ namespace Virtual_Camera_Push_Demo
                 }
             }
 
-            // Not written (every buffer busy): the same samples are pushed again on the next tick.
+            // Not written: the same samples are pushed again on the next tick.
             if (_audio.PushSamples(pcm))
             {
                 _samplesSent += count;
