@@ -60,7 +60,8 @@ namespace Virtual_Camera_Push_Demo
         private static bool IsRegistered(string clsid)
         {
             using var key = Registry.ClassesRoot.OpenSubKey($@"CLSID\{clsid}\InprocServer32");
-            return key != null;
+            // Registered and the .ax file is still where it was registered from.
+            return key?.GetValue(null) is string path && File.Exists(path);
         }
 
         private async void btRegister_Click(object sender, RoutedEventArgs e)
@@ -181,11 +182,11 @@ namespace Virtual_Camera_Push_Demo
         }
 
         // A 440 Hz tone for the virtual microphone, as many samples as the clock says are due
-        // (at most one second, the size of one audio buffer).
+        // (at most 100 ms per tick, so a backlog after failed pushes is caught up gradually).
         private void PushTone()
         {
             long due = (long)(_clock.Elapsed.TotalSeconds * SampleRate);
-            int count = (int)Math.Min(due - _samplesSent, SampleRate);
+            int count = (int)Math.Min(due - _samplesSent, SampleRate / 10);
             if (count <= 0)
             {
                 return;
