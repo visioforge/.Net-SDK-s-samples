@@ -29,7 +29,8 @@ namespace Virtual_Camera_Push_Demo
 
         private readonly RenderTargetBitmap _canvas = new RenderTargetBitmap(FrameWidth, FrameHeight, 96, 96, PixelFormats.Pbgra32);
         private readonly byte[] _pixels = new byte[FrameWidth * FrameHeight * 4];
-        private readonly DispatcherTimer _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1000.0 / FrameRate) };
+        // Polls the clock; the clock, not the timer, decides when a frame or audio is due.
+        private readonly DispatcherTimer _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(10) };
         private readonly Stopwatch _clock = new Stopwatch();
 
         private VirtualVideoWriter _video;
@@ -140,13 +141,22 @@ namespace Virtual_Camera_Push_Demo
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            DrawFrame(_clock.Elapsed.TotalSeconds);
+            double seconds = _clock.Elapsed.TotalSeconds;
 
             try
             {
-                // A WPF bitmap is BGRA, top row first: pushed as it is.
-                _canvas.CopyPixels(_pixels, FrameWidth * 4, 0);
-                _video.PushFrameBgra(_pixels, FrameWidth * 4);
+                long framesDue = (long)(seconds * FrameRate) + 1;
+                if (_video.FrameCount < framesDue)
+                {
+                    DrawFrame(seconds);
+
+                    // A WPF bitmap is BGRA, top row first: pushed as it is. After a UI stall the frame
+                    // is repeated, so the video timestamps keep up with the clock.
+                    _canvas.CopyPixels(_pixels, FrameWidth * 4, 0);
+                    while (_video.FrameCount < framesDue && _video.PushFrameBgra(_pixels, FrameWidth * 4))
+                    {
+                    }
+                }
 
                 PushTone();
             }
@@ -180,29 +190,35 @@ namespace Virtual_Camera_Push_Demo
             _canvas.Render(visual);
         }
 
-        // A 440 Hz tone for the virtual microphone, as many samples as the clock says are due.
+        // A 440 Hz tone for the virtual microphone, as many samples as the clock says are due
+        // (at most one second, the size of one audio buffer).
         private void PushTone()
         {
             long due = (long)(_clock.Elapsed.TotalSeconds * SampleRate);
-            int count = (int)(due - _samplesSent);
+            int count = (int)Math.Min(due - _samplesSent, SampleRate);
             if (count <= 0)
             {
                 return;
             }
 
             var pcm = new byte[count * Channels * 2];
+            double phase = _phase;
             for (int i = 0; i < count; i++)
             {
-                short sample = (short)(Math.Sin(_phase) * 3000);
-                _phase = (_phase + 2 * Math.PI * 440 / SampleRate) % (2 * Math.PI);
+                short sample = (short)(Math.Sin(phase) * 3000);
+                phase = (phase + 2 * Math.PI * 440 / SampleRate) % (2 * Math.PI);
                 for (int c = 0; c < Channels; c++)
                 {
                     BitConverter.TryWriteBytes(pcm.AsSpan((i * Channels + c) * 2), sample);
                 }
             }
 
-            _audio.PushSamples(pcm);
-            _samplesSent = due;
+            // No free buffer: the same samples are pushed again on the next tick.
+            if (_audio.PushSamples(pcm))
+            {
+                _samplesSent += count;
+                _phase = phase;
+            }
         }
     }
 }
