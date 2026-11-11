@@ -29,8 +29,7 @@ namespace Virtual_Camera_Push_Demo
 
         private readonly RenderTargetBitmap _canvas = new RenderTargetBitmap(FrameWidth, FrameHeight, 96, 96, PixelFormats.Pbgra32);
         private readonly byte[] _pixels = new byte[FrameWidth * FrameHeight * 4];
-        // Polls the clock; the clock, not the timer, decides when a frame or audio is due.
-        private readonly DispatcherTimer _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(10) };
+        private readonly DispatcherTimer _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1000.0 / FrameRate) };
         private readonly Stopwatch _clock = new Stopwatch();
 
         private VirtualVideoWriter _video;
@@ -141,22 +140,13 @@ namespace Virtual_Camera_Push_Demo
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            double seconds = _clock.Elapsed.TotalSeconds;
+            DrawFrame(_clock.Elapsed.TotalSeconds);
 
             try
             {
-                long framesDue = (long)(seconds * FrameRate) + 1;
-                if (_video.FrameCount < framesDue)
-                {
-                    DrawFrame(seconds);
-
-                    // A WPF bitmap is BGRA, top row first: pushed as it is. After a UI stall the frame
-                    // is repeated, so the video timestamps keep up with the clock.
-                    _canvas.CopyPixels(_pixels, FrameWidth * 4, 0);
-                    while (_video.FrameCount < framesDue && _video.PushFrameBgra(_pixels, FrameWidth * 4))
-                    {
-                    }
-                }
+                // A WPF bitmap is BGRA, top row first: pushed as it is.
+                _canvas.CopyPixels(_pixels, FrameWidth * 4, 0);
+                _video.PushFrameBgra(_pixels, FrameWidth * 4);
 
                 PushTone();
             }
@@ -213,7 +203,7 @@ namespace Virtual_Camera_Push_Demo
                 }
             }
 
-            // No free buffer: the same samples are pushed again on the next tick.
+            // Not written (every buffer busy): the same samples are pushed again on the next tick.
             if (_audio.PushSamples(pcm))
             {
                 _samplesSent += count;

@@ -8,8 +8,8 @@ Virtual Audio Card as a microphone.
 ## Used packages
 
 * `VisioForge.DotNet.VirtualCamera` - the push API
-* `VisioForge.DotNet.Core.Redist.VirtualCamera.x64` - the virtual camera and virtual audio card filters
-* `VisioForge.DotNet.Core.Redist.Shared.x64` - the native BGRA to YUY2 conversion
+* `VisioForge.DotNet.Core.Redist.VirtualCamera.x64` - the virtual camera and virtual audio card filters, and through
+  `Redist.Shared.x64` the native BGRA to YUY2 conversion
 
 ## How to use
 
