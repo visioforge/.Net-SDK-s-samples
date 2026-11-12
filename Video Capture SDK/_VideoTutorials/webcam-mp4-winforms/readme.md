@@ -1,6 +1,6 @@
 # Video Capture SDK .Net - webcam-mp4-winforms (C#/WinForms)
 
-The code of the [webcam to MP4 video tutorial](https://www.youtube.com/@VisioForgeTutorials): a WinForms app with a live preview that records a webcam, and a microphone when there is one, to MP4, with H.264 on the GPU and a CPU fallback.
+The code of the [webcam to MP4 video tutorial](https://www.youtube.com/watch?v=fAt1Bp6qYPc): a WinForms app with a live preview that records a webcam, and a microphone when there is one, to MP4, with H.264 on the GPU and a CPU fallback.
 
 ## Supported frameworks
 
