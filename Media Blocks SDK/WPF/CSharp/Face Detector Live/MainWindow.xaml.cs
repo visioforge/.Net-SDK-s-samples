@@ -268,7 +268,10 @@ namespace Face_Detector_Live
                                 Format = formatItem.ToFormat()
                             };
 
-                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                            if (!string.IsNullOrEmpty(cbVideoFrameRate.Text))
+                            {
+                                videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                            }
                         }
                     }
                 }

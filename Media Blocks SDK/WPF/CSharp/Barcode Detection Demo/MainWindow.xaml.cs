@@ -226,7 +226,10 @@ namespace MediaBlocks_Barcode_Detection_Demo_WPF
                                 Format = formatItem.ToFormat()
                             };
 
-                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                            if (!string.IsNullOrEmpty(cbVideoFrameRate.Text))
+                            {
+                                videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                            }
                         }
                     }
                 }

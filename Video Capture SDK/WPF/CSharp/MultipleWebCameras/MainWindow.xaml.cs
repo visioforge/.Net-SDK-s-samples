@@ -130,6 +130,11 @@ namespace MultipleWebCameras
             {
                 VideoCapture1.Video_CaptureDevice.FrameRate = videoFormat.FrameRates[videoFormat.FrameRates.Count - 1];
             }
+            else
+            {
+                // The device constructor stored another format's rate. No listed rate clears it.
+                VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty;
+            }
 
             // VideoCapture1.OnError += VideoCapture1OnOnError;
             VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
@@ -178,6 +183,11 @@ namespace MultipleWebCameras
             if (videoFormat.FrameRates.Count > 0)
             {
                 VideoCapture2.Video_CaptureDevice.FrameRate = videoFormat.FrameRates[videoFormat.FrameRates.Count - 1];
+            }
+            else
+            {
+                // The device constructor stored another format's rate. No listed rate clears it.
+                VideoCapture2.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty;
             }
 
             // VideoCapture2.OnError += VideoCapture2OnOnError;

@@ -214,7 +214,8 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
         {
             try
             {
-                if (cbVideoFrameRate.SelectedIndex == -1)
+                // An empty list means the camera published no rate. Start anyway and use the pin's rate.
+                if (cbVideoFrameRate.Items.Count > 0 && cbVideoFrameRate.SelectedIndex == -1)
                 {
                     MessageBox.Show("The frame rate should be specified.");
                     return;
@@ -251,7 +252,13 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
                 VideoCapture1.Audio_CaptureDevice.Format = cbAudioFormat.Text;
                 VideoCapture1.Audio_CaptureDevice.Format_UseBest = false;
 
-                var frameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                var frameRate = VideoFrameRate.Empty;
+                if (!string.IsNullOrEmpty(cbVideoFrameRate.Text))
+                {
+                    frameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                }
+
+                // The device constructor stored another format's rate. An empty box clears it.
                 VideoCapture1.Video_CaptureDevice.FrameRate = frameRate;
 
                 VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
@@ -291,6 +298,19 @@ namespace MediaBlocks_Simple_Video_Capture_Demo_WPF
 
                 // Start DirectShow part first
                 await VideoCapture1.StartAsync();
+
+                // The pin's frame time is known only after the camera starts. Without it, videotestsrc runs at 30 fps.
+                if (videoSettings.FrameRate.IsEmpty)
+                {
+                    videoSettings.FrameRate = VideoCapture1.Video_CaptureDevice.FrameRate;
+                    if (videoSettings.FrameRate.IsEmpty)
+                    {
+                        MessageBox.Show("The camera did not report a frame rate.");
+                        await VideoCapture1.StopAsync();
+                        _pipeline.ClearBlocks();
+                        return;
+                    }
+                }
 
                 await Task.Delay(500); // give some time to DirectShow to start
 

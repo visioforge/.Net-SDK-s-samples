@@ -104,7 +104,10 @@ namespace h264_capture_webcam
                                 Format = formatItem.ToFormat()
                             };
 
-                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
+                            if (!string.IsNullOrEmpty(cbVideoInputFrameRate.Text))
+                            {
+                                videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
+                            }
 
                             // Disable H264 decoder, because if we are capturing H264, we don't need to decode it.
                             videoSourceSettings.DisableH264Decoder = true;

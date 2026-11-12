@@ -76,14 +76,21 @@ namespace multiple_video_streams
             VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbCamera1.Text);
             VideoCapture1.Video_CaptureDevice.Format_UseBest = false;
             VideoCapture1.Video_CaptureDevice.Format = cbVideoFormat1.Text;
-            VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate1.Text));
+            var frameRate = VideoFrameRate.Empty;
+            if (!string.IsNullOrEmpty(cbVideoFrameRate1.Text))
+            {
+                frameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate1.Text));
+            }
+
+            // The device constructor stored another format's rate. An empty box clears it.
+            VideoCapture1.Video_CaptureDevice.FrameRate = frameRate;
 
             // 2nd device
             VideoCapture1.PIP_Sources_Add_VideoCaptureDevice(
                 cbCamera2.Text,
                 cbVideoFormat2.Text,
                 false,
-                new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate1.Text)),
+                frameRate,
                 cbCamera2.Text,
                 0,
                 0,

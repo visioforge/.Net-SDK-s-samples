@@ -258,6 +258,11 @@ namespace madVR_Demo
             {
                 VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
             }
+            else
+            {
+                // The device constructor stored another format's rate. An empty box clears it.
+                VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty;
+            }
 
             VideoCapture1.Audio_CaptureDevice = new AudioCaptureSource(cbAudioInputDevice.Text);
             VideoCapture1.Audio_CaptureDevice.Format_UseBest = cbUseBestAudioInputFormat.Checked;

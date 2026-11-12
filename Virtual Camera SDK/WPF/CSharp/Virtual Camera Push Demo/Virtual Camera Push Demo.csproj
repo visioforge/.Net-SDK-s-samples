@@ -12,9 +12,9 @@
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.Core.Redist.VirtualCamera.x64" Version="[2026.11.6]" />
+    <PackageReference Include="VisioForge.DotNet.Core.Redist.VirtualCamera.x64" Version="[2026.11.12]" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VirtualCamera" Version="[2026.11.6]" />
+    <PackageReference Include="VisioForge.DotNet.VirtualCamera" Version="[2026.11.12]" />
   </ItemGroup>
 </Project>

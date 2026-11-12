@@ -500,6 +500,9 @@ Public Class Form1
 
         If cbVideoInputFrameRate.SelectedIndex <> -1 Then
             VideoCapture1.Video_CaptureDevice.FrameRate = New VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text))
+        Else
+            ' The device constructor stored another format's rate. An empty box clears it.
+            VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty
         End If
 
         If (rbPreview.Checked) Then

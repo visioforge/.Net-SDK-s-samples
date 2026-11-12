@@ -538,6 +538,11 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             {
                 VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
             }
+            else
+            {
+                // The device constructor stored another format's rate. An empty box clears it.
+                VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty;
+            }
 
             if (rbPreview.Checked)
             {

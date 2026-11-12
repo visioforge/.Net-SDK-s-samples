@@ -135,8 +135,6 @@ namespace Live_Source_Switch_Demo
                         {
                             Format = formatItem.ToFormat()
                         };
-
-                        videoSourceSettings.Format.FrameRate = formatItem.FrameRateList[formatItem.FrameRateList.Count - 1];
                     }
                 }
             }

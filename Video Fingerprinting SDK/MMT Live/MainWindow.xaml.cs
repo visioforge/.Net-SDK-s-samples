@@ -304,7 +304,10 @@ namespace VisioForge_MMT_Live
                         Format = format.ToFormat()
                     };
 
-                    videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                    if (!string.IsNullOrEmpty(cbVideoFrameRate.Text))
+                    {
+                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                    }
 
 
                     _videoCapture.Video_Source = videoSourceSettings;

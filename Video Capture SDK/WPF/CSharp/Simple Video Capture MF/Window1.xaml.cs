@@ -135,10 +135,10 @@ namespace Simple_Video_Capture_MF
             var source = new VideoCaptureSource(camera);
             source.Format = format.Name;
             source.Format_UseBest = false;
-            if (cbFrameRate.SelectedItem is VideoFrameRate rate && !rate.IsEmpty)
-            {
-                source.FrameRate = rate;
-            }
+            // The device constructor stored another format's rate. An empty box clears it.
+            source.FrameRate = cbFrameRate.SelectedItem is VideoFrameRate rate && !rate.IsEmpty
+                ? rate
+                : VideoFrameRate.Empty;
 
             _capture.Video_CaptureDevice = source;
             _capture.Audio_PlayAudio = false;

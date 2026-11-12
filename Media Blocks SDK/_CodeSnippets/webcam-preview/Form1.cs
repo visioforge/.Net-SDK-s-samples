@@ -196,7 +196,10 @@ using System.Diagnostics;
                                 Format = formatItem.ToFormat()
                             };
 
-                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
+                            if (!string.IsNullOrEmpty(cbVideoInputFrameRate.Text))
+                            {
+                                videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
+                            }
                         }
                     }
                 }

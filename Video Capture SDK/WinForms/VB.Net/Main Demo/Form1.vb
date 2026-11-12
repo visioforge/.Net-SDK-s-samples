@@ -995,6 +995,8 @@ Public Class Form1
 
         ' Virtual camera output
         VideoCapture1.Virtual_Camera_Output_Enabled = cbVirtualCamera.Checked
+        ' Virtual Camera SDK license key; without it the virtual camera shows a TRIAL strip.
+        'VideoCapture1.Virtual_Camera_Output_LicenseKey = "your license key"
 
         ' Decklink output
         ConfigureDecklink()
@@ -1970,6 +1972,9 @@ Public Class Form1
 
         If cbVideoInputFrameRate.SelectedIndex <> -1 Then
             VideoCapture1.Video_CaptureDevice.FrameRate = New VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text))
+        Else
+            ' The device constructor stored another format's rate. An empty box clears it.
+            VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty
         End If
 
         VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked

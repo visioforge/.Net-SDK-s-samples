@@ -116,7 +116,8 @@ namespace multiple_ap_cams
             }
             else
             {
-                VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(25);
+                // The device constructor stored another format's rate. An empty box clears it.
+                VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty;
             }
 
             VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
@@ -190,7 +191,8 @@ namespace multiple_ap_cams
             }
             else
             {
-                VideoCapture2.Video_CaptureDevice.FrameRate = new VideoFrameRate(25);
+                // The device constructor stored another format's rate. An empty box clears it.
+                VideoCapture2.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty;
             }
 
             VideoCapture2.Mode = VideoCaptureMode.VideoPreview;

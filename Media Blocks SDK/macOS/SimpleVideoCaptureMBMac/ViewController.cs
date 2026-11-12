@@ -281,8 +281,11 @@ public partial class ViewController : NSViewController
                         Format = formatItem.ToFormat()
                     };
 
-                    videoSourceSettings.Format.FrameRate =
-                        new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.StringValue));
+                    if (!string.IsNullOrEmpty(cbVideoFrameRate.StringValue))
+                    {
+                        videoSourceSettings.Format.FrameRate =
+                            new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.StringValue));
+                    }
                 }
             }
         }

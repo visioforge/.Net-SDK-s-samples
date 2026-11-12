@@ -122,7 +122,10 @@ namespace face_detection
             VideoCapture1.Video_CaptureDevice = new VideoCaptureSource(cbVideoInputDevice.Text);
             VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text;
             VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked;
-            VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
+            // The device constructor stored another format's rate. An empty box clears it.
+            VideoCapture1.Video_CaptureDevice.FrameRate = string.IsNullOrEmpty(cbVideoInputFrameRate.Text)
+                ? VideoFrameRate.Empty
+                : new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
 
             // disabe audio
             VideoCapture1.Audio_PlayAudio = false;

@@ -447,6 +447,11 @@ namespace Nvidia_Maxine_Demo
             {
                 VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
             }
+            else
+            {
+                // The device constructor stored another format's rate. An empty box clears it.
+                VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty;
+            }
             
             VideoCapture1.Mode = VideoCaptureMode.VideoPreview;
 

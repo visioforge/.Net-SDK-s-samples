@@ -1688,16 +1688,16 @@ namespace Main_Demo
                 VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text;
                 VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.IsChecked == true;
 
+                // The device constructor stored another format's rate. An empty box clears it.
                 try
                 {
-                    if (!string.IsNullOrEmpty(cbVideoInputFrameRate.Text))
-                    {
-                        VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
-                    }
+                    VideoCapture1.Video_CaptureDevice.FrameRate = string.IsNullOrEmpty(cbVideoInputFrameRate.Text)
+                        ? VideoFrameRate.Empty
+                        : new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
                 }
                 catch
                 {
-                    VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(25);
+                    VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty;
                 }
 
                 VideoCapture1.Video_CaptureDevice.UseClosedCaptions = cbUseClosedCaptions.IsChecked == true;
@@ -2073,6 +2073,8 @@ namespace Main_Demo
 
             // Virtual camera output
             VideoCapture1.Virtual_Camera_Output_Enabled = cbVirtualCamera.IsChecked == true;
+            // Virtual Camera SDK license key; without it the virtual camera shows a TRIAL strip.
+            //VideoCapture1.Virtual_Camera_Output_LicenseKey = "your license key";
 
             // Decklink output
             if (cbDecklinkOutput.IsChecked == true)

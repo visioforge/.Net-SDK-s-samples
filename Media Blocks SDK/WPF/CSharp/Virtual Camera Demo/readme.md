@@ -1,6 +1,6 @@
 # Media Blocks SDK .Net - Virtual Camera Demo (C#/WPF)
 
-This application streams webcam video and microphone audio to the VisioForge Virtual Camera via shared memory, making the feed available to other applications like Zoom, Teams, and OBS.
+This application streams webcam video to the VisioForge Virtual Camera and microphone audio to the VisioForge Virtual Audio Card via shared memory. Zoom, OBS and browsers see the camera as a webcam, and DirectShow applications also see the Virtual Audio Card as a microphone.
 
 ## Used media blocks
 

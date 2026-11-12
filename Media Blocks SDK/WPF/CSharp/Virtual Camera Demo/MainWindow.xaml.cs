@@ -177,6 +177,9 @@ namespace MediaBlocks_Virtual_Camera_Demo_WPF
                 Width = width,
                 Height = height,
                 FrameRate = frameRate,
+
+                // Virtual Camera SDK license key; without it the virtual camera shows a TRIAL strip.
+                //LicenseKey = "your license key",
             };
 
             // Virtual camera sink block

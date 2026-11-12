@@ -30,6 +30,8 @@ namespace video_capture_text_overlay
             videoCapture1.Mode = VideoCaptureMode.VideoPreview;
 
             videoCapture1.Virtual_Camera_Output_Enabled = true;
+            // Virtual Camera SDK license key; without it the virtual camera shows a TRIAL strip.
+            //videoCapture1.Virtual_Camera_Output_LicenseKey = "your license key";
 
             await videoCapture1.StartAsync();
         }

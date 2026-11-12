@@ -228,7 +228,10 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                                 Format = formatItem.ToFormat()
                             };
 
-                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                            if (!string.IsNullOrEmpty(cbVideoFrameRate.Text))
+                            {
+                                videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                            }
                         }
                     }
                 }

@@ -130,11 +130,12 @@ Public Class Form1
         VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text
         VideoCapture1.Video_CaptureDevice.Format_UseBest = False
 
-        If cbVideoInputFrameRate.SelectedIndex <> -1 Then
-            Dim frameRate As Double
-            If Double.TryParse(cbVideoInputFrameRate.Text, frameRate) Then
-                VideoCapture1.Video_CaptureDevice.FrameRate = New VideoFrameRate(frameRate)
-            End If
+        Dim frameRate As Double
+        If cbVideoInputFrameRate.SelectedIndex <> -1 AndAlso Double.TryParse(cbVideoInputFrameRate.Text, frameRate) Then
+            VideoCapture1.Video_CaptureDevice.FrameRate = New VideoFrameRate(frameRate)
+        Else
+            ' The device constructor stored another format's rate. An empty box clears it.
+            VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty
         End If
 
         ' Set mode to preview only (no capture)

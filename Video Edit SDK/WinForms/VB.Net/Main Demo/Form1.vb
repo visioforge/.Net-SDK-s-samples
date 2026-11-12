@@ -993,6 +993,8 @@ Public Class Form1
 
         ' Virtual camera output
         VideoEdit1.Virtual_Camera_Output_Enabled = cbVirtualCamera.Checked
+        ' Virtual Camera SDK license key; without it the virtual camera shows a TRIAL strip.
+        'VideoEdit1.Virtual_Camera_Output_LicenseKey = "your license key"
 
         ' Video effects CPU
         AddVideoEffects()

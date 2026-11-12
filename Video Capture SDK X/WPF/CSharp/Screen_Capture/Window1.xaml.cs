@@ -194,20 +194,16 @@ namespace Screen_Capture_X
         {
             var screenID = Convert.ToInt32(cbScreenCaptureDisplayIndex.Text);
 
+            // Desktop Duplication: starts at once, even on a still screen
             var source = new ScreenCaptureD3D11SourceSettings();
-            source.API = D3D11ScreenCaptureAPI.WGC;
+            source.API = D3D11ScreenCaptureAPI.DXGI;
 
             source.FrameRate = new VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text));
 
             if (rbScreenFullScreen.IsChecked == true)
             {
-                for (int i = 0; i < System.Windows.Forms.Screen.AllScreens.Length; i++)
-                {
-                    if (i == screenID)
-                    {
-                        source.Rectangle = new VisioForge.Core.Types.Rect(System.Windows.Forms.Screen.AllScreens[i].Bounds);
-                    }
-                }
+                // An empty rectangle captures the whole monitor at its native resolution
+                source.Rectangle = new VisioForge.Core.Types.Rect();
             }
             else
             {

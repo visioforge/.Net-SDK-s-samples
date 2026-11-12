@@ -1189,6 +1189,8 @@ namespace Main_Demo
 
             // Virtual camera output
             VideoEdit1.Virtual_Camera_Output_Enabled = cbVirtualCamera.IsChecked == true;
+            // Virtual Camera SDK license key; without it the virtual camera shows a TRIAL strip.
+            //VideoEdit1.Virtual_Camera_Output_LicenseKey = "your license key";
 
             // Video effects CPU
             AddVideoEffects();

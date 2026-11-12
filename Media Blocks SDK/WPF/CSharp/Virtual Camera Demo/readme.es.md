@@ -1,15 +1,15 @@
 # Media Blocks SDK .Net - Virtual Camera Demo (C#/WPF)
 
-Esta aplicacion transmite video de la webcam y audio del microfono a la Camara Virtual de VisioForge a traves de memoria compartida, haciendo que la senal este disponible para otras aplicaciones como Zoom, Teams y OBS.
+Esta aplicación transmite video de la webcam a VisioForge Virtual Camera y audio del micrófono a VisioForge Virtual Audio Card a través de memoria compartida. Zoom, OBS y los navegadores ven la cámara como una webcam, y las aplicaciones DirectShow también ven la Virtual Audio Card como un micrófono.
 
 ## Bloques de medios utilizados
 
 * `SystemVideoSourceBlock` - Captura de video de webcam
-* `SystemAudioSourceBlock` - Captura de audio del microfono
-* `TeeBlock` - Division de flujo para vista previa y salida de camara virtual
+* `SystemAudioSourceBlock` - Captura de audio del micrófono
+* `TeeBlock` - División de flujo para vista previa y salida de cámara virtual
 * `VideoRendererBlock` - Vista previa de video en tiempo real
 * `AudioRendererBlock` - Vista previa de audio en tiempo real
-* `VirtualCameraSinkBlock` - Salida de camara virtual via memoria compartida
+* `VirtualCameraSinkBlock` - Salida de cámara virtual vía memoria compartida
 
 ## Pipeline
 

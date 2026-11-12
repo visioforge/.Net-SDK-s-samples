@@ -1120,6 +1120,8 @@ Public Class Form1
         End If
 
         MediaPlayer1.Virtual_Camera_Output_Enabled = rbVirtualCameraOutput.Checked
+        ' Virtual Camera SDK license key; without it the virtual camera shows a TRIAL strip.
+        'MediaPlayer1.Virtual_Camera_Output_LicenseKey = "your license key"
 
         MediaPlayer1.Video_Renderer.RotationAngle = Convert.ToInt32(cbDirect2DRotate.Text)
         MediaPlayer1.Video_Renderer.Flip_Horizontal = cbScreenFlipHorizontal.Checked

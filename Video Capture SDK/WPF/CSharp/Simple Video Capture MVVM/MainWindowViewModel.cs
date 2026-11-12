@@ -879,7 +879,8 @@ namespace Simple_Video_Capture
             var videoSource = new VideoCaptureSource(SelectedVideoInputDevice.Name);
             videoSource.Format = SelectedVideoFormat.Name;
             videoSource.Format_UseBest = UseBestVideoInputFormat;
-            videoSource.FrameRate = SelectedFrameRate.GetValueOrDefault(VideoFrameRate.FPS_25);
+            // No selected rate: keep the frame time the pin reported, not 25 fps.
+            videoSource.FrameRate = SelectedFrameRate.GetValueOrDefault(VideoFrameRate.Empty);
 
             var audioSource = new AudioCaptureSource(SelectedAudioInputDevice.Name);
             audioSource.Format = SelectedAudioInputFormat;

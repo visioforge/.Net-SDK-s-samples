@@ -43,7 +43,8 @@ namespace ndi_streamer_mb
             var source = new ScreenCaptureD3D11SourceSettings();
 
             source.FrameRate = new VideoFrameRate(30);
-            source.Rectangle = new VisioForge.Core.Types.Rect(System.Windows.Forms.Screen.AllScreens[0].Bounds);
+            // An empty rectangle captures the whole monitor at its native resolution
+            source.Rectangle = new VisioForge.Core.Types.Rect();
 
             source.CaptureCursor = true;
 

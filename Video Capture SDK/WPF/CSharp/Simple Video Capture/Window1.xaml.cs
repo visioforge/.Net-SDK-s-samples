@@ -577,6 +577,11 @@ namespace Simple_Video_Capture
             {
                 VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text));
             }
+            else
+            {
+                // The device constructor stored another format's rate. An empty box clears it.
+                VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty;
+            }
 
             if (rbPreview.IsChecked == true)
             {

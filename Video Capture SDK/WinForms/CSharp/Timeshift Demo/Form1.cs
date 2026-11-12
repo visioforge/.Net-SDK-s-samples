@@ -259,6 +259,11 @@
                 {
                     VideoCapture1.Video_CaptureDevice.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text, CultureInfo.CurrentCulture));
                 }
+                else
+                {
+                    // The device constructor stored another format's rate. An empty box clears it.
+                    VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty;
+                }
             }
             else
             {

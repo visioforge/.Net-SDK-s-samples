@@ -227,7 +227,10 @@ namespace SRT_Streamer_Demo
                                     Format = formatItem.ToFormat()
                                 };
 
-                                videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                                if (!string.IsNullOrEmpty(cbVideoFrameRate.Text))
+                                {
+                                    videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                                }
                             }
                         }
                     }

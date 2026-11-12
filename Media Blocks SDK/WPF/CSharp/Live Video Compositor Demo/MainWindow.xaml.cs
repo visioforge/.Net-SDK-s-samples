@@ -901,6 +901,9 @@ namespace Live_Video_Compositor_Demo
         private async Task AddVirtualCameraOutputAsync()
         {
             var vcSettings = new VirtualCameraSinkSettings();
+
+            // Virtual Camera SDK license key; without it the virtual camera shows a TRIAL strip.
+            //vcSettings.LicenseKey = "your license key";
             var vcBlock = new VirtualCameraSinkBlock(vcSettings);
             var name = "Virtual Camera";
             var output = new LVCVideoAudioOutput(name, _compositor, vcBlock, autostart: true);

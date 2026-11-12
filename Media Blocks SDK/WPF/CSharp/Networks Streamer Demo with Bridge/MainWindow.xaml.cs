@@ -187,7 +187,10 @@ namespace Networks_Streamer_Demo_with_Bridge
                             Format = formatItem.ToFormat()
                         };
 
-                        videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                        if (!string.IsNullOrEmpty(cbVideoFrameRate.Text))
+                        {
+                            videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                        }
                     }
                 }
             }
