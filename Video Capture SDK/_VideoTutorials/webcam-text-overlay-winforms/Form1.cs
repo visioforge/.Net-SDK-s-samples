@@ -83,13 +83,13 @@ public partial class Form1 : Form
             VerticalAlignment = TextLogoVerticalAlignment.Top
         });
 
-        // The frame number on the left, below the clock
+        // The frame number in the top-left corner
         videoCapture1.Video_Effects_Add(new VideoEffectTextLogo(true, "frame")
         {
             Mode = TextLogoMode.FrameNumber,
             Text = "Frame ",
             Left = 20,
-            Top = 60
+            Top = 20
         });
 
         // Time since the recording started, under the frame number
@@ -99,7 +99,7 @@ public partial class Form1 : Form
             TimeStampMask = @"hh\:mm\:ss\.fff",
             Text = "Rec ",
             Left = 20,
-            Top = 120
+            Top = 140 // the text size follows the Windows display scale
         });
     }
 
