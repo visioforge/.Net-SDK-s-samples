@@ -63,10 +63,11 @@ public partial class Form1 : Form
         videoCapture1.Video_Effects_Clear();
 
         // A caption at the bottom, changed with Apply while recording
+        using var font = new Font("Segoe UI", 40, FontStyle.Bold); // the effect keeps its own copy
         videoCapture1.Video_Effects_Add(new VideoEffectTextLogo(true, "caption")
         {
             Text = tbCaption.Text,
-            Font = new Font("Segoe UI", 40, FontStyle.Bold),
+            Font = font,
             FontColor = Color.Yellow,
             HorizontalAlignment = TextLogoHorizontalAlignment.Center,
             VerticalAlignment = TextLogoVerticalAlignment.Bottom
