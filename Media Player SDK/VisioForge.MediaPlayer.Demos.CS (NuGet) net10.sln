@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple Player Demo D3D11 WP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VR 360 Demo (NuGet) net10", "WinForms\CSharp\VR 360 Demo\VR 360 Demo (NuGet) net10.csproj", "{1834A963-A727-4AA0-94F3-47D758B52C46}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "memory-playback-wpf (NuGet) net10", "_VideoTutorials\memory-playback-wpf\memory-playback-wpf (NuGet) net10.csproj", "{C59D9344-D28E-46BC-BC03-B3B33382FF80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -341,6 +343,18 @@ Global
 		{1834A963-A727-4AA0-94F3-47D758B52C46}.Release|x86.Build.0 = Release|Any CPU
 		{1834A963-A727-4AA0-94F3-47D758B52C46}.Release|x64.ActiveCfg = Release|Any CPU
 		{1834A963-A727-4AA0-94F3-47D758B52C46}.Release|x64.Build.0 = Release|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Debug|x64.Build.0 = Debug|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Debug|x86.Build.0 = Debug|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Release|x64.ActiveCfg = Release|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Release|x64.Build.0 = Release|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Release|x86.ActiveCfg = Release|Any CPU
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -369,6 +383,7 @@ Global
 		{57F9467E-89AE-4FC7-BE02-542DC2C22FA1} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
 		{252A6BCD-8303-4CF3-88F5-D8384431D8C9} = {C65A40AE-D7BC-4311-85F5-30D463D55564}
 		{1834A963-A727-4AA0-94F3-47D758B52C46} = {743796DD-6F87-4CD9-8419-0B8CE16B4CB9}
+		{C59D9344-D28E-46BC-BC03-B3B33382FF80} = {6E4DFE4D-F6E3-4D76-9143-0C408F773B65}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
