@@ -9,7 +9,6 @@
     <FileVersion>2026.4.7.0</FileVersion>
     <Version>2026.4.7.0</Version>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
-    <CheckEolWorkloads>false</CheckEolWorkloads>
   </PropertyGroup>
   <ItemGroup>
     <AndroidJavaSource Include="GstAhcCallback.java" />
