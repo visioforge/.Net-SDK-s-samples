@@ -4,12 +4,11 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using ReactiveUI;
+using ReactiveUI.Primitives;
 using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Reactive;
-using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -49,10 +48,10 @@ namespace Simple_Player_MVVM.ViewModels
             WindowClosingCommand = ReactiveCommand.Create(OnWindowClosing);
 
             // Surface any ReactiveCommand failures to VS Output via Debug.WriteLine.
-            ((ReactiveCommand<Unit, Unit>)OpenFileCommand).ThrownExceptions.Subscribe(ex => LogError("Open file failed", ex));
-            ((ReactiveCommand<Unit, Unit>)PlayPauseCommand).ThrownExceptions.Subscribe(ex => LogError("Play / Pause failed", ex));
-            ((ReactiveCommand<Unit, Unit>)StopCommand).ThrownExceptions.Subscribe(ex => LogError("Stop failed", ex));
-            ((ReactiveCommand<Unit, Unit>)SpeedCommand).ThrownExceptions.Subscribe(ex => LogError("Speed change failed", ex));
+            ((ReactiveCommand<RxVoid, RxVoid>)OpenFileCommand).ThrownExceptions.Subscribe(ex => LogError("Open file failed", ex));
+            ((ReactiveCommand<RxVoid, RxVoid>)PlayPauseCommand).ThrownExceptions.Subscribe(ex => LogError("Play / Pause failed", ex));
+            ((ReactiveCommand<RxVoid, RxVoid>)StopCommand).ThrownExceptions.Subscribe(ex => LogError("Stop failed", ex));
+            ((ReactiveCommand<RxVoid, RxVoid>)SpeedCommand).ThrownExceptions.Subscribe(ex => LogError("Speed change failed", ex));
 
             // Throttled volume update
             this.WhenAnyValue(x => x.VolumeValue)
@@ -187,7 +186,7 @@ namespace Simple_Player_MVVM.ViewModels
             set => this.RaiseAndSetIfChanged(ref _SeekingMaximum, value);
         }
 
-        public ReactiveCommand<Unit, Unit> WindowClosingCommand { get; }
+        public ReactiveCommand<RxVoid, RxVoid> WindowClosingCommand { get; }
 
         private MediaPlayerCoreX _player;
 

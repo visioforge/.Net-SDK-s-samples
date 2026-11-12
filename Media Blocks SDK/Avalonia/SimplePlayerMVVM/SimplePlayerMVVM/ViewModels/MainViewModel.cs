@@ -5,12 +5,11 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using ReactiveUI;
+using ReactiveUI.Primitives;
 using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Reactive;
-using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -175,7 +174,7 @@ namespace Simple_Player_MVVM.ViewModels
             set => this.RaiseAndSetIfChanged(ref _SeekingMaximum, value);
         }
 
-        public ReactiveCommand<Unit, Unit> WindowClosingCommand { get; }
+        public ReactiveCommand<RxVoid, RxVoid> WindowClosingCommand { get; }
 
         private MediaBlocksPipeline _pipeline;
 

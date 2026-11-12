@@ -4,12 +4,12 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using ReactiveUI;
+using ReactiveUI.Primitives;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Reactive;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using VisioForge.Core;
@@ -56,7 +56,7 @@ namespace SimpleVideoCaptureMVVM.ViewModels
         /// </summary>
         private readonly bool IsMobile = OperatingSystem.IsAndroid() || OperatingSystem.IsIOS();
 
-        public ReactiveCommand<Unit, Unit> VolumeValueChangedCommand { get; }
+        public ReactiveCommand<RxVoid, RxVoid> VolumeValueChangedCommand { get; }
 
         public IVideoView VideoViewIntf { get; set; }
 
@@ -184,7 +184,7 @@ namespace SimpleVideoCaptureMVVM.ViewModels
             set => this.RaiseAndSetIfChanged(ref _audioOutputDevice, value);
         }
 
-        public ReactiveCommand<Unit, Unit> WindowClosingCommand { get; }
+        public ReactiveCommand<RxVoid, RxVoid> WindowClosingCommand { get; }
 
         /// <summary>
         /// The recording timer.

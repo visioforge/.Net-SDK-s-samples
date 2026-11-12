@@ -1,9 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Threading;
 using ReactiveUI;
+using ReactiveUI.Primitives;
 using System;
 using System.Diagnostics;
-using System.Reactive;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using VisioForge.Core;
@@ -52,7 +52,7 @@ namespace VideoMixerMVVM.ViewModels
 
         public ICommand StartStopCommand { get; }
 
-        public ReactiveCommand<Unit, Unit> WindowClosingCommand { get; }
+        public ReactiveCommand<RxVoid, RxVoid> WindowClosingCommand { get; }
 
         private bool _isClosing;
 

@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using ReactiveUI.Primitives;
 using SimpleVideoCaptureMVVM.ViewModels;
 using VisioForge.Core.Types;
 using System;
