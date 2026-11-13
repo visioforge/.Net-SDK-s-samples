@@ -52,13 +52,14 @@ namespace RTMP_Source_Demo
 
             try
             {
-                // DisposeAsync stops a running pipeline first.
-                await _pipeline.DisposeAsync();
+                await _pipeline.StopAsync();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
+
+            await _pipeline.DisposeAsync();
 
             _pipeline.OnError -= Pipeline_OnError;
             _pipeline = null;
@@ -112,7 +113,12 @@ namespace RTMP_Source_Demo
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                lbError.Text = ex.Message;
+
+                // Keep the pipeline's own error if it already reported one.
+                if (string.IsNullOrEmpty(lbError.Text))
+                {
+                    lbError.Text = ex.Message;
+                }
 
                 await DestroyEngineAsync();
                 btStart.IsEnabled = true;
