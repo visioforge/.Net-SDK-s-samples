@@ -350,6 +350,12 @@ namespace Simple_Player_MVVM.ViewModels
 
         private async Task SpeedAsync()
         {
+            // Nothing is playing yet.
+            if (_pipeline == null)
+            {
+                return;
+            }
+
             if (SpeedText == "SPEED: 1X")
             {
                 SpeedText = "SPEED: 2X";
