@@ -18,12 +18,7 @@ await VisioForgeX.InitSDKAsync();
 
 var edit = new VideoEditCoreX();
 var done = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
-// An error ends the render without OnStop, so it ends the wait too.
-edit.OnError += (s, e) =>
-{
-    Console.WriteLine(e.Message);
-    done.TrySetResult(false);
-};
+edit.OnError += (s, e) => Console.WriteLine(e.Message);
 edit.OnProgress += (s, e) => Console.Write($"\rRendering: {e.Progress}%");
 edit.OnStop += (s, e) => done.TrySetResult(e.Successful);
 
