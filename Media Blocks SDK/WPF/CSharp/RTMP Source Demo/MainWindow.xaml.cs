@@ -72,6 +72,7 @@ namespace RTMP_Source_Demo
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             btStart.IsEnabled = false;
+            cbAudioOutput.IsEnabled = false; // the output is chosen at Start
             lbError.Text = string.Empty;
 
             try
@@ -122,6 +123,7 @@ namespace RTMP_Source_Demo
 
                 await DestroyEngineAsync();
                 btStart.IsEnabled = true;
+                cbAudioOutput.IsEnabled = true;
             }
         }
 
@@ -135,6 +137,7 @@ namespace RTMP_Source_Demo
             await DestroyEngineAsync();
 
             btStart.IsEnabled = true;
+            cbAudioOutput.IsEnabled = true;
         }
 
         /// <summary>
@@ -178,6 +181,7 @@ namespace RTMP_Source_Demo
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                lbError.Text = ex.Message;
             }
         }
 
