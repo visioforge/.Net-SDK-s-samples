@@ -43,5 +43,10 @@
 	<string>We need access to your camera to take photos.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Required to get audio</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+	</dict>
 </dict>
 </plist>

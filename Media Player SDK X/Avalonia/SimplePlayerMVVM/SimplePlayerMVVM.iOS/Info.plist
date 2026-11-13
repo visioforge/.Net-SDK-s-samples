@@ -39,5 +39,10 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo library used to play files</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+	</dict>
 </dict>
 </plist>
