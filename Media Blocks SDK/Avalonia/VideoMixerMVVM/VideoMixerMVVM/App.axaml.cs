@@ -43,8 +43,7 @@ namespace VideoMixerMVVM
 
                 videoView = (singleViewPlatform.MainView as MainView).GetVideoView();
                 model.VideoViewIntf = videoView;
-                // On Android the view joins its window later, so read the TopLevel once it is attached.
-                singleViewPlatform.MainView.AttachedToVisualTree += (_, _) => model.TopLevel = TopLevel.GetTopLevel(singleViewPlatform.MainView);
+                model.TopLevel = TopLevel.GetTopLevel(singleViewPlatform.MainView);
             }
 
             base.OnFrameworkInitializationCompleted();
