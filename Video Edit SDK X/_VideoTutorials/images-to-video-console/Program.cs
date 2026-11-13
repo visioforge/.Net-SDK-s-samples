@@ -18,7 +18,12 @@ await VisioForgeX.InitSDKAsync();
 
 var edit = new VideoEditCoreX();
 var done = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
-edit.OnError += (s, e) => Console.WriteLine(e.Message);
+// An error ends the render without OnStop, so it ends the wait too.
+edit.OnError += (s, e) =>
+{
+    Console.WriteLine(e.Message);
+    done.TrySetResult(false);
+};
 edit.OnProgress += (s, e) => Console.Write($"\rRendering: {e.Progress}%");
 edit.OnStop += (s, e) => done.TrySetResult(e.Successful);
 
@@ -56,7 +61,7 @@ edit.Output_VideoSize = new Size(1920, 1080);
 edit.Output_VideoFrameRate = new VideoFrameRate(30);
 edit.Output_Format = new MP4Output(output);
 
-// Start returns false, with the reason in OnError, when the render cannot begin.
+// Start returns false when the render cannot begin.
 var saved = edit.Start() && await done.Task;
 Console.WriteLine(saved ? $"\nSaved: {output}" : "\nThe video was not saved.");
 
