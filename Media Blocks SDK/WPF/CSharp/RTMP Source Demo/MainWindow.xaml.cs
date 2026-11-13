@@ -52,7 +52,7 @@ namespace RTMP_Source_Demo
 
             try
             {
-                await _pipeline.StopAsync();
+                // DisposeAsync stops a running pipeline first.
                 await _pipeline.DisposeAsync();
             }
             catch (Exception ex)
@@ -102,7 +102,10 @@ namespace RTMP_Source_Demo
                     _pipeline.Connect(audioDecoder.Output, _audioRenderer.Input);
                 }
 
-                await _pipeline.StartAsync();
+                if (!await _pipeline.StartAsync())
+                {
+                    throw new InvalidOperationException("Unable to start the pipeline.");
+                }
 
                 btStop.IsEnabled = true;
             }
@@ -183,7 +186,7 @@ namespace RTMP_Source_Demo
                 return;
             }
 
-            // Stop the stream first, then close. While Start or Stop is still running, wait for it.
+            // Stop the stream first, then close. Closing is ignored while Start or Stop is still running.
             e.Cancel = true;
             if (!btStop.IsEnabled)
             {
