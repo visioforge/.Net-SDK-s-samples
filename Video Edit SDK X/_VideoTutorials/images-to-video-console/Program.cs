@@ -6,7 +6,7 @@ using VisioForge.Core.VideoEditX;
 
 // The images, in file-name order, and where the video goes.
 var folder = args.Length > 0 ? args[0] : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "slides");
-var images = Directory.GetFiles(folder, "*.jpg").Order().ToArray();
+var images = Directory.Exists(folder) ? Directory.GetFiles(folder, "*.jpg").Order().ToArray() : [];
 var output = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "slideshow.mp4");
 if (images.Length == 0)
 {
@@ -56,8 +56,8 @@ edit.Output_VideoSize = new Size(1920, 1080);
 edit.Output_VideoFrameRate = new VideoFrameRate(30);
 edit.Output_Format = new MP4Output(output);
 
-edit.Start();
-var saved = await done.Task;
+// Start returns false, with the reason in OnError, when the render cannot begin.
+var saved = edit.Start() && await done.Task;
 Console.WriteLine(saved ? $"\nSaved: {output}" : "\nThe video was not saved.");
 
 edit.Dispose();
