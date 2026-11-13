@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video From Images VE X CLI", "Console\CSharp\Video From Images X CLI\Video From Images VE X CLI.csproj", "{2D3E308D-D1E8-4517-8536-1B137953CC54}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "images-to-video-console net10", "_VideoTutorials\images-to-video-console\images-to-video-console net10.csproj", "{673594A4-8350-4682-89EB-45B55BC60CDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2D3E308D-D1E8-4517-8536-1B137953CC54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D3E308D-D1E8-4517-8536-1B137953CC54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D3E308D-D1E8-4517-8536-1B137953CC54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{673594A4-8350-4682-89EB-45B55BC60CDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{673594A4-8350-4682-89EB-45B55BC60CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{673594A4-8350-4682-89EB-45B55BC60CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{673594A4-8350-4682-89EB-45B55BC60CDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
