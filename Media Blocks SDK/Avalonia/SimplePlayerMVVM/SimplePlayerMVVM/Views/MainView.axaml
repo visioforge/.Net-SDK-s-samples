@@ -41,11 +41,12 @@
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="*" MaxWidth="160"/>
+					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
 				<TextBlock Grid.Column="0" Text="Vol" Foreground="White" FontSize="12" VerticalAlignment="Center" Margin="0,0,8,0"/>
 				<Slider Grid.Column="1" Value="{Binding VolumeValue}" Minimum="0" Maximum="100" MinHeight="48" VerticalAlignment="Center"/>
-				<Button Grid.Column="2" Command="{Binding SpeedCommand}" Content="{Binding SpeedText}" Margin="8,0,0,0" MinWidth="50" HorizontalContentAlignment="Center"/>
+				<Button Grid.Column="3" Command="{Binding SpeedCommand}" Content="{Binding SpeedText}" Margin="8,0,0,0" MinWidth="50" HorizontalContentAlignment="Center"/>
 			</Grid>
 		</StackPanel>
 
