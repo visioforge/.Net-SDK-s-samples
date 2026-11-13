@@ -225,9 +225,13 @@ namespace Simple_Player_MVVM.ViewModels
             _player.Audio_Play = true;
 
 #if !__ANDROID__ && !(__IOS__ && !__MACCATALYST__)
-            // On desktop the audio is heard only through an output device: use the system default.
+            // On desktop the audio is heard only through an output device: the system default on macOS, the first one elsewhere.
             var outputs = await DeviceEnumerator.Shared.AudioOutputsAsync();
+#if __MACOS__ || __MACCATALYST__
             var speakers = outputs.FirstOrDefault(d => d.IsDefault) ?? outputs.FirstOrDefault();
+#else
+            var speakers = outputs.FirstOrDefault();
+#endif
             if (speakers != null)
             {
                 _player.Audio_OutputDevice = new AudioRendererSettings(speakers);
