@@ -205,8 +205,6 @@ namespace Simple_Player_MVVM.ViewModels
             _pipeline.OnError += _player_OnError;
             _pipeline.OnStart += _player_OnStart;
 
-            _audioRenderer = new AudioRendererBlock();
-
             var sourceSettings = await UniversalSourceSettings.CreateAsync(_Filename);
             _source = new UniversalSourceBlock(sourceSettings);
 
@@ -390,8 +388,11 @@ namespace Simple_Player_MVVM.ViewModels
 
             await Task.Delay(300);
 
+            // Not a user seek: keep it out of the seek subscription.
+            _isTimerUpdate = true;
             SeekingValue = 0;
             SeekingMaximum = 1;
+            _isTimerUpdate = false;
         }
 
         private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)

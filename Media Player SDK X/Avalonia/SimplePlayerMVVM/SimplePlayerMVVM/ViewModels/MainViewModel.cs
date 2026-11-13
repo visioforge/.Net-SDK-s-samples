@@ -9,6 +9,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -226,7 +227,7 @@ namespace Simple_Player_MVVM.ViewModels
 #if !__ANDROID__ && !(__IOS__ && !__MACCATALYST__)
             // On desktop the audio is heard only through an output device: use the system default.
             var outputs = await DeviceEnumerator.Shared.AudioOutputsAsync();
-            var speakers = Array.Find(outputs, d => d.IsDefault) ?? (outputs.Length > 0 ? outputs[0] : null);
+            var speakers = outputs.FirstOrDefault(d => d.IsDefault) ?? outputs.FirstOrDefault();
             if (speakers != null)
             {
                 _player.Audio_OutputDevice = new AudioRendererSettings(speakers);
@@ -391,8 +392,11 @@ namespace Simple_Player_MVVM.ViewModels
 
             await Task.Delay(300);
 
+            // Not a user seek: keep it out of the seek subscription.
+            _isTimerUpdate = true;
             SeekingValue = 0;
             SeekingMaximum = 1;
+            _isTimerUpdate = false;
         }
 
         private async void tmPosition_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
