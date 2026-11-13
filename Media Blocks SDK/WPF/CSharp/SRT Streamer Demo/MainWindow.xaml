@@ -55,7 +55,7 @@
 
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                 <Label Content="URI" Width="100"/>
-                <TextBox x:Name="edSrtUri" Width="230" Text="srt://192.168.1.44:8890?streamid=publish:srt-demo" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="edSrtUri" Width="230" Text="srt://192.168.1.45:8890?streamid=publish:srt-demo" VerticalContentAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5,0,0">

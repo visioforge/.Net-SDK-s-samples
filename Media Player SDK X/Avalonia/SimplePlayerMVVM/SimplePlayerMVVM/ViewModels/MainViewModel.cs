@@ -175,13 +175,8 @@ namespace Simple_Player_MVVM.ViewModels
                 AudioOutputDevices.Add(output);
             }
 
-            // macOS knows the system default; elsewhere start with the first device.
-#if __MACOS__ || __MACCATALYST__
-            var speakers = outputs.FirstOrDefault(d => d.IsDefault) ?? outputs.FirstOrDefault();
-#else
-            var speakers = outputs.FirstOrDefault();
-#endif
-            AudioOutputDevice = speakers;
+            // Start with the system default where the platform reports one.
+            AudioOutputDevice = outputs.FirstOrDefault(d => d.IsDefault) ?? outputs.FirstOrDefault();
         }
 #endif
 

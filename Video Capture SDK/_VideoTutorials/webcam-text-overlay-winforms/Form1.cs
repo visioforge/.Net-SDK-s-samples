@@ -99,7 +99,7 @@ public partial class Form1 : Form
             TimeStampMask = @"hh\:mm\:ss\.fff",
             Text = "Rec ",
             Left = 20,
-            Top = 140 // the text size follows the Windows display scale
+            Top = 140 // room between the rows
         });
     }
 

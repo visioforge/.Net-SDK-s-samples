@@ -650,7 +650,7 @@ namespace Networks_Streamer_Demo
                     edStreamingKey.Text = "AWS S3 URL";
                     break;
                 case 5:
-                    edStreamingKey.Text = "srt://192.168.1.44:8890?streamid=publish:testxxx";
+                    edStreamingKey.Text = "srt://192.168.1.45:8890?streamid=publish:testxxx";
                     break;
                 case 6:
                     edStreamingKey.Text = "NDI name";

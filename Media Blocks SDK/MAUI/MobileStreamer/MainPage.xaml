@@ -39,7 +39,7 @@
 
                 <Entry x:Name="edUrl"
                        Margin="5, 0, 5, 0"
-                       Text="srt://192.168.1.44:8890?streamid=publish:mobile"
+                       Text="srt://192.168.1.45:8890?streamid=publish:mobile"
                        Placeholder="Stream URL / key (srt://…, rtmp://…, YouTube/Facebook key)" />
 
 

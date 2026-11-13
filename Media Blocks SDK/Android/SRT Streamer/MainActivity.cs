@@ -68,7 +68,7 @@ namespace SRT_Streamer
         private bool _isStreaming;
 
         // SRT settings — persisted across dialog invocations.
-        private string _srtUri = "srt://192.168.1.44:8890?streamid=publish:mobile";
+        private string _srtUri = "srt://192.168.1.45:8890?streamid=publish:mobile";
         private int _srtLatencyMs = 750;
         private int _srtModeIndex; // 0 caller, 1 listener, 2 rendezvous
 
