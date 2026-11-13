@@ -18,6 +18,7 @@ using VisioForge.Core.MediaBlocks.AudioRendering;
 using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
+using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI.Avalonia;
 using SimplePlayerMVVM;
@@ -67,11 +68,13 @@ namespace Simple_Player_MVVM.ViewModels
 
             // Throttled seeking
             this.WhenAnyValue(x => x.SeekingValue)
+                // Drop the timer's own updates here, before the delay: after it the flag is already cleared.
+                .Where(_ => !_isTimerUpdate)
                 .Throttle(TimeSpan.FromMilliseconds(100))
                 .ObserveOn(RxSchedulers.MainThreadScheduler)
                 .Subscribe(v =>
                 {
-                    if (!_isTimerUpdate && _player != null)
+                    if (_player != null)
                     {
                         _ = _player.Position_SetAsync(TimeSpan.FromMilliseconds(v));
                     }
@@ -219,6 +222,17 @@ namespace Simple_Player_MVVM.ViewModels
             _player = new MediaPlayerCoreX(VideoViewIntf);
             _player.OnError += _player_OnError;
             _player.Audio_Play = true;
+
+#if !__ANDROID__ && !(__IOS__ && !__MACCATALYST__)
+            // On desktop the audio is heard only through an output device: use the system default.
+            var outputs = await DeviceEnumerator.Shared.AudioOutputsAsync();
+            var speakers = Array.Find(outputs, d => d.IsDefault) ?? (outputs.Length > 0 ? outputs[0] : null);
+            if (speakers != null)
+            {
+                _player.Audio_OutputDevice = new AudioRendererSettings(speakers);
+            }
+#endif
+            _player.Audio_OutputDevice_Volume = VolumeValue / 100.0;
 
             var sourceSettings = await UniversalSourceSettings.CreateAsync(_Filename);
             await _player.OpenAsync(sourceSettings);

@@ -64,11 +64,13 @@ namespace Simple_Player_MVVM.ViewModels
 
             // Throttled seeking — avoids flooding pipeline with seek commands during drag
             this.WhenAnyValue(x => x.SeekingValue)
+                // Drop the timer's own updates here, before the delay: after it the flag is already cleared.
+                .Where(_ => !_isTimerUpdate)
                 .Throttle(TimeSpan.FromMilliseconds(100))
                 .ObserveOn(RxSchedulers.MainThreadScheduler)
                 .Subscribe(v =>
                 {
-                    if (!_isTimerUpdate && _pipeline != null)
+                    if (_pipeline != null)
                     {
                         _ = _pipeline.Position_SetAsync(TimeSpan.FromMilliseconds(v));
                     }
@@ -211,6 +213,7 @@ namespace Simple_Player_MVVM.ViewModels
             _videoRenderer = new VideoRendererBlock(_pipeline, VideoViewIntf);
 
             _audioRenderer = new AudioRendererBlock();
+            _audioRenderer.Volume = VolumeValue / 100.0;
 
             _pipeline.Connect(_source.VideoOutput, _videoRenderer.Input);
             _pipeline.Connect(_source.AudioOutput, _audioRenderer.Input);

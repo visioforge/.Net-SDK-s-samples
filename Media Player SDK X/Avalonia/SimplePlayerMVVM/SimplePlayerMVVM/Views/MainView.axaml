@@ -39,7 +39,7 @@
 			<!-- Volume + Speed -->
 			<Grid Margin="12,4,12,8" ColumnDefinitions="Auto,*,Auto">
 				<TextBlock Grid.Column="0" Text="Vol" Foreground="White" FontSize="12" VerticalAlignment="Center" Margin="0,0,8,0"/>
-				<Slider Grid.Column="1" Value="{Binding VolumeValue}" Minimum="0" Maximum="100" MinHeight="48" VerticalAlignment="Center"/>
+				<Slider Grid.Column="1" Value="{Binding VolumeValue}" Minimum="0" Maximum="100" MinHeight="48" Width="160" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 				<Button Grid.Column="2" Command="{Binding SpeedCommand}" Content="{Binding SpeedText}" Margin="8,0,0,0" MinWidth="50" HorizontalContentAlignment="Center"/>
 			</Grid>
 		</StackPanel>
