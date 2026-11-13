@@ -52,7 +52,8 @@ namespace Simple_Player_MVVM
 
                 videoView = (singleViewPlatform.MainView as MainView).GetVideoView();
                 model.VideoViewIntf = videoView;
-                model.TopLevel = TopLevel.GetTopLevel(singleViewPlatform.MainView);
+                // On Android the view joins its window later, so read the TopLevel once it is attached.
+                singleViewPlatform.MainView.AttachedToVisualTree += (_, _) => model.TopLevel = TopLevel.GetTopLevel(singleViewPlatform.MainView);
             }
 
             base.OnFrameworkInitializationCompleted();
