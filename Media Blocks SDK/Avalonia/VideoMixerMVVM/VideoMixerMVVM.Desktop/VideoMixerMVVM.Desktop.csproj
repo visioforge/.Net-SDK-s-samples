@@ -28,8 +28,8 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('OSX'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="[2026.11.5]" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS.Adds" Version="[2026.11.5]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="[2026.11.13]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS.Adds" Version="[2026.11.13]" />
     <PartialAppManifest Include="Info.plist" />
   </ItemGroup>
   <PropertyGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
