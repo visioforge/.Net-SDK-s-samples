@@ -21,6 +21,7 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.AudioRenderers;
+using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.UI.Avalonia;
 using SimplePlayerMVVM;
@@ -88,7 +89,7 @@ namespace Simple_Player_MVVM.ViewModels
             VisioForgeX.InitSDK();
 
 #if !__ANDROID__ && !(__IOS__ && !__MACCATALYST__)
-            _ = LoadAudioOutputsAsync();
+            _audioOutputsLoaded = LoadAudioOutputsAsync();
 #endif
         }
 
@@ -150,22 +151,28 @@ namespace Simple_Player_MVVM.ViewModels
         /// <summary>
         /// Audio output devices, listed on desktop only.
         /// </summary>
-        public ObservableCollection<string> AudioOutputDevices { get; } = new ObservableCollection<string>();
+        public ObservableCollection<AudioOutputDeviceInfo> AudioOutputDevices { get; } = new ObservableCollection<AudioOutputDeviceInfo>();
 
-        private string? _AudioOutputDevice;
+        private AudioOutputDeviceInfo? _AudioOutputDevice;
 
-        public string? AudioOutputDevice
+        /// <summary>
+        /// The selected audio output. A change applies the next time playback starts.
+        /// </summary>
+        public AudioOutputDeviceInfo? AudioOutputDevice
         {
             get => _AudioOutputDevice;
             set => this.RaiseAndSetIfChanged(ref _AudioOutputDevice, value);
         }
+
+#if !__ANDROID__ && !(__IOS__ && !__MACCATALYST__)
+        private Task _audioOutputsLoaded;
 
         private async Task LoadAudioOutputsAsync()
         {
             var outputs = await DeviceEnumerator.Shared.AudioOutputsAsync();
             foreach (var output in outputs)
             {
-                AudioOutputDevices.Add(output.DisplayName);
+                AudioOutputDevices.Add(output);
             }
 
             // macOS knows the system default; elsewhere start with the first device.
@@ -174,8 +181,9 @@ namespace Simple_Player_MVVM.ViewModels
 #else
             var speakers = outputs.FirstOrDefault();
 #endif
-            AudioOutputDevice = speakers?.DisplayName;
+            AudioOutputDevice = speakers;
         }
+#endif
 
         private double _VolumeValue = 25;
 
@@ -261,11 +269,10 @@ namespace Simple_Player_MVVM.ViewModels
 
 #if !__ANDROID__ && !(__IOS__ && !__MACCATALYST__)
             // On desktop the audio is heard only through an output device: use the selected one.
-            var outputs = await DeviceEnumerator.Shared.AudioOutputsAsync();
-            var speakers = outputs.FirstOrDefault(d => d.DisplayName == AudioOutputDevice);
-            if (speakers != null)
+            await _audioOutputsLoaded;
+            if (AudioOutputDevice != null)
             {
-                _player.Audio_OutputDevice = new AudioRendererSettings(speakers);
+                _player.Audio_OutputDevice = new AudioRendererSettings(AudioOutputDevice);
             }
 #endif
             _player.Audio_OutputDevice_Volume = VolumeValue / 100.0;
