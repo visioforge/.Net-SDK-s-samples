@@ -31,15 +31,15 @@ jobs:
         if: runner.environment == 'github-hosted'
         run: |
           curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 9.0 --architecture arm64
-          curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --version 10.0.203 --architecture arm64
+          curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --version 10.0.404 --architecture arm64
           echo "$HOME/.dotnet" >> $GITHUB_PATH
           echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
 
-      # Pinned .NET 10 workload set. ValidateXcodeVersion is off (repo root env), so it builds under
-# the xcode-27 image's newer Xcode instead of refusing the mismatch.
+      # Pinned .NET 10 workload set 10.0.404 = the Apple SDKs for Xcode 27.2, the xcode-27 image's Xcode.
+      # The older 26.4 set under Xcode 27.2 broke the ScreenCapture extension's dsymutil step.
       - name: Install workloads
         if: runner.environment == 'github-hosted'
-        run: dotnet workload install ios macos --version 10.0.203.1
+        run: dotnet workload install ios macos --version 10.0.404
 
       # Media Blocks
       - name: Build (Media Blocks)
