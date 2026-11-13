@@ -40,7 +40,7 @@
 			<Grid Margin="12,4,12,8">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="*" MaxWidth="160"/>
+					<ColumnDefinition Width="4*" MaxWidth="160"/>
 					<ColumnDefinition Width="*"/>
 					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
