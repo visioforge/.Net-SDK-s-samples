@@ -6,6 +6,7 @@ using Avalonia.Threading;
 using ReactiveUI;
 using ReactiveUI.Primitives;
 using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -85,6 +86,10 @@ namespace Simple_Player_MVVM.ViewModels
             _tmPosition.Elapsed += tmPosition_Elapsed;
 
             VisioForgeX.InitSDK();
+
+#if !__ANDROID__ && !(__IOS__ && !__MACCATALYST__)
+            _ = LoadAudioOutputsAsync();
+#endif
         }
 
         /// <summary>
@@ -140,6 +145,36 @@ namespace Simple_Player_MVVM.ViewModels
         {
             get => _Duration;
             set => this.RaiseAndSetIfChanged(ref _Duration, value);
+        }
+
+        /// <summary>
+        /// Audio output devices, listed on desktop only.
+        /// </summary>
+        public ObservableCollection<string> AudioOutputDevices { get; } = new ObservableCollection<string>();
+
+        private string? _AudioOutputDevice;
+
+        public string? AudioOutputDevice
+        {
+            get => _AudioOutputDevice;
+            set => this.RaiseAndSetIfChanged(ref _AudioOutputDevice, value);
+        }
+
+        private async Task LoadAudioOutputsAsync()
+        {
+            var outputs = await DeviceEnumerator.Shared.AudioOutputsAsync();
+            foreach (var output in outputs)
+            {
+                AudioOutputDevices.Add(output.DisplayName);
+            }
+
+            // macOS knows the system default; elsewhere start with the first device.
+#if __MACOS__ || __MACCATALYST__
+            var speakers = outputs.FirstOrDefault(d => d.IsDefault) ?? outputs.FirstOrDefault();
+#else
+            var speakers = outputs.FirstOrDefault();
+#endif
+            AudioOutputDevice = speakers?.DisplayName;
         }
 
         private double _VolumeValue = 25;
@@ -225,13 +260,9 @@ namespace Simple_Player_MVVM.ViewModels
             _player.Audio_Play = true;
 
 #if !__ANDROID__ && !(__IOS__ && !__MACCATALYST__)
-            // On desktop the audio is heard only through an output device: the system default on macOS, the first one elsewhere.
+            // On desktop the audio is heard only through an output device: use the selected one.
             var outputs = await DeviceEnumerator.Shared.AudioOutputsAsync();
-#if __MACOS__ || __MACCATALYST__
-            var speakers = outputs.FirstOrDefault(d => d.IsDefault) ?? outputs.FirstOrDefault();
-#else
-            var speakers = outputs.FirstOrDefault();
-#endif
+            var speakers = outputs.FirstOrDefault(d => d.DisplayName == AudioOutputDevice);
             if (speakers != null)
             {
                 _player.Audio_OutputDevice = new AudioRendererSettings(speakers);
