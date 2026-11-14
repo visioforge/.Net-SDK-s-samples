@@ -52,10 +52,9 @@ Most demo applications contain unmanaged NuGet redist packages specific to the S
 |---------|----------|------------|
 | VisioForge.CrossPlatform.Core.Windows.x64 | Windows x64 | [![NuGet](https://img.shields.io/nuget/v/VisioForge.CrossPlatform.Core.Windows.x64.svg)](https://www.nuget.org/packages/VisioForge.CrossPlatform.Core.Windows.x64/) |
 | VisioForge.CrossPlatform.Core.Linux.x64 | Linux x64 | [![NuGet](https://img.shields.io/nuget/v/VisioForge.CrossPlatform.Core.Linux.x64.svg)](https://www.nuget.org/packages/VisioForge.CrossPlatform.Core.Linux.x64/) |
-| VisioForge.CrossPlatform.Core.macOS | macOS | [![NuGet](https://img.shields.io/nuget/v/VisioForge.CrossPlatform.Core.macOS.svg)](https://www.nuget.org/packages/VisioForge.CrossPlatform.Core.macOS/) |
+| VisioForge.CrossPlatform.Core.macOS | macOS, Mac Catalyst | [![NuGet](https://img.shields.io/nuget/v/VisioForge.CrossPlatform.Core.macOS.svg)](https://www.nuget.org/packages/VisioForge.CrossPlatform.Core.macOS/) |
 | VisioForge.CrossPlatform.Core.Android | Android | [![NuGet](https://img.shields.io/nuget/v/VisioForge.CrossPlatform.Core.Android.svg)](https://www.nuget.org/packages/VisioForge.CrossPlatform.Core.Android/) |
 | VisioForge.CrossPlatform.Core.iOS | iOS | [![NuGet](https://img.shields.io/nuget/v/VisioForge.CrossPlatform.Core.iOS.svg)](https://www.nuget.org/packages/VisioForge.CrossPlatform.Core.iOS/) |
-| VisioForge.CrossPlatform.Core.macCatalyst | Mac Catalyst | [![NuGet](https://img.shields.io/nuget/v/VisioForge.CrossPlatform.Core.macCatalyst.svg)](https://www.nuget.org/packages/VisioForge.CrossPlatform.Core.macCatalyst/) |
 
 ### Redistribution Packages (Windows)
 
