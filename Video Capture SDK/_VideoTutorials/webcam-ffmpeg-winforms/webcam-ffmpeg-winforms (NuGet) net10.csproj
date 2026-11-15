@@ -14,6 +14,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core" Version="[2026.11.13]" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.Core.Redist.VideoCapture.x64" Version="[2026.11.13]" />
     <PackageReference Include="VisioForge.DotNet.Core.Redist.FFMPEG.x64" Version="[2026.11.13]" />
   </ItemGroup>
