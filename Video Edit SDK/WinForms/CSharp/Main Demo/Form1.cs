@@ -1225,15 +1225,15 @@ namespace VideoEdit_CS_Demo
                     AudioEffectType.Fade,
                     AUDIO_EFFECT_ID_FADE_IN,
                     cbFadeInEnabled.Checked,
-                    TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeInStartTime.Text)),
-                    TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeInStopTime.Text)));
+                    TimeSpan.Zero,
+                    TimeSpan.Zero);
                 VideoEdit1.Audio_Effects_Add(
                     -1,
                     AudioEffectType.Fade,
                     AUDIO_EFFECT_ID_FADE_OUT,
                     cbFadeOutEnabled.Checked,
-                    TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeOutStartTime.Text)),
-                    TimeSpan.FromMilliseconds(Convert.ToInt32(edFadeOutStopTime.Text)));
+                    TimeSpan.Zero,
+                    TimeSpan.Zero);
 
                 tbAudAmplifyAmp_Scroll(sender, e);
                 tbAudDynAmp_Scroll(sender, e);
@@ -3043,24 +3043,11 @@ namespace VideoEdit_CS_Demo
         /// </summary>
         private async void btStartCut_Click(object sender, EventArgs e)
         {
-            var seekMode = IsTransportStreamFile(edSourceFileToCut.Text)
-                ? FastEditSeekMode.Input
-                : FastEditSeekMode.Output;
-
             await VideoEdit1.FastEdit_CutFileAsync(
                 edSourceFileToCut.Text,
                  TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTimeCut.Text)),
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTimeCut.Text)),
-                edOutputFileCut.Text,
-                seekMode);
-        }
-
-        private static bool IsTransportStreamFile(string fileName)
-        {
-            var extension = Path.GetExtension(fileName);
-            return string.Equals(extension, ".ts", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(extension, ".m2ts", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(extension, ".mts", StringComparison.OrdinalIgnoreCase);
+                edOutputFileCut.Text);
         }
 
         /// <summary>

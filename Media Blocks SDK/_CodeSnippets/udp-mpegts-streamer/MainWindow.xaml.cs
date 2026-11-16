@@ -35,10 +35,10 @@ namespace udp_mpegts_streamer_mb
         /// </summary>
         private IScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
+            // The default rectangle is empty: the whole primary monitor at its native size.
             var source = new ScreenCaptureD3D11SourceSettings();
 
             source.FrameRate = new VideoFrameRate(30);
-            source.Rectangle = new VisioForge.Core.Types.Rect(System.Windows.Forms.Screen.AllScreens[0].Bounds);
 
             source.CaptureCursor = true;
 

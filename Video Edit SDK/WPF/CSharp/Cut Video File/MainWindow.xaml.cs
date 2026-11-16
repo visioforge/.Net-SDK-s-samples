@@ -112,24 +112,11 @@ namespace Cut_Video_File
                 return;
             }
 
-            var seekMode = IsTransportStreamFile(edSourceVideoFile.Text)
-                ? VisioForge.Core.Types.VideoEdit.FastEditSeekMode.Input
-                : VisioForge.Core.Types.VideoEdit.FastEditSeekMode.Output;
-
             await _core.FastEdit_CutFileAsync(
                 edSourceVideoFile.Text,
                 TimeSpan.FromSeconds(startTime),
                 TimeSpan.FromSeconds(stopTime),
-                edOutputVideoFile.Text,
-                seekMode);
-        }
-
-        private static bool IsTransportStreamFile(string fileName)
-        {
-            var extension = Path.GetExtension(fileName);
-            return string.Equals(extension, ".ts", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(extension, ".m2ts", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(extension, ".mts", StringComparison.OrdinalIgnoreCase);
+                edOutputVideoFile.Text);
         }
 
         /// <summary>

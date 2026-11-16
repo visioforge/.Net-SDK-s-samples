@@ -43,8 +43,7 @@ namespace DecklinkFillKeyDemo
         private readonly RenderTargetBitmap _renderBitmap = new RenderTargetBitmap(1920, 1080, 96, 96, PixelFormats.Pbgra32);
         private readonly FormatConvertedBitmap _straightBitmap;
         private readonly VideoFrameX _frame = VideoFrameX.Alloc(1920, 1080, 1920 * 4, VideoFormatX.BGRA);
-        private DecklinkVideoSinkBlock _decklinkFillSink;
-        private DecklinkVideoSinkBlock _decklinkKeySink;
+        private DecklinkVideoSinkBlock _decklinkSink;
         private UniversalSourceBlock _backgroundSource;
         private VideoMixerBlock _videoMixer;
         private VideoRendererBlock _previewRenderer;
@@ -116,16 +115,6 @@ namespace DecklinkFillKeyDemo
                     }
                     cbDecklinkDevice.SelectedIndex = 0;
                     Log($"Found {outputDevices.Length} Decklink output device(s)");
-
-                    // Note for Fill+Key mode
-                    if (outputDevices.Length >= 2)
-                    {
-                        Log("Fill+Key mode available: Will use consecutive outputs for Fill and Key signals");
-                    }
-                    else
-                    {
-                        Log("WARNING: Fill+Key mode requires at least 2 outputs. Only internal keying available.");
-                    }
                 }
                 else
                 {
@@ -416,27 +405,6 @@ namespace DecklinkFillKeyDemo
                     return;
                 }
 
-                // Check if Fill+Key mode is properly configured
-                if (cbEnableKeyer.IsChecked == true && cbVideoFormat.SelectedIndex == 2)
-                {
-                    var outputDevices = await DecklinkVideoSinkBlock.GetDevicesAsync();
-                    uint selectedDevice = (uint)cbDecklinkDevice.SelectedIndex;
-
-                    if (selectedDevice + 1 >= outputDevices.Length)
-                    {
-                        MessageBox.Show(
-                            $"Fill+Key mode requires two consecutive outputs.\n" +
-                            $"Selected device {selectedDevice} needs device {selectedDevice + 1} for Key output.\n" +
-                            $"Please select a lower device number or use Internal keyer mode.",
-                            "Configuration Error",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Warning);
-                        return;
-                    }
-
-                    Log($"Fill+Key mode: Using device {selectedDevice} for Fill and device {selectedDevice + 1} for Key");
-                }
-
                 btStart.IsEnabled = false;
                 cbVideoMode.IsEnabled = false;
                 lbStatus.Text = "Initializing...";
@@ -450,18 +418,7 @@ namespace DecklinkFillKeyDemo
                 lbStatus.Foreground = Brushes.Red;
                 _startTime = DateTime.Now;
 
-                bool isFillKeyMode = cbEnableKeyer.IsChecked == true && cbVideoFormat.SelectedIndex == 2;
-                if (isFillKeyMode)
-                {
-                    uint device = (uint)cbDecklinkDevice.SelectedIndex;
-                    Log($"Broadcast started in Fill+Key mode");
-                    Log($"  Fill signal on device {device}");
-                    Log($"  Key signal on device {device + 1}");
-                }
-                else
-                {
-                    Log("Broadcast started successfully");
-                }
+                Log("Broadcast started successfully");
             }
             catch (Exception ex)
             {
@@ -496,51 +453,37 @@ namespace DecklinkFillKeyDemo
                 VideoFormatX.BGRA);
             _graphicsSource = new PushVideoSourceBlock(pushSettings);
 
-            // Configure Decklink outputs for Fill+Key mode
-            uint deviceNumber = (uint)cbDecklinkDevice.SelectedIndex;
+            // Keying needs ARGB and the card's one-sub-device full-duplex profile (the card keeps it after exit)
+            var keyerMode = (DecklinkKeyerMode)cbKeyerMode.SelectedIndex;
+            bool keyerOn = keyerMode != DecklinkKeyerMode.Off;
+            Log($"Configuring Decklink output, keyer: {keyerMode}{(keyerOn ? ", format: ARGB 8-bit" : "")}...");
 
-            // Determine if we're using Fill+Key (External keyer) or Internal keyer
-            bool useFillKey = cbEnableKeyer.IsChecked == true && cbVideoFormat.SelectedIndex == 2; // ARGB_8bit is required for Fill+Key
-
-            if (useFillKey)
+            var decklinkSettings = new DecklinkVideoSinkSettings((uint)cbDecklinkDevice.SelectedIndex, GetSelectedDecklinkMode())
             {
-                Log("Configuring Fill+Key mode with External keyer...");
+                VideoFormat = keyerOn ? DecklinkVideoFormat.ARGB_8bit : GetSelectedVideoFormat(),
+                KeyerMode = keyerMode,
+                KeyerLevel = (int)slKeyerLevel.Value,
+                Profile = keyerOn ? DecklinkProfileID.OneSubDeviceFull : DecklinkProfileID.Default,
+                IsSync = true
+            };
+            _decklinkSink = new DecklinkVideoSinkBlock(decklinkSettings);
 
-                // Fill output (device N) - contains the composited video
-                var fillSettings = new DecklinkVideoSinkSettings(deviceNumber, GetSelectedDecklinkMode())
-                {
-                    VideoFormat = DecklinkVideoFormat.ARGB_8bit, // Must be ARGB for Fill+Key
-                    KeyerMode = DecklinkKeyerMode.External,
-                    IsSync = true
-                };
-                _decklinkFillSink = new DecklinkVideoSinkBlock(fillSettings);
+            _pipeline.AddBlock(_graphicsSource);
+            _pipeline.AddBlock(_decklinkSink);
+            _outputTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
+            _pipeline.AddBlock(_outputTee);
 
-                // Key output (device N+1) - contains the alpha channel
-                var keySettings = new DecklinkVideoSinkSettings(deviceNumber + 1, GetSelectedDecklinkMode())
-                {
-                    VideoFormat = DecklinkVideoFormat.ARGB_8bit, // Must match Fill format
-                    KeyerMode = DecklinkKeyerMode.Off, // Key output doesn't use keyer
-                    IsSync = true
-                };
-                _decklinkKeySink = new DecklinkVideoSinkBlock(keySettings);
-            }
-            else
+            // Keyer on: the card gets the graphics alone, the background goes to the preview only
+            MediaBlockPad overlay = _graphicsSource.Output;
+            if (keyerOn)
             {
-                // Single output with Internal keyer or no keying
-                Log($"Configuring single output with {(cbEnableKeyer.IsChecked == true ? "Internal keyer" : "no keying")}...");
-
-                var decklinkSettings = new DecklinkVideoSinkSettings(deviceNumber, GetSelectedDecklinkMode())
-                {
-                    VideoFormat = GetSelectedVideoFormat(),
-                    KeyerMode = cbEnableKeyer.IsChecked == true ? DecklinkKeyerMode.Internal : DecklinkKeyerMode.Off,
-                    KeyerLevel = (int)slKeyerLevel.Value,
-                    IsSync = true
-                };
-                _decklinkFillSink = new DecklinkVideoSinkBlock(decklinkSettings);
+                _pipeline.Connect(_graphicsSource.Output, _outputTee.Input);
+                _pipeline.Connect(_outputTee.Outputs[0], _decklinkSink.Input);
+                overlay = _outputTee.Outputs[1];
             }
 
             // Build pipeline based on background source
-            MediaBlock finalOutput = _graphicsSource;
+            MediaBlockPad program = overlay;
 
             if (rbFileBackground.IsChecked == true && !string.IsNullOrEmpty(edVideoFile.Text))
             {
@@ -566,14 +509,13 @@ namespace DecklinkFillKeyDemo
 
                 _pipeline.AddBlock(_backgroundSource);
                 _pipeline.AddBlock(_videoMixer);
-                _pipeline.AddBlock(_graphicsSource);
 
                 // Connect: background -> mixer input 0
                 // Connect: graphics -> mixer input 1 (overlay with alpha)
                 _pipeline.Connect(_backgroundSource.Output, _videoMixer.Inputs[0]);
-                _pipeline.Connect(_graphicsSource.Output, _videoMixer.Inputs[1]);
+                _pipeline.Connect(overlay, _videoMixer.Inputs[1]);
 
-                finalOutput = _videoMixer;
+                program = _videoMixer.Output;
             }
             else if (rbDecklinkInput.IsChecked == true && cbDecklinkInput.SelectedIndex >= 0)
             {
@@ -594,12 +536,11 @@ namespace DecklinkFillKeyDemo
 
                 _pipeline.AddBlock(decklinkInput);
                 _pipeline.AddBlock(_videoMixer);
-                _pipeline.AddBlock(_graphicsSource);
 
                 _pipeline.Connect(decklinkInput.Output, _videoMixer.Inputs[0]);
-                _pipeline.Connect(_graphicsSource.Output, _videoMixer.Inputs[1]);
+                _pipeline.Connect(overlay, _videoMixer.Inputs[1]);
 
-                finalOutput = _videoMixer;
+                program = _videoMixer.Output;
             }
             else if (rbTestPattern.IsChecked == true)
             {
@@ -623,73 +564,29 @@ namespace DecklinkFillKeyDemo
 
                 _pipeline.AddBlock(testPattern);
                 _pipeline.AddBlock(_videoMixer);
-                _pipeline.AddBlock(_graphicsSource);
 
                 _pipeline.Connect(testPattern.Output, _videoMixer.Inputs[0]);
-                _pipeline.Connect(_graphicsSource.Output, _videoMixer.Inputs[1]);
+                _pipeline.Connect(overlay, _videoMixer.Inputs[1]);
 
-                finalOutput = _videoMixer;
+                program = _videoMixer.Output;
             }
-            else
+
+            if (!keyerOn)
             {
-                // Graphics only
-                _pipeline.AddBlock(_graphicsSource);
+                // Without the keyer, the card and the preview get the same mixed picture
+                _pipeline.Connect(program, _outputTee.Input);
+                _pipeline.Connect(_outputTee.Outputs[0], _decklinkSink.Input);
+                program = _outputTee.Outputs[1];
             }
 
-            // Add tee for preview and output
-            bool useFillKeyMode = cbEnableKeyer.IsChecked == true && cbVideoFormat.SelectedIndex == 2;
-
-            if (useFillKeyMode && _decklinkKeySink != null)
+            // Add preview renderer
+            var videoView = (VisioForge.Core.UI.WPF.VideoView)this.FindName("VideoViewBackground");
+            if (videoView != null)
             {
-                // Fill+Key mode: Need to split output to Fill and Key
-                _outputTee = new TeeBlock(3, MediaBlockPadMediaType.Video); // 3 outputs: Fill, Key, Preview
-                _pipeline.AddBlock(_outputTee);
-                _pipeline.Connect(finalOutput.Output, _outputTee.Input);
-
-                // Connect Fill output (full composited video)
-                _pipeline.AddBlock(_decklinkFillSink);
-                _pipeline.Connect(_outputTee.Outputs[0], _decklinkFillSink.Input);
-
-                // For Key output, we need to extract just the alpha channel
-                // In Fill+Key mode, the key signal is typically the alpha channel
-                // Since we're sending ARGB, the Decklink will extract the alpha for the key
-                _pipeline.AddBlock(_decklinkKeySink);
-                _pipeline.Connect(_outputTee.Outputs[1], _decklinkKeySink.Input);
-
-                // Use output 2 for preview
-                var previewOutput = _outputTee.Outputs[2];
-
-                // Add preview renderer
-                var videoView = (VisioForge.Core.UI.WPF.VideoView)this.FindName("VideoViewBackground");
-                if (videoView != null)
-                {
-                    _previewRenderer = new VideoRendererBlock(_pipeline, videoView);
-                    _pipeline.AddBlock(_previewRenderer);
-                    _pipeline.Connect(previewOutput, _previewRenderer.Input);
-                }
+                _previewRenderer = new VideoRendererBlock(_pipeline, videoView);
+                _pipeline.AddBlock(_previewRenderer);
+                _pipeline.Connect(program, _previewRenderer.Input);
             }
-            else
-            {
-                // Single output mode
-                _outputTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
-                _pipeline.AddBlock(_outputTee);
-                _pipeline.Connect(finalOutput.Output, _outputTee.Input);
-
-                // Connect to Decklink output
-                _pipeline.AddBlock(_decklinkFillSink);
-                _pipeline.Connect(_outputTee.Outputs[0], _decklinkFillSink.Input);
-
-                // Add preview renderer
-                var videoView = (VisioForge.Core.UI.WPF.VideoView)this.FindName("VideoViewBackground");
-                if (videoView != null)
-                {
-                    _previewRenderer = new VideoRendererBlock(_pipeline, videoView);
-                    _pipeline.AddBlock(_previewRenderer);
-                    _pipeline.Connect(_outputTee.Outputs[1], _previewRenderer.Input);
-                }
-            }
-
-            // Preview handling is now done in the tee section above
 
             // Start pipeline
             await _pipeline.StartAsync();
@@ -964,32 +861,6 @@ namespace DecklinkFillKeyDemo
         {
             UpdateGraphicsContent();
             Log("Graphics content updated");
-        }
-
-        /// <summary>
-        /// Cb enable keyer checked.
-        /// </summary>
-        private void cbEnableKeyer_Checked(object sender, RoutedEventArgs e)
-        {
-            if (cbVideoFormat != null && cbVideoFormat.SelectedIndex == 2)
-            {
-                Log("Fill+Key mode enabled - Will use External keyer with two outputs");
-            }
-            else
-            {
-                Log("Internal keyer mode enabled");
-            }
-        }
-
-        /// <summary>
-        /// Cb video format selection changed.
-        /// </summary>
-        private void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cbEnableKeyer != null && cbEnableKeyer.IsChecked == true && cbVideoFormat.SelectedIndex == 2)
-            {
-                Log("ARGB format selected with keyer - Fill+Key mode will be used");
-            }
         }
 
         /// <summary>

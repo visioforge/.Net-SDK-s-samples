@@ -22,9 +22,7 @@ using VisioForge.Core;
 using VisioForge.Libs.Decklink.SDK;
 using System.IO;
 using VisioForge.Core.Types;
-using Rect = VisioForge.Core.Types.Rect;
 using System.Linq;
-using System.Windows.Media;
 using System.Diagnostics;
 
 namespace Decklink_MultiOutput
@@ -187,32 +185,26 @@ namespace Decklink_MultiOutput
                 }
                 else if (rbScreenSource.IsChecked == true)
                 {
+                    // The whole primary monitor at its native size, scaled to the 1080p output.
                     var screenSource = new ScreenCaptureD3D11SourceSettings();
-                    screenSource.Rectangle = new Rect(0, 0, 1920, 1080);
                     screenSource.FrameRate = new VideoFrameRate(30);
                     _videoSource = new ScreenSourceBlock(screenSource);
 
-                    _pipeline.Connect(_videoSource.Output, _videoTee.Input);
+                    _videoResize = new VideoResizeBlock(new ResizeVideoEffect(1920, 1080));
+
+                    _pipeline.Connect(_videoSource.Output, _videoResize.Input);
+                    _pipeline.Connect(_videoResize.Output, _videoTee.Input);
                 }
                 else
                 {
                     var screenSource = new ScreenCaptureD3D11SourceSettings();
 
                     var wih = new System.Windows.Interop.WindowInteropHelper(this);
-                    var dpi = VisualTreeHelper.GetDpi(this);
 
+                    // The SDK measures the window, in physical pixels, when the handle is set and again at the start.
                     screenSource.WindowHandle = wih.Handle;
                     screenSource.FrameRate = new VideoFrameRate(30);
                     screenSource.API = D3D11ScreenCaptureAPI.WGC;
-
-                    if (dpi.DpiScaleX > 1.01 || dpi.DpiScaleY > 1.01)
-                    {
-                        screenSource.Rectangle = new Rect(0, 0, (int)(Width * dpi.DpiScaleX) - (int)(dpi.DpiScaleX * 15), (int)(Height * dpi.DpiScaleY) - (int)(dpi.DpiScaleY * 15));
-                    }
-                    else
-                    {
-                        screenSource.Rectangle = new Rect(0, 0, (int)Width, (int)Height);
-                    }
 
                     _videoSource = new ScreenSourceBlock(screenSource);
 

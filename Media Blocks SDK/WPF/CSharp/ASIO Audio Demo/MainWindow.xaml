@@ -1,0 +1,31 @@
+<Window x:Class="ASIO_Audio_Demo_MB.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ASIO Audio Demo - Media Blocks SDK .Net" Height="560" Width="440" ResizeMode="CanMinimize"
+        Loaded="Window_Loaded" Closing="Window_Closing" Icon="visioforge_main_icon.ico">
+    <StackPanel Margin="15">
+        <Label Content="ASIO input device" />
+        <ComboBox Name="cbInputDevice" />
+        <Label Content="Input channels (zero-based, comma-separated; empty = all)" />
+        <TextBox Name="edInputChannels" Text="0,1" />
+
+        <Label Content="ASIO output device" Margin="0,12,0,0" />
+        <ComboBox Name="cbOutputDevice" />
+        <Label Content="Output channels (zero-based, comma-separated; empty = all)" />
+        <TextBox Name="edOutputChannels" Text="0,1" />
+
+        <Label Content="Driver buffer size in samples (0 = driver default)" Margin="0,12,0,0" />
+        <TextBox Name="edBufferSize" Text="0" />
+
+        <CheckBox Name="cbRecord" Content="Record to WAV file" Margin="0,12,0,0" />
+        <TextBox Name="edOutputFile" Margin="0,5,0,0" />
+
+        <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+            <Button Name="btStart" Content="Start" Width="75" Click="btStart_Click" />
+            <Button Name="btStop" Content="Stop" Width="75" Margin="10,0,0,0" IsEnabled="False" Click="btStop_Click" />
+        </StackPanel>
+
+        <Label Content="Log" Margin="0,12,0,0" />
+        <TextBox Name="mmLog" Height="90" TextWrapping="Wrap" IsReadOnly="True" VerticalScrollBarVisibility="Auto" />
+    </StackPanel>
+</Window>

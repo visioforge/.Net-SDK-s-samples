@@ -3435,24 +3435,11 @@ namespace Main_Demo
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStartCut_Click(object sender, RoutedEventArgs e)
         {
-            var seekMode = IsTransportStreamFile(edSourceFileToCut.Text)
-                ? FastEditSeekMode.Input
-                : FastEditSeekMode.Output;
-
             await VideoEdit1.FastEdit_CutFileAsync(
                 edSourceFileToCut.Text,
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTimeCut.Text)),
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTimeCut.Text)),
-                edOutputFileCut.Text,
-                seekMode);
-        }
-
-        private static bool IsTransportStreamFile(string fileName)
-        {
-            var extension = Path.GetExtension(fileName);
-            return string.Equals(extension, ".ts", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(extension, ".m2ts", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(extension, ".mts", StringComparison.OrdinalIgnoreCase);
+                edOutputFileCut.Text);
         }
 
         /// <summary>

@@ -2487,19 +2487,11 @@ Public Class Form1
 
     Private Async Sub btStartCut_Click(sender As Object, e As EventArgs) Handles btStartCut.Click
 
-        Dim sourceExtension = Path.GetExtension(edSourceFileToCut.Text)
-        Dim seekMode = If(String.Equals(sourceExtension, ".ts", StringComparison.OrdinalIgnoreCase) OrElse
-                          String.Equals(sourceExtension, ".m2ts", StringComparison.OrdinalIgnoreCase) OrElse
-                          String.Equals(sourceExtension, ".mts", StringComparison.OrdinalIgnoreCase),
-                          FastEditSeekMode.Input,
-                          FastEditSeekMode.Output)
-
         Await VideoEdit1.FastEdit_CutFileAsync(
                 edSourceFileToCut.Text,
                  TimeSpan.FromMilliseconds(Convert.ToInt32(edStartTimeCut.Text)),
                 TimeSpan.FromMilliseconds(Convert.ToInt32(edStopTimeCut.Text)),
-                edOutputFileCut.Text,
-                seekMode)
+                edOutputFileCut.Text)
 
     End Sub
 

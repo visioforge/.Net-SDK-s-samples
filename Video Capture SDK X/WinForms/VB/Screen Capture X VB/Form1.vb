@@ -1,4 +1,5 @@
 Imports System.IO
+Imports System.Runtime.InteropServices
 Imports System.Timers
 Imports System.Linq
 Imports VisioForge.Core
@@ -59,6 +60,22 @@ Public Class Form1
         edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "screen_capture.mp4")
     End Sub
 
+    ' HMONITOR of the list entry. DXGI output order is not the Screen.AllScreens order.
+    Private Function SelectedMonitorHandle() As IntPtr
+        Dim index = cbScreenCaptureDisplayIndex.SelectedIndex
+        Dim screens = System.Windows.Forms.Screen.AllScreens
+        If index < 0 OrElse index >= screens.Length Then
+            Return IntPtr.Zero
+        End If
+
+        Dim bounds = screens(index).Bounds
+        Return MonitorFromPoint(New System.Drawing.Point(bounds.Left + 1, bounds.Top + 1), 2) ' MONITOR_DEFAULTTONEAREST
+    End Function
+
+    <DllImport("user32.dll")>
+    Private Shared Function MonitorFromPoint(pt As System.Drawing.Point, dwFlags As UInteger) As IntPtr
+    End Function
+
     Private Async Sub btStart_Click(sender As Object, e As EventArgs) Handles btStart.Click
         Try
             mmLog.Clear()
@@ -74,14 +91,17 @@ Public Class Form1
                 frameRateValue = 10
             End If
 
+            Dim monitorHandle = SelectedMonitorHandle()
+
             If rbScreenFullScreen.Checked Then
                 screenSource = New ScreenCaptureD3D11SourceSettings() With {
-                    .MonitorIndex = cbScreenCaptureDisplayIndex.SelectedIndex,
+                    .MonitorHandle = monitorHandle,
                     .FrameRate = New VideoFrameRate(frameRateValue, 1),
                     .CaptureCursor = cbScreenCapture_GrabMouseCursor.Checked
                 }
             ElseIf rbScreenCustomArea.Checked Then
                 screenSource = New ScreenCaptureD3D11SourceSettings() With {
+                    .MonitorHandle = monitorHandle,
                     .Rectangle = New Rect(CInt(edScreenLeft.Text), CInt(edScreenTop.Text), CInt(edScreenRight.Text), CInt(edScreenBottom.Text)),
                     .FrameRate = New VideoFrameRate(frameRateValue, 1),
                     .CaptureCursor = cbScreenCapture_GrabMouseCursor.Checked

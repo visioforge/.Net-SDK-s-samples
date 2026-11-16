@@ -72,7 +72,7 @@ namespace ScreenCaptureServiceHelper
 
             var wmvOutput = new WMVOutput();
             wmvOutput.Mode = WMVMode.InternalProfile;
-            wmvOutput.Internal_Profile_Name = VideoCapture1.WMV_Internal_Profiles()[5];
+            wmvOutput.Internal_Profile_Name = "Windows Media Video 9 for Local Network (256 kbps)";
             VideoCapture1.Output_Format = wmvOutput;
 
             VideoCapture1.OnError -= VideoCapture1_OnError;

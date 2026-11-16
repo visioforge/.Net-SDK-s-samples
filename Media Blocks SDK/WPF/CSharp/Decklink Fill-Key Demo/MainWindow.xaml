@@ -84,22 +84,29 @@
                         </ComboBox>
 
                         <Label Content="Keyer Settings" FontWeight="Bold" Margin="0,15,0,0"/>
-                        <CheckBox x:Name="cbEnableKeyer" Content="Enable Fill+Key Output" IsChecked="True" Margin="0,5,0,0" Checked="cbEnableKeyer_Checked" Unchecked="cbEnableKeyer_Checked"/>
+                        <ComboBox x:Name="cbKeyerMode" Width="360" SelectedIndex="2" Margin="0,5,0,0">
+                            <ComboBoxItem>Off</ComboBoxItem>
+                            <ComboBoxItem>Internal (graphics over the card's input)</ComboBoxItem>
+                            <ComboBoxItem>External (Fill + Key outputs)</ComboBoxItem>
+                        </ComboBox>
                         <Label Content="Keyer Level (0-255)"/>
                         <Slider x:Name="slKeyerLevel" Minimum="0" Maximum="255" Value="255" Width="360" TickFrequency="10" IsSnapToTickEnabled="True"/>
                         <TextBlock Text="{Binding ElementName=slKeyerLevel, Path=Value, StringFormat=Level: {0:F0}}" HorizontalAlignment="Center" Margin="0,5,0,0"/>
 
                         <Label Content="Video Format" FontWeight="Bold" Margin="0,15,0,0"/>
-                        <ComboBox x:Name="cbVideoFormat" Width="360" SelectedIndex="2" SelectionChanged="cbVideoFormat_SelectionChanged">
+                        <ComboBox x:Name="cbVideoFormat" Width="360" SelectedIndex="2">
                             <ComboBoxItem>YUV 8-bit</ComboBoxItem>
                             <ComboBoxItem>YUV 10-bit (Broadcast Quality)</ComboBoxItem>
-                            <ComboBoxItem>ARGB 8-bit (Required for Fill+Key)</ComboBoxItem>
+                            <ComboBoxItem>ARGB 8-bit (always used with the keyer)</ComboBoxItem>
                         </ComboBox>
-                        
+
                         <TextBlock Margin="0,10,10,0" TextWrapping="Wrap" Foreground="DarkBlue" FontStyle="Italic">
-                            <Bold>Fill+Key Mode:</Bold> When enabled with ARGB format, uses External keyer mode.
-                            This sends the Fill signal to the selected device and the Key (alpha) signal to the next device.
-                            For example: Device 0 = Fill, Device 1 = Key.
+                            <Bold>Keyer:</Bold> both modes key on the graphics' alpha, so the output is ARGB whenever the keyer is on.
+                            External outputs the Fill and the Key (alpha as a greyscale matte) on the selected device's two paired SDI connectors.
+                            Keying needs the card's one-sub-device full-duplex profile: the demo sets it, the card keeps it after exit,
+                            and the pair's second device stays unavailable until another profile is chosen in Desktop Video Setup.
+                            Select the pair's first device (on a DeckLink Duo 2: DeckLink Duo (1) or (2)); a Decklink input background cannot use the pair's second device.
+                            With the keyer on, the card gets the graphics alone and a background is mixed into the preview only.
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>

@@ -10,6 +10,7 @@ namespace Screen_Capture_X
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
@@ -192,8 +193,6 @@ namespace Screen_Capture_X
         /// <returns>The screen capture source settings.</returns>
         private IScreenCaptureSourceSettings CreateScreenCaptureSource()
         {
-            var screenID = Convert.ToInt32(cbScreenCaptureDisplayIndex.Text);
-
             // Desktop Duplication: starts at once, even on a still screen
             var source = new ScreenCaptureD3D11SourceSettings();
             source.API = D3D11ScreenCaptureAPI.DXGI;
@@ -215,7 +214,7 @@ namespace Screen_Capture_X
             }
 
             source.CaptureCursor = cbScreenCapture_GrabMouseCursor.IsChecked == true;
-            source.MonitorIndex = screenID;
+            source.MonitorHandle = MonitorHandleForListIndex(cbScreenCaptureDisplayIndex.SelectedIndex);
 
             if (cbMouseHighlight.IsChecked == true)
             {
@@ -224,6 +223,24 @@ namespace Screen_Capture_X
 
             return source;
         }
+
+        /// <summary>
+        /// HMONITOR of the list entry. DXGI output order is not the <c>Screen.AllScreens</c> order.
+        /// </summary>
+        private static IntPtr MonitorHandleForListIndex(int index)
+        {
+            var screens = Screen.AllScreens;
+            if (index < 0 || index >= screens.Length)
+            {
+                return IntPtr.Zero;
+            }
+
+            var bounds = screens[index].Bounds;
+            return MonitorFromPoint(new System.Drawing.Point(bounds.Left + 1, bounds.Top + 1), 2 /*MONITOR_DEFAULTTONEAREST*/);
+        }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr MonitorFromPoint(System.Drawing.Point pt, uint dwFlags);
 
         /// <summary>
         /// Handles the Click event of the btOutputConfigure control.
