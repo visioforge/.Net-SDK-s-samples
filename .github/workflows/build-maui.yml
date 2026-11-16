@@ -53,12 +53,13 @@ jobs:
       with:
         dotnet-version: '10.0.x'
 
+    # The image preinstalls SDK 11 in ~/.dotnet; a separate root keeps the pinned SDK 10 and its workload set.
     - name: Setup .NET (macOS ARM64)
       if: runner.environment == 'github-hosted' && runner.os == 'macOS'
       run: |
-        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --version 10.0.203 --architecture arm64
-        echo "$HOME/.dotnet" >> $GITHUB_PATH
-        echo "DOTNET_ROOT=$HOME/.dotnet" >> $GITHUB_ENV
+        curl -sSL https://dot.net/v1/dotnet-install.sh | bash -s -- --version 10.0.203 --architecture arm64 --install-dir "$HOME/.dotnet-ci"
+        echo "$HOME/.dotnet-ci" >> $GITHUB_PATH
+        echo "DOTNET_ROOT=$HOME/.dotnet-ci" >> $GITHUB_ENV
 
     - name: Install MAUI workloads (Windows)
       if: runner.environment == 'github-hosted' && runner.os == 'Windows'
