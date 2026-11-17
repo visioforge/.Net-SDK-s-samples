@@ -105,6 +105,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Video Stabilization Capture
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "screen-capture-mp4-wpf net10", "_VideoTutorials\screen-capture-mp4-wpf\screen-capture-mp4-wpf net10.csproj", "{CBD1288C-1A31-4E40-95EB-3A6080F52A62}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "network-streaming-rtmp-wpf net10", "_VideoTutorials\network-streaming-rtmp-wpf\network-streaming-rtmp-wpf net10.csproj", "{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ip-camera-capture-mp4-winforms net10", "_VideoTutorials\ip-camera-capture-mp4-winforms\ip-camera-capture-mp4-winforms net10.csproj", "{A46448B4-2B05-4324-859C-FA7FAAB47BC3}"
 EndProject
 Global
@@ -705,6 +707,18 @@ Global
 		{CBD1288C-1A31-4E40-95EB-3A6080F52A62}.Release|x64.Build.0 = Release|Any CPU
 		{CBD1288C-1A31-4E40-95EB-3A6080F52A62}.Release|x86.ActiveCfg = Release|Any CPU
 		{CBD1288C-1A31-4E40-95EB-3A6080F52A62}.Release|x86.Build.0 = Release|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Debug|x64.Build.0 = Debug|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Debug|x86.Build.0 = Debug|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Release|x64.ActiveCfg = Release|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Release|x64.Build.0 = Release|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Release|x86.ActiveCfg = Release|Any CPU
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08}.Release|x86.Build.0 = Release|Any CPU
 		{A46448B4-2B05-4324-859C-FA7FAAB47BC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A46448B4-2B05-4324-859C-FA7FAAB47BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A46448B4-2B05-4324-859C-FA7FAAB47BC3}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -771,6 +785,7 @@ Global
 		{9F6F24C9-4D3D-441D-B9B6-67273FB9025F} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{BC577606-95BD-4BCA-BDC1-73E63CC79057} = {BEB35102-F434-47CE-A231-2FC3F089F75B}
 		{CBD1288C-1A31-4E40-95EB-3A6080F52A62} = {DFE6F0CC-7F94-46B3-9B2E-7FDE062AAD8D}
+		{5C0E2B7A-3F41-4D8E-9A62-7E1D4B3C9F08} = {DFE6F0CC-7F94-46B3-9B2E-7FDE062AAD8D}
 		{A46448B4-2B05-4324-859C-FA7FAAB47BC3} = {DFE6F0CC-7F94-46B3-9B2E-7FDE062AAD8D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
