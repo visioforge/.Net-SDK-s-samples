@@ -25,7 +25,7 @@ A simple media player demo application built with Uno Platform and VisioForge Me
 ## Requirements
 
 - .NET 10.0 SDK
-- Visual Studio 2022 with Uno Platform extension
+- Uno Platform 7+ (Visual Studio 2022 with the Uno Platform extension)
 - For Android: Android SDK 34
 - For iOS: Xcode with current SDK
 
