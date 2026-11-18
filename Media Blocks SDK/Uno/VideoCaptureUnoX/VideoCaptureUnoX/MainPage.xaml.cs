@@ -1,4 +1,4 @@
-#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
+#if __IOS__ || __ANDROID__
 #define MOBILE
 #endif
 
@@ -26,11 +26,11 @@ using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core;
 using System.Linq;
 
-#if __IOS__ || __MACCATALYST__
+#if __IOS__
 using AVFoundation;
 #endif
 
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
 using Foundation;
 #endif
 #if __ANDROID__
@@ -142,7 +142,7 @@ public sealed partial class MainPage : Page
     {
         try
         {
-#if __IOS__ || __MACCATALYST__
+#if __IOS__
             var permissionsOk = await EnsureApplePermissionsAsync();
 #elif __ANDROID__
             var permissionsOk = await EnsureAndroidPermissionsAsync();
@@ -157,7 +157,7 @@ public sealed partial class MainPage : Page
                 return;
             }
 
-#if __IOS__ || __MACCATALYST__
+#if __IOS__
 
             // Use DeviceEnumerator for device enumeration
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
@@ -222,7 +222,7 @@ public sealed partial class MainPage : Page
         }
     }
 
-#if __IOS__ || __MACCATALYST__
+#if __IOS__
         /// <summary>
         /// Ensure apple permissions async.
         /// </summary>
@@ -470,7 +470,7 @@ public sealed partial class MainPage : Page
         }
     }
 
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
         /// <summary>
         /// Add video to photos library.
         /// </summary>
@@ -509,7 +509,7 @@ public sealed partial class MainPage : Page
     {
         try
         {
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
             bool capture = _mp4Sink != null;
             string filename = null;
             if (capture)
@@ -521,7 +521,7 @@ public sealed partial class MainPage : Page
             await StopAllAsync();
 
             // save video to iOS photo library
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
             if (capture)
             {
                 AddVideoToPhotosLibrary(filename);
@@ -730,17 +730,9 @@ public sealed partial class MainPage : Page
             
             filename = Path.Combine(cameraDir.AbsolutePath, $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
         }
-#elif __IOS__ && !__MACCATALYST__
+#elif __IOS__
         var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
             "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
-#elif __MACCATALYST__
-        // Sandbox disabled - save directly to ~/Movies
-        var moviesFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Movies");
-        if (!Directory.Exists(moviesFolder))
-        {
-            Directory.CreateDirectory(moviesFolder);
-        }
-        var filename = Path.Combine(moviesFolder, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #else
         var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #endif

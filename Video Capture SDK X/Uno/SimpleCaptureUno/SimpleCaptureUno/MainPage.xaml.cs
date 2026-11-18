@@ -1,4 +1,4 @@
-#if (__IOS__ && !__MACCATALYST__) || __ANDROID__
+#if __IOS__ || __ANDROID__
 #define MOBILE
 #endif
 
@@ -21,11 +21,11 @@ using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoCapture;
 using VisioForge.Core.VideoCaptureX;
 
-#if __IOS__ || __MACCATALYST__
+#if __IOS__
 using AVFoundation;
 #endif
 
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
 using Foundation;
 #endif
 
@@ -100,9 +100,9 @@ public sealed partial class MainPage : Page
         }
     }
 
-#if __IOS__ || __MACCATALYST__
+#if __IOS__
     /// <summary>
-    /// Asynchronously requests video and audio permissions on iOS and MacCatalyst.
+    /// Asynchronously requests video and audio permissions on iOS.
     /// </summary>
     /// <returns>True if permissions are granted; otherwise, false.</returns>
     private async Task<bool> EnsureApplePermissionsAsync()
@@ -245,7 +245,7 @@ public sealed partial class MainPage : Page
         {
             _defaultButtonBackground = btStartCapture.Background as SolidColorBrush;
 
-#if __IOS__ || __MACCATALYST__
+#if __IOS__
             var permissionsOk = await EnsureApplePermissionsAsync();
 #elif __ANDROID__
             var permissionsOk = await EnsureAndroidPermissionsAsync();
@@ -293,7 +293,7 @@ public sealed partial class MainPage : Page
                 btSpeakers.Content = _speakers[0].DisplayName;
             }
 
-#if __ANDROID__ || (__IOS__ && !__MACCATALYST__)
+#if __ANDROID__ || __IOS__
             // Select second camera if available for mobile platforms
             if (_cameras.Length > 1)
             {
@@ -304,8 +304,11 @@ public sealed partial class MainPage : Page
             // Start preview
             btStartCapture.IsEnabled = true;
             await StartPreview();
-#elif __MACCATALYST__
-            ShowStatus("Ready");
+#else
+            if (_cameras.Length > 0)
+            {
+                ShowStatus("Ready");
+            }
 #endif
         }
         catch (Exception ex)
@@ -340,7 +343,7 @@ public sealed partial class MainPage : Page
         await _core.StopAsync();
     }
 
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
     /// <summary>
     /// Adds the recorded video file to the iOS Photos library.
     /// </summary>
@@ -391,7 +394,7 @@ public sealed partial class MainPage : Page
         btStartCapture.Content = "CAPTURE";
 
         // save video to photo library or show file path
-#if __ANDROID__ || (__IOS__ && !__MACCATALYST__)
+#if __ANDROID__ || __IOS__
         if (!string.IsNullOrEmpty(filename))
         {
             await PhotoGalleryHelper.AddVideoToGalleryAsync(filename);
@@ -422,7 +425,7 @@ public sealed partial class MainPage : Page
 
         btCamera.Content = _cameras[_cameraSelectedIndex].DisplayName;
 
-#if __ANDROID__ || (__IOS__ && !__MACCATALYST__)
+#if __ANDROID__ || __IOS__
         await StopAllAsync();
         await StartPreview();
 #endif
@@ -601,17 +604,9 @@ public sealed partial class MainPage : Page
             
             filename = Path.Combine(cameraDir.AbsolutePath, $"visioforge_{now.Hour}_{now.Minute}_{now.Second}.mp4");
         }
-#elif __IOS__ && !__MACCATALYST__
+#elif __IOS__
         var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "..",
             "Library", $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
-#elif __MACCATALYST__
-        // Sandbox disabled - save directly to ~/Movies
-        var moviesFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Movies");
-        if (!Directory.Exists(moviesFolder))
-        {
-            Directory.CreateDirectory(moviesFolder);
-        }
-        var filename = Path.Combine(moviesFolder, $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #else
         var filename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), $"{now.Hour}_{now.Minute}_{now.Second}.mp4");
 #endif

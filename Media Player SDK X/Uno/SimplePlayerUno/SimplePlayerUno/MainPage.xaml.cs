@@ -13,7 +13,7 @@ using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Sources;
 
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
 using Foundation;
 #endif
 
@@ -90,7 +90,7 @@ public sealed partial class MainPage : Page
             _player.OnStart += Player_OnStart;
             _player.OnStop += Player_OnStop;
 
-#if !__IOS__ || __MACCATALYST__
+#if !__IOS__
             var audioOutputs = await _player.Audio_OutputDevicesAsync();
             if (audioOutputs.Length > 0)
             {
@@ -364,7 +364,7 @@ public sealed partial class MainPage : Page
         /// </summary>
     private static async Task<UniversalSourceSettings> CreateSourceSettingsAsync(string input)
     {
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
         NSUrl ResolveNsUrl(string value)
         {
             if (Uri.TryCreate(value, UriKind.Absolute, out var httpUri) && !httpUri.IsFile)

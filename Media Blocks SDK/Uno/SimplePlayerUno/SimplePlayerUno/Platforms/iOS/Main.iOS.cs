@@ -1,4 +1,5 @@
 using UIKit;
+using Uno.UI.Hosting;
 
 namespace SimplePlayerUno.Template.iOS;
 
@@ -12,8 +13,11 @@ public class EntryPoint
     {
         App.InitializeLogging();
 
-        // if you want to use a different Application Delegate class from "AppDelegate"
-        // you can specify it here.
-        UIApplication.Main(args, null, typeof(App));
+        var host = UnoPlatformHostBuilder.Create()
+            .App(() => new App())
+            .UseAppleUIKit()
+            .Build();
+
+        host.Run();
     }
 }

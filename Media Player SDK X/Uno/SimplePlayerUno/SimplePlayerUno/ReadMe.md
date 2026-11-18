@@ -20,14 +20,14 @@ A simple media player demo application built with Uno Platform and VisioForge Me
 - Windows (WinUI)
 - Android
 - iOS
-- macCatalyst
+- desktop (macOS, Linux)
 
 ## Requirements
 
 - .NET 10.0 SDK
 - Visual Studio 2022 with Uno Platform extension
 - For Android: Android SDK 34
-- For iOS/macCatalyst: Xcode with current SDK
+- For iOS: Xcode with current SDK
 
 ## Building
 

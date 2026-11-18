@@ -13,7 +13,7 @@ using VisioForge.Core.MediaBlocks.Sources;
 using VisioForge.Core.MediaBlocks.VideoRendering;
 using VisioForge.Core.Types.Events;
 using VisioForge.Core.Types.X.Sources;
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
 using Foundation;
 #endif
 #if __ANDROID__
@@ -72,7 +72,7 @@ public sealed partial class MainPage : Page
     /// </summary>
     private bool _isPlaying;
 
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
     // The message alert on screen, if any.
     private UIKit.UIAlertController? _alert;
 #elif !__ANDROID__
@@ -224,7 +224,7 @@ public sealed partial class MainPage : Page
 
             if (info?.AudioStreams.Count > 0)
             {
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
                 // Play sound even when the ring/silent switch is on.
                 AVFoundation.AVAudioSession.SharedInstance().SetCategory(AVFoundation.AVAudioSessionCategory.Playback);
 #endif
@@ -360,7 +360,7 @@ public sealed partial class MainPage : Page
     {
         DebugLogger.WriteLine($"CreateSourceSettingsAsync: input = {input}");
         
-#if __IOS__ && !__MACCATALYST__
+#if __IOS__
         NSUrl ResolveNsUrl(string value)
         {
             if (Uri.TryCreate(value, UriKind.Absolute, out var httpUri) && !httpUri.IsFile)
@@ -583,7 +583,7 @@ public sealed partial class MainPage : Page
                 Toast.MakeText(context, message, ToastLength.Short)?.Show();
             }
         });
-#elif __IOS__ && !__MACCATALYST__
+#elif __IOS__
         _dispatcherQueue.TryEnqueue(() =>
         {
             // One alert at a time: a second one would not be presented, so later messages join the one on screen.
@@ -610,7 +610,7 @@ public sealed partial class MainPage : Page
             top?.PresentViewController(_alert, true, null);
         });
 #else
-        // Windows and Mac Catalyst: a dialog that stays until OK
+        // Windows and desktop: a dialog that stays until OK
         _dispatcherQueue.TryEnqueue(async () =>
         {
             // Only one ContentDialog can be open, so later messages join the open one.

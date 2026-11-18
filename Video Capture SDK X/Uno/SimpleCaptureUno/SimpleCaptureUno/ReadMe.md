@@ -39,10 +39,10 @@ dotnet build -f net10.0-android
 dotnet build -f net10.0-ios
 ```
 
-### macOS (Mac Catalyst)
+### macOS
 
 ```bash
-dotnet build -f net10.0-maccatalyst
+dotnet build -f net10.0-desktop
 ```
 
 ## Usage

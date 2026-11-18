@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- Used only by the macOS app bundle (dotnet publish -p:PackageFormat=app), not by dotnet run; empty keys are filled from the project. -->
+  <key>CFBundleDisplayName</key>
+  <string></string>
+  <key>CFBundleExecutable</key>
+  <string></string>
+  <key>CFBundleIdentifier</key>
+  <string></string>
+  <key>CFBundleName</key>
+  <string></string>
+  <key>CFBundleShortVersionString</key>
+  <string></string>
+  <key>CFBundleVersion</key>
+  <string></string>
+  <key>NSCameraUsageDescription</key>
+  <string>Camera access is required to capture video.</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Microphone access is required to capture audio.</string>
+</dict>
+</plist>

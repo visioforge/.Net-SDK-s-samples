@@ -1,4 +1,5 @@
 using UIKit;
+using Uno.UI.Hosting;
 
 namespace RTSPViewerUno.Template.iOS;
 
@@ -11,6 +12,12 @@ public class EntryPoint
     public static void Main(string[] args)
     {
         App.InitializeLogging();
-        UIApplication.Main(args, null, typeof(App));
+
+        var host = UnoPlatformHostBuilder.Create()
+            .App(() => new App())
+            .UseAppleUIKit()
+            .Build();
+
+        host.Run();
     }
 }
