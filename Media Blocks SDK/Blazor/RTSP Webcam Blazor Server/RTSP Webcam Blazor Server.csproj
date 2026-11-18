@@ -23,6 +23,11 @@
   <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="[2026.11.13]" />
   </ItemGroup>
+  <!-- Linux: VisioForge native libraries (GStreamer comes from the system); the package follows the runtime identifier. -->
+  <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Linux.arm64" Version="[2026.10.26]" Condition="$(RuntimeIdentifier.EndsWith('-arm64')) or ('$(RuntimeIdentifier)' == '' and $(NETCoreSdkRuntimeIdentifier.EndsWith('-arm64')))" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Linux.x64" Version="[2026.10.26]" Condition="!($(RuntimeIdentifier.EndsWith('-arm64')) or ('$(RuntimeIdentifier)' == '' and $(NETCoreSdkRuntimeIdentifier.EndsWith('-arm64'))))" />
+  </ItemGroup>
   <!-- A macOS .app bundle is the ASP.NET content root, and no web files are copied into it by default. -->
   <Target Name="CopyWebAssetsToBundle" AfterTargets="_CreateAppBundle" BeforeTargets="_CodesignAppBundle" Condition="$([MSBuild]::IsOsPlatform('MacOS'))">
     <ItemGroup>
