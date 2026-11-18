@@ -16,7 +16,7 @@ This sample demonstrates how to use the VisioForge Video Capture SDK X with Uno 
 ## Requirements
 
 - .NET 10.0
-- Uno Platform 6.4+
+- Uno Platform 7+
 - VisioForge SDK license for production use
 
 ## Building

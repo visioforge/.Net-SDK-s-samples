@@ -25,6 +25,6 @@ This sample demonstrates real-time face recognition from a live camera using the
 ## Requirements
 
 - .NET 10.0
-- Uno Platform 6.4+
+- Uno Platform 7+
 - Android API 24+ (required by ONNX Runtime)
 - VisioForge SDK license for production use

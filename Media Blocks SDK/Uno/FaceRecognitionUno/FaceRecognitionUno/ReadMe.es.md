@@ -25,6 +25,6 @@ Este ejemplo demuestra el reconocimiento facial en tiempo real desde una cámara
 ## Requisitos
 
 - .NET 10.0
-- Uno Platform 6.4+
+- Uno Platform 7+
 - Android API 24+ (requerido por ONNX Runtime)
 - Licencia VisioForge SDK para uso en producción

@@ -16,5 +16,5 @@ Este ejemplo demuestra cómo utilizar VisioForge Media Player SDK X con Uno Plat
 ## Requisitos
 
 - .NET 10.0
-- Uno Platform 6.4+
+- Uno Platform 7+
 - Licencia VisioForge SDK para uso en producción

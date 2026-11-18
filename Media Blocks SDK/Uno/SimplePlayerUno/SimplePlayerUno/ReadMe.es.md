@@ -16,5 +16,5 @@ Este ejemplo demuestra cómo utilizar VisioForge Media Blocks SDK con Uno Platfo
 ## Requisitos
 
 - .NET 10.0
-- Uno Platform 6.4+
+- Uno Platform 7+
 - Licencia VisioForge SDK para uso en producción
