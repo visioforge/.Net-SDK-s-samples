@@ -1,7 +1,7 @@
 # Video Capture SDK .Net samples
 Video Capture SDK .Net TRIAL can be downloaded on [product page](https://www.visioforge.com/video-capture-sdk-net).
 
-[Online help](http://help.visioforge.com/sdks_net/index.html)
+[Online help](https://www.visioforge.com/help/docs/dotnet/)
 
 [Tutorials](https://support.visioforge.com/975762-Net-SDKs)
 

@@ -1,7 +1,7 @@
 # Video Edit SDK .Net samples
 Video Edit SDK .Net TRIAL can be downloaded on [product page](https://www.visioforge.com/video-edit-sdk-net).
 
-[Online help](http://help.visioforge.com/sdks_net/index.html)
+[Online help](https://www.visioforge.com/help/docs/dotnet/)
 
 [Tutorials](https://support.visioforge.com/975762-Net-SDKs)
 
