@@ -226,6 +226,11 @@ namespace Main_Demo
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         /// <summary>
+        /// Last error reported by the engine, shown when a start fails.
+        /// </summary>
+        private string _lastError;
+
+        /// <summary>
         /// Open file dialog for file selection (instance 1).
         /// </summary>
         private readonly Microsoft.Win32.OpenFileDialog openFileDialog1 = new Microsoft.Win32.OpenFileDialog();
@@ -1309,6 +1314,7 @@ namespace Main_Demo
             zoomShiftY = 0;
 
             mmLog.Clear();
+            _lastError = null;
 
             if (cbPIPDevices.Items.Count > 0)
             {
@@ -2392,10 +2398,16 @@ namespace Main_Demo
             // Start
             var started = await VideoCapture1.StartAsync();
 
-            edONVIFLiveVideoURL.Text = started ? VideoCapture1.IP_Camera_ONVIF_StreamURL?.ToString() : string.Empty;
+            if (!started)
+            {
+                MessageBox.Show(this, string.IsNullOrEmpty(_lastError) ? "Unable to start capture. See the log pane for details." : _lastError);
+                return;
+            }
+
+            edONVIFLiveVideoURL.Text = VideoCapture1.IP_Camera_ONVIF_StreamURL?.ToString();
 
             edNetworkURL.Text = VideoCapture1.Network_Streaming_URL;
-                 
+
             tmRecording.Start();
         }
 
@@ -5570,6 +5582,7 @@ namespace Main_Demo
         /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
+            _lastError = string.IsNullOrEmpty(_lastError) ? e.Message : _lastError + Environment.NewLine + e.Message;
             Log(e.Message);
         }
 

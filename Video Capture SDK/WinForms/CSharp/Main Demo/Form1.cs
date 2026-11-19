@@ -217,6 +217,11 @@ namespace VideoCapture_CSharp_Demo
         private System.Timers.Timer tmRecording = new System.Timers.Timer(1000);
 
         /// <summary>
+        /// Last error reported by the engine, shown when a start fails.
+        /// </summary>
+        private string _lastError;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Form1"/> class.
         /// </summary>
         public Form1()
@@ -840,6 +845,7 @@ namespace VideoCapture_CSharp_Demo
             }
 
             mmLog.Clear();
+            _lastError = null;
 
             if (cbPIPDevices.Items.Count > 0)
             {
@@ -1344,7 +1350,13 @@ namespace VideoCapture_CSharp_Demo
             // start
             var started = await VideoCapture1.StartAsync();
 
-            edONVIFLiveVideoURL.Text = started ? VideoCapture1.IP_Camera_ONVIF_StreamURL?.ToString() : string.Empty;
+            if (!started)
+            {
+                MessageBox.Show(string.IsNullOrEmpty(_lastError) ? "Unable to start capture. See the log pane for details." : _lastError);
+                return;
+            }
+
+            edONVIFLiveVideoURL.Text = VideoCapture1.IP_Camera_ONVIF_StreamURL?.ToString();
 
             edNetworkURL.Text = VideoCapture1.Network_Streaming_URL;
 
@@ -4657,6 +4669,7 @@ namespace VideoCapture_CSharp_Demo
         /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the event data.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
+            _lastError = string.IsNullOrEmpty(_lastError) ? e.Message : _lastError + Environment.NewLine + e.Message;
             Log(e.Message);
         }
 
