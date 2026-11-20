@@ -15,7 +15,7 @@ Esta aplicación demuestra las capacidades del SDK.
 
 ## Instalación
 
-Compile el proyecto y ejecute `install.bat` como administrador. Registra el servicio **VFVidCapNetSrv** con `sc.exe`; ejecute `uninstall.bat` como administrador para eliminarlo. Compile el proyecto helper de la carpeta `..\Helper` y copie toda su carpeta de compilación (`bin\<Debug|Release>\<framework>`) junto al ejecutable del servicio - el exe del helper por sí solo no arranca.
+Compile el proyecto y ejecute `install.bat` como administrador. Registra el servicio **VFVidCapNetSrv** con `sc.exe`; ejecute `uninstall.bat` como administrador para eliminarlo. Compile el proyecto helper de la carpeta `..\Helper` y copie el contenido de su carpeta de compilación (`bin\<Debug|Release>\<framework>`) en la carpeta del ejecutable del servicio - el exe del helper por sí solo no arranca.
 
 ---
 

@@ -15,7 +15,7 @@ This application demonstrates the SDK capabilities.
 
 ## Installation
 
-Build the project, then run `install.bat` as administrator. It registers the **VFVidCapNetSrv** service with `sc.exe`; run `uninstall.bat` as administrator to remove it. Build the helper project in the `..\Helper` folder and copy its whole build output folder (`bin\<Debug|Release>\<framework>`) next to the service executable - the helper exe alone cannot start.
+Build the project, then run `install.bat` as administrator. It registers the **VFVidCapNetSrv** service with `sc.exe`; run `uninstall.bat` as administrator to remove it. Build the helper project in the `..\Helper` folder and copy the contents of its build output folder (`bin\<Debug|Release>\<framework>`) into the folder that holds the service executable - the helper exe alone cannot start.
 
 ---
 
