@@ -53,6 +53,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "video-player-short-wpf net1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "reverse-playback-csharp-wpf net10", "_VideoTutorials\reverse-playback-csharp-wpf\reverse-playback-csharp-wpf net10.csproj", "{8E3B772E-1122-43C4-BB15-AC3D2E826509}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_VideoTutorials", "_VideoTutorials", "{81645283-F23A-B5BA-B8AF-DAFAC31FDC60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "audio-effects-csharp-wpf", "audio-effects-csharp-wpf", "{46E2ADE4-3212-2C54-C060-960923620A14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "audio-effects-csharp-wpf net10", "_VideoTutorials\audio-effects-csharp-wpf\audio-effects-csharp-wpf net10.csproj", "{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -339,6 +345,18 @@ Global
 		{8E3B772E-1122-43C4-BB15-AC3D2E826509}.Release|x64.Build.0 = Release|Any CPU
 		{8E3B772E-1122-43C4-BB15-AC3D2E826509}.Release|x86.ActiveCfg = Release|Any CPU
 		{8E3B772E-1122-43C4-BB15-AC3D2E826509}.Release|x86.Build.0 = Release|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Debug|x64.Build.0 = Debug|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Debug|x86.Build.0 = Debug|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Release|x64.ActiveCfg = Release|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Release|x64.Build.0 = Release|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Release|x86.ActiveCfg = Release|Any CPU
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -364,6 +382,8 @@ Global
 		{339AA74D-A92E-415A-94C1-30EE7774B064} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
 		{1F1898C2-3CAB-487F-99F6-2A241A8FDB5B} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
 		{067F78F4-45A4-4707-8399-71C7C87DAD3A} = {2B2C63B6-A615-4BAE-B9C9-BC56D88032EC}
+		{46E2ADE4-3212-2C54-C060-960923620A14} = {81645283-F23A-B5BA-B8AF-DAFAC31FDC60}
+		{6397E2C5-9E3E-4F11-99CA-C457927E9BC0} = {46E2ADE4-3212-2C54-C060-960923620A14}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23833106-1A40-4105-9674-C90843B23533}
