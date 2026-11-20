@@ -268,6 +268,20 @@ namespace Nvidia_Maxine_Demo
         }
 
         /// <summary>
+        /// Handles the select models folder click event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        private void btSelectModelsFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.OpenFolderDialog { Title = "NVIDIA Maxine models folder" };
+            if (dlg.ShowDialog() == true)
+            {
+                edModels.Text = dlg.FolderName;
+            }
+        }
+
+        /// <summary>
         /// Log.
         /// </summary>
         /// <param name="txt">The text.</param>
@@ -412,6 +426,12 @@ namespace Nvidia_Maxine_Demo
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            if (cbVideoEffect.SelectedIndex > 0 && !Directory.Exists(edModels.Text))
+            {
+                System.Windows.MessageBox.Show("Please select the Maxine models folder.");
+                return;
+            }
+
             mmLog.Clear();
 
             VideoCapture1.Video_Sample_Grabber_Enabled = true;

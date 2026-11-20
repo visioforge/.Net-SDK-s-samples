@@ -63,6 +63,12 @@ namespace Face_AI_MB_Demo
         /// </summary>
         private async Task FindKnownFacesInImages()
         {
+            if (!Directory.Exists(edImagesKnown.Text) || !Directory.Exists(edImagesToDetect.Text))
+            {
+                MessageBox.Show("Please select both folders with images.");
+                return;
+            }
+
             _sw = Stopwatch.StartNew();
 
             // load known faces
@@ -138,6 +144,12 @@ namespace Face_AI_MB_Demo
         /// </summary>
         private async Task FindKnownFacesInVideoFile()
         {
+            if (!Directory.Exists(edImagesKnown.Text) || !Directory.Exists(edImagesToDetect.Text))
+            {
+                MessageBox.Show("Please select both folders with images.");
+                return;
+            }
+
             _sw = Stopwatch.StartNew();
 
             // load known faces
@@ -204,6 +216,12 @@ namespace Face_AI_MB_Demo
         /// </summary>
         private async Task FindKnownFacesInWebcam()
         {
+            if (!Directory.Exists(edImagesKnown.Text))
+            {
+                MessageBox.Show("Please select the folder with images of known persons.");
+                return;
+            }
+
             _sw = Stopwatch.StartNew();
 
             // load known faces
@@ -231,11 +249,31 @@ namespace Face_AI_MB_Demo
         FaceRecognitionDB _db = new FaceRecognitionDB();
 
         /// <summary>
+        /// Path to the local face database file.
+        /// </summary>
+        private static readonly string _dbPath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "faces.bin");
+
+        /// <summary>
         /// Handles the bt test load click event.
         /// </summary>
         private void btTestLoad_Click(object sender, RoutedEventArgs e)
         {
-            _db = FaceRecognitionDB.Load("c:\\Samples\\FaceAI\\faces.bin");
+            if (!File.Exists(_dbPath))
+            {
+                MessageBox.Show("There is no saved database yet. Use Test save to create one.");
+                return;
+            }
+
+            try
+            {
+                _db = FaceRecognitionDB.Load(_dbPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Cannot read the database at {_dbPath}: {ex.Message}");
+                return;
+            }
 
             foreach (var person in _db.Persons)
             {
@@ -248,15 +286,27 @@ namespace Face_AI_MB_Demo
         /// </summary>
         private async void btTestSave_Click(object sender, RoutedEventArgs e)
         {
+            if (!Directory.Exists(edImagesKnown.Text))
+            {
+                MessageBox.Show("Please select the folder with images of known persons.");
+                return;
+            }
+
+            var files = Directory.GetFiles(edImagesKnown.Text);
+            if (files.Length == 0)
+            {
+                MessageBox.Show("The selected folder contains no images.");
+                return;
+            }
+
             try
             {
-                // load known faces
-                var files = System.IO.Directory.GetFiles(edImagesKnown.Text);
                 await _core.AddKnownPersonsAsync(files);
 
                 _db.Persons.AddRange(_core.KnownPersons);
 
-                _db.Save("c:\\Samples\\FaceAI\\faces.bin");
+                Directory.CreateDirectory(Path.GetDirectoryName(_dbPath));
+                _db.Save(_dbPath);
             }
             catch (Exception ex)
             {

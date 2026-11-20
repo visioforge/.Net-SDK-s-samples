@@ -1,5 +1,6 @@
 using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -185,6 +186,12 @@ namespace Simple_Player_Demo_D3D11_X
             btStart.IsEnabled = false;
             try
             {
+                if (string.IsNullOrWhiteSpace(edFilename.Text) || (!edFilename.Text.Contains("://") && !File.Exists(edFilename.Text)))
+                {
+                    MessageBox.Show("Please select a file or enter a URL.");
+                    return;
+                }
+
                 edLog.Clear();
                 await DestroyEngineAsync();
 

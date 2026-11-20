@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -239,12 +240,26 @@ namespace SyncPlayback
         }
 
         /// <summary>
+        /// A source is set when it is an existing file or a URL the SDK source accepts.
+        /// </summary>
+        private static bool IsSource(string source)
+        {
+            return !string.IsNullOrWhiteSpace(source) && (source.Contains("://") || File.Exists(source));
+        }
+
+        /// <summary>
         /// Handles the bt start click event.
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                if (!IsSource(edFilename1.Text) || !IsSource(edFilename2.Text))
+                {
+                    MessageBox.Show("Please select both files or enter URLs.");
+                    return;
+                }
+
                 edLog.Clear();
 
                 await DestroyEngineAsync();

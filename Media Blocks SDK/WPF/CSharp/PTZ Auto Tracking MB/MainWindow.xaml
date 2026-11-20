@@ -21,7 +21,7 @@
             <StackPanel DockPanel.Dock="Top">
                 <TextBlock Text="RTSP camera URL" FontWeight="Bold" />
                 <TextBox x:Name="edRtspUrl" Margin="0,2,0,8"
-                         Text="rtsp://192.168.1.22:554/cam/realmonitor?channel=1&amp;subtype=0&amp;unicast=true&amp;proto=Onvif" />
+                         ToolTip="rtsp://&lt;camera-ip&gt;:554/..." />
 
                 <Grid Margin="0,0,0,8">
                     <Grid.ColumnDefinitions>
@@ -30,17 +30,17 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Margin="0,0,4,0">
                         <TextBlock Text="User" FontWeight="Bold" />
-                        <TextBox x:Name="edUser" Text="admin" Margin="0,2,0,0" />
+                        <TextBox x:Name="edUser" Margin="0,2,0,0" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="4,0,0,0">
                         <TextBlock Text="Password" FontWeight="Bold" />
-                        <TextBox x:Name="edPassword" Text="" Margin="0,2,0,0" />
+                        <PasswordBox x:Name="edPassword" Margin="0,2,0,0" />
                     </StackPanel>
                 </Grid>
 
                 <TextBlock Text="ONVIF device service URL" FontWeight="Bold" />
                 <TextBox x:Name="edOnvifUrl" Margin="0,2,0,8"
-                         Text="http://192.168.1.22/onvif/device_service" />
+                         ToolTip="http://&lt;camera-ip&gt;/onvif/device_service" />
 
                 <TextBlock Text="YOLO model" FontWeight="Bold" />
                 <ComboBox x:Name="cbModel" Margin="0,2,0,4" SelectionChanged="cbModel_SelectionChanged" />

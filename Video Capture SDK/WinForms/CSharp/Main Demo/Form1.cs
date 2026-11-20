@@ -298,6 +298,10 @@ namespace VideoCapture_CSharp_Demo
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
+#if NETCOREAPP
+            // PlaceholderText is .NET 5+; the net472 project of this demo shares this file.
+            edONVIFURL.PlaceholderText = "http://<camera-ip>/onvif/device_service";
+#endif
             float dpiScale = this.DeviceDpi / 96.0f;
             Width = (int)(910 * dpiScale);
             Height = (int)(880 * dpiScale);
@@ -927,6 +931,12 @@ namespace VideoCapture_CSharp_Demo
             else if ((VideoCapture1.Mode == VideoCaptureMode.IPCapture) || (VideoCapture1.Mode == VideoCaptureMode.IPPreview))
             {
                 // from IP camera
+                if (string.IsNullOrWhiteSpace(cbIPURL.Text))
+                {
+                    MessageBox.Show(this, "Enter the camera URL, or select the NDI engine to use a listed NDI source.");
+                    return;
+                }
+
                 IPCameraSourceSettings settings;
                 SelectIPCameraSource(out settings);
                 VideoCapture1.IP_Camera_Source = settings;
@@ -4923,6 +4933,12 @@ namespace VideoCapture_CSharp_Demo
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void btPIPAddIPCamera_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cbIPURL.Text))
+            {
+                MessageBox.Show(this, "Enter the camera URL, or select the NDI engine to use a listed NDI source.");
+                return;
+            }
+
             IPCameraSourceSettings ipCameraSource;
             SelectIPCameraSource(out ipCameraSource);
 

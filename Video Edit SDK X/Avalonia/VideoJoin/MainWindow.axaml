@@ -29,7 +29,7 @@
 		<TextBlock Grid.Column="0" Text="You can use API to configure format settings" Margin="20,290,0,0" />
 
 		<TextBlock Grid.Column="0" Text="Output file" Margin="20,330,0,0" />
-		<TextBox Grid.Column="0" Height="30" Width="560" Margin="20,350,0,0" Text="c:\samples\!video.avi" x:Name="edOutput" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+		<TextBox Grid.Column="0" Height="30" Width="560" Margin="20,350,0,0" x:Name="edOutput" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 		<Button Grid.Column="0" Height="30" Width="30" Margin="590,350,0,0" Content="..." x:Name="btSelectFile" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
 		<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="20,400,0,0" Width="350" Height="36" HorizontalAlignment="Left" VerticalAlignment="Top">

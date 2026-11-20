@@ -15,9 +15,9 @@
                                 <Label Content="Engine" Height="35" HorizontalAlignment="Left" Margin="20,67,0,0" Name="label223" VerticalAlignment="Top" Width="55" />
                                 <CheckBox Content="Capture audio" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="350,85,0,0" Name="cbIPAudioCapture" VerticalAlignment="Top" Width="107" />
                                 <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="16,102,0,0" Name="label221" VerticalAlignment="Top" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="20,126,0,0" Name="edIPLogin" VerticalAlignment="Top" Width="150" Text="admin" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="20,126,0,0" Name="edIPLogin" VerticalAlignment="Top" Width="150" />
                                 <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="187,102,0,0" Name="label222" VerticalAlignment="Top" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="185,126,0,0" Name="edIPPassword" VerticalAlignment="Top" Width="150" Text="" />
+                                <PasswordBox Height="23" HorizontalAlignment="Left" Margin="185,126,0,0" Name="edIPPassword" VerticalAlignment="Top" Width="150" />
                                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="71,70,0,0" Name="cbIPCameraType" VerticalAlignment="Top" Width="264">
                                     <ComboBoxItem Content="Auto" />
                                     <ComboBoxItem Content="RTSP" />
@@ -31,7 +31,7 @@
                                 <CheckBox x:Name="cbLowLatencyMode" Content="Low latency mode" HorizontalAlignment="Left" Margin="350,127,0,0" VerticalAlignment="Top" ToolTip="Enable ultra-low latency (60-120ms) for real-time surveillance and monitoring"/>
                                 <Label Content="To use NDI please install NDI SDK for Windows from" HorizontalAlignment="Left" Margin="20,231,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="lbNDIVendor" Content="vendor's website" HorizontalAlignment="Left" Margin="301,231,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbNDIVendor_MouseLeftButtonDown" />
-                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" Text="http://192.168.1.22/onvif/device_service" IsEditable="True"/>
+                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" IsEditable="True"/>
                                 <Button x:Name="btListNDISources" Content="List NDI sources" HorizontalAlignment="Left" Margin="20,273,0,0" VerticalAlignment="Top" Width="112" Click="btListNDISources_Click"/>
                                 <Button x:Name="btListONVIFSources" Content="List ONVIF sources" HorizontalAlignment="Left" Margin="137,273,0,0" VerticalAlignment="Top" Width="112" Click="btListONVIFSources_Click" />
                             </Grid>
@@ -55,11 +55,11 @@
                                 <ComboBox x:Name="cbONVIFProfile" HorizontalAlignment="Left" Margin="80,104,0,0" VerticalAlignment="Top" Width="418" IsReadOnly="True"/>
                                 <Label Content="Video URL" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edONVIFLiveVideoURL" HorizontalAlignment="Left" Height="23" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="418" Margin="80,135,0,0"/>
-                                <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="http://192.168.1.22/onvif/device_service" VerticalAlignment="Top" Width="408"/>
+                                <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" ToolTip="http://&lt;camera-ip&gt;/onvif/device_service" VerticalAlignment="Top" Width="408"/>
                                 <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="label221_Copy" VerticalAlignment="Top" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="80,43,0,0" x:Name="edONVIFLogin" VerticalAlignment="Top" Width="150" Text="admin" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="80,43,0,0" x:Name="edONVIFLogin" VerticalAlignment="Top" Width="150" />
                                 <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="283,38,0,0" x:Name="label222_Copy" VerticalAlignment="Top" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="348,43,0,0" x:Name="edONVIFPassword" VerticalAlignment="Top" Width="150" Text="" />
+                                <PasswordBox Height="23" HorizontalAlignment="Left" Margin="348,43,0,0" x:Name="edONVIFPassword" VerticalAlignment="Top" Width="150" />
                             </Grid>
                         </TabItem>
                     </TabControl>

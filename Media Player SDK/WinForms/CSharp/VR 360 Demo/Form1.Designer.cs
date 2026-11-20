@@ -314,7 +314,6 @@
             edFilename.Name = "edFilename";
             edFilename.Size = new System.Drawing.Size(642, 31);
             edFilename.TabIndex = 53;
-            edFilename.Text = "c:\\Samples\\360\\equirectangular4.MP4";
             // 
             // label14
             // 

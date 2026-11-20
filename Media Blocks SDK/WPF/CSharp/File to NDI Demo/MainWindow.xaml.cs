@@ -304,6 +304,12 @@ namespace File_to_NDI_Demo
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(edFilename.Text) || (!edFilename.Text.Contains("://") && !File.Exists(edFilename.Text)))
+                {
+                    MessageBox.Show("Please select a file or enter a URL.");
+                    return;
+                }
+
                 edLog.Clear();
 
                 await CreateEngineAsync();

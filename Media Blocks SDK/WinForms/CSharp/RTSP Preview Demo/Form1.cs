@@ -116,6 +116,10 @@ namespace RTSP_Preview_WinForms
         /// </summary>
         private async void Form1_Load(object sender, EventArgs e)
         {
+#if NETCOREAPP
+            // PlaceholderText is .NET 5+; the net472 project of this demo shares this file.
+            edONVIFURL.PlaceholderText = "http://<camera-ip>/onvif/device_service";
+#endif
             try
             {
                 // We have to initialize the engine on start
@@ -138,6 +142,12 @@ namespace RTSP_Preview_WinForms
         /// </summary>
         private async void btStart_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cbIPURL.Text))
+            {
+                MessageBox.Show(this, "Enter the camera URL.");
+                return;
+            }
+
             // Starting takes a few seconds, so block the button - a second click would build
             // a second pipeline over the same VideoView and open a second session to the camera.
             btStart.Enabled = false;

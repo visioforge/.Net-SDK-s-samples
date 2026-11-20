@@ -233,7 +233,6 @@ namespace Computer_Vision_Demo
             edFilename.Name = "edFilename";
             edFilename.Size = new System.Drawing.Size(602, 31);
             edFilename.TabIndex = 143;
-            edFilename.Text = "c:\\samples\\cv\\highway.mp4";
             // 
             // label9
             // 

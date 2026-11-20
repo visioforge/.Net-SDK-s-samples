@@ -82,6 +82,7 @@ namespace Video_Compositor_Demo
         {
             _videoCapture = new VideoCaptureCoreX(VideoView1);
             _videoCapture.OnError += VideoCapture_OnError;
+            _videoCapture.Audio_Play = false; // the virtual audio source feeds the outputs only
 
             _videoCapture.Debug_Dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
             _videoCapture.Debug_Mode = true;

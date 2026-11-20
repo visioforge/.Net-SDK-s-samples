@@ -125,7 +125,6 @@ namespace multiple_ap_cams
             this.edURL1.Name = "edURL1";
             this.edURL1.Size = new System.Drawing.Size(260, 20);
             this.edURL1.TabIndex = 7;
-            this.edURL1.Text = "http://192.168.1.22/onvif/device_service";
             // 
             // edURL2
             // 
@@ -133,7 +132,6 @@ namespace multiple_ap_cams
             this.edURL2.Name = "edURL2";
             this.edURL2.Size = new System.Drawing.Size(260, 20);
             this.edURL2.TabIndex = 9;
-            this.edURL2.Text = "http://192.168.1.22/onvif/device_service";
             // 
             // label2
             // 
@@ -217,6 +215,7 @@ namespace multiple_ap_cams
             this.edPassword1.Name = "edPassword1";
             this.edPassword1.Size = new System.Drawing.Size(100, 20);
             this.edPassword1.TabIndex = 118;
+            this.edPassword1.UseSystemPasswordChar = true;
             // 
             // label167
             // 
@@ -249,6 +248,7 @@ namespace multiple_ap_cams
             this.edPassword2.Name = "edPassword2";
             this.edPassword2.Size = new System.Drawing.Size(100, 20);
             this.edPassword2.TabIndex = 122;
+            this.edPassword2.UseSystemPasswordChar = true;
             // 
             // label4
             // 

@@ -118,6 +118,12 @@
                 _x = 0;
                 _y = 0;
 
+                if (string.IsNullOrWhiteSpace(edFilename.Text) || (!edFilename.Text.Contains("://") && !File.Exists(edFilename.Text)))
+                {
+                    MessageBox.Show("Please select a file or enter a URL.");
+                    return;
+                }
+
                 mmError.Clear();
 
                 MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;

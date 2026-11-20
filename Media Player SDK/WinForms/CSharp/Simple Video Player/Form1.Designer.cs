@@ -372,7 +372,6 @@ namespace Video_Player_Demo
             edFilename.Name = "edFilename";
             edFilename.Size = new System.Drawing.Size(642, 31);
             edFilename.TabIndex = 27;
-            edFilename.Text = "C:\\samples\\!video.mp4";
             // 
             // label14
             // 

@@ -74,7 +74,6 @@
             this.edFilenameOrURL.Name = "edFilenameOrURL";
             this.edFilenameOrURL.Size = new System.Drawing.Size(385, 20);
             this.edFilenameOrURL.TabIndex = 6;
-            this.edFilenameOrURL.Text = "c:\\Samples\\3_video_streams.asf";
             // 
             // label14
             // 

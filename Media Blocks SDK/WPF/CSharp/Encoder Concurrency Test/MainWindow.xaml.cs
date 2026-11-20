@@ -31,6 +31,12 @@ namespace EncoderConcurrencyTest
         private bool _suppressComboEvents;
 
         /// <summary>
+        /// Result of the last "Fill to limit" run, shown beside the live pipeline counts
+        /// until the set of pipelines changes.
+        /// </summary>
+        private string _fillSummary;
+
+        /// <summary>
         /// Set once by <see cref="Window_Closing"/> to serialise the cancel/reissue
         /// pattern — the first close is cancelled, teardown runs, then we close for real.
         /// </summary>
@@ -399,6 +405,7 @@ namespace EncoderConcurrencyTest
 
         private async void BtAdd_Click(object sender, RoutedEventArgs e)
         {
+            _fillSummary = null;
             try
             {
                 await AddTileAsync();
@@ -455,6 +462,7 @@ namespace EncoderConcurrencyTest
             // keeps reporting success (e.g., a patched NVENC driver with no cap).
             const int hardCeiling = 32;
 
+            _fillSummary = null;
             SetButtonsEnabled(false);
             try
             {
@@ -468,13 +476,13 @@ namespace EncoderConcurrencyTest
                     }
                     catch (Exception ex)
                     {
-                        lbStatus.Text = $"Fill stopped after {_tiles.Count - startCount} tiles: {ex.Message}";
+                        _fillSummary = $"Fill stopped after {_tiles.Count - startCount} tiles: {ex.Message}";
                         return;
                     }
 
                     if (tile.StartFailed)
                     {
-                        lbStatus.Text =
+                        _fillSummary =
                             $"Fill hit limit after {_tiles.Count - startCount - 1} successful tiles. " +
                             $"Last error: {tile.LastStatus}";
                         return;
@@ -485,7 +493,7 @@ namespace EncoderConcurrencyTest
                     await Task.Delay(300);
                 }
 
-                lbStatus.Text = $"Fill ceiling reached ({hardCeiling} tiles). No runtime refused.";
+                _fillSummary = $"Fill ceiling reached ({hardCeiling} tiles). No runtime refused.";
             }
             finally
             {
@@ -505,6 +513,7 @@ namespace EncoderConcurrencyTest
 
         private async void BtRemoveLast_Click(object sender, RoutedEventArgs e)
         {
+            _fillSummary = null;
             if (_tiles.Count == 0) return;
             var tile = _tiles[_tiles.Count - 1];
             _tiles.RemoveAt(_tiles.Count - 1);
@@ -522,6 +531,7 @@ namespace EncoderConcurrencyTest
 
         private async void BtStopAll_Click(object sender, RoutedEventArgs e)
         {
+            _fillSummary = null;
             var tiles = _tiles.ToArray();
             _tiles.Clear();
             tilesPanel.Children.Clear();
@@ -558,8 +568,10 @@ namespace EncoderConcurrencyTest
                 parts.Add($"{kv.Key}={kv.Value}");
             }
 
-            lbStatus.Text = $"Pipelines: {_tiles.Count}. " +
+            var statusText = $"Pipelines: {_tiles.Count}. " +
                 (parts.Count == 0 ? "No running tiles." : string.Join("  ", parts));
+
+            lbStatus.Text = _fillSummary == null ? statusText : $"{_fillSummary}  {statusText}";
         }
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

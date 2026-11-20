@@ -99,7 +99,6 @@ namespace Two_Windows_Demo
             edFilename.Name = "edFilename";
             edFilename.Size = new System.Drawing.Size(642, 31);
             edFilename.TabIndex = 17;
-            edFilename.Text = "C:\\Samples\\!video.mp4";
             // 
             // label14
             // 

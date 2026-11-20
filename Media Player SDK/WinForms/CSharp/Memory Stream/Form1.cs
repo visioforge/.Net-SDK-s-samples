@@ -121,6 +121,12 @@ namespace Memory_Stream_Demo
         {
             try
             {
+                if (!File.Exists(edFilename.Text))
+                {
+                    MessageBox.Show("Please select a video file.");
+                    return;
+                }
+
                 mmError.Text = string.Empty;
                 bool videoAvailable;
                 bool audioAvailable;

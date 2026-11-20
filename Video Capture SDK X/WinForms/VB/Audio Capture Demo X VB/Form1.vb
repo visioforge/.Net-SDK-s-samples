@@ -121,6 +121,7 @@ Public Class Form1
 
             ' audio input
             Dim audioSource As IVideoCaptureBaseAudioSourceSettings = Nothing
+            Dim echo = False
             If rbSystemAudio.Checked Then
                 Dim deviceItem = (Await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(Function(device) device.DisplayName = cbAudioInputDevice.Text)
                 If deviceItem Is Nothing Then
@@ -141,11 +142,14 @@ Public Class Form1
                 End If
 
                 audioSource = New LoopbackAudioCaptureDeviceSourceSettings(deviceItem)
+
+                ' Loopback played back into the same device (or a default alias of it) is captured again: an echo.
+                echo = deviceItem.Name = audioOutputDevice.Name OrElse deviceItem.IsDefault OrElse audioOutputDevice.IsDefault
             End If
 
             VideoCapture1.Audio_Source = audioSource
 
-            VideoCapture1.Audio_Play = cbPlayAudio.Checked
+            VideoCapture1.Audio_Play = cbPlayAudio.Checked AndAlso Not echo
             VideoCapture1.Audio_Record = False
 
             VideoCapture1.Outputs_Clear()

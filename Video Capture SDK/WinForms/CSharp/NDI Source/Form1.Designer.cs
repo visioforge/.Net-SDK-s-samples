@@ -259,7 +259,6 @@ namespace NDI_Source
             this.cbIPURL.Name = "cbIPURL";
             this.cbIPURL.Size = new System.Drawing.Size(476, 33);
             this.cbIPURL.TabIndex = 97;
-            this.cbIPURL.Text = "http://192.168.1.22/onvif/device_service";
             // 
             // btListNDISources
             // 
@@ -310,6 +309,7 @@ namespace NDI_Source
             this.edIPPassword.Name = "edIPPassword";
             this.edIPPassword.Size = new System.Drawing.Size(164, 31);
             this.edIPPassword.TabIndex = 91;
+            this.edIPPassword.UseSystemPasswordChar = true;
             // 
             // label167
             // 

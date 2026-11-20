@@ -2540,7 +2540,6 @@ namespace VideoEdit_CS_Demo
             edChromaKeyImage.Name = "edChromaKeyImage";
             edChromaKeyImage.Size = new System.Drawing.Size(388, 31);
             edChromaKeyImage.TabIndex = 41;
-            edChromaKeyImage.Text = "c:\\Samples\\pics\\1.jpg";
             // 
             // label216
             // 

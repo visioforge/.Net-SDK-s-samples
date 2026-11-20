@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using VisioForge.Core.MediaBlocks;
@@ -72,13 +71,7 @@ namespace EncoderConcurrencyTest
             {
                 lbHeader.Text = $"#{pipelineIndex}  [{sourceLabel}]  {codec}  {width}x{height}@{fps}  enc={encoder}  dec={decoder}";
 
-                Directory.CreateDirectory(@"C:\vf");
-
-                _pipeline = new MediaBlocksPipeline
-                {
-                    Debug_Mode = true,
-                    Debug_Dir = @"C:\vf",
-                };
+                _pipeline = new MediaBlocksPipeline();
                 _pipeline.OnError += Pipeline_OnError;
 
                 _source = sourceBlock;
@@ -101,7 +94,7 @@ namespace EncoderConcurrencyTest
                 if (!started)
                 {
                     StartFailed = true;
-                    LastStatus = "Failed to start pipeline. Check driver/session limits.";
+                    LastStatus = "Failed to start pipeline. This encoder runtime is either unavailable on this machine or already at its session limit - pick another Encoder entry.";
                     lbStatus.Text = LastStatus;
                 }
                 else

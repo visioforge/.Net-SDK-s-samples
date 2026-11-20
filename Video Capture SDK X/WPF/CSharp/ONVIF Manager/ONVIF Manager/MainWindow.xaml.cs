@@ -47,7 +47,7 @@ namespace ONVIF_Manager
         {
             string url = edURL.Text;
             string username = edUsername.Text;
-            string password = edPassword.Text;            
+            string password = edPassword.Password;            
 
             if (btnConnect.Content.ToString() == "Connect")
             {

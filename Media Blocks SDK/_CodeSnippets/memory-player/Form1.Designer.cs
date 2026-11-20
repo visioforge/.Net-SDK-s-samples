@@ -87,7 +87,6 @@
             edFilename.Name = "edFilename";
             edFilename.Size = new System.Drawing.Size(837, 31);
             edFilename.TabIndex = 4;
-            edFilename.Text = "c:\\samples\\!video.mp4";
             // 
             // btOpenFile
             // 

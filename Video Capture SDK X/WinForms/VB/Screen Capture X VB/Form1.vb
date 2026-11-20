@@ -131,6 +131,7 @@ Public Class Form1
                 End If
 
                 VideoCapture1.Audio_Record = True
+                VideoCapture1.Audio_Play = False ' record only, no speaker monitoring
             End If
 
             ' Output

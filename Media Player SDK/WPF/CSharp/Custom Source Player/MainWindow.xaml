@@ -29,7 +29,7 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="File name:" VerticalAlignment="Center"/>
-            <TextBox x:Name="edFilename" Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" VerticalAlignment="Center" Text="C:\samples\!video.mp4"/>
+            <TextBox x:Name="edFilename" Grid.Row="0" Grid.Column="1" Margin="5,0,5,0" VerticalAlignment="Center"/>
             <Button x:Name="btSelectFile" Grid.Row="0" Grid.Column="2" Content="..." Width="30" Click="btSelectFile_Click"/>
 
             <Label Grid.Row="1" Grid.Column="0" Content="Filter CLSID:" VerticalAlignment="Center" Margin="0,5,0,0"/>

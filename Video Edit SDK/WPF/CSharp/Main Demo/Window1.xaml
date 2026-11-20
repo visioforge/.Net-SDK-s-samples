@@ -262,7 +262,7 @@
                                 <Slider Height="23" HorizontalAlignment="Left" Margin="10,124,0,0" Maximum="1000" x:Name="tbChromaKeySmoothing" VerticalAlignment="Top" Width="100" Value="80" />
                                 <Label Content="Smoothing" Height="28" HorizontalAlignment="Left" Margin="10,96,0,0" x:Name="labe1l112" VerticalAlignment="Top" Width="86" />
                                 <Label Content="Image background file" Height="29" HorizontalAlignment="Left" Margin="10,212,0,0" x:Name="label1115" VerticalAlignment="Top" Width="131" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="10,241,0,0" x:Name="edChromaKeyImage" VerticalAlignment="Top" Width="321" Text="c:\Samples\pics\1.jpg" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="10,241,0,0" x:Name="edChromaKeyImage" VerticalAlignment="Top" Width="321" />
                                 <Button Click="btChromaKeySelectBGImage_Click" Content="..." Height="23" HorizontalAlignment="Left" Margin="336,241,0,0" x:Name="btChromaKeySelectBGImage" VerticalAlignment="Top" Width="24" />
                                 <Label Content="Color" Height="23" HorizontalAlignment="Left" Margin="10,167,0,0" x:Name="label1116" VerticalAlignment="Top" Width="59" />
                                 <Rectangle Fill="#FF80DA80" Height="29" HorizontalAlignment="Left" Margin="78,167,0,0" x:Name="pnChromaKeyColor" Stroke="Black" VerticalAlignment="Top" Width="32" MouseDown="pnChromaKeyColor_MouseDown" />

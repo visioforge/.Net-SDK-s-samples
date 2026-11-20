@@ -3971,7 +3971,6 @@ Partial Class Form1
         Me.cbIPURL.Name = "cbIPURL"
         Me.cbIPURL.Size = New System.Drawing.Size(538, 28)
         Me.cbIPURL.TabIndex = 92
-        Me.cbIPURL.Text = "rtsp://192.168.1.101:554/stream1"
         '
         'btListNDISources
         '
@@ -4088,6 +4087,7 @@ Partial Class Form1
         Me.edIPPassword.Name = "edIPPassword"
         Me.edIPPassword.Size = New System.Drawing.Size(148, 26)
         Me.edIPPassword.TabIndex = 66
+        Me.edIPPassword.UseSystemPasswordChar = True
         '
         'label167
         '
@@ -4214,6 +4214,7 @@ Partial Class Form1
         Me.edONVIFPassword.Name = "edONVIFPassword"
         Me.edONVIFPassword.Size = New System.Drawing.Size(148, 26)
         Me.edONVIFPassword.TabIndex = 75
+        Me.edONVIFPassword.UseSystemPasswordChar = True
         '
         'Label379
         '
@@ -4250,7 +4251,6 @@ Partial Class Form1
         Me.edONVIFURL.Name = "edONVIFURL"
         Me.edONVIFURL.Size = New System.Drawing.Size(487, 26)
         Me.edONVIFURL.TabIndex = 71
-        Me.edONVIFURL.Text = "http://192.168.1.22/onvif/device_service"
         '
         'edONVIFLiveVideoURL
         '
@@ -9215,7 +9215,6 @@ Partial Class Form1
         Me.edChromaKeyImage.Name = "edChromaKeyImage"
         Me.edChromaKeyImage.Size = New System.Drawing.Size(350, 26)
         Me.edChromaKeyImage.TabIndex = 41
-        Me.edChromaKeyImage.Text = "c:\Samples\pics\1.jpg"
         '
         'label216
         '

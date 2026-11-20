@@ -368,7 +368,6 @@ namespace Memory_Stream_Demo
             edFilename.Name = "edFilename";
             edFilename.Size = new System.Drawing.Size(516, 27);
             edFilename.TabIndex = 35;
-            edFilename.Text = "C:\\Samples\\!video.avi";
             // 
             // label14
             // 

@@ -52,7 +52,7 @@
             <Grid>
                 <TextBlock Text="Sensitivity" Width="100" Height="20" Margin="10,10,265,0" VerticalAlignment="Top"></TextBlock>
                 <Slider x:Name="slSensitivity" Height="20" Margin="110,10,86,0" Maximum="100" Value="30" VerticalAlignment="Top" ValueChanged="slSensitivity_ValueChanged"/>
-                <TextBlock x:Name="lbSensitivity" Text="7" Height="20" Margin="306,10,34,0" VerticalAlignment="Top"/>
+                <TextBlock x:Name="lbSensitivity" Text="30" Height="20" Margin="306,10,34,0" VerticalAlignment="Top"/>
 
                 <TextBlock Text="Max shift" Width="100" Height="20" Margin="10,35,265,0" VerticalAlignment="Top"></TextBlock>
                 <Slider x:Name="slMaxShift" Height="20" Margin="110,35,86,0" Maximum="10" Value="0" VerticalAlignment="Top" ValueChanged="slMaxShift_ValueChanged"/>

@@ -1,3 +1,4 @@
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -110,6 +111,12 @@ namespace key_frame_detector_mb
         {
             try
             {
+                if (!File.Exists(edSourceFile.Text))
+                {
+                    MessageBox.Show("Please select a video file.");
+                    return;
+                }
+
                 var sourceFile = edSourceFile.Text;
                 string jsonFile = sourceFile + ".json";
 

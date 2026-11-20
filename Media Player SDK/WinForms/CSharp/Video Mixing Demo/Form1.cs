@@ -124,6 +124,12 @@
         /// </summary>
         private void btAddFileToPlaylist_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edFilenameOrURL.Text))
+            {
+                MessageBox.Show("Please select a file or enter a URL.");
+                return;
+            }
+
             var filename = edFilenameOrURL.Text;
             AddFile(filename);
         }

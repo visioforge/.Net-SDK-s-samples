@@ -13,7 +13,6 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
@@ -25,23 +24,24 @@
                         Margin="10" 
                         Clicked="btCamera_Clicked" />
 
-                    <Label  
-                        Grid.Column="1"
-                        Text="BARCODE"
-                        TextColor="White"
-                        x:Name="lbBarcode" 
-                        VerticalOptions="Center"
-                        HorizontalOptions="CenterAndExpand"
-                        Margin="10" />
-
                     <Button  
-                        Grid.Column="2"
+                        Grid.Column="1"
                         x:Name="btPlayStop"   
                         Text="START" 
                         Margin="10" 
                         Clicked="btPlayStop_Clicked" 
                         HorizontalOptions="EndAndExpand"/>
                 </Grid>
+
+                <Label
+                    Text="BARCODE"
+                    TextColor="White"
+                    x:Name="lbBarcode"
+                    HorizontalOptions="Fill"
+                    HorizontalTextAlignment="Center"
+                    LineBreakMode="TailTruncation"
+                    MaxLines="1"
+                    Margin="10,0,10,10" />
             </StackLayout>
 
             <my:VideoView Grid.Row="1"               

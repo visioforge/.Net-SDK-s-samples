@@ -72,10 +72,15 @@ using System.Diagnostics;
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(edFilenameOrURL.Text))
+                {
+                    MessageBox.Show("Please select a file or enter a URL.");
+                    return;
+                }
+
                 MediaPlayer1.Debug_Mode = cbDebugMode.Checked;
 
                 mmLog.Clear();
-
                 MediaPlayer1.Video_Renderer.Zoom_Ratio = 0;
                 MediaPlayer1.Video_Renderer.Zoom_ShiftX = 0;
                 MediaPlayer1.Video_Renderer.Zoom_ShiftY = 0;

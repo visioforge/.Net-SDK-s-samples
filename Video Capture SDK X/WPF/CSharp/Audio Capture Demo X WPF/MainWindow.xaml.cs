@@ -197,6 +197,7 @@ namespace Audio_Capture_Demo_X_WPF
 
             // audio input
             IVideoCaptureBaseAudioSourceSettings audioSource = null;
+            var echo = false;
             if (rbSystemAudio.IsChecked == true)
             {
                 var deviceItem = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(device => device.DisplayName == cbAudioInputDevice.Text);
@@ -223,11 +224,14 @@ namespace Audio_Capture_Demo_X_WPF
                 }
 
                 audioSource = new LoopbackAudioCaptureDeviceSourceSettings(deviceItem);
+
+                // Loopback played back into the same device (or a default alias of it) is captured again: an echo.
+                echo = deviceItem.Name == audioOutputDevice.Name || deviceItem.IsDefault || audioOutputDevice.IsDefault;
             }
 
             VideoCapture1.Audio_Source = audioSource;
 
-            VideoCapture1.Audio_Play = cbPlayAudio.IsChecked == true;
+            VideoCapture1.Audio_Play = cbPlayAudio.IsChecked == true && !echo;
             VideoCapture1.Audio_Record = false;
 
             VideoCapture1.Outputs_Clear();

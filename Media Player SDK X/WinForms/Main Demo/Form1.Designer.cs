@@ -457,7 +457,6 @@
             edFilenameOrURL.Name = "edFilenameOrURL";
             edFilenameOrURL.Size = new System.Drawing.Size(639, 31);
             edFilenameOrURL.TabIndex = 19;
-            edFilenameOrURL.Text = "c:\\samples\\!video.mp4";
             // 
             // label14
             // 
@@ -2204,7 +2203,6 @@
             edImageOverlayFilename.Name = "edImageOverlayFilename";
             edImageOverlayFilename.Size = new System.Drawing.Size(368, 31);
             edImageOverlayFilename.TabIndex = 4;
-            edImageOverlayFilename.Text = "c:\\samples\\icon.png";
             // 
             // label43
             // 

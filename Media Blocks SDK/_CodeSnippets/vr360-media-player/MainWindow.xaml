@@ -27,8 +27,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Column="0" Content="File name:" VerticalAlignment="Center"/>
-            <TextBox x:Name="edFilename" Grid.Column="1" Margin="5,0" 
-                     Text="c:\Samples\360\equirectangular.MP4" VerticalAlignment="Center"/>
+            <TextBox x:Name="edFilename" Grid.Column="1" Margin="5,0" VerticalAlignment="Center"/>
             <Button x:Name="btOpenFile" Grid.Column="2" Content="..." Width="40" 
                     Click="btOpenFile_Click"/>
         </Grid>

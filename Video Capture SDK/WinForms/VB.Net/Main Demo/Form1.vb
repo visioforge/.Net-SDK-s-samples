@@ -142,6 +142,10 @@ Public Class Form1
     End Sub
 
     Private Async Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+#If NETCOREAPP Then
+        ' PlaceholderText is .NET 5+; the net461 project of this demo shares this file.
+        Me.edONVIFURL.PlaceholderText = "http://<camera-ip>/onvif/device_service"
+#End If
 
         Await CreateEngineAsync()
 
@@ -721,6 +725,11 @@ Public Class Form1
             'from screen
 
         ElseIf VideoCapture1.Mode = VideoCaptureMode.IPCapture Or VideoCapture1.Mode = VideoCaptureMode.IPPreview Then
+
+            If String.IsNullOrWhiteSpace(cbIPURL.Text) Then
+                MessageBox.Show(Me, "Enter the camera URL, or select the NDI engine to use a listed NDI source.")
+                Return
+            End If
 
             Dim settings As IPCameraSourceSettings = SelectIPCameraSource()
             VideoCapture1.IP_Camera_Source = settings
@@ -3617,6 +3626,11 @@ Public Class Form1
         ''' Bt pip add ip camera click.
         ''' </summary>
     Private Sub btPIPAddIPCamera_Click(sender As System.Object, e As EventArgs) Handles btPIPAddIPCamera.Click
+
+        If String.IsNullOrWhiteSpace(cbIPURL.Text) Then
+            MessageBox.Show(Me, "Enter the camera URL, or select the NDI engine to use a listed NDI source.")
+            Return
+        End If
 
         Dim ipCameraSource As IPCameraSourceSettings = SelectIPCameraSource()
 

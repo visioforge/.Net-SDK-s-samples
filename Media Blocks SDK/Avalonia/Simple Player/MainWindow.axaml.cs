@@ -289,6 +289,12 @@ namespace SimplePlayerAMB
         {
             try
             {
+                if (!File.Exists(edFilenameOrURL.Text) && !edFilenameOrURL.Text.Contains("://"))
+                {
+                    Log.Add("Please select a file or enter a URL.");
+                    return;
+                }
+
                 tbSpeed.Value = 10;
                 Log.Clear();
 
@@ -333,7 +339,7 @@ namespace SimplePlayerAMB
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Log.Add(ex.Message);
             }
         }
 

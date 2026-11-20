@@ -3464,7 +3464,6 @@ namespace Media_Player_Demo
             edChromaKeyImage.Name = "edChromaKeyImage";
             edChromaKeyImage.Size = new System.Drawing.Size(388, 31);
             edChromaKeyImage.TabIndex = 31;
-            edChromaKeyImage.Text = "c:\\Samples\\pics\\1.jpg";
             // 
             // label216
             // 
@@ -6760,7 +6759,6 @@ namespace Media_Player_Demo
             edFilenameOrURL.Name = "edFilenameOrURL";
             edFilenameOrURL.Size = new System.Drawing.Size(576, 31);
             edFilenameOrURL.TabIndex = 3;
-            edFilenameOrURL.Text = "c:\\samples\\!video.mp4";
             // 
             // btSelectFile
             // 

@@ -477,12 +477,26 @@ namespace Decklink_MB_Demo
         }
 
         /// <summary>
+        /// A source is set when it is an existing file or a URL the SDK source accepts.
+        /// </summary>
+        private static bool IsSource(string source)
+        {
+            return !string.IsNullOrWhiteSpace(source) && (source.Contains("://") || File.Exists(source));
+        }
+
+        /// <summary>
         /// Handles the bt start click event.
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                if (rbCaptureDeviceSource.IsChecked != true && !IsSource(edSourceFilename.Text))
+                {
+                    MessageBox.Show("Please select a source file or enter a URL.");
+                    return;
+                }
+
                 CreatePipeline(rbCaptureDeviceSource.IsChecked == true);
 
                 bool capture = cbOutputFormat.SelectedIndex > 0;

@@ -73,6 +73,10 @@ Public Class Form1
     End Sub
 
     Private Async Sub Form1_Load(ByVal sender As System.Object, ByVal e As EventArgs) Handles MyBase.Load
+#If NETCOREAPP Then
+        ' PlaceholderText is .NET 5+; the net461 project of this demo shares this file.
+        Me.edONVIFURL.PlaceholderText = "http://<camera-ip>/onvif/device_service"
+#End If
         Await CreateEngineAsync()
 
         Text += $" (SDK v{VideoCapture1.SDK_Version})"
@@ -188,6 +192,11 @@ Public Class Form1
     End Sub
 
     Private Async Sub btStart_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btStart.Click
+
+        If String.IsNullOrWhiteSpace(cbIPURL.Text) Then
+            MessageBox.Show(Me, "Enter the camera URL, or select the NDI engine to use a listed NDI source.")
+            Return
+        End If
 
         If (onvifClient IsNot Nothing) Then
             onvifClient.Dispose()

@@ -88,6 +88,12 @@ namespace multiple_ap_cams
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart1_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edURL1.Text))
+            {
+                MessageBox.Show(this, "Enter the camera URL.");
+                return;
+            }
+
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
             {
                 URL = new Uri(edURL1.Text),
@@ -138,6 +144,12 @@ namespace multiple_ap_cams
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart2_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edURL2.Text))
+            {
+                MessageBox.Show(this, "Enter the camera URL.");
+                return;
+            }
+
             VideoCapture2.IP_Camera_Source = new IPCameraSourceSettings
             {
                 URL = new Uri(edURL2.Text),
@@ -186,6 +198,11 @@ namespace multiple_ap_cams
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
+#if NETCOREAPP
+            // PlaceholderText is .NET 5+; the net472 project of this demo shares this file.
+            edURL1.PlaceholderText = "http://<camera-ip>/onvif/device_service";
+            edURL2.PlaceholderText = "http://<camera-ip>/onvif/device_service";
+#endif
             await CreateEngine1Async();
             await CreateEngine2Async();
 

@@ -74,7 +74,6 @@
             this.edSourceFile.Name = "edSourceFile";
             this.edSourceFile.Size = new System.Drawing.Size(567, 26);
             this.edSourceFile.TabIndex = 53;
-            this.edSourceFile.Text = "C:\\Samples\\!video.avi";
             // 
             // btSaveFile
             // 
@@ -97,7 +96,6 @@
             this.edDestFile.Name = "edDestFile";
             this.edDestFile.Size = new System.Drawing.Size(567, 26);
             this.edDestFile.TabIndex = 56;
-            this.edDestFile.Text = "C:\\Samples\\!video.avi.enc";
             // 
             // label2
             // 

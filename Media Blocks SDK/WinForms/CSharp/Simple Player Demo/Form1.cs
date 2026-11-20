@@ -157,6 +157,12 @@ namespace MediaBlocks_Player_Demo
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(edFilename.Text) || (!edFilename.Text.Contains("://") && !File.Exists(edFilename.Text)))
+                {
+                    MessageBox.Show("Please select a file or enter a URL.");
+                    return;
+                }
+
                 mmError.Clear();
 
                 CreateEngine();

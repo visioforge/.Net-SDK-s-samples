@@ -234,6 +234,7 @@ namespace PreEventRecordingDemoVCXA
 
                 VideoCapture1 = new VideoCaptureCoreX(VideoView1 as IVideoView);
                 VideoCapture1.OnError += VideoCapture1_OnError;
+                VideoCapture1.Audio_Play = false; // record only, no speaker monitoring
 
                 // Video source
                 if (isRtsp)

@@ -24,14 +24,14 @@
             <Label Content="Folder with images, known persons" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             
             <StackPanel Orientation="Horizontal">
-                <TextBox Width="250" x:Name="edImagesKnown" Text="c:\Samples\FaceAI\known\" />
+                <TextBox Width="250" x:Name="edImagesKnown" />
                 <Button Content="Browse" Margin="5,0,0,0" Width="45" x:Name="btSelectImagesKnown" Click="btSelectImagesKnown_Click"/>
             </StackPanel>
 
             <Label Content="Folder with images, to detect" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
             <StackPanel Orientation="Horizontal">
-                <TextBox Width="250" x:Name="edImagesToDetect" Text="c:\Samples\FaceAI\unknown\"/>
+                <TextBox Width="250" x:Name="edImagesToDetect"/>
                 <Button Content="Browse" Margin="5,0,0,0" Width="45" x:Name="btSelectImagesDetect" Click="btSelectImagesDetect_Click"/>
             </StackPanel>
 

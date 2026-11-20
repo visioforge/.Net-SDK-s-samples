@@ -451,7 +451,7 @@ namespace PTZ_Auto_Tracking_MB
                 }
 
                 // Build the RTSP source and read its resolution (needed to normalize detection boxes for tracking).
-                var rtsp = await RTSPSourceSettings.CreateAsync(rtspUri, edUser.Text, edPassword.Text, audioEnabled: false);
+                var rtsp = await RTSPSourceSettings.CreateAsync(rtspUri, edUser.Text, edPassword.Password, audioEnabled: false);
                 if (_isClosing)
                 {
                     return; // window closed during the probe — Window_Closing handles teardown
@@ -526,7 +526,7 @@ namespace PTZ_Auto_Tracking_MB
             try
             {
                 _onvif = new ONVIFClientX();
-                var connected = await _onvif.ConnectAsync(edOnvifUrl.Text, edUser.Text, edPassword.Text);
+                var connected = await _onvif.ConnectAsync(edOnvifUrl.Text, edUser.Text, edPassword.Password);
                 if (!connected)
                 {
                     // No PTZ this session — release the ONVIF client now instead of holding an idle

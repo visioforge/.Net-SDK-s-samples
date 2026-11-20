@@ -140,6 +140,12 @@ namespace Encrypted_Memory_Playback_Demo
         {
             try
             {
+                if (!File.Exists(edFilename.Text))
+                {
+                    MessageBox.Show("Please select a video file.");
+                    return;
+                }
+
                 mmError.Text = string.Empty;
 
                 // video and audio present in file. tune this settings to play audio files or video files without audio

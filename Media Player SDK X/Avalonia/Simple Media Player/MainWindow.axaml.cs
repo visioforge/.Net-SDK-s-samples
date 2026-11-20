@@ -307,6 +307,12 @@ namespace Simple_Media_Player
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(edFilenameOrURL.Text))
+                {
+                    Log.Add("Please select a file or enter a URL.");
+                    return;
+                }
+
                 tbSpeed.Value = 10;
                 _player.Debug_Mode = cbDebugMode.IsChecked == true;
 
@@ -497,6 +503,13 @@ namespace Simple_Media_Player
         /// </summary>
         private void btReadTags_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edFilenameOrURL.Text))
+            {
+                Info.Clear();
+                Info.Add("Please select a file or enter a URL.");
+                return;
+            }
+
             var tags = _player.Tags_Read(edFilenameOrURL.Text);
             Info.Clear();
             Info.Add(tags?.ToString());
@@ -507,6 +520,13 @@ namespace Simple_Media_Player
         /// </summary>
         private async void btReadInfo_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edFilenameOrURL.Text))
+            {
+                Info.Clear();
+                Info.Add("Please select a file or enter a URL.");
+                return;
+            }
+
             try
             {
                 Info.Clear();

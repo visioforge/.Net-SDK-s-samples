@@ -89,7 +89,6 @@
             edFilename.Name = "edFilename";
             edFilename.Size = new System.Drawing.Size(587, 23);
             edFilename.TabIndex = 4;
-            edFilename.Text = "c:\\samples\\video.h264";
             // 
             // btOpenFile
             // 

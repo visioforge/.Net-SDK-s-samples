@@ -94,6 +94,12 @@ namespace madVR_Player_Demo
         {
             mmError.Clear();
 
+            if (string.IsNullOrWhiteSpace(edFilename.Text) || (!edFilename.Text.Contains("://") && !File.Exists(edFilename.Text)))
+            {
+                MessageBox.Show("Please select a file or enter a URL.");
+                return;
+            }
+
             switch (cbSourceMode.SelectedIndex)
             {
                 case 0:

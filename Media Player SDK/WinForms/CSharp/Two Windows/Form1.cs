@@ -117,6 +117,12 @@ namespace Two_Windows_Demo
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(edFilename.Text) || (!edFilename.Text.Contains("://") && !File.Exists(edFilename.Text)))
+                {
+                    MessageBox.Show("Please select a file or enter a URL.");
+                    return;
+                }
+
                 MediaPlayer1.Playlist_Clear();
                 MediaPlayer1.Playlist_Add(edFilename.Text);
                 MediaPlayer1.Loop = cbLoop.Checked;

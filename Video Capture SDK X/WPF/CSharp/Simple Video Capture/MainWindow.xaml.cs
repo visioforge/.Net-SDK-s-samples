@@ -236,14 +236,6 @@ namespace Simple_Video_Capture
         }
 
         /// <summary>
-        /// Log.
-        /// </summary>
-        private void Log(string txt)
-        {
-            Dispatcher.Invoke(() => { mmLog.Text = mmLog.Text + txt + Environment.NewLine; });
-        }
-
-        /// <summary>
         /// Handles the OnError event of the VideoCapture1 control.
         /// Logs error messages to the UI.
         /// </summary>
@@ -251,7 +243,17 @@ namespace Simple_Video_Capture
         /// <param name="e">The <see cref="ErrorsEventArgs"/> instance containing the error information.</param>
         private void VideoCapture1_OnError(object sender, ErrorsEventArgs e)
         {
-            Log(e.Message);
+            Dispatcher.Invoke(() =>
+            {
+                mmLog.Text = mmLog.Text + e.Message + Environment.NewLine;
+
+                // Show the reason at once: a recording can fail after Start, while the preview keeps running.
+                // Debug mode also sends info and warnings here.
+                if (e.Level == DebugLevel.Error)
+                {
+                    tcMain.SelectedIndex = 4;
+                }
+            });
         }
 
         /// <summary>
@@ -358,7 +360,16 @@ namespace Simple_Video_Capture
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            // Enabled again by Stop: a second Start would clear the outputs that are recording.
+            btStart.IsEnabled = false;
+
+            // Stop waits until the engine has started.
+            btStop.IsEnabled = false;
+
             mmLog.Clear();
+
+            // Selected first, so an error reported from here on opens the Log tab (OnError).
+            tcMain.SelectedIndex = 3;
 
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
@@ -425,40 +436,32 @@ namespace Simple_Video_Capture
 
             VideoCapture1.Audio_Source = audioSourceSettings;
 
+            // Outputs autostart, so Preview must not keep the ones a previous Capture added.
+            VideoCapture1.Outputs_Clear();
+
             if (rbPreview.IsChecked == true)
             {
             }
             else
             {
-                VideoCapture1.Outputs_Clear();
-                
                 switch (cbOutputFormat.SelectedIndex)
                 {
                     case 0:
-                        {
-                            if (mp4SettingsDialog == null)
-                            {
-                                VideoCapture1.Outputs_Add(new MP4Output(edOutput.Text), false);
-                            }
-                            else
-                            {
-                                VideoCapture1.Outputs_Add(mp4SettingsDialog.GetOutputVC(), false);
-                            }
-                            
-                            break;
-                        }
                     case 1:
                         {
-                            if (mp4SettingsDialog == null)
+                            // MP4 and split MP4 share the settings dialog; the sink picks the mode.
+                            var mp4 = mp4SettingsDialog == null ? new MP4Output(edOutput.Text) : (MP4Output)mp4SettingsDialog.GetOutputVC();
+                            if (cbOutputFormat.SelectedIndex == 1)
                             {
-                                var mp4 = new MP4Output(edOutput.Text);
-                                mp4.Sink = new MP4SplitSinkSettings(edOutput.Text) { SplitDuration = TimeSpan.FromSeconds(10)};
-                                VideoCapture1.Outputs_Add(mp4, false);
+                                mp4.Sink = new MP4SplitSinkSettings(SplitFilePattern()) { SplitDuration = TimeSpan.FromSeconds(10) };
                             }
                             else
                             {
-                                VideoCapture1.Outputs_Add(mp4SettingsDialog.GetOutputVC(), false);
+                                // Replaces a split sink a previous run may have left on the dialog's output.
+                                mp4.Sink = new MP4SinkSettings(edOutput.Text);
                             }
+
+                            VideoCapture1.Outputs_Add(mp4);
 
                             break;
                         }
@@ -466,11 +469,14 @@ namespace Simple_Video_Capture
                         {
                             if (aviSettingsDialog == null)
                             {
-                                VideoCapture1.Outputs_Add(new AVIOutput(edOutput.Text), false);
+                                VideoCapture1.Outputs_Add(new AVIOutput(edOutput.Text));
                             }
                             else
                             {
-                                VideoCapture1.Outputs_Add(aviSettingsDialog.GetOutputVC(), false);
+                                // The dialog keeps the file name from when it was opened.
+                                var avi = aviSettingsDialog.GetOutputVC();
+                                avi.SetFilename(edOutput.Text);
+                                VideoCapture1.Outputs_Add(avi);
                             }
 
                             break;
@@ -479,11 +485,13 @@ namespace Simple_Video_Capture
                         {
                             if (webMSettingsDialog == null)
                             {
-                                VideoCapture1.Outputs_Add(new WebMOutput(edOutput.Text), false);
+                                VideoCapture1.Outputs_Add(new WebMOutput(edOutput.Text));
                             }
                             else
                             {
-                                VideoCapture1.Outputs_Add(webMSettingsDialog.GetOutputVC(), false);
+                                var webm = webMSettingsDialog.GetOutputVC();
+                                webm.SetFilename(edOutput.Text);
+                                VideoCapture1.Outputs_Add(webm);
                             }
                             
                             break;
@@ -492,11 +500,13 @@ namespace Simple_Video_Capture
                         {
                             if (mpegTSSettingsDialog == null)
                             {
-                                VideoCapture1.Outputs_Add(new MPEGTSOutput(edOutput.Text), false);
+                                VideoCapture1.Outputs_Add(new MPEGTSOutput(edOutput.Text));
                             }
                             else
                             {
-                                VideoCapture1.Outputs_Add(mpegTSSettingsDialog.GetOutputVC(), false);
+                                var ts = mpegTSSettingsDialog.GetOutputVC();
+                                ts.SetFilename(edOutput.Text);
+                                VideoCapture1.Outputs_Add(ts);
                             }
                             
 
@@ -506,11 +516,13 @@ namespace Simple_Video_Capture
                         {
                             if (movSettingsDialog == null)
                             {
-                                VideoCapture1.Outputs_Add(new MOVOutput(edOutput.Text), false);
+                                VideoCapture1.Outputs_Add(new MOVOutput(edOutput.Text));
                             }
                             else
                             {
-                                VideoCapture1.Outputs_Add(movSettingsDialog.GetOutputVC(), false);
+                                var mov = movSettingsDialog.GetOutputVC();
+                                mov.SetFilename(edOutput.Text);
+                                VideoCapture1.Outputs_Add(mov);
                             }
 
                             break;
@@ -524,7 +536,6 @@ namespace Simple_Video_Capture
             if (cbVUMeter.IsChecked == true)
             {
                 VideoCapture1.Audio_VU_Meter_Enabled = true;
-                vumeter.Start();
             }
             else
             {
@@ -533,9 +544,20 @@ namespace Simple_Video_Capture
 
             VideoCapture1.Snapshot_Grabber_Enabled = true;
 
-            await VideoCapture1.StartAsync();
+            var started = await VideoCapture1.StartAsync();
+            btStop.IsEnabled = true;
+            if (!started)
+            {
+                tcMain.SelectedIndex = 4;
+                btStart.IsEnabled = true;
+                return;
+            }
 
-            tcMain.SelectedIndex = 3;
+            if (cbVUMeter.IsChecked == true)
+            {
+                vumeter.Start();
+            }
+
             tmRecording.Start();
 
             //VideoCapture1.Debug_SavePipeline("videocapturex");
@@ -621,9 +643,16 @@ namespace Simple_Video_Capture
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
+            // Enabled again by the next Start.
+            btStop.IsEnabled = false;
+
             tmRecording.Stop();
+            vumeter.Stop();
+            vumeter.Clear();
 
             await VideoCapture1.StopAsync();
+
+            btStart.IsEnabled = true;
         }
 
         /// <summary>
@@ -1062,6 +1091,15 @@ namespace Simple_Video_Capture
         }
 
         /// <summary>
+        /// Split MP4 segment file names: name_00.mp4, name_01.mp4, ...
+        /// </summary>
+        private string SplitFilePattern()
+        {
+            // The location is a printf pattern, so a '%' in the path is doubled.
+            return Path.ChangeExtension(edOutput.Text, null).Replace("%", "%%") + "_%02d.mp4";
+        }
+
+        /// <summary>
         /// Bt start capture.
         /// </summary>
         private async void btStartCapture(object sender, RoutedEventArgs e)
@@ -1071,25 +1109,29 @@ namespace Simple_Video_Capture
                 return;
             }
 
-            if (VideoCapture1.Outputs_Count() == 0)
+            // Outputs from a stopped session are still listed, so the state is checked as well.
+            if (VideoCapture1.State == PlaybackState.Free || VideoCapture1.Outputs_Count() == 0)
             {
-                MessageBox.Show("Please add output first.");
+                MessageBox.Show("Select Capture mode and press Start.");
+                return;
+            }
+
+            if (VideoCapture1.IsCaptureStarted(0))
+            {
+                MessageBox.Show("Already recording. Press Stop capture first.");
                 return;
             }
 
             var output = VideoCapture1.Outputs_Get(0);
 
             // check if it is split MP4 sink to create segmented file
-            if (output is MP4Output mp4 && mp4.Sink is MP4SplitSinkSettings)
+            var filename = output is MP4Output mp4 && mp4.Sink is MP4SplitSinkSettings ? SplitFilePattern() : edOutput.Text;
+
+            // The reason for a failure (for example, after Stop) is in the Log tab (OnError).
+            if (!await VideoCapture1.StartCaptureAsync(0, filename))
             {
-                var filename = Path.Combine(Path.GetDirectoryName(edOutput.Text), Path.GetFileNameWithoutExtension(edOutput.Text) + "_%02d.mp4");
-                await VideoCapture1.StartCaptureAsync(0, filename);
+                tcMain.SelectedIndex = 4;
             }
-            else
-            {
-                await VideoCapture1.StartCaptureAsync(0, edOutput.Text);
-            }
-            
         }
 
         /// <summary>

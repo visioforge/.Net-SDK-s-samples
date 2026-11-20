@@ -9,7 +9,7 @@
         Title="Media Blocks SDK .Net - Simple Video Player Demo" Height="391" Width="590" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Label x:Name="label" Content="File name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="edFilename" Margin="10,36,285,0" TextWrapping="Wrap" Text="C:\samples\!video.mp4" VerticalAlignment="Top"/>
+        <TextBox x:Name="edFilename" Margin="10,36,285,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <WPF:VideoView x:Name="VideoView1" Margin="10,59,260,76"/>
         <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Right" Margin="0,35,260,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
         <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Right" Margin="0,11,27,0" VerticalAlignment="Top"/>

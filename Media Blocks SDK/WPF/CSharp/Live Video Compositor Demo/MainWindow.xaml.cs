@@ -405,9 +405,7 @@ namespace Live_Video_Compositor_Demo
             var dlg = new ScreenSourceDialog();
             if (dlg.ShowDialog() == true)
             {
-                // Fail fast on a zero-area capture region. An empty rectangle propagates to the
-                // native ScreenCapture element as a 0x0 capture surface, which either crashes
-                // the capture thread or streams empty frames that negotiate no caps downstream.
+                // Refuse a zero-area region picked in the dialog.
                 if (dlg.Rectangle.Width <= 0 || dlg.Rectangle.Height <= 0)
                 {
                     MessageBox.Show(this, $"Screen capture rectangle must have positive width and height (got {dlg.Rectangle.Width}x{dlg.Rectangle.Height}).", "Screen Source", MessageBoxButton.OK, MessageBoxImage.Warning);

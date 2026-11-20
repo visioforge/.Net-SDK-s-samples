@@ -117,6 +117,12 @@ namespace IP_MJPEG_Restreamer
         /// <param name="e">Event args.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cbIPURL.Text))
+            {
+                MessageBox.Show(this, "Enter the camera URL, or select the NDI engine to use a listed NDI source.");
+                return;
+            }
+
             if (onvifControl != null)
             {
                 onvifControl.Dispose();
@@ -185,7 +191,7 @@ namespace IP_MJPEG_Restreamer
 
             VideoCapture1.IP_Camera_Source.AudioCapture = cbIPAudioCapture.IsChecked == true;
             VideoCapture1.IP_Camera_Source.Login = edIPLogin.Text;
-            VideoCapture1.IP_Camera_Source.Password = edIPPassword.Text;
+            VideoCapture1.IP_Camera_Source.Password = edIPPassword.Password;
             VideoCapture1.IP_Camera_Source.VLC_ZeroClockJitterEnabled = cbVLCZeroClockJitter.IsChecked == true;
             VideoCapture1.IP_Camera_Source.VLC_CustomLatency = Convert.ToInt32(edVLCCacheSize.Text);
             VideoCapture1.IP_Camera_Source.ForcedFramerate = new VideoFrameRate(Convert.ToInt32(edIPForcedFramerate.Text));
@@ -297,7 +303,7 @@ namespace IP_MJPEG_Restreamer
                     }
 
                     onvifControl = new ONVIFClientX();
-                    var result = await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
+                    var result = await onvifControl.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Password);
                     if (!result)
                     {
                         onvifControl.Dispose();
@@ -328,7 +334,7 @@ namespace IP_MJPEG_Restreamer
                     cbIPCameraONVIF.IsChecked = true;
 
                     edIPLogin.Text = edONVIFLogin.Text;
-                    edIPPassword.Text = edONVIFPassword.Text;
+                    edIPPassword.Password = edONVIFPassword.Password;
 
                     btONVIFConnect.Content = "Disconnect";
                 }

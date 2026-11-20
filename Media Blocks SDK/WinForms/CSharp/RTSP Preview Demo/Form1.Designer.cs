@@ -184,6 +184,7 @@ namespace RTSP_Preview_WinForms
             edIPPassword.Name = "edIPPassword";
             edIPPassword.Size = new System.Drawing.Size(150, 27);
             edIPPassword.TabIndex = 5;
+            edIPPassword.UseSystemPasswordChar = true;
             // 
             // label222
             // 
@@ -217,7 +218,6 @@ namespace RTSP_Preview_WinForms
             cbIPURL.Name = "cbIPURL";
             cbIPURL.Size = new System.Drawing.Size(477, 28);
             cbIPURL.TabIndex = 1;
-            cbIPURL.Text = "rtsp://";
             // 
             // label220
             // 
@@ -255,6 +255,7 @@ namespace RTSP_Preview_WinForms
             edONVIFPassword.Name = "edONVIFPassword";
             edONVIFPassword.Size = new System.Drawing.Size(150, 27);
             edONVIFPassword.TabIndex = 10;
+            edONVIFPassword.UseSystemPasswordChar = true;
             // 
             // label222_Copy
             // 
@@ -287,7 +288,6 @@ namespace RTSP_Preview_WinForms
             edONVIFURL.Name = "edONVIFURL";
             edONVIFURL.Size = new System.Drawing.Size(408, 27);
             edONVIFURL.TabIndex = 6;
-            edONVIFURL.Text = "http://192.168.1.22/onvif/device_service";
             // 
             // edONVIFLiveVideoURL
             // 

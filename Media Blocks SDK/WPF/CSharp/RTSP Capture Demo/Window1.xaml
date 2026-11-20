@@ -17,8 +17,8 @@
                                 <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="20,74,0,0" Name="label221" VerticalAlignment="Top" />
                                 <TextBox Height="23" HorizontalAlignment="Left" Margin="20,98,0,0" Name="edIPLogin" VerticalAlignment="Top" Width="150" Text="" />
                                 <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="186,74,0,0" Name="label222" VerticalAlignment="Top" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="186,98,0,0" Name="edIPPassword" VerticalAlignment="Top" Width="150" Text="" />
-                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" Text="rtsp://" IsEditable="True"/>
+                                <PasswordBox Height="23" HorizontalAlignment="Left" Margin="186,98,0,0" Name="edIPPassword" VerticalAlignment="Top" Width="150" />
+                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="20,38,0,0" VerticalAlignment="Top" Width="477" ToolTip="rtsp://&lt;camera-ip&gt;:554/..." IsEditable="True"/>
                                 <Button x:Name="btListONVIFSources" Content="List ONVIF sources" HorizontalAlignment="Left" Margin="351,98,0,0" VerticalAlignment="Top" Width="147" Click="btListONVIFSources_Click" Height="23" />
                             </Grid>
                         </TabItem>
@@ -33,11 +33,11 @@
                                 <ComboBox x:Name="cbONVIFProfile" HorizontalAlignment="Left" Margin="80,104,0,0" VerticalAlignment="Top" Width="418" IsReadOnly="True"/>
                                 <Label Content="Video URL" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edONVIFLiveVideoURL" HorizontalAlignment="Left" Height="23" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="418" Margin="80,135,0,0"/>
-                                <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="http://192.168.1.22/onvif/device_service" VerticalAlignment="Top" Width="408"/>
+                                <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" ToolTip="http://&lt;camera-ip&gt;/onvif/device_service" VerticalAlignment="Top" Width="408"/>
                                 <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="label221_Copy" VerticalAlignment="Top" />
                                 <TextBox Height="23" HorizontalAlignment="Left" Margin="80,43,0,0" x:Name="edONVIFLogin" VerticalAlignment="Top" Width="150" Text="" />
                                 <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="283,38,0,0" x:Name="label222_Copy" VerticalAlignment="Top" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="348,43,0,0" x:Name="edONVIFPassword" VerticalAlignment="Top" Width="150" Text="" />
+                                <PasswordBox Height="23" HorizontalAlignment="Left" Margin="348,43,0,0" x:Name="edONVIFPassword" VerticalAlignment="Top" Width="150" />
                             </Grid>
                         </TabItem>
                     </TabControl>

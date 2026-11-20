@@ -305,10 +305,7 @@ public sealed partial class MainPage : Page
             btStartCapture.IsEnabled = true;
             await StartPreview();
 #else
-            if (_cameras.Length > 0)
-            {
-                ShowStatus("Ready");
-            }
+            ShowStatus(_cameras.Length > 0 ? "Ready" : "No camera found", _cameras.Length > 0 ? "#00FF00" : "#FF0000");
 #endif
         }
         catch (Exception ex)

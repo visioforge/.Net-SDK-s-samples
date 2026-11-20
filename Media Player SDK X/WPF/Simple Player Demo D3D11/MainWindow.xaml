@@ -11,7 +11,7 @@
         Height="420" Width="640" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Label Content="File name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="edFilename" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="C:\samples\!video.mp4" VerticalAlignment="Top" Width="285"/>
+        <TextBox x:Name="edFilename" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
         <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Left" Margin="300,35,0,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
 
         <!-- Video preview with WPF overlay. Composes correctly because the GPU

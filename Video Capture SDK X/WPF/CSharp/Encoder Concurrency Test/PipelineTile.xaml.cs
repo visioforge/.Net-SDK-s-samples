@@ -68,7 +68,7 @@ namespace EncoderConcurrencyTestX
                 if (!started)
                 {
                     StartFailed = true;
-                    LastStatus = "Failed to start capture. Check driver/session limits.";
+                    LastStatus = "Failed to start capture. This encoder runtime is either unavailable on this machine or already at its session limit - pick another Encoder entry.";
                     lbStatus.Text = LastStatus;
                 }
                 else

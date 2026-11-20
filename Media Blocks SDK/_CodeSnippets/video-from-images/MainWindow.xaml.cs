@@ -65,8 +65,6 @@ namespace video_from_images
                 await VisioForgeX.InitSDKAsync();
                 this.IsEnabled = true;
                 Title = Title.Replace("[FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
-
-                edSourceFolder.Text = "c:\\Samples\\pics\\src\\";
             }
             catch (Exception ex)
             {
@@ -114,6 +112,12 @@ namespace video_from_images
         {
             try
             {
+                if (!Directory.Exists(edSourceFolder.Text))
+                {
+                    MessageBox.Show("Please select a folder with images.");
+                    return;
+                }
+
                 // Create VideoCaptureCoreX object
                 _pipeline = new MediaBlocksPipeline();
                 _pipeline.OnStop += _pipeline_OnStop;

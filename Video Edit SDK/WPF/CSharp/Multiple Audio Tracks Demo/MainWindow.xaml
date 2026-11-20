@@ -18,7 +18,7 @@
                 <TextBlock Text="Video file"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <TextBox x:Name="edVideoFile" Width="350" Margin="0,0,10,0" Text="c:\Samples\!video.avi"/>
+                    <TextBox x:Name="edVideoFile" Width="350" Margin="0,0,10,0"/>
                     <Button Content="..." Width="20" Click="btOpenVideoFile_Click"/>
                 </StackPanel>
             </StackPanel>
@@ -27,7 +27,7 @@
                 <TextBlock Text="Audio file 1"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <TextBox x:Name="edAudioFile1" Width="350" Margin="0,0,10,0" Text="c:\Samples\!audio.mp3"/>
+                    <TextBox x:Name="edAudioFile1" Width="350" Margin="0,0,10,0"/>
                     <Button Content="..." Width="20" Click="btOpenAudioFile1_Click"/>
                 </StackPanel>
             </StackPanel>
@@ -36,7 +36,7 @@
                 <TextBlock Text="Audio file 2"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <TextBox x:Name="edAudioFile2" Width="350" Margin="0,0,10,0" Text="c:\Samples\!audio.wav"/>
+                    <TextBox x:Name="edAudioFile2" Width="350" Margin="0,0,10,0"/>
                     <Button Content="..." Width="20" Click="btOpenAudioFile2_Click"/>
                 </StackPanel>
             </StackPanel>

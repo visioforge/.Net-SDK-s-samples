@@ -11,7 +11,7 @@
             <TextBlock Text="Source file" />
 
             <StackPanel Orientation="Horizontal">
-                <TextBox x:Name="edSourceFile" Text="c:\samples\!video.mp4" Margin="0, 0, 10, 0" Width="300" />
+                <TextBox x:Name="edSourceFile" Margin="0, 0, 10, 0" Width="300" />
                 <Button Click="btSelectFile_Click" Content="..." Width="20" />
             </StackPanel>
 

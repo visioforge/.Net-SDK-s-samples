@@ -3776,7 +3776,6 @@ Partial Class Form1
         Me.edChromaKeyImage.Name = "edChromaKeyImage"
         Me.edChromaKeyImage.Size = New System.Drawing.Size(350, 26)
         Me.edChromaKeyImage.TabIndex = 41
-        Me.edChromaKeyImage.Text = "c:\Samples\pics\1.jpg"
         '
         'label216
         '
@@ -7019,7 +7018,6 @@ Partial Class Form1
         Me.edFilenameOrURL.Name = "edFilenameOrURL"
         Me.edFilenameOrURL.Size = New System.Drawing.Size(520, 26)
         Me.edFilenameOrURL.TabIndex = 27
-        Me.edFilenameOrURL.Text = "c:\Samples\!video.mp4"
         '
         'label14
         '

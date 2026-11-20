@@ -10,7 +10,7 @@
 
 	<Grid ColumnDefinitions="16,0.5*,1, 0.5*">
 		<TextBlock Grid.Column="1" Text="File name or URL" Margin="0,20,0,0"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
-		<TextBox Grid.Column="1" Height="32" Width="560" Margin="0,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Text="c:\samples\!video.mp4" x:Name="edFilenameOrURL"/>
+		<TextBox Grid.Column="1" Height="32" Width="560" Margin="0,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="edFilenameOrURL"/>
 		<Button Grid.Column="1" Height="32" Width="32" Margin="568,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Content="..." x:Name="btSelectFile"/>
 
 		<Panel Grid.Column="1" Height="400" Width="600" Margin="0,80,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#0C0C0C" x:Name="pnScreen">

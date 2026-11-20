@@ -276,7 +276,7 @@
                                 <Slider Height="23" HorizontalAlignment="Left" Margin="10,124,0,0" Maximum="1000" x:Name="tbChromaKeySmoothing" VerticalAlignment="Top" Width="100" Value="80" ValueChanged="tbChromaKeySmoothing_ValueChanged" />
                                 <Label Content="Smoothing" Height="28" HorizontalAlignment="Left" Margin="10,96,0,0" x:Name="labe1l112" VerticalAlignment="Top" Width="86" />
                                 <Label Content="Image background file" Height="29" HorizontalAlignment="Left" Margin="10,212,0,0" x:Name="label1115" VerticalAlignment="Top" Width="131" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="10,241,0,0" x:Name="edChromaKeyImage" VerticalAlignment="Top" Width="321" Text="c:\Samples\pics\1.jpg" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="10,241,0,0" x:Name="edChromaKeyImage" VerticalAlignment="Top" Width="321" />
                                 <Button Click="btChromaKeySelectBGImage_Click" Content="..." Height="23" HorizontalAlignment="Left" Margin="336,241,0,0" x:Name="btChromaKeySelectBGImage" VerticalAlignment="Top" Width="24" />
                                 <Label Content="Color" Height="23" HorizontalAlignment="Left" Margin="10,167,0,0" x:Name="label1116" VerticalAlignment="Top" Width="59" />
                                 <Rectangle Fill="#FF80DA80" Height="29" HorizontalAlignment="Left" Margin="78,167,0,0" x:Name="pnChromaKeyColor" Stroke="Black" VerticalAlignment="Top" Width="32" MouseDown="pnChromaKeyColor_MouseDown" />
@@ -1186,7 +1186,7 @@
                                 <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="10,80,0,0" x:Name="label221" VerticalAlignment="Top" />
                                 <TextBox Height="23" HorizontalAlignment="Left" Margin="10,106,0,0" x:Name="edIPLogin" VerticalAlignment="Top" Width="150" />
                                 <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="188,80,0,0" x:Name="label222" VerticalAlignment="Top" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="187,106,0,0" x:Name="edIPPassword" VerticalAlignment="Top" Width="150" />
+                                <PasswordBox Height="23" HorizontalAlignment="Left" Margin="187,106,0,0" x:Name="edIPPassword" VerticalAlignment="Top" Width="150" />
                                 <ComboBox Height="23" HorizontalAlignment="Left" Margin="53,45,0,0" x:Name="cbIPCameraType" VerticalAlignment="Top" Width="284">
                                     <ComboBoxItem Content="Auto (VLC engine)" />
                                     <ComboBoxItem Content="Auto (FFMPEG engine)" />
@@ -1207,7 +1207,7 @@
                                 <TextBox x:Name="edIPForcedFramerateID" HorizontalAlignment="Left" Height="23" Margin="303,138,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="34"/>
                                 <Label Content="To use NDI please install NDI SDK for Windows from" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top"/>
                                 <Label x:Name="lbNDIVendor" Content="vendor's website" HorizontalAlignment="Left" Margin="291,230,0,0" VerticalAlignment="Top" Foreground="#FF003AFF" FontWeight="Bold" MouseLeftButtonDown="lbNDIVendor_MouseLeftButtonDown" />
-                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="53,10,0,0" VerticalAlignment="Top" Width="444" Text="http://192.168.1.64/onvif/device_service" IsEditable="True"/>
+                                <ComboBox x:Name="cbIPURL" HorizontalAlignment="Left" Margin="53,10,0,0" VerticalAlignment="Top" Width="444" IsEditable="True"/>
                                 <Button x:Name="btListNDISources" Content="List NDI sources" HorizontalAlignment="Left" Margin="10,273,0,0" VerticalAlignment="Top" Width="112" Click="btListNDISources_Click"/>
                                 <Button x:Name="btListONVIFSources" Content="List ONVIF sources" HorizontalAlignment="Left" Margin="127,273,0,0" VerticalAlignment="Top" Width="112" Click="btListONVIFSources_Click" />
                             </Grid>
@@ -1238,11 +1238,11 @@
                                 </GroupBox>
                                 <Label Content="Video URL" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edONVIFLiveVideoURL" HorizontalAlignment="Left" Height="23" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="418" Margin="80,135,0,0"/>
-                                <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="http://192.168.1.22/onvif/device_service" VerticalAlignment="Top" Width="408"/>
+                                <TextBox x:Name="edONVIFURL" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" ToolTip="http://&lt;camera-ip&gt;/onvif/device_service" VerticalAlignment="Top" Width="408"/>
                                 <Label Content="Login" Height="28" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="label221_Copy" VerticalAlignment="Top" />
                                 <TextBox Height="23" HorizontalAlignment="Left" Margin="80,43,0,0" x:Name="edONVIFLogin" VerticalAlignment="Top" Width="150" />
                                 <Label Content="Password" Height="28" HorizontalAlignment="Left" Margin="283,38,0,0" x:Name="label222_Copy" VerticalAlignment="Top" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="348,43,0,0" x:Name="edONVIFPassword" VerticalAlignment="Top" Width="150" />
+                                <PasswordBox Height="23" HorizontalAlignment="Left" Margin="348,43,0,0" x:Name="edONVIFPassword" VerticalAlignment="Top" Width="150" />
                             </Grid>
                         </TabItem>
                     </TabControl>

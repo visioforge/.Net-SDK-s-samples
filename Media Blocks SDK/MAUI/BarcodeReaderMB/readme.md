@@ -8,7 +8,7 @@ This cross-platform MAUI application demonstrates real-time barcode and QR code 
 
 - **Real-time Barcode Detection**: Scan barcodes and QR codes using device camera
 - **Cross-Platform**: Works on Windows, Android, iOS, and macOS
-- **Multiple Barcode Formats**: Supports QR codes, DataMatrix, Code128, Code39, EAN-13, UPC-A, and more
+- **Multiple Barcode Formats**: Supports QR codes, Code 128, Code 39, Code 93, EAN-13, UPC-A, and more
 - **Duplicate Detection**: Prevents multiple detections of the same barcode within 2 seconds
 - **Live Video Preview**: See camera feed while scanning
 - **Camera Selection**: Switch between multiple cameras if available
@@ -18,17 +18,17 @@ This cross-platform MAUI application demonstrates real-time barcode and QR code 
 
 ### 2D Barcodes
 - QR Code
-- DataMatrix
-- PDF417
-- Aztec
+- Data Matrix is not read by this demo; see the [DataMatrix Detection demo](https://github.com/visioforge/.Net-SDK-s-samples/tree/master/Media%20Blocks%20SDK/WPF/CSharp/DataMatrix%20Detection%20Demo)
 
 ### 1D Barcodes
 - Code 128
 - Code 39
+- Code 93
 - EAN-13 / EAN-8
-- UPC-A / UPC-E
+- UPC-A / UPC-E (both reported as UPC-A, with the 12-digit value)
 - Codabar
 - ITF (Interleaved 2 of 5)
+- GS1 DataBar (RSS-14)
 
 ## Requirements
 
@@ -48,7 +48,7 @@ This cross-platform MAUI application demonstrates real-time barcode and QR code 
 4. **Start Scanning**: Tap the "START" button to begin scanning
 5. **Scan Barcodes**: Point your camera at any barcode or QR code
 6. **View Results**: Detected barcodes appear at the bottom showing:
-   - Barcode type (e.g., "QR Code", "EAN-13")
+   - Barcode type (e.g., "QR-Code", "EAN-13")
    - Decoded value
    - Total detection count
 7. **Stop Scanning**: Tap the "STOP" button when done

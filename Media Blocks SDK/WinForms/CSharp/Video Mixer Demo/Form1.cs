@@ -45,6 +45,14 @@ namespace MediaBlocks_Video_Mixer_Demo
         /// </summary>
         private async void btStart_Click(object sender, System.EventArgs e)
         {
+            // File only: the mixer engines read the stream info of both sources, which a
+            // network source does not provide.
+            if (!System.IO.File.Exists(edFile1.Text) || !System.IO.File.Exists(edFile2.Text))
+            {
+                MessageBox.Show("Please select both video files.");
+                return;
+            }
+
             if (rbCPU.Checked)
             {
                 _engine = new CPUMixerEngine();

@@ -3399,7 +3399,6 @@ namespace VideoCapture_CSharp_Demo
             edChromaKeyImage.Name = "edChromaKeyImage";
             edChromaKeyImage.Size = new System.Drawing.Size(388, 31);
             edChromaKeyImage.TabIndex = 41;
-            edChromaKeyImage.Text = "c:\\Samples\\pics\\1.jpg";
             // 
             // label216
             // 
@@ -10453,7 +10452,6 @@ namespace VideoCapture_CSharp_Demo
             cbIPURL.Name = "cbIPURL";
             cbIPURL.Size = new System.Drawing.Size(620, 33);
             cbIPURL.TabIndex = 89;
-            cbIPURL.Text = "http://192.168.1.64/onvif/device_service";
             // 
             // btListNDISources
             // 
@@ -10572,6 +10570,7 @@ namespace VideoCapture_CSharp_Demo
             edIPPassword.Name = "edIPPassword";
             edIPPassword.Size = new System.Drawing.Size(164, 31);
             edIPPassword.TabIndex = 66;
+            edIPPassword.UseSystemPasswordChar = true;
             // 
             // label167
             // 
@@ -10753,6 +10752,7 @@ namespace VideoCapture_CSharp_Demo
             edONVIFPassword.Name = "edONVIFPassword";
             edONVIFPassword.Size = new System.Drawing.Size(164, 31);
             edONVIFPassword.TabIndex = 70;
+            edONVIFPassword.UseSystemPasswordChar = true;
             // 
             // label378
             // 
@@ -10789,7 +10789,6 @@ namespace VideoCapture_CSharp_Demo
             edONVIFURL.Name = "edONVIFURL";
             edONVIFURL.Size = new System.Drawing.Size(541, 31);
             edONVIFURL.TabIndex = 29;
-            edONVIFURL.Text = "http://192.168.1.22/onvif/device_service";
             // 
             // edONVIFLiveVideoURL
             // 

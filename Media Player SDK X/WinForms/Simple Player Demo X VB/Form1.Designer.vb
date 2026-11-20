@@ -258,7 +258,6 @@ Partial Class Form1
         edFilename.Name = "edFilename"
         edFilename.Size = New Size(642, 31)
         edFilename.TabIndex = 53
-        edFilename.Text = "C:\samples\!video.mp4"
         ' 
         ' label14
         ' 

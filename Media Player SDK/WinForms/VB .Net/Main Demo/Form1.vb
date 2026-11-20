@@ -515,6 +515,11 @@ Public Class Form1
         ''' Bt read info click.
         ''' </summary>
     Private Sub btReadInfo_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btReadInfo.Click
+        If sender IsNot Nothing AndAlso String.IsNullOrWhiteSpace(edFilenameOrURL.Text) Then
+            MessageBox.Show("Please select a file or enter a URL.")
+            Return
+        End If
+
         mmInfo.Clear()
 
         'clear audio controls
@@ -1105,7 +1110,7 @@ Public Class Form1
 
         SetSourceMode()
 
-        btReadInfo_Click(sender, e)
+        btReadInfo_Click(Nothing, Nothing)
 
         MediaPlayer1.Audio_OutputDevice = cbAudioOutputDevice.Text
 
@@ -2137,6 +2142,11 @@ Public Class Form1
         ''' Bt add file to playlist click.
         ''' </summary>
     Private Sub btAddFileToPlaylist_Click(sender As Object, e As EventArgs) Handles btAddFileToPlaylist.Click
+
+        If String.IsNullOrWhiteSpace(edFilenameOrURL.Text) Then
+            MessageBox.Show("Please select a file or enter a URL.")
+            Return
+        End If
 
         lbSourceFiles.Items.Add(edFilenameOrURL.Text)
 

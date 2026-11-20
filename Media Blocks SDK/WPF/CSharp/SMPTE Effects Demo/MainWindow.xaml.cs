@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -308,6 +309,12 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
 
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edFilename.Text) || (!edFilename.Text.Contains("://") && !File.Exists(edFilename.Text)))
+            {
+                MessageBox.Show("Please select a file or enter a URL.");
+                return;
+            }
+
             edLog.Text = "";
 
             await StopEngineAsync();

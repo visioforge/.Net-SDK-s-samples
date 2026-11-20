@@ -259,6 +259,12 @@ namespace Bridge_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edFilename.Text))
+            {
+                MessageBox.Show("Please specify the output file.");
+                return;
+            }
+
             await DestroyFileOutputEngineAsync();
             CreateFileOutputEngine();
 

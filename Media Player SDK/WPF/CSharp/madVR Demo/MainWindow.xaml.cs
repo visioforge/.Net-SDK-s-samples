@@ -103,6 +103,12 @@ namespace madVR_Demo
         /// </summary>
         private async void btPlay_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edFilename.Text) || (!edFilename.Text.Contains("://") && !File.Exists(edFilename.Text)))
+            {
+                MessageBox.Show("Please select a file or enter a URL.");
+                return;
+            }
+
             MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
 
             MediaPlayer1.Playlist_Clear();

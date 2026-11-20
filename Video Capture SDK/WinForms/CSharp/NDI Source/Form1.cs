@@ -116,6 +116,12 @@ namespace NDI_Source
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cbIPURL.Text))
+            {
+                MessageBox.Show(this, "Pick a source with the List NDI sources button.");
+                return;
+            }
+
             mmLog.Clear();
 
             VideoCapture1.Debug_Mode = cbDebugMode.Checked;

@@ -530,7 +530,7 @@ namespace VisioForge_MMT_Live
 
                                 if (duplicate)
                                 {
-                                    break;
+                                    continue;
                                 }
 
                                 _results.Add(new DetectedAd(tm));

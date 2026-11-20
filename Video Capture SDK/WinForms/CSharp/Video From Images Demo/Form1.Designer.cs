@@ -146,7 +146,6 @@ namespace Video_From_Images_Demo
             this.edInputFolder.Name = "edInputFolder";
             this.edInputFolder.Size = new System.Drawing.Size(249, 20);
             this.edInputFolder.TabIndex = 10;
-            this.edInputFolder.Text = "c:\\Samples\\pics\\";
             // 
             // btSelectFolder
             // 

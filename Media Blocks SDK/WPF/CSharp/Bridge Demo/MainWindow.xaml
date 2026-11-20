@@ -13,7 +13,7 @@
         Icon="visioforge_main_icon.ico">
     <Grid>
         <Label x:Name="label" Content="Output file" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Height="26"/>
-        <TextBox x:Name="edFilename" Margin="15,268,0,0" TextWrapping="Wrap" Text="C:\samples\!video.webm" VerticalAlignment="Top" HorizontalAlignment="Left" Width="330"/>
+        <TextBox x:Name="edFilename" Margin="15,268,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="330"/>
         <wpf:VideoView x:Name="VideoView1" Margin="10,10,0,0" Height="223" VerticalAlignment="Top" HorizontalAlignment="Left" Width="360"/>
         <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Left" Margin="350,267,0,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
         <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="15,291,0,0" VerticalAlignment="Top" Width="53" Click="btStart_Click"/>

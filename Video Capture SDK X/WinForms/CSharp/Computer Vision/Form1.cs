@@ -518,6 +518,14 @@
         #endregion
 
         /// <summary>
+        /// A source is set when it is an existing file or a URL the SDK source accepts.
+        /// </summary>
+        private static bool IsSource(string source)
+        {
+            return !string.IsNullOrWhiteSpace(source) && (source.Contains("://") || File.Exists(source));
+        }
+
+        /// <summary>
         /// Handles the Click event of the btStart control.
         /// Configures and starts either video capture or media playback with computer vision processing enabled.
         /// </summary>
@@ -525,6 +533,12 @@
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
+            if (rbVideoFile.Checked && !IsSource(edFilename.Text))
+            {
+                MessageBox.Show("Please select a file or enter a URL.");
+                return;
+            }
+
             mmLog.Clear();
             tcMain.SelectedIndex = 5;
 

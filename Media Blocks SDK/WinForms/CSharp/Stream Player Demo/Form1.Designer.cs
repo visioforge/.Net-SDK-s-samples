@@ -238,7 +238,6 @@ namespace MediaBlocks_Memory_Player_Demo
             this.edFilename.Name = "edFilename";
             this.edFilename.Size = new System.Drawing.Size(706, 29);
             this.edFilename.TabIndex = 27;
-            this.edFilename.Text = "C:\\samples\\!video.mp4";
             // 
             // label14
             // 

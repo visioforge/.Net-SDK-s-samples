@@ -14,11 +14,11 @@
 
         <StackPanel Grid.Row="0" Margin="10" Orientation="Horizontal">
             <Label Content="URL" Margin="0,0,5,0" VerticalAlignment="Center" />
-            <TextBox Name="edURL" Width="200" Margin="0,0,10,0" Text="http://192.168.1.22/onvif/device_service" />
+            <TextBox Name="edURL" Width="200" Margin="0,0,10,0" ToolTip="http://&lt;camera-ip&gt;/onvif/device_service" />
             <Label Content="Username" Margin="0,0,5,0" VerticalAlignment="Center" />
-            <TextBox Name="edUsername" Width="100" Margin="0,0,10,0" Text="admin" />
+            <TextBox Name="edUsername" Width="100" Margin="0,0,10,0" />
             <Label Content="Password" Margin="0,0,5,0" VerticalAlignment="Center" />
-            <TextBox Name="edPassword" Width="100" Margin="0,0,10,0" Text="dancer23" />
+            <PasswordBox Name="edPassword" Width="100" Margin="0,0,10,0" />
             <Button Name="btnConnect" Width="75" Click="btnConnect_Click">Connect</Button>
         </StackPanel>
 

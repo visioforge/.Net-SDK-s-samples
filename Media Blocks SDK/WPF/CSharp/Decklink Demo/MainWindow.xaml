@@ -28,7 +28,7 @@
 
                     <RadioButton x:Name="rbFileSource" Content="Use file source (be sure that file is compatible)" IsChecked="True" Margin="0,20,0,0"/>
                     <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
-                        <TextBox x:Name="edSourceFilename" Width="320" Text="c:\Samples\!video.mp4"/>
+                        <TextBox x:Name="edSourceFilename" Width="320"/>
                         <Button x:Name="btSelectSourceFile" Content="..." Margin="10,0,0,0" Width="20" Click="btSelectSourceFile_Click"/>
                     </StackPanel>
                 </StackPanel>

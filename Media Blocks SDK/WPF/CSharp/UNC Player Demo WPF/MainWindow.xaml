@@ -10,7 +10,7 @@
     <Grid>
         <!-- UNC Path -->
         <Label Content="UNC path" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="edFilename" Margin="10,36,285,0" TextWrapping="Wrap" Text="\\localhost\SambaTest\video.avi" VerticalAlignment="Top"/>
+        <TextBox x:Name="edFilename" Margin="10,36,285,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
         <!-- Credentials -->
         <Label Content="Username" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>

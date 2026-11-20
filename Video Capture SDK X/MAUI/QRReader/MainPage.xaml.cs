@@ -63,7 +63,7 @@ namespace QRReader
 
             _core.OnError += Core_OnError;
             _core.OnBarcodeDetected += Core_OnBarcodeDetected;
-            //_core.Barcode_Reader_Enabled = true;
+            _core.Barcode_Reader_Enabled = true;
 
             // cameras
             _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();

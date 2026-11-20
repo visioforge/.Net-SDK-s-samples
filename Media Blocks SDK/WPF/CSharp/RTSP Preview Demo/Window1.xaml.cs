@@ -149,6 +149,12 @@ namespace RTSP_Preview
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cbIPURL.Text))
+            {
+                MessageBox.Show(this, "Enter the camera URL.");
+                return;
+            }
+
             // Starting takes a few seconds, so block the button - a second click would build
             // a second pipeline over the same VideoView and open a second session to the camera.
             btStart.IsEnabled = false;
@@ -176,7 +182,7 @@ namespace RTSP_Preview
                 _pipeline.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
                 // An ONVIF device-service URL is resolved to the profile selected for that camera, or to its best stream.
-                var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, audioEnabled, cbIPURL.Text == edONVIFURL.Text ? cbONVIFProfile.SelectedItem as string : null);
+                var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Password, audioEnabled, cbIPURL.Text == edONVIFURL.Text ? cbONVIFProfile.SelectedItem as string : null);
                 edONVIFLiveVideoURL.Text = rtsp.Uri.ToString();
 
                 // Enable low latency mode if checkbox is checked
@@ -330,7 +336,7 @@ namespace RTSP_Preview
                         }
 
                         onvifClient = new ONVIFClientX();
-                        var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
+                        var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Password);
                         if (!result)
                         {
                             onvifClient.Dispose();
@@ -356,7 +362,7 @@ namespace RTSP_Preview
                         cbIPURL.Text = edONVIFURL.Text;
 
                         edIPLogin.Text = edONVIFLogin.Text;
-                        edIPPassword.Text = edONVIFPassword.Text;
+                        edIPPassword.Password = edONVIFPassword.Password;
 
                         btONVIFConnect.Content = "Disconnect";
                     }

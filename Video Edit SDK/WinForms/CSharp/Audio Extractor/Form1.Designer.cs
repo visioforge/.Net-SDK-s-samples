@@ -64,7 +64,6 @@ namespace Audio_Extractor
             edSourceFile.Name = "edSourceFile";
             edSourceFile.Size = new System.Drawing.Size(683, 31);
             edSourceFile.TabIndex = 1;
-            edSourceFile.Text = "c:\\Samples\\!video.mp4";
             // 
             // btSelectOutput
             // 

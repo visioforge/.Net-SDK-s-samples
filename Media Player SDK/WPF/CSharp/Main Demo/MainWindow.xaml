@@ -254,7 +254,7 @@
                                 <Slider Height="23" HorizontalAlignment="Left" Margin="10,124,0,0" Maximum="1000" x:Name="tbChromaKeySmoothing" VerticalAlignment="Top" Width="100" Value="80" ValueChanged="tbChromaKeySmoothing_ValueChanged" />
                                 <Label Content="Smoothing" Height="28" HorizontalAlignment="Left" Margin="10,96,0,0" x:Name="label112" VerticalAlignment="Top" Width="86" />
                                 <Label Content="Image background file" Height="29" HorizontalAlignment="Left" Margin="10,212,0,0" x:Name="label115" VerticalAlignment="Top" Width="131" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="10,241,0,0" x:Name="edChromaKeyImage" VerticalAlignment="Top" Width="321" Text="c:\Samples\pics\1.jpg" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="10,241,0,0" x:Name="edChromaKeyImage" VerticalAlignment="Top" Width="321" />
                                 <Button Click="btChromaKeySelectBGImage_Click" Content="..." Height="23" HorizontalAlignment="Left" Margin="336,241,0,0" x:Name="btChromaKeySelectBGImage" VerticalAlignment="Top" Width="24" />
                                 <Label Content="Color" Height="23" HorizontalAlignment="Left" Margin="10,167,0,0" x:Name="label116" VerticalAlignment="Top" Width="59" />
                                 <Rectangle Fill="#FF80DA80" Height="29" HorizontalAlignment="Left" Margin="78,167,0,0" x:Name="pnChromaKeyColor" Stroke="Black" VerticalAlignment="Top" Width="32" MouseDown="pnChromaKeyColor_MouseDown" />
@@ -700,7 +700,7 @@
         </TabControl>
         <Label Content="Watch tutorials" FontWeight="Bold" Foreground="#FF0016CF" Height="29" HorizontalAlignment="Right" Margin="0,1,25,0" x:Name="label129" VerticalAlignment="Top" MouseDown="label129_MouseDown" />
         <Label Content="File name" Height="28" HorizontalAlignment="Left" Margin="406,6,0,0" x:Name="label17" VerticalAlignment="Top" />
-        <TextBox Height="23" Margin="407,30,105,0" x:Name="edFilenameOrURL" VerticalAlignment="Top" Text="c:\Samples\!video.mp4" />
+        <TextBox Height="23" Margin="407,30,105,0" x:Name="edFilenameOrURL" VerticalAlignment="Top" />
         <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,30,25,0" x:Name="btSelectFile" VerticalAlignment="Top" Width="23" Click="btSelectFile_Click" />
         <GroupBox Header="Controls" Height="89" HorizontalAlignment="Left" Margin="407,0,0,217" x:Name="groupBox1" VerticalAlignment="Bottom" Width="403">
             <Grid>

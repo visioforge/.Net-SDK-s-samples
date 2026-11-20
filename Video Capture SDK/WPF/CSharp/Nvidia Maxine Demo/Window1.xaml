@@ -36,8 +36,8 @@
             <TabItem Header="Video effects">
                 <Grid>
                     <Label Content="Models folder" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="edModels" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="c:\Projects\_Projects\NvidiaMaxineNet\SDK\bin\models\" VerticalAlignment="Top" Width="357" Height="20" MaxLines="1"/>
-                    <Button x:Name="btSelectModelsFolder" Content="..." HorizontalAlignment="Left" Margin="372,36,0,0" VerticalAlignment="Top" Width="20" Height="20"/>
+                    <TextBox x:Name="edModels" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="357" Height="20" MaxLines="1"/>
+                    <Button x:Name="btSelectModelsFolder" Content="..." HorizontalAlignment="Left" Margin="372,36,0,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectModelsFolder_Click"/>
 
                     <Label Content="Effect" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
                     <ComboBox x:Name="cbVideoEffect" Margin="10,85,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedIndex="0" Height="24" Width="250" SelectionChanged="cbVideoEffect_SelectionChanged">
@@ -93,7 +93,7 @@
                         </ComboBox>
 
                         <Label Margin="10,45,0,0">Background image</Label>
-                        <TextBox x:Name="edAIGSBackground" Margin="15,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="24">c:\Samples\pics\5.jpg</TextBox>
+                        <TextBox x:Name="edAIGSBackground" Margin="15,70,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="24"></TextBox>
                     </Grid>-->
 
                     <Label Content="Nvidia Maxine Video Effects SDK or redist is required" HorizontalAlignment="Left" Margin="44,251,0,0" VerticalAlignment="Top"/>

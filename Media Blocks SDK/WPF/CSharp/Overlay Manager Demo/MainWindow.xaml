@@ -26,7 +26,6 @@
 
                 <TextBox Grid.Column="1"
                          x:Name="edFilename"
-                         Text="C:\samples\!video.mp4"
                          VerticalAlignment="Center"
                          Margin="0,0,5,0"/>
 

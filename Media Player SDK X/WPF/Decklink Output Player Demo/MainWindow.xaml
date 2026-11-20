@@ -9,7 +9,7 @@
         Title="Media Player SDK .Net - Decklink Output Player Demo" Height="400" Width="838" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Label x:Name="label" Content="File name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="edFilename" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="C:\samples\!video_1280x720@2997.mp4" VerticalAlignment="Top" Width="295"/>
+        <TextBox x:Name="edFilename" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="295"/>
         <WPF:VideoView x:Name="VideoView1" HorizontalAlignment="Left" Height="240" Margin="10,59,0,0" VerticalAlignment="Top" Width="320"/>
         <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Left" Margin="310,35,0,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
         <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Left" Margin="714,150,0,0" VerticalAlignment="Top"/>

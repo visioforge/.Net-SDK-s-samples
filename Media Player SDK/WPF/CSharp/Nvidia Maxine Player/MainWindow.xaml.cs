@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using VisioForge.Core.MediaPlayer;
@@ -85,6 +86,18 @@ namespace Nvidia_Maxine_Player
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edFilename.Text) || (!edFilename.Text.Contains("://") && !File.Exists(edFilename.Text)))
+            {
+                MessageBox.Show("Please select a file or enter a URL.");
+                return;
+            }
+
+            if (cbVideoEffect.SelectedIndex > 0 && !Directory.Exists(edModels.Text))
+            {
+                MessageBox.Show("Please select the Maxine models folder.");
+                return;
+            }
+
             edLog.Clear();
 
             MediaPlayer1.Source_Mode = MediaPlayerSourceMode.LAV;
@@ -201,6 +214,18 @@ namespace Nvidia_Maxine_Player
             if (dlg.ShowDialog() == true)
             {
                 edFilename.Text = dlg.FileName;
+            }
+        }
+
+        /// <summary>
+        /// Handles the select models folder click event.
+        /// </summary>
+        private void btSelectModelsFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.OpenFolderDialog { Title = "NVIDIA Maxine models folder" };
+            if (dlg.ShowDialog() == true)
+            {
+                edModels.Text = dlg.FolderName;
             }
         }
 

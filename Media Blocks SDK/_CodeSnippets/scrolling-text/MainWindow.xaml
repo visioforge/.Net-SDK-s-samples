@@ -19,7 +19,7 @@
         <!-- File selection row -->
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
             <TextBlock VerticalAlignment="Center" Margin="0,0,10,0">Video file:</TextBlock>
-            <TextBox x:Name="edFilename" Text="c:\samples\!video.mp4" Width="500" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBox x:Name="edFilename" Width="500" VerticalAlignment="Center" Margin="0,0,10,0"/>
             <Button x:Name="btSelectFile" Content="..." Width="30" Click="btSelectFile_Click" Margin="0,0,10,0"/>
         </StackPanel>
 

@@ -245,6 +245,12 @@ namespace MediaBlocks_UNC_Player_Demo_WPF
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(edFilename.Text))
+                {
+                    MessageBox.Show("Please select a file or enter a UNC path.");
+                    return;
+                }
+
                 edLog.Clear();
 
                 await CreateEngineAsync();

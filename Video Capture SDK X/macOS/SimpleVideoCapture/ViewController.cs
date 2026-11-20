@@ -3,6 +3,7 @@ using AVFoundation;
 using ObjCRuntime;
 using VisioForge.Core;
 using VisioForge.Core.Types;
+using VisioForge.Core.Types.X.AudioRenderers;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoCapture;
 using VisioForge.Core.UI.Apple;
@@ -233,6 +234,7 @@ public partial class ViewController : NSViewController
 
         // audio renderer
         var audioOutput = (await DeviceEnumerator.Shared.AudioOutputsAsync()).Where(device => device.DisplayName == cbAudioOutput.StringValue).First();
+        _core.Audio_OutputDevice = new AudioRendererSettings(audioOutput);
 
         // start
         await _core.StartAsync();

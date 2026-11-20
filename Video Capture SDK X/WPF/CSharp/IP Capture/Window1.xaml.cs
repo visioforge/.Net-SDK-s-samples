@@ -205,6 +205,12 @@ namespace IP_Capture
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cbIPURL.Text))
+            {
+                MessageBox.Show(this, "Enter the camera URL, or select the NDI engine to use a listed NDI source.");
+                return;
+            }
+
             try
             {
                 if (onvifDevice != null)
@@ -228,7 +234,7 @@ namespace IP_Capture
                 VideoCapture1.Audio_OutputDevice = new AudioRendererSettings(audioOutputDevice);
 
                 var login = edIPLogin.Text;
-                var password = edIPPassword.Text;
+                var password = edIPPassword.Password;
 
                 switch (cbIPCameraType.SelectedIndex)
                 {
@@ -252,7 +258,7 @@ namespace IP_Capture
                         {
                             // RTSP
                             // An ONVIF device-service URL is resolved to the profile selected for that camera, or to its best stream.
-                            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text, cbIPAudioCapture.IsChecked == true, cbIPURL.Text == edONVIFURL.Text ? cbONVIFProfile.SelectedItem as string : null);
+                            var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Password, cbIPAudioCapture.IsChecked == true, cbIPURL.Text == edONVIFURL.Text ? cbONVIFProfile.SelectedItem as string : null);
                             edONVIFLiveVideoURL.Text = rtsp.Uri.ToString();
 
                             // Enable low latency mode if checkbox is checked
@@ -268,7 +274,7 @@ namespace IP_Capture
                     case 2:
                         {
                             // HTTP MJPEG
-                            var mjpeg = await HTTPMJPEGSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Text);
+                            var mjpeg = await HTTPMJPEGSourceSettings.CreateAsync(new Uri(cbIPURL.Text), edIPLogin.Text, edIPPassword.Password);
                             VideoCapture1.Video_Source = mjpeg;
                         }
 
@@ -474,7 +480,7 @@ namespace IP_Capture
                     }
 
                     onvifDevice = new ONVIFClientX();
-                    var result = await onvifDevice.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
+                    var result = await onvifDevice.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Password);
                     if (!result)
                     {
                         onvifDevice.Dispose();
@@ -506,7 +512,7 @@ namespace IP_Capture
                     cbIPCameraType.SelectedIndex = 1;
 
                     edIPLogin.Text = edONVIFLogin.Text;
-                    edIPPassword.Text = edONVIFPassword.Text;
+                    edIPPassword.Password = edONVIFPassword.Password;
 
                     btONVIFConnect.Content = "Disconnect";
                 }

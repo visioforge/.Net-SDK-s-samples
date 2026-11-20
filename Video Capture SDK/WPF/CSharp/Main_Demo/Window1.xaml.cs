@@ -931,7 +931,7 @@ namespace Main_Demo
 
             settings.AudioCapture = cbIPAudioCapture.IsChecked == true;
             settings.Login = edIPLogin.Text;
-            settings.Password = edIPPassword.Text;
+            settings.Password = edIPPassword.Password;
             settings.ForcedFramerate = new VideoFrameRate(Convert.ToInt32(edIPForcedFramerate.Text));
             settings.ForcedFramerate_InstanceID = edIPForcedFramerateID.Text[0];
             settings.Debug_Enabled = cbDebugMode.IsChecked == true;
@@ -1296,6 +1296,13 @@ namespace Main_Demo
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            // Mode is only assigned further down, from cbMode, so the check has to read the selection.
+            if ((cbMode.SelectedIndex == 6 || cbMode.SelectedIndex == 7) && string.IsNullOrWhiteSpace(cbIPURL.Text))
+            {
+                MessageBox.Show(this, "Enter the camera URL, or select the NDI engine to use a listed NDI source.");
+                return;
+            }
+
             VideoCapture1.Debug_Mode = cbDebugMode.IsChecked == true;
             VideoCapture1.Debug_Telemetry = cbTelemetry.IsChecked == true;
 
@@ -4324,6 +4331,12 @@ namespace Main_Demo
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btPIPAddIPCamera_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cbIPURL.Text))
+            {
+                MessageBox.Show(this, "Enter the camera URL, or select the NDI engine to use a listed NDI source.");
+                return;
+            }
+
             IPCameraSourceSettings ipCameraSource;
             SelectIPCameraSource(out ipCameraSource);
 
@@ -6036,7 +6049,7 @@ namespace Main_Demo
                     }
 
                     onvifClient = new ONVIFClientX();
-                    var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Text);
+                    var result = await onvifClient.ConnectAsync(edONVIFURL.Text, edONVIFLogin.Text, edONVIFPassword.Password);
                     if (!result)
                     {
                         onvifClient.Dispose();
@@ -6063,7 +6076,7 @@ namespace Main_Demo
                     cbIPCameraONVIF.IsChecked = true;
 
                     edIPLogin.Text = edONVIFLogin.Text;
-                    edIPPassword.Text = edONVIFPassword.Text;
+                    edIPPassword.Password = edONVIFPassword.Password;
 
                     btONVIFConnect.Content = "Disconnect";
                 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -208,6 +209,12 @@ namespace Overlay_Manager_Demo
         /// </summary>
         private async void btStart_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edFilename.Text) || (!edFilename.Text.Contains("://") && !File.Exists(edFilename.Text)))
+            {
+                MessageBox.Show("Please select a file or enter a URL.");
+                return;
+            }
+
             edLog.Clear();
 
             await CreateEngineAsync();

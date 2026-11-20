@@ -295,7 +295,6 @@
             edImagesFolder.Name = "edImagesFolder";
             edImagesFolder.Size = new System.Drawing.Size(407, 31);
             edImagesFolder.TabIndex = 126;
-            edImagesFolder.Text = "c:\\Samples\\pics_test\\";
             // 
             // rbImagesFolder
             // 

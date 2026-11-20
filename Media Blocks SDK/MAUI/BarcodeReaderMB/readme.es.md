@@ -8,7 +8,7 @@ Esta aplicación multiplataforma MAUI demuestra la detección de códigos de bar
 
 - **Detección de códigos de barras en tiempo real**: Escanea códigos de barras y códigos QR usando la cámara del dispositivo
 - **Multiplataforma**: Funciona en Windows, Android, iOS y macOS
-- **Múltiples formatos de códigos de barras**: Soporta códigos QR, DataMatrix, Code128, Code39, EAN-13, UPC-A y más
+- **Múltiples formatos de códigos de barras**: Soporta códigos QR, Code 128, Code 39, Code 93, EAN-13, UPC-A y más
 - **Detección de duplicados**: Previene múltiples detecciones del mismo código de barras en 2 segundos
 - **Vista previa de video en vivo**: Visualiza la cámara mientras escanea
 - **Selección de cámara**: Cambia entre múltiples cámaras si están disponibles
@@ -18,17 +18,17 @@ Esta aplicación multiplataforma MAUI demuestra la detección de códigos de bar
 
 ### Códigos de barras 2D
 - QR Code
-- DataMatrix
-- PDF417
-- Aztec
+- Esta demo no lee Data Matrix; consulte la [demo DataMatrix Detection](https://github.com/visioforge/.Net-SDK-s-samples/tree/master/Media%20Blocks%20SDK/WPF/CSharp/DataMatrix%20Detection%20Demo)
 
 ### Códigos de barras 1D
 - Code 128
 - Code 39
+- Code 93
 - EAN-13 / EAN-8
-- UPC-A / UPC-E
+- UPC-A / UPC-E (ambos se informan como UPC-A, con el valor de 12 dígitos)
 - Codabar
 - ITF (Interleaved 2 of 5)
+- GS1 DataBar (RSS-14)
 
 ## Requisitos
 
@@ -48,7 +48,7 @@ Esta aplicación multiplataforma MAUI demuestra la detección de códigos de bar
 4. **Iniciar escaneo**: Toque el botón "START" para comenzar a escanear
 5. **Escanear códigos de barras**: Apunte su cámara a cualquier código de barras o código QR
 6. **Ver resultados**: Los códigos de barras detectados aparecen en la parte inferior mostrando:
-   - Tipo de código de barras (ej. "QR Code", "EAN-13")
+   - Tipo de código de barras (ej. "QR-Code", "EAN-13")
    - Valor decodificado
    - Conteo total de detecciones
 7. **Detener escaneo**: Toque el botón "STOP" cuando termine

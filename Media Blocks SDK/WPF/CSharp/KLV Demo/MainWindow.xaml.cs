@@ -1,6 +1,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -187,6 +188,12 @@ namespace KLV_Demo
         {
             try
             {
+                if (!File.Exists(edSrcTSFile.Text) || string.IsNullOrWhiteSpace(edOutputKLVFile.Text))
+                {
+                    MessageBox.Show("Please select the source TS file and the output KLV file.");
+                    return;
+                }
+
                 await DestroyEngineAsync();
                 CreateExtractEngine();
 
@@ -284,6 +291,12 @@ namespace KLV_Demo
         /// </summary>
         private void btViewerParse_Click(object sender, RoutedEventArgs e)
         {
+            if (!File.Exists(edViewerKLVFile.Text))
+            {
+                MessageBox.Show("Please select a KLV file.");
+                return;
+            }
+
             edViewerData.Text = string.Empty;
 
             var klv = new KLVParser(edViewerKLVFile.Text);

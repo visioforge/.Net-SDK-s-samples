@@ -10,7 +10,7 @@
     <Grid>
         <!-- File Selection -->
         <Label x:Name="label" Content="File name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="edFilename" Margin="10,36,150,0" TextWrapping="Wrap" Text="C:\samples\!video.mp4" VerticalAlignment="Top"/>
+        <TextBox x:Name="edFilename" Margin="10,36,150,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Button x:Name="btSelectFile" Content="..." HorizontalAlignment="Right" Margin="0,35,125,0" VerticalAlignment="Top" Width="20" Height="20" Click="btSelectFile_Click"/>
         
         <!-- Video Display -->

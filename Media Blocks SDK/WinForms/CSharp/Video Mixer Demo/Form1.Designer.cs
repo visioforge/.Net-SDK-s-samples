@@ -81,7 +81,6 @@
             edFile1.Name = "edFile1";
             edFile1.Size = new System.Drawing.Size(486, 31);
             edFile1.TabIndex = 1;
-            edFile1.Text = "c:\\Samples\\!video.mp4";
             // 
             // btOpenFile1
             // 
@@ -112,7 +111,6 @@
             edFile2.Name = "edFile2";
             edFile2.Size = new System.Drawing.Size(486, 31);
             edFile2.TabIndex = 4;
-            edFile2.Text = "c:\\Samples\\!video.avi";
             // 
             // label2
             // 

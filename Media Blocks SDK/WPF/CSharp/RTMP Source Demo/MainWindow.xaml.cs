@@ -205,7 +205,8 @@ namespace RTMP_Source_Demo
 
             btStop.IsEnabled = false;
             await DestroyEngineAsync();
-            Close();
+            // Deferred: WPF throws if Close() runs while this Closing call is still on the stack.
+            _ = Dispatcher.BeginInvoke(new Action(Close));
         }
     }
 }

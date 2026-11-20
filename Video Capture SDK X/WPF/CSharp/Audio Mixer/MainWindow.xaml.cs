@@ -253,6 +253,7 @@ namespace Audio_Mixer_MB
 
             // audio mixer
             var audioMixer = new AudioMixerSourceSettings();
+            var echo = false;
 
             // audio input 1
             if (rbSystemAudio1.IsChecked == true)
@@ -283,6 +284,7 @@ namespace Audio_Mixer_MB
 
                 var audioSource = new LoopbackAudioCaptureDeviceSourceSettings(deviceItem);
                 audioMixer.Inputs.Add(audioSource);
+                echo |= deviceItem.Name == audioOutputDevice.Name || deviceItem.IsDefault || audioOutputDevice.IsDefault;
             }
 
             // audio input 2
@@ -314,9 +316,14 @@ namespace Audio_Mixer_MB
 
                 var audioSource = new LoopbackAudioCaptureDeviceSourceSettings(deviceItem);
                 audioMixer.Inputs.Add(audioSource);
+                echo |= deviceItem.Name == audioOutputDevice.Name || deviceItem.IsDefault || audioOutputDevice.IsDefault;
             }
 
             _core.Audio_Source = audioMixer;
+
+            // Loopback played back into the same device (or a default alias of it) is captured again: an echo.
+            _core.Audio_Play = !echo;
+            _core.Audio_Record = cbMode.SelectedIndex == 1;
 
             // MP3 capture?
             if (cbMode.SelectedIndex == 1)

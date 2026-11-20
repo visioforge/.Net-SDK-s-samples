@@ -534,7 +534,6 @@
             edFilenameOrURL.Name = "edFilenameOrURL";
             edFilenameOrURL.Size = new System.Drawing.Size(577, 31);
             edFilenameOrURL.TabIndex = 22;
-            edFilenameOrURL.Text = "c:\\Samples\\!video.avi";
             // 
             // label14
             // 

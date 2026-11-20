@@ -489,6 +489,12 @@ namespace Media_Player_Demo
         /// </summary>
         private void btReadInfo_Click(object sender, EventArgs e)
         {
+            if (sender != null && string.IsNullOrWhiteSpace(edFilenameOrURL.Text))
+            {
+                MessageBox.Show("Please select a file or enter a URL.");
+                return;
+            }
+
             mmInfo.Clear();
 
             // clear audio controls
@@ -2551,6 +2557,12 @@ namespace Media_Player_Demo
         /// </summary>
         private void btAddFileToPlaylist_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(edFilenameOrURL.Text))
+            {
+                MessageBox.Show("Please select a file or enter a URL.");
+                return;
+            }
+
             lbSourceFiles.Items.Add(edFilenameOrURL.Text);
         }
 

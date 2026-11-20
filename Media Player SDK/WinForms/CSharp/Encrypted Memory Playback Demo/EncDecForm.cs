@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -87,6 +88,12 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private async void btEncrypt_Click(object sender, EventArgs e)
         {
+            if (!File.Exists(edSourceFile.Text) || string.IsNullOrWhiteSpace(edDestFile.Text))
+            {
+                MessageBox.Show("Please select the source file and the output file.");
+                return;
+            }
+
             try
             {
                 await VideoEncryptor.EncryptAsync(edSourceFile.Text, edDestFile.Text, edKey.Text, _ivBytes, _progressCallback);
@@ -106,6 +113,12 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private async void btDecrypt_Click(object sender, EventArgs e)
         {
+            if (!File.Exists(edSourceFile.Text) || string.IsNullOrWhiteSpace(edDestFile.Text))
+            {
+                MessageBox.Show("Please select the source file and the output file.");
+                return;
+            }
+
             try
             {
                 await VideoDecryptor.DecryptAsync(edSourceFile.Text, edDestFile.Text, edKey.Text, _ivBytes, _progressCallback);

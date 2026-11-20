@@ -60,11 +60,16 @@ namespace USB3V_GigE_Spinnaker
         {
             if (_core != null)
             {
-                await _core.StopAsync();
-                _core.OnError -= Pipeline_OnError;
-
-                await _core.DisposeAsync();
-                _core = null;
+                try
+                {
+                    await _core.StopAsync();
+                }
+                finally
+                {
+                    _core.OnError -= Pipeline_OnError;
+                    await _core.DisposeAsync();
+                    _core = null;
+                }
             }
         }
 
@@ -189,14 +194,22 @@ namespace USB3V_GigE_Spinnaker
             // Closing does not await an async handler: keep the window open until teardown is done.
             _closing = true;
             e.Cancel = true;
+            IsEnabled = false;
 
             tmRecording.Stop();
 
-            await DestroyEngineAsync();
+            try
+            {
+                await DestroyEngineAsync();
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
 
-            VisioForgeX.DestroySDK();
-
-            Close();
+            // Deferred: WPF throws if Close() runs while this Closing call is still on the stack.
+            _ = Dispatcher.BeginInvoke(new Action(Close));
         }
     }
 }

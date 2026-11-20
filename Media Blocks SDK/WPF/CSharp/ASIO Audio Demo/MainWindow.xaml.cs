@@ -169,7 +169,8 @@ namespace ASIO_Audio_Demo_MB
             IsEnabled = false;
             await _pipeline.StopAsync();
             await DestroyPipelineAsync();
-            Close();
+            // Deferred: WPF throws if Close() runs while this Closing call is still on the stack.
+            _ = Dispatcher.BeginInvoke(new Action(Close));
         }
     }
 }

@@ -2749,7 +2749,6 @@ Partial Class Form1
         Me.edChromaKeyImage.Name = "edChromaKeyImage"
         Me.edChromaKeyImage.Size = New System.Drawing.Size(350, 26)
         Me.edChromaKeyImage.TabIndex = 41
-        Me.edChromaKeyImage.Text = "c:\Samples\pics\1.jpg"
         '
         'label216
         '

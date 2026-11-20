@@ -23,7 +23,7 @@
             <TextBlock Text="File name" Margin="0,0,0,3"/>
             <DockPanel>
                 <Button x:Name="btSelectFile" Content="..." DockPanel.Dock="Right" Width="30" Margin="5,0,0,0" Click="btSelectFile_Click"/>
-                <TextBox x:Name="edFilename" Text="C:\samples\!video.mp4"/>
+                <TextBox x:Name="edFilename"/>
             </DockPanel>
         </StackPanel>
 

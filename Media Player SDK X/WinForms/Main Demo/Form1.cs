@@ -414,6 +414,12 @@ namespace Main_Demo
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(edFilenameOrURL.Text))
+                {
+                    MessageBox.Show("Please select a file or enter a URL.");
+                    return;
+                }
+
                 mmLog.Text = "";
 
                 tbSpeed.Value = 10;

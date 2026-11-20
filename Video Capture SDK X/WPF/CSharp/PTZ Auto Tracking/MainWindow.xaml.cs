@@ -394,7 +394,7 @@ namespace PTZ_Auto_Tracking
                 mmLog.Clear();
 
                 // Build the RTSP source and read its resolution (needed to normalize detection boxes for tracking).
-                var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edRtspUrl.Text), edUser.Text, edPassword.Text, audioEnabled: false);
+                var rtsp = await RTSPSourceSettings.CreateAsync(new Uri(edRtspUrl.Text), edUser.Text, edPassword.Password, audioEnabled: false);
                 var videoInfo = rtsp.GetInfo()?.GetVideoInfo();
                 if (videoInfo == null || videoInfo.Width <= 0 || videoInfo.Height <= 0)
                 {
@@ -458,7 +458,7 @@ namespace PTZ_Auto_Tracking
             try
             {
                 _onvif = new ONVIFClientX();
-                var connected = await _onvif.ConnectAsync(edOnvifUrl.Text, edUser.Text, edPassword.Text);
+                var connected = await _onvif.ConnectAsync(edOnvifUrl.Text, edUser.Text, edPassword.Password);
                 if (!connected)
                 {
                     Log("ONVIF: could not connect — running preview without PTZ.");

@@ -127,6 +127,11 @@ Public Class Form1
     End Sub
 
     Private Async Sub btStart_Click(sender As Object, e As EventArgs) Handles btStart.Click
+        If String.IsNullOrWhiteSpace(edFilename.Text) OrElse (Not edFilename.Text.Contains("://") AndAlso Not IO.File.Exists(edFilename.Text)) Then
+            MessageBox.Show("Please select a file or enter a URL.")
+            Return
+        End If
+
         edLog.Clear()
 
         Await DestroyEngineAsync()

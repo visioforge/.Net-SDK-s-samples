@@ -131,6 +131,12 @@ namespace MediaBlocks_Memory_Player_Demo
         {
             try
             {
+                if (!File.Exists(edFilename.Text))
+                {
+                    MessageBox.Show("Please select a video file.");
+                    return;
+                }
+
                 mmError.Clear();
 
                 CreateEngine();
