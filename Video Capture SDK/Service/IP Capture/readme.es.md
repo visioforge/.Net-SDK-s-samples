@@ -13,6 +13,10 @@ Esta aplicación demuestra las capacidades del SDK.
 * .Net 9
 * .Net 10
 
+## Instalación
+
+Compile el proyecto y ejecute `install.bat` como administrador. Registra el servicio **VFVidCapIPCaptureSrv** con `sc.exe`; ejecute `uninstall.bat` como administrador para eliminarlo.
+
 ---
 
 [Visit the product page.](https://www.visioforge.com/video-capture-sdk-net)

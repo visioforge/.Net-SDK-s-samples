@@ -37,7 +37,7 @@
             // 
             // Service1
             // 
-            this.ServiceName = "Service1";
+            this.ServiceName = "VFVidCapIPCaptureSrv";
             ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
 
         }
