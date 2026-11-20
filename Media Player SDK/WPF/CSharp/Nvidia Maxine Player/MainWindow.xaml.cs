@@ -222,11 +222,26 @@ namespace Nvidia_Maxine_Player
         /// </summary>
         private void btSelectModelsFolder_Click(object sender, RoutedEventArgs e)
         {
+#if NET8_0_OR_GREATER
             var dlg = new Microsoft.Win32.OpenFolderDialog { Title = "NVIDIA Maxine models folder" };
             if (dlg.ShowDialog() == true)
             {
                 edModels.Text = dlg.FolderName;
             }
+#else
+            // OpenFolderDialog needs WPF .NET 8+; on older frameworks the file dialog picks the folder.
+            var dlg = new Microsoft.Win32.OpenFileDialog
+            {
+                Title = "NVIDIA Maxine models folder",
+                CheckFileExists = false,
+                ValidateNames = false,
+                FileName = "Select this folder"
+            };
+            if (dlg.ShowDialog() == true)
+            {
+                edModels.Text = System.IO.Path.GetDirectoryName(dlg.FileName);
+            }
+#endif
         }
 
         /// <summary>
