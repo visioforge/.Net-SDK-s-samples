@@ -2,6 +2,7 @@ using VisioForge.Core;
 using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Output;
 using VisioForge.Core.Types.X.VideoEdit;
+using VisioForge.Core.Types.X.VideoEncoders;
 using VisioForge.Core.VideoEditX;
 
 // The folder of images, and the video to write.
@@ -37,7 +38,10 @@ edit.Video_Transition_Add_FadeOut(end - cross, end);
 
 edit.Output_VideoSize = new Size(1920, 1080);
 edit.Output_VideoFrameRate = new VideoFrameRate(30);
-edit.Output_Format = new MP4Output(args[1]);
+// The default encoder is small: 3 Mbit/s at 1080p,
+// which shows as blocks in a sky or a gradient.
+var enc = new OpenH264EncoderSettings(VideoQuality.VeryHigh);
+edit.Output_Format = new MP4Output(args[1], enc);
 
 // Start returns false when the render cannot begin;
 // OnStop fires when the file is finished.
