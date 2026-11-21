@@ -156,7 +156,8 @@ public partial class MainWindow : Window
                 _receivePipeline.Connect(ndiSource.VideoOutput, video.Input);
             }
 
-            if (settings.GetInfo().AudioStreams.Count > 0)
+            // Off for this app's own sender: the microphone would come back out of the speakers
+            if (settings.GetInfo().AudioStreams.Count > 0 && cbPlayAudio.IsChecked == true)
             {
                 var speakers = new AudioRendererBlock();
                 _receivePipeline.Connect(ndiSource.AudioOutput, speakers.Input);
