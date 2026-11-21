@@ -1,0 +1,50 @@
+<Window x:Class="NdiWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        Title="NDI Send and Receive" Height="600" Width="1200" IsEnabled="False"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.RowSpan="2" Margin="0,0,10,0">
+            <Label Content="Camera" />
+            <ComboBox x:Name="cbCamera" />
+            <Label Content="Microphone" Margin="0,10,0,0" />
+            <ComboBox x:Name="cbMicrophone" />
+            <Label Content="NDI name" Margin="0,10,0,0" />
+            <TextBox x:Name="edName" Text="VisioForge NDI" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="btSend" Content="Send" Width="100" Click="btSend_Click" />
+                <Button x:Name="btStopSend" Content="Stop" Width="100" Margin="10,0,0,0"
+                        IsEnabled="False" Click="btStopSend_Click" />
+            </StackPanel>
+
+            <Label Content="NDI source" Margin="0,30,0,0" />
+            <ComboBox x:Name="cbSource" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="btRefresh" Content="Refresh" Width="100" Click="btRefresh_Click" />
+                <Button x:Name="btReceive" Content="Receive" Width="100" Margin="10,0,0,0"
+                        IsEnabled="False" Click="btReceive_Click" />
+            </StackPanel>
+            <Button x:Name="btStopReceive" Content="Stop" Width="100" Margin="110,10,0,0"
+                    HorizontalAlignment="Left" IsEnabled="False" Click="btStopReceive_Click" />
+        </StackPanel>
+
+        <Label Grid.Column="1" Content="Camera (sent over NDI)" />
+        <vf:VideoView x:Name="VideoView1" Grid.Column="1" Grid.Row="1" Margin="0,0,5,0" Background="Black" />
+
+        <Label Grid.Column="2" Content="Received from NDI" Margin="5,0,0,0" />
+        <vf:VideoView x:Name="VideoView2" Grid.Column="2" Grid.Row="1" Margin="5,0,0,0" Background="Black" />
+    </Grid>
+</Window>
