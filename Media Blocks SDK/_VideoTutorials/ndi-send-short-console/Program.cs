@@ -8,8 +8,9 @@ var file = new UniversalSourceBlock(
 var ndi = new NDISinkBlock("VisioForge NDI");
 p.Connect(file.VideoOutput,
     ndi.CreateNewInput(Video));
-p.Connect(file.AudioOutput,
-    ndi.CreateNewInput(Audio));
+if (file.AudioOutput != null)
+    p.Connect(file.AudioOutput,
+        ndi.CreateNewInput(Audio));
 if (!await p.StartAsync()) return;
 Console.ReadLine();
 await p.StopAsync();
