@@ -225,6 +225,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMPTE Effects Demo MB WPF n
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ndi-send-receive-wpf net10", "_VideoTutorials\ndi-send-receive-wpf\ndi-send-receive-wpf net10.csproj", "{ABE8619A-282B-482F-8D8A-CDCFA470C5F3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ndi-send-short-console net10", "_VideoTutorials\ndi-send-short-console\ndi-send-short-console net10.csproj", "{645ADD2D-68DC-4641-8C7C-97932E31A2B6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ndi-receive-short-console net10", "_VideoTutorials\ndi-receive-short-console\ndi-receive-short-console net10.csproj", "{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1531,6 +1535,30 @@ Global
 		{ABE8619A-282B-482F-8D8A-CDCFA470C5F3}.Release|x64.Build.0 = Release|Any CPU
 		{ABE8619A-282B-482F-8D8A-CDCFA470C5F3}.Release|x86.ActiveCfg = Release|Any CPU
 		{ABE8619A-282B-482F-8D8A-CDCFA470C5F3}.Release|x86.Build.0 = Release|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Debug|x64.Build.0 = Debug|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Debug|x86.Build.0 = Debug|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Release|x64.ActiveCfg = Release|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Release|x64.Build.0 = Release|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Release|x86.ActiveCfg = Release|Any CPU
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6}.Release|x86.Build.0 = Release|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Debug|x64.Build.0 = Debug|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Debug|x86.Build.0 = Debug|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Release|x64.ActiveCfg = Release|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Release|x64.Build.0 = Release|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Release|x86.ActiveCfg = Release|Any CPU
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1644,6 +1672,8 @@ Global
 		{BEBE43A5-0500-4742-819F-FDD5EB7CEB70} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{4D7DFEF3-3770-4E36-BA05-330E15607271} = {0C3276A5-B4ED-4D44-BD9E-C622613A2F56}
 		{ABE8619A-282B-482F-8D8A-CDCFA470C5F3} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
+		{645ADD2D-68DC-4641-8C7C-97932E31A2B6} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
+		{3E24E73B-0936-41F8-AD39-D8E2DC76DE33} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {421FE47D-FE2B-4EF3-A888-EC10030B8DBE}
