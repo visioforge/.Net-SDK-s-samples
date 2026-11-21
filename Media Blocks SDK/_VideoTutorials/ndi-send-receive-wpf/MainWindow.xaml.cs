@@ -13,15 +13,15 @@ namespace NdiWpf;
 
 public partial class MainWindow : Window
 {
-    private MediaBlocksPipeline sendPipeline;
+    private MediaBlocksPipeline _sendPipeline;
 
-    private MediaBlocksPipeline receivePipeline;
+    private MediaBlocksPipeline _receivePipeline;
 
-    private VideoCaptureDeviceInfo[] cameras;
+    private VideoCaptureDeviceInfo[] _cameras;
 
-    private AudioCaptureDeviceInfo[] microphones;
+    private AudioCaptureDeviceInfo[] _microphones;
 
-    private NDISourceInfo[] ndiSources;
+    private NDISourceInfo[] _ndiSources;
 
     public MainWindow()
     {
@@ -32,12 +32,12 @@ public partial class MainWindow : Window
     {
         await VisioForgeX.InitSDKAsync();
 
-        cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
-        foreach (var device in cameras)
+        _cameras = await DeviceEnumerator.Shared.VideoSourcesAsync();
+        foreach (var device in _cameras)
             cbCamera.Items.Add(device.DisplayName);
 
-        microphones = await DeviceEnumerator.Shared.AudioSourcesAsync();
-        foreach (var device in microphones)
+        _microphones = await DeviceEnumerator.Shared.AudioSourcesAsync();
+        foreach (var device in _microphones)
             cbMicrophone.Items.Add(device.DisplayName);
 
         if (cbCamera.Items.Count > 0) cbCamera.SelectedIndex = 0;
@@ -71,133 +71,137 @@ public partial class MainWindow : Window
         }
 
         Title = "NDI Send and Receive";
-        btSend.IsEnabled = false;
+        IsEnabled = false; // no clicks, and no closing, until the pipeline has started
 
-        sendPipeline = CreatePipeline();
+        _sendPipeline = CreatePipeline();
 
         // The camera goes to the preview and to NDI through a tee
         var camera = new SystemVideoSourceBlock(
-            new VideoCaptureDeviceSourceSettings(cameras[cbCamera.SelectedIndex]));
+            new VideoCaptureDeviceSourceSettings(_cameras[cbCamera.SelectedIndex]));
         var tee = new TeeBlock(2, MediaBlockPadMediaType.Video);
-        var preview = new VideoRendererBlock(sendPipeline, VideoView1);
+        var preview = new VideoRendererBlock(_sendPipeline, VideoView1);
         var ndiSink = new NDISinkBlock(edName.Text.Trim());
 
-        sendPipeline.Connect(camera.Output, tee.Input);
-        sendPipeline.Connect(tee.Outputs[0], preview.Input);
-        sendPipeline.Connect(tee.Outputs[1], ndiSink.CreateNewInput(MediaBlockPadMediaType.Video));
+        _sendPipeline.Connect(camera.Output, tee.Input);
+        _sendPipeline.Connect(tee.Outputs[0], preview.Input);
+        _sendPipeline.Connect(tee.Outputs[1], ndiSink.CreateNewInput(MediaBlockPadMediaType.Video));
 
         // No microphone: send video only
         if (cbMicrophone.SelectedIndex >= 0)
         {
             var microphone = new SystemAudioSourceBlock(
-                microphones[cbMicrophone.SelectedIndex].CreateSourceSettings());
-            sendPipeline.Connect(microphone.Output, ndiSink.CreateNewInput(MediaBlockPadMediaType.Audio));
+                _microphones[cbMicrophone.SelectedIndex].CreateSourceSettings());
+            _sendPipeline.Connect(microphone.Output, ndiSink.CreateNewInput(MediaBlockPadMediaType.Audio));
         }
 
-        if (await sendPipeline.StartAsync())
-        {
-            btStopSend.IsEnabled = true;
-            return;
-        }
+        var started = await _sendPipeline.StartAsync();
+        if (!started) await StopSendAsync();
 
-        await StopSendAsync();
-        btSend.IsEnabled = true;
+        btSend.IsEnabled = !started;
+        btStopSend.IsEnabled = started;
+        IsEnabled = true;
     }
 
     private async Task StopSendAsync()
     {
-        var pipeline = sendPipeline;
-        sendPipeline = null;
-        await pipeline.StopAsync();
-        await pipeline.DisposeAsync();
+        await _sendPipeline.StopAsync();
+        await _sendPipeline.DisposeAsync();
+        _sendPipeline = null;
     }
 
     private async void btStopSend_Click(object sender, RoutedEventArgs e)
     {
-        btStopSend.IsEnabled = false;
+        IsEnabled = false;
         await StopSendAsync();
+        btStopSend.IsEnabled = false;
         btSend.IsEnabled = true;
+        IsEnabled = true;
     }
 
     private async void btRefresh_Click(object sender, RoutedEventArgs e)
     {
-        btRefresh.IsEnabled = false;
+        IsEnabled = false;
 
         // Every NDI sender on the network, this app's own one included
-        ndiSources = await DeviceEnumerator.Shared.NDISourcesAsync();
+        _ndiSources = await DeviceEnumerator.Shared.NDISourcesAsync();
         cbSource.Items.Clear();
-        foreach (var source in ndiSources)
+        foreach (var source in _ndiSources)
             cbSource.Items.Add(source.Name);
 
         if (cbSource.Items.Count > 0) cbSource.SelectedIndex = 0;
 
-        btRefresh.IsEnabled = true;
-        btReceive.IsEnabled = cbSource.Items.Count > 0 && receivePipeline == null;
+        btReceive.IsEnabled = cbSource.Items.Count > 0 && _receivePipeline == null;
+        IsEnabled = true;
     }
 
     private async void btReceive_Click(object sender, RoutedEventArgs e)
     {
         Title = "NDI Send and Receive";
-        btReceive.IsEnabled = false;
+        IsEnabled = false;
 
-        receivePipeline = CreatePipeline();
+        _receivePipeline = CreatePipeline();
 
         // Connects to the sender and reads its video and audio formats
         var settings = await NDISourceSettings.CreateAsync(
-            receivePipeline.GetContext(), ndiSources[cbSource.SelectedIndex]);
+            _receivePipeline.GetContext(), _ndiSources[cbSource.SelectedIndex]);
 
+        var started = false;
         if (settings != null)
         {
             var ndiSource = new NDISourceBlock(settings);
-            var video = new VideoRendererBlock(receivePipeline, VideoView2);
-            receivePipeline.Connect(ndiSource.VideoOutput, video.Input);
+
+            if (settings.GetInfo().VideoStreams.Count > 0)
+            {
+                var video = new VideoRendererBlock(_receivePipeline, VideoView2);
+                _receivePipeline.Connect(ndiSource.VideoOutput, video.Input);
+            }
 
             if (settings.GetInfo().AudioStreams.Count > 0)
             {
                 var speakers = new AudioRendererBlock();
-                receivePipeline.Connect(ndiSource.AudioOutput, speakers.Input);
+                _receivePipeline.Connect(ndiSource.AudioOutput, speakers.Input);
             }
 
-            if (await receivePipeline.StartAsync())
-            {
-                btStopReceive.IsEnabled = true;
-                return;
-            }
+            started = await _receivePipeline.StartAsync();
         }
 
-        await StopReceiveAsync();
-        btReceive.IsEnabled = true;
+        if (!started) await StopReceiveAsync();
+
+        btReceive.IsEnabled = !started;
+        btStopReceive.IsEnabled = started;
+        IsEnabled = true;
     }
 
     private async Task StopReceiveAsync()
     {
-        var pipeline = receivePipeline;
-        receivePipeline = null;
-        await pipeline.StopAsync();
-        await pipeline.DisposeAsync();
+        await _receivePipeline.StopAsync();
+        await _receivePipeline.DisposeAsync();
+        _receivePipeline = null;
     }
 
     private async void btStopReceive_Click(object sender, RoutedEventArgs e)
     {
-        btStopReceive.IsEnabled = false;
+        IsEnabled = false;
         await StopReceiveAsync();
+        btStopReceive.IsEnabled = false;
         btReceive.IsEnabled = cbSource.Items.Count > 0;
+        IsEnabled = true;
     }
 
     private async void Window_Closing(object sender, CancelEventArgs e)
     {
-        if (IsEnabled && sendPipeline == null && receivePipeline == null)
+        if (IsEnabled && _sendPipeline == null && _receivePipeline == null)
         {
             VisioForgeX.DestroySDK();
             return;
         }
 
-        e.Cancel = true; // still loading, or still sending or receiving: stop first
-        if (!IsEnabled) return; // loading or already stopping
+        e.Cancel = true; // busy, or still sending or receiving: stop first
+        if (!IsEnabled) return; // loading, starting or stopping
         IsEnabled = false;
 
-        if (sendPipeline != null) await StopSendAsync();
-        if (receivePipeline != null) await StopReceiveAsync();
+        if (_sendPipeline != null) await StopSendAsync();
+        if (_receivePipeline != null) await StopReceiveAsync();
 
         IsEnabled = true;
         await Dispatcher.InvokeAsync(Close); // not Close(): WPF throws inside Closing
