@@ -156,7 +156,7 @@ public partial class MainWindow : Window
                 _receivePipeline.Connect(ndiSource.VideoOutput, video.Input);
             }
 
-            // Off for this app's own sender: the microphone would come back out of the speakers
+            // Off by default: this app's own sender would play the microphone back through the speakers
             if (settings.GetInfo().AudioStreams.Count > 0 && cbPlayAudio.IsChecked == true)
             {
                 var speakers = new AudioRendererBlock();
@@ -169,6 +169,7 @@ public partial class MainWindow : Window
         if (!started) await StopReceiveAsync();
 
         btReceive.IsEnabled = !started;
+        cbPlayAudio.IsEnabled = !started;
         btStopReceive.IsEnabled = started;
         IsEnabled = true;
     }
@@ -186,6 +187,7 @@ public partial class MainWindow : Window
         await StopReceiveAsync();
         btStopReceive.IsEnabled = false;
         btReceive.IsEnabled = cbSource.Items.Count > 0;
+        cbPlayAudio.IsEnabled = true;
         IsEnabled = true;
     }
 
