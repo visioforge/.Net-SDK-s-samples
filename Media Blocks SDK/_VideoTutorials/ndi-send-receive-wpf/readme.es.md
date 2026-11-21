@@ -8,4 +8,4 @@ El código del [tutorial en vídeo de envío y recepción por NDI](https://www.y
 
 ---
 
-[Visite la página del producto.](https://www.visioforge.com/media-blocks-sdk)
+[Visite la página del producto.](https://www.visioforge.com/es/media-blocks-sdk-net)
