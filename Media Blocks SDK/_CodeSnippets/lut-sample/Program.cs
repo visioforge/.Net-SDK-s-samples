@@ -41,7 +41,7 @@ namespace lut_sample
                 var videoTee = new TeeBlock(2, MediaBlockPadMediaType.Video);
 
                 // Create LUT processor
-                var lutPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bw.cube");
+                var lutPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BW.cube");
                 var lutProcessor = new LUTProcessorBlock(new LUTVideoEffect(lutPath));
 
                 // Connect blocks
