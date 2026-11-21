@@ -71,7 +71,7 @@ public partial class MainWindow : Window
         }
 
         Title = "NDI Send and Receive";
-        IsEnabled = false; // no clicks, and no closing, until the pipeline has started
+        IsEnabled = false; // no clicks until it has started; Window_Closing waits too
 
         _sendPipeline = CreatePipeline();
 
@@ -197,7 +197,7 @@ public partial class MainWindow : Window
         }
 
         e.Cancel = true; // busy, or still sending or receiving: stop first
-        if (!IsEnabled) return; // loading, starting or stopping
+        if (!IsEnabled) return; // loading, starting or stopping: close again after
         IsEnabled = false;
 
         if (_sendPipeline != null) await StopSendAsync();
