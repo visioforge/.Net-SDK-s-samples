@@ -365,7 +365,7 @@ Public Class Form1
         If cbVideoInputDevice.SelectedIndex <> -1 Then
             cbVideoInputFormat.Items.Clear()
 
-            Dim deviceItem = (From info In VideoCapture1.Video_CaptureDevices Where info.Name = cbVideoInputDevice.Text)?.FirstOrDefault()
+            Dim deviceItem As VideoCaptureDeviceInfo = (From info In VideoCapture1.Video_CaptureDevices Where info.Name = cbVideoInputDevice.Text)?.FirstOrDefault()
             If Not IsNothing(deviceItem) Then
                 Dim formats = deviceItem.VideoFormats
                 For Each item As VideoCaptureDeviceFormat In formats

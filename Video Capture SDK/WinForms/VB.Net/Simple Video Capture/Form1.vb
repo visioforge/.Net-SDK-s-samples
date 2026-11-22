@@ -162,7 +162,7 @@ Public Class Form1
         If cbVideoInputDevice.SelectedIndex <> -1 Then
             cbVideoInputFormat.Items.Clear()
 
-            Dim deviceItem =
+            Dim deviceItem As VideoCaptureDeviceInfo =
                     (From info In VideoCapture1.Video_CaptureDevices Where info.Name = cbVideoInputDevice.Text)?.
                     FirstOrDefault()
             If IsNothing(deviceItem) Then
