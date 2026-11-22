@@ -53,8 +53,6 @@ Public Class Form1
 
     Dim wmvSettingsDialog As WMVSettingsDialog
 
-    Dim dvSettingsDialog As DVSettingsDialog
-
     Dim pcmSettingsDialog As PCMSettingsDialog
 
     Dim mp3SettingsDialog As MP3SettingsDialog
@@ -114,6 +112,13 @@ Public Class Form1
 
     Dim WithEvents VideoCapture1 As VideoCaptureCore
 
+    ''' <summary>
+    ''' The format and frame rate the demo starts with: the ones the SDK picks for "use best".
+    ''' </summary>
+    Private _defaultVideoFormat As String
+
+    Private _defaultVideoFrameRate As VideoFrameRate
+
     Private Async Function CreateEngineAsync() As Task(Of VideoCaptureCore)
         VideoCapture1 = Await VideoCaptureCore.CreateAsync(VideoView1)
         Return VideoCapture1
@@ -162,7 +167,7 @@ Public Class Form1
 
         ' set combobox indexes
         cbMode.SelectedIndex = 0
-        cbOutputFormat.SelectedIndex = 22
+        cbOutputFormat.SelectedIndex = 20
 
         cbResizeMode.SelectedIndex = 0
         cbMotDetHLColor.SelectedIndex = 1
@@ -170,9 +175,6 @@ Public Class Form1
         cbRotate.SelectedIndex = 0
         cbBarcodeType.SelectedIndex = 0
         cbNetworkStreamingMode.SelectedIndex = 0
-
-        cbCustomAudioSourceCategory.SelectedIndex = 0
-        cbCustomVideoSourceCategory.SelectedIndex = 0
 
         For Each screen As Screen In Screen.AllScreens
             cbScreenCaptureDisplayIndex.Items.Add(screen.DeviceName.Replace("\\.\DISPLAY", String.Empty))
@@ -240,30 +242,6 @@ Public Class Form1
 
         cbDirect2DRotate.SelectedIndex = 0
 
-        Await VideoCapture1.TVTuner_ReadAsync()
-
-        For i As Integer = 0 To VideoCapture1.TVTuner_Devices.Count - 1
-            cbTVTuner.Items.Add(VideoCapture1.TVTuner_Devices.Item(i))
-        Next i
-
-        If cbTVTuner.Items.Count > 0 Then
-            cbTVTuner.SelectedIndex = 0
-        End If
-
-        For i As Integer = 0 To VideoCapture1.TVTuner_TVFormats.Count - 1
-            cbTVSystem.Items.Add(VideoCapture1.TVTuner_TVFormats.Item(i))
-        Next i
-
-        cbTVSystem.SelectedIndex = 0
-
-        For i As Integer = 0 To VideoCapture1.TVTuner_Countries.Count - 1
-            cbTVCountry.Items.Add(VideoCapture1.TVTuner_Countries.Item(i))
-        Next i
-
-        cbTVCountry.SelectedIndex = 0
-
-        cbTVTuner_SelectedIndexChanged(sender, e)
-
         For Each info As VideoCaptureDeviceInfo In VideoCapture1.Video_CaptureDevices
             cbVideoInputDevice.Items.Add(info.Name)
             cbPIPDevice.Items.Add(info.Name)
@@ -329,16 +307,6 @@ Public Class Form1
 
         rbVR_CheckedChanged(sender, e)
 
-        Dim filters As List(Of String)
-        filters = VideoCapture1.Special_Filters(SpecialFilterType.HardwareVideoEncoder).ToList()
-        For i As Integer = 0 To filters.Count - 1
-            cbMPEGEncoder.Items.Add(filters.Item(i))
-        Next i
-
-        If cbMPEGEncoder.Items.Count > 0 Then
-            cbMPEGEncoder.SelectedIndex = 0
-        End If
-
         For i As Integer = 0 To VideoCapture1.DirectShow_Filters.Count - 1
             cbFilters.Items.Add(VideoCapture1.DirectShow_Filters.Item(i))
         Next i
@@ -346,6 +314,7 @@ Public Class Form1
         cbMPEGVideoDecoder.Items.Add("(default)")
         cbMPEGAudioDecoder.Items.Add("(default)")
 
+        Dim filters As List(Of String)
         filters = VideoCapture1.Special_Filters(SpecialFilterType.MPEG12VideoDecoder).ToList()
         For i As Integer = 0 To filters.Count - 1
             cbMPEGVideoDecoder.Items.Add(filters.Item(i))
@@ -371,37 +340,12 @@ Public Class Form1
         Next i
 
         edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
+        edHLSOutputFolder.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "hls")
+
+        ' the output defaults live here, so the folder has to exist before the first record
+        Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge"))
 
         cbPIPMode.SelectedIndex = 0
-
-        ' BDA
-        For Each source As String In VideoCapture1.BDA_Sources()
-
-            cbBDASourceDevice.Items.Add(source)
-
-        Next
-
-        For Each receiver As String In VideoCapture1.BDA_Receivers()
-
-            cbBDAReceiver.Items.Add(receiver)
-
-        Next
-
-        If (cbBDASourceDevice.Items.Count > 0) Then
-
-            cbBDASourceDevice.SelectedIndex = 0
-
-        End If
-
-        If (cbBDAReceiver.Items.Count > 1) Then
-
-            cbBDAReceiver.SelectedIndex = 1
-
-        End If
-
-        cbBDADeviceStandard.SelectedIndex = 0
-        cbDVBSPolarisation.SelectedIndex = 0
-        cbDVBCModulation.SelectedIndex = 4
 
         ' Decklink
         For Each device As DecklinkDeviceInfo In Await VideoCapture1.Decklink_CaptureDevicesAsync
@@ -429,21 +373,16 @@ Public Class Form1
                 Next
 
                 If cbVideoInputFormat.Items.Count > 0 Then
-                    cbVideoInputFormat.SelectedIndex = 0
+                    ' Start from the format the SDK picks for "use best" instead of the first listed one.
+                    Dim bestFormat As New VideoCaptureSource(deviceItem)
+                    _defaultVideoFormat = bestFormat.Format
+                    _defaultVideoFrameRate = bestFormat.FrameRate
+
+                    Dim formatIndex = deviceItem.VideoFormats.FindIndex(Function(f) f.Name = _defaultVideoFormat)
+                    cbVideoInputFormat.SelectedIndex = If(formatIndex >= 0, formatIndex, 0)
                 End If
 
                 cbVideoInputSelectedIndexChanged(sender, e)
-
-                'currently device active, we can read TV Tuner name
-                Dim tvTuner = deviceItem.TVTuner
-                If tvTuner <> "" Then
-
-                    Dim k As Integer = cbTVTuner.Items.IndexOf(tvTuner)
-                    If k >= 0 Then
-                        cbTVTuner.SelectedIndex = k
-                    End If
-
-                End If
 
                 cbCrossBarAvailable.Enabled = VideoCapture1.Video_CaptureDevice_CrossBar_Init(cbVideoInputDevice.Text)
                 cbCrossBarAvailable.Checked = cbCrossBarAvailable.Enabled
@@ -590,7 +529,14 @@ Public Class Form1
             Next
 
             If (cbVideoInputFrameRate.Items.Count > 0) Then
-                cbVideoInputFrameRate.SelectedIndex = 0
+                ' The "use best" default keeps its own frame rate; any other format starts at the first rate.
+                Dim rateIndex = 0
+                If videoFormat.Name = _defaultVideoFormat Then
+                    Dim knownRate = cbVideoInputFrameRate.Items.IndexOf(_defaultVideoFrameRate.ToString(CultureInfo.CurrentCulture))
+                    If knownRate >= 0 Then rateIndex = knownRate
+                End If
+
+                cbVideoInputFrameRate.SelectedIndex = rateIndex
             End If
         End If
 
@@ -700,12 +646,8 @@ Public Class Form1
             Case 5 : VideoCapture1.Mode = VideoCaptureMode.ScreenCapture
             Case 6 : VideoCapture1.Mode = VideoCaptureMode.IPPreview
             Case 7 : VideoCapture1.Mode = VideoCaptureMode.IPCapture
-            Case 8 : VideoCapture1.Mode = VideoCaptureMode.BDAPreview
-            Case 9 : VideoCapture1.Mode = VideoCaptureMode.BDACapture
-            Case 10 : VideoCapture1.Mode = VideoCaptureMode.CustomPreview
-            Case 11 : VideoCapture1.Mode = VideoCaptureMode.CustomCapture
-            Case 12 : VideoCapture1.Mode = VideoCaptureMode.DecklinkSourcePreview
-            Case 13 : VideoCapture1.Mode = VideoCaptureMode.DecklinkSourceCapture
+            Case 8 : VideoCapture1.Mode = VideoCaptureMode.DecklinkSourcePreview
+            Case 9 : VideoCapture1.Mode = VideoCaptureMode.DecklinkSourceCapture
         End Select
 
         VideoCapture1.Audio_OutputDevice = cbAudioOutputDevice.Text
@@ -736,14 +678,6 @@ Public Class Form1
 
             VideoView1.StatusOverlay = New TextStatusOverlay()
 
-        ElseIf ((VideoCapture1.Mode = VideoCaptureMode.BDACapture) Or (VideoCapture1.Mode = VideoCaptureMode.BDAPreview)) Then
-
-            SelectBDASource()
-
-        ElseIf ((VideoCapture1.Mode = VideoCaptureMode.CustomCapture) Or (VideoCapture1.Mode = VideoCaptureMode.CustomPreview)) Then
-
-            SelectCustomSource()
-
         ElseIf ((VideoCapture1.Mode = VideoCaptureMode.DecklinkSourceCapture) Or (VideoCapture1.Mode = VideoCaptureMode.DecklinkSourcePreview)) Then
 
             VideoCapture1.Decklink_Source = New DecklinkSourceSettings()
@@ -757,8 +691,7 @@ Public Class Form1
         End If
 
 
-        Dim captureMode = (VideoCapture1.Mode = VideoCaptureMode.AudioCapture Or VideoCapture1.Mode = VideoCaptureMode.BDACapture Or
-                           VideoCapture1.Mode = VideoCaptureMode.CustomCapture Or VideoCapture1.Mode = VideoCaptureMode.IPCapture Or
+        Dim captureMode = (VideoCapture1.Mode = VideoCaptureMode.AudioCapture Or VideoCapture1.Mode = VideoCaptureMode.IPCapture Or
                            VideoCapture1.Mode = VideoCaptureMode.ScreenCapture Or VideoCapture1.Mode = VideoCaptureMode.DecklinkSourceCapture Or
                            VideoCapture1.Mode = VideoCaptureMode.VideoCapture)
 
@@ -768,6 +701,12 @@ Public Class Form1
 
         ' Network streaming
         VideoCapture1.Network_Streaming_Enabled = False
+
+        If cbNetworkStreaming.Checked AndAlso cbNetworkStreamingMode.SelectedIndex = 0 AndAlso
+            Not rbNetworkStreamingUseMainWMVSettings.Checked AndAlso Not System.IO.File.Exists(edNetworkStreamingWMVProfile.Text) Then
+            MessageBox.Show(Me, "Please select the WMV profile file.")
+            Return
+        End If
 
         If cbNetworkStreaming.Checked Then
             ConfigureNetworkStreaming()
@@ -804,142 +743,128 @@ Public Class Form1
                     SetWMVOutput(wmvOutput)
                     VideoCapture1.Output_Format = wmvOutput
                 Case 3
-                    outputFormat = VideoCaptureOutputFormat.DV
-
-                    Dim dvOutput = New DVOutput()
-                    SetDVOutput(dvOutput)
-                    VideoCapture1.Output_Format = dvOutput
-                Case 4
                     outputFormat = VideoCaptureOutputFormat.PCM_ACM
 
                     Dim acmOutput = New ACMOutput()
                     SetACMOutput(acmOutput)
                     VideoCapture1.Output_Format = acmOutput
-                Case 5
+                Case 4
                     outputFormat = VideoCaptureOutputFormat.MP3
 
                     Dim mp3Output = New MP3Output()
                     SetMP3Output(mp3Output)
                     VideoCapture1.Output_Format = mp3Output
-                Case 6
+                Case 5
                     outputFormat = VideoCaptureOutputFormat.M4A
 
                     Dim m4aOutput = New M4AOutput()
                     SetM4AOutput(m4aOutput)
                     VideoCapture1.Output_Format = m4aOutput
-                Case 7
+                Case 6
                     outputFormat = VideoCaptureOutputFormat.WMA
 
                     Dim wmaOutput As WMAOutput = New WMAOutput()
                     SetWMAOutput(wmaOutput)
                     VideoCapture1.Output_Format = wmaOutput
-                Case 8
+                Case 7
                     outputFormat = VideoCaptureOutputFormat.FLAC
 
                     Dim flacOutput = New FLACOutput()
                     SetFLACOutput(flacOutput)
                     VideoCapture1.Output_Format = flacOutput
-                Case 9
+                Case 8
                     outputFormat = VideoCaptureOutputFormat.OggVorbis
 
                     Dim oggVorbisOutput = New OGGVorbisOutput()
                     SetOGGOutput(oggVorbisOutput)
                     VideoCapture1.Output_Format = oggVorbisOutput
-                Case 10
+                Case 9
                     outputFormat = VideoCaptureOutputFormat.Speex
 
                     Dim speexOutput = New SpeexOutput()
                     SetSpeexOutput(speexOutput)
                     VideoCapture1.Output_Format = speexOutput
-                Case 11
+                Case 10
                     outputFormat = VideoCaptureOutputFormat.Custom
 
                     Dim customOutput = New CustomOutput()
                     SetCustomOutput(customOutput)
                     VideoCapture1.Output_Format = customOutput
-                Case 12
-                    outputFormat = VideoCaptureOutputFormat.DirectCaptureDV
-                    VideoCapture1.Output_Format = New DirectCaptureDVOutput()
-                Case 13
+                Case 11
                     outputFormat = VideoCaptureOutputFormat.DirectCaptureAVI
                     VideoCapture1.Output_Format = New DirectCaptureAVIOutput()
-                Case 14
+                Case 12
                     outputFormat = VideoCaptureOutputFormat.DirectCaptureMPEG
                     VideoCapture1.Output_Format = New DirectCaptureMPEGOutput()
-                Case 15
+                Case 13
                     outputFormat = VideoCaptureOutputFormat.DirectCaptureMKV
                     VideoCapture1.Output_Format = New DirectCaptureMKVOutput()
-                Case 16
+                Case 14
                     outputFormat = VideoCaptureOutputFormat.DirectCaptureMP4_GDCL
 
                     Dim directCaptureOutputGDCL = New DirectCaptureMP4Output()
                     SetDirectCaptureCustomOutput(directCaptureOutputGDCL)
                     directCaptureOutputGDCL.Muxer = DirectCaptureMP4Muxer.GDCL
                     VideoCapture1.Output_Format = directCaptureOutputGDCL
-                Case 17
+                Case 15
                     outputFormat = VideoCaptureOutputFormat.DirectCaptureMP4_Monogram
 
                     Dim directCaptureOutputMG = New DirectCaptureMP4Output()
                     SetDirectCaptureCustomOutput(directCaptureOutputMG)
                     directCaptureOutputMG.Muxer = DirectCaptureMP4Muxer.Monogram
                     VideoCapture1.Output_Format = directCaptureOutputMG
-                Case 18
+                Case 16
                     outputFormat = VideoCaptureOutputFormat.DirectCaptureCustom
 
                     Dim directCaptureOutput = New DirectCaptureCustomOutput()
                     SetDirectCaptureCustomOutput(directCaptureOutput)
                     VideoCapture1.Output_Format = directCaptureOutput
-                Case 19
+                Case 17
                     outputFormat = VideoCaptureOutputFormat.WebM
 
                     Dim webmOutput = New WebMOutput()
                     SetWebMOutput(webmOutput)
                     VideoCapture1.Output_Format = webmOutput
-                Case 20
+                Case 18
                     outputFormat = VideoCaptureOutputFormat.FFMPEG
 
                     Dim ffmpegOutput = New FFMPEGOutput()
                     SetFFMPEGOutput(ffmpegOutput)
                     VideoCapture1.Output_Format = ffmpegOutput
-                Case 21
+                Case 19
                     outputFormat = VideoCaptureOutputFormat.FFMPEG_EXE
 
                     Dim ffmpegOutput = New FFMPEGEXEOutput()
                     SetFFMPEGEXEOutput(ffmpegOutput)
                     VideoCapture1.Output_Format = ffmpegOutput
-                Case 22
+                Case 20
                     outputFormat = VideoCaptureOutputFormat.MP4
-                Case 23
+                Case 21
                     outputFormat = VideoCaptureOutputFormat.MP4_HW
 
                     Dim mp4Output = New MP4HWOutput()
                     SetMP4HWOutput(mp4Output)
                     VideoCapture1.Output_Format = mp4Output
-                Case 24
+                Case 22
                     outputFormat = VideoCaptureOutputFormat.AnimatedGIF
 
                     Dim gifOutput = New AnimatedGIFOutput()
                     SetGIFOutput(gifOutput)
                     VideoCapture1.Output_Format = gifOutput
-                Case 25
+                Case 23
                     outputFormat = VideoCaptureOutputFormat.Encrypted
-                Case 26
+                Case 24
                     Dim tsOutput = New MPEGTSOutput()
                     SetMPEGTSOutput(tsOutput)
                     VideoCapture1.Output_Format = tsOutput
-                Case 27
+                Case 25
                     Dim movOutput = New MOVOutput()
                     SetMOVOutput(movOutput)
                     VideoCapture1.Output_Format = movOutput
             End Select
 
-            If outputFormat = VideoCaptureOutputFormat.DirectCaptureMPEG Then
-
-                If cbMPEGEncoder.SelectedIndex <> -1 Then
-                    VideoCapture1.Video_CaptureDevice.InternalMPEGEncoder_Name = cbMPEGEncoder.Text
-                End If
-
-            ElseIf ((outputFormat = VideoCaptureOutputFormat.MP4) Or
+            ' DirectCapture MPEG keeps its own output format even when RTSP streaming is on
+            If outputFormat <> VideoCaptureOutputFormat.DirectCaptureMPEG And ((outputFormat = VideoCaptureOutputFormat.MP4) Or
                 ((outputFormat = VideoCaptureOutputFormat.Encrypted) And (rbEncryptedH264SW.Checked)) Or
                         (VideoCapture1.Network_Streaming_Enabled And (VideoCapture1.Network_Streaming_Format = NetworkStreamingFormat.RTSP_H264_AAC_SW))) Then
 
@@ -958,6 +883,11 @@ Public Class Form1
                         mp4Output.Encryption = True
 
                     ElseIf (rbEncryptionKeyFile.Checked) Then
+                        If (Not System.IO.File.Exists(edEncryptionKeyFile.Text)) Then
+                            MessageBox.Show(Me, "Please select the encryption key file.")
+                            Return
+                        End If
+
                         mp4Output.Encryption_KeyType = EncryptionKeyType.File
                         mp4Output.Encryption_Key = edEncryptionKeyFile.Text
 
@@ -1016,8 +946,8 @@ Public Class Form1
         ' resize crop rotate
         ConfigureResizeCropRotate()
 
-        ' MPEG / DV decoding
-        ConfigureMPEGDVDecoding()
+        ' MPEG decoding
+        ConfigureMPEGDecoding()
 
         'motion detection
         ConfigureMotionDetection()
@@ -1166,11 +1096,11 @@ Public Class Form1
     End Sub
 
         ''' <summary>
-        ''' Configure mpegdv decoding.
+        ''' Configure MPEG decoding.
         ''' </summary>
-    Private Sub ConfigureMPEGDVDecoding()
+    Private Sub ConfigureMPEGDecoding()
 
-        'MPEG decoding (only for tuners with internal HW encoder)
+        'MPEG decoding (devices with MPEG output)
         If cbMPEGVideoDecoder.SelectedIndex < 1 Then
             VideoCapture1.MPEG_Video_Decoder = "" 'default
         Else
@@ -1181,17 +1111,6 @@ Public Class Form1
             VideoCapture1.MPEG_Audio_Decoder = "" 'default
         Else
             VideoCapture1.MPEG_Audio_Decoder = cbMPEGAudioDecoder.Text
-        End If
-
-        'DV resolution
-        If rbDVResFull.Checked Then
-            VideoCapture1.DV_Decoder_Video_Resolution = DVVideoResolution.Full
-        ElseIf rbDVResHalf.Checked Then
-            VideoCapture1.DV_Decoder_Video_Resolution = DVVideoResolution.Half
-        ElseIf rbDVResQuarter.Checked Then
-            VideoCapture1.DV_Decoder_Video_Resolution = DVVideoResolution.Quarter
-        Else
-            VideoCapture1.DV_Decoder_Video_Resolution = DVVideoResolution.DC
         End If
     End Sub
 
@@ -1750,17 +1669,6 @@ Public Class Form1
     End Sub
 
         ''' <summary>
-        ''' Set dv output.
-        ''' </summary>
-    Private Sub SetDVOutput(ByRef dvOutput As DVOutput)
-        If (dvSettingsDialog Is Nothing) Then
-            dvSettingsDialog = New DVSettingsDialog()
-        End If
-
-        dvSettingsDialog.SaveSettings(dvOutput)
-    End Sub
-
-        ''' <summary>
         ''' Set avi output.
         ''' </summary>
     Private Sub SetAVIOutput(ByRef aviOutput As AVIOutput)
@@ -1977,8 +1885,6 @@ Public Class Form1
         VideoCapture1.Video_CaptureDevice.Format = cbVideoInputFormat.Text
         VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked
 
-        VideoCapture1.Video_CaptureDevice.UseClosedCaptions = cbUseClosedCaptions.Checked
-
         If cbVideoInputFrameRate.SelectedIndex <> -1 Then
             VideoCapture1.Video_CaptureDevice.FrameRate = New VideoFrameRate(Convert.ToDouble(cbVideoInputFrameRate.Text))
         Else
@@ -1988,65 +1894,6 @@ Public Class Form1
 
         VideoCapture1.Video_CaptureDevice.Format_UseBest = cbUseBestVideoInputFormat.Checked
 
-    End Sub
-
-        ''' <summary>
-        ''' Select custom source.
-        ''' </summary>
-    Private Sub SelectCustomSource()
-
-        VideoCapture1.Custom_Source = New CustomSourceSettings()
-
-        If (cbCustomVideoSourceCategory.SelectedIndex = 0) Then
-            VideoCapture1.Custom_Source.VideoFilterCategory = FilterCategoryX.VideoCaptureSource
-        Else
-            VideoCapture1.Custom_Source.VideoFilterCategory = FilterCategoryX.DirectShowFilters
-        End If
-
-        VideoCapture1.Custom_Source.VideoFilterName = cbCustomVideoSourceFilter.Text
-        VideoCapture1.Custom_Source.VideoFilterFormat = cbCustomVideoSourceFormat.Text
-        VideoCapture1.Custom_Source.VideoFilenameOrURL = edCustomVideoSourceURL.Text
-
-        If (String.IsNullOrEmpty(cbCustomVideoSourceFrameRate.Text)) Then
-            VideoCapture1.Custom_Source.VideoFilterFrameRate = VideoFrameRate.Empty
-        Else
-            VideoCapture1.Custom_Source.VideoFilterFrameRate = New VideoFrameRate(Convert.ToDouble(cbCustomVideoSourceFrameRate.Text))
-        End If
-
-        If (cbCustomAudioSourceCategory.SelectedIndex = 0) Then
-            VideoCapture1.Custom_Source.AudioFilterCategory = FilterCategoryX.AudioCaptureSource
-        Else
-            VideoCapture1.Custom_Source.AudioFilterCategory = FilterCategoryX.DirectShowFilters
-        End If
-
-        VideoCapture1.Custom_Source.AudioFilterName = cbCustomAudioSourceFilter.Text
-        VideoCapture1.Custom_Source.AudioFilterFormat = cbCustomAudioSourceFormat.Text
-        VideoCapture1.Custom_Source.AudioFilenameOrURL = edCustomAudioSourceURL.Text
-
-    End Sub
-
-        ''' <summary>
-        ''' Select bda source.
-        ''' </summary>
-    Private Sub SelectBDASource()
-
-        VideoCapture1.BDA_Source = New BDASourceSettings()
-        VideoCapture1.BDA_Source.ReceiverName = cbBDAReceiver.Text
-        VideoCapture1.BDA_Source.SourceType = cbBDADeviceStandard.SelectedIndex
-        VideoCapture1.BDA_Source.SourceName = cbBDASourceDevice.Text
-
-        If (VideoCapture1.BDA_Source.SourceType = BDAType.DVBT) Then
-
-            Dim bdaTuningParameters As BDATuningParameters = New BDATuningParameters
-
-            bdaTuningParameters.Frequency = Convert.ToInt32(edDVBTFrequency.Text)
-            bdaTuningParameters.ONID = Convert.ToInt32(edDVBTONID.Text)
-            bdaTuningParameters.SID = Convert.ToInt32(edDVBTSID.Text)
-            bdaTuningParameters.TSID = Convert.ToInt32(edDVBTTSID.Text)
-
-            VideoCapture1.BDA_SetParameters(bdaTuningParameters)
-
-        End If
     End Sub
 
         ''' <summary>
@@ -2241,54 +2088,6 @@ Public Class Form1
         cbCrossbarInput_SelectedIndexChanged(sender, e)
     End Sub
 
-    Private Async Sub cbTVChannel_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cbTVChannel.SelectedIndexChanged
-        If cbTVChannel.SelectedIndex <> -1 Then
-
-            Dim k As Integer = Convert.ToInt32(cbTVChannel.Text)
-
-            If k <= 10000 Then
-                'channel
-                VideoCapture1.TVTuner_Channel = k
-            Else
-
-                VideoCapture1.TVTuner_Channel = -1
-                'must be -1 to use frequency
-
-                VideoCapture1.TVTuner_Frequency = k
-            End If
-
-            If String.IsNullOrEmpty(VideoCapture1.TVTuner_Name) Then
-                Return
-            End If
-
-            Await VideoCapture1.TVTuner_ApplyAsync()
-            Await VideoCapture1.TVTuner_ReadAsync()
-            edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString()
-            edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString()
-        End If
-    End Sub
-
-    Private Async Sub cbTVTuner_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVTuner.SelectedIndexChanged
-
-        If cbTVTuner.Items.Count > 0 And cbTVTuner.SelectedIndex <> -1 Then
-            VideoCapture1.TVTuner_Name = cbTVTuner.Text
-            Await VideoCapture1.TVTuner_ReadAsync()
-
-            cbTVMode.Items.Clear()
-            For i As Integer = 0 To VideoCapture1.TVTuner_Modes.Count - 1
-                cbTVMode.Items.Add(VideoCapture1.TVTuner_Modes.Item(i))
-            Next i
-
-            edVideoFreq.Text = Convert.ToString(VideoCapture1.TVTuner_VideoFrequency)
-            edAudioFreq.Text = Convert.ToString(VideoCapture1.TVTuner_AudioFrequency)
-            cbTVInput.SelectedIndex = cbTVInput.Items.IndexOf(VideoCapture1.TVTuner_InputType)
-            cbTVMode.SelectedIndex = cbTVMode.Items.IndexOf(VideoCapture1.TVTuner_Mode)
-            cbTVSystem.SelectedIndex = cbTVSystem.Items.IndexOf(VideoCapture1.TVTuner_TVFormat)
-            cbTVCountry.SelectedIndex = cbTVCountry.Items.IndexOf(VideoCapture1.TVTuner_Country)
-        End If
-
-    End Sub
-
         ''' <summary>
         ''' Cb greyscale checked changed.
         ''' </summary>
@@ -2424,34 +2223,6 @@ Public Class Form1
         End If
     End Sub
 
-    Private Async Sub btDVFF_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVFF.Click
-        Await VideoCapture1.DV_SendCommandAsync(DVCommand.FastestFwd)
-    End Sub
-
-    Private Async Sub btDVPause_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVPause.Click
-        Await VideoCapture1.DV_SendCommandAsync(DVCommand.Pause)
-    End Sub
-
-    Private Async Sub btDVRewind_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVRewind.Click
-        Await VideoCapture1.DV_SendCommandAsync(DVCommand.Rew)
-    End Sub
-
-    Private Async Sub btDVPlay_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVPlay.Click
-        Await VideoCapture1.DV_SendCommandAsync(DVCommand.Play)
-    End Sub
-
-    Private Async Sub btDVStepFWD_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVStepFWD.Click
-        Await VideoCapture1.DV_SendCommandAsync(DVCommand.StepFw)
-    End Sub
-
-    Private Async Sub btDVStepRev_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVStepRev.Click
-        Await VideoCapture1.DV_SendCommandAsync(DVCommand.StepRev)
-    End Sub
-
-    Private Async Sub btDVStop_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btDVStop.Click
-        Await VideoCapture1.DV_SendCommandAsync(DVCommand.Stop)
-    End Sub
-
         ''' <summary>
         ''' Bt refresh clients click.
         ''' </summary>
@@ -2474,130 +2245,10 @@ Public Class Form1
 
     End Sub
 
-    Private Async Sub btStartTune_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btStartTune.Click
-
-        Const KHz As Integer = 1000
-        Const MHz As Integer = 1000000
-
-        Await VideoCapture1.TVTuner_ReadAsync()
-        cbTVChannel.Items.Clear()
-
-        If (cbTVMode.SelectedIndex <> -1) And (cbTVMode.Text = "FM Radio") Then
-            VideoCapture1.TVTuner_FM_Tuning_StartFrequency = 100 * MHz
-            VideoCapture1.TVTuner_FM_Tuning_StopFrequency = 110 * MHz
-            VideoCapture1.TVTuner_FM_Tuning_Step = 100 * KHz
-        End If
-
-        VideoCapture1.TVTuner_TuneChannels_Start()
-
-    End Sub
-
-        ''' <summary>
-        ''' Bt stop tune click.
-        ''' </summary>
-    Private Sub btStopTune_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btStopTune.Click
-
-        VideoCapture1.TVTuner_TuneChannels_Stop()
-
-    End Sub
-
-    Private Async Sub btUseThisChannel_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btUseThisChannel.Click
-        If Convert.ToInt32(edChannel.Text) <= 10000 Then
-            'channel
-            VideoCapture1.TVTuner_Channel = Convert.ToInt32(edChannel.Text)
-        Else
-
-            VideoCapture1.TVTuner_Channel = -1
-            'must be -1 to use frequency
-
-            VideoCapture1.TVTuner_Frequency = Convert.ToInt32(edChannel.Text)
-
-        End If
-
-        If String.IsNullOrEmpty(VideoCapture1.TVTuner_Name) Then
-            Return
-        End If
-
-        Await VideoCapture1.TVTuner_ApplyAsync()
-        Await VideoCapture1.TVTuner_ReadAsync()
-        edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString()
-        edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString()
-
-    End Sub
-
-    Private Async Sub cbTVCountry_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVCountry.SelectedIndexChanged
-        If cbTVCountry.SelectedIndex <> -1 Then
-
-            VideoCapture1.TVTuner_Country = cbTVCountry.Text
-            edTVDefaultFormat.Text = VideoCapture1.TVTuner_Countries_GetPreferredFormatForCountry(VideoCapture1.TVTuner_Country)
-
-            If String.IsNullOrEmpty(VideoCapture1.TVTuner_Name) Then
-                Return
-            End If
-
-            If VideoCapture1.State = PlaybackState.Play Then
-                Await VideoCapture1.TVTuner_ApplyAsync()
-                Await VideoCapture1.TVTuner_ReadAsync()
-            End If
-
-        End If
-    End Sub
-
     Private Async Sub cbStretch_CheckedChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbStretch.CheckedChanged
 
         VideoCapture1.Video_Renderer.StretchMode = cbStretch.Checked
         Await VideoCapture1.Video_Renderer_UpdateAsync()
-
-    End Sub
-
-    Private Async Sub cbTVSelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVMode.SelectedIndexChanged
-
-        If cbTVMode.SelectedIndex <> -1 Then
-            VideoCapture1.TVTuner_Mode = cbTVMode.Text
-
-            If String.IsNullOrEmpty(VideoCapture1.TVTuner_Name) Then
-                Return
-            End If
-
-            Await VideoCapture1.TVTuner_ApplyAsync()
-            Await VideoCapture1.TVTuner_ReadAsync()
-            cbTVChannel.Items.Clear()
-            edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString()
-            edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString()
-        End If
-
-    End Sub
-
-    Private Async Sub cbTVInput_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVInput.SelectedIndexChanged
-        If cbTVInput.SelectedIndex <> -1 Then
-            VideoCapture1.TVTuner_InputType = cbTVInput.Text
-
-            If String.IsNullOrEmpty(VideoCapture1.TVTuner_Name) Then
-                Return
-            End If
-
-            Await VideoCapture1.TVTuner_ApplyAsync()
-            Await VideoCapture1.TVTuner_ReadAsync()
-            edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString()
-            edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString()
-        End If
-
-    End Sub
-
-    Private Async Sub cbTVSystem_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles cbTVSystem.SelectedIndexChanged
-
-        If cbTVSystem.SelectedIndex <> -1 Then
-            VideoCapture1.TVTuner_TVFormat = VideoCapture1.TVTuner_TVFormat_FromString(cbTVSystem.Text)
-
-            If String.IsNullOrEmpty(VideoCapture1.TVTuner_Name) Then
-                Return
-            End If
-
-            Await VideoCapture1.TVTuner_ApplyAsync()
-            Await VideoCapture1.TVTuner_ReadAsync()
-            edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency.ToString()
-            edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency.ToString()
-        End If
 
     End Sub
 
@@ -2658,17 +2309,6 @@ Public Class Form1
     Private Async Sub btResume_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btResume.Click
 
         Await VideoCapture1.ResumeAsync()
-
-    End Sub
-
-        ''' <summary>
-        ''' Bt mpeg encoder show dialog click.
-        ''' </summary>
-    Private Sub btMPEGEncoderShowDialog_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btMPEGEncoderShowDialog.Click
-
-        If cbMPEGEncoder.SelectedIndex <> -1 Then
-            VideoCapture1.Video_CaptureDevice_InternalMPEGEncoder_ShowDialog(IntPtr.Zero, cbMPEGEncoder.Text)
-        End If
 
     End Sub
 
@@ -3474,32 +3114,6 @@ Public Class Form1
 
     End Sub
 
-        ''' <summary>
-        ''' Video capture 1 on tv tuner tune channels.
-        ''' </summary>
-    Private Sub VideoCapture1_OnTVTunerTuneChannels(ByVal sender As System.Object, ByVal e As TVTunerTuneChannelsEventArgs) Handles VideoCapture1.OnTVTunerTuneChannels
-
-        BeginInvoke(Sub()
-                        Application.DoEvents()
-
-                        pbChannels.Value = e.Progress
-
-                        If e.SignalPresent Then
-                            cbTVChannel.Items.Add(e.Channel.ToString())
-
-                            If e.Channel = -1 Then
-
-                                pbChannels.Value = 0
-                                MessageBox.Show(Me, "AutoTune complete")
-
-                            End If
-                        End If
-
-                        Application.DoEvents()
-                    End Sub)
-
-    End Sub
-
     Private Delegate Sub MotionDelegate(ByVal e As MotionDetectionEventArgs)
 
         ''' <summary>
@@ -3721,26 +3335,6 @@ Public Class Form1
     Private Async Sub btSeparateCaptureResume_Click(sender As System.Object, e As EventArgs) Handles btSeparateCaptureResume.Click
 
         Await VideoCapture1.SeparateCapture_ResumeAsync()
-
-    End Sub
-
-        ''' <summary>
-        ''' Bt dvbt tune click.
-        ''' </summary>
-    Private Sub btDVBTTune_Click(sender As System.Object, e As EventArgs) Handles btDVBTTune.Click
-
-        If (Not IsNothing(VideoCapture1.BDA_Source) And VideoCapture1.BDA_Source.SourceType = BDAType.DVBT) Then
-
-            Dim bdaTuningParameters As BDATuningParameters = New BDATuningParameters
-
-            bdaTuningParameters.Frequency = Convert.ToInt32(edDVBTFrequency.Text)
-            bdaTuningParameters.ONID = Convert.ToInt32(edDVBTONID.Text)
-            bdaTuningParameters.SID = Convert.ToInt32(edDVBTSID.Text)
-            bdaTuningParameters.TSID = Convert.ToInt32(edDVBTTSID.Text)
-
-            VideoCapture1.BDA_SetParameters(bdaTuningParameters)
-
-        End If
 
     End Sub
 
@@ -4007,40 +3601,6 @@ Public Class Form1
     End Sub
 
         ''' <summary>
-        ''' Bt bda channel scanning start click.
-        ''' </summary>
-    Private Sub btBDAChannelScanningStart_Click(sender As Object, e As EventArgs) Handles btBDAChannelScanningStart.Click
-
-        lvBDAChannels.Items.Clear()
-        VideoCapture1.BDA_ScanChannels()
-
-    End Sub
-
-        ''' <summary>
-        ''' Video capture 1 on bda channel found.
-        ''' </summary>
-    Private Sub VideoCapture1_OnBDAChannelFound(sender As Object, e As BDAChannelEventArgs) Handles VideoCapture1.OnBDAChannelFound
-
-        BeginInvoke(Sub()
-                        Application.DoEvents()
-
-                        Dim list As String() = New String() {
-            e.Channel.Name,
-        e.Channel.Frequency.ToString(CultureInfo.InvariantCulture),
-        e.Channel.AudioPid.ToString(CultureInfo.InvariantCulture),
-        e.Channel.VideoPid.ToString(CultureInfo.InvariantCulture),
-        e.Channel.ServId.ToString(CultureInfo.InvariantCulture),
-        e.Channel.SymbolRate.ToString(CultureInfo.InvariantCulture)}
-
-                        Dim lvi As ListViewItem = New ListViewItem(list)
-
-                        lvBDAChannels.Items.Add(lvi)
-
-                        Application.DoEvents()
-                    End Sub)
-    End Sub
-
-        ''' <summary>
         ''' Link label 4 link clicked.
         ''' </summary>
     Private Sub linkLabel4_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkLabel4.LinkClicked
@@ -4268,136 +3828,6 @@ Public Class Form1
             VideoView1.BackColor = pnVideoRendererBGColor.BackColor
             Await VideoCapture1.Video_Renderer_UpdateAsync()
 
-        End If
-
-    End Sub
-
-        ''' <summary>
-        ''' Cb custom video source category selected index changed.
-        ''' </summary>
-    Private Sub cbCustomVideoSourceCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomVideoSourceCategory.SelectedIndexChanged
-
-        cbCustomVideoSourceFilter.Items.Clear()
-
-        If (cbCustomVideoSourceCategory.SelectedIndex = 0) Then
-
-            Dim filters = VideoCapture1.Video_CaptureDevices
-            For Each item As VideoCaptureDeviceInfo In filters
-                cbCustomVideoSourceFilter.Items.Add(item.Name)
-            Next
-
-            If (filters.Count > 0) Then
-                cbCustomVideoSourceFilter.SelectedIndex = 0
-            End If
-
-        ElseIf (cbCustomVideoSourceCategory.SelectedIndex = 1) Then
-
-            Dim filters = VideoCapture1.DirectShow_Filters
-            For Each item As String In filters
-                cbCustomVideoSourceFilter.Items.Add(item)
-            Next
-
-            If (filters.Count > 0) Then
-                cbCustomVideoSourceFilter.SelectedIndex = 0
-            End If
-
-        End If
-
-    End Sub
-
-        ''' <summary>
-        ''' Cb custom audio source category selected index changed.
-        ''' </summary>
-    Private Sub cbCustomAudioSourceCategory_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomAudioSourceCategory.SelectedIndexChanged
-
-        cbCustomAudioSourceFilter.Items.Clear()
-        cbCustomAudioSourceFilter.Items.Add(String.Empty)
-
-        If (cbCustomAudioSourceCategory.SelectedIndex = 0) Then
-
-            Dim filters = VideoCapture1.Audio_CaptureDevices
-            For Each item As AudioCaptureDeviceInfo In filters
-                cbCustomAudioSourceFilter.Items.Add(item.Name)
-            Next
-
-            If (filters.Count > 0) Then
-                cbCustomAudioSourceFilter.SelectedIndex = 0
-            End If
-
-        ElseIf (cbCustomAudioSourceCategory.SelectedIndex = 1) Then
-
-            Dim filters = VideoCapture1.DirectShow_Filters
-            For Each item As String In filters
-                cbCustomAudioSourceFilter.Items.Add(item)
-            Next
-
-            If (filters.Count > 0) Then
-
-                cbCustomAudioSourceFilter.SelectedIndex = 0
-
-            End If
-        End If
-    End Sub
-
-        ''' <summary>
-        ''' Cb custom video source filter selected index changed.
-        ''' </summary>
-    Private Sub cbCustomVideoSourceFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomVideoSourceFilter.SelectedIndexChanged
-
-        If (Not String.IsNullOrEmpty(cbCustomVideoSourceFilter.Text)) Then
-            cbCustomVideoSourceFormat.Items.Clear()
-            cbCustomVideoSourceFrameRate.Items.Clear()
-
-            Dim formats As List(Of VideoCaptureDeviceFormat) = Nothing
-
-            If (cbCustomVideoSourceCategory.SelectedIndex = 0) Then
-                VideoCapture1.DirectShow_Filter_GetVideoFormats(
-                    FilterCategoryX.VideoCaptureSource,
-                    cbCustomVideoSourceFilter.Text,
-                    MediaTypeCategory.Video,
-                     formats)
-            Else
-                VideoCapture1.DirectShow_Filter_GetVideoFormats(
-                    FilterCategoryX.DirectShowFilters,
-                    cbCustomVideoSourceFilter.Text,
-                    MediaTypeCategory.Video,
-                     formats)
-            End If
-
-            For Each format As VideoCaptureDeviceFormat In formats
-                cbCustomVideoSourceFormat.Items.Add(format.Name)
-            Next
-        End If
-
-    End Sub
-
-        ''' <summary>
-        ''' Cb custom audio source filter selected index changed.
-        ''' </summary>
-    Private Sub cbCustomAudioSourceFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCustomAudioSourceFilter.SelectedIndexChanged
-
-        If (Not String.IsNullOrEmpty(cbCustomAudioSourceFilter.Text)) Then
-            cbCustomAudioSourceFormat.Items.Clear()
-
-            Dim formats As List(Of String) = Nothing
-
-            If (cbCustomAudioSourceCategory.SelectedIndex = 0) Then
-                VideoCapture1.DirectShow_Filter_GetAudioFormats(
-                    FilterCategoryX.AudioCaptureSource,
-                    cbCustomAudioSourceFilter.Text,
-                    MediaTypeCategory.Audio,
-                    formats)
-            Else
-                VideoCapture1.DirectShow_Filter_GetAudioFormats(
-                    FilterCategoryX.DirectShowFilters,
-                    cbCustomAudioSourceFilter.Text,
-                    MediaTypeCategory.Audio,
-                     formats)
-            End If
-
-            For Each format As String In formats
-                cbCustomAudioSourceFormat.Items.Add(format)
-            Next
         End If
 
     End Sub
@@ -5202,54 +4632,50 @@ Public Class Form1
             Case 2
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wmv")
             Case 3
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
-            Case 4
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wav")
-            Case 5
+            Case 4
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp3")
-            Case 6
+            Case 5
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".m4a")
-            Case 7
+            Case 6
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wma")
-            Case 8
+            Case 7
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".flac")
+            Case 8
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg")
             Case 9
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg")
             Case 10
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg")
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
             Case 11
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
             Case 12
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
-            Case 13
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
-            Case 14
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mpg")
-            Case 15
+            Case 13
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mkv")
+            Case 14
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
+            Case 15
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
             Case 16
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
             Case 17
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm")
             Case 18
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
             Case 19
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm")
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
             Case 20
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
             Case 21
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
             Case 22
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
-            Case 23
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
-            Case 24
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif")
-            Case 25
+            Case 23
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".enc")
-            Case 26
+            Case 24
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ts")
-            Case 27
+            Case 25
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mov")
         End Select
     End Sub
@@ -5279,122 +4705,111 @@ Public Class Form1
                 wmvSettingsDialog.WMA = False
                 wmvSettingsDialog.ShowDialog(Me)
             Case 3
-                If (dvSettingsDialog Is Nothing) Then
-                    dvSettingsDialog = New DVSettingsDialog()
-                End If
-
-                dvSettingsDialog.ShowDialog(Me)
-            Case 4
                 If (pcmSettingsDialog Is Nothing) Then
                     pcmSettingsDialog = New PCMSettingsDialog(VideoCapture1.Audio_Codecs.ToArray())
                 End If
 
                 pcmSettingsDialog.ShowDialog(Me)
-            Case 5
+            Case 4
                 If (mp3SettingsDialog Is Nothing) Then
                     mp3SettingsDialog = New MP3SettingsDialog()
                 End If
 
                 mp3SettingsDialog.ShowDialog(Me)
-            Case 6
+            Case 5
                 If (m4aSettingsDialog Is Nothing) Then
                     m4aSettingsDialog = New M4ASettingsDialog()
                 End If
 
                 m4aSettingsDialog.ShowDialog(Me)
-            Case 7
+            Case 6
                 If (wmvSettingsDialog Is Nothing) Then
                     wmvSettingsDialog = New WMVSettingsDialog(VideoCapture1)
                 End If
 
                 wmvSettingsDialog.WMA = True
                 wmvSettingsDialog.ShowDialog(Me)
-            Case 8
+            Case 7
                 If (flacSettingsDialog Is Nothing) Then
                     flacSettingsDialog = New FLACSettingsDialog()
                 End If
 
                 flacSettingsDialog.ShowDialog(Me)
-            Case 9
+            Case 8
                 If (oggVorbisSettingsDialog Is Nothing) Then
                     oggVorbisSettingsDialog = New OggVorbisSettingsDialog()
                 End If
 
                 oggVorbisSettingsDialog.ShowDialog(Me)
-            Case 10
+            Case 9
                 If (speexSettingsDialog Is Nothing) Then
                     speexSettingsDialog = New SpeexSettingsDialog()
                 End If
 
                 speexSettingsDialog.ShowDialog(Me)
-            Case 11
+            Case 10
                 If (customFormatSettingsDialog Is Nothing) Then
                     customFormatSettingsDialog = New CustomFormatSettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray(), VideoCapture1.DirectShow_Filters.ToArray())
                 End If
 
                 customFormatSettingsDialog.ShowDialog(Me)
-            Case 12
-            Case 13
-            Case 14
-            Case 15
+            Case 11, 12, 13
                 MessageBox.Show(Me, "No settings available for selected output format.")
-            Case 16
-            Case 17
-            Case 18
+            Case 14, 15, 16
                 If (customFormatSettingsDialog Is Nothing) Then
                     customFormatSettingsDialog = New CustomFormatSettingsDialog(VideoCapture1.Video_Codecs.ToArray(), VideoCapture1.Audio_Codecs.ToArray(), VideoCapture1.DirectShow_Filters.ToArray())
                 End If
 
                 customFormatSettingsDialog.ShowDialog(Me)
-            Case 19
+            Case 17
                 If (webmSettingsDialog Is Nothing) Then
                     webmSettingsDialog = New WebMSettingsDialog()
                 End If
 
                 webmSettingsDialog.ShowDialog(Me)
-            Case 20
+            Case 18
                 If (ffmpegSettingsDialog Is Nothing) Then
                     ffmpegSettingsDialog = New FFMPEGSettingsDialog()
                 End If
 
                 ffmpegSettingsDialog.ShowDialog(Me)
-            Case 21
+            Case 19
                 If (ffmpegEXESettingsDialog Is Nothing) Then
                     ffmpegEXESettingsDialog = New FFMPEGEXESettingsDialog()
                 End If
 
                 ffmpegEXESettingsDialog.ShowDialog(Me)
-            Case 22
+            Case 20
                 If (mp4SettingsDialog Is Nothing) Then
                     mp4SettingsDialog = New MP4SettingsDialog()
                 End If
 
                 mp4SettingsDialog.ShowDialog(Me)
-            Case 23
+            Case 21
                 If (mp4HWSettingsDialog Is Nothing) Then
                     mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
                 End If
 
                 mp4HWSettingsDialog.ShowDialog(Me)
-            Case 24
+            Case 22
                 If (gifSettingsDialog Is Nothing) Then
                     gifSettingsDialog = New GIFSettingsDialog()
                 End If
 
                 gifSettingsDialog.ShowDialog(Me)
-            Case 25
+            Case 23
                 If (mp4SettingsDialog Is Nothing) Then
                     mp4SettingsDialog = New MP4SettingsDialog()
                 End If
 
                 mp4SettingsDialog.ShowDialog(Me)
-            Case 26
+            Case 24
                 If (mpegTSSettingsDialog Is Nothing) Then
                     mpegTSSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MPEGTS)
                 End If
 
                 mpegTSSettingsDialog.ShowDialog(Me)
-            Case 27
+            Case 25
                 If (movSettingsDialog Is Nothing) Then
                     movSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MOV)
                 End If

@@ -19,6 +19,13 @@ namespace webcam_preview
         private VideoCaptureCore VideoCapture1;
 
         /// <summary>
+        /// The format and frame rate the demo starts with: the ones the SDK picks for "use best".
+        /// </summary>
+        private string _defaultVideoFormat;
+
+        private VideoFrameRate _defaultVideoFrameRate;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Form1"/> class.
         /// </summary>
         public Form1()
@@ -101,7 +108,13 @@ namespace webcam_preview
 
             if (cbVideoInputFormat.Items.Count > 0)
             {
-                cbVideoInputFormat.SelectedIndex = 0;
+                // Start from the format the SDK picks for "use best" instead of the first listed one.
+                var bestFormat = new VideoCaptureSource(deviceItem);
+                _defaultVideoFormat = bestFormat.Format;
+                _defaultVideoFrameRate = bestFormat.FrameRate;
+
+                var formatIndex = cbVideoInputFormat.Items.IndexOf(_defaultVideoFormat);
+                cbVideoInputFormat.SelectedIndex = formatIndex >= 0 ? formatIndex : 0;
             }
         }
 
@@ -249,7 +262,18 @@ namespace webcam_preview
 
                 if (cbVideoInputFrameRate.Items.Count > 0)
                 {
-                    cbVideoInputFrameRate.SelectedIndex = 0;
+                    // The "use best" default keeps its own frame rate; any other format starts at the first rate.
+                    var index = 0;
+                    if (videoFormat.Name == _defaultVideoFormat)
+                    {
+                        var rateIndex = cbVideoInputFrameRate.Items.IndexOf(_defaultVideoFrameRate.ToString(CultureInfo.CurrentCulture));
+                        if (rateIndex >= 0)
+                        {
+                            index = rateIndex;
+                        }
+                    }
+
+                    cbVideoInputFrameRate.SelectedIndex = index;
                 }
             }
         }

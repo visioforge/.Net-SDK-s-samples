@@ -314,6 +314,7 @@ namespace Main_Demo
             cbAudEqualizerPreset.SelectedIndex = 0;
 
             edScreenshotsFolder.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
+            Directory.CreateDirectory(edScreenshotsFolder.Text);
             MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             InitTimer();
@@ -1098,6 +1099,12 @@ namespace Main_Demo
             }
             else if (rbEncryptionKeyFile.IsChecked == true)
             {
+                if (MediaPlayer1.Source_Mode == MediaPlayerSourceMode.Encrypted_File_DS && !File.Exists(edEncryptionKeyFile.Text))
+                {
+                    MessageBox.Show(this, "Please select the encryption key file.");
+                    return;
+                }
+
                 MediaPlayer1.Encryption_KeyType = EncryptionKeyType.File;
                 MediaPlayer1.Encryption_Key = edEncryptionKeyFile.Text;
             }

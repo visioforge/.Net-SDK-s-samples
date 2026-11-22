@@ -11,7 +11,6 @@ using VisioForge.Core.Types;
 using VisioForge.Core.Types.X.Sources;
 using VisioForge.Core.Types.X.VideoCapture;
 using VisioForge.Core.VideoCaptureX;
-using VisioForge.Core.Windows;
 
 namespace EncoderConcurrencyTestX
 {
@@ -55,7 +54,6 @@ namespace EncoderConcurrencyTestX
                 await VisioForgeX.InitSDKAsync();
                 Title = originalTitle + $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
-                PopulateAdapters();
                 PopulateEncoderCombo();
                 ApplySourceMode();
                 _statusTimer.Start();
@@ -112,52 +110,8 @@ namespace EncoderConcurrencyTestX
         }
 
         // ================================================================
-        //  Adapters / encoders
+        //  Encoders
         // ================================================================
-
-        private void PopulateAdapters()
-        {
-            cbAdapter.Items.Clear();
-            cbAdapter.Items.Add("Any");
-
-            foreach (var a in EncoderAdapters())
-            {
-                cbAdapter.Items.Add(FormatAdapterLabel(a));
-            }
-
-            cbAdapter.SelectedIndex = 0;
-        }
-
-        private static IEnumerable<EncoderAdapterInfo> EncoderAdapters()
-        {
-            foreach (var a in DXGIAdapterEnumerator.Enumerate())
-            {
-                if (a.IsSoftware) continue;
-
-                // VendorId 0x1414 = Microsoft (WARP, Basic Render Driver, IDD shims).
-                if (a.VendorId == 0x1414) continue;
-
-                yield return a;
-            }
-        }
-
-        private static string FormatAdapterLabel(EncoderAdapterInfo a)
-        {
-            var vendor = a.VendorId switch
-            {
-                0x10DE => "NVIDIA",
-                0x1002 => "AMD",
-                0x8086 => "Intel",
-                0x1414 => "Microsoft",
-                _ => $"0x{a.VendorId:X4}",
-            };
-
-            var vram = a.DedicatedVideoMemory > 0
-                ? $"{a.DedicatedVideoMemory / (1024 * 1024)} MB"
-                : "UMA";
-
-            return $"{vendor}: {a.Description} ({vram}, LUID {a.Luid})";
-        }
 
         private void PopulateEncoderCombo()
         {
@@ -287,15 +241,6 @@ namespace EncoderConcurrencyTestX
             }
         }
 
-        private long? SelectedAdapterLuid()
-        {
-            if (cbAdapter.SelectedIndex <= 0) return null;
-            var adapters = EncoderAdapters().ToList();
-            var idx = cbAdapter.SelectedIndex - 1;
-            if (idx < 0 || idx >= adapters.Count) return null;
-            return adapters[idx].Luid;
-        }
-
         // ================================================================
         //  Source-settings construction
         // ================================================================
@@ -391,8 +336,7 @@ namespace EncoderConcurrencyTestX
                     height: h,
                     fps: fps,
                     codec: SelectedCodec(),
-                    encoder: SelectedEncoder(),
-                    adapterLuid: SelectedAdapterLuid());
+                    encoder: SelectedEncoder());
             }
             catch
             {

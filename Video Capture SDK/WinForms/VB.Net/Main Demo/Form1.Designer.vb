@@ -41,9 +41,6 @@ Partial Class Form1
         ffmpegEXESettingsDialog?.Dispose()
         ffmpegEXESettingsDialog = Nothing
 
-        dvSettingsDialog?.Dispose()
-        dvSettingsDialog = Nothing
-
         aviSettingsDialog?.Dispose()
         aviSettingsDialog = Nothing
 
@@ -138,39 +135,6 @@ Partial Class Form1
         Me.cbCrossbarOutput = New System.Windows.Forms.ComboBox()
         Me.cbCrossbarInput = New System.Windows.Forms.ComboBox()
         Me.label16 = New System.Windows.Forms.Label()
-        Me.tabPage10 = New System.Windows.Forms.TabPage()
-        Me.tabControl3 = New System.Windows.Forms.TabControl()
-        Me.tabPage14 = New System.Windows.Forms.TabPage()
-        Me.cbUseClosedCaptions = New System.Windows.Forms.CheckBox()
-        Me.edTVDefaultFormat = New System.Windows.Forms.TextBox()
-        Me.label57 = New System.Windows.Forms.Label()
-        Me.cbTVCountry = New System.Windows.Forms.ComboBox()
-        Me.label56 = New System.Windows.Forms.Label()
-        Me.cbTVMode = New System.Windows.Forms.ComboBox()
-        Me.cbTVInput = New System.Windows.Forms.ComboBox()
-        Me.cbTVTuner = New System.Windows.Forms.ComboBox()
-        Me.label33 = New System.Windows.Forms.Label()
-        Me.label32 = New System.Windows.Forms.Label()
-        Me.label27 = New System.Windows.Forms.Label()
-        Me.tabPage15 = New System.Windows.Forms.TabPage()
-        Me.edChannel = New System.Windows.Forms.TextBox()
-        Me.btUseThisChannel = New System.Windows.Forms.Button()
-        Me.groupBox1 = New System.Windows.Forms.GroupBox()
-        Me.cbTVChannel = New System.Windows.Forms.ComboBox()
-        Me.label58 = New System.Windows.Forms.Label()
-        Me.pbChannels = New System.Windows.Forms.ProgressBar()
-        Me.btStopTune = New System.Windows.Forms.Button()
-        Me.btStartTune = New System.Windows.Forms.Button()
-        Me.cbTVSystem = New System.Windows.Forms.ComboBox()
-        Me.edAudioFreq = New System.Windows.Forms.TextBox()
-        Me.label36 = New System.Windows.Forms.Label()
-        Me.edVideoFreq = New System.Windows.Forms.TextBox()
-        Me.label37 = New System.Windows.Forms.Label()
-        Me.label34 = New System.Windows.Forms.Label()
-        Me.tabPage21 = New System.Windows.Forms.TabPage()
-        Me.btMPEGEncoderShowDialog = New System.Windows.Forms.Button()
-        Me.cbMPEGEncoder = New System.Windows.Forms.ComboBox()
-        Me.label21 = New System.Windows.Forms.Label()
         Me.tabPage33 = New System.Windows.Forms.TabPage()
         Me.btMPEGAudDecSettings = New System.Windows.Forms.Button()
         Me.cbMPEGAudioDecoder = New System.Windows.Forms.ComboBox()
@@ -178,20 +142,6 @@ Partial Class Form1
         Me.btMPEGVidDecSetting = New System.Windows.Forms.Button()
         Me.cbMPEGVideoDecoder = New System.Windows.Forms.ComboBox()
         Me.label120 = New System.Windows.Forms.Label()
-        Me.tabPage11 = New System.Windows.Forms.TabPage()
-        Me.groupBox21 = New System.Windows.Forms.GroupBox()
-        Me.rbDVResDC = New System.Windows.Forms.RadioButton()
-        Me.rbDVResQuarter = New System.Windows.Forms.RadioButton()
-        Me.rbDVResHalf = New System.Windows.Forms.RadioButton()
-        Me.rbDVResFull = New System.Windows.Forms.RadioButton()
-        Me.groupBox2 = New System.Windows.Forms.GroupBox()
-        Me.btDVStepFWD = New System.Windows.Forms.Button()
-        Me.btDVStepRev = New System.Windows.Forms.Button()
-        Me.btDVFF = New System.Windows.Forms.Button()
-        Me.btDVStop = New System.Windows.Forms.Button()
-        Me.btDVPause = New System.Windows.Forms.Button()
-        Me.btDVPlay = New System.Windows.Forms.Button()
-        Me.btDVRewind = New System.Windows.Forms.Button()
         Me.tabPage57 = New System.Windows.Forms.TabPage()
         Me.lbAdjSaturationCurrent = New System.Windows.Forms.Label()
         Me.lbAdjSaturationMax = New System.Windows.Forms.Label()
@@ -379,74 +329,12 @@ Partial Class Form1
         Me.label340 = New System.Windows.Forms.Label()
         Me.cbDecklinkSourceInput = New System.Windows.Forms.ComboBox()
         Me.label338 = New System.Windows.Forms.Label()
-        Me.TabPage66 = New System.Windows.Forms.TabPage()
-        Me.tabControl22 = New System.Windows.Forms.TabControl()
-        Me.tabPage82 = New System.Windows.Forms.TabPage()
-        Me.cbBDADeviceStandard = New System.Windows.Forms.ComboBox()
-        Me.label129 = New System.Windows.Forms.Label()
-        Me.cbBDAReceiver = New System.Windows.Forms.ComboBox()
-        Me.label270 = New System.Windows.Forms.Label()
-        Me.cbBDASourceDevice = New System.Windows.Forms.ComboBox()
-        Me.label272 = New System.Windows.Forms.Label()
-        Me.tabPage83 = New System.Windows.Forms.TabPage()
-        Me.tabControl23 = New System.Windows.Forms.TabControl()
-        Me.tabPage84 = New System.Windows.Forms.TabPage()
-        Me.btDVBTTune = New System.Windows.Forms.Button()
-        Me.edDVBTSID = New System.Windows.Forms.TextBox()
-        Me.edDVBTTSID = New System.Windows.Forms.TextBox()
-        Me.edDVBTONID = New System.Windows.Forms.TextBox()
-        Me.label273 = New System.Windows.Forms.Label()
-        Me.edDVBTFrequency = New System.Windows.Forms.TextBox()
-        Me.label274 = New System.Windows.Forms.Label()
-        Me.label275 = New System.Windows.Forms.Label()
-        Me.label276 = New System.Windows.Forms.Label()
-        Me.label277 = New System.Windows.Forms.Label()
-        Me.tabPage85 = New System.Windows.Forms.TabPage()
-        Me.cbDVBSPolarisation = New System.Windows.Forms.ComboBox()
-        Me.label278 = New System.Windows.Forms.Label()
-        Me.edDVBSSymbolRate = New System.Windows.Forms.TextBox()
-        Me.label279 = New System.Windows.Forms.Label()
-        Me.btDVBSTune = New System.Windows.Forms.Button()
-        Me.edDVBSSID = New System.Windows.Forms.TextBox()
-        Me.edDVBSTSID = New System.Windows.Forms.TextBox()
-        Me.edDVBSONIT = New System.Windows.Forms.TextBox()
-        Me.label280 = New System.Windows.Forms.Label()
-        Me.edDVBSFrequency = New System.Windows.Forms.TextBox()
-        Me.label281 = New System.Windows.Forms.Label()
-        Me.label282 = New System.Windows.Forms.Label()
-        Me.label283 = New System.Windows.Forms.Label()
-        Me.label284 = New System.Windows.Forms.Label()
-        Me.tabPage86 = New System.Windows.Forms.TabPage()
-        Me.groupBox35 = New System.Windows.Forms.GroupBox()
-        Me.edDVBCMinorChannel = New System.Windows.Forms.TextBox()
-        Me.label285 = New System.Windows.Forms.Label()
-        Me.edDVBCPhysicalChannel = New System.Windows.Forms.TextBox()
-        Me.label286 = New System.Windows.Forms.Label()
-        Me.edDVBCVirtualChannel = New System.Windows.Forms.TextBox()
-        Me.label287 = New System.Windows.Forms.Label()
-        Me.groupBox36 = New System.Windows.Forms.GroupBox()
-        Me.edDVBCSymbolRate = New System.Windows.Forms.TextBox()
-        Me.label288 = New System.Windows.Forms.Label()
-        Me.edDVBCProgramNumber = New System.Windows.Forms.TextBox()
-        Me.label289 = New System.Windows.Forms.Label()
-        Me.cbDVBCModulation = New System.Windows.Forms.ComboBox()
-        Me.label290 = New System.Windows.Forms.Label()
-        Me.label291 = New System.Windows.Forms.Label()
-        Me.edDVBCCarrierFrequency = New System.Windows.Forms.TextBox()
-        Me.label292 = New System.Windows.Forms.Label()
-        Me.btBDADVBCTune = New System.Windows.Forms.Button()
-        Me.tabPage87 = New System.Windows.Forms.TabPage()
-        Me.label293 = New System.Windows.Forms.Label()
-        Me.TabPage104 = New System.Windows.Forms.TabPage()
-        Me.btBDAChannelScanningStart = New System.Windows.Forms.Button()
-        Me.lvBDAChannels = New System.Windows.Forms.ListView()
         Me.columnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.columnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.label342 = New System.Windows.Forms.Label()
         Me.tabPage49 = New System.Windows.Forms.TabPage()
         Me.tabControl20 = New System.Windows.Forms.TabControl()
         Me.tabPage67 = New System.Windows.Forms.TabPage()
@@ -607,28 +495,6 @@ Partial Class Form1
         Me.cbSeparateCaptureEnabled = New System.Windows.Forms.CheckBox()
         Me.label83 = New System.Windows.Forms.Label()
         Me.label82 = New System.Windows.Forms.Label()
-        Me.TabPage123 = New System.Windows.Forms.TabPage()
-        Me.tabControl28 = New System.Windows.Forms.TabControl()
-        Me.tabPage125 = New System.Windows.Forms.TabPage()
-        Me.edCustomVideoSourceURL = New System.Windows.Forms.TextBox()
-        Me.label516 = New System.Windows.Forms.Label()
-        Me.cbCustomVideoSourceFrameRate = New System.Windows.Forms.ComboBox()
-        Me.label438 = New System.Windows.Forms.Label()
-        Me.label435 = New System.Windows.Forms.Label()
-        Me.cbCustomVideoSourceFormat = New System.Windows.Forms.ComboBox()
-        Me.label434 = New System.Windows.Forms.Label()
-        Me.cbCustomVideoSourceFilter = New System.Windows.Forms.ComboBox()
-        Me.cbCustomVideoSourceCategory = New System.Windows.Forms.ComboBox()
-        Me.label432 = New System.Windows.Forms.Label()
-        Me.tabPage126 = New System.Windows.Forms.TabPage()
-        Me.edCustomAudioSourceURL = New System.Windows.Forms.TextBox()
-        Me.label517 = New System.Windows.Forms.Label()
-        Me.label437 = New System.Windows.Forms.Label()
-        Me.cbCustomAudioSourceFormat = New System.Windows.Forms.ComboBox()
-        Me.label436 = New System.Windows.Forms.Label()
-        Me.cbCustomAudioSourceFilter = New System.Windows.Forms.ComboBox()
-        Me.label433 = New System.Windows.Forms.Label()
-        Me.cbCustomAudioSourceCategory = New System.Windows.Forms.ComboBox()
         Me.btResume = New System.Windows.Forms.Button()
         Me.btPause = New System.Windows.Forms.Button()
         Me.cbMode = New System.Windows.Forms.ComboBox()
@@ -1208,16 +1074,7 @@ Partial Class Form1
         Me.tabControl2.SuspendLayout
         Me.tabPage8.SuspendLayout
         Me.tabPage52.SuspendLayout
-        Me.tabPage10.SuspendLayout
-        Me.tabControl3.SuspendLayout
-        Me.tabPage14.SuspendLayout
-        Me.tabPage15.SuspendLayout
-        Me.groupBox1.SuspendLayout
-        Me.tabPage21.SuspendLayout
         Me.tabPage33.SuspendLayout
-        Me.tabPage11.SuspendLayout
-        Me.groupBox21.SuspendLayout
-        Me.groupBox2.SuspendLayout
         Me.tabPage57.SuspendLayout
         CType(Me.tbAdjSaturation, System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.tbAdjHue, System.ComponentModel.ISupportInitialize).BeginInit
@@ -1247,18 +1104,6 @@ Partial Class Form1
         Me.tabPage145.SuspendLayout
         Me.groupBox42.SuspendLayout
         Me.TabPage61.SuspendLayout
-        Me.TabPage66.SuspendLayout
-        Me.tabControl22.SuspendLayout
-        Me.tabPage82.SuspendLayout
-        Me.tabPage83.SuspendLayout
-        Me.tabControl23.SuspendLayout
-        Me.tabPage84.SuspendLayout
-        Me.tabPage85.SuspendLayout
-        Me.tabPage86.SuspendLayout
-        Me.groupBox35.SuspendLayout
-        Me.groupBox36.SuspendLayout
-        Me.tabPage87.SuspendLayout
-        Me.TabPage104.SuspendLayout
         Me.tabPage49.SuspendLayout
         Me.tabControl20.SuspendLayout
         Me.tabPage67.SuspendLayout
@@ -1288,10 +1133,6 @@ Partial Class Form1
         Me.tabPage116.SuspendLayout
         Me.TabPage23.SuspendLayout
         Me.groupBox8.SuspendLayout
-        Me.TabPage123.SuspendLayout
-        Me.tabControl28.SuspendLayout
-        Me.tabPage125.SuspendLayout
-        Me.tabPage126.SuspendLayout
         Me.tabControl1.SuspendLayout
         Me.tabPage1.SuspendLayout
         Me.tabPage2.SuspendLayout
@@ -1500,12 +1341,11 @@ Partial Class Form1
         Me.tabControl10.Controls.Add(Me.tabPage47)
         Me.tabControl10.Controls.Add(Me.tabPage48)
         Me.tabControl10.Controls.Add(Me.TabPage61)
-        Me.tabControl10.Controls.Add(Me.TabPage66)
         Me.tabControl10.Controls.Add(Me.tabPage49)
         Me.tabControl10.Controls.Add(Me.tabPage50)
         Me.tabControl10.Controls.Add(Me.tabPage51)
         Me.tabControl10.Controls.Add(Me.TabPage23)
-        Me.tabControl10.Controls.Add(Me.TabPage123)
+        Me.tabControl10.Controls.Add(Me.tabPage33)
         Me.tabControl10.Location = New System.Drawing.Point(501, 10)
         Me.tabControl10.Margin = New System.Windows.Forms.Padding(4)
         Me.tabControl10.Name = "tabControl10"
@@ -1529,8 +1369,6 @@ Partial Class Form1
         '
         Me.tabControl2.Controls.Add(Me.tabPage8)
         Me.tabControl2.Controls.Add(Me.tabPage52)
-        Me.tabControl2.Controls.Add(Me.tabPage10)
-        Me.tabControl2.Controls.Add(Me.tabPage11)
         Me.tabControl2.Controls.Add(Me.tabPage57)
         Me.tabControl2.Controls.Add(Me.TabPage3)
         Me.tabControl2.Location = New System.Drawing.Point(4, 9)
@@ -1825,368 +1663,6 @@ Partial Class Form1
         Me.label16.TabIndex = 82
         Me.label16.Text = "Crossbar (INPUT - OUTPUT)"
         '
-        'tabPage10
-        '
-        Me.tabPage10.Controls.Add(Me.tabControl3)
-        Me.tabPage10.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage10.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage10.Name = "tabPage10"
-        Me.tabPage10.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage10.Size = New System.Drawing.Size(676, 359)
-        Me.tabPage10.TabIndex = 2
-        Me.tabPage10.Text = "TV Tuner"
-        Me.tabPage10.UseVisualStyleBackColor = True
-        '
-        'tabControl3
-        '
-        Me.tabControl3.Controls.Add(Me.tabPage14)
-        Me.tabControl3.Controls.Add(Me.tabPage15)
-        Me.tabControl3.Controls.Add(Me.tabPage21)
-        Me.tabControl3.Controls.Add(Me.tabPage33)
-        Me.tabControl3.Location = New System.Drawing.Point(4, 9)
-        Me.tabControl3.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabControl3.Name = "tabControl3"
-        Me.tabControl3.SelectedIndex = 0
-        Me.tabControl3.Size = New System.Drawing.Size(658, 338)
-        Me.tabControl3.TabIndex = 0
-        '
-        'tabPage14
-        '
-        Me.tabPage14.Controls.Add(Me.cbUseClosedCaptions)
-        Me.tabPage14.Controls.Add(Me.edTVDefaultFormat)
-        Me.tabPage14.Controls.Add(Me.label57)
-        Me.tabPage14.Controls.Add(Me.cbTVCountry)
-        Me.tabPage14.Controls.Add(Me.label56)
-        Me.tabPage14.Controls.Add(Me.cbTVMode)
-        Me.tabPage14.Controls.Add(Me.cbTVInput)
-        Me.tabPage14.Controls.Add(Me.cbTVTuner)
-        Me.tabPage14.Controls.Add(Me.label33)
-        Me.tabPage14.Controls.Add(Me.label32)
-        Me.tabPage14.Controls.Add(Me.label27)
-        Me.tabPage14.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage14.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage14.Name = "tabPage14"
-        Me.tabPage14.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage14.Size = New System.Drawing.Size(650, 305)
-        Me.tabPage14.TabIndex = 0
-        Me.tabPage14.Text = "Main settings"
-        Me.tabPage14.UseVisualStyleBackColor = True
-        '
-        'cbUseClosedCaptions
-        '
-        Me.cbUseClosedCaptions.AutoSize = True
-        Me.cbUseClosedCaptions.Location = New System.Drawing.Point(39, 209)
-        Me.cbUseClosedCaptions.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbUseClosedCaptions.Name = "cbUseClosedCaptions"
-        Me.cbUseClosedCaptions.Size = New System.Drawing.Size(234, 24)
-        Me.cbUseClosedCaptions.TabIndex = 61
-        Me.cbUseClosedCaptions.Text = "Allow closed captions usage"
-        Me.cbUseClosedCaptions.UseVisualStyleBackColor = True
-        '
-        'edTVDefaultFormat
-        '
-        Me.edTVDefaultFormat.Location = New System.Drawing.Point(348, 147)
-        Me.edTVDefaultFormat.Margin = New System.Windows.Forms.Padding(4)
-        Me.edTVDefaultFormat.Name = "edTVDefaultFormat"
-        Me.edTVDefaultFormat.ReadOnly = True
-        Me.edTVDefaultFormat.Size = New System.Drawing.Size(122, 26)
-        Me.edTVDefaultFormat.TabIndex = 59
-        '
-        'label57
-        '
-        Me.label57.AutoSize = True
-        Me.label57.Location = New System.Drawing.Point(344, 120)
-        Me.label57.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label57.Name = "label57"
-        Me.label57.Size = New System.Drawing.Size(111, 20)
-        Me.label57.TabIndex = 58
-        Me.label57.Text = "Default format"
-        '
-        'cbTVCountry
-        '
-        Me.cbTVCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTVCountry.FormattingEnabled = True
-        Me.cbTVCountry.Location = New System.Drawing.Point(110, 147)
-        Me.cbTVCountry.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbTVCountry.Name = "cbTVCountry"
-        Me.cbTVCountry.Size = New System.Drawing.Size(223, 28)
-        Me.cbTVCountry.TabIndex = 57
-        '
-        'label56
-        '
-        Me.label56.AutoSize = True
-        Me.label56.Location = New System.Drawing.Point(34, 152)
-        Me.label56.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label56.Name = "label56"
-        Me.label56.Size = New System.Drawing.Size(64, 20)
-        Me.label56.TabIndex = 56
-        Me.label56.Text = "Country"
-        '
-        'cbTVMode
-        '
-        Me.cbTVMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTVMode.FormattingEnabled = True
-        Me.cbTVMode.Items.AddRange(New Object() {"Default", "TV", "FM Radio", "AM Radio", "DSS"})
-        Me.cbTVMode.Location = New System.Drawing.Point(108, 74)
-        Me.cbTVMode.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbTVMode.Name = "cbTVMode"
-        Me.cbTVMode.Size = New System.Drawing.Size(127, 28)
-        Me.cbTVMode.TabIndex = 55
-        '
-        'cbTVInput
-        '
-        Me.cbTVInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTVInput.FormattingEnabled = True
-        Me.cbTVInput.Items.AddRange(New Object() {"Cable", "Antenna"})
-        Me.cbTVInput.Location = New System.Drawing.Point(344, 74)
-        Me.cbTVInput.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbTVInput.Name = "cbTVInput"
-        Me.cbTVInput.Size = New System.Drawing.Size(127, 28)
-        Me.cbTVInput.TabIndex = 54
-        '
-        'cbTVTuner
-        '
-        Me.cbTVTuner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTVTuner.FormattingEnabled = True
-        Me.cbTVTuner.Location = New System.Drawing.Point(108, 23)
-        Me.cbTVTuner.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbTVTuner.Name = "cbTVTuner"
-        Me.cbTVTuner.Size = New System.Drawing.Size(362, 28)
-        Me.cbTVTuner.TabIndex = 53
-        '
-        'label33
-        '
-        Me.label33.AutoSize = True
-        Me.label33.Location = New System.Drawing.Point(34, 78)
-        Me.label33.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label33.Name = "label33"
-        Me.label33.Size = New System.Drawing.Size(49, 20)
-        Me.label33.TabIndex = 52
-        Me.label33.Text = "Mode"
-        '
-        'label32
-        '
-        Me.label32.AutoSize = True
-        Me.label32.Location = New System.Drawing.Point(288, 78)
-        Me.label32.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label32.Name = "label32"
-        Me.label32.Size = New System.Drawing.Size(46, 20)
-        Me.label32.TabIndex = 51
-        Me.label32.Text = "Input"
-        '
-        'label27
-        '
-        Me.label27.AutoSize = True
-        Me.label27.Location = New System.Drawing.Point(34, 28)
-        Me.label27.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label27.Name = "label27"
-        Me.label27.Size = New System.Drawing.Size(57, 20)
-        Me.label27.TabIndex = 50
-        Me.label27.Text = "Device"
-        '
-        'tabPage15
-        '
-        Me.tabPage15.Controls.Add(Me.edChannel)
-        Me.tabPage15.Controls.Add(Me.btUseThisChannel)
-        Me.tabPage15.Controls.Add(Me.groupBox1)
-        Me.tabPage15.Controls.Add(Me.cbTVSystem)
-        Me.tabPage15.Controls.Add(Me.edAudioFreq)
-        Me.tabPage15.Controls.Add(Me.label36)
-        Me.tabPage15.Controls.Add(Me.edVideoFreq)
-        Me.tabPage15.Controls.Add(Me.label37)
-        Me.tabPage15.Controls.Add(Me.label34)
-        Me.tabPage15.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage15.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage15.Name = "tabPage15"
-        Me.tabPage15.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage15.Size = New System.Drawing.Size(650, 305)
-        Me.tabPage15.TabIndex = 1
-        Me.tabPage15.Text = "Tuning"
-        Me.tabPage15.UseVisualStyleBackColor = True
-        '
-        'edChannel
-        '
-        Me.edChannel.Location = New System.Drawing.Point(501, 196)
-        Me.edChannel.Margin = New System.Windows.Forms.Padding(4)
-        Me.edChannel.Name = "edChannel"
-        Me.edChannel.Size = New System.Drawing.Size(116, 26)
-        Me.edChannel.TabIndex = 59
-        Me.edChannel.Text = "22"
-        '
-        'btUseThisChannel
-        '
-        Me.btUseThisChannel.Location = New System.Drawing.Point(336, 192)
-        Me.btUseThisChannel.Margin = New System.Windows.Forms.Padding(4)
-        Me.btUseThisChannel.Name = "btUseThisChannel"
-        Me.btUseThisChannel.Size = New System.Drawing.Size(156, 33)
-        Me.btUseThisChannel.TabIndex = 58
-        Me.btUseThisChannel.Text = "Set channel/freq."
-        Me.btUseThisChannel.UseVisualStyleBackColor = True
-        '
-        'groupBox1
-        '
-        Me.groupBox1.Controls.Add(Me.cbTVChannel)
-        Me.groupBox1.Controls.Add(Me.label58)
-        Me.groupBox1.Controls.Add(Me.pbChannels)
-        Me.groupBox1.Controls.Add(Me.btStopTune)
-        Me.groupBox1.Controls.Add(Me.btStartTune)
-        Me.groupBox1.Location = New System.Drawing.Point(24, 28)
-        Me.groupBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.groupBox1.Name = "groupBox1"
-        Me.groupBox1.Padding = New System.Windows.Forms.Padding(4)
-        Me.groupBox1.Size = New System.Drawing.Size(393, 140)
-        Me.groupBox1.TabIndex = 57
-        Me.groupBox1.TabStop = False
-        Me.groupBox1.Text = "AutoTune"
-        '
-        'cbTVChannel
-        '
-        Me.cbTVChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTVChannel.FormattingEnabled = True
-        Me.cbTVChannel.Location = New System.Drawing.Point(248, 81)
-        Me.cbTVChannel.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbTVChannel.Name = "cbTVChannel"
-        Me.cbTVChannel.Size = New System.Drawing.Size(121, 28)
-        Me.cbTVChannel.TabIndex = 4
-        '
-        'label58
-        '
-        Me.label58.AutoSize = True
-        Me.label58.Location = New System.Drawing.Point(26, 85)
-        Me.label58.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label58.Name = "label58"
-        Me.label58.Size = New System.Drawing.Size(206, 20)
-        Me.label58.TabIndex = 3
-        Me.label58.Text = "TV Channel / FM Frequency"
-        '
-        'pbChannels
-        '
-        Me.pbChannels.Location = New System.Drawing.Point(220, 33)
-        Me.pbChannels.Margin = New System.Windows.Forms.Padding(4)
-        Me.pbChannels.Name = "pbChannels"
-        Me.pbChannels.Size = New System.Drawing.Size(150, 22)
-        Me.pbChannels.TabIndex = 2
-        '
-        'btStopTune
-        '
-        Me.btStopTune.Location = New System.Drawing.Point(114, 28)
-        Me.btStopTune.Margin = New System.Windows.Forms.Padding(4)
-        Me.btStopTune.Name = "btStopTune"
-        Me.btStopTune.Size = New System.Drawing.Size(75, 33)
-        Me.btStopTune.TabIndex = 1
-        Me.btStopTune.Text = "Stop"
-        Me.btStopTune.UseVisualStyleBackColor = True
-        '
-        'btStartTune
-        '
-        Me.btStartTune.Location = New System.Drawing.Point(30, 28)
-        Me.btStartTune.Margin = New System.Windows.Forms.Padding(4)
-        Me.btStartTune.Name = "btStartTune"
-        Me.btStartTune.Size = New System.Drawing.Size(75, 33)
-        Me.btStartTune.TabIndex = 0
-        Me.btStartTune.Text = "Start"
-        Me.btStartTune.UseVisualStyleBackColor = True
-        '
-        'cbTVSystem
-        '
-        Me.cbTVSystem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTVSystem.FormattingEnabled = True
-        Me.cbTVSystem.Location = New System.Drawing.Point(152, 196)
-        Me.cbTVSystem.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbTVSystem.Name = "cbTVSystem"
-        Me.cbTVSystem.Size = New System.Drawing.Size(127, 28)
-        Me.cbTVSystem.TabIndex = 56
-        '
-        'edAudioFreq
-        '
-        Me.edAudioFreq.Location = New System.Drawing.Point(576, 110)
-        Me.edAudioFreq.Margin = New System.Windows.Forms.Padding(4)
-        Me.edAudioFreq.Name = "edAudioFreq"
-        Me.edAudioFreq.Size = New System.Drawing.Size(42, 26)
-        Me.edAudioFreq.TabIndex = 55
-        '
-        'label36
-        '
-        Me.label36.AutoSize = True
-        Me.label36.Location = New System.Drawing.Point(434, 112)
-        Me.label36.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label36.Name = "label36"
-        Me.label36.Size = New System.Drawing.Size(124, 20)
-        Me.label36.TabIndex = 54
-        Me.label36.Text = "Audio frequency"
-        '
-        'edVideoFreq
-        '
-        Me.edVideoFreq.Location = New System.Drawing.Point(576, 50)
-        Me.edVideoFreq.Margin = New System.Windows.Forms.Padding(4)
-        Me.edVideoFreq.Name = "edVideoFreq"
-        Me.edVideoFreq.Size = New System.Drawing.Size(42, 26)
-        Me.edVideoFreq.TabIndex = 53
-        '
-        'label37
-        '
-        Me.label37.AutoSize = True
-        Me.label37.Location = New System.Drawing.Point(434, 55)
-        Me.label37.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label37.Name = "label37"
-        Me.label37.Size = New System.Drawing.Size(124, 20)
-        Me.label37.TabIndex = 52
-        Me.label37.Text = "Video frequency"
-        '
-        'label34
-        '
-        Me.label34.AutoSize = True
-        Me.label34.Location = New System.Drawing.Point(20, 200)
-        Me.label34.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label34.Name = "label34"
-        Me.label34.Size = New System.Drawing.Size(120, 20)
-        Me.label34.TabIndex = 51
-        Me.label34.Text = "TV video format"
-        '
-        'tabPage21
-        '
-        Me.tabPage21.Controls.Add(Me.btMPEGEncoderShowDialog)
-        Me.tabPage21.Controls.Add(Me.cbMPEGEncoder)
-        Me.tabPage21.Controls.Add(Me.label21)
-        Me.tabPage21.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage21.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage21.Name = "tabPage21"
-        Me.tabPage21.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage21.Size = New System.Drawing.Size(650, 305)
-        Me.tabPage21.TabIndex = 3
-        Me.tabPage21.Text = "MPEG Encoder"
-        Me.tabPage21.UseVisualStyleBackColor = True
-        '
-        'btMPEGEncoderShowDialog
-        '
-        Me.btMPEGEncoderShowDialog.Location = New System.Drawing.Point(362, 44)
-        Me.btMPEGEncoderShowDialog.Margin = New System.Windows.Forms.Padding(4)
-        Me.btMPEGEncoderShowDialog.Name = "btMPEGEncoderShowDialog"
-        Me.btMPEGEncoderShowDialog.Size = New System.Drawing.Size(112, 33)
-        Me.btMPEGEncoderShowDialog.TabIndex = 2
-        Me.btMPEGEncoderShowDialog.Text = "Settings"
-        Me.btMPEGEncoderShowDialog.UseVisualStyleBackColor = True
-        '
-        'cbMPEGEncoder
-        '
-        Me.cbMPEGEncoder.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbMPEGEncoder.FormattingEnabled = True
-        Me.cbMPEGEncoder.Location = New System.Drawing.Point(28, 46)
-        Me.cbMPEGEncoder.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbMPEGEncoder.Name = "cbMPEGEncoder"
-        Me.cbMPEGEncoder.Size = New System.Drawing.Size(322, 28)
-        Me.cbMPEGEncoder.TabIndex = 1
-        '
-        'label21
-        '
-        Me.label21.AutoSize = True
-        Me.label21.Location = New System.Drawing.Point(24, 23)
-        Me.label21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label21.Name = "label21"
-        Me.label21.Size = New System.Drawing.Size(120, 20)
-        Me.label21.TabIndex = 0
-        Me.label21.Text = "MPEG Encoder"
-        '
         'tabPage33
         '
         Me.tabPage33.Controls.Add(Me.btMPEGAudDecSettings)
@@ -2199,7 +1675,7 @@ Partial Class Form1
         Me.tabPage33.Margin = New System.Windows.Forms.Padding(4)
         Me.tabPage33.Name = "tabPage33"
         Me.tabPage33.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage33.Size = New System.Drawing.Size(650, 305)
+        Me.tabPage33.Size = New System.Drawing.Size(692, 415)
         Me.tabPage33.TabIndex = 4
         Me.tabPage33.Text = "MPEG Decoding"
         Me.tabPage33.UseVisualStyleBackColor = True
@@ -2263,168 +1739,6 @@ Partial Class Form1
         Me.label120.Size = New System.Drawing.Size(115, 20)
         Me.label120.TabIndex = 0
         Me.label120.Text = "Video Decoder"
-        '
-        'tabPage11
-        '
-        Me.tabPage11.Controls.Add(Me.groupBox21)
-        Me.tabPage11.Controls.Add(Me.groupBox2)
-        Me.tabPage11.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage11.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage11.Name = "tabPage11"
-        Me.tabPage11.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage11.Size = New System.Drawing.Size(676, 359)
-        Me.tabPage11.TabIndex = 3
-        Me.tabPage11.Text = "DV"
-        Me.tabPage11.UseVisualStyleBackColor = True
-        '
-        'groupBox21
-        '
-        Me.groupBox21.Controls.Add(Me.rbDVResDC)
-        Me.groupBox21.Controls.Add(Me.rbDVResQuarter)
-        Me.groupBox21.Controls.Add(Me.rbDVResHalf)
-        Me.groupBox21.Controls.Add(Me.rbDVResFull)
-        Me.groupBox21.Location = New System.Drawing.Point(28, 202)
-        Me.groupBox21.Margin = New System.Windows.Forms.Padding(4)
-        Me.groupBox21.Name = "groupBox21"
-        Me.groupBox21.Padding = New System.Windows.Forms.Padding(4)
-        Me.groupBox21.Size = New System.Drawing.Size(542, 65)
-        Me.groupBox21.TabIndex = 1
-        Me.groupBox21.TabStop = False
-        Me.groupBox21.Text = "Resolution"
-        '
-        'rbDVResDC
-        '
-        Me.rbDVResDC.AutoSize = True
-        Me.rbDVResDC.Location = New System.Drawing.Point(418, 28)
-        Me.rbDVResDC.Margin = New System.Windows.Forms.Padding(4)
-        Me.rbDVResDC.Name = "rbDVResDC"
-        Me.rbDVResDC.Size = New System.Drawing.Size(57, 24)
-        Me.rbDVResDC.TabIndex = 3
-        Me.rbDVResDC.Text = "DC"
-        Me.rbDVResDC.UseVisualStyleBackColor = True
-        '
-        'rbDVResQuarter
-        '
-        Me.rbDVResQuarter.AutoSize = True
-        Me.rbDVResQuarter.Location = New System.Drawing.Point(274, 28)
-        Me.rbDVResQuarter.Margin = New System.Windows.Forms.Padding(4)
-        Me.rbDVResQuarter.Name = "rbDVResQuarter"
-        Me.rbDVResQuarter.Size = New System.Drawing.Size(88, 24)
-        Me.rbDVResQuarter.TabIndex = 2
-        Me.rbDVResQuarter.Text = "Quarter"
-        Me.rbDVResQuarter.UseVisualStyleBackColor = True
-        '
-        'rbDVResHalf
-        '
-        Me.rbDVResHalf.AutoSize = True
-        Me.rbDVResHalf.Location = New System.Drawing.Point(156, 28)
-        Me.rbDVResHalf.Margin = New System.Windows.Forms.Padding(4)
-        Me.rbDVResHalf.Name = "rbDVResHalf"
-        Me.rbDVResHalf.Size = New System.Drawing.Size(63, 24)
-        Me.rbDVResHalf.TabIndex = 1
-        Me.rbDVResHalf.Text = "Half"
-        Me.rbDVResHalf.UseVisualStyleBackColor = True
-        '
-        'rbDVResFull
-        '
-        Me.rbDVResFull.AutoSize = True
-        Me.rbDVResFull.Checked = True
-        Me.rbDVResFull.Location = New System.Drawing.Point(33, 28)
-        Me.rbDVResFull.Margin = New System.Windows.Forms.Padding(4)
-        Me.rbDVResFull.Name = "rbDVResFull"
-        Me.rbDVResFull.Size = New System.Drawing.Size(59, 24)
-        Me.rbDVResFull.TabIndex = 0
-        Me.rbDVResFull.TabStop = True
-        Me.rbDVResFull.Text = "Full"
-        Me.rbDVResFull.UseVisualStyleBackColor = True
-        '
-        'groupBox2
-        '
-        Me.groupBox2.Controls.Add(Me.btDVStepFWD)
-        Me.groupBox2.Controls.Add(Me.btDVStepRev)
-        Me.groupBox2.Controls.Add(Me.btDVFF)
-        Me.groupBox2.Controls.Add(Me.btDVStop)
-        Me.groupBox2.Controls.Add(Me.btDVPause)
-        Me.groupBox2.Controls.Add(Me.btDVPlay)
-        Me.groupBox2.Controls.Add(Me.btDVRewind)
-        Me.groupBox2.Location = New System.Drawing.Point(28, 34)
-        Me.groupBox2.Margin = New System.Windows.Forms.Padding(4)
-        Me.groupBox2.Name = "groupBox2"
-        Me.groupBox2.Padding = New System.Windows.Forms.Padding(4)
-        Me.groupBox2.Size = New System.Drawing.Size(542, 144)
-        Me.groupBox2.TabIndex = 0
-        Me.groupBox2.TabStop = False
-        Me.groupBox2.Text = "Controls"
-        '
-        'btDVStepFWD
-        '
-        Me.btDVStepFWD.Location = New System.Drawing.Point(376, 84)
-        Me.btDVStepFWD.Margin = New System.Windows.Forms.Padding(4)
-        Me.btDVStepFWD.Name = "btDVStepFWD"
-        Me.btDVStepFWD.Size = New System.Drawing.Size(102, 33)
-        Me.btDVStepFWD.TabIndex = 6
-        Me.btDVStepFWD.Text = "Step FWD"
-        Me.btDVStepFWD.UseVisualStyleBackColor = True
-        '
-        'btDVStepRev
-        '
-        Me.btDVStepRev.Location = New System.Drawing.Point(78, 84)
-        Me.btDVStepRev.Margin = New System.Windows.Forms.Padding(4)
-        Me.btDVStepRev.Name = "btDVStepRev"
-        Me.btDVStepRev.Size = New System.Drawing.Size(102, 33)
-        Me.btDVStepRev.TabIndex = 5
-        Me.btDVStepRev.Text = "Step REV"
-        Me.btDVStepRev.UseVisualStyleBackColor = True
-        '
-        'btDVFF
-        '
-        Me.btDVFF.Location = New System.Drawing.Point(429, 33)
-        Me.btDVFF.Margin = New System.Windows.Forms.Padding(4)
-        Me.btDVFF.Name = "btDVFF"
-        Me.btDVFF.Size = New System.Drawing.Size(90, 33)
-        Me.btDVFF.TabIndex = 4
-        Me.btDVFF.Text = "F.F."
-        Me.btDVFF.UseVisualStyleBackColor = True
-        '
-        'btDVStop
-        '
-        Me.btDVStop.Location = New System.Drawing.Point(330, 33)
-        Me.btDVStop.Margin = New System.Windows.Forms.Padding(4)
-        Me.btDVStop.Name = "btDVStop"
-        Me.btDVStop.Size = New System.Drawing.Size(90, 33)
-        Me.btDVStop.TabIndex = 3
-        Me.btDVStop.Text = "Stop"
-        Me.btDVStop.UseVisualStyleBackColor = True
-        '
-        'btDVPause
-        '
-        Me.btDVPause.Location = New System.Drawing.Point(231, 33)
-        Me.btDVPause.Margin = New System.Windows.Forms.Padding(4)
-        Me.btDVPause.Name = "btDVPause"
-        Me.btDVPause.Size = New System.Drawing.Size(90, 33)
-        Me.btDVPause.TabIndex = 2
-        Me.btDVPause.Text = "Pause"
-        Me.btDVPause.UseVisualStyleBackColor = True
-        '
-        'btDVPlay
-        '
-        Me.btDVPlay.Location = New System.Drawing.Point(132, 33)
-        Me.btDVPlay.Margin = New System.Windows.Forms.Padding(4)
-        Me.btDVPlay.Name = "btDVPlay"
-        Me.btDVPlay.Size = New System.Drawing.Size(90, 33)
-        Me.btDVPlay.TabIndex = 1
-        Me.btDVPlay.Text = "Play"
-        Me.btDVPlay.UseVisualStyleBackColor = True
-        '
-        'btDVRewind
-        '
-        Me.btDVRewind.Location = New System.Drawing.Point(33, 33)
-        Me.btDVRewind.Margin = New System.Windows.Forms.Padding(4)
-        Me.btDVRewind.Name = "btDVRewind"
-        Me.btDVRewind.Size = New System.Drawing.Size(90, 33)
-        Me.btDVRewind.TabIndex = 0
-        Me.btDVRewind.Text = "Rewind"
-        Me.btDVRewind.UseVisualStyleBackColor = True
         '
         'tabPage57
         '
@@ -4546,677 +3860,6 @@ Partial Class Form1
         Me.label338.TabIndex = 24
         Me.label338.Text = "Input"
         '
-        'TabPage66
-        '
-        Me.TabPage66.Controls.Add(Me.tabControl22)
-        Me.TabPage66.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage66.Margin = New System.Windows.Forms.Padding(4)
-        Me.TabPage66.Name = "TabPage66"
-        Me.TabPage66.Padding = New System.Windows.Forms.Padding(4)
-        Me.TabPage66.Size = New System.Drawing.Size(692, 415)
-        Me.TabPage66.TabIndex = 7
-        Me.TabPage66.Text = "DVB-x / ATSC"
-        Me.TabPage66.UseVisualStyleBackColor = True
-        '
-        'tabControl22
-        '
-        Me.tabControl22.Controls.Add(Me.tabPage82)
-        Me.tabControl22.Controls.Add(Me.tabPage83)
-        Me.tabControl22.Controls.Add(Me.TabPage104)
-        Me.tabControl22.Location = New System.Drawing.Point(9, 9)
-        Me.tabControl22.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabControl22.Name = "tabControl22"
-        Me.tabControl22.SelectedIndex = 0
-        Me.tabControl22.Size = New System.Drawing.Size(670, 394)
-        Me.tabControl22.TabIndex = 13
-        '
-        'tabPage82
-        '
-        Me.tabPage82.Controls.Add(Me.cbBDADeviceStandard)
-        Me.tabPage82.Controls.Add(Me.label129)
-        Me.tabPage82.Controls.Add(Me.cbBDAReceiver)
-        Me.tabPage82.Controls.Add(Me.label270)
-        Me.tabPage82.Controls.Add(Me.cbBDASourceDevice)
-        Me.tabPage82.Controls.Add(Me.label272)
-        Me.tabPage82.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage82.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage82.Name = "tabPage82"
-        Me.tabPage82.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage82.Size = New System.Drawing.Size(662, 361)
-        Me.tabPage82.TabIndex = 0
-        Me.tabPage82.Text = "Input device"
-        Me.tabPage82.UseVisualStyleBackColor = True
-        '
-        'cbBDADeviceStandard
-        '
-        Me.cbBDADeviceStandard.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbBDADeviceStandard.FormattingEnabled = True
-        Me.cbBDADeviceStandard.Items.AddRange(New Object() {"DVB-T", "DVB-S", "DVB-C", "ATSC (not supported now)"})
-        Me.cbBDADeviceStandard.Location = New System.Drawing.Point(21, 188)
-        Me.cbBDADeviceStandard.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbBDADeviceStandard.Name = "cbBDADeviceStandard"
-        Me.cbBDADeviceStandard.Size = New System.Drawing.Size(402, 28)
-        Me.cbBDADeviceStandard.TabIndex = 17
-        '
-        'label129
-        '
-        Me.label129.AutoSize = True
-        Me.label129.Location = New System.Drawing.Point(16, 164)
-        Me.label129.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label129.Name = "label129"
-        Me.label129.Size = New System.Drawing.Size(124, 20)
-        Me.label129.TabIndex = 16
-        Me.label129.Text = "Device standard"
-        '
-        'cbBDAReceiver
-        '
-        Me.cbBDAReceiver.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbBDAReceiver.FormattingEnabled = True
-        Me.cbBDAReceiver.Items.AddRange(New Object() {""})
-        Me.cbBDAReceiver.Location = New System.Drawing.Point(21, 117)
-        Me.cbBDAReceiver.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbBDAReceiver.Name = "cbBDAReceiver"
-        Me.cbBDAReceiver.Size = New System.Drawing.Size(402, 28)
-        Me.cbBDAReceiver.TabIndex = 15
-        '
-        'label270
-        '
-        Me.label270.AutoSize = True
-        Me.label270.Location = New System.Drawing.Point(16, 94)
-        Me.label270.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label270.Name = "label270"
-        Me.label270.Size = New System.Drawing.Size(229, 20)
-        Me.label270.TabIndex = 14
-        Me.label270.Text = "Receiver device (can be empty)"
-        '
-        'cbBDASourceDevice
-        '
-        Me.cbBDASourceDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbBDASourceDevice.FormattingEnabled = True
-        Me.cbBDASourceDevice.Location = New System.Drawing.Point(21, 46)
-        Me.cbBDASourceDevice.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbBDASourceDevice.Name = "cbBDASourceDevice"
-        Me.cbBDASourceDevice.Size = New System.Drawing.Size(402, 28)
-        Me.cbBDASourceDevice.TabIndex = 13
-        '
-        'label272
-        '
-        Me.label272.AutoSize = True
-        Me.label272.Location = New System.Drawing.Point(16, 23)
-        Me.label272.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label272.Name = "label272"
-        Me.label272.Size = New System.Drawing.Size(109, 20)
-        Me.label272.TabIndex = 12
-        Me.label272.Text = "Source device"
-        '
-        'tabPage83
-        '
-        Me.tabPage83.Controls.Add(Me.tabControl23)
-        Me.tabPage83.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage83.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage83.Name = "tabPage83"
-        Me.tabPage83.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage83.Size = New System.Drawing.Size(662, 361)
-        Me.tabPage83.TabIndex = 1
-        Me.tabPage83.Text = "Tuning"
-        Me.tabPage83.UseVisualStyleBackColor = True
-        '
-        'tabControl23
-        '
-        Me.tabControl23.Controls.Add(Me.tabPage84)
-        Me.tabControl23.Controls.Add(Me.tabPage85)
-        Me.tabControl23.Controls.Add(Me.tabPage86)
-        Me.tabControl23.Controls.Add(Me.tabPage87)
-        Me.tabControl23.Location = New System.Drawing.Point(9, 6)
-        Me.tabControl23.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabControl23.Name = "tabControl23"
-        Me.tabControl23.SelectedIndex = 0
-        Me.tabControl23.Size = New System.Drawing.Size(640, 346)
-        Me.tabControl23.TabIndex = 8
-        '
-        'tabPage84
-        '
-        Me.tabPage84.Controls.Add(Me.btDVBTTune)
-        Me.tabPage84.Controls.Add(Me.edDVBTSID)
-        Me.tabPage84.Controls.Add(Me.edDVBTTSID)
-        Me.tabPage84.Controls.Add(Me.edDVBTONID)
-        Me.tabPage84.Controls.Add(Me.label273)
-        Me.tabPage84.Controls.Add(Me.edDVBTFrequency)
-        Me.tabPage84.Controls.Add(Me.label274)
-        Me.tabPage84.Controls.Add(Me.label275)
-        Me.tabPage84.Controls.Add(Me.label276)
-        Me.tabPage84.Controls.Add(Me.label277)
-        Me.tabPage84.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage84.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage84.Name = "tabPage84"
-        Me.tabPage84.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage84.Size = New System.Drawing.Size(632, 313)
-        Me.tabPage84.TabIndex = 0
-        Me.tabPage84.Text = "DVB-T"
-        Me.tabPage84.UseVisualStyleBackColor = True
-        '
-        'btDVBTTune
-        '
-        Me.btDVBTTune.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.btDVBTTune.Location = New System.Drawing.Point(9, 267)
-        Me.btDVBTTune.Margin = New System.Windows.Forms.Padding(4)
-        Me.btDVBTTune.Name = "btDVBTTune"
-        Me.btDVBTTune.Size = New System.Drawing.Size(69, 33)
-        Me.btDVBTTune.TabIndex = 21
-        Me.btDVBTTune.Text = "Tune"
-        Me.btDVBTTune.UseVisualStyleBackColor = True
-        '
-        'edDVBTSID
-        '
-        Me.edDVBTSID.Location = New System.Drawing.Point(153, 136)
-        Me.edDVBTSID.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBTSID.Name = "edDVBTSID"
-        Me.edDVBTSID.Size = New System.Drawing.Size(139, 26)
-        Me.edDVBTSID.TabIndex = 20
-        Me.edDVBTSID.Text = "3"
-        '
-        'edDVBTTSID
-        '
-        Me.edDVBTTSID.Location = New System.Drawing.Point(153, 95)
-        Me.edDVBTTSID.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBTTSID.Name = "edDVBTTSID"
-        Me.edDVBTTSID.Size = New System.Drawing.Size(139, 26)
-        Me.edDVBTTSID.TabIndex = 19
-        Me.edDVBTTSID.Text = "3"
-        '
-        'edDVBTONID
-        '
-        Me.edDVBTONID.Location = New System.Drawing.Point(153, 53)
-        Me.edDVBTONID.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBTONID.Name = "edDVBTONID"
-        Me.edDVBTONID.Size = New System.Drawing.Size(139, 26)
-        Me.edDVBTONID.TabIndex = 18
-        Me.edDVBTONID.Text = "0"
-        '
-        'label273
-        '
-        Me.label273.AutoSize = True
-        Me.label273.Location = New System.Drawing.Point(303, 16)
-        Me.label273.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label273.Name = "label273"
-        Me.label273.Size = New System.Drawing.Size(39, 20)
-        Me.label273.TabIndex = 17
-        Me.label273.Text = "KHz"
-        '
-        'edDVBTFrequency
-        '
-        Me.edDVBTFrequency.Location = New System.Drawing.Point(153, 11)
-        Me.edDVBTFrequency.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBTFrequency.Name = "edDVBTFrequency"
-        Me.edDVBTFrequency.Size = New System.Drawing.Size(139, 26)
-        Me.edDVBTFrequency.TabIndex = 16
-        Me.edDVBTFrequency.Text = "586000"
-        '
-        'label274
-        '
-        Me.label274.AutoSize = True
-        Me.label274.Location = New System.Drawing.Point(9, 140)
-        Me.label274.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label274.Name = "label274"
-        Me.label274.Size = New System.Drawing.Size(37, 20)
-        Me.label274.TabIndex = 15
-        Me.label274.Text = "SID"
-        '
-        'label275
-        '
-        Me.label275.AutoSize = True
-        Me.label275.Location = New System.Drawing.Point(9, 100)
-        Me.label275.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label275.Name = "label275"
-        Me.label275.Size = New System.Drawing.Size(46, 20)
-        Me.label275.TabIndex = 14
-        Me.label275.Text = "TSID"
-        '
-        'label276
-        '
-        Me.label276.AutoSize = True
-        Me.label276.Location = New System.Drawing.Point(9, 58)
-        Me.label276.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label276.Name = "label276"
-        Me.label276.Size = New System.Drawing.Size(49, 20)
-        Me.label276.TabIndex = 13
-        Me.label276.Text = "ONID"
-        '
-        'label277
-        '
-        Me.label277.AutoSize = True
-        Me.label277.Location = New System.Drawing.Point(9, 16)
-        Me.label277.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label277.Name = "label277"
-        Me.label277.Size = New System.Drawing.Size(135, 20)
-        Me.label277.TabIndex = 12
-        Me.label277.Text = "Carrier Frequency"
-        '
-        'tabPage85
-        '
-        Me.tabPage85.Controls.Add(Me.cbDVBSPolarisation)
-        Me.tabPage85.Controls.Add(Me.label278)
-        Me.tabPage85.Controls.Add(Me.edDVBSSymbolRate)
-        Me.tabPage85.Controls.Add(Me.label279)
-        Me.tabPage85.Controls.Add(Me.btDVBSTune)
-        Me.tabPage85.Controls.Add(Me.edDVBSSID)
-        Me.tabPage85.Controls.Add(Me.edDVBSTSID)
-        Me.tabPage85.Controls.Add(Me.edDVBSONIT)
-        Me.tabPage85.Controls.Add(Me.label280)
-        Me.tabPage85.Controls.Add(Me.edDVBSFrequency)
-        Me.tabPage85.Controls.Add(Me.label281)
-        Me.tabPage85.Controls.Add(Me.label282)
-        Me.tabPage85.Controls.Add(Me.label283)
-        Me.tabPage85.Controls.Add(Me.label284)
-        Me.tabPage85.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage85.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage85.Name = "tabPage85"
-        Me.tabPage85.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage85.Size = New System.Drawing.Size(632, 313)
-        Me.tabPage85.TabIndex = 1
-        Me.tabPage85.Text = "DVB-S"
-        Me.tabPage85.UseVisualStyleBackColor = True
-        '
-        'cbDVBSPolarisation
-        '
-        Me.cbDVBSPolarisation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDVBSPolarisation.Items.AddRange(New Object() {"Not Set", "Not Defined", "Linear Horizontal", "Linear Vertical", "Circular Left", "Circular Right", "Max"})
-        Me.cbDVBSPolarisation.Location = New System.Drawing.Point(153, 86)
-        Me.cbDVBSPolarisation.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbDVBSPolarisation.Name = "cbDVBSPolarisation"
-        Me.cbDVBSPolarisation.Size = New System.Drawing.Size(139, 28)
-        Me.cbDVBSPolarisation.TabIndex = 34
-        '
-        'label278
-        '
-        Me.label278.AutoSize = True
-        Me.label278.Location = New System.Drawing.Point(9, 91)
-        Me.label278.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label278.Name = "label278"
-        Me.label278.Size = New System.Drawing.Size(139, 20)
-        Me.label278.TabIndex = 33
-        Me.label278.Text = "Signal Polarisation"
-        '
-        'edDVBSSymbolRate
-        '
-        Me.edDVBSSymbolRate.Location = New System.Drawing.Point(153, 49)
-        Me.edDVBSSymbolRate.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBSSymbolRate.Name = "edDVBSSymbolRate"
-        Me.edDVBSSymbolRate.Size = New System.Drawing.Size(139, 26)
-        Me.edDVBSSymbolRate.TabIndex = 32
-        Me.edDVBSSymbolRate.Text = "-1"
-        '
-        'label279
-        '
-        Me.label279.AutoSize = True
-        Me.label279.Location = New System.Drawing.Point(9, 53)
-        Me.label279.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label279.Name = "label279"
-        Me.label279.Size = New System.Drawing.Size(100, 20)
-        Me.label279.TabIndex = 31
-        Me.label279.Text = "Symbol Rate"
-        '
-        'btDVBSTune
-        '
-        Me.btDVBSTune.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.btDVBSTune.Location = New System.Drawing.Point(9, 267)
-        Me.btDVBSTune.Margin = New System.Windows.Forms.Padding(4)
-        Me.btDVBSTune.Name = "btDVBSTune"
-        Me.btDVBSTune.Size = New System.Drawing.Size(69, 33)
-        Me.btDVBSTune.TabIndex = 30
-        Me.btDVBSTune.Text = "Tune"
-        Me.btDVBSTune.UseVisualStyleBackColor = True
-        '
-        'edDVBSSID
-        '
-        Me.edDVBSSID.Location = New System.Drawing.Point(153, 208)
-        Me.edDVBSSID.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBSSID.Name = "edDVBSSID"
-        Me.edDVBSSID.Size = New System.Drawing.Size(139, 26)
-        Me.edDVBSSID.TabIndex = 29
-        Me.edDVBSSID.Text = "-1"
-        '
-        'edDVBSTSID
-        '
-        Me.edDVBSTSID.Location = New System.Drawing.Point(153, 167)
-        Me.edDVBSTSID.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBSTSID.Name = "edDVBSTSID"
-        Me.edDVBSTSID.Size = New System.Drawing.Size(139, 26)
-        Me.edDVBSTSID.TabIndex = 28
-        Me.edDVBSTSID.Text = "-1"
-        '
-        'edDVBSONIT
-        '
-        Me.edDVBSONIT.Location = New System.Drawing.Point(153, 125)
-        Me.edDVBSONIT.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBSONIT.Name = "edDVBSONIT"
-        Me.edDVBSONIT.Size = New System.Drawing.Size(139, 26)
-        Me.edDVBSONIT.TabIndex = 27
-        Me.edDVBSONIT.Text = "-1"
-        '
-        'label280
-        '
-        Me.label280.AutoSize = True
-        Me.label280.Location = New System.Drawing.Point(303, 16)
-        Me.label280.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label280.Name = "label280"
-        Me.label280.Size = New System.Drawing.Size(39, 20)
-        Me.label280.TabIndex = 26
-        Me.label280.Text = "KHz"
-        '
-        'edDVBSFrequency
-        '
-        Me.edDVBSFrequency.Location = New System.Drawing.Point(153, 11)
-        Me.edDVBSFrequency.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBSFrequency.Name = "edDVBSFrequency"
-        Me.edDVBSFrequency.Size = New System.Drawing.Size(139, 26)
-        Me.edDVBSFrequency.TabIndex = 25
-        Me.edDVBSFrequency.Text = "-1"
-        '
-        'label281
-        '
-        Me.label281.AutoSize = True
-        Me.label281.Location = New System.Drawing.Point(9, 212)
-        Me.label281.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label281.Name = "label281"
-        Me.label281.Size = New System.Drawing.Size(37, 20)
-        Me.label281.TabIndex = 24
-        Me.label281.Text = "SID"
-        '
-        'label282
-        '
-        Me.label282.AutoSize = True
-        Me.label282.Location = New System.Drawing.Point(9, 172)
-        Me.label282.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label282.Name = "label282"
-        Me.label282.Size = New System.Drawing.Size(46, 20)
-        Me.label282.TabIndex = 23
-        Me.label282.Text = "TSID"
-        '
-        'label283
-        '
-        Me.label283.AutoSize = True
-        Me.label283.Location = New System.Drawing.Point(9, 130)
-        Me.label283.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label283.Name = "label283"
-        Me.label283.Size = New System.Drawing.Size(46, 20)
-        Me.label283.TabIndex = 22
-        Me.label283.Text = "ONIT"
-        '
-        'label284
-        '
-        Me.label284.AutoSize = True
-        Me.label284.Location = New System.Drawing.Point(9, 16)
-        Me.label284.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label284.Name = "label284"
-        Me.label284.Size = New System.Drawing.Size(135, 20)
-        Me.label284.TabIndex = 21
-        Me.label284.Text = "Carrier Frequency"
-        '
-        'tabPage86
-        '
-        Me.tabPage86.Controls.Add(Me.groupBox35)
-        Me.tabPage86.Controls.Add(Me.groupBox36)
-        Me.tabPage86.Controls.Add(Me.btBDADVBCTune)
-        Me.tabPage86.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage86.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage86.Name = "tabPage86"
-        Me.tabPage86.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage86.Size = New System.Drawing.Size(632, 313)
-        Me.tabPage86.TabIndex = 2
-        Me.tabPage86.Text = "DVB-C"
-        Me.tabPage86.UseVisualStyleBackColor = True
-        '
-        'groupBox35
-        '
-        Me.groupBox35.Controls.Add(Me.edDVBCMinorChannel)
-        Me.groupBox35.Controls.Add(Me.label285)
-        Me.groupBox35.Controls.Add(Me.edDVBCPhysicalChannel)
-        Me.groupBox35.Controls.Add(Me.label286)
-        Me.groupBox35.Controls.Add(Me.edDVBCVirtualChannel)
-        Me.groupBox35.Controls.Add(Me.label287)
-        Me.groupBox35.Location = New System.Drawing.Point(348, 13)
-        Me.groupBox35.Margin = New System.Windows.Forms.Padding(4)
-        Me.groupBox35.Name = "groupBox35"
-        Me.groupBox35.Padding = New System.Windows.Forms.Padding(4)
-        Me.groupBox35.Size = New System.Drawing.Size(272, 154)
-        Me.groupBox35.TabIndex = 46
-        Me.groupBox35.TabStop = False
-        Me.groupBox35.Text = "Tune request"
-        '
-        'edDVBCMinorChannel
-        '
-        Me.edDVBCMinorChannel.Location = New System.Drawing.Point(147, 110)
-        Me.edDVBCMinorChannel.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBCMinorChannel.Name = "edDVBCMinorChannel"
-        Me.edDVBCMinorChannel.Size = New System.Drawing.Size(114, 26)
-        Me.edDVBCMinorChannel.TabIndex = 57
-        Me.edDVBCMinorChannel.Text = "-1"
-        '
-        'label285
-        '
-        Me.label285.AutoSize = True
-        Me.label285.Location = New System.Drawing.Point(9, 114)
-        Me.label285.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label285.Name = "label285"
-        Me.label285.Size = New System.Drawing.Size(108, 20)
-        Me.label285.TabIndex = 56
-        Me.label285.Text = "Minor channel"
-        '
-        'edDVBCPhysicalChannel
-        '
-        Me.edDVBCPhysicalChannel.Location = New System.Drawing.Point(147, 74)
-        Me.edDVBCPhysicalChannel.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBCPhysicalChannel.Name = "edDVBCPhysicalChannel"
-        Me.edDVBCPhysicalChannel.Size = New System.Drawing.Size(114, 26)
-        Me.edDVBCPhysicalChannel.TabIndex = 55
-        Me.edDVBCPhysicalChannel.Text = "103"
-        '
-        'label286
-        '
-        Me.label286.AutoSize = True
-        Me.label286.Location = New System.Drawing.Point(9, 78)
-        Me.label286.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label286.Name = "label286"
-        Me.label286.Size = New System.Drawing.Size(126, 20)
-        Me.label286.TabIndex = 54
-        Me.label286.Text = "Physical channel"
-        '
-        'edDVBCVirtualChannel
-        '
-        Me.edDVBCVirtualChannel.Location = New System.Drawing.Point(147, 34)
-        Me.edDVBCVirtualChannel.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBCVirtualChannel.Name = "edDVBCVirtualChannel"
-        Me.edDVBCVirtualChannel.Size = New System.Drawing.Size(114, 26)
-        Me.edDVBCVirtualChannel.TabIndex = 53
-        Me.edDVBCVirtualChannel.Text = "-1"
-        '
-        'label287
-        '
-        Me.label287.AutoSize = True
-        Me.label287.Location = New System.Drawing.Point(9, 39)
-        Me.label287.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label287.Name = "label287"
-        Me.label287.Size = New System.Drawing.Size(114, 20)
-        Me.label287.TabIndex = 52
-        Me.label287.Text = "Virtual channel"
-        '
-        'groupBox36
-        '
-        Me.groupBox36.Controls.Add(Me.edDVBCSymbolRate)
-        Me.groupBox36.Controls.Add(Me.label288)
-        Me.groupBox36.Controls.Add(Me.edDVBCProgramNumber)
-        Me.groupBox36.Controls.Add(Me.label289)
-        Me.groupBox36.Controls.Add(Me.cbDVBCModulation)
-        Me.groupBox36.Controls.Add(Me.label290)
-        Me.groupBox36.Controls.Add(Me.label291)
-        Me.groupBox36.Controls.Add(Me.edDVBCCarrierFrequency)
-        Me.groupBox36.Controls.Add(Me.label292)
-        Me.groupBox36.Location = New System.Drawing.Point(9, 13)
-        Me.groupBox36.Margin = New System.Windows.Forms.Padding(4)
-        Me.groupBox36.Name = "groupBox36"
-        Me.groupBox36.Padding = New System.Windows.Forms.Padding(4)
-        Me.groupBox36.Size = New System.Drawing.Size(330, 200)
-        Me.groupBox36.TabIndex = 45
-        Me.groupBox36.TabStop = False
-        Me.groupBox36.Text = "Current locator properties"
-        '
-        'edDVBCSymbolRate
-        '
-        Me.edDVBCSymbolRate.Location = New System.Drawing.Point(159, 150)
-        Me.edDVBCSymbolRate.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBCSymbolRate.Name = "edDVBCSymbolRate"
-        Me.edDVBCSymbolRate.Size = New System.Drawing.Size(114, 26)
-        Me.edDVBCSymbolRate.TabIndex = 53
-        Me.edDVBCSymbolRate.Text = "6875"
-        '
-        'label288
-        '
-        Me.label288.AutoSize = True
-        Me.label288.Location = New System.Drawing.Point(15, 154)
-        Me.label288.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label288.Name = "label288"
-        Me.label288.Size = New System.Drawing.Size(93, 20)
-        Me.label288.TabIndex = 52
-        Me.label288.Text = "Symbol rate"
-        '
-        'edDVBCProgramNumber
-        '
-        Me.edDVBCProgramNumber.Location = New System.Drawing.Point(159, 112)
-        Me.edDVBCProgramNumber.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBCProgramNumber.Name = "edDVBCProgramNumber"
-        Me.edDVBCProgramNumber.Size = New System.Drawing.Size(114, 26)
-        Me.edDVBCProgramNumber.TabIndex = 51
-        Me.edDVBCProgramNumber.Text = "8"
-        '
-        'label289
-        '
-        Me.label289.AutoSize = True
-        Me.label289.Location = New System.Drawing.Point(15, 117)
-        Me.label289.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label289.Name = "label289"
-        Me.label289.Size = New System.Drawing.Size(127, 20)
-        Me.label289.TabIndex = 50
-        Me.label289.Text = "Program number"
-        '
-        'cbDVBCModulation
-        '
-        Me.cbDVBCModulation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDVBCModulation.Items.AddRange(New Object() {"ModNotSet", "ModNotDefined", "Mod16Qam", "Mod32Qam", "Mod64Qam", "Mod80Qam", "Mod96Qam", "Mod112Qam", "Mod128Qam", "Mod160Qam", "Mod192Qam", "Mod224Qam", "Mod256Qam", "Mod320Qam", "Mod384Qam", "Mod448Qam", "Mod512Qam", "Mod640Qam", "Mod768Qam", "Mod896Qam", "Mod1024Qam", "ModQpsk", "ModBpsk", "ModOqpsk", "Mod8Vsb", "Mod16Vsb", "ModAnalogAmplitude ", "ModAnalogFrequency ", "Mod8Psk", "ModRF", "Mod16Apsk", "Mod32Apsk", "ModNbcQpsk", "ModNbc8Psk", "ModDirectTv", "ModMax"})
-        Me.cbDVBCModulation.Location = New System.Drawing.Point(159, 74)
-        Me.cbDVBCModulation.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbDVBCModulation.Name = "cbDVBCModulation"
-        Me.cbDVBCModulation.Size = New System.Drawing.Size(114, 28)
-        Me.cbDVBCModulation.TabIndex = 49
-        '
-        'label290
-        '
-        Me.label290.AutoSize = True
-        Me.label290.Location = New System.Drawing.Point(15, 78)
-        Me.label290.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label290.Name = "label290"
-        Me.label290.Size = New System.Drawing.Size(87, 20)
-        Me.label290.TabIndex = 48
-        Me.label290.Text = "Modulation"
-        '
-        'label291
-        '
-        Me.label291.AutoSize = True
-        Me.label291.Location = New System.Drawing.Point(284, 40)
-        Me.label291.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label291.Name = "label291"
-        Me.label291.Size = New System.Drawing.Size(39, 20)
-        Me.label291.TabIndex = 47
-        Me.label291.Text = "KHz"
-        '
-        'edDVBCCarrierFrequency
-        '
-        Me.edDVBCCarrierFrequency.Location = New System.Drawing.Point(159, 34)
-        Me.edDVBCCarrierFrequency.Margin = New System.Windows.Forms.Padding(4)
-        Me.edDVBCCarrierFrequency.Name = "edDVBCCarrierFrequency"
-        Me.edDVBCCarrierFrequency.Size = New System.Drawing.Size(114, 26)
-        Me.edDVBCCarrierFrequency.TabIndex = 46
-        Me.edDVBCCarrierFrequency.Text = "303250"
-        '
-        'label292
-        '
-        Me.label292.AutoSize = True
-        Me.label292.Location = New System.Drawing.Point(15, 39)
-        Me.label292.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label292.Name = "label292"
-        Me.label292.Size = New System.Drawing.Size(130, 20)
-        Me.label292.TabIndex = 45
-        Me.label292.Text = "Carrier frequency"
-        '
-        'btBDADVBCTune
-        '
-        Me.btBDADVBCTune.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.btBDADVBCTune.Location = New System.Drawing.Point(9, 267)
-        Me.btBDADVBCTune.Margin = New System.Windows.Forms.Padding(4)
-        Me.btBDADVBCTune.Name = "btBDADVBCTune"
-        Me.btBDADVBCTune.Size = New System.Drawing.Size(69, 33)
-        Me.btBDADVBCTune.TabIndex = 36
-        Me.btBDADVBCTune.Text = "Tune"
-        Me.btBDADVBCTune.UseVisualStyleBackColor = True
-        '
-        'tabPage87
-        '
-        Me.tabPage87.Controls.Add(Me.label293)
-        Me.tabPage87.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage87.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage87.Name = "tabPage87"
-        Me.tabPage87.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage87.Size = New System.Drawing.Size(632, 313)
-        Me.tabPage87.TabIndex = 3
-        Me.tabPage87.Text = "ATSC"
-        Me.tabPage87.UseVisualStyleBackColor = True
-        '
-        'label293
-        '
-        Me.label293.AutoSize = True
-        Me.label293.Location = New System.Drawing.Point(15, 16)
-        Me.label293.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label293.Name = "label293"
-        Me.label293.Size = New System.Drawing.Size(152, 20)
-        Me.label293.TabIndex = 0
-        Me.label293.Text = "not implemented yet"
-        '
-        'TabPage104
-        '
-        Me.TabPage104.Controls.Add(Me.btBDAChannelScanningStart)
-        Me.TabPage104.Controls.Add(Me.lvBDAChannels)
-        Me.TabPage104.Controls.Add(Me.label342)
-        Me.TabPage104.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage104.Margin = New System.Windows.Forms.Padding(4)
-        Me.TabPage104.Name = "TabPage104"
-        Me.TabPage104.Padding = New System.Windows.Forms.Padding(4)
-        Me.TabPage104.Size = New System.Drawing.Size(662, 361)
-        Me.TabPage104.TabIndex = 2
-        Me.TabPage104.Text = "Channel scanning"
-        Me.TabPage104.UseVisualStyleBackColor = True
-        '
-        'btBDAChannelScanningStart
-        '
-        Me.btBDAChannelScanningStart.Location = New System.Drawing.Point(548, 298)
-        Me.btBDAChannelScanningStart.Margin = New System.Windows.Forms.Padding(4)
-        Me.btBDAChannelScanningStart.Name = "btBDAChannelScanningStart"
-        Me.btBDAChannelScanningStart.Size = New System.Drawing.Size(84, 33)
-        Me.btBDAChannelScanningStart.TabIndex = 5
-        Me.btBDAChannelScanningStart.Text = "Start"
-        Me.btBDAChannelScanningStart.UseVisualStyleBackColor = True
-        '
-        'lvBDAChannels
-        '
-        Me.lvBDAChannels.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.columnHeader1, Me.columnHeader2, Me.columnHeader3, Me.columnHeader4, Me.columnHeader5, Me.columnHeader6})
-        Me.lvBDAChannels.HideSelection = False
-        Me.lvBDAChannels.Location = New System.Drawing.Point(30, 47)
-        Me.lvBDAChannels.Margin = New System.Windows.Forms.Padding(4)
-        Me.lvBDAChannels.Name = "lvBDAChannels"
-        Me.lvBDAChannels.Size = New System.Drawing.Size(600, 240)
-        Me.lvBDAChannels.TabIndex = 4
-        Me.lvBDAChannels.UseCompatibleStateImageBehavior = False
-        Me.lvBDAChannels.View = System.Windows.Forms.View.Details
-        '
         'columnHeader1
         '
         Me.columnHeader1.Text = "Name"
@@ -5240,16 +3883,6 @@ Partial Class Form1
         'columnHeader6
         '
         Me.columnHeader6.Text = "Symbol rate"
-        '
-        'label342
-        '
-        Me.label342.AutoSize = True
-        Me.label342.Location = New System.Drawing.Point(26, 25)
-        Me.label342.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label342.Name = "label342"
-        Me.label342.Size = New System.Drawing.Size(434, 20)
-        Me.label342.TabIndex = 3
-        Me.label342.Text = "Please tune to a required frequency or other parameters first"
         '
         'tabPage49
         '
@@ -7051,247 +5684,6 @@ Partial Class Form1
         Me.label82.Text = """Separate capture"" option allows you to start and stop video/audio capture indepe" &
     "ndently"
         '
-        'TabPage123
-        '
-        Me.TabPage123.Controls.Add(Me.tabControl28)
-        Me.TabPage123.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage123.Margin = New System.Windows.Forms.Padding(4)
-        Me.TabPage123.Name = "TabPage123"
-        Me.TabPage123.Padding = New System.Windows.Forms.Padding(4)
-        Me.TabPage123.Size = New System.Drawing.Size(692, 415)
-        Me.TabPage123.TabIndex = 9
-        Me.TabPage123.Text = "Custom source"
-        Me.TabPage123.UseVisualStyleBackColor = True
-        '
-        'tabControl28
-        '
-        Me.tabControl28.Controls.Add(Me.tabPage125)
-        Me.tabControl28.Controls.Add(Me.tabPage126)
-        Me.tabControl28.Location = New System.Drawing.Point(6, 9)
-        Me.tabControl28.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabControl28.Name = "tabControl28"
-        Me.tabControl28.SelectedIndex = 0
-        Me.tabControl28.Size = New System.Drawing.Size(675, 394)
-        Me.tabControl28.TabIndex = 7
-        '
-        'tabPage125
-        '
-        Me.tabPage125.Controls.Add(Me.edCustomVideoSourceURL)
-        Me.tabPage125.Controls.Add(Me.label516)
-        Me.tabPage125.Controls.Add(Me.cbCustomVideoSourceFrameRate)
-        Me.tabPage125.Controls.Add(Me.label438)
-        Me.tabPage125.Controls.Add(Me.label435)
-        Me.tabPage125.Controls.Add(Me.cbCustomVideoSourceFormat)
-        Me.tabPage125.Controls.Add(Me.label434)
-        Me.tabPage125.Controls.Add(Me.cbCustomVideoSourceFilter)
-        Me.tabPage125.Controls.Add(Me.cbCustomVideoSourceCategory)
-        Me.tabPage125.Controls.Add(Me.label432)
-        Me.tabPage125.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage125.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage125.Name = "tabPage125"
-        Me.tabPage125.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage125.Size = New System.Drawing.Size(667, 361)
-        Me.tabPage125.TabIndex = 0
-        Me.tabPage125.Text = "Video source"
-        Me.tabPage125.UseVisualStyleBackColor = True
-        '
-        'edCustomVideoSourceURL
-        '
-        Me.edCustomVideoSourceURL.Location = New System.Drawing.Point(21, 189)
-        Me.edCustomVideoSourceURL.Margin = New System.Windows.Forms.Padding(4)
-        Me.edCustomVideoSourceURL.Name = "edCustomVideoSourceURL"
-        Me.edCustomVideoSourceURL.Size = New System.Drawing.Size(619, 26)
-        Me.edCustomVideoSourceURL.TabIndex = 16
-        '
-        'label516
-        '
-        Me.label516.AutoSize = True
-        Me.label516.Location = New System.Drawing.Point(16, 164)
-        Me.label516.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label516.Name = "label516"
-        Me.label516.Size = New System.Drawing.Size(285, 20)
-        Me.label516.TabIndex = 15
-        Me.label516.Text = "File name or URL (if supported by filter)"
-        '
-        'cbCustomVideoSourceFrameRate
-        '
-        Me.cbCustomVideoSourceFrameRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCustomVideoSourceFrameRate.FormattingEnabled = True
-        Me.cbCustomVideoSourceFrameRate.Location = New System.Drawing.Point(514, 117)
-        Me.cbCustomVideoSourceFrameRate.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbCustomVideoSourceFrameRate.Name = "cbCustomVideoSourceFrameRate"
-        Me.cbCustomVideoSourceFrameRate.Size = New System.Drawing.Size(126, 28)
-        Me.cbCustomVideoSourceFrameRate.TabIndex = 12
-        '
-        'label438
-        '
-        Me.label438.AutoSize = True
-        Me.label438.Location = New System.Drawing.Point(510, 92)
-        Me.label438.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label438.Name = "label438"
-        Me.label438.Size = New System.Drawing.Size(87, 20)
-        Me.label438.TabIndex = 11
-        Me.label438.Text = "Frame rate"
-        '
-        'label435
-        '
-        Me.label435.AutoSize = True
-        Me.label435.Location = New System.Drawing.Point(16, 20)
-        Me.label435.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label435.Name = "label435"
-        Me.label435.Size = New System.Drawing.Size(73, 20)
-        Me.label435.TabIndex = 10
-        Me.label435.Text = "Category"
-        '
-        'cbCustomVideoSourceFormat
-        '
-        Me.cbCustomVideoSourceFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCustomVideoSourceFormat.FormattingEnabled = True
-        Me.cbCustomVideoSourceFormat.Location = New System.Drawing.Point(21, 117)
-        Me.cbCustomVideoSourceFormat.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbCustomVideoSourceFormat.Name = "cbCustomVideoSourceFormat"
-        Me.cbCustomVideoSourceFormat.Size = New System.Drawing.Size(482, 28)
-        Me.cbCustomVideoSourceFormat.TabIndex = 9
-        '
-        'label434
-        '
-        Me.label434.AutoSize = True
-        Me.label434.Location = New System.Drawing.Point(16, 92)
-        Me.label434.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label434.Name = "label434"
-        Me.label434.Size = New System.Drawing.Size(60, 20)
-        Me.label434.TabIndex = 8
-        Me.label434.Text = "Format"
-        '
-        'cbCustomVideoSourceFilter
-        '
-        Me.cbCustomVideoSourceFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCustomVideoSourceFilter.FormattingEnabled = True
-        Me.cbCustomVideoSourceFilter.Location = New System.Drawing.Point(248, 44)
-        Me.cbCustomVideoSourceFilter.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbCustomVideoSourceFilter.Name = "cbCustomVideoSourceFilter"
-        Me.cbCustomVideoSourceFilter.Size = New System.Drawing.Size(392, 28)
-        Me.cbCustomVideoSourceFilter.TabIndex = 7
-        '
-        'cbCustomVideoSourceCategory
-        '
-        Me.cbCustomVideoSourceCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCustomVideoSourceCategory.FormattingEnabled = True
-        Me.cbCustomVideoSourceCategory.Items.AddRange(New Object() {"Video capture source", "DirectShow filter"})
-        Me.cbCustomVideoSourceCategory.Location = New System.Drawing.Point(21, 44)
-        Me.cbCustomVideoSourceCategory.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbCustomVideoSourceCategory.Name = "cbCustomVideoSourceCategory"
-        Me.cbCustomVideoSourceCategory.Size = New System.Drawing.Size(198, 28)
-        Me.cbCustomVideoSourceCategory.TabIndex = 6
-        '
-        'label432
-        '
-        Me.label432.AutoSize = True
-        Me.label432.Location = New System.Drawing.Point(243, 20)
-        Me.label432.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label432.Name = "label432"
-        Me.label432.Size = New System.Drawing.Size(51, 20)
-        Me.label432.TabIndex = 5
-        Me.label432.Text = "Name"
-        '
-        'tabPage126
-        '
-        Me.tabPage126.Controls.Add(Me.edCustomAudioSourceURL)
-        Me.tabPage126.Controls.Add(Me.label517)
-        Me.tabPage126.Controls.Add(Me.label437)
-        Me.tabPage126.Controls.Add(Me.cbCustomAudioSourceFormat)
-        Me.tabPage126.Controls.Add(Me.label436)
-        Me.tabPage126.Controls.Add(Me.cbCustomAudioSourceFilter)
-        Me.tabPage126.Controls.Add(Me.label433)
-        Me.tabPage126.Controls.Add(Me.cbCustomAudioSourceCategory)
-        Me.tabPage126.Location = New System.Drawing.Point(4, 29)
-        Me.tabPage126.Margin = New System.Windows.Forms.Padding(4)
-        Me.tabPage126.Name = "tabPage126"
-        Me.tabPage126.Padding = New System.Windows.Forms.Padding(4)
-        Me.tabPage126.Size = New System.Drawing.Size(667, 361)
-        Me.tabPage126.TabIndex = 1
-        Me.tabPage126.Text = "Audio source"
-        Me.tabPage126.UseVisualStyleBackColor = True
-        '
-        'edCustomAudioSourceURL
-        '
-        Me.edCustomAudioSourceURL.Location = New System.Drawing.Point(21, 189)
-        Me.edCustomAudioSourceURL.Margin = New System.Windows.Forms.Padding(4)
-        Me.edCustomAudioSourceURL.Name = "edCustomAudioSourceURL"
-        Me.edCustomAudioSourceURL.Size = New System.Drawing.Size(619, 26)
-        Me.edCustomAudioSourceURL.TabIndex = 18
-        '
-        'label517
-        '
-        Me.label517.AutoSize = True
-        Me.label517.Location = New System.Drawing.Point(16, 164)
-        Me.label517.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label517.Name = "label517"
-        Me.label517.Size = New System.Drawing.Size(285, 20)
-        Me.label517.TabIndex = 17
-        Me.label517.Text = "File name or URL (if supported by filter)"
-        '
-        'label437
-        '
-        Me.label437.AutoSize = True
-        Me.label437.Location = New System.Drawing.Point(16, 20)
-        Me.label437.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label437.Name = "label437"
-        Me.label437.Size = New System.Drawing.Size(73, 20)
-        Me.label437.TabIndex = 12
-        Me.label437.Text = "Category"
-        '
-        'cbCustomAudioSourceFormat
-        '
-        Me.cbCustomAudioSourceFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCustomAudioSourceFormat.FormattingEnabled = True
-        Me.cbCustomAudioSourceFormat.Location = New System.Drawing.Point(21, 114)
-        Me.cbCustomAudioSourceFormat.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbCustomAudioSourceFormat.Name = "cbCustomAudioSourceFormat"
-        Me.cbCustomAudioSourceFormat.Size = New System.Drawing.Size(619, 28)
-        Me.cbCustomAudioSourceFormat.TabIndex = 11
-        '
-        'label436
-        '
-        Me.label436.AutoSize = True
-        Me.label436.Location = New System.Drawing.Point(16, 89)
-        Me.label436.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label436.Name = "label436"
-        Me.label436.Size = New System.Drawing.Size(60, 20)
-        Me.label436.TabIndex = 10
-        Me.label436.Text = "Format"
-        '
-        'cbCustomAudioSourceFilter
-        '
-        Me.cbCustomAudioSourceFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCustomAudioSourceFilter.FormattingEnabled = True
-        Me.cbCustomAudioSourceFilter.Location = New System.Drawing.Point(248, 44)
-        Me.cbCustomAudioSourceFilter.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbCustomAudioSourceFilter.Name = "cbCustomAudioSourceFilter"
-        Me.cbCustomAudioSourceFilter.Size = New System.Drawing.Size(392, 28)
-        Me.cbCustomAudioSourceFilter.TabIndex = 8
-        '
-        'label433
-        '
-        Me.label433.AutoSize = True
-        Me.label433.Location = New System.Drawing.Point(243, 20)
-        Me.label433.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label433.Name = "label433"
-        Me.label433.Size = New System.Drawing.Size(51, 20)
-        Me.label433.TabIndex = 7
-        Me.label433.Text = "Name"
-        '
-        'cbCustomAudioSourceCategory
-        '
-        Me.cbCustomAudioSourceCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCustomAudioSourceCategory.FormattingEnabled = True
-        Me.cbCustomAudioSourceCategory.Items.AddRange(New Object() {"Audio capture source", "DirectShow filter"})
-        Me.cbCustomAudioSourceCategory.Location = New System.Drawing.Point(21, 44)
-        Me.cbCustomAudioSourceCategory.Margin = New System.Windows.Forms.Padding(4)
-        Me.cbCustomAudioSourceCategory.Name = "cbCustomAudioSourceCategory"
-        Me.cbCustomAudioSourceCategory.Size = New System.Drawing.Size(198, 28)
-        Me.cbCustomAudioSourceCategory.TabIndex = 6
-        '
         'btResume
         '
         Me.btResume.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -7319,7 +5711,7 @@ Partial Class Form1
         Me.cbMode.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMode.FormattingEnabled = True
-        Me.cbMode.Items.AddRange(New Object() {"Video Preview", "Video Capture", "Audio Preview", "Audio Capture", "Screen Preview", "Screen Capture", "IP Preview", "IP Capture", "DVB-x Preview", "DVB-x Capture", "Custom Source Preview", "Custom Source Capture", "DeckLink Source Preview", "DeckLink Source Capture"})
+        Me.cbMode.Items.AddRange(New Object() {"Video Preview", "Video Capture", "Audio Preview", "Audio Capture", "Screen Preview", "Screen Capture", "IP Preview", "IP Capture", "DeckLink Source Preview", "DeckLink Source Capture"})
         Me.cbMode.Location = New System.Drawing.Point(564, 986)
         Me.cbMode.Margin = New System.Windows.Forms.Padding(4)
         Me.cbMode.Name = "cbMode"
@@ -7474,7 +5866,7 @@ Partial Class Form1
         '
         Me.cbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutputFormat.FormattingEnabled = True
-        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV (Windows Media Video)", "DV", "PCM/ACM", "MP3 (Lame)", "M4A (AAC)", "WMA (Windows Media Audio)", "FLAC", "Ogg Vorbis", "Speex", "Custom", "DirectCapture DV (DV devices only)", "DirectCapture AVI (some specific devices)", "DirectCapture MPEG (MPEG 1/2/4 devices only)", "DirectCapture MKV (IP cameras / H264 devices)", "DirectCapture MP4 GDCL Mux (IP cameras / H264 devices)", "DirectCapture MP4 Monogram Mux (IP cameras / H264 devices)", "DirectCapture Custom (H264 devices only)", "WebM", "FFMPEG", "FFMPEG (external exe)", "MP4 (CPU)", "MP4 (GPU: Intel, Nvidia, AMD/ATI)", "Animated GIF", "Encrypted video", "MPEG-TS", "MOV"})
+        Me.cbOutputFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV (Windows Media Video)", "PCM/ACM", "MP3 (Lame)", "M4A (AAC)", "WMA (Windows Media Audio)", "FLAC", "Ogg Vorbis", "Speex", "Custom", "DirectCapture AVI (some specific devices)", "DirectCapture MPEG (MPEG 1/2/4 devices only)", "DirectCapture MKV (IP cameras / H264 devices)", "DirectCapture MP4 GDCL Mux (IP cameras / H264 devices)", "DirectCapture MP4 Monogram Mux (IP cameras / H264 devices)", "DirectCapture Custom (H264 devices only)", "WebM", "FFMPEG", "FFMPEG (external exe)", "MP4 (CPU)", "MP4 (GPU: Intel, Nvidia, AMD/ATI)", "Animated GIF", "Encrypted video", "MPEG-TS", "MOV"})
         Me.cbOutputFormat.Location = New System.Drawing.Point(28, 47)
         Me.cbOutputFormat.Margin = New System.Windows.Forms.Padding(4)
         Me.cbOutputFormat.Name = "cbOutputFormat"
@@ -7498,7 +5890,6 @@ Partial Class Form1
         Me.edOutput.Name = "edOutput"
         Me.edOutput.Size = New System.Drawing.Size(366, 26)
         Me.edOutput.TabIndex = 40
-        Me.edOutput.Text = "c:\capture.avi"
         '
         'label9
         '
@@ -10989,7 +9380,6 @@ Partial Class Form1
         Me.edNetworkStreamingWMVProfile.Name = "edNetworkStreamingWMVProfile"
         Me.edNetworkStreamingWMVProfile.Size = New System.Drawing.Size(307, 26)
         Me.edNetworkStreamingWMVProfile.TabIndex = 19
-        Me.edNetworkStreamingWMVProfile.Text = "c:\WM.prx"
         '
         'label44
         '
@@ -11632,7 +10022,6 @@ Partial Class Form1
         Me.edHLSOutputFolder.Name = "edHLSOutputFolder"
         Me.edHLSOutputFolder.Size = New System.Drawing.Size(343, 26)
         Me.edHLSOutputFolder.TabIndex = 12
-        Me.edHLSOutputFolder.Text = "c:\inetpub\wwwroot\hls\"
         '
         'Label500
         '
@@ -11893,7 +10282,6 @@ Partial Class Form1
         Me.edOSDImageFilename.Name = "edOSDImageFilename"
         Me.edOSDImageFilename.Size = New System.Drawing.Size(286, 26)
         Me.edOSDImageFilename.TabIndex = 1
-        Me.edOSDImageFilename.Text = "c:\logo.png"
         '
         'label113
         '
@@ -13122,7 +11510,6 @@ Partial Class Form1
         Me.edEncryptionKeyHEX.Name = "edEncryptionKeyHEX"
         Me.edEncryptionKeyHEX.Size = New System.Drawing.Size(319, 26)
         Me.edEncryptionKeyHEX.TabIndex = 9
-        Me.edEncryptionKeyHEX.Text = "enter hex data"
         '
         'rbEncryptionKeyBinary
         '
@@ -13152,7 +11539,6 @@ Partial Class Form1
         Me.edEncryptionKeyFile.Name = "edEncryptionKeyFile"
         Me.edEncryptionKeyFile.Size = New System.Drawing.Size(276, 26)
         Me.edEncryptionKeyFile.TabIndex = 6
-        Me.edEncryptionKeyFile.Text = "c:\keyfile.txt"
         '
         'rbEncryptionKeyFile
         '
@@ -13813,22 +12199,8 @@ Partial Class Form1
         Me.tabPage8.PerformLayout
         Me.tabPage52.ResumeLayout(false)
         Me.tabPage52.PerformLayout
-        Me.tabPage10.ResumeLayout(false)
-        Me.tabControl3.ResumeLayout(false)
-        Me.tabPage14.ResumeLayout(false)
-        Me.tabPage14.PerformLayout
-        Me.tabPage15.ResumeLayout(false)
-        Me.tabPage15.PerformLayout
-        Me.groupBox1.ResumeLayout(false)
-        Me.groupBox1.PerformLayout
-        Me.tabPage21.ResumeLayout(false)
-        Me.tabPage21.PerformLayout
         Me.tabPage33.ResumeLayout(false)
         Me.tabPage33.PerformLayout
-        Me.tabPage11.ResumeLayout(false)
-        Me.groupBox21.ResumeLayout(false)
-        Me.groupBox21.PerformLayout
-        Me.groupBox2.ResumeLayout(false)
         Me.tabPage57.ResumeLayout(false)
         Me.tabPage57.PerformLayout
         CType(Me.tbAdjSaturation,System.ComponentModel.ISupportInitialize).EndInit
@@ -13870,25 +12242,6 @@ Partial Class Form1
         Me.groupBox42.ResumeLayout(false)
         Me.TabPage61.ResumeLayout(false)
         Me.TabPage61.PerformLayout
-        Me.TabPage66.ResumeLayout(false)
-        Me.tabControl22.ResumeLayout(false)
-        Me.tabPage82.ResumeLayout(false)
-        Me.tabPage82.PerformLayout
-        Me.tabPage83.ResumeLayout(false)
-        Me.tabControl23.ResumeLayout(false)
-        Me.tabPage84.ResumeLayout(false)
-        Me.tabPage84.PerformLayout
-        Me.tabPage85.ResumeLayout(false)
-        Me.tabPage85.PerformLayout
-        Me.tabPage86.ResumeLayout(false)
-        Me.groupBox35.ResumeLayout(false)
-        Me.groupBox35.PerformLayout
-        Me.groupBox36.ResumeLayout(false)
-        Me.groupBox36.PerformLayout
-        Me.tabPage87.ResumeLayout(false)
-        Me.tabPage87.PerformLayout
-        Me.TabPage104.ResumeLayout(false)
-        Me.TabPage104.PerformLayout
         Me.tabPage49.ResumeLayout(false)
         Me.tabControl20.ResumeLayout(false)
         Me.tabPage67.ResumeLayout(false)
@@ -13935,12 +12288,6 @@ Partial Class Form1
         Me.TabPage23.PerformLayout
         Me.groupBox8.ResumeLayout(false)
         Me.groupBox8.PerformLayout
-        Me.TabPage123.ResumeLayout(false)
-        Me.tabControl28.ResumeLayout(false)
-        Me.tabPage125.ResumeLayout(false)
-        Me.tabPage125.PerformLayout
-        Me.tabPage126.ResumeLayout(false)
-        Me.tabPage126.PerformLayout
         Me.tabControl1.ResumeLayout(false)
         Me.tabPage1.ResumeLayout(false)
         Me.tabPage1.PerformLayout
@@ -14164,38 +12511,6 @@ End Sub
     Private WithEvents cbCrossbarOutput As System.Windows.Forms.ComboBox
     Private WithEvents cbCrossbarInput As System.Windows.Forms.ComboBox
     Private WithEvents label16 As System.Windows.Forms.Label
-    Private WithEvents tabPage10 As System.Windows.Forms.TabPage
-    Private WithEvents tabControl3 As System.Windows.Forms.TabControl
-    Private WithEvents tabPage14 As System.Windows.Forms.TabPage
-    Private WithEvents edTVDefaultFormat As System.Windows.Forms.TextBox
-    Private WithEvents label57 As System.Windows.Forms.Label
-    Private WithEvents cbTVCountry As System.Windows.Forms.ComboBox
-    Private WithEvents label56 As System.Windows.Forms.Label
-    Private WithEvents cbTVMode As System.Windows.Forms.ComboBox
-    Private WithEvents cbTVInput As System.Windows.Forms.ComboBox
-    Private WithEvents cbTVTuner As System.Windows.Forms.ComboBox
-    Private WithEvents label33 As System.Windows.Forms.Label
-    Private WithEvents label32 As System.Windows.Forms.Label
-    Private WithEvents label27 As System.Windows.Forms.Label
-    Private WithEvents tabPage15 As System.Windows.Forms.TabPage
-    Private WithEvents edChannel As System.Windows.Forms.TextBox
-    Private WithEvents btUseThisChannel As System.Windows.Forms.Button
-    Private WithEvents groupBox1 As System.Windows.Forms.GroupBox
-    Private WithEvents cbTVChannel As System.Windows.Forms.ComboBox
-    Private WithEvents label58 As System.Windows.Forms.Label
-    Private WithEvents pbChannels As System.Windows.Forms.ProgressBar
-    Private WithEvents btStopTune As System.Windows.Forms.Button
-    Private WithEvents btStartTune As System.Windows.Forms.Button
-    Private WithEvents cbTVSystem As System.Windows.Forms.ComboBox
-    Private WithEvents edAudioFreq As System.Windows.Forms.TextBox
-    Private WithEvents label36 As System.Windows.Forms.Label
-    Private WithEvents edVideoFreq As System.Windows.Forms.TextBox
-    Private WithEvents label37 As System.Windows.Forms.Label
-    Private WithEvents label34 As System.Windows.Forms.Label
-    Private WithEvents tabPage21 As System.Windows.Forms.TabPage
-    Private WithEvents btMPEGEncoderShowDialog As System.Windows.Forms.Button
-    Private WithEvents cbMPEGEncoder As System.Windows.Forms.ComboBox
-    Private WithEvents label21 As System.Windows.Forms.Label
     Private WithEvents tabPage33 As System.Windows.Forms.TabPage
     Private WithEvents btMPEGAudDecSettings As System.Windows.Forms.Button
     Private WithEvents cbMPEGAudioDecoder As System.Windows.Forms.ComboBox
@@ -14203,20 +12518,6 @@ End Sub
     Private WithEvents btMPEGVidDecSetting As System.Windows.Forms.Button
     Private WithEvents cbMPEGVideoDecoder As System.Windows.Forms.ComboBox
     Private WithEvents label120 As System.Windows.Forms.Label
-    Private WithEvents tabPage11 As System.Windows.Forms.TabPage
-    Private WithEvents groupBox21 As System.Windows.Forms.GroupBox
-    Private WithEvents rbDVResDC As System.Windows.Forms.RadioButton
-    Private WithEvents rbDVResQuarter As System.Windows.Forms.RadioButton
-    Private WithEvents rbDVResHalf As System.Windows.Forms.RadioButton
-    Private WithEvents rbDVResFull As System.Windows.Forms.RadioButton
-    Private WithEvents groupBox2 As System.Windows.Forms.GroupBox
-    Private WithEvents btDVStepFWD As System.Windows.Forms.Button
-    Private WithEvents btDVStepRev As System.Windows.Forms.Button
-    Private WithEvents btDVFF As System.Windows.Forms.Button
-    Private WithEvents btDVStop As System.Windows.Forms.Button
-    Private WithEvents btDVPause As System.Windows.Forms.Button
-    Private WithEvents btDVPlay As System.Windows.Forms.Button
-    Private WithEvents btDVRewind As System.Windows.Forms.Button
     Private WithEvents tabPage57 As System.Windows.Forms.TabPage
     Private WithEvents lbAdjSaturationCurrent As System.Windows.Forms.Label
     Private WithEvents lbAdjSaturationMax As System.Windows.Forms.Label
@@ -14564,64 +12865,6 @@ End Sub
     Private WithEvents tpExternal As System.Windows.Forms.TabPage
     Private WithEvents cbNetworkStreamingAudioEnabled As System.Windows.Forms.CheckBox
     Private WithEvents cbNetworkStreaming As System.Windows.Forms.CheckBox
-    Friend WithEvents TabPage66 As System.Windows.Forms.TabPage
-    Private WithEvents tabControl22 As System.Windows.Forms.TabControl
-    Private WithEvents tabPage82 As System.Windows.Forms.TabPage
-    Private WithEvents cbBDADeviceStandard As System.Windows.Forms.ComboBox
-    Private WithEvents label129 As System.Windows.Forms.Label
-    Private WithEvents cbBDAReceiver As System.Windows.Forms.ComboBox
-    Private WithEvents label270 As System.Windows.Forms.Label
-    Private WithEvents cbBDASourceDevice As System.Windows.Forms.ComboBox
-    Private WithEvents label272 As System.Windows.Forms.Label
-    Private WithEvents tabPage83 As System.Windows.Forms.TabPage
-    Private WithEvents tabControl23 As System.Windows.Forms.TabControl
-    Private WithEvents tabPage84 As System.Windows.Forms.TabPage
-    Private WithEvents btDVBTTune As System.Windows.Forms.Button
-    Private WithEvents edDVBTSID As System.Windows.Forms.TextBox
-    Private WithEvents edDVBTTSID As System.Windows.Forms.TextBox
-    Private WithEvents edDVBTONID As System.Windows.Forms.TextBox
-    Private WithEvents label273 As System.Windows.Forms.Label
-    Private WithEvents edDVBTFrequency As System.Windows.Forms.TextBox
-    Private WithEvents label274 As System.Windows.Forms.Label
-    Private WithEvents label275 As System.Windows.Forms.Label
-    Private WithEvents label276 As System.Windows.Forms.Label
-    Private WithEvents label277 As System.Windows.Forms.Label
-    Private WithEvents tabPage85 As System.Windows.Forms.TabPage
-    Private WithEvents cbDVBSPolarisation As System.Windows.Forms.ComboBox
-    Private WithEvents label278 As System.Windows.Forms.Label
-    Private WithEvents edDVBSSymbolRate As System.Windows.Forms.TextBox
-    Private WithEvents label279 As System.Windows.Forms.Label
-    Private WithEvents btDVBSTune As System.Windows.Forms.Button
-    Private WithEvents edDVBSSID As System.Windows.Forms.TextBox
-    Private WithEvents edDVBSTSID As System.Windows.Forms.TextBox
-    Private WithEvents edDVBSONIT As System.Windows.Forms.TextBox
-    Private WithEvents label280 As System.Windows.Forms.Label
-    Private WithEvents edDVBSFrequency As System.Windows.Forms.TextBox
-    Private WithEvents label281 As System.Windows.Forms.Label
-    Private WithEvents label282 As System.Windows.Forms.Label
-    Private WithEvents label283 As System.Windows.Forms.Label
-    Private WithEvents label284 As System.Windows.Forms.Label
-    Private WithEvents tabPage86 As System.Windows.Forms.TabPage
-    Private WithEvents groupBox35 As System.Windows.Forms.GroupBox
-    Private WithEvents edDVBCMinorChannel As System.Windows.Forms.TextBox
-    Private WithEvents label285 As System.Windows.Forms.Label
-    Private WithEvents edDVBCPhysicalChannel As System.Windows.Forms.TextBox
-    Private WithEvents label286 As System.Windows.Forms.Label
-    Private WithEvents edDVBCVirtualChannel As System.Windows.Forms.TextBox
-    Private WithEvents label287 As System.Windows.Forms.Label
-    Private WithEvents groupBox36 As System.Windows.Forms.GroupBox
-    Private WithEvents edDVBCSymbolRate As System.Windows.Forms.TextBox
-    Private WithEvents label288 As System.Windows.Forms.Label
-    Private WithEvents edDVBCProgramNumber As System.Windows.Forms.TextBox
-    Private WithEvents label289 As System.Windows.Forms.Label
-    Private WithEvents cbDVBCModulation As System.Windows.Forms.ComboBox
-    Private WithEvents label290 As System.Windows.Forms.Label
-    Private WithEvents label291 As System.Windows.Forms.Label
-    Private WithEvents edDVBCCarrierFrequency As System.Windows.Forms.TextBox
-    Private WithEvents label292 As System.Windows.Forms.Label
-    Private WithEvents btBDADVBCTune As System.Windows.Forms.Button
-    Private WithEvents tabPage87 As System.Windows.Forms.TabPage
-    Private WithEvents label293 As System.Windows.Forms.Label
     Friend WithEvents TabPage88 As System.Windows.Forms.TabPage
     Private WithEvents cbZoom As System.Windows.Forms.CheckBox
     Private WithEvents groupBox37 As System.Windows.Forms.GroupBox
@@ -14763,16 +13006,12 @@ End Sub
     Private WithEvents label331 As System.Windows.Forms.Label
     Private WithEvents cbDecklinkOutputAnalog As System.Windows.Forms.ComboBox
     Private WithEvents label87 As System.Windows.Forms.Label
-    Friend WithEvents TabPage104 As System.Windows.Forms.TabPage
-    Private WithEvents btBDAChannelScanningStart As System.Windows.Forms.Button
-    Private WithEvents lvBDAChannels As System.Windows.Forms.ListView
     Private WithEvents columnHeader1 As System.Windows.Forms.ColumnHeader
     Private WithEvents columnHeader2 As System.Windows.Forms.ColumnHeader
     Private WithEvents columnHeader3 As System.Windows.Forms.ColumnHeader
     Private WithEvents columnHeader4 As System.Windows.Forms.ColumnHeader
     Private WithEvents columnHeader5 As System.Windows.Forms.ColumnHeader
     Private WithEvents columnHeader6 As System.Windows.Forms.ColumnHeader
-    Private WithEvents label342 As System.Windows.Forms.Label
     Private WithEvents linkLabel4 As System.Windows.Forms.LinkLabel
     Friend WithEvents TabPage105 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage106 As System.Windows.Forms.TabPage
@@ -14867,24 +13106,6 @@ End Sub
     Private WithEvents cbDirect2DRotate As System.Windows.Forms.ComboBox
     Private WithEvents rbAddAudioStreamsIndependent As System.Windows.Forms.RadioButton
     Private WithEvents rbAddAudioStreamsMix As System.Windows.Forms.RadioButton
-    Friend WithEvents TabPage123 As System.Windows.Forms.TabPage
-    Private WithEvents tabControl28 As System.Windows.Forms.TabControl
-    Private WithEvents tabPage125 As System.Windows.Forms.TabPage
-    Private WithEvents cbCustomVideoSourceFrameRate As System.Windows.Forms.ComboBox
-    Private WithEvents label438 As System.Windows.Forms.Label
-    Private WithEvents label435 As System.Windows.Forms.Label
-    Private WithEvents cbCustomVideoSourceFormat As System.Windows.Forms.ComboBox
-    Private WithEvents label434 As System.Windows.Forms.Label
-    Private WithEvents cbCustomVideoSourceFilter As System.Windows.Forms.ComboBox
-    Private WithEvents cbCustomVideoSourceCategory As System.Windows.Forms.ComboBox
-    Private WithEvents label432 As System.Windows.Forms.Label
-    Private WithEvents tabPage126 As System.Windows.Forms.TabPage
-    Private WithEvents label437 As System.Windows.Forms.Label
-    Private WithEvents cbCustomAudioSourceFormat As System.Windows.Forms.ComboBox
-    Private WithEvents label436 As System.Windows.Forms.Label
-    Private WithEvents cbCustomAudioSourceFilter As System.Windows.Forms.ComboBox
-    Private WithEvents label433 As System.Windows.Forms.Label
-    Private WithEvents cbCustomAudioSourceCategory As System.Windows.Forms.ComboBox
     Friend WithEvents TabPage124 As System.Windows.Forms.TabPage
     Private WithEvents lbAudioTimeshift As System.Windows.Forms.Label
     Private WithEvents tbAudioTimeshift As System.Windows.Forms.TrackBar
@@ -14983,7 +13204,6 @@ End Sub
     Friend WithEvents Label498 As Label
     Friend WithEvents imgTagCover As PictureBox
     Friend WithEvents Label499 As Label
-    Private WithEvents cbUseClosedCaptions As CheckBox
     Private WithEvents Label250 As Label
     Friend WithEvents TabPage26 As TabPage
     Private WithEvents pbAFMotionLevel As ProgressBar
@@ -15087,10 +13307,6 @@ End Sub
     Private WithEvents label514 As Label
     Private WithEvents cbPIPResizeMode As ComboBox
     Private WithEvents label317 As Label
-    Private WithEvents edCustomAudioSourceURL As TextBox
-    Private WithEvents label517 As Label
-    Private WithEvents edCustomVideoSourceURL As TextBox
-    Private WithEvents label516 As Label
     Private WithEvents label165 As Label
     Private WithEvents edONVIFPassword As TextBox
     Private WithEvents Label379 As Label

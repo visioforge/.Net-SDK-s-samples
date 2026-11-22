@@ -287,7 +287,6 @@ namespace VideoEdit_CS_Demo
             this.edOutput.Name = "edOutput";
             this.edOutput.Size = new System.Drawing.Size(338, 26);
             this.edOutput.TabIndex = 30;
-            this.edOutput.Text = "c:\\vf\\video_edit_output.avi";
             // 
             // label15
             // 

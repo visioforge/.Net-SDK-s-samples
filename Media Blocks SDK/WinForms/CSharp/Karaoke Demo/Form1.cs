@@ -183,6 +183,12 @@ namespace Karaoke_Demo
                 mmError.Clear();
                 _duration = TimeSpan.Zero;
 
+                if (string.IsNullOrWhiteSpace(edFilename.Text) || (!rbZipMode.Checked && string.IsNullOrWhiteSpace(edAudioFilename.Text)))
+                {
+                    MessageBox.Show(this, "Please select the ZIP archive, or the CDG and audio files.");
+                    return;
+                }
+
                 // Create fresh pipeline for each run
                 _pipeline = new MediaBlocksPipeline();
                 _pipeline.OnError += Pipeline_OnError;
@@ -371,7 +377,7 @@ namespace Karaoke_Demo
                 edAudioFilename.Enabled = false;
                 btSelectAudioFile.Enabled = false;
                 label2.Enabled = false;
-                edFilename.Text = "c:\\1.zip";
+                edFilename.Text = string.Empty;
             }
             else
             {
@@ -380,8 +386,8 @@ namespace Karaoke_Demo
                 edAudioFilename.Enabled = true;
                 btSelectAudioFile.Enabled = true;
                 label2.Enabled = true;
-                edFilename.Text = "c:\\1.cdg";
-                edAudioFilename.Text = "c:\\1.mp3";
+                edFilename.Text = string.Empty;
+                edAudioFilename.Text = string.Empty;
             }
         }
 

@@ -223,7 +223,6 @@
             edFilename.Name = "edFilename";
             edFilename.Size = new System.Drawing.Size(466, 31);
             edFilename.TabIndex = 21;
-            edFilename.Text = "c:\\1.zip";
             // 
             // label14
             // 

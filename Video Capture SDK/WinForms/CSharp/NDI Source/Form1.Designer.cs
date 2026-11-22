@@ -73,7 +73,6 @@ namespace NDI_Source
             this.edOutput.Name = "edOutput";
             this.edOutput.Size = new System.Drawing.Size(688, 31);
             this.edOutput.TabIndex = 119;
-            this.edOutput.Text = "c:\\capture.mp4";
             // 
             // label4
             // 

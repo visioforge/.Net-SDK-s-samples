@@ -332,6 +332,12 @@ namespace DVD_Player_Demo
             {
                 mmError.Clear();
 
+                if (!File.Exists(edFilename.Text))
+                {
+                    MessageBox.Show(this, "Please select the VIDEO_TS.IFO file on the DVD.");
+                    return;
+                }
+
                 MediaPlayer1.Playlist_Clear();
                 MediaPlayer1.Playlist_Add(edFilename.Text);
                 MediaPlayer1.Loop = cbLoop.Checked;

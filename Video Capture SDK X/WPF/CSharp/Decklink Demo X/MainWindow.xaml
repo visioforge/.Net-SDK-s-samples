@@ -44,7 +44,7 @@
                         <Label Content="File name" Height="23" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62" />
 
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Height="23" HorizontalAlignment="Left" x:Name="edOutput" VerticalAlignment="Top" Width="350" Text="c:\capture.avi" />
+                            <TextBox Height="23" HorizontalAlignment="Left" x:Name="edOutput" VerticalAlignment="Top" Width="350" />
                             <Button Content="..." Margin="5,0,0,0" Height="23" HorizontalAlignment="Right" x:Name="btSelectOutput" VerticalAlignment="Top" Width="25" Click="btSelectOutput_Click" />
                         </StackPanel>
 

@@ -134,6 +134,12 @@
         {
             mmError.Clear();
 
+            if (string.IsNullOrWhiteSpace(edFilename.Text) || (!rbZipMode.Checked && string.IsNullOrWhiteSpace(edAudioFilename.Text)))
+            {
+                MessageBox.Show(this, "Please select the ZIP archive, or the CDG and audio files.");
+                return;
+            }
+
             _player.Audio_Play = true;
             var audioOutputDevice = (await _player.Audio_OutputDevicesAsync(AudioOutputDeviceAPI.DirectSound)).FirstOrDefault(x => x.Name == cbAudioOutputDevice.Text);
             if (audioOutputDevice == null)

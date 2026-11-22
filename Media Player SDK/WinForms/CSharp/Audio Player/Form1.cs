@@ -79,6 +79,12 @@ namespace Audio_Player_Demo
             {
                 mmError.Clear();
 
+                if (!File.Exists(edFilename.Text))
+                {
+                    MessageBox.Show(this, "Please select an audio file.");
+                    return;
+                }
+
                 MediaPlayer1.Playlist_Clear();
                 MediaPlayer1.Playlist_Add(edFilename.Text);
                 MediaPlayer1.Audio_PlayAudio = true;

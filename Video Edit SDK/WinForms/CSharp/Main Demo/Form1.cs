@@ -109,11 +109,6 @@ namespace VideoEdit_CS_Demo
         private WMVSettingsDialog wmvSettingsDialog;
 
         /// <summary>
-        /// The DV settings dialog.
-        /// </summary>
-        private DVSettingsDialog dvSettingsDialog;
-
-        /// <summary>
         /// The PCM settings dialog.
         /// </summary>
         private PCMSettingsDialog pcmSettingsDialog;
@@ -415,11 +410,13 @@ namespace VideoEdit_CS_Demo
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
             edOutputFileCut.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
             edOutputFileJoin.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+            edMuxStreamsOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+            edHLSOutputFolder.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "hls");
             VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             cbMode.SelectedIndex = 1;
             cbFrameRate.SelectedIndex = 0;
-            cbOutputVideoFormat.SelectedIndex = 15;
+            cbOutputVideoFormat.SelectedIndex = 14;
             cbMotDetHLColor.SelectedIndex = 1;
             cbRotate.SelectedIndex = 0;
             cbBarcodeType.SelectedIndex = 0;
@@ -687,19 +684,6 @@ namespace VideoEdit_CS_Demo
         }
 
         /// <summary>
-        /// Set dv output.
-        /// </summary>
-        private void SetDVOutput(ref DVOutput dvOutput)
-        {
-            if (dvSettingsDialog == null)
-            {
-                dvSettingsDialog = new DVSettingsDialog();
-            }
-
-            dvSettingsDialog.SaveSettings(ref dvOutput);
-        }
-
-        /// <summary>
         /// Set avi output.
         /// </summary>
         private void SetAVIOutput(ref AVIOutput aviOutput)
@@ -955,6 +939,13 @@ namespace VideoEdit_CS_Demo
 
             ConfigureVideoRenderer();
 
+            if (cbNetworkStreaming.Checked && cbNetworkStreamingMode.SelectedIndex == 0
+                && !rbNetworkStreamingUseMainWMVSettings.Checked && !File.Exists(edNetworkStreamingWMVProfile.Text))
+            {
+                MessageBox.Show(this, "Please select the WMV profile file.");
+                return;
+            }
+
             ConfigureNetworkStreaming();
 
             VideoEdit1.Output_Filename = edOutput.Text;
@@ -994,16 +985,6 @@ namespace VideoEdit_CS_Demo
                     }
                 case 3:
                     {
-                        outputFormat = VideoEditOutputFormat.DV;
-
-                        var dvOutput = new DVOutput();
-                        SetDVOutput(ref dvOutput);
-                        VideoEdit1.Output_Format = dvOutput;
-
-                        break;
-                    }
-                case 4:
-                    {
                         outputFormat = VideoEditOutputFormat.PCM_ACM;
 
                         var acmOutput = new ACMOutput();
@@ -1012,7 +993,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 5:
+                case 4:
                     {
                         outputFormat = VideoEditOutputFormat.MP3;
 
@@ -1022,7 +1003,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 6:
+                case 5:
                     {
                         outputFormat = VideoEditOutputFormat.M4A;
 
@@ -1032,7 +1013,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 7:
+                case 6:
                     {
                         outputFormat = VideoEditOutputFormat.WMA;
 
@@ -1042,7 +1023,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 8:
+                case 7:
                     {
                         outputFormat = VideoEditOutputFormat.OggVorbis;
 
@@ -1052,7 +1033,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 9:
+                case 8:
                     {
                         outputFormat = VideoEditOutputFormat.FLAC;
 
@@ -1062,7 +1043,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 10:
+                case 9:
                     {
                         outputFormat = VideoEditOutputFormat.Speex;
 
@@ -1072,7 +1053,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 11:
+                case 10:
                     {
                         outputFormat = VideoEditOutputFormat.Custom;
 
@@ -1082,7 +1063,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 12:
+                case 11:
                     {
                         outputFormat = VideoEditOutputFormat.WebM;
 
@@ -1092,7 +1073,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 13:
+                case 12:
                     {
                         outputFormat = VideoEditOutputFormat.FFMPEG;
 
@@ -1102,7 +1083,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 14:
+                case 13:
                     {
                         outputFormat = VideoEditOutputFormat.FFMPEG_EXE;
 
@@ -1112,10 +1093,10 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 15:
+                case 14:
                     outputFormat = VideoEditOutputFormat.MP4;
                     break;
-                case 16:
+                case 15:
                     {
                         outputFormat = VideoEditOutputFormat.MP4_HW;
 
@@ -1125,7 +1106,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 17:
+                case 16:
                     {
                         outputFormat = VideoEditOutputFormat.AnimatedGIF;
                         var gifOutput = new AnimatedGIFOutput();
@@ -1133,7 +1114,7 @@ namespace VideoEdit_CS_Demo
                         VideoEdit1.Output_Format = gifOutput;
                         break;
                     }
-                case 18:
+                case 17:
                     outputFormat = VideoEditOutputFormat.Encrypted;
                     break;
             }
@@ -1158,6 +1139,12 @@ namespace VideoEdit_CS_Demo
                     }
                     else if (rbEncryptionKeyFile.Checked)
                     {
+                        if (!File.Exists(edEncryptionKeyFile.Text))
+                        {
+                            MessageBox.Show(this, "Please select the encryption key file.");
+                            return;
+                        }
+
                         mp4Output.Encryption_KeyType = EncryptionKeyType.File;
                         mp4Output.Encryption_Key = edEncryptionKeyFile.Text;
                     }
@@ -3589,17 +3576,6 @@ namespace VideoEdit_CS_Demo
 
                 case 3:
                     {
-                        if (dvSettingsDialog == null)
-                        {
-                            dvSettingsDialog = new DVSettingsDialog();
-                        }
-
-                        dvSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 4:
-                    {
                         if (pcmSettingsDialog == null)
                         {
                             pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1);
@@ -3609,7 +3585,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 5:
+                case 4:
                     {
                         if (mp3SettingsDialog == null)
                         {
@@ -3620,7 +3596,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 6:
+                case 5:
                     {
                         if (m4aSettingsDialog == null)
                         {
@@ -3631,7 +3607,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 7:
+                case 6:
                     {
                         if (wmvSettingsDialog == null)
                         {
@@ -3643,7 +3619,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 8:
+                case 7:
                     {
                         if (oggVorbisSettingsDialog == null)
                         {
@@ -3654,7 +3630,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 9:
+                case 8:
                     {
                         if (flacSettingsDialog == null)
                         {
@@ -3665,7 +3641,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 10:
+                case 9:
                     {
                         if (speexSettingsDialog == null)
                         {
@@ -3676,7 +3652,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 11:
+                case 10:
                     {
                         if (customFormatSettingsDialog == null)
                         {
@@ -3688,7 +3664,7 @@ namespace VideoEdit_CS_Demo
                         break;
                     }
 
-                case 12:
+                case 11:
                     {
                         if (webmSettingsDialog == null)
                         {
@@ -3699,7 +3675,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 13:
+                case 12:
                     {
                         if (ffmpegSettingsDialog == null)
                         {
@@ -3710,7 +3686,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 14:
+                case 13:
                     {
                         if (ffmpegEXESettingsDialog == null)
                         {
@@ -3721,8 +3697,8 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 15:
-                case 18:
+                case 14:
+                case 17:
                     {
                         if (this.mp4SettingsDialog == null)
                         {
@@ -3733,7 +3709,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 16:
+                case 15:
                     {
                         if (mp4HWSettingsDialog == null)
                         {
@@ -3744,7 +3720,7 @@ namespace VideoEdit_CS_Demo
 
                         break;
                     }
-                case 17:
+                case 16:
                     {
                         if (gifSettingsDialog == null)
                         {
@@ -3783,52 +3759,52 @@ namespace VideoEdit_CS_Demo
 
                 case 3:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wav");
                         break;
                     }
                 case 4:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wav");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp3");
                         break;
                     }
                 case 5:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp3");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".m4a");
                         break;
                     }
                 case 6:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".m4a");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wma");
                         break;
                     }
                 case 7:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wma");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
                         break;
                     }
                 case 8:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".flac");
                         break;
                     }
                 case 9:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".flac");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
                         break;
                     }
                 case 10:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
                         break;
                     }
                 case 11:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm");
                         break;
                     }
                 case 12:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
                         break;
                     }
                 case 13:
@@ -3838,7 +3814,7 @@ namespace VideoEdit_CS_Demo
                     }
                 case 14:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
                         break;
                     }
                 case 15:
@@ -3848,15 +3824,10 @@ namespace VideoEdit_CS_Demo
                     }
                 case 16:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
-                        break;
-                    }
-                case 17:
-                    {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif");
                         break;
                     }
-                case 18:
+                case 17:
                     {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".enc");
                         break;

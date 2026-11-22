@@ -81,7 +81,7 @@ Partial Class Form1
         Me.edFilename.Name = "edFilename"
         Me.edFilename.Size = New System.Drawing.Size(770, 31)
         Me.edFilename.TabIndex = 25
-        Me.edFilename.Text = "c:\1.avi"
+
         '
         'groupBox2
         '

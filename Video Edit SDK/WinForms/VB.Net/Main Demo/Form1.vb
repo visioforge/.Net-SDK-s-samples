@@ -43,8 +43,6 @@ Public Class Form1
 
     Private wmvSettingsDialog As WMVSettingsDialog
 
-    Private dvSettingsDialog As DVSettingsDialog
-
     Private pcmSettingsDialog As PCMSettingsDialog
 
     Private mp3SettingsDialog As MP3SettingsDialog
@@ -225,12 +223,16 @@ Public Class Form1
         edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
         edOutputFileCut.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
         edOutputFileJoin.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
+        edMuxStreamsOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge", "output.mp4")
+
+        ' the output defaults live here, so the folder has to exist before the first save
+        Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge"))
         VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
 
         Tag = 1
 
         cbFrameRate.SelectedIndex = 0
-        cbOutputVideoFormat.SelectedIndex = 15
+        cbOutputVideoFormat.SelectedIndex = 14
         cbRotate.SelectedIndex = 0
         cbBarcodeType.SelectedIndex = 0
         cbNetworkStreamingMode.SelectedIndex = 0
@@ -590,17 +592,6 @@ Public Class Form1
     End Sub
 
         ''' <summary>
-        ''' Set dv output.
-        ''' </summary>
-    Private Sub SetDVOutput(ByRef dvOutput As DVOutput)
-        If (dvSettingsDialog Is Nothing) Then
-            dvSettingsDialog = New DVSettingsDialog()
-        End If
-
-        dvSettingsDialog.SaveSettings(dvOutput)
-    End Sub
-
-        ''' <summary>
         ''' Set avi output.
         ''' </summary>
     Private Sub SetAVIOutput(ByRef aviOutput As AVIOutput)
@@ -668,6 +659,12 @@ Public Class Form1
         ConfigureVideoRenderer()
 
         ' Network streaming
+        If cbNetworkStreaming.Checked AndAlso cbNetworkStreamingMode.SelectedIndex = 0 AndAlso
+            Not rbNetworkStreamingUseMainWMVSettings.Checked AndAlso Not System.IO.File.Exists(edNetworkStreamingWMVProfile.Text) Then
+            MessageBox.Show(Me, "Please select the WMV profile file.")
+            Return
+        End If
+
         VideoEdit1.Network_Streaming_Enabled = cbNetworkStreaming.Checked
 
         If VideoEdit1.Network_Streaming_Enabled Then
@@ -803,92 +800,86 @@ Public Class Form1
                 SetWMVOutput(wmvOutput)
                 VideoEdit1.Output_Format = wmvOutput
             Case 3
-                outputFormat = VideoEditOutputFormat.DV
-
-                Dim dvOutput = New DVOutput()
-                SetDVOutput(dvOutput)
-                VideoEdit1.Output_Format = dvOutput
-            Case 4
                 outputFormat = VideoEditOutputFormat.PCM_ACM
 
                 Dim acmOutput = New ACMOutput()
                 SetACMOutput(acmOutput)
                 VideoEdit1.Output_Format = acmOutput
-            Case 5
+            Case 4
                 outputFormat = VideoEditOutputFormat.MP3
 
                 Dim mp3Output = New MP3Output()
                 SetMP3Output(mp3Output)
                 VideoEdit1.Output_Format = mp3Output
-            Case 6
+            Case 5
                 outputFormat = VideoEditOutputFormat.M4A
 
                 Dim m4aOutput = New M4AOutput()
                 SetM4AOutput(m4aOutput)
                 VideoEdit1.Output_Format = m4aOutput
-            Case 7
+            Case 6
                 outputFormat = VideoEditOutputFormat.WMA
 
                 Dim wmaOutput As WMAOutput = New WMAOutput()
                 SetWMAOutput(wmaOutput)
                 VideoEdit1.Output_Format = wmaOutput
-            Case 8
+            Case 7
                 outputFormat = VideoEditOutputFormat.OggVorbis
 
                 Dim oggVorbisOutput = New OGGVorbisOutput()
                 SetOGGOutput(oggVorbisOutput)
                 VideoEdit1.Output_Format = oggVorbisOutput
-            Case 9
+            Case 8
                 outputFormat = VideoEditOutputFormat.FLAC
 
                 Dim flacOutput = New FLACOutput()
                 SetFLACOutput(flacOutput)
                 VideoEdit1.Output_Format = flacOutput
-            Case 10
+            Case 9
                 outputFormat = VideoEditOutputFormat.Speex
 
                 Dim speexOutput = New SpeexOutput()
                 SetSpeexOutput(speexOutput)
                 VideoEdit1.Output_Format = speexOutput
-            Case 11
+            Case 10
                 outputFormat = VideoEditOutputFormat.Custom
 
                 Dim customOutput = New CustomOutput()
                 SetCustomOutput(customOutput)
                 VideoEdit1.Output_Format = customOutput
-            Case 12
+            Case 11
                 outputFormat = VideoEditOutputFormat.WebM
 
                 Dim webmOutput = New WebMOutput()
                 SetWebMOutput(webmOutput)
                 VideoEdit1.Output_Format = webmOutput
-            Case 13
+            Case 12
                 outputFormat = VideoEditOutputFormat.FFMPEG
 
                 Dim ffmpegOutput = New FFMPEGOutput()
                 SetFFMPEGOutput(ffmpegOutput)
                 VideoEdit1.Output_Format = ffmpegOutput
-            Case 14
+            Case 13
                 outputFormat = VideoEditOutputFormat.FFMPEG_EXE
 
                 Dim ffmpegOutput = New FFMPEGEXEOutput()
                 SetFFMPEGEXEOutput(ffmpegOutput)
                 VideoEdit1.Output_Format = ffmpegOutput
-            Case 15
+            Case 14
                 outputFormat = VideoEditOutputFormat.MP4
-            Case 16
+            Case 15
                 outputFormat = VideoEditOutputFormat.MP4_HW
 
                 Dim mp4Output = New MP4HWOutput()
                 SetMP4HWOutput(mp4Output)
                 VideoEdit1.Output_Format = mp4Output
-            Case 17
+            Case 16
                 outputFormat = VideoEditOutputFormat.AnimatedGIF
 
                 Dim gifOutput = New AnimatedGIFOutput()
                 SetGIFOutput(gifOutput)
                 VideoEdit1.Output_Format = gifOutput
-            Case 18
+            Case 17
                 outputFormat = VideoEditOutputFormat.Encrypted
         End Select
 
@@ -911,6 +902,11 @@ Public Class Form1
                     mp4Output.Encryption_Key = edEncryptionKeyString.Text
 
                 ElseIf (rbEncryptionKeyFile.Checked) Then
+
+                    If (Not System.IO.File.Exists(edEncryptionKeyFile.Text)) Then
+                        MessageBox.Show(Me, "Please select the encryption key file.")
+                        Return
+                    End If
 
                     mp4Output.Encryption_KeyType = EncryptionKeyType.File
                     mp4Output.Encryption_Key = edEncryptionKeyFile.Text
@@ -2967,97 +2963,91 @@ Public Class Form1
                 wmvSettingsDialog.WMA = False
                 wmvSettingsDialog.ShowDialog(Me)
             Case 3
-                If (dvSettingsDialog Is Nothing) Then
-                    dvSettingsDialog = New DVSettingsDialog()
-                End If
-
-                dvSettingsDialog.ShowDialog(Me)
-            Case 4
                 If (pcmSettingsDialog Is Nothing) Then
                     pcmSettingsDialog = New PCMSettingsDialog(VideoEdit1.Audio_Codecs.ToArray())
                 End If
 
                 pcmSettingsDialog.ShowDialog(Me)
-            Case 5
+            Case 4
                 If (mp3SettingsDialog Is Nothing) Then
                     mp3SettingsDialog = New MP3SettingsDialog()
                 End If
 
                 mp3SettingsDialog.ShowDialog(Me)
-            Case 6
+            Case 5
                 If (m4aSettingsDialog Is Nothing) Then
                     m4aSettingsDialog = New M4ASettingsDialog()
                 End If
 
                 m4aSettingsDialog.ShowDialog(Me)
-            Case 7
+            Case 6
                 If (wmvSettingsDialog Is Nothing) Then
                     wmvSettingsDialog = New WMVSettingsDialog(VideoEdit1)
                 End If
 
                 wmvSettingsDialog.WMA = True
                 wmvSettingsDialog.ShowDialog(Me)
-            Case 8
+            Case 7
                 If (oggVorbisSettingsDialog Is Nothing) Then
                     oggVorbisSettingsDialog = New OggVorbisSettingsDialog()
                 End If
 
                 oggVorbisSettingsDialog.ShowDialog(Me)
-            Case 9
+            Case 8
                 If (flacSettingsDialog Is Nothing) Then
                     flacSettingsDialog = New FLACSettingsDialog()
                 End If
 
                 flacSettingsDialog.ShowDialog(Me)
-            Case 10
+            Case 9
                 If (speexSettingsDialog Is Nothing) Then
                     speexSettingsDialog = New SpeexSettingsDialog()
                 End If
 
                 speexSettingsDialog.ShowDialog(Me)
-            Case 11
+            Case 10
                 If (customFormatSettingsDialog Is Nothing) Then
                     customFormatSettingsDialog = New CustomFormatSettingsDialog(VideoEdit1.Video_Codecs.ToArray(), VideoEdit1.Audio_Codecs.ToArray(), VideoEdit1.DirectShow_Filters.ToArray())
                 End If
 
                 customFormatSettingsDialog.ShowDialog(Me)
-            Case 12
+            Case 11
                 If (webmSettingsDialog Is Nothing) Then
                     webmSettingsDialog = New WebMSettingsDialog()
                 End If
 
                 webmSettingsDialog.ShowDialog(Me)
-            Case 13
+            Case 12
                 If (ffmpegSettingsDialog Is Nothing) Then
                     ffmpegSettingsDialog = New FFMPEGSettingsDialog()
                 End If
 
                 ffmpegSettingsDialog.ShowDialog(Me)
-            Case 14
+            Case 13
                 If (ffmpegEXESettingsDialog Is Nothing) Then
                     ffmpegEXESettingsDialog = New FFMPEGEXESettingsDialog()
                 End If
 
                 ffmpegEXESettingsDialog.ShowDialog(Me)
-            Case 15
+            Case 14
                 If (mp4SettingsDialog Is Nothing) Then
                     mp4SettingsDialog = New MP4SettingsDialog()
                 End If
 
                 mp4SettingsDialog.ShowDialog(Me)
-            Case 16
+            Case 15
                 If (mp4HWSettingsDialog Is Nothing) Then
                     mp4HWSettingsDialog = New HWEncodersOutputSettingsDialog(HWSettingsDialogMode.MP4)
                 End If
 
                 mp4HWSettingsDialog.ShowDialog(Me)
-            Case 17
+            Case 16
                 If (gifSettingsDialog Is Nothing) Then
                     gifSettingsDialog = New GIFSettingsDialog()
                 End If
 
                 gifSettingsDialog.ShowDialog(Me)
-            Case 18
+            Case 17
                 If (mp4SettingsDialog Is Nothing) Then
                     mp4SettingsDialog = New MP4SettingsDialog()
                 End If
@@ -3078,36 +3068,34 @@ Public Class Form1
             Case 2
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wmv")
             Case 3
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
-            Case 4
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wav")
-            Case 5
+            Case 4
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp3")
-            Case 6
+            Case 5
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".m4a")
-            Case 7
+            Case 6
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wma")
+            Case 7
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg")
             Case 8
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg")
-            Case 9
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".flac")
-            Case 10
+            Case 9
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg")
-            Case 11
+            Case 10
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
-            Case 12
+            Case 11
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm")
+            Case 12
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
             Case 13
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
             Case 14
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi")
+                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
             Case 15
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
             Case 16
-                edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4")
-            Case 17
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif")
-            Case 18
+            Case 17
                 edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".enc")
         End Select
     End Sub

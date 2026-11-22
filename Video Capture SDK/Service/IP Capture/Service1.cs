@@ -59,7 +59,10 @@ namespace IPCaptureService
             VideoCapture1.IP_Camera_Source.Type = IPSourceEngine.Auto_LAV;
             VideoCapture1.IP_Camera_Source.URL = new Uri("http://212.162.177.75/mjpg/video.mjpg");
 
-            VideoCapture1.Output_Filename = @"c:\vf\service_output.mp4";
+            var outputFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "VisioForge");
+            Directory.CreateDirectory(outputFolder);
+
+            VideoCapture1.Output_Filename = Path.Combine(outputFolder, "service_output.mp4");
 
             var mp4Output = new MP4Output();
             mp4Output.MP4Mode = MP4Mode.CPU_QSV;

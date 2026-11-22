@@ -198,7 +198,6 @@
             edOutput.Name = "edOutput";
             edOutput.Size = new System.Drawing.Size(596, 31);
             edOutput.TabIndex = 93;
-            edOutput.Text = "c:\\vf\\video_edit_output.avi";
             // 
             // cbLicensing
             // 

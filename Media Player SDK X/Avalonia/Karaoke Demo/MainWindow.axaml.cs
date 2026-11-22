@@ -325,6 +325,12 @@ public partial class MainWindow : Window
         {
             mmError.Text = string.Empty;
 
+            if (string.IsNullOrWhiteSpace(edFilename.Text) || (rbZipMode.IsChecked != true && string.IsNullOrWhiteSpace(edAudioFilename.Text)))
+            {
+                mmError.Text = "Please select the ZIP archive, or the CDG and audio files.";
+                return;
+            }
+
             _player.Audio_Play = true;
 
             var audioOutputs = await _player.Audio_OutputDevicesAsync(_audioOutputDeviceAPI);

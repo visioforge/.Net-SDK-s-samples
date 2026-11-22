@@ -28,7 +28,6 @@ namespace screen_capture_webm
             var source = new ScreenCaptureDX9SourceSettings();
 
             source.FrameRate = new VideoFrameRate(25);
-            source.Rectangle = new VisioForge.Core.Types.Rect(System.Windows.Forms.Screen.AllScreens[0].Bounds);
 
             source.CaptureCursor = true;
             source.Monitor = 0;

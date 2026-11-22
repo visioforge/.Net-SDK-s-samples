@@ -5427,7 +5427,6 @@ namespace Media_Player_Demo
             edOSDImageFilename.Name = "edOSDImageFilename";
             edOSDImageFilename.Size = new System.Drawing.Size(316, 31);
             edOSDImageFilename.TabIndex = 1;
-            edOSDImageFilename.Text = "c:\\logo.png";
             // 
             // label113
             // 
@@ -6573,7 +6572,6 @@ namespace Media_Player_Demo
             edEncryptionKeyHEX.Name = "edEncryptionKeyHEX";
             edEncryptionKeyHEX.Size = new System.Drawing.Size(354, 31);
             edEncryptionKeyHEX.TabIndex = 9;
-            edEncryptionKeyHEX.Text = "enter hex data";
             // 
             // rbEncryptionKeyBinary
             // 
@@ -6604,7 +6602,6 @@ namespace Media_Player_Demo
             edEncryptionKeyFile.Name = "edEncryptionKeyFile";
             edEncryptionKeyFile.Size = new System.Drawing.Size(306, 31);
             edEncryptionKeyFile.TabIndex = 6;
-            edEncryptionKeyFile.Text = "c:\\keyfile.txt";
             // 
             // rbEncryptionKeyFile
             // 

@@ -228,7 +228,6 @@ namespace Window_Capture
             this.edOutput.Name = "edOutput";
             this.edOutput.Size = new System.Drawing.Size(235, 20);
             this.edOutput.TabIndex = 126;
-            this.edOutput.Text = "c:\\capture.avi";
             // 
             // lbInfo
             // 

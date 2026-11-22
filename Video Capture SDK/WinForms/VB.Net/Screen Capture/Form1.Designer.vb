@@ -868,7 +868,6 @@ Partial Class Form1
         Me.edOutput.Name = "edOutput"
         Me.edOutput.Size = New System.Drawing.Size(632, 31)
         Me.edOutput.TabIndex = 132
-        Me.edOutput.Text = "c:\capture.avi"
         '
         'lbInfo
         '

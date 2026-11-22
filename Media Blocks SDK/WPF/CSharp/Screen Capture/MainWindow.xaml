@@ -26,6 +26,7 @@
                     <Label Height="28" Margin="149,62,0,0" Name="label25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30">Top</Label>
                     <TextBox Height="23" HorizontalAlignment="Left" Margin="200,89,0,0" Name="edScreenBottom" VerticalAlignment="Top" Width="39" Text="480" />
                     <Label Height="28" Margin="149,89,0,0" Name="label26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="54">Bottom</Label>
+                    <Label Height="22" HorizontalAlignment="Left" Margin="12,114,0,0" Name="labelRegionHint" VerticalAlignment="Top" FontSize="10" Width="320">Custom Area: pixels relative to the selected display</Label>
                     <TextBox HorizontalAlignment="Left" Margin="103,144,0,0" Name="edScreenFrameRate" Width="39" Height="22" VerticalAlignment="Top" Text="10" />
                     <Label HorizontalAlignment="Left" Margin="12,141,0,0" Name="label27" Width="67" Height="28" VerticalAlignment="Top">Frame rate</Label>
                     <Label Margin="0,141,0,0" Name="label28" Height="28" VerticalAlignment="Top" HorizontalAlignment="Center" Width="47">fps</Label>

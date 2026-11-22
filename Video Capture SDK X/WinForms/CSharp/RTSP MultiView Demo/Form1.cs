@@ -47,7 +47,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
             cbCameraIndex.SelectedIndex = 0;
             edURL.Text = "http://localhost:8000/camera/mjpeg";
-            edFilename.Text = @"c:\vf\outputxx.ts";
+            edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 
             // HW decoders
             cbGPUDecoder.Items.Add("None");

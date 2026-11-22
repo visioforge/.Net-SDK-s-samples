@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Camera Grid - VisioForge Media Blocks SDK</title>
+    <style>
+        body { margin: 0; background: #111; color: #ddd; font-family: sans-serif; }
+        #grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 6px; padding: 6px; }
+        figure { margin: 0; position: relative; background: #000; }
+        video { width: 100%; aspect-ratio: 16 / 9; display: block; }
+        figcaption { position: absolute; left: 8px; top: 6px; font-size: 13px; text-shadow: 0 0 3px #000; }
+    </style>
+</head>
+<body>
+<div id="grid"></div>
+<script>
+    // A minimal WHEP player: offer, POST it to the endpoint, apply the answer.
+    async function play(endpoint, video, caption) {
+        const pc = new RTCPeerConnection();
+        pc.addTransceiver('video', { direction: 'recvonly' });
+        pc.ontrack = e => video.srcObject = e.streams[0] || new MediaStream([e.track]);
+
+        await pc.setLocalDescription(await pc.createOffer());
+        // Send the offer with all ICE candidates in it.
+        await new Promise(resolve => {
+            if (pc.iceGatheringState === 'complete') resolve();
+            else pc.onicegatheringstatechange = () => pc.iceGatheringState === 'complete' && resolve();
+        });
+
+        const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/sdp' }, body: pc.localDescription.sdp });
+        if (response.status !== 201) throw new Error(`${endpoint}: HTTP ${response.status}`);
+        await pc.setRemoteDescription({ type: 'answer', sdp: await response.text() });
+
+        // End the session on the server when the page closes.
+        const session = response.headers.get('Location');
+        addEventListener('pagehide', () => fetch(session, { method: 'DELETE', keepalive: true }));
+        pc.onconnectionstatechange = () => caption.textContent = `${caption.dataset.name} - ${pc.connectionState}`;
+    }
+
+    (async () => {
+        const count = await (await fetch('/cameras')).json();
+        for (let i = 0; i < count; i++) {
+            const figure = document.createElement('figure');
+            const video = Object.assign(document.createElement('video'), { autoplay: true, muted: true, playsInline: true });
+            const caption = document.createElement('figcaption');
+            caption.dataset.name = caption.textContent = `Camera ${i}`;
+            figure.append(video, caption);
+            document.getElementById('grid').append(figure);
+            play(`/cam/${i}/whep/endpoint`, video, caption).catch(e => caption.textContent = e.message);
+        }
+    })();
+</script>
+</body>
+</html>

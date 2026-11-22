@@ -21,7 +21,6 @@
                                     <ComboBoxItem Content="AVI" />
                                     <ComboBoxItem Content="MKV (Matroska)" />
                                     <ComboBoxItem Content="WMV (Windows Media Video)" />
-                                    <ComboBoxItem Content="DV" />
                                     <ComboBoxItem Content="PCM/ACM" />
                                     <ComboBoxItem Content="MP3" />
                                     <ComboBoxItem Content="M4A (AAC)" />
@@ -39,7 +38,7 @@
                                     <ComboBoxItem Content="Encrypted video" />
                                 </ComboBox>
                                 <Label Content="File name" Height="23" HorizontalAlignment="Left" Margin="10,130,0,0" x:Name="label22" VerticalAlignment="Top" Width="62" />
-                                <TextBox Height="23" HorizontalAlignment="Left" Margin="10,158,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="304" Text="c:\capture.avi" />
+                                <TextBox Height="23" HorizontalAlignment="Left" Margin="10,158,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="304" />
                                 <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,158,10,0" x:Name="btSelectOutput" VerticalAlignment="Top" Width="24" Click="btSelectOutput_Click" />
                                 <Button x:Name="btOutputConfigure" Content="Configure" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Width="75" Click="BtOutputConfigure_Click" />
                                 <Label x:Name="label1" Content="You can use dialog or code to configure format settings" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
@@ -627,7 +626,7 @@
                                 <RadioButton Content="Use external profile" Height="16" HorizontalAlignment="Left" Margin="10,33,0,0" x:Name="rbNetworkStreamingUseExternalProfile" VerticalAlignment="Top" />
                                 <RadioButton Content="Use WMV settings from capture tab" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="10,11,0,0" x:Name="rbNetworkStreamingUseMainWMVSettings" VerticalAlignment="Top" />
                                 <Label Content="File name" Height="23" HorizontalAlignment="Left" Margin="44,61,0,0" x:Name="label142" VerticalAlignment="Top" Width="62" />
-                                <TextBox Height="23" Margin="117,63,36,0" x:Name="edNetworkStreamingWMVProfile" Text="c:\WM.prx" VerticalAlignment="Top" />
+                                <TextBox Height="23" Margin="117,63,36,0" x:Name="edNetworkStreamingWMVProfile" VerticalAlignment="Top" />
                                 <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,62,6,0" x:Name="btSelectWMVProfileNetwork" VerticalAlignment="Top" Width="24" Click="btSelectWMVProfileNetwork_Click" />
                                 <TextBox Height="23" HorizontalAlignment="Left" Margin="123,98,0,0" x:Name="edMaximumClients" Text="10" VerticalAlignment="Top" Width="31" />
                                 <Label Content="Maximum clients" Height="28" HorizontalAlignment="Left" Margin="11,96,0,0" x:Name="label143" VerticalAlignment="Top" Width="110" />
@@ -672,7 +671,7 @@
                         <TabItem Header="HLS">
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Output folder for video files and playlist" VerticalAlignment="Top"/>
-                                <TextBox x:Name="edHLSOutputFolder" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" Text="c:\inetpub\wwwroot\hls\" VerticalAlignment="Top" Width="309"/>
+                                <TextBox x:Name="edHLSOutputFolder" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="309"/>
                                 <Button x:Name="btSelectHLSOutputFolder" HorizontalAlignment="Left" Height="23" Margin="324,31,0,0" Content="..." VerticalAlignment="Top" Width="23" Click="btSelectHLSOutputFolder_Click"/>
                                 <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="10,59,0,0" TextWrapping="Wrap" Text="Segment duration (sec)" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edHLSSegmentDuration" HorizontalAlignment="Left" Height="23" Margin="10,80,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="67"/>
@@ -818,9 +817,9 @@
                             <RadioButton x:Name="rbEncryptionKeyFile" Content="File (v9 SDK)" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
                             <RadioButton x:Name="rbEncryptionKeyBinary" Content="Binary data (v9 SDK)" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top"/>
                             <TextBox x:Name="edEncryptionKeyString" HorizontalAlignment="Left" Height="23" Margin="30,30,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="304"/>
-                            <TextBox x:Name="edEncryptionKeyFile" HorizontalAlignment="Left" Height="23" Margin="30,87,0,0" TextWrapping="Wrap" Text="c:\keyfile.txt" VerticalAlignment="Top" Width="277"/>
+                            <TextBox x:Name="edEncryptionKeyFile" HorizontalAlignment="Left" Height="23" Margin="30,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
                             <Button x:Name="btEncryptionOpenFile" Content="..." HorizontalAlignment="Left" Margin="312,87,0,0" VerticalAlignment="Top" Width="22" Height="22" Click="btEncryptionOpenFile_Click"/>
-                            <TextBox x:Name="edEncryptionKeyHEX" HorizontalAlignment="Left" Height="23" Margin="30,146,0,0" TextWrapping="Wrap" Text="enter hex data" VerticalAlignment="Top" Width="304"/>
+                            <TextBox x:Name="edEncryptionKeyHEX" HorizontalAlignment="Left" Height="23" Margin="30,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304"/>
                             <Label Content="You can assign byte[] using API" HorizontalAlignment="Left" Margin="30,169,0,0" VerticalAlignment="Top"/>
 
                         </Grid>
@@ -929,7 +928,7 @@
                     <Label Content="ms" Height="28" HorizontalAlignment="Left" Margin="305,51,0,0" VerticalAlignment="Top" />
                     <Label x:Name="label" Content="Specify time before adding source file" HorizontalAlignment="Left" Margin="94,81,0,0" VerticalAlignment="Top"/>
                     <Label Content="Output file" HorizontalAlignment="Left" Margin="10,132,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="edOutputFileCut" HorizontalAlignment="Left" Height="23" Margin="93,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392" Text="c:\vf\video_edit_output.avi"/>
+                    <TextBox x:Name="edOutputFileCut" HorizontalAlignment="Left" Height="23" Margin="93,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392"/>
                     <Button x:Name="btSelectOutputCut" Content="..." HorizontalAlignment="Left" Margin="490,135,0,0" VerticalAlignment="Top" Width="24" Height="23" Click="btSelectOutputCut_Click"/>
                     <Button x:Name="btStartCut" Content="Start" HorizontalAlignment="Left" Margin="20,204,0,0" VerticalAlignment="Top" Width="75" Click="btStartCut_Click"/>
                     <Button x:Name="btStopCut" Content="Stop" HorizontalAlignment="Left" Margin="100,204,0,0" VerticalAlignment="Top" Width="75" Click="btStopCut_Click"/>
@@ -944,7 +943,7 @@
                     <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="452,38,0,0" x:Name="btAddInputFile3" VerticalAlignment="Top" Width="62" Click="btAddInputFile3_Click" />
                     <Button Content="Clear" Height="23" HorizontalAlignment="Left" Margin="452,66,0,0" x:Name="btClearList3" VerticalAlignment="Top" Width="62" Click="btClearList3_Click" />
                     <Label Content="Output file" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="edOutputFileJoin" HorizontalAlignment="Left" Height="23" Margin="93,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392" Text="c:\vf\video_edit_output.avi"/>
+                    <TextBox x:Name="edOutputFileJoin" HorizontalAlignment="Left" Height="23" Margin="93,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392"/>
                     <Button x:Name="btSelectOutputJoin" Content="..." HorizontalAlignment="Left" Margin="490,108,0,0" VerticalAlignment="Top" Width="24" Height="23" Click="btSelectOutputJoin_Click"/>
                     <Button x:Name="btStartJoin" Content="Start" HorizontalAlignment="Left" Margin="15,155,0,0" VerticalAlignment="Top" Width="75" Click="btStartJoin_Click"/>
                     <Button x:Name="btStopJoin" Content="Stop" HorizontalAlignment="Left" Margin="95,155,0,0" VerticalAlignment="Top" Width="75" Click="btStopJoin_Click"/>
@@ -959,7 +958,7 @@
                     <Button x:Name="btMuxStreamsAdd" Content="Add" Height="23" HorizontalAlignment="Left" Margin="452,37,0,0" VerticalAlignment="Top" Width="62" Click="btMuxStreamsAdd_Click" />
                     <Button x:Name="btMuxStreamsClear" Content="Clear" Height="23" HorizontalAlignment="Left" Margin="452,180,0,0" VerticalAlignment="Top" Width="62" Click="btMuxStreamsClear_Click" />
                     <Label Content="Output file" HorizontalAlignment="Left" Margin="10,229,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="edMuxStreamsOutputFile"  HorizontalAlignment="Left" Height="23" Margin="93,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392" Text="c:\vf\video_edit_output.avi"/>
+                    <TextBox x:Name="edMuxStreamsOutputFile"  HorizontalAlignment="Left" Height="23" Margin="93,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392"/>
                     <Button x:Name="btMuxStreamsSelectOutput"  Content="..." HorizontalAlignment="Left" Margin="490,232,0,0" VerticalAlignment="Top" Width="24" Height="23" Click="btMuxStreamsSelectOutput_Click" />
                     <Button x:Name="btStartMux" Content="Start" HorizontalAlignment="Left" Margin="15,279,0,0" VerticalAlignment="Top" Width="75" Click="btStartMux_Click"/>
                     <Button x:Name="btStopMux" Content="Stop" HorizontalAlignment="Left" Margin="95,279,0,0" VerticalAlignment="Top" Width="75" Click="btStopMux_Click" />

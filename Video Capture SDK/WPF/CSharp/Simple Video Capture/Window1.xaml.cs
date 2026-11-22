@@ -89,6 +89,13 @@ namespace Simple_Video_Capture
         private VideoCaptureCore VideoCapture1;
 
         /// <summary>
+        /// The format and frame rate the demo starts with: the ones the SDK picks for "use best".
+        /// </summary>
+        private string _defaultVideoFormat;
+
+        private VideoFrameRate _defaultVideoFrameRate;
+
+        /// <summary>
         /// The disposed value.
         /// </summary>
         private bool disposedValue;
@@ -366,7 +373,13 @@ namespace Simple_Video_Capture
 
                 if (cbVideoInputFormat.Items.Count > 0)
                 {
-                    cbVideoInputFormat.SelectedIndex = 0;
+                    // Start from the format the SDK picks for "use best" instead of the first listed one.
+                    var bestFormat = new VideoCaptureSource(deviceItem);
+                    _defaultVideoFormat = bestFormat.Format;
+                    _defaultVideoFrameRate = bestFormat.FrameRate;
+
+                    var formatIndex = deviceItem.VideoFormats.FindIndex(format => format.Name == _defaultVideoFormat);
+                    cbVideoInputFormat.SelectedIndex = formatIndex >= 0 ? formatIndex : 0;
                     cbVideoInputFormat_SelectionChanged(null, null);
                 }
 
@@ -785,7 +798,18 @@ namespace Simple_Video_Capture
 
                 if (cbVideoInputFrameRate.Items.Count > 0)
                 {
-                    cbVideoInputFrameRate.SelectedIndex = 0;
+                    // The "use best" default keeps its own frame rate; any other format starts at the first rate.
+                    var index = 0;
+                    if (videoFormat.Name == _defaultVideoFormat)
+                    {
+                        var rateIndex = cbVideoInputFrameRate.Items.IndexOf(_defaultVideoFrameRate.ToString(CultureInfo.CurrentCulture));
+                        if (rateIndex >= 0)
+                        {
+                            index = rateIndex;
+                        }
+                    }
+
+                    cbVideoInputFrameRate.SelectedIndex = index;
                 }
             }
         }

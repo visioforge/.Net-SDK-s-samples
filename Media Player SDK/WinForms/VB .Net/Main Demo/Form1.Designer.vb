@@ -917,7 +917,7 @@ Partial Class Form1
         Me.edScreenshotsFolder.Name = "edScreenshotsFolder"
         Me.edScreenshotsFolder.Size = New System.Drawing.Size(206, 26)
         Me.edScreenshotsFolder.TabIndex = 26
-        Me.edScreenshotsFolder.Text = "c:\"
+
         '
         'tbJPEGQuality
         '
@@ -5631,7 +5631,6 @@ Partial Class Form1
         Me.edOSDImageFilename.Name = "edOSDImageFilename"
         Me.edOSDImageFilename.Size = New System.Drawing.Size(286, 26)
         Me.edOSDImageFilename.TabIndex = 1
-        Me.edOSDImageFilename.Text = "c:\logo.png"
         '
         'label113
         '
@@ -6650,7 +6649,6 @@ Partial Class Form1
         Me.edEncryptionKeyHEX.Name = "edEncryptionKeyHEX"
         Me.edEncryptionKeyHEX.Size = New System.Drawing.Size(319, 26)
         Me.edEncryptionKeyHEX.TabIndex = 9
-        Me.edEncryptionKeyHEX.Text = "enter hex data"
         '
         'rbEncryptionKeyBinary
         '
@@ -6680,7 +6678,6 @@ Partial Class Form1
         Me.edEncryptionKeyFile.Name = "edEncryptionKeyFile"
         Me.edEncryptionKeyFile.Size = New System.Drawing.Size(276, 26)
         Me.edEncryptionKeyFile.TabIndex = 6
-        Me.edEncryptionKeyFile.Text = "c:\keyfile.txt"
         '
         'rbEncryptionKeyFile
         '

@@ -216,17 +216,8 @@ namespace Screen_Capture_MB_WPF
 
             source.FrameRate = new VideoFrameRate(Convert.ToDouble(edScreenFrameRate.Text));
 
-            if (rbScreenFullScreen.IsChecked == true)
-            {
-                for (int i = 0; i < System.Windows.Forms.Screen.AllScreens.Length; i++)
-                {
-                    if (i == screenID)
-                    {
-                        source.Rectangle = new VisioForge.Core.Types.Rect(System.Windows.Forms.Screen.AllScreens[i].Bounds);
-                    }
-                }
-            }
-            else
+            // full screen: an empty rectangle captures the whole monitor that Monitor selects
+            if (rbScreenFullScreen.IsChecked != true)
             {
                 source.Rectangle = new VisioForge.Core.Types.Rect(
                     Convert.ToInt32(edScreenLeft.Text),

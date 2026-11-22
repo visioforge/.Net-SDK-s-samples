@@ -50,7 +50,7 @@
                         <ComboBoxItem Content="MOV" />
                     </ComboBox>
                     <TextBlock Text="File name" HorizontalAlignment="Left" Margin="6,148,0,0" VerticalAlignment="Top" Width="62" />
-                    <TextBox HorizontalAlignment="Left" Margin="6,176,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="375" Text="c:\capture.avi" />
+                    <TextBox HorizontalAlignment="Left" Margin="6,176,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="375" />
                     <Button Content="..." Height="23" HorizontalAlignment="Left" Margin="385,178,0,0" x:Name="btSelectOutput" VerticalAlignment="Top" Width="24" Click="btSelectOutput_Click" />
                     <TextBlock Text="You can use dialog or code to configure format settings" HorizontalAlignment="Left" Margin="6,70,0,0" VerticalAlignment="Top"/>
                 </Grid>

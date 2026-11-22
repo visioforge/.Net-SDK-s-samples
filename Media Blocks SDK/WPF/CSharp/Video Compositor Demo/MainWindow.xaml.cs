@@ -215,14 +215,15 @@ namespace Video_Compositor_Demo
             if (dlg.ShowDialog() == true)
             {
                 var src = new CompositorSource();
+                var size = dlg.CaptureSize;
                 var settings = new ScreenCaptureDX9SourceSettings();
                 settings.CaptureCursor = dlg.GrabMouseCursor;
-                settings.Monitor = dlg.DisplayIndex;
+                settings.Monitor = dlg.Monitor;
                 settings.FrameRate = dlg.FrameRate;
                 settings.Rectangle = dlg.Rectangle;
                 src.Source = new ScreenSourceBlock(settings);
                 src.Rectangle = new Rect(Convert.ToInt32(edRectLeft.Text), Convert.ToInt32(edRectTop.Text), Convert.ToInt32(edRectRight.Text), Convert.ToInt32(edRectBottom.Text));
-                src.DisplayName = $"Screen [{dlg.DisplayIndex}] {dlg.Rectangle.Width}x{dlg.Rectangle.Height}";
+                src.DisplayName = $"Screen [{dlg.DisplayIndex}] {size.Width}x{size.Height}";
                 src.ZOrder = _sources.Count; // Set default z-order
 
                 _sources.Add(src);
@@ -333,6 +334,8 @@ namespace Video_Compositor_Demo
                 // Initialize chroma key UI
                 cbSources.SelectionChanged += CbSources_SelectionChanged;
                 UpdateChromaKeyUI();
+
+                edOutputFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 
                 LogMessage($"Application ready (SDK v{MediaBlocksPipeline.SDK_Version})", LogLevel.Info);
             }

@@ -619,9 +619,9 @@
                             <RadioButton x:Name="rbEncryptionKeyFile" Content="File (v9 SDK)" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
                             <RadioButton x:Name="rbEncryptionKeyBinary" Content="Binary data (v9 SDK)" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top"/>
                             <TextBox x:Name="edEncryptionKeyString" HorizontalAlignment="Left" Height="23" Margin="30,30,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="304"/>
-                            <TextBox x:Name="edEncryptionKeyFile" HorizontalAlignment="Left" Height="23" Margin="30,87,0,0" TextWrapping="Wrap" Text="c:\keyfile.txt" VerticalAlignment="Top" Width="277"/>
+                            <TextBox x:Name="edEncryptionKeyFile" HorizontalAlignment="Left" Height="23" Margin="30,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
                             <Button x:Name="btEncryptionOpenFile" Content="..." HorizontalAlignment="Left" Margin="312,87,0,0" VerticalAlignment="Top" Width="22" Height="22" Click="btEncryptionOpenFile_Click"/>
-                            <TextBox x:Name="edEncryptionKeyHEX" HorizontalAlignment="Left" Height="23" Margin="30,146,0,0" TextWrapping="Wrap" Text="enter hex data" VerticalAlignment="Top" Width="304"/>
+                            <TextBox x:Name="edEncryptionKeyHEX" HorizontalAlignment="Left" Height="23" Margin="30,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304"/>
                             <Label Content="You can assign byte[] using API" HorizontalAlignment="Left" Margin="30,169,0,0" VerticalAlignment="Top"/>
 
                         </Grid>

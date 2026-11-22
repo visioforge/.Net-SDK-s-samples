@@ -19,6 +19,18 @@ Public Class Form1
     Private VideoCapture1 As VideoCaptureCoreX
     Private WithEvents tmRecording As New Timer(1000)
 
+    ''' <summary>
+    ''' The selected video capture device.
+    ''' </summary>
+    Private _videoDevice As VideoCaptureDeviceInfo
+
+    ''' <summary>
+    ''' The HD format and frame rate the demo starts with, picked by the SDK.
+    ''' </summary>
+    Private _defaultVideoFormat As String
+
+    Private _defaultVideoFrameRate As VideoFrameRate
+
     Private Async Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text += " [INITIALIZING SDK...]"
         Me.Enabled = False
@@ -64,30 +76,46 @@ Public Class Form1
         cbVideoInputFrameRate.Items.Clear()
 
         Dim videoSources = Await DeviceEnumerator.Shared.VideoSourcesAsync()
-        Dim device = videoSources.FirstOrDefault(Function(d) d.DisplayName = cbVideoInputDevice.Text)
-        If device IsNot Nothing Then
-            For Each videoFormat In device.VideoFormats
+        _videoDevice = videoSources.FirstOrDefault(Function(d) d.DisplayName = cbVideoInputDevice.Text)
+        If _videoDevice IsNot Nothing Then
+            Dim frameRate As VideoFrameRate = Nothing
+            Dim formatItem = _videoDevice.GetHDOrAnyVideoFormatAndFrameRate(frameRate)
+            _defaultVideoFormat = If(formatItem IsNot Nothing, formatItem.Name, Nothing)
+            _defaultVideoFrameRate = frameRate
+
+            For Each videoFormat In _videoDevice.VideoFormats
                 cbVideoInputFormat.Items.Add(videoFormat.Name)
             Next
-            If cbVideoInputFormat.Items.Count > 0 Then cbVideoInputFormat.SelectedIndex = 0
+
+            If cbVideoInputFormat.Items.Count > 0 Then
+                ' Start from the HD format the SDK picks instead of the first listed one.
+                Dim formatIndex = If(_defaultVideoFormat Is Nothing, -1, cbVideoInputFormat.Items.IndexOf(_defaultVideoFormat))
+                cbVideoInputFormat.SelectedIndex = If(formatIndex >= 0, formatIndex, 0)
+            End If
         End If
     End Sub
 
-    Private Async Sub cbVideoInputFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbVideoInputFormat.SelectedIndexChanged
-        If cbVideoInputFormat.SelectedIndex = -1 Then Return
-
+    Private Sub cbVideoInputFormat_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbVideoInputFormat.SelectedIndexChanged
         cbVideoInputFrameRate.Items.Clear()
 
-        Dim videoSources = Await DeviceEnumerator.Shared.VideoSourcesAsync()
-        Dim device = videoSources.FirstOrDefault(Function(d) d.DisplayName = cbVideoInputDevice.Text)
-        If device IsNot Nothing Then
-            Dim selectedVideoFormatInfo = device.VideoFormats.FirstOrDefault(Function(f) f.Name = cbVideoInputFormat.Text)
-            If selectedVideoFormatInfo IsNot Nothing Then
-                For Each frameRateItem In selectedVideoFormatInfo.FrameRateList
-                    cbVideoInputFrameRate.Items.Add(frameRateItem.ToString())
-                Next
-                If cbVideoInputFrameRate.Items.Count > 0 Then cbVideoInputFrameRate.SelectedIndex = 0
+        If cbVideoInputFormat.SelectedIndex = -1 OrElse _videoDevice Is Nothing Then Return
+
+        Dim selectedVideoFormatInfo = _videoDevice.VideoFormats.FirstOrDefault(Function(f) f.Name = cbVideoInputFormat.Text)
+        If selectedVideoFormatInfo Is Nothing Then Return
+
+        For Each frameRateItem In selectedVideoFormatInfo.FrameRateList
+            cbVideoInputFrameRate.Items.Add(frameRateItem.ToString())
+        Next
+
+        If cbVideoInputFrameRate.Items.Count > 0 Then
+            ' The HD default keeps its own frame rate; any other format starts at the first rate.
+            Dim rateIndex = 0
+            If selectedVideoFormatInfo.Name = _defaultVideoFormat Then
+                Dim knownRate = cbVideoInputFrameRate.Items.IndexOf(_defaultVideoFrameRate.ToString())
+                If knownRate >= 0 Then rateIndex = knownRate
             End If
+
+            cbVideoInputFrameRate.SelectedIndex = rateIndex
         End If
     End Sub
 

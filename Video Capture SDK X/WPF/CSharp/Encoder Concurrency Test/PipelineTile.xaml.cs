@@ -40,7 +40,7 @@ namespace EncoderConcurrencyTestX
                                      IVideoCaptureBaseVideoSourceSettings sourceSettings,
                                      string sourceLabel,
                                      int width, int height, int fps,
-                                     CodecChoice codec, EncoderChoice encoder, long? adapterLuid)
+                                     CodecChoice codec, EncoderChoice encoder)
         {
             try
             {
@@ -54,7 +54,7 @@ namespace EncoderConcurrencyTestX
                 _core.Audio_Play = false;
                 _core.Audio_Source = null;
 
-                _encoderSettings = BuildEncoder(codec, encoder, width, height, fps, adapterLuid);
+                _encoderSettings = BuildEncoder(codec, encoder, width, height, fps);
 
                 var dir = Path.Combine(Path.GetTempPath(), "VFEncoderConcurrency");
                 Directory.CreateDirectory(dir);
@@ -107,25 +107,25 @@ namespace EncoderConcurrencyTestX
         // ================================================================
 
         private static IVideoEncoder BuildEncoder(CodecChoice codec, EncoderChoice choice,
-            int width, int height, int fps, long? adapterLuid)
+            int width, int height, int fps)
         {
             uint bitrate = ComputeBitrate(width, height, fps);
 
             switch (codec)
             {
                 case CodecChoice.HEVC:
-                    return BuildHEVCEncoderSettings(choice, bitrate, adapterLuid);
+                    return BuildHEVCEncoderSettings(choice, bitrate);
 
                 case CodecChoice.AV1:
-                    return BuildAV1EncoderSettings(choice, bitrate, adapterLuid);
+                    return BuildAV1EncoderSettings(choice, bitrate);
 
                 case CodecChoice.H264:
                 default:
-                    return BuildH264EncoderSettings(choice, bitrate, adapterLuid);
+                    return BuildH264EncoderSettings(choice, bitrate);
             }
         }
 
-        private static IH264EncoderSettings BuildH264EncoderSettings(EncoderChoice choice, uint bitrate, long? adapterLuid)
+        private static IH264EncoderSettings BuildH264EncoderSettings(EncoderChoice choice, uint bitrate)
         {
             switch (choice)
             {
@@ -150,7 +150,7 @@ namespace EncoderConcurrencyTestX
             }
         }
 
-        private static IHEVCEncoderSettings BuildHEVCEncoderSettings(EncoderChoice choice, uint bitrate, long? adapterLuid)
+        private static IHEVCEncoderSettings BuildHEVCEncoderSettings(EncoderChoice choice, uint bitrate)
         {
             switch (choice)
             {
@@ -172,7 +172,7 @@ namespace EncoderConcurrencyTestX
             }
         }
 
-        private static IAV1EncoderSettings BuildAV1EncoderSettings(EncoderChoice choice, uint bitrate, long? adapterLuid)
+        private static IAV1EncoderSettings BuildAV1EncoderSettings(EncoderChoice choice, uint bitrate)
         {
             switch (choice)
             {
@@ -193,8 +193,6 @@ namespace EncoderConcurrencyTestX
 
                 case EncoderChoice.AMF:
                 default:
-                    // AMFAV1EncoderSettings has no AdapterLuid property today; the engine
-                    // will use the system-default AMD GPU.
                     return new AMFAV1EncoderSettings { Bitrate = bitrate };
             }
         }

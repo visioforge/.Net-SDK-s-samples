@@ -279,7 +279,6 @@
             this.edOutput.Name = "edOutput";
             this.edOutput.Size = new System.Drawing.Size(296, 26);
             this.edOutput.TabIndex = 57;
-            this.edOutput.Text = "c:\\vf\\video_edit_output.avi";
             // 
             // label15
             // 

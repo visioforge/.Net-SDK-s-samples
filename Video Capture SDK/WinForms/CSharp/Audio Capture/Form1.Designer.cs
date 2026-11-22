@@ -842,7 +842,6 @@ namespace VisioForge_SDK_4_Audio_Capture_CSharp
             this.edOutput.Name = "edOutput";
             this.edOutput.Size = new System.Drawing.Size(417, 26);
             this.edOutput.TabIndex = 54;
-            this.edOutput.Text = "c:\\capture.wav";
             // 
             // label9
             // 

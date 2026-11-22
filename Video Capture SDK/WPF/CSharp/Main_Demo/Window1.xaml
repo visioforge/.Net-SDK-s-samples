@@ -15,7 +15,6 @@
                         <ComboBoxItem Content="AVI" />
                         <ComboBoxItem Content="MKV (Matroska)" />
                         <ComboBoxItem Content="WMV (Windows Media Video)" />
-                        <ComboBoxItem Content="DV" />
                         <ComboBoxItem Content="PCM/ACM" />
                         <ComboBoxItem Content="MP3 (Lame)" />
                         <ComboBoxItem Content="M4A (AAC)" />
@@ -24,7 +23,6 @@
                         <ComboBoxItem Content="Ogg Vorbis" />
                         <ComboBoxItem Content="Speex" />
                         <ComboBoxItem Content="Custom" />
-                        <ComboBoxItem Content="DirectCapture DV (DV devices only)" />
                         <ComboBoxItem Content="DirectCapture AVI (some devices only)" />
                         <ComboBoxItem Content="DirectCapture MPEG (IP cameras / MPEG2 devices)" />
                         <ComboBoxItem Content="DirectCapture MKV (IP cameras / H264 devices)" />
@@ -43,7 +41,7 @@
                     </ComboBox>
                     <CheckBox Content="Record audio" Height="16" HorizontalAlignment="Left" Margin="10,127,0,0" x:Name="cbRecordAudio" VerticalAlignment="Top" Width="109" />
                     <Label Content="File name" Height="23" HorizontalAlignment="Left" Margin="10,148,0,0" x:Name="label22" VerticalAlignment="Top" Width="62" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="10,176,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="327" Text="c:\capture.avi" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="10,176,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="327" />
                     <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,176,10,0" x:Name="btSelectOutput" VerticalAlignment="Top" Width="24" Click="btSelectOutput_Click" />
                     <Button x:Name="btOutputConfigure" Content="Configure" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Width="75" Click="BtOutputConfigure_Click"/>
                     <Label x:Name="label1" Content="You can use dialog or code to configure format settings" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
@@ -463,7 +461,7 @@
                                 <RadioButton Content="Use external profile" Height="16" HorizontalAlignment="Left" Margin="10,33,0,0" x:Name="rbNetworkStreamingUseExternalProfile" VerticalAlignment="Top" />
                                 <RadioButton Content="Use WMV settings from capture tab" Height="16" HorizontalAlignment="Left" IsChecked="True" Margin="10,11,0,0" x:Name="rbNetworkStreamingUseMainWMVSettings" VerticalAlignment="Top" />
                                 <Label Content="File name" Height="23" HorizontalAlignment="Left" Margin="44,61,0,0" x:Name="label142" VerticalAlignment="Top" Width="62" />
-                                <TextBox Height="23" Margin="117,63,36,0" x:Name="edNetworkStreamingWMVProfile" Text="c:\WM.prx" VerticalAlignment="Top" />
+                                <TextBox Height="23" Margin="117,63,36,0" x:Name="edNetworkStreamingWMVProfile" VerticalAlignment="Top" />
                                 <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,62,6,0" x:Name="btSelectWMVProfileNetwork" VerticalAlignment="Top" Width="24" Click="btSelectWMVProfileNetwork_Click" />
                                 <TextBox Height="23" HorizontalAlignment="Left" Margin="123,98,0,0" x:Name="edMaximumClients" Text="10" VerticalAlignment="Top" Width="31" />
                                 <Label Content="Maximum clients" Height="28" HorizontalAlignment="Left" Margin="11,96,0,0" x:Name="label143" VerticalAlignment="Top" Width="110" />
@@ -552,7 +550,7 @@
                         <TabItem Header="HLS">
                             <Grid>
                                 <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Output folder for video files and playlist" VerticalAlignment="Top"/>
-                                <TextBox x:Name="edHLSOutputFolder" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" Text="c:\inetpub\wwwroot\hls\" VerticalAlignment="Top" Width="309"/>
+                                <TextBox x:Name="edHLSOutputFolder" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="309"/>
                                 <Button x:Name="btSelectHLSOutputFolder" HorizontalAlignment="Left" Height="23" Margin="324,31,0,0" Content="..." VerticalAlignment="Top" Width="23" Click="btSelectHLSOutputFolder_Click"/>
                                 <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="10,59,0,0" TextWrapping="Wrap" Text="Segment duration (sec)" VerticalAlignment="Top"/>
                                 <TextBox x:Name="edHLSSegmentDuration" HorizontalAlignment="Left" Height="23" Margin="10,80,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="67"/>
@@ -797,9 +795,9 @@
                             <RadioButton x:Name="rbEncryptionKeyFile" Content="File (v9 SDK)" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
                             <RadioButton x:Name="rbEncryptionKeyBinary" Content="Binary data (v9 SDK)" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top"/>
                             <TextBox x:Name="edEncryptionKeyString" HorizontalAlignment="Left" Height="23" Margin="30,30,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="304"/>
-                            <TextBox x:Name="edEncryptionKeyFile" HorizontalAlignment="Left" Height="23" Margin="30,87,0,0" TextWrapping="Wrap" Text="c:\keyfile.txt" VerticalAlignment="Top" Width="277"/>
+                            <TextBox x:Name="edEncryptionKeyFile" HorizontalAlignment="Left" Height="23" Margin="30,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
                             <Button x:Name="btEncryptionOpenFile" Content="..." HorizontalAlignment="Left" Margin="312,87,0,0" VerticalAlignment="Top" Width="22" Height="22" Click="btEncryptionOpenFile_Click"/>
-                            <TextBox x:Name="edEncryptionKeyHEX" HorizontalAlignment="Left" Height="23" Margin="30,146,0,0" TextWrapping="Wrap" Text="enter hex data" VerticalAlignment="Top" Width="304"/>
+                            <TextBox x:Name="edEncryptionKeyHEX" HorizontalAlignment="Left" Height="23" Margin="30,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304"/>
                             <Label Content="You can assign byte[] using API" HorizontalAlignment="Left" Margin="30,169,0,0" VerticalAlignment="Top"/>
 
                         </Grid>
@@ -924,95 +922,14 @@
                                 <Label Content="routes" Height="28" HorizontalAlignment="Left" Margin="59,227,0,0" x:Name="label194" VerticalAlignment="Top" Width="72" />
                             </Grid>
                         </TabItem>
-                        <TabItem Header="TV Tuner" x:Name="tabItem52">
+                        <TabItem Header="MPEG Decoding" x:Name="tabItem56">
                             <Grid>
-                                <TabControl Height="295" HorizontalAlignment="Left" Margin="0,10,0,0" x:Name="tabControl16" VerticalAlignment="Top" Width="506">
-                                    <TabItem Header="Main settings" x:Name="tabItem53">
-                                        <Grid>
-                                            <Label Content="Device" Height="28" HorizontalAlignment="Left" Margin="24,20,0,0" x:Name="label195" VerticalAlignment="Top" Width="52" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="78,22,0,0" x:Name="cbTVTuner" VerticalAlignment="Top" Width="326" SelectionChanged="cbTVTuner_SelectedIndexChanged" />
-                                            <Label Content="Mode" Height="28" HorizontalAlignment="Left" Margin="24,54,0,0" x:Name="label196" VerticalAlignment="Top" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="78,57,0,0" x:Name="cbTVMode" VerticalAlignment="Top" Width="92" SelectionChanged="cbTVMode_SelectedIndexChanged">
-                                                <ComboBoxItem Content="Default" />
-                                                <ComboBoxItem Content="TV" />
-                                                <ComboBoxItem Content="FM Radio" />
-                                                <ComboBoxItem Content="AM Radio" />
-                                            </ComboBox>
-                                            <Label Content="Input" Height="28" HorizontalAlignment="Left" Margin="225,54,0,0" x:Name="label197" VerticalAlignment="Top" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="266,57,0,0" x:Name="cbTVInput" VerticalAlignment="Top" Width="138" SelectionChanged="cbTVInput_SelectedIndexChanged">
-                                                <ComboBoxItem Content="Cable" />
-                                                <ComboBoxItem Content="Antenna" />
-                                            </ComboBox>
-                                            <Label Content="Country" Height="28" HorizontalAlignment="Left" Margin="24,112,0,0" x:Name="label198" VerticalAlignment="Top" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="78,115,0,0" x:Name="cbTVCountry" VerticalAlignment="Top"
-												Width="166" SelectionChanged="cbTVCountry_SelectedIndexChanged" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="266,117,0,0" x:Name="edTVDefaultFormat" VerticalAlignment="Top" Width="138" />
-                                            <Label Content="Default format" Height="28" HorizontalAlignment="Left" Margin="266,92,0,0" x:Name="label199" VerticalAlignment="Top" Width="87" />
-                                            <CheckBox x:Name="cbUseClosedCaptions" Content="Allow closed captions usage" HorizontalAlignment="Left" Margin="24,171,0,0" VerticalAlignment="Top"/>
-                                        </Grid>
-                                    </TabItem>
-                                    <TabItem Header="Tuning" x:Name="tabItem54">
-                                        <Grid>
-                                            <GroupBox Header="AutoTune" Height="128" HorizontalAlignment="Left" Margin="6,6,0,0" x:Name="groupBox22" VerticalAlignment="Top" Width="287">
-                                                <Grid>
-                                                    <Button Content="Start" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="16,16,0,0" x:Name="btStartTune" VerticalAlignment="Top" Width="65" Click="btStartTune_Click" />
-                                                    <Button Content="Stop" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="87,16,0,0" x:Name="btStopTune" VerticalAlignment="Top" Width="65" Click="btStopTune_Click" />
-                                                    <Label Content="TV Channel / FM Frequency" Height="28" HorizontalAlignment="Left" Margin="16,59,0,0" x:Name="label200" VerticalAlignment="Top" Width="163" />
-                                                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="182,63,0,0" x:Name="cbTVChannel" VerticalAlignment="Top" Width="78" SelectionChanged="cbTVChannel_SelectedIndexChanged" />
-                                                    <ProgressBar Height="23" HorizontalAlignment="Left" Margin="166,16,0,0" x:Name="pbChannels" VerticalAlignment="Top" Width="94" />
-                                                </Grid>
-                                            </GroupBox>
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="416,25,0,0" x:Name="edVideoFreq" VerticalAlignment="Top" Width="40" />
-                                            <Label Content="Video frequency" Height="28" HorizontalAlignment="Left" Margin="309,23,0,0" x:Name="label201" VerticalAlignment="Top" Width="105" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="416,57,0,0" x:Name="edAudioFreq" VerticalAlignment="Top" Width="40" />
-                                            <Label Content="Audio frequency" Height="28" HorizontalAlignment="Left" Margin="309,55,0,0" x:Name="label202" VerticalAlignment="Top" Width="105" />
-                                            <Label Content="TV video format" Height="28" HorizontalAlignment="Left" Margin="28,140,0,0" x:Name="label203" VerticalAlignment="Top" Width="107" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="125,142,0,0" x:Name="cbTVSystem" VerticalAlignment="Top" Width="138" SelectionChanged="cbTVSystem_SelectedIndexChanged" />
-                                            <Button Content="Set channel/freq." Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="298,142,0,0" x:Name="btUseThisChannel" VerticalAlignment="Top" Width="106" Click="btUseThisChannel_Click" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="416,140,0,0" x:Name="edChannel" VerticalAlignment="Top" Width="40" Text="22" />
-                                        </Grid>
-                                    </TabItem>
-                                    <TabItem Header="MPEG Encoder" x:Name="tabItem55">
-                                        <Grid>
-                                            <Label Content="MPEG Encoder" Height="28" HorizontalAlignment="Left" Margin="32,26,0,0" x:Name="label204" VerticalAlignment="Top" Width="111" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="32,51,0,0" x:Name="cbMPEGEncoder" VerticalAlignment="Top" Width="303" />
-                                            <Button Content="Settings" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="341,51,0,0" x:Name="btMPEGEncoderShowDialog" VerticalAlignment="Top" Width="65" Click="btMPEGEncoderShowDialog_Click" />
-                                        </Grid>
-                                    </TabItem>
-                                    <TabItem Header="MPEG Decoding" x:Name="tabItem56">
-                                        <Grid>
-                                            <Label Content="Video Decoder" Height="28" HorizontalAlignment="Left" Margin="32,26,0,0" x:Name="label205" VerticalAlignment="Top" Width="117" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="32,51,0,0" x:Name="cbMPEGVideoDecoder" VerticalAlignment="Top" Width="293" SelectionChanged="cbMPEGVideoDecoder_SelectedIndexChanged" />
-                                            <Button Content="Settings" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="331,51,0,0" x:Name="btMPEGVidDecSetting" VerticalAlignment="Top" Width="65" Click="btMPEGVidDecSetting_Click" />
-                                            <Label Content="Audio Decoder" Height="28" Margin="32,94,0,0" x:Name="label206" VerticalAlignment="Top" HorizontalAlignment="Left" Width="117" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="32,119,0,0" x:Name="cbMPEGAudioDecoder" VerticalAlignment="Top" Width="293" SelectionChanged="cbMPEGAudioDecoder_SelectedIndexChanged" />
-                                            <Button Content="Settings" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="331,119,0,0" x:Name="btMPEGAudDecSettings" VerticalAlignment="Top" Width="65" Click="btMPEGAudDecSettings_Click" />
-                                        </Grid>
-                                    </TabItem>
-                                </TabControl>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="DV" x:Name="tabItem57">
-                            <Grid>
-                                <GroupBox Header="Controls" Height="114" Margin="61,20,0,0" x:Name="groupBox23" VerticalAlignment="Top" HorizontalAlignment="Left" Width="386">
-                                    <Grid>
-                                        <Button Content="Rewind" Height="22.723" HorizontalAlignment="Left" Margin="23,12,0,0" x:Name="btDVRewind" VerticalAlignment="Top" Width="63" Click="btDVRewind_Click" />
-                                        <Button Content="Pause" Height="22.723" HorizontalAlignment="Left" Margin="160,12,0,0" x:Name="btDVPause" VerticalAlignment="Top" Width="59" Click="btDVPause_Click" />
-                                        <Button Content="Play" Height="22.723" HorizontalAlignment="Left" Margin="92,12,0,0" x:Name="btDVPlay" VerticalAlignment="Top" Width="62" Click="btDVPlay_Click" />
-                                        <Button Content="Stop" Height="22.723" HorizontalAlignment="Left" Margin="225,12,0,0" x:Name="btDVStop" VerticalAlignment="Top" Width="62" Click="btDVStop_Click" />
-                                        <Button Content="F.F." Height="22.723" HorizontalAlignment="Left" Margin="293,12,0,0" x:Name="btDVFF" VerticalAlignment="Top" Width="60" Click="btDVFF_Click" />
-                                        <Button Content="Step REV" Height="22.723" HorizontalAlignment="Left" Margin="53,50,0,0" x:Name="btDVStepRev" VerticalAlignment="Top" Width="73" Click="btDVStepRev_Click" />
-                                        <Button Content="Step FWD" Height="22.723" HorizontalAlignment="Left" Margin="255,50,0,0" x:Name="btDVStepFWD" VerticalAlignment="Top" Width="72" Click="btDVStepFWD_Click" />
-                                    </Grid>
-                                </GroupBox>
-                                <GroupBox Header="Resolution" Height="84" Margin="61,144,0,0" x:Name="groupBox24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="386">
-                                    <Grid>
-                                        <RadioButton Content="Full" HorizontalAlignment="Left" IsChecked="True" Margin="44,23,0,0" x:Name="rbDVResFull" Width="42" Height="20" VerticalAlignment="Top" />
-                                        <RadioButton Content="Quarter" HorizontalAlignment="Left" Margin="198,23,0,0" x:Name="rbDVResQuarter" Width="62" Height="20" VerticalAlignment="Top" />
-                                        <RadioButton Content="Half" HorizontalAlignment="Left" Margin="122,23,0,0" x:Name="rbDVResHalf" Width="45" Height="20" VerticalAlignment="Top" />
-                                        <RadioButton Content="DC" HorizontalAlignment="Left" Margin="277,23,0,0" x:Name="rbDVResDC" Width="38" Height="20" VerticalAlignment="Top" />
-                                    </Grid>
-                                </GroupBox>
+                                <Label Content="Video Decoder" Height="28" HorizontalAlignment="Left" Margin="32,26,0,0" x:Name="label205" VerticalAlignment="Top" Width="117" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="32,51,0,0" x:Name="cbMPEGVideoDecoder" VerticalAlignment="Top" Width="293" SelectionChanged="cbMPEGVideoDecoder_SelectedIndexChanged" />
+                                <Button Content="Settings" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="331,51,0,0" x:Name="btMPEGVidDecSetting" VerticalAlignment="Top" Width="65" Click="btMPEGVidDecSetting_Click" />
+                                <Label Content="Audio Decoder" Height="28" Margin="32,94,0,0" x:Name="label206" VerticalAlignment="Top" HorizontalAlignment="Left" Width="117" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="32,119,0,0" x:Name="cbMPEGAudioDecoder" VerticalAlignment="Top" Width="293" SelectionChanged="cbMPEGAudioDecoder_SelectedIndexChanged" />
+                                <Button Content="Settings" Height="23" HorizontalAlignment="Left" IsDefault="False" IsEnabled="True" Margin="331,119,0,0" x:Name="btMPEGAudDecSettings" VerticalAlignment="Top" Width="65" Click="btMPEGAudDecSettings_Click" />
                             </Grid>
                         </TabItem>
                         <TabItem Header="Video adjustments" x:Name="tabItem58">
@@ -1282,107 +1199,6 @@
                     <ComboBox x:Name="cbDecklinkCaptureVideoFormat" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="242"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="DVB-x / ATSC" x:Name="tabItem72">
-                <Grid>
-                    <TabControl Height="328" HorizontalAlignment="Left" Margin="6,6,0,0" x:Name="tabControl21" VerticalAlignment="Top" Width="514">
-                        <TabItem Header="Input device" x:Name="tabItem73">
-                            <Grid>
-                                <Label Content="Source device" Height="28" HorizontalAlignment="Left" Margin="6,8,0,0" x:Name="label253" VerticalAlignment="Top" />
-                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="12,33,0,0" x:Name="cbBDASourceDevice" VerticalAlignment="Top" Width="279" />
-                                <Label Content="Receiver device (can be empty)" Height="28" HorizontalAlignment="Left" Margin="6,64,0,0" x:Name="label254" VerticalAlignment="Top" />
-                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="12,89,0,0" x:Name="cbBDAReceiver" VerticalAlignment="Top" Width="279" />
-                                <Label Content="Device standard" Height="28" HorizontalAlignment="Left" Margin="6,118,0,0" x:Name="label255" VerticalAlignment="Top" />
-                                <ComboBox Height="23" HorizontalAlignment="Left" Margin="12,143,0,0" x:Name="cbBDADeviceStandard" VerticalAlignment="Top" Width="279" />
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Tuning" x:Name="tabItem74">
-                            <Grid>
-                                <TabControl Height="284" HorizontalAlignment="Left" Margin="6,6,0,0" x:Name="tabControl22" VerticalAlignment="Top" Width="492">
-                                    <TabItem Header="DVB-T" x:Name="tabItem75">
-                                        <Grid>
-                                            <Label Content="Carrier Frequency" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" x:Name="label256" VerticalAlignment="Top" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="126,8,0,0" x:Name="edDVBTFrequency" VerticalAlignment="Top" Width="62" Text="586000" />
-                                            <Label Content="KHz" Height="28" HorizontalAlignment="Left" Margin="192,6,0,0" x:Name="label257" VerticalAlignment="Top" />
-                                            <Label Content="ONIT" Height="28" HorizontalAlignment="Left" Margin="6,44,0,0" x:Name="label258" VerticalAlignment="Top" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="126,46,0,0" x:Name="edDVBTONID" VerticalAlignment="Top" Width="62" Text="0" />
-                                            <Label Content="TSID" Height="28" HorizontalAlignment="Left" Margin="6,82,0,0" x:Name="label259" VerticalAlignment="Top" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="126,84,0,0" x:Name="edDVBTTSID" VerticalAlignment="Top" Width="62" Text="3" />
-                                            <Label Content="SID" Height="28" HorizontalAlignment="Left" Margin="6,120,0,0" x:Name="label260" VerticalAlignment="Top" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="126,122,0,0" x:Name="edDVBTSID" VerticalAlignment="Top" Width="62" Text="3" />
-                                            <Button Content="Tune" Height="23" HorizontalAlignment="Right" Margin="0,0,6,6" x:Name="btDVBTTune" VerticalAlignment="Bottom" Width="61" FontWeight="Bold" Click="btDVBTTune_Click" />
-                                        </Grid>
-                                    </TabItem>
-                                    <TabItem Header="DVB-S" x:Name="tabItem76">
-                                        <Grid>
-                                            <Label Content="Carrier Frequency" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="label261" VerticalAlignment="Top" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="130,12,0,0" x:Name="textBox1" Text="-1" VerticalAlignment="Top" Width="62" />
-                                            <Label Content="KHz" Height="28" HorizontalAlignment="Left" Margin="196,10,0,0" x:Name="label262" VerticalAlignment="Top" />
-                                            <Label Content="Symbol Rate" Height="28" HorizontalAlignment="Left" Margin="10,48,0,0" x:Name="label263" VerticalAlignment="Top" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="130,50,0,0" x:Name="textBox3" Text="-1" VerticalAlignment="Top" Width="62" />
-                                            <Label Content="Signal Polarisation" Height="28" HorizontalAlignment="Left" Margin="10,86,0,0" x:Name="label264" VerticalAlignment="Top" />
-                                            <ComboBox Height="23" HorizontalAlignment="Left" Margin="130,86,0,0" x:Name="comboBox4" VerticalAlignment="Top" Width="97">
-                                                <ComboBoxItem Content="Not Set" />
-                                                <ComboBoxItem Content="Not Defined" />
-                                                <ComboBoxItem Content="Linear Horizontal" />
-                                                <ComboBoxItem Content="Linear Vertical" />
-                                                <ComboBoxItem Content="Circular Left" />
-                                                <ComboBoxItem Content="Circular Right" />
-                                                <ComboBoxItem Content="Max" />
-                                            </ComboBox>
-                                            <Label Content="ONIT" Height="28" HorizontalAlignment="Left" Margin="10,122,0,0" x:Name="label265" VerticalAlignment="Top" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="130,124,0,0" x:Name="textBox4" Text="-1" VerticalAlignment="Top" Width="62" />
-                                            <Label Content="TSID" Height="28" HorizontalAlignment="Left" Margin="10,160,0,0" x:Name="label266" VerticalAlignment="Top" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="130,162,0,0" x:Name="textBox5" Text="-1" VerticalAlignment="Top" Width="62" />
-                                            <Label Content="SID" Height="28" HorizontalAlignment="Left" Margin="10,198,0,0" x:Name="label267" VerticalAlignment="Top" />
-                                            <TextBox Height="23" HorizontalAlignment="Left" Margin="130,200,0,0" x:Name="textBox6" Text="-1" VerticalAlignment="Top" Width="62" />
-                                            <Button Content="Tune" FontWeight="Bold" Height="23" HorizontalAlignment="Right" Margin="0,0,6,6" x:Name="button2" VerticalAlignment="Bottom" Width="61" />
-                                        </Grid>
-                                    </TabItem>
-                                    <TabItem Header="DVB-C" x:Name="tabItem77">
-                                        <Grid>
-                                            <GroupBox Header="Current locator properties" Height="179" HorizontalAlignment="Left" Margin="6,6,0,0" x:Name="groupBox32" VerticalAlignment="Top" Width="233">
-                                                <Grid>
-                                                    <Label Content="Carrier Frequency" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" x:Name="label268" VerticalAlignment="Top" />
-                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="115,8,0,0" x:Name="textBox7" Text="-1" VerticalAlignment="Top" Width="62" />
-                                                    <Label Content="KHz" Height="28" HorizontalAlignment="Left" Margin="181,6,0,0" x:Name="label269" VerticalAlignment="Top" />
-                                                    <Label Content="Modulation" Height="28" HorizontalAlignment="Left" Margin="6,46,0,0" x:Name="label270" VerticalAlignment="Top" />
-                                                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="115,46,0,0" x:Name="comboBox5" VerticalAlignment="Top" Width="97">
-                                                        <ComboBoxItem Content="Not Set" />
-                                                        <ComboBoxItem Content="Not Defined" />
-                                                        <ComboBoxItem Content="Linear Horizontal" />
-                                                        <ComboBoxItem Content="Linear Vertical" />
-                                                        <ComboBoxItem Content="Circular Left" />
-                                                        <ComboBoxItem Content="Circular Right" />
-                                                        <ComboBoxItem Content="Max" />
-                                                    </ComboBox>
-                                                    <Label Content="Program number" Height="28" HorizontalAlignment="Left" Margin="6,82,0,0" x:Name="label271" VerticalAlignment="Top" />
-                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="115,84,0,0" x:Name="textBox8" Text="-1" VerticalAlignment="Top" Width="62" />
-                                                    <Label Content="Symbol rate" Height="28" HorizontalAlignment="Left" Margin="6,120,0,0" x:Name="label272" VerticalAlignment="Top" />
-                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="115,122,0,0" x:Name="textBox9" Text="-1" VerticalAlignment="Top" Width="62" />
-                                                </Grid>
-                                            </GroupBox>
-                                            <GroupBox Header="Tune request" Height="141" HorizontalAlignment="Left" Margin="243,6,0,0" x:Name="groupBox33" VerticalAlignment="Top" Width="203">
-                                                <Grid>
-                                                    <Label Content="Virtual channel" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" x:Name="label273" VerticalAlignment="Top" />
-                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="115,8,0,0" x:Name="textBox10" Text="-1" VerticalAlignment="Top" Width="62" />
-                                                    <Label Content="Physical channel" Height="28" HorizontalAlignment="Left" Margin="6,44,0,0" x:Name="label276" VerticalAlignment="Top" />
-                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="115,46,0,0" x:Name="textBox11" Text="103" VerticalAlignment="Top" Width="62" />
-                                                    <Label Content="Minor channel" Height="28" HorizontalAlignment="Left" Margin="6,82,0,0" x:Name="label277" VerticalAlignment="Top" />
-                                                    <TextBox Height="23" HorizontalAlignment="Left" Margin="115,84,0,0" x:Name="textBox12" Text="-1" VerticalAlignment="Top" Width="62" />
-                                                </Grid>
-                                            </GroupBox>
-                                            <Button Content="Tune" FontWeight="Bold" Height="23" HorizontalAlignment="Right" Margin="0,0,6,6" x:Name="button3" VerticalAlignment="Bottom" Width="61" />
-                                        </Grid>
-                                    </TabItem>
-                                    <TabItem Header="ATSC" x:Name="tabItem78">
-                                        <Grid />
-                                    </TabItem>
-                                </TabControl>
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
-                </Grid>
-            </TabItem>
             <TabItem Header="Picture-In-Picture" x:Name="tabItem61">
                 <Grid>
                     <TabControl Height="334" HorizontalAlignment="Left" Margin="3,4,0,0" x:Name="tabControl18" VerticalAlignment="Top" Width="522">
@@ -1603,44 +1419,6 @@
                     <Label Content="MB" HorizontalAlignment="Left" Margin="451.727,245,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Custom source">
-                <Grid>
-                    <TabControl HorizontalAlignment="Left" Height="324.08" Margin="10,10,0,0" VerticalAlignment="Top" Width="510">
-                        <TabItem Header="Video source">
-                            <Grid >
-                                <Label Content="Category" HorizontalAlignment="Left" Margin="6,10,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbCustomVideoSourceCategory" HorizontalAlignment="Left" Margin="10,35.96,0,0" VerticalAlignment="Top" Width="156" SelectedIndex="0" SelectionChanged="cbCustomVideoSourceCategory_SelectionChanged">
-                                    <ComboBoxItem Content="Video capture source"/>
-                                    <ComboBoxItem Content="DirectShow filter"/>
-                                </ComboBox>
-                                <Label Content="Name" HorizontalAlignment="Left" Margin="188,10,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbCustomVideoSourceFilter" HorizontalAlignment="Left" Margin="192,35.96,0,0" VerticalAlignment="Top" Width="302" SelectionChanged="cbCustomVideoSourceFilter_SelectionChanged"/>
-                                <Label Content="Format" HorizontalAlignment="Left" Margin="6,76,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbCustomVideoSourceFormat" HorizontalAlignment="Left" Margin="10,102,0,0" VerticalAlignment="Top" Width="373"/>
-                                <Label Content="Frame rate" HorizontalAlignment="Left" Margin="388,76,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbCustomVideoSourceFrameRate" HorizontalAlignment="Left" Margin="392,102,0,0" VerticalAlignment="Top" Width="102"/>
-                                <Label Content="File name or URL (if supported by filter)" HorizontalAlignment="Left" Margin="10,143,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="edCustomVideoSourceURL" HorizontalAlignment="Left" Height="23" Margin="10,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="484"/>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Audio source">
-                            <Grid >
-                                <Label Content="Category" HorizontalAlignment="Left" Margin="6,10,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbCustomAudioSourceCategory" HorizontalAlignment="Left" Margin="10,35.96,0,0" VerticalAlignment="Top" Width="156" SelectedIndex="0" SelectionChanged="cbCustomAudioSourceCategory_SelectionChanged">
-                                    <ComboBoxItem Content="Audio capture source"/>
-                                    <ComboBoxItem Content="DirectShow filter"/>
-                                </ComboBox>
-                                <Label Content="Name" HorizontalAlignment="Left" Margin="188,10,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbCustomAudioSourceFilter" HorizontalAlignment="Left" Margin="192,35.96,0,0" VerticalAlignment="Top" Width="302" SelectionChanged="cbCustomAudioSourceFilter_SelectionChanged"/>
-                                <Label Content="Format" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbCustomAudioSourceFormat" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Width="484"/>
-                                <Label Content="File name or URL (if supported by filter)" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="edCustomAudioSourceURL" HorizontalAlignment="Left" Height="23" Margin="10,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="484"/>
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
-                </Grid>
-            </TabItem>
         </TabControl>
         <Label Content="Mode" Height="28" HorizontalAlignment="Right" Margin="0,0,514,11" x:Name="label127" VerticalAlignment="Bottom" Width="44" />
         <ComboBox Height="23" HorizontalAlignment="Right" Margin="0,0,353,14" x:Name="cbMode" VerticalAlignment="Bottom" Width="156" SelectedIndex="0">
@@ -1652,10 +1430,6 @@
             <ComboBoxItem Content="Screen Capture" />
             <ComboBoxItem Content="IP Preview" />
             <ComboBoxItem Content="IP Capture" />
-            <ComboBoxItem Content="BDA Preview" />
-            <ComboBoxItem Content="BDA Capture" />
-            <ComboBoxItem Content="Custom Source Preview" />
-            <ComboBoxItem Content="Custom Source Capture" />
             <ComboBoxItem Content="Decklink Preview" />
             <ComboBoxItem Content="Decklink Capture" />
         </ComboBox>

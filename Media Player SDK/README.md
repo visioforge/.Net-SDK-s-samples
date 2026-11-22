@@ -1,7 +1,7 @@
 # Media Player SDK .Net samples
 Media Player SDK .Net TRIAL can be downloaded on [product page](https://www.visioforge.com/media-player-sdk-net).
 
-[Online help](https://www.visioforge.com/help/docs/dotnet/)
+[Online help](https://www.visioforge.com/help/docs/dotnet/mediaplayer/)
 
 [Tutorials](https://support.visioforge.com/975762-Net-SDKs)
 

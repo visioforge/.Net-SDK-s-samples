@@ -49,6 +49,11 @@ Public Class Form1
 
         mmError.Clear()
 
+        If (String.IsNullOrWhiteSpace(edFilename.Text) OrElse (Not edFilename.Text.Contains("://") AndAlso Not System.IO.File.Exists(edFilename.Text))) Then
+            MessageBox.Show(Me, "Please select a file or enter a URL.")
+            Return
+        End If
+
         MediaPlayer1.Playlist_Clear()
         MediaPlayer1.Playlist_Add(edFilename.Text)
 

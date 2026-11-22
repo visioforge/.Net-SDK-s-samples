@@ -93,7 +93,7 @@
                     </ComboBox>
                     <CheckBox Content="Record audio" Height="16" HorizontalAlignment="Left" Margin="10,127,0,0" x:Name="cbRecordAudio" VerticalAlignment="Top" Width="109" />
                     <Label Content="File name" Height="23" HorizontalAlignment="Left" Margin="10,148,0,0" x:Name="label22" VerticalAlignment="Top" Width="62" />
-                    <TextBox Height="23" HorizontalAlignment="Left" Margin="10,176,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="485" Text="c:\capture.avi" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="10,176,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="485" />
                     <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,176,10,0" x:Name="btSelectOutput" VerticalAlignment="Top" Width="24" Click="btSelectOutput_Click" />
                     <Button x:Name="btOutputConfigure" Content="Configure" HorizontalAlignment="Left" Margin="10,92,0,0" VerticalAlignment="Top" Width="75" Click="BtOutputConfigure_Click"/>
                     <Label Content="You can use dialog or code to configure format settings" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>

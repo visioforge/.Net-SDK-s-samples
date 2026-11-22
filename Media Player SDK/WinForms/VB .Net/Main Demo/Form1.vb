@@ -119,6 +119,7 @@ Public Class Form1
         cbAudEqualizerPreset.SelectedIndex = 0
 
         edScreenshotsFolder.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
+        Directory.CreateDirectory(edScreenshotsFolder.Text)
         MediaPlayer1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge")
     End Sub
 
@@ -378,15 +379,15 @@ Public Class Form1
 
         Select Case (cbImageType.SelectedIndex)
             Case 0
-                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".bmp"), ImageFormat.Bmp, 0, customWidth, customHeight)
+                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".bmp"), ImageFormat.Bmp, 0, customWidth, customHeight)
             Case 1
-                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".jpg"), ImageFormat.Jpeg, tbJPEGQuality.Value, customWidth, customHeight)
+                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".jpg"), ImageFormat.Jpeg, tbJPEGQuality.Value, customWidth, customHeight)
             Case 2
-                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".gif"), ImageFormat.Gif, 0, customWidth, customHeight)
+                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".gif"), ImageFormat.Gif, 0, customWidth, customHeight)
             Case 3
-                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".png"), ImageFormat.Png, 0, customWidth, customHeight)
+                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".png"), ImageFormat.Png, 0, customWidth, customHeight)
             Case 4
-                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s, ".tiff"), ImageFormat.Tiff, 0, customWidth, customHeight)
+                Await MediaPlayer1.Frame_SaveAsync(Path.Combine(edScreenshotsFolder.Text, s + ".tiff"), ImageFormat.Tiff, 0, customWidth, customHeight)
         End Select
     End Sub
 
@@ -1233,6 +1234,11 @@ Public Class Form1
             MediaPlayer1.Encryption_Key = edEncryptionKeyString.Text
 
         ElseIf (rbEncryptionKeyFile.Checked) Then
+
+            If (MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Encrypted_File_DS AndAlso Not System.IO.File.Exists(edEncryptionKeyFile.Text)) Then
+                MessageBox.Show(Me, "Please select the encryption key file.")
+                Return
+            End If
 
             MediaPlayer1.Encryption_KeyType = EncryptionKeyType.File
             MediaPlayer1.Encryption_Key = edEncryptionKeyFile.Text

@@ -1570,7 +1570,7 @@ namespace Overlay_Manager_Demo
         /// <summary>
         /// Handles the bt pan add click event.
         /// </summary>
-        private void btPanAdd_Click(object sender, RoutedEventArgs e)
+        private async void btPanAdd_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -1593,11 +1593,14 @@ namespace Overlay_Manager_Demo
                     case 3: easing = OverlayManagerPanEasing.EaseInOut; break;
                 }
 
+                // Start the pan at the current position (or at zero before playback)
+                var start = _pipeline != null ? await _pipeline.Position_GetAsync() : TimeSpan.Zero;
+
                 // Create pan effect
                 var pan = new OverlayManagerPan(
                     startX, startY, startW, startH,
                     stopX, stopY, stopW, stopH,
-                    TimeSpan.Zero, TimeSpan.FromSeconds(duration),
+                    start, start + TimeSpan.FromSeconds(duration),
                     true, $"Pan_{_panOverlays.Count + 1}")
                 {
                     Easing = easing

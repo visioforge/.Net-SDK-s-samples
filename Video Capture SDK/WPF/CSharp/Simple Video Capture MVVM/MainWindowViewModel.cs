@@ -121,8 +121,20 @@ namespace Simple_Video_Capture
                 {
                     if (SelectedVideoInputDevice != null)
                     {
-                        this.videoCaptureAccessor.Video_CaptureDevice = new VideoCaptureSource(SelectedVideoInputDevice.Name);
-                        SelectedVideoFormat = SelectedVideoInputDevice.VideoFormats.FirstOrDefault();
+                        var source = new VideoCaptureSource(SelectedVideoInputDevice);
+                        this.videoCaptureAccessor.Video_CaptureDevice = source;
+
+                        // Start from the format and frame rate the SDK picks for "use best" instead of the first listed one.
+                        SelectedVideoFormat = SelectedVideoInputDevice.VideoFormats.FirstOrDefault(format => format.Name == source.Format)
+                            ?? SelectedVideoInputDevice.VideoFormats.FirstOrDefault();
+
+                        var defaultRate = SelectedVideoFormat?.FrameRates.FirstOrDefault(rate => rate.Value == source.FrameRate.Value);
+                        if (defaultRate == null || defaultRate.Value.IsEmpty)
+                        {
+                            defaultRate = SelectedVideoFormat?.FrameRates.FirstOrDefault();
+                        }
+
+                        SelectedFrameRate = defaultRate;
                     }
                 }
             }

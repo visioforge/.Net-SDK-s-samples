@@ -50,6 +50,13 @@ Public Class Form1
 
     Private WithEvents VideoCapture1 As VideoCaptureCore
 
+    ''' <summary>
+    ''' The format and frame rate the demo starts with: the ones the SDK picks for "use best".
+    ''' </summary>
+    Private _defaultVideoFormat As String
+
+    Private _defaultVideoFrameRate As VideoFrameRate
+
         ''' <summary>
         ''' New.
         ''' </summary>
@@ -168,7 +175,13 @@ Public Class Form1
             Next
 
             If cbVideoInputFormat.Items.Count > 0 Then
-                cbVideoInputFormat.SelectedIndex = 0
+                ' Start from the format the SDK picks for "use best" instead of the first listed one.
+                Dim bestFormat As New VideoCaptureSource(deviceItem)
+                _defaultVideoFormat = bestFormat.Format
+                _defaultVideoFrameRate = bestFormat.FrameRate
+
+                Dim formatIndex = deviceItem.VideoFormats.FindIndex(Function(f) f.Name = _defaultVideoFormat)
+                cbVideoInputFormat.SelectedIndex = If(formatIndex >= 0, formatIndex, 0)
                 cbVideoInputFormat_SelectedIndexChanged(Nothing, Nothing)
             End If
 
@@ -202,7 +215,14 @@ Public Class Form1
             Next
 
             If (cbVideoInputFrameRate.Items.Count > 0) Then
-                cbVideoInputFrameRate.SelectedIndex = 0
+                ' The "use best" default keeps its own frame rate; any other format starts at the first rate.
+                Dim rateIndex = 0
+                If videoFormat.Name = _defaultVideoFormat Then
+                    Dim knownRate = cbVideoInputFrameRate.Items.IndexOf(_defaultVideoFrameRate.ToString(CultureInfo.CurrentCulture))
+                    If knownRate >= 0 Then rateIndex = knownRate
+                End If
+
+                cbVideoInputFrameRate.SelectedIndex = rateIndex
             End If
         End If
     End Sub

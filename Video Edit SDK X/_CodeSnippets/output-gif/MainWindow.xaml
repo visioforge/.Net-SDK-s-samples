@@ -10,13 +10,13 @@
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,16,16,0">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Source video file" Width="120" />
-                <TextBox Text="c:\vf\Test-VisioForge.mp4" VerticalAlignment="Center" Margin="0,0,10,0" Width="230" x:Name="edSourceVideoFile" />
+                <TextBox VerticalAlignment="Center" Margin="0,0,10,0" Width="230" x:Name="edSourceVideoFile" />
                 <Button x:Name="btSelectVideo" Content="..." Click="btSelectVideo_Click" Width="20" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <TextBlock Text="Output GIF file" Width="120" />
-                <TextBox Text="c:\vf\output.gif" VerticalAlignment="Center" Margin="0,0,10,0" Width="230" x:Name="edOutputFile"/>
+                <TextBox VerticalAlignment="Center" Margin="0,0,10,0" Width="230" x:Name="edOutputFile"/>
                 <Button x:Name="btSelectOutput" Content="..." Click="btSelectOutput_Click" Width="20" />
             </StackPanel>
 

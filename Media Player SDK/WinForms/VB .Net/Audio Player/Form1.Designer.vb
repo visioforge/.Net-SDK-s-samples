@@ -234,7 +234,6 @@ Partial Class Form1
         Me.edFilename.Name = "edFilename"
         Me.edFilename.Size = New System.Drawing.Size(680, 31)
         Me.edFilename.TabIndex = 19
-        Me.edFilename.Text = "c:\1.mp3"
         '
         'label14
         '

@@ -77,6 +77,13 @@ namespace VideoCapture_CSharp_Demo
         private VideoCaptureCore VideoCapture1;
 
         /// <summary>
+        /// The format and frame rate the demo starts with: the ones the SDK picks for "use best".
+        /// </summary>
+        private string _defaultVideoFormat;
+
+        private VideoFrameRate _defaultVideoFrameRate;
+
+        /// <summary>
         /// Settings dialog for MP4 hardware encoder output.
         /// </summary>
         private HWEncodersOutputSettingsDialog mp4HWSettingsDialog;
@@ -105,11 +112,6 @@ namespace VideoCapture_CSharp_Demo
         /// Settings dialog for WMV output format.
         /// </summary>
         private WMVSettingsDialog wmvSettingsDialog;
-
-        /// <summary>
-        /// Settings dialog for DV output format.
-        /// </summary>
-        private DVSettingsDialog dvSettingsDialog;
 
         /// <summary>
         /// Settings dialog for PCM audio output format.
@@ -256,11 +258,9 @@ namespace VideoCapture_CSharp_Demo
             VideoCapture1.OnAudioVUMeterProVolume += VideoCapture1_OnAudioVUMeterProVolume;
             VideoCapture1.OnMotion += VideoCapture1_OnMotion;
             VideoCapture1.OnAudioVUMeter += VideoCapture1_OnAudioVUMeter;
-            VideoCapture1.OnTVTunerTuneChannels += VideoCapture1_OnTVTunerTuneChannels;
             VideoCapture1.OnNetworkSourceDisconnect += VideoCapture1_OnNetworkSourceDisconnect;
             VideoCapture1.OnFFMPEGInfo += VideoCapture1_OnFFMPEGInfo;
             VideoCapture1.OnFaceDetected += VideoCapture1_OnFaceDetected;
-            VideoCapture1.OnBDAChannelFound += VideoCapture1_OnBDAChannelFound;
             VideoCapture1.OnMotionDetectionEx += VideoCapture1_OnMotionDetectionEx;
         }
 
@@ -278,11 +278,9 @@ namespace VideoCapture_CSharp_Demo
                 VideoCapture1.OnMotion -= VideoCapture1_OnMotion;
 
                 VideoCapture1.OnAudioVUMeter -= VideoCapture1_OnAudioVUMeter;
-                VideoCapture1.OnTVTunerTuneChannels -= VideoCapture1_OnTVTunerTuneChannels;
                 VideoCapture1.OnNetworkSourceDisconnect -= VideoCapture1_OnNetworkSourceDisconnect;
                 VideoCapture1.OnFFMPEGInfo -= VideoCapture1_OnFFMPEGInfo;
                 VideoCapture1.OnFaceDetected -= VideoCapture1_OnFaceDetected;
-                VideoCapture1.OnBDAChannelFound -= VideoCapture1_OnBDAChannelFound;
                 VideoCapture1.OnMotionDetectionEx -= VideoCapture1_OnMotionDetectionEx;
 
                 VideoCapture1.Dispose();
@@ -320,7 +318,7 @@ namespace VideoCapture_CSharp_Demo
 
             // set combobox indexes
             cbMode.SelectedIndex = 0;
-            cbOutputFormat.SelectedIndex = 22;
+            cbOutputFormat.SelectedIndex = 20;
 
             cbResizeMode.SelectedIndex = 0;
             cbMotDetHLColor.SelectedIndex = 1;
@@ -328,8 +326,6 @@ namespace VideoCapture_CSharp_Demo
             cbRotate.SelectedIndex = 0;
             cbBarcodeType.SelectedIndex = 0;
 
-            cbCustomAudioSourceCategory.SelectedIndex = 0;
-            cbCustomVideoSourceCategory.SelectedIndex = 0;
             cbPIPResizeMode.SelectedIndex = 0;
 
             foreach (var screen in Screen.AllScreens)
@@ -409,34 +405,7 @@ namespace VideoCapture_CSharp_Demo
 
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
             edNewFilename.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output_new.mp4");
-
-            await VideoCapture1.TVTuner_ReadAsync();
-
-            foreach (string tunerDevice in VideoCapture1.TVTuner_Devices())
-            {
-                cbTVTuner.Items.Add(tunerDevice);
-            }
-
-            if (cbTVTuner.Items.Count > 0)
-            {
-                cbTVTuner.SelectedIndex = 0;
-            }
-
-            foreach (string tunerTVFormat in VideoCapture1.TVTuner_TVFormats())
-            {
-                cbTVSystem.Items.Add(tunerTVFormat);
-            }
-
-            cbTVSystem.SelectedIndex = 0;
-
-            foreach (string tunerCountry in VideoCapture1.TVTuner_Countries())
-            {
-                cbTVCountry.Items.Add(tunerCountry);
-            }
-
-            cbTVCountry.SelectedIndex = 0;
-
-            cbTVTuner_SelectedIndexChanged(null, null);
+            edHLSOutputFolder.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "hls");
 
             foreach (var device in VideoCapture1.Video_CaptureDevices())
             {
@@ -516,16 +485,6 @@ namespace VideoCapture_CSharp_Demo
 
             rbVR_CheckedChanged(null, null);
 
-            foreach (string specialFilter in VideoCapture1.Special_Filters(SpecialFilterType.HardwareVideoEncoder))
-            {
-                cbMPEGEncoder.Items.Add(specialFilter);
-            }
-
-            if (cbMPEGEncoder.Items.Count > 0)
-            {
-                cbMPEGEncoder.SelectedIndex = 0;
-            }
-
             foreach (string directShowFilter in VideoCapture1.DirectShow_Filters())
             {
                 cbFilters.Items.Add(directShowFilter);
@@ -555,32 +514,6 @@ namespace VideoCapture_CSharp_Demo
 
             cbPIPMode.SelectedIndex = 0;
 
-            // BDA
-            foreach (string source in VideoCapture1.BDA_Sources())
-            {
-                cbBDASourceDevice.Items.Add(source);
-            }
-
-            foreach (string receiver in VideoCapture1.BDA_Receivers())
-            {
-                cbBDAReceiver.Items.Add(receiver);
-            }
-
-            if (cbBDASourceDevice.Items.Count > 0)
-            {
-                cbBDASourceDevice.SelectedIndex = 0;
-            }
-
-            if (cbBDAReceiver.Items.Count > 1)
-            {
-                cbBDAReceiver.SelectedIndex = 1;
-            }
-
-            cbBDADeviceStandard.SelectedIndex = 0;
-            cbDVBSPolarisation.SelectedIndex = 0;
-            cbDVBCModulation.SelectedIndex = 4;
-
-            
             cbAudEqualizerPreset.Items.AddRange(VideoCapture1.Audio_Effects_Equalizer_Presets().ToArray());
             cbAudEqualizerPreset.SelectedIndex = 0;
 
@@ -623,19 +556,14 @@ namespace VideoCapture_CSharp_Demo
 
                 if (cbVideoInputFormat.Items.Count > 0)
                 {
-                    cbVideoInputFormat.SelectedIndex = 0;
-                    cbVideoInputFormat_SelectedIndexChanged(null, null);
-                }
+                    // Start from the format the SDK picks for "use best" instead of the first listed one.
+                    var bestFormat = new VideoCaptureSource(deviceItem);
+                    _defaultVideoFormat = bestFormat.Format;
+                    _defaultVideoFrameRate = bestFormat.FrameRate;
 
-                // currently device active, we can read TV Tuner name
-                string tvTuner = deviceItem.TVTuner;
-                if (!string.IsNullOrEmpty(tvTuner))
-                {
-                    int k = cbTVTuner.Items.IndexOf(tvTuner);
-                    if (k >= 0)
-                    {
-                        cbTVTuner.SelectedIndex = k;
-                    }
+                    var formatIndex = cbVideoInputFormat.Items.IndexOf(_defaultVideoFormat);
+                    cbVideoInputFormat.SelectedIndex = formatIndex >= 0 ? formatIndex : 0;
+                    cbVideoInputFormat_SelectedIndexChanged(null, null);
                 }
 
                 cbCrossBarAvailable.Enabled = VideoCapture1.Video_CaptureDevice_CrossBar_Init(cbVideoInputDevice.Text);
@@ -894,21 +822,9 @@ namespace VideoCapture_CSharp_Demo
                     VideoCapture1.Mode = VideoCaptureMode.IPCapture;
                     break;
                 case 8:
-                    VideoCapture1.Mode = VideoCaptureMode.BDAPreview;
-                    break;
-                case 9:
-                    VideoCapture1.Mode = VideoCaptureMode.BDACapture;
-                    break;
-                case 10:
-                    VideoCapture1.Mode = VideoCaptureMode.CustomPreview;
-                    break;
-                case 11:
-                    VideoCapture1.Mode = VideoCaptureMode.CustomCapture;
-                    break;
-                case 12:
                     VideoCapture1.Mode = VideoCaptureMode.DecklinkSourcePreview;
                     break;
-                case 13:
+                case 9:
                     VideoCapture1.Mode = VideoCaptureMode.DecklinkSourceCapture;
                     break;
             }
@@ -949,14 +865,6 @@ namespace VideoCapture_CSharp_Demo
                 // from video capture device
                 SelectVideoCaptureSource();
             }
-            else if ((VideoCapture1.Mode == VideoCaptureMode.BDACapture) || (VideoCapture1.Mode == VideoCaptureMode.BDAPreview))
-            {
-                SelectBDASource();
-            }
-            else if ((VideoCapture1.Mode == VideoCaptureMode.CustomCapture) || (VideoCapture1.Mode == VideoCaptureMode.CustomPreview))
-            {
-                SelectCustomSource();
-            }
             else if ((VideoCapture1.Mode == VideoCaptureMode.PushSourceCapture) || (VideoCapture1.Mode == VideoCaptureMode.PushSourcePreview))
             {
                 VideoCapture1.Push_Source = new PushSourceSettings
@@ -976,8 +884,6 @@ namespace VideoCapture_CSharp_Demo
             }
 
             bool captureMode = VideoCapture1.Mode == VideoCaptureMode.AudioCapture
-                               || VideoCapture1.Mode == VideoCaptureMode.BDACapture
-                               || VideoCapture1.Mode == VideoCaptureMode.CustomCapture
                                || VideoCapture1.Mode == VideoCaptureMode.IPCapture
                                || VideoCapture1.Mode == VideoCaptureMode.ScreenCapture
                                || VideoCapture1.Mode == VideoCaptureMode.DecklinkSourceCapture
@@ -991,6 +897,13 @@ namespace VideoCapture_CSharp_Demo
 
             // network streaming
             VideoCapture1.Network_Streaming_Enabled = false;
+
+            if (cbNetworkStreaming.Checked && cbNetworkStreamingMode.SelectedIndex == 0
+                && !rbNetworkStreamingUseMainWMVSettings.Checked && !File.Exists(edNetworkStreamingWMVProfile.Text))
+            {
+                MessageBox.Show(this, "Please select the WMV profile file.");
+                return;
+            }
 
             if (cbNetworkStreaming.Checked)
             {
@@ -1039,21 +952,13 @@ namespace VideoCapture_CSharp_Demo
                         }
                     case 3:
                         {
-                            var dvOutput = new DVOutput();
-                            SetDVOutput(ref dvOutput);
-                            VideoCapture1.Output_Format = dvOutput;
-
-                            break;
-                        }
-                    case 4:
-                        {
                             var acmOutput = new ACMOutput();
                             SetACMOutput(ref acmOutput);
                             VideoCapture1.Output_Format = acmOutput;
 
                             break;
                         }
-                    case 5:
+                    case 4:
                         {
                             var mp3Output = new MP3Output();
                             SetMP3Output(ref mp3Output);
@@ -1061,7 +966,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 6:
+                    case 5:
                         {
                             var m4aOutput = new M4AOutput();
                             SetM4AOutput(ref m4aOutput);
@@ -1069,7 +974,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 7:
+                    case 6:
                         {
                             var wmaOutput = new WMAOutput();
                             SetWMAOutput(ref wmaOutput);
@@ -1077,7 +982,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 8:
+                    case 7:
                         {
                             var flacOutput = new FLACOutput();
                             SetFLACOutput(ref flacOutput);
@@ -1085,7 +990,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 9:
+                    case 8:
                         {
                             var oggVorbisOutput = new OGGVorbisOutput();
                             SetOGGOutput(ref oggVorbisOutput);
@@ -1093,7 +998,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 10:
+                    case 9:
                         {
                             var speexOutput = new SpeexOutput();
                             SetSpeexOutput(ref speexOutput);
@@ -1101,7 +1006,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 11:
+                    case 10:
                         {
                             var customOutput = new CustomOutput();
                             SetCustomOutput(ref customOutput);
@@ -1109,36 +1014,25 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 12:
-                        {
-                            VideoCapture1.Output_Format = new DirectCaptureDVOutput();
-
-                            break;
-                        }
-                    case 13:
+                    case 11:
                         {
                             VideoCapture1.Output_Format = new DirectCaptureAVIOutput();
 
                             break;
                         }
-                    case 14:
+                    case 12:
                         {
                             VideoCapture1.Output_Format = new DirectCaptureMPEGOutput();
 
-                            if (cbMPEGEncoder.SelectedIndex != -1)
-                            {
-                                VideoCapture1.Video_CaptureDevice.InternalMPEGEncoder_Name = cbMPEGEncoder.Text;
-                            }
-
                             break;
                         }
-                    case 15:
+                    case 13:
                         {
                             VideoCapture1.Output_Format = new DirectCaptureMKVOutput();
 
                             break;
                         }
-                    case 16:
+                    case 14:
                         {
                             var directCaptureOutputGDCL = new DirectCaptureMP4Output();
                             SetDirectCaptureCustomOutput(ref directCaptureOutputGDCL);
@@ -1147,7 +1041,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 17:
+                    case 15:
                         {
                             var directCaptureOutputMG = new DirectCaptureMP4Output();
                             SetDirectCaptureCustomOutput(ref directCaptureOutputMG);
@@ -1156,7 +1050,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 18:
+                    case 16:
                         {
                             var directCaptureOutput = new DirectCaptureCustomOutput();
                             SetDirectCaptureCustomOutput(ref directCaptureOutput);
@@ -1164,7 +1058,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 19:
+                    case 17:
                         {
                             var webmOutput = new WebMOutput();
                             SetWebMOutput(ref webmOutput);
@@ -1172,7 +1066,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 20:
+                    case 18:
                         {
                             var ffmpegOutput = new FFMPEGOutput();
                             SetFFMPEGOutput(ref ffmpegOutput);
@@ -1180,7 +1074,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 21:
+                    case 19:
                         {
                             var ffmpegOutput = new FFMPEGEXEOutput();
                             SetFFMPEGEXEOutput(ref ffmpegOutput);
@@ -1188,7 +1082,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 22:
+                    case 20:
                         {
                             var mp4Output = new MP4Output();
                             SetMP4Output(ref mp4Output);
@@ -1196,7 +1090,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 23:
+                    case 21:
                         {
                             var mp4Output = new MP4HWOutput();
                             SetMP4HWOutput(ref mp4Output);
@@ -1204,7 +1098,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 24:
+                    case 22:
                         {
                             var gifOutput = new AnimatedGIFOutput();
                             SetGIFOutput(ref gifOutput);
@@ -1213,7 +1107,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 25:
+                    case 23:
                         {
                             var encOutput = new MP4Output();
                             SetMP4Output(ref encOutput);
@@ -1224,7 +1118,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 26:
+                    case 24:
                         {
                             var tsOutput = new MPEGTSOutput();
                             SetMPEGTSOutput(ref tsOutput);
@@ -1232,7 +1126,7 @@ namespace VideoCapture_CSharp_Demo
 
                             break;
                         }
-                    case 27:
+                    case 25:
                         {
                             var movOutput = new MOVOutput();
                             SetMOVOutput(ref movOutput);
@@ -1282,7 +1176,7 @@ namespace VideoCapture_CSharp_Demo
             // video resize and crop
             ConfigureResizeCropRotate();
 
-            // MPEG / DV decoders
+            // MPEG decoders
             ConfigureDecoders();
 
             // motion detection
@@ -1378,7 +1272,7 @@ namespace VideoCapture_CSharp_Demo
         /// </summary>
         private void ConfigureDecoders()
         {
-            // MPEG decoding (only for tuners with internal HW encoder)
+            // MPEG decoding (devices with MPEG output)
             if (cbMPEGVideoDecoder.SelectedIndex < 1)
             {
                 // default
@@ -1407,24 +1301,6 @@ namespace VideoCapture_CSharp_Demo
             else
             {
                 VideoCapture1.MPEG_Demuxer = cbMPEGDemuxer.Text;
-            }
-
-            // DV resolution
-            if (rbDVResFull.Checked)
-            {
-                VideoCapture1.DV_Decoder_Video_Resolution = DVVideoResolution.Full;
-            }
-            else if (rbDVResHalf.Checked)
-            {
-                VideoCapture1.DV_Decoder_Video_Resolution = DVVideoResolution.Half;
-            }
-            else if (rbDVResQuarter.Checked)
-            {
-                VideoCapture1.DV_Decoder_Video_Resolution = DVVideoResolution.Quarter;
-            }
-            else
-            {
-                VideoCapture1.DV_Decoder_Video_Resolution = DVVideoResolution.DC;
             }
         }
 
@@ -1706,7 +1582,7 @@ namespace VideoCapture_CSharp_Demo
 
                 string path = Path.GetDirectoryName(edOutput.Text);
                 string ext = Path.GetExtension(edOutput.Text);
-                VideoCapture1.Output_Filename = Path.Combine(path, s, ext);
+                VideoCapture1.Output_Filename = Path.Combine(path, s + ext);
             }
         }
 
@@ -2291,20 +2167,6 @@ namespace VideoCapture_CSharp_Demo
         }
 
         /// <summary>
-        /// Set dv output.
-        /// </summary>
-        /// <param name="dvOutput">The dv output.</param>
-        private void SetDVOutput(ref DVOutput dvOutput)
-        {
-            if (dvSettingsDialog == null)
-            {
-                dvSettingsDialog = new DVSettingsDialog();
-            }
-
-            dvSettingsDialog.SaveSettings(ref dvOutput);
-        }
-
-        /// <summary>
         /// Set avi output.
         /// </summary>
         /// <param name="aviOutput">The avi output.</param>
@@ -2621,75 +2483,6 @@ namespace VideoCapture_CSharp_Demo
         }
 
         /// <summary>
-        /// Select custom source.
-        /// </summary>
-        private void SelectCustomSource()
-        {
-            VideoCapture1.Custom_Source = new CustomSourceSettings();
-
-            if (cbCustomVideoSourceCategory.SelectedIndex == 0)
-            {
-                VideoCapture1.Custom_Source.VideoFilterCategory = FilterCategoryX.VideoCaptureSource;
-            }
-            else
-            {
-                VideoCapture1.Custom_Source.VideoFilterCategory = FilterCategoryX.DirectShowFilters;
-            }
-
-            VideoCapture1.Custom_Source.VideoFilterName = cbCustomVideoSourceFilter.Text;
-            VideoCapture1.Custom_Source.VideoFilterFormat = cbCustomVideoSourceFormat.Text;
-            VideoCapture1.Custom_Source.VideoFilenameOrURL = edCustomVideoSourceURL.Text;
-
-            if (string.IsNullOrEmpty(cbCustomVideoSourceFrameRate.Text))
-            {
-                VideoCapture1.Custom_Source.VideoFilterFrameRate = VideoFrameRate.Empty;
-            }
-            else
-            {
-                VideoCapture1.Custom_Source.VideoFilterFrameRate = new VideoFrameRate(Convert.ToDouble(cbCustomVideoSourceFrameRate.Text));
-            }
-
-            if (cbCustomAudioSourceCategory.SelectedIndex == 0)
-            {
-                VideoCapture1.Custom_Source.AudioFilterCategory = FilterCategoryX.AudioCaptureSource;
-            }
-            else
-            {
-                VideoCapture1.Custom_Source.AudioFilterCategory = FilterCategoryX.DirectShowFilters;
-            }
-
-            VideoCapture1.Custom_Source.AudioFilterName = cbCustomAudioSourceFilter.Text;
-            VideoCapture1.Custom_Source.AudioFilterFormat = cbCustomAudioSourceFormat.Text;
-            VideoCapture1.Custom_Source.AudioFilenameOrURL = edCustomAudioSourceURL.Text;
-        }
-
-        /// <summary>
-        /// Select bda source.
-        /// </summary>
-        private void SelectBDASource()
-        {
-            VideoCapture1.BDA_Source = new BDASourceSettings
-            {
-                ReceiverName = cbBDAReceiver.Text,
-                SourceType = (BDAType)cbBDADeviceStandard.SelectedIndex,
-                SourceName = cbBDASourceDevice.Text
-            };
-
-            if (VideoCapture1.BDA_Source.SourceType == BDAType.DVBT)
-            {
-                BDATuningParameters bdaTuningParameters = new BDATuningParameters
-                {
-                    Frequency = Convert.ToInt32(edDVBTFrequency.Text),
-                    ONID = Convert.ToInt32(edDVBTONID.Text),
-                    SID = Convert.ToInt32(edDVBTSID.Text),
-                    TSID = Convert.ToInt32(edDVBTTSID.Text)
-                };
-
-                VideoCapture1.BDA_SetParameters(bdaTuningParameters);
-            }
-        }
-
-        /// <summary>
         /// Select video capture source.
         /// </summary>
         private void SelectVideoCaptureSource()
@@ -2707,8 +2500,6 @@ namespace VideoCapture_CSharp_Demo
                 // The device constructor stored another format's rate. An empty box clears it.
                 VideoCapture1.Video_CaptureDevice.FrameRate = VideoFrameRate.Empty;
             }
-
-            VideoCapture1.Video_CaptureDevice.UseClosedCaptions = cbUseClosedCaptions.Checked;
         }
 
         /// <summary>
@@ -2975,33 +2766,6 @@ namespace VideoCapture_CSharp_Demo
 
 
         /// <summary>
-        /// Handles the cb tv tuner selected index changed event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void cbTVTuner_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if ((cbTVTuner.Items.Count > 0) && (cbTVTuner.SelectedIndex != -1))
-            {
-                VideoCapture1.TVTuner_Name = cbTVTuner.Text;
-                await VideoCapture1.TVTuner_ReadAsync();
-
-                cbTVMode.Items.Clear();
-                foreach (string tunerMode in VideoCapture1.TVTuner_Modes())
-                {
-                    cbTVMode.Items.Add(tunerMode);
-                }
-
-                edVideoFreq.Text = Convert.ToString(VideoCapture1.TVTuner_VideoFrequency());
-                edAudioFreq.Text = Convert.ToString(VideoCapture1.TVTuner_AudioFrequency());
-                cbTVInput.SelectedIndex = cbTVInput.Items.IndexOf(VideoCapture1.TVTuner_InputType);
-                cbTVMode.SelectedIndex = cbTVMode.Items.IndexOf(VideoCapture1.TVTuner_Mode);
-                cbTVSystem.SelectedIndex = cbTVSystem.Items.IndexOf(VideoCapture1.TVTuner_TVFormat);
-                cbTVCountry.SelectedIndex = cbTVCountry.Items.IndexOf(VideoCapture1.TVTuner_Country);
-            }
-        }
-
-        /// <summary>
         /// Handles the cb video input format selected index changed event.
         /// </summary>
         /// <param name="sender">The sender.</param>
@@ -3035,7 +2799,18 @@ namespace VideoCapture_CSharp_Demo
 
                 if (cbVideoInputFrameRate.Items.Count > 0)
                 {
-                    cbVideoInputFrameRate.SelectedIndex = 0;
+                    // The "use best" default keeps its own frame rate; any other format starts at the first rate.
+                    var index = 0;
+                    if (videoFormat.Name == _defaultVideoFormat)
+                    {
+                        var rateIndex = cbVideoInputFrameRate.Items.IndexOf(_defaultVideoFrameRate.ToString(CultureInfo.CurrentCulture));
+                        if (rateIndex >= 0)
+                        {
+                            index = rateIndex;
+                        }
+                    }
+
+                    cbVideoInputFrameRate.SelectedIndex = index;
                 }
             }
         }
@@ -3223,80 +2998,6 @@ namespace VideoCapture_CSharp_Demo
         }
 
         /// <summary>
-        /// DV Fast Forward.
-        /// </summary>
-        /// <param name="sender">
-        /// Sender object.
-        /// </param>
-        /// <param name="e">
-        /// Event args.
-        /// </param>
-        /// <summary>
-        /// Handles the bt click event.
-        /// </summary>
-        private async void btDVFF_Click(object sender, EventArgs e)
-        {
-            await VideoCapture1.DV_SendCommandAsync(DVCommand.FastForward);
-        }
-
-        /// <summary>
-        /// DV pause.
-        /// </summary>
-        /// <param name="sender">
-        /// Sender object.
-        /// </param>
-        /// <param name="e">
-        /// Event args.
-        /// </param>
-        /// <summary>
-        /// Handles the bt dv pause click event.
-        /// </summary>
-        private async void btDVPause_Click(object sender, EventArgs e)
-        {
-            await VideoCapture1.DV_SendCommandAsync(DVCommand.Pause);
-        }
-
-        /// <summary>
-        /// Handles the bt dv rewind click event.
-        /// </summary>
-        private async void btDVRewind_Click(object sender, EventArgs e)
-        {
-            await VideoCapture1.DV_SendCommandAsync(DVCommand.Rew);
-        }
-
-        /// <summary>
-        /// Handles the bt dv play click event.
-        /// </summary>
-        private async void btDVPlay_Click(object sender, EventArgs e)
-        {
-            await VideoCapture1.DV_SendCommandAsync(DVCommand.Play);
-        }
-
-        /// <summary>
-        /// Handles the bt dv step click event.
-        /// </summary>
-        private async void btDVStepFWD_Click(object sender, EventArgs e)
-        {
-            await VideoCapture1.DV_SendCommandAsync(DVCommand.StepFw);
-        }
-
-        /// <summary>
-        /// Handles the bt dv step rev click event.
-        /// </summary>
-        private async void btDVStepRev_Click(object sender, EventArgs e)
-        {
-            await VideoCapture1.DV_SendCommandAsync(DVCommand.StepRev);
-        }
-
-        /// <summary>
-        /// Handles the bt dv stop click event.
-        /// </summary>
-        private async void btDVStop_Click(object sender, EventArgs e)
-        {
-            await VideoCapture1.DV_SendCommandAsync(DVCommand.Stop);
-        }
-
-        /// <summary>
         /// Handles the bt refresh clients click event.
         /// </summary>
         /// <param name="sender">The sender.</param>
@@ -3318,84 +3019,6 @@ namespace VideoCapture_CSharp_Demo
         }
 
         /// <summary>
-        /// Handles the bt start tune click event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void btStartTune_Click(object sender, EventArgs e)
-        {
-            const int KHz = 1000;
-            const int MHz = 1000000;
-
-            await VideoCapture1.TVTuner_ReadAsync();
-            cbTVChannel.Items.Clear();
-
-            if ((cbTVMode.SelectedIndex != -1) && (cbTVMode.Text == "FM Radio"))
-            {
-                VideoCapture1.TVTuner_FM_Tuning_StartFrequency = 100 * MHz;
-                VideoCapture1.TVTuner_FM_Tuning_StopFrequency = 110 * MHz;
-                VideoCapture1.TVTuner_FM_Tuning_Step = 100 * KHz;
-            }
-
-            await VideoCapture1.TVTuner_TuneChannels_StartAsync();
-        }
-
-        /// <summary>
-        /// Handles the bt stop tune click event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void btStopTune_Click(object sender, EventArgs e)
-        {
-            await VideoCapture1.TVTuner_TuneChannels_StopAsync();
-        }
-
-        /// <summary>
-        /// Handles the bt use this channel click event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void btUseThisChannel_Click(object sender, EventArgs e)
-        {
-            if (Convert.ToInt32(edChannel.Text) <= 10000)
-            {
-                // channel
-                VideoCapture1.TVTuner_Channel = Convert.ToInt32(edChannel.Text);
-            }
-            else
-            {
-                // must be -1 to use frequency
-                VideoCapture1.TVTuner_Channel = -1;
-                VideoCapture1.TVTuner_Frequency = Convert.ToInt32(edChannel.Text);
-            }
-
-            await VideoCapture1.TVTuner_ApplyAsync();
-            await VideoCapture1.TVTuner_ReadAsync();
-            edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
-            edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
-        }
-
-        /// <summary>
-        /// Handles the cb tv country selected index changed event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void cbTVCountry_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbTVCountry.SelectedIndex != -1)
-            {
-                VideoCapture1.TVTuner_Country = cbTVCountry.Text;
-                edTVDefaultFormat.Text = VideoCapture1.TVTuner_Countries_GetPreferredFormatForCountry(VideoCapture1.TVTuner_Country);
-
-                if (VideoCapture1.State() == PlaybackState.Play)
-                {
-                    await VideoCapture1.TVTuner_ApplyAsync();
-                    await VideoCapture1.TVTuner_ReadAsync();
-                }
-            }
-        }
-
-        /// <summary>
         /// Handles the cb stretch checked changed event.
         /// </summary>
         /// <param name="sender">The sender.</param>
@@ -3412,96 +3035,6 @@ namespace VideoCapture_CSharp_Demo
             }
 
             await VideoCapture1.Video_Renderer_UpdateAsync();
-        }
-
-        /// <summary>
-        /// Handles the cb tv mode selected index changed event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void cbTVMode_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbTVMode.SelectedIndex != -1)
-            {
-                TVTunerMode mode;
-                Enum.TryParse(cbTVMode.Text, true, out mode);
-                VideoCapture1.TVTuner_Mode = mode;
-
-                await VideoCapture1.TVTuner_ApplyAsync();
-                await VideoCapture1.TVTuner_ReadAsync();
-                cbTVChannel.Items.Clear();
-                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
-                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
-            }
-        }
-
-        /// <summary>
-        /// Handles the cb tv channel selected index changed event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void cbTVChannel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbTVChannel.SelectedIndex != -1)
-            {
-                int k = Convert.ToInt32(cbTVChannel.Text);
-
-                if (k <= 10000)
-                {
-                    // channel
-                    VideoCapture1.TVTuner_Channel = k;
-                }
-                else
-                {
-                    // must be -1 to use frequency
-                    VideoCapture1.TVTuner_Channel = -1;
-                    VideoCapture1.TVTuner_Frequency = k;
-                }
-
-                await VideoCapture1.TVTuner_ApplyAsync();
-                await VideoCapture1.TVTuner_ReadAsync();
-                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
-                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
-            }
-        }
-
-        /// <summary>
-        /// Handles the cb tv input selected index changed event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void cbTVInput_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbTVInput.SelectedIndex != -1)
-            {
-                VideoCapture1.TVTuner_InputType = cbTVInput.Text;
-                await VideoCapture1.TVTuner_ApplyAsync();
-                await VideoCapture1.TVTuner_ReadAsync();
-                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
-                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
-            }
-        }
-
-        /// <summary>
-        /// Handles the cb tv system selected index changed event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void cbTVSystem_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbTVSystem.SelectedIndex != -1)
-            {
-                if (string.IsNullOrEmpty(VideoCapture1.TVTuner_Name))
-                {
-                    return;
-                }
-
-                VideoCapture1.TVTuner_TVFormat = VideoCapture1.TVTuner_TVFormat_FromString(cbTVSystem.Text);
-                await VideoCapture1.TVTuner_ApplyAsync();
-                await VideoCapture1.TVTuner_ReadAsync();
-                edVideoFreq.Text = VideoCapture1.TVTuner_VideoFrequency().ToString(CultureInfo.InvariantCulture);
-                edAudioFreq.Text = VideoCapture1.TVTuner_AudioFrequency().ToString(CultureInfo.InvariantCulture);
-            }
         }
 
         /// <summary>
@@ -3575,19 +3108,6 @@ namespace VideoCapture_CSharp_Demo
         private async void btResume_Click(object sender, EventArgs e)
         {
             await VideoCapture1.ResumeAsync();
-        }
-
-        /// <summary>
-        /// Handles the bt mpeg encoder show dialog click event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btMPEGEncoderShowDialog_Click(object sender, EventArgs e)
-        {
-            if (cbMPEGEncoder.SelectedIndex != -1)
-            {
-                VideoCapture1.Video_CaptureDevice_InternalMPEGEncoder_ShowDialog(IntPtr.Zero, cbMPEGEncoder.Text);
-            }
         }
 
         /// <summary>
@@ -4683,34 +4203,6 @@ namespace VideoCapture_CSharp_Demo
             Log(e.Message);
         }
 
-        /// <summary>
-        /// Video capture 1 on tv tuner tune channels.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="TVTunerTuneChannelsEventArgs"/> instance containing the event data.</param>
-        private void VideoCapture1_OnTVTunerTuneChannels(object sender, TVTunerTuneChannelsEventArgs e)
-        {
-            BeginInvoke((Action)(() =>
-            {
-                Application.DoEvents();
-
-                pbChannels.Value = e.Progress;
-
-                if (e.SignalPresent)
-                {
-                    cbTVChannel.Items.Add(e.Channel.ToString(CultureInfo.InvariantCulture));
-                }
-
-                if (e.Channel == -1)
-                {
-                    pbChannels.Value = 0;
-                    MessageBox.Show(this, "AutoTune complete");
-                }
-
-                Application.DoEvents();
-            }));
-        }
-
         #region VU Meter
 
         private delegate void VUDelegate(VUMeterEventArgs e);
@@ -5039,27 +4531,6 @@ namespace VideoCapture_CSharp_Demo
         }
 
         /// <summary>
-        /// Handles the bt dvbt tune click event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btDVBTTune_Click(object sender, EventArgs e)
-        {
-            if (VideoCapture1.BDA_Source != null && VideoCapture1.BDA_Source.SourceType == BDAType.DVBT)
-            {
-                BDATuningParameters bdaTuningParameters = new BDATuningParameters
-                {
-                    Frequency = Convert.ToInt32(edDVBTFrequency.Text),
-                    ONID = Convert.ToInt32(edDVBTONID.Text),
-                    SID = Convert.ToInt32(edDVBTSID.Text),
-                    TSID = Convert.ToInt32(edDVBTTSID.Text)
-                };
-
-                VideoCapture1.BDA_SetParameters(bdaTuningParameters);
-            }
-        }
-
-        /// <summary>
         /// Handles the bt separate capture pause click event.
         /// </summary>
         /// <param name="sender">The sender.</param>
@@ -5341,45 +4812,6 @@ namespace VideoCapture_CSharp_Demo
         {
             var startInfo = new ProcessStartInfo("explorer.exe", HelpLinks.StreamingToAdobeFlashServer);
             Process.Start(startInfo);
-        }
-
-        /// <summary>
-        /// Video capture 1 on bda channel found.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="BDAChannelEventArgs"/> instance containing the event data.</param>
-        private void VideoCapture1_OnBDAChannelFound(object sender, BDAChannelEventArgs e)
-        {
-            BeginInvoke((Action)(() =>
-            {
-                Application.DoEvents();
-
-                ListViewItem lvi = new ListViewItem(
-                    new[]
-                    {
-                        e.Channel.Name,
-                        e.Channel.Frequency.ToString(CultureInfo.InvariantCulture),
-                        e.Channel.AudioPid.ToString(CultureInfo.InvariantCulture),
-                        e.Channel.VideoPid.ToString(CultureInfo.InvariantCulture),
-                        e.Channel.ServId.ToString(CultureInfo.InvariantCulture),
-                        e.Channel.SymbolRate.ToString(CultureInfo.InvariantCulture)
-                    });
-
-                lvBDAChannels.Items.Add(lvi);
-
-                Application.DoEvents();
-            }));
-        }
-
-        /// <summary>
-        /// Handles the bt bda channel scanning start click event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void btBDAChannelScanningStart_Click(object sender, EventArgs e)
-        {
-            lvBDAChannels.Items.Clear();
-            VideoCapture1.BDA_ScanChannels();
         }
 
         /// <summary>
@@ -5677,156 +5109,6 @@ namespace VideoCapture_CSharp_Demo
 
                 VideoView1.BackColor = pnVideoRendererBGColor.BackColor;
                 await VideoCapture1.Video_Renderer_UpdateAsync();
-            }
-        }
-
-        /// <summary>
-        /// Handles the cb custom video source category selected index changed event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void cbCustomVideoSourceCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cbCustomVideoSourceFilter.Items.Clear();
-
-            if (cbCustomVideoSourceCategory.SelectedIndex == 0)
-            {
-                var filters = VideoCapture1.Video_CaptureDevices();
-                foreach (var item in filters)
-                {
-                    cbCustomVideoSourceFilter.Items.Add(item.Name);
-                }
-
-                if (filters.Count > 0)
-                {
-                    cbCustomVideoSourceFilter.SelectedIndex = 0;
-                }
-            }
-            else if (cbCustomVideoSourceCategory.SelectedIndex == 1)
-            {
-                var filters = VideoCapture1.DirectShow_Filters();
-                foreach (var item in filters)
-                {
-                    cbCustomVideoSourceFilter.Items.Add(item);
-                }
-
-                if (filters.Count > 0)
-                {
-                    cbCustomVideoSourceFilter.SelectedIndex = 0;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Handles the cb custom audio source category selected index changed event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void cbCustomAudioSourceCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cbCustomAudioSourceFilter.Items.Clear();
-            cbCustomAudioSourceFilter.Items.Add(string.Empty);
-
-            if (cbCustomAudioSourceCategory.SelectedIndex == 0)
-            {
-                var filters = VideoCapture1.Audio_CaptureDevices();
-                foreach (var item in filters)
-                {
-                    cbCustomAudioSourceFilter.Items.Add(item.Name);
-                }
-
-                if (filters.Count > 0)
-                {
-                    cbCustomAudioSourceFilter.SelectedIndex = 0;
-                }
-            }
-            else if (cbCustomAudioSourceCategory.SelectedIndex == 1)
-            {
-                var filters = VideoCapture1.DirectShow_Filters();
-                foreach (var item in filters)
-                {
-                    cbCustomAudioSourceFilter.Items.Add(item);
-                }
-
-                if (filters.Count > 0)
-                {
-                    cbCustomAudioSourceFilter.SelectedIndex = 0;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Handles the cb custom video source filter selected index changed event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void cbCustomVideoSourceFilter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cbCustomVideoSourceFilter.Text))
-            {
-                cbCustomVideoSourceFormat.Items.Clear();
-                cbCustomVideoSourceFrameRate.Items.Clear();
-
-                List<VideoCaptureDeviceFormat> formats;
-
-                if (cbCustomVideoSourceCategory.SelectedIndex == 0)
-                {
-                    VideoCapture1.DirectShow_Filter_GetVideoFormats(
-                        FilterCategoryX.VideoCaptureSource,
-                        cbCustomVideoSourceFilter.Text,
-                        MediaTypeCategory.Video,
-                        out formats);
-                }
-                else
-                {
-                    VideoCapture1.DirectShow_Filter_GetVideoFormats(
-                        FilterCategoryX.DirectShowFilters,
-                        cbCustomVideoSourceFilter.Text,
-                        MediaTypeCategory.Video,
-                        out formats);
-                }
-
-                foreach (var format in formats)
-                {
-                    cbCustomVideoSourceFormat.Items.Add(format.Name);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Handles the cb custom audio source filter selected index changed event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void cbCustomAudioSourceFilter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cbCustomAudioSourceFilter.Text))
-            {
-                cbCustomAudioSourceFormat.Items.Clear();
-
-                List<string> formats;
-
-                if (cbCustomAudioSourceCategory.SelectedIndex == 0)
-                {
-                    VideoCapture1.DirectShow_Filter_GetAudioFormats(
-                        FilterCategoryX.AudioCaptureSource,
-                        cbCustomAudioSourceFilter.Text,
-                        MediaTypeCategory.Audio,
-                        out formats);
-                }
-                else
-                {
-                    VideoCapture1.DirectShow_Filter_GetAudioFormats(
-                        FilterCategoryX.DirectShowFilters,
-                        cbCustomAudioSourceFilter.Text,
-                        MediaTypeCategory.Audio,
-                        out formats);
-                }
-
-                foreach (var format in formats)
-                {
-                    cbCustomAudioSourceFormat.Items.Add(format);
-                }
             }
         }
 
@@ -6692,17 +5974,6 @@ namespace VideoCapture_CSharp_Demo
 
                 case 3:
                     {
-                        if (dvSettingsDialog == null)
-                        {
-                            dvSettingsDialog = new DVSettingsDialog();
-                        }
-
-                        dvSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 4:
-                    {
                         if (pcmSettingsDialog == null)
                         {
                             pcmSettingsDialog = new PCMSettingsDialog(VideoCapture1);
@@ -6712,7 +5983,7 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 5:
+                case 4:
                     {
                         if (mp3SettingsDialog == null)
                         {
@@ -6723,7 +5994,7 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 6:
+                case 5:
                     {
                         if (m4aSettingsDialog == null)
                         {
@@ -6734,7 +6005,7 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 7:
+                case 6:
                     {
                         if (wmvSettingsDialog == null)
                         {
@@ -6747,7 +6018,7 @@ namespace VideoCapture_CSharp_Demo
                         break;
                     }
 
-                case 8:
+                case 7:
                     {
                         if (flacSettingsDialog == null)
                         {
@@ -6758,7 +6029,7 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 9:
+                case 8:
                     {
                         if (oggVorbisSettingsDialog == null)
                         {
@@ -6769,7 +6040,7 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 10:
+                case 9:
                     {
                         if (speexSettingsDialog == null)
                         {
@@ -6780,10 +6051,10 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 11:
+                case 10:
+                case 14:
+                case 15:
                 case 16:
-                case 17:
-                case 18:
                     {
                         if (customFormatSettingsDialog == null)
                         {
@@ -6794,16 +6065,15 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
+                case 11:
                 case 12:
                 case 13:
-                case 14:
-                case 15:
                     {
                         MessageBox.Show(this, "No settings available for selected output format.");
 
                         break;
                     }
-                case 19:
+                case 17:
                     {
                         if (webmSettingsDialog == null)
                         {
@@ -6814,7 +6084,7 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 20:
+                case 18:
                     {
                         if (ffmpegSettingsDialog == null)
                         {
@@ -6825,7 +6095,7 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 21:
+                case 19:
                     {
                         if (ffmpegEXESettingsDialog == null)
                         {
@@ -6836,8 +6106,8 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 22:
-                case 25:
+                case 20:
+                case 23:
                     {
                         if (mp4SettingsDialog == null)
                         {
@@ -6848,7 +6118,7 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 23:
+                case 21:
                     {
                         if (mp4HWSettingsDialog == null)
                         {
@@ -6859,7 +6129,7 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 24:
+                case 22:
                     {
                         if (gifSettingsDialog == null)
                         {
@@ -6870,7 +6140,7 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 26:
+                case 24:
                     {
                         if (mpegTSSettingsDialog == null)
                         {
@@ -6881,7 +6151,7 @@ namespace VideoCapture_CSharp_Demo
 
                         break;
                     }
-                case 27:
+                case 25:
                     {
                         if (movSettingsDialog == null)
                         {
@@ -6922,32 +6192,32 @@ namespace VideoCapture_CSharp_Demo
 
                 case 3:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wav");
                         break;
                     }
                 case 4:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wav");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp3");
                         break;
                     }
                 case 5:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp3");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".m4a");
                         break;
                     }
                 case 6:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".m4a");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wma");
                         break;
                     }
                 case 7:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wma");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".flac");
                         break;
                     }
                 case 8:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".flac");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
                         break;
                     }
                 case 9:
@@ -6957,7 +6227,7 @@ namespace VideoCapture_CSharp_Demo
                     }
                 case 10:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
                         break;
                     }
                 case 11:
@@ -6967,32 +6237,32 @@ namespace VideoCapture_CSharp_Demo
                     }
                 case 12:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mpg");
                         break;
                     }
                 case 13:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mkv");
                         break;
                     }
                 case 14:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mpg");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
                         break;
                     }
                 case 15:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mkv");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
                         break;
                     }
                 case 16:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
                         break;
                     }
                 case 17:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm");
                         break;
                     }
                 case 18:
@@ -7002,45 +6272,35 @@ namespace VideoCapture_CSharp_Demo
                     }
                 case 19:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
                         break;
                     }
                 case 20:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
                         break;
                     }
                 case 21:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
                         break;
                     }
                 case 22:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif");
                         break;
                     }
                 case 23:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".enc");
                         break;
                     }
                 case 24:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif");
-                        break;
-                    }
-                case 25:
-                    {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".enc");
-                        break;
-                    }
-                case 26:
-                    {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ts");
                         break;
                     }
-                case 27:
+                case 25:
                     {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mov");
                         break;

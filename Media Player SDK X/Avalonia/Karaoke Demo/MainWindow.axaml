@@ -25,7 +25,7 @@
             <!-- CDG/ZIP File Input -->
             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
                 <TextBlock x:Name="lbFileLabel" Text="ZIP File:" Width="80" VerticalAlignment="Center"/>
-                <TextBox x:Name="edFilename" Width="460" Text="c:\1.zip"/>
+                <TextBox x:Name="edFilename" Width="460"/>
                 <Button x:Name="btSelectFile" Content="..." Width="40" Margin="5,0,0,0"/>
             </StackPanel>
 

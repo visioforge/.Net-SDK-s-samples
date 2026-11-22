@@ -1,6 +1,6 @@
 using Gst;
 using System;
-
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -50,6 +50,18 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// The video source.
         /// </summary>
         private SystemVideoSourceBlock _videoSource;
+
+        /// <summary>
+        /// The selected video capture device.
+        /// </summary>
+        private VideoCaptureDeviceInfo _videoDevice;
+
+        /// <summary>
+        /// The HD format and frame rate the demo starts with, picked by the SDK.
+        /// </summary>
+        private string _defaultVideoFormat;
+
+        private VideoFrameRate _defaultVideoFrameRate;
 
         /// <summary>
         /// The audio source.
@@ -230,7 +242,7 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
 
                             if (!string.IsNullOrEmpty(cbVideoFrameRate.Text))
                             {
-                                videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text));
+                                videoSourceSettings.Format.FrameRate = new VideoFrameRate(Convert.ToDouble(cbVideoFrameRate.Text, CultureInfo.InvariantCulture));
                             }
                         }
                     }
@@ -462,17 +474,23 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
                 {
                     cbVideoFormat.Items.Clear();
 
-                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                    if (device != null)
+                    _videoDevice = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
+                    if (_videoDevice != null)
                     {
-                        foreach (var item in device.VideoFormats)
+                        var formatItem = _videoDevice.GetHDOrAnyVideoFormatAndFrameRate(out var frameRate);
+                        _defaultVideoFormat = formatItem?.Name;
+                        _defaultVideoFrameRate = frameRate;
+
+                        foreach (var item in _videoDevice.VideoFormats)
                         {
                             cbVideoFormat.Items.Add(item.Name);
                         }
 
                         if (cbVideoFormat.Items.Count > 0)
                         {
-                            cbVideoFormat.SelectedIndex = 0;
+                            // Start from the HD format the SDK picks instead of the first listed one.
+                            var formatIndex = cbVideoFormat.Items.IndexOf(_defaultVideoFormat);
+                            cbVideoFormat.SelectedIndex = formatIndex >= 0 ? formatIndex : 0;
                         }
                     }
                 }
@@ -486,40 +504,43 @@ namespace MediaBlocks_Simple_Video_Capture_Demo
         /// <summary>
         /// Handles the cb video format selected index changed event.
         /// </summary>
-        private async void cbVideoFormat_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbVideoFormat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            cbVideoFrameRate.Items.Clear();
+
+            var format = cbVideoFormat.SelectedItem?.ToString();
+            if (_videoDevice == null || string.IsNullOrEmpty(format))
             {
-                cbVideoFrameRate.Items.Clear();
+                return;
+            }
 
-                var deviceName = cbVideoInput.Text;
-                var format = cbVideoFormat.Text;
-                if (!string.IsNullOrEmpty(deviceName) && !string.IsNullOrEmpty(format))
+            var formatItem = _videoDevice.VideoFormats.FirstOrDefault(x => x.Name == format);
+            if (formatItem == null)
+            {
+                return;
+            }
+
+            // build int range from tuple (min, max)    
+            var frameRateList = formatItem.GetFrameRateRangeAsStringList();
+            foreach (var item in frameRateList)
+            {
+                cbVideoFrameRate.Items.Add(item);
+            }
+
+            if (cbVideoFrameRate.Items.Count > 0)
+            {
+                // The HD default keeps its own frame rate; any other format starts at the first rate.
+                var index = 0;
+                if (formatItem.Name == _defaultVideoFormat)
                 {
-                    var device = (await SystemVideoSourceBlock.GetDevicesAsync()).FirstOrDefault(x => x.DisplayName == deviceName);
-                    if (device != null)
+                    var rateIndex = cbVideoFrameRate.Items.IndexOf(_defaultVideoFrameRate.ToString());
+                    if (rateIndex >= 0)
                     {
-                        var formatItem = device.VideoFormats.FirstOrDefault(x => x.Name == format);
-                        if (formatItem != null)
-                        {
-                            // build int range from tuple (min, max)    
-                            var frameRateList = formatItem.GetFrameRateRangeAsStringList();
-                            foreach (var item in frameRateList)
-                            {
-                                cbVideoFrameRate.Items.Add(item);
-                            }
-
-                            if (cbVideoFrameRate.Items.Count > 0)
-                            {
-                                cbVideoFrameRate.SelectedIndex = 0;
-                            }
-                        }
+                        index = rateIndex;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
+
+                cbVideoFrameRate.SelectedIndex = index;
             }
         }
 

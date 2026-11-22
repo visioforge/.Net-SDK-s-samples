@@ -440,7 +440,6 @@ Partial Class Form1
         Me.edOutput.Name = "edOutput"
         Me.edOutput.Size = New System.Drawing.Size(554, 31)
         Me.edOutput.TabIndex = 61
-        Me.edOutput.Text = "c:\capture.wav"
         '
         'label9
         '

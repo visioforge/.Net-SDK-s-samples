@@ -1376,6 +1376,12 @@ namespace Media_Player_Demo
                 }
                 else if (rbEncryptionKeyFile.Checked)
                 {
+                    if (MediaPlayer1.Source_Mode == MediaPlayerSourceMode.Encrypted_File_DS && !File.Exists(edEncryptionKeyFile.Text))
+                    {
+                        MessageBox.Show(this, "Please select the encryption key file.");
+                        return;
+                    }
+
                     MediaPlayer1.Encryption_KeyType = EncryptionKeyType.File;
                     MediaPlayer1.Encryption_Key = edEncryptionKeyFile.Text;
                 }

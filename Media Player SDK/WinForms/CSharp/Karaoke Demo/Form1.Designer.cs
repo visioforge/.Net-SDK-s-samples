@@ -236,7 +236,6 @@
             this.edFilename.Name = "edFilename";
             this.edFilename.Size = new System.Drawing.Size(342, 20);
             this.edFilename.TabIndex = 21;
-            this.edFilename.Text = "c:\\1.mp3";
             // 
             // label14
             // 

@@ -34,6 +34,11 @@ Public Class Form1
 
         mmError.Clear()
 
+        If (Not System.IO.File.Exists(edFilename.Text)) Then
+            MessageBox.Show(Me, "Please select an audio file.")
+            Return
+        End If
+
         MediaPlayer1.Playlist_Clear()
         MediaPlayer1.Playlist_Add(edFilename.Text)
         MediaPlayer1.Audio_PlayAudio = True

@@ -543,7 +543,6 @@ namespace Decklink_Demo
             this.edOutput.Name = "edOutput";
             this.edOutput.Size = new System.Drawing.Size(318, 20);
             this.edOutput.TabIndex = 125;
-            this.edOutput.Text = "c:\\capture.avi";
             // 
             // lbInfo
             // 

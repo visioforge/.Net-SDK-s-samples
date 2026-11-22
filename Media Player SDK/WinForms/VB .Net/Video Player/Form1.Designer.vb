@@ -353,7 +353,7 @@ Partial Class Form1
         Me.edFilename.Name = "edFilename"
         Me.edFilename.Size = New System.Drawing.Size(578, 26)
         Me.edFilename.TabIndex = 36
-        Me.edFilename.Text = "C:\video.avi"
+
         '
         'label14
         '

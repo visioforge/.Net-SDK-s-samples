@@ -39,9 +39,6 @@ Partial Class Form1
             ffmpegEXESettingsDialog?.Dispose()
             ffmpegEXESettingsDialog = Nothing
 
-            dvSettingsDialog?.Dispose()
-            dvSettingsDialog = Nothing
-
             aviSettingsDialog?.Dispose()
             aviSettingsDialog = Nothing
 
@@ -1028,7 +1025,6 @@ Partial Class Form1
         Me.edOutput.Name = "edOutput"
         Me.edOutput.Size = New System.Drawing.Size(338, 26)
         Me.edOutput.TabIndex = 56
-        Me.edOutput.Text = "c:\vf\video_edit_output.avi"
         '
         'label15
         '
@@ -1044,7 +1040,7 @@ Partial Class Form1
         '
         Me.cbOutputVideoFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutputVideoFormat.FormattingEnabled = True
-        Me.cbOutputVideoFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV", "DV", "PCM/ACM", "MP3", "M4A (AAC)", "WMA (Windows Media Audio)", "Ogg Vorbis", "FLAC", "Speex", "Custom format", "WebM", "FFMPEG", "FFMPEG (external exe)", "MP4 (CPU)", "MP4 (GPU: Intel, Nvidia, AMD/ATI)", "Animated GIF", "Encrypted video"})
+        Me.cbOutputVideoFormat.Items.AddRange(New Object() {"AVI", "MKV (Matroska)", "WMV", "PCM/ACM", "MP3", "M4A (AAC)", "WMA (Windows Media Audio)", "Ogg Vorbis", "FLAC", "Speex", "Custom format", "WebM", "FFMPEG", "FFMPEG (external exe)", "MP4 (CPU)", "MP4 (GPU: Intel, Nvidia, AMD/ATI)", "Animated GIF", "Encrypted video"})
         Me.cbOutputVideoFormat.Location = New System.Drawing.Point(20, 48)
         Me.cbOutputVideoFormat.Margin = New System.Windows.Forms.Padding(4)
         Me.cbOutputVideoFormat.Name = "cbOutputVideoFormat"
@@ -5321,7 +5317,6 @@ Partial Class Form1
         Me.edNetworkStreamingWMVProfile.Name = "edNetworkStreamingWMVProfile"
         Me.edNetworkStreamingWMVProfile.Size = New System.Drawing.Size(307, 26)
         Me.edNetworkStreamingWMVProfile.TabIndex = 19
-        Me.edNetworkStreamingWMVProfile.Text = "c:\WM.prx"
         '
         'Label19
         '
@@ -6132,7 +6127,6 @@ Partial Class Form1
         Me.edEncryptionKeyHEX.Name = "edEncryptionKeyHEX"
         Me.edEncryptionKeyHEX.Size = New System.Drawing.Size(319, 26)
         Me.edEncryptionKeyHEX.TabIndex = 9
-        Me.edEncryptionKeyHEX.Text = "enter hex data"
         '
         'rbEncryptionKeyBinary
         '
@@ -6162,7 +6156,6 @@ Partial Class Form1
         Me.edEncryptionKeyFile.Name = "edEncryptionKeyFile"
         Me.edEncryptionKeyFile.Size = New System.Drawing.Size(276, 26)
         Me.edEncryptionKeyFile.TabIndex = 6
-        Me.edEncryptionKeyFile.Text = "c:\keyfile.txt"
         '
         'rbEncryptionKeyFile
         '
@@ -6826,7 +6819,6 @@ Partial Class Form1
         Me.edOutputFileCut.Name = "edOutputFileCut"
         Me.edOutputFileCut.Size = New System.Drawing.Size(416, 26)
         Me.edOutputFileCut.TabIndex = 70
-        Me.edOutputFileCut.Text = "c:\vf\video_edit_output.avi"
         '
         'label131
         '
@@ -7002,7 +6994,6 @@ Partial Class Form1
         Me.edOutputFileJoin.Name = "edOutputFileJoin"
         Me.edOutputFileJoin.Size = New System.Drawing.Size(406, 26)
         Me.edOutputFileJoin.TabIndex = 70
-        Me.edOutputFileJoin.Text = "c:\vf\video_edit_output.avi"
         '
         'label132
         '
@@ -7177,7 +7168,6 @@ Partial Class Form1
         Me.edMuxStreamsOutputFile.Name = "edMuxStreamsOutputFile"
         Me.edMuxStreamsOutputFile.Size = New System.Drawing.Size(434, 26)
         Me.edMuxStreamsOutputFile.TabIndex = 84
-        Me.edMuxStreamsOutputFile.Text = "c:\vf\video_edit_output.avi"
         '
         'label165
         '

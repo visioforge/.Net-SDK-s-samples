@@ -56,6 +56,11 @@ Public Class Form1
 
     Private Async Sub btStart_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btStart.Click
 
+        If (String.IsNullOrWhiteSpace(edFilename.Text) OrElse (Not edFilename.Text.Contains("://") AndAlso Not System.IO.File.Exists(edFilename.Text))) Then
+            MessageBox.Show(Me, "Please select a file or enter a URL.")
+            Return
+        End If
+
         MediaPlayer1.Playlist_Clear()
         MediaPlayer1.Playlist_Add(edFilename.Text)
 

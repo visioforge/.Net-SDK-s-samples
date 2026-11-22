@@ -66,7 +66,10 @@ namespace ScreenCaptureServiceHelper
             VideoCapture1.Screen_Capture_Source.FullScreen = true;
             VideoCapture1.Screen_Capture_Source.FrameRate = new VideoFrameRate(5);
 
-            VideoCapture1.Output_Filename = "d:\\screen.wmv";
+            var outputFolder = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "VisioForge");
+            System.IO.Directory.CreateDirectory(outputFolder);
+
+            VideoCapture1.Output_Filename = System.IO.Path.Combine(outputFolder, "screen.wmv");
 
             AddLog("Output file: " + VideoCapture1.Output_Filename);
 

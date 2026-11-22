@@ -116,7 +116,7 @@ namespace DVD_Player_Demo
             this.edFilename.Name = "edFilename";
             this.edFilename.Size = new System.Drawing.Size(387, 20);
             this.edFilename.TabIndex = 17;
-            this.edFilename.Text = "D:\\VIDEO_TS\\VIDEO_TS.IFO";
+
             // 
             // label14
             // 

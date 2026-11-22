@@ -47,9 +47,6 @@ namespace VideoEdit_CS_Demo
             ffmpegEXESettingsDialog?.Dispose();
             ffmpegEXESettingsDialog = null;
 
-            dvSettingsDialog?.Dispose();
-            dvSettingsDialog = null;
-
             aviSettingsDialog?.Dispose();
             aviSettingsDialog = null;
 
@@ -1007,7 +1004,6 @@ namespace VideoEdit_CS_Demo
             edOutput.Name = "edOutput";
             edOutput.Size = new System.Drawing.Size(375, 31);
             edOutput.TabIndex = 30;
-            edOutput.Text = "c:\\vf\\video_edit_output.avi";
             // 
             // label15
             // 
@@ -1023,7 +1019,7 @@ namespace VideoEdit_CS_Demo
             // 
             cbOutputVideoFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbOutputVideoFormat.FormattingEnabled = true;
-            cbOutputVideoFormat.Items.AddRange(new object[] { "AVI", "MKV (Matroska)", "WMV (Windows Media Video)", "DV", "PCM/ACM", "MP3", "M4A (AAC)", "WMA (Windows Media Audio)", "Ogg Vorbis", "FLAC", "Speex", "Custom format", "WebM", "FFMPEG", "FFMPEG (external exe)", "MP4 (CPU)", "MP4 (GPU: Intel, Nvidia, AMD/ATI)", "Animated GIF", "Encrypted video" });
+            cbOutputVideoFormat.Items.AddRange(new object[] { "AVI", "MKV (Matroska)", "WMV (Windows Media Video)", "PCM/ACM", "MP3", "M4A (AAC)", "WMA (Windows Media Audio)", "Ogg Vorbis", "FLAC", "Speex", "Custom format", "WebM", "FFMPEG", "FFMPEG (external exe)", "MP4 (CPU)", "MP4 (GPU: Intel, Nvidia, AMD/ATI)", "Animated GIF", "Encrypted video" });
             cbOutputVideoFormat.Location = new System.Drawing.Point(18, 65);
             cbOutputVideoFormat.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             cbOutputVideoFormat.Name = "cbOutputVideoFormat";
@@ -5580,7 +5576,6 @@ namespace VideoEdit_CS_Demo
             edNetworkStreamingWMVProfile.Name = "edNetworkStreamingWMVProfile";
             edNetworkStreamingWMVProfile.Size = new System.Drawing.Size(341, 31);
             edNetworkStreamingWMVProfile.TabIndex = 19;
-            edNetworkStreamingWMVProfile.Text = "c:\\WM.prx";
             // 
             // label23
             // 
@@ -6225,7 +6220,6 @@ namespace VideoEdit_CS_Demo
             edHLSOutputFolder.Name = "edHLSOutputFolder";
             edHLSOutputFolder.Size = new System.Drawing.Size(381, 31);
             edHLSOutputFolder.TabIndex = 18;
-            edHLSOutputFolder.Text = "c:\\inetpub\\wwwroot\\hls\\";
             // 
             // label380
             // 
@@ -6607,7 +6601,6 @@ namespace VideoEdit_CS_Demo
             edEncryptionKeyHEX.Name = "edEncryptionKeyHEX";
             edEncryptionKeyHEX.Size = new System.Drawing.Size(354, 31);
             edEncryptionKeyHEX.TabIndex = 9;
-            edEncryptionKeyHEX.Text = "enter hex data";
             // 
             // rbEncryptionKeyBinary
             // 
@@ -6638,7 +6631,6 @@ namespace VideoEdit_CS_Demo
             edEncryptionKeyFile.Name = "edEncryptionKeyFile";
             edEncryptionKeyFile.Size = new System.Drawing.Size(306, 31);
             edEncryptionKeyFile.TabIndex = 6;
-            edEncryptionKeyFile.Text = "c:\\keyfile.txt";
             // 
             // rbEncryptionKeyFile
             // 
@@ -7610,7 +7602,6 @@ namespace VideoEdit_CS_Demo
             edOutputFileCut.Name = "edOutputFileCut";
             edOutputFileCut.Size = new System.Drawing.Size(462, 31);
             edOutputFileCut.TabIndex = 55;
-            edOutputFileCut.Text = "c:\\vf\\video_edit_output.avi";
             // 
             // label131
             // 
@@ -7790,7 +7781,6 @@ namespace VideoEdit_CS_Demo
             edOutputFileJoin.Name = "edOutputFileJoin";
             edOutputFileJoin.Size = new System.Drawing.Size(451, 31);
             edOutputFileJoin.TabIndex = 61;
-            edOutputFileJoin.Text = "c:\\vf\\video_edit_output.avi";
             // 
             // label132
             // 
@@ -7971,7 +7961,6 @@ namespace VideoEdit_CS_Demo
             edMuxStreamsOutputFile.Name = "edMuxStreamsOutputFile";
             edMuxStreamsOutputFile.Size = new System.Drawing.Size(482, 31);
             edMuxStreamsOutputFile.TabIndex = 70;
-            edMuxStreamsOutputFile.Text = "c:\\vf\\video_edit_output.avi";
             // 
             // label165
             // 

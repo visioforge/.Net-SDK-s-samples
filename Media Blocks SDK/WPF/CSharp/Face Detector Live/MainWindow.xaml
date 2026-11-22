@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <wpf:VideoView Grid.Column="1" x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="300" Margin="10,10,10,0" Width="400"/>
+        <wpf:VideoView Grid.Column="1" x:Name="VideoView1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="300" Margin="10,10,10,0"/>
 
         <TabControl Grid.Column="0" Margin="10,10,0,10" VerticalAlignment="Stretch">
             <TabItem Header="Source">

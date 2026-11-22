@@ -736,7 +736,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             edOutput.Name = "edOutput";
             edOutput.Size = new System.Drawing.Size(688, 31);
             edOutput.TabIndex = 119;
-            edOutput.Text = "c:\\capture.avi";
             // 
             // lbInfo
             // 

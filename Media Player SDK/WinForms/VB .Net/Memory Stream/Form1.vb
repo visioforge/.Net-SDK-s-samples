@@ -49,6 +49,11 @@ Public Class Form1
 
         mmError.Text = String.Empty
 
+        If (Not System.IO.File.Exists(edFilename.Text)) Then
+            MessageBox.Show(Me, "Please select a video file.")
+            Return
+        End If
+
         Dim audioPresent As Boolean
         Dim videoPresent As Boolean
 
@@ -63,8 +68,8 @@ Public Class Form1
             _memoryStream = New MemoryStream(_memorySource)
             _stream = New ManagedIStream(_memoryStream)
 
-            MediaInfoReader.GetStreamAvailabilityFromMemoryStream(MediaPlayer1.GetContext(), _stream, _fileStream.Length, videoPresent, audioPresent)
-            MediaPlayer1.Source_MemoryStream = New MemoryStreamSource(_stream, videoPresent, audioPresent, _fileStream.Length)
+            MediaInfoReader.GetStreamAvailabilityFromMemoryStream(MediaPlayer1.GetContext(), _stream, _memoryStream.Length, videoPresent, audioPresent)
+            MediaPlayer1.Source_MemoryStream = New MemoryStreamSource(_stream, videoPresent, audioPresent, _memoryStream.Length)
         End If
 
         MediaPlayer1.Source_Mode = MediaPlayerSourceMode.Memory_DS

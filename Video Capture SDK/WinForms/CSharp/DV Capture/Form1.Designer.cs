@@ -584,7 +584,6 @@ namespace VisioForge_SDK_4_DV_Capture_CSharp_Demo
             this.edOutput.Name = "edOutput";
             this.edOutput.Size = new System.Drawing.Size(322, 20);
             this.edOutput.TabIndex = 112;
-            this.edOutput.Text = "c:\\capture.avi";
             // 
             // lbInfo
             // 

@@ -71,7 +71,7 @@
 
                     <Label Content="Filename" HorizontalAlignment="Left" VerticalAlignment="Top" />
                     <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="edFilename" Width="330" Text="c:\capture.mp4"/>
+                        <TextBox x:Name="edFilename" Width="330"/>
                         <Button x:Name="btSelectFile" Content="..." Margin="10,0,0,0" Width="20" Click="btSelectFile_Click"/>
                     </StackPanel>
                 </StackPanel>

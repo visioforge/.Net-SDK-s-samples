@@ -35,7 +35,7 @@
 					<Label Content="MP4 output format will be used" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
 
 					<Label Content="File name" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" />
-					<TextBox HorizontalAlignment="Left" Margin="10,76,0,0" x:Name="edOutput" VerticalAlignment="Top" Text="c:\capture.avi" Width="320" />
+					<TextBox HorizontalAlignment="Left" Margin="10,76,0,0" x:Name="edOutput" VerticalAlignment="Top" Width="320" />
 					<Button Content="..." HorizontalAlignment="Left" Margin="340,76,0,0" x:Name="btSelectOutput" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
 
 				</Grid>

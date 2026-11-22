@@ -36,6 +36,8 @@ namespace output_gif
             await VisioForgeX.InitSDKAsync();
             this.IsEnabled = true;
             Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
+
+            edOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.gif");
         }
 
         /// <summary>

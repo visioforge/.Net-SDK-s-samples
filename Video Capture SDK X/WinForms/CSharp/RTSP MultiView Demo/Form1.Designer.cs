@@ -340,7 +340,6 @@
             edFilename.Name = "edFilename";
             edFilename.Size = new System.Drawing.Size(412, 31);
             edFilename.TabIndex = 32;
-            edFilename.Text = "c:\\vf\\_ipcamoutput.mp4";
             // 
             // button1
             // 

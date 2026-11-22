@@ -106,6 +106,12 @@
             {
                 mmError.Clear();
 
+                if (!File.Exists(edFilename.Text))
+                {
+                    MessageBox.Show(this, "Please select an MP3 file.");
+                    return;
+                }
+
                 MediaPlayer1.Playlist_Clear();
                 MediaPlayer1.Playlist_Add(edFilename.Text);
 

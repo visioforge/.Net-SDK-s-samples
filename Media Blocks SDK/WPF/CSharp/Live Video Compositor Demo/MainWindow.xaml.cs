@@ -405,22 +405,24 @@ namespace Live_Video_Compositor_Demo
             var dlg = new ScreenSourceDialog();
             if (dlg.ShowDialog() == true)
             {
-                // Refuse a zero-area region picked in the dialog.
-                if (dlg.Rectangle.Width <= 0 || dlg.Rectangle.Height <= 0)
+                var size = dlg.CaptureSize;
+
+                // Refuse a zero-area region picked in the dialog; full screen is the monitor's own size.
+                if (size.Width <= 0 || size.Height <= 0)
                 {
-                    MessageBox.Show(this, $"Screen capture rectangle must have positive width and height (got {dlg.Rectangle.Width}x{dlg.Rectangle.Height}).", "Screen Source", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(this, $"Screen capture rectangle must have positive width and height (got {size.Width}x{size.Height}).", "Screen Source", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
                 var settings = new ScreenCaptureDX9SourceSettings();
                 settings.CaptureCursor = dlg.GrabMouseCursor;
-                settings.Monitor = dlg.DisplayIndex;
+                settings.Monitor = dlg.Monitor;
                 settings.FrameRate = dlg.FrameRate;
                 settings.Rectangle = dlg.Rectangle;
 
                 var rect = ReadRect();
-                var name = $"Screen [{dlg.DisplayIndex}] {dlg.Rectangle.Width}x{dlg.Rectangle.Height}";
-                var info = new VideoFrameInfoX(dlg.Rectangle.Width, dlg.Rectangle.Height, dlg.FrameRate);
+                var name = $"Screen [{dlg.DisplayIndex}] {size.Width}x{size.Height}";
+                var info = new VideoFrameInfoX(size.Width, size.Height, dlg.FrameRate);
                 var src = new LVCVideoInput(name, _compositor, new ScreenSourceBlock(settings), info, rect, true);
                 try
                 {

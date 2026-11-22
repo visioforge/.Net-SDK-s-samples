@@ -61,7 +61,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
                 cbCameraIndex.SelectedIndex = 0;
                 edURL.Text = "rtsp://";
-                edFilename.Text = @"c:\vf\outputxx.ts";
+                edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.ts");
 
                 // HW decoders
                 cbGPUDecoder.Items.Add("None");
@@ -396,7 +396,7 @@ namespace MediaBlocks_RTSP_MultiView_Demo
 
                 _recordEngines[id] = new RTSPRecordEngine();
                 _recordEngines[id].OnError += Engine_OnError;
-                _recordEngines[id].Filename = edFilename.Text;
+                _recordEngines[id].Filename = System.IO.Path.ChangeExtension(edFilename.Text, rbMP4Output.Checked ? ".mp4" : ".ts");
                 _recordEngines[id].ReencodeAudio = cbReencodeAudio.Checked;
                 _recordEngines[id].MP4 = rbMP4Output.Checked;
 

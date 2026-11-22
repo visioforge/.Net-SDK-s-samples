@@ -105,11 +105,6 @@ namespace Main_Demo
         private WMVSettingsDialog wmvSettingsDialog;
 
         /// <summary>
-        /// DV settings dialog.
-        /// </summary>
-        private DVSettingsDialog dvSettingsDialog;
-
-        /// <summary>
         /// PCM settings dialog.
         /// </summary>
         private PCMSettingsDialog pcmSettingsDialog;
@@ -294,7 +289,6 @@ namespace Main_Demo
             mp4SettingsDialog?.Dispose();
             aviSettingsDialog?.Dispose();
             wmvSettingsDialog?.Dispose();
-            dvSettingsDialog?.Dispose();
             pcmSettingsDialog?.Dispose();
             mp3SettingsDialog?.Dispose();
             webmSettingsDialog?.Dispose();
@@ -328,7 +322,7 @@ namespace Main_Demo
             fontDialog.Font = new Font(System.Drawing.FontFamily.GenericSansSerif, 32);
 
             cbFrameRate.SelectedIndex = 0;
-            cbOutputVideoFormat.SelectedIndex = 15;
+            cbOutputVideoFormat.SelectedIndex = 14;
             cbMotDetHLColor.SelectedIndex = 1;
             cbRotate.SelectedIndex = 0;
             cbBarcodeType.SelectedIndex = 0;
@@ -340,6 +334,8 @@ namespace Main_Demo
             edOutput.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
             edOutputFileCut.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
             edOutputFileJoin.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+            edMuxStreamsOutputFile.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
+            edHLSOutputFolder.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "hls");
             VideoEdit1.Debug_Dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "VisioForge");
 
             var transitionNames = VideoEdit1.Video_Transition_Names();
@@ -604,20 +600,6 @@ namespace Main_Demo
         }
 
         /// <summary>
-        /// Configures the DV output settings.
-        /// </summary>
-        /// <param name="dvOutput">The DV output settings.</param>
-        private void SetDVOutput(ref DVOutput dvOutput)
-        {
-            if (dvSettingsDialog == null)
-            {
-                dvSettingsDialog = new DVSettingsDialog();
-            }
-
-            dvSettingsDialog.SaveSettings(ref dvOutput);
-        }
-
-        /// <summary>
         /// Configures the AVI output settings.
         /// </summary>
         /// <param name="aviOutput">The AVI output settings.</param>
@@ -741,6 +723,13 @@ namespace Main_Demo
             VideoView1.Background = pnVideoRendererBGColor.Fill;
 
             // Network streaming
+            if (cbNetworkStreaming.IsChecked == true && cbNetworkStreamingMode.SelectedIndex == 0
+                && rbNetworkStreamingUseMainWMVSettings.IsChecked != true && !File.Exists(edNetworkStreamingWMVProfile.Text))
+            {
+                MessageBox.Show(this, "Please select the WMV profile file.");
+                return;
+            }
+
             VideoEdit1.Network_Streaming_Enabled = cbNetworkStreaming.IsChecked == true;
 
             if (VideoEdit1.Network_Streaming_Enabled)
@@ -941,16 +930,6 @@ namespace Main_Demo
                     }
                 case 3:
                     {
-                        outputFormat = VideoEditOutputFormat.DV;
-
-                        var dvOutput = new DVOutput();
-                        SetDVOutput(ref dvOutput);
-                        VideoEdit1.Output_Format = dvOutput;
-
-                        break;
-                    }
-                case 4:
-                    {
                         outputFormat = VideoEditOutputFormat.PCM_ACM;
 
                         var acmOutput = new ACMOutput();
@@ -959,7 +938,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 5:
+                case 4:
                     {
                         outputFormat = VideoEditOutputFormat.MP3;
 
@@ -969,7 +948,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 6:
+                case 5:
                     {
                         outputFormat = VideoEditOutputFormat.M4A;
 
@@ -979,7 +958,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 7:
+                case 6:
                     {
                         outputFormat = VideoEditOutputFormat.WMA;
 
@@ -989,7 +968,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 8:
+                case 7:
                     {
                         outputFormat = VideoEditOutputFormat.OggVorbis;
 
@@ -999,7 +978,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 9:
+                case 8:
                     {
                         outputFormat = VideoEditOutputFormat.FLAC;
 
@@ -1009,7 +988,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 10:
+                case 9:
                     {
                         outputFormat = VideoEditOutputFormat.Speex;
 
@@ -1019,7 +998,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 11:
+                case 10:
                     {
                         outputFormat = VideoEditOutputFormat.Custom;
 
@@ -1029,7 +1008,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 12:
+                case 11:
                     {
                         outputFormat = VideoEditOutputFormat.WebM;
 
@@ -1039,7 +1018,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 13:
+                case 12:
                     {
                         outputFormat = VideoEditOutputFormat.FFMPEG;
 
@@ -1049,7 +1028,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 14:
+                case 13:
                     {
                         outputFormat = VideoEditOutputFormat.FFMPEG_EXE;
 
@@ -1059,10 +1038,10 @@ namespace Main_Demo
 
                         break;
                     }
-                case 15:
+                case 14:
                     outputFormat = VideoEditOutputFormat.MP4;
                     break;
-                case 16:
+                case 15:
                     {
                         outputFormat = VideoEditOutputFormat.MP4_HW;
 
@@ -1072,7 +1051,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 17:
+                case 16:
                     {
                         outputFormat = VideoEditOutputFormat.AnimatedGIF;
                         var gifOutput = new AnimatedGIFOutput();
@@ -1080,7 +1059,7 @@ namespace Main_Demo
                         VideoEdit1.Output_Format = gifOutput;
                         break;
                     }
-                case 18:
+                case 17:
                     outputFormat = VideoEditOutputFormat.Encrypted;
                     break;
             }
@@ -1105,6 +1084,12 @@ namespace Main_Demo
                     }
                     else if (rbEncryptionKeyFile.IsChecked == true)
                     {
+                        if (!File.Exists(edEncryptionKeyFile.Text))
+                        {
+                            MessageBox.Show(this, "Please select the encryption key file.");
+                            return;
+                        }
+
                         mp4Output.Encryption_KeyType = EncryptionKeyType.File;
                         mp4Output.Encryption_Key = edEncryptionKeyFile.Text;
                     }
@@ -3991,52 +3976,52 @@ namespace Main_Demo
 
                 case 3:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wav");
                         break;
                     }
                 case 4:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wav");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp3");
                         break;
                     }
                 case 5:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp3");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".m4a");
                         break;
                     }
                 case 6:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".m4a");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wma");
                         break;
                     }
                 case 7:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".wma");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
                         break;
                     }
                 case 8:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".flac");
                         break;
                     }
                 case 9:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".flac");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
                         break;
                     }
                 case 10:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".ogg");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
                         break;
                     }
                 case 11:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm");
                         break;
                     }
                 case 12:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".webm");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
                         break;
                     }
                 case 13:
@@ -4046,7 +4031,7 @@ namespace Main_Demo
                     }
                 case 14:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".avi");
+                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
                         break;
                     }
                 case 15:
@@ -4056,15 +4041,10 @@ namespace Main_Demo
                     }
                 case 16:
                     {
-                        edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".mp4");
-                        break;
-                    }
-                case 17:
-                    {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".gif");
                         break;
                     }
-                case 18:
+                case 17:
                     {
                         edOutput.Text = FilenameHelper.ChangeFileExt(edOutput.Text, ".enc");
                         break;
@@ -4119,17 +4099,6 @@ namespace Main_Demo
 
                 case 3:
                     {
-                        if (dvSettingsDialog == null)
-                        {
-                            dvSettingsDialog = new DVSettingsDialog();
-                        }
-
-                        dvSettingsDialog.ShowDialog(this);
-
-                        break;
-                    }
-                case 4:
-                    {
                         if (pcmSettingsDialog == null)
                         {
                             pcmSettingsDialog = new PCMSettingsDialog(VideoEdit1);
@@ -4139,7 +4108,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 5:
+                case 4:
                     {
                         if (mp3SettingsDialog == null)
                         {
@@ -4150,7 +4119,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 6:
+                case 5:
                     {
                         if (m4aSettingsDialog == null)
                         {
@@ -4161,7 +4130,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 7:
+                case 6:
                     {
                         if (wmvSettingsDialog == null)
                         {
@@ -4173,7 +4142,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 8:
+                case 7:
                     {
                         if (oggVorbisSettingsDialog == null)
                         {
@@ -4184,7 +4153,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 9:
+                case 8:
                     {
                         if (flacSettingsDialog == null)
                         {
@@ -4195,7 +4164,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 10:
+                case 9:
                     {
                         if (speexSettingsDialog == null)
                         {
@@ -4206,7 +4175,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 11:
+                case 10:
                     {
                         if (customFormatSettingsDialog == null)
                         {
@@ -4218,7 +4187,7 @@ namespace Main_Demo
                         break;
                     }
 
-                case 12:
+                case 11:
                     {
                         if (webmSettingsDialog == null)
                         {
@@ -4229,7 +4198,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 13:
+                case 12:
                     {
                         if (ffmpegSettingsDialog == null)
                         {
@@ -4240,7 +4209,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 14:
+                case 13:
                     {
                         if (ffmpegEXESettingsDialog == null)
                         {
@@ -4251,8 +4220,8 @@ namespace Main_Demo
 
                         break;
                     }
-                case 15:
-                case 18:
+                case 14:
+                case 17:
                     {
                         if (this.mp4SettingsDialog == null)
                         {
@@ -4263,7 +4232,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 16:
+                case 15:
                     {
                         if (mp4HWSettingsDialog == null)
                         {
@@ -4274,7 +4243,7 @@ namespace Main_Demo
 
                         break;
                     }
-                case 17:
+                case 16:
                     {
                         if (gifSettingsDialog == null)
                         {

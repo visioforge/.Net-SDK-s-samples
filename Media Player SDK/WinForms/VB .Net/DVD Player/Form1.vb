@@ -198,6 +198,11 @@ Public Class Form1
 
         mmError.Clear()
 
+        If (Not System.IO.File.Exists(edFilename.Text)) Then
+            MessageBox.Show(Me, "Please select the VIDEO_TS.IFO file on the DVD.")
+            Return
+        End If
+
         MediaPlayer1.Playlist_Clear()
         MediaPlayer1.Playlist_Add(edFilename.Text)
         MediaPlayer1.Loop = cbLoop.Checked

@@ -330,7 +330,7 @@
             edScreenshotsFolder.Name = "edScreenshotsFolder";
             edScreenshotsFolder.Size = new System.Drawing.Size(229, 31);
             edScreenshotsFolder.TabIndex = 26;
-            edScreenshotsFolder.Text = "c:\\";
+
             // 
             // tbJPEGQuality
             // 

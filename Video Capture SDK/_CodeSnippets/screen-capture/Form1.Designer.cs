@@ -357,7 +357,6 @@
             this.edOutput.Name = "edOutput";
             this.edOutput.Size = new System.Drawing.Size(366, 20);
             this.edOutput.TabIndex = 43;
-            this.edOutput.Text = "c:\\capture.avi";
             // 
             // label9
             // 

@@ -222,7 +222,6 @@ namespace Push_Source_Demo
             this.edOutput.Name = "edOutput";
             this.edOutput.Size = new System.Drawing.Size(280, 20);
             this.edOutput.TabIndex = 126;
-            this.edOutput.Text = "c:\\capture.avi";
             // 
             // lbInfo
             // 
