@@ -1,0 +1,21 @@
+<Window x:Class="WhepPlayerWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        Title="WHEP Player" Height="600" Width="900" IsEnabled="False"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    <DockPanel Margin="10">
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+            <Label DockPanel.Dock="Left" Content="WHEP URL" VerticalAlignment="Center" />
+            <Button x:Name="btStop" DockPanel.Dock="Right" Content="Stop" Width="70" Margin="5,0,0,0"
+                    IsEnabled="False" Click="btStop_Click" />
+            <Button x:Name="btStart" DockPanel.Dock="Right" Content="Start" Width="70" Margin="5,0,0,0"
+                    Click="btStart_Click" />
+            <CheckBox x:Name="cbAudio" DockPanel.Dock="Right" Content="Audio" VerticalAlignment="Center"
+                      Margin="10,0,5,0" />
+            <TextBox x:Name="edURL" VerticalContentAlignment="Center"
+                     Text="http://localhost:8889/mystream/whep" />
+        </DockPanel>
+        <vf:VideoView x:Name="VideoView1" Background="Black" />
+    </DockPanel>
+</Window>
