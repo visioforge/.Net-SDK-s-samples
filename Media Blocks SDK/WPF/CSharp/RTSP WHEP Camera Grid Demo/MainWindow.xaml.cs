@@ -345,7 +345,7 @@ namespace RTSP_WHEP_Camera_Grid_Demo
             _pageServer?.Close();
             _pageServer = null;
 
-            // Closing while starting: the stop cuts the start short, and disposing waits for it.
+            // Closing while starting: the stop cuts the pipeline start short; disposing also waits for a camera probe to end.
             await pipeline.StopAsync();
             await _start;
             await pipeline.DisposeAsync();
