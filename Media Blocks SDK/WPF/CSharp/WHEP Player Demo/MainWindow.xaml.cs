@@ -120,8 +120,17 @@ namespace WHEP_Player_Demo
         private async void btStop_Click(object sender, RoutedEventArgs e)
         {
             btStop.IsEnabled = false;
-            await StopAsync();
-            lbStatus.Text = "Stopped";
+
+            try
+            {
+                await StopAsync();
+                lbStatus.Text = "Stopped";
+            }
+            catch (Exception ex)
+            {
+                lbStatus.Text = ex.Message;
+            }
+
             btStart.IsEnabled = true;
             cbAudio.IsEnabled = true;
         }

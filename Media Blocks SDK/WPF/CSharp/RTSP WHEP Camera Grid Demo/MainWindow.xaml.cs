@@ -54,13 +54,11 @@ namespace RTSP_WHEP_Camera_Grid_Demo
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
+            IsEnabled = false;
             try
             {
-                Title += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]";
-                IsEnabled = false;
                 await VisioForgeX.InitSDKAsync();
-                IsEnabled = true;
-                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
                 Title += $" (SDK v{MediaBlocksPipeline.SDK_Version})";
 
                 if (!WHEPServerSinkBlock.IsAvailable())
@@ -72,6 +70,12 @@ namespace RTSP_WHEP_Camera_Grid_Demo
             catch (Exception ex)
             {
                 Log(ex.Message);
+                btStart.IsEnabled = false;
+            }
+            finally
+            {
+                IsEnabled = true;
+                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
             }
         }
 
@@ -97,7 +101,7 @@ namespace RTSP_WHEP_Camera_Grid_Demo
                     return;
                 }
 
-                if (!int.TryParse(edPagePort.Text, out var pagePort))
+                if (!int.TryParse(edPagePort.Text, out var pagePort) || pagePort < 1 || pagePort > 65535)
                 {
                     MessageBox.Show(this, "Enter a valid port number");
                     return;
@@ -133,7 +137,15 @@ namespace RTSP_WHEP_Camera_Grid_Demo
             catch (Exception ex)
             {
                 Log(ex.Message);
-                await StopAsync();
+
+                try
+                {
+                    await StopAsync();
+                }
+                catch (Exception stopEx)
+                {
+                    Log(stopEx.Message);
+                }
             }
         }
 
@@ -143,7 +155,6 @@ namespace RTSP_WHEP_Camera_Grid_Demo
             try
             {
                 _pageUrl = $"http://localhost:{pagePort}/";
-                lbCameras.Items.Clear();
 
                 // Unchecked drops every camera's audio: an audio codec with no decoder stops the whole grid, a camera listing audio it never sends leaves its tile empty.
                 var audio = cbAudio.IsChecked == true;
@@ -176,7 +187,7 @@ namespace RTSP_WHEP_Camera_Grid_Demo
                         _pipeline.Connect(audioDecoder.AudioOutput, whep.AudioInput);
                     }
 
-                    lbCameras.Items.Add($"Camera {i}: {camera.Url}  ->  {_pageUrl}cam/{i}/whep/endpoint");
+                    lbCameras.Items[i] = $"Camera {i}: {camera.Url}  ->  {_pageUrl}cam/{i}/whep/endpoint";
                 }
 
                 // The page and the WHEP requests share one origin: whepserversink sends no CORS headers.
@@ -345,13 +356,18 @@ namespace RTSP_WHEP_Camera_Grid_Demo
             _pageServer?.Close();
             _pageServer = null;
 
-            // Closing while starting: the stop cuts the pipeline start short; disposing also waits for a camera probe to end.
-            await pipeline.StopAsync();
-            await _start;
-            await pipeline.DisposeAsync();
-
-            btStart.IsEnabled = true;
-            btAdd.IsEnabled = true;
+            try
+            {
+                // Closing while starting: the stop cuts the pipeline start short; disposing also waits for a camera probe to end.
+                await pipeline.StopAsync();
+                await _start;
+                await pipeline.DisposeAsync();
+            }
+            finally
+            {
+                btStart.IsEnabled = true;
+                btAdd.IsEnabled = true;
+            }
         }
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
