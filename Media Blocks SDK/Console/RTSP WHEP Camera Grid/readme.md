@@ -1,10 +1,12 @@
 # Media Blocks SDK .Net - RTSP WHEP Camera Grid (C#/Console, Windows, macOS, Linux)
 
-This console application shows IP cameras live in a web browser. Pass each camera's RTSP URL, open the grid page it prints, and every camera plays in the browser over WebRTC (WHEP), with the camera's own H.264 sent as it is - no decoding, no encoding, almost no CPU per camera.
+This console application shows IP cameras live in a web browser. Pass each camera's RTSP URL, open the grid page it prints, and every camera plays in the browser over WebRTC (WHEP), with the camera's own H.264 sent as it is - no decoding, no encoding, almost no CPU per camera - and the camera's audio, when it has any, encoded to Opus. The page starts muted: unmute a tile with its controls.
 
 ```
-RTSPWHEPCameraGrid [--port 8080] [--login user --password pass] rtsp://camera1 [rtsp://camera2 ...]
+RTSPWHEPCameraGrid [--port 8080] [--login user --password pass] [--no-audio] rtsp://camera1 [rtsp://camera2 ...]
 ```
+
+`--no-audio` leaves the audio of every camera out. Use it when a camera's audio codec has no decoder, which stops the whole grid, or a camera lists audio and sends none, which leaves that camera's tile empty.
 
 Each camera gets its own WHEP server (`WHEPServerSinkBlock`) on `127.0.0.1:9100`, `:9101` and so on. The app also serves the grid page and forwards `/cam/N/whep/...` to camera N's server, so the page and the WHEP requests share one origin: the WHEP server sends no CORS headers.
 
@@ -20,17 +22,20 @@ Most browsers cannot play H.265 over WebRTC: use the camera's H.264 stream.
 
 ## Used media blocks
 
-* `RTSPRAWSourceBlock` - Encoded H.264 from the camera, without decoding
-* `WHEPServerSinkBlock` - WHEP server, sends the H.264 to every browser without re-encoding
+* `RTSPRAWSourceBlock` - Encoded H.264 from the camera, without decoding, and its encoded audio
+* `DecodeBinBlock` - Decodes the camera's AAC or G.711
+* `WHEPServerSinkBlock` - WHEP server, sends the H.264 to every browser without re-encoding and encodes the audio to Opus
 
 ## Pipeline
 
 ```mermaid
 graph LR
     RTSPRAWSourceBlock -- H.264 --> WHEPServerSinkBlock
+    RTSPRAWSourceBlock -- AAC / G.711 --> DecodeBinBlock
+    DecodeBinBlock -- PCM --> WHEPServerSinkBlock
 ```
 
-One such pair per camera.
+One such chain per camera; the audio part only for a camera that sends audio.
 
 ## Supported frameworks
 
