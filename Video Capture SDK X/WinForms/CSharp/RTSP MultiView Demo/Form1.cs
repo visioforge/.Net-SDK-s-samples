@@ -46,7 +46,6 @@ namespace MediaBlocks_RTSP_MultiView_Demo
             Text += $" (SDK v{VideoCaptureCoreX.SDK_Version})";
 
             cbCameraIndex.SelectedIndex = 0;
-            edURL.Text = "http://localhost:8000/camera/mjpeg";
             edFilename.Text = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos), "output.mp4");
 
             // HW decoders

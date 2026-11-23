@@ -50,7 +50,7 @@
         <!-- Row 3: Timeline -->
         <DockPanel Grid.Row="3" Margin="0,5,0,5">
             <TextBlock x:Name="lbTime" Text="00:00:00 | 00:00:00" DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10,0,0,0" Width="130" TextAlignment="Right"/>
-            <Slider x:Name="tbTimeline" Minimum="0" Maximum="100" ValueChanged="tbTimeline_ValueChanged"/>
+            <Slider x:Name="tbTimeline" Minimum="0" Maximum="100" IsMoveToPointEnabled="True" ValueChanged="tbTimeline_ValueChanged"/>
         </DockPanel>
 
         <!-- Row 4: Label -->

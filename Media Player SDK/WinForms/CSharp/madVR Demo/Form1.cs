@@ -154,6 +154,7 @@ namespace madVR_Player_Demo
             await MediaPlayer1.StopAsync();
 
             tbTimeline.Value = 0;
+            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
         }
 
         /// <summary>
@@ -209,6 +210,14 @@ namespace madVR_Player_Demo
             tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
             int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
+
+            // Playback has stopped: keep the reset label.
+            if (!timer1.Enabled)
+            {
+                timer1.Tag = 0;
+                return;
+            }
+
             if ((value > 0) && (value < tbTimeline.Maximum))
             {
                 tbTimeline.Value = value;
@@ -237,7 +246,9 @@ namespace madVR_Player_Demo
         {
             Invoke((Action)(() =>
                                    {
+                                       timer1.Enabled = false;
                                        tbTimeline.Value = 0;
+                                       lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
                                    }));
         }
 

@@ -65,6 +65,7 @@
                             <Slider Grid.Column="0"
                                     x:Name="tbTimeline"
                                     VerticalAlignment="Center"
+                                    IsMoveToPointEnabled="True"
                                     ValueChanged="tbTimeline_ValueChanged"/>
 
                             <TextBlock Grid.Column="1"

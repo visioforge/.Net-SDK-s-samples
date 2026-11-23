@@ -74,7 +74,7 @@
             <TextBlock x:Name="lblTime" VerticalAlignment="Center" Margin="8,0,0,0" DockPanel.Dock="Right"
                        Text="00:00:00 / 00:00:00" Width="140" TextAlignment="Right" />
             <Slider x:Name="sliderSeek" Minimum="0" Maximum="0" Value="0" VerticalAlignment="Center"
-                    PreviewMouseDown="sliderSeek_PreviewMouseDown"
+                    IsMoveToPointEnabled="True"
                     PreviewMouseUp="sliderSeek_PreviewMouseUp"
                     LostMouseCapture="sliderSeek_LostMouseCapture"
                     ValueChanged="sliderSeek_ValueChanged" />

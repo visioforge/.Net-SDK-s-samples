@@ -271,7 +271,7 @@
                 </Grid.RowDefinitions>
 
                 <wpf:VideoView x:Name="VideoView1" Grid.Row="0" Background="Black"/>
-                <Slider x:Name="tbSeeking" Grid.Row="1" Margin="0,5,0,0" ValueChanged="tbSeeking_ValueChanged"/>
+                <Slider x:Name="tbSeeking" Grid.Row="1" Margin="0,5,0,0" IsMoveToPointEnabled="True" ValueChanged="tbSeeking_ValueChanged"/>
             </Grid>
         </Grid>
 

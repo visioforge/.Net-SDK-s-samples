@@ -25,6 +25,6 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.16]" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.21]" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.23]" />
   </ItemGroup>
 </Project>

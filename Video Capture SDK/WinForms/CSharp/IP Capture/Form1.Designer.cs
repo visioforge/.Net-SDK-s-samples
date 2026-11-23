@@ -262,7 +262,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             cbIPURL.Name = "cbIPURL";
             cbIPURL.Size = new System.Drawing.Size(597, 33);
             cbIPURL.TabIndex = 86;
-            cbIPURL.Text = "udp://239.1.1.140:1234";
             // 
             // btListNDISources
             // 
@@ -383,6 +382,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             edIPPassword.Name = "edIPPassword";
             edIPPassword.Size = new System.Drawing.Size(164, 31);
             edIPPassword.TabIndex = 66;
+            edIPPassword.UseSystemPasswordChar = true;
             // 
             // label167
             // 
@@ -507,6 +507,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             edONVIFPassword.Name = "edONVIFPassword";
             edONVIFPassword.Size = new System.Drawing.Size(164, 31);
             edONVIFPassword.TabIndex = 75;
+            edONVIFPassword.UseSystemPasswordChar = true;
             // 
             // label378
             // 
@@ -543,7 +544,6 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             edONVIFURL.Name = "edONVIFURL";
             edONVIFURL.Size = new System.Drawing.Size(541, 31);
             edONVIFURL.TabIndex = 71;
-            edONVIFURL.Text = "http://192.168.1.101:2020/onvif/device_service";
             // 
             // edONVIFLiveVideoURL
             // 

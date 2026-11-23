@@ -101,6 +101,9 @@ namespace youtube_player_x
         public MainWindow()
         {
             InitializeComponent();
+
+            // A track click marks PreviewMouseLeftButtonDown handled, so the drag flag is armed here.
+            sliderTimeline.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new System.Windows.Input.MouseButtonEventHandler(sliderTimeline_PreviewMouseDown), true);
         }
 
         /// <summary>
@@ -596,16 +599,10 @@ namespace youtube_player_x
 
         /// <summary>
         /// Arms the drag flag when the user presses the left mouse button on the slider.
-        /// Mirrors the guard used in Multi Audio Streams Demo so a middle/right-click or a
-        /// click on an empty/pre-playback slider can't leave the flag stuck true.
+        /// A click on an empty/pre-playback slider must not leave the flag stuck true.
         /// </summary>
         private void sliderTimeline_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (e.ChangedButton != System.Windows.Input.MouseButton.Left)
-            {
-                return;
-            }
-
             if (_player == null || sliderTimeline.Maximum <= 0)
             {
                 return;

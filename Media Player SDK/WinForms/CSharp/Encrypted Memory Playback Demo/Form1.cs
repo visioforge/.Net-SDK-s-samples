@@ -67,7 +67,12 @@ namespace Encrypted_Memory_Playback_Demo
         /// </summary>
         private void MediaPlayer1_OnStop(object sender, StopEventArgs e)
         {
-            timer1.Enabled = false;
+            Invoke((Action)(() =>
+            {
+                timer1.Enabled = false;
+                tbTimeline.Value = 0;
+                lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
+            }));
         }
 
         /// <summary>
@@ -236,6 +241,7 @@ namespace Encrypted_Memory_Playback_Demo
             await MediaPlayer1.StopAsync();
             timer1.Enabled = false;
             tbTimeline.Value = 0;
+            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
 
             _stream = null;
 
@@ -295,6 +301,9 @@ namespace Encrypted_Memory_Playback_Demo
         {
             try
             {
+                // The form is closing: OnStop must not update its controls.
+                MediaPlayer1.OnStop -= MediaPlayer1_OnStop;
+
                 await StopAsync();
 
                 DestroyEngine();
@@ -325,6 +334,14 @@ namespace Encrypted_Memory_Playback_Demo
                 tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
                 int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
+
+                // Playback has stopped: keep the reset label.
+                if (!timer1.Enabled)
+                {
+                    timer1.Tag = 0;
+                    return;
+                }
+
                 if ((value > 0) && (value < tbTimeline.Maximum))
                 {
                     tbTimeline.Value = value;

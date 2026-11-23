@@ -39,7 +39,7 @@
         <Slider x:Name="tbVolume" HorizontalAlignment="Right" Margin="0,206,27,0" VerticalAlignment="Top" Width="220" Maximum="100" Value="80" ValueChanged="tbVolume_ValueChanged"/>
 
         <!-- Timeline -->
-        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="10,0,0,53" VerticalAlignment="Bottom" Width="300" ValueChanged="tbTimeline_ValueChanged"/>
+        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="10,0,0,53" VerticalAlignment="Bottom" Width="300" IsMoveToPointEnabled="True" ValueChanged="tbTimeline_ValueChanged"/>
         <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="315,0,0,55" TextWrapping="Wrap" Text="00:00:00 / 00:00:00" VerticalAlignment="Bottom"/>
 
         <!-- Playback Controls -->

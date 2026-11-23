@@ -26,6 +26,11 @@ namespace Simple_Player_Demo_D3D11_X
     {
         private System.Timers.Timer _timer;
         private volatile bool _timerFlag;
+
+        /// <summary>
+        /// The duration of the current file, shown in the time label after playback stops.
+        /// </summary>
+        private TimeSpan _duration;
         private MediaPlayerCoreX _player;
         private volatile bool _isClosing;
 
@@ -122,7 +127,12 @@ namespace Simple_Player_Demo_D3D11_X
         private void Player_OnStop(object sender, StopEventArgs e)
         {
             if (_isClosing) return;
-            Dispatcher.Invoke(() => tbTimeline.Value = 0);
+            Dispatcher.Invoke(() =>
+            {
+                _timer.Stop();
+                tbTimeline.Value = 0;
+                lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
+            });
         }
 
         private async void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -137,6 +147,18 @@ namespace Simple_Player_Demo_D3D11_X
 
                 Dispatcher.Invoke(() =>
                 {
+                    // Playback has stopped: keep the reset label.
+                    if (!_timer.Enabled)
+                    {
+                        return;
+                    }
+
+                    // At the end of the file the pipeline may already report 0: keep the last real duration.
+                    if (duration > TimeSpan.Zero)
+                    {
+                        _duration = duration;
+                    }
+
                     tbTimeline.Maximum = (int)duration.TotalSeconds;
                     lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
                     if (tbTimeline.Maximum >= position.TotalSeconds)
@@ -215,6 +237,7 @@ namespace Simple_Player_Demo_D3D11_X
                     ? "Note: SurfaceProvider is null — D3D11Composable not active."
                     : $"D3D11Composable active. Surface {provider.SurfaceWidth}x{provider.SurfaceHeight}");
 
+                _duration = TimeSpan.Zero;
                 _timer.Start();
             }
             catch (Exception ex)
@@ -239,6 +262,7 @@ namespace Simple_Player_Demo_D3D11_X
                     await DestroyEngineAsync();
                 }
                 tbTimeline.Value = 0;
+                lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
             }
             catch (Exception ex)
             {

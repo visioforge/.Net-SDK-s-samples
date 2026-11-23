@@ -71,6 +71,9 @@ namespace Tempo_Pitch_Demo_X
         public MainWindow()
         {
             InitializeComponent();
+
+            // A track click marks PreviewMouseLeftButtonDown handled, so the drag flag is armed here.
+            sliderSeek.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new System.Windows.Input.MouseButtonEventHandler(sliderSeek_PreviewMouseDown), true);
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -598,14 +601,6 @@ namespace Tempo_Pitch_Demo_X
 
         private void sliderSeek_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // PreviewMouseDown fires for every mouse button; a right- or middle-click on the track
-            // would otherwise set _seekDragging=true and a matching PreviewMouseUp would then issue
-            // Position_SetAsync even though the user never intended to seek.
-            if (e.ChangedButton != System.Windows.Input.MouseButton.Left)
-            {
-                return;
-            }
-
             // Don't arm the flag before there's something to seek. Pre-Play clicks on the
             // disabled slider would otherwise leave _seekDragging true if the user drags off the
             // slider, silently suppressing later timer updates.

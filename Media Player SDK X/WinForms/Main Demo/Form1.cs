@@ -908,6 +908,8 @@ namespace Main_Demo
         /// </summary>
         private async void btReadInfo_Click(object sender, EventArgs e)
         {
+            mmInfo.Clear();
+
             var input = edFilenameOrURL.Text;
             if (string.IsNullOrWhiteSpace(input))
             {
@@ -930,15 +932,24 @@ namespace Main_Demo
                 }
             }
 
-            var infoReader = new MediaInfoReaderX(_player);
-            if (await infoReader.OpenAsync(uri))
+            // Keeps a second click during the read from filling the box twice.
+            btReadInfo.Enabled = false;
+
+            try
             {
+                var infoReader = new MediaInfoReaderX(_player);
+                if (!await infoReader.OpenAsync(uri))
+                {
+                    mmInfo.Text += "Unable to read media info." + Environment.NewLine;
+                    return;
+                }
+
                 if (infoReader.Info.VideoStreams.Count > 0)
                 {
                     mmInfo.Text += "Video streams" + Environment.NewLine;
                     foreach (var video in infoReader.Info.VideoStreams)
                     {
-                        mmInfo.Text += $"{video.Width}x{video.Height}, {video.FrameRate:F2} fps, Duration: {video.Duration.ToString()}" + Environment.NewLine;
+                        mmInfo.Text += $"{CodecPrefix(video.Codec)}{video.Width}x{video.Height}, {video.FrameRate:F2} fps, Duration: {video.Duration.ToString()}" + Environment.NewLine;
                     }
                 }
 
@@ -947,10 +958,22 @@ namespace Main_Demo
                     mmInfo.Text += "Audio streams" + Environment.NewLine;
                     foreach (var audio in infoReader.Info.AudioStreams)
                     {
-                        mmInfo.Text += $"{audio.SampleRate} Hz, {audio.Channels} channels, Duration: {audio.Duration.ToString()}" + Environment.NewLine;
+                        mmInfo.Text += $"{CodecPrefix(audio.Codec)}{audio.SampleRate} Hz, {audio.Channels} channels, Duration: {audio.Duration.ToString()}" + Environment.NewLine;
                     }
                 }
             }
+            finally
+            {
+                btReadInfo.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// The codec name to start a stream line with, empty when the reader has none.
+        /// </summary>
+        private static string CodecPrefix(string codec)
+        {
+            return string.IsNullOrEmpty(codec) ? string.Empty : codec + ", ";
         }
 
         /// <summary>

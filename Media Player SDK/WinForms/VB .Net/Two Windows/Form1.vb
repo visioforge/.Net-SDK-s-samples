@@ -103,6 +103,7 @@ Public Class Form1
 
         timer1.Enabled = False
         tbTimeline.Value = 0
+        lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum)
 
         form2.Screen.Invalidate()
 
@@ -165,6 +166,13 @@ Public Class Form1
 
         Dim value As Integer
         value = (Await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds
+
+        ' Playback has stopped: keep the reset label.
+        If Not timer1.Enabled Then
+            timer1.Tag = 0
+            Return
+        End If
+
         If ((value > 0) And (value < tbTimeline.Maximum)) Then
             tbTimeline.Value = value
         End If

@@ -176,6 +176,7 @@
             await MediaPlayer1.StopAsync();
             timer1.Enabled = false;
             tbTimeline.Value = 0;
+            lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
 
             imgScreen.Image = null;
         }
@@ -222,6 +223,14 @@
                 tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
                 var position = await MediaPlayer1.Position_Get_TimeAsync();
+
+                // Playback has stopped: keep the reset label.
+                if (!timer1.Enabled)
+                {
+                    timer1.Tag = 0;
+                    return;
+                }
+
                 if ((position.TotalSeconds > 0) && (position.TotalSeconds < tbTimeline.Maximum))
                 {
                     tbTimeline.Value = (int)position.TotalSeconds;
@@ -272,7 +281,9 @@
         {
             Invoke((Action)(() =>
                                    {
+                                       timer1.Enabled = false;
                                        tbTimeline.Value = 0;
+                                       lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
                                    }));
         }
 

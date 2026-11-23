@@ -7,7 +7,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using System.Windows.Threading;
     using VisioForge.Core;
     using VisioForge.Core.CV;
     using VisioForge.Core.MediaPlayerX;
@@ -75,7 +74,7 @@
         /// <param name="e">The <see cref="VideoCaptureDeviceInfo"/> instance containing the device information.</param>
         private void DeviceEnumerator_OnVideoSourceAdded(object sender, VideoCaptureDeviceInfo e)
         {
-            Invoke(() =>
+            Invoke((Action)(() =>
             {
                 cbVideoInputDevice.Items.Add(e.DisplayName);
 
@@ -83,7 +82,7 @@
                 {
                     cbVideoInputDevice.SelectedIndex = 0;
                 }
-            });
+            }));
         }
 
         /// <summary>

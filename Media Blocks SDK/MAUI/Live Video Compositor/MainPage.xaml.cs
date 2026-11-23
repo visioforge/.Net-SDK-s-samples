@@ -618,16 +618,19 @@ namespace Live_Video_Compositor_MB_MAUI
 #if __MACCATALYST__ || __MACOS__
                 if (screenSettings is ScreenCaptureMacOSSourceSettings macSettings)
                 {
-                    // ScreenCaptureMacOSSourceSettings may be constructed with a default (empty)
-                    // Rectangle / FrameRate if DisplayHelper failed upstream — fall back to a
-                    // safe 1280x720@30 instead of feeding width=0,height=0 into VideoFrameInfoX,
-                    // which would assert or produce a zero-sized Metal drawable downstream.
+                    // A null Rectangle captures the whole main display, in points on Mac Catalyst.
+                    var display = DeviceDisplay.Current.MainDisplayInfo;
                     if (macSettings.Rectangle != null
                         && macSettings.Rectangle.Width > 0
                         && macSettings.Rectangle.Height > 0)
                     {
                         width = (int)macSettings.Rectangle.Width;
                         height = (int)macSettings.Rectangle.Height;
+                    }
+                    else if (display.Width > 0 && display.Height > 0 && display.Density > 0)
+                    {
+                        width = (int)Math.Round(display.Width / display.Density);
+                        height = (int)Math.Round(display.Height / display.Density);
                     }
 
                     if (!macSettings.FrameRate.IsEmpty && macSettings.FrameRate.Value > 0)

@@ -44,6 +44,9 @@ namespace Multi_Audio_Streams_Demo_X
         public MainWindow()
         {
             InitializeComponent();
+
+            // A track click marks PreviewMouseLeftButtonDown handled, so the drag flag is armed here.
+            sliderSeek.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new System.Windows.Input.MouseButtonEventHandler(sliderSeek_PreviewMouseDown), true);
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -542,14 +545,6 @@ namespace Multi_Audio_Streams_Demo_X
 
         private void sliderSeek_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // Only respond to the left button — PreviewMouseDown fires for every button, so a
-            // middle/right-click on the track would otherwise flip _seekDragging=true and
-            // suppress the seek timer without any release ever clearing it.
-            if (e.ChangedButton != System.Windows.Input.MouseButton.Left)
-            {
-                return;
-            }
-
             // Don't arm the flag if there's nothing to seek yet (pre-Play click on an empty
             // slider). Without this, a click on the disabled slider before Play would leave
             // _seekDragging=true permanently because no MouseUp path clears it while the slider

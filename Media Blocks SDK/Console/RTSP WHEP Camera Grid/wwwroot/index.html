@@ -19,7 +19,10 @@
     async function play(endpoint, video, caption) {
         const pc = new RTCPeerConnection();
         pc.addTransceiver('video', { direction: 'recvonly' });
-        pc.ontrack = e => video.srcObject = e.streams[0] || new MediaStream([e.track]);
+        pc.addTransceiver('audio', { direction: 'recvonly' });
+        // Video and audio arrive as two tracks; both go into the one stream the video element plays.
+        video.srcObject = new MediaStream();
+        pc.ontrack = e => video.srcObject.addTrack(e.track);
 
         await pc.setLocalDescription(await pc.createOffer());
         // Send the offer with all ICE candidates in it.
@@ -42,7 +45,7 @@
         const count = await (await fetch('/cameras')).json();
         for (let i = 0; i < count; i++) {
             const figure = document.createElement('figure');
-            const video = Object.assign(document.createElement('video'), { autoplay: true, muted: true, playsInline: true });
+            const video = Object.assign(document.createElement('video'), { autoplay: true, muted: true, playsInline: true, controls: true });
             const caption = document.createElement('figcaption');
             caption.dataset.name = caption.textContent = `Camera ${i}`;
             figure.append(video, caption);

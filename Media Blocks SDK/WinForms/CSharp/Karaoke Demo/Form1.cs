@@ -333,6 +333,7 @@ namespace Karaoke_Demo
                 }
 
                 tbTimeline.Value = 0;
+                lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
             }
             catch (Exception ex)
             {
@@ -419,6 +420,13 @@ namespace Karaoke_Demo
                     _duration = await _pipeline.DurationAsync();
                 }
 
+                // Playback has stopped: keep the reset label.
+                if (!timer1.Enabled)
+                {
+                    timer1.Tag = 0;
+                    return;
+                }
+
                 tbTimeline.Maximum = (int)(_duration.TotalSeconds);
 
                 if ((position.TotalSeconds > 0) && (position.TotalSeconds < tbTimeline.Maximum))
@@ -463,7 +471,9 @@ namespace Karaoke_Demo
         {
             Invoke((Action)(() =>
                                    {
+                                       timer1.Enabled = false;
                                        tbTimeline.Value = 0;
+                                       lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
                                    }));
         }
 

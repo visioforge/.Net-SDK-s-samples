@@ -124,6 +124,7 @@
             edPassword.Name = "edPassword";
             edPassword.Size = new System.Drawing.Size(150, 31);
             edPassword.TabIndex = 8;
+            edPassword.UseSystemPasswordChar = true;
             // 
             // cbAudioStream
             // 

@@ -98,6 +98,7 @@
             edPassword.Name = "edPassword";
             edPassword.Size = new System.Drawing.Size(135, 31);
             edPassword.TabIndex = 12;
+            edPassword.UseSystemPasswordChar = true;
             // 
             // cbCameraIndex
             // 

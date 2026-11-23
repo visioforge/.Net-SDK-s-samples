@@ -32,6 +32,11 @@ namespace MPEG_TS_Player_Demo
         private volatile bool _timerFlag;
 
         /// <summary>
+        /// The duration of the current file, shown in the time label after playback stops.
+        /// </summary>
+        private TimeSpan _duration;
+
+        /// <summary>
         /// The media player instance.
         /// </summary>
         private MediaPlayerCoreX _player;
@@ -111,7 +116,9 @@ namespace MPEG_TS_Player_Demo
 
             Dispatcher.Invoke((Action)(() =>
             {
+                _timer.Stop();
                 tbTimeline.Value = 0;
+                lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
             }));
         }
 
@@ -147,6 +154,18 @@ namespace MPEG_TS_Player_Demo
 
                 Dispatcher.Invoke((Action)(() =>
                 {
+                    // Playback has stopped: keep the reset label.
+                    if (!_timer.Enabled)
+                    {
+                        return;
+                    }
+
+                    // At the end of the file the pipeline may already report 0: keep the last real duration.
+                    if (duration > TimeSpan.Zero)
+                    {
+                        _duration = duration;
+                    }
+
                     tbTimeline.Maximum = (int)duration.TotalSeconds;
 
                     lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
@@ -271,6 +290,7 @@ namespace MPEG_TS_Player_Demo
 
                 await RestartPlayback();
 
+                _duration = TimeSpan.Zero;
                 _timer.Start();
             }
             catch (Exception ex)
@@ -335,6 +355,7 @@ namespace MPEG_TS_Player_Demo
                 }
 
                 tbTimeline.Value = 0;
+                lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
             }
             catch (Exception ex)
             {

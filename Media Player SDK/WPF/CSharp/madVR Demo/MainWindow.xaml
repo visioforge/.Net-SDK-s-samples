@@ -25,7 +25,7 @@
         <wpf:VideoView x:Name="VideoView1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Height="280" Margin="16,16,0,0" />
 
         <StackPanel Orientation="Vertical" Grid.Row="2" Width="400" HorizontalAlignment="Left" Margin="16,16,0,0">
-            <Slider x:Name="tbTimeline" HorizontalAlignment="Stretch" ValueChanged="tbTimeline_ValueChanged" />
+            <Slider x:Name="tbTimeline" HorizontalAlignment="Stretch" IsMoveToPointEnabled="True" ValueChanged="tbTimeline_ValueChanged" />
             <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0">
                 <Button Content="Play" Width="50" Click="btPlay_Click" />
                 <Button Content="Stop" Width="50" Margin="10,0,0,0" Click="btStop_Click" />

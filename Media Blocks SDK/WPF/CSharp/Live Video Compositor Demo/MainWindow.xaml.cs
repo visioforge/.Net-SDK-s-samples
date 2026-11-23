@@ -77,6 +77,9 @@ namespace Live_Video_Compositor_Demo
         public MainWindow()
         {
             InitializeComponent();            
+
+            // A track click marks PreviewMouseLeftButtonDown handled, so the drag flag is armed here.
+            tbSeeking.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new System.Windows.Input.MouseButtonEventHandler(tbSeeking_PreviewMouseLeftButtonDown), true);
         }
                 
         /// <summary>
@@ -1986,9 +1989,10 @@ namespace Live_Video_Compositor_Demo
                     return;
                 }
 
-                // Suppress the torrent of value-changed ticks that fire while the user is dragging
-                // the thumb — we only want to seek once on mouse-up (see tbSeeking_PreviewMouseLeftButtonUp).
-                if (_isDraggingSeek)
+                // A track click raises ValueChanged before tbSeeking_PreviewMouseLeftButtonDown sets
+                // the drag flag, so the button state is checked too: while the mouse is down only
+                // tbSeeking_PreviewMouseLeftButtonUp seeks. Keyboard changes still seek here.
+                if (_isDraggingSeek || System.Windows.Input.Mouse.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
                 {
                     return;
                 }

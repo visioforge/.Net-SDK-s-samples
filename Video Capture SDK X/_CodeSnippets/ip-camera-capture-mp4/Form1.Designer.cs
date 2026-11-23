@@ -93,6 +93,7 @@
             edPassword.Name = "edPassword";
             edPassword.Size = new System.Drawing.Size(150, 31);
             edPassword.TabIndex = 15;
+            edPassword.UseSystemPasswordChar = true;
             // 
             // edLogin
             // 

@@ -15,7 +15,7 @@
         </Grid>
         <GroupBox Header="Controls" Margin="10,0,303,31" Height="89" VerticalAlignment="Bottom">
             <Grid>
-                <Slider Height="23" HorizontalAlignment="Left" Margin="8,6,0,0" x:Name="tbTimeline" VerticalAlignment="Top" Width="146" Maximum="100" ValueChanged="tbTimeline_ValueChanged" />
+                <Slider Height="23" HorizontalAlignment="Left" Margin="8,6,0,0" x:Name="tbTimeline" VerticalAlignment="Top" Width="146" Maximum="100" IsMoveToPointEnabled="True" ValueChanged="tbTimeline_ValueChanged" />
                 <Label Content="00:00:00/00:00:00" Height="28" HorizontalAlignment="Left" Margin="160,1,0,0" x:Name="lbTime" VerticalAlignment="Top" />
                 <Button Content="Start" Height="23" HorizontalAlignment="Left" Margin="6,35,0,0" x:Name="btStart" VerticalAlignment="Top" Width="50" FontWeight="Bold" Click="btStart_Click" />
                 <Button Content="Resume" Height="23" HorizontalAlignment="Left" Margin="61,35,0,0" x:Name="btResume" VerticalAlignment="Top" Width="50" Click="btResume_Click" />

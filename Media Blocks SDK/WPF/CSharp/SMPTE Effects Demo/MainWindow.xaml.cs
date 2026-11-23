@@ -29,6 +29,11 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
 
         private volatile bool _timerFlag;
 
+        /// <summary>
+        /// The duration of the current file, shown in the time label after playback stops.
+        /// </summary>
+        private TimeSpan _duration;
+
         private MediaBlocksPipeline _pipeline;
 
         private VideoRendererBlock _videoRenderer;
@@ -176,6 +181,7 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
             {
                 _timer.Stop();
                 tbTimeline.Value = 0;
+                lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
                 UpdateUI();
             }));
         }
@@ -265,6 +271,18 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
 
                 Dispatcher.Invoke((Action)(() =>
                 {
+                    // Playback has stopped: keep the reset label.
+                    if (!_timer.Enabled)
+                    {
+                        return;
+                    }
+
+                    // At the end of the file the pipeline may already report 0: keep the last real duration.
+                    if (duration > TimeSpan.Zero)
+                    {
+                        _duration = duration;
+                    }
+
                     tbTimeline.Maximum = (int)duration.TotalSeconds;
 
                     lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
@@ -327,6 +345,7 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
             await _pipeline.StartAsync();
 
             _isPlaying = true;
+            _duration = TimeSpan.Zero;
             _timer.Start();
 
             UpdateUI();
@@ -338,6 +357,8 @@ namespace MediaBlocks_SMPTE_Effects_Demo_WPF
 
             _isPlaying = false;
             _timer.Stop();
+            tbTimeline.Value = 0;
+            lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
 
             UpdateUI();
         }

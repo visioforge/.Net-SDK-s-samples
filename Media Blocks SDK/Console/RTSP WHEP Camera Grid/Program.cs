@@ -6,14 +6,16 @@ using VisioForge.Core;
 using VisioForge.Core.MediaBlocks;
 using VisioForge.Core.MediaBlocks.Sinks;
 using VisioForge.Core.MediaBlocks.Sources;
+using VisioForge.Core.MediaBlocks.Special;
 using VisioForge.Core.Types.X.Sinks;
 using VisioForge.Core.Types.X.Sources;
 
 namespace RTSPWHEPCameraGrid
 {
     /// <summary>
-    /// Shows RTSP cameras on a web page over WHEP. The cameras' H.264 goes to the browsers as it is, never re-encoded.
-    /// Usage: RTSPWHEPCameraGrid [--port 8080] [--login user --password pass] rtsp://camera1 [rtsp://camera2 ...]
+    /// Shows RTSP cameras on a web page over WHEP. The cameras' H.264 goes to the browsers as it is, never re-encoded;
+    /// their audio is encoded to Opus.
+    /// Usage: RTSPWHEPCameraGrid [--port 8080] [--login user --password pass] [--no-audio] rtsp://camera1 [rtsp://camera2 ...]
     /// </summary>
     internal class Program
     {
@@ -34,6 +36,7 @@ namespace RTSPWHEPCameraGrid
 
             var pagePort = 8080;
             string login = null, password = null;
+            var audio = true;
             var cameras = new List<Uri>();
             var argsValid = true;
             for (var i = 0; i < args.Length && argsValid; i++)
@@ -43,6 +46,7 @@ namespace RTSPWHEPCameraGrid
                     case "--port" when i + 1 < args.Length: argsValid = int.TryParse(args[++i], out pagePort); break;
                     case "--login" when i + 1 < args.Length: login = args[++i]; break;
                     case "--password" when i + 1 < args.Length: password = args[++i]; break;
+                    case "--no-audio": audio = false; break;
                     default:
                         argsValid = Uri.TryCreate(args[i], UriKind.Absolute, out var camera) && camera.Scheme.StartsWith("rtsp", StringComparison.Ordinal);
                         if (argsValid) cameras.Add(camera);
@@ -52,7 +56,7 @@ namespace RTSPWHEPCameraGrid
 
             if (!argsValid || cameras.Count == 0)
             {
-                Console.WriteLine("Usage: RTSPWHEPCameraGrid [--port 8080] [--login user --password pass] rtsp://camera1 [rtsp://camera2 ...]");
+                Console.WriteLine("Usage: RTSPWHEPCameraGrid [--port 8080] [--login user --password pass] [--no-audio] rtsp://camera1 [rtsp://camera2 ...]");
                 return;
             }
 
@@ -87,8 +91,9 @@ namespace RTSPWHEPCameraGrid
                 var pageUrl = $"http://localhost:{pagePort}/";
                 for (var i = 0; i < cameras.Count && !stop.Task.IsCompleted; i++)
                 {
-                    // Encoded H.264 straight from the camera, without audio: browsers take Opus, not the camera's AAC.
-                    var rtspSettings = await RTSPRAWSourceSettings.CreateAsync(cameras[i], login, password, audioEnabled: false);
+                    // Encoded H.264 straight from the camera, and its audio if it has any (CreateAsync turns audio off otherwise).
+                    // --no-audio drops every camera's audio: an audio codec with no decoder stops the whole grid, a camera listing audio it never sends leaves its tile empty.
+                    var rtspSettings = await RTSPRAWSourceSettings.CreateAsync(cameras[i], login, password, audioEnabled: audio);
                     var rtsp = new RTSPRAWSourceBlock(rtspSettings);
 
                     // One WHEP server per camera; only this app talks to it, the browsers go through the page server below.
@@ -96,7 +101,15 @@ namespace RTSPWHEPCameraGrid
                     whep.ConsumerAdded += (s, e) => Console.WriteLine($"Viewer sessions: {Interlocked.Increment(ref _viewers)}");
                     whep.ConsumerRemoved += (s, e) => Console.WriteLine($"Viewer sessions: {Interlocked.Decrement(ref _viewers)}");
 
-                    pipeline.Connect(rtsp.VideoOutput, whep.Input);
+                    pipeline.Connect(rtsp.VideoOutput, whep.VideoInput);
+
+                    // Browsers take Opus, not the camera's AAC or G.711: decode it here, the WHEP server encodes it to Opus.
+                    if (rtspSettings.AudioEnabled)
+                    {
+                        var audioDecoder = new DecodeBinBlock(renderVideo: false, renderAudio: true, renderSubtitle: false);
+                        pipeline.Connect(rtsp.AudioOutput, audioDecoder.Input);
+                        pipeline.Connect(audioDecoder.AudioOutput, whep.AudioInput);
+                    }
                     Console.WriteLine($"Camera {i}: {cameras[i]}  ->  {pageUrl}cam/{i}/whep/endpoint");
                 }
 

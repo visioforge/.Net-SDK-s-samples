@@ -46,7 +46,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Slider x:Name="tbTimeline" Grid.Column="0" VerticalAlignment="Center" ValueChanged="tbTimeline_ValueChanged"/>
+            <Slider x:Name="tbTimeline" Grid.Column="0" VerticalAlignment="Center" IsMoveToPointEnabled="True" ValueChanged="tbTimeline_ValueChanged"/>
             <TextBlock x:Name="lbTime" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center" Text="00:00:00 / 00:00:00" Width="130" TextAlignment="Right"/>
         </Grid>
 

@@ -134,6 +134,10 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Form1_Load(object sender, EventArgs e)
         {
+#if NETCOREAPP
+            // PlaceholderText is .NET 5+; the net472 project of this demo shares this file.
+            edONVIFURL.PlaceholderText = "http://<camera-ip>/onvif/device_service";
+#endif
             await CreateEngineAsync();
 
             Text += $" (SDK v{VideoCapture1.SDK_Version()})";
@@ -169,6 +173,12 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void btStart_Click(object sender, EventArgs e)
         {
+            if (!Uri.TryCreate(cbIPURL.Text, UriKind.Absolute, out var uri))
+            {
+                MessageBox.Show(this, "Enter a valid camera URL.");
+                return;
+            }
+
             if (onvifClient != null)
             {
                 onvifClient.Dispose();
@@ -192,7 +202,7 @@ namespace VisioForge_SDK_4_IP_Camera_CSharp_Demo
             // source
             VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
             {
-                URL = new Uri(cbIPURL.Text, UriKind.Absolute)
+                URL = uri
             };
 
             bool lavGPU = false;

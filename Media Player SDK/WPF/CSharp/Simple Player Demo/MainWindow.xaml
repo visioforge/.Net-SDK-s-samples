@@ -15,7 +15,7 @@
         <CheckBox x:Name="cbDebugMode" Content="Debug mode" HorizontalAlignment="Right" Margin="0,11,27,0" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="Log" HorizontalAlignment="Right" Margin="0,5,217,0" VerticalAlignment="Top"/>
         <TextBox x:Name="edLog" HorizontalAlignment="Right" Margin="0,35,27,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="98"/>
-        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="10,0,0,47" VerticalAlignment="Bottom" Width="209" ValueChanged="tbTimeline_ValueChanged"/>
+        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="10,0,0,47" VerticalAlignment="Bottom" Width="209" IsMoveToPointEnabled="True" ValueChanged="tbTimeline_ValueChanged"/>
         <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="225,0,0,49" TextWrapping="Wrap" Text="00:00:00/00:00::00" VerticalAlignment="Bottom"/>
         <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="10,0,0,21" VerticalAlignment="Bottom" Width="53" Click="btStart_Click"/>
         <Button x:Name="btResume" Content="Resume" HorizontalAlignment="Left" Margin="68,0,0,21" VerticalAlignment="Bottom" Width="53" Click="btResume_Click"/>

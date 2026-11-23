@@ -26,6 +26,11 @@
         private MediaPlayerCoreX _player;
 
         /// <summary>
+        /// The duration of the current file, shown in the time label after playback stops.
+        /// </summary>
+        private TimeSpan _duration;
+
+        /// <summary>
         /// The current CDG source settings.
         /// </summary>
         private CDGSourceSettings _currentSettings;
@@ -183,6 +188,7 @@
 
             _player.Audio_OutputDevice_Volume = tbVolume1.Value;
 
+            _duration = TimeSpan.Zero;
             timer1.Enabled = true;
         }
 
@@ -220,6 +226,7 @@
 
             timer1.Enabled = false;
             tbTimeline.Value = 0;
+            lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
         }
 
         /// <summary>
@@ -293,6 +300,19 @@
             var position = await _player.Position_GetAsync();
             var duration = await _player.DurationAsync();
 
+            // Playback has stopped: keep the reset label.
+            if (!timer1.Enabled)
+            {
+                _isTimerUpdating = false;
+                return;
+            }
+
+            // At the end of the file the pipeline may already report 0: keep the last real duration.
+            if (duration > TimeSpan.Zero)
+            {
+                _duration = duration;
+            }
+
             tbTimeline.Maximum = (int)(duration.TotalSeconds);
 
             if ((position.TotalSeconds > 0) && (position.TotalSeconds < tbTimeline.Maximum))
@@ -332,7 +352,9 @@
         {
             Invoke((Action)(() =>
                                    {
+                                       timer1.Stop();
                                        tbTimeline.Value = 0;
+                                       lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
                                    }));
         }
 

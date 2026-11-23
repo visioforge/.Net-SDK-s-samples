@@ -45,6 +45,14 @@ namespace madVR_Demo
             tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
             int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
+
+            // Playback has stopped: keep the reset label.
+            if (!_timer.IsEnabled)
+            {
+                _timer.Tag = 0;
+                return;
+            }
+
             if ((value > 0) && (value < tbTimeline.Maximum))
             {
                 tbTimeline.Value = value;
@@ -96,6 +104,7 @@ namespace madVR_Demo
             await MediaPlayer1.StopAsync();
 
             tbTimeline.Value = 0;
+            lbTimestamp.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Maximum);
         }
 
         /// <summary>

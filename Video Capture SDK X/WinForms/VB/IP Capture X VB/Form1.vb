@@ -27,9 +27,6 @@ Public Class Form1
 
         ' Populate IP engine types
         cbIPCameraType.SelectedIndex = 0
-
-        ' Set default URL
-        cbIPURL.Text = "rtsp://192.168.1.100:554/stream"
     End Sub
 
     Private Async Sub btStart_Click(sender As Object, e As EventArgs) Handles btStart.Click

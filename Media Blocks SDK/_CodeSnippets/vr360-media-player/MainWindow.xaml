@@ -102,7 +102,7 @@
 
             <Label Grid.Column="0" Content="Timeline:" VerticalAlignment="Center"/>
             <Slider x:Name="tbTimeline" Grid.Column="1" Margin="5,0" 
-                    VerticalAlignment="Center" ValueChanged="tbTimeline_ValueChanged"/>
+                    VerticalAlignment="Center" IsMoveToPointEnabled="True" ValueChanged="tbTimeline_ValueChanged"/>
             <Label x:Name="lbTime" Grid.Column="2" Content="00:00:00/00:00:00" 
                    VerticalAlignment="Center" MinWidth="150"/>
         </Grid>

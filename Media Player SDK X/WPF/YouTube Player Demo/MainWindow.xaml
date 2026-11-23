@@ -99,7 +99,7 @@
             <Slider x:Name="sliderTimeline"
                     Grid.Column="0"
                     VerticalAlignment="Center"
-                    PreviewMouseDown="sliderTimeline_PreviewMouseDown"
+                    IsMoveToPointEnabled="True"
                     PreviewMouseUp="sliderTimeline_PreviewMouseUp"
                     LostMouseCapture="sliderTimeline_LostMouseCapture"
                     ValueChanged="sliderTimeline_ValueChanged" />

@@ -118,7 +118,7 @@
                                         Click="btPauseResume_Click">
                                     <materialDesign:PackIcon x:Name="icPauseResume" Kind="Pause" Width="20" Height="20"/>
                                 </Button>
-                                <Slider x:Name="tbSeeking" Margin="8,0,0,0" Width="150" VerticalAlignment="Center" ValueChanged="tbSeeking_ValueChanged" PreviewMouseLeftButtonDown="tbSeeking_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="tbSeeking_PreviewMouseLeftButtonUp" LostMouseCapture="tbSeeking_LostMouseCapture"/>
+                                <Slider x:Name="tbSeeking" Margin="8,0,0,0" Width="150" VerticalAlignment="Center" ValueChanged="tbSeeking_ValueChanged" IsMoveToPointEnabled="True" PreviewMouseLeftButtonUp="tbSeeking_PreviewMouseLeftButtonUp" LostMouseCapture="tbSeeking_LostMouseCapture"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

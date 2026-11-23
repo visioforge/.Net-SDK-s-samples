@@ -137,6 +137,14 @@ namespace Main_Demo
             tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
             int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
+
+            // Playback has stopped: keep the reset label.
+            if (!timer.IsEnabled)
+            {
+                timer.Tag = 0;
+                return;
+            }
+
             if ((value > 0) && (value < tbTimeline.Maximum))
             {
                 tbTimeline.Value = value;
@@ -1472,6 +1480,7 @@ namespace Main_Demo
         private void ClearUI()
         {
             tbTimeline.Value = 0;
+            lbTime.Content = MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Maximum);
 
             waveformPainter.Stop();
             waveformPainter.Clear();
@@ -1950,6 +1959,7 @@ namespace Main_Demo
         private void StopDelegateMethod()
         {
             tbTimeline.Value = 0;
+            lbTime.Content = MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Maximum);
 
             waveformPainter.Stop();
             waveformPainter.Clear();

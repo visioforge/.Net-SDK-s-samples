@@ -195,6 +195,7 @@ namespace Nvidia_Maxine_Player
             await MediaPlayer1.StopAsync();
 
             tbTimeline.Value = 0;
+            lbTime.Content = MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Maximum);
         }
 
         /// <summary>
@@ -274,6 +275,14 @@ namespace Nvidia_Maxine_Player
             tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
             int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
+
+            // Playback has stopped: keep the reset label.
+            if (!_timer.IsEnabled)
+            {
+                _timer.Tag = 0;
+                return;
+            }
+
             if ((value > 0) && (value < tbTimeline.Maximum))
             {
                 tbTimeline.Value = value;
@@ -302,7 +311,9 @@ namespace Nvidia_Maxine_Player
         {
             Dispatcher.Invoke((Action)(() =>
             {
+                _timer.Stop();
                 tbTimeline.Value = 0;
+                lbTime.Content = MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted((int)tbTimeline.Maximum);
             }));
         }
 

@@ -527,19 +527,26 @@ namespace Simple_Media_Player
                 return;
             }
 
+            // Keeps a second click during the read from appending a second list.
+            btReadInfo.IsEnabled = false;
+
             try
             {
                 Info.Clear();
 
                 var infoReader = new MediaInfoReaderX(_player);
-                await infoReader.OpenAsync(new Uri(edFilenameOrURL.Text));
+                if (!await infoReader.OpenAsync(new Uri(edFilenameOrURL.Text)))
+                {
+                    Info.Add("Unable to read media info.");
+                    return;
+                }
 
                 if (infoReader.Info.VideoStreams.Count > 0)
                 {
                     Info.Add("Video streams:");
                     foreach (var video in infoReader.Info.VideoStreams)
                     {
-                        Info.Add($"{video.Width}x{video.Height}, {video.FrameRate:F2} fps, Duration: {video.Duration.ToString()}");
+                        Info.Add($"{CodecPrefix(video.Codec)}{video.Width}x{video.Height}, {video.FrameRate:F2} fps, Duration: {video.Duration.ToString()}");
                     }
                 }
 
@@ -548,7 +555,7 @@ namespace Simple_Media_Player
                     Info.Add("Audio streams:");
                     foreach (var audio in infoReader.Info.AudioStreams)
                     {
-                        Info.Add($"{audio.SampleRate} Hz, {audio.Channels} channels, Duration: {audio.Duration.ToString()}");
+                        Info.Add($"{CodecPrefix(audio.Codec)}{audio.SampleRate} Hz, {audio.Channels} channels, Duration: {audio.Duration.ToString()}");
                     }
                 }
             }
@@ -556,6 +563,18 @@ namespace Simple_Media_Player
             {
                 Info.Add($"Error reading info: {ex.Message}");
             }
+            finally
+            {
+                btReadInfo.IsEnabled = true;
+            }
+        }
+
+        /// <summary>
+        /// The codec name to start a stream line with, empty when the reader has none.
+        /// </summary>
+        private static string CodecPrefix(string codec)
+        {
+            return string.IsNullOrEmpty(codec) ? string.Empty : codec + ", ";
         }
     }
 }

@@ -49,6 +49,11 @@ namespace MediaBlocks_Memory_Player_Demo
         private Stream _sourceStream;
 
         /// <summary>
+        /// The duration of the current file, shown in the time label after playback stops.
+        /// </summary>
+        private TimeSpan _duration;
+
+        /// <summary>
         /// The decode bin.
         /// </summary>
         private DecodeBinBlock _decodeBin;
@@ -184,6 +189,7 @@ namespace MediaBlocks_Memory_Player_Demo
                 // _pipeline.Audio_OutputDevice_Balance_Set(0, tbBalance1.Value);
                 // _pipeline.Audio_OutputDevice_Volume_Set(0, tbVolume1.Value);
 
+                _duration = TimeSpan.Zero;
                 _tmPosition.Start();
             }
             catch (Exception ex)
@@ -207,6 +213,7 @@ namespace MediaBlocks_Memory_Player_Demo
                 }
 
                 tbTimeline.Value = 0;
+                lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
 
                 VideoView1.Invalidate();
 
@@ -293,6 +300,19 @@ namespace MediaBlocks_Memory_Player_Demo
                 var position = await _pipeline.Position_GetAsync();
                 var duration = await _pipeline.DurationAsync();
 
+                // Playback has stopped: keep the reset label.
+                if (!_tmPosition.Enabled)
+                {
+                    _tmPosition.Tag = 0;
+                    return;
+                }
+
+                // At the end of the file the pipeline may already report 0: keep the last real duration.
+                if (duration > TimeSpan.Zero)
+                {
+                    _duration = duration;
+                }
+
                 tbTimeline.Maximum = (int)duration.TotalSeconds;
 
                 lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
@@ -328,7 +348,9 @@ namespace MediaBlocks_Memory_Player_Demo
         {
             Invoke((Action)(() =>
                                    {
+                                       _tmPosition.Stop();
                                        tbTimeline.Value = 0;
+                                       lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
                                    }));
         }
 

@@ -34,6 +34,11 @@ namespace MediaBlocks_Simple_Player_Core_Demo
         private volatile bool _timerFlag;
 
         /// <summary>
+        /// The duration of the current file, shown in the time label after playback stops.
+        /// </summary>
+        private TimeSpan _duration;
+
+        /// <summary>
         /// The simple player core.
         /// </summary>
         private SimplePlayerCoreX _simplePlayer;
@@ -91,6 +96,7 @@ namespace MediaBlocks_Simple_Player_Core_Demo
             {
                 _timer.Stop();
                 tbTimeline.Value = 0;
+                lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
             }));
         }
 
@@ -108,6 +114,18 @@ namespace MediaBlocks_Simple_Player_Core_Demo
 
                 Dispatcher.Invoke((Action)(() =>
                 {
+                    // Playback has stopped: keep the reset label.
+                    if (!_timer.Enabled)
+                    {
+                        return;
+                    }
+
+                    // At the end of the file the pipeline may already report 0: keep the last real duration.
+                    if (duration > TimeSpan.Zero)
+                    {
+                        _duration = duration;
+                    }
+
                     tbTimeline.Maximum = (int)duration.TotalSeconds;
 
                     lbTime.Text = position.ToString("hh\\:mm\\:ss") + " | " + duration.ToString("hh\\:mm\\:ss");
@@ -192,9 +210,11 @@ namespace MediaBlocks_Simple_Player_Core_Demo
 
                 _simplePlayer.OnStreamsInfoAvailable += _simplePlayer_OnStreamsInfoAvailable;
                 _simplePlayer.OnError += Player_OnError;
+                _simplePlayer.OnStop += Pipeline_OnStop;
 
                 await _simplePlayer.StartAsync(await UniversalSourceSettings.CreateAsync(new Uri(edFilename.Text)));
 
+                _duration = TimeSpan.Zero;
                 _timer.Start();
             }
             catch (Exception ex)
@@ -254,6 +274,7 @@ namespace MediaBlocks_Simple_Player_Core_Demo
                 }            
 
                 tbTimeline.Value = 0;
+                lbTime.Text = "00:00:00 | " + _duration.ToString("hh\\:mm\\:ss");
             }
             catch (Exception ex)
             {

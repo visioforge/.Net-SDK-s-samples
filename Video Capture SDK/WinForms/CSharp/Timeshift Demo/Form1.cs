@@ -267,10 +267,16 @@
             }
             else
             {
+                if (!Uri.TryCreate(cbIPURL.Text, UriKind.Absolute, out var uri))
+                {
+                    MessageBox.Show(this, "Enter a valid camera URL.");
+                    return;
+                }
+
                 VideoCapture1.Mode = VideoCaptureMode.IPPreview;
                 VideoCapture1.IP_Camera_Source = new IPCameraSourceSettings
                 {
-                    URL = new Uri(cbIPURL.Text)
+                    URL = uri
                 };
 
                 switch (cbIPCameraType.SelectedIndex)

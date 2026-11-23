@@ -704,7 +704,7 @@
         <Button Content="..." Height="23" HorizontalAlignment="Right" Margin="0,30,25,0" x:Name="btSelectFile" VerticalAlignment="Top" Width="23" Click="btSelectFile_Click" />
         <GroupBox Header="Controls" Height="89" HorizontalAlignment="Left" Margin="407,0,0,217" x:Name="groupBox1" VerticalAlignment="Bottom" Width="403">
             <Grid>
-                <Slider Height="23" HorizontalAlignment="Left" Margin="8,6,0,0" x:Name="tbTimeline" VerticalAlignment="Top" Width="146" Maximum="100" ValueChanged="tbTimeline_ValueChanged" />
+                <Slider Height="23" HorizontalAlignment="Left" Margin="8,6,0,0" x:Name="tbTimeline" VerticalAlignment="Top" Width="146" Maximum="100" IsMoveToPointEnabled="True" ValueChanged="tbTimeline_ValueChanged" />
                 <Label Content="00:00:00/00:00:00" Height="28" HorizontalAlignment="Left" Margin="160,1,0,0" x:Name="lbTime" VerticalAlignment="Top" />
                 <Slider Height="23" HorizontalAlignment="Left" Margin="316,6,0,0" x:Name="tbSpeed" VerticalAlignment="Top" Width="69" Maximum="25" Minimum="5" Value="10" ValueChanged="tbSpeed_ValueChanged" />
                 <Label Content="Speed" Height="28" HorizontalAlignment="Left" Margin="269,1,0,0" x:Name="label19" VerticalAlignment="Top" />

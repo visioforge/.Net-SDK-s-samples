@@ -18,6 +18,9 @@ Public Class Form1
 
     Private _isClosing As Boolean
 
+    ' The duration of the current file, shown in the time label after playback stops.
+    Private _duration As TimeSpan
+
     Private Async Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Text += " [FIRST TIME LOAD, BUILDING THE REGISTRY...]"
         Me.Enabled = False
@@ -61,7 +64,9 @@ Public Class Form1
         End If
 
         Invoke(Sub()
+                   _timer.Stop()
                    tbTimeline.Value = 0
+                   lbTime.Text = "00:00:00 | " + _duration.ToString("hh\:mm\:ss")
                End Sub)
     End Sub
 
@@ -88,6 +93,15 @@ Public Class Form1
         Dim duration = Await _player.DurationAsync()
 
         Invoke(Sub()
+                   ' Playback has stopped: keep the reset label.
+                   If Not _timer.Enabled Then
+                       Return
+                   End If
+
+                   ' At the end of the file the player may already report 0: keep the last real duration.
+                   If duration > TimeSpan.Zero Then
+                       _duration = duration
+                   End If
                    tbTimeline.Maximum = CInt(duration.TotalSeconds)
                    lbTime.Text = position.ToString("hh\:mm\:ss") + " | " + duration.ToString("hh\:mm\:ss")
 
@@ -146,6 +160,7 @@ Public Class Form1
 
         Await _player.PlayAsync()
 
+        _duration = TimeSpan.Zero
         _timer.Start()
     End Sub
 
@@ -159,6 +174,7 @@ Public Class Form1
         End If
 
         tbTimeline.Value = 0
+        lbTime.Text = "00:00:00 | " + _duration.ToString("hh\:mm\:ss")
     End Sub
 
     Private Async Sub btResume_Click(sender As Object, e As EventArgs) Handles btResume.Click

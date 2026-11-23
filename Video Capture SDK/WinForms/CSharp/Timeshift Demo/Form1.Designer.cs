@@ -387,7 +387,6 @@ namespace VC_Timeshift_Demo
             this.cbIPURL.Name = "cbIPURL";
             this.cbIPURL.Size = new System.Drawing.Size(360, 21);
             this.cbIPURL.TabIndex = 92;
-            this.cbIPURL.Text = "rtsp://192.168.1.101:554/stream1";
             // 
             // label165
             // 
@@ -404,6 +403,7 @@ namespace VC_Timeshift_Demo
             this.edIPPassword.Name = "edIPPassword";
             this.edIPPassword.Size = new System.Drawing.Size(100, 20);
             this.edIPPassword.TabIndex = 90;
+            this.edIPPassword.UseSystemPasswordChar = true;
             // 
             // label167
             // 

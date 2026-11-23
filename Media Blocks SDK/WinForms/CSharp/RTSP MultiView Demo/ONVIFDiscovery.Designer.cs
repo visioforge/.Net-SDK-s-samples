@@ -99,7 +99,6 @@
             this.edUsername.Name = "edUsername";
             this.edUsername.Size = new System.Drawing.Size(100, 26);
             this.edUsername.TabIndex = 6;
-            this.edUsername.Text = "admin";
             //
             // edPassword
             //
@@ -107,7 +106,7 @@
             this.edPassword.Name = "edPassword";
             this.edPassword.Size = new System.Drawing.Size(100, 26);
             this.edPassword.TabIndex = 7;
-            this.edPassword.Text = "";
+            this.edPassword.UseSystemPasswordChar = true;
             //
             // ONVIFDiscovery
             //

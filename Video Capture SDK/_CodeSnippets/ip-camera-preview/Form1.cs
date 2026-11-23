@@ -46,7 +46,7 @@ namespace ip_camera_preview
             // Several engines are available. We'll use LAV as the most compatible. For low latency RTSP playback, use the RTSP Low Latency engine.
             videoCapture1.IP_Camera_Source = new IPCameraSourceSettings()
             {
-                URL = new Uri("http://192.168.233.129:8000/camera/mjpeg"),
+                URL = new Uri("http://192.0.2.1:8000/camera/mjpeg"),
                 Type = IPSourceEngine.Auto_LAV
             };
 

@@ -55,7 +55,7 @@
         <TextBox x:Name="edLog" HorizontalAlignment="Right" Margin="0,0,10,50" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="135" Height="110"/>
         
         <!-- Timeline and Playback Controls -->
-        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="10,0,0,25" VerticalAlignment="Bottom" Width="400" ValueChanged="tbTimeline_ValueChanged"/>
+        <Slider x:Name="tbTimeline" HorizontalAlignment="Left" Margin="10,0,0,25" VerticalAlignment="Bottom" Width="400" IsMoveToPointEnabled="True" ValueChanged="tbTimeline_ValueChanged"/>
         <TextBlock x:Name="lbTime" HorizontalAlignment="Left" Margin="420,0,0,27" TextWrapping="Wrap" Text="00:00:00/00:00::00" VerticalAlignment="Bottom"/>
         
         <Button x:Name="btStart" Content="Start" HorizontalAlignment="Left" Margin="10,0,0,1" VerticalAlignment="Bottom" Width="53" Click="btStart_Click"/>
