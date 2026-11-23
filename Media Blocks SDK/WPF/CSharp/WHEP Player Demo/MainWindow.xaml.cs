@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -102,7 +103,15 @@ namespace WHEP_Player_Demo
                     lbStatus.Text = "Unable to start";
                 }
 
-                await StopAsync();
+                try
+                {
+                    await StopAsync();
+                }
+                catch (Exception ex)
+                {
+                    lbStatus.Text = ex.Message;
+                }
+
                 btStart.IsEnabled = true;
                 cbAudio.IsEnabled = true;
                 return;
@@ -149,11 +158,18 @@ namespace WHEP_Player_Demo
 
         private async Task StopPipelineAsync(MediaBlocksPipeline pipeline)
         {
-            // Closing while connecting: the stop cuts the start short, and disposing waits for it.
-            await pipeline.StopAsync();
-            await _start;
-            pipeline.OnError -= Pipeline_OnError;
-            await pipeline.DisposeAsync();
+            try
+            {
+                // Closing while connecting: the stop cuts the start short, and disposing waits for it.
+                await pipeline.StopAsync();
+                await _start;
+            }
+            finally
+            {
+                // Even after a failed stop, so the renderer leaves VideoView1.
+                pipeline.OnError -= Pipeline_OnError;
+                await pipeline.DisposeAsync();
+            }
         }
 
         private void Pipeline_OnError(object sender, ErrorsEventArgs e)
@@ -167,7 +183,15 @@ namespace WHEP_Player_Demo
             if (_pipeline != null || !_stop.IsCompleted)
             {
                 e.Cancel = true;
-                await StopAsync();
+
+                try
+                {
+                    await StopAsync();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
 
                 // A window cannot close from inside its own Closing event, and the stop may end synchronously.
                 _ = Dispatcher.BeginInvoke(Close);

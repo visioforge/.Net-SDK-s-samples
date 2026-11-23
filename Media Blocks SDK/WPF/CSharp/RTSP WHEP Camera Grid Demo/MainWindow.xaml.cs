@@ -101,9 +101,11 @@ namespace RTSP_WHEP_Camera_Grid_Demo
                     return;
                 }
 
-                if (!int.TryParse(edPagePort.Text, out var pagePort) || pagePort < 1 || pagePort > 65535)
+                // The cameras' WHEP servers take FirstWhepPort and up.
+                if (!int.TryParse(edPagePort.Text, out var pagePort) || pagePort < 1 || pagePort > 65535 ||
+                    (pagePort >= FirstWhepPort && pagePort < FirstWhepPort + _cameras.Count))
                 {
-                    MessageBox.Show(this, "Enter a valid port number");
+                    MessageBox.Show(this, $"Enter a port number from 1 to 65535, outside {FirstWhepPort}-{FirstWhepPort + _cameras.Count - 1}");
                     return;
                 }
 
@@ -330,7 +332,7 @@ namespace RTSP_WHEP_Camera_Grid_Demo
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Log(ex.Message);
             }
         }
 
@@ -361,10 +363,11 @@ namespace RTSP_WHEP_Camera_Grid_Demo
                 // Closing while starting: the stop cuts the pipeline start short; disposing also waits for a camera probe to end.
                 await pipeline.StopAsync();
                 await _start;
-                await pipeline.DisposeAsync();
             }
             finally
             {
+                // Even after a failed stop: a new start must not meet the old WHEP servers on their ports.
+                await pipeline.DisposeAsync();
                 btStart.IsEnabled = true;
                 btAdd.IsEnabled = true;
             }
