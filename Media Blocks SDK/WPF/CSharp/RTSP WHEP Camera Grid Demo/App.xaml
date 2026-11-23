@@ -1,0 +1,9 @@
+<Application x:Class="RTSP_WHEP_Camera_Grid_Demo.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:RTSP_WHEP_Camera_Grid_Demo"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+    </Application.Resources>
+</Application>

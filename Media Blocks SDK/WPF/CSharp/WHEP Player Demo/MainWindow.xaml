@@ -1,0 +1,18 @@
+<Window x:Class="WHEP_Player_Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpf="clr-namespace:VisioForge.Core.UI.WPF;assembly=VisioForge.Core"
+        Title="WHEP Player Demo - Media Blocks SDK .Net" Height="480" Width="800" Icon="visioforge_main_icon.ico"
+        Loaded="Window_Loaded" Closing="Window_Closing">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" Margin="10">
+            <Label DockPanel.Dock="Left" Content="WHEP URL" VerticalAlignment="Center" />
+            <Button x:Name="btStop" DockPanel.Dock="Right" Content="Stop" Width="60" Margin="5,0,0,0" IsEnabled="False" Click="btStop_Click" />
+            <Button x:Name="btStart" DockPanel.Dock="Right" Content="Start" Width="60" Margin="5,0,0,0" IsEnabled="False" Click="btStart_Click" />
+            <CheckBox x:Name="cbAudio" DockPanel.Dock="Right" Content="Audio" IsChecked="True" VerticalAlignment="Center" Margin="10,0,5,0" />
+            <TextBox x:Name="edURL" VerticalContentAlignment="Center" Text="http://192.168.1.10:8889/mystream/whep" />
+        </DockPanel>
+        <TextBlock x:Name="lbStatus" DockPanel.Dock="Bottom" Margin="10,0,10,10" TextWrapping="Wrap" />
+        <wpf:VideoView x:Name="VideoView1" Margin="10,0,10,10" Background="Black" />
+    </DockPanel>
+</Window>
