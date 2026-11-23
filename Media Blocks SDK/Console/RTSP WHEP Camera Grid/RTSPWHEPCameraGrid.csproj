@@ -11,7 +11,7 @@
     <RunWithOpen Condition="$([MSBuild]::IsOsPlatform('OSX'))">false</RunWithOpen>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.21]" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.23]" />
   </ItemGroup>
   <!-- WHEPServerSinkBlock lives in the Adds package of each platform. -->
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
@@ -19,8 +19,8 @@
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="[2026.11.23]" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('-macos'))">
-    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="[2026.11.13]" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS.Adds" Version="[2026.11.21]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS" Version="[2026.11.22]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.macOS.Adds" Version="[2026.11.23]" />
   </ItemGroup>
   <!-- Linux: VisioForge native libraries (GStreamer comes from the system); the packages follow the runtime identifier. -->
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Linux'))">
