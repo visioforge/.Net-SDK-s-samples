@@ -38,6 +38,10 @@ namespace RTSP_WHEP_Camera_Grid_Demo
 
         private string _pageUrl;
 
+        private Task<bool> _start = Task.FromResult(true);
+
+        private Task _stop = Task.CompletedTask;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -67,7 +71,7 @@ namespace RTSP_WHEP_Camera_Grid_Demo
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Log(ex.Message);
             }
         }
 
@@ -118,6 +122,12 @@ namespace RTSP_WHEP_Camera_Grid_Demo
 
                     // Encoded H.264 straight from the camera, and its audio if it has any (CreateAsync turns audio off otherwise).
                     var rtspSettings = await RTSPRAWSourceSettings.CreateAsync(camera.Url, camera.Login, camera.Password, audioEnabled: audio);
+                    if (_pipeline == null)
+                    {
+                        // The window was closed while connecting.
+                        return;
+                    }
+
                     var rtsp = new RTSPRAWSourceBlock(rtspSettings);
 
                     // One WHEP server per camera; only this app talks to it, the browsers go through the page server below.
@@ -154,7 +164,15 @@ namespace RTSP_WHEP_Camera_Grid_Demo
 
                 _ = ServePageAsync(_pageServer);
 
-                if (!await _pipeline.StartAsync())
+                _start = _pipeline.StartAsync();
+                var started = await _start;
+                if (_pipeline == null)
+                {
+                    // The window was closed while starting.
+                    return;
+                }
+
+                if (!started)
                 {
                     await StopAsync();
                     return;
@@ -168,6 +186,7 @@ namespace RTSP_WHEP_Camera_Grid_Demo
             catch (Exception ex)
             {
                 Log(ex.Message);
+                _start = Task.FromResult(false);
                 await StopAsync();
             }
         }
@@ -292,7 +311,19 @@ namespace RTSP_WHEP_Camera_Grid_Demo
             }
         }
 
-        private async Task StopAsync()
+        // A second caller (closing the window mid-stop) waits for the same stop.
+        private Task StopAsync()
+        {
+            if (_pipeline != null)
+            {
+                _stop = StopPipelineAsync(_pipeline);
+                _pipeline = null;
+            }
+
+            return _stop;
+        }
+
+        private async Task StopPipelineAsync(MediaBlocksPipeline pipeline)
         {
             btStop.IsEnabled = false;
             lnkPage.IsEnabled = false;
@@ -302,12 +333,10 @@ namespace RTSP_WHEP_Camera_Grid_Demo
             _pageServer?.Close();
             _pageServer = null;
 
-            if (_pipeline != null)
-            {
-                await _pipeline.StopAsync();
-                await _pipeline.DisposeAsync();
-                _pipeline = null;
-            }
+            // Closing while starting: the stop cuts the start short, and disposing waits for it.
+            await pipeline.StopAsync();
+            await _start;
+            await pipeline.DisposeAsync();
 
             btStart.IsEnabled = true;
             btAdd.IsEnabled = true;
@@ -316,7 +345,7 @@ namespace RTSP_WHEP_Camera_Grid_Demo
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Stop the pipeline first, then close for real.
-            if (_pipeline != null)
+            if (_pipeline != null || !_stop.IsCompleted)
             {
                 e.Cancel = true;
 
@@ -329,12 +358,19 @@ namespace RTSP_WHEP_Camera_Grid_Demo
                     Debug.WriteLine(ex);
                 }
 
-                Close();
+                // A window cannot close from inside its own Closing event, and the stop may end synchronously.
+                _ = Dispatcher.BeginInvoke(Close);
                 return;
             }
 
-            _pageServer?.Close();
-            VisioForgeX.DestroySDK();
+            try
+            {
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

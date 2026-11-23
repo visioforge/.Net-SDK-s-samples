@@ -85,6 +85,7 @@ namespace WHEP_Player_Demo
             {
                 // Shown below as the reason the start failed.
                 lbStatus.Text = ex.Message;
+                _start = Task.FromResult(false);
                 started = false;
             }
 
@@ -158,7 +159,9 @@ namespace WHEP_Player_Demo
             {
                 e.Cancel = true;
                 await StopAsync();
-                Close();
+
+                // A window cannot close from inside its own Closing event, and the stop may end synchronously.
+                _ = Dispatcher.BeginInvoke(Close);
                 return;
             }
 
