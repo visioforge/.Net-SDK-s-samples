@@ -28,7 +28,15 @@ namespace WHEP_Player_Demo
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await VisioForgeX.InitSDKAsync();
+            try
+            {
+                await VisioForgeX.InitSDKAsync();
+            }
+            catch (Exception ex)
+            {
+                lbStatus.Text = ex.Message;
+                return;
+            }
 
             if (!WHEPSourceBlock.IsAvailable())
             {
@@ -48,27 +56,38 @@ namespace WHEP_Player_Demo
             _pipeline = new MediaBlocksPipeline();
             _pipeline.OnError += Pipeline_OnError;
 
-            // No StunServer: on a LAN the hosts connect directly. Clear Audio for a video-only stream.
-            var audio = cbAudio.IsChecked == true;
-            var source = new WHEPSourceBlock(new WHEPSourceSettings
+            bool started;
+            try
             {
-                Location = edURL.Text,
-                AudioEnabled = audio,
-            });
+                // No StunServer: on a LAN the hosts connect directly. Clear Audio for a video-only stream.
+                var audio = cbAudio.IsChecked == true;
+                var source = new WHEPSourceBlock(new WHEPSourceSettings
+                {
+                    Location = edURL.Text,
+                    AudioEnabled = audio,
+                });
 
-            // IsSync = false: show each frame on arrival instead of holding it for the 200 ms jitter buffer.
-            var videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
-            _pipeline.Connect(source.VideoOutput, videoRenderer.Input);
+                // IsSync = false: show each frame on arrival instead of holding it for the 200 ms jitter buffer.
+                var videoRenderer = new VideoRendererBlock(_pipeline, VideoView1) { IsSync = false };
+                _pipeline.Connect(source.VideoOutput, videoRenderer.Input);
 
-            if (audio)
+                if (audio)
+                {
+                    // Audio plays on arrival too.
+                    var audioRenderer = new AudioRendererBlock { IsSync = false };
+                    _pipeline.Connect(source.AudioOutput, audioRenderer.Input);
+                }
+
+                _start = _pipeline.StartAsync();
+                started = await _start;
+            }
+            catch (Exception ex)
             {
-                // Audio plays on arrival too.
-                var audioRenderer = new AudioRendererBlock { IsSync = false };
-                _pipeline.Connect(source.AudioOutput, audioRenderer.Input);
+                // Shown below as the reason the start failed.
+                lbStatus.Text = ex.Message;
+                started = false;
             }
 
-            _start = _pipeline.StartAsync();
-            var started = await _start;
             if (_pipeline == null)
             {
                 // The window was closed while connecting.

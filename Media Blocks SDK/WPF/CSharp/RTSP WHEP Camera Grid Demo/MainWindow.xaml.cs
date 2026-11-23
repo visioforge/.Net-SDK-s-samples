@@ -19,7 +19,8 @@ using VisioForge.Core.Types.X.Sources;
 namespace RTSP_WHEP_Camera_Grid_Demo
 {
     /// <summary>
-    /// Shows RTSP cameras on a web page over WHEP. The cameras' H.264 goes to the browsers as it is, never re-encoded.
+    /// Shows RTSP cameras on a web page over WHEP. The cameras' H.264 goes to the browsers as it is, never re-encoded;
+    /// their audio is encoded to Opus.
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -237,7 +238,12 @@ namespace RTSP_WHEP_Camera_Grid_Demo
             catch (Exception ex)
             {
                 Log(ex.Message);
-                response.StatusCode = 502;
+
+                // Once a body is under way the status is already sent.
+                if (response.ContentLength64 == 0)
+                {
+                    response.StatusCode = 502;
+                }
             }
             finally
             {
@@ -309,23 +315,26 @@ namespace RTSP_WHEP_Camera_Grid_Demo
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            try
+            // Stop the pipeline first, then close for real.
+            if (_pipeline != null)
             {
-                _pageServer?.Close();
+                e.Cancel = true;
 
-                if (_pipeline != null)
+                try
                 {
-                    await _pipeline.StopAsync();
-                    await _pipeline.DisposeAsync();
-                    _pipeline = null;
+                    await StopAsync();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
                 }
 
-                VisioForgeX.DestroySDK();
+                Close();
+                return;
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
+
+            _pageServer?.Close();
+            VisioForgeX.DestroySDK();
         }
     }
 }
