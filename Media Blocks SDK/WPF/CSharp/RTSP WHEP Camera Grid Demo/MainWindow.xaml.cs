@@ -111,6 +111,37 @@ namespace RTSP_WHEP_Camera_Grid_Demo
                 _pipeline = new MediaBlocksPipeline();
                 _pipeline.OnError += (s, args) => Log(args.Message);
 
+                _start = StartCamerasAsync(pagePort);
+                var started = await _start;
+                if (_pipeline == null)
+                {
+                    // The window was closed while starting.
+                    return;
+                }
+
+                if (!started)
+                {
+                    await StopAsync();
+                    return;
+                }
+
+                lbPageUrl.Text = _pageUrl;
+                lnkPage.IsEnabled = true;
+                btStop.IsEnabled = true;
+                Log($"Serving {_cameras.Count} camera(s). Open {_pageUrl} in a browser.");
+            }
+            catch (Exception ex)
+            {
+                Log(ex.Message);
+                await StopAsync();
+            }
+        }
+
+        // The whole start in one task, so that closing the window can wait for it: probing a camera takes seconds.
+        private async Task<bool> StartCamerasAsync(int pagePort)
+        {
+            try
+            {
                 _pageUrl = $"http://localhost:{pagePort}/";
                 lbCameras.Items.Clear();
 
@@ -125,7 +156,7 @@ namespace RTSP_WHEP_Camera_Grid_Demo
                     if (_pipeline == null)
                     {
                         // The window was closed while connecting.
-                        return;
+                        return false;
                     }
 
                     var rtsp = new RTSPRAWSourceBlock(rtspSettings);
@@ -158,36 +189,17 @@ namespace RTSP_WHEP_Camera_Grid_Demo
                 catch (HttpListenerException ex)
                 {
                     Log($"Cannot serve the page on port {pagePort}, choose another one: {ex.Message}");
-                    await StopAsync();
-                    return;
+                    return false;
                 }
 
                 _ = ServePageAsync(_pageServer);
 
-                _start = _pipeline.StartAsync();
-                var started = await _start;
-                if (_pipeline == null)
-                {
-                    // The window was closed while starting.
-                    return;
-                }
-
-                if (!started)
-                {
-                    await StopAsync();
-                    return;
-                }
-
-                lbPageUrl.Text = _pageUrl;
-                lnkPage.IsEnabled = true;
-                btStop.IsEnabled = true;
-                Log($"Serving {_cameras.Count} camera(s). Open {_pageUrl} in a browser.");
+                return await _pipeline.StartAsync();
             }
             catch (Exception ex)
             {
                 Log(ex.Message);
-                _start = Task.FromResult(false);
-                await StopAsync();
+                return false;
             }
         }
 
