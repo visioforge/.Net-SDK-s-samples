@@ -7,8 +7,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using Newtonsoft.Json.Linq;
 using YoutubeDLSharp;
 using YoutubeDLSharp.Metadata;
+using YoutubeDLSharp.Options;
 using VisioForge.Core;
 using VisioForge.Core.MediaPlayerX;
 using VisioForge.Core.Types.Events;
@@ -188,9 +190,27 @@ namespace youtube_player_x
                     Environment.SetEnvironmentVariable("PATH", toolsDir + Path.PathSeparator + envPath);
                 }
 
+                // yt-dlp -J with RunVideoDataFetch's playlist/config/error flags plus a player_js_variant, parsed here rather than by RunVideoDataFetch
+                // to also read "available_at", which YoutubeDLSharp's FormatData does not map.
                 var ytdl = new YoutubeDL { YoutubeDLPath = ytdlpPath };
-                var result = await ytdl.RunVideoDataFetch(edURL.Text);
-                var formats = result.Data?.Formats;
+                var result = await ytdl.RunWithOptions(
+                    new[] { edURL.Text },
+                    new OptionSet
+                    {
+                        DumpSingleJson = true,
+                        FlatPlaylist = true,
+                        NoPlaylist = true,
+                        IgnoreConfig = true,
+                        IgnoreErrors = true,
+                        // yt-dlp 2026.10.26 cannot solve the "main" JS of some YouTube players (yt-dlp #18123);
+                        // yt-dlp #18124 (after 2026.11.23) makes "tv" the default; drop this when ManuHub.Ytdlp carries it.
+                        ExtractorArgs = "youtube:player_js_variant=tv",
+                    },
+                    CancellationToken.None);
+                var json = result.Data?.LastOrDefault(line => line != null && line.StartsWith("{", StringComparison.Ordinal));
+                var root = json == null ? null : JObject.Parse(json);
+                var videoData = root?.ToObject<VideoData>();
+                var formats = videoData?.Formats;
 
                 if (formats == null || !result.Success)
                 {
@@ -198,7 +218,19 @@ namespace youtube_player_x
                     return;
                 }
 
-                _videoDurationSeconds = result.Data?.Duration ?? 0;
+                // YouTube serves the streams only once its pre-roll ad would have played; before that they answer 403.
+                var availableAt = root["formats"].Max(f => (long?)f["available_at"]) ?? 0;
+                var wait = DateTimeOffset.FromUnixTimeSeconds(availableAt) - DateTimeOffset.UtcNow;
+                if (wait > TimeSpan.Zero)
+                {
+                    AppendLog($"YouTube makes the streams wait {wait.TotalSeconds:F0} s (pre-roll ad)...");
+                    await Task.Delay(wait);
+                }
+
+                // YouTube also lists every height as HLS (m3u8); this demo plays the https files.
+                formats = formats.Where(f => f.Protocol?.StartsWith("m3u8", StringComparison.Ordinal) != true).ToArray();
+
+                _videoDurationSeconds = videoData.Duration ?? 0;
 
                 // All streams carrying video (both video-only and muxed video+audio).
                 // Muxed formats are useful to select when debugging seek: they use a single
