@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Live HLS from a webcam</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.7.4/dist/hls.min.js"></script>
+</head>
+<body style="margin:0;background:#000">
+  <video id="video" controls autoplay muted playsinline style="display:block;width:100%;height:100vh"></video>
+  <script>
+    // The app's built-in HTTP server serves this page, the playlist and the segments from the hls folder.
+    const video = document.getElementById("video");
+    if (window.Hls && Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource("playlist.m3u8");
+      hls.attachMedia(video);
+    } else {
+      // No hls.js (no MSE, or the CDN did not load): the browser's own HLS playback, where it has one.
+      video.src = "playlist.m3u8";
+    }
+  </script>
+</body>
+</html>
