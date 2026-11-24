@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVS MAUI", "DVS MAUI\DVS MA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMT MAUI", "MMT MAUI\MMT MAUI.csproj", "{DAC47853-CA54-E868-2EA9-337DF4BEC184}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "find-clip-short-console", "_VideoTutorials\find-clip-short-console\find-clip-short-console.csproj", "{63CC4AA7-6DC2-47F4-B08E-8133DBD12E26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{DAC47853-CA54-E868-2EA9-337DF4BEC184}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAC47853-CA54-E868-2EA9-337DF4BEC184}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DAC47853-CA54-E868-2EA9-337DF4BEC184}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{63CC4AA7-6DC2-47F4-B08E-8133DBD12E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63CC4AA7-6DC2-47F4-B08E-8133DBD12E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63CC4AA7-6DC2-47F4-B08E-8133DBD12E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63CC4AA7-6DC2-47F4-B08E-8133DBD12E26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{08A5DD94-7C3D-4BFA-EE8E-5C873A190C9B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{F5A76636-E0E2-C813-D9BC-21FC8DDE0B9E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{224D3002-F613-6B60-454B-9DAD0C71BBB1} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{63CC4AA7-6DC2-47F4-B08E-8133DBD12E26} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D9F410F2-CC37-4E32-ABE8-8A545FEA0877}
