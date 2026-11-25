@@ -7244,6 +7244,8 @@ namespace VideoEdit_CS_Demo
             tbSeeking.Size = new System.Drawing.Size(224, 69);
             tbSeeking.TabIndex = 46;
             tbSeeking.Scroll += tbSeeking_Scroll;
+            tbSeeking.MouseDown += tbSeeking_MouseDown;
+            tbSeeking.MouseUp += tbSeeking_MouseUp;
             // 
             // linkLabel1
             // 

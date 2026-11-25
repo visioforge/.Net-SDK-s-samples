@@ -12,9 +12,9 @@
     <Content Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.16]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.25]" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="[2026.11.23]" />
+    <PackageReference Include="VisioForge.DotNet.VideoEdit" Version="[2026.11.25]" />
   </ItemGroup>
 </Project>

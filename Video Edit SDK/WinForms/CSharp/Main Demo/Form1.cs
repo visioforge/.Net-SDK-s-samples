@@ -20,6 +20,7 @@ namespace VideoEdit_CS_Demo
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using VisioForge.Core.Helpers;
     using VisioForge.Core.Types;
@@ -2020,10 +2021,99 @@ namespace VideoEdit_CS_Demo
             lbSpeed.Text = Convert.ToInt32(tbSpeed.Value) + "%";
         }
 
+        private const int TbmGetChannelRect = 0x041A;
+        private const int TbmGetThumbRect = 0x0419;
+
+        private bool _timelineThumbDrag;
+
+        private bool _timelinePageStep;
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, ref RECT lParam);
+
         /// <summary>
-        /// Handles the tb seeking scroll event.
+        /// The channel and thumb rectangles of a track bar, in client coordinates.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        private struct RECT
+        {
+            public int Left, Top, Right, Bottom;
+        }
+
+        /// <summary>
+        /// Moves the thumb to the clicked point.
+        /// </summary>
+        private void ClickToPosition(MouseEventArgs e)
+        {
+            var thumb = new RECT();
+            SendMessage(tbSeeking.Handle, TbmGetThumbRect, IntPtr.Zero, ref thumb);
+
+            var channel = new RECT();
+            SendMessage(tbSeeking.Handle, TbmGetChannelRect, IntPtr.Zero, ref channel);
+
+            // The thumb centre travels from the channel's left edge to its right edge minus the thumb.
+            var thumbWidth = thumb.Right - thumb.Left;
+            var value = tbSeeking.Minimum + (int)Math.Round((e.X - (channel.Left + thumbWidth / 2.0)) * (tbSeeking.Maximum - tbSeeking.Minimum) / (channel.Right - channel.Left - thumbWidth));
+            tbSeeking.Value = Math.Max(tbSeeking.Minimum, Math.Min(tbSeeking.Maximum, value));
+        }
+
+        /// <summary>
+        /// A click on the track seeks to the clicked point; a press on the thumb is a drag.
+        /// </summary>
+        private void tbSeeking_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left || tbSeeking.Maximum <= tbSeeking.Minimum)
+            {
+                return;
+            }
+
+            // A page step means the native control took the press on the channel: a click.
+            if (!_timelinePageStep)
+            {
+                var thumb = new RECT();
+                SendMessage(tbSeeking.Handle, TbmGetThumbRect, IntPtr.Zero, ref thumb);
+
+                if (e.X >= thumb.Left && e.X < thumb.Right)
+                {
+                    _timelineThumbDrag = true;
+                    return;
+                }
+            }
+
+            _timelinePageStep = false;
+            ClickToPosition(e);
+
+            SeekToTimeline();
+        }
+
+        /// <summary>
+        /// Ends a thumb drag.
+        /// </summary>
+        private void tbSeeking_MouseUp(object sender, MouseEventArgs e)
+        {
+            _timelinePageStep = false;
+            _timelineThumbDrag = false;
+        }
+
+        /// <summary>
+        /// Handles the Scroll event of the tbSeeking control.
         /// </summary>
         private void tbSeeking_Scroll(object sender, EventArgs e)
+        {
+            // The page step of a click arrives before MouseDown, which reads it to tell a click from a thumb press.
+            if (MouseButtons == MouseButtons.Left && !_timelineThumbDrag)
+            {
+                _timelinePageStep = true;
+                return;
+            }
+
+            SeekToTimeline();
+        }
+
+        /// <summary>
+        /// Seeks to the timeline value.
+        /// </summary>
+        private void SeekToTimeline()
         {
             VideoEdit1.Position_Set(TimeSpan.FromMilliseconds(tbSeeking.Value));
         }

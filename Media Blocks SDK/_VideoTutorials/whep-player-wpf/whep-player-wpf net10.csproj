@@ -14,10 +14,10 @@
   </ItemGroup>
   <!-- WHEPSourceBlock (whepclientsrc) lives in the Adds package. -->
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.16]" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="[2026.11.23]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.25]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="[2026.11.25]" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.23]" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.25]" />
   </ItemGroup>
 </Project>

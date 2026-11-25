@@ -334,6 +334,8 @@ namespace Memory_Stream_Demo
             tbTimeline.Size = new System.Drawing.Size(276, 56);
             tbTimeline.TabIndex = 0;
             tbTimeline.Scroll += tbTimeline_Scroll;
+            tbTimeline.MouseDown += tbTimeline_MouseDown;
+            tbTimeline.MouseUp += tbTimeline_MouseUp;
             // 
             // linkLabel1
             // 

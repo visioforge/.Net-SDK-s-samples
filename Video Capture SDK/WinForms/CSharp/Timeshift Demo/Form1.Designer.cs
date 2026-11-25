@@ -595,6 +595,7 @@ namespace VC_Timeshift_Demo
             this.tbTimeline.Size = new System.Drawing.Size(434, 45);
             this.tbTimeline.TabIndex = 3;
             this.tbTimeline.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tbTimeline_MouseDown);
+            this.tbTimeline.Scroll += new System.EventHandler(this.tbTimeline_Scroll);
             this.tbTimeline.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tbTimeline_MouseUp);
             // 
             // btPlayerResume

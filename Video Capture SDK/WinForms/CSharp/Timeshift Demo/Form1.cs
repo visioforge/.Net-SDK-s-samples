@@ -5,6 +5,7 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using VisioForge.Core.MediaPlayer;
     using VisioForge.Core.Types;
@@ -435,6 +436,12 @@
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
+            // Leave the timeline alone while the user holds it: a range change recreates its handle and ends the drag.
+            if (tbTimeline.Capture)
+            {
+                return;
+            }
+
             var spanDur = await MediaPlayer1.Duration_TimeAsync();
             lbDuration.Text = FormatTime(spanDur);
 
@@ -456,12 +463,81 @@
             lbPostion.Text = FormatTime(spanPos);
         }
 
+        private const int TbmGetChannelRect = 0x041A;
+        private const int TbmGetThumbRect = 0x0419;
+
+        private bool _timelineThumbDrag;
+
+        private bool _timelinePageStep;
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, ref RECT lParam);
+
+        /// <summary>
+        /// The channel and thumb rectangles of a track bar, in client coordinates.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        private struct RECT
+        {
+            public int Left, Top, Right, Bottom;
+        }
+
+        /// <summary>
+        /// Moves the thumb to the clicked point.
+        /// </summary>
+        private void ClickToPosition(MouseEventArgs e)
+        {
+            var thumb = new RECT();
+            SendMessage(tbTimeline.Handle, TbmGetThumbRect, IntPtr.Zero, ref thumb);
+
+            var channel = new RECT();
+            SendMessage(tbTimeline.Handle, TbmGetChannelRect, IntPtr.Zero, ref channel);
+
+            // The thumb centre travels from the channel's left edge to its right edge minus the thumb.
+            var thumbWidth = thumb.Right - thumb.Left;
+            var value = tbTimeline.Minimum + (int)Math.Round((e.X - (channel.Left + thumbWidth / 2.0)) * (tbTimeline.Maximum - tbTimeline.Minimum) / (channel.Right - channel.Left - thumbWidth));
+            tbTimeline.Value = Math.Max(tbTimeline.Minimum, Math.Min(tbTimeline.Maximum, value));
+        }
+
+        /// <summary>
+        /// Handles the Scroll event of the tbTimeline control.
+        /// </summary>
+        private void tbTimeline_Scroll(object sender, EventArgs e)
+        {
+            // The page step of a click arrives before MouseDown, which reads it to tell a click from a thumb press.
+            if (MouseButtons == MouseButtons.Left && !_timelineThumbDrag)
+            {
+                _timelinePageStep = true;
+            }
+        }
+
         /// <summary>
         /// Tb timeline mouse down.
         /// </summary>
         private void tbTimeline_MouseDown(object sender, MouseEventArgs e)
         {
             timer1.Enabled = false;
+
+            if (e.Button != MouseButtons.Left || tbTimeline.Maximum <= tbTimeline.Minimum)
+            {
+                return;
+            }
+
+            // A page step means the native control took the press on the channel: a click.
+            if (!_timelinePageStep)
+            {
+                var thumb = new RECT();
+                SendMessage(tbTimeline.Handle, TbmGetThumbRect, IntPtr.Zero, ref thumb);
+
+                if (e.X >= thumb.Left && e.X < thumb.Right)
+                {
+                    _timelineThumbDrag = true;
+                    return;
+                }
+            }
+
+            _timelinePageStep = false;
+            ClickToPosition(e);
         }
 
         /// <summary>
@@ -469,9 +545,26 @@
         /// </summary>
         private async void tbTimeline_MouseUp(object sender, MouseEventArgs e)
         {
-            await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+            _timelinePageStep = false;
+            _timelineThumbDrag = false;
+            try
+            {
+                // Only a left press seeks, as in MouseDown; the timer still resumes for any button.
+                if (e.Button != MouseButtons.Left || tbTimeline.Maximum <= tbTimeline.Minimum)
+                {
+                    return;
+                }
 
-            timer1.Enabled = true;
+                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
+            }
+            catch (Exception ex)
+            {
+                Log(ex.Message);
+            }
+            finally
+            {
+                timer1.Enabled = true;
+            }
         }
 
         /// <summary>

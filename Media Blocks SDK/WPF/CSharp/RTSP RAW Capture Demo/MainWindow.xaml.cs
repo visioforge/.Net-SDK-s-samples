@@ -125,8 +125,8 @@ namespace RTSP_RAW_Capture_Demo
                     _videoRenderer = new VideoRendererBlock(_previewPipeline, VideoView1);
                     _previewPipeline.Connect(_previewSource.VideoOutput, _videoRenderer.Input);
 
-                    // Create audio renderer if audio is enabled
-                    if (cbAudioEnabled.IsChecked == true)
+                    // Create audio renderer if the camera sends audio (no output with audio off or camera info without audio; compatibility mode keeps it)
+                    if (_previewSource.AudioOutput != null)
                     {
                         _audioRenderer = new AudioRendererBlock();
                         _previewPipeline.Connect(_previewSource.AudioOutput, _audioRenderer.Input);

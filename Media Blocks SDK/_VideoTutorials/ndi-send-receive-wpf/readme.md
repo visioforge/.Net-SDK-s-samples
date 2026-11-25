@@ -8,4 +8,4 @@ The code of the [NDI send and receive video tutorial](https://www.youtube.com/wa
 
 ---
 
-[Visit the product page.](https://www.visioforge.com/media-blocks-sdk)
+[Visit the product page.](https://www.visioforge.com/media-blocks-sdk-net)

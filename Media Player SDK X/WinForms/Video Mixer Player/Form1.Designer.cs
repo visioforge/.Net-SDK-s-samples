@@ -256,6 +256,7 @@
             // 
             // btStop
             // 
+            btStop.Enabled = false;
             btStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             btStop.Location = new System.Drawing.Point(300, 113);
             btStop.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
@@ -264,9 +265,11 @@
             btStop.TabIndex = 7;
             btStop.Text = "Stop";
             btStop.UseVisualStyleBackColor = true;
+            btStop.Click += btStop_Click;
             // 
             // btPause
             // 
+            btPause.Enabled = false;
             btPause.Location = new System.Drawing.Point(204, 113);
             btPause.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             btPause.Name = "btPause";
@@ -274,9 +277,11 @@
             btPause.TabIndex = 6;
             btPause.Text = "Pause";
             btPause.UseVisualStyleBackColor = true;
+            btPause.Click += btPause_Click;
             // 
             // btResume
             // 
+            btResume.Enabled = false;
             btResume.Location = new System.Drawing.Point(91, 113);
             btResume.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             btResume.Name = "btResume";
@@ -284,6 +289,7 @@
             btResume.TabIndex = 5;
             btResume.Text = "Resume";
             btResume.UseVisualStyleBackColor = true;
+            btResume.Click += btResume_Click;
             // 
             // btStart
             // 
@@ -316,6 +322,8 @@
             tbTimeline.Size = new System.Drawing.Size(456, 69);
             tbTimeline.TabIndex = 0;
             tbTimeline.Scroll += tbTimeline_Scroll;
+            tbTimeline.MouseDown += tbTimeline_MouseDown;
+            tbTimeline.MouseUp += tbTimeline_MouseUp;
             // 
             // tmPosition
             // 

@@ -1,6 +1,7 @@
 ' ReSharper disable InconsistentNaming
 
 Imports System.IO
+Imports System.Runtime.InteropServices
 Imports VisioForge.Core.UI
 Imports VisioForge.Core
 Imports VisioForge.Core.Types
@@ -37,13 +38,102 @@ Public Class Form1
         MediaPlayer1 = Nothing
     End Sub
 
-    Private Async Sub tbTimeline_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbTimeline.Scroll
+    Private Const TbmGetChannelRect As Integer = &H41A
+    Private Const TbmGetThumbRect As Integer = &H419
 
-        If (Convert.ToInt32(timer1.Tag) = 0) Then
-            Await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value))
+    Private _timelineThumbDrag As Boolean
+
+    Private _timelinePageStep As Boolean
+
+    <DllImport("user32.dll")>
+    Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As IntPtr, ByRef lParam As RECT) As IntPtr
+    End Function
+
+    ''' <summary>
+    ''' The channel and thumb rectangles of a track bar, in client coordinates.
+    ''' </summary>
+    <StructLayout(LayoutKind.Sequential)>
+    Private Structure RECT
+        Public Left As Integer
+        Public Top As Integer
+        Public Right As Integer
+        Public Bottom As Integer
+    End Structure
+
+    ''' <summary>
+    ''' Moves the thumb to the clicked point.
+    ''' </summary>
+    Private Sub ClickToPosition(e As MouseEventArgs)
+        Dim thumb As New RECT()
+        SendMessage(tbTimeline.Handle, TbmGetThumbRect, IntPtr.Zero, thumb)
+
+        Dim channel As New RECT()
+        SendMessage(tbTimeline.Handle, TbmGetChannelRect, IntPtr.Zero, channel)
+
+        ' The thumb centre travels from the channel's left edge to its right edge minus the thumb.
+        Dim thumbWidth = thumb.Right - thumb.Left
+        ' A track bar narrower than its thumb has no travel to map the click onto.
+        If channel.Right - channel.Left - thumbWidth <= 0 Then
+            Return
         End If
 
+        Dim value = tbTimeline.Minimum + CInt(Math.Round((e.X - (channel.Left + thumbWidth / 2.0)) * (tbTimeline.Maximum - tbTimeline.Minimum) / (channel.Right - channel.Left - thumbWidth)))
+        tbTimeline.Value = Math.Max(tbTimeline.Minimum, Math.Min(tbTimeline.Maximum, value))
     End Sub
+
+    ''' <summary>
+    ''' A click on the track seeks to the clicked point; a press on the thumb is a drag.
+    ''' </summary>
+    Private Async Sub tbTimeline_MouseDown(sender As Object, e As MouseEventArgs) Handles tbTimeline.MouseDown
+        If (e.Button <> MouseButtons.Left OrElse tbTimeline.Maximum <= tbTimeline.Minimum) Then
+            Return
+        End If
+
+        ' A page step means the native control took the press on the channel: a click.
+        If (Not _timelinePageStep) Then
+            Dim thumb As New RECT()
+            SendMessage(tbTimeline.Handle, TbmGetThumbRect, IntPtr.Zero, thumb)
+
+            If (e.X >= thumb.Left AndAlso e.X < thumb.Right) Then
+                _timelineThumbDrag = True
+                Return
+            End If
+        End If
+
+        _timelinePageStep = False
+        ClickToPosition(e)
+
+        Await SeekToTimelineAsync()
+    End Sub
+
+    ''' <summary>
+    ''' Ends a thumb drag.
+    ''' </summary>
+    Private Sub tbTimeline_MouseUp(sender As Object, e As MouseEventArgs) Handles tbTimeline.MouseUp
+        _timelinePageStep = False
+        _timelineThumbDrag = False
+    End Sub
+
+    Private Async Sub tbTimeline_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbTimeline.Scroll
+        ' The page step of a click arrives before MouseDown, which reads it to tell a click from a thumb press.
+        If (MouseButtons = MouseButtons.Left AndAlso Not _timelineThumbDrag) Then
+            _timelinePageStep = True
+            Return
+        End If
+
+        Await SeekToTimelineAsync()
+    End Sub
+
+    ''' <summary>
+    ''' Seeks to the timeline value.
+    ''' </summary>
+    Private Async Function SeekToTimelineAsync() As Task
+        Try
+            Await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value))
+        Catch ex As Exception
+            Debug.WriteLine(ex)
+        End Try
+    End Function
 
     Private Async Sub btStart_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btStart.Click
 
@@ -171,15 +261,17 @@ Public Class Form1
     End Sub
 
     Private Async Sub timer1_Tick(ByVal sender As System.Object, ByVal e As EventArgs) Handles timer1.Tick
+        ' Leave the timeline alone while the user holds it: a range change recreates its handle and ends the drag.
+        If tbTimeline.Capture Then
+            Return
+        End If
 
-        timer1.Tag = 1
         tbTimeline.Maximum = (Await MediaPlayer1.Duration_TimeAsync()).TotalSeconds
 
         Dim value As Integer = (Await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds
 
         ' Playback has stopped: keep the reset label.
         If Not timer1.Enabled Then
-            timer1.Tag = 0
             Return
         End If
 
@@ -188,8 +280,6 @@ Public Class Form1
         End If
 
         lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum)
-
-        timer1.Tag = 0
 
     End Sub
 

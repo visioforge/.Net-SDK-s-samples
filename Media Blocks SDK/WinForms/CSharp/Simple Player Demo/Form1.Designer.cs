@@ -256,6 +256,8 @@ namespace MediaBlocks_Player_Demo
             tbTimeline.Size = new System.Drawing.Size(344, 69);
             tbTimeline.TabIndex = 0;
             tbTimeline.Scroll += tbTimeline_Scroll;
+            tbTimeline.MouseDown += tbTimeline_MouseDown;
+            tbTimeline.MouseUp += tbTimeline_MouseUp;
             // 
             // linkLabel1
             // 

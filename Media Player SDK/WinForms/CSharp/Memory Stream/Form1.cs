@@ -5,6 +5,7 @@ namespace Memory_Stream_Demo
     using System;
     using System.Diagnostics;
     using System.IO;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using VisioForge.Core;
     using VisioForge.Core.MediaPlayer;
@@ -96,17 +97,103 @@ namespace Memory_Stream_Demo
             Process.Start(startInfo);
         }
 
+        private const int TbmGetChannelRect = 0x041A;
+        private const int TbmGetThumbRect = 0x0419;
+
+        private bool _timelineThumbDrag;
+
+        private bool _timelinePageStep;
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, ref RECT lParam);
+
         /// <summary>
-        /// Handles the tb timeline scroll event.
+        /// The channel and thumb rectangles of a track bar, in client coordinates.
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        private struct RECT
+        {
+            public int Left, Top, Right, Bottom;
+        }
+
+        /// <summary>
+        /// Moves the thumb to the clicked point.
+        /// </summary>
+        private void ClickToPosition(MouseEventArgs e)
+        {
+            var thumb = new RECT();
+            SendMessage(tbTimeline.Handle, TbmGetThumbRect, IntPtr.Zero, ref thumb);
+
+            var channel = new RECT();
+            SendMessage(tbTimeline.Handle, TbmGetChannelRect, IntPtr.Zero, ref channel);
+
+            // The thumb centre travels from the channel's left edge to its right edge minus the thumb.
+            var thumbWidth = thumb.Right - thumb.Left;
+            var value = tbTimeline.Minimum + (int)Math.Round((e.X - (channel.Left + thumbWidth / 2.0)) * (tbTimeline.Maximum - tbTimeline.Minimum) / (channel.Right - channel.Left - thumbWidth));
+            tbTimeline.Value = Math.Max(tbTimeline.Minimum, Math.Min(tbTimeline.Maximum, value));
+        }
+
+        /// <summary>
+        /// A click on the track seeks to the clicked point; a press on the thumb is a drag.
+        /// </summary>
+        private async void tbTimeline_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left || tbTimeline.Maximum <= tbTimeline.Minimum)
+            {
+                return;
+            }
+
+            // A page step means the native control took the press on the channel: a click.
+            if (!_timelinePageStep)
+            {
+                var thumb = new RECT();
+                SendMessage(tbTimeline.Handle, TbmGetThumbRect, IntPtr.Zero, ref thumb);
+
+                if (e.X >= thumb.Left && e.X < thumb.Right)
+                {
+                    _timelineThumbDrag = true;
+                    return;
+                }
+            }
+
+            _timelinePageStep = false;
+            ClickToPosition(e);
+
+            await SeekToTimelineAsync();
+        }
+
+        /// <summary>
+        /// Ends a thumb drag.
+        /// </summary>
+        private void tbTimeline_MouseUp(object sender, MouseEventArgs e)
+        {
+            _timelinePageStep = false;
+            _timelineThumbDrag = false;
+        }
+
+        /// <summary>
+        /// Handles the Scroll event of the tbTimeline control.
         /// </summary>
         private async void tbTimeline_Scroll(object sender, EventArgs e)
         {
+            // The page step of a click arrives before MouseDown, which reads it to tell a click from a thumb press.
+            if (MouseButtons == MouseButtons.Left && !_timelineThumbDrag)
+            {
+                _timelinePageStep = true;
+                return;
+            }
+
+            await SeekToTimelineAsync();
+        }
+
+        /// <summary>
+        /// Seeks to the timeline value.
+        /// </summary>
+        private async Task SeekToTimelineAsync()
+        {
             try
             {
-                if (Convert.ToInt32(timer1.Tag) == 0)
-                {
-                    await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
-                }
+                await MediaPlayer1.Position_Set_TimeAsync(TimeSpan.FromSeconds(tbTimeline.Value));
             }
             catch (Exception ex)
             {
@@ -313,9 +400,14 @@ namespace Memory_Stream_Demo
         /// </summary>
         private async void timer1_Tick(object sender, EventArgs e)
         {
+            // Leave the timeline alone while the user holds it: a range change recreates its handle and ends the drag.
+            if (tbTimeline.Capture)
+            {
+                return;
+            }
+
             try
             {
-                timer1.Tag = 1;
                 tbTimeline.Maximum = (int)(await MediaPlayer1.Duration_TimeAsync()).TotalSeconds;
 
                 int value = (int)(await MediaPlayer1.Position_Get_TimeAsync()).TotalSeconds;
@@ -323,7 +415,6 @@ namespace Memory_Stream_Demo
                 // Playback has stopped: keep the reset label.
                 if (!timer1.Enabled)
                 {
-                    timer1.Tag = 0;
                     return;
                 }
 
@@ -333,8 +424,6 @@ namespace Memory_Stream_Demo
                 }
 
                 lbTime.Text = MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Value) + "/" + MediaPlayer1.Helpful_SecondsToTimeFormatted(tbTimeline.Maximum);
-
-                timer1.Tag = 0;
             }
             catch (Exception ex)
             {

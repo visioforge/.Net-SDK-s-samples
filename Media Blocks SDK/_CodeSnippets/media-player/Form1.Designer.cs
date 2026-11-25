@@ -124,6 +124,8 @@
             tbTimeline.Size = new System.Drawing.Size(345, 69);
             tbTimeline.TabIndex = 6;
             tbTimeline.Scroll += tbTimeline_Scroll;
+            tbTimeline.MouseDown += tbTimeline_MouseDown;
+            tbTimeline.MouseUp += tbTimeline_MouseUp;
             // 
             // timer1
             // 

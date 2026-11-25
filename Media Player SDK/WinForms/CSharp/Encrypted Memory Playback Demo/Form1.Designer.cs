@@ -344,6 +344,8 @@
             this.tbTimeline.Size = new System.Drawing.Size(310, 69);
             this.tbTimeline.TabIndex = 0;
             this.tbTimeline.Scroll += new System.EventHandler(this.tbTimeline_Scroll);
+            this.tbTimeline.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tbTimeline_MouseDown);
+            this.tbTimeline.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tbTimeline_MouseUp);
             // 
             // linkLabel1
             // 

@@ -4,6 +4,7 @@ Imports System.Globalization
 Imports System.IO
 Imports System.Linq
 Imports System.Threading.Tasks
+Imports System.Runtime.InteropServices
 Imports VisioForge.Core.Helpers
 Imports VisioForge.Core.Types
 Imports VisioForge.Core.Types.AudioEffects
@@ -1741,11 +1742,99 @@ Public Class Form1
 
     End Sub
 
-        ''' <summary>
-        ''' Tb seeking scroll.
-        ''' </summary>
-    Private Sub tbSeeking_Scroll(ByVal sender As Object, ByVal e As EventArgs) Handles tbSeeking.Scroll
+    Private Const TbmGetChannelRect As Integer = &H41A
+    Private Const TbmGetThumbRect As Integer = &H419
 
+    Private _timelineThumbDrag As Boolean
+
+    Private _timelinePageStep As Boolean
+
+    <DllImport("user32.dll")>
+    Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As IntPtr, ByRef lParam As RECT) As IntPtr
+    End Function
+
+    ''' <summary>
+    ''' The channel and thumb rectangles of a track bar, in client coordinates.
+    ''' </summary>
+    <StructLayout(LayoutKind.Sequential)>
+    Private Structure RECT
+        Public Left As Integer
+        Public Top As Integer
+        Public Right As Integer
+        Public Bottom As Integer
+    End Structure
+
+    ''' <summary>
+    ''' Moves the thumb to the clicked point.
+    ''' </summary>
+    Private Sub ClickToPosition(e As MouseEventArgs)
+        Dim thumb As New RECT()
+        SendMessage(tbSeeking.Handle, TbmGetThumbRect, IntPtr.Zero, thumb)
+
+        Dim channel As New RECT()
+        SendMessage(tbSeeking.Handle, TbmGetChannelRect, IntPtr.Zero, channel)
+
+        ' The thumb centre travels from the channel's left edge to its right edge minus the thumb.
+        Dim thumbWidth = thumb.Right - thumb.Left
+        ' A track bar narrower than its thumb has no travel to map the click onto.
+        If channel.Right - channel.Left - thumbWidth <= 0 Then
+            Return
+        End If
+
+        Dim value = tbSeeking.Minimum + CInt(Math.Round((e.X - (channel.Left + thumbWidth / 2.0)) * (tbSeeking.Maximum - tbSeeking.Minimum) / (channel.Right - channel.Left - thumbWidth)))
+        tbSeeking.Value = Math.Max(tbSeeking.Minimum, Math.Min(tbSeeking.Maximum, value))
+    End Sub
+
+    ''' <summary>
+    ''' A click on the track seeks to the clicked point; a press on the thumb is a drag.
+    ''' </summary>
+    Private Sub tbSeeking_MouseDown(sender As Object, e As MouseEventArgs) Handles tbSeeking.MouseDown
+        If (e.Button <> MouseButtons.Left OrElse tbSeeking.Maximum <= tbSeeking.Minimum) Then
+            Return
+        End If
+
+        ' A page step means the native control took the press on the channel: a click.
+        If (Not _timelinePageStep) Then
+            Dim thumb As New RECT()
+            SendMessage(tbSeeking.Handle, TbmGetThumbRect, IntPtr.Zero, thumb)
+
+            If (e.X >= thumb.Left AndAlso e.X < thumb.Right) Then
+                _timelineThumbDrag = True
+                Return
+            End If
+        End If
+
+        _timelinePageStep = False
+        ClickToPosition(e)
+
+        SeekToTimeline()
+    End Sub
+
+    ''' <summary>
+    ''' Ends a thumb drag.
+    ''' </summary>
+    Private Sub tbSeeking_MouseUp(sender As Object, e As MouseEventArgs) Handles tbSeeking.MouseUp
+        _timelinePageStep = False
+        _timelineThumbDrag = False
+    End Sub
+
+    ''' <summary>
+    ''' Tb seeking scroll.
+    ''' </summary>
+    Private Sub tbSeeking_Scroll(ByVal sender As System.Object, ByVal e As EventArgs) Handles tbSeeking.Scroll
+        ' The page step of a click arrives before MouseDown, which reads it to tell a click from a thumb press.
+        If (MouseButtons = MouseButtons.Left AndAlso Not _timelineThumbDrag) Then
+            _timelinePageStep = True
+            Return
+        End If
+
+        SeekToTimeline()
+    End Sub
+
+    ''' <summary>
+    ''' Seeks to the timeline value.
+    ''' </summary>
+    Private Sub SeekToTimeline()
         VideoEdit1.Position_Set(TimeSpan.FromMilliseconds(tbSeeking.Value))
 
     End Sub

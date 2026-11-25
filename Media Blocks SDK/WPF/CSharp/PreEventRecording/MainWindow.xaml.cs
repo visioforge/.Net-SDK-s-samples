@@ -255,6 +255,15 @@ namespace PreEventRecordingDemoMBWPF
                         audioEnabled);
 
                     rtspSource = new RTSPSourceBlock(rtspSettings);
+
+                    // No audio output with audio off or camera info without audio (compatibility mode keeps it):
+                    // record video only, or the audio branch would wait for a stream that never comes.
+                    if (audioEnabled && rtspSource.AudioOutput == null)
+                    {
+                        Log("The camera has no audio; recording video only.");
+                    }
+
+                    audioEnabled = rtspSource.AudioOutput != null;
                     _videoSource = rtspSource;
                 }
                 else
