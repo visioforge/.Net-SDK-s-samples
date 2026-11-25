@@ -15,8 +15,8 @@
         </Grid.ColumnDefinitions>
 
         <!-- Left panel: controls -->
-        <ScrollViewer Grid.Column="0" Margin="8">
-            <StackPanel Margin="0,0,0,10">
+        <ScrollViewer Grid.Column="0" Margin="8" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,10,10">
                 <!-- Source type selection -->
                 <TextBlock FontWeight="Bold" Text="Source Type" Margin="0,0,0,3" />
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
@@ -63,12 +63,12 @@
                 <!-- Pre-event settings -->
                 <TextBlock FontWeight="Bold" Text="Pre-Event Settings" Margin="0,0,0,3" />
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                    <TextBlock Text="Pre-event (s):" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <TextBlock Text="Pre-event (s):" VerticalAlignment="Center" Margin="0,0,8,0" Width="90" />
                     <Slider x:Name="slPreEvent" Minimum="5" Maximum="60" Value="10" Width="150" Margin="0,0,8,0" />
                     <TextBlock x:Name="lbPreEvent" Text="10" VerticalAlignment="Center" Width="30" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                    <TextBlock Text="Post-event (s):" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <TextBlock Text="Post-event (s):" VerticalAlignment="Center" Margin="0,0,8,0" Width="90" />
                     <Slider x:Name="slPostEvent" Minimum="5" Maximum="30" Value="5" Width="150" Margin="0,0,8,0" />
                     <TextBlock x:Name="lbPostEvent" Text="5" VerticalAlignment="Center" Width="30" />
                 </StackPanel>
@@ -101,20 +101,26 @@
                 <TextBlock FontWeight="Bold" Text="Status" Margin="0,0,0,3" />
                 <TextBlock x:Name="lbState" Text="State: Idle" Margin="0,0,0,3" />
                 <TextBlock x:Name="lbRecFile" Text="File: —" TextWrapping="Wrap" Margin="0,0,0,6" />
-
-                <Separator Margin="0,6" />
-
-                <!-- Debug -->
-                <TextBlock FontWeight="Bold" Text="Log" Margin="0,0,0,3" />
-                <TextBox x:Name="edLog" Height="200" AcceptsReturn="True" IsReadOnly="True"
-                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
             </StackPanel>
         </ScrollViewer>
 
-        <!-- Right panel: video preview -->
-        <Border Grid.Column="1" Margin="4,8,8,8" Background="#0C0C0C">
-            <WPF:VideoView x:Name="VideoView1" HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" Background="#0C0C0C" />
-        </Border>
+        <!-- Right panel: video preview and log -->
+        <Grid Grid.Column="1" Margin="4,8,8,8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Background="#0C0C0C">
+                <WPF:VideoView x:Name="VideoView1" HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch" Background="#0C0C0C" />
+            </Border>
+
+            <StackPanel Grid.Row="1" Margin="0,8,0,0">
+                <TextBlock FontWeight="Bold" Text="Log" Margin="0,0,0,3" />
+                <TextBox x:Name="edLog" Height="120" AcceptsReturn="True" IsReadOnly="True"
+                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

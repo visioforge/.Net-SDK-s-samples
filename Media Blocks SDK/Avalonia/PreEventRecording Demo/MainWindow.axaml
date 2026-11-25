@@ -9,8 +9,8 @@
 
     <Grid ColumnDefinitions="500,*">
         <!-- Left panel: controls -->
-        <ScrollViewer Grid.Column="0" Margin="8">
-            <StackPanel Spacing="6">
+        <ScrollViewer Grid.Column="0" Margin="8" AllowAutoHide="False">
+            <StackPanel Spacing="6" Margin="0,0,10,0">
                 <!-- Source type selection -->
                 <TextBlock FontWeight="Bold" Text="Source Type" />
                 <StackPanel Orientation="Horizontal" Spacing="16">
@@ -32,11 +32,11 @@
                     <TextBlock FontWeight="Bold" Text="RTSP URL" />
                     <TextBox x:Name="edRtspUrl" Text="rtsp://localhost:554/stream" />
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <TextBlock Text="Login:" VerticalAlignment="Center" Width="55" />
+                        <TextBlock Text="Login:" VerticalAlignment="Center" Width="80" />
                         <TextBox x:Name="edRtspLogin" Width="150" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Spacing="8">
-                        <TextBlock Text="Password:" VerticalAlignment="Center" Width="55" />
+                        <TextBlock Text="Password:" VerticalAlignment="Center" Width="80" />
                         <TextBox x:Name="edRtspPassword" PasswordChar="*" Width="150" />
                     </StackPanel>
                 </StackPanel>
@@ -51,12 +51,12 @@
                 <!-- Pre-event settings -->
                 <TextBlock FontWeight="Bold" Text="Pre-Event Settings" />
                 <StackPanel Orientation="Horizontal" Spacing="8">
-                    <TextBlock Text="Pre-event (s):" VerticalAlignment="Center" />
+                    <TextBlock Text="Pre-event (s):" VerticalAlignment="Center" Width="110" />
                     <Slider x:Name="slPreEvent" Minimum="5" Maximum="60" Value="10" Width="150" />
                     <TextBlock x:Name="lbPreEvent" Text="10" VerticalAlignment="Center" Width="30" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="8">
-                    <TextBlock Text="Post-event (s):" VerticalAlignment="Center" />
+                    <TextBlock Text="Post-event (s):" VerticalAlignment="Center" Width="110" />
                     <Slider x:Name="slPostEvent" Minimum="5" Maximum="30" Value="5" Width="150" />
                     <TextBlock x:Name="lbPostEvent" Text="5" VerticalAlignment="Center" Width="30" />
                 </StackPanel>
@@ -97,20 +97,21 @@
                 <TextBlock x:Name="lbState" Text="State: Idle" />
                 <TextBlock x:Name="lbBufferStats" Text="Buffer: 0 KB, 0.0s" />
                 <TextBlock x:Name="lbRecFile" Text="File: —" TextWrapping="Wrap" />
+            </StackPanel>
+        </ScrollViewer>
 
-                <Separator Margin="0,6" />
+        <!-- Right panel: video preview and log -->
+        <Grid Grid.Column="1" Margin="4,8,8,8" RowDefinitions="*,Auto">
+            <Panel Background="#0C0C0C">
+                <avalonia:VideoView x:Name="VideoView1" HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch" Background="#0C0C0C" />
+            </Panel>
 
-                <!-- Log -->
+            <StackPanel Grid.Row="1" Spacing="6" Margin="0,8,0,0">
                 <TextBlock FontWeight="Bold" Text="Log" />
                 <TextBox x:Name="edLog" Height="120" AcceptsReturn="True" IsReadOnly="True"
                          TextWrapping="Wrap" />
             </StackPanel>
-        </ScrollViewer>
-
-        <!-- Right panel: video preview -->
-        <Panel Grid.Column="1" Margin="4,8,8,8" Background="#0C0C0C">
-            <avalonia:VideoView x:Name="VideoView1" HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" Background="#0C0C0C" />
-        </Panel>
+        </Grid>
     </Grid>
 </Window>
