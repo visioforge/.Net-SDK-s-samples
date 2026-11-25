@@ -35,6 +35,8 @@ namespace WebRTC_Browser_Streamer_Demo
 
         private bool _closing;
 
+        private bool _canClose;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -82,7 +84,7 @@ namespace WebRTC_Browser_Streamer_Demo
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                MessageBox.Show(this, $"The SDK could not start: {ex.Message}");
+                MessageBox.Show(this, $"Initialization failed: {ex.Message}");
             }
         }
 
@@ -178,8 +180,6 @@ namespace WebRTC_Browser_Streamer_Demo
                 catch (Exception stopEx)
                 {
                     Log(stopEx.Message);
-                    _pipeline = null;
-                    btStart.IsEnabled = true;
                 }
             }
         }
@@ -264,13 +264,18 @@ namespace WebRTC_Browser_Streamer_Demo
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_closing)
+            if (_canClose)
             {
                 return;
             }
 
             // Keep the window open until the pipeline has stopped and the SDK is destroyed, then close again.
             e.Cancel = true;
+            if (_closing)
+            {
+                return;
+            }
+
             _closing = true;
             IsEnabled = false;
 
@@ -282,13 +287,14 @@ namespace WebRTC_Browser_Streamer_Demo
                     await _pipeline.DisposeAsync();
                     _pipeline = null;
                 }
-
-                VisioForgeX.DestroySDK();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
+
+            VisioForgeX.DestroySDK();
+            _canClose = true;
 
             // Deferred: WPF throws if Close() runs while this Closing call is still on the stack.
             _ = Dispatcher.BeginInvoke(new Action(Close));
