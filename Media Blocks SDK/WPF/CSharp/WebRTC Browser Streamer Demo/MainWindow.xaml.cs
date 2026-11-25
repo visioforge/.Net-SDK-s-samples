@@ -85,6 +85,7 @@ namespace WebRTC_Browser_Streamer_Demo
             {
                 Debug.WriteLine(ex);
                 IsEnabled = true;
+                Title = Title.Replace(" [FIRST TIME LOAD, BUILDING THE REGISTRY...]", "");
                 MessageBox.Show(this, $"Initialization failed: {ex.Message}");
             }
         }
@@ -181,7 +182,6 @@ namespace WebRTC_Browser_Streamer_Demo
                 catch (Exception stopEx)
                 {
                     Log(stopEx.Message);
-                    btStart.IsEnabled = true;
                 }
             }
         }
@@ -289,7 +289,15 @@ namespace WebRTC_Browser_Streamer_Demo
                     await _pipeline.DisposeAsync();
                     _pipeline = null;
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
 
+            // Its own try: the SDK is destroyed even when the pipeline stop failed.
+            try
+            {
                 VisioForgeX.DestroySDK();
             }
             catch (Exception ex)
