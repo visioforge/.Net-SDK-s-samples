@@ -181,7 +181,7 @@ namespace WebRTC_Browser_Streamer_Demo
                 }
                 catch (Exception stopEx)
                 {
-                    Log(stopEx.Message);
+                    Log($"Cleanup failed: {stopEx.Message} Close the window to release the camera and the ports.");
                 }
             }
         }
@@ -289,15 +289,7 @@ namespace WebRTC_Browser_Streamer_Demo
                     await _pipeline.DisposeAsync();
                     _pipeline = null;
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
 
-            // Its own try: the SDK is destroyed even when the pipeline stop failed.
-            try
-            {
                 VisioForgeX.DestroySDK();
             }
             catch (Exception ex)
