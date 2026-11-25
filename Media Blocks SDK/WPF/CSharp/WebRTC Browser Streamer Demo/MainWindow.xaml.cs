@@ -84,6 +84,7 @@ namespace WebRTC_Browser_Streamer_Demo
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                IsEnabled = true;
                 MessageBox.Show(this, $"Initialization failed: {ex.Message}");
             }
         }
@@ -180,6 +181,7 @@ namespace WebRTC_Browser_Streamer_Demo
                 catch (Exception stopEx)
                 {
                     Log(stopEx.Message);
+                    btStart.IsEnabled = true;
                 }
             }
         }
@@ -287,13 +289,14 @@ namespace WebRTC_Browser_Streamer_Demo
                     await _pipeline.DisposeAsync();
                     _pipeline = null;
                 }
+
+                VisioForgeX.DestroySDK();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
 
-            VisioForgeX.DestroySDK();
             _canClose = true;
 
             // Deferred: WPF throws if Close() runs while this Closing call is still on the stack.
