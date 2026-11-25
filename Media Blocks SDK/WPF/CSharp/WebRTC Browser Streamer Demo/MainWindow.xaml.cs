@@ -33,6 +33,8 @@ namespace WebRTC_Browser_Streamer_Demo
 
         private string _viewerUrl;
 
+        private bool _closing;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -80,6 +82,7 @@ namespace WebRTC_Browser_Streamer_Demo
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
+                MessageBox.Show(this, $"The SDK could not start: {ex.Message}");
             }
         }
 
@@ -166,7 +169,18 @@ namespace WebRTC_Browser_Streamer_Demo
             catch (Exception ex)
             {
                 Log(ex.Message);
-                await StopAsync();
+
+                // The handler is async void: an exception out of the cleanup would end the application.
+                try
+                {
+                    await StopAsync();
+                }
+                catch (Exception stopEx)
+                {
+                    Log(stopEx.Message);
+                    _pipeline = null;
+                    btStart.IsEnabled = true;
+                }
             }
         }
 
@@ -250,6 +264,16 @@ namespace WebRTC_Browser_Streamer_Demo
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (_closing)
+            {
+                return;
+            }
+
+            // Keep the window open until the pipeline has stopped and the SDK is destroyed, then close again.
+            e.Cancel = true;
+            _closing = true;
+            IsEnabled = false;
+
             try
             {
                 if (_pipeline != null)
@@ -265,6 +289,9 @@ namespace WebRTC_Browser_Streamer_Demo
             {
                 Debug.WriteLine(ex);
             }
+
+            // Deferred: WPF throws if Close() runs while this Closing call is still on the stack.
+            _ = Dispatcher.BeginInvoke(new Action(Close));
         }
 
         private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
