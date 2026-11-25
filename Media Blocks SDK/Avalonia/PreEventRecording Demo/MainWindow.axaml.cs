@@ -204,6 +204,7 @@ namespace PreEventRecordingDemoAMB
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 edLog.Text += txt + Environment.NewLine;
+                edLog.CaretIndex = edLog.Text?.Length ?? 0;
             });
         }
 
