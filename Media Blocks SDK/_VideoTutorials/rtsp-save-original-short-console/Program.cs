@@ -13,7 +13,8 @@ p.Connect(cam.VideoOutput, mp4.CreateNewInput(
     MediaBlockPadMediaType.Video));
 // Only AAC sound fits MP4 as it is
 var aac = rtsp.GetInfo().AudioStreams
-    .Any(a => a.Codec == "MPEG4-GENERIC");
+    .Any(a => a.Codec is "MPEG4-GENERIC"
+        or "MP4A-LATM");
 if (aac)
 {
     var audioIn = mp4.CreateNewInput(
