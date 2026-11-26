@@ -21,15 +21,31 @@ jobs:
           # One runner per solution: the whole macOS set on a single runner ran
           # out of resources part-way through the second solution, and the job
           # died without ever uploading a log.
+          # Media Blocks is split by demo group: the whole solution on one
+          # runner passed the 120-minute limit (2026.11.25, run 45673202452).
           - os: xcode-27
             sdk: media-blocks
+            part: standalone
+            projects: "Avalonia/BarcodeReaderMB/BarcodeReaderAMB.csproj;Avalonia/PreEventRecording Demo/PreEventRecordingDemoAMB.csproj;Avalonia/Simple Player/SimplePlayerAMB.csproj;Avalonia/Simple Video Capture/SimpleVideoCaptureAMB.csproj"
+          - os: xcode-27
+            sdk: media-blocks
+            part: player-mvvm
+            projects: "Avalonia/SimplePlayerMVVM/SimplePlayerMVVM.Android/SimplePlayerMVVMMB.Android.csproj;Avalonia/SimplePlayerMVVM/SimplePlayerMVVM.Desktop/SimplePlayerMVVMMB.Desktop.csproj;Avalonia/SimplePlayerMVVM/SimplePlayerMVVM.iOS/SimplePlayerMVVMMB.iOS.csproj"
+          - os: xcode-27
+            sdk: media-blocks
+            part: capture-mvvm
+            projects: "Avalonia/SimpleVideoCaptureMVVM/SimpleVideoCaptureMVVM.Android/SimpleVideoCaptureMVVMMB.Android.csproj;Avalonia/SimpleVideoCaptureMVVM/SimpleVideoCaptureMVVM.Desktop/SimpleVideoCaptureMVVMMB.Desktop.csproj;Avalonia/SimpleVideoCaptureMVVM/SimpleVideoCaptureMVVM.iOS/SimpleVideoCaptureMVVMMB.iOS.csproj"
+          - os: xcode-27
+            sdk: media-blocks
+            part: mixer-mvvm
+            projects: "Avalonia/VideoMixerMVVM/VideoMixerMVVM.Android/VideoMixerMVVM.Android.csproj;Avalonia/VideoMixerMVVM/VideoMixerMVVM.Desktop/VideoMixerMVVM.Desktop.csproj;Avalonia/VideoMixerMVVM/VideoMixerMVVM.iOS/VideoMixerMVVM.iOS.csproj"
           - os: xcode-27
             sdk: media-player
           - os: xcode-27
             sdk: video-capture
           - os: xcode-27
             sdk: video-edit
-    name: build (${{ matrix.os }}${{ matrix.sdk && format(' / {0}', matrix.sdk) || '' }})
+    name: build (${{ matrix.os }}${{ matrix.sdk && format(' / {0}', matrix.sdk) || '' }}${{ matrix.part && format(' / {0}', matrix.part) || '' }})
     runs-on: ${{ matrix.os }}
 
     env:
@@ -103,7 +119,15 @@ jobs:
         timeout-minutes: 120
         env:
           MSBUILDDISABLENODEREUSE: "1"
-        run: dotnet build "${{ env.Solution_Name_MB }}" --configuration Release -m:1 --disable-build-servers
+        shell: bash
+        working-directory: Media Blocks SDK
+        run: |
+          IFS=';' read -ra projects <<< "${{ matrix.projects }}"
+          for p in "${projects[@]}"; do
+            echo "::group::$p"
+            dotnet build "$p" --configuration Release -m:1 --disable-build-servers
+            echo "::endgroup::"
+          done
 
       # Media Blocks (Linux - uses solution without iOS)
       - name: Restore dependencies (Media Blocks - Linux)
