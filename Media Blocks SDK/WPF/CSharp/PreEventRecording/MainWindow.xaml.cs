@@ -28,6 +28,8 @@ namespace PreEventRecordingDemoMBWPF
     {
         private bool _initialized;
         private bool _disposedValue;
+        private bool _closing;
+        private bool _canClose;
 
         // Pipeline blocks
         private MediaBlocksPipeline _pipeline;
@@ -553,21 +555,52 @@ namespace PreEventRecordingDemoMBWPF
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DeviceEnumerator.Shared.OnVideoSourceAdded -= DeviceEnumerator_OnVideoSourceAdded;
-
-            _statusTimer?.Stop();
-            _statusTimer?.Dispose();
-
-            if (_pipeline != null)
+            if (_canClose)
             {
-                _pipeline.OnError -= Pipeline_OnError;
-                _pipeline.Dispose();
-                _pipeline = null;
+                return;
             }
 
-            VisioForgeX.DestroySDK();
+            // Keep the window open until the pipeline has stopped and the SDK is destroyed, then close again.
+            e.Cancel = true;
+            if (_closing)
+            {
+                return;
+            }
+
+            _closing = true;
+            IsEnabled = false;
+
+            try
+            {
+                DeviceEnumerator.Shared.OnVideoSourceAdded -= DeviceEnumerator_OnVideoSourceAdded;
+
+                _statusTimer?.Stop();
+                _statusTimer?.Dispose();
+                _statusTimer = null;
+
+                if (_pipeline != null)
+                {
+                    await _pipeline.StopAsync();
+                    _pipeline.OnError -= Pipeline_OnError;
+
+                    // Sends EOS and waits for a clip being saved to be finalized.
+                    await _pipeline.DisposeAsync();
+                    _pipeline = null;
+                }
+
+                VisioForgeX.DestroySDK();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            _canClose = true;
+
+            // Deferred: WPF throws if Close() runs while this Closing call is still on the stack.
+            _ = Dispatcher.BeginInvoke(new Action(Close));
         }
 
         protected virtual void Dispose(bool disposing)

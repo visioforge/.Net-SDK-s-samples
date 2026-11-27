@@ -14,7 +14,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.25]" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.27]" />
   </ItemGroup>
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">
     <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.25]" />

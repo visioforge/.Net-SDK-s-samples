@@ -120,7 +120,8 @@ namespace Background_Removal_Demo
         private System.Windows.Threading.DispatcherTimer _timer;
         private bool _timerBusy;
         private VideoCaptureDeviceInfo[] _videoCaptureDevices;
-        private bool _isClosing;
+        private bool _closing;
+        private bool _canClose;
         private bool _uiBusy;
 
         // Cancels an in-flight model download (e.g. when the window closes).
@@ -136,7 +137,7 @@ namespace Background_Removal_Demo
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (_uiBusy || _isClosing) return;
+                if (_uiBusy || _closing) return;
                 _timer?.Stop();
                 btStart.IsEnabled = true;
                 btStop.IsEnabled = false;
@@ -184,7 +185,14 @@ namespace Background_Removal_Demo
 
         private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_isClosing) return; e.Cancel = true; _isClosing = true; IsEnabled = false;
+            if (_canClose) return;
+
+            // Keep the window open until the pipeline has stopped and the SDK is destroyed, then close again.
+            e.Cancel = true;
+            if (_closing) return;
+
+            _closing = true;
+            IsEnabled = false;
             try
             {
                 _timer?.Stop();
@@ -202,8 +210,11 @@ namespace Background_Removal_Demo
                 CleanupBlocks(); VideoView1.CallRefresh(); VisioForgeX.DestroySDK();
             }
             catch (Exception ex) { Debug.WriteLine(ex); }
-            try { _ = Dispatcher.BeginInvoke(new Action(() => Close())); }
-            catch (Exception ex) { Debug.WriteLine(ex); _isClosing = false; IsEnabled = true; }
+
+            _canClose = true;
+
+            // Deferred: WPF throws if Close() runs while this Closing call is still on the stack.
+            _ = Dispatcher.BeginInvoke(new Action(Close));
         }
 
         // ---- source UI ----

@@ -11,7 +11,7 @@ and that part is what this sample is about.
 | Process | `<PlatformTarget>ARM64</PlatformTarget>` plus `<RuntimeIdentifier>win-arm64</RuntimeIdentifier>`: the apphost and the running process are ARM64, not x64 under emulation. The label under the video shows `Process architecture: Arm64` when it really runs natively. |
 | Runtime packages | `VisioForge.CrossPlatform.Core.Windows.arm64` and `VisioForge.CrossPlatform.Libav.Windows.arm64`. `Libav` carries the FFmpeg (`gst-libav`) plugins the file decoder needs; `Core` does not include them. |
 | Engine | Media Blocks is the engine family that runs natively on Arm. The classic DirectShow engines run natively too, as far as their ARM64 filters go: `VisioForge.DotNet.Core.Redist.Base.arm64` carries the base filters, the effects, the video and audio mixers, the WASAPI renderer and Desktop Duplication capture, and `Redist.MP4.arm64` the MP4/MPEG-TS/MKV/HLS outputs with the Media Foundation H.264/H.265 encoders. The LAV filters and the legacy x64 DirectShow encoders and muxers have no ARM64 build, so a DirectShow app that decodes files through LAV fails in an ARM64 process (`0xC1` on `LAVSplitter.ax`); for those, build an x64 app (`<PlatformTarget>x64</PlatformTarget>`) and let Windows run it under emulation. |
-| Optional features | NDI, ElevenLabs and the Basler, Allied Vision and Spinnaker camera SDKs have no ARM64 build. Everything this sample uses is present, GenICam cameras included. |
+| Optional features | NDI and the Basler, Allied Vision and Spinnaker camera SDKs have no ARM64 build. Everything this sample uses is present, GenICam cameras included; ElevenLabs is available through `VisioForge.CrossPlatform.ElevenLabs.Windows.arm64`. |
 
 ## Known ARM64 traps
 

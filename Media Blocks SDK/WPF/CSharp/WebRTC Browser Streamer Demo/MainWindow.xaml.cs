@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,6 +31,11 @@ namespace WebRTC_Browser_Streamer_Demo
 
         private WebRTCSinkBlock _webrtcSink;
 
+        // The combo boxes show DisplayName, which is not unique: keep the devices the items were added from.
+        private readonly List<VideoCaptureDeviceInfo> _videoDevices = new List<VideoCaptureDeviceInfo>();
+
+        private readonly List<AudioCaptureDeviceInfo> _audioDevices = new List<AudioCaptureDeviceInfo>();
+
         private int _viewers;
 
         private string _viewerUrl;
@@ -42,9 +49,10 @@ namespace WebRTC_Browser_Streamer_Demo
             InitializeComponent();
         }
 
+        // Also called from the GStreamer threads: never block them on the UI thread.
         private void Log(string text)
         {
-            Dispatcher.Invoke(() => mmLog.AppendText(text + Environment.NewLine));
+            Dispatcher.BeginInvoke(() => mmLog.AppendText(text + Environment.NewLine));
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -64,8 +72,9 @@ namespace WebRTC_Browser_Streamer_Demo
                     btStart.IsEnabled = false;
                 }
 
-                DeviceEnumerator.Shared.OnVideoSourceAdded += (s, device) => Dispatcher.Invoke(() =>
+                DeviceEnumerator.Shared.OnVideoSourceAdded += (s, device) => Dispatcher.BeginInvoke(() =>
                 {
+                    _videoDevices.Add(device);
                     cbVideoInput.Items.Add(device.DisplayName);
                     if (cbVideoInput.Items.Count == 1)
                     {
@@ -73,7 +82,11 @@ namespace WebRTC_Browser_Streamer_Demo
                     }
                 });
 
-                DeviceEnumerator.Shared.OnAudioSourceAdded += (s, device) => Dispatcher.Invoke(() => cbAudioInput.Items.Add(device.DisplayName));
+                DeviceEnumerator.Shared.OnAudioSourceAdded += (s, device) => Dispatcher.BeginInvoke(() =>
+                {
+                    _audioDevices.Add(device);
+                    cbAudioInput.Items.Add(device.DisplayName);
+                });
 
                 cbAudioInput.Items.Add("None");
                 cbAudioInput.SelectedIndex = 0;
@@ -100,9 +113,10 @@ namespace WebRTC_Browser_Streamer_Demo
                     return;
                 }
 
-                if (!int.TryParse(edWebPort.Text, out var webPort) || !int.TryParse(edSignallingPort.Text, out var signallingPort))
+                if (!int.TryParse(edWebPort.Text, out var webPort) || webPort < 1 || webPort > 65535 ||
+                    !int.TryParse(edSignallingPort.Text, out var signallingPort) || signallingPort < 1 || signallingPort > 65535)
                 {
-                    MessageBox.Show(this, "Enter valid port numbers");
+                    Log("Enter port numbers between 1 and 65535.");
                     return;
                 }
 
@@ -113,7 +127,7 @@ namespace WebRTC_Browser_Streamer_Demo
                 _pipeline.OnError += (s, args) => Log(args.Message);
 
                 // Camera, split to the local preview and to the browsers.
-                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).First(x => x.DisplayName == cbVideoInput.Text);
+                var device = _videoDevices[cbVideoInput.SelectedIndex];
                 var videoSettings = new VideoCaptureDeviceSourceSettings(device);
                 var format = device.VideoFormats.FirstOrDefault(x => x.Name == cbVideoFormat.Text);
                 if (format != null)
@@ -151,7 +165,7 @@ namespace WebRTC_Browser_Streamer_Demo
 
                 if (cbAudioInput.SelectedIndex > 0)
                 {
-                    var audioDevice = (await DeviceEnumerator.Shared.AudioSourcesAsync()).First(x => x.DisplayName == cbAudioInput.Text);
+                    var audioDevice = _audioDevices[cbAudioInput.SelectedIndex - 1]; // index 0 is None
                     var audioFormat = audioDevice.Formats.FirstOrDefault(x => x.Name == cbAudioFormat.Text);
                     var audioSource = new SystemAudioSourceBlock(audioDevice.CreateSourceSettings(audioFormat?.ToFormat()));
                     _pipeline.Connect(audioSource.Output, _webrtcSink.CreateNewInput(MediaBlockPadMediaType.Audio));
@@ -188,7 +202,8 @@ namespace WebRTC_Browser_Streamer_Demo
 
         private void UpdateViewers(int delta, string message)
         {
-            Dispatcher.Invoke(() =>
+            // Called from the streaming threads: never block them on the UI thread.
+            Dispatcher.BeginInvoke(() =>
             {
                 _viewers += delta;
                 lbViewers.Text = $"Viewers: {_viewers}";
@@ -198,7 +213,38 @@ namespace WebRTC_Browser_Streamer_Demo
 
         private static string GetLanAddress()
         {
-            // A UDP connect sends nothing; it only picks the interface that routes outward.
+            // A phone on the same Wi-Fi cannot reach a VPN, Hyper-V or WSL address: prefer a real Ethernet or
+            // Wi-Fi adapter that has a default gateway.
+            var virtualMarkers = new[] { "vEthernet", "Virtual", "VPN", "Wintun", "TAP-", "Tailscale", "WireGuard" };
+            try
+            {
+                foreach (var nic in NetworkInterface.GetAllNetworkInterfaces())
+                {
+                    if (nic.OperationalStatus != OperationalStatus.Up ||
+                        (nic.NetworkInterfaceType != NetworkInterfaceType.Ethernet && nic.NetworkInterfaceType != NetworkInterfaceType.Wireless80211) ||
+                        virtualMarkers.Any(m => nic.Name.Contains(m, StringComparison.OrdinalIgnoreCase) || nic.Description.Contains(m, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        continue;
+                    }
+
+                    var properties = nic.GetIPProperties();
+                    if (!properties.GatewayAddresses.Any(g => g.Address.AddressFamily == AddressFamily.InterNetwork))
+                    {
+                        continue;
+                    }
+
+                    var address = properties.UnicastAddresses.FirstOrDefault(a => a.Address.AddressFamily == AddressFamily.InterNetwork);
+                    if (address != null)
+                    {
+                        return address.Address.ToString();
+                    }
+                }
+            }
+            catch (NetworkInformationException)
+            {
+            }
+
+            // Fallback: a UDP connect sends nothing; it only picks the interface that routes outward.
             try
             {
                 using var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -303,21 +349,17 @@ namespace WebRTC_Browser_Streamer_Demo
             _ = Dispatcher.BeginInvoke(new Action(Close));
         }
 
-        private async void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbVideoInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
                 cbVideoFormat.Items.Clear();
-                if (e.AddedItems.Count == 0)
+                if (cbVideoInput.SelectedIndex < 0)
                 {
                     return;
                 }
 
-                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == (string)e.AddedItems[0]);
-                if (device == null)
-                {
-                    return;
-                }
+                var device = _videoDevices[cbVideoInput.SelectedIndex];
 
                 foreach (var item in device.VideoFormats)
                 {
@@ -335,18 +377,18 @@ namespace WebRTC_Browser_Streamer_Demo
             }
         }
 
-        private async void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbVideoFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
                 cbVideoFrameRate.Items.Clear();
-                if (e.AddedItems.Count == 0)
+                if (cbVideoInput.SelectedIndex < 0 || e.AddedItems.Count == 0)
                 {
                     return;
                 }
 
-                var device = (await DeviceEnumerator.Shared.VideoSourcesAsync()).FirstOrDefault(x => x.DisplayName == cbVideoInput.Text);
-                var format = device?.VideoFormats.FirstOrDefault(x => x.Name == (string)e.AddedItems[0]);
+                var device = _videoDevices[cbVideoInput.SelectedIndex];
+                var format = device.VideoFormats.FirstOrDefault(x => x.Name == (string)e.AddedItems[0]);
                 if (format == null)
                 {
                     return;
@@ -368,7 +410,7 @@ namespace WebRTC_Browser_Streamer_Demo
             }
         }
 
-        private async void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbAudioInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
@@ -378,11 +420,7 @@ namespace WebRTC_Browser_Streamer_Demo
                     return;
                 }
 
-                var device = (await DeviceEnumerator.Shared.AudioSourcesAsync()).FirstOrDefault(x => x.DisplayName == (string)e.AddedItems[0]);
-                if (device == null)
-                {
-                    return;
-                }
+                var device = _audioDevices[cbAudioInput.SelectedIndex - 1]; // index 0 is None
 
                 foreach (var format in device.Formats)
                 {

@@ -11,7 +11,7 @@
     <RunWithOpen Condition="$([MSBuild]::IsOsPlatform('OSX'))">false</RunWithOpen>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.25]" />
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.27]" />
   </ItemGroup>
   <!-- WHEPServerSinkBlock lives in the Adds package of each platform. -->
   <ItemGroup Condition="$([MSBuild]::IsOsPlatform('Windows'))">

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VisioForge WebRTC Call</title>
+    <link rel="icon" href="data:,">
+    <style>
+        body { margin: 0; background: #111; color: #ddd; font-family: system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; }
+        #videos { position: relative; width: 100%; max-width: 1280px; margin-top: 16px; }
+        #remote { width: 100%; max-height: 80vh; background: #000; }
+        #local { position: absolute; right: 12px; bottom: 12px; width: 25%; background: #222; border: 1px solid #444; }
+        #bar { margin: 12px 16px; display: flex; gap: 12px; align-items: center; }
+        button { padding: 6px 14px; }
+    </style>
+</head>
+<body>
+    <div id="videos">
+        <video id="remote" autoplay playsinline></video>
+        <video id="local" autoplay playsinline muted></video>
+    </div>
+    <div id="bar">
+        <button id="call">Call</button>
+        <button id="mute" disabled>Mute</button>
+        <button id="camera" disabled>Camera off</button>
+        <span id="status">Press Call to start</span>
+    </div>
+
+    <script>
+        // Signalling port of the application's WebRTCSinkBlock: ?signalling=8443 in the page URL.
+        // The page speaks the GStreamer WebRTC signalling protocol: as a consumer it receives the application's
+        // camera and microphone, as a producer it calls the application's WebRTCSourceBlock, which waits for a call.
+        const port = new URLSearchParams(location.search).get('signalling') || '8443';
+        const remote = document.getElementById('remote');
+        const local = document.getElementById('local');
+        const status = document.getElementById('status');
+        const callButton = document.getElementById('call');
+        const muteButton = document.getElementById('mute');
+        const cameraButton = document.getElementById('camera');
+        const iceServers = [{ urls: 'stun:stun.l.google.com:19302' }];
+        let ws, myId, stream;
+        // One session per direction: 'receive' from the application's sink, 'send' to its source.
+        const sessions = {};
+
+        function send(msg) { ws.send(JSON.stringify(msg)); }
+
+        callButton.onclick = async () => {
+            if (ws) { hangUp(); return; }
+            try {
+                // getUserMedia works on http://127.0.0.1 and http://localhost; any other address needs https://.
+                stream = stream || await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            } catch (err) {
+                status.textContent = 'No camera or microphone: ' + err.message;
+                return;
+            }
+            local.srcObject = stream;
+            callButton.textContent = 'Hang up';
+            muteButton.disabled = cameraButton.disabled = false;
+            connect();
+        };
+
+        muteButton.onclick = () => {
+            const track = stream.getAudioTracks()[0];
+            track.enabled = !track.enabled;
+            muteButton.textContent = track.enabled ? 'Mute' : 'Unmute';
+        };
+
+        cameraButton.onclick = () => {
+            const track = stream.getVideoTracks()[0];
+            track.enabled = !track.enabled;
+            cameraButton.textContent = track.enabled ? 'Camera off' : 'Camera on';
+        };
+
+        function connect() {
+            status.textContent = 'Connecting...';
+            // An https:// page needs wss://: set SignallingServerCertificate and SignallingServerKey.
+            ws = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.hostname}:${port}`);
+            ws.onclose = () => { closeSessions(); status.textContent = 'Disconnected, retrying...'; setTimeout(() => { if (ws) connect(); }, 2000); };
+            ws.onmessage = e => onMessage(JSON.parse(e.data)).catch(err => status.textContent = 'Error: ' + err);
+        }
+
+        // Closing the socket ends both sessions on the server.
+        function hangUp() {
+            const socket = ws;
+            ws = undefined;
+            socket.onclose = null;
+            socket.close();
+            closeSessions();
+            callButton.textContent = 'Call';
+            muteButton.disabled = cameraButton.disabled = true;
+            status.textContent = 'Call ended';
+        }
+
+        function closeSessions() {
+            for (const key of Object.keys(sessions)) closeSession(key);
+        }
+
+        function closeSession(key) {
+            if (sessions[key].pc) sessions[key].pc.close();
+            delete sessions[key];
+            if (key === 'receive') remote.srcObject = null;
+        }
+
+        function sessionKey(id) { return Object.keys(sessions).find(k => sessions[k].id === id); }
+
+        async function onMessage(msg) {
+            switch (msg.type) {
+                case 'welcome':
+                    myId = msg.peerId;
+                    // The meta marks call pages, so another open call page is never taken for the application.
+                    send({ type: 'setPeerStatus', roles: ['producer', 'listener'], meta: { callPage: true } });
+                    send({ type: 'list' });
+                    send({ type: 'listConsumers' });
+                    break;
+                case 'list':
+                    msg.producers.filter(p => p.id !== myId && !p.meta?.callPage).slice(0, 1).forEach(p => receiveFrom(p.id));
+                    break;
+                case 'listConsumers':
+                    msg.consumers.filter(c => c.id !== myId && !c.meta?.callPage).slice(0, 1).forEach(c => callTo(c.id));
+                    break;
+                case 'peerStatusChanged':
+                    // The application started after the page: its sink is a producer, its source a consumer.
+                    if (msg.peerId === myId) break;
+                    if (msg.roles.includes('producer') && !msg.meta?.callPage) receiveFrom(msg.peerId);
+                    if (msg.roles.includes('consumer') && !msg.meta?.callPage) callTo(msg.peerId);
+                    break;
+                case 'sessionStarted':
+                    // The receiving session: the application's sink sends the offer.
+                    sessions.receive.id = msg.sessionId;
+                    break;
+                case 'startSession':
+                    // The calling session: this page offers its camera and microphone.
+                    sessions.send.id = msg.sessionId;
+                    await offer();
+                    break;
+                case 'peer':
+                    await onPeer(msg);
+                    break;
+                case 'endSession': {
+                    const key = sessionKey(msg.sessionId);
+                    if (!key) break;
+                    closeSession(key);
+                    status.textContent = key === 'receive'
+                        ? 'The application stopped sending its video'
+                        : 'The application stopped receiving this camera';
+                    break;
+                }
+                case 'error':
+                    status.textContent = 'Error: ' + msg.details;
+                    break;
+            }
+        }
+
+        function receiveFrom(peerId) {
+            if (sessions.receive) return;
+            sessions.receive = {};
+            send({ type: 'startSession', peerId });
+        }
+
+        function callTo(peerId) {
+            if (sessions.send) return;
+            sessions.send = {};
+            send({ type: 'startSession', peerId });
+        }
+
+        function createPeerConnection(session) {
+            const pc = new RTCPeerConnection({ iceServers });
+            pc.onicecandidate = e => {
+                if (e.candidate) send({ type: 'peer', sessionId: session.id, ice: { candidate: e.candidate.candidate, sdpMLineIndex: e.candidate.sdpMLineIndex } });
+            };
+            session.pc = pc;
+            return pc;
+        }
+
+        async function offer() {
+            const pc = createPeerConnection(sessions.send);
+            stream.getTracks().forEach(track => pc.addTransceiver(track, { direction: 'sendonly', streams: [stream] }));
+            const description = await pc.createOffer();
+            await pc.setLocalDescription(description);
+            send({ type: 'peer', sessionId: sessions.send.id, sdp: { type: 'offer', sdp: description.sdp } });
+        }
+
+        async function onPeer(msg) {
+            const key = sessionKey(msg.sessionId);
+            if (!key) return;
+            const session = sessions[key];
+
+            if (msg.sdp && msg.sdp.type === 'offer') {
+                const pc = createPeerConnection(session);
+                pc.ontrack = e => { remote.srcObject = e.streams[0] || new MediaStream([e.track]); status.textContent = 'In call'; };
+                await pc.setRemoteDescription(msg.sdp);
+                const answer = await pc.createAnswer();
+                await pc.setLocalDescription(answer);
+                send({ type: 'peer', sessionId: session.id, sdp: { type: 'answer', sdp: answer.sdp } });
+            } else if (msg.sdp && msg.sdp.type === 'answer') {
+                await session.pc.setRemoteDescription(msg.sdp);
+            } else if (msg.ice && session.pc) {
+                await session.pc.addIceCandidate({ candidate: msg.ice.candidate, sdpMLineIndex: msg.ice.sdpMLineIndex });
+            }
+        }
+    </script>
+</body>
+</html>

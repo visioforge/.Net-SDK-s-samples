@@ -474,7 +474,9 @@ namespace Live_Video_Compositor_MB_MAUI
                     var rotation = device.CalculateVideoRotation();
                     var portrait = rotation == 90 || rotation == 270;
 #if __IOS__ && !__MACCATALYST__
-                    portrait = settings.Orientation == IOSVideoSourceOrientation.Portrait || settings.Orientation == IOSVideoSourceOrientation.PortratUpsideDown;
+                    // An external camera (iPad) keeps its own orientation.
+                    portrait = device.Facing != VideoCaptureDeviceFacing.External &&
+                        (settings.Orientation == IOSVideoSourceOrientation.Portrait || settings.Orientation == IOSVideoSourceOrientation.PortratUpsideDown);
 #endif
                     var videoInfo = portrait
                         ? new VideoFrameInfoX(settings.Format.Height, settings.Format.Width, settings.Format.FrameRate)

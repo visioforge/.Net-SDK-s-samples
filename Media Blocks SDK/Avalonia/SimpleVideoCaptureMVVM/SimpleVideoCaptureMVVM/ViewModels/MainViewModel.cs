@@ -379,11 +379,13 @@ namespace SimpleVideoCaptureMVVM.ViewModels
                 case UIInterfaceOrientation.PortraitUpsideDown:
                     videoSourceSettings.Orientation = IOSVideoSourceOrientation.PortratUpsideDown;
                     break;
+                // IOSVideoSourceOrientation is named after the device orientation, which is the reverse of
+                // the interface orientation in landscape.
                 case UIInterfaceOrientation.LandscapeLeft:
-                    videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeLeft;
+                    videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
                     break;
                 case UIInterfaceOrientation.LandscapeRight:
-                    videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeRight;
+                    videoSourceSettings.Orientation = IOSVideoSourceOrientation.LandscapeLeft;
                     break;
             }
 #endif
