@@ -255,6 +255,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rtsp-save-original-short-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webrtc-whip-winforms net10", "_VideoTutorials\webrtc-whip-winforms\webrtc-whip-winforms net10.csproj", "{DDC9E861-2182-4D39-833B-80945699E7DA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hls-webcam-winforms net10", "_VideoTutorials\hls-webcam-winforms\hls-webcam-winforms net10.csproj", "{B0932CF4-5863-4756-8C80-D4C00C8E4277}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webrtc-browser-short-console net10", "_VideoTutorials\webrtc-browser-short-console\webrtc-browser-short-console net10.csproj", "{1D3C7DDF-B457-41FC-A885-BD85B3D6AF2D}"
 EndProject
 Global
@@ -1743,6 +1745,18 @@ Global
 		{DDC9E861-2182-4D39-833B-80945699E7DA}.Release|x64.Build.0 = Release|Any CPU
 		{DDC9E861-2182-4D39-833B-80945699E7DA}.Release|x86.ActiveCfg = Release|Any CPU
 		{DDC9E861-2182-4D39-833B-80945699E7DA}.Release|x86.Build.0 = Release|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Debug|x64.Build.0 = Debug|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Debug|x86.Build.0 = Debug|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Release|x64.ActiveCfg = Release|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Release|x64.Build.0 = Release|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Release|x86.ActiveCfg = Release|Any CPU
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277}.Release|x86.Build.0 = Release|Any CPU
 		{1D3C7DDF-B457-41FC-A885-BD85B3D6AF2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1D3C7DDF-B457-41FC-A885-BD85B3D6AF2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D3C7DDF-B457-41FC-A885-BD85B3D6AF2D}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -1883,6 +1897,7 @@ Global
 		{F25C0AF3-B680-465F-B7F9-15AC3ED17E79} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
 		{D72745E7-6701-4373-98EE-E1CFE5046E24} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
 		{DDC9E861-2182-4D39-833B-80945699E7DA} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
+		{B0932CF4-5863-4756-8C80-D4C00C8E4277} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
 		{1D3C7DDF-B457-41FC-A885-BD85B3D6AF2D} = {A6AA6B28-F1AF-4837-A38D-F45D98C4FF81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
