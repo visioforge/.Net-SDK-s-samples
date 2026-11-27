@@ -124,7 +124,10 @@ jobs:
           IFS=';' read -ra projects <<< "${{ matrix.projects }}"
           for p in "${projects[@]}"; do
             echo "::group::$p"
-            dotnet build "$p" --configuration Release -m:1 --disable-build-servers
+            # One RID for Desktop heads: each RID runs install_name_tool on every bundled dylib at once (MediaFrameworkDotnet#5742)
+            extra=""
+            case "$p" in *.Desktop.csproj) extra="-p:RuntimeIdentifier=osx-arm64";; esac
+            dotnet build "$p" --configuration Release -m:1 --disable-build-servers $extra
             echo "::endgroup::"
           done
 
