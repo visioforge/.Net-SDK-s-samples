@@ -14,8 +14,8 @@
   </ItemGroup>
   <!-- Libav carries the AAC encoder for a camera that sends G.711 or another codec MP4 does not take. -->
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.25]" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="[2026.11.25]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.26]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="[2026.11.26]" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.27]" />

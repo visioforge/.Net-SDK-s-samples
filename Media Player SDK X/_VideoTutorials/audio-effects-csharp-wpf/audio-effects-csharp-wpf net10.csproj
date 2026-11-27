@@ -13,9 +13,9 @@
     <Resource Include="visioforge_main_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.25]" />
-    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="[2026.11.25]" />
-    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="[2026.11.25]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.26]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="[2026.11.26]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Libav.Windows.x64" Version="[2026.11.26]" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="VisioForge.DotNet.MediaPlayer" Version="[2026.11.27]" />
