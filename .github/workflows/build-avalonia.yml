@@ -125,8 +125,9 @@ jobs:
           for p in "${projects[@]}"; do
             echo "::group::$p"
             # One RID for Desktop heads: each RID runs install_name_tool on every bundled dylib at once (MediaFrameworkDotnet#5742)
+            # Restore without the RID: as a global property it reaches the shared library's iOS TFM (NU1102)
             extra=""
-            case "$p" in *.Desktop.csproj) extra="-p:RuntimeIdentifier=osx-arm64";; esac
+            case "$p" in *.Desktop.csproj) dotnet restore "$p"; extra="--no-restore -p:RuntimeIdentifier=osx-arm64";; esac
             dotnet build "$p" --configuration Release -m:1 --disable-build-servers $extra
             echo "::endgroup::"
           done
