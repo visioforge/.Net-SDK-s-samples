@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <RootNamespace>WebrtcBrowserShort</RootNamespace>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>visioforge_main_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="visioforge_main_icon.ico" />
+    <Content Include="wwwroot\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="VisioForge.Core" />
+    <Using Include="VisioForge.Core.MediaBlocks" />
+    <Using Include="VisioForge.Core.MediaBlocks.Sinks" />
+    <Using Include="VisioForge.Core.MediaBlocks.Sources" />
+    <Using Include="VisioForge.Core.Types.X.Sinks" />
+    <Using Include="VisioForge.Core.Types.X.Sources" />
+  </ItemGroup>
+  <!-- Adds carries rswebrtc: WebRTCSinkBlock. -->
+  <ItemGroup>
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.x64" Version="[2026.11.25]" />
+    <PackageReference Include="VisioForge.CrossPlatform.Core.Windows.Adds.x64" Version="[2026.11.25]" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="VisioForge.DotNet.MediaBlocks" Version="[2026.11.25]" />
+  </ItemGroup>
+</Project>

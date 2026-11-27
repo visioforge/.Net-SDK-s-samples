@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VisioForge WebRTC Viewer</title>
+    <link rel="icon" href="data:,">
+    <style>
+        body { margin: 0; background: #111; color: #ddd; font-family: system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; }
+        video { width: 100%; max-width: 1280px; max-height: 80vh; background: #000; margin-top: 16px; }
+        #bar { margin: 12px 16px; display: flex; gap: 12px; align-items: center; }
+        button { padding: 6px 14px; }
+    </style>
+</head>
+<body>
+    <video id="video" autoplay playsinline muted></video>
+    <div id="bar">
+        <button id="unmute">Unmute</button>
+        <span id="status">Connecting...</span>
+    </div>
+
+    <script>
+        // Signalling port of WebRTCSinkBlock: ?signalling=8443 in the page URL.
+        const port = new URLSearchParams(location.search).get('signalling') || '8443';
+        const video = document.getElementById('video');
+        const status = document.getElementById('status');
+        let ws, pc, sessionId;
+
+        document.getElementById('unmute').onclick = () => { video.muted = false; };
+
+        function send(msg) { ws.send(JSON.stringify(msg)); }
+
+        function connect() {
+            // An https:// page needs wss://: set SignallingServerCertificate and SignallingServerKey.
+            ws = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.hostname}:${port}`);
+            ws.onopen = () => send({ type: 'setPeerStatus', roles: ['listener'], meta: null });
+            ws.onclose = () => { reset(); status.textContent = 'Disconnected, retrying...'; setTimeout(connect, 2000); };
+            ws.onmessage = e => onMessage(e.data).catch(err => fail('Error: ' + err));
+        }
+
+        function startSession(peerId) {
+            if (sessionId === undefined) {
+                sessionId = null;
+                send({ type: 'startSession', peerId });
+            }
+        }
+
+        async function onMessage(data) {
+            const msg = JSON.parse(data);
+            switch (msg.type) {
+                case 'welcome':
+                    send({ type: 'list' });
+                    break;
+                case 'list':
+                    if (msg.producers.length > 0) startSession(msg.producers[0].id);
+                    else status.textContent = 'Waiting for the stream...';
+                    break;
+                case 'peerStatusChanged':
+                    if (msg.roles.includes('producer')) startSession(msg.peerId);
+                    break;
+                case 'sessionStarted':
+                    sessionId = msg.sessionId;
+                    break;
+                case 'peer':
+                    await onPeer(msg);
+                    break;
+                case 'endSession':
+                    reset();
+                    status.textContent = 'Stream ended, waiting...';
+                    listLater();
+                    break;
+                case 'error':
+                    fail('Error: ' + msg.details);
+                    break;
+            }
+        }
+
+        async function onPeer(msg) {
+            if (msg.sdp && msg.sdp.type === 'offer') {
+                // Mirror the sink's StunServer and TurnServers here when it is given them.
+                if (pc) { pc.close(); video.srcObject = null; }
+                pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
+                const conn = pc;
+                pc.onconnectionstatechange = () => {
+                    if (conn === pc && conn.connectionState === 'failed') {
+                        video.srcObject = null;
+                        fail('Connection lost');
+                    }
+                };
+                pc.ontrack = e => { video.srcObject = e.streams[0] || new MediaStream([e.track]); status.textContent = 'Playing'; };
+                pc.onicecandidate = e => {
+                    if (e.candidate) send({ type: 'peer', sessionId, ice: { candidate: e.candidate.candidate, sdpMLineIndex: e.candidate.sdpMLineIndex } });
+                };
+                await pc.setRemoteDescription(msg.sdp);
+                const answer = await pc.createAnswer();
+                await pc.setLocalDescription(answer);
+                send({ type: 'peer', sessionId, sdp: { type: 'answer', sdp: answer.sdp } });
+            } else if (msg.ice && pc) {
+                await pc.addIceCandidate({ candidate: msg.ice.candidate, sdpMLineIndex: msg.ice.sdpMLineIndex });
+            }
+        }
+
+        // An error while a stream plays (a stale message, a rejected candidate) leaves it alone;
+        // otherwise the session is ended and the producer list asked for again.
+        function fail(text) {
+            if (video.srcObject) {
+                status.textContent = text;
+                return;
+            }
+
+            if (sessionId) send({ type: 'endSession', sessionId });
+            reset();
+            status.textContent = text + ', retrying...';
+            listLater();
+        }
+
+        // Asks for the producer list again after a pause, so a failing session does not retry in a tight loop.
+        function listLater() {
+            const socket = ws;
+            setTimeout(() => { if (ws === socket && ws.readyState === WebSocket.OPEN) send({ type: 'list' }); }, 2000);
+        }
+
+        function reset() {
+            if (pc) pc.close();
+            pc = undefined;
+            sessionId = undefined;
+            video.srcObject = null;
+        }
+
+        connect();
+    </script>
+</body>
+</html>
