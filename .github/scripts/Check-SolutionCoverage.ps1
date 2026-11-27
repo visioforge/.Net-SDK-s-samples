@@ -69,7 +69,8 @@ $targets = [System.Collections.Generic.HashSet[string]]::new($ic)
 $workflowDir = Join-Path $repoFull '.github/workflows'
 foreach ($wf in Get-ChildItem -LiteralPath $workflowDir -Filter 'build-*.yml' -File) {
     foreach ($m in [regex]::Matches([System.IO.File]::ReadAllText($wf.FullName), '"([^"]+\.(?:sln|csproj|vbproj|fsproj))"')) {
-        [void]$targets.Add($m.Groups[1].Value)
+        # A matrix "projects" value lists several projects separated by ';'.
+        foreach ($t in $m.Groups[1].Value -split ';') { [void]$targets.Add($t) }
     }
 }
 

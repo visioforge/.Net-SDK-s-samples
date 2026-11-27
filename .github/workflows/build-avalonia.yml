@@ -26,19 +26,19 @@ jobs:
           - os: xcode-27
             sdk: media-blocks
             part: standalone
-            projects: "Avalonia/BarcodeReaderMB/BarcodeReaderAMB.csproj;Avalonia/PreEventRecording Demo/PreEventRecordingDemoAMB.csproj;Avalonia/Simple Player/SimplePlayerAMB.csproj;Avalonia/Simple Video Capture/SimpleVideoCaptureAMB.csproj"
+            projects: "Media Blocks SDK/Avalonia/BarcodeReaderMB/BarcodeReaderAMB.csproj;Media Blocks SDK/Avalonia/PreEventRecording Demo/PreEventRecordingDemoAMB.csproj;Media Blocks SDK/Avalonia/Simple Player/SimplePlayerAMB.csproj;Media Blocks SDK/Avalonia/Simple Video Capture/SimpleVideoCaptureAMB.csproj"
           - os: xcode-27
             sdk: media-blocks
             part: player-mvvm
-            projects: "Avalonia/SimplePlayerMVVM/SimplePlayerMVVM.Android/SimplePlayerMVVMMB.Android.csproj;Avalonia/SimplePlayerMVVM/SimplePlayerMVVM.Desktop/SimplePlayerMVVMMB.Desktop.csproj;Avalonia/SimplePlayerMVVM/SimplePlayerMVVM.iOS/SimplePlayerMVVMMB.iOS.csproj"
+            projects: "Media Blocks SDK/Avalonia/SimplePlayerMVVM/SimplePlayerMVVM.Android/SimplePlayerMVVMMB.Android.csproj;Media Blocks SDK/Avalonia/SimplePlayerMVVM/SimplePlayerMVVM.Desktop/SimplePlayerMVVMMB.Desktop.csproj;Media Blocks SDK/Avalonia/SimplePlayerMVVM/SimplePlayerMVVM.iOS/SimplePlayerMVVMMB.iOS.csproj"
           - os: xcode-27
             sdk: media-blocks
             part: capture-mvvm
-            projects: "Avalonia/SimpleVideoCaptureMVVM/SimpleVideoCaptureMVVM.Android/SimpleVideoCaptureMVVMMB.Android.csproj;Avalonia/SimpleVideoCaptureMVVM/SimpleVideoCaptureMVVM.Desktop/SimpleVideoCaptureMVVMMB.Desktop.csproj;Avalonia/SimpleVideoCaptureMVVM/SimpleVideoCaptureMVVM.iOS/SimpleVideoCaptureMVVMMB.iOS.csproj"
+            projects: "Media Blocks SDK/Avalonia/SimpleVideoCaptureMVVM/SimpleVideoCaptureMVVM.Android/SimpleVideoCaptureMVVMMB.Android.csproj;Media Blocks SDK/Avalonia/SimpleVideoCaptureMVVM/SimpleVideoCaptureMVVM.Desktop/SimpleVideoCaptureMVVMMB.Desktop.csproj;Media Blocks SDK/Avalonia/SimpleVideoCaptureMVVM/SimpleVideoCaptureMVVM.iOS/SimpleVideoCaptureMVVMMB.iOS.csproj"
           - os: xcode-27
             sdk: media-blocks
             part: mixer-mvvm
-            projects: "Avalonia/VideoMixerMVVM/VideoMixerMVVM.Android/VideoMixerMVVM.Android.csproj;Avalonia/VideoMixerMVVM/VideoMixerMVVM.Desktop/VideoMixerMVVM.Desktop.csproj;Avalonia/VideoMixerMVVM/VideoMixerMVVM.iOS/VideoMixerMVVM.iOS.csproj"
+            projects: "Media Blocks SDK/Avalonia/VideoMixerMVVM/VideoMixerMVVM.Android/VideoMixerMVVM.Android.csproj;Media Blocks SDK/Avalonia/VideoMixerMVVM/VideoMixerMVVM.Desktop/VideoMixerMVVM.Desktop.csproj;Media Blocks SDK/Avalonia/VideoMixerMVVM/VideoMixerMVVM.iOS/VideoMixerMVVM.iOS.csproj"
           - os: xcode-27
             sdk: media-player
           - os: xcode-27
@@ -120,7 +120,6 @@ jobs:
         env:
           MSBUILDDISABLENODEREUSE: "1"
         shell: bash
-        working-directory: Media Blocks SDK
         run: |
           IFS=';' read -ra projects <<< "${{ matrix.projects }}"
           for p in "${projects[@]}"; do
